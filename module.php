@@ -32,6 +32,8 @@ if (!defined('WT_WEBTREES')) {
 	exit;
 }
 
+require_once( dirname(__FILE__)."/config.php");
+
 /**
 	* Returns the temporary dir
 	*
@@ -116,7 +118,7 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
     }
 
     public function getTitle() {
-        return 'GVExport2';
+        return 'GVExport';
     }
 
     public function getDescription() {
@@ -187,7 +189,7 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
  	 */
 	
 	function downloadFile( $temp_dir, $file_type) {
-        require( dirname(__FILE__)."/config.php");
+        global $GVE_CONFIG;
 		
 		$basename = $GVE_CONFIG["filename"] . "." . $GVE_CONFIG["output"][$file_type]["extension"]; // new
 		$filename = $temp_dir . "/" . $basename; // new
@@ -228,10 +230,10 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
 	 * @return	string	Directory where the file is saved
 	 */
 	function saveDOTFile()	{
-        require( dirname(__FILE__)."/config.php");
+        global $GVE_CONFIG;
 
 		// Make a unique directory to the tmp dir
-		$temp_dir = sys_get_temp_dir_my() . "/" . md5($_SESSION["wt_user"]);
+		$temp_dir = sys_get_temp_dir_my() . "/" . md5($_SESSION['WEBTREES']["wt_user"]);
 		if( !is_dir("$temp_dir")) {
 			mkdir( "$temp_dir");
 		}
@@ -250,7 +252,7 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
 	function showDOTFile()	{
 
 		// Create the dump
-		$temp_dir = sys_get_temp_dir_my() . "/" . md5($_SESSION["wt_user"]);
+		$temp_dir = sys_get_temp_dir_my() . "/" . md5($_SESSION['WEBTREES']["wt_user"]);
 		header("Content-Type: text/html; charset=UTF-8");
 		$contents = $this->createGraphVizDump( $temp_dir);
 		$contents = "<pre>" . htmlspecialchars( $contents, ENT_QUOTES) . "</pre>";
@@ -447,7 +449,7 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
 	 *
 	 */
 	function action_formAllinOneTree() {
-        require( dirname(__FILE__)."/config.php");
+        global $GVE_CONFIG;
 		
 		$userDefaultVars = array(//Defaults (this cloud be defined in the config?)
 		    "grdir" => $GVE_CONFIG["default_direction"],

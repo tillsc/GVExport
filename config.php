@@ -29,6 +29,8 @@ if (preg_match("/\Wconfig.php/", $_SERVER["SCRIPT_NAME"])>0) {
 	exit;
 }
 
+global $GVE_CONFIG;
+
 // GraphViz binary
 $GVE_CONFIG["graphviz_bin"] = "/usr/bin/dot"; // Default on Debian Linux
 //$GVE_CONFIG["graphviz_bin"] = "/usr/local/bin/dot"; // Default if you compiled Graphviz from source
