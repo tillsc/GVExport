@@ -29,26 +29,9 @@
  */
 
 // Load the config file
-require_once( "modules/gvexport/config.php");
-
-// workaround for PGV 4.1.6SVN / PGV 4.2 final
-if ( file_exists( "includes/classes/class_person.php")) {
-	require_once( "includes/classes/class_person.php"); // ESL!!! 20090208 Fix for PGV 4.2
-} else if ( file_exists( "includes/class_person.php")) {
-	require_once( "includes/class_person.php"); // workaround for PGV 4.1.6SVN
-} else if ( file_exists("includes/person_class.php")) { 
-	require_once( "includes/person_class.php"); // ESL!!! 20090208 Fix for PGV 4.2
-} else {
-	echo("ERROR: Cannot load the person_class.php or class_person.php include file.");
-	exit;
-}
-
-// Load language file (if the localized file does not exists, then it loads the english one)
-if ( !file_exists( "modules/gvexport/languages/lang." . $lang_short_cut[$LANGUAGE] . ".php")) {
-	require_once( "modules/gvexport/languages/lang.en.php");
-} else {
-	require_once( "modules/gvexport/languages/lang." . $lang_short_cut[$LANGUAGE] . ".php");
-}
+require_once( dirname(__FILE__)."/config.php");
+require_once( "library/WT/Person.php");
+require_once( "library/WT/Family.php");
 
 /**
  * Main class for managing the DOT file
@@ -155,7 +138,7 @@ class Dot {
 	 * @param string $color
 	 */
 	function setColor( $color_type, $color) {
-		$this->font_size[$color_type] = $color;
+		$this->colors[$color_type] = $color;
 	}
 
 	/**
@@ -205,12 +188,12 @@ class Dot {
 	function createIndiList () {
 		// Full tree
 		if ( $this->settings["indi"] == "ALL") {
-			$indis = get_indilist_indis();
+			$indis = WT_Query_Name::individuals(false, false, false, true, false, WT_GED_ID);
 			foreach ($indis as $pid=>$indi) {
-				if ( get_class( $indi ) != "Person") {     #ESL!!! 20090208 Fix for PGV 4.2
+				if ( get_class( $indi ) != "WT_Person") {     #ESL!!! 20090208 Fix for PGV 4.2
 					$this->addIndiToList( $pid);
 				} else {
-					$this->addIndiToList($indi->xref); #ESL!!! 20090208 Fix for PGV 4.2
+					$this->addIndiToList($indi->getXref()); #ESL!!! 20090208 Fix for PGV 4.2
 				}
 			}
 		}
@@ -313,8 +296,16 @@ class Dot {
 					$f = $this->getUpdatedFamily( $fid);
 					
 					// Get the husband & wife ID
-					$husb_id = $f->getHusbId();
-					$wife_id = $f->getWifeId();
+                    $h = $f->getHusband();
+                    $w = $f->getWife();
+                    if($h)
+                        $husb_id = $h->getXref();
+                    else
+                        $husb_id = null;
+                    if($w)
+                        $wife_id = $w->getXref();
+                    else
+                        $wife_id = null;
 
 					// Draw an arrow from HUSB to FAM
 					if ( !empty( $husb_id) && ( isset( $this->individuals[$husb_id]))) {
@@ -444,7 +435,7 @@ class Dot {
 	 */
 	function printDOTHeader() {
 		$out = "";
-		$out .= "digraph PGV_Graph {\n";
+		$out .= "digraph WT_Graph {\n";
 		// Using pagebreak
 		if ( !empty( $this->settings["use_pagesize"])) {
 			$out .= "ratio=\"auto\"\n";
@@ -564,18 +555,13 @@ class Dot {
 		}
 
 		$bordercolor = "#606060";	// Border color of the INDI's box
-
-		// by wooc
-		$func="date_localisation_{$lang_short_cut[$LANGUAGE]}";
-		if (!function_exists($func))
-			$func="DefaultDateLocalisation";
 		
 		// --- Birth data ---
 		if ( $this->settings["show_by"]) {
 			$birthdate_var = $i->getBirthDate( FALSE);
 			$q1=$birthdate_var->qual1;
 			$d1=$birthdate_var->date1->Format($DATE_FORMAT);
-			$dy=$birthdate_var->date1->Format("Y");
+			$dy=$birthdate_var->date1->Format("%Y");
 			$q2=$birthdate_var->qual2;
 			if (is_null($birthdate_var->date2))
 				$d2='';
@@ -586,7 +572,6 @@ class Dot {
 				// Show full GEDCOM date
 				if ( is_object( $birthdate_var)) {
 					// Workaround for PGV 4.1.5 SVN, it gives back an object not a string
-					$func($q1, $d1, $q2, $d2, $q3);
 					$birthdate = trim("{$q1} {$d1} {$q2} {$d2} {$q3}");
 				} else {
 					$birthdate = $birthdate_var;
@@ -595,7 +580,6 @@ class Dot {
 				// Show birth year only
 				if ( is_object( $birthdate_var)) {
 					// Workaround for PGV 4.1.5 SVN, it gives back an object not a string
-					$func($q1, $dy, $q2, $d2, $q3);
 					$birthdate = trim("{$q1} {$dy}");
 				} else {
 					$birthdate = substr( $birthdate_var, -4, 4);
@@ -621,7 +605,7 @@ class Dot {
 			$deathdate_var = $i->getDeathDate( FALSE);
 			$q1=$deathdate_var->qual1;
 			$d1=$deathdate_var->date1->Format($DATE_FORMAT);
-			$dy=$deathdate_var->date1->Format("Y");
+			$dy=$deathdate_var->date1->Format("%Y");
 			$q2=$deathdate_var->qual2;
 			if (is_null($deathdate_var->date2))
 				$d2='';
@@ -632,7 +616,6 @@ class Dot {
 				// Show full GEDCOM date
 				if ( is_object( $deathdate_var)) {
 					// Workaround for PGV 4.1.5 SVN, it gives back an object not a string
-					$func($q1, $d1, $q2, $d2, $q3);
 					$deathdate = trim("{$q1} {$d1} {$q2} {$d2} {$q3}");
 				} else {
 					$deathdate = $deathdate_var;
@@ -641,7 +624,6 @@ class Dot {
 				// Show death year only
 				if ( is_object( $deathdate_var)) {
 					// Workaround for PGV 4.1.5 SVN, it gives back an object not a string
-					$func($q1, $dy, $q2, $d2, $q3);
 					$deathdate = trim("{$q1} {$dy}");
 				} else {
 					$deathdate = substr( $deathdate_var, -4, 4);
@@ -681,6 +663,7 @@ class Dot {
 	            else 
 		            $name .= '<BR />' . $addname;//@@ Meliza Amity
             }
+            $name = strip_tags($name);
 		}
 
 		//@@ $name = str_replace(array('<span class="starredname">','</span>'), array('_','_'), $name); //@@ replace starredname by <u> and </u>
@@ -701,14 +684,6 @@ class Dot {
 			$name = $name . " (" . $pid . ")";
 		}
 		//$name = str_replace('"', '', $name); // To remove double quotes
-
-		// --- Link URL ---
-		if ( $i->isRemote()) {
-			// If the INDI is remote, then PGV gives back a full URL
-			$link = $i->getLinkUrl();
-		} else {
-			$link = "http://" . $_SERVER['SERVER_NAME'] . substr( $_SERVER['SCRIPT_NAME'], 0, strrpos( $_SERVER['SCRIPT_NAME'], '/')) . "/" . $i->getLinkUrl();
-		}
 
 		// --- Printing the INDI details ---
 		if ( $this->settings["diagram_type"] == "simple") {
@@ -826,7 +801,7 @@ class Dot {
 				$marrdate_var = $f->getMarriageDate( FALSE);
 				$q1=$marrdate_var->qual1;
 				$d1=$marrdate_var->date1->Format($DATE_FORMAT);
-				$dy=$marrdate_var->date1->Format("Y");
+				$dy=$marrdate_var->date1->Format("%Y");
 				$q2=$marrdate_var->qual2;
 				if (is_null($marrdate_var->date2))
 					$d2='';
@@ -837,7 +812,6 @@ class Dot {
 				// Show full GEDCOM date
 					if ( is_object( $marrdate_var)) {
 						// Workaround for PGV 4.1.5 SVN, it gives back an object not a string
-						$func($q1, $d1, $q2, $d2, $q3);
 						$marriagedate = trim("{$q1} {$d1} {$q2} {$d2} {$q3}");
 					} else {
 						$marriagedate = $marrdate_var;
@@ -846,7 +820,6 @@ class Dot {
 					// Show birth year only
 					if ( is_object( $marrdate_var)) {
 						// Workaround for PGV 4.1.5 SVN, it gives back an object not a string
-						$func($q1, $dy, $q2, $d2, $q3);
 						$marriagedate = trim("{$q1} {$dy}");
 					} else {
 						$marriagedate = substr( $marrdate_var, -4, 4);
@@ -878,15 +851,6 @@ class Dot {
 				$wife_id = $this->families[$fid]["wife_id"];
 			} else {
 				$wife_id = "";
-			}
-			
-
-			// --- Link URL ---
-			if ( $f->isRemote()) {
-				// If the FAM is remote, then PGV gives back a full URL
-				$link = $f->getLinkUrl();
-			} else {
-				$link = "http://" . $_SERVER['SERVER_NAME'] . substr( $_SERVER['SCRIPT_NAME'], 0, strrpos( $_SERVER['SCRIPT_NAME'], '/')) . "/" . $f->getLinkUrl();
 			}
 		}
 
@@ -1094,11 +1058,11 @@ class Dot {
 		}
 
 		if ( $this->settings["indi"] == "ALL") { 	#ESL!!! 20090208 Fix for PGV 4.2
-			$fams = $i->getChildFamilyIds(); 	#ESL!!! 20090208 Fix for PGV 4.2
+			$fams = $i->getChildFamilies(); 	#ESL!!! 20090208 Fix for PGV 4.2
 			foreach ($fams as $fid) { 		#ESL!!! 20090208 Fix for PGV 4.2
 				$this->addFamToList($fid); 	#ESL!!! 20090208 Fix for PGV 4.2
 			}
-			$fams = $i->getSpouseFamilyIds(); 	#ESL!!! 20090208 Fix for PGV 4.2
+			$fams = $i->getSpouseFamilies(); 	#ESL!!! 20090208 Fix for PGV 4.2
 			foreach ($fams as $fid) { 		#ESL!!! 20090208 Fix for PGV 4.2
 				$this->addFamToList($fid); 	#ESL!!! 20090208 Fix for PGV 4.2
 			}
@@ -1210,8 +1174,16 @@ class Dot {
 						}
 
 						// Add father & mother
-						$husb_id = $f->getHusbId();
-						$wife_id = $f->getWifeId();
+                    $h = $f->getHusband();
+                    $w = $f->getWife();
+                    if($h)
+                        $husb_id = $h->getXref();
+                    else
+                        $husb_id = null;
+                    if($w)
+                        $wife_id = $w->getXref();
+                    else
+                        $wife_id = null;
 
 						if ( !empty( $husb_id)) {
 							$this->families[$fid]["has_children"] = TRUE;
@@ -1295,12 +1267,25 @@ class Dot {
 					$this->families[$fid]["has_children"] = FALSE;
 					$f = $this->getUpdatedFamily( $fid);
 
-					if ($f->getHusbId() == $pid) {
-						$this->families[$fid]["husb_id"] = $pid;
-					} else {
-						$this->families[$fid]["wife_id"] = $pid;
-					}
-					
+                    $h = $f->getHusband();
+                    if($h){
+                        if($h->getXref() == $pid){
+                            $this->families[$fid]["husb_id"] = $pid;
+                        } else {
+                            $this->families[$fid]["wife_id"] = $pid;
+                        }
+                    }
+                    else {
+                        $w = $f->getWife();
+                        if($w){
+                            if($w->getXref() == $pid){
+                                $this->families[$fid]["wife_id"] = $pid;
+                            } else {
+                                $this->families[$fid]["husb_id"] = $pid;
+                            }
+                        }
+                    }
+
 					if ( isset( $this->families[$fid]["fid"]) && ($this->families[$fid]["fid"]== $fid)) {
 						// Family ID already added
 						// do nothing	
@@ -1378,15 +1363,26 @@ class Dot {
 
 					//$spouse_id = $f->getSpouseId( $pid);
 					// Alternative method of getting the $spouse_id - workaround by Till Schulte-Coerne
-					if ($f->getHusbId() == $pid) {
-						$spouse_id = $f->getWifeId();
-						$this->families[$fid]["husb_id"] = $pid;
-						$this->families[$fid]["wife_id"] = $spouse_id;
-					} else {
-						$spouse_id = $f->getHusbId();
-						$this->families[$fid]["husb_id"] = $spouse_id;
-						$this->families[$fid]["wife_id"] = $pid;
-					}
+                    // And the coerced into webtrees by Iain MacDonald
+                    $h = $f->getHusband();
+					if ($h) {
+                        if($h->getXref() == $pid) {
+                            $w = $f->getWife();
+                            if($w) {
+                                $spouse_id = $w->getXref();
+                                $this->families[$fid]["husb_id"] = $pid;
+                                $this->families[$fid]["wife_id"] = $spouse_id;
+                            }
+                        }
+                        else {
+                            $w = $f->getWife();
+                            if($w && $w->getXref() == $pid) {
+                                $spouse_id = $h->getXref();
+                                $this->families[$fid]["husb_id"] = $spouse_id;
+                                $this->families[$fid]["wife_id"] = $pid;
+                            }
+                        }
+                    }
 
 					if ( !empty( $spouse_id)) {
 						// --- DEBUG ---
@@ -1469,7 +1465,7 @@ class Dot {
 
 			// Add step-siblings
 			if ( $sibl && $ance_level > 0) {
-				$fams = $i->getStepFamilies();
+				$fams = $i->getChildStepFamilies();
 
 				// --- DEBUG ---
 				if ( $this->settings["debug"]) {
@@ -1549,7 +1545,7 @@ class Dot {
 			require_once( "includes/functions/functions_mediadb.php"); #ESL!!! 20090208 Fix for PGV 4.2
 		}
 		$tn_file = "";
-		$i = Person::getInstance( $pid);
+		$i = WT_Person::getInstance( $pid);
 		$m = $i->findHighlightedMedia();
 		if ( !empty( $m)) {
 			$tn_file = $m["thumb"];
@@ -1568,10 +1564,10 @@ class Dot {
 		if ( $this->settings["mark_not_validated"] && isset( $pgv_changes[$fid."_".$GEDCOM])) {
 			$upd_gedcom_rec = find_updated_record( $fid);
 
-			$f = new Family( $upd_gedcom_rec, false);
+			$f = new WT_Family( $upd_gedcom_rec, false);
 			$f->setChanged( true);
 		} else {
-			$f = Family::getInstance( $fid);
+			$f = WT_Family::getInstance( $fid);
 		}
 		return $f;
 	}
@@ -1581,10 +1577,10 @@ class Dot {
 		if ( $this->settings["mark_not_validated"] && isset( $pgv_changes[$pid."_".$GEDCOM])) {
 			$upd_gedcom_rec = find_updated_record( $pid);
 
-			$i = new Person( $upd_gedcom_rec, false);
+			$i = new WT_Person( $upd_gedcom_rec, false);
 			$i->setChanged( true);
 		} else {
-			$i = Person::getInstance( $pid);
+			$i = WT_Person::getInstance( $pid);
 		}
 		return $i;
 	}
