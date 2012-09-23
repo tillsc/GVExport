@@ -1,40 +1,36 @@
 <?php
 /**
- * GraphViz module for phpGedView
+ * GraphViz module for Webtrees
  *
- * phpGedView: Genealogy Viewer
- * Copyright (C) 2002 to 2007  John Finlay and Others
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- *
- * @package PhpGedView
- * @subpackage Modules, GVExport
- * @version 0.8.3
- * @author Ferenc Kurucz <korbendallas1976@gmail.com> 
+ * Ported to Webtrees by Iain MacDonald <ijmacd@gmail.com>
  */
+// Classes and libraries for module system
+//
+// webtrees: Web based Family History software
+// Copyright (C) 2012 webtrees development team.
+//
+// Derived from PhpGedView
+// Copyright (C) 2010 John Finlay
+//
+// This program is free software; you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation; either version 2 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software
+// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 //-- security check, only allow access from module.php
 if (!defined('WT_WEBTREES')) {
 	header('HTTP/1.0 403 Forbidden');
 	exit;
 }
-
-// Load the config file
-require( dirname(__FILE__)."/config.php");
-
-require( dirname(__FILE__)."/functions_dot.php");
 
 /**
 	* Returns the temporary dir
@@ -110,8 +106,17 @@ function is__writable($path) {
  */
 class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
 
+    function __construct() {
+        $file = WT_ROOT.'modules_v3/'.$this->getName().'/language/lang.'.WT_LOCALE.'.php';
+        if (file_exists($file)) {
+            Zend_Registry::get('Zend_Translate')->addTranslation(
+                new Zend_Translate('array', $file, WT_LOCALE)
+            );
+        }
+    }
+
     public function getTitle() {
-        return 'GVExport';
+        return 'GVExport2';
     }
 
     public function getDescription() {
@@ -131,7 +136,7 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
 			return null;
 		}
 
-		$menu = new WT_Menu($this->getTitle(), 'module.php?mod=gvexport&amp;mod_action=allinonetree', 'menu-help');
+		$menu = new WT_Menu($this->getTitle(), 'module.php?mod='.$this->getName().'&amp;mod_action=allinonetree', 'menu-help');
 		return $menu;
 	}
 
@@ -182,7 +187,7 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
  	 */
 	
 	function downloadFile( $temp_dir, $file_type) {
-		global $GVE_CONFIG;
+        require( dirname(__FILE__)."/config.php");
 		
 		$basename = $GVE_CONFIG["filename"] . "." . $GVE_CONFIG["output"][$file_type]["extension"]; // new
 		$filename = $temp_dir . "/" . $basename; // new
@@ -223,7 +228,7 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
 	 * @return	string	Directory where the file is saved
 	 */
 	function saveDOTFile()	{
-		global $GVE_CONFIG;
+        require( dirname(__FILE__)."/config.php");
 
 		// Make a unique directory to the tmp dir
 		$temp_dir = sys_get_temp_dir_my() . "/" . md5($_SESSION["wt_user"]);
@@ -243,7 +248,6 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
 	}
 
 	function showDOTFile()	{
-		global $GVE_CONFIG;
 
 		// Create the dump
 		$temp_dir = sys_get_temp_dir_my() . "/" . md5($_SESSION["wt_user"]);
@@ -255,7 +259,7 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
 	}
 	
 	function createGraphVizDump( $temp_dir) {
-		global $GVE_CONFIG;
+        require( dirname(__FILE__)."/functions_dot.php");
 
 		$out = "";
 		$dot = new Dot;
@@ -403,16 +407,16 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
 		
 		// Set custom colors
 		if ( $_REQUEST["vars"]["colorm"] == "custom") {
-			$dot->setColor("colorm", $_REQUEST["colorm_custom"]);
+			$dot->setColor("colorm", $_REQUEST["colorm_custom_var"]);
 		}
 		if ( $_REQUEST["vars"]["colorf"] == "custom") {
-			$dot->setColor("colorf", $_REQUEST["colorf_custom"]);
+			$dot->setColor("colorf", $_REQUEST["colorf_custom_var"]);
 		}
 		if ( $_REQUEST["vars"]["coloru"] == "custom") {
-			$dot->setColor("coloru", $_REQUEST["coloru_custom"]);
+			$dot->setColor("coloru", $_REQUEST["coloru_custom_var"]);
 		}
 		if ( $_REQUEST["vars"]["colorfam"] == "custom") {
-			$dot->setColor("colorfam", $_REQUEST["colorfam_custom"]);
+			$dot->setColor("colorfam", $_REQUEST["colorfam_custom_var"]);
 		}
 		
 		// Settings
@@ -443,7 +447,7 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
 	 *
 	 */
 	function action_formAllinOneTree() {
-		global $GVE_CONFIG;
+        require( dirname(__FILE__)."/config.php");
 		
 		$userDefaultVars = array(//Defaults (this cloud be defined in the config?)
 		    "grdir" => $GVE_CONFIG["default_direction"],
@@ -491,7 +495,7 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
         $controller->addInlineJavascript($js);
 		
 		// Form
-		$out .= "<form name=\"setup_gvexport_allinontree\" method=\"post\" target=\"_blank\" action=\"module.php?mod=gvexport&action=allinonetree-run\">";
+		$out .= "<form name=\"setup_gvexport_allinontree\" method=\"post\" target=\"_blank\" action=\"module.php?mod=".$this->getName()."&mod_action=allinonetree-run\">";
 		$out .= "<table class=\"width80 center\">";
 		$out .= "<tr><td class=\"topbottombar\">" . "All-in-one Tree" . "</td></tr>";
 		
@@ -585,7 +589,7 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
 		$out .= "</td></tr>";
 
 		// --- Diagram preferences ---
-		$out .= "<tr><td class=\"topbottombar\"><div align=\"left\"<a id=\"tab-2_btn\" href=\"#\">" . "Diagram preferences" . "</a></div></td></tr>\n";
+		$out .= "<tr><td class=\"topbottombar\"><div align=\"left\"><a id=\"tab-2_btn\" href=\"#\">" . "Diagram preferences" . "</a></div></td></tr>\n";
 		$out .= "<tr><td>";
 		$out .= "<div id=\"tab-2\" style=\"display: none;\">";
 		$out .= "<table class=\"center width100\" style=\"text-align: left;\">";
@@ -605,7 +609,7 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
 		if (isset($_REQUEST['pid'])) {
 			$pid = $_REQUEST['pid'];
 		} else {
-			$pid = check_rootid(isset($userDefaultVars["pid"]) ? $userDefaultVars["pid"] : "");
+			$pid = "I1";
 		}
 		//$out.="<input type=\"text\" size=\"10\" name=\"pid\" id=\"pid\" value=\"".check_rootid(isset($userDefaultVars["pid"]) ? $userDefaultVars["pid"] : "")."\"/>";
 		$out .= "<input type=\"text\" size=\"10\" name=\"pid\" id=\"pid\" value=\"" . $pid . "\"/>";
@@ -620,7 +624,7 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
 		$out .= "<br/>";
 
 		// Stop tree processing on the indis
-		$out .= $pgv_lang['stop_pids'] . "&nbsp;";
+		$out .= "Stop tree processing on INDIs:" . "&nbsp;";
 		if (isset($_REQUEST['stop_pid'])) {
 			$stop_pid = $_REQUEST['stop_pid'];
 		} else {
@@ -684,7 +688,7 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
 		$out.="</td>\n</tr>\n";
 		// Death data
 		$out.="<tr>\n";
-		$out.="<td class=\"optionbox\" style=\"text-align: left;\">"  . $pgv_lang["death"] . "<br/>\n";
+		$out.="<td class=\"optionbox\" style=\"text-align: left;\">"  ."Death" . "<br/>\n";
 		$out.="<input type=\"checkbox\" name=\"vars[show_dy]\" id=\"show_dy_var\" value=\"show_dy\"".((isset($userDefaultVars["show_dy"]) and $userDefaultVars["show_dy"] == "show_dy") ? " checked=\"checked\"" : "")."/> " . "Date" . " ";
 		$out.="<input type=\"radio\" name=\"vars[dd_type]\" id=\"dd_type_var\" value=\"y\"".((isset($userDefaultVars["dd_type"]) and $userDefaultVars["dd_type"] == "gedcom") ? "" : " checked=\"checked\"")."/> " . "Year" . " ";
 		$out.="<input type=\"radio\" name=\"vars[dd_type]\" id=\"dd_type_var\" value=\"gedcom\"".((isset($userDefaultVars["dd_type"]) and $userDefaultVars["dd_type"] == "gedcom") ? " checked=\"checked\"" : "")." /> " . "Full Date" . "<br/>";
@@ -697,7 +701,7 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
 		$out.="<td class=\"optionbox\" style=\"text-align: left;\">";
 		$out.="<input type=\"checkbox\" name=\"vars[show_fid]\" id=\"show_fid_var\" value=\"show_fid\"".((isset($userDefaultVars["show_fid"]) and $userDefaultVars["show_fid"] == "show_fid") ? " checked=\"checked\"" : "")." /> " . "Family ID" . "<br/>";
 		// Mariage data
-		$out.=$pgv_lang["marriage"] . "<br/><input type=\"checkbox\" name=\"vars[show_my]\" id=\"show_my_var\" value=\"show_my\"".((isset($userDefaultVars["show_my"]) and $userDefaultVars["show_my"] == "show_my") ? " checked=\"checked\"" : "")." /> " . "Date" . " ";
+		$out.= "Marriage" . "<br/><input type=\"checkbox\" name=\"vars[show_my]\" id=\"show_my_var\" value=\"show_my\"".((isset($userDefaultVars["show_my"]) and $userDefaultVars["show_my"] == "show_my") ? " checked=\"checked\"" : "")." /> " . "Date" . " ";
 		$out.="<input type=\"radio\" name=\"vars[md_type]\" id=\"md_type_var\" value=\"y\"".((isset($userDefaultVars["md_type"]) and $userDefaultVars["md_type"] == "gedcom") ? "" : " checked=\"checked\"")."/> " . "Year" . " ";
 		$out.="<input type=\"radio\" name=\"vars[md_type]\" id=\"md_type_var\" value=\"gedcom\"".((isset($userDefaultVars["md_type"]) and $userDefaultVars["md_type"] == "gedcom") ? " checked=\"checked\"" : "")." /> " . "Full Date" . "<br/>";
 		$out.=" <input type=\"checkbox\" name=\"vars[show_mp]\" id=\"show_mp_var\" value=\"show_mp\"".((isset($userDefaultVars["show_mp"]) and $userDefaultVars["show_mp"] == "show_mp") ? " checked=\"checked\"" : "")." /> " . "Place";
@@ -709,7 +713,7 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
 
 		
 		// --- Appearance ---
-		$out .= "<tr><td class=\"topbottombar\"><div align=\"left\"<a id=\"tab-3_btn\" href=\"#\">" . "Appearance" . "</a></div></td></tr>\n";
+		$out .= "<tr><td class=\"topbottombar\"><div align=\"left\"><a id=\"tab-3_btn\" href=\"#\">" . "Appearance" . "</a></div></td></tr>\n";
 		$out .= "<tr><td>";
 		$out .= "<div id=\"tab-3\" style=\"display: none;\">";
 		$out .= "<table class=\"center width100\" style=\"text-align: left;\">";
@@ -778,7 +782,7 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
 		$out .= "</td></tr>";
 
 		// --- Advanced settings ---
-		$out .= "<tr><td class=\"topbottombar\"><div align=\"left\"<a id=\"tab-adv_btn\" href=\"#\">" . "Advanced Settings" . "</a></div></td></tr>\n";
+		$out .= "<tr><td class=\"topbottombar\"><div align=\"left\"><a id=\"tab-adv_btn\" href=\"#\">" . "Advanced Settings" . "</a></div></td></tr>\n";
 		$out .= "<tr><td>";
 		$out .= "<div id=\"tab-adv\" style=\"display: none;\">";
 		$out .= "<table class=\"center width100\" style=\"text-align: left;\">";
@@ -813,7 +817,7 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
 		$out .= "</table>";
 		
 		$out .= "</form>";
-		return $out;
+		echo $out;
 	}
 }
 ?>
