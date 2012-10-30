@@ -22,10 +22,14 @@ The original [GVExport Module](http://wiki.phpgedview.net/en/index.php?title=GVE
 pceres' GVExport
 ----------------
 
-pceres created a [GitHub repository](https://github.com/pceres/GVExport) as a maintenance repository after the original developer's notice about ceasing development. However this module is still targeted at the stale PhpGedView. This repository is a 
+pceres created a [GitHub repository](https://github.com/pceres/GVExport) as a maintenance repository after the original developer's notice about ceasing development.
+ However this module is still targeted at the stale PhpGedView. This repository is a 
 fork of pceres' repository.
 
 GVExport
 --------
 
 This module therefore is the missing piece of the puzzle. It is the updated version of GVExport based on pceres' latest developments but instead targeted at latest version of Webtrees.
+
+Here is a sample of the type of graph which can be produced:
+![Sample All-in-one tree](http://ijmacd.com/FamilySample.png)
