@@ -43,7 +43,7 @@ $GVE_CONFIG["filename"] = "gvexport";
 $GVE_CONFIG["output"]["dot"]["label"] = "DOT"; #ESL!!! 20090213
 $GVE_CONFIG["output"]["dot"]["extension"] = "dot";
 $GVE_CONFIG["output"]["dot"]["exec"] = "";
-$GVE_CONFIG["output"]["dot"]["cont_type"] = "text/plain";
+$GVE_CONFIG["output"]["dot"]["cont_type"] = "text/plain; charset=utf-8";
 
 if ( !empty( $GVE_CONFIG["graphviz_bin"])) {
 	$GVE_CONFIG["output"]["png"]["label"] = "PNG"; #ESL!!! 20090213
