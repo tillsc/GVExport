@@ -217,12 +217,12 @@ class Dot {
 	function createFamList () {
 		// Full tree
 		if ( $this->settings["indi"] == "ALL") {
-			$fams = get_fam_list(); 	#ESL!!! ON PGV 4.2 RETURNS EMPTY ALWAYS
+			$fams = WT_Query_Name::families(false, false, false, false, WT_GED_ID);
 			foreach ($fams as $fid=>$fam) {
-				if ( get_class( $fam ) != "Family") {     #ESL!!! 20090208 Fix for PGV 4.2
+				if ( get_class( $fam ) != "WT_Family") {
 					$this->addFamToList( $fid);
 				} else {
-					$this->addFamToList($fam->xref); #ESL!!! 20090208 Fix for PGV 4.2
+					$this->addFamToList($fam->getXref());
 				}
 			}
 		}
@@ -1528,6 +1528,10 @@ class Dot {
 	 *
 	 */
 	function addFamToList( $fid) {
+        if($fid instanceof WT_Family)
+            $fid = $fid->getXref();
+        if(!isset($this->families[$fid]))
+            $this->families[$fid] = array();
 		$this->families[$fid]["fid"] = $fid;
 		//$this->families[$fid]["has_children"] = FALSE;
 		//$this->families[$fid]["has_parents"] = FALSE;
