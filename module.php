@@ -460,11 +460,8 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
 		    "diagtypeCombinedWithPhoto" => FALSE, #ESL!!! 20090213
 		    "use_abbr_place" => ($GVE_CONFIG['settings']['use_abbr_place'] ? "use_abbr_place" : ""),
 		    "show_by" => "show_by",
-		    "show_bp" => "show_bp",
 		    "show_dy" => "show_dy",
-		    "show_dp" => "show_dp",
 		    "show_my" => "show_my",
-		    "show_mp" => "show_mp",
 			"tree_type" => "tree_type",
 		    "debug" => ($GVE_CONFIG['debug'] ? "debug" : ""),
 			"dpi" => $GVE_CONFIG["settings"]["dpi"],
