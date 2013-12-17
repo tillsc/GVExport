@@ -30,7 +30,7 @@
 
 // Load the config file
 require_once( dirname(__FILE__)."/config.php");
-require_once( "library/WT/Person.php");
+require_once( "library/WT/Individual.php");
 require_once( "library/WT/Family.php");
 
 /**
@@ -190,7 +190,7 @@ class Dot {
 		if ( $this->settings["indi"] == "ALL") {
 			$indis = WT_Query_Name::individuals(false, false, false, true, false, WT_GED_ID);
 			foreach ($indis as $pid=>$indi) {
-				if ( get_class( $indi ) != "WT_Person") {     #ESL!!! 20090208 Fix for PGV 4.2
+				if ( get_class( $indi ) != "WT_Individual") {     #ESL!!! 20090208 Fix for PGV 4.2
 					$this->addIndiToList( $pid);
 				} else {
 					$this->addIndiToList($indi->getXref()); #ESL!!! 20090208 Fix for PGV 4.2
@@ -534,25 +534,25 @@ class Dot {
 		$isdead = $i->isDead();
 
 		// --- Background color & last editor's data ---
-		if ( $i->getChanged()) {
-			// The INDI's data has been changed and not accepted yet
-			$fillcolor = $GVE_CONFIG["dot"]["colorch"]; // Backround color is set to specified
-			if ( $this->settings["show_lt_editor"]) {
-				// Show last editor
-				// Hack is needed for compatibility for PGV revisions < 1661
-				if ( method_exists( $i, "LastchangeUser")) {
-					$editor = $pgv_lang["last_change_user"] . ": " . $i->LastchangeUser();
-				} else {
-					$editor = $pgv_lang["last_change_user"] . ": " . $i->getLastchangeUser();
-				}
-			} else {
-				$editor = "";
-			}
-		} else {
+		// if ( $i->getChanged()) {
+		// 	// The INDI's data has been changed and not accepted yet
+		// 	$fillcolor = $GVE_CONFIG["dot"]["colorch"]; // Backround color is set to specified
+		// 	if ( $this->settings["show_lt_editor"]) {
+		// 		// Show last editor
+		// 		// Hack is needed for compatibility for PGV revisions < 1661
+		// 		if ( method_exists( $i, "LastchangeUser")) {
+		// 			$editor = $pgv_lang["last_change_user"] . ": " . $i->LastchangeUser();
+		// 		} else {
+		// 			$editor = $pgv_lang["last_change_user"] . ": " . $i->getLastchangeUser();
+		// 		}
+		// 	} else {
+		// 		$editor = "";
+		// 	}
+		// } else {
 			// The INDI's data is up-to-date
 			$fillcolor = $this->getGenderColour( $i->getSex(), $related); // Backround color is set to specified
 			$editor = "";
-		}
+		// }
 
 		$bordercolor = "#606060";	// Border color of the INDI's box
 		
@@ -830,15 +830,15 @@ class Dot {
 			}
 			
 			// Show marriage place
-			if ( $this->settings["show_mp"]) {
-				if ( $this->settings["use_abbr_place"]) {
-					$marriageplace = $this->getFormattedPlace( $f->getMarriagePlace());
-				} else {
-					$marriageplace = $f->getMarriagePlace();
-				}
-			} else {
+			// if ( $this->settings["show_mp"]) {
+			// 	if ( $this->settings["use_abbr_place"]) {
+			// 		$marriageplace = $this->getFormattedPlace( $f->getMarriagePlace());
+			// 	} else {
+			// 		$marriageplace = $f->getMarriagePlace()->getPlaceName();
+			// 	}
+			// } else {
 				$marriageplace = "";
-			}
+			// }
 			// Get the husband's and wife's id from PGV
 			//$husb_id = $f->getHusbId();
 			//$wife_id = $f->getWifeId();
@@ -1319,7 +1319,7 @@ class Dot {
 							}
 							// -------------
 
-							$this->addIndiToList( $child_id, FALSE, TRUE, $this->indi_search_method["spou"], FALSE, TRUE, $ind, 0, $ance_level + ($desc_level - 1));
+							$this->addIndiToList( $child_id, FALSE, TRUE, $this->indi_search_method["spou"], FALSE, TRUE, $ind, 0, ($desc_level - 1));
 						}
 					}
 				}
@@ -1549,10 +1549,11 @@ class Dot {
 			require_once( "includes/functions/functions_mediadb.php"); #ESL!!! 20090208 Fix for PGV 4.2
 		}
 		$tn_file = "";
-		$i = WT_Person::getInstance( $pid);
+		$i = WT_Individual::getInstance( $pid);
 		$m = $i->findHighlightedMedia();
 		if ( !empty( $m)) {
-			$tn_file = $m["thumb"];
+			//$tn_file = $m["thumb"];
+			$tn_file = $m->getFilename("thumb");
 			if ( !$this->settings["media_dir"]) {
 				return substr($_SERVER['SCRIPT_FILENAME'], 0, strrpos($_SERVER['SCRIPT_FILENAME'], '/')) . "/" . $tn_file;
 			} elseif ( !empty( $this->settings["media_dir"])) {
@@ -1581,10 +1582,10 @@ class Dot {
 		if ( $this->settings["mark_not_validated"] && isset( $pgv_changes[$pid."_".$GEDCOM])) {
 			$upd_gedcom_rec = find_updated_record( $pid);
 
-			$i = new WT_Person( $upd_gedcom_rec, false);
+			$i = new WT_Individual( $upd_gedcom_rec, false);
 			$i->setChanged( true);
 		} else {
-			$i = WT_Person::getInstance( $pid);
+			$i = WT_Individual::getInstance( $pid);
 		}
 		return $i;
 	}

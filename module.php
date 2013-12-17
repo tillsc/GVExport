@@ -158,13 +158,13 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
                 break;
             case 'allinonetree':
                 global $controller;
-                $controller=new WT_Controller_Base();
+                $controller=new WT_Controller_Page();
                 $controller->pageHeader();
                 $this->action_formAllInOneTree();
                 break;
             default:
                 global $controller;
-                $controller=new WT_Controller_Base();
+                $controller=new WT_Controller_Page();
                 $controller->pageHeader();
                 echo 'Internal error - unknown action:', $mod_action;
         }
@@ -460,8 +460,11 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
 		    "diagtypeCombinedWithPhoto" => FALSE, #ESL!!! 20090213
 		    "use_abbr_place" => ($GVE_CONFIG['settings']['use_abbr_place'] ? "use_abbr_place" : ""),
 		    "show_by" => "show_by",
+		    "show_bp" => "show_bp",
 		    "show_dy" => "show_dy",
+		    "show_dp" => "show_dp",
 		    "show_my" => "show_my",
+		    "show_mp" => "show_mp",
 			"tree_type" => "tree_type",
 		    "debug" => ($GVE_CONFIG['debug'] ? "debug" : ""),
 			"dpi" => $GVE_CONFIG["settings"]["dpi"],
