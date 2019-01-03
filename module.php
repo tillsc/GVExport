@@ -26,111 +26,56 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
-//-- security check, only allow access from module.php
-if (!defined('WT_WEBTREES')) {
-	header('HTTP/1.0 403 Forbidden');
-	exit;
-}
+namespace vendor\WebtreesModules\gvexport;
 
 require_once( dirname(__FILE__)."/config.php");
+require( dirname(__FILE__)."/utils.php");
 
-/**
-	* Returns the temporary dir
-	*
-	* Based on http://www.phpit.net/
-	* article/creating-zip-tar-archives-dynamically-php/2/
-	*
-	* changed to prevent SAFE_MODE restrictions
-	* 
-	* @return	string	System temp dir
-	*/
-function sys_get_temp_dir_my() {
-    // Try to get from environment variable
-    if ( !empty( $_ENV['TMP']) && is__writable($_ENV,'TMP') ) {
-	return realpath( $_ENV['TMP']);
-    } elseif ( !empty( $_ENV['TMPDIR']) && is__writable($_ENV,'TMPDIR') ) {
-	return realpath( $_ENV['TMPDIR']);
-    } elseif ( !empty( $_ENV['TEMP']) && is__writable($_ENV,'TEMP') ) {
-	return realpath( $_ENV['TEMP'] );
-    }
-    // Detect by creating a temporary file
-    else {
-	// Try to use system's temporary directory
-	// as random name shouldn't exist
-	$temp_file = tempnam( md5( uniqid( rand(), TRUE)), '');
-	if ( $temp_file ) {
-	    if (!is__writable(dirname( $temp_file)))
-	    {
-		unlink( $temp_file );
-		
-	    // Last resort: try index folder
-	    // as random name shouldn't exist
-		$temp_file = tempnam(realpath("index/"), md5( uniqid( rand(), TRUE)));
-	    }
-	    
-	    $temp_dir = realpath( dirname( $temp_file));
-	    unlink( $temp_file );
-	    
-	    return $temp_dir;
-	} else {
-	    return FALSE;
-	}
-    }
-}
-
-
-
-function is__writable($path) {
-//will work in despite of Windows ACLs bug
-//NOTE: use a trailing slash for folders!!!
-//see http://bugs.php.net/bug.php?id=27609
-//see http://bugs.php.net/bug.php?id=30931
-
-    if ($path{strlen($path)-1}=='/') // recursively return a temporary file path
-        return is__writable($path.uniqid(mt_rand()).'.tmp');
-    else if (is_dir($path))
-        return is__writable($path.'/'.uniqid(mt_rand()).'.tmp');
-    // check tmp file for read/write capabilities
-    $rm = file_exists($path);
-    $f = @fopen($path, 'a');
-    if ($f===false)
-        return false;
-    fclose($f);
-    if (!$rm)
-        unlink($path);
-    return true;
-}
-
-
+use Composer\Autoload\ClassLoader;
+use Fisharebest\Webtrees\Auth;
+use Fisharebest\Webtrees\Filter;
+use Fisharebest\Webtrees\Module\AbstractModule;
+use Fisharebest\Webtrees\Module\ModuleMenuInterface;
+use Fisharebest\Webtrees\Menu;
+use Fisharebest\Webtrees\Tree;
+use Fisharebest\Webtrees\Controller\PageController;
+use Fisharebest\Webtrees\Functions\FunctionsPrint;
 
 /**
  * Main class for GVExport module
  */
-class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
+class GVExport	extends AbstractModule implements ModuleMenuInterface {
 
     function __construct() {
-        $file = WT_ROOT.'modules_v3/'.$this->getName().'/language/lang.'.WT_LOCALE.'.php';
-        if (file_exists($file)) {
-            Zend_Registry::get('Zend_Translate')->addTranslation(
-                new Zend_Translate('array', $file, WT_LOCALE)
-            );
-        }
+        parent::__construct('gvexport');
+        $this->directory = WT_MODULES_DIR . $this->getName();
+        $this->action = Filter::get('mod_action');
+        // register the namespaces
+        $loader = new ClassLoader();
+        $loader->addPsr4('vendor\\WebtreesModules\\gvexport\\', $this->directory);
+        $loader->register();
+    }
+
+    public function getName() {
+		return 'GVExport';
     }
 
     public function getTitle() {
-        return 'GVExport';
+    	return 'GVExport';
     }
 
     public function getDescription() {
         return 'This is the "GVExport" module';
     }
 
-	// Implement WT_Module_Menu
+    public function defaultAccessLevel(): int {
+		return Auth::PRIV_PRIVATE;
+    }
+
 	public function defaultMenuOrder() {
 		return 40;
 	}
 
-	// Implement WT_Module_Menu
 	public function getMenu() {
 		global $SEARCH_SPIDER;
 
@@ -138,7 +83,7 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
 			return null;
 		}
 
-		$menu = new WT_Menu($this->getTitle(), 'module.php?mod='.$this->getName().'&amp;mod_action=allinonetree', 'menu-help');
+		$menu = new Menu($this->getTitle(), 'module.php?mod='.$this->getName().'&amp;mod_action=allinonetree', 'menu-help');
 		return $menu;
 	}
 
@@ -152,19 +97,21 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
 	*
 	*/
     public function modAction($mod_action) {
-        switch($mod_action) {
+	    global $WT_TREE;
+
+	    switch($mod_action) {
             case 'allinonetree-run':
                 $this->action_runAllInOneTree();
                 break;
             case 'allinonetree':
                 global $controller;
-                $controller=new WT_Controller_Page();
+                $controller = new PageController();
                 $controller->pageHeader();
-                $this->action_formAllInOneTree();
+				$this->action_formAllInOneTree();
                 break;
             default:
                 global $controller;
-                $controller=new WT_Controller_Page();
+                $controller=new PageController();
                 $controller->pageHeader();
                 echo 'Internal error - unknown action:', $mod_action;
         }
@@ -187,16 +134,15 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
 	 * @param string $temp_dir
 	 * @param string $file_type
  	 */
-	
+
 	function downloadFile( $temp_dir, $file_type) {
         global $GVE_CONFIG;
-		
+
 		$basename = $GVE_CONFIG["filename"] . "." . $GVE_CONFIG["output"][$file_type]["extension"]; // new
 		$filename = $temp_dir . "/" . $basename; // new
 		if ( !empty( $GVE_CONFIG["output"][$file_type]["exec"])) {
-			//$shell_cmd = "cd $temp_dir;" . $GVE_CONFIG["output"][$file_type]["exec"];
 			// Multi-platform operability (by Thomas Ledoux)
-                        $old_dir = getcwd(); // save the current directory
+			$old_dir = getcwd(); // save the current directory
 			chdir($temp_dir); // change to the right directory for generation
 			$shell_cmd = $GVE_CONFIG["output"][$file_type]["exec"];
 			exec($shell_cmd, $temp, $return_var); // new
@@ -206,7 +152,7 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
 				die("Error (return code $return_var) executing command \"$shell_cmd\".<br>Check path and Graphviz functionality!"); // new
 			}
 		}
-		
+
 		if (!empty($_REQUEST['vars']['disposition']))
 		{
 			$disposition = "attachment; filename=".$basename;
@@ -215,7 +161,7 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
 		{
 			$disposition = 'inline';
 		}
-		
+
 		header("Content-Description: File Transfer");
 		header("Content-Type:" . $GVE_CONFIG["output"][$file_type]["cont_type"]);
 		header("Content-Transfer-Encoding: binary");
@@ -223,7 +169,7 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
 		header("Content-Disposition: $disposition"); // new
 		readfile( $filename);
 	}
-	
+
 	/**
 	 * Creates and saves a DOT file
 	 *
@@ -233,14 +179,14 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
         global $GVE_CONFIG;
 
 		// Make a unique directory to the tmp dir
-		$temp_dir = sys_get_temp_dir_my() . "/" . md5($_SESSION['WEBTREES']["wt_user"]);
+		$temp_dir = sys_get_temp_dir_my() . "/" . md5(Auth::id());
 		if( !is_dir("$temp_dir")) {
 			mkdir( "$temp_dir");
 		}
-		
+
 		// Create the dump
 		$contents = $this->createGraphVizDump( $temp_dir);
-	
+
 		// Put the contents into the file
 		$fid = fopen( $temp_dir . "/" . $GVE_CONFIG["filename"] . ".dot","w");
 		fwrite($fid,$contents);
@@ -259,23 +205,23 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
 		print $contents;
 		//print nl2br( $contents);
 	}
-	
+
 	function createGraphVizDump( $temp_dir) {
         require( dirname(__FILE__)."/functions_dot.php");
 
 		$out = "";
 		$dot = new Dot;
-		
+
 		$cookieStr = "";
 		foreach ($_REQUEST['vars'] as $key => $value)
 		    $cookieStr.= "$key=$value|";
-		
+
 		setcookie("GVEUserDefaults", $cookieStr, time() + (3600 * 24 * 365));
-		
+
 		if ( isset( $temp_dir)) {
 			$dot->setSettings("temp_dir", $temp_dir);
 		}
-		
+
 		if ( isset( $_REQUEST["pid"]) && ($_REQUEST['vars']['indiinc'] != "all")) {
 			// INDI id
 			if ( !empty( $_REQUEST["other_pids"])) {
@@ -319,11 +265,11 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
 				$dot->setSettings( "desc_level", 0);
 			}
 		}
-		
+
 		if ( isset( $_REQUEST["vars"]["mclimit"])) {
 			$dot->setSettings( "mclimit", $_REQUEST["vars"]["mclimit"]);
 		}
-		
+
 		if ( isset( $_REQUEST['vars']['marknv'])) {
 			$dot->setSettings( "mark_not_validated", TRUE);
 		}
@@ -335,7 +281,7 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
 		if ( isset( $_REQUEST['vars']['show_lt_editor'])) {
 			$dot->setSettings( "show_lt_editor", TRUE);
 		}
-		
+
 		if ( isset( $_REQUEST['vars']['fontsize'])) {
 			$dot->setFontSize( $_REQUEST['vars']['fontsize']);
 		}
@@ -343,12 +289,12 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
 		if ( isset( $_REQUEST['vars']['fontname'])) {
 			$dot->setSettings( "fontname", $_REQUEST['vars']['fontname']);
 		}
-		
+
 		if ( isset( $_REQUEST['vars']['pagebrk'])) {
 			$dot->setSettings( "use_pagesize", $_REQUEST['vars']['psize']);
 			$dot->setPageSize( $_REQUEST['vars']['psize']);
 		}
-		
+
 		if ( isset( $_REQUEST['vars']['grdir'])) {
 			$dot->setSettings( "graph_dir", $_REQUEST['vars']['grdir']);
 		}
@@ -387,11 +333,11 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
 		if ( isset( $_REQUEST['vars']['show_fid'])) {
 			$dot->setSettings( "show_fid", TRUE);
 		}
-		
+
 		if ( isset( $_REQUEST['vars']['show_url'])) {
 			$dot->setSettings( "show_url", TRUE);
 		}
-		
+
 		if ( isset( $_REQUEST['vars']['use_abbr_place'])) {
 			$dot->setSettings( "use_abbr_place", TRUE);
 		}
@@ -405,8 +351,8 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
 		if ( isset( $_REQUEST['vars']['debug'])) {
 			$dot->setSettings( "debug", TRUE);
 		}
-		
-		
+
+
 		// Set custom colors
 		if ( $_REQUEST["vars"]["colorm"] == "custom") {
 			$dot->setColor("colorm", $_REQUEST["colorm_custom_var"]);
@@ -420,7 +366,7 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
 		if ( $_REQUEST["vars"]["colorfam"] == "custom") {
 			$dot->setColor("colorfam", $_REQUEST["colorfam_custom_var"]);
 		}
-		
+
 		// Settings
 		if ( !empty( $_REQUEST['vars']['diagtype'])) {
 			$dot->setSettings( "diagram_type", $_REQUEST['vars']['diagtype']);
@@ -429,7 +375,7 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
 		if ( !empty( $_REQUEST['vars']['no_fams'])) {
 			$dot->setSettings( "no_fams", $_REQUEST['vars']['no_fams']);
 		}
-		
+
 		if ( isset( $_REQUEST['vars']['dpi'])) {
 			$dot->setSettings( "dpi", $_REQUEST['vars']['dpi']);
 		}
@@ -439,18 +385,18 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
 		if ( isset( $_REQUEST['vars']['nodesep'])) {
 			$dot->setSettings( "nodesep", $_REQUEST['vars']['nodesep']);
 		}
-		
+
 		$out .= $dot->getDOTDump();
 		return $out;
 	}
-	
+
 	/**
 	 * Shows the form for All-in-One Tree
 	 *
 	 */
 	function action_formAllinOneTree() {
         global $GVE_CONFIG;
-		
+
 		$userDefaultVars = array(//Defaults (this cloud be defined in the config?)
 		    "grdir" => $GVE_CONFIG["default_direction"],
 		    "mclimit" => $GVE_CONFIG["mclimit"][$GVE_CONFIG["default_mclimit"]],
@@ -476,45 +422,45 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
 		    $arr = explode("=", $s);
 		    if (count($arr) == 2) {
 			$userDefaultVars[$arr[0]] = $arr[1];
-		    }	
+		    }
 		  }
 		}
-		
+
 		global $controller;
 		$out=$js="";
 		// JQuery code
-		$js .= "$(document).ready(function(){\n";
-		$js .= "  $(\"#test_button\").toggle(\n    function(){ $(\"#div_tohide\").hide('slow');},\n    function(){ $(\"#div_tohide\").show('slow');}\n  );\n";
-		$js .= "  $(\"#tab-1_btn\").toggle(\n    function(){ $(\"#tab-1\").hide('fast');},\n    function(){ $(\"#tab-1\").show('fast');}\n  );\n";
-		$js .= "  $(\"#tab-2_btn\").toggle(\n    function(){ $(\"#tab-2\").show('fast');},\n    function(){ $(\"#tab-2\").hide('fast');}\n  );\n";
-		$js .= "  $(\"#tab-3_btn\").toggle(\n    function(){ $(\"#tab-3\").show('fast');},\n    function(){ $(\"#tab-3\").hide('fast');}\n  );\n";
-		$js .= "  $(\"#tab-adv_btn\").toggle(\n    function(){ $(\"#tab-adv\").show('fast');},\n    function(){ $(\"#tab-adv\").hide('fast');}\n  );\n";
-		$js .= "  $(\"#test_button\").toggle(\n    function(){ $(\"#div_tohide\").hide('slow');},\n    function(){ $(\"#div_tohide\").show('slow');}\n  );\n";
-		$js .= "});";
+		//$js .= "$(document).ready(function(){\n";
+		//$js .= "  $(\"#test_button\").toggle(\n    function(){ $(\"#div_tohide\").hide('slow');},\n    function(){ $(\"#div_tohide\").show('slow');}\n  );\n";
+		//$js .= "  $(\"#tab-1_btn\").toggle(\n    function(){ $(\"#tab-1\").hide('fast');},\n    function(){ $(\"#tab-1\").show('fast');}\n  );\n";
+		//$js .= "  $(\"#tab-2_btn\").toggle(\n    function(){ $(\"#tab-2\").show('fast');},\n    function(){ $(\"#tab-2\").hide('fast');}\n  );\n";
+		//$js .= "  $(\"#tab-3_btn\").toggle(\n    function(){ $(\"#tab-3\").show('fast');},\n    function(){ $(\"#tab-3\").hide('fast');}\n  );\n";
+		//$js .= "  $(\"#tab-adv_btn\").toggle(\n    function(){ $(\"#tab-adv\").show('fast');},\n    function(){ $(\"#tab-adv\").hide('fast');}\n  );\n";
+		//$js .= "  $(\"#test_button\").toggle(\n    function(){ $(\"#div_tohide\").hide('slow');},\n    function(){ $(\"#div_tohide\").show('slow');}\n  );\n";
+		//$js .= "});";
 		// JavaScript
 		$js .= "function gve_enablecustomcolor(cn) {\n document.getElementById(cn).disabled=false;\n document.getElementById(cn).style.backgroundColor=document.getElementById(cn).value;\n return false;\n }\n";
 		$js .= "var pastefield;\n function paste_id(value) {\n pastefield.value = value;\n }\n";
         $controller->addInlineJavascript($js);
-		
+
 		// Form
 		$out .= "<form name=\"setup_gvexport_allinontree\" method=\"post\" target=\"_blank\" action=\"module.php?mod=".$this->getName()."&mod_action=allinonetree-run\">";
 		$out .= "<table class=\"width80 center\">";
 		$out .= "<tr><td class=\"topbottombar\">" . "All-in-one Tree" . "</td></tr>";
-		
+
 		// --- Output settings ---
 		$out .= "<tr><td class=\"topbottombar\"><div align=\"left\"><a id=\"tab-1_btn\" href=\"#\">" . "Output Settings" . "</a></div></td></tr>";
 		$out .= "<tr><td>";
-		$out .= "<div id=\"tab-1\">";            
+		$out .= "<div id=\"tab-1\">";
 		$out .= "<table class=\"center width100\" style=\"text-align: left;\">";
 
 		// Tree type
 		$out.="<tr><td class=\"descriptionbox wrap\">" . "Tree Type" . "</td>";
 		$out.="<td class=\"optionbox\" style=\"text-align: left;\">";
-		$out.="<input type=\"radio\" name=\"vars[treetype]\" id=\"treetype_var\" value=\"aio\"".((isset($userDefaultVars["treetype"]) and $userDefaultVars["treetype"] == "aio") ? " checked=\"checked\"" : "")." />" . "GraphViz All-in-One" . "<br/>";
+		$out.="<input type=\"radio\" name=\"vars[treetype]\" id=\"treetype_var\" value=\"aio\"".((!isset($userDefaultVars["treetype"]) or $userDefaultVars["treetype"] == "aio") ? " checked=\"checked\"" : "")." />" . "GraphViz All-in-One" . "<br/>";
 		//$out.="<input type=\"radio\" name=\"vars[treetype]\" id=\"treetype_var\" value=\"desc\"".((isset($userDefaultVars["treetype"]) and $userDefaultVars["treetype"] == "desc") ? " checked=\"checked\"" : "")." />" . "PDF Descendancy";
 		$out.="</td>\n";
 		$out.="</tr>\n";
-				
+
 		// Output file type
 		$out .= "<tr><td rowspan=\"2\" class=\"descriptionbox wrap\">" ."Output File Type" . "<br/>" . "Choose DOT if you don't have GraphViz installed on server." . "</td>";
 		$out .= "<td style=\"text-align: left;\" class=\"optionbox\">";
@@ -541,12 +487,12 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
 //		}
 
 		$out.="</td></tr>";
-		
+
 		// Disposition type
 		$out.="<tr><td style=\"text-align: left;\" class=\"optionbox\">";
 		$out.="<input type=\"checkbox\" name=\"vars[disposition]\" id=\"disposition_var\" value=\"disposition\"".((isset($userDefaultVars["disposition"]) and $userDefaultVars["disposition"] == "disposition") ? " checked=\"checked\"" : "")." />" . "Generate a file for download" . " "; // new
 		$out.="</td></tr>";
-		
+
 		// Use page breaking
 		$out.="<tr><td class=\"descriptionbox wrap\">" . "Use Page Break" . "</td>";
 		$out.="<td class=\"optionbox\" style=\"text-align: left;\">";
@@ -556,7 +502,6 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
 			$out.="<option value=\"" . $pagesize_n . "\"".((isset($userDefaultVars["psize"]) and $userDefaultVars["psize"] == $pagesize_n) ? " selected=\"selected\"" : "").">" . $pagesize_n . "</option>";
 		}
 		$out.="</select></td></tr>";
-		//$out.="</td></tr>";
 
 		// Graph direction
 		$out.="<tr><td class=\"descriptionbox wrap\">" . "Graph Direction" . "</td>";
@@ -566,7 +511,6 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
 			$out.="<option value=\"" . $grdir_n . "\"".((isset($userDefaultVars["grdir"]) and $userDefaultVars["grdir"] == $grdir_n) ? " selected=\"selected\"" : "").">" . $grdir_n . "</option>";
 		}
 		$out.="</select></td></tr>";
-		//$out.="</td></tr>";
 
 		// mclimit settings
 		$out.="<tr><td class=\"descriptionbox wrap\">" . "\"MCLIMIT\" setting, a.k.a. number of iterations which helps to reduce the crossings on the graph.<br />This can be really slow (up to 10..15x compared to default (20) setting)" . "</td>";
@@ -576,8 +520,7 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
 			$out.="<option value=\"" . $mclimit_data . "\"".((isset($userDefaultVars["mclimit"]) and $userDefaultVars["mclimit"] == $mclimit_data) ? " selected=\"selected\"" : "").">" .$mclimit_data . "</option>";
 		}
 		$out .= "</select></td></tr>";
-		//$out .= "</td></tr>";
-		
+
 		// Graph look settings
 		$out .= "<tr><td class=\"descriptionbox wrap\">" . "Graph Look" . "</td>";
 		$out .= "<td class=\"optionbox\" style=\"text-align: left;\">";
@@ -585,7 +528,7 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
 		$out .= "ranksep: " . "<input type=\"text\" size=\"10\" name=\"vars[ranksep]\" id=\"ranksep\" value=\"".(isset($userDefaultVars["ranksep"]) ? $userDefaultVars["ranksep"] : $GVE_CONFIG["settings"]["ranksep"])."\" /> " . "&nbsp;";
 		$out .= "nodesep: " . "<input type=\"text\" size=\"10\" name=\"vars[nodesep]\" id=\"nodesep\" value=\"".(isset($userDefaultVars["nodesep"]) ? $userDefaultVars["nodesep"] : $GVE_CONFIG["settings"]["nodesep"])."\" /> ";
 		$out .= "</td></tr>";
-		
+
 		$out .= "</table>";
 		$out .= "</div>";
 		$out .= "</td></tr>";
@@ -593,9 +536,9 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
 		// --- Diagram preferences ---
 		$out .= "<tr><td class=\"topbottombar\"><div align=\"left\"><a id=\"tab-2_btn\" href=\"#\">" . "Diagram preferences" . "</a></div></td></tr>\n";
 		$out .= "<tr><td>";
-		$out .= "<div id=\"tab-2\" style=\"display: none;\">";
+		$out .= "<div id=\"tab-2\">";
 		$out .= "<table class=\"center width100\" style=\"text-align: left;\">";
-		
+
 		// Individuals to be included
 		$out .= "<tr><td rowspan=\"2\" class=\"descriptionbox wrap\">" ."Individuals Included" . "</td>\n";
 		$out .= "<td class=\"optionbox\" style=\"text-align: left;\">";
@@ -611,16 +554,16 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
 		if (isset($_REQUEST['pid'])) {
 			$pid = $_REQUEST['pid'];
 		} else {
-			$pid = "I1";
+			$pid = "I1";//$controller->getSignificantIndividual()->getXref();
 		}
 		//$out.="<input type=\"text\" size=\"10\" name=\"pid\" id=\"pid\" value=\"".check_rootid(isset($userDefaultVars["pid"]) ? $userDefaultVars["pid"] : "")."\"/>";
 		$out .= "<input type=\"text\" size=\"10\" name=\"pid\" id=\"pid\" value=\"" . $pid . "\"/>";
-		$out .= print_findindi_link("pid","", TRUE, FALSE);
+        $out .= FunctionsPrint::printFindIndividualLink("pid");
 		if (isset($_REQUEST['other_pids'])) {
 			$other_pids = $_REQUEST['other_pids'];
 		} else {
 			$other_pids = "";
-		}		
+		}
 		$out .= "&nbsp;<input type=\"button\" value=\">>>\" onclick=\"document.setup_gvexport_allinontree.other_pids.value=document.setup_gvexport_allinontree.other_pids.value+','+document.setup_gvexport_allinontree.pid.value;\" /> ";
 		$out .= "<input type=\"text\" size=\"30\" name=\"other_pids\" id=\"other_pids\" value=\"" . $other_pids . "\" />";
 		$out .= "<br/>";
@@ -633,7 +576,7 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
 			$stop_pid = "";
 		}
 		$out .= "<input type=\"text\" size=\"10\" name=\"stop_pid\" id=\"stop_pid\" value=\"" . $stop_pid . "\"/>";
-		$out .= print_findindi_link("stop_pid","", TRUE, FALSE);
+		$out .= FunctionsPrint::printFindIndividualLink("stop_pid");
 		if (isset($_REQUEST['other_stop_pids'])) {
 			$other_stop_pids = $_REQUEST['other_stop_pids'];
 		} else {
@@ -653,7 +596,7 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
 		$out .= "<input type=\"checkbox\" name=\"vars[marknr]\" id=\"marknr_var\" value=\"marknr\"".((isset($userDefaultVars["marknr"]) and $userDefaultVars["marknr"] == "marknr") ? " checked=\"checked\"" : "")." />" . "Mark not blood-related people with different color" . " ";
 		$out .= "</td>\n";
 		$out .= "</tr>\n";
-		
+
 		// Mark not validated data & Show last editor of the data
 		$out.="<tr><td class=\"descriptionbox wrap\">" . "Mark those individuals which facts are not validated yet" . "</td>\n";
 		$out.="<td class=\"optionbox\" style=\"text-align: left;\">";
@@ -696,7 +639,7 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
 		$out.="<input type=\"radio\" name=\"vars[dd_type]\" id=\"dd_type_var\" value=\"gedcom\"".((isset($userDefaultVars["dd_type"]) and $userDefaultVars["dd_type"] == "gedcom") ? " checked=\"checked\"" : "")." /> " . "Full Date" . "<br/>";
 		$out.="<input type=\"checkbox\" name=\"vars[show_dp]\" id=\"show_dp_var\" value=\"show_dp\"".((isset($userDefaultVars["show_dp"]) and $userDefaultVars["show_dp"] == "show_dp") ? " checked=\"checked\"" : "")." /> " . "Place";
 		$out.="</td></tr>\n";
-		
+
 		// Marriage container settings
 		$out.="<tr><td class=\"descriptionbox wrap\">" . "Marriage data to be shown" . "</td>";
 		// Family ID
@@ -708,16 +651,16 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
 		$out.="<input type=\"radio\" name=\"vars[md_type]\" id=\"md_type_var\" value=\"gedcom\"".((isset($userDefaultVars["md_type"]) and $userDefaultVars["md_type"] == "gedcom") ? " checked=\"checked\"" : "")." /> " . "Full Date" . "<br/>";
 		$out.=" <input type=\"checkbox\" name=\"vars[show_mp]\" id=\"show_mp_var\" value=\"show_mp\"".((isset($userDefaultVars["show_mp"]) and $userDefaultVars["show_mp"] == "show_mp") ? " checked=\"checked\"" : "")." /> " . "Place";
 		$out.="</td></tr>";
-		
+
 		$out .= "</table>";
 		$out .= "</div>";
 		$out .= "</td></tr>";
 
-		
+
 		// --- Appearance ---
 		$out .= "<tr><td class=\"topbottombar\"><div align=\"left\"><a id=\"tab-3_btn\" href=\"#\">" . "Appearance" . "</a></div></td></tr>\n";
 		$out .= "<tr><td>";
-		$out .= "<div id=\"tab-3\" style=\"display: none;\">";
+		$out .= "<div id=\"tab-3\">";
 		$out .= "<table class=\"center width100\" style=\"text-align: left;\">";
 
 		// Diagram type
@@ -732,7 +675,7 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
 		$out.="<br/>"; #ESL!!! 20090213
 		$out.="<input type=\"checkbox\" name=\"vars[no_fams]\" id=\"no_fams_var\" value=\"no_fams\"".((isset($userDefaultVars["no_fams"]) and $userDefaultVars["no_fams"] == "no_fams") ? " checked=\"checked\"" : "") . " />" . "No family containers, just individuals";
 		$out.='</td></tr>';
-		
+
 		// Font name
 		$out .= "<tr><td class=\"descriptionbox wrap\">" . "Font Name" . "</td>";
 		$out .= "<td class=\"optionbox\" style=\"text-align: left;\">";
@@ -744,7 +687,7 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
 		$out .= "<td class=\"optionbox\" style=\"text-align: left;\">";
 		$out .= "<input type=\"text\" size=\"2\" name=\"vars[fontsize]\" id=\"fontsize_var\" value=\"".(isset($userDefaultVars["fontsize"]) ? $userDefaultVars["fontsize"] : $GVE_CONFIG["dot"]["fontsize"])."\" />";
 		$out .= "</td></tr>";
-		
+
 		// Custom colors
 		$out.='<tr><td class="descriptionbox wrap">' . "Color code of male individuals" . '</td>';
 		$out.="<td class=\"optionbox\" style=\"text-align: left;\">";
@@ -778,7 +721,7 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
 		$defcustcol = isset($userDefaultVars['colorfam_custom']) ? $userDefaultVars['colorfam_custom'] : $GVE_CONFIG["dot"]["colorfam"];
 		$out.="<input type=\"text\" name=\"colorfam_custom_var\" id=\"colorfam_custom_var\" value=\"$defcustcol\" style=\"background-color: $defcustcol\"".((isset($userDefaultVars['colorfam']) and $userDefaultVars['colorfam'] == "custom") ? '' : ' disabled="disabled"')." onblur=\"document.setup_gvexport_allinontree.colorfam_custom_var.style.backgroundColor=document.setup_gvexport_allinontree.colorfam_custom_var.value;\" />";
 		$out.='</td></tr>';
-		
+
 		$out .= "</table>";
 		$out .= "</div>";
 		$out .= "</td></tr>";
@@ -786,7 +729,7 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
 		// --- Advanced settings ---
 		$out .= "<tr><td class=\"topbottombar\"><div align=\"left\"><a id=\"tab-adv_btn\" href=\"#\">" . "Advanced Settings" . "</a></div></td></tr>\n";
 		$out .= "<tr><td>";
-		$out .= "<div id=\"tab-adv\" style=\"display: none;\">";
+		$out .= "<div id=\"tab-adv\">";
 		$out .= "<table class=\"center width100\" style=\"text-align: left;\">";
 
 		// Debug mode
@@ -805,21 +748,23 @@ class gvexport_WT_Module extends WT_Module implements WT_Module_Menu {
 		}
 		$out .= "<input type=\"text\" name=\"vars[media_dir]\" id=\"media_dir_var\" value=\"".(isset($userDefaultVars["media_dir"]) ? $userDefaultVars["media_dir"] : $def_media_dir)."\" /> " . "The \"/media/thumbs\" subdir will be added automatically by PGV.";
 		$out .= "</td></tr>";
-		
-		
+
+
 		$out .= "</table>";
 		$out .= "</div>";
 		$out .= "</td></tr>";
-		
-		// --- Buttons at the end of form ---		
+
+		// --- Buttons at the end of form ---
 		$out .= "<tr><td class=\"topbottombar\" colspan=\"2\">";
 		$out .= "<input type=\"submit\" value=\"" . "Generate" . "\"/> ";
 		$out .= "<input type=\"reset\" value=\"" . "Reset" . "\"/></td></tr>";
-		
+
 		$out .= "</table>";
-		
+
 		$out .= "</form>";
 		echo $out;
 	}
 }
+
+return new GVExport();
 ?>

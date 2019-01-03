@@ -28,10 +28,14 @@
  * @license GPL v2 or later
  */
 
+namespace vendor\WebtreesModules\gvexport;
+
 // Load the config file
-require_once( dirname(__FILE__)."/config.php");
-require_once( "library/WT/Individual.php");
-require_once( "library/WT/Family.php");
+require_once(dirname(__FILE__)."/config.php");
+use Fisharebest\Webtrees\Individual;
+use Fisharebest\Webtrees\Family;
+use Fisharebest\Webtrees\Log;
+use Fisharebest\Webtrees\I18n;
 
 /**
  * Main class for managing the DOT file
@@ -40,7 +44,7 @@ require_once( "library/WT/Family.php");
 class Dot {
 	var $individuals = array();
 	var $families = array();
-	var $indi_search_method = array( "ance" => FALSE, "desc" => FALSE, "spou" => FALSE, "sibl" => FALSE, "cous" => FALSE);
+	var $indi_search_method = array("ance" => FALSE, "desc" => FALSE, "spou" => FALSE, "sibl" => FALSE, "cous" => FALSE);
 	var $font_size;
 	var $colors = array();
 	var $settings = array();
@@ -49,7 +53,7 @@ class Dot {
 	/**
 	 * Constructor of Dot class
 	 */
-	function Dot() {
+	function __construct() {
 		global $GVE_CONFIG;
 		// Load settings from config file
 
@@ -100,18 +104,18 @@ class Dot {
 
 		$this->settings["birth_text"] = $GVE_CONFIG["custom"]["birth_text"];
 		$this->settings["death_text"] = $GVE_CONFIG["custom"]["death_text"];
-		
+
 		$this->settings["dpi"] = $GVE_CONFIG["settings"]["dpi"];
 		$this->settings["ranksep"] = $GVE_CONFIG["settings"]["ranksep"];
 		$this->settings["nodesep"] = $GVE_CONFIG["settings"]["nodesep"];
 	}
 
-	function setPageSize( $pagesize, $size_x = FALSE, $size_y = FALSE) {
+	function setPageSize($pagesize, $size_x = FALSE, $size_y = FALSE) {
 		global $GVE_CONFIG;
-		if ( $pagesize == "Custom" && isset( $size_x) && isset( $size_y)) {
+		if ($pagesize == "Custom" && isset($size_x) && isset($size_y)) {
 			$this->pagesize["x"] = $size_x;
 			$this->pagesize["y"] = $size_y;
-		} elseif ( !empty( $pagesize) && isset( $GVE_CONFIG["pagesize"][$pagesize]["x"]) && isset( $GVE_CONFIG["pagesize"][$pagesize]["y"])) {
+		} elseif (!empty($pagesize) && isset($GVE_CONFIG["pagesize"][$pagesize]["x"]) && isset($GVE_CONFIG["pagesize"][$pagesize]["y"])) {
 			$this->pagesize["x"] = $GVE_CONFIG["pagesize"][$pagesize]["x"];
 			$this->pagesize["y"] = $GVE_CONFIG["pagesize"][$pagesize]["y"];
 		} else {
@@ -127,7 +131,7 @@ class Dot {
 	 * @param string $setting
 	 * @param mixed $value
 	 */
-	function setSettings( $setting, $value) {
+	function setSettings($setting, $value) {
 		$this->settings[$setting] = $value;
 	}
 
@@ -137,7 +141,7 @@ class Dot {
 	 * @param string $color_type
 	 * @param string $color
 	 */
-	function setColor( $color_type, $color) {
+	function setColor($color_type, $color) {
 		$this->colors[$color_type] = $color;
 	}
 
@@ -146,7 +150,7 @@ class Dot {
 	 *
 	 * @param string $font_size
 	 */
-	function setFontSize( $font_size) {
+	function setFontSize($font_size) {
 		$this->font_size = $font_size;
 	}
 
@@ -161,7 +165,7 @@ class Dot {
 	 *
 	 * @param string $method
 	 */
-	function setIndiSearchMethod( $method) {
+	function setIndiSearchMethod($method) {
 		$this->indi_search_method[$method] = TRUE;
 	}
 
@@ -169,7 +173,7 @@ class Dot {
 		$out = "";
 
 		// --- DEBUG ---
-		if ( $this->settings["debug"]) {
+		if ($this->settings["debug"]) {
 			print("<pre>");
 		}
 		// -------------
@@ -177,7 +181,7 @@ class Dot {
 		$out .= $this->createDOTDump();
 
 		// --- DEBUG ---
-		if ( $this->settings["debug"]) {
+		if ($this->settings["debug"]) {
 			print("</pre>");
 		}
 		// -------------
@@ -187,27 +191,27 @@ class Dot {
 
 	function createIndiList () {
 		// Full tree
-		if ( $this->settings["indi"] == "ALL") {
+		if ($this->settings["indi"] == "ALL") {
 			$indis = WT_Query_Name::individuals(false, false, false, true, false, WT_GED_ID);
 			foreach ($indis as $pid=>$indi) {
-				if ( get_class( $indi ) != "WT_Individual") {     #ESL!!! 20090208 Fix for PGV 4.2
-					$this->addIndiToList( $pid);
+				if (get_class($indi ) != "Individual") {     #ESL!!! 20090208 Fix for PGV 4.2
+					$this->addIndiToList($pid);
 				} else {
 					$this->addIndiToList($indi->getXref()); #ESL!!! 20090208 Fix for PGV 4.2
 				}
 			}
 		}
 		// Partial tree
-		else if ( !empty( $this->settings["indi"])) {
+		else if (!empty($this->settings["indi"])) {
 			// -- DEBUG ---
 			// echo "INDI: " . $this->settings["indi"];
-			if ( $this->settings["multi_indi"] == FALSE) {
-				$this->addIndiToList( $this->settings["indi"], $this->indi_search_method["ance"], $this->indi_search_method["desc"], $this->indi_search_method["spou"], $this->indi_search_method["sibl"], TRUE, 0, $this->settings["ance_level"], $this->settings["desc_level"]);
+			if ($this->settings["multi_indi"] == FALSE) {
+				$this->addIndiToList($this->settings["indi"], $this->indi_search_method["ance"], $this->indi_search_method["desc"], $this->indi_search_method["spou"], $this->indi_search_method["sibl"], TRUE, 0, $this->settings["ance_level"], $this->settings["desc_level"]);
 			} else {
 				// if multiple indis are defined
 				$indis = explode(",", $this->settings["indi"]);
 				for ($i=0;$i<count($indis);$i++) {
-					$this->addIndiToList( $indis[$i], $this->indi_search_method["ance"], $this->indi_search_method["desc"], $this->indi_search_method["spou"], $this->indi_search_method["sibl"], TRUE, 0, $this->settings["ance_level"], $this->settings["desc_level"]);
+					$this->addIndiToList($indis[$i], $this->indi_search_method["ance"], $this->indi_search_method["desc"], $this->indi_search_method["spou"], $this->indi_search_method["sibl"], TRUE, 0, $this->settings["ance_level"], $this->settings["desc_level"]);
 				}
 			}
 
@@ -216,18 +220,18 @@ class Dot {
 
 	function createFamList () {
 		// Full tree
-		if ( $this->settings["indi"] == "ALL") {
+		if ($this->settings["indi"] == "ALL") {
 			$fams = WT_Query_Name::families(false, false, false, false, WT_GED_ID);
 			foreach ($fams as $fid=>$fam) {
-				if ( get_class( $fam ) != "WT_Family") {
-					$this->addFamToList( $fid);
+				if (get_class($fam ) != "Family") {
+					$this->addFamToList($fid);
 				} else {
 					$this->addFamToList($fam->getXref());
 				}
 			}
 		}
 		// Partial tree	(families will be added during INDI processing)
-		else if ( !empty( $this->settings["indi"])) {
+		else if (!empty($this->settings["indi"])) {
 		}
 	}
 
@@ -243,58 +247,58 @@ class Dot {
 		$out .= $this->printDOTHeader();
 
 		// ### Print the individuals list ###
-		if ( $this->settings["diagram_type"] == "combined") {
+		if ($this->settings["diagram_type"] == "combined") {
 			// Do nothing, print only families
 		} else {
 			foreach ($this->individuals as $pid) {
-				$out .= $this->printPerson( $pid['pid'], $pid['rel']);
+				$out .= $this->printPerson($pid['pid'], $pid['rel']);
 			}
 		}
 
 		// ### Print the families list ###
 		// If no_fams option is not checked then we print the families
-		if ( $this->settings["no_fams"] == FALSE) {
+		if ($this->settings["no_fams"] == FALSE) {
 			foreach ($this->families as $fid=>$fam_data) {
-				if ( $this->settings["diagram_type"] == "combined") {
+				if ($this->settings["diagram_type"] == "combined") {
 					// We do not show those families which has no parents and children in case of "combined" view;
-					if ( ( isset( $this->families[$fid]["has_children"]) && $this->families[$fid]["has_children"] == TRUE) 
-							|| ( isset( $this->families[$fid]["has_parents"]) && $this->families[$fid]["has_parents"] == TRUE)
-							|| ( $this->settings["indi"] == "ALL")) { #ESL!!! Fix for 4.2
-						$out .= $this->printFamily( $fid);
+					if ((isset($this->families[$fid]["has_children"]) && $this->families[$fid]["has_children"] == TRUE)
+							|| (isset($this->families[$fid]["has_parents"]) && $this->families[$fid]["has_parents"] == TRUE)
+							|| ($this->settings["indi"] == "ALL")) { #ESL!!! Fix for 4.2
+						$out .= $this->printFamily($fid);
 					}
-				} elseif ( $this->settings["diagram_type"] != "combined") {
-					$out .= $this->printFamily( $fid);
+				} elseif ($this->settings["diagram_type"] != "combined") {
+					$out .= $this->printFamily($fid);
 				}
 			}
 		}
 
 		// ### Print the connections ###
 		// If no_fams option is not checked
-		if ( $this->settings["no_fams"] == FALSE) {
+		if ($this->settings["no_fams"] == FALSE) {
 			foreach ($this->families as $fid=>$set) {
 				// COMBINED type diagram
-				if ( $this->settings["diagram_type"] == "combined") {
-					if ( substr( $fid, 0, 2) == "F_") {
+				if ($this->settings["diagram_type"] == "combined") {
+					if (substr($fid, 0, 2) == "F_") {
 						// In case of dummy family do nothing, because it has no children
 						//$this->families[$fid]["has_children"] = FALSE;
 					} else {
 						// Get the family data
-						$f = $this->getUpdatedFamily( $fid);
+						$f = $this->getUpdatedFamily($fid);
 
 						// Draw an arrow from FAM to each CHIL
 						foreach ($f->getChildren() as $child) {
-							if ( !empty( $child) && ( isset( $this->individuals[$child->getXref()]))) {
+							if (!empty($child) && (isset($this->individuals[$child->getXref()]))) {
 								//$this->families[$fid]["has_children"] = TRUE;
-								foreach ( $this->individuals[$child->getXref()]["fams"] as $fam_nr=>$fam) {
-									$out .= $this->convertID( $fid) . " -> " . $this->convertID( $fam) . ":" . $this->convertID( $child->getXref()) . "\n";
+								foreach ($this->individuals[$child->getXref()]["fams"] as $fam_nr=>$fam) {
+									$out .= $this->convertID($fid) . " -> " . $this->convertID($fam) . ":" . $this->convertID($child->getXref()) . "\n";
 								}
 							}
 						}
 					}
 				} else {
 					// Get the family data
-					$f = $this->getUpdatedFamily( $fid);
-					
+					$f = $this->getUpdatedFamily($fid);
+
 					// Get the husband & wife ID
                     $h = $f->getHusband();
                     $w = $f->getWife();
@@ -308,17 +312,17 @@ class Dot {
                         $wife_id = null;
 
 					// Draw an arrow from HUSB to FAM
-					if ( !empty( $husb_id) && ( isset( $this->individuals[$husb_id]))) {
-						$out .= $this->convertID( $husb_id) . " -> " . $this->convertID( $fid) ."\n";
+					if (!empty($husb_id) && (isset($this->individuals[$husb_id]))) {
+						$out .= $this->convertID($husb_id) . " -> " . $this->convertID($fid) ."\n";
 					}
 					// Draw an arrow from WIFE to FAM
-					if ( !empty( $wife_id) && ( isset( $this->individuals[$wife_id]))) {
-						$out .= $this->convertID( $wife_id) . " -> ". $this->convertID( $fid) ."\n";
+					if (!empty($wife_id) && (isset($this->individuals[$wife_id]))) {
+						$out .= $this->convertID($wife_id) . " -> ". $this->convertID($fid) ."\n";
 					}
 					// Draw an arrow from FAM to each CHIL
 					foreach ($f->getChildren() as $child) {
-						if ( !empty( $child) && ( isset( $this->individuals[$child->getXref()]))) {
-							$out .= $this->convertID( $fid) . " -> " . $this->convertID( $child->getXref()) . "\n";
+						if (!empty($child) && (isset($this->individuals[$child->getXref()]))) {
+							$out .= $this->convertID($fid) . " -> " . $this->convertID($child->getXref()) . "\n";
 						}
 					}
 				}
@@ -326,23 +330,23 @@ class Dot {
 		} else {
 		// If no_fams option is checked then we do not print the families
 			foreach ($this->families as $fid=>$set) {
-				if ( $this->settings["diagram_type"] == "combined") {
+				if ($this->settings["diagram_type"] == "combined") {
 					/*
 					*/
 				} else {
-					$f = $this->getUpdatedFamily( $fid);
+					$f = $this->getUpdatedFamily($fid);
 					// Draw an arrow from HUSB and WIFE to FAM
-					$husb_id = $f->getHusbId();
-					$wife_id = $f->getWifeId();
+					$husb_id = empty($f->getHusband()) ? null : $f->getHusband()->getXref();
+					$wife_id = empty($f->getWife()) ? null : $f->getWife()->getXref();
 
 					// Draw an arrow from FAM to each CHIL
 					foreach ($f->getChildren() as $child) {
-						if ( !empty( $child) && ( isset( $this->individuals[$child->getXref()]))) {
-							if ( !empty( $husb_id) && ( isset( $this->individuals[$husb_id]))) {
-								$out .= $this->convertID( $husb_id) . " -> " . $this->convertID( $child->getXref()) ."\n";
+						if (!empty($child) && (isset($this->individuals[$child->getXref()]))) {
+							if (!empty($husb_id) && (isset($this->individuals[$husb_id]))) {
+								$out .= $this->convertID($husb_id) . " -> " . $this->convertID($child->getXref()) ."\n";
 							}
-							if ( !empty( $wife_id) && ( isset( $this->individuals[$wife_id]))) {
-								$out .= $this->convertID( $wife_id) . " -> ". $this->convertID( $child->getXref()) ."\n";
+							if (!empty($wife_id) && (isset($this->individuals[$wife_id]))) {
+								$out .= $this->convertID($wife_id) . " -> ". $this->convertID($child->getXref()) ."\n";
 							}
 						}
 					}
@@ -361,19 +365,19 @@ class Dot {
 	 * @param	string	Place string in long format (Town,County,State/Region,Country)
 	 * @return	string	The first and last chunk of the above string (Town, Country)
 	 */
-	function getFormattedPlace( $place_long) {
-		$place_chunks = explode( ",", $place_long);
+	function getFormattedPlace($place_long) {
+		$place_chunks = explode(",", $place_long);
 		$place = "";
-		$chunk_count = count( $place_chunks);
+		$chunk_count = count($place_chunks);
 		/* We need only the first and last place name (city and country name) */
-		if ( !empty( $place_chunks[0])) {
-			$place .= trim( $place_chunks[0]);
+		if (!empty($place_chunks[0])) {
+			$place .= trim($place_chunks[0]);
 		}
-		if ( !empty( $place_chunks[$chunk_count - 1]) && ( $chunk_count > 1)) {
-			if ( !empty( $place)) {
+		if (!empty($place_chunks[$chunk_count - 1]) && ($chunk_count > 1)) {
+			if (!empty($place)) {
 				$place .= ", ";
 			}
-			$place .= trim( $place_chunks[$chunk_count - 1]);
+			$place .= trim($place_chunks[$chunk_count - 1]);
 		}
 		return $place;
 	}
@@ -388,23 +392,23 @@ class Dot {
  	 * @param boolean $related (TRUE/FALSE) Person is blood-related
  	 * @return string $colour (#RRGGBB)
  	 */
-	function getGenderColour( $gender, $related = TRUE) {
+	function getGenderColour($gender, $related = TRUE) {
 		global $GVE_CONFIG;
 		// Determine the fill color
-		if ( $gender == 'F') {
-			if ( $related) {
+		if ($gender == 'F') {
+			if ($related) {
 				$fillcolor = $this->colors["colorf"];
 			} else  {
 				$fillcolor = $this->colors["colorf_nr"];
 			}
-		} elseif ( $gender == 'M'){
-			if ( $related) {
+		} elseif ($gender == 'M'){
+			if ($related) {
 				$fillcolor = $this->colors["colorm"];
 			} else  {
 				$fillcolor = $this->colors["colorm_nr"];
 			}
 		} else {
-			if ( $related) {
+			if ($related) {
 				$fillcolor = $this->colors["coloru"];
 			} else  {
 				$fillcolor = $this->colors["coloru_nr"];
@@ -437,17 +441,17 @@ class Dot {
 		$out = "";
 		$out .= "digraph WT_Graph {\n";
 		// Using pagebreak
-		if ( !empty( $this->settings["use_pagesize"])) {
+		if (!empty($this->settings["use_pagesize"])) {
 			$out .= "ratio=\"auto\"\n";
 			//$out .= "/* PAGESIZE: " . $this->settings["use_pagesize"] . " */";
 			// Size of the page
 			$out .= "page=\"" . $this->pagesize["x"] . "," . $this->pagesize["y"] . "\"\n";
 			// Size of the drawing (pagesize - 1 inch)
-			$out .= "size=\"" . ( $this->pagesize["x"] - $this->settings["page_margin"]) . "," . ( $this->pagesize["y"] - $this->settings["page_margin"]) . "\"\n";
+			$out .= "size=\"" . ($this->pagesize["x"] - $this->settings["page_margin"]) . "," . ($this->pagesize["y"] - $this->settings["page_margin"]) . "\"\n";
 			//$out .= "size=\"50, 50\"\n";
 		}
 		/*
-		if ( $this->settings["diagram_type"] == "combined") {
+		if ($this->settings["diagram_type"] == "combined") {
 			$out .= "ranksep=\"0.50 equally\"\n";
 		} else {
 			$out .= "ranksep=\"0.30 equally\"\n";
@@ -462,7 +466,7 @@ class Dot {
 		$out .= "pagedir=\"LT\"\n";
 		$out .= "edge [ style=solid, arrowhead=normal arrowtail=none];\n";
 		// I need Arial font because of UTF-8 characters - feel free to change it
-		if ( $this->settings["diagram_type"] == "simple") {
+		if ($this->settings["diagram_type"] == "simple") {
 			$out .= "node [ shape=box, style=filled fontsize=\"" . $this->font_size ."\" fontname=\"" . $this->settings["fontname"] ."\"];\n";
 		} else {
 			$out .= "node [ shape=plaintext fontsize=\"" . $this->font_size ."\" fontname=\"" . $this->settings["fontname"] ."\"];\n";
@@ -487,8 +491,8 @@ class Dot {
 	 * @param	string	$text	String to convert
 	 * @return	string	Converted string
 	 */
-	function convertToHTMLSC( $text) {
-		$out = htmlspecialchars( $text, ENT_QUOTES, "UTF-8");
+	function convertToHTMLSC($text) {
+		$out = htmlspecialchars($text, ENT_QUOTES, "UTF-8");
 		return $out;
 	}
 
@@ -497,20 +501,20 @@ class Dot {
 	 *
 	 * @param integer $pid Person ID
 	 */
-	function printPerson( $pid, $related = TRUE) {
+	function printPerson($pid, $related = TRUE) {
 		global $GVE_CONFIG, $pgv_changes, $GEDCOM, $pgv_lang;
 
 		$out = "";
-		$out .= $this->convertID( $pid); // Convert the ID, so linked GEDCOMs are displayed properly
+		$out .= $this->convertID($pid); // Convert the ID, so linked GEDCOMs are displayed properly
 		$out .= " [ ";
 
-		if ( $this->settings["diagram_type"] == "simple") {
+		if ($this->settings["diagram_type"] == "simple") {
 			// Simple output
-			$out .= $this->printPersonLabel( $pid, $related);
+			$out .= $this->printPersonLabel($pid, $related);
 		} else {
 			// HTML style output
 			$out .= "label=<";
-			$out .= $this->printPersonLabel( $pid, $related);
+			$out .= $this->printPersonLabel($pid, $related);
 			$out .= ">";
 		}
 
@@ -524,23 +528,23 @@ class Dot {
 	 *
 	 * @param integer $pid Person ID
 	 */
-	function printPersonLabel( $pid, $related = TRUE) {
-		global $GVE_CONFIG, $pgv_changes, $lang_short_cut, $LANGUAGE, $DATE_FORMAT, $GEDCOM, $pgv_lang;
-		
+	function printPersonLabel($pid, $related = TRUE) {
+		global $GVE_CONFIG, $pgv_changes, $lang_short_cut, $LANGUAGE, $GEDCOM, $pgv_lang;
+
 		$out = "";
 		// Get the personal data
-		$i = $this->getUpdatedPerson( $pid);
+		$i = $this->getUpdatedPerson($pid);
 
 		$isdead = $i->isDead();
 
 		// --- Background color & last editor's data ---
-		// if ( $i->getChanged()) {
+		// if ($i->getChanged()) {
 		// 	// The INDI's data has been changed and not accepted yet
 		// 	$fillcolor = $GVE_CONFIG["dot"]["colorch"]; // Backround color is set to specified
-		// 	if ( $this->settings["show_lt_editor"]) {
+		// 	if ($this->settings["show_lt_editor"]) {
 		// 		// Show last editor
 		// 		// Hack is needed for compatibility for PGV revisions < 1661
-		// 		if ( method_exists( $i, "LastchangeUser")) {
+		// 		if (method_exists($i, "LastchangeUser")) {
 		// 			$editor = $pgv_lang["last_change_user"] . ": " . $i->LastchangeUser();
 		// 		} else {
 		// 			$editor = $pgv_lang["last_change_user"] . ": " . $i->getLastchangeUser();
@@ -550,27 +554,28 @@ class Dot {
 		// 	}
 		// } else {
 			// The INDI's data is up-to-date
-			$fillcolor = $this->getGenderColour( $i->getSex(), $related); // Backround color is set to specified
+			$fillcolor = $this->getGenderColour($i->getSex(), $related); // Backround color is set to specified
 			$editor = "";
 		// }
 
 		$bordercolor = "#606060";	// Border color of the INDI's box
-		
+		$link = $i->getHtmlUrl();
+
 		// --- Birth data ---
-		if ( $this->settings["show_by"]) {
-			$birthdate_var = $i->getBirthDate( FALSE);
+		if ($this->settings["show_by"]) {
+			$birthdate_var = $i->getBirthDate(FALSE);
 			$q1=$birthdate_var->qual1;
-			$d1=$birthdate_var->date1->Format($DATE_FORMAT);
-			$dy=$birthdate_var->date1->Format("%Y");
+			$d1=$birthdate_var->minimumDate()->format(I18N::dateFormat());
+			$dy=$birthdate_var->minimumDate()->format("%Y");
 			$q2=$birthdate_var->qual2;
-			if (is_null($birthdate_var->date2))
+			if ($birthdate_var->minimumDate() == $birthdate_var->maximumDate())
 				$d2='';
 			else
-				$d2=$birthdate_var->date2->Format($DATE_FORMAT);
+				$d2=$birthdate_var->maximumDate()->format(I18N::dateFormat());
 			$q3='';
-			if ( $this->settings["bd_type"] == "gedcom") {
+			if ($this->settings["bd_type"] == "gedcom") {
 				// Show full GEDCOM date
-				if ( is_object( $birthdate_var)) {
+				if (is_object($birthdate_var)) {
 					// Workaround for PGV 4.1.5 SVN, it gives back an object not a string
 					$birthdate = trim("{$q1} {$d1} {$q2} {$d2} {$q3}");
 				} else {
@@ -578,21 +583,21 @@ class Dot {
 				}
 			} else {
 				// Show birth year only
-				if ( is_object( $birthdate_var)) {
+				if (is_object($birthdate_var)) {
 					// Workaround for PGV 4.1.5 SVN, it gives back an object not a string
 					$birthdate = trim("{$q1} {$dy}");
 				} else {
-					$birthdate = substr( $birthdate_var, -4, 4);
+					$birthdate = substr($birthdate_var, -4, 4);
 				}
 			}
 		} else {
 			$birthdate = "";
 		}
-				
-		if ( $this->settings["show_bp"]) {
+
+		if ($this->settings["show_bp"]) {
 			// Show birth place
-			if ( $this->settings["use_abbr_place"]) {
-				$birthplace = $this->getFormattedPlace( $i->getBirthPlace());
+			if ($this->settings["use_abbr_place"]) {
+				$birthplace = $this->getFormattedPlace($i->getBirthPlace());
 			} else {
 				$birthplace = $i->getBirthPlace();
 			}
@@ -601,20 +606,20 @@ class Dot {
 		}
 
 		// --- Death data ---
-		if ( $this->settings["show_dy"]) {
-			$deathdate_var = $i->getDeathDate( FALSE);
+		if ($this->settings["show_dy"]) {
+			$deathdate_var = $i->getDeathDate(FALSE);
 			$q1=$deathdate_var->qual1;
-			$d1=$deathdate_var->date1->Format($DATE_FORMAT);
-			$dy=$deathdate_var->date1->Format("%Y");
+			$d1=$deathdate_var->minimumDate()->format(I18N::dateFormat());
+			$dy=$deathdate_var->minimumDate()->format("%Y");
 			$q2=$deathdate_var->qual2;
-			if (is_null($deathdate_var->date2))
+			if ($deathdate_var->minimumDate() == $deathdate_var->maximumDate())
 				$d2='';
 			else
-				$d2=$deathdate_var->date2->Format($DATE_FORMAT);
+				$d2=$deathdate_var->maximumDate()->format(I18N::dateFormat());
 			$q3='';
 			if ($this->settings["dd_type"] == "gedcom") {
 				// Show full GEDCOM date
-				if ( is_object( $deathdate_var)) {
+				if (is_object($deathdate_var)) {
 					// Workaround for PGV 4.1.5 SVN, it gives back an object not a string
 					$deathdate = trim("{$q1} {$d1} {$q2} {$d2} {$q3}");
 				} else {
@@ -622,21 +627,21 @@ class Dot {
 				}
 			} else {
 				// Show death year only
-				if ( is_object( $deathdate_var)) {
+				if (is_object($deathdate_var)) {
 					// Workaround for PGV 4.1.5 SVN, it gives back an object not a string
 					$deathdate = trim("{$q1} {$dy}");
 				} else {
-					$deathdate = substr( $deathdate_var, -4, 4);
+					$deathdate = substr($deathdate_var, -4, 4);
 				}
 			}
 		} else {
 			$deathdate = "";
 		}
-		
-		if ( $this->settings["show_dp"]) {
+
+		if ($this->settings["show_dp"]) {
 			// Show death place
-			if ( $this->settings["use_abbr_place"]) {
-				$deathplace = $this->getFormattedPlace( $i->getDeathPlace());
+			if ($this->settings["use_abbr_place"]) {
+				$deathplace = $this->getFormattedPlace($i->getDeathPlace());
 			} else {
 				$deathplace = $i->getDeathPlace();
 			}
@@ -646,7 +651,7 @@ class Dot {
 
 		// --- Name ---
 		if (method_exists($i,'getName')) {
-			$name = strip_tags( $i->getName());
+			$name = strip_tags($i->getName());
 		} else {
 			/*foreach ($i->getAllNames() as $n=>$nm) {
 				if ($nm['type']=='NAME') {
@@ -658,9 +663,9 @@ class Dot {
 			$name = $i->getFullName();//@@ Meliza Amity
 			$addname = $i->getAddName();//@@ Meliza Amity
             if (!empty($addname)) {
-	            if ( $this->settings["diagram_type"] == "simple") 
+	            if ($this->settings["diagram_type"] == "simple")
 		            $name .= '\n' . $addname;//@@ Meliza Amity
-	            else 
+	            else
 		            $name .= '<BR />' . $addname;//@@ Meliza Amity
             }
             $name = strip_tags($name);
@@ -670,48 +675,48 @@ class Dot {
 		 //@@ replace starredname by <u> and </u>
 		//@@ $name = str_replace(array('<span class="starredname">','</span>'), array('<U>','</U>'), $name); //@@ replace starredname by <u> and </u>
 		//$name = str_replace(array('<span class="starredname">','</span>'), array("",""), $name); //@@ replace starredname by null till graphviz supports underline
-		//$name = strip_tags( $name);
+		//$name = strip_tags($name);
 
-        if ( $this->settings["diagram_type"] == "simple") { //@@ Meliza Amity
+        if ($this->settings["diagram_type"] == "simple") { //@@ Meliza Amity
         	$name = str_replace(array('<span class="starredname">','</span>'), array('\"','\"'), $name);
 			//$name = str_replace('"', '\"', $name); //@@ Meliza Amity Handle double quotes of nick-names in simple tree ...
         } else {
         	$name = str_replace(array('<span class="starredname">','</span>'), array('<FONT face="' . $this->settings["fontname"] . ' italic">','</FONT>'), $name);
         }
-		
-		if ( $this->settings["show_pid"]) {
+
+		if ($this->settings["show_pid"]) {
 			// Show INDI id
 			$name = $name . " (" . $pid . ")";
 		}
 		//$name = str_replace('"', '', $name); // To remove double quotes
 
 		// --- Printing the INDI details ---
-		if ( $this->settings["diagram_type"] == "simple") {
-			if ( $this->settings["show_url"]) {
-				// substr( $_SERVER['QUERY_STRING'], 0, strrpos( $_SERVER['QUERY_STRING'], '/'))
+		if ($this->settings["diagram_type"] == "simple") {
+			if ($this->settings["show_url"]) {
+				// substr($_SERVER['QUERY_STRING'], 0, strrpos($_SERVER['QUERY_STRING'], '/'))
 				$out .= "color=\"" . $bordercolor . "\", fillcolor=\"" . $fillcolor . "\", target=\"_blank\", href=\"" . $this->convertToHTMLSC($link) . "\" label="; #ESL!!! 20090213 without convertToHTMLSC the dot file has invalid data
 			} else {
 				$out .= "color=\"" . $bordercolor . "\", fillcolor=\"" . $fillcolor . "\", label=";
 			}
 			$out .= '"';
-			$out .= str_replace('"','\"',$name) . '\n' . $this->settings["birth_text"] . $birthdate . " " . ( empty($birthplace)?'':'('.$birthplace.')') . '\l';
-			if ( $isdead) {
+			$out .= str_replace('"','\"',$name) . '\n' . $this->settings["birth_text"] . $birthdate . " " . (empty($birthplace)?'':'('.$birthplace.')') . '\l';
+			if ($isdead) {
 				$out .= $this->settings["death_text"] . $deathdate . " " . (empty($deathplace)?'':'('.$deathplace.')');
 			} else {
 				$out .= " ";
 			}
 			$out .= '\l';
-			if ( !empty( $editor)) {
-				$out .= '\n' . strip_tags( $editor);
+			if (!empty($editor)) {
+				$out .= '\n' . strip_tags($editor);
 			}
 			$out .= '"';
 		} else {
 			// Convert birth & death place to get rid of characters which mess up the HTML output
-			$birthplace = $this->convertToHTMLSC( $birthplace);
-			$deathplace = $this->convertToHTMLSC( $deathplace);
+			$birthplace = $this->convertToHTMLSC($birthplace);
+			$deathplace = $this->convertToHTMLSC($deathplace);
 
 			// Draw table
-			if ( $this->settings["diagram_type"] == "combined") {
+			if ($this->settings["diagram_type"] == "combined") {
 				$out .= "<TABLE BORDER=\"0\" CELLBORDER=\"0\" CELLPADDING=\"2\" CELLSPACING=\"0\" BGCOLOR=\"#F0F0F0\">";
 			} else {
 				$out .= "<TABLE BORDER=\"1\" CELLBORDER=\"0\" CELLPADDING=\"2\" CELLSPACING=\"0\" BGCOLOR=\"#F0F0F0\">";
@@ -720,27 +725,27 @@ class Dot {
 			// First row (photo & name)
 			$out .= "<TR>";
 			// Show photo
-			if ( ($this->settings["diagram_type"] == "deco-photo" || $this->settings["diagram_type_combined_with_photo"]) && isset($this->individuals[$pid]["pic"]) && !empty($this->individuals[$pid]["pic"])) { #ESL!!! 20090213 deco-photo not used anymore
-				$out .= "<TD ROWSPAN=\"2\" CELLPADDING=\"1\" PORT=\"pic\" WIDTH=\"" . ( $this->font_size * 5) . "\" HEIGHT=\"" . ( $this->font_size * 6) . "\" FIXEDSIZE=\"true\"><IMG SCALE=\"true\" SRC=\"" . $this->individuals[$pid]["pic"] . "\" /></TD>";
+			if (($this->settings["diagram_type"] == "deco-photo" || $this->settings["diagram_type_combined_with_photo"]) && isset($this->individuals[$pid]["pic"]) && !empty($this->individuals[$pid]["pic"])) { #ESL!!! 20090213 deco-photo not used anymore
+				$out .= "<TD ROWSPAN=\"2\" CELLPADDING=\"1\" PORT=\"pic\" WIDTH=\"" . ($this->font_size * 5) . "\" HEIGHT=\"" . ($this->font_size * 6) . "\" FIXEDSIZE=\"true\"><IMG SCALE=\"true\" SRC=\"" . $this->individuals[$pid]["pic"] . "\" /></TD>";
 			}
 			// Show name
-			if ( $this->settings["show_url"]) {
-				$out .= "<TD CELLPADDING=\"2\" BGCOLOR=\"$fillcolor\" TARGET=\"_blank\" HREF=\"" . $this->convertToHTMLSC($link) . "\" PORT=\"nam\"><FONT POINT-SIZE=\"" . ( $this->font_size + 2) ."\">" . $name . "</FONT></TD>";
+			if ($this->settings["show_url"]) {
+				$out .= "<TD CELLPADDING=\"2\" BGCOLOR=\"$fillcolor\" TARGET=\"_blank\" HREF=\"" . $this->convertToHTMLSC($link) . "\" PORT=\"nam\"><FONT POINT-SIZE=\"" . ($this->font_size + 2) ."\">" . $name . "</FONT></TD>";
 			} else {
-				$out .= "<TD CELLPADDING=\"2\" BGCOLOR=\"$fillcolor\" PORT=\"nam\"><FONT POINT-SIZE=\"" . ( $this->font_size + 2) ."\">" . $name . "</FONT></TD>";
+				$out .= "<TD CELLPADDING=\"2\" BGCOLOR=\"$fillcolor\" PORT=\"nam\"><FONT POINT-SIZE=\"" . ($this->font_size + 2) ."\">" . $name . "</FONT></TD>";
 			}
 			$out .= "</TR>";
 
 			// Second row (birth & death data)
 			$out .= "<TR>";
-			$out .= "<TD ALIGN=\"LEFT\" BALIGN=\"LEFT\" PORT=\"dat\">" . $this->settings["birth_text"] . " $birthdate " . ( empty( $birthplace)?"":"( $birthplace)");
+			$out .= "<TD ALIGN=\"LEFT\" BALIGN=\"LEFT\" PORT=\"dat\">" . $this->settings["birth_text"] . " $birthdate " . (empty($birthplace)?"":"($birthplace)");
 			$out .= "<BR />";
-			if ( $isdead) {
-				$out .= $this->settings["death_text"] . " $deathdate " . ( empty( $deathplace)?"":"( $deathplace)");
+			if ($isdead) {
+				$out .= $this->settings["death_text"] . " $deathdate " . (empty($deathplace)?"":"($deathplace)");
 			} else {
 				$out .= " ";
 			}
-			if ( !empty( $editor)) {
+			if (!empty($editor)) {
 				$out .= "<BR/>" . $editor;
 			}
 
@@ -759,58 +764,59 @@ class Dot {
 	 *
 	 * @param integer $fid Family ID
 	 */
-	function printFamily( $fid) {
-		global $GVE_CONFIG, $pgv_changes, $lang_short_cut, $LANGUAGE, $DATE_FORMAT, $GEDCOM, $pgv_lang;
-		
+	function printFamily($fid) {
+		global $GVE_CONFIG, $pgv_changes, $lang_short_cut, $LANGUAGE, $GEDCOM, $pgv_lang;
+
 		$out = "";
 
-		$out .= $this->convertID( $fid);
+		$out .= $this->convertID($fid);
 		$out .= " [ ";
 
 		// Showing the ID of the family, if set
-		if ( $this->settings["show_fid"]) {
+		if ($this->settings["show_fid"]) {
 			$family = " (" . $fid . ")";
 		} else {
 			$family = "";
 		}
-		
+
 		// by wooc
 		$func="date_localisation_{$lang_short_cut[$LANGUAGE]}";
 		if (!function_exists($func))
 			$func="DefaultDateLocalisation";
-		
+
 		// --- Data collection ---
 		// If a "dummy" family is set (begins with "F_"), then there is no marriage & family data, so no need for querying PGV...
-		if ( substr( $fid, 0, 2) == "F_") {
+		if (substr($fid, 0, 2) == "F_") {
 			$fillcolor = $this->getFamilyColour();
 			$marriageyear = "";
 			$marriageplace = "";
 			$husb_id = $this->families[$fid]["husb_id"];
 			$wife_id = $this->families[$fid]["wife_id"];
-			if ( !empty( $this->families[$fid]["unkn_id"])) {
+			if (!empty($this->families[$fid]["unkn_id"])) {
 				$unkn_id = $this->families[$fid]["unkn_id"];
 			}
 			$link = "#";
 		// Querying PGV for the data of a FAM object
 		} else {
-			$f = $this->getUpdatedFamily( $fid);
+			$f = $this->getUpdatedFamily($fid);
 			$fillcolor = $this->getFamilyColour();
+			$link = $f->getHtmlUrl();
 
 			// Show marriage year
-			if ( $this->settings["show_my"]) {
-				$marrdate_var = $f->getMarriageDate( FALSE);
+			if ($this->settings["show_my"]) {
+				$marrdate_var = $f->getMarriageDate(FALSE);
 				$q1=$marrdate_var->qual1;
-				$d1=$marrdate_var->date1->Format($DATE_FORMAT);
-				$dy=$marrdate_var->date1->Format("%Y");
+				$d1=$marrdate_var->minimumDate()->format(I18N::dateFormat());
+				$dy=$marrdate_var->minimumDate()->format("%Y");
 				$q2=$marrdate_var->qual2;
-				if (is_null($marrdate_var->date2))
+				if ($marrdate_var->minimumDate() == $marrdate_var->maximumDate())
 					$d2='';
 				else
-					$d2=$marrdate_var->date2->Format($DATE_FORMAT);
+					$d2=$marrdate_var->maximumDate()->format(I18N::dateFormat());
 				$q3='';
 				if ($this->settings["md_type"] == "gedcom") {
 				// Show full GEDCOM date
-					if ( is_object( $marrdate_var)) {
+					if (is_object($marrdate_var)) {
 						// Workaround for PGV 4.1.5 SVN, it gives back an object not a string
 						$marriagedate = trim("{$q1} {$d1} {$q2} {$d2} {$q3}");
 					} else {
@@ -818,36 +824,36 @@ class Dot {
 					}
 				} else {
 					// Show birth year only
-					if ( is_object( $marrdate_var)) {
+					if (is_object($marrdate_var)) {
 						// Workaround for PGV 4.1.5 SVN, it gives back an object not a string
 						$marriagedate = trim("{$q1} {$dy}");
 					} else {
-						$marriagedate = substr( $marrdate_var, -4, 4);
+						$marriagedate = substr($marrdate_var, -4, 4);
 					}
 				}
 			} else {
 				$marriagedate = "";
 			}
-			
+
 			// Show marriage place
-			// if ( $this->settings["show_mp"]) {
-			// 	if ( $this->settings["use_abbr_place"]) {
-			// 		$marriageplace = $this->getFormattedPlace( $f->getMarriagePlace());
-			// 	} else {
-			// 		$marriageplace = $f->getMarriagePlace()->getPlaceName();
-			// 	}
-			// } else {
+			if ($this->settings["show_mp"] && !empty($f->getMarriage()) && !empty($f->getMarriagePlace())) {
+			 	if ($this->settings["use_abbr_place"]) {
+			 		$marriageplace = $this->getFormattedPlace($f->getMarriagePlace()->getGedcomName());
+			 	} else {
+			 		$marriageplace = $f->getMarriagePlace()->getGedcomName();
+			 	}
+			 } else {
 				$marriageplace = "";
-			// }
+			 }
 			// Get the husband's and wife's id from PGV
 			//$husb_id = $f->getHusbId();
 			//$wife_id = $f->getWifeId();
-			if ( isset($this->families[$fid]["husb_id"])) {
+			if (isset($this->families[$fid]["husb_id"])) {
 				$husb_id = $this->families[$fid]["husb_id"];
 			} else {
 				$husb_id = "";
 			}
-			if ( isset( $this->families[$fid]["wife_id"])) {
+			if (isset($this->families[$fid]["wife_id"])) {
 				$wife_id = $this->families[$fid]["wife_id"];
 			} else {
 				$wife_id = "";
@@ -857,7 +863,7 @@ class Dot {
 
 		// --- Printing ---
 		// "Combined" type
-		if ( $this->settings["diagram_type"] == "combined") {
+		if ($this->settings["diagram_type"] == "combined") {
 			$out .= "label=<";
 
 			// --- Print table ---
@@ -866,40 +872,40 @@ class Dot {
 			// --- Print couple ---
 			$out .= "<TR>";
 
-			if ( !empty( $unkn_id)) {
+			if (!empty($unkn_id)) {
 				// Print unknown gender INDI
-				if ( isset( $this->individuals[$unkn_id]['rel']) && ( $this->individuals[$unkn_id]['rel'] == FALSE)) {
+				if (isset($this->individuals[$unkn_id]['rel']) && ($this->individuals[$unkn_id]['rel'] == FALSE)) {
 					$related = FALSE;
 				} else {
 					$related = TRUE;
 				}
 				$out .= "<TD CELLPADDING=\"0\" PORT=\"" . $unkn_id . "\">";
-				$out .= $this->printPersonLabel( $unkn_id, $related);
+				$out .= $this->printPersonLabel($unkn_id, $related);
 				$out .= "</TD>";
 			} else {
 				// Print husband
 				//$husb_id = $f->getHusbId();
-				if ( !empty( $husb_id)) {
-					if ( isset( $this->individuals[$husb_id]['rel']) && ( $this->individuals[$husb_id]['rel'] == FALSE)) {
+				if (!empty($husb_id)) {
+					if (isset($this->individuals[$husb_id]['rel']) && ($this->individuals[$husb_id]['rel'] == FALSE)) {
 						$related = FALSE;
 					} else {
 						$related = TRUE;
 					}
 					$out .= "<TD CELLPADDING=\"0\" PORT=\"" . $husb_id . "\">";
-					$out .= $this->printPersonLabel( $husb_id, $related);
+					$out .= $this->printPersonLabel($husb_id, $related);
 					$out .= "</TD>";
 				}
 
 				// Print wife
 				//$wife_id = $f->getWifeId();
-				if ( !empty( $wife_id)) {
-					if ( isset( $this->individuals[$wife_id]['rel']) && ( $this->individuals[$wife_id]['rel'] == FALSE)) {
+				if (!empty($wife_id)) {
+					if (isset($this->individuals[$wife_id]['rel']) && ($this->individuals[$wife_id]['rel'] == FALSE)) {
 						$related = FALSE;
 					} else {
 						$related = TRUE;
 					}
 					$out .= "<TD CELLPADDING=\"0\" PORT=\"" . $wife_id . "\">";
-					$out .= $this->printPersonLabel( $wife_id, $related);
+					$out .= $this->printPersonLabel($wife_id, $related);
 					$out .= "</TD>";
 				}
 			}
@@ -907,17 +913,17 @@ class Dot {
 			$out .= "</TR>";
 
 			// --- Print marriage ---
-			if ( substr( $fid, 0, 2) == "F_") {
+			if (substr($fid, 0, 2) == "F_") {
 				// If it is a dummy FAM, then do nothing
 			} else {
 				$out .= "<TR>";
-				if ( $this->settings["show_url"]) {
+				if ($this->settings["show_url"]) {
 					$out .= "<TD COLSPAN=\"2\" CELLPADDING=\"0\" PORT=\"marr\" TARGET=\"_BLANK\" HREF=\"" . $this->convertToHTMLSC($link) . "\" BGCOLOR=\"" . $fillcolor . "\">"; #ESL!!! 20090213 without convertToHTMLSC the dot file has invalid data
 				} else {
 					$out .= "<TD COLSPAN=\"2\" CELLPADDING=\"0\" PORT=\"marr\" BGCOLOR=\"" . $fillcolor . "\">";
 				}
 
-				$out .= ( empty( $marriagedate)?".":$marriagedate) . "<BR />" . ( empty( $marriageplace)?"":"(".$marriageplace.")") . $family;
+				$out .= (empty($marriagedate)?".":$marriagedate) . "<BR />" . (empty($marriageplace)?"":"(".$marriageplace.")") . $family;
 				$out .= "</TD>";
 				$out .= "</TR>";
 			}
@@ -927,16 +933,16 @@ class Dot {
 			$out .= ">";
 		} else {
 		// Non-combined type
-			if ( $this->settings["show_url"]) {
+			if ($this->settings["show_url"]) {
 				$out .= "color=\"#606060\",fillcolor=\"" . $fillcolor . "\", href=\"" . $this->convertToHTMLSC($link) . "\", target=\"_blank\", shape=ellipse, style=filled"; #ESL!!! 20090213 without convertToHTMLSC the dot file has invalid data
 			} else {
 				$out .= "color=\"#606060\",fillcolor=\"" . $fillcolor . "\", shape=ellipse, style=filled";
 			}
-			$out .= ", label=" . '"' . ( empty( $marriagedate)?'':$marriagedate) . '\n' . ( empty( $marriageplace)?'':'('.$marriageplace.')') . $family . '"';
+			$out .= ", label=" . '"' . (empty($marriagedate)?'':$marriagedate) . '\n' . (empty($marriageplace)?'':'('.$marriageplace.')') . $family . '"';
 		}
 
 		$out .= "];\n";
-		
+
 		return $out;
 	}
 
@@ -950,13 +956,13 @@ class Dot {
 	 * @param boolean $sibl
 	 * @param boolean $rel
 	 */
-	function addIndiToList( $pid, $ance = FALSE, $desc = FALSE, $spou = FALSE, $sibl = FALSE, $rel = TRUE, $ind = 0, $ance_level = 0, $desc_level = 0) {
+	function addIndiToList($pid, $ance = FALSE, $desc = FALSE, $spou = FALSE, $sibl = FALSE, $rel = TRUE, $ind = 0, $ance_level = 0, $desc_level = 0) {
 		global $GVE_CONFIG, $pgv_changes, $GEDCOM;
 
 		$this->individuals[$pid]['pid'] = $pid;
 
 		// --- DEBUG ---
-		if ( $this->settings["debug"]) {
+		if ($this->settings["debug"]) {
 			$this->printDebug("--- #$pid# ---\n", $ind);
 			$this->printDebug("{\n", $ind);
 			$ind++;
@@ -966,25 +972,25 @@ class Dot {
 		// -------------
 
 		// Overwrite the 'related' status if it was not set before or its 'false' (for those people who are added as both related and non-related)
-		if ( !isset( $this->individuals[$pid]['rel']) || ( $this->individuals[$pid]['rel'] == FALSE)) {
+		if (!isset($this->individuals[$pid]['rel']) || ($this->individuals[$pid]['rel'] == FALSE)) {
 			$this->individuals[$pid]['rel'] = $rel;
 		}
 
 		// Add photo
-		if ( $this->settings["diagram_type"] == "deco-photo" || $this->settings["diagram_type_combined_with_photo"]) { #ESL!!! 20090213 deco-photo not used anymore
-			$this->individuals[$pid]["pic"] = $this->addPhotoToIndi( $pid);
+		if ($this->settings["diagram_type"] == "deco-photo" || $this->settings["diagram_type_combined_with_photo"]) { #ESL!!! 20090213 deco-photo not used anymore
+			$this->individuals[$pid]["pic"] = $this->addPhotoToIndi($pid);
 		}
 
 		// Get updated INDI data
-		$i = $this->getUpdatedPerson( $pid);
+		$i = $this->getUpdatedPerson($pid);
 
 		// Add the family nr which he/she belongs to as spouse (needed when "combined" mode is used)
-		if ( $this->settings["diagram_type"] == "combined") {
+		if ($this->settings["diagram_type"] == "combined") {
 			$fams = $i->getSpouseFamilies();
-			if ( !empty( $fams)) {
+			if (!empty($fams)) {
 
 				// --- DEBUG ---
-				if ( $this->settings["debug"]) {
+				if ($this->settings["debug"]) {
 					$this->printDebug("($pid) - /COMBINED MODE/ adding FAMs where INDI is marked as spouse:\n", $ind);
 				}
 				// -------------
@@ -992,59 +998,59 @@ class Dot {
 				foreach ($fams as $fam) {
 					$fid = $fam->getXref();
 					$this->individuals[$pid]["fams"][$fid] = $fid;
-					
+
 					//$this->families[$fid]["husb_id"] = $fam->getHusbId();
 					//$this->families[$fid]["wife_id"] = $fam->getWifeId();
 
-					if ( isset( $this->families[$fid]["fid"]) && ($this->families[$fid]["fid"] == $fid)) {
+					if (isset($this->families[$fid]["fid"]) && ($this->families[$fid]["fid"] == $fid)) {
 						// Family ID already added
-						// do nothing	
+						// do nothing
 						// --- DEBUG ---
-						if ( $this->settings["debug"]) {
+						if ($this->settings["debug"]) {
 							$this->printDebug("($pid) -- FAM ($fid) already added\n", $ind);
-							//var_dump( $fams);
+							//var_dump($fams);
 						}
 						// -------------
 					} else {
-						$this->addFamToList( $fid);
-	
+						$this->addFamToList($fid);
+
 						// --- DEBUG ---
-						if ( $this->settings["debug"]) {
+						if ($this->settings["debug"]) {
 							$this->printDebug("($pid) -- FAM ($fid) added\n", $ind);
-							//var_dump( $fams);
+							//var_dump($fams);
 						}
 						// -------------
-					}	
+					}
 
-					if ($fam->getHusbId() == $pid) {
+					if ($fam->getHusband()->getXref() == $pid) {
 						$this->families[$fid]["husb_id"] = $pid;
 					} else {
 						$this->families[$fid]["wife_id"] = $pid;
 					}
-					
-					if ( $desc) {
+
+					if ($desc) {
 						$this->families[$fid]["has_parents"] = TRUE;
 					}
 					//var_dump($this->families[$fid]);
-					
-					//$this->addFamToList( $fid);
+
+					//$this->addFamToList($fid);
 				}
 			} else {
 				// If there is no spouse family we create a dummy one
 				$this->individuals[$pid]["fams"]["F_$pid"] = "F_$pid";
-				$this->addFamToList( "F_$pid");
+				$this->addFamToList("F_$pid");
 
 				// --- DEBUG ---
-				if ( $this->settings["debug"]) {
+				if ($this->settings["debug"]) {
 					$this->printDebug("($pid) - /COMBINED MODE/ adding dummy FAM (F_$pid), because this INDI does not belong to any family as spouse\n", $ind);
 				}
 				// -------------
 
 				$this->families["F_$pid"]["has_parents"] = TRUE;
-				if ( $i->getSex() == "M") {
+				if ($i->getSex() == "M") {
 					$this->families["F_$pid"]["husb_id"] = $pid;
 					$this->families["F_$pid"]["wife_id"] = "";
-				} elseif ( $i->getSex() == "F") {
+				} elseif ($i->getSex() == "F") {
 				 	$this->families["F_$pid"]["wife_id"] = $pid;
 				 	$this->families["F_$pid"]["husb_id"] = "";
 				} else {
@@ -1057,7 +1063,7 @@ class Dot {
 		} else {
 		}
 
-		if ( $this->settings["indi"] == "ALL") { 	#ESL!!! 20090208 Fix for PGV 4.2
+		if ($this->settings["indi"] == "ALL") { 	#ESL!!! 20090208 Fix for PGV 4.2
 			$fams = $i->getChildFamilies(); 	#ESL!!! 20090208 Fix for PGV 4.2
 			foreach ($fams as $fid) { 		#ESL!!! 20090208 Fix for PGV 4.2
 				$this->addFamToList($fid); 	#ESL!!! 20090208 Fix for PGV 4.2
@@ -1070,12 +1076,12 @@ class Dot {
 
 		// Check that INDI is listed in stop pids (should we stop the tree processing or not?)
 		$stop_proc = FALSE;
-		if ( isset($this->settings["stop_proc"]) && $this->settings["stop_proc"] == TRUE) {
+		if (isset($this->settings["stop_proc"]) && $this->settings["stop_proc"] == TRUE) {
 			$stop_pids = explode(",", $this->settings["stop_pids"]);
 			for ($j=0;$j<count($stop_pids);$j++) {
 				if ($pid == $stop_pids[$j]){
 					// --- DEBUG ---
-					if ( $this->settings["debug"]) {
+					if ($this->settings["debug"]) {
 						$this->printDebug("($pid) -- STOP processing, because INDI is listed in the \"Stop tree processing on INDIs\"\n", $ind);
 					}
 					// -------------
@@ -1088,74 +1094,74 @@ class Dot {
 		{
 
 			// Add ancestors (parents)
-			if ( $ance && $ance_level > 0) {
+			if ($ance && $ance_level > 0) {
 				// Get the list of families where the INDI is listed as CHILD
 				$famc = $i->getChildFamilies();
 
 				// --- DEBUG ---
-				if ( $this->settings["debug"]) {
+				if ($this->settings["debug"]) {
 					$this->printDebug("($pid) - adding ANCESTORS (ANCE_LEVEL: $ance_level)\n", $ind);
 					$this->printDebug("($pid) -- adding FAMs, where this INDI is listed as a child (to find his/her parents):\n", $ind);
-					//var_dump( $fams);
+					//var_dump($fams);
 				}
 				// -------------
 
-				if ( !empty( $famc)) {
+				if (!empty($famc)) {
 					// For every family where the INDI is listed as CHILD
-					foreach ( $famc as $fam) {
+					foreach ($famc as $fam) {
 						// Get the family ID
 						$fid = $fam->getXref();
 						// Get the family object
-						$f = $this->getUpdatedFamily( $fid);
+						$f = $this->getUpdatedFamily($fid);
 
-						if ( isset( $this->families[$fid]["fid"]) && ($this->families[$fid]["fid"]== $fid)) {
+						if (isset($this->families[$fid]["fid"]) && ($this->families[$fid]["fid"]== $fid)) {
 							// Family ID already added
-							// do nothing	
+							// do nothing
 							// --- DEBUG ---
-							if ( $this->settings["debug"]) {
+							if ($this->settings["debug"]) {
 								$this->printDebug("($pid) -- FAM ($fid) already added\n", $ind);
-								//var_dump( $fams);
+								//var_dump($fams);
 							}
 							// -------------
 						} else {
-							$this->addFamToList( $fid);
-		
+							$this->addFamToList($fid);
+
 							// --- DEBUG ---
-							if ( $this->settings["debug"]) {
+							if ($this->settings["debug"]) {
 								$this->printDebug("($pid) -- FAM ($fid) added\n", $ind);
-								//var_dump( $fams);
+								//var_dump($fams);
 							}
 							// -------------
-						}	
-						
+						}
+
 						$adopfam_found = FALSE;
 						// Find out that actual family has adopters or not
-						$indifacts = $i->getIndiFacts();
-						foreach ( $indifacts as $fact) {
+						$indifacts = $i->getFacts();
+						foreach ($indifacts as $fact) {
 							// --- DEBUG ---
-							if ( $this->settings["debug"]) {
-								//var_dump( $fact);
+							if ($this->settings["debug"]) {
+								//var_dump($fact);
 							}
 							// -------------
 
 							// Workaround for 4.1.6, because the $fact is an object now not an array as before
-							if ( is_array( $fact))
+							if (is_array($fact))
 							{
 
-							if ( substr_count($fact[1], "1 ADOP") >0) {
+							if (substr_count($fact[1], "1 ADOP") >0) {
 								$adop = preg_split("/\n/", $fact[1]);
-								//var_dump( $adop);
+								//var_dump($adop);
 								foreach ($adop as $adopline) {
-									if ( substr_count($adopline, "2 FAMC") >0) {
+									if (substr_count($adopline, "2 FAMC") >0) {
 										$adopfamcline = preg_split("/@/", $adopline);
 										$adopfamid = $adopfamcline[1];
 										//print $adopfamid;
 
 										// Adopter family found
-										if ( $adopfamid == $fid) {
+										if ($adopfamid == $fid) {
 											$adopfam_found = TRUE;
 											// ---DEBUG---
-											if ( $this->settings["debug"]) {
+											if ($this->settings["debug"]) {
 												$this->printDebug("($pid) -- ADOP record: " . preg_replace("/\n/", " | ", $fact[1]) . "\n", $ind);
 											}
 											// -----------
@@ -1185,52 +1191,52 @@ class Dot {
                     else
                         $wife_id = null;
 
-						if ( !empty( $husb_id)) {
+						if (!empty($husb_id)) {
 							$this->families[$fid]["has_children"] = TRUE;
 							$this->families[$fid]["husb_id"] = $husb_id;
 
-							if ( $adopfam_found && ($adopfamcadoptype == "BOTH" || $adopfamcadoptype == "HUSB")) {
+							if ($adopfam_found && ($adopfamcadoptype == "BOTH" || $adopfamcadoptype == "HUSB")) {
 								// --- DEBUG ---
-								if ( $this->settings["debug"]) {
+								if ($this->settings["debug"]) {
 									$this->printDebug("($pid) -- adding an _ADOPTING_ PARENT /FATHER/ with INDI id ($husb_id) from FAM ($fid):\n", $ind);
-									//var_dump( $fams);
+									//var_dump($fams);
 								}
 								// -------------
-								$this->addIndiToList( $husb_id, TRUE, FALSE, $this->indi_search_method["spou"], $this->indi_search_method["sibl"], FALSE, $ind, ($ance_level - 1), $desc_level);
+								$this->addIndiToList($husb_id, TRUE, FALSE, $this->indi_search_method["spou"], $this->indi_search_method["sibl"], FALSE, $ind, ($ance_level - 1), $desc_level);
 							} else {
 								// --- DEBUG ---
-								if ( $this->settings["debug"]) {
+								if ($this->settings["debug"]) {
 									$this->printDebug("($pid) -- adding a PARENT /FATHER/ with INDI id ($husb_id) from FAM ($fid):\n", $ind);
-									//var_dump( $fams);
+									//var_dump($fams);
 								}
 								// -------------
-								$this->addIndiToList( $husb_id, TRUE, FALSE, $this->indi_search_method["spou"], $this->indi_search_method["sibl"], $rel, $ind, ($ance_level - 1), $desc_level);
+								$this->addIndiToList($husb_id, TRUE, FALSE, $this->indi_search_method["spou"], $this->indi_search_method["sibl"], $rel, $ind, ($ance_level - 1), $desc_level);
 							}
 						}
-						if ( !empty( $wife_id)) {
+						if (!empty($wife_id)) {
 							$this->families[$fid]["has_children"] = TRUE;
 							$this->families[$fid]["wife_id"] = $wife_id;
 
-							if ( $adopfam_found && ($adopfamcadoptype == "BOTH" || $adopfamcadoptype == "WIFE")) {
+							if ($adopfam_found && ($adopfamcadoptype == "BOTH" || $adopfamcadoptype == "WIFE")) {
 								// --- DEBUG ---
-								if ( $this->settings["debug"]) {
+								if ($this->settings["debug"]) {
 									$this->printDebug("($pid) -- adding an _ADOPTING_ PARENT /MOTHER/ with INDI id ($wife_id) from FAM ($fid):\n", $ind);
-									//var_dump( $fams);
+									//var_dump($fams);
 								}
 								// -------------
-								$this->addIndiToList( $wife_id, TRUE, FALSE, $this->indi_search_method["spou"], $this->indi_search_method["sibl"], FALSE, $ind, ($ance_level - 1), $desc_level);
+								$this->addIndiToList($wife_id, TRUE, FALSE, $this->indi_search_method["spou"], $this->indi_search_method["sibl"], FALSE, $ind, ($ance_level - 1), $desc_level);
 							} else {
 								// --- DEBUG ---
-								if ( $this->settings["debug"]) {
+								if ($this->settings["debug"]) {
 									$this->printDebug("($pid) -- adding a PARENT /MOTHER/ with INDI id ($wife_id) from FAM ($fid):\n", $ind);
-									//var_dump( $fams);
+									//var_dump($fams);
 								}
 								// -------------
-								$this->addIndiToList( $wife_id, TRUE, FALSE, $this->indi_search_method["spou"], $this->indi_search_method["sibl"], $rel, $ind, ($ance_level - 1), $desc_level);
+								$this->addIndiToList($wife_id, TRUE, FALSE, $this->indi_search_method["spou"], $this->indi_search_method["sibl"], $rel, $ind, ($ance_level - 1), $desc_level);
 							}
 						}
 
-						if ( $this->settings["diagram_type"] == "combined") {
+						if ($this->settings["diagram_type"] == "combined") {
 							// This person's spouse family HAS parents
 							foreach ($this->individuals[$pid]["fams"] as $s_fid=>$s_fam) {
 								$this->families[$s_fid]["has_parents"] = TRUE;
@@ -1239,7 +1245,7 @@ class Dot {
 
 					}
 				} else {
-					if ( $this->settings["diagram_type"] == "combined") {
+					if ($this->settings["diagram_type"] == "combined") {
 						// This person's spouse family HAS NO parents
 						foreach ($this->individuals[$pid]["fams"] as $s_fid=>$s_fam) {
 							$this->families[$s_fid]["has_parents"] = FALSE;
@@ -1250,22 +1256,22 @@ class Dot {
 			}
 
 			// Add descendants (children)
-			if ( $desc && $desc_level > 0) {
+			if ($desc && $desc_level > 0) {
 				$fams = $i->getSpouseFamilies();
 
 				// --- DEBUG ---
-				if ( $this->settings["debug"]) {
+				if ($this->settings["debug"]) {
 					$this->printDebug("($pid) - adding DESCENDANTS (DESC_LEVEL: $desc_level)\n", $ind);
 					$this->printDebug("($pid) -- adding FAMs, where this INDI is listed as a spouse (to find his/her children):\n", $ind);
 
-					//var_dump( $fams);
+					//var_dump($fams);
 				}
 				// -------------
 
 				foreach ($fams as $fam) {
 					$fid = $fam->getXref();
 					$this->families[$fid]["has_children"] = FALSE;
-					$f = $this->getUpdatedFamily( $fid);
+					$f = $this->getUpdatedFamily($fid);
 
                     $h = $f->getHusband();
                     if($h){
@@ -1286,82 +1292,82 @@ class Dot {
                         }
                     }
 
-					if ( isset( $this->families[$fid]["fid"]) && ($this->families[$fid]["fid"]== $fid)) {
+					if (isset($this->families[$fid]["fid"]) && ($this->families[$fid]["fid"]== $fid)) {
 						// Family ID already added
-						// do nothing	
+						// do nothing
 						// --- DEBUG ---
-						if ( $this->settings["debug"]) {
+						if ($this->settings["debug"]) {
 							$this->printDebug("($pid) -- FAM ($fid) already added\n", $ind);
-							//var_dump( $fams);
+							//var_dump($fams);
 						}
 						// -------------
 					} else {
-						$this->addFamToList( $fid);
-	
+						$this->addFamToList($fid);
+
 						// --- DEBUG ---
-						if ( $this->settings["debug"]) {
+						if ($this->settings["debug"]) {
 							$this->printDebug("($pid) -- FAM ($fid) added\n", $ind);
-							//var_dump( $fams);
+							//var_dump($fams);
 						}
 						// -------------
-					}	
+					}
 					$this->families[$fid]["has_children"] = TRUE;
-					
+
 					$children = $f->getChildren();
 					foreach ($children as $child) {
 						$child_id = $child->getXref();
-						if ( !empty( $child_id)) {
+						if (!empty($child_id)) {
 
 							// --- DEBUG ---
-							if ( $this->settings["debug"]) {
+							if ($this->settings["debug"]) {
 								$this->printDebug("($pid) -- adding a CHILD with INDI id ($child_id) from FAM ($fid):\n", $ind);
-								//var_dump( $fams);
+								//var_dump($fams);
 							}
 							// -------------
 
-							$this->addIndiToList( $child_id, FALSE, TRUE, $this->indi_search_method["spou"], FALSE, TRUE, $ind, 0, ($desc_level - 1));
+							$this->addIndiToList($child_id, FALSE, TRUE, $this->indi_search_method["spou"], FALSE, TRUE, $ind, 0, ($desc_level - 1));
 						}
 					}
 				}
 			}
 
 			// Add spouses
-			if ( ($spou && !$desc) || ($spou && $desc && $desc_level > 0) || ($spou && $this->settings["diagram_type"] == "combined")) {
+			if (($spou && !$desc) || ($spou && $desc && $desc_level > 0) || ($spou && $this->settings["diagram_type"] == "combined")) {
 				$fams = $i->getSpouseFamilies();
 
 				// --- DEBUG ---
-				if ( $this->settings["debug"]) {
+				if ($this->settings["debug"]) {
 					$this->printDebug("($pid) - adding SPOUSES\n", $ind);
 					$this->printDebug("($pid) -- adding FAMs, where this INDI is listed as a spouse (to find his/her spouse(s)):\n", $ind);
-					//var_dump( $fams);
+					//var_dump($fams);
 				}
 				// -------------
 
 				foreach ($fams as $fam) {
 					$fid = $fam->getXref();
-					$f = $this->getUpdatedFamily( $fid);
-					
-					if ( isset( $this->families[$fid]["fid"]) && ($this->families[$fid]["fid"]== $fid)) {
+					$f = $this->getUpdatedFamily($fid);
+
+					if (isset($this->families[$fid]["fid"]) && ($this->families[$fid]["fid"]== $fid)) {
 						// Family ID already added
-						// do nothing	
+						// do nothing
 						// --- DEBUG ---
-						if ( $this->settings["debug"]) {
+						if ($this->settings["debug"]) {
 							$this->printDebug("($pid) -- FAM ($fid) already added\n", $ind);
-							//var_dump( $fams);
+							//var_dump($fams);
 						}
 						// -------------
 					} else {
-						$this->addFamToList( $fid);
-	
+						$this->addFamToList($fid);
+
 						// --- DEBUG ---
-						if ( $this->settings["debug"]) {
+						if ($this->settings["debug"]) {
 							$this->printDebug("($pid) -- FAM ($fid) added\n", $ind);
-							//var_dump( $fams);
+							//var_dump($fams);
 						}
 						// -------------
-					}	
+					}
 
-					//$spouse_id = $f->getSpouseId( $pid);
+					//$spouse_id = $f->getSpouseId($pid);
 					// Alternative method of getting the $spouse_id - workaround by Till Schulte-Coerne
                     // And the coerced into webtrees by Iain MacDonald
                     $h = $f->getHusband();
@@ -1384,18 +1390,18 @@ class Dot {
                         }
                     }
 
-					if ( !empty( $spouse_id)) {
+					if (!empty($spouse_id)) {
 						// --- DEBUG ---
-						if ( $this->settings["debug"]) {
+						if ($this->settings["debug"]) {
 							$this->printDebug("($pid) -- adding SPOUSE with INDI id ($spouse_id) from FAM ($fid):\n", $ind);
-							//var_dump( $fams);
+							//var_dump($fams);
 						}
 						// -------------
-						
-						//if ( $this->settings["mark_not_related"] == TRUE) {
-							$this->addIndiToList( $spouse_id, FALSE, FALSE, FALSE, FALSE, FALSE, $ind, $ance_level, $desc_level);
+
+						//if ($this->settings["mark_not_related"] == TRUE) {
+							$this->addIndiToList($spouse_id, FALSE, FALSE, FALSE, FALSE, FALSE, $ind, $ance_level, $desc_level);
 						//} else {
-						//	$this->addIndiToList( $spouse_id, FALSE, FALSE, FALSE, FALSE, TRUE, $ind, $ance_level, $desc_level);
+						//	$this->addIndiToList($spouse_id, FALSE, FALSE, FALSE, FALSE, TRUE, $ind, $ance_level, $desc_level);
 						//}
 					}
 
@@ -1403,59 +1409,59 @@ class Dot {
 			}
 
 			// Add siblings
-			if ( $sibl && $ance_level > 0) {
+			if ($sibl && $ance_level > 0) {
 				$famc = $i->getChildFamilies();
 
 				// --- DEBUG ---
-				if ( $this->settings["debug"]) {
+				if ($this->settings["debug"]) {
 					$this->printDebug("($pid) - adding SIBLINGS (ANCE_LEVEL: $ance_level)\n", $ind);
 					$this->printDebug("($pid) -- adding FAMs, where this INDI is listed as a child (to find his/her siblings):\n", $ind);
-					//var_dump( $fams);
+					//var_dump($fams);
 				}
 				// -------------
 
 				foreach ($famc as $fam) {
 					$fid = $fam->getXref();
-					$f = $this->getUpdatedFamily( $fid);
-					
-					if ( isset( $this->families[$fid]["fid"]) && ($this->families[$fid]["fid"]== $fid)) {
+					$f = $this->getUpdatedFamily($fid);
+
+					if (isset($this->families[$fid]["fid"]) && ($this->families[$fid]["fid"]== $fid)) {
 						// Family ID already added
-						// do nothing	
+						// do nothing
 						// --- DEBUG ---
-						if ( $this->settings["debug"]) {
+						if ($this->settings["debug"]) {
 							$this->printDebug("($pid) -- FAM ($fid) already added\n", $ind);
-							//var_dump( $fams);
+							//var_dump($fams);
 						}
 						// -------------
 					} else {
-						$this->addFamToList( $fid);
-	
+						$this->addFamToList($fid);
+
 						// --- DEBUG ---
-						if ( $this->settings["debug"]) {
+						if ($this->settings["debug"]) {
 							$this->printDebug("($pid) -- FAM ($fid) added\n", $ind);
-							//var_dump( $fams);
+							//var_dump($fams);
 						}
 						// -------------
-					}	
-					
+					}
+
 					$children = $f->getChildren();
 					foreach ($children as $child) {
 						$child_id = $child->getXref();
-						if ( !empty( $child_id) && ( $child_id != $pid)) {
+						if (!empty($child_id) && ($child_id != $pid)) {
 							$this->families[$fid]["has_children"] = TRUE;
 							// --- DEBUG ---
-							if ( $this->settings["debug"]) {
+							if ($this->settings["debug"]) {
 								$this->printDebug("($pid) -- adding a SIBLING with INDI id ($child_id) from FAM ($fid):\n", $ind);
-								//var_dump( $fams);
+								//var_dump($fams);
 							}
 							// -------------
 
 							// If searching for cousins, then the descendants of ancestors' siblings should be added
-							if ( $this->indi_search_method["cous"]) {
-								//$this->addIndiToList( $child_id, FALSE, TRUE, $this->indi_search_method["spou"], FALSE, TRUE, $ind, 0, ($this->settings["ance_level"] - $ance_level));
-								$this->addIndiToList( $child_id, FALSE, TRUE, $this->indi_search_method["spou"], FALSE, TRUE, $ind, 0, ($this->settings["ance_level"] - $ance_level) + $this->settings["desc_level"]);
+							if ($this->indi_search_method["cous"]) {
+								//$this->addIndiToList($child_id, FALSE, TRUE, $this->indi_search_method["spou"], FALSE, TRUE, $ind, 0, ($this->settings["ance_level"] - $ance_level));
+								$this->addIndiToList($child_id, FALSE, TRUE, $this->indi_search_method["spou"], FALSE, TRUE, $ind, 0, ($this->settings["ance_level"] - $ance_level) + $this->settings["desc_level"]);
 							} else {
-								$this->addIndiToList( $child_id, TRUE, FALSE, $this->indi_search_method["spou"], FALSE, TRUE, $ind, 1, 0);
+								$this->addIndiToList($child_id, TRUE, FALSE, $this->indi_search_method["spou"], FALSE, TRUE, $ind, 1, 0);
 							}
 
 						}
@@ -1464,47 +1470,47 @@ class Dot {
 			}
 
 			// Add step-siblings
-			if ( $sibl && $ance_level > 0) {
+			if ($sibl && $ance_level > 0) {
 				$fams = $i->getChildStepFamilies();
 
 				// --- DEBUG ---
-				if ( $this->settings["debug"]) {
+				if ($this->settings["debug"]) {
 					$this->printDebug("($pid) - adding STEP-SIBLINGS (ANCE_LEVEL: $ance_level)\n", $ind);
 					$this->printDebug("($pid) -- adding FAMs, where this INDI's parents are listed as spouses (to find his/her step-siblings):\n", $ind);
-					//var_dump( $fams);
+					//var_dump($fams);
 				}
 				// -------------
 
 				foreach ($fams as $fam) {
 					$fid = $fam->getXref();
-					$f = $this->getUpdatedFamily( $fid);
-					$this->addFamToList( $fid);
+					$f = $this->getUpdatedFamily($fid);
+					$this->addFamToList($fid);
 
 					// --- DEBUG ---
-					if ( $this->settings["debug"]) {
+					if ($this->settings["debug"]) {
 						$this->printDebug("($pid) -- FAM ($fid) added\n", $ind);
-						//var_dump( $fams);
+						//var_dump($fams);
 					}
 					// -------------
-					
-					
+
+
 					$children = $f->getChildren();
 					foreach ($children as $child) {
 						$child_id = $child->getXref();
-						if ( !empty( $child_id) && ( $child_id != $pid)) {
+						if (!empty($child_id) && ($child_id != $pid)) {
 							$this->families[$fid]["has_children"] = TRUE;
 							// --- DEBUG ---
-							if ( $this->settings["debug"]) {
+							if ($this->settings["debug"]) {
 								$this->printDebug("($pid) -- adding a STEP-SIBLING with INDI id ($child_id) from FAM ($fid):\n", $ind);
-								//var_dump( $fams);
+								//var_dump($fams);
 							}
 							// -------------
 
 							// If searching for step-cusins, then the descendants of ancestors' siblings should be added
-							if ( $this->indi_search_method["cous"]) {
-								$this->addIndiToList( $child_id, FALSE, TRUE, $this->indi_search_method["spou"], FALSE, TRUE, $ind, 0, ($this->settings["ance_level"] - $ance_level));
+							if ($this->indi_search_method["cous"]) {
+								$this->addIndiToList($child_id, FALSE, TRUE, $this->indi_search_method["spou"], FALSE, TRUE, $ind, 0, ($this->settings["ance_level"] - $ance_level));
 							} else {
-								$this->addIndiToList( $child_id, TRUE, FALSE, $this->indi_search_method["spou"], FALSE, TRUE, $ind, 1, 0);
+								$this->addIndiToList($child_id, TRUE, FALSE, $this->indi_search_method["spou"], FALSE, TRUE, $ind, 1, 0);
 							}
 						}
 					}
@@ -1515,7 +1521,7 @@ class Dot {
 
 
 		// --- DEBUG ---
-		if ( $this->settings["debug"]) {
+		if ($this->settings["debug"]) {
 			$ind--;
 			$this->printDebug("}\n", $ind);
 		}
@@ -1527,8 +1533,8 @@ class Dot {
 	 * Adds a family to the family list
 	 *
 	 */
-	function addFamToList( $fid) {
-        if($fid instanceof WT_Family)
+	function addFamToList($fid) {
+        if($fid instanceof Family)
             $fid = $fid->getXref();
         if(!isset($this->families[$fid]))
             $this->families[$fid] = array();
@@ -1542,60 +1548,50 @@ class Dot {
  	 *
 	 * @param string $pid Individual's GEDCOM id (Ixxx)
 	 */
-	function addPhotoToIndi( $pid) {
-		if ( file_exists("includes/functions_mediadb.php")) { #ESL!!! 20090208 Fix for PGV 4.2
-			require_once( "includes/functions_mediadb.php");
-		} else {
-			require_once( "includes/functions/functions_mediadb.php"); #ESL!!! 20090208 Fix for PGV 4.2
-		}
+	function addPhotoToIndi($pid) {
+		global $WT_TREE;
 		$tn_file = "";
-		$i = WT_Individual::getInstance( $pid);
+		$i = Individual::getInstance($pid, $WT_TREE);
 		$m = $i->findHighlightedMedia();
-		if ( !empty( $m)) {
-			//$tn_file = $m["thumb"];
-			$tn_file = $m->getFilename("thumb");
-			if ( !$this->settings["media_dir"]) {
-				return substr($_SERVER['SCRIPT_FILENAME'], 0, strrpos($_SERVER['SCRIPT_FILENAME'], '/')) . "/" . $tn_file;
-			} elseif ( !empty( $this->settings["media_dir"])) {
-				return $this->settings["media_dir"] . "/" . $tn_file;
-			}
+		if (!empty($m) && $m->fileExists("thumb")) {
+			return $m->getServerFilename("thumb");
 		} else {
 			return null;
 		}
 	}
 
-	function getUpdatedFamily( $fid) {
-		global $GVE_CONFIG, $pgv_changes, $GEDCOM;
-		if ( $this->settings["mark_not_validated"] && isset( $pgv_changes[$fid."_".$GEDCOM])) {
-			$upd_gedcom_rec = find_updated_record( $fid);
+	function getUpdatedFamily($fid) {
+		global $pgv_changes, $GEDCOM, $WT_TREE;
+		if ($this->settings["mark_not_validated"] && isset($pgv_changes[$fid."_".$GEDCOM])) {
+			$upd_gedcom_rec = find_updated_record($fid);
 
-			$f = new WT_Family( $upd_gedcom_rec, false);
-			$f->setChanged( true);
+			$f = new Family($upd_gedcom_rec, false);
+			$f->setChanged(true);
 		} else {
-			$f = WT_Family::getInstance( $fid);
+			$f = Family::getInstance($fid, $WT_TREE);
 		}
 		return $f;
 	}
 
-	function getUpdatedPerson( $pid) {
-		global $GVE_CONFIG, $pgv_changes, $GEDCOM;
-		if ( $this->settings["mark_not_validated"] && isset( $pgv_changes[$pid."_".$GEDCOM])) {
-			$upd_gedcom_rec = find_updated_record( $pid);
+	function getUpdatedPerson($pid) {
+		global $GVE_CONFIG, $pgv_changes, $GEDCOM, $WT_TREE;
+		if ($this->settings["mark_not_validated"] && isset($pgv_changes[$pid."_".$GEDCOM])) {
+			$upd_gedcom_rec = find_updated_record($pid);
 
-			$i = new WT_Individual( $upd_gedcom_rec, false);
-			$i->setChanged( true);
+			$i = new Individual($upd_gedcom_rec, false);
+			$i->setChanged(true);
 		} else {
-			$i = WT_Individual::getInstance( $pid);
+			$i = Individual::getInstance($pid, $WT_TREE);
 		}
 		return $i;
 	}
 
-	function printDebug( $txt, $ind = 0) {
-		print( str_repeat("\t", $ind) . $txt);
+	function printDebug($txt, $ind = 0) {
+		print(str_repeat("\t", $ind) . $txt);
 	}
 
 	// Linked IDs has a colon, it needs to be replaced
-	function convertID( $id) {
+	function convertID($id) {
 		return preg_replace("/\:/", "_", $id);
 	}
 }
