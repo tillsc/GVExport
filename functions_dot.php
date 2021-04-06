@@ -34,8 +34,9 @@ namespace vendor\WebtreesModules\gvexport;
 require_once(dirname(__FILE__)."/config.php");
 use Fisharebest\Webtrees\Individual;
 use Fisharebest\Webtrees\Family;
-use Fisharebest\Webtrees\Log;
 use Fisharebest\Webtrees\I18n;
+use League\Flysystem\Util;
+
 
 /**
  * Main class for managing the DOT file
@@ -53,9 +54,13 @@ class Dot {
 	/**
 	 * Constructor of Dot class
 	 */
-	function __construct() {
+	function __construct($tree, $file_system, $use_urls_for_media) {
 		global $GVE_CONFIG;
 		// Load settings from config file
+
+		$this->tree = $tree;
+		$this->file_system = $file_system;
+		$this->use_urls_for_media = $use_urls_for_media;
 
 		// Load font size
 		$this->font_size = $GVE_CONFIG["dot"]["fontsize"];
@@ -72,16 +77,15 @@ class Dot {
 
 		// Default settings
 		$this->settings["diagram_type"] = "simple";
+		$this->settings["diagram_type_combined_with_photo"] = true;
 		$this->settings["indi"] = "ALL";
 		$this->settings["multi_indi"] = FALSE;
 		$this->settings["use_pagesize"] = "";
 		$this->settings["page_margin"] = $GVE_CONFIG["default_margin"];
-		$this->settings["mark_not_validated"] = FALSE;
 		$this->settings["show_lt_editor"] = FALSE;
 		$this->settings["mark_not_related"] = FALSE;
 		$this->settings["graph_dir"] = $GVE_CONFIG["default_direction"];
-		$default_mclimit = $GVE_CONFIG["default_mclimit"];
-		$this->settings["mclimit"] = $GVE_CONFIG["mclimit"][$default_mclimit];
+		$this->settings["mclimit"] = $GVE_CONFIG["default_mclimit"];
 
 		$this->settings["show_by"] = FALSE;
 		$this->settings["show_bp"] = FALSE;
@@ -96,7 +100,6 @@ class Dot {
 		$this->settings["no_fams"] = FALSE;
 
 		$this->settings["use_abbr_place"] = $GVE_CONFIG["settings"]["use_abbr_place"];
-		$this->settings["media_dir"] = $GVE_CONFIG["settings"]["media_dir"];
 		$this->settings["debug"] = $GVE_CONFIG["debug"];
 
 		$this->settings["ance_level"] = $GVE_CONFIG["settings"]["ance_level"];
@@ -190,19 +193,6 @@ class Dot {
 	}
 
 	function createIndiList () {
-		// Full tree
-		if ($this->settings["indi"] == "ALL") {
-			$indis = WT_Query_Name::individuals(false, false, false, true, false, WT_GED_ID);
-			foreach ($indis as $pid=>$indi) {
-				if (get_class($indi ) != "Individual") {     #ESL!!! 20090208 Fix for PGV 4.2
-					$this->addIndiToList($pid);
-				} else {
-					$this->addIndiToList($indi->getXref()); #ESL!!! 20090208 Fix for PGV 4.2
-				}
-			}
-		}
-		// Partial tree
-		else if (!empty($this->settings["indi"])) {
 			// -- DEBUG ---
 			// echo "INDI: " . $this->settings["indi"];
 			if ($this->settings["multi_indi"] == FALSE) {
@@ -215,33 +205,11 @@ class Dot {
 				}
 			}
 
-		}
-	}
-
-	function createFamList () {
-		// Full tree
-		if ($this->settings["indi"] == "ALL") {
-			$fams = WT_Query_Name::families(false, false, false, false, WT_GED_ID);
-			foreach ($fams as $fid=>$fam) {
-				if (get_class($fam ) != "Family") {
-					$this->addFamToList($fid);
-				} else {
-					$this->addFamToList($fam->getXref());
-				}
-			}
-		}
-		// Partial tree	(families will be added during INDI processing)
-		else if (!empty($this->settings["indi"])) {
-		}
 	}
 
 	function createDOTDump() {
-		global $pgv_lang, $LANGUAGE, $lang_short_cut, $GVE_CONFIG, $GEDCOM, $pgv_changes;
-
 		// Create the individuals list
 		$this->createIndiList();
-		// Create the families list
-		$this->createFamList();
 
 		$out = "";
 		$out .= $this->printDOTHeader();
@@ -286,11 +254,11 @@ class Dot {
 						$f = $this->getUpdatedFamily($fid);
 
 						// Draw an arrow from FAM to each CHIL
-						foreach ($f->getChildren() as $child) {
-							if (!empty($child) && (isset($this->individuals[$child->getXref()]))) {
+						foreach ($f->children() as $child) {
+							if (!empty($child) && (isset($this->individuals[$child->xref()]))) {
 								//$this->families[$fid]["has_children"] = TRUE;
-								foreach ($this->individuals[$child->getXref()]["fams"] as $fam_nr=>$fam) {
-									$out .= $this->convertID($fid) . " -> " . $this->convertID($fam) . ":" . $this->convertID($child->getXref()) . "\n";
+								foreach ($this->individuals[$child->xref()]["fams"] as $fam_nr=>$fam) {
+									$out .= $this->convertID($fid) . " -> " . $this->convertID($fam) . ":" . $this->convertID($child->xref()) . "\n";
 								}
 							}
 						}
@@ -300,14 +268,14 @@ class Dot {
 					$f = $this->getUpdatedFamily($fid);
 
 					// Get the husband & wife ID
-                    $h = $f->getHusband();
-                    $w = $f->getWife();
+                    $h = $f->husband();
+                    $w = $f->wife();
                     if($h)
-                        $husb_id = $h->getXref();
+                        $husb_id = $h->xref();
                     else
                         $husb_id = null;
                     if($w)
-                        $wife_id = $w->getXref();
+                        $wife_id = $w->xref();
                     else
                         $wife_id = null;
 
@@ -320,9 +288,9 @@ class Dot {
 						$out .= $this->convertID($wife_id) . " -> ". $this->convertID($fid) ."\n";
 					}
 					// Draw an arrow from FAM to each CHIL
-					foreach ($f->getChildren() as $child) {
-						if (!empty($child) && (isset($this->individuals[$child->getXref()]))) {
-							$out .= $this->convertID($fid) . " -> " . $this->convertID($child->getXref()) . "\n";
+					foreach ($f->children() as $child) {
+						if (!empty($child) && (isset($this->individuals[$child->xref()]))) {
+							$out .= $this->convertID($fid) . " -> " . $this->convertID($child->xref()) . "\n";
 						}
 					}
 				}
@@ -336,17 +304,17 @@ class Dot {
 				} else {
 					$f = $this->getUpdatedFamily($fid);
 					// Draw an arrow from HUSB and WIFE to FAM
-					$husb_id = empty($f->getHusband()) ? null : $f->getHusband()->getXref();
-					$wife_id = empty($f->getWife()) ? null : $f->getWife()->getXref();
+					$husb_id = empty($f->husband()) ? null : $f->husband()->xref();
+					$wife_id = empty($f->wife()) ? null : $f->wife()->xref();
 
 					// Draw an arrow from FAM to each CHIL
-					foreach ($f->getChildren() as $child) {
-						if (!empty($child) && (isset($this->individuals[$child->getXref()]))) {
+					foreach ($f->children() as $child) {
+						if (!empty($child) && (isset($this->individuals[$child->xref()]))) {
 							if (!empty($husb_id) && (isset($this->individuals[$husb_id]))) {
-								$out .= $this->convertID($husb_id) . " -> " . $this->convertID($child->getXref()) ."\n";
+								$out .= $this->convertID($husb_id) . " -> " . $this->convertID($child->xref()) ."\n";
 							}
 							if (!empty($wife_id) && (isset($this->individuals[$wife_id]))) {
-								$out .= $this->convertID($wife_id) . " -> ". $this->convertID($child->getXref()) ."\n";
+								$out .= $this->convertID($wife_id) . " -> ". $this->convertID($child->xref()) ."\n";
 							}
 						}
 					}
@@ -365,7 +333,7 @@ class Dot {
 	 * @param	string	Place string in long format (Town,County,State/Region,Country)
 	 * @return	string	The first and last chunk of the above string (Town, Country)
 	 */
-	function getFormattedPlace($place_long) {
+	function getFormattedPlace(string $place_long) {
 		$place_chunks = explode(",", $place_long);
 		$place = "";
 		$chunk_count = count($place_chunks);
@@ -554,12 +522,12 @@ class Dot {
 		// 	}
 		// } else {
 			// The INDI's data is up-to-date
-			$fillcolor = $this->getGenderColour($i->getSex(), $related); // Backround color is set to specified
+			$fillcolor = $this->getGenderColour($i->sex(), $related); // Backround color is set to specified
 			$editor = "";
 		// }
 
 		$bordercolor = "#606060";	// Border color of the INDI's box
-		$link = $i->getHtmlUrl();
+		$link = $i->url();
 
 		// --- Birth data ---
 		if ($this->settings["show_by"]) {
@@ -597,9 +565,9 @@ class Dot {
 		if ($this->settings["show_bp"]) {
 			// Show birth place
 			if ($this->settings["use_abbr_place"]) {
-				$birthplace = $this->getFormattedPlace($i->getBirthPlace());
+				$birthplace = $this->getFormattedPlace($i->getBirthPlace()->gedcomName());
 			} else {
-				$birthplace = $i->getBirthPlace();
+				$birthplace = $i->getBirthPlace()->gedcomName();
 			}
 		} else {
 			$birthplace = "";
@@ -641,35 +609,24 @@ class Dot {
 		if ($this->settings["show_dp"]) {
 			// Show death place
 			if ($this->settings["use_abbr_place"]) {
-				$deathplace = $this->getFormattedPlace($i->getDeathPlace());
+				$deathplace = $this->getFormattedPlace($i->getDeathPlace()->gedcomName());
 			} else {
-				$deathplace = $i->getDeathPlace();
+				$deathplace = $i->getDeathPlace()->gedcomName();
 			}
 		} else {
 			$deathplace = "";
 		}
 
 		// --- Name ---
-		if (method_exists($i,'getName')) {
-			$name = strip_tags($i->getName());
-		} else {
-			/*foreach ($i->getAllNames() as $n=>$nm) {
-				if ($nm['type']=='NAME') {
-					//var_dump($nm);
-					$name=$nm['fullNN'];
-					break;
-				}
-			}*/
-			$name = $i->getFullName();//@@ Meliza Amity
-			$addname = $i->getAddName();//@@ Meliza Amity
-            if (!empty($addname)) {
-	            if ($this->settings["diagram_type"] == "simple")
-		            $name .= '\n' . $addname;//@@ Meliza Amity
-	            else
-		            $name .= '<BR />' . $addname;//@@ Meliza Amity
-            }
-            $name = strip_tags($name);
+		$name = $i->fullName();//@@ Meliza Amity
+		$addname = $i->alternateName();//@@ Meliza Amity
+		if (!empty($addname)) {
+			if ($this->settings["diagram_type"] == "simple")
+				$name .= '\n' . $addname;//@@ Meliza Amity
+			else
+				$name .= '<BR />' . $addname;//@@ Meliza Amity
 		}
+		$name = strip_tags($name);
 
 		//@@ $name = str_replace(array('<span class="starredname">','</span>'), array('_','_'), $name); //@@ replace starredname by <u> and </u>
 		 //@@ replace starredname by <u> and </u>
@@ -800,7 +757,7 @@ class Dot {
 		} else {
 			$f = $this->getUpdatedFamily($fid);
 			$fillcolor = $this->getFamilyColour();
-			$link = $f->getHtmlUrl();
+			$link = $f->url();
 
 			// Show marriage year
 			if ($this->settings["show_my"]) {
@@ -838,16 +795,16 @@ class Dot {
 			// Show marriage place
 			if ($this->settings["show_mp"] && !empty($f->getMarriage()) && !empty($f->getMarriagePlace())) {
 			 	if ($this->settings["use_abbr_place"]) {
-			 		$marriageplace = $this->getFormattedPlace($f->getMarriagePlace()->getGedcomName());
+			 		$marriageplace = $this->getFormattedPlace($f->getMarriagePlace()->gedcomName());
 			 	} else {
-			 		$marriageplace = $f->getMarriagePlace()->getGedcomName();
+			 		$marriageplace = $f->getMarriagePlace()->gedcomName();
 			 	}
 			 } else {
 				$marriageplace = "";
 			 }
 			// Get the husband's and wife's id from PGV
 			//$husb_id = $f->getHusbId();
-			//$wife_id = $f->getWifeId();
+			//$wife_id = $f->wifeId();
 			if (isset($this->families[$fid]["husb_id"])) {
 				$husb_id = $this->families[$fid]["husb_id"];
 			} else {
@@ -897,7 +854,7 @@ class Dot {
 				}
 
 				// Print wife
-				//$wife_id = $f->getWifeId();
+				//$wife_id = $f->wifeId();
 				if (!empty($wife_id)) {
 					if (isset($this->individuals[$wife_id]['rel']) && ($this->individuals[$wife_id]['rel'] == FALSE)) {
 						$related = FALSE;
@@ -986,7 +943,7 @@ class Dot {
 
 		// Add the family nr which he/she belongs to as spouse (needed when "combined" mode is used)
 		if ($this->settings["diagram_type"] == "combined") {
-			$fams = $i->getSpouseFamilies();
+			$fams = $i->spouseFamilies();
 			if (!empty($fams)) {
 
 				// --- DEBUG ---
@@ -996,11 +953,11 @@ class Dot {
 				// -------------
 
 				foreach ($fams as $fam) {
-					$fid = $fam->getXref();
+					$fid = $fam->xref();
 					$this->individuals[$pid]["fams"][$fid] = $fid;
 
 					//$this->families[$fid]["husb_id"] = $fam->getHusbId();
-					//$this->families[$fid]["wife_id"] = $fam->getWifeId();
+					//$this->families[$fid]["wife_id"] = $fam->wifeId();
 
 					if (isset($this->families[$fid]["fid"]) && ($this->families[$fid]["fid"] == $fid)) {
 						// Family ID already added
@@ -1022,7 +979,7 @@ class Dot {
 						// -------------
 					}
 
-					if ($fam->getHusband()->getXref() == $pid) {
+					if ($fam->husband() && $fam->husband()->xref() == $pid) {
 						$this->families[$fid]["husb_id"] = $pid;
 					} else {
 						$this->families[$fid]["wife_id"] = $pid;
@@ -1047,10 +1004,10 @@ class Dot {
 				// -------------
 
 				$this->families["F_$pid"]["has_parents"] = TRUE;
-				if ($i->getSex() == "M") {
+				if ($i->sex() == "M") {
 					$this->families["F_$pid"]["husb_id"] = $pid;
 					$this->families["F_$pid"]["wife_id"] = "";
-				} elseif ($i->getSex() == "F") {
+				} elseif ($i->sex() == "F") {
 				 	$this->families["F_$pid"]["wife_id"] = $pid;
 				 	$this->families["F_$pid"]["husb_id"] = "";
 				} else {
@@ -1064,11 +1021,11 @@ class Dot {
 		}
 
 		if ($this->settings["indi"] == "ALL") { 	#ESL!!! 20090208 Fix for PGV 4.2
-			$fams = $i->getChildFamilies(); 	#ESL!!! 20090208 Fix for PGV 4.2
+			$fams = $i->childFamilies(); 	#ESL!!! 20090208 Fix for PGV 4.2
 			foreach ($fams as $fid) { 		#ESL!!! 20090208 Fix for PGV 4.2
 				$this->addFamToList($fid); 	#ESL!!! 20090208 Fix for PGV 4.2
 			}
-			$fams = $i->getSpouseFamilies(); 	#ESL!!! 20090208 Fix for PGV 4.2
+			$fams = $i->spouseFamilies(); 	#ESL!!! 20090208 Fix for PGV 4.2
 			foreach ($fams as $fid) { 		#ESL!!! 20090208 Fix for PGV 4.2
 				$this->addFamToList($fid); 	#ESL!!! 20090208 Fix for PGV 4.2
 			}
@@ -1096,7 +1053,7 @@ class Dot {
 			// Add ancestors (parents)
 			if ($ance && $ance_level > 0) {
 				// Get the list of families where the INDI is listed as CHILD
-				$famc = $i->getChildFamilies();
+				$famc = $i->childFamilies();
 
 				// --- DEBUG ---
 				if ($this->settings["debug"]) {
@@ -1110,7 +1067,7 @@ class Dot {
 					// For every family where the INDI is listed as CHILD
 					foreach ($famc as $fam) {
 						// Get the family ID
-						$fid = $fam->getXref();
+						$fid = $fam->xref();
 						// Get the family object
 						$f = $this->getUpdatedFamily($fid);
 
@@ -1136,7 +1093,7 @@ class Dot {
 
 						$adopfam_found = FALSE;
 						// Find out that actual family has adopters or not
-						$indifacts = $i->getFacts();
+						$indifacts = $i->facts();
 						foreach ($indifacts as $fact) {
 							// --- DEBUG ---
 							if ($this->settings["debug"]) {
@@ -1180,14 +1137,14 @@ class Dot {
 						}
 
 						// Add father & mother
-                    $h = $f->getHusband();
-                    $w = $f->getWife();
+                    $h = $f->husband();
+                    $w = $f->wife();
                     if($h)
-                        $husb_id = $h->getXref();
+                        $husb_id = $h->xref();
                     else
                         $husb_id = null;
                     if($w)
-                        $wife_id = $w->getXref();
+                        $wife_id = $w->xref();
                     else
                         $wife_id = null;
 
@@ -1257,7 +1214,7 @@ class Dot {
 
 			// Add descendants (children)
 			if ($desc && $desc_level > 0) {
-				$fams = $i->getSpouseFamilies();
+				$fams = $i->spouseFamilies();
 
 				// --- DEBUG ---
 				if ($this->settings["debug"]) {
@@ -1269,22 +1226,22 @@ class Dot {
 				// -------------
 
 				foreach ($fams as $fam) {
-					$fid = $fam->getXref();
+					$fid = $fam->xref();
 					$this->families[$fid]["has_children"] = FALSE;
 					$f = $this->getUpdatedFamily($fid);
 
-                    $h = $f->getHusband();
+                    $h = $f->husband();
                     if($h){
-                        if($h->getXref() == $pid){
+                        if($h->xref() == $pid){
                             $this->families[$fid]["husb_id"] = $pid;
                         } else {
                             $this->families[$fid]["wife_id"] = $pid;
                         }
                     }
                     else {
-                        $w = $f->getWife();
+                        $w = $f->wife();
                         if($w){
-                            if($w->getXref() == $pid){
+                            if($w->xref() == $pid){
                                 $this->families[$fid]["wife_id"] = $pid;
                             } else {
                                 $this->families[$fid]["husb_id"] = $pid;
@@ -1313,9 +1270,9 @@ class Dot {
 					}
 					$this->families[$fid]["has_children"] = TRUE;
 
-					$children = $f->getChildren();
+					$children = $f->children();
 					foreach ($children as $child) {
-						$child_id = $child->getXref();
+						$child_id = $child->xref();
 						if (!empty($child_id)) {
 
 							// --- DEBUG ---
@@ -1333,7 +1290,7 @@ class Dot {
 
 			// Add spouses
 			if (($spou && !$desc) || ($spou && $desc && $desc_level > 0) || ($spou && $this->settings["diagram_type"] == "combined")) {
-				$fams = $i->getSpouseFamilies();
+				$fams = $i->spouseFamilies();
 
 				// --- DEBUG ---
 				if ($this->settings["debug"]) {
@@ -1344,7 +1301,7 @@ class Dot {
 				// -------------
 
 				foreach ($fams as $fam) {
-					$fid = $fam->getXref();
+					$fid = $fam->xref();
 					$f = $this->getUpdatedFamily($fid);
 
 					if (isset($this->families[$fid]["fid"]) && ($this->families[$fid]["fid"]== $fid)) {
@@ -1370,20 +1327,20 @@ class Dot {
 					//$spouse_id = $f->getSpouseId($pid);
 					// Alternative method of getting the $spouse_id - workaround by Till Schulte-Coerne
                     // And the coerced into webtrees by Iain MacDonald
-                    $h = $f->getHusband();
+                    $h = $f->husband();
 					if ($h) {
-                        if($h->getXref() == $pid) {
-                            $w = $f->getWife();
+                        if($h->xref() == $pid) {
+                            $w = $f->wife();
                             if($w) {
-                                $spouse_id = $w->getXref();
+                                $spouse_id = $w->xref();
                                 $this->families[$fid]["husb_id"] = $pid;
                                 $this->families[$fid]["wife_id"] = $spouse_id;
                             }
                         }
                         else {
-                            $w = $f->getWife();
-                            if($w && $w->getXref() == $pid) {
-                                $spouse_id = $h->getXref();
+                            $w = $f->wife();
+                            if($w && $w->xref() == $pid) {
+                                $spouse_id = $h->xref();
                                 $this->families[$fid]["husb_id"] = $spouse_id;
                                 $this->families[$fid]["wife_id"] = $pid;
                             }
@@ -1410,7 +1367,7 @@ class Dot {
 
 			// Add siblings
 			if ($sibl && $ance_level > 0) {
-				$famc = $i->getChildFamilies();
+				$famc = $i->childFamilies();
 
 				// --- DEBUG ---
 				if ($this->settings["debug"]) {
@@ -1421,7 +1378,7 @@ class Dot {
 				// -------------
 
 				foreach ($famc as $fam) {
-					$fid = $fam->getXref();
+					$fid = $fam->xref();
 					$f = $this->getUpdatedFamily($fid);
 
 					if (isset($this->families[$fid]["fid"]) && ($this->families[$fid]["fid"]== $fid)) {
@@ -1444,9 +1401,9 @@ class Dot {
 						// -------------
 					}
 
-					$children = $f->getChildren();
+					$children = $f->children();
 					foreach ($children as $child) {
-						$child_id = $child->getXref();
+						$child_id = $child->xref();
 						if (!empty($child_id) && ($child_id != $pid)) {
 							$this->families[$fid]["has_children"] = TRUE;
 							// --- DEBUG ---
@@ -1471,7 +1428,7 @@ class Dot {
 
 			// Add step-siblings
 			if ($sibl && $ance_level > 0) {
-				$fams = $i->getChildStepFamilies();
+				$fams = $i->childStepFamilies();
 
 				// --- DEBUG ---
 				if ($this->settings["debug"]) {
@@ -1482,7 +1439,7 @@ class Dot {
 				// -------------
 
 				foreach ($fams as $fam) {
-					$fid = $fam->getXref();
+					$fid = $fam->xref();
 					$f = $this->getUpdatedFamily($fid);
 					$this->addFamToList($fid);
 
@@ -1494,9 +1451,9 @@ class Dot {
 					// -------------
 
 
-					$children = $f->getChildren();
+					$children = $f->children();
 					foreach ($children as $child) {
-						$child_id = $child->getXref();
+						$child_id = $child->xref();
 						if (!empty($child_id) && ($child_id != $pid)) {
 							$this->families[$fid]["has_children"] = TRUE;
 							// --- DEBUG ---
@@ -1535,7 +1492,7 @@ class Dot {
 	 */
 	function addFamToList($fid) {
         if($fid instanceof Family)
-            $fid = $fid->getXref();
+            $fid = $fid->xref();
         if(!isset($this->families[$fid]))
             $this->families[$fid] = array();
 		$this->families[$fid]["fid"] = $fid;
@@ -1549,41 +1506,27 @@ class Dot {
 	 * @param string $pid Individual's GEDCOM id (Ixxx)
 	 */
 	function addPhotoToIndi($pid) {
-		global $WT_TREE;
-		$tn_file = "";
-		$i = Individual::getInstance($pid, $WT_TREE);
-		$m = $i->findHighlightedMedia();
-		if (!empty($m) && $m->fileExists("thumb")) {
-			return $m->getServerFilename("thumb");
+		$i = Individual::getInstance($pid, $this->tree);
+		$m = $i->findHighlightedMediaFile();
+		if (empty($m)) {
+			return null;
+		}
+		else if (false && $this->use_urls_for_media) {
+			return $m->downloadUrl('inline');
+		}
+		else if (!$m->isExternal() && $m->fileExists($this->file_system)) {
+			return realpath($this->file_system->getAdapter()->applyPathPrefix($m->filename()));
 		} else {
 			return null;
 		}
 	}
 
 	function getUpdatedFamily($fid) {
-		global $pgv_changes, $GEDCOM, $WT_TREE;
-		if ($this->settings["mark_not_validated"] && isset($pgv_changes[$fid."_".$GEDCOM])) {
-			$upd_gedcom_rec = find_updated_record($fid);
-
-			$f = new Family($upd_gedcom_rec, false);
-			$f->setChanged(true);
-		} else {
-			$f = Family::getInstance($fid, $WT_TREE);
-		}
-		return $f;
+		return Family::getInstance($fid, $this->tree);
 	}
 
 	function getUpdatedPerson($pid) {
-		global $GVE_CONFIG, $pgv_changes, $GEDCOM, $WT_TREE;
-		if ($this->settings["mark_not_validated"] && isset($pgv_changes[$pid."_".$GEDCOM])) {
-			$upd_gedcom_rec = find_updated_record($pid);
-
-			$i = new Individual($upd_gedcom_rec, false);
-			$i->setChanged(true);
-		} else {
-			$i = Individual::getInstance($pid, $WT_TREE);
-		}
-		return $i;
+		return Individual::getInstance($pid, $this->tree);
 	}
 
 	function printDebug($txt, $ind = 0) {

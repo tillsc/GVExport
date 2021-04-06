@@ -65,6 +65,7 @@ if ( !empty( $GVE_CONFIG["graphviz_bin"])) {
 	$GVE_CONFIG["output"]["svg"]["extension"] = "svg";
 	$GVE_CONFIG["output"]["svg"]["exec"] = $GVE_CONFIG["graphviz_bin"] . " -Tsvg -o" . $GVE_CONFIG["filename"] . ".svg " . $GVE_CONFIG["filename"] . ".dot";
 	$GVE_CONFIG["output"]["svg"]["cont_type"] = "image/svg+xml";
+	$GVE_CONFIG["output"]["svg"]["rewrite_media_paths"] = true;
 
 	$GVE_CONFIG["output"]["pdf"]["label"] = "PDF"; #ESL!!! 20090213
 	$GVE_CONFIG["output"]["pdf"]["extension"] = "pdf";
@@ -98,25 +99,21 @@ $GVE_CONFIG["pagesize"]["A4"]["y"] = "11.692";
 $GVE_CONFIG["pagesize"]["Letter"]["x"] = "8.5";
 $GVE_CONFIG["pagesize"]["Letter"]["y"] = "11";
 
-$GVE_CONFIG["settings"]["dpi"] = "75"; // default DPI (75: screen, 300: print)
-$GVE_CONFIG["settings"]["ranksep"] = "0.30";
-$GVE_CONFIG["settings"]["nodesep"] = "0.30";
+$GVE_CONFIG["settings"]["dpi"] = "72"; // default DPI (75: screen, 300: print)
+$GVE_CONFIG["settings"]["ranksep"] = "0.15";
+$GVE_CONFIG["settings"]["nodesep"] = "0.15";
 
 // Direction of graph
-$GVE_CONFIG["default_direction"] = "TB";
-$GVE_CONFIG["direction"]["TB"] = "Top-to-Bottom";
-$GVE_CONFIG["direction"]["LR"] = "Left-to-Right";
+$GVE_CONFIG["default_direction"] = "LR";
+$GVE_CONFIG["directions"]["TB"] = "Top-to-Bottom";
+$GVE_CONFIG["directions"]["LR"] = "Left-to-Right";
 
 // Font name
 $GVE_CONFIG["default_fontname"] = "Sans";
 
 // mclimit settings (number of iterations to help to reduce crossings)
-$GVE_CONFIG["default_mclimit"] = "normal";
-$GVE_CONFIG["mclimit"]["faster"] = 1;
-$GVE_CONFIG["mclimit"]["fast"] = 5;
-$GVE_CONFIG["mclimit"]["normal"] = 20;
-$GVE_CONFIG["mclimit"]["slow"] = 50;
-$GVE_CONFIG["mclimit"]["slower"] = 100;
+$GVE_CONFIG["default_mclimit"] = "50";
+$GVE_CONFIG["mclimits"] = ["1" => "1", "5" => "5" , "20" => "20", "50" => "50", "100" => "100"];
 
 // Customization
 $GVE_CONFIG["custom"]["birth_text"] = "*";	// Text shown on chart before the birth date
@@ -124,11 +121,6 @@ $GVE_CONFIG["custom"]["death_text"] = "+";	// Text shown on chart before the dea
 
 // Settings
 $GVE_CONFIG["settings"]["use_abbr_place"] = FALSE;
-// Media directory
-// If FALSE then it uses the PGV's media dir
-$GVE_CONFIG["settings"]["media_dir"] = FALSE;
-// If any path is given, then the script uses that. So uncomment the next line and fill it according to your needs to use this directory as media dir
-//$GVE_CONFIG["settings"]["media_dir"] = "/home/somebody/mypictures";
 
 // Deafult max levels of ancestors
 $GVE_CONFIG["settings"]["ance_level"] = 5;

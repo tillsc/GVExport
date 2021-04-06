@@ -1,8 +1,0 @@
-=====================================================================
-	TODO
-	GVExport module for phpGedView
-	
-	Contact		: Ferenc Kurucz <korbendallas1976@gmail.com>
-=====================================================================
-
-- Media Firewall compatibility
