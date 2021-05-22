@@ -1,321 +1,328 @@
 <?php
 
 use Fisharebest\Webtrees\I18N;
-use Fisharebest\Webtrees\Individual;
-use Fisharebest\Webtrees\Tree;
-
 ?>
 
 <h2 class="wt-page-title">
     <?= $title ?>
 </h2>
 
-<form method="post" class="wt-page-options wt-page-options-fan-chart d-print-none">
-    <?= csrf_field() ?>
+<script src="<?= $module->assetUrl('javascript/viz.js'); ?>"></script>
+<script src="<?= $module->assetUrl('javascript/panzoom.min.js'); ?>"></script>
 
-    <h3>Output Settings</h3>
-    <div class="row form-group">
-        <label class="col-sm-4 col-form-label wt-page-options-label" for="otype">Output File Type</label>
-        <div class="col-sm-8 wt-page-options-value">
-            <?= view('components/select', ['name' => 'otype', 'selected' => $otype, 'options' => $otypes]) ?>
-            <small id="emailHelp" class="form-text text-muted">Choose DOT if you don't have GraphViz installed on server.</small>
+<style>
+    .sidebar {
+        height: calc(100% - 200px);
+        width: 500px;
+        position: fixed;
+        z-index: 1;
+        top: 200px;
+        left: 0;
+        border-top: 1px solid black;
+        border-right: 1px solid black;
+        padding-top: 0.5rem;
+        background-color: #fff;
+        display: flex;
+        flex-direction: column;
+    }
+
+
+    .sidebar__formfields {
+        overflow-x: hidden;
+        overflow-y: scroll;
+        flex-shrink: 1;
+    }
+
+    .sidebar__buttons {
+        border-top: 1px solid black;
+        padding: 0.5rem;
+    }
+
+    .sidebar__toggler {
+        position: fixed;
+        left: 0;
+        top: 400px; 
+        transform-origin: left bottom;
+        transform: rotate(90deg);
+    }
+
+</style>
+
+
+<form action="<?= $module->chartUrl($individual) ?>" method="post" class="wt-page-options sidebar d-print-none" id="gvexport">
+    <div class="sidebar__formfields col">
+        <?= csrf_field() ?>
+
+        <div class="d-flex">
+         <h3>Diagram preferences</h3>
+         <div class="pull-right" style="margin-left: auto;">
+        <a href="#" class="hide-form btn btn-secondary">X</a>
         </div>
-    </div>
+       </div>
 
-    <div class="row form-group">
-        <label class="col-sm-4 col-form-label wt-page-options-label" for="disposition">Generate a file for download</label>
-        <div class="col-sm-8 wt-page-options-value">
-            <input type="checkbox" name="disposition" id="disposition" value="1" <?= $disposition ? 'checked' : '' ?>>
-        </div>
-    </div>
+        <script type="text/javascript">
+            var appendPidTo = function(sourceId, targetId) {
+                var ids = [];
+                document.getElementById(targetId).value.split(',').forEach(function(id) {
+                    id = id.trim();
+                    if (id != '') {
+                        ids.push(id);
+                    }
+                });
+                var newId = document.getElementById(sourceId).value.trim();
+                if (ids.indexOf(newId) == -1) {
+                    ids.push(newId);
+                }
+                document.getElementById(targetId).value = ids.join(', ')
+            }
+        </script>
 
-<!--
-    <div class="row form-group">
-        <label class="col-sm-4 col-form-label wt-page-options-label" for="pagebrk_var">Use Page Break</label>
-        <div class="col-sm-8 wt-page-options-value">
-            <input type="checkbox" name="vars[pagebrk]" id="pagebrk_var" value="pagebrk">
-        </div>
-    </div>
-    -->
-
-    <div class="row form-group">
-        <label class=" col-sm-4 col-form-label wt-page-options-label" for="vars[grdir]">Graph Direction</label>
-        <div class="col-sm-8 wt-page-options-value">
-            <?= view('components/select', ['name' => 'vars[grdir]', 'selected' => $vars['grdir'], 'options' => $gve_config["directions"]]) ?>
-        </div>
-    </div>
-
-    <div class="row form-group">
-        <label class=" col-sm-4 col-form-label wt-page-options-label" for="vars[grdir]">Number of iterations (MCLIMIT)</label>
-        <div class="col-sm-8 wt-page-options-value">
-            <?= view('components/select', ['name' => 'vars[mclimit]', 'selected' => $vars['mclimit'], 'options' => $gve_config["mclimits"]]) ?>
-            <small class="form-text text-muted">helps to reduce the crossings on the graph. This can be really slow (up to 10..15x compared to the 20 setting)</small>
-        </div>
-    </div>
-
-    <div class="row form-group">
-        <label class=" col-sm-4 col-form-label wt-page-options-label" for="vars[dpi]">DPI</label>
-        <div class="col-sm-8 wt-page-options-value">
-            <div class="row">
-                <div class="col-auto">
-                    <input type="text" class="form-control" size="10" name="vars[dpi]" id="vars[dpi]" value="<?= $vars["dpi"] ?>">
-                </div>
-                <div class="col-auto row">
-                    <label for="vars[ranksep]" class="col-sm-6">ranksep:</label>
-                    <input type="text" class="form-control col-sm-6" size="10" name="vars[ranksep]" id="vars[ranksep]" value="<?= $vars["ranksep"] ?>">
-                </div>
-                <div class="col-auto row">
-                    <label for="vars[nodesep]" class="col-sm-6">nodesep:</label>
-                    <input type="text" class="form-control col-sm-6" size="10" name="vars[nodesep]" id="vars[nodesep]" value="<?= $vars["nodesep"] ?>">
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <h3>Diagram preferences</h3>
-
-    <div class="row form-group">
-        <label class=" col-sm-4 col-form-label wt-page-options-label" for="pid">Include anyone related to persons</label>
-        <div class="col-sm-8 wt-page-options-value">
-            <?= view('components/select-individual', ['name' => 'pid', 'id' => 'pid', 'tree' => $tree, 'individual' => $individual]) ?>
-        </div>
-    </div>
-
-    <div class="row form-group">
-        <label class=" col-sm-4 col-form-label wt-page-options-label" for="vars[other_pids]">Other PIDs</label>
-        <div class="col-sm-8 wt-page-options-value">
-            <input type="text" class="form-control" name="vars[other_pids]" id="vars[other_pids]" value="<?= $vars['other_pids'] ?>">
-        </div>
-        <!--         
-                            <input type="text" size="10" name="opid" id="pid" value="" . $pid . "\" />
-                            // $out .= FunctionsPrint::printFindIndividualLink("pid");
-                            if (isset($_REQUEST['other_pids'])) {
-                            $other_pids = $_REQUEST['other_pids'];
-                            } else {
-                            $other_pids = "
-                            }
-                            &nbsp;<input type="button" value=">>>" onclick="document.setup_gvexport_allinontree.other_pids.value=document.setup_gvexport_allinontree.other_pids.value+','+document.setup_gvexport_allinontree.pid.value;" />
--->
-    </div>
-
-    <!--  
-
-                            // Stop tree processing on the indis
-                            Stop tree processing on INDIs:" . "&nbsp;
-                            if (isset($_REQUEST['stop_pid'])) {
-                            $stop_pid = $_REQUEST['stop_pid'];
-                            } else {
-                            $stop_pid = "
-                            }
-                            <input type="text" size="10" name="stop_pid" id="stop_pid" value="" . $stop_pid . "\" />
-                            //$out .= FunctionsPrint::printFindIndividualLink("stop_pid");
-                            if (isset($_REQUEST['other_stop_pids'])) {
-                            $other_stop_pids = $_REQUEST['other_stop_pids'];
-                            } else {
-                            $other_stop_pids = "
-                            }
-                            &nbsp;<input type="button" value=">>>" onclick="document.setup_gvexport_allinontree.other_stop_pids.value=document.setup_gvexport_allinontree.other_stop_pids.value+','+document.setup_gvexport_allinontree.stop_pid.value;" />
-                            <input type="text" size="30" name="other_stop_pids" id="other_stop_pids" value="" . $other_stop_pids . "" />
-                            <br />
-                            -->
-
-    <div class="row form-group">
-        <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[indiance]">Include Ancestors</label>
-        <div class="col-sm-8 wt-page-options-value">
-            <div class="row">
-                <div class=col-auto mx-3">
-                    <input type="checkbox" name="vars[indiance]" id="vars[indiance]" value="ance" <?= $vars["indiance"] == "ance" ? 'checked' : '' ?>>
-                </div>
-                <div class="col-auto row">
-                    <label for="vars[ance_level]" class="col-sm-6">Max Levels:</label>
-                    <input type="text" class="form-control col-sm-6" size="10" name="vars[ance_level]" id="vars[ance_level]" value="<?= $vars["ance_level"] ?>">
+        <div class="row form-group">
+            <label class=" col-sm-4 col-form-label wt-page-options-label" for="pid">Include anyone related to</label>
+            <div class="col-sm-8 wt-page-options-value">
+                <?= view('components/select-individual', ['name' => 'pid', 'id' => 'pid', 'tree' => $tree, 'individual' => $individual]) ?>
+                <div class="input-group mt-1">
+                    <input type="text" class="form-control" name="vars[other_pids]" id="vars[other_pids]" value="<?= $vars['other_pids'] ?>">
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-outline-secondary" onclick="appendPidTo('pid', 'vars[other_pids]')">⏎</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="row form-group">
-        <label class="col-sm-4 col-form-label wt-page-options-label">Include</label>
-        <div class="col-sm-8 wt-page-options-value">
-            <div class="row">
-                <div class=col-auto mx-3">
-                    <input type="checkbox" name="vars[indisibl]" id="vars[indisibl]" value="sibl" <?= $vars["indisibl"] == "sibl" ? 'checked' : '' ?>>
-                    <label for="vars[indisibl]">Siblings</label>
-                </div>
-                <div class=col-auto mx-3">
-                    <input type="checkbox" name="vars[indicous]" id="vars[indicous]" value="cous" <?= $vars["indicous"] == "cous" ? 'checked' : '' ?>>
-                    <label for="vars[indicous]">Cousins</label>
-                </div>
-                <div class=col-auto mx-3">
-                    <input type="checkbox" name="vars[indispou]" id="vars[indispou]" value="spou" <?= $vars["indispou"] == "spou" ? 'checked' : '' ?>>
-                    <label for="vars[indispou]">Spouses</label>
+        <div class="row form-group">
+            <label class=" col-sm-4 col-form-label wt-page-options-label" for="vars[other_stop_pids]">Stop processing on</label>
+            <div class="col-sm-8 wt-page-options-value">
+                <?= view('components/select-individual', ['name' => 'vars[stop_pid]', 'id' => 'vars[stop_pid]', 'tree' => $tree, 'xref' => $vars['stop_pid']]) ?>
+                <div class="input-group mt-1">
+                    <input type="text" class="form-control" name="vars[other_stop_pids]" id="vars[other_stop_pids]" value="<?= $vars['other_stop_pids'] ?>">
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-outline-secondary" onclick="appendPidTo('vars[stop_pid]', 'vars[other_stop_pids]')">⏎</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="row form-group">
-        <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[indidesc]">Include Descendants</label>
-        <div class="col-sm-8 wt-page-options-value">
-            <div class="row">
-                <div class=col-auto mx-3">
-                    <input type="checkbox" name="vars[indidesc]" id="vars[indidesc]" value="desc" <?= $vars["indidesc"] == "desc" ? 'checked' : '' ?>>
-                </div>
-                <div class="col-auto row">
-                    <label for="vars[desc_level]" class="col-sm-6">Max Levels:</label>
-                    <input type="text" class="form-control col-sm-6" size="10" name="vars[desc_level]" id="vars[desc_level]" value="<?= $vars["desc_level"] ?>">
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row form-group">
-        <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[marknr]">Mark not blood-related people with different color</label>
-        <div class="col-sm-8 wt-page-options-value">
-            <input type="checkbox" name="vars[marknr]" id="vars[marknr]" value="marknr" <?= $vars["marknr"] == "marknr" ? 'checked' : '' ?>>
-        </div>
-    </div>
-
-    <div class="row form-group">
-        <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[show_url]">Add URL to individuals and families</label>
-        <div class="col-sm-8 wt-page-options-value">
-            <input type="checkbox" name="vars[show_url]" id="vars[show_url]" value="show_url" <?= $vars["show_url"] == "show_url" ? 'checked' : '' ?>>
-            <span class="text-muted">(SVG only)</span>
-        </div>
-    </div>
-
-    <div class="row form-group">
-        <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[use_abbr_place]">Use abbreviated placenames</label>
-        <div class="col-sm-8 wt-page-options-value">
-            <input type="checkbox" name="vars[use_abbr_place]" id="vars[use_abbr_place]" value="use_abbr_place" <?= $vars["use_abbr_place"] == "use_abbr_place" ? 'checked' : '' ?>>
-        </div>
-    </div>
-
-    <div class="row form-group">
-        <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[show_pid]">Show Individual PID</label>
-        <div class="col-sm-8 wt-page-options-value">
-            <input type="checkbox" name="vars[show_pid]" id="vars[show_pid]" value="show_pid" <?= $vars["show_pid"] == "show_pid" ? 'checked' : '' ?>>
-        </div>
-    </div>
-
-    <div class="row form-group">
-        <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[show_by]">Show Birth Date</label>
-        <div class="col-sm-8 wt-page-options-value">
-            <div class="row">
-                <div class=col-auto mx-3">
-                    <input type="checkbox" name="vars[show_by]" id="vars[show_by]" value="show_by" <?= $vars["show_by"] == "show_by" ? 'checked' : '' ?>>
-                </div>
-                <div class=col-auto mx-3">
-                    <input type="radio" name="vars[bd_type]" id="vars[bd_type]_y" value="y" <?= $vars["bd_type"] == "y" ? 'checked' : '' ?>>
-                    <label for="vars[bd_type]_y">Year</label>
-                </div>
-                <div class=col-auto mx-3">
-                    <input type="radio" name="vars[bd_type]" id="vars[bd_type]_gedcom" value="gedcom" <?= $vars["bd_type"] == "gedcom" ? 'checked' : '' ?>>
-                    <label for="vars[bd_type]_gedcom">Full Date</label>
+        <div class="row form-group">
+            <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[indiance]">Include Ancestors</label>
+            <div class="col-sm-8 wt-page-options-value">
+                <div class="row">
+                    <div class=col-auto mx-3">
+                        <input type="hidden" name="vars[indiance]" value="no">
+                        <input type="checkbox" name="vars[indiance]" id="vars[indiance]" value="ance" <?= $vars["indiance"] == "ance" ? 'checked' : '' ?>>
+                    </div>
+                    <div class="col-auto row">
+                        <label for="vars[ance_level]" class="col-sm-6">Max Levels:</label>
+                        <input type="text" class="form-control col-sm-6" size="10" name="vars[ance_level]" id="vars[ance_level]" value="<?= $vars["ance_level"] ?>">
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="row form-group">
-        <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[show_bp]">Show Birth Place</label>
-        <div class="col-sm-8 wt-page-options-value">
-            <input type="checkbox" name="vars[show_bp]" id="vars[show_bp]" value="show_bp" <?= $vars["show_bp"] == "show_bp" ? 'checked' : '' ?>>
-        </div>
-    </div>
-
-    <div class="row form-group">
-        <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[show_dy]">Show Death Date</label>
-        <div class="col-sm-8 wt-page-options-value">
-            <div class="row">
-                <div class=col-auto mx-3">
-                    <input type="checkbox" name="vars[show_dy]" id="vars[show_dy]" value="show_dy" <?= $vars["show_dy"] == "show_dy" ? 'checked' : '' ?>>
-                </div>
-                <div class=col-auto mx-3">
-                    <input type="radio" name="vars[dd_type]" id="vars[dd_type]_y" value="y" <?= $vars["dd_type"] == "y" ? 'checked' : '' ?>>
-                    <label for="vars[dd_type]_y">Year</label>
-                </div>
-                <div class=col-auto mx-3">
-                    <input type="radio" name="vars[dd_type]" id="vars[dd_type]_gedcom" value="gedcom" <?= $vars["dd_type"] == "gedcom" ? 'checked' : '' ?>>
-                    <label for="vars[dd_type]_gedcom">Full Date</label>
+        <div class="row form-group">
+            <label class="col-sm-4 col-form-label wt-page-options-label">Include</label>
+            <div class="col-sm-8 wt-page-options-value">
+                <div class="row">
+                    <div class=col-auto mx-3">
+                        <input type="hidden" name="vars[indisibl]" value="no">
+                        <input type="checkbox" name="vars[indisibl]" id="vars[indisibl]" value="sibl" <?= $vars["indisibl"] == "sibl" ? 'checked' : '' ?>>
+                        <label for="vars[indisibl]">Siblings</label>
+                    </div>
+                    <div class=col-auto mx-3">
+                        <input type="hidden" name="vars[indicous]" value="no">
+                        <input type="checkbox" name="vars[indicous]" id="vars[indicous]" value="cous" <?= $vars["indicous"] == "cous" ? 'checked' : '' ?>>
+                        <label for="vars[indicous]">Cousins</label>
+                    </div>
+                    <div class=col-auto mx-3">
+                        <input type="hidden" name="vars[indispou]" value="no">
+                        <input type="checkbox" name="vars[indispou]" id="vars[indispou]" value="spou" <?= $vars["indispou"] == "spou" ? 'checked' : '' ?>>
+                        <label for="vars[indispou]">Spouses</label>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="row form-group">
-        <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[show_dp]">Show Death Place</label>
-        <div class="col-sm-8 wt-page-options-value">
-            <input type="checkbox" name="vars[show_dp]" id="vars[show_dp]" value="show_dp" <?= $vars["show_dp"] == "show_dp" ? 'checked' : '' ?>>
-        </div>
-    </div>
-
-
-    <div class="row form-group">
-        <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[show_fid]">Show Family ID</label>
-        <div class="col-sm-8 wt-page-options-value">
-            <input type="checkbox" name="vars[show_fid]" id="vars[show_fid]" value="show_fid" <?= $vars["show_fid"] == "show_fid" ? 'checked' : '' ?>>
-        </div>
-    </div>
-
-    <div class="row form-group">
-        <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[show_my]">Show Marriage Date</label>
-        <div class="col-sm-8 wt-page-options-value">
-            <div class="row">
-                <div class=col-auto mx-3">
-                    <input type="checkbox" name="vars[show_my]" id="vars[show_my]" value="show_my" <?= $vars["show_my"] == "show_my" ? 'checked' : '' ?>>
-                </div>
-                <div class=col-auto mx-3">
-                    <input type="radio" name="vars[md_type]" id="vars[md_type]_y" value="y" <?= $vars["md_type"] == "y" ? 'checked' : '' ?>>
-                    <label for="vars[md_type]_y">Year</label>
-                </div>
-                <div class=col-auto mx-3">
-                    <input type="radio" name="vars[md_type]" id="vars[md_type]_gedcom" value="gedcom" <?= $vars["md_type"] == "gedcom" ? 'checked' : '' ?>>
-                    <label for="vars[md_type]_gedcom">Full Date</label>
+        <div class="row form-group">
+            <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[indidesc]">Include Descendants</label>
+            <div class="col-sm-8 wt-page-options-value">
+                <div class="row">
+                    <div class=col-auto mx-3">
+                        <input type="hidden" name="vars[indidesc]" value="no">
+                        <input type="checkbox" name="vars[indidesc]" id="vars[indidesc]" value="desc" <?= $vars["indidesc"] == "desc" ? 'checked' : '' ?>>
+                    </div>
+                    <div class="col-auto row">
+                        <label for="vars[desc_level]" class="col-sm-6">Max Levels:</label>
+                        <input type="text" class="form-control col-sm-6" size="10" name="vars[desc_level]" id="vars[desc_level]" value="<?= $vars["desc_level"] ?>">
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="row form-group">
-        <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[show_mp]">Show Marriage Place</label>
-        <div class="col-sm-8 wt-page-options-value">
-            <input type="checkbox" name="vars[show_mp]" id="vars[show_mp]" value="show_mp" <?= $vars["show_mp"] == "show_mp" ? 'checked' : '' ?>>
+        <div class="row form-group">
+            <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[marknr]">Mark not blood-related people with different color</label>
+            <div class="col-sm-8 wt-page-options-value">
+                <input type="hidden" name="vars[marknr]" value="no">
+                <input type="checkbox" name="vars[marknr]" id="vars[marknr]" value="marknr" <?= $vars["marknr"] == "marknr" ? 'checked' : '' ?>>
+            </div>
         </div>
-    </div>
 
+        <div class="row form-group">
+            <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[show_url]">Add URL to individuals and families</label>
+            <div class="col-sm-8 wt-page-options-value">
+                <input type="hidden" name="vars[show_url]" value="no">
+                <input type="checkbox" name="vars[show_url]" id="vars[show_url]" value="show_url" <?= $vars["show_url"] == "show_url" ? 'checked' : '' ?>>
+                <span class="text-muted">(SVG only)</span>
+            </div>
+        </div>
 
-<h3>Appearance</h3>
+        <div class="row form-group">
+            <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[use_abbr_place]">Use abbreviated placenames</label>
+            <div class="col-sm-8 wt-page-options-value">
+                <input type="hidden" name="vars[use_abbr_place]" value="no">
+                <input type="checkbox" name="vars[use_abbr_place]" id="vars[use_abbr_place]" value="use_abbr_place" <?= $vars["use_abbr_place"] == "use_abbr_place" ? 'checked' : '' ?>>
+            </div>
+        </div>
 
-<div class="row form-group">
-        <label class="col-sm-4 col-form-label wt-page-options-label">Diagram Type</label>
-        <div class="col-sm-8 wt-page-options-value">
-            <div class="row">
-                <div class=col-auto mx-3">
-                    <input type="radio" name="vars[diagtype]" id="vars[diagtype]_simple" value="simple" <?= $vars["diagtype"] == "simple" ? 'checked' : '' ?>>
-                    <label for="vars[diagtype]_simple">Simple</label>
-                </div>
-                <div class=col-auto mx-3">
-                    <input type="radio" name="vars[diagtype]" id="vars[diagtype]_decorated" value="decorated" <?= $vars["diagtype"] == "decorated" ? 'checked' : '' ?>>
-                    <label for="vars[diagtype]_decorated">Decorated</label>
-                </div>
-                <div class=col-auto mx-3">
-                    <input type="radio" name="vars[diagtype]" id="vars[diagtype]_combined" value="combined" <?= $vars["diagtype"] == "combined" ? 'checked' : '' ?>>
-                    <label for="vars[diagtype]_combined">Combined</label>
+        <div class="row form-group">
+            <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[show_pid]">Show Individual PID</label>
+            <div class="col-sm-8 wt-page-options-value">
+                <input type="hidden" name="vars[show_pid]" value="no">
+                <input type="checkbox" name="vars[show_pid]" id="vars[show_pid]" value="show_pid" <?= $vars["show_pid"] == "show_pid" ? 'checked' : '' ?>>
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[show_by]">Show Birth Date</label>
+            <div class="col-sm-8 wt-page-options-value">
+                <div class="row">
+                    <div class=col-auto mx-3">
+                        <input type="hidden" name="vars[show_by]" value="no">
+                        <input type="checkbox" name="vars[show_by]" id="vars[show_by]" value="show_by" <?= $vars["show_by"] == "show_by" ? 'checked' : '' ?>>
+                    </div>
+                    <div class=col-auto mx-3">
+                        <input type="radio" name="vars[bd_type]" id="vars[bd_type]_y" value="y" <?= $vars["bd_type"] == "y" ? 'checked' : '' ?>>
+                        <label for="vars[bd_type]_y">Year</label>
+                    </div>
+                    <div class=col-auto mx-3">
+                        <input type="radio" name="vars[bd_type]" id="vars[bd_type]_gedcom" value="gedcom" <?= $vars["bd_type"] == "gedcom" ? 'checked' : '' ?>>
+                        <label for="vars[bd_type]_gedcom">Full Date</label>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="row form-group">
-        <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[with_photos]">Add photos</label>
-        <div class="col-sm-8 wt-page-options-value">
-            <input type="checkbox" name="vars[with_photos]" id="vars[with_photos]" value="with_photos" <?= $vars["with_photos"] == "with_photos" ? 'checked' : '' ?>>
-            <span class="text-muted">(Only Decorated or Combined)</span>
+        <div class="row form-group">
+            <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[show_bp]">Show Birth Place</label>
+            <div class="col-sm-8 wt-page-options-value">
+                <input type="hidden" name="vars[show_bp]" value="no">
+                <input type="checkbox" name="vars[show_bp]" id="vars[show_bp]" value="show_bp" <?= $vars["show_bp"] == "show_bp" ? 'checked' : '' ?>>
+            </div>
         </div>
-    </div>
-    <!--
+
+        <div class="row form-group">
+            <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[show_dy]">Show Death Date</label>
+            <div class="col-sm-8 wt-page-options-value">
+                <div class="row">
+                    <div class=col-auto mx-3">
+                        <input type="hidden" name="vars[show_dy]" value="no">
+                        <input type="checkbox" name="vars[show_dy]" id="vars[show_dy]" value="show_dy" <?= $vars["show_dy"] == "show_dy" ? 'checked' : '' ?>>
+                    </div>
+                    <div class=col-auto mx-3">
+                        <input type="radio" name="vars[dd_type]" id="vars[dd_type]_y" value="y" <?= $vars["dd_type"] == "y" ? 'checked' : '' ?>>
+                        <label for="vars[dd_type]_y">Year</label>
+                    </div>
+                    <div class=col-auto mx-3">
+                        <input type="radio" name="vars[dd_type]" id="vars[dd_type]_gedcom" value="gedcom" <?= $vars["dd_type"] == "gedcom" ? 'checked' : '' ?>>
+                        <label for="vars[dd_type]_gedcom">Full Date</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[show_dp]">Show Death Place</label>
+            <div class="col-sm-8 wt-page-options-value">
+                <input type="hidden" name="vars[show_dp]" value="no">
+                <input type="checkbox" name="vars[show_dp]" id="vars[show_dp]" value="show_dp" <?= $vars["show_dp"] == "show_dp" ? 'checked' : '' ?>>
+            </div>
+        </div>
+
+
+        <div class="row form-group">
+            <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[show_fid]">Show Family ID</label>
+            <div class="col-sm-8 wt-page-options-value">
+                <input type="hidden" name="vars[show_fid]" value="no">
+                <input type="checkbox" name="vars[show_fid]" id="vars[show_fid]" value="show_fid" <?= $vars["show_fid"] == "show_fid" ? 'checked' : '' ?>>
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[show_my]">Show Marriage Date</label>
+            <div class="col-sm-8 wt-page-options-value">
+                <div class="row">
+                    <div class=col-auto mx-3">
+                        <input type="hidden" name="vars[show_my]" value="no">
+                        <input type="checkbox" name="vars[show_my]" id="vars[show_my]" value="show_my" <?= $vars["show_my"] == "show_my" ? 'checked' : '' ?>>
+                    </div>
+                    <div class=col-auto mx-3">
+                        <input type="radio" name="vars[md_type]" id="vars[md_type]_y" value="y" <?= $vars["md_type"] == "y" ? 'checked' : '' ?>>
+                        <label for="vars[md_type]_y">Year</label>
+                    </div>
+                    <div class=col-auto mx-3">
+                        <input type="radio" name="vars[md_type]" id="vars[md_type]_gedcom" value="gedcom" <?= $vars["md_type"] == "gedcom" ? 'checked' : '' ?>>
+                        <label for="vars[md_type]_gedcom">Full Date</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[show_mp]">Show Marriage Place</label>
+            <div class="col-sm-8 wt-page-options-value">
+                <input type="hidden" name="vars[show_mp]" value="no">
+                <input type="checkbox" name="vars[show_mp]" id="vars[show_mp]" value="show_mp" <?= $vars["show_mp"] == "show_mp" ? 'checked' : '' ?>>
+            </div>
+        </div>
+
+
+        <h3>Appearance</h3>
+
+        <div class="row form-group">
+            <label class=" col-sm-4 col-form-label wt-page-options-label" for="vars[grdir]">Graph Direction</label>
+            <div class="col-sm-8 wt-page-options-value">
+                <?= view('components/select', ['name' => 'vars[grdir]', 'selected' => $vars['grdir'], 'options' => $gve_config["directions"]]) ?>
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <label class="col-sm-4 col-form-label wt-page-options-label">Diagram Type</label>
+            <div class="col-sm-8 wt-page-options-value">
+                <div class="row">
+                    <div class=col-auto mx-3">
+                        <input type="radio" name="vars[diagtype]" id="vars[diagtype]_simple" value="simple" <?= $vars["diagtype"] == "simple" ? 'checked' : '' ?>>
+                        <label for="vars[diagtype]_simple">Simple</label>
+                    </div>
+                    <div class=col-auto mx-3">
+                        <input type="radio" name="vars[diagtype]" id="vars[diagtype]_decorated" value="decorated" <?= $vars["diagtype"] == "decorated" ? 'checked' : '' ?>>
+                        <label for="vars[diagtype]_decorated">Decorated</label>
+                    </div>
+                    <div class=col-auto mx-3">
+                        <input type="radio" name="vars[diagtype]" id="vars[diagtype]_combined" value="combined" <?= $vars["diagtype"] == "combined" ? 'checked' : '' ?>>
+                        <label for="vars[diagtype]_combined">Combined</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[with_photos]">Add photos</label>
+            <div class="col-sm-8 wt-page-options-value">
+                <input type="hidden" name="vars[with_photos]" value="no">
+                <input type="checkbox" name="vars[with_photos]" id="vars[with_photos]" value="with_photos" <?= $vars["with_photos"] == "with_photos" ? 'checked' : '' ?>>
+                <span class="text-muted">(Only Decorated or Combined)</span>
+            </div>
+        </div>
+        <!--
 
 
 
@@ -407,6 +414,208 @@ use Fisharebest\Webtrees\Tree;
         </td>
     </tr>-->
 
+        <h3>Output Settings</h3>
+        <div class="row form-group">
+            <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[otype]">Output File Type</label>
+            <div class="col-sm-8 wt-page-options-value">
+                <?= view('components/select', ['name' => 'vars[otype]', 'selected' => $vars['otype'], 'options' => $otypes]) ?>
+                <small id="emailHelp" class="form-text text-muted">Choose DOT if you don't have GraphViz installed on server.</small>
+            </div>
+        </div>
 
-            <input class="btn btn-primary" type="submit" value="<?= /* I18N: A button label. */ I18N::translate('view') ?>">
+        <div class="row form-group">
+            <label class="col-sm-4 col-form-label wt-page-options-label" for="disposition">Generate a file for download</label>
+            <div class="col-sm-8 wt-page-options-value">
+                <input type="checkbox" name="disposition" id="disposition" value="1" <?= $disposition ? 'checked' : '' ?>>
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <label class=" col-sm-4 col-form-label wt-page-options-label" for="vars[grdir]">Number of iterations (MCLIMIT)</label>
+            <div class="col-sm-8 wt-page-options-value">
+                <?= view('components/select', ['name' => 'vars[mclimit]', 'selected' => $vars['mclimit'], 'options' => $gve_config["mclimits"]]) ?>
+                <small class="form-text text-muted">helps to reduce the crossings on the graph. This can be really slow (up to 10..15x compared to the 20 setting)</small>
+            </div>
+        </div>
+
+
+        <div class="row form-group">
+            <label class=" col-sm-4 col-form-label wt-page-options-label" for="vars[dpi]">DPI</label>
+            <div class="col-sm-8 wt-page-options-value">
+                <div class="row">
+                    <div class="col-auto">
+                        <input type="text" class="form-control" size="10" name="vars[dpi]" id="vars[dpi]" value="<?= $vars["dpi"] ?>">
+                    </div>
+                    <div class="col-auto row">
+                        <label for="vars[ranksep]" class="col-sm-6">ranksep:</label>
+                        <input type="text" class="form-control col-sm-6" size="10" name="vars[ranksep]" id="vars[ranksep]" value="<?= $vars["ranksep"] ?>">
+                    </div>
+                    <div class="col-auto row">
+                        <label for="vars[nodesep]" class="col-sm-6">nodesep:</label>
+                        <input type="text" class="form-control col-sm-6" size="10" name="vars[nodesep]" id="vars[nodesep]" value="<?= $vars["nodesep"] ?>">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!--
+    <div class="row form-group">
+        <label class="col-sm-4 col-form-label wt-page-options-label" for="pagebrk_var">Use Page Break</label>
+        <div class="col-sm-8 wt-page-options-value">
+            <input type="checkbox" name="vars[pagebrk]" id="pagebrk_var" value="pagebrk">
+        </div>
+    </div>
+    -->
+
+
+    </div>
+
+    <div class="sidebar__buttons">
+        <button type="submit" class="btn btn-primary update-browser-rendering">Update</button>
+        <button type="submit" class="btn btn-secondary"><?= /* I18N: A button label. */ I18N::translate('Render serverside') ?></button>
+        <a href="<?= $module->chartUrl($individual, ['reset' => '1']) ?>" class="btn btn-outline-secondary"><?= /* I18N: A button label. */ I18N::translate('reset') ?></a>
+    </div>
 </form>
+
+<div class="sidebar__toggler" hidden>
+    <a href="#" class="btn btn-outline-secondary">Show Selection</a>
+</div>
+
+<div class="h-100 w-100 border-1">
+    <div id="rendering" hidden class="my-3" style="height: 500px; border: 1px solid black; overflow: hidden"></div>
+</div>
+
+<script type="text/javascript">
+    var workerURL = '<?= $module->assetUrl('javascript/full.renderer.js'); ?>';
+    var viz = new Viz({
+        workerURL: workerURL
+    });
+
+    var form = document.getElementById('gvexport');
+    var rendering = document.getElementById('rendering');
+
+    document.querySelector('.update-browser-rendering').addEventListener('click', function(e) {
+        var oldOtype = document.getElementById('vars[otype]').value;
+        document.getElementById('vars[otype]').value = 'dot';
+        var data = jQuery(form).serialize();
+        document.getElementById('vars[otype]').value = oldOtype;
+        var lastDotStr;
+
+        rendering.innerHTML = '<div class="d-flex justify-content-center h-100"><div class="spinner-border align-self-center" role="status"><span class="sr-only">Loading...</span></div></div>';
+        rendering.hidden = false;
+
+        var h = window.innerHeight - document.querySelector('.wt-header-wrapper').getBoundingClientRect().height -  document.querySelector('.wt-footers').getBoundingClientRect().height;
+        rendering.style.height = h + "px";
+        
+
+        window.fetch(form.getAttribute('action'), {
+            method: form.getAttribute('method'),
+            credentials: 'same-origin', // include, *same-origin, omit
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: data
+        }).then(function(response) {
+            if (!response.ok) {
+                return response.text().then(function(errorText) {
+                    return Promise.reject(errorText)
+                });
+            }
+            return response.text();
+        }).then(function(dotStr) {
+            lastDotStr = dotStr;
+            var images = [...lastDotStr.matchAll(/<IMG[^>]+SRC="([^"]*)/gmi)].map(function(matches) {
+                return {
+                    path: matches[1],
+                    width: '150px',
+                    height: '150px'
+                };
+            })
+            console.log("Starting render (found " + images.length + " images)");
+            return viz.renderSVGElement(dotStr, {
+                images: images
+            });
+        }).then(function(element) {
+            console.log("Appending SVG", element);
+            rendering.innerHTML = "";
+            rendering.appendChild(element);
+            var fullZoom = Math.min(2, rendering.getBoundingClientRect().width / element.getBBox().width);
+            panzoom(element, {
+                maxZoom: 2,
+                minZoom: fullZoom / 2,
+                initialZoom: fullZoom
+            });
+            return element;
+        }).catch(function(error) {
+            rendering.innerHTML = '<div class="alert alert-danger" role="alert">Error running GVExport in Browser mode: <br>' + error + '</div>';
+            if (lastDotStr) {
+                rendering.innerHTML = rendering.innerHTML + '<h4>DOT contents</h4><pre id="dot-text"></pre>';
+                document.getElementById('dot-text').appendChild(document.createTextNode(lastDotStr));
+            }
+            console.error(error);
+
+            // Create a new Viz instance (@see Caveats page for more info)
+            viz = new Viz({
+                workerURL: workerURL
+            });
+        });
+
+        e.preventDefault();
+        return false;
+    });
+
+    function hideSidebar(e) {
+        document.querySelector('.sidebar').hidden = true;
+        document.querySelector('.sidebar__toggler').hidden = false;
+        e.preventDefault();
+    }
+
+    function showSidebar(e) {
+        document.querySelector('.sidebar__toggler').hidden = true;
+        document.querySelector('.sidebar').hidden = false;
+        e.preventDefault();
+    }
+    
+    document.querySelector('.hide-form').addEventListener('click', hideSidebar);
+
+
+    document.querySelector('.sidebar__toggler a').addEventListener('click', showSidebar);
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key == 'Esc' || e.key == 'Escape') {
+            document.querySelector('.sidebar').hidden ? showSidebar(e) : hideSidebar(e);
+        }
+    });
+
+    function machSVGGut(svg) {
+        [].forEach.call(svg.querySelectorAll("g>a"), function(a) {
+            var box = a.parentNode.parentNode;
+            var polygon = box.querySelector('polygon');
+            if (!polygon) {
+                return;
+            }
+            var lowerRight = polygon.getAttribute('points').split(' ')[3].split(',')
+            var menu = document.createElementNS("http://www.w3.org/2000/svg", "foreignObject");
+            var dropdown = document.importNode(document.getElementById('dropdown').content, true);
+            menu.appendChild(dropdown);
+            box.appendChild(menu);
+            var bb = box.querySelector('.btn').getBoundingClientRect();
+            menu.setAttribute('class', 'node');
+            menu.setAttribute('x', parseFloat(lowerRight[0]) - bb.width + 5);
+            menu.setAttribute('y', parseFloat(lowerRight[1]) - bb.height + 5);
+            menu.setAttribute('width', bb.width);
+            menu.setAttribute('height', bb.height);
+            menu.style = 'overflow: visible';
+        });
+    }
+</script>
+
+<template id=dropdown>
+    <div style="position: relative; z-index: 10000">
+        <a class="btn btn-secondary btn-sm m-0" style="position: relative; overflow: hidden" onclick="this.parentNode.querySelector('.content').hidden = false;">V</a>
+        <ul class="content list-group" hidden>
+            <li class="list-group-item">Klick!</li>
+        </ul>
+    </div>
+</template>

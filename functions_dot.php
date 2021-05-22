@@ -201,7 +201,7 @@ class Dot {
 				// if multiple indis are defined
 				$indis = explode(",", $this->settings["indi"]);
 				for ($i=0;$i<count($indis);$i++) {
-					$this->addIndiToList($indis[$i], $this->indi_search_method["ance"], $this->indi_search_method["desc"], $this->indi_search_method["spou"], $this->indi_search_method["sibl"], TRUE, 0, $this->settings["ance_level"], $this->settings["desc_level"]);
+					$this->addIndiToList(trim($indis[$i]), $this->indi_search_method["ance"], $this->indi_search_method["desc"], $this->indi_search_method["spou"], $this->indi_search_method["sibl"], TRUE, 0, $this->settings["ance_level"], $this->settings["desc_level"]);
 				}
 			}
 
@@ -257,7 +257,8 @@ class Dot {
 						foreach ($f->children() as $child) {
 							if (!empty($child) && (isset($this->individuals[$child->xref()]))) {
 								//$this->families[$fid]["has_children"] = TRUE;
-								foreach ($this->individuals[$child->xref()]["fams"] as $fam_nr=>$fam) {
+								$fams = isset($this->individuals[$child->xref()]["fams"]) ? $this->individuals[$child->xref()]["fams"] : [];
+								foreach ($fams as $fam_nr=>$fam) {
 									$out .= $this->convertID($fid) . " -> " . $this->convertID($fam) . ":" . $this->convertID($child->xref()) . "\n";
 								}
 							}
@@ -1036,7 +1037,7 @@ class Dot {
 		if (isset($this->settings["stop_proc"]) && $this->settings["stop_proc"] == TRUE) {
 			$stop_pids = explode(",", $this->settings["stop_pids"]);
 			for ($j=0;$j<count($stop_pids);$j++) {
-				if ($pid == $stop_pids[$j]){
+				if ($pid == trim($stop_pids[$j])){
 					// --- DEBUG ---
 					if ($this->settings["debug"]) {
 						$this->printDebug("($pid) -- STOP processing, because INDI is listed in the \"Stop tree processing on INDIs\"\n", $ind);
@@ -1515,7 +1516,7 @@ class Dot {
 			return $m->downloadUrl('inline');
 		}
 		else if (!$m->isExternal() && $m->fileExists($this->file_system)) {
-			return realpath($this->file_system->getAdapter()->applyPathPrefix($m->filename()));
+			return './'.$this->file_system->getAdapter()->applyPathPrefix('media/'.$m->filename());
 		} else {
 			return null;
 		}

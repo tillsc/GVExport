@@ -97,12 +97,12 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
 
 	public function chartUrl(Individual $individual, array $parameters = []): string
 	{
-		return route('module', [
+		return route('module', array_merge($parameters, [
 			'module' => $this->name(),
 			'action' => 'Chart',
 			'xref' => $individual->xref(),
 			'tree' => $individual->tree()->name(),
-		]);
+		]));
 	}
 
 	public function getIndividual($tree, $xref): Individual
@@ -123,12 +123,13 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
 		$individual = $this->getIndividual($tree, $request->getQueryParams()['xref']);
 
 		$userDefaultVars = [ //Defaults (this cloud be defined in the config?)
+			"otype" => "svg",
 			"grdir" => $GVE_CONFIG["default_direction"],
 			"mclimit" => $GVE_CONFIG["default_mclimit"],
 			"psize" => $GVE_CONFIG["default_pagesize"],
 			"indiinc" => "indi",
 			"diagtype" => "decorated",
-			"with_photos" => "with_photos",
+			"with_photos" => "",
 			"use_abbr_place" => ($GVE_CONFIG['settings']['use_abbr_place'] ? "use_abbr_place" : ""),
 			"show_by" => "show_by",
 			"bd_type" => "gedcom",
@@ -157,12 +158,14 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
 			"ranksep" => $GVE_CONFIG["settings"]["ranksep"],
 			"nodesep" => $GVE_CONFIG["settings"]["nodesep"],
 			"other_pids" => '',
+			"stop_pid" => '',
+			"other_stop_pids" => ''
 		];
-		if (isset($_COOKIE["GVEUserDefaults"]) and $_COOKIE["GVEUserDefaults"] != "") {
+		if (!isset($_REQUEST['reset']) and isset($_COOKIE["GVEUserDefaults"]) and $_COOKIE["GVEUserDefaults"] != "") {
 			foreach (explode("|", $_COOKIE["GVEUserDefaults"]) as $s) {
 				$arr = explode("=", $s);
 				if (count($arr) == 2) {
-					//$userDefaultVars[$arr[0]] = $arr[1];
+					$userDefaultVars[$arr[0]] = $arr[1];
 				}
 			}
 		}
@@ -179,12 +182,12 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
 		return $this->viewResponse($this->name() . '::page', [
 			'tree' => $tree,
 			'individual' => $individual,
-			'otype' => 'svg',
-			'disposition' => false,
+			'disposition' => true,
 			'title' => 'GVExport',
 			'vars' => $userDefaultVars,
 			'otypes' => $otypes,
-			'gve_config' => $GVE_CONFIG
+			'gve_config' => $GVE_CONFIG,
+			'module' => $this
 		]);
 	}
 
@@ -200,8 +203,8 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
 		if (isset($_REQUEST["vars"]["debug"])) {
 			return $this->showDOTFile($individual->tree(), $individual);
 		} else {
-			$temp_dir = $this->saveDOTFile($individual->tree(), $individual, $_REQUEST['otype'] == 'svg' || $_REQUEST['otype'] == 'dot');
-			return $this->downloadFile($temp_dir, $_REQUEST['otype']);
+			$temp_dir = $this->saveDOTFile($individual->tree(), $individual, $_REQUEST["vars"]["otype"] == 'svg' || $_REQUEST["vars"]["otype"] == 'dot');
+			return $this->downloadFile($temp_dir, $_REQUEST["vars"]["otype"]);
 		}
 	}
 
@@ -220,14 +223,14 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
 		$filename = $temp_dir . "/" . $basename; // new
 		if (!empty($GVE_CONFIG["output"][$file_type]["exec"])) {
 			// Multi-platform operability (by Thomas Ledoux)
-			$old_dir = getcwd(); // save the current directory
-			chdir($temp_dir); // change to the right directory for generation
-			$shell_cmd = $GVE_CONFIG["output"][$file_type]["exec"];
-			exec($shell_cmd, $temp, $return_var); // new
-			chdir($old_dir); // back to the saved directory
+			//$old_dir = getcwd(); // save the current directory
+			//chdir($temp_dir); // change to the right directory for generation
+			$shell_cmd = str_replace($GVE_CONFIG["filename"],  $temp_dir . "/" .$GVE_CONFIG["filename"], $GVE_CONFIG["output"][$file_type]["exec"]);
+			exec($shell_cmd." 2>&1", $stdout_output, $return_var); // new
+			//chdir($old_dir); // back to the saved directory
 			if ($return_var !== 0) // check correct output generation
 			{
-				die("Error (return code $return_var) executing command \"$shell_cmd\".<br>Check path and Graphviz functionality!"); // new
+				die("Error (return code $return_var) executing command \"$shell_cmd\" in \"".getcwd()."\".<br>Check path and Graphviz functionality!<br><pre>".(join($stdout_output, "\n"))."</pre>"); // new
 			}
 		}
 
@@ -311,34 +314,34 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
 		}
 
 		// INDI id
-		if (!empty($_REQUEST["other_pids"])) {
-			$dot->setSettings("indi", $individual->xref() .','. $_REQUEST["other_pids"]);
+		if (!empty($vars["other_pids"])) {
+			$dot->setSettings("indi", $individual->xref() .','. $vars["other_pids"]);
 			$dot->setSettings("multi_indi", TRUE);
 		} else {
 			$dot->setSettings("indi", $individual->xref());
 			$dot->setSettings("multi_indi", FALSE);
 		}
 		// Stop PIDs
-		if (!empty($_REQUEST["other_stop_pids"]) || !empty($_REQUEST["stop_pid"])) {
-			$dot->setSettings("stop_pids", $_REQUEST["stop_pid"] .','. $_REQUEST["other_stop_pids"]);
+		if (!empty($vars["other_stop_pids"]) || !empty($vars["stop_pid"])) {
+			$dot->setSettings("stop_pids", $vars["stop_pid"] .','. $vars["other_stop_pids"]);
 			$dot->setSettings("stop_proc", TRUE);
 		} else {
 			$dot->setSettings("stop_proc", FALSE);
 		}
 
-		if (isset($vars['indiance'])) {
+		if ($vars['indiance'] == 'ance') {
 			$dot->setIndiSearchMethod("ance");
 		}
-		if (isset($vars['indisibl'])) {
+		if ($vars['indisibl'] == 'sibl') {
 			$dot->setIndiSearchMethod("sibl");
 		}
-		if (isset($vars['indidesc'])) {
+		if ($vars['indidesc'] == 'desc') {
 			$dot->setIndiSearchMethod("desc");
 		}
-		if (isset($vars['indispou'])) {
+		if ($vars['indispou'] == 'spou') {
 			$dot->setIndiSearchMethod("spou");
 		}
-		if (isset($vars['indicous'])) {
+		if ($vars['indicous'] == 'cous') {
 			$dot->setIndiSearchMethod("cous");
 		}
 		if (isset($vars['ance_level'])) {
@@ -356,7 +359,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
 			$dot->setSettings("mclimit", $_REQUEST["vars"]["mclimit"]);
 		}
 
-		if (isset($vars['marknr'])) {
+		if ($vars['marknr'] == 'marknr') {
 			$dot->setSettings("mark_not_related", TRUE);
 		}
 
@@ -382,45 +385,45 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
 		}
 
 		// Which data to show
-		if (isset($vars['show_by'])) {
+		if ($vars['show_by'] == 'show_by') {
 			$dot->setSettings("show_by", TRUE);
 		}
 		if (isset($vars['bd_type'])) {
 			$dot->setSettings("bd_type", $vars['bd_type']);
 		}
-		if (isset($vars['show_bp'])) {
+		if ($vars['show_bp'] == 'show_bp') {
 			$dot->setSettings("show_bp", TRUE);
 		}
-		if (isset($vars['show_dy'])) {
+		if ($vars['show_dy'] == 'show_dy') {
 			$dot->setSettings("show_dy", TRUE);
 		}
 		if (isset($vars['dd_type'])) {
 			$dot->setSettings("dd_type", $vars['dd_type']);
 		}
-		if (isset($vars['show_dp'])) {
+		if ($vars['show_dp'] == 'show_dp') {
 			$dot->setSettings("show_dp", TRUE);
 		}
-		if (isset($vars['show_my'])) {
+		if ($vars['show_my'] == 'show_my') {
 			$dot->setSettings("show_my", TRUE);
 		}
 		if (isset($vars['md_type'])) {
 			$dot->setSettings("md_type", $vars['md_type']);
 		}
-		if (isset($vars['show_mp'])) {
+		if ($vars['show_mp'] == 'show_mp') {
 			$dot->setSettings("show_mp", TRUE);
 		}
-		if (isset($vars['show_pid'])) {
+		if ($vars['show_pid'] == 'show_pid') {
 			$dot->setSettings("show_pid", TRUE);
 		}
-		if (isset($vars['show_fid'])) {
+		if ($vars['show_fid'] == 'show_fid') {
 			$dot->setSettings("show_fid", TRUE);
 		}
 
-		if (isset($vars['show_url'])) {
+		if ($vars['show_url'] == 'show_url') {
 			$dot->setSettings("show_url", TRUE);
 		}
 
-		if (isset($vars['use_abbr_place'])) {
+		if ($vars['use_abbr_place'] == 'use_abbr_place') {
 			$dot->setSettings("use_abbr_place", TRUE);
 		}
 
@@ -448,7 +451,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
 		// Settings
 		if (!empty($vars['diagtype'])) {
 			$dot->setSettings("diagram_type", $vars['diagtype']);
-			$dot->setSettings("diagram_type_combined_with_photo", !empty($vars['with_photos']));
+			$dot->setSettings("diagram_type_combined_with_photo", $vars['with_photos'] == 'with_photos');
 		}
 		if (!empty($vars['no_fams'])) {
 			$dot->setSettings("no_fams", $vars['no_fams']);
