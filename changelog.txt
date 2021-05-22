@@ -1,9 +1,14 @@
 =====================================================================
 	Change Log
 	GVExport module for phpGedView
-	
-	Contact		: Ferenc Kurucz <korbendallas1976@gmail.com>
 =====================================================================
+Version 2.0.0 (2021-05-21)
+    - New       : Webtrees 2.0 compatibility
+	- New       : Clientside graphviz rendering via viz.js
+	- Changed   : Complete form / JavaScript rewrite for Webtrees compatibility
+	- Changed   : I18n support / translations dropeed
+
+
 Version 0.8.3 (2009-11-24)
 	- New		: Additional settings to control the look of the tree (dpi, ranksep, nodesep)
 	- Fixed		: Combined tree (request by Meliza Amity)
