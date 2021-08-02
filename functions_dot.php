@@ -737,11 +737,6 @@ class Dot {
 			$family = "";
 		}
 
-		// by wooc
-		$func="date_localisation_{$lang_short_cut[$LANGUAGE]}";
-		if (!function_exists($func))
-			$func="DefaultDateLocalisation";
-
 		// --- Data collection ---
 		// If a "dummy" family is set (begins with "F_"), then there is no marriage & family data, so no need for querying PGV...
 		if (substr($fid, 0, 2) == "F_") {
