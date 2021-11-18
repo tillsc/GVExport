@@ -363,6 +363,10 @@ class Dot {
  	 */
 	function getGenderColour($gender, $related = TRUE) {
 		global $GVE_CONFIG;
+		// reset related flag
+		if ($this->settings["mark_not_related"] == FALSE) {
+			$related = TRUE;
+		}
 		// Determine the fill color
 		if ($gender == 'F') {
 			if ($related) {
