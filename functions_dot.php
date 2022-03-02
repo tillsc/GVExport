@@ -627,6 +627,7 @@ class Dot {
 			else
 				$name .= '<BR />' . $addname;//@@ Meliza Amity
 		}
+		$name = str_replace(array('<q class="wt-nickname">','</q>'), array('"','"'), $name); // Show nickname in quotes
 		$name = strip_tags($name);
 
 		//@@ $name = str_replace(array('<span class="starredname">','</span>'), array('_','_'), $name); //@@ replace starredname by <u> and </u>
