@@ -230,7 +230,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
 			//chdir($old_dir); // back to the saved directory
 			if ($return_var !== 0) // check correct output generation
 			{
-				die("Error (return code $return_var) executing command \"$shell_cmd\" in \"".getcwd()."\".<br>Check path and Graphviz functionality!<br><pre>".(join($stdout_output, "\n"))."</pre>"); // new
+				die("Error (return code $return_var) executing command \"$shell_cmd\" in \"".getcwd()."\".<br>Check path and Graphviz functionality!<br><pre>".(join("\n", $stdout_output))."</pre>"); // new
 			}
 		}
 
