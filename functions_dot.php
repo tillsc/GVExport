@@ -36,6 +36,9 @@ use Fisharebest\Webtrees\Individual;
 use Fisharebest\Webtrees\Family;
 use Fisharebest\Webtrees\I18n;
 use League\Flysystem\Util;
+use Fisharebest\Webtrees\Site;
+use Fisharebest\Webtrees\Tree;
+use Fisharebest\Webtrees\Registry;
 
 
 /**
@@ -1503,7 +1506,7 @@ class Dot {
 	 * @param string $pid Individual's GEDCOM id (Ixxx)
 	 */
 	function addPhotoToIndi($pid) {
-		$i = Individual::getInstance($pid, $this->tree);
+		$i = Registry::individualFactory()->make($pid, $this->tree);
 		$m = $i->findHighlightedMediaFile();
 		if (empty($m)) {
 			return null;
@@ -1512,18 +1515,18 @@ class Dot {
 			return $m->downloadUrl('inline');
 		}
 		else if (!$m->isExternal() && $m->fileExists($this->file_system)) {
-			return './'.$this->file_system->getAdapter()->applyPathPrefix('media/'.$m->filename());
+			return './'.Site::getPreference('INDEX_DIRECTORY').$this->tree->getPreference('MEDIA_DIRECTORY').$m->filename();
 		} else {
 			return null;
 		}
 	}
 
 	function getUpdatedFamily($fid) {
-		return Family::getInstance($fid, $this->tree);
+		return Registry::familyFactory()->make($fid, $this->tree);
 	}
 
 	function getUpdatedPerson($pid) {
-		return Individual::getInstance($pid, $this->tree);
+		return Registry::individualFactory()->make($pid, $this->tree);
 	}
 
 	function printDebug($txt, $ind = 0) {

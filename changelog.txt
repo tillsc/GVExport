@@ -1,9 +1,12 @@
 =====================================================================
 	Change Log
-	GVExport module for phpGedView
+	GVExport module for Webtrees
 =====================================================================
+Version 2.0.1 (2022-05-10)
+  - New       : Webtrees 2.1.2 compatibility
+
 Version 2.0.0 (2021-05-21)
-    - New       : Webtrees 2.0 compatibility
+  - New       : Webtrees 2.0 compatibility
 	- New       : Clientside graphviz rendering via viz.js
 	- Changed   : Complete form / JavaScript rewrite for Webtrees compatibility
 	- Changed   : I18n support / translations dropeed
@@ -32,15 +35,15 @@ Version 0.8.0 (2009-02-15)
 Version 0.7.2 (2008-10-23)
 	- Fixed		: Clickable containers (INDI and FAM) - now working again
 	- New		: Family containers could be switched off, so the graph is more compact now (its quite usable for pedigree & descendancy charts)
-	- New		: PostScript output works (sort of), this is needed if the page-breaking mode is used 
+	- New		: PostScript output works (sort of), this is needed if the page-breaking mode is used
 
 Version 0.7.1 (2008-10-19)
 	- Fixed		: Works correctly with 4.1.6 SVN (file naming difference: person_class.php vs class_person.php)
 
 Version 0.7.0 (2008-07-27)
 	- Fixed		: Works correctly with 4.1.5 & 4.1.6 SVN (date handling)
-	- New		: Minor improvements in usability 
-	
+	- New		: Minor improvements in usability
+
 Version 0.6.6 (2008-05-01)
 	- New		: UI settings are saved in cookie (by Till Schulte-Coerne)
 	- New		: Multiple date formats (under development)
@@ -62,7 +65,7 @@ Version 0.6.2 (2008-01-31)
 	- Fixed		: URLs in combined mode
 
 Version 0.6.1 (2008-01-23)
-	- New		: Linked GEDCOMs (only in partial tree mode, not when "Everyone" is selected), URLs are working too for linked GEDCOMs.  
+	- New		: Linked GEDCOMs (only in partial tree mode, not when "Everyone" is selected), URLs are working too for linked GEDCOMs.
 	- Fixed		: INDIs with unknown gender in "combined" mode
 	- Fixed		: INDI id missing in "decorated" mode
 	- Fixed		: FAM id problems in "combined" mode (linked GEDCOMs)
@@ -85,14 +88,14 @@ Version 0.5.3 (2008-01-14)
 	- New		: Customizable text on the chart (in config file)
 	- New		: Full or abbreviated place name (in config file)
 	- New		: Margin size (in config file)
-	- Fixed		: Removing double qoutes (") from names	
+	- Fixed		: Removing double qoutes (") from names
 
 Version 0.5.2 (2007-12-20)
 	- New		: Polish translation (by wooc)
 
 Version 0.5.1a (2007-12-13)
 	- Fixed		: MCLIMIT setting (wasn't functioning at all)
-	
+
 Version 0.5.1 (2007-12-12)
 	- New		: MCLIMIT setting
 
@@ -103,14 +106,14 @@ Version 0.5.0 (2007-12-02)
 	- New		: Last editor's username can be shown (TODO #4)
 
 Version 0.4.9 (2007-11-30)
-	- Fixed		: (Now really fixed) Unvalidated individuals and families are shown (TODO #1) 
+	- Fixed		: (Now really fixed) Unvalidated individuals and families are shown (TODO #1)
 	- New		: Graph direction selectable (Top-to-Bottom or Left-to-Right)
 	- New		: Combined graph mode (husband and wife in a single cell together with marriage info) - works correctly only in partial tree mode
 	- New		: Data shown in the container can be selected
 
 Version 0.4.8 (2007-11-29)
-	- Fixed		: Unvalidated individuals and families are shown (TODO #1) 
-	
+	- Fixed		: Unvalidated individuals and families are shown (TODO #1)
+
 Version 0.4.7 (2007-11-28)
 	- Fixed		: Error handling for GraphViz exec (Pasquale Ceres <pasquale_ceres at yahoo it>)
 	- New		: Graph can be shown in the browser window (Pasquale Ceres <pasquale_ceres at yahoo it>)
@@ -152,10 +155,10 @@ Version 0.3.1 (2007-11-22)
 	- New		: Basic configuration is available in a dedicated config file
 	- Fixed		: Proper use of language files
 	- Changed	: No more JS popups (gvexport_output.php is obsolete now)
-	
+
 Version 0.3 (2007-11-22)
 	- New		: Simple / Decorated (HTML) diagram
-	- New		: Custom colors for diagram 
+	- New		: Custom colors for diagram
 	- Fixed		: PHP bug (Pasquale Ceres <pasquale_ceres at yahoo it>)
 
 Version 0.2 (2007-11-21)
