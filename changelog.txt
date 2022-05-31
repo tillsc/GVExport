@@ -2,7 +2,7 @@
 	Change Log
 	GVExport module for Webtrees
 =====================================================================
-Version 2.0.1 (2022-05-10)
+Version 2.1.0 (2022-05-10)
   - New       : Webtrees 2.1.2 compatibility
 
 Version 2.0.0 (2021-05-21)
