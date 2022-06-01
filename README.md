@@ -50,6 +50,6 @@ Some further but non-exhaustive instructions can be found in [this forum post](h
 Older Versions
 -------
 
-We attempt to keep up with the latest non-prerelease version of webtrees. You can see the latest release [here](https://github.com/fisharebest/webtrees/releases). Older versions are not supported. *However*, as we progress through webtrees versions, we are releasing GVExport versions. These are listed on the [Releases page](https://github.com/fisharebest/webtrees/releases). If you are not using the latest version of webtrees, and the latest release of GVExport isn't working for you, you may want to try an older release.
+We attempt to keep up with the latest stable (non-prerelease) version of webtrees. You can see the latest release [here](https://github.com/fisharebest/webtrees/releases). Older versions are not supported. *However*, as we progress through webtrees versions, we are releasing GVExport versions. These are listed on the [Releases page](https://github.com/fisharebest/webtrees/releases). If you are not using the latest version of webtrees, and the latest release of GVExport isn't working for you, you may want to try an older release.
 
 For versions earlier than 2.0.21 you can try the [source repository](https://github.com/tillsc/GVExport), but note this DOES NOT work for 2.0.22 and later.
