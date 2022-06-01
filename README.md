@@ -18,7 +18,7 @@ Past Authors:
 Webtrees
 --------
 
-[Webtrees](https://webtrees.net/) is an online collaborative genealogy application. This can be hosted on your own server. If you are familiar with Docker, you might like to install Webtrees using [this unofficial docker image](https://hub.docker.com/r/nathanvaughn/webtrees).
+[Webtrees](https://webtrees.net/) is an online collaborative genealogy application. This can be hosted on your own server by following the [Install instructions](https://webtrees.net/install/). If you are familiar with Docker, you might like to install Webtrees using [this unofficial docker image](https://hub.docker.com/r/nathanvaughn/webtrees).
 
 Installation
 ------------
@@ -46,3 +46,10 @@ GVExport Module
 Once installed, go to *Charts -> GVExport* to see the options.
 
 Some further but non-exhaustive instructions can be found in [this forum post](https://www.webtrees.net/index.php/en/forum/4-customising/35801-display-complex-all-in-on-tree-with-gvexport?start=0) from the previous version.
+
+Older Versions
+-------
+
+We attempt to keep up with the latest non-prerelease version of webtrees. You can see the latest release [here](https://github.com/fisharebest/webtrees/releases). Older versions are not supported. *However*, as we progress through webtrees versions, we are releasing GVExport versions. These are listed on the [Releases page](https://github.com/fisharebest/webtrees/releases). If you are not using the latest version of webtrees, and the latest release of GVExport isn't working for you, you may want to try an older release.
+
+For versions earlier than 2.0.21 you can try the [source repository](https://github.com/tillsc/GVExport), but note this DOES NOT work for 2.0.22 and later.
