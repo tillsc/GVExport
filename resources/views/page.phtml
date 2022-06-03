@@ -45,21 +45,28 @@ use Fisharebest\Webtrees\I18N;
         transform-origin: left bottom;
         transform: rotate(90deg);
     }
-
+    
+    .btn-hover {
+        float: right;
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        z-index: 1100;
+    }
 </style>
 
 
 <form action="<?= $module->chartUrl($individual) ?>" method="post" class="wt-page-options sidebar d-print-none" id="gvexport">
+
+    <div class="pull-right btn-hover">
+        <a href="#" class="hide-form btn btn-secondary">X</a>
+    </div>
+    
     <div class="sidebar__formfields col">
         <?= csrf_field() ?>
-
         <div class="d-flex">
-         <h3>Diagram preferences</h3>
-         <div class="pull-right" style="margin-left: auto;">
-        <a href="#" class="hide-form btn btn-secondary">X</a>
+            <h3>Diagram preferences</h3>
         </div>
-       </div>
-
         <script type="text/javascript">
             var appendPidTo = function(sourceId, targetId) {
                 var ids = [];
