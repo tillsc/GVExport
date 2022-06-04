@@ -121,6 +121,7 @@ $GVE_CONFIG["custom"]["death_text"] = "+";	// Text shown on chart before the dea
 
 // Settings
 $GVE_CONFIG["settings"]["use_abbr_place"] = FALSE;
+$GVE_CONFIG["settings"]["download"] = TRUE;
 
 // Deafult max levels of ancestors
 $GVE_CONFIG["settings"]["ance_level"] = 5;

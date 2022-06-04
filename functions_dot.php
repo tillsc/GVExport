@@ -103,6 +103,7 @@ class Dot {
 		$this->settings["no_fams"] = FALSE;
 
 		$this->settings["use_abbr_place"] = $GVE_CONFIG["settings"]["use_abbr_place"];
+		$this->settings["download"] = $GVE_CONFIG["settings"]["download"];
 		$this->settings["debug"] = $GVE_CONFIG["debug"];
 
 		$this->settings["ance_level"] = $GVE_CONFIG["settings"]["ance_level"];
