@@ -3,6 +3,11 @@
 	GVExport module for Webtrees
 =====================================================================
 
+Version 2.1.2 (2022-06-04):
+  - Changed     : X in corner of options now stays when scrolling for easier access
+  - Fixed       : Media path issue could mean user could receive error and not be able to use GVExport, this is now resolved
+  - Fixed       : Option to download is now remembered after page load like other options
+
 Version 2.1.1 (2022-06-01):
   - Fixed       : Combined mode errors resolved, issues with partners resolved
   - Fixed       : "Mark not related" option can now be disabled
@@ -16,7 +21,6 @@ Version 2.0.0 (2021-05-21)
 	- New       : Clientside graphviz rendering via viz.js
 	- Changed   : Complete form / JavaScript rewrite for Webtrees compatibility
 	- Changed   : I18n support / translations dropeed
-
 
 Version 0.8.3 (2009-11-24)
 	- New		: Additional settings to control the look of the tree (dpi, ranksep, nodesep)
