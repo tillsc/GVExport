@@ -122,7 +122,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
 
 		$individual = $this->getIndividual($tree, $request->getQueryParams()['xref']);
 
-		$userDefaultVars = [ //Defaults (this cloud be defined in the config?)
+		$userDefaultVars = [ //Defaults (this could be defined in the config?)
 			"otype" => "svg",
 			"grdir" => $GVE_CONFIG["default_direction"],
 			"mclimit" => $GVE_CONFIG["default_mclimit"],
@@ -157,9 +157,10 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
 			"dpi" => $GVE_CONFIG["settings"]["dpi"],
 			"ranksep" => $GVE_CONFIG["settings"]["ranksep"],
 			"nodesep" => $GVE_CONFIG["settings"]["nodesep"],
-			"other_pids" => '',
-			"stop_pid" => '',
-			"other_stop_pids" => ''
+			"other_pids" => "",
+			"stop_pid" => "",
+			"other_stop_pids" => "",
+            "download" => TRUE
 		];
 		if (!isset($_REQUEST['reset']) and isset($_COOKIE["GVEUserDefaults"]) and $_COOKIE["GVEUserDefaults"] != "") {
 			foreach (explode("|", $_COOKIE["GVEUserDefaults"]) as $s) {
@@ -182,7 +183,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
 		return $this->viewResponse($this->name() . '::page', [
 			'tree' => $tree,
 			'individual' => $individual,
-			'disposition' => true,
+			'disposition' => false,
 			'title' => 'GVExport',
 			'vars' => $userDefaultVars,
 			'otypes' => $otypes,

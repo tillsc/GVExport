@@ -395,9 +395,10 @@ use Fisharebest\Webtrees\I18N;
         </div>
 
         <div class="row form-group">
-            <label class="col-sm-4 col-form-label wt-page-options-label" for="disposition">Generate a file for download</label>
+            <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[download]">Generate a file for download</label>
             <div class="col-sm-8 wt-page-options-value">
-                <input type="checkbox" name="disposition" id="disposition" value="1" <?= $disposition ? 'checked' : '' ?>>
+                <input type="hidden" name="vars[download]" value="no">
+                <input type="checkbox" name="vars[download]" id="vars[download]" value="1" <?= $vars["download"] == 1 ? 'checked' : ''  ?>>
             </div>
         </div>
 
