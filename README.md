@@ -61,6 +61,7 @@ If you'd like to contribute to GVExport, great! You can contribute by:
 - Creating issues if you find bugs
 - Contributing code - check out the Issues for things that need attention. If you have changes you want to make not listed in an issue, please create one, then you can link your pull request.
 - Testing - it's all manual currently, please create issues for any bugs you find.
+- Documentation - [our Wiki](https://github.com/Neriderc/GVExport/wiki) is in need of attention.
 
 This repository
 ---------------
