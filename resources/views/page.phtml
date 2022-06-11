@@ -445,7 +445,7 @@ use Fisharebest\Webtrees\I18N;
 
     <div class="sidebar__buttons">
         <button type="submit" class="btn btn-primary update-browser-rendering">Update</button>
-        <button type="submit" class="btn btn-secondary"><?= /* I18N: A button label. */ I18N::translate('Render serverside') ?></button>
+        <button type="submit" class="btn btn-secondary" name="render"><?= /* I18N: A button label. */ I18N::translate('Render serverside') ?></button>
         <a href="<?= $module->chartUrl($individual, ['reset' => '1']) ?>" class="btn btn-outline-secondary"><?= /* I18N: A button label. */ I18N::translate('reset') ?></a>
     </div>
 </form>
@@ -510,6 +510,7 @@ use Fisharebest\Webtrees\I18N;
             });
         }).then(function(element) {
             console.log("Appending SVG", element);
+            element.innerHTML = element.innerHTML.replaceAll("%26","&amp;"); //half of bug fix for photos not showing in browser - we change & to %26 in functions_dot.php
             rendering.innerHTML = "";
             rendering.appendChild(element);
             var fullZoom = Math.min(2, rendering.getBoundingClientRect().width / element.getBBox().width);
