@@ -1516,7 +1516,12 @@ class Dot {
 			return $m->downloadUrl('inline');
 		}
 		else if (!$m->isExternal() && $m->fileExists($this->file_system)) {
-			return Site::getPreference('INDEX_DIRECTORY').$this->tree->getPreference('MEDIA_DIRECTORY').$m->filename();
+			// If we are rendering in the browser, provide the URL, otherwise provide the server side file locartion
+			if (isset($_REQUEST["render"])) {
+				return Site::getPreference('INDEX_DIRECTORY').$this->tree->getPreference('MEDIA_DIRECTORY').$m->filename();
+			} else {
+				return str_replace("&","%26",$m->imageUrl(200,200,"contain"));
+			}
 		} else {
 			return null;
 		}
