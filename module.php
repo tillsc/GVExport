@@ -234,8 +234,8 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
 				die("Error (return code $return_var) executing command \"$shell_cmd\" in \"".getcwd()."\".<br>Check path and Graphviz functionality!<br><pre>".(join("\n", $stdout_output))."</pre>"); // new
 			}
 		}
-
-		if (!empty($_REQUEST['disposition'])) {
+        $vars = $_REQUEST['vars'];
+		if ($vars["download"] == 1) {
 			$disposition = "attachment; filename=" . $basename;
 		} else {
 			$disposition = 'inline';
