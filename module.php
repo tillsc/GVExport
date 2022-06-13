@@ -39,6 +39,7 @@ use Fig\Http\Message\RequestMethodInterface;
 use Fisharebest\Webtrees\Auth;
 use Fisharebest\Webtrees\Registry;
 use Fisharebest\Webtrees\I18N;
+use Fisharebest\Localization\Translation;
 use Fisharebest\Webtrees\Individual;
 use Fisharebest\Webtrees\Module\AbstractModule;
 use Fisharebest\Webtrees\Module\ModuleCustomInterface;
@@ -471,6 +472,25 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
 		$out .= $dot->getDOTDump();
 		return $out;
 	}
+
+    /**
+     * Additional/updated translations.
+     *
+     * @param string $language
+     *
+     * @return string[]
+     */
+
+    public function customTranslations(string $language): array
+    {
+        $lang_dir   = $this->resourcesFolder() . 'lang/';
+        $file       = $lang_dir . $language . '.mo';
+        if (file_exists($file)) {
+            return (new Translation($file))->asArray();
+        } else {
+            return [];
+        }
+    }
 }
 
 return new GVExport();

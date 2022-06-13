@@ -1,0 +1,189 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: POEditor.com\n"
+"Project-Id-Version: GVExport\n"
+"Language: de\n"
+
+#: 
+msgid "Update"
+msgstr ""
+
+#: 
+msgid "Render serverside"
+msgstr ""
+
+#: 
+msgid "Reset"
+msgstr "Einstellungen zur&uuml;cksetzen"
+
+#: 
+msgid "Diagram preferences"
+msgstr "Diagramm Eigenschaften"
+
+#: 
+msgid "Appearance"
+msgstr "Gestaltung des Diagramms"
+
+#: 
+msgid "Output Settings"
+msgstr "Ausgabe Einstellungen"
+
+#: 
+msgid "Include anyone related to"
+msgstr "Jeder, der mit folgender Person verwandt ist"
+
+#: 
+msgid "Stop processing on"
+msgstr ""
+
+#: 
+msgid "Include Ancestors"
+msgstr "Include ancestors"
+
+#: 
+msgid "Include"
+msgstr "Einbeziehen"
+
+#: 
+msgid "Siblings"
+msgstr "Geschwister"
+
+#: 
+msgid "Cousins"
+msgstr "Vettern und Cousinen"
+
+#: 
+msgid "Spouses"
+msgstr "Ehegatten"
+
+#: 
+msgid "Include Descendants"
+msgstr "Nachfahren einbeziehen"
+
+#: 
+msgid "Max Levels"
+msgstr "Max Ebenen bzw. Generationen"
+
+#: 
+msgid "Mark not blood-related people with different color"
+msgstr "Markierung von nicht blutsverwandten Personen mit einer anderen Farbe"
+
+#: 
+msgid "Add URL to individuals and families"
+msgstr "URL hinzuf&uuml;gen zu Personen und Familien"
+
+#: 
+msgid "Use abbreviated placenames"
+msgstr "Benutzung abgek&uuml;rzter Ortsnamen"
+
+#: 
+msgid "Show Individual PID"
+msgstr ""
+
+#: 
+msgid "Show Birth Date"
+msgstr ""
+
+#: 
+msgid "Show Birth Place"
+msgstr ""
+
+#: 
+msgid "Show Death Date"
+msgstr ""
+
+#: 
+msgid "Full Date"
+msgstr ""
+
+#: 
+msgid "Year"
+msgstr ""
+
+#: 
+msgid "Show Death Place"
+msgstr ""
+
+#: 
+msgid "Show Family ID"
+msgstr ""
+
+#: 
+msgid "Show Marriage Date"
+msgstr ""
+
+#: 
+msgid "Show Marriage Place"
+msgstr ""
+
+#: 
+msgid "Graph Direction"
+msgstr ""
+
+#: 
+msgid "Diagram Type"
+msgstr "Diagramm-Typ"
+
+#: 
+msgid "Simple"
+msgstr "Einfach"
+
+#: 
+msgid "Decorated"
+msgstr "Formatierter Text"
+
+#: 
+msgid "Combined"
+msgstr ""
+
+#: 
+msgid "Add photos"
+msgstr ""
+
+#: 
+msgid "Only Decorated or Combined"
+msgstr ""
+
+#: 
+msgid "Output File Type"
+msgstr "Ausgabedatei-Typ"
+
+#: 
+msgid "Generate a file for download"
+msgstr ""
+
+#: 
+msgid "Choose DOT if you don't have GraphViz installed on server."
+msgstr "W&auml;hlen sie DOT aus, wenn GraphViz nicht auf Ihrem Server installiert ist."
+
+#: 
+msgid "Number of iterations (MCLIMIT)"
+msgstr ""
+
+#: 
+msgid "helps to reduce the crossings on the graph. This can be really slow (up to 10..15x compared to the 20 setting)"
+msgstr ""
+
+#: 
+msgid "DPI"
+msgstr ""
+
+#: 
+msgid "ranksep"
+msgstr ""
+
+#: 
+msgid "nodesep"
+msgstr ""
+
+#: 
+msgid "Show Selection"
+msgstr ""
+
+#: 
+msgid "SVG only"
+msgstr ""
+
