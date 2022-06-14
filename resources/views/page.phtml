@@ -181,7 +181,7 @@ use Fisharebest\Webtrees\I18N;
             <div class="col-sm-8 wt-page-options-value">
                 <input type="hidden" name="vars[show_url]" value="no">
                 <input type="checkbox" name="vars[show_url]" id="vars[show_url]" value="show_url" <?= $vars["show_url"] == "show_url" ? 'checked' : '' ?>>
-                <span class="text-muted">(<?= I18N::translate('SVG only') ?></span>
+                <span class="text-muted">(<?= I18N::translate('SVG only') ?>)</span>
             </div>
         </div>
 
@@ -300,7 +300,8 @@ use Fisharebest\Webtrees\I18N;
         <div class="row form-group">
             <label class=" col-sm-4 col-form-label wt-page-options-label" for="vars[grdir]"><?= I18N::translate('Graph Direction') ?></label>
             <div class="col-sm-8 wt-page-options-value">
-                <?= view('components/select', ['name' => 'vars[grdir]', 'selected' => $vars['grdir'], 'options' => $gve_config["directions"]]) ?>
+                <?  updateTranslations($gve_config["directions"]);
+                    echo view('components/select', ['name' => 'vars[grdir]', 'selected' => $vars['grdir'], 'options' => $gve_config["directions"]]) ?>
             </div>
         </div>
 
@@ -390,7 +391,7 @@ use Fisharebest\Webtrees\I18N;
             <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[otype]"><?= I18N::translate('Output File Type') ?></label>
             <div class="col-sm-8 wt-page-options-value">
                 <?= view('components/select', ['name' => 'vars[otype]', 'selected' => $vars['otype'], 'options' => $otypes]) ?>
-                <small id="emailHelp" class="form-text text-muted"><?= I18N::translate("Choose DOT if you don't have GraphViz installed on server.") ?>'</small>
+                <small id="emailHelp" class="form-text text-muted"><?= I18N::translate("Choose DOT if you don't have GraphViz installed on server.") ?></small>
             </div>
         </div>
 
@@ -419,11 +420,11 @@ use Fisharebest\Webtrees\I18N;
                         <input type="text" class="form-control" size="10" name="vars[dpi]" id="vars[dpi]" value="<?= $vars["dpi"] ?>">
                     </div>
                     <div class="col-auto row">
-                        <label for="vars[ranksep]" class="col-sm-6"><?= I18N::translate('ranksep') ?>:</label>
+                        <label for="vars[ranksep]" class="col-sm-6"><?= I18N::translate('Space between generations') ?>:</label>
                         <input type="text" class="form-control col-sm-6" size="10" name="vars[ranksep]" id="vars[ranksep]" value="<?= $vars["ranksep"] ?>">
                     </div>
                     <div class="col-auto row">
-                        <label for="vars[nodesep]" class="col-sm-6"><?= I18N::translate('nodesep') ?>':</label>
+                        <label for="vars[nodesep]" class="col-sm-6"><?= I18N::translate('Space between individuals on the same level') ?>:</label>
                         <input type="text" class="form-control col-sm-6" size="10" name="vars[nodesep]" id="vars[nodesep]" value="<?= $vars["nodesep"] ?>">
                     </div>
                 </div>
@@ -521,7 +522,7 @@ use Fisharebest\Webtrees\I18N;
             });
             return element;
         }).catch(function(error) {
-            rendering.innerHTML = '<div class="alert alert-danger" role="alert">Error running GVExport in Browser mode: <br>' + error + '</div>';
+            rendering.innerHTML = '<div class="alert alert-danger" role="alert"><?= I18N::translate('Error running GVExport in Browser mode') ?>:<br>' + error + '</div>';
             if (lastDotStr) {
                 rendering.innerHTML = rendering.innerHTML + '<h4>DOT contents</h4><pre id="dot-text"></pre>';
                 document.getElementById('dot-text').appendChild(document.createTextNode(lastDotStr));

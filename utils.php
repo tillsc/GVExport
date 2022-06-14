@@ -1,4 +1,5 @@
 <?php
+use Fisharebest\Webtrees\I18N;
 
 /**
 	* Returns the temporary dir
@@ -66,4 +67,17 @@ function is__writable($path) {
     return true;
 }
 
+
+/**
+ * This function updates the configured names in the provided array to translated versions.
+ * It is used for translating options for dropdown boxes in the module.
+ *
+ * @param $array
+ * @return void
+ */
+function updateTranslations($array){
+	foreach ($array as $key => $value) {
+		$array[$key] = I18N::translate($value);
+	}
+}
 ?>
