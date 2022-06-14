@@ -474,7 +474,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
 	}
 
     /**
-     * Additional/updated translations.
+     * Additional translations for module.
      *
      * @param string $language
      *

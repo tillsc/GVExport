@@ -5,205 +5,207 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: POEditor.com\n"
 "Project-Id-Version: GVExport\n"
-"Language: de\n"
+"Language: en-gb\n"
 
 #: 
 msgid "Update"
-msgstr "Aktualisieren"
+msgstr "Update"
 
 #: 
 msgid "Render serverside"
-msgstr "Serverseitig rendern"
+msgstr "Render serverside"
 
 #: 
 msgid "Reset"
-msgstr "Einstellungen zur&uuml;cksetzen"
+msgstr "Reset"
 
 #: 
 msgid "Diagram preferences"
-msgstr "Eigenschaften des Diagramms"
+msgstr "Diagram preferences"
 
 #: 
 msgid "Appearance"
-msgstr "Gestaltung des Diagramms"
+msgstr "Appearance"
 
 #: 
 msgid "Output Settings"
-msgstr "Ausgabe-Einstellungen"
+msgstr "Output Settings"
 
 #: 
 msgid "Include anyone related to"
-msgstr "Alle, die verwandt sind"
+msgstr "Include anyone related to"
 
 #: 
 msgid "Stop processing on"
-msgstr "Beende Bearbeitung bei"
+msgstr "Stop processing on"
 
 #: 
 msgid "Include Ancestors"
-msgstr "Vorfahren einbeziehen"
+msgstr "Include Ancestors"
 
 #: 
 msgid "Include"
-msgstr "Einbeziehen"
+msgstr "Include"
 
 #: 
 msgid "Siblings"
-msgstr "Geschwister"
+msgstr "Siblings"
 
 #: 
 msgid "Cousins"
-msgstr "Cousins und Cousinen"
+msgstr "Cousins"
 
 #: 
 msgid "Spouses"
-msgstr "Partner"
+msgstr "Spouses"
 
 #: 
 msgid "Include Descendants"
-msgstr "Nachkommen einbeziehen"
+msgstr "Include Descentdants"
 
 #: 
 msgid "Max Levels"
-msgstr "Maximale Generationen"
+msgstr "Max Levels"
 
 #: 
 msgid "Mark not blood-related people with different color"
-msgstr "Markierung von nicht blutsverwandten Personen in einer anderen Farbe"
+msgstr "Mark not blood-related people with different colour"
 
 #: 
 msgid "Add URL to individuals and families"
-msgstr "URL hinzuf&uuml;gen zu Personen und Familien"
+msgstr "Add URL to individuals and families"
 
 #: 
 msgid "Use abbreviated placenames"
-msgstr "Benutzung abgek&uuml;rzter Ortsnamen"
+msgstr "Use abbreviated placenames"
 
 #: 
 msgid "Show Individual PID"
-msgstr "Zeige XREF einer Person"
+msgstr "Show Individual PID"
 
 #: 
 msgid "Show Birth Date"
-msgstr "Zeige Geburtsdatum"
+msgstr "Show Birth Date"
 
 #: 
 msgid "Show Birth Place"
-msgstr "Zeige Geburtsort"
+msgstr "Show Birth Place"
 
 #: 
 msgid "Show Death Date"
-msgstr "Zeige Sterbedatum"
+msgstr "Show Death Date"
 
 #: 
 msgid "Full Date"
-msgstr "Vollständiges Datum"
+msgstr "Full Date"
 
 #: 
 msgid "Year"
-msgstr "Jahr"
+msgstr "Year"
 
 #: 
 msgid "Show Death Place"
-msgstr "Zeige Sterbeort"
+msgstr "Show Death Place"
 
 #: 
 msgid "Show Family ID"
-msgstr "Zeige XREF einer Familie"
+msgstr "Show Family ID"
 
 #: 
 msgid "Show Marriage Date"
-msgstr "Zeige Heiratsdatum"
+msgstr "Show Marriage Date"
 
 #: 
 msgid "Show Marriage Place"
-msgstr "Zeige Heiratsort"
+msgstr "Show Marriage Place"
 
 #: 
 msgid "Graph Direction"
-msgstr "Diagrammrichtung"
+msgstr "Graph Direction"
 
 #: 
 msgid "Diagram Type"
-msgstr "Diagrammtyp"
+msgstr "Diagram Type"
 
 #: 
 msgid "Simple"
-msgstr "Einfach"
+msgstr "Simple"
 
 #: 
 msgid "Decorated"
-msgstr "Dekoriert"
+msgstr "Decorated"
 
 #: 
 msgid "Combined"
-msgstr "Kombiniert"
+msgstr "Combined"
 
 #: 
 msgid "Add photos"
-msgstr "Fotos hinzufügen"
+msgstr "Add photos"
 
 #: 
 msgid "Only Decorated or Combined"
-msgstr "nur bei \"dekoriert\" oder \"kombiniert\""
+msgstr "Only Decorated or Combined"
 
 #: 
 msgid "Output File Type"
-msgstr "Ausgabedatei-Typ"
+msgstr "Output File Type"
 
 #: 
 msgid "Generate a file for download"
-msgstr "Erzeuge eine Datei zum Herunterladen"
+msgstr "Generate a file for download"
 
 #: 
 msgid "Choose DOT if you don't have GraphViz installed on server."
-msgstr "W&auml;hlen sie DOT aus, wenn GraphViz nicht auf Ihrem Server installiert ist."
+msgstr "Choose DOT if you don't have GraphViz installed on server."
 
 #: 
 msgid "Number of iterations (MCLIMIT)"
-msgstr "Anzahl der Iterationen"
+msgstr "Number of iterations (MCLIMIT)"
 
 #: 
 msgid "helps to reduce the crossings on the graph. This can be really slow (up to 10..15x compared to the 20 setting)"
-msgstr "Hilfreich um Überkreuzungen im Diagramm zu vermeiden (kann sehr langsam sein; im Vergleich zum Wert 20 um den Faktor 10 bis 15)"
+msgstr "\n"
+"Helps to reduce the crossings on the graph. This can be really slow (up to 10-15x compared to the 20 setting)\n"
+""
 
 #: 
 msgid "DPI"
-msgstr "DPI (Zeichen pro Zoll)"
+msgstr "DPI"
 
 #: 
 msgid "Show Selection"
-msgstr "Zeige Auswahl"
+msgstr "Show Selection"
 
 #: 
 msgid "SVG only"
-msgstr "nur SVG"
+msgstr "SVG only"
 
 #: 
 msgid "Top-to-Bottom"
-msgstr "von oben nach unten"
+msgstr "Top-to-Bottom"
 
 #: 
 msgid "Left-to-Right"
-msgstr "von links nach rechts"
+msgstr "Left-to-Right"
 
 #: 
 msgid "Space between generations"
-msgstr "Abstand zwischen den Generationen"
+msgstr "Space between generations"
 
 #: 
 msgid "Space between individuals on the same level"
-msgstr "Abstand zwischen den Personen auf der selben Ebene"
+msgstr "Space between individuals on the same level"
 
 #: 
 msgid "Error running GVExport in Browser mode"
-msgstr "Fehler bei der Ausführung von GVExport im Browser"
+msgstr "Error running GVExport in Browser mode"
 
 #: 
 msgid "Preview"
-msgstr "Vorschau"
+msgstr "Preview"
 
 #: 
 msgid "Download"
-msgstr "Herunterladen"
+msgstr "Download"
 

@@ -5,7 +5,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: POEditor.com\n"
 "Project-Id-Version: GVExport\n"
-"Language: en\n"
+"Language: en-us\n"
 
 #: 
 msgid "Update"
@@ -172,18 +172,38 @@ msgid "DPI"
 msgstr "DPI"
 
 #: 
-msgid "ranksep"
-msgstr "Space between generations"
-
-#: 
-msgid "nodesep"
-msgstr "Space between individuals on the same level"
-
-#: 
 msgid "Show Selection"
 msgstr "Show Selection"
 
 #: 
 msgid "SVG only"
 msgstr "SVG only"
+
+#: 
+msgid "Top-to-Bottom"
+msgstr "Top-to-Bottom"
+
+#: 
+msgid "Left-to-Right"
+msgstr "Left-to-Right"
+
+#: 
+msgid "Space between generations"
+msgstr "Space between generations"
+
+#: 
+msgid "Space between individuals on the same level"
+msgstr "Space between individuals on the same level"
+
+#: 
+msgid "Error running GVExport in Browser mode"
+msgstr "Error running GVExport in Browser mode"
+
+#: 
+msgid "Preview"
+msgstr "Preview"
+
+#: 
+msgid "Download"
+msgstr "Download"
 
