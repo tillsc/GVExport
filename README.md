@@ -51,7 +51,7 @@ If you'd like to contribute to GVExport, great! You can contribute by:
 - Contributing code - check out the Issues for things that need attention. If you have changes you want to make not listed in an issue, please create one, then you can link your pull request.
 - Testing - it's all manual currently, please create issues for any bugs you find.
 - Documentation - [our Wiki](https://github.com/Neriderc/GVExport/wiki) is in need of attention.
-- Translating - you can translate into a language you are fluent in by joining the [PO Editor project](https://poeditor.com/join/project/YqPRBXZnlf). Discussion on translating can be done in [this issue](https://github.com/Neriderc/GVExport/issues/21).
+- Translating - you can translate into a language you are fluent in by joining the [PO Editor project](https://poeditor.com/join/project/YqPRBXZnlf). Discussion on translating can be done by creating an issue.
 
 This repository
 ---------------
