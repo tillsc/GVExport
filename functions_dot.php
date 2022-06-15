@@ -32,9 +32,12 @@ namespace vendor\WebtreesModules\gvexport;
 
 // Load the config file
 require_once(dirname(__FILE__)."/config.php");
+
+use Fisharebest\Webtrees\GedcomRecord;
 use Fisharebest\Webtrees\Individual;
 use Fisharebest\Webtrees\Family;
 use Fisharebest\Webtrees\I18n;
+use Fisharebest\Webtrees\Session;
 use League\Flysystem\Util;
 use Fisharebest\Webtrees\Site;
 use Fisharebest\Webtrees\Tree;
@@ -208,12 +211,94 @@ class Dot {
 					$this->addIndiToList(trim($indis[$i]), $this->indi_search_method["ance"], $this->indi_search_method["desc"], $this->indi_search_method["spou"], $this->indi_search_method["sibl"], TRUE, 0, $this->settings["ance_level"], $this->settings["desc_level"]);
 				}
 			}
+	}
 
+	/**
+	 * read INDI and FAM from the clippings cart and fill the arrays "individuals" and "families"
+	 *
+	 * tbd: add personal photo to individuals
+	 * tbd: support for "combined" mode
+	 */
+	function createIndiListFromClippingsCart () {
+		$records = $this->getRecordsInCart($this->tree);
+		foreach ($records as $record){
+			if ($record instanceof Individual) {
+				$pid = $record->xref();
+				if(!isset($this->individuals[$pid])) {
+					$this->individuals[$pid] = array();
+				}
+				$this->individuals[$pid]['pid'] = $pid;
+				$this->individuals[$pid]['rel'] = true;
+			} elseif ($record instanceof Family) {
+				$fid = $record->xref();
+				if(!isset($this->families[$fid])) {
+					$this->families[$fid] = array();
+				}
+				$this->families[$fid]["fid"] = $fid;
+			}
+		}
+	}
+
+	/**
+	 * @param Tree $tree
+	 *
+	 * @return bool
+	 */
+	private function isCartEmpty(Tree $tree): bool
+	{
+		$cart     = Session::get('cart', []);
+		$contents = $cart[$tree->name()] ?? [];
+
+		return $contents === [];
+	}
+
+	/**
+	 * Get the Xrefs in the clippings cart.
+	 *
+	 * @param Tree $tree
+	 *
+	 * @return array
+	 */
+	private function getXrefsInCart(Tree $tree): array
+	{
+		$cart = Session::get('cart', []);
+		$xrefs = array_keys($cart[$tree->name()] ?? []);
+		$xrefs = array_map('strval', $xrefs);           // PHP converts numeric keys to integers.
+		return $xrefs;
+	}
+
+	/**
+	 * Get the records in the clippings cart.
+	 *
+	 * @param Tree $tree
+	 *
+	 * @return array
+	 */
+	private function getRecordsInCart(Tree $tree): array
+	{
+		$xrefs = $this->getXrefsInCart($tree);
+		$records = array_map(static function (string $xref) use ($tree): ?GedcomRecord {
+			return Registry::gedcomRecordFactory()->make($xref, $tree);
+		}, $xrefs);
+
+		// some records may have been deleted after they were added to the cart, remove them
+		$records = array_filter($records);
+
+		// group and sort the records
+		uasort($records, static function (GedcomRecord $x, GedcomRecord $y): int {
+			return $x->tag() <=> $y->tag() ?: GedcomRecord::nameComparator()($x, $y);
+		});
+
+		return $records;
 	}
 
 	function createDOTDump() {
 		// Create the individuals list
-		$this->createIndiList();
+		if ($this->isCartEmpty($this->tree)) {
+			$this->createIndiList();
+		} else {
+			$this->createIndiListFromClippingsCart();
+		}
 
 		$out = "";
 		$out .= $this->printDOTHeader();
