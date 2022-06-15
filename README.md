@@ -5,7 +5,7 @@ This is a repository for a webtrees module known as gvexport. GVExport's goal is
 
 One of the display options renders output like this:
 
-![GVExport output]("https://github.com/Neriderc/GVExport/blob/5c859ea1070fa95efe0e49d8a7815972d464790f/gvexport.jpg")
+![GVExport output]("https://github.com/Neriderc/GVExport/raw/89203e4d3a728a8ec04c6558b15a9e650c54c802/gvexport.jpg")
 
 Webtrees
 --------
