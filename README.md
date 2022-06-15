@@ -5,7 +5,7 @@ This is a repository for a webtrees module known as gvexport. GVExport's goal is
 
 One of the display options renders output like this:
 
- <img height="550" src="https://raw.githubusercontent.com/Neriderc/GVExport/master/gvexport.jpg" />
+ <img src="https://raw.githubusercontent.com/Neriderc/GVExport/master/gvexport.jpg" />
 
 Webtrees
 --------
