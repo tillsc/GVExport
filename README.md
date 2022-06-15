@@ -3,6 +3,10 @@ GVExport
 
 This is a repository for a webtrees module known as gvexport. GVExport's goal is to produce an "all in one tree" of every person in a family tree and their relationships. It uses GraphViz to generate a tree, and if the GraphViz software is installed on the server it can produce output in multiple file formats such as JPG, SVG, PDF, and others.
 
+One of the display options renders output like this:
+
+![GVExport output](gvexport.jpg")
+
 Webtrees
 --------
 
@@ -28,11 +32,11 @@ Some further but non-exhaustive instructions can be found in [this forum post](h
 Help and support
 ----------------
 
-If you need help with GVExport, please create an issue on GitHub.
+If you need help with GVExport, please [create an issue](https://github.com/Neriderc/GVExport/issues) on GitHub.
 
-If you find a bug or something isn't working, please create an issue.
+If you find a bug or something isn't working, please [create an issue](https://github.com/Neriderc/GVExport/issues).
 
-If you want to request a new feature, please create an issue.
+If you want to request a new feature, please [create an issue](https://github.com/Neriderc/GVExport/issues).
 
 Older Versions
 --------------
@@ -49,7 +53,7 @@ If you'd like to contribute to GVExport, great! You can contribute by:
 - Creating issues for any new ideas you have
 - Creating issues if you find bugs
 - Contributing code - check out the Issues for things that need attention. If you have changes you want to make not listed in an issue, please create one, then you can link your pull request.
-- Testing - it's all manual currently, please create issues for any bugs you find.
+- Testing - it's all manual currently, please [create an issue](https://github.com/Neriderc/GVExport/issues) for any bugs you find.
 - Documentation - [our Wiki](https://github.com/Neriderc/GVExport/wiki) is in need of attention.
 - Translating - you can translate into a language you are fluent in by joining the [PO Editor project](https://poeditor.com/join/project/YqPRBXZnlf). Discussion on translating can be done by creating an issue.
 
