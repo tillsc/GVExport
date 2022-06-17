@@ -334,6 +334,41 @@ use Fisharebest\Webtrees\I18N;
                 <span class="text-muted">(<?= I18N::translate('Only Decorated or Combined') ?>)</span>
             </div>
         </div>
+
+        <div class="row form-group">
+            <label class=" col-sm-4 col-form-label wt-page-options-label" for="vars[grdir]"><?= I18N::translate('Number of iterations (MCLIMIT)') ?></label>
+            <div class="col-sm-8 wt-page-options-value">
+                <?= view('components/select', ['name' => 'vars[mclimit]', 'selected' => $vars['mclimit'], 'options' => $gve_config["mclimits"]]) ?>
+                <small class="form-text text-muted"><?= I18N::translate('helps to reduce the crossings on the graph. This can be really slow (up to 10..15x compared to the 20 setting)') ?></small>
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <label class=" col-sm-4 col-form-label wt-page-options-label" for="vars[dpi]"><?= I18N::translate('DPI') ?></label>
+            <div class="col-sm-8 wt-page-options-value">
+                <div class="row">
+                    <div class="col-auto">
+                        <input type="text" class="form-control" size="10" name="vars[dpi]" id="vars[dpi]" value="<?= $vars["dpi"] ?>">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <label class=" col-sm-4 col-form-label wt-page-options-label" for="vars[dpi]"><?= I18N::translate('Space') ?></label>
+            <div class="col-sm-8 wt-page-options-value">
+                <div class="row">
+                    <div class="col-auto row">
+                        <label for="vars[ranksep]"><?= I18N::translate('Between generations') ?>:</label>
+                        <input type="text" class="form-control col-sm-6" size="10" name="vars[ranksep]" id="vars[ranksep]" value="<?= $vars["ranksep"] ?>">
+                    </div>
+                    <div class="col-auto row">
+                        <label for="vars[nodesep]"><?= I18N::translate('Between individuals on the same level') ?>:</label>
+                        <input type="text" class="form-control col-sm-6" size="10" name="vars[nodesep]" id="vars[nodesep]" value="<?= $vars["nodesep"] ?>">
+                    </div>
+                </div>
+            </div>
+        </div>
         <!--
 		<input type=" checkbox" name="vars[no_fams]" id="no_fams_var" value="no_fams\"" . ((isset($userDefaultVars[" no_fams"]) and $userDefaultVars["no_fams"]=="no_fams" ) ? " checked=" checked\"" : "" ) . " />" . "No family containers, just individuals
 		$out .= '</td></tr>';
@@ -396,43 +431,6 @@ use Fisharebest\Webtrees\I18N;
             </div>
         </div>
 
-        <div class="row form-group">
-            <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[download]"><?= I18N::translate('Generate a file for download') ?></label>
-            <div class="col-sm-8 wt-page-options-value">
-                <input type="hidden" name="vars[download]" value="no">
-                <input type="checkbox" name="vars[download]" id="vars[download]" value="1" <?= $vars["download"] == 1 ? 'checked' : ''  ?>>
-            </div>
-        </div>
-
-        <div class="row form-group">
-            <label class=" col-sm-4 col-form-label wt-page-options-label" for="vars[grdir]"><?= I18N::translate('Number of iterations (MCLIMIT)') ?></label>
-            <div class="col-sm-8 wt-page-options-value">
-                <?= view('components/select', ['name' => 'vars[mclimit]', 'selected' => $vars['mclimit'], 'options' => $gve_config["mclimits"]]) ?>
-                <small class="form-text text-muted"><?= I18N::translate('helps to reduce the crossings on the graph. This can be really slow (up to 10..15x compared to the 20 setting)') ?></small>
-            </div>
-        </div>
-
-
-        <div class="row form-group">
-            <label class=" col-sm-4 col-form-label wt-page-options-label" for="vars[dpi]"><?= I18N::translate('DPI') ?></label>
-            <div class="col-sm-8 wt-page-options-value">
-                <div class="row">
-                    <div class="col-auto">
-                        <input type="text" class="form-control" size="10" name="vars[dpi]" id="vars[dpi]" value="<?= $vars["dpi"] ?>">
-                    </div>
-                    <div class="col-auto row">
-                        <label for="vars[ranksep]" class="col-sm-6"><?= I18N::translate('Space between generations') ?>:</label>
-                        <input type="text" class="form-control col-sm-6" size="10" name="vars[ranksep]" id="vars[ranksep]" value="<?= $vars["ranksep"] ?>">
-                    </div>
-                    <div class="col-auto row">
-                        <label for="vars[nodesep]" class="col-sm-6"><?= I18N::translate('Space between individuals on the same level') ?>:</label>
-                        <input type="text" class="form-control col-sm-6" size="10" name="vars[nodesep]" id="vars[nodesep]" value="<?= $vars["nodesep"] ?>">
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
         <!--
     <div class="row form-group">
         <label class="col-sm-4 col-form-label wt-page-options-label" for="pagebrk_var">Use Page Break</label>
@@ -446,8 +444,8 @@ use Fisharebest\Webtrees\I18N;
     </div>
 
     <div class="sidebar__buttons">
-        <button type="submit" class="btn btn-primary update-browser-rendering"><?= /* I18N: A button label. */ I18N::translate('Update') ?></button>
-        <button type="submit" class="btn btn-secondary" name="render"><?= /* I18N: A button label. */ I18N::translate('Render serverside') ?></button>
+        <button type="submit" class="btn btn-primary update-browser-rendering"><?= /* I18N: A button label. */ I18N::translate('Preview') ?></button>
+        <button type="submit" class="btn btn-secondary" name="render"><?= /* I18N: A button label. */ I18N::translate('Download') ?></button>
         <a href="<?= $module->chartUrl($individual, ['reset' => '1']) ?>" class="btn btn-outline-secondary"><?= /* I18N: A button label. */ I18N::translate('Reset') ?></a>
     </div>
 </form>

@@ -235,12 +235,6 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
 				die("Error (return code $return_var) executing command \"$shell_cmd\" in \"".getcwd()."\".<br>Check path and Graphviz functionality!<br><pre>".(join("\n", $stdout_output))."</pre>"); // new
 			}
 		}
-        $vars = $_REQUEST['vars'];
-		if ($vars["download"] == 1) {
-			$disposition = "attachment; filename=" . $basename;
-		} else {
-			$disposition = 'inline';
-		}
 
 		if (@$GVE_CONFIG["output"][$file_type]["rewrite_media_paths"]) {
 			$str = file_get_contents($filename);
@@ -255,7 +249,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
 		return $response_factory->createResponse()
 			->withBody($stream)
 			->withHeader('Content-Type', $GVE_CONFIG["output"][$file_type]["cont_type"])
-			->withHeader('Content-Disposition', $disposition);
+			->withHeader('Content-Disposition', "attachment; filename=" . $basename);
 	}
 
 	/**
