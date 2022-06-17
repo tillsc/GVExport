@@ -186,10 +186,11 @@ use Fisharebest\Webtrees\I18N;
         </div>
 
         <div class="row form-group">
-            <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[use_abbr_place]"><?= I18N::translate('Use abbreviated placenames') ?></label>
+            <label class=" col-sm-4 col-form-label wt-page-options-label" for="vars[use_abbr_place]"><?= I18N::translate('Abbreviated placenames') ?></label>
             <div class="col-sm-8 wt-page-options-value">
-                <input type="hidden" name="vars[use_abbr_place]" value="no">
-                <input type="checkbox" name="vars[use_abbr_place]" id="vars[use_abbr_place]" value="use_abbr_place" <?= $vars["use_abbr_place"] == "use_abbr_place" ? 'checked' : '' ?>>
+                <? updateTranslations($gve_config["settings"]["use_abbr_places"]);
+                    echo view('components/select', ['name' => 'vars[use_abbr_place]', 'selected' => $vars['use_abbr_place'], 'options' => $gve_config["settings"]["use_abbr_places"]]) ?>
+                <small class="form-text text-muted"></small>
             </div>
         </div>
 

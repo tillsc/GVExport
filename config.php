@@ -120,7 +120,7 @@ $GVE_CONFIG["custom"]["birth_text"] = "*";	// Text shown on chart before the bir
 $GVE_CONFIG["custom"]["death_text"] = "+";	// Text shown on chart before the death date
 
 // Settings
-$GVE_CONFIG["settings"]["use_abbr_place"] = FALSE;
+$GVE_CONFIG["settings"]["use_abbr_place"] = "Full place name";
 $GVE_CONFIG["settings"]["download"] = TRUE;
 
 // Deafult max levels of ancestors
@@ -130,5 +130,19 @@ $GVE_CONFIG["settings"]["desc_level"] = 5;
 
 // Debug mode (if set to true the DOT file & other debug info will be dumped on screen)
 $GVE_CONFIG["debug"] = FALSE;
+
+// Load country data for abbreviating place names
+// Data comes from https://www.datahub.io/core/country-codes
+// This material is licensed by its maintainers under the Public Domain Dedication and License, however,
+// they note that the data is ultimately sourced from ISO who have an unclear licence regarding use,
+// particularly around commercial use. Though all data sources providing ISO data have this problem.
+$string = file_get_contents(dirname(__FILE__)."/resources/data/country-codes_json.json");
+$json = json_decode($string, true);
+foreach ($json as $row) {
+	$GVE_CONFIG["countries"]["iso2"][strtolower($row["CLDR display name"])] = $row["ISO3166-1-Alpha-2"];
+	$GVE_CONFIG["countries"]["iso3"][strtolower($row["CLDR display name"])] = $row["ISO3166-1-Alpha-3"];
+}
+// Options for abbreviating place names
+$GVE_CONFIG["settings"]["use_abbr_places"] = [0 => "Full place name", 10 => "City and Country" ,  20 => "City and 2 Letter ISO Country Code", 30 => "City and 3 Letter ISO Country Code"];
 
 ?>
