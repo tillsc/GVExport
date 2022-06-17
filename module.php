@@ -153,7 +153,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
 			"show_url" => "show_url",
 			"show_pid" => "",
 			"show_fid" => "",
-			"use_abbr_place" => "",
+			"use_abbr_place" => "Full place name",
 			"debug" => ($GVE_CONFIG['debug'] ? "debug" : ""),
 			"dpi" => $GVE_CONFIG["settings"]["dpi"],
 			"ranksep" => $GVE_CONFIG["settings"]["ranksep"],
@@ -425,8 +425,8 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
 			$dot->setSettings("show_url", TRUE);
 		}
 
-		if ($vars['use_abbr_place'] == 'use_abbr_place') {
-			$dot->setSettings("use_abbr_place", TRUE);
+		if (isset($vars['use_abbr_place'])) {
+			$dot->setSettings("use_abbr_place", $vars['use_abbr_place']);
 		}
 
 		if (isset($vars['debug'])) {
