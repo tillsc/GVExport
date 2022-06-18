@@ -72,9 +72,11 @@ class Dot {
 		// Load colors
 		$this->colors["colorm"] = $GVE_CONFIG["dot"]["colorm"];
 		$this->colors["colorf"] = $GVE_CONFIG["dot"]["colorf"];
+		$this->colors["colorx"] = $GVE_CONFIG["dot"]["colorx"];
 		$this->colors["coloru"] = $GVE_CONFIG["dot"]["coloru"];
 		$this->colors["colorm_nr"] = $GVE_CONFIG["dot"]["colorm_nr"];
 		$this->colors["colorf_nr"] = $GVE_CONFIG["dot"]["colorf_nr"];
+		$this->colors["colorx_nr"] = $GVE_CONFIG["dot"]["colorx_nr"];
 		$this->colors["coloru_nr"] = $GVE_CONFIG["dot"]["coloru_nr"];
 		$this->colors["colorfam"] = $GVE_CONFIG["dot"]["colorfam"];
 
@@ -413,6 +415,12 @@ class Dot {
 				$fillcolor = $this->colors["colorm"];
 			} else  {
 				$fillcolor = $this->colors["colorm_nr"];
+			}
+		} elseif ($gender == 'X'){
+			if ($related) {
+				$fillcolor = $this->colors["colorx"];
+			} else  {
+				$fillcolor = $this->colors["colorx_nr"];
 			}
 		} else {
 			if ($related) {
