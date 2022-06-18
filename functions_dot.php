@@ -674,6 +674,8 @@ class Dot {
         }
 
 		if ($this->settings["show_pid"]) {
+			// If PID already in name (from another module), remove it
+			$name = str_replace(" (" . $pid . ")", "", $name);
 			// Show INDI id
 			$name = $name . " (" . $pid . ")";
 		}
