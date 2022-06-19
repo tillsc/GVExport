@@ -376,17 +376,22 @@ class Dot {
 					default:
 						return $place_long;
 				}
+				/* It's possible the place name string was blank, meaning our return variable is
+					   still blank. We don't want to add a comma if that's the case. */
+				if (!empty($place) && !empty($place_chunks[$chunk_count - 1]) && ($chunk_count > 1)) {
+					$place .= ", ";
+				}
 				/* Look up our country in the array of country names.
 				   It must be an exact match, or it won't be abbreviated to the country code. */
 				if (isset($this->settings["countries"][$code][strtolower(trim($place_chunks[$chunk_count - 1]))])) {
-					/* It's possible the place name string was blank, meaning our return variable is
-					   still blank. We don't want to add a comma if that's the case. */
-					if (!empty($place)) {
-						$place .= ", ";
-					}
 					$place .= $this->settings["countries"][$code][strtolower(trim($place_chunks[$chunk_count - 1]))];
-					return $place;
+				} else {
+					// We didn't find out country in the abbreviation list, so just add the full country name
+					if (!empty($place_chunks[$chunk_count - 1]) && ($chunk_count > 1)) {
+						$place .= trim($place_chunks[$chunk_count - 1]);
+					}
 				}
+				return $place;
 			}
 		}
 	}
