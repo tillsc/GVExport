@@ -32,15 +32,12 @@ namespace vendor\WebtreesModules\gvexport;
 
 // Load the config file
 require_once(dirname(__FILE__)."/config.php");
+require_once("functionsClippingsCart.php");
 
-use Fisharebest\Webtrees\GedcomRecord;
-use Fisharebest\Webtrees\Individual;
 use Fisharebest\Webtrees\Family;
 use Fisharebest\Webtrees\I18n;
-use Fisharebest\Webtrees\Session;
-use League\Flysystem\Util;
+//use League\Flysystem\Util;
 use Fisharebest\Webtrees\Site;
-use Fisharebest\Webtrees\Tree;
 use Fisharebest\Webtrees\Registry;
 
 
@@ -75,9 +72,11 @@ class Dot {
 		// Load colors
 		$this->colors["colorm"] = $GVE_CONFIG["dot"]["colorm"];
 		$this->colors["colorf"] = $GVE_CONFIG["dot"]["colorf"];
+		$this->colors["colorx"] = $GVE_CONFIG["dot"]["colorx"];
 		$this->colors["coloru"] = $GVE_CONFIG["dot"]["coloru"];
 		$this->colors["colorm_nr"] = $GVE_CONFIG["dot"]["colorm_nr"];
 		$this->colors["colorf_nr"] = $GVE_CONFIG["dot"]["colorf_nr"];
+		$this->colors["colorx_nr"] = $GVE_CONFIG["dot"]["colorx_nr"];
 		$this->colors["coloru_nr"] = $GVE_CONFIG["dot"]["coloru_nr"];
 		$this->colors["colorfam"] = $GVE_CONFIG["dot"]["colorfam"];
 
@@ -106,6 +105,8 @@ class Dot {
 		$this->settings["no_fams"] = FALSE;
 
 		$this->settings["use_abbr_place"] = $GVE_CONFIG["settings"]["use_abbr_place"];
+		$this->settings["use_abbr_places"] = $GVE_CONFIG["settings"]["use_abbr_places"];
+		$this->settings["countries"] = $GVE_CONFIG["countries"];
 		$this->settings["download"] = $GVE_CONFIG["settings"]["download"];
 		$this->settings["debug"] = $GVE_CONFIG["debug"];
 
@@ -199,6 +200,29 @@ class Dot {
 		return $out;
 	}
 
+	/**
+	 * get preference in this tree to show thumbnails
+	 * @param object $tree
+	 *
+	 * @return bool
+	 */
+	private function isTreePreferenceShowingThumbnails(object $tree): bool
+	{
+		return ($tree->getPreference('SHOW_HIGHLIGHT_IMAGES') == '1');
+	}
+
+	/**
+	 * check if a photo is required
+	 *
+	 * @return bool
+	 */
+	private function isPhotoRequired(): bool
+	{
+		return ($this->isTreePreferenceShowingThumbnails($this->tree) &&
+			($this->settings["diagram_type"] == "deco-photo" ||
+				$this->settings["diagram_type_combined_with_photo"]));
+	}
+
 	function createIndiList () {
 			// -- DEBUG ---
 			// echo "INDI: " . $this->settings["indi"];
@@ -213,91 +237,14 @@ class Dot {
 			}
 	}
 
-	/**
-	 * read INDI and FAM from the clippings cart and fill the arrays "individuals" and "families"
-	 *
-	 * tbd: add personal photo to individuals
-	 * tbd: support for "combined" mode
-	 */
-	function createIndiListFromClippingsCart () {
-		$records = $this->getRecordsInCart($this->tree);
-		foreach ($records as $record){
-			if ($record instanceof Individual) {
-				$pid = $record->xref();
-				if(!isset($this->individuals[$pid])) {
-					$this->individuals[$pid] = array();
-				}
-				$this->individuals[$pid]['pid'] = $pid;
-				$this->individuals[$pid]['rel'] = true;
-			} elseif ($record instanceof Family) {
-				$fid = $record->xref();
-				if(!isset($this->families[$fid])) {
-					$this->families[$fid] = array();
-				}
-				$this->families[$fid]["fid"] = $fid;
-			}
-		}
-	}
-
-	/**
-	 * @param Tree $tree
-	 *
-	 * @return bool
-	 */
-	private function isCartEmpty(Tree $tree): bool
-	{
-		$cart     = Session::get('cart', []);
-		$contents = $cart[$tree->name()] ?? [];
-
-		return $contents === [];
-	}
-
-	/**
-	 * Get the Xrefs in the clippings cart.
-	 *
-	 * @param Tree $tree
-	 *
-	 * @return array
-	 */
-	private function getXrefsInCart(Tree $tree): array
-	{
-		$cart = Session::get('cart', []);
-		$xrefs = array_keys($cart[$tree->name()] ?? []);
-		$xrefs = array_map('strval', $xrefs);           // PHP converts numeric keys to integers.
-		return $xrefs;
-	}
-
-	/**
-	 * Get the records in the clippings cart.
-	 *
-	 * @param Tree $tree
-	 *
-	 * @return array
-	 */
-	private function getRecordsInCart(Tree $tree): array
-	{
-		$xrefs = $this->getXrefsInCart($tree);
-		$records = array_map(static function (string $xref) use ($tree): ?GedcomRecord {
-			return Registry::gedcomRecordFactory()->make($xref, $tree);
-		}, $xrefs);
-
-		// some records may have been deleted after they were added to the cart, remove them
-		$records = array_filter($records);
-
-		// group and sort the records
-		uasort($records, static function (GedcomRecord $x, GedcomRecord $y): int {
-			return $x->tag() <=> $y->tag() ?: GedcomRecord::nameComparator()($x, $y);
-		});
-
-		return $records;
-	}
-
 	function createDOTDump() {
 		// Create the individuals list
-		if ($this->isCartEmpty($this->tree)) {
+		if (functionsClippingsCart::isCartEmpty($this->tree)) {
 			$this->createIndiList();
 		} else {
-			$this->createIndiListFromClippingsCart();
+			$functionsCC = new functionsClippingsCart($this->tree, $this->isPhotoRequired(), ($this->settings["diagram_type"] == "combined"));
+			$this->individuals = $functionsCC->getIndividuals();
+			$this->families = $functionsCC->getFamilies();
 		}
 
 		$out = "";
@@ -418,26 +365,58 @@ class Dot {
 	}
 
 	/**
-	 * Returns a chopped version of the PLAC string.
+	 * Returns an abbreviated version of the PLAC string.
 	 *
 	 * @param	string	Place string in long format (Town,County,State/Region,Country)
-	 * @return	string	The first and last chunk of the above string (Town, Country)
+	 * @return	string	The abbreviated place name
 	 */
 	function getFormattedPlace(string $place_long) {
-		$place_chunks = explode(",", $place_long);
-		$place = "";
-		$chunk_count = count($place_chunks);
-		/* We need only the first and last place name (city and country name) */
-		if (!empty($place_chunks[0])) {
-			$place .= trim($place_chunks[0]);
-		}
-		if (!empty($place_chunks[$chunk_count - 1]) && ($chunk_count > 1)) {
-			if (!empty($place)) {
-				$place .= ", ";
+		// If chose no abbreviating, then return string untouched
+		if ($this->settings["use_abbr_place"] == 0 /* Full place name */) {
+			return $place_long;
+		} else {
+			// Cut the place name up into pieces using the commas
+			$place_chunks = explode(",", $place_long);
+			$place = "";
+			$chunk_count = count($place_chunks);
+			// Add city to out return string as we always keep this
+			if (!empty($place_chunks[0])) {
+				$place .= trim($place_chunks[0]);
 			}
-			$place .= trim($place_chunks[$chunk_count - 1]);
+			// Chose to keep just the first and last sections
+			if ($this->settings["use_abbr_place"] == 10 /* City and Country */) {
+				if (!empty($place_chunks[$chunk_count - 1]) && ($chunk_count > 1)) {
+					if (!empty($place)) {
+						$place .= ", ";
+					}
+					$place .= trim($place_chunks[$chunk_count - 1]);
+				}
+				return $place;
+			} else {
+				/* Otherwise, we have chosen one of the ISO code options */
+				switch ($this->settings["use_abbr_place"]) {
+					case 20: //City and 2 Letter ISO Country Code
+						$code = "iso2";
+						break;
+					case 30: //City and 3 Letter ISO Country Code
+						$code = "iso3";
+						break;
+					default:
+						return $place_long;
+				}
+				/* Look up our country in the array of country names.
+				   It must be an exact match, or it won't be abbreviated to the country code. */
+				if (isset($this->settings["countries"][$code][strtolower(trim($place_chunks[$chunk_count - 1]))])) {
+					/* It's possible the place name string was blank, meaning our return variable is
+					   still blank. We don't want to add a comma if that's the case. */
+					if (!empty($place)) {
+						$place .= ", ";
+					}
+					$place .= $this->settings["countries"][$code][strtolower(trim($place_chunks[$chunk_count - 1]))];
+					return $place;
+				}
+			}
 		}
-		return $place;
 	}
 
 	/**
@@ -464,6 +443,12 @@ class Dot {
 				$fillcolor = $this->colors["colorm"];
 			} else  {
 				$fillcolor = $this->colors["colorm_nr"];
+			}
+		} elseif ($gender == 'X'){
+			if ($related) {
+				$fillcolor = $this->colors["colorx"];
+			} else  {
+				$fillcolor = $this->colors["colorx_nr"];
 			}
 		} else {
 			if ($related) {
@@ -590,153 +575,137 @@ class Dot {
 		global $GVE_CONFIG, $pgv_changes, $lang_short_cut, $LANGUAGE, $GEDCOM, $pgv_lang;
 
 		$out = "";
-		// Get the personal data
-		$i = $this->getUpdatedPerson($pid);
-
-		$isdead = $i->isDead();
-
-		// --- Background color & last editor's data ---
-		// if ($i->getChanged()) {
-		// 	// The INDI's data has been changed and not accepted yet
-		// 	$fillcolor = $GVE_CONFIG["dot"]["colorch"]; // Backround color is set to specified
-		// 	if ($this->settings["show_lt_editor"]) {
-		// 		// Show last editor
-		// 		// Hack is needed for compatibility for PGV revisions < 1661
-		// 		if (method_exists($i, "LastchangeUser")) {
-		// 			$editor = $pgv_lang["last_change_user"] . ": " . $i->LastchangeUser();
-		// 		} else {
-		// 			$editor = $pgv_lang["last_change_user"] . ": " . $i->getLastchangeUser();
-		// 		}
-		// 	} else {
-		// 		$editor = "";
-		// 	}
-		// } else {
-			// The INDI's data is up-to-date
-			$fillcolor = $this->getGenderColour($i->sex(), $related); // Backround color is set to specified
-			$editor = "";
-		// }
-
+		$editor = "";
 		$bordercolor = "#606060";	// Border color of the INDI's box
-		$link = $i->url();
 
-		// --- Birth data ---
-		if ($this->settings["show_by"]) {
-			$birthdate_var = $i->getBirthDate(FALSE);
-			$q1=$birthdate_var->qual1;
-			$d1=$birthdate_var->minimumDate()->format(I18N::dateFormat());
-			$dy=$birthdate_var->minimumDate()->format("%Y");
-			$q2=$birthdate_var->qual2;
-			if ($birthdate_var->minimumDate() == $birthdate_var->maximumDate())
-				$d2='';
-			else
-				$d2=$birthdate_var->maximumDate()->format(I18N::dateFormat());
-			$q3='';
-			if ($this->settings["bd_type"] == "gedcom") {
-				// Show full GEDCOM date
-				if (is_object($birthdate_var)) {
-					// Workaround for PGV 4.1.5 SVN, it gives back an object not a string
-					$birthdate = trim("{$q1} {$d1} {$q2} {$d2} {$q3}");
+		// Get the personal data
+		if ($this->settings["diagram_type"] == "combined" && ( substr($pid, 0, 3) == "I_H" || substr($pid, 0, 3) == "I_W" )) {
+			// In case of dummy individual
+			$fillcolor = $this->getGenderColour('U', false);
+			$isdead = false;
+			$birthdate = "";
+			$birthplace = "";
+			$link = "";
+			$name = " ";
+		} else {
+			$i = $this->getUpdatedPerson($pid);
+			$fillcolor = $this->getGenderColour($i->sex(), $related);        // Background color is set to specified
+			$isdead = $i->isDead();
+			$link = $i->url();
+
+			// --- Birth data ---
+			if ($this->settings["show_by"]) {
+				$birthdate_var = $i->getBirthDate(FALSE);
+				$q1 = $birthdate_var->qual1;
+				$d1 = $birthdate_var->minimumDate()->format(I18N::dateFormat());
+				$dy = $birthdate_var->minimumDate()->format("%Y");
+				$q2 = $birthdate_var->qual2;
+				if ($birthdate_var->minimumDate() == $birthdate_var->maximumDate())
+					$d2 = '';
+				else
+					$d2 = $birthdate_var->maximumDate()->format(I18N::dateFormat());
+				$q3 = '';
+				if ($this->settings["bd_type"] == "gedcom") {
+					// Show full GEDCOM date
+					if (is_object($birthdate_var)) {
+						// Workaround for PGV 4.1.5 SVN, it gives back an object not a string
+						$birthdate = trim("{$q1} {$d1} {$q2} {$d2} {$q3}");
+					} else {
+						$birthdate = $birthdate_var;
+					}
 				} else {
-					$birthdate = $birthdate_var;
+					// Show birth year only
+					if (is_object($birthdate_var)) {
+						// Workaround for PGV 4.1.5 SVN, it gives back an object not a string
+						$birthdate = trim("{$q1} {$dy}");
+					} else {
+						$birthdate = substr($birthdate_var, -4, 4);
+					}
 				}
 			} else {
-				// Show birth year only
-				if (is_object($birthdate_var)) {
-					// Workaround for PGV 4.1.5 SVN, it gives back an object not a string
-					$birthdate = trim("{$q1} {$dy}");
-				} else {
-					$birthdate = substr($birthdate_var, -4, 4);
-				}
+				$birthdate = "";
 			}
-		} else {
-			$birthdate = "";
-		}
 
-		if ($this->settings["show_bp"]) {
-			// Show birth place
-			if ($this->settings["use_abbr_place"]) {
+			if ($this->settings["show_bp"]) {
+				// Show birth place
 				$birthplace = $this->getFormattedPlace($i->getBirthPlace()->gedcomName());
 			} else {
-				$birthplace = $i->getBirthPlace()->gedcomName();
+				$birthplace = "";
 			}
-		} else {
-			$birthplace = "";
-		}
 
-		// --- Death data ---
-		if ($this->settings["show_dy"]) {
-			$deathdate_var = $i->getDeathDate(FALSE);
-			$q1=$deathdate_var->qual1;
-			$d1=$deathdate_var->minimumDate()->format(I18N::dateFormat());
-			$dy=$deathdate_var->minimumDate()->format("%Y");
-			$q2=$deathdate_var->qual2;
-			if ($deathdate_var->minimumDate() == $deathdate_var->maximumDate())
-				$d2='';
-			else
-				$d2=$deathdate_var->maximumDate()->format(I18N::dateFormat());
-			$q3='';
-			if ($this->settings["dd_type"] == "gedcom") {
-				// Show full GEDCOM date
-				if (is_object($deathdate_var)) {
-					// Workaround for PGV 4.1.5 SVN, it gives back an object not a string
-					$deathdate = trim("{$q1} {$d1} {$q2} {$d2} {$q3}");
+			// --- Death data ---
+			if ($this->settings["show_dy"]) {
+				$deathdate_var = $i->getDeathDate(FALSE);
+				$q1 = $deathdate_var->qual1;
+				$d1 = $deathdate_var->minimumDate()->format(I18N::dateFormat());
+				$dy = $deathdate_var->minimumDate()->format("%Y");
+				$q2 = $deathdate_var->qual2;
+				if ($deathdate_var->minimumDate() == $deathdate_var->maximumDate())
+					$d2 = '';
+				else
+					$d2 = $deathdate_var->maximumDate()->format(I18N::dateFormat());
+				$q3 = '';
+				if ($this->settings["dd_type"] == "gedcom") {
+					// Show full GEDCOM date
+					if (is_object($deathdate_var)) {
+						// Workaround for PGV 4.1.5 SVN, it gives back an object not a string
+						$deathdate = trim("{$q1} {$d1} {$q2} {$d2} {$q3}");
+					} else {
+						$deathdate = $deathdate_var;
+					}
 				} else {
-					$deathdate = $deathdate_var;
+					// Show death year only
+					if (is_object($deathdate_var)) {
+						// Workaround for PGV 4.1.5 SVN, it gives back an object not a string
+						$deathdate = trim("{$q1} {$dy}");
+					} else {
+						$deathdate = substr($deathdate_var, -4, 4);
+					}
 				}
 			} else {
-				// Show death year only
-				if (is_object($deathdate_var)) {
-					// Workaround for PGV 4.1.5 SVN, it gives back an object not a string
-					$deathdate = trim("{$q1} {$dy}");
-				} else {
-					$deathdate = substr($deathdate_var, -4, 4);
-				}
+				$deathdate = "";
 			}
-		} else {
-			$deathdate = "";
-		}
 
-		if ($this->settings["show_dp"]) {
-			// Show death place
-			if ($this->settings["use_abbr_place"]) {
+			if ($this->settings["show_dp"]) {
+				// Show death place
 				$deathplace = $this->getFormattedPlace($i->getDeathPlace()->gedcomName());
 			} else {
-				$deathplace = $i->getDeathPlace()->gedcomName();
+				$deathplace = "";
 			}
-		} else {
-			$deathplace = "";
+
+			// --- Name ---
+			$name = $i->fullName();//@@ Meliza Amity
+			$addname = $i->alternateName();//@@ Meliza Amity
+			if (!empty($addname)) {
+				if ($this->settings["diagram_type"] == "simple")
+					$name .= '\n' . $addname;//@@ Meliza Amity
+				else
+					$name .= '<BR />' . $addname;//@@ Meliza Amity
+			}
+			$name = str_replace(array('<q class="wt-nickname">', '</q>'), array('"', '"'), $name); // Show nickname in quotes
+			$name = strip_tags($name);
+
+			//@@ $name = str_replace(array('<span class="starredname">','</span>'), array('_','_'), $name); //@@ replace starredname by <u> and </u>
+			//@@ replace starredname by <u> and </u>
+			//@@ $name = str_replace(array('<span class="starredname">','</span>'), array('<U>','</U>'), $name); //@@ replace starredname by <u> and </u>
+			//$name = str_replace(array('<span class="starredname">','</span>'), array("",""), $name); //@@ replace starredname by null till graphviz supports underline
+			//$name = strip_tags($name);
+
+			if ($this->settings["diagram_type"] == "simple") { //@@ Meliza Amity
+				$name = str_replace(array('<span class="starredname">', '</span>'), array('\"', '\"'), $name);
+				//$name = str_replace('"', '\"', $name); //@@ Meliza Amity Handle double quotes of nick-names in simple tree ...
+			} else {
+				$name = str_replace(array('<span class="starredname">', '</span>'), array('<FONT face="' . $this->settings["fontname"] . ' italic">', '</FONT>'), $name);
+			}
+
+			if ($this->settings["show_pid"]) {
+				// If PID already in name (from another module), remove it
+				$name = str_replace(" (" . $pid . ")", "", $name);
+				// Show INDI id
+				$name = $name . " (" . $pid . ")";
+			}
+			//$name = str_replace('"', '', $name); // To remove double quotes
 		}
-
-		// --- Name ---
-		$name = $i->fullName();//@@ Meliza Amity
-		$addname = $i->alternateName();//@@ Meliza Amity
-		if (!empty($addname)) {
-			if ($this->settings["diagram_type"] == "simple")
-				$name .= '\n' . $addname;//@@ Meliza Amity
-			else
-				$name .= '<BR />' . $addname;//@@ Meliza Amity
-		}
-		$name = str_replace(array('<q class="wt-nickname">','</q>'), array('"','"'), $name); // Show nickname in quotes
-		$name = strip_tags($name);
-
-		//@@ $name = str_replace(array('<span class="starredname">','</span>'), array('_','_'), $name); //@@ replace starredname by <u> and </u>
-		 //@@ replace starredname by <u> and </u>
-		//@@ $name = str_replace(array('<span class="starredname">','</span>'), array('<U>','</U>'), $name); //@@ replace starredname by <u> and </u>
-		//$name = str_replace(array('<span class="starredname">','</span>'), array("",""), $name); //@@ replace starredname by null till graphviz supports underline
-		//$name = strip_tags($name);
-
-        if ($this->settings["diagram_type"] == "simple") { //@@ Meliza Amity
-        	$name = str_replace(array('<span class="starredname">','</span>'), array('\"','\"'), $name);
-			//$name = str_replace('"', '\"', $name); //@@ Meliza Amity Handle double quotes of nick-names in simple tree ...
-        } else {
-        	$name = str_replace(array('<span class="starredname">','</span>'), array('<FONT face="' . $this->settings["fontname"] . ' italic">','</FONT>'), $name);
-        }
-
-		if ($this->settings["show_pid"]) {
-			// Show INDI id
-			$name = $name . " (" . $pid . ")";
-		}
-		//$name = str_replace('"', '', $name); // To remove double quotes
 
 		// --- Printing the INDI details ---
 		if ($this->settings["diagram_type"] == "simple") {
@@ -761,7 +730,9 @@ class Dot {
 		} else {
 			// Convert birth & death place to get rid of characters which mess up the HTML output
 			$birthplace = $this->convertToHTMLSC($birthplace);
-			$deathplace = $this->convertToHTMLSC($deathplace);
+			if ($isdead) {
+				$deathplace = $this->convertToHTMLSC($deathplace);
+			}
 
 			// Draw table
 			if ($this->settings["diagram_type"] == "combined") {
@@ -880,14 +851,11 @@ class Dot {
 
 			// Show marriage place
 			if ($this->settings["show_mp"] && !empty($f->getMarriage()) && !empty($f->getMarriagePlace())) {
-			 	if ($this->settings["use_abbr_place"]) {
-			 		$marriageplace = $this->getFormattedPlace($f->getMarriagePlace()->gedcomName());
-			 	} else {
-			 		$marriageplace = $f->getMarriagePlace()->gedcomName();
-			 	}
-			 } else {
+				$marriageplace = $this->getFormattedPlace($f->getMarriagePlace()->gedcomName());
+			} else {
 				$marriageplace = "";
-			 }
+			}
+
 			// Get the husband's and wife's id from PGV
 			//$husb_id = $f->getHusbId();
 			//$wife_id = $f->wifeId();
