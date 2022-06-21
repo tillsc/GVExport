@@ -102,8 +102,9 @@ $GVE_CONFIG["pagesize"]["Letter"]["x"] = "8.5";
 $GVE_CONFIG["pagesize"]["Letter"]["y"] = "11";
 
 $GVE_CONFIG["settings"]["dpi"] = "72"; // default DPI (75: screen, 300: print)
-$GVE_CONFIG["settings"]["ranksep"] = "0.15";
-$GVE_CONFIG["settings"]["nodesep"] = "0.15";
+$GVE_CONFIG["settings"]["ranksep"] = "100%";
+$GVE_CONFIG["settings"]["nodesep"] = "100%";
+$GVE_CONFIG["settings"]["space_base"] = .15;
 
 // Direction of graph
 $GVE_CONFIG["default_direction"] = "LR";
