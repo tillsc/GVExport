@@ -119,6 +119,7 @@ class Dot {
 		$this->settings["dpi"] = $GVE_CONFIG["settings"]["dpi"];
 		$this->settings["ranksep"] = $GVE_CONFIG["settings"]["ranksep"];
 		$this->settings["nodesep"] = $GVE_CONFIG["settings"]["nodesep"];
+		$this->settings["space_base"] = $GVE_CONFIG["settings"]["space_base"];
 	}
 
 	function setPageSize($pagesize, $size_x = FALSE, $size_y = FALSE) {
@@ -219,8 +220,7 @@ class Dot {
 	private function isPhotoRequired(): bool
 	{
 		return ($this->isTreePreferenceShowingThumbnails($this->tree) &&
-			($this->settings["diagram_type"] == "deco-photo" ||
-				$this->settings["diagram_type_combined_with_photo"]));
+			($this->settings["diagram_type_combined_with_photo"]));
 	}
 
 	function createIndiList () {
@@ -404,17 +404,22 @@ class Dot {
 					default:
 						return $place_long;
 				}
+				/* It's possible the place name string was blank, meaning our return variable is
+					   still blank. We don't want to add a comma if that's the case. */
+				if (!empty($place) && !empty($place_chunks[$chunk_count - 1]) && ($chunk_count > 1)) {
+					$place .= ", ";
+				}
 				/* Look up our country in the array of country names.
 				   It must be an exact match, or it won't be abbreviated to the country code. */
 				if (isset($this->settings["countries"][$code][strtolower(trim($place_chunks[$chunk_count - 1]))])) {
-					/* It's possible the place name string was blank, meaning our return variable is
-					   still blank. We don't want to add a comma if that's the case. */
-					if (!empty($place)) {
-						$place .= ", ";
-					}
 					$place .= $this->settings["countries"][$code][strtolower(trim($place_chunks[$chunk_count - 1]))];
-					return $place;
+				} else {
+					// We didn't find out country in the abbreviation list, so just add the full country name
+					if (!empty($place_chunks[$chunk_count - 1]) && ($chunk_count > 1)) {
+						$place .= trim($place_chunks[$chunk_count - 1]);
+					}
 				}
+				return $place;
 			}
 		}
 	}
@@ -501,8 +506,8 @@ class Dot {
 		}
 		$out .= "nodesep=\"0.30\"\n";
 		*/
-		$out .= "ranksep=\"" . $this->settings["ranksep"] . " equally\"\n";
-		$out .= "nodesep=\"" . $this->settings["nodesep"] . "\"\n";
+		$out .= "ranksep=\"" . str_replace("%"," ",$this->settings["ranksep"])*$this->settings["space_base"]/100 . " equally\"\n";
+		$out .= "nodesep=\"" . str_replace("%"," ",$this->settings["nodesep"])*$this->settings["space_base"]/100	 . "\"\n";
 		$out .= "dpi=\"" . $this->settings["dpi"] . "\"\n";
 		$out .= "mclimit=\"" . $this->settings["mclimit"] . "\"\n";
 		$out .= "rankdir=\"" . $this->settings["graph_dir"] . "\"\n";
@@ -744,7 +749,7 @@ class Dot {
 			// First row (photo & name)
 			$out .= "<TR>";
 			// Show photo
-			if (($this->settings["diagram_type"] == "deco-photo" || $this->settings["diagram_type_combined_with_photo"]) && isset($this->individuals[$pid]["pic"]) && !empty($this->individuals[$pid]["pic"])) { #ESL!!! 20090213 deco-photo not used anymore
+			if (($this->settings["diagram_type_combined_with_photo"]) && isset($this->individuals[$pid]["pic"]) && !empty($this->individuals[$pid]["pic"])) {
 				$out .= "<TD ROWSPAN=\"2\" CELLPADDING=\"1\" PORT=\"pic\" WIDTH=\"" . ($this->font_size * 5) . "\" HEIGHT=\"" . ($this->font_size * 6) . "\" FIXEDSIZE=\"true\"><IMG SCALE=\"true\" SRC=\"" . $this->individuals[$pid]["pic"] . "\" /></TD>";
 			}
 			// Show name
@@ -988,7 +993,7 @@ class Dot {
 		}
 
 		// Add photo
-		if ($this->settings["diagram_type"] == "deco-photo" || $this->settings["diagram_type_combined_with_photo"]) { #ESL!!! 20090213 deco-photo not used anymore
+		if ($this->settings["diagram_type_combined_with_photo"] && $this->isPhotoRequired()) {
 			$this->individuals[$pid]["pic"] = $this->addPhotoToIndi($pid);
 		}
 

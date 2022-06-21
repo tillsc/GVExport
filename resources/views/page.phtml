@@ -1,6 +1,7 @@
 <?php
 
 use Fisharebest\Webtrees\I18N;
+use Fisharebest\Webtrees\Session;
 ?>
 
 <h2 class="wt-page-title">
@@ -67,7 +68,7 @@ use Fisharebest\Webtrees\I18N;
         <?= csrf_field() ?>
 
         <div class="d-flex">
-            <h3><?= I18N::translate('Diagram preferences') ?></h3>
+            <h3><?= I18N::translate('People to be included') ?></h3>
         </div>
 
         <script type="text/javascript">
@@ -86,13 +87,34 @@ use Fisharebest\Webtrees\I18N;
                 document.getElementById(targetId).value = ids.join(', ')
             }
         </script>
+        <?
+        $cart = Session::get('cart', []);
+        $xrefs = array_keys($cart[$tree->name()] ?? []);
+        $cartempty = sizeof($xrefs) == 0;
+        if (!$cartempty) :
+        ?>
+        <div class="row form-group">
+            <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[marknr]">Warning</label>
+            <div class="col-sm-8 wt-page-options-value">
+                <?= I18N::translate('You have items in the clippings cart, so clippings cart items will be used for the diagram instead of the below options.') ?>
+            </div>
+        </div>
+        <? endif; ?>
 
         <div class="row form-group">
             <label class=" col-sm-4 col-form-label wt-page-options-label" for="pid"><?= I18N::translate('Include anyone related to') ?></label>
             <div class="col-sm-8 wt-page-options-value">
-                <?= view('components/select-individual', ['name' => 'pid', 'id' => 'pid', 'tree' => $tree, 'individual' => $individual]) ?>
+                <?
+                    if ($cartempty) {
+                        echo view('components/select-individual', ['name' => 'pid', 'id' => 'pid', 'tree' => $tree, 'individual' => $individual]);
+                    } else { ?>
+                        <div style="display: none">
+                        <?= view('components/select-individual', ['name' => 'pid', 'id' => 'pid', 'tree' => $tree, 'individual' => $individual]); ?>
+                        </div>
+                        <input type="text" class="form-control" disabled />
+                    <? } ?>
                 <div class="input-group mt-1">
-                    <input type="text" class="form-control" name="vars[other_pids]" id="vars[other_pids]" value="<?= $vars['other_pids'] ?>">
+                    <input type="text" class="form-control" name="vars[other_pids]" id="vars[other_pids]" value="<?= $vars['other_pids'] ?>" <?= !$cartempty ? "disabled" : ""; ?>>
                     <div class="input-group-append">
                         <button type="button" class="btn btn-outline-secondary" onclick="appendPidTo('pid', 'vars[other_pids]')">⏎</button>
                     </div>
@@ -103,9 +125,18 @@ use Fisharebest\Webtrees\I18N;
         <div class="row form-group">
             <label class=" col-sm-4 col-form-label wt-page-options-label" for="vars[other_stop_pids]"><?= I18N::translate('Stop processing on') ?></label>
             <div class="col-sm-8 wt-page-options-value">
-                <?= view('components/select-individual', ['name' => 'vars[stop_pid]', 'id' => 'vars[stop_pid]', 'tree' => $tree, 'xref' => $vars['stop_pid']]) ?>
+                <?
+                if ($cartempty) {
+                    echo view('components/select-individual', ['name' => 'vars[stop_pid]', 'id' => 'vars[stop_pid]', 'tree' => $tree, 'xref' => $vars['stop_pid']]);
+                } else {
+                    ?>
+                    <input type="text" class="form-control" name="" id="" value="" disabled>
+                    <input type="hidden" name="vars[stoppid]" value="">
+                    <?
+                }
+                ?>
                 <div class="input-group mt-1">
-                    <input type="text" class="form-control" name="vars[other_stop_pids]" id="vars[other_stop_pids]" value="<?= $vars['other_stop_pids'] ?>">
+                    <input type="text" class="form-control" name="vars[other_stop_pids]" id="vars[other_stop_pids]" value="<?= $vars['other_stop_pids'] ?>" <?= !$cartempty ? "disabled" : ""; ?>>
                     <div class="input-group-append">
                         <button type="button" class="btn btn-outline-secondary" onclick="appendPidTo('vars[stop_pid]', 'vars[other_stop_pids]')">⏎</button>
                     </div>
@@ -119,11 +150,11 @@ use Fisharebest\Webtrees\I18N;
                 <div class="row">
                     <div class="col-auto mx-3">
                         <input type="hidden" name="vars[indiance]" value="no">
-                        <input type="checkbox" name="vars[indiance]" id="vars[indiance]" value="ance" <?= $vars["indiance"] == "ance" ? 'checked' : '' ?>>
+                        <input type="checkbox" name="vars[indiance]" id="vars[indiance]" value="ance" <?= $vars["indiance"] == "ance" ? 'checked' : '' ?>  <?= !$cartempty ? "disabled" : ""; ?>>
                     </div>
                     <div class="col-auto row">
                         <label for="vars[ance_level]" class="col-sm-6"><?= I18N::translate('Max Levels') ?>:</label>
-                        <input type="text" class="form-control col-sm-6" size="10" name="vars[ance_level]" id="vars[ance_level]" value="<?= $vars["ance_level"] ?>">
+                        <input type="text" class="form-control col-sm-6" size="10" name="vars[ance_level]" id="vars[ance_level]" value="<?= $vars["ance_level"] ?>" <?= !$cartempty ? "disabled" : ""; ?>>
                     </div>
                 </div>
             </div>
@@ -135,17 +166,17 @@ use Fisharebest\Webtrees\I18N;
                 <div class="row">
                     <div class="col-auto mx-3">
                         <input type="hidden" name="vars[indisibl]" value="no">
-                        <input type="checkbox" name="vars[indisibl]" id="vars[indisibl]" value="sibl" <?= $vars["indisibl"] == "sibl" ? 'checked' : '' ?>>
+                        <input type="checkbox" name="vars[indisibl]" id="vars[indisibl]" value="sibl" <?= $vars["indisibl"] == "sibl" ? 'checked' : '' ?> <?= !$cartempty ? "disabled" : ""; ?>>
                         <label for="vars[indisibl]"><?= I18N::translate('Siblings') ?></label>
                     </div>
                     <div class="col-auto mx-3">
                         <input type="hidden" name="vars[indicous]" value="no">
-                        <input type="checkbox" name="vars[indicous]" id="vars[indicous]" value="cous" <?= $vars["indicous"] == "cous" ? 'checked' : '' ?>>
+                        <input type="checkbox" name="vars[indicous]" id="vars[indicous]" value="cous" <?= $vars["indicous"] == "cous" ? 'checked' : '' ?> <?= !$cartempty ? "disabled" : ""; ?>>
                         <label for="vars[indicous]"><?= I18N::translate('Cousins') ?></label>
                     </div>
                     <div class="col-auto mx-3">
                         <input type="hidden" name="vars[indispou]" value="no">
-                        <input type="checkbox" name="vars[indispou]" id="vars[indispou]" value="spou" <?= $vars["indispou"] == "spou" ? 'checked' : '' ?>>
+                        <input type="checkbox" name="vars[indispou]" id="vars[indispou]" value="spou" <?= $vars["indispou"] == "spou" ? 'checked' : '' ?> <?= !$cartempty ? "disabled" : ""; ?>>
                         <label for="vars[indispou]"><?= I18N::translate('Spouses') ?></label>
                     </div>
                 </div>
@@ -158,11 +189,11 @@ use Fisharebest\Webtrees\I18N;
                 <div class="row">
                     <div class="col-auto mx-3">
                         <input type="hidden" name="vars[indidesc]" value="no">
-                        <input type="checkbox" name="vars[indidesc]" id="vars[indidesc]" value="desc" <?= $vars["indidesc"] == "desc" ? 'checked' : '' ?>>
+                        <input type="checkbox" name="vars[indidesc]" id="vars[indidesc]" value="desc" <?= $vars["indidesc"] == "desc" ? 'checked' : '' ?> <?= !$cartempty ? "disabled" : ""; ?>>
                     </div>
                     <div class="col-auto row">
                         <label for="vars[desc_level]" class="col-sm-6"><?= I18N::translate('Max Levels') ?>:</label>
-                        <input type="text" class="form-control col-sm-6" size="10" name="vars[desc_level]" id="vars[desc_level]" value="<?= $vars["desc_level"] ?>">
+                        <input type="text" class="form-control col-sm-6" size="10" name="vars[desc_level]" id="vars[desc_level]" value="<?= $vars["desc_level"] ?>" <?= !$cartempty ? "disabled" : ""; ?>>
                     </div>
                 </div>
             </div>
@@ -172,12 +203,54 @@ use Fisharebest\Webtrees\I18N;
             <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[marknr]"><?= I18N::translate('Mark not blood-related people with different color') ?></label>
             <div class="col-sm-8 wt-page-options-value">
                 <input type="hidden" name="vars[marknr]" value="no">
-                <input type="checkbox" name="vars[marknr]" id="vars[marknr]" value="marknr" <?= $vars["marknr"] == "marknr" ? 'checked' : '' ?>>
+                <input type="checkbox" name="vars[marknr]" id="vars[marknr]" value="marknr" <?= $vars["marknr"] == "marknr" ? 'checked' : '' ?> <?= !$cartempty ? "disabled" : ""; ?>>
+            </div>
+        </div>
+
+
+        <h3><?= /* I18N: Appearance heading */ I18N::translate('Appearance') ?></h3>
+
+        <div class="row form-group">
+            <label class=" col-sm-4 col-form-label wt-page-options-label" for="vars[grdir]"><?= I18N::translate('Graph Direction') ?></label>
+            <div class="col-sm-8 wt-page-options-value">
+                <?  updateTranslations($gve_config["directions"]);
+                    echo view('components/select', ['name' => 'vars[grdir]', 'selected' => $vars['grdir'], 'options' => $gve_config["directions"]]) ?>
             </div>
         </div>
 
         <div class="row form-group">
-            <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[show_url]"><?= I18N::translate('Add URL to individuals and families') ?>'</label>
+            <label class="col-sm-4 col-form-label wt-page-options-label"><?= I18N::translate('Diagram Type') ?></label>
+            <div class="col-sm-8 wt-page-options-value">
+                <div class="row">
+                    <div class="col-auto mx-3">
+                        <input type="radio" onclick="togglePhotos(false)" name="vars[diagtype]" id="vars[diagtype]_simple" value="simple" <?= $vars["diagtype"] == "simple" ? 'checked' : '' ?>>
+                        <label for="vars[diagtype]_simple"><?= I18N::translate('Simple') ?></label>
+                    </div>
+                    <div class="col-auto mx-3">
+                        <input type="radio" onclick="togglePhotos(true)" name="vars[diagtype]" id="vars[diagtype]_decorated" value="decorated" <?= $vars["diagtype"] == "decorated" ? 'checked' : '' ?>>
+                        <label for="vars[diagtype]_decorated"><?= I18N::translate('Decorated') ?></label>
+                    </div>
+                    <div class="col-auto mx-3">
+                        <input type="radio" onclick="togglePhotos(true)" name="vars[diagtype]" id="vars[diagtype]_combined" value="combined" <?= $vars["diagtype"] == "combined" ? 'checked' : '' ?>>
+                        <label for="vars[diagtype]_combined"><?= I18N::translate('Combined') ?></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <? if ($tree->getPreference('SHOW_HIGHLIGHT_IMAGES') == '1') { ?>
+            <div class="row form-group">
+                <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[with_photos]"><?= I18N::translate('Add photos') ?></label>
+                <div class="col-sm-8 wt-page-options-value">
+                    <input type="hidden" name="vars[with_photos]" value="no">
+                    <input type="checkbox" name="vars[with_photos]" id="vars[with_photos]" value="with_photos" <?= $vars["with_photos"] == "with_photos" ? 'checked' : '' ?>>
+                    <span class="text-muted">(<?= I18N::translate('Only Decorated or Combined') ?>)</span>
+                </div>
+            </div>
+        <? } ?>
+
+        <div class="row form-group">
+            <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[show_url]"><?= I18N::translate('Add URL to individuals and families') ?></label>
             <div class="col-sm-8 wt-page-options-value">
                 <input type="hidden" name="vars[show_url]" value="no">
                 <input type="checkbox" name="vars[show_url]" id="vars[show_url]" value="show_url" <?= $vars["show_url"] == "show_url" ? 'checked' : '' ?>>
@@ -186,15 +259,16 @@ use Fisharebest\Webtrees\I18N;
         </div>
 
         <div class="row form-group">
-            <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[use_abbr_place]"><?= I18N::translate('Use abbreviated placenames') ?></label>
+            <label class=" col-sm-4 col-form-label wt-page-options-label" for="vars[use_abbr_place]"><?= I18N::translate('Abbreviated place names') ?></label>
             <div class="col-sm-8 wt-page-options-value">
-                <input type="hidden" name="vars[use_abbr_place]" value="no">
-                <input type="checkbox" name="vars[use_abbr_place]" id="vars[use_abbr_place]" value="use_abbr_place" <?= $vars["use_abbr_place"] == "use_abbr_place" ? 'checked' : '' ?>>
+                <? updateTranslations($gve_config["settings"]["use_abbr_places"]);
+                    echo view('components/select', ['name' => 'vars[use_abbr_place]', 'selected' => $vars['use_abbr_place'], 'options' => $gve_config["settings"]["use_abbr_places"]]) ?>
+                <small class="form-text text-muted"></small>
             </div>
         </div>
 
         <div class="row form-group">
-            <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[show_pid]"><?= I18N::translate('Show Individual PID') ?></label>
+            <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[show_pid]"><?= I18N::translate('Show Individual ID') ?></label>
             <div class="col-sm-8 wt-page-options-value">
                 <input type="hidden" name="vars[show_pid]" value="no">
                 <input type="checkbox" name="vars[show_pid]" id="vars[show_pid]" value="show_pid" <?= $vars["show_pid"] == "show_pid" ? 'checked' : '' ?>>
@@ -294,43 +368,38 @@ use Fisharebest\Webtrees\I18N;
             </div>
         </div>
 
-
-        <h3><?= /* I18N: Appearance heading */ I18N::translate('Appearance') ?></h3>
-
         <div class="row form-group">
-            <label class=" col-sm-4 col-form-label wt-page-options-label" for="vars[grdir]"><?= I18N::translate('Graph Direction') ?></label>
+            <label class=" col-sm-4 col-form-label wt-page-options-label" for="vars[grdir]"><?= I18N::translate('Number of iterations (MCLIMIT)') ?></label>
             <div class="col-sm-8 wt-page-options-value">
-                <?  updateTranslations($gve_config["directions"]);
-                    echo view('components/select', ['name' => 'vars[grdir]', 'selected' => $vars['grdir'], 'options' => $gve_config["directions"]]) ?>
+                <?= view('components/select', ['name' => 'vars[mclimit]', 'selected' => $vars['mclimit'], 'options' => $gve_config["mclimits"]]) ?>
+                <small class="form-text text-muted"><?= I18N::translate('helps to reduce the crossings on the graph. This can be really slow (up to 10..15x compared to the 20 setting)') ?></small>
             </div>
         </div>
 
         <div class="row form-group">
-            <label class="col-sm-4 col-form-label wt-page-options-label"><?= I18N::translate('Diagram Type') ?></label>
+            <label class=" col-sm-4 col-form-label wt-page-options-label" for="vars[dpi]"><?= I18N::translate('DPI') ?></label>
             <div class="col-sm-8 wt-page-options-value">
                 <div class="row">
-                    <div class="col-auto mx-3">
-                        <input type="radio" name="vars[diagtype]" id="vars[diagtype]_simple" value="simple" <?= $vars["diagtype"] == "simple" ? 'checked' : '' ?>>
-                        <label for="vars[diagtype]_simple"><?= I18N::translate('Simple') ?></label>
-                    </div>
-                    <div class="col-auto mx-3">
-                        <input type="radio" name="vars[diagtype]" id="vars[diagtype]_decorated" value="decorated" <?= $vars["diagtype"] == "decorated" ? 'checked' : '' ?>>
-                        <label for="vars[diagtype]_decorated"><?= I18N::translate('Decorated') ?></label>
-                    </div>
-                    <div class="col-auto mx-3">
-                        <input type="radio" name="vars[diagtype]" id="vars[diagtype]_combined" value="combined" <?= $vars["diagtype"] == "combined" ? 'checked' : '' ?>>
-                        <label for="vars[diagtype]_combined"><?= I18N::translate('Combined') ?></label>
+                    <div class="col-auto">
+                        <input type="text" class="form-control" size="10" name="vars[dpi]" id="vars[dpi]" value="<?= $vars["dpi"] ?>">
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="row form-group">
-            <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[with_photos]"><?= I18N::translate('Add photos') ?></label>
+            <label class=" col-sm-4 col-form-label wt-page-options-label" for="vars[dpi]"><?= I18N::translate('Space') ?></label>
             <div class="col-sm-8 wt-page-options-value">
-                <input type="hidden" name="vars[with_photos]" value="no">
-                <input type="checkbox" name="vars[with_photos]" id="vars[with_photos]" value="with_photos" <?= $vars["with_photos"] == "with_photos" ? 'checked' : '' ?>>
-                <span class="text-muted">(<?= I18N::translate('Only Decorated or Combined') ?>)</span>
+                <div class="row">
+                    <div class="col-auto row">
+                        <label for="vars[ranksep]"><?= I18N::translate('Between generations') ?>:</label>
+                        <input type="text" onclick="togglePercent(this, false)" onblur="togglePercent(this, true)" class="form-control col-sm-6" size="10" name="vars[ranksep]" id="vars[ranksep]" value="<?= $vars["ranksep"] ?>">
+                    </div>
+                    <div class="col-auto row">
+                        <label for="vars[nodesep]"><?= I18N::translate('Between individuals on the same level') ?>:</label>
+                        <input type="text" onclick="togglePercent(this, false)" onblur="togglePercent(this, true)" class="form-control col-sm-6" size="10" name="vars[nodesep]" id="vars[nodesep]" value="<?= $vars["nodesep"] ?>">
+                    </div>
+                </div>
             </div>
         </div>
         <!--
@@ -395,43 +464,6 @@ use Fisharebest\Webtrees\I18N;
             </div>
         </div>
 
-        <div class="row form-group">
-            <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[download]"><?= I18N::translate('Generate a file for download') ?></label>
-            <div class="col-sm-8 wt-page-options-value">
-                <input type="hidden" name="vars[download]" value="no">
-                <input type="checkbox" name="vars[download]" id="vars[download]" value="1" <?= $vars["download"] == 1 ? 'checked' : ''  ?>>
-            </div>
-        </div>
-
-        <div class="row form-group">
-            <label class=" col-sm-4 col-form-label wt-page-options-label" for="vars[grdir]"><?= I18N::translate('Number of iterations (MCLIMIT)') ?></label>
-            <div class="col-sm-8 wt-page-options-value">
-                <?= view('components/select', ['name' => 'vars[mclimit]', 'selected' => $vars['mclimit'], 'options' => $gve_config["mclimits"]]) ?>
-                <small class="form-text text-muted"><?= I18N::translate('helps to reduce the crossings on the graph. This can be really slow (up to 10..15x compared to the 20 setting)') ?></small>
-            </div>
-        </div>
-
-
-        <div class="row form-group">
-            <label class=" col-sm-4 col-form-label wt-page-options-label" for="vars[dpi]"><?= I18N::translate('DPI') ?></label>
-            <div class="col-sm-8 wt-page-options-value">
-                <div class="row">
-                    <div class="col-auto">
-                        <input type="text" class="form-control" size="10" name="vars[dpi]" id="vars[dpi]" value="<?= $vars["dpi"] ?>">
-                    </div>
-                    <div class="col-auto row">
-                        <label for="vars[ranksep]" class="col-sm-6"><?= I18N::translate('Space between generations') ?>:</label>
-                        <input type="text" class="form-control col-sm-6" size="10" name="vars[ranksep]" id="vars[ranksep]" value="<?= $vars["ranksep"] ?>">
-                    </div>
-                    <div class="col-auto row">
-                        <label for="vars[nodesep]" class="col-sm-6"><?= I18N::translate('Space between individuals on the same level') ?>:</label>
-                        <input type="text" class="form-control col-sm-6" size="10" name="vars[nodesep]" id="vars[nodesep]" value="<?= $vars["nodesep"] ?>">
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
         <!--
     <div class="row form-group">
         <label class="col-sm-4 col-form-label wt-page-options-label" for="pagebrk_var">Use Page Break</label>
@@ -445,8 +477,8 @@ use Fisharebest\Webtrees\I18N;
     </div>
 
     <div class="sidebar__buttons">
-        <button type="submit" class="btn btn-primary update-browser-rendering"><?= /* I18N: A button label. */ I18N::translate('Update') ?></button>
-        <button type="submit" class="btn btn-secondary" name="render"><?= /* I18N: A button label. */ I18N::translate('Render serverside') ?></button>
+        <button type="submit" class="btn btn-primary update-browser-rendering"><?= /* I18N: A button label. */ I18N::translate('Preview') ?></button>
+        <button type="submit" class="btn btn-secondary" name="render"><?= /* I18N: A button label. */ I18N::translate('Download') ?></button>
         <a href="<?= $module->chartUrl($individual, ['reset' => '1']) ?>" class="btn btn-outline-secondary"><?= /* I18N: A button label. */ I18N::translate('Reset') ?></a>
     </div>
 </form>
@@ -561,30 +593,29 @@ use Fisharebest\Webtrees\I18N;
             document.querySelector('.sidebar').hidden ? showSidebar(e) : hideSidebar(e);
         }
     });
-    // this function is not called anywhere on the page - what does it do? Commenting out for now, will delete
-    // later once I'm confident it's not needed.
-    /*
-    function machSVGGut(svg) {
-        [].forEach.call(svg.querySelectorAll("g>a"), function(a) {
-            var box = a.parentNode.parentNode;
-            var polygon = box.querySelector('polygon');
-            if (!polygon) {
-                return;
+
+    // Enable or disable the option to add photos.
+    // This is used when selecting diagram type, as only
+    // some types support photos.
+    function togglePhotos(enable) {
+        document.getElementById("vars[with_photos]").disabled = !enable;
+    }
+
+    // Add or remove the % sign from the text input
+    function togglePercent(element, add) {
+        // Clicked out of input field, add % sign
+        if (add) {
+            element.value = element.value.replace("%", "") + "%";
+        } else {
+            // Clicked in input box, remove % and select text,
+            // but only select text the first time, let use move cursor if they want
+            startval = element.value;
+            element.value = element.value.replace("%", "");
+            if (startval != element.value) {
+                element.select();
             }
-            var lowerRight = polygon.getAttribute('points').split(' ')[3].split(',')
-            var menu = document.createElementNS("http://www.w3.org/2000/svg", "foreignObject");
-            var dropdown = document.importNode(document.getElementById('dropdown').content, true);
-            menu.appendChild(dropdown);
-            box.appendChild(menu);
-            var bb = box.querySelector('.btn').getBoundingClientRect();
-            menu.setAttribute('class', 'node');
-            menu.setAttribute('x', parseFloat(lowerRight[0]) - bb.width + 5);
-            menu.setAttribute('y', parseFloat(lowerRight[1]) - bb.height + 5);
-            menu.setAttribute('width', bb.width);
-            menu.setAttribute('height', bb.height);
-            menu.style = 'overflow: visible';
-        });
-    } */
+        }
+    }
 </script>
 
 <template id=dropdown>

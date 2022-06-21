@@ -2,6 +2,19 @@
 	Change Log
 	GVExport module for Webtrees
 =====================================================================
+Version 2.1.2 (2022-06-22):
+  - New         : The clippings cart can now be used as a source for the items in the tree
+  - New         : GVExport is now fully translatable, and we have a full translation for German
+  - New         : More place name abbreviation options, adding options for two or three-letter ISO codes
+  - New         : Added support for Gender "Other" (X), by default this is the same yellow colour as webtrees uses. This update also changes the default colour for "Unknown" to the green that webtrees uses, instead of grey.
+  - Changed     : The options panel has been shuffled around to suit the heading better
+  - Changed     : The node spacing options now use % instead of undefined numbers. 100% is the same as the previous default.
+  - Changed     : Respect the control panel option to not include photos in charts. If this is selected, the option to add photos will not show in GVExport
+
+Version 2.1.3 (2022-06-12):
+  - Fixed       : photos not showing in browser
+  - Changed     : photos now embedded in SVG
+  - Fixed       : download option now works again
 
 Version 2.1.2 (2022-06-04):
   - Changed     : X in corner of options now stays when scrolling for easier access
