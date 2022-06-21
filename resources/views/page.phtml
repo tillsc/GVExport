@@ -2,7 +2,6 @@
 
 use Fisharebest\Webtrees\I18N;
 use Fisharebest\Webtrees\Session;
-use vendor\WebtreesModules\gvexport\functionsClippingsCart;
 ?>
 
 <h2 class="wt-page-title">
@@ -224,20 +223,31 @@ use vendor\WebtreesModules\gvexport\functionsClippingsCart;
             <div class="col-sm-8 wt-page-options-value">
                 <div class="row">
                     <div class="col-auto mx-3">
-                        <input type="radio" name="vars[diagtype]" id="vars[diagtype]_simple" value="simple" <?= $vars["diagtype"] == "simple" ? 'checked' : '' ?>>
+                        <input type="radio" onclick="togglePhotos(false)" name="vars[diagtype]" id="vars[diagtype]_simple" value="simple" <?= $vars["diagtype"] == "simple" ? 'checked' : '' ?>>
                         <label for="vars[diagtype]_simple"><?= I18N::translate('Simple') ?></label>
                     </div>
                     <div class="col-auto mx-3">
-                        <input type="radio" name="vars[diagtype]" id="vars[diagtype]_decorated" value="decorated" <?= $vars["diagtype"] == "decorated" ? 'checked' : '' ?>>
+                        <input type="radio" onclick="togglePhotos(true)" name="vars[diagtype]" id="vars[diagtype]_decorated" value="decorated" <?= $vars["diagtype"] == "decorated" ? 'checked' : '' ?>>
                         <label for="vars[diagtype]_decorated"><?= I18N::translate('Decorated') ?></label>
                     </div>
                     <div class="col-auto mx-3">
-                        <input type="radio" name="vars[diagtype]" id="vars[diagtype]_combined" value="combined" <?= $vars["diagtype"] == "combined" ? 'checked' : '' ?>>
+                        <input type="radio" onclick="togglePhotos(true)" name="vars[diagtype]" id="vars[diagtype]_combined" value="combined" <?= $vars["diagtype"] == "combined" ? 'checked' : '' ?>>
                         <label for="vars[diagtype]_combined"><?= I18N::translate('Combined') ?></label>
                     </div>
                 </div>
             </div>
         </div>
+
+        <? if ($tree->getPreference('SHOW_HIGHLIGHT_IMAGES') == '1') { ?>
+            <div class="row form-group">
+                <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[with_photos]"><?= I18N::translate('Add photos') ?></label>
+                <div class="col-sm-8 wt-page-options-value">
+                    <input type="hidden" name="vars[with_photos]" value="no">
+                    <input type="checkbox" name="vars[with_photos]" id="vars[with_photos]" value="with_photos" <?= $vars["with_photos"] == "with_photos" ? 'checked' : '' ?>>
+                    <span class="text-muted">(<?= I18N::translate('Only Decorated or Combined') ?>)</span>
+                </div>
+            </div>
+        <? } ?>
 
         <div class="row form-group">
             <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[show_url]"><?= I18N::translate('Add URL to individuals and families') ?></label>
@@ -355,15 +365,6 @@ use vendor\WebtreesModules\gvexport\functionsClippingsCart;
             <div class="col-sm-8 wt-page-options-value">
                 <input type="hidden" name="vars[show_mp]" value="no">
                 <input type="checkbox" name="vars[show_mp]" id="vars[show_mp]" value="show_mp" <?= $vars["show_mp"] == "show_mp" ? 'checked' : '' ?>>
-            </div>
-        </div>
-
-        <div class="row form-group">
-            <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[with_photos]"><?= I18N::translate('Add photos') ?></label>
-            <div class="col-sm-8 wt-page-options-value">
-                <input type="hidden" name="vars[with_photos]" value="no">
-                <input type="checkbox" name="vars[with_photos]" id="vars[with_photos]" value="with_photos" <?= $vars["with_photos"] == "with_photos" ? 'checked' : '' ?>>
-                <span class="text-muted">(<?= I18N::translate('Only Decorated or Combined') ?>)</span>
             </div>
         </div>
 
@@ -592,30 +593,13 @@ use vendor\WebtreesModules\gvexport\functionsClippingsCart;
             document.querySelector('.sidebar').hidden ? showSidebar(e) : hideSidebar(e);
         }
     });
-    // this function is not called anywhere on the page - what does it do? Commenting out for now, will delete
-    // later once I'm confident it's not needed.
-    /*
-    function machSVGGut(svg) {
-        [].forEach.call(svg.querySelectorAll("g>a"), function(a) {
-            var box = a.parentNode.parentNode;
-            var polygon = box.querySelector('polygon');
-            if (!polygon) {
-                return;
-            }
-            var lowerRight = polygon.getAttribute('points').split(' ')[3].split(',')
-            var menu = document.createElementNS("http://www.w3.org/2000/svg", "foreignObject");
-            var dropdown = document.importNode(document.getElementById('dropdown').content, true);
-            menu.appendChild(dropdown);
-            box.appendChild(menu);
-            var bb = box.querySelector('.btn').getBoundingClientRect();
-            menu.setAttribute('class', 'node');
-            menu.setAttribute('x', parseFloat(lowerRight[0]) - bb.width + 5);
-            menu.setAttribute('y', parseFloat(lowerRight[1]) - bb.height + 5);
-            menu.setAttribute('width', bb.width);
-            menu.setAttribute('height', bb.height);
-            menu.style = 'overflow: visible';
-        });
-    } */
+
+    // Enable or disable the option to add photos.
+    // This is used when selecting diagram type, as only
+    // some types support photos.
+    function togglePhotos(enable) {
+        document.getElementById("vars[with_photos]").disabled = !enable;
+    }
 </script>
 
 <template id=dropdown>
