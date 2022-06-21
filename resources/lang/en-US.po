@@ -80,10 +80,6 @@ msgid "Use abbreviated placenames"
 msgstr "Use abbreviated placenames"
 
 #: 
-msgid "Show Individual PID"
-msgstr "Show Individual PID"
-
-#: 
 msgid "Show Birth Date"
 msgstr "Show Birth Date"
 
@@ -206,4 +202,48 @@ msgstr "Preview"
 #: 
 msgid "Download"
 msgstr "Download"
+
+#: 
+msgid "Full place name"
+msgstr "Full place name"
+
+#: 
+msgid "City and Country"
+msgstr "City and Country"
+
+#: 
+msgid "City and 2 Letter ISO Country Code"
+msgstr "City and 2 Letter ISO Country Code"
+
+#: 
+msgid "City and 3 Letter ISO Country Code"
+msgstr "City and 3 Letter ISO Country Code"
+
+#: 
+msgid "Space"
+msgstr "Space"
+
+#: 
+msgid "Between generations"
+msgstr "Between generations"
+
+#: 
+msgid "Between individuals on the same level"
+msgstr "Between individuals on the same level"
+
+#: 
+msgid "Abbreviated place names"
+msgstr "Abbreviated place names"
+
+#: 
+msgid "You have items in the clippings cart, so clippings cart items will be used for the diagram instead of the below options."
+msgstr "You have items in the clippings cart, so clippings cart items will be used for the diagram instead of the below options."
+
+#: 
+msgid "People to be included"
+msgstr "People to be included"
+
+#: 
+msgid "Show Individual ID"
+msgstr "Show Individual ID"
 

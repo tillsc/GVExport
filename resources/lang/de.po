@@ -80,10 +80,6 @@ msgid "Use abbreviated placenames"
 msgstr "Benutzung abgek&uuml;rzter Ortsnamen"
 
 #: 
-msgid "Show Individual PID"
-msgstr "Zeige XREF einer Person"
-
-#: 
 msgid "Show Birth Date"
 msgstr "Zeige Geburtsdatum"
 
@@ -241,5 +237,13 @@ msgstr "Abgekürzte Ortsnamen"
 
 #: 
 msgid "You have items in the clippings cart, so clippings cart items will be used for the diagram instead of the below options."
-msgstr ""
+msgstr "Sie haben Datensätze im Sammelbehälter. Diese werden hier dargestellt und damit werden die untenstehenden Optionen ausgeblendet."
+
+#: 
+msgid "People to be included"
+msgstr "Einzubeziehende Personen"
+
+#: 
+msgid "Show Individual ID"
+msgstr "Zeige XREF einer Person"
 
