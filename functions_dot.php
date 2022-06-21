@@ -219,8 +219,7 @@ class Dot {
 	private function isPhotoRequired(): bool
 	{
 		return ($this->isTreePreferenceShowingThumbnails($this->tree) &&
-			($this->settings["diagram_type"] == "deco-photo" ||
-				$this->settings["diagram_type_combined_with_photo"]));
+			($this->settings["diagram_type_combined_with_photo"]));
 	}
 
 	function createIndiList () {
@@ -749,7 +748,7 @@ class Dot {
 			// First row (photo & name)
 			$out .= "<TR>";
 			// Show photo
-			if (($this->settings["diagram_type"] == "deco-photo" || $this->settings["diagram_type_combined_with_photo"]) && isset($this->individuals[$pid]["pic"]) && !empty($this->individuals[$pid]["pic"])) { #ESL!!! 20090213 deco-photo not used anymore
+			if (($this->settings["diagram_type_combined_with_photo"]) && isset($this->individuals[$pid]["pic"]) && !empty($this->individuals[$pid]["pic"])) {
 				$out .= "<TD ROWSPAN=\"2\" CELLPADDING=\"1\" PORT=\"pic\" WIDTH=\"" . ($this->font_size * 5) . "\" HEIGHT=\"" . ($this->font_size * 6) . "\" FIXEDSIZE=\"true\"><IMG SCALE=\"true\" SRC=\"" . $this->individuals[$pid]["pic"] . "\" /></TD>";
 			}
 			// Show name
@@ -993,7 +992,7 @@ class Dot {
 		}
 
 		// Add photo
-		if ($this->settings["diagram_type"] == "deco-photo" || $this->settings["diagram_type_combined_with_photo"]) { #ESL!!! 20090213 deco-photo not used anymore
+		if ($this->settings["diagram_type_combined_with_photo"] && $this->isPhotoRequired()) {
 			$this->individuals[$pid]["pic"] = $this->addPhotoToIndi($pid);
 		}
 

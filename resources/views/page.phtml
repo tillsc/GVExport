@@ -2,7 +2,6 @@
 
 use Fisharebest\Webtrees\I18N;
 use Fisharebest\Webtrees\Session;
-use vendor\WebtreesModules\gvexport\functionsClippingsCart;
 ?>
 
 <h2 class="wt-page-title">
@@ -358,6 +357,7 @@ use vendor\WebtreesModules\gvexport\functionsClippingsCart;
             </div>
         </div>
 
+        <? if ($tree->getPreference('SHOW_HIGHLIGHT_IMAGES') == '1') { ?>
         <div class="row form-group">
             <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[with_photos]"><?= I18N::translate('Add photos') ?></label>
             <div class="col-sm-8 wt-page-options-value">
@@ -366,6 +366,7 @@ use vendor\WebtreesModules\gvexport\functionsClippingsCart;
                 <span class="text-muted">(<?= I18N::translate('Only Decorated or Combined') ?>)</span>
             </div>
         </div>
+        <? } ?>
 
         <div class="row form-group">
             <label class=" col-sm-4 col-form-label wt-page-options-label" for="vars[grdir]"><?= I18N::translate('Number of iterations (MCLIMIT)') ?></label>
