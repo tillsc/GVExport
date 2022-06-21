@@ -393,11 +393,11 @@ use Fisharebest\Webtrees\Session;
                 <div class="row">
                     <div class="col-auto row">
                         <label for="vars[ranksep]"><?= I18N::translate('Between generations') ?>:</label>
-                        <input type="text" class="form-control col-sm-6" size="10" name="vars[ranksep]" id="vars[ranksep]" value="<?= $vars["ranksep"] ?>">
+                        <input type="text" onclick="togglePercent(this, false)" onblur="togglePercent(this, true)" class="form-control col-sm-6" size="10" name="vars[ranksep]" id="vars[ranksep]" value="<?= $vars["ranksep"] ?>">
                     </div>
                     <div class="col-auto row">
                         <label for="vars[nodesep]"><?= I18N::translate('Between individuals on the same level') ?>:</label>
-                        <input type="text" class="form-control col-sm-6" size="10" name="vars[nodesep]" id="vars[nodesep]" value="<?= $vars["nodesep"] ?>">
+                        <input type="text" onclick="togglePercent(this, false)" onblur="togglePercent(this, true)" class="form-control col-sm-6" size="10" name="vars[nodesep]" id="vars[nodesep]" value="<?= $vars["nodesep"] ?>">
                     </div>
                 </div>
             </div>
@@ -599,6 +599,22 @@ use Fisharebest\Webtrees\Session;
     // some types support photos.
     function togglePhotos(enable) {
         document.getElementById("vars[with_photos]").disabled = !enable;
+    }
+
+    // Add or remove the % sign from the text input
+    function togglePercent(element, add) {
+        // Clicked out of input field, add % sign
+        if (add) {
+            element.value = element.value.replace("%", "") + "%";
+        } else {
+            // Clicked in input box, remove % and select text,
+            // but only select text the first time, let use move cursor if they want
+            startval = element.value;
+            element.value = element.value.replace("%", "");
+            if (startval != element.value) {
+                element.select();
+            }
+        }
     }
 </script>
 

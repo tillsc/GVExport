@@ -119,6 +119,7 @@ class Dot {
 		$this->settings["dpi"] = $GVE_CONFIG["settings"]["dpi"];
 		$this->settings["ranksep"] = $GVE_CONFIG["settings"]["ranksep"];
 		$this->settings["nodesep"] = $GVE_CONFIG["settings"]["nodesep"];
+		$this->settings["space_base"] = $GVE_CONFIG["settings"]["space_base"];
 	}
 
 	function setPageSize($pagesize, $size_x = FALSE, $size_y = FALSE) {
@@ -505,8 +506,8 @@ class Dot {
 		}
 		$out .= "nodesep=\"0.30\"\n";
 		*/
-		$out .= "ranksep=\"" . $this->settings["ranksep"] . " equally\"\n";
-		$out .= "nodesep=\"" . $this->settings["nodesep"] . "\"\n";
+		$out .= "ranksep=\"" . str_replace("%"," ",$this->settings["ranksep"])*$this->settings["space_base"]/100 . " equally\"\n";
+		$out .= "nodesep=\"" . str_replace("%"," ",$this->settings["nodesep"])*$this->settings["space_base"]/100	 . "\"\n";
 		$out .= "dpi=\"" . $this->settings["dpi"] . "\"\n";
 		$out .= "mclimit=\"" . $this->settings["mclimit"] . "\"\n";
 		$out .= "rankdir=\"" . $this->settings["graph_dir"] . "\"\n";
