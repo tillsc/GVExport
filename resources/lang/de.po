@@ -207,3 +207,39 @@ msgstr "Vorschau"
 msgid "Download"
 msgstr "Herunterladen"
 
+#: 
+msgid "Full place name"
+msgstr "Vollständige Ortsnamen"
+
+#: 
+msgid "City and Country"
+msgstr "Stadt und Staat"
+
+#: 
+msgid "City and 2 Letter ISO Country Code"
+msgstr "Stadt und 2-Buchstaben ISO-Länder-Code"
+
+#: 
+msgid "City and 3 Letter ISO Country Code"
+msgstr "Stadt und 3-Buchstaben ISO-Länder-Code"
+
+#: 
+msgid "Space"
+msgstr "Abstand"
+
+#: 
+msgid "Between generations"
+msgstr "Zwischen den Generationen"
+
+#: 
+msgid "Between individuals on the same level"
+msgstr "Zwischen Personen auf der selben Ebene"
+
+#: 
+msgid "Abbreviated place names"
+msgstr "Abgekürzte Ortsnamen"
+
+#: 
+msgid "You have items in the clippings cart, so clippings cart items will be used for the diagram instead of the below options."
+msgstr ""
+
