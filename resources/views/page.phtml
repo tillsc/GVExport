@@ -90,6 +90,10 @@ use Fisharebest\Webtrees\I18N;
             }
         </script>
         <?
+        // Check if the clippings cart is empty, to decide what options to allow
+        $cart = Session::get('cart', []);
+        $xrefs = array_keys($cart[$tree->name()] ?? []);
+        $cartempty = sizeof($xrefs) == 0;
         if (!$cartempty) :
         ?>
         <div class="row form-group">
