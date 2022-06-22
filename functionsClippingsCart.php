@@ -97,7 +97,8 @@ class functionsClippingsCart {
 		$this->tree = $tree;
 		$this->photoIsRequired = $photoIsRequired;
 		$this->combinedMode = $combinedMode;
-
+		$this->individuals = [];
+		$this->families = [];
 		$this->createIndividualsFamiliesListsFromClippingsCart();
 	}
 
@@ -305,13 +306,32 @@ class functionsClippingsCart {
 	}
 
 	/**
+	 * is an individual (INDI record) in the clippings cart
+	 *
+	 * @param Tree $tree
+	 * @return bool
+	 */
+	public static function isIndividualInCart(Tree $tree): bool
+	{
+		if (!self::isCartEmpty($tree)) {
+			$records = self::getRecordsInCart($tree);
+			foreach ($records as $record) {
+				if ($record instanceof Individual) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	/**
 	 * get the XREFs in the clippings cart
 	 *
 	 * @param Tree $tree
 	 *
 	 * @return array
 	 */
-	private function getXrefsInCart(Tree $tree): array
+	private static function getXrefsInCart(Tree $tree): array
 	{
 		$cart = Session::get('cart', []);
 		$xrefs = array_keys($cart[$tree->name()] ?? []);
@@ -326,9 +346,9 @@ class functionsClippingsCart {
 	 *
 	 * @return array
 	 */
-	private function getRecordsInCart(Tree $tree): array
+	private static function getRecordsInCart(Tree $tree): array
 	{
-		$xrefs = $this->getXrefsInCart($tree);
+		$xrefs = self::getXrefsInCart($tree);
 		$records = array_map(static function (string $xref) use ($tree): ?GedcomRecord {
 			return Registry::gedcomRecordFactory()->make($xref, $tree);
 		}, $xrefs);

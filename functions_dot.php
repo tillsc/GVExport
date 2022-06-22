@@ -239,7 +239,7 @@ class Dot {
 
 	function createDOTDump() {
 		// Create the individuals list
-		if (functionsClippingsCart::isCartEmpty($this->tree)) {
+		if (!functionsClippingsCart::isIndividualInCart($this->tree)) {
 			$this->createIndiList();
 		} else {
 			$functionsCC = new functionsClippingsCart($this->tree, $this->isPhotoRequired(), ($this->settings["diagram_type"] == "combined"));

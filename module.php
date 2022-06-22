@@ -31,14 +31,14 @@ namespace vendor\WebtreesModules\gvexport;
 
 require_once(dirname(__FILE__) . "/config.php");
 require(dirname(__FILE__) . "/utils.php");
+require_once(dirname(__FILE__) . "/functionsClippingsCart.php");
 
-
-use Aura\Router\RouterContainer;
-use Exception;
-use Fig\Http\Message\RequestMethodInterface;
+//use Aura\Router\RouterContainer;
+//use Exception;
+//use Fig\Http\Message\RequestMethodInterface;
 use Fisharebest\Webtrees\Auth;
 use Fisharebest\Webtrees\Registry;
-use Fisharebest\Webtrees\I18N;
+//use Fisharebest\Webtrees\I18N;
 use Fisharebest\Localization\Translation;
 use Fisharebest\Webtrees\Individual;
 use Fisharebest\Webtrees\Module\AbstractModule;
@@ -131,7 +131,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
 			"indiinc" => "indi",
 			"diagtype" => "decorated",
 			"with_photos" => "",
-			"use_abbr_place" => ($GVE_CONFIG['settings']['use_abbr_place'] ? "use_abbr_place" : ""),
+			//"use_abbr_place" => ($GVE_CONFIG['settings']['use_abbr_place'] ? "use_abbr_place" : ""),  // duplicated key
 			"show_by" => "show_by",
 			"bd_type" => "gedcom",
 			"show_bp" => "show_bp",
@@ -189,7 +189,8 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
 			'vars' => $userDefaultVars,
 			'otypes' => $otypes,
 			'gve_config' => $GVE_CONFIG,
-			'module' => $this
+            'cartempty' => !functionsClippingsCart::isIndividualInCart($tree),
+			'module' => $this,
 		]);
 	}
 
@@ -199,7 +200,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
 		$tree = $request->getAttribute('tree');
 		assert($tree instanceof Tree);
 
-		$individual = $this->getIndividual($tree, $_REQUEST['pid']);
+		$individual = $this->getIndividual($tree, $_REQUEST['pid']);            // is this defined in all cases ???
 
 		unset($_REQUEST["vars"]["debug"]);
 		if (isset($_REQUEST["vars"]["debug"])) {
@@ -428,7 +429,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
 		}
 
 
-		if (false) {
+		if (false) {                                // ?
 			// Set custom colors
 			if ($_REQUEST["vars"]["colorm"] == "custom") {
 				$dot->setColor("colorm", $_REQUEST["colorm_custom_var"]);

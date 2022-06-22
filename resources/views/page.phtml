@@ -1,7 +1,9 @@
 <?php
 
+namespace vendor\WebtreesModules\gvexport;
+
 use Fisharebest\Webtrees\I18N;
-use Fisharebest\Webtrees\Session;
+
 ?>
 
 <h2 class="wt-page-title">
@@ -88,9 +90,6 @@ use Fisharebest\Webtrees\Session;
             }
         </script>
         <?
-        $cart = Session::get('cart', []);
-        $xrefs = array_keys($cart[$tree->name()] ?? []);
-        $cartempty = sizeof($xrefs) == 0;
         if (!$cartempty) :
         ?>
         <div class="row form-group">
