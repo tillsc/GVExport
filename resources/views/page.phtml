@@ -108,7 +108,7 @@ use Fisharebest\Webtrees\Session;
         <div class="row form-group">
             <label class=" col-sm-4 col-form-label wt-page-options-label" for="pid"><?= I18N::translate('Include anyone related to') ?></label>
             <div class="col-sm-8 wt-page-options-value">
-                <?
+                <?php
                     if ($cartempty) {
                         echo view('components/select-individual', ['name' => 'pid', 'id' => 'pid', 'tree' => $tree, 'individual' => $individual]);
                     } else { ?>
@@ -129,14 +129,14 @@ use Fisharebest\Webtrees\Session;
         <div class="row form-group">
             <label class=" col-sm-4 col-form-label wt-page-options-label" for="vars[other_stop_pids]"><?= I18N::translate('Stop processing on') ?></label>
             <div class="col-sm-8 wt-page-options-value">
-                <?
+                <?php
                 if ($cartempty) {
                     echo view('components/select-individual', ['name' => 'vars[stop_pid]', 'id' => 'vars[stop_pid]', 'tree' => $tree, 'xref' => $vars['stop_pid']]);
                 } else {
                     ?>
                     <input type="text" class="form-control" name="" id="" value="" disabled>
                     <input type="hidden" name="vars[stoppid]" value="">
-                    <?
+                    <?php
                 }
                 ?>
                 <div class="input-group mt-1">
