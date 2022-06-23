@@ -90,7 +90,7 @@ use Fisharebest\Webtrees\Session;
                 document.getElementById(targetId).value = ids.join(', ')
             }
         </script>
-        <?
+        <?php
         // Check if the clippings cart is empty, to decide what options to allow
         $cart = Session::get('cart', []);
         $xrefs = array_keys($cart[$tree->name()] ?? []);
@@ -103,7 +103,7 @@ use Fisharebest\Webtrees\Session;
                 <?= I18N::translate('You have items in the clippings cart, so clippings cart items will be used for the diagram instead of the below options.') ?>
             </div>
         </div>
-        <? endif; ?>
+        <?php endif; ?>
 
         <div class="row form-group">
             <label class=" col-sm-4 col-form-label wt-page-options-label" for="pid"><?= I18N::translate('Include anyone related to') ?></label>
@@ -116,7 +116,7 @@ use Fisharebest\Webtrees\Session;
                         <?= view('components/select-individual', ['name' => 'pid', 'id' => 'pid', 'tree' => $tree, 'individual' => $individual]); ?>
                         </div>
                         <input type="text" class="form-control" disabled />
-                    <? } ?>
+                    <?php } ?>
                 <div class="input-group mt-1">
                     <input type="text" class="form-control" name="vars[other_pids]" id="vars[other_pids]" value="<?= $vars['other_pids'] ?>" <?= !$cartempty ? "disabled" : ""; ?>>
                     <div class="input-group-append">
@@ -217,7 +217,7 @@ use Fisharebest\Webtrees\Session;
         <div class="row form-group">
             <label class=" col-sm-4 col-form-label wt-page-options-label" for="vars[grdir]"><?= I18N::translate('Graph Direction') ?></label>
             <div class="col-sm-8 wt-page-options-value">
-                <?  updateTranslations($gve_config["directions"]);
+                <?php  updateTranslations($gve_config["directions"]);
                     echo view('components/select', ['name' => 'vars[grdir]', 'selected' => $vars['grdir'], 'options' => $gve_config["directions"]]) ?>
             </div>
         </div>
@@ -242,7 +242,7 @@ use Fisharebest\Webtrees\Session;
             </div>
         </div>
 
-        <? if ($tree->getPreference('SHOW_HIGHLIGHT_IMAGES') == '1') { ?>
+        <?php if ($tree->getPreference('SHOW_HIGHLIGHT_IMAGES') == '1') { ?>
             <div class="row form-group">
                 <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[with_photos]"><?= I18N::translate('Add photos') ?></label>
                 <div class="col-sm-8 wt-page-options-value">
@@ -251,7 +251,7 @@ use Fisharebest\Webtrees\Session;
                     <span class="text-muted">(<?= I18N::translate('Only Decorated or Combined') ?>)</span>
                 </div>
             </div>
-        <? } ?>
+        <?php } ?>
 
         <div class="row form-group">
             <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[show_url]"><?= I18N::translate('Add URL to individuals and families') ?></label>
@@ -265,7 +265,7 @@ use Fisharebest\Webtrees\Session;
         <div class="row form-group">
             <label class=" col-sm-4 col-form-label wt-page-options-label" for="vars[use_abbr_place]"><?= I18N::translate('Abbreviated place names') ?></label>
             <div class="col-sm-8 wt-page-options-value">
-                <? updateTranslations($gve_config["settings"]["use_abbr_places"]);
+                <?php updateTranslations($gve_config["settings"]["use_abbr_places"]);
                     echo view('components/select', ['name' => 'vars[use_abbr_place]', 'selected' => $vars['use_abbr_place'], 'options' => $gve_config["settings"]["use_abbr_places"]]) ?>
                 <small class="form-text text-muted"></small>
             </div>
