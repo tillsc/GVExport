@@ -462,19 +462,9 @@ use Fisharebest\Webtrees\Session;
             <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[otype]"><?= I18N::translate('Output File Type') ?></label>
             <div class="col-sm-8 wt-page-options-value">
                 <?= view('components/select', ['name' => 'vars[otype]', 'selected' => $vars['otype'], 'options' => $otypes]) ?>
-                <small id="emailHelp" class="form-text text-muted"><?= I18N::translate("Choose DOT if you don't have GraphViz installed on server.") ?></small>
+                <small id="emailHelp" class="form-text text-muted"><?= $nographviz ? I18N::translate("Options limited as GraphViz not installed on server") : "" ?></small>
             </div>
         </div>
-
-        <!--
-    <div class="row form-group">
-        <label class="col-sm-4 col-form-label wt-page-options-label" for="pagebrk_var">Use Page Break</label>
-        <div class="col-sm-8 wt-page-options-value">
-            <input type="checkbox" name="vars[pagebrk]" id="pagebrk_var" value="pagebrk">
-        </div>
-    </div>
-    -->
-
 
     </div>
 
