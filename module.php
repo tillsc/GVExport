@@ -191,6 +191,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
 			'gve_config' => $GVE_CONFIG,
             'cartempty' => !functionsClippingsCart::isIndividualInCart($tree),
 			'module' => $this,
+            'nographviz' => $GVE_CONFIG["graphviz_bin"] == ""
 		]);
 	}
 
