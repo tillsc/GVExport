@@ -152,10 +152,6 @@ msgid "Generate a file for download"
 msgstr "Genereer een bestand om te downloaden"
 
 #: 
-msgid "Choose DOT if you don't have GraphViz installed on server."
-msgstr "Kies DOT als u GraphViz niet op de server heeft geïnstalleerd."
-
-#: 
 msgid "Number of iterations (MCLIMIT)"
 msgstr "Aantal iteraties (MCLIMIT)"
 
@@ -246,4 +242,8 @@ msgstr "Inclusief de volgende personen"
 #: 
 msgid "Show Individual ID"
 msgstr "Toon persoons-ID"
+
+#: 
+msgid "Options limited as GraphViz not installed on server"
+msgstr "Opties beperkt omdat GraphViz niet op de server is geïnstalleerd"
 
