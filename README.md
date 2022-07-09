@@ -10,7 +10,7 @@ One of the display options renders output like this:
 Webtrees
 --------
 
-[Webtrees](https://webtrees.net/) is an online collaborative genealogy application. This can be hosted on your own server by following the [Install instructions](https://webtrees.net/install/). If you are familiar with Docker, you might like to install Webtrees using [this unofficial docker image](https://hub.docker.com/r/nathanvaughn/webtrees).
+[Webtrees](https://webtrees.net/) is an online collaborative genealogy application. This can be hosted on your own server by following the [Install instructions](https://webtrees.net/install/). If you are familiar with Docker, you might like to install Webtrees using [this unofficial docker image](https://hub.docker.com/r/nathanvaughn/webtrees), [or this one](https://github.com/H2CK/webtrees).
 
 Installation of GVExport
 ------------
