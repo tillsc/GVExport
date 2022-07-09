@@ -1,7 +1,7 @@
 GVExport
 ========
 
-This is a repository for a webtrees module known as gvexport. GVExport's goal is to produce an "all in one tree" of every person in a family tree and their relationships. It uses GraphViz to generate a tree, and if the GraphViz software is installed on the server it can produce output in multiple file formats such as JPG, SVG, PDF, and others.
+This is a repository for a webtrees module known as GVExport. GVExport's goal is to produce an "all in one tree" of every person in a family tree and their relationships. You can view the tree in webtrees and click on individuals of families to go to their page in webtrees, and if the GraphViz software is installed on the server it can produce output in multiple file formats such as JPG, SVG, PDF, and others.
 
 One of the display options renders output like this:
 
