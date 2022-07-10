@@ -1,0 +1,249 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: POEditor.com\n"
+"Project-Id-Version: GVExport\n"
+"Language: ru\n"
+
+#: 
+msgid "Update"
+msgstr "Обновлять"
+
+#: 
+msgid "Render serverside"
+msgstr "Рендеринг на стороне сервера"
+
+#: 
+msgid "Reset"
+msgstr "Перезагрузить"
+
+#: 
+msgid "Diagram preferences"
+msgstr "Настройки диаграммы"
+
+#: 
+msgid "Appearance"
+msgstr "вид"
+
+#: 
+msgid "Output Settings"
+msgstr "Настройки вывода"
+
+#: 
+msgid "Include anyone related to"
+msgstr "Включите всех, кто связан с"
+
+#: 
+msgid "Stop processing on"
+msgstr "Остановить обработку"
+
+#: 
+msgid "Include Ancestors"
+msgstr "Включить предков"
+
+#: 
+msgid "Include"
+msgstr "Включить"
+
+#: 
+msgid "Siblings"
+msgstr "Братья и сестры"
+
+#: 
+msgid "Cousins"
+msgstr " Кузены"
+
+#: 
+msgid "Spouses"
+msgstr "Супруги"
+
+#: 
+msgid "Include Descendants"
+msgstr "Включить потомков"
+
+#: 
+msgid "Max Levels"
+msgstr "Максимальные уровни"
+
+#: 
+msgid "Mark not blood-related people with different color"
+msgstr "Отметить не кровнородственных людей с разным цветом кожи"
+
+#: 
+msgid "Add URL to individuals and families"
+msgstr "Добавить URL для отдельных лиц и семей"
+
+#: 
+msgid "Use abbreviated placenames"
+msgstr "Используйте сокращенные географические названия"
+
+#: 
+msgid "Show Birth Date"
+msgstr "Показать дату рождения"
+
+#: 
+msgid "Show Birth Place"
+msgstr "Показать место рождения"
+
+#: 
+msgid "Show Death Date"
+msgstr "Показать дату смерти"
+
+#: 
+msgid "Full Date"
+msgstr "Полная дата"
+
+#: 
+msgid "Year"
+msgstr "Год"
+
+#: 
+msgid "Show Death Place"
+msgstr "Показать место смерти"
+
+#: 
+msgid "Show Family ID"
+msgstr "Показать удостоверение семьи"
+
+#: 
+msgid "Show Marriage Date"
+msgstr "Показать дату брака"
+
+#: 
+msgid "Show Marriage Place"
+msgstr "Показать место заключения брака"
+
+#: 
+msgid "Graph Direction"
+msgstr "Направление графика"
+
+#: 
+msgid "Diagram Type"
+msgstr "Тип диаграммы"
+
+#: 
+msgid "Simple"
+msgstr "Простой"
+
+#: 
+msgid "Decorated"
+msgstr "Украшен"
+
+#: 
+msgid "Combined"
+msgstr "Комбинация"
+
+#: 
+msgid "Add photos"
+msgstr "Добавить фото"
+
+#: 
+msgid "Only Decorated or Combined"
+msgstr "Только декорированные или комбинированные"
+
+#: 
+msgid "Output File Type"
+msgstr "Тип выходного файла"
+
+#: 
+msgid "Generate a file for download"
+msgstr "Создайте файл для загрузки"
+
+#: 
+msgid "Number of iterations (MCLIMIT)"
+msgstr "Количество итераций (MCLIMIT)"
+
+#: 
+msgid "helps to reduce the crossings on the graph. This can be really slow (up to 10..15x compared to the 20 setting)"
+msgstr "помогает уменьшить количество пересечений на графике. Это может быть очень медленным (до 10...15 раз по сравнению с настройкой 20)"
+
+#: 
+msgid "DPI"
+msgstr "DPI"
+
+#: 
+msgid "Show Selection"
+msgstr "Выбор шоу"
+
+#: 
+msgid "SVG only"
+msgstr "Только SVG"
+
+#: 
+msgid "Top-to-Bottom"
+msgstr "Сверху вниз"
+
+#: 
+msgid "Left-to-Right"
+msgstr "Слева направо"
+
+#: 
+msgid "Space between generations"
+msgstr "Пространство между поколениями"
+
+#: 
+msgid "Space between individuals on the same level"
+msgstr "Пространство между людьми, находящимися на одном уровне"
+
+#: 
+msgid "Error running GVExport in Browser mode"
+msgstr "Ошибка при запуске GVExport в режиме браузера"
+
+#: 
+msgid "Preview"
+msgstr "Предпросмотр"
+
+#: 
+msgid "Download"
+msgstr "Скачать"
+
+#: 
+msgid "Full place name"
+msgstr "Полное название места"
+
+#: 
+msgid "City and Country"
+msgstr "Город и страна"
+
+#: 
+msgid "City and 2 Letter ISO Country Code"
+msgstr "Город и 2-буквенный код страны ISO"
+
+#: 
+msgid "City and 3 Letter ISO Country Code"
+msgstr "Город и 3-буквенный код страны ISO"
+
+#: 
+msgid "Space"
+msgstr "Космос"
+
+#: 
+msgid "Between generations"
+msgstr "Между поколениями"
+
+#: 
+msgid "Between individuals on the same level"
+msgstr "Между людьми, находящимися на одном уровне"
+
+#: 
+msgid "Abbreviated place names"
+msgstr "Сокращенные названия мест"
+
+#: 
+msgid "You have items in the clippings cart, so clippings cart items will be used for the diagram instead of the below options."
+msgstr "У вас есть товары в корзине вырезок, поэтому для диаграммы вместо приведенных ниже параметров будут использоваться товары корзины вырезок."
+
+#: 
+msgid "People to be included"
+msgstr "Люди, которые должны быть включены"
+
+#: 
+msgid "Show Individual ID"
+msgstr "Показать индивидуальный идентификатор"
+
+#: 
+msgid "Options limited as GraphViz not installed on server"
+msgstr "Параметры ограничены, так как GraphViz не установлен на сервере"
+
