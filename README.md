@@ -43,7 +43,7 @@ Older Versions
 
 We attempt to keep up with the latest stable (non-prerelease) version of webtrees. You can see the latest release of webtrees [here](https://github.com/fisharebest/webtrees/releases). Older versions are not supported. *However*, as we progress through webtrees versions, we are releasing GVExport versions. These are listed on the [Releases page](https://github.com/Neriderc/GVExport/releases). If you are not using the latest version of webtrees, and the latest release of GVExport isn't working for you, you may want to try an older release.
 
-For versions earlier than 2.0.21 you can try the [source repository](https://github.com/tillsc/GVExport), but note this DOES NOT work for 2.0.22 and later.
+For versions earlier than 2.0.21 you can try the [source repository](https://github.com/tillsc/GVExport), but note this DOES NOT work with PHP 8 and it is missing many enhancements from this repository.
 
 Contributing
 ------------
@@ -54,12 +54,12 @@ If you'd like to contribute to GVExport, great! You can contribute by:
 - Creating issues if you find bugs
 - Contributing code - check out the Issues for things that need attention. If you have changes you want to make not listed in an issue, please create one, then you can link your pull request.
 - Testing - it's all manual currently, please [create an issue](https://github.com/Neriderc/GVExport/issues) for any bugs you find.
-- Documentation - [our Wiki](https://github.com/Neriderc/GVExport/wiki) is in need of attention.
+- Documentation - anyone can update [our Wiki](https://github.com/Neriderc/GVExport/wiki)
 - Translating - you can translate into a language you are fluent in by joining the [PO Editor project](https://poeditor.com/join/project/YqPRBXZnlf). Discussion on translating can be done by creating an issue.
 
 This repository
 ---------------
-This repository was forked from [tillsc/GVExport](https://github.com/tillsc/GVExport) after community pull requests had not been merged for some time. [A post](https://www.webtrees.net/index.php/en/forum/4-customising/35801-display-complex-all-in-on-tree-with-gvexport) had been made on the webtrees forum stating that GVExport had been brought up to date to work with webtrees 2.0, but that the developer could not provide ongoing support. After a webtrees update broke the module, this fork was created to maintain compatibility.
+This repository was forked from [tillsc/GVExport](https://github.com/tillsc/GVExport) after community pull requests had not been merged for some time. [A post](https://www.webtrees.net/index.php/en/forum/4-customising/35801-display-complex-all-in-on-tree-with-gvexport) had been made on the webtrees forum stating that GVExport had been brought up to date to work with webtrees 2.0, but that the developer could not provide ongoing support. After a webtrees update broke the module, this fork was created to maintain compatibility and continue refining the tool with new features and other enhancements.
 
 Current maintainer:
  - https://github.com/Neriderc
