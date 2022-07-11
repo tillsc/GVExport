@@ -170,13 +170,13 @@ use Fisharebest\Webtrees\Session;
                 <div class="row">
                     <div class="col-auto mx-3">
                         <input type="hidden" name="vars[indisibl]" value="no">
-                        <input type="checkbox" name="vars[indisibl]" id="vars[indisibl]" value="sibl" <?= $vars["indisibl"] == "sibl" ? 'checked' : '' ?> <?= !$cartempty ? "disabled" : ""; ?>>
+                        <input type="checkbox" onclick="updateRelationOption('indisibl')" name="vars[indisibl]" id="vars[indisibl]" value="sibl" <?= $vars["indisibl"] == "sibl" ? 'checked' : '' ?> <?= !$cartempty ? "disabled" : ""; ?>>
                         <label for="vars[indisibl]"><?= I18N::translate('Siblings') ?></label>
                     </div>
                     <div class="col-auto mx-3">
                         <input type="hidden" name="vars[indicous]" value="no">
-                        <input type="checkbox" name="vars[indicous]" id="vars[indicous]" value="cous" <?= $vars["indicous"] == "cous" ? 'checked' : '' ?> <?= !$cartempty ? "disabled" : ""; ?>>
-                        <label for="vars[indicous]"><?= I18N::translate('Cousins') ?></label>
+                        <input type="checkbox" onclick="updateRelationOption('indicous')" name="vars[indicous]" id="vars[indicous]" value="cous" <?= $vars["indicous"] == "cous" ? 'checked' : '' ?> <?= !$cartempty ? "disabled" : ""; ?>>
+                        <label for="vars[indicous]"><?= I18N::translate('All relatives') ?></label>
                     </div>
                     <div class="col-auto mx-3">
                         <input type="hidden" name="vars[indispou]" value="no">
@@ -605,6 +605,22 @@ use Fisharebest\Webtrees\Session;
             element.value = element.value.replace("%", "");
             if (startval != element.value) {
                 element.select();
+            }
+        }
+    }
+
+    // This function ensures that if "All relations" is checked, so is "Siblings"
+    function updateRelationOption(field) {
+        // If function triggered by checking "All relatives" field, ensure "Siblings" is checked
+        if (field == "indicous") {
+            if (document.getElementById("vars[indicous]").checked) {
+                document.getElementById("vars[indisibl]").checked = true;
+            }
+        }
+        // If function triggered by unchecking "Siblings" field, ensure "All relatives" is unchecked
+        if (field == "indisibl") {
+            if (!document.getElementById("vars[indisibl]").checked) {
+                document.getElementById("vars[indicous]").checked = false;
             }
         }
     }
