@@ -614,10 +614,16 @@ use Fisharebest\Webtrees\Session;
     function togglePercent(element, add) {
         // Clicked out of input field, add % sign
         if (add) {
-            element.value = element.value.replace("%", "") + "%";
+            // Keep just numbers
+            let boxVal = element.value.replace(/\D/g, "");
+            // If result is blank, set to default
+            if (boxVal == "") {
+                boxVal = "100";
+            }
+            element.value =  boxVal + "%";
         } else {
             // Clicked in input box, remove % and select text,
-            // but only select text the first time, let use move cursor if they want
+            // but only select text the first time, let user move cursor if they want
             startval = element.value;
             element.value = element.value.replace("%", "");
             if (startval != element.value) {
