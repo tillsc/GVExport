@@ -33,6 +33,8 @@ Currently we use a wiki for documenting functionality. Anyone can update [our Wi
 
 You can translate into a language you are fluent in by joining the [PO Editor project](https://poeditor.com/join/project/YqPRBXZnlf). 
 
+If you're not familiar with contributing on GitHub, see [this tutorial](https://github.com/firstcontributions/first-contributions).
+
 If you're familiar with GitHub, please create a pull request to add your languages to the module. The basic instructions for this are:
 
 - In POEditor, click on your language, and then at the top (underthe header) choose "Export"
