@@ -11,13 +11,13 @@ There are many ways to contribute, such as:
 - Translating
 
 # Index
-- [Questions](https://github.com/Neriderc/GVExport/new/master#questions)
-- [Documentation](https://github.com/Neriderc/GVExport/new/master#documentation)
-- [Translating](https://github.com/Neriderc/GVExport/new/master#translating)
-- [Contributing code](https://github.com/Neriderc/GVExport/new/master#contributing-code)
-- [Testing](https://github.com/Neriderc/GVExport/new/master#testing)
-- [How to report a bug](https://github.com/Neriderc/GVExport/new/master#how-to-report-a-bug)
-- [How to suggest a feature or enhancement](https://github.com/Neriderc/GVExport/new/master#how-to-suggest-a-feature-or-enhancement)
+- [Questions](https://github.com/Neriderc/GVExport/new/master/CONTRIBUTING.md#questions)
+- [Documentation](https://github.com/Neriderc/GVExport/new/master/CONTRIBUTING.md#documentation)
+- [Translating](https://github.com/Neriderc/GVExport/new/master/CONTRIBUTING.md#translating)
+- [Contributing code](https://github.com/Neriderc/GVExport/new/master/CONTRIBUTING.md#contributing-code)
+- [Testing](https://github.com/Neriderc/GVExport/new/master/CONTRIBUTING.md#testing)
+- [How to report a bug](https://github.com/Neriderc/GVExport/new/master/CONTRIBUTING.md#how-to-report-a-bug)
+- [How to suggest a feature or enhancement](https://github.com/Neriderc/GVExport/new/master/CONTRIBUTING.md#how-to-suggest-a-feature-or-enhancement)
 
 # Questions
 
