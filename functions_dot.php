@@ -500,16 +500,9 @@ class Dot {
 			$out .= "size=\"" . ($this->pagesize["x"] - $this->settings["page_margin"]) . "," . ($this->pagesize["y"] - $this->settings["page_margin"]) . "\"\n";
 			//$out .= "size=\"50, 50\"\n";
 		}
-		/*
-		if ($this->settings["diagram_type"] == "combined") {
-			$out .= "ranksep=\"0.50 equally\"\n";
-		} else {
-			$out .= "ranksep=\"0.30 equally\"\n";
-		}
-		$out .= "nodesep=\"0.30\"\n";
-		*/
-		$out .= "ranksep=\"" . str_replace("%"," ",$this->settings["ranksep"])*$this->settings["space_base"]/100 . " equally\"\n";
-		$out .= "nodesep=\"" . str_replace("%"," ",$this->settings["nodesep"])*$this->settings["space_base"]/100	 . "\"\n";
+
+		$out .= "ranksep=\"" . str_replace("%","",$this->settings["ranksep"])*$this->settings["space_base"]/100 . " equally\"\n";
+		$out .= "nodesep=\"" . str_replace("%","",$this->settings["nodesep"])*$this->settings["space_base"]/100	 . "\"\n";
 		$out .= "dpi=\"" . $this->settings["dpi"] . "\"\n";
 		$out .= "mclimit=\"" . $this->settings["mclimit"] . "\"\n";
 		$out .= "rankdir=\"" . $this->settings["graph_dir"] . "\"\n";
