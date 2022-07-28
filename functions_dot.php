@@ -698,9 +698,10 @@ class Dot {
 				$name = str_replace(array('<span class="starredname">', '</span>'), array('<FONT face="' . $this->settings["fontname"] . ' italic">', '</FONT>'), $name);
 			}
 
+			// If PID already in name (from another module), remove it so we don't add twice
+			$name = str_replace(" (" . $pid . ")", "", $name);
+
 			if ($this->settings["show_pid"]) {
-				// If PID already in name (from another module), remove it
-				$name = str_replace(" (" . $pid . ")", "", $name);
 				// Show INDI id
 				$name = $name . " (" . $pid . ")";
 			}
