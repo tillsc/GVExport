@@ -151,7 +151,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
 			"indispou" => "spou",
 			"marknr" => "marknr",
 			"show_url" => "show_url",
-			"show_pid" => "",
+			"show_pid" => "DEFAULT", // This is set to DEFAULT so we can tell if it was loaded from cookie or not
 			"show_fid" => "",
 			"use_abbr_place" => "Full place name",
 			"debug" => ($GVE_CONFIG['debug'] ? "debug" : ""),
