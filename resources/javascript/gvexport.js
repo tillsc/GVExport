@@ -67,6 +67,18 @@ function togglePercent(element, add) {
     }
 }
 
+// Update provided element with provided value when element blank
+function defaultValueWhenBlank(element, value) {
+    if (element.value === "") {
+        element.value = value;
+    }
+}
+
+function checkIndiBlank() {
+    let el = document.getElementsByClassName("item");
+    return el.length === 0;
+}
+
 // This function ensures that if certain options are checked in regard to which relations to include,
 // then other required options are selected. e.g. if "Anyone" is selected, all other options must
 // all be selected
@@ -115,6 +127,27 @@ function updateRelationOption(field) {
     }
 
 }
+
+
+
+
+// Gets position of element relative to another
+// From https://stackoverflow.com/questions/1769584/get-position-of-element-by-javascript
+function getPos(el, rel)
+{
+    let i = 1;
+
+    var x=0, y=0;
+
+    do {
+        x += el.offsetLeft;
+        y += el.offsetTop;
+        el = el.offsetParent;
+    }
+    while (el !== rel)
+    return {x:x, y:y};
+}
+
 
 // Toggle items based on if the items in the cart should be used or not
 // enable - if set to true, use cart. Update form to disable options. Set to false to reverse.
