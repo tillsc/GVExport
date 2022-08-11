@@ -263,3 +263,7 @@ msgstr "Gebruik stamboomknipsels"
 msgid "Ignore clippings cart"
 msgstr "Negeer stamboomknipsels"
 
+#: 
+msgid "Warning"
+msgstr "Waarschuwing"
+
