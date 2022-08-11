@@ -106,16 +106,8 @@ use Fisharebest\Webtrees\Tree;
             <label class=" col-sm-4 col-form-label wt-page-options-label" for="pid"><?= I18N::translate('Include anyone related to') ?></label>
             <div class="col-sm-8 wt-page-options-value">
                 <div class="cart_toggle_hide" <?php if ($greypeople) { echo 'style="display: none"'; } ?>>
-                <?php
-                if ($cartempty) {
-                    echo view('components/select-individual', ['name' => 'pid', 'id' => 'pid', 'tree' => $tree, 'individual' => $individual]);
-                } else { ?>
-                    <div style="display: none">
-                        <?= view('components/select-individual', ['name' => 'pid', 'id' => 'pid', 'tree' => $tree, 'individual' => $individual]); ?>
-                    </div>
-                    <input type="text" class="form-control" disabled />
-                <?php } ?>
                     <?= view('components/select-individual', ['name' => 'pid', 'id' => 'pid', 'tree' => $tree, 'individual' => $individual]); ?>
+                    <div class="red-text" id="indi-error"></div>
                 </div>
                 <div class="input-group mt-1">
                     <input class="cart_toggle" type="text" class="form-control" name="vars[other_pids]" id="vars[other_pids]" value="<?= $vars['other_pids'] ?>" <?= $greypeople ? "disabled" : ""; ?>>
@@ -153,7 +145,7 @@ use Fisharebest\Webtrees\Tree;
                     </div>
                     <div class="col-auto row">
                         <label for="vars[ance_level]" class="col-sm-6"><?= I18N::translate('Max Levels') ?>:</label>
-                        <input class="cart_toggle" type="text" class="form-control col-sm-6" size="10" name="vars[ance_level]" id="vars[ance_level]" value="<?= $vars["ance_level"] ?>" <?= $greypeople ? "disabled" : ""; ?>>
+                        <input class="cart_toggle" onblur="defaultValueWhenBlank(this, 0)" type="text" class="form-control col-sm-6" size="10" name="vars[ance_level]" id="vars[ance_level]" value="<?= $vars["ance_level"] ?>" <?= $greypeople ? "disabled" : ""; ?>>
                     </div>
                 </div>
             </div>
@@ -197,7 +189,7 @@ use Fisharebest\Webtrees\Tree;
                     </div>
                     <div class="col-auto row">
                         <label for="vars[desc_level]" class="col-sm-6"><?= I18N::translate('Max Levels') ?>:</label>
-                        <input class="cart_toggle" type="text" class="form-control col-sm-6" size="10" name="vars[desc_level]" id="vars[desc_level]" value="<?= $vars["desc_level"] ?>" <?= $greypeople ? "disabled" : ""; ?>>
+                        <input class="cart_toggle"  onblur="defaultValueWhenBlank(this, 0)" type="text" class="form-control col-sm-6" size="10" name="vars[desc_level]" id="vars[desc_level]" value="<?= $vars["desc_level"] ?>" <?= $greypeople ? "disabled" : ""; ?>>
                     </div>
                 </div>
             </div>
@@ -383,7 +375,7 @@ use Fisharebest\Webtrees\Tree;
             <div class="col-sm-8 wt-page-options-value">
                 <div class="row">
                     <div class="col-auto">
-                        <input type="text" class="form-control" size="10" name="vars[dpi]" id="vars[dpi]" value="<?= $vars["dpi"] ?>">
+                        <input type="text" onblur="defaultValueWhenBlank(this, 72)" class="form-control" size="10" name="vars[dpi]" id="vars[dpi]" value="<?= $vars["dpi"] ?>">
                     </div>
                 </div>
             </div>
@@ -470,7 +462,7 @@ use Fisharebest\Webtrees\Tree;
 
     <div class="sidebar__buttons">
         <button type="submit" class="btn btn-primary update-browser-rendering"><?= /* I18N: A button label. */ I18N::translate('Update') ?></button>
-        <button type="submit" class="btn btn-secondary" name="render"><?= /* I18N: A button label. */ I18N::translate('Download') ?></button>
+        <button type="submit" class="btn btn-secondary main-action" name="render"><?= /* I18N: A button label. */ I18N::translate('Download') ?></button>
         <a href="<?= $module->chartUrl($individual, ['reset' => '1']) ?>" class="btn btn-outline-secondary"><?= /* I18N: A button label. */ I18N::translate('Reset') ?></a>
     </div>
 
@@ -509,9 +501,26 @@ use Fisharebest\Webtrees\Tree;
             history.pushState(null, '', url + "?" + params.toString())
         }
     });
+
+    // Trigger action when "Update" button clicked
     document.querySelector('.update-browser-rendering').addEventListener('click', function(e) {
-        updateRender();
+        if (checkIndiBlank() === false) {
+            updateRender();
+            removeError("indi-error");
+        } else {
+            addError("indi-error","<?= I18N::translate("Individual required") ?>");
+        }
         e.preventDefault();
+    });
+
+    // If "Download" button clicked, first check that individual has been selected
+    document.querySelector('.main-action').addEventListener('click', function(e) {
+        if (checkIndiBlank() === false) {
+            removeError("indi-error");
+        } else {
+            addError("indi-error","<?= I18N::translate("Individual required") ?>");
+            e.preventDefault();
+        }
     });
 
     function updateRender() {
@@ -606,6 +615,23 @@ use Fisharebest\Webtrees\Tree;
         return false;
     }
 
+    // Add an error message to the page
+    // id - the id of the element that holds the message
+    // message - the text to show in the error message
+    function addError(id, message) {
+        let er = document.getElementById(id);
+        er.innerText=message;
+        let el = document.getElementsByClassName("sidebar__formfields");
+        let form = document.getElementsByTagName("FORM");
+        let pos = getPos(er,form.item(1));
+        el.item(0).scrollTo(0,pos["y"]-70);
+    }
+
+    // Removes the error text in the provided element
+    function removeError(id) {
+        let er = document.getElementById(id);
+        er.innerText="";
+    }
 </script>
 
 <div id="toast"></div>
