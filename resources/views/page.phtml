@@ -115,6 +115,7 @@ use Fisharebest\Webtrees\Tree;
                     </div>
                     <input type="text" class="form-control" disabled />
                 <?php } ?>
+                    <?= view('components/select-individual', ['name' => 'pid', 'id' => 'pid', 'tree' => $tree, 'individual' => $individual]); ?>
                 </div>
                 <div class="input-group mt-1">
                     <input class="cart_toggle" type="text" class="form-control" name="vars[other_pids]" id="vars[other_pids]" value="<?= $vars['other_pids'] ?>" <?= $greypeople ? "disabled" : ""; ?>>
@@ -503,8 +504,6 @@ use Fisharebest\Webtrees\Tree;
         let url=document.location.href.split("?")[0];
         let args=document.location.href.split("?")[1];
         let params = new URLSearchParams(args);
-        params.delete('reset');
-        history.pushState(null, '', url+"?"+params.toString())
         if (params.toString().search("reset") !== -1) {
             params.delete('reset');
             history.pushState(null, '', url + "?" + params.toString())
