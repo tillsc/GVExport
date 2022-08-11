@@ -537,8 +537,17 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
             $dot->setSettings("nodesep", $vars['nodesep']);
         }
 
+        // Get out DOT file
         $out .= $dot->getDOTDump();
-        return $out;
+        if (isset($_POST["browser"]) && $_POST["browser"] == "true") {
+            // Add in our counts of individuals and families so we can show a message
+            $indinum = //sizeof($dot->individuals);
+            $famnum = sizeof($dot->families);
+            $r = $indinum . "|" . $famnum . "|" . $out;
+        } else {
+            $r = $out;
+        }
+        return $r;
     }
 
     /**

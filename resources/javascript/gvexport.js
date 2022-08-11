@@ -140,3 +140,16 @@ function showHide(css_class, show) {
         }
     }
 }
+
+// Show a toast message
+// message - the message to show
+function showToast(message) {
+    var x = document.getElementById("toast");
+    if (x !== null) {
+        x.innerText = message;
+        x.className = "show";
+        setTimeout(function () {
+            x.className = x.className.replace("show", "");
+        }, 5500);
+    }
+}

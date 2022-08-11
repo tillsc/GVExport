@@ -73,7 +73,7 @@ function is__writable($path) {
  * It is used for translating options for dropdown boxes in the module.
  *
  * @param $array
- * @return void
+ * @return array
  */
 function updateTranslations($array){
 	foreach ($array as $key => $value) {
