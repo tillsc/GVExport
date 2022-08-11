@@ -472,6 +472,8 @@ use Fisharebest\Webtrees\Tree;
         <button type="submit" class="btn btn-secondary" name="render"><?= /* I18N: A button label. */ I18N::translate('Download') ?></button>
         <a href="<?= $module->chartUrl($individual, ['reset' => '1']) ?>" class="btn btn-outline-secondary"><?= /* I18N: A button label. */ I18N::translate('Reset') ?></a>
     </div>
+
+    <input type="hidden" id="browser" name="browser" value="false">
 </form>
 
 <div class="sidebar__toggler" hidden>
@@ -493,7 +495,9 @@ use Fisharebest\Webtrees\Tree;
 
     document.addEventListener("DOMContentLoaded", function(e) {
         // Load browser render when page has loaded
-        updateRender();
+        // Timeout needed as function is in file added to page
+        // by javascript so doesn't exist the instant page loads.
+        setTimeout(updateRender,5);
         // Remove reset parameter from URL when page loaded, to prevent
         // further resets when page reloaded
         let url=document.location.href.split("?")[0];
@@ -514,6 +518,9 @@ use Fisharebest\Webtrees\Tree;
     function updateRender() {
         var oldOtype = document.getElementById('vars[otype]').value;
         document.getElementById('vars[otype]').value = 'dot';
+        // Set value to true so we can return other info with DOT file
+        // that can't be included with downloaded file
+        document.getElementById("browser").value = "true";
         // Enable disabled fields so they are included in serialised data - this means the values are remembered
         var el = document.getElementsByClassName("cart_toggle");
         for (var i = 0; i < el.length; i++) {
@@ -525,9 +532,10 @@ use Fisharebest\Webtrees\Tree;
         if (!cartempty && document.getElementById("vars[usecart]_yes").checked) {
             toggleCart(true);
         }
+        document.getElementById("browser").value = "false";
 
         document.getElementById('vars[otype]').value = oldOtype;
-        var lastDotStr;
+        var lastDotStr, indiNum, famNum;
 
         rendering.innerHTML = '<div class="d-flex justify-content-center h-100"><div class="spinner-border align-self-center" role="status"><span class="sr-only">Loading...</span></div></div>';
         rendering.hidden = false;
@@ -551,6 +559,13 @@ use Fisharebest\Webtrees\Tree;
             }
             return response.text();
         }).then(function (dotStr) {
+            // Grab our individual and family record counts from
+            // our return string - and remove them before passing
+            // the rest of the string to DOT processor
+            indiNum = dotStr.substring(0,dotStr.indexOf("|"));
+            dotStr = dotStr.substring(dotStr.indexOf("|")+1);
+            famNum = dotStr.substring(0,dotStr.indexOf("|"));
+            dotStr = dotStr.substring(dotStr.indexOf("|")+1);
             lastDotStr = dotStr;
             var images = [...lastDotStr.matchAll(/<IMG[^>]+SRC="([^"]*)/gmi)].map(function (matches) {
                 return {
@@ -574,6 +589,7 @@ use Fisharebest\Webtrees\Tree;
                 minZoom: fullZoom / 2,
                 initialZoom: fullZoom
             });
+            showToast("Generated "+indiNum+" individuals and "+famNum+" family records",5000);
             return element;
         }).catch(function (error) {
             rendering.innerHTML = '<div class="alert alert-danger" role="alert"><?= I18N::translate('Error running GVExport in Browser mode') ?>:<br>' + error + '</div>';
@@ -588,7 +604,6 @@ use Fisharebest\Webtrees\Tree;
                 workerURL: workerURL
             });
         });
-        showToast("Rendering complete",5000);
         return false;
     }
 
