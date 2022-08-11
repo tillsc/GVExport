@@ -501,6 +501,10 @@ use Fisharebest\Webtrees\Tree;
         let params = new URLSearchParams(args);
         params.delete('reset');
         history.pushState(null, '', url+"?"+params.toString())
+        if (params.toString().search("reset") !== -1) {
+            params.delete('reset');
+            history.pushState(null, '', url + "?" + params.toString())
+        }
     });
     document.querySelector('.update-browser-rendering').addEventListener('click', function(e) {
         updateRender();
@@ -584,10 +588,13 @@ use Fisharebest\Webtrees\Tree;
                 workerURL: workerURL
             });
         });
+        showToast("Rendering complete",5000);
         return false;
     }
 
 </script>
+
+<div id="toast"></div>
 
 <template id=dropdown>
     <div style="position: relative; z-index: 10000">
