@@ -40,6 +40,8 @@ $GVE_CONFIG["graphviz_bin"] = "/usr/bin/dot"; // Default on Debian Linux
 $GVE_CONFIG["filename"] = "gvexport";
 
 // Test we can actually access GraphViz
+$stdout_output = null;
+$return_var = null;
 exec($GVE_CONFIG["graphviz_bin"] . " -V"." 2>&1", $stdout_output, $return_var);
 if ($return_var !== 0)
 {
