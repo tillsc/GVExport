@@ -541,7 +541,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
         $out .= $dot->getDOTDump();
         if (isset($_POST["browser"]) && $_POST["browser"] == "true") {
             // Add in our counts of individuals and families so we can show a message
-            $indinum = //sizeof($dot->individuals);
+            $indinum = sizeof($dot->individuals);
             $famnum = sizeof($dot->families);
             $r = $indinum . "|" . $famnum . "|" . $out;
         } else {

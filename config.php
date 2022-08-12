@@ -39,11 +39,16 @@ $GVE_CONFIG["graphviz_bin"] = "/usr/bin/dot"; // Default on Debian Linux
 
 $GVE_CONFIG["filename"] = "gvexport";
 
+// Check if exec function disabled on web server
+$disabled = explode(',', ini_get('disable_functions'));
+$exec_available = !in_array('exec', $disabled);
 // Test we can actually access GraphViz
 $stdout_output = null;
 $return_var = null;
-exec($GVE_CONFIG["graphviz_bin"] . " -V"." 2>&1", $stdout_output, $return_var);
-if ($return_var !== 0)
+if ($exec_available) {
+	exec($GVE_CONFIG["graphviz_bin"] . " -V" . " 2>&1", $stdout_output, $return_var);
+}
+if (!$exec_available || $return_var !== 0)
 {
 	$GVE_CONFIG["graphviz_bin"] = "";
 }
