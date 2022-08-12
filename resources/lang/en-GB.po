@@ -265,3 +265,15 @@ msgstr "Use clippings cart"
 msgid "Ignore clippings cart"
 msgstr "Ignore clippings cart"
 
+#: 
+msgid "Warning"
+msgstr "Warning"
+
+#: 
+msgid "Individual required"
+msgstr "Individual required"
+
+#: 
+msgid "Generated ${indiNum} individuals and ${famNum} family records"
+msgstr "Generated ${indiNum} individuals and ${famNum} family records"
+
