@@ -597,7 +597,7 @@ use Fisharebest\Webtrees\Tree;
                 minZoom: fullZoom / 2,
                 initialZoom: fullZoom
             });
-            showToast("Generated "+indiNum+" individuals and "+famNum+" family records",5000);
+            showToast(`<?= I18N::translate('Generated ${indiNum} individuals and ${famNum} family records'); ?>`,5000);
             return element;
         }).catch(function (error) {
             rendering.innerHTML = '<div class="alert alert-danger" role="alert"><?= I18N::translate('Error running GVExport in Browser mode') ?>:<br>' + error + '</div>';
