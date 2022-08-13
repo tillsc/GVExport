@@ -235,12 +235,19 @@ class Dot {
 
 		// Show preferred name as underlined by replacing span with underline tags
 		$pos_start = strpos($name,'<span class="starredname">');
-		if ($pos_start !== false) {
+		while ($pos_start != false) {
+			// Start by replacing the </span>
 			$pos_end = strpos(substr($name, $pos_start), "</span>") + $pos_start;
 			if ($pos_end) {
 				$name = substr_replace($name, "_/U_", $pos_end, strlen("</span>"));
 			}
-			$name = str_replace('<span class="starredname">', '_U_', $name);
+
+			// Next do the starting tags
+			$pos_start = strpos($name,'<span class="starredname">');
+			if ($pos_start !== false) {
+				$name = substr_replace($name, "_U_", $pos_start, strlen('<span class="starredname">'));
+			}
+			$pos_start = strpos($name,'<span class="starredname">');
 		}
 		$name = strip_tags($name);
 		// We use _ instead of < >, remove tags, then switch them to proper tags. This lets
