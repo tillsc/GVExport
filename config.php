@@ -39,16 +39,13 @@ $GVE_CONFIG["graphviz_bin"] = "/usr/bin/dot"; // Default on Debian Linux
 
 $GVE_CONFIG["filename"] = "gvexport";
 
-// Check if exec function disabled on web server
-$disabled = explode(',', ini_get('disable_functions'));
-$exec_available = !in_array('exec', $disabled);
 // Test we can actually access GraphViz
 $stdout_output = null;
 $return_var = null;
-if ($exec_available) {
+if (is_exec_available()) {
 	exec($GVE_CONFIG["graphviz_bin"] . " -V" . " 2>&1", $stdout_output, $return_var);
 }
-if (!$exec_available || $return_var !== 0)
+if (!is_exec_available() || $return_var !== 0)
 {
 	$GVE_CONFIG["graphviz_bin"] = "";
 }
@@ -163,5 +160,29 @@ foreach ($json as $row) {
 }
 // Options for abbreviating place names
 $GVE_CONFIG["settings"]["use_abbr_places"] = [0 => "Full place name", 10 => "City and Country" ,  20 => "City and 2 Letter ISO Country Code", 30 => "City and 3 Letter ISO Country Code"];
+
+// Check if exec function is available to prevent error if webserver has disabled it
+// From: https://stackoverflow.com/questions/3938120/check-if-exec-is-disabled
+function is_exec_available() {
+	static $available;
+
+	if (!isset($available)) {
+		$available = true;
+		if (ini_get('safe_mode')) {
+			$available = false;
+		} else {
+			$d = ini_get('disable_functions');
+			$s = ini_get('suhosin.executor.func.blacklist');
+			if ("$d$s") {
+				$array = preg_split('/,\s*/', "$d,$s");
+				if (in_array('exec', $array)) {
+					$available = false;
+				}
+			}
+		}
+	}
+
+	return $available;
+}
 
 ?>
