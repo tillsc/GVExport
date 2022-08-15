@@ -1192,7 +1192,7 @@ class Dot {
 			}
 		}
 
-		if (!$stop_proc)
+		if (!$stop_proc || $full)
 		{
 
 			// Add ancestors (parents)
