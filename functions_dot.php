@@ -347,6 +347,7 @@ class Dot {
 				foreach ($this->individuals as $indi) {
 					if (!$indi['rel']) {
 						$NonrelativeExists = TRUE;
+						break;
 					}
 				}
 				// If there are non-related persons, generate a full relative tree starting from
