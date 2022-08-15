@@ -336,14 +336,39 @@ class Dot {
 	function createDOTDump() {
 		// If no individuals in the clippings cart (or option chosen to overide), use standard method
 		if (!functionsClippingsCart::isIndividualInCart($this->tree) || !$this->settings["usecart"] ) {
-			// If option to display related in another colour is selected, generate full tree of
-			// inviduals related to starting person(s)
+			// Create our tree
+			$this->createIndiList($this->individuals, $this->families, false, null);
+			// If option to display related in another colour is selected,
+			// check if any non-related persons in tree
 			$relList = array();
 			$relFams = array();
 			if ($this->settings["mark_not_related"]) {
-				$this->createIndiList($relList, $relFams, true, null);
+				$NonrelativeExists = FALSE;
+				foreach ($this->individuals as $indi) {
+					if (!$indi['rel']) {
+						$NonrelativeExists = TRUE;
+					}
+				}
+				// If there are non-related persons, generate a full relative tree starting from
+				// the initial persons, to ensure no relation links exist outside displayed records
+				if ($NonrelativeExists) {
+					// Save and change some settings before generating full tree
+					$save = $this->indi_search_method;
+					$this->indi_search_method = array("ance" => TRUE, "desc" => TRUE, "spou" => FALSE, "sibl" => TRUE, "cous" => TRUE, "any" => FALSE);
+					// Generate full tree of relatives
+					$this->createIndiList($relList, $relFams, true, null);
+					// Restore settings
+					$this->indi_search_method = $save;
+					// Update our relative statuses on the main tree
+					foreach ($this->individuals as $indi) {
+						$pid = $indi['pid'];
+						// If needed, overwrite relation status
+						if (isset($relList[$pid])) {
+							$this->individuals[$pid]['rel'] = $relList[$pid]['rel'];
+						}
+					}
+				}
 			}
-			$this->createIndiList($this->individuals, $this->families, false, $relList);
 		} else {
 		// If individuals in clipping cart and option chosen to use them, then proceed
 			$functionsCC = new functionsClippingsCart($this->tree, $this->isPhotoRequired(), ($this->settings["diagram_type"] == "combined"));
@@ -1057,13 +1082,6 @@ class Dot {
 		$ance_level = $this->indi_search_method["ance"] ? $this->settings["ance_level"] : 0;
 		$desc_level = $this->indi_search_method["desc"] ? $this->settings["desc_level"] : 0;
 
-		// If we are generating a full relative tree, then we need to overide some actions
-		if ($full) {
-			$ance = TRUE;
-			$desc = TRUE;
-			$spou = FALSE;
-			$sibl = TRUE;
-		}
 		$individuals[$pid]['pid'] = $pid;
 		if ($relList != null) {
 			if (isset($relList[$pid]) && $relList[$pid]['rel']) {
@@ -1071,7 +1089,7 @@ class Dot {
 			}
 		}
 		// Overwrite the 'related' status if it was not set before or it's 'false' (for those people who are added as both related and non-related)
-		if (!isset($individuals[$pid]['rel']) || ($individuals[$pid]['rel'] == FALSE && $rel)) {
+		if (!isset($individuals[$pid]['rel']) || (!$individuals[$pid]['rel'] && $rel)) {
 			$individuals[$pid]['rel'] = $rel;
 		} else {
 			return false;
@@ -1143,9 +1161,6 @@ class Dot {
 					if ($desc) {
 						$families[$fid]["has_parents"] = TRUE;
 					}
-					//var_dump($this->families[$fid]);
-
-					//$this->addFamToList($fid);
 				}
 			} else {
 				// If there is no spouse family we create a dummy one
