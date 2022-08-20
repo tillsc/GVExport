@@ -478,6 +478,8 @@ use Fisharebest\Webtrees\Tree;
 </div>
 
 <script type="text/javascript">
+    const graphvizAvailable = <?= $nographviz ? "false" : "true" ?>;
+
     var workerURL = '<?= $module->assetUrl('javascript/full.renderer.js'); ?>';
     var viz = new Viz({
         workerURL: workerURL
@@ -488,9 +490,7 @@ use Fisharebest\Webtrees\Tree;
 
     document.addEventListener("DOMContentLoaded", function(e) {
         // Load browser render when page has loaded
-        // Timeout needed as function is in file added to page
-        // by javascript so doesn't exist the instant page loads.
-        setTimeout(updateRender,5);
+        updateRender();
         // Remove reset parameter from URL when page loaded, to prevent
         // further resets when page reloaded
         let url=document.location.href.split("?")[0];
@@ -513,13 +513,35 @@ use Fisharebest\Webtrees\Tree;
         e.preventDefault();
     });
 
-    // If "Download" button clicked, first check that individual has been selected
+    // If "Download" button clicked
     document.querySelector('.main-action').addEventListener('click', function(e) {
+        // first check that individual has been selected
         if (checkIndiBlank() === false) {
             removeError("indi-error");
         } else {
             addError("indi-error","<?= I18N::translate("Individual required") ?>");
             e.preventDefault();
+        }
+
+        // Also check if GraphViz installed. If so then let it handle it,
+        // but if not, trigger client side actions
+        if (!graphvizAvailable) {
+            output = document.getElementById('vars[otype]').value;
+            switch(output) {
+                case "png":
+                    downloadSVGAsPNG();
+                    break;
+                case "svg":
+                    downloadSVGAsText();
+                    break;
+                case "jpg":
+                    downloadSVGAsJPEG();
+                    break;
+                default:
+            }
+            if (output !== "dot") {
+                e.preventDefault();
+            }
         }
     });
 

@@ -51,32 +51,35 @@ if (!is_exec_available() || $return_var !== 0)
 }
 
 // Output file formats
+$GVE_CONFIG["output"]["svg"]["label"] = "SVG"; #ESL!!! 20090213
+$GVE_CONFIG["output"]["svg"]["extension"] = "svg";
+$GVE_CONFIG["output"]["svg"]["exec"] = $GVE_CONFIG["graphviz_bin"] . " -Tsvg:cairo -o" . $GVE_CONFIG["filename"] . ".svg " . $GVE_CONFIG["filename"] . ".dot";
+$GVE_CONFIG["output"]["svg"]["cont_type"] = "image/svg+xml";
+$GVE_CONFIG["output"]["svg"]["rewrite_media_paths"] = true;
+
+
 $GVE_CONFIG["output"]["dot"]["label"] = "DOT"; #ESL!!! 20090213
 $GVE_CONFIG["output"]["dot"]["extension"] = "dot";
 $GVE_CONFIG["output"]["dot"]["exec"] = "";
 $GVE_CONFIG["output"]["dot"]["cont_type"] = "text/plain; charset=utf-8";
 
-if ( !empty( $GVE_CONFIG["graphviz_bin"]) && $GVE_CONFIG["graphviz_bin"] != "") {
-	$GVE_CONFIG["output"]["png"]["label"] = "PNG"; #ESL!!! 20090213
-	$GVE_CONFIG["output"]["png"]["extension"] = "png";
-	$GVE_CONFIG["output"]["png"]["exec"] = $GVE_CONFIG["graphviz_bin"] . " -Tpng -o" . $GVE_CONFIG["filename"] . ".png " . $GVE_CONFIG["filename"] . ".dot";
-	$GVE_CONFIG["output"]["png"]["cont_type"] = "image/png";
+$GVE_CONFIG["output"]["png"]["label"] = "PNG"; #ESL!!! 20090213
+$GVE_CONFIG["output"]["png"]["extension"] = "png";
+$GVE_CONFIG["output"]["png"]["exec"] = $GVE_CONFIG["graphviz_bin"] . " -Tpng -o" . $GVE_CONFIG["filename"] . ".png " . $GVE_CONFIG["filename"] . ".dot";
+$GVE_CONFIG["output"]["png"]["cont_type"] = "image/png";
 
-	$GVE_CONFIG["output"]["jpg"]["label"] = "JPG"; #ESL!!! 20090213
-	$GVE_CONFIG["output"]["jpg"]["extension"] = "jpg";
-	$GVE_CONFIG["output"]["jpg"]["exec"] = $GVE_CONFIG["graphviz_bin"] . " -Tjpg -o" . $GVE_CONFIG["filename"] . ".jpg " . $GVE_CONFIG["filename"] . ".dot";
-	$GVE_CONFIG["output"]["jpg"]["cont_type"] = "image/jpeg";
+$GVE_CONFIG["output"]["jpg"]["label"] = "JPG"; #ESL!!! 20090213
+$GVE_CONFIG["output"]["jpg"]["extension"] = "jpg";
+$GVE_CONFIG["output"]["jpg"]["exec"] = $GVE_CONFIG["graphviz_bin"] . " -Tjpg -o" . $GVE_CONFIG["filename"] . ".jpg " . $GVE_CONFIG["filename"] . ".dot";
+$GVE_CONFIG["output"]["jpg"]["cont_type"] = "image/jpeg";
+
+
+if ( !empty( $GVE_CONFIG["graphviz_bin"]) && $GVE_CONFIG["graphviz_bin"] != "") {
 
 	$GVE_CONFIG["output"]["gif"]["label"] = "GIF"; #ESL!!! 20090213
 	$GVE_CONFIG["output"]["gif"]["extension"] = "gif";
 	$GVE_CONFIG["output"]["gif"]["exec"] = $GVE_CONFIG["graphviz_bin"] . " -Tgif -o" . $GVE_CONFIG["filename"] . ".gif " . $GVE_CONFIG["filename"] . ".dot";
 	$GVE_CONFIG["output"]["gif"]["cont_type"] = "image/gif";
-
-	$GVE_CONFIG["output"]["svg"]["label"] = "SVG"; #ESL!!! 20090213
-	$GVE_CONFIG["output"]["svg"]["extension"] = "svg";
-	$GVE_CONFIG["output"]["svg"]["exec"] = $GVE_CONFIG["graphviz_bin"] . " -Tsvg:cairo -o" . $GVE_CONFIG["filename"] . ".svg " . $GVE_CONFIG["filename"] . ".dot";
-	$GVE_CONFIG["output"]["svg"]["cont_type"] = "image/svg+xml";
-	$GVE_CONFIG["output"]["svg"]["rewrite_media_paths"] = true;
 
 	$GVE_CONFIG["output"]["pdf"]["label"] = "PDF"; #ESL!!! 20090213
 	$GVE_CONFIG["output"]["pdf"]["extension"] = "pdf";
