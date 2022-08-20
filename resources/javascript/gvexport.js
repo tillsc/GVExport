@@ -135,9 +135,7 @@ function updateRelationOption(field) {
 // From https://stackoverflow.com/questions/1769584/get-position-of-element-by-javascript
 function getPos(el, rel)
 {
-    let i = 1;
-
-    var x=0, y=0;
+    let x = 0, y = 0;
 
     do {
         x += el.offsetLeft;
@@ -177,7 +175,7 @@ function showHide(css_class, show) {
 // Show a toast message
 // message - the message to show
 function showToast(message) {
-    var x = document.getElementById("toast");
+    const x = document.getElementById("toast");
     if (x !== null) {
         x.innerText = message;
         x.className = "show";
@@ -185,4 +183,106 @@ function showToast(message) {
             x.className = x.className.replace("show", "");
         }, 5500);
     }
+}
+
+// Download SVG file
+function downloadSVGAsText() {
+    const svg = document.getElementById('rendering').getElementsByTagName('svg')[0].cloneNode(true);
+    svg.removeAttribute("style");
+    let svgData = svg.outerHTML.replace(/&nbsp;/g, '');
+    // Replace image URLs with embedded data  for SVG also triggers download
+    replaceImageURLs(svgData, "svg", null);
+}
+
+function downloadSVGAsPNG() {
+    downloadSVGAsImage("png");
+}
+
+function downloadSVGAsJPEG() {
+    downloadSVGAsImage("jpeg");
+}
+
+// Download PNG from SVG file
+function downloadSVGAsImage(type) {
+    const svg = document.getElementById('rendering').getElementsByTagName('svg')[0].cloneNode(true);
+    // Style attribute used for the draggable browser view, remove this to reset to standard SVG
+    svg.removeAttribute("style");
+
+    const canvas = document.createElement("canvas");
+    const img = document.createElement("img");
+    // get svg data and remove line breaks
+    let xml = new XMLSerializer().serializeToString(svg);
+    // Fix the + symbol (any # breaks everything)
+    xml = xml.replace(/&#45;/g,"+");
+    // Replace # colours with rgb equivalent
+    // From https://stackoverflow.com/questions/13875974/search-and-replace-hexadecimal-color-codes-with-rgb-values-in-a-string
+    const rgbHex = /#([0-9A-F][0-9A-F])([0-9A-F][0-9A-F])([0-9A-F][0-9A-F])/gi;
+    xml = xml.replace(rgbHex, function (m, r, g, b) {
+        return 'rgb(' + parseInt(r,16) + ','
+            + parseInt(g,16) + ','
+            + parseInt(b,16) + ')';
+    });
+    // Replace image URLs with embedded images
+    replaceImageURLs(xml, type, img);
+    // Once image loaded, draw to canvas then download it
+    img.onload = function() {
+        canvas.setAttribute('width', img.width.toString());
+        canvas.setAttribute('height', img.height.toString());
+        // draw the image onto the canvas
+        let context = canvas.getContext('2d');
+        context.drawImage(img, 0, 0, img.width, img.height);
+        // Download it
+        const dataURL = canvas.toDataURL('image/'+type);
+        downloadLink(dataURL, "gvexport."+type);
+    }
+
+}
+
+// Convert image URL to base64 data - we use for embedding images in SVG
+// From https://stackoverflow.com/questions/22172604/convert-image-from-url-to-base64
+function getBase64Image(img) {
+    const canvas = document.createElement("canvas");
+    canvas.width = img.width;
+    canvas.height = img.height;
+    const ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0);
+    return canvas.toDataURL("image/png");
+}
+
+// Find image URLs and replace with embedded versions
+function replaceImageURLs(svg, type, img) {
+    let protocol = "http";
+    let start = '<image xlink:href="'+protocol;
+    let startPos, len, url;
+    if (svg.indexOf(start) !== -1) {
+        startPos = svg.indexOf(start)+start.length-protocol.length;
+        len = svg.substring(startPos).indexOf("\"");
+        url = svg.substring(startPos,startPos+len);
+        const img2 = document.createElement("img");
+        img2.onload = function() {
+            let base64 = getBase64Image(img2);
+            svg = svg.replace(url,base64);
+            replaceImageURLs(svg, type, img);
+            img2.remove();
+        }
+        img2.src = url.replace(/&amp;/g,"&");
+    } else {
+        if (type === "svg") {
+            const svgBlob = new Blob([svg], {type: "image/svg+xml;charset=utf-8"});
+            const svgUrl = URL.createObjectURL(svgBlob);
+            downloadLink(svgUrl, "gvexport."+type);
+        } else {
+            img.src = "data:image/svg+xml;utf8," + svg;
+        }
+    }
+}
+
+// Trigger a download via javascript
+function downloadLink(URL, filename) {
+    const downloadLink = document.createElement("a");
+    downloadLink.href = URL;
+    downloadLink.download = filename;
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
 }
