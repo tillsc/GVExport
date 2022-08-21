@@ -267,3 +267,11 @@ msgstr "Negeer stamboomknipsels"
 msgid "Warning"
 msgstr "Waarschuwing"
 
+#: 
+msgid "Individual required"
+msgstr "Persoon vereist"
+
+#: 
+msgid "Generated ${indiNum} individuals and ${famNum} family records"
+msgstr "${indiNum} persoons- en ${famNum} gezinsrecords gegenereerd"
+

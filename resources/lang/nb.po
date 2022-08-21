@@ -5,11 +5,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: POEditor.com\n"
 "Project-Id-Version: GVExport\n"
-"Language: en-us\n"
+"Language: nb\n"
 
 #: 
 msgid "Update"
-msgstr "Update"
+msgstr "Oppdater"
 
 #: 
 msgid "Render serverside"
@@ -17,147 +17,147 @@ msgstr "Render serverside"
 
 #: 
 msgid "Reset"
-msgstr "Reset"
+msgstr "Nullstill"
 
 #: 
 msgid "Diagram preferences"
-msgstr "Diagram preferences"
+msgstr "Diagrampreferanser"
 
 #: 
 msgid "Appearance"
-msgstr "Appearance"
+msgstr "Utseende"
 
 #: 
 msgid "Output Settings"
-msgstr "Output Settings"
+msgstr "Innstillinger for utdata"
 
 #: 
 msgid "Include anyone related to"
-msgstr "Include anyone related to"
+msgstr "Inkluder alle som er relatert til"
 
 #: 
 msgid "Stop processing on"
-msgstr "Stop processing on"
+msgstr "Stopp behandlingen på"
 
 #: 
 msgid "Include Ancestors"
-msgstr "Include Ancestors"
+msgstr "Inkluder forfedre"
 
 #: 
 msgid "Include"
-msgstr "Include"
+msgstr "Inkluder"
 
 #: 
 msgid "Siblings"
-msgstr "Siblings"
+msgstr "Søsken"
 
 #: 
 msgid "Cousins"
-msgstr "Cousins"
+msgstr "Søskenbarn"
 
 #: 
 msgid "Spouses"
-msgstr "Spouses"
+msgstr "Ektefeller"
 
 #: 
 msgid "Include Descendants"
-msgstr "Include Descendants"
+msgstr "Inkluder etterkommere"
 
 #: 
 msgid "Max Levels"
-msgstr "Max Levels"
+msgstr "Maks nivåer"
 
 #: 
 msgid "Mark not blood-related people with different color"
-msgstr "Mark not blood-related people with different color"
+msgstr "Merk ikke blodrelaterte personer med ulik farge"
 
 #: 
 msgid "Add URL to individuals and families"
-msgstr "Add URL to individuals and families"
+msgstr "Legg til URL til enkeltpersoner og familier"
 
 #: 
 msgid "Use abbreviated placenames"
-msgstr "Use abbreviated placenames"
+msgstr "Bruk forkortede stedsnavn"
 
 #: 
 msgid "Show Birth Date"
-msgstr "Show Birth Date"
+msgstr "Vis fødselsdato"
 
 #: 
 msgid "Show Birth Place"
-msgstr "Show Birth Place"
+msgstr "Vis fødested"
 
 #: 
 msgid "Show Death Date"
-msgstr "Show Death Date"
+msgstr "Vis dødsdato"
 
 #: 
 msgid "Full Date"
-msgstr "Full Date"
+msgstr "Full dato"
 
 #: 
 msgid "Year"
-msgstr "Year"
+msgstr "År"
 
 #: 
 msgid "Show Death Place"
-msgstr "Show Death Place"
+msgstr "Vis dødsstedet"
 
 #: 
 msgid "Show Family ID"
-msgstr "Show Family ID"
+msgstr "Vis familie-ID"
 
 #: 
 msgid "Show Marriage Date"
-msgstr "Show Marriage Date"
+msgstr "Vis ekteskapsdato"
 
 #: 
 msgid "Show Marriage Place"
-msgstr "Show Marriage Place"
+msgstr "Vis ekteskapssted"
 
 #: 
 msgid "Graph Direction"
-msgstr "Graph Direction"
+msgstr "Graf retning"
 
 #: 
 msgid "Diagram Type"
-msgstr "Diagram Type"
+msgstr "Diagramtype"
 
 #: 
 msgid "Simple"
-msgstr "Simple"
+msgstr "Enkel"
 
 #: 
 msgid "Decorated"
-msgstr "Decorated"
+msgstr "Dekorert"
 
 #: 
 msgid "Combined"
-msgstr "Combined"
+msgstr "Kombinert"
 
 #: 
 msgid "Add photos"
-msgstr "Add photos"
+msgstr "Legg til bilder"
 
 #: 
 msgid "Only Decorated or Combined"
-msgstr "Only Decorated or Combined"
+msgstr "Kun dekorert eller kombinert"
 
 #: 
 msgid "Output File Type"
-msgstr "Output File Type"
+msgstr "Utdatafiltype"
 
 #: 
 msgid "Generate a file for download"
-msgstr "Generate a file for download"
+msgstr "Generer en fil for nedlasting"
 
 #: 
 msgid "Number of iterations (MCLIMIT)"
-msgstr "Number of iterations (MCLIMIT)"
+msgstr "Antall iterasjoner (MCLIMIT)"
 
 #: 
 msgid "helps to reduce the crossings on the graph. This can be really slow (up to 10..15x compared to the 20 setting)"
-msgstr "helps to reduce the crossings on the graph. This can be really slow (up to 10-15x compared to the 20 setting)"
+msgstr "bidrar til å redusere kryssene på grafen. Dette kan være veldig tregt (opptil 10..15x sammenlignet med 20-innstillingen)"
 
 #: 
 msgid "DPI"
@@ -165,113 +165,113 @@ msgstr "DPI"
 
 #: 
 msgid "Show Selection"
-msgstr "Show Selection"
+msgstr "Vis utvalg"
 
 #: 
 msgid "SVG only"
-msgstr "SVG only"
+msgstr "Kun SVG"
 
 #: 
 msgid "Top-to-Bottom"
-msgstr "Top-to-Bottom"
+msgstr "Topp til bunn"
 
 #: 
 msgid "Left-to-Right"
-msgstr "Left-to-Right"
+msgstr "Venstre til høyre"
 
 #: 
 msgid "Space between generations"
-msgstr "Space between generations"
+msgstr "Plass mellom generasjoner"
 
 #: 
 msgid "Space between individuals on the same level"
-msgstr "Space between individuals on the same level"
+msgstr "Plass mellom individer på samme nivå"
 
 #: 
 msgid "Error running GVExport in Browser mode"
-msgstr "Error running GVExport in Browser mode"
+msgstr "Feil ved kjøring av GVExport i nettlesermodus"
 
 #: 
 msgid "Preview"
-msgstr "Preview"
+msgstr "Forhåndsvisning"
 
 #: 
 msgid "Download"
-msgstr "Download"
+msgstr "Nedlasting"
 
 #: 
 msgid "Full place name"
-msgstr "Full place name"
+msgstr "Fullt stedsnavn"
 
 #: 
 msgid "City and Country"
-msgstr "City and Country"
+msgstr "By og land"
 
 #: 
 msgid "City and 2 Letter ISO Country Code"
-msgstr "City and 2 Letter ISO Country Code"
+msgstr "By og ISO-landskode på 2 bokstaver"
 
 #: 
 msgid "City and 3 Letter ISO Country Code"
-msgstr "City and 3 Letter ISO Country Code"
+msgstr "By og 3-bokstavs ISO-landskode"
 
 #: 
 msgid "Space"
-msgstr "Space"
+msgstr "Plass"
 
 #: 
 msgid "Between generations"
-msgstr "Between generations"
+msgstr "Mellom generasjoner"
 
 #: 
 msgid "Between individuals on the same level"
-msgstr "Between individuals on the same level"
+msgstr "Mellom individer på samme nivå"
 
 #: 
 msgid "Abbreviated place names"
-msgstr "Abbreviated place names"
+msgstr "Forkortede stedsnavn"
 
 #: 
 msgid "People to be included"
-msgstr "People to be included"
+msgstr "Personer som skal inkluderes"
 
 #: 
 msgid "Show Individual ID"
-msgstr "Show Individual ID"
+msgstr "Vis individuell ID"
 
 #: 
 msgid "Options limited as GraphViz not installed on server"
-msgstr "Options limited as GraphViz not installed on server"
+msgstr "Alternativer begrenset da GraphViz ikke er installert på serveren"
 
 #: 
 msgid "Anyone"
-msgstr "Anyone"
+msgstr "Hvem som helst"
 
 #: 
 msgid "All relatives"
-msgstr "All relatives"
+msgstr "Alle pårørende"
 
 #: 
 msgid "You have items in the clippings cart, which can be used for the diagram instead of the below options."
-msgstr "You have items in the clippings cart, which can be used for the diagram instead of the below options."
+msgstr "Du har elementer i utklippsvognen, som kan brukes til diagrammet i stedet for alternativene nedenfor."
 
 #: 
 msgid "Use clippings cart"
-msgstr "Use clippings cart"
+msgstr "Bruk utklippsvogn"
 
 #: 
 msgid "Ignore clippings cart"
-msgstr "Ignore clippings cart"
+msgstr "Ignorer utklippsvogn"
 
 #: 
 msgid "Warning"
-msgstr "Warning"
+msgstr "Advarsel"
 
 #: 
 msgid "Individual required"
-msgstr "Individual required"
+msgstr "Individuell påkrevd"
 
 #: 
 msgid "Generated ${indiNum} individuals and ${famNum} family records"
-msgstr "Generated ${indiNum} individuals and ${famNum} family records"
+msgstr "Genererte ${indiNum} individer og ${famNum} familieposter"
 
