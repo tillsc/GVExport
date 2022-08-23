@@ -265,55 +265,75 @@ class Dot {
 	}
 
 	/** Checks if provided individual is related by
-	 * adoption to the provided family record
-	 * @param individual $i webtrees individual object for the person to check
-	 * @param family $f webtrees family object for the family to check against
+	 * adoption or foster to the provided family record
+	 * @param Individual $i webtrees individual object for the person to check
+	 * @param Family $f webtrees family object for the family to check against
 	 * @param integer $ind the indent level for printing the debug log
 	 * @return string
 	 */
-	function checkIndiAdopted($i, $f, $ind) {
+	function getRelationshipType($i, $f, int $ind): string
+	{
 		$fid = $f->xref();
 		$facts = $i->facts();
-		$adopfam_found = FALSE;
+		$famFound = FALSE;
 
 		// --- DEBUG ---
 		if ($this->settings["debug"]) {
-			$this->printDebug("-- Checking if link between individual ".$i->xref()." and family ".$fid." is by adoption.\n", $ind);
+			$this->printDebug("-- Checking if link between individual ".$i->xref()." and family ".$fid." is by blood.\n", $ind);
 		}
 		// -------------
 
-
-		// Find out that actual family has adopters or not
+		// Find out if individual has adoption record
 		foreach ($facts as $fact) {
-			if (substr_count($fact->gedcom(), "1 ADOP") > 0) {
-				$adop = preg_split("/\n/", $fact->gedcom());
-				foreach ($adop as $adopline) {
-					if (substr_count($adopline, "2 FAMC") > 0) {
-						$adopfamcline = preg_split("/@/", $adopline);
-						$adopfamid = $adopfamcline[1];
+			$gedcom = strtoupper($fact->gedcom());
+			// If adoption record found, check for family link
+			if (substr_count($gedcom, "1 ADOP") > 0) {
+				$GEDLines = preg_split("/\n/", $gedcom);
+				foreach ($GEDLines as $line) {
+					if (substr_count($line, "2 FAMC") > 0) {
+						$GEDFamID = explode("@", $line)[1];
 
-						// Adopter family found
-						if ($adopfamid == $fid) {
-							$adopfam_found = TRUE;
+						// Check if link is to the family we are looking for
+						if ($GEDFamID == $fid) {
+							$famFound = TRUE;
 							// ---DEBUG---
 							if ($this->settings["debug"]) {
-									$this->printDebug("(".$i->xref().") -- ADOP record: " . preg_replace("/\n/", " | ", $fact->gedcom()) . "\n", $ind);
+									$this->printDebug("(".$i->xref().") -- ADOP record: " . preg_replace("/\n/", " | ", $gedcom) . "\n", $ind);
 							}
 							// -----------
 						}
 					}
 
-					if ($adopfam_found && substr_count($adopline, "3 ADOP") > 0) {
-						$adopfamcadopline = preg_split("/ /", $adopline);
-						$adopfamcadoptype = $adopfamcadopline[2];
+					if ($famFound && substr_count($line, "3 ADOP") > 0) {
+						$adopfamcadoptype = explode(" ", $line)[2];
+						break;
+					}
+				}
+			}
+
+			// Find other non-blood relationships between records
+			if (substr_count($gedcom, "2 PEDI") > 0 && substr_count($gedcom, "2 PEDI BIRTH") == 0) {
+				$GEDLines = preg_split("/\n/", $gedcom);
+				foreach ($GEDLines as $line) {
+					if (substr_count($line, "1 FAMC") > 0) {
+						$GEDFamID = explode("@", $line)[1];
+
+						// Adopter family found
+						if ($GEDFamID == $fid) {
+							$adopfamcadoptype = "OTHER";
+							break;
+						}
 					}
 				}
 			}
 		}
+		// If we found no record of non-blood relationship, return blank
+		// Otherwise return the type ("BOTH/HUSB/WIFE for adoptions, "OTHER" for anything else)
 		if (!isset($adopfamcadoptype)) {
-			$adopfamcadoptype = "";
+			return "";
+		} else {
+			return $adopfamcadoptype;
 		}
-		return $adopfamcadoptype;
 	}
 
 	function createIndiList (&$individuals, &$families, $full, $relList) {
@@ -1233,9 +1253,9 @@ class Dot {
 						$f = $this->getUpdatedFamily($fid);
 
 						// First check if we are related to our own family
-						$adopfamcadoptype = $this->checkIndiAdopted($i, $f, $ind);
+						$relationshipType = $this->getRelationshipType($i, $f, $ind);
 						// Not related - so overide the initial setting
-						if ($adopfamcadoptype != "") {
+						if ($relationshipType != "") {
 							$rel = false;
 						}
 
@@ -1260,7 +1280,7 @@ class Dot {
 						}
 
 						// Work out if indi has adoptive relationship to this family
-						$adopfamcadoptype = $this->checkIndiAdopted($i, $fam, $ind);
+						$relationshipType = $this->getRelationshipType($i, $fam, $ind);
 						// Add father & mother
 						$h = $f->husband();
 						$w = $f->wife();
@@ -1277,14 +1297,14 @@ class Dot {
 							$families[$fid]["has_children"] = TRUE;
 							$families[$fid]["husb_id"] = $husb_id;
 
-							if ($adopfamcadoptype == "BOTH" || $adopfamcadoptype == "HUSB") {
+							if ($relationshipType == "BOTH" || $relationshipType == "HUSB") {
 								// --- DEBUG ---
 								if ($this->settings["debug"]) {
 									$this->printDebug("($pid) -- adding an _ADOPTING_ PARENT /FATHER/ with INDI id ($husb_id) from FAM ($fid):\n", $ind);
 									//var_dump($fams);
 								}
 								// -------------
-								$this->addIndiToList($pid."|Code 1", $husb_id, TRUE, FALSE, $this->indi_search_method["spou"] && $adopfamcadoptype !== "BOTH", $this->indi_search_method["sibl"], FALSE, $ind, $level+1, $individuals, $families, $full, $relList);
+								$this->addIndiToList($pid."|Code 1", $husb_id, TRUE, FALSE, $this->indi_search_method["spou"] && $relationshipType !== "BOTH", $this->indi_search_method["sibl"], FALSE, $ind, $level+1, $individuals, $families, $full, $relList);
 							} else {
 								// --- DEBUG ---
 								if ($this->settings["debug"]) {
@@ -1299,14 +1319,14 @@ class Dot {
 							$families[$fid]["has_children"] = TRUE;
 							$families[$fid]["wife_id"] = $wife_id;
 
-							if ($adopfamcadoptype == "BOTH" || $adopfamcadoptype == "WIFE") {
+							if ($relationshipType == "BOTH" || $relationshipType == "WIFE") {
 								// --- DEBUG ---
 								if ($this->settings["debug"]) {
 									$this->printDebug("($pid) -- adding an _ADOPTING_ PARENT /MOTHER/ with INDI id ($wife_id) from FAM ($fid):\n", $ind);
 									//var_dump($fams);
 								}
 								// -------------
-								$this->addIndiToList($pid."|Code 3", $wife_id, TRUE, FALSE, $this->indi_search_method["spou"] && $adopfamcadoptype !== "BOTH", $this->indi_search_method["sibl"], FALSE, $ind, $level+1, $individuals, $families, $full, $relList);
+								$this->addIndiToList($pid."|Code 3", $wife_id, TRUE, FALSE, $this->indi_search_method["spou"] && $relationshipType !== "BOTH", $this->indi_search_method["sibl"], FALSE, $ind, $level+1, $individuals, $families, $full, $relList);
 							} else {
 								// --- DEBUG ---
 								if ($this->settings["debug"]) {
@@ -1410,8 +1430,8 @@ class Dot {
 							// -------------
 
 							// Work out if indi has adoptive relationship to this family
-							$adopfamcadoptype = $this->checkIndiAdopted($child, $f, $ind);
-							if ($adopfamcadoptype != "") {
+							$relationshipType = $this->getRelationshipType($child, $f, $ind);
+							if ($relationshipType != "") {
 								$related = false;
 							} else {
 								$related = $rel;
@@ -1553,8 +1573,8 @@ class Dot {
 							// -------------
 
 							// Work out if indi has adoptive relationship to this family
-							$adopfamcadoptype = $this->checkIndiAdopted($child, $fam, $ind);
-							if ($adopfamcadoptype != "") {
+							$relationshipType = $this->getRelationshipType($child, $fam, $ind);
+							if ($relationshipType != "") {
 								$related = false;
 							} else {
 								$related = $rel;
