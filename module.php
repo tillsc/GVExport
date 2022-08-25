@@ -64,6 +64,10 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
 
     use ModuleCustomTrait;
     use ModuleChartTrait;
+    public const CUSTOM_VERSION     = '2.1.8';
+    public const CUSTOM_MODULE      = "GVExport";
+    public const CUSTOM_LATEST      = 'https://raw.githubusercontent.com/Neriderc/' . self::CUSTOM_MODULE. '/main/latest-version.txt';
+    public const SUPPORT_URL        = 'https://github.com/Neriderc/GVExport';
 
     public function boot(): void
     {
@@ -104,6 +108,36 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
             'xref' => $individual->xref(),
             'tree' => $individual->tree()->name(),
         ]));
+    }
+
+    /**
+     * The version of this module.
+     *
+     * @return string
+     */
+    public function customModuleVersion(): string
+    {
+        return self::CUSTOM_VERSION;
+    }
+
+    /**
+     * A URL that will provide the latest version of this module.
+     *
+     * @return string
+     */
+    public function customModuleLatestVersionUrl(): string
+    {
+        return self::CUSTOM_LATEST;
+    }
+
+    /**
+     * Where to get support for this module.
+     *
+     * @return string
+     */
+    public function customModuleSupportUrl(): string
+    {
+        return self::SUPPORT_URL;
     }
 
     public function getIndividual($tree, $xref): Individual
