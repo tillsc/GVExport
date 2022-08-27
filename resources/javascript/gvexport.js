@@ -185,11 +185,12 @@ function showToast(message) {
             message = message.substring(ERROR_CHAR.length);
         }
         toast.innerText = message;
-        toast.className += " show";
         setTimeout(function () {
             toast.remove();
         }, 5500);
         toastParent.appendChild(toast);
+        toast.setAttribute("style", " margin-left: -"+toast.clientWidth/2 + "px; width:" + toast.clientWidth + "px");
+        toast.className += " show";
     }
 }
 
@@ -241,7 +242,11 @@ function downloadSVGAsImage(type) {
         context.drawImage(img, 0, 0, img.width, img.height);
         // Download it
         const dataURL = canvas.toDataURL('image/'+type);
-        downloadLink(dataURL, "gvexport."+type);
+        if (dataURL.length < 10) {
+            showToast("E:"+CLIENT_ERRORS[0]); // Canvas too big
+        } else {
+            downloadLink(dataURL, "gvexport." + type);
+        }
     }
 
 }
