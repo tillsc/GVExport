@@ -123,6 +123,9 @@ class Dot {
 		$this->settings["ranksep"] = $GVE_CONFIG["settings"]["ranksep"];
 		$this->settings["nodesep"] = $GVE_CONFIG["settings"]["nodesep"];
 		$this->settings["space_base"] = $GVE_CONFIG["settings"]["space_base"];
+
+		$this->settings["adv_people"] = $GVE_CONFIG["settings"]["adv_people"];
+		$this->settings["adv_appear"] = $GVE_CONFIG["settings"]["adv_appear"];
 	}
 
 	function setPageSize($pagesize, $size_x = FALSE, $size_y = FALSE) {
@@ -1148,7 +1151,7 @@ class Dot {
 		$individuals[$pid]['pid'] = $pid;
 
 		// Overwrite the 'related' status if it was not set before or it's 'false' (for those people who are added as both related and non-related)
-		if (!isset($individuals[$pid]['rel'])) {
+		if (!isset($individuals[$pid]['rel']) || !$individuals[$pid]['rel']) {
 			$individuals[$pid]['rel'] = $rel;
 		} else {
 			// We've already added this person
