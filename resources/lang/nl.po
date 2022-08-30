@@ -275,3 +275,15 @@ msgstr "Persoon vereist"
 msgid "Generated ${indiNum} individuals and ${famNum} family records"
 msgstr "${indiNum} persoons- en ${famNum} gezinsrecords gegenereerd"
 
+#: 
+msgid "Invalid starting individual:"
+msgstr "Ongeldige startpersoon:"
+
+#: 
+msgid "Your browser does not support exporting images this large. Please reduce number of records, reduce DPI setting, or use SVG option."
+msgstr "Uw browser ondersteunt het exporteren van zulke grote afbeeldingen niet. Verminder het aantal records, verlaag de DPI-instelling of gebruik de SVG-optie."
+
+#: 
+msgid "Toggle advanced settings"
+msgstr "Geavanceerde instellingen in-/uitschakelen"
+
