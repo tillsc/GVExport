@@ -392,8 +392,8 @@ class Dot {
 			// check if any non-related persons in tree
 			$relList = array();
 			$relFams = array();
+			$NonrelativeExists = FALSE;
 			if ($this->settings["mark_not_related"] && !$this->settings["fast_not_related"]) {
-				$NonrelativeExists = FALSE;
 				foreach ($this->individuals as $indi) {
 					if (!$indi['rel']) {
 						$NonrelativeExists = TRUE;
@@ -1153,7 +1153,11 @@ class Dot {
 
 		// Overwrite the 'related' status if it was not set before or it's 'false' (for those people who are added as both related and non-related)
 		if (!isset($individuals[$pid]['rel']) || !$individuals[$pid]['rel']) {
-			$individuals[$pid]['rel'] = $rel;
+			if ($this->settings["mark_not_related"]) {
+				$individuals[$pid]['rel'] = $rel;
+			} else {
+				$individuals[$pid]['rel'] = TRUE;
+			}
 		} else {
 			// We've already added this person
 			return false;
