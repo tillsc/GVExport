@@ -905,18 +905,18 @@ class Dot {
 			// Show photo
 			if (($this->settings["diagram_type_combined_with_photo"])) {
                 if (isset($this->individuals[$pid]["pic"]) && !empty($this->individuals[$pid]["pic"])) {
-                    $out .= "<TD ROWSPAN=\"2\" CELLPADDING=\"3\" PORT=\"pic\" WIDTH=\"" . ($this->font_size * 5) . "\" HEIGHT=\"" . ($this->font_size * 6) . "\" FIXEDSIZE=\"true\"><IMG SCALE=\"false\" SRC=\"" . $this->individuals[$pid]["pic"] . "\" /></TD>";
+                    $out .= "<TD ROWSPAN=\"2\" CELLPADDING=\"1\" PORT=\"pic\" WIDTH=\"" . ($this->font_size * 3.5) . "\" HEIGHT=\"" . ($this->font_size * 4) . "\" FIXEDSIZE=\"true\"><IMG SCALE=\"false\" SRC=\"" . $this->individuals[$pid]["pic"] . "\" /></TD>";
                 } else {
                     // Blank cell zero width to keep the height right
-                    $out .= "<TD ROWSPAN=\"2\" CELLPADDING=\"3\" PORT=\"pic\" WIDTH=\"0\" HEIGHT=\"" . ($this->font_size * 6) . "\" FIXEDSIZE=\"true\"></TD>";
+                    $out .= "<TD ROWSPAN=\"2\" CELLPADDING=\"1\" PORT=\"pic\" WIDTH=\"0\" HEIGHT=\"" . ($this->font_size * 5) . "\" FIXEDSIZE=\"true\"></TD>";
                 }
 			}
 
 			// Show name
 			if ($this->settings["show_url"]) {
-				$out .= "<TD ALIGN=\"LEFT\" BALIGN=\"LEFT\" PORT=\"dat\" HREF=\"" . $this->convertToHTMLSC($link) . "\" ><FONT COLOR=\"#555555\" POINT-SIZE=\"" . ($this->font_size + 2) ."\">" . $name . "</FONT>";
+				$out .= "<TD ALIGN=\"LEFT\" BALIGN=\"LEFT\" CELLPADDING=\"5\" PORT=\"dat\" HREF=\"" . $this->convertToHTMLSC($link) . "\" ><FONT COLOR=\"#555555\" POINT-SIZE=\"" . ($this->font_size + 2) ."\">" . $name . "</FONT>";
 			} else {
-				$out .= "<TD ALIGN=\"LEFT\" BALIGN=\"LEFT\" PORT=\"dat\"><FONT COLOR=\"#555555\" POINT-SIZE=\"" . ($this->font_size + 2) ."\">" . $name . "</FONT>";
+				$out .= "<TD ALIGN=\"LEFT\" BALIGN=\"LEFT\" CELLPADDING=\"5\" PORT=\"dat\"><FONT COLOR=\"#555555\" POINT-SIZE=\"" . ($this->font_size + 2) ."\">" . $name . "</FONT>";
 			}
 			$out .= "<BR />";
 			$out .= "<FONT COLOR=\"#777777\" POINT-SIZE=\"" . ($this->font_size) ."\">" . $this->settings["birth_text"] . " $birthdate " . (empty($birthplace)?"":"($birthplace)") . "</FONT>";
