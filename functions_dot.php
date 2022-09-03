@@ -474,7 +474,7 @@ class Dot {
 							if (!empty($child) && (isset($this->individuals[$child->xref()]))) {
 								$fams = isset($this->individuals[$child->xref()]["fams"]) ? $this->individuals[$child->xref()]["fams"] : [];
 								foreach ($fams as $fam) {
-									$out .= $this->convertID($fid) . " -> " . $this->convertID($fam) . ":" . $this->convertID($child->xref()) . "\n";
+									$out .= $this->convertID($fid) . " -> " . $this->convertID($fam) . ":" . $this->convertID($child->xref()) . " [color=\"#555555\", arrowsize=0.3] \n";
 								}
 							}
 						}
@@ -497,16 +497,16 @@ class Dot {
 
 					// Draw an arrow from HUSB to FAM
 					if (!empty($husb_id) && (isset($this->individuals[$husb_id]))) {
-						$out .= $this->convertID($husb_id) . " -> " . $this->convertID($fid) ."\n";
+						$out .= $this->convertID($husb_id) . " -> " . $this->convertID($fid) ." [color=\"#555555\", arrowsize=0.3]\n";
 					}
 					// Draw an arrow from WIFE to FAM
 					if (!empty($wife_id) && (isset($this->individuals[$wife_id]))) {
-						$out .= $this->convertID($wife_id) . " -> ". $this->convertID($fid) ."\n";
+						$out .= $this->convertID($wife_id) . " -> ". $this->convertID($fid) ." [color=\"#555555\", arrowsize=0.3]\n";
 					}
 					// Draw an arrow from FAM to each CHIL
 					foreach ($f->children() as $child) {
 						if (!empty($child) && (isset($this->individuals[$child->xref()]))) {
-							$out .= $this->convertID($fid) . " -> " . $this->convertID($child->xref()) . "\n";
+							$out .= $this->convertID($fid) . " -> " . $this->convertID($child->xref()) . " [color=\"#555555\", arrowsize=0.3]\n";
 						}
 					}
 				}
@@ -527,10 +527,10 @@ class Dot {
 					foreach ($f->children() as $child) {
 						if (!empty($child) && (isset($this->individuals[$child->xref()]))) {
 							if (!empty($husb_id) && (isset($this->individuals[$husb_id]))) {
-								$out .= $this->convertID($husb_id) . " -> " . $this->convertID($child->xref()) ."\n";
+								$out .= $this->convertID($husb_id) . " -> " . $this->convertID($child->xref()) ." [color=\"#555555\", arrowsize=0.3]\n";
 							}
 							if (!empty($wife_id) && (isset($this->individuals[$wife_id]))) {
-								$out .= $this->convertID($wife_id) . " -> ". $this->convertID($child->xref()) ."\n";
+								$out .= $this->convertID($wife_id) . " -> ". $this->convertID($child->xref()) ." [color=\"#555555\", arrowsize=0.3]\n";
 							}
 						}
 					}
@@ -653,7 +653,6 @@ class Dot {
  	 * @return string colour (#RRGGBB)
  	 */
 	function getFamilyColour() {
-		global $GVE_CONFIG;
 		// Determine the fill color
 		$fillcolor = $this->colors["colorfam"];
 		return $fillcolor;
@@ -684,6 +683,7 @@ class Dot {
 		$out .= "mclimit=\"" . $this->settings["mclimit"] . "\"\n";
 		$out .= "rankdir=\"" . $this->settings["graph_dir"] . "\"\n";
 		$out .= "pagedir=\"LT\"\n";
+		$out .= "bgcolor=\"#eeeeee\"\n";
 		$out .= "edge [ style=solid, arrowhead=normal arrowtail=none];\n";
 		// I need Arial font because of UTF-8 characters - feel free to change it
 		if ($this->settings["diagram_type"] == "simple") {
@@ -892,31 +892,37 @@ class Dot {
 
 			// Draw table
 			if ($this->settings["diagram_type"] == "combined") {
-				$out .= "<TABLE BORDER=\"0\" CELLBORDER=\"0\" CELLPADDING=\"2\" CELLSPACING=\"0\" BGCOLOR=\"#F0F0F0\">";
+				$out .= "<TABLE BORDER=\"0\" CELLBORDER=\"0\" CELLPADDING=\"2\" CELLSPACING=\"0\" BGCOLOR=\"#ffffff\">";
 			} else {
-				$out .= "<TABLE BORDER=\"1\" CELLBORDER=\"0\" CELLPADDING=\"2\" CELLSPACING=\"0\" BGCOLOR=\"#F0F0F0\">";
+				$out .= "<TABLE COLOR=\"#999999\" BORDER=\"1\" CELLBORDER=\"0\" CELLPADDING=\"2\" CELLSPACING=\"0\" BGCOLOR=\"#fefefe\">";
 			}
 
-			// First row (photo & name)
+			// Top line (colour only)
+			$out .= "<TR><TD COLSPAN=\"2\" CELLPADDING=\"2\" BGCOLOR=\"$fillcolor\" PORT=\"nam\"></TD></TR>";
+
+			// Second row (photo, name, birth & death data)
 			$out .= "<TR>";
 			// Show photo
-			if (($this->settings["diagram_type_combined_with_photo"]) && isset($this->individuals[$pid]["pic"]) && !empty($this->individuals[$pid]["pic"])) {
-				$out .= "<TD ROWSPAN=\"2\" CELLPADDING=\"1\" PORT=\"pic\" WIDTH=\"" . ($this->font_size * 5) . "\" HEIGHT=\"" . ($this->font_size * 6) . "\" FIXEDSIZE=\"true\"><IMG SCALE=\"true\" SRC=\"" . $this->individuals[$pid]["pic"] . "\" /></TD>";
+			if (($this->settings["diagram_type_combined_with_photo"])) {
+                if (isset($this->individuals[$pid]["pic"]) && !empty($this->individuals[$pid]["pic"])) {
+                    $out .= "<TD ROWSPAN=\"2\" CELLPADDING=\"3\" PORT=\"pic\" WIDTH=\"" . ($this->font_size * 5) . "\" HEIGHT=\"" . ($this->font_size * 6) . "\" FIXEDSIZE=\"true\"><IMG SCALE=\"false\" SRC=\"" . $this->individuals[$pid]["pic"] . "\" /></TD>";
+                } else {
+                    // Blank cell zero width to keep the height right
+                    $out .= "<TD ROWSPAN=\"2\" CELLPADDING=\"3\" PORT=\"pic\" WIDTH=\"0\" HEIGHT=\"" . ($this->font_size * 6) . "\" FIXEDSIZE=\"true\"></TD>";
+                }
 			}
+
 			// Show name
 			if ($this->settings["show_url"]) {
-				$out .= "<TD CELLPADDING=\"2\" BGCOLOR=\"$fillcolor\" TARGET=\"_blank\" HREF=\"" . $this->convertToHTMLSC($link) . "\" PORT=\"nam\"><FONT POINT-SIZE=\"" . ($this->font_size + 2) ."\">" . $name . "</FONT></TD>";
+				$out .= "<TD ALIGN=\"LEFT\" BALIGN=\"LEFT\" PORT=\"dat\" HREF=\"" . $this->convertToHTMLSC($link) . "\" ><FONT COLOR=\"#555555\" POINT-SIZE=\"" . ($this->font_size + 2) ."\">" . $name . "</FONT>";
 			} else {
-				$out .= "<TD CELLPADDING=\"2\" BGCOLOR=\"$fillcolor\" PORT=\"nam\"><FONT POINT-SIZE=\"" . ($this->font_size + 2) ."\">" . $name . "</FONT></TD>";
+				$out .= "<TD ALIGN=\"LEFT\" BALIGN=\"LEFT\" PORT=\"dat\"><FONT COLOR=\"#555555\" POINT-SIZE=\"" . ($this->font_size + 2) ."\">" . $name . "</FONT>";
 			}
-			$out .= "</TR>";
-
-			// Second row (birth & death data)
-			$out .= "<TR>";
-			$out .= "<TD ALIGN=\"LEFT\" BALIGN=\"LEFT\" PORT=\"dat\">" . $this->settings["birth_text"] . " $birthdate " . (empty($birthplace)?"":"($birthplace)");
+			$out .= "<BR />";
+			$out .= "<FONT COLOR=\"#777777\" POINT-SIZE=\"" . ($this->font_size) ."\">" . $this->settings["birth_text"] . " $birthdate " . (empty($birthplace)?"":"($birthplace)") . "</FONT>";
 			$out .= "<BR />";
 			if ($isdead) {
-				$out .= $this->settings["death_text"] . " $deathdate " . (empty($deathplace)?"":"($deathplace)");
+				$out .= "<FONT COLOR=\"#777777\" POINT-SIZE=\"" . ($this->font_size) ."\">" . $this->settings["death_text"] . " $deathdate " . (empty($deathplace)?"":"($deathplace)") . "</FONT>";
 			} else {
 				$out .= " ";
 			}
@@ -1034,7 +1040,7 @@ class Dot {
 			$out .= "label=<";
 
 			// --- Print table ---
-			$out .= "<TABLE BORDER=\"0\" CELLBORDER=\"1\" CELLPADDING=\"2\" CELLSPACING=\"0\">";
+			$out .= "<TABLE COLOR=\"#999999\" BORDER=\"0\" CELLBORDER=\"1\" CELLPADDING=\"2\" CELLSPACING=\"0\">";
 
 			// --- Print couple ---
 			$out .= "<TR>";
@@ -1090,7 +1096,7 @@ class Dot {
 					$out .= "<TD COLSPAN=\"2\" CELLPADDING=\"0\" PORT=\"marr\" BGCOLOR=\"" . $fillcolor . "\">";
 				}
 
-				$out .= (empty($marriagedate)?".":$marriagedate) . "<BR />" . (empty($marriageplace)?"":"(".$marriageplace.")") . $family;
+				$out .= (empty($marriagedate)?"":$marriagedate) . "<BR />" . (empty($marriageplace)?"":"(".$marriageplace.")") . $family;
 				$out .= "</TD>";
 				$out .= "</TR>";
 			}
@@ -1101,12 +1107,12 @@ class Dot {
 		} else {
 		// Non-combined type
 			if ($this->settings["show_url"]) {
-				$out .= "color=\"#606060\",fillcolor=\"" . $fillcolor . "\", href=\"" . $this->convertToHTMLSC($link) . "\", target=\"_blank\", shape=ellipse, style=filled"; #ESL!!! 20090213 without convertToHTMLSC the dot file has invalid data
+				$out .= "color=\"#999999\",fillcolor=\"" . $fillcolor . "\", href=\"" . $this->convertToHTMLSC($link) . "\", target=\"_blank\", shape=ellipse, style=filled"; #ESL!!! 20090213 without convertToHTMLSC the dot file has invalid data
 			} else {
-				$out .= "color=\"#606060\",fillcolor=\"" . $fillcolor . "\", shape=ellipse, style=filled";
+				$out .= "color=\"#999999\",fillcolor=\"" . $fillcolor . "\", shape=ellipse, style=filled";
 			}
-			$out .= ", label=" . '"' . (empty($marriagedate)?'':$marriagedate) . '\n' . (empty($marriageplace)?'':'('.$marriageplace.')') . $family . '"';
-		}
+			$out .= ", label=" . '"' . (empty($marriagedate)?'':$marriagedate.'\n') . (empty($marriageplace)?'':'('.$marriageplace.')') . $family . '"';
+        }
 
 		$out .= "];\n";
 
