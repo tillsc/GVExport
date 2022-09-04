@@ -36,7 +36,15 @@ use Fisharebest\Webtrees\Tree;
     // Javascript functions
     var newScript = document.createElement("script");
     newScript.onload = function() {
-        pageLoaded();
+        // Check that a) our function that runs on page load has been loaded, and
+        // b), jQuery exists (as this comes via webtrees)
+        if (typeof pageLoaded === 'function' && typeof jQuery === 'function') {
+            pageLoaded();
+        } else {
+            // If external script loads before inline script, then wait
+            // 100 milliseconds before trying to run page loaded function.
+            setTimeout(pageLoaded, 100);
+        }
     };
     newScript.setAttribute("type","text/javascript");
     newScript.setAttribute("src","<?= $gvexport_js ?>");
