@@ -275,3 +275,23 @@ msgstr "Individuell påkrevd"
 msgid "Generated ${indiNum} individuals and ${famNum} family records"
 msgstr "Genererte ${indiNum} individer og ${famNum} familieposter"
 
+#: 
+msgid "Invalid starting individual:"
+msgstr ""
+
+#: 
+msgid "Your browser does not support exporting images this large. Please reduce number of records, reduce DPI setting, or use SVG option."
+msgstr ""
+
+#: 
+msgid "Toggle advanced settings"
+msgstr ""
+
+#: 
+msgid "Ignore unseen links to speed up relative check"
+msgstr ""
+
+#: 
+msgid "Non-relatives"
+msgstr ""
+
