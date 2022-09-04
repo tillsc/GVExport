@@ -101,7 +101,7 @@ $GVE_CONFIG["dot"]["colorm_nr"] = "#EEF8F8";	// Default color of not blood-relat
 $GVE_CONFIG["dot"]["colorf_nr"] = "#FDF2F2";	// Default color of not blood-related female individuals
 $GVE_CONFIG["dot"]["colorx_nr"] = "#FCF7E3";	// Default color of not blood-related Other gender individuals
 $GVE_CONFIG["dot"]["coloru_nr"] = "#D6EED6";	// Default color of not blood-related unknown gender individuals
-$GVE_CONFIG["dot"]["colorfam"] = "#FFFFE0";	// Default color of families (different light yellow)
+$GVE_CONFIG["dot"]["colorfam"] = "#FFFFEE";	// Default color of families (different light yellow)
 $GVE_CONFIG["dot"]["colorch"] = "#FF0000"; // Default color of changed (waiting for validation) records
 $GVE_CONFIG["dot"]["fontsize"] = "10";	// Default font size
 
