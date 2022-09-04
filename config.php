@@ -101,7 +101,7 @@ $GVE_CONFIG["dot"]["colorm_nr"] = "#EEF8F8";	// Default color of not blood-relat
 $GVE_CONFIG["dot"]["colorf_nr"] = "#FDF2F2";	// Default color of not blood-related female individuals
 $GVE_CONFIG["dot"]["colorx_nr"] = "#FCF7E3";	// Default color of not blood-related Other gender individuals
 $GVE_CONFIG["dot"]["coloru_nr"] = "#D6EED6";	// Default color of not blood-related unknown gender individuals
-$GVE_CONFIG["dot"]["colorfam"] = "#FFFFE0";	// Default color of families (different light yellow)
+$GVE_CONFIG["dot"]["colorfam"] = "#FFFFEE";	// Default color of families (different light yellow)
 $GVE_CONFIG["dot"]["colorch"] = "#FF0000"; // Default color of changed (waiting for validation) records
 $GVE_CONFIG["dot"]["fontsize"] = "10";	// Default font size
 
@@ -161,9 +161,10 @@ $GVE_CONFIG["debug"] = FALSE;
 // particularly around commercial use. Though all data sources providing ISO data have this problem.
 $string = file_get_contents(dirname(__FILE__)."/resources/data/country-codes_json.json");
 $json = json_decode($string, true);
+
 foreach ($json as $row) {
-	$GVE_CONFIG["countries"]["iso2"][strtolower($row["CLDR display name"])] = $row["ISO3166-1-Alpha-2"];
-	$GVE_CONFIG["countries"]["iso3"][strtolower($row["CLDR display name"])] = $row["ISO3166-1-Alpha-3"];
+	$GVE_CONFIG["countries"]["iso2"][strtolower($row["Name"])] = $row["ISO3166-1-Alpha-2"];
+	$GVE_CONFIG["countries"]["iso3"][strtolower($row["Name"])] = $row["ISO3166-1-Alpha-3"];
 }
 // Options for abbreviating place names
 $GVE_CONFIG["settings"]["use_abbr_places"] = [0 => "Full place name", 10 => "City and Country" ,  20 => "City and 2 Letter ISO Country Code", 30 => "City and 3 Letter ISO Country Code"];
