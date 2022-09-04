@@ -285,5 +285,13 @@ msgstr "Uw browser ondersteunt het exporteren van zulke grote afbeeldingen niet.
 
 #: 
 msgid "Toggle advanced settings"
-msgstr "Geavanceerde instellingen in-/uitschakelen"
+msgstr "Toon/verberg geavanceerde instellingen"
+
+#: 
+msgid "Ignore unseen links to speed up relative check"
+msgstr "Negeer niet-zichtbare relaties om de verwantschapscontrole te versnellen"
+
+#: 
+msgid "Non-relatives"
+msgstr "Niet-verwanten"
 

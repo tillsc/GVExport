@@ -3,13 +3,15 @@
 	GVExport module for Webtrees
 =====================================================================
 
+Version 2.1.10
+
 Version 2.1.9 (2022-08-30):
-  - New         : Added toast message when invalid starting individual provided
-  - New         : GVExport now checks if it is up-to-date using the webtrees built in check in control panel
-  - Changed     : Some settings now hidden by default in "advanced" sections
-  - Fixed       : Export to SVG, PNG, JPEG without GraphViz now works in Chrome, Edge
-  - Fixed       : Output type is no longer reset to DOT when running browser render
-  - Fixed       : DPI settings higher than default 72 no longer cause browser render to be cut off
+  - New         : Refreshed diagram design
+  - New         : Advanced option to skip scanning tree for unseen relative links to speed up generation at the expense of accuracy
+  - Fixed       : Children with pedigree other than by birth no longer as non-related even when this option is disabled
+  - Fixed       : Fix for endless loop in specific tree scenario when option to display non-relatives in a different colour is selected
+  - Fixed       : Fix for page render not generating on page load when scripts load in unusual order (particularly, external script loads before internal script element)
+  - Fixed       : Fixed issue where some server setups would not load GVExport because of null country in sountry list
 
 Version 2.1.8 (2022-08-21):
   - New         : Export to SVG, PNG, and JPG without needing GraphViz installed
