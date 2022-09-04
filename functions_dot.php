@@ -1158,7 +1158,7 @@ class Dot {
 		$individuals[$pid]['pid'] = $pid;
 
 		// Overwrite the 'related' status if it was not set before or it's 'false' (for those people who are added as both related and non-related)
-		if (!isset($individuals[$pid]['rel']) || !$individuals[$pid]['rel']) {
+		if (!isset($individuals[$pid]['rel']) || (!$individuals[$pid]['rel'] && $rel)) {
 			if ($this->settings["mark_not_related"]) {
 				$individuals[$pid]['rel'] = $rel;
 			} else {
