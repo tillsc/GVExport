@@ -370,9 +370,8 @@ class Dot {
 	function removeGhosts(array &$individuals, array &$families) {
 		foreach ($individuals as $i) {
 			foreach ($i["fams"] as $f) {
-
 				// If not dummy family, the family has no children, and one of the spouse records are missing
-				if (substr($f, 0, 2) != "F_" && !isset($families[$f]["has_children"]) && (!isset($families[$f]["husb_id"]) || !isset($families[$f]["wife_id"]))) {
+				if (substr($f, 0, 2) != "F_" && !isset($families[$f]["has_children"]) && (!isset($f["husb_id"]) || !isset($f["wife_id"]))) {
 					// Remove this family from both the individual record of families and from the family list
 					unset($families[$f]);
 					unset($individuals[$i["pid"]]["fams"][$f]);
