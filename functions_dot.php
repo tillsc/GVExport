@@ -56,20 +56,23 @@ class Dot {
 	var $pagesize = array();
     var $messages = array(); // messages for toast system
 	private const ERROR_CHAR = "E:"; // Messages that start with this will be highlighted
-	/**
+    private $tree, $file_system, $use_urls_for_media;
+
+    /**
 	 * Constructor of Dot class
 	 */
 	function __construct($tree, $file_system, $use_urls_for_media) {
 		global $GVE_CONFIG;
 		// Load settings from config file
-
 		$this->tree = $tree;
 		$this->file_system = $file_system;
 		$this->use_urls_for_media = $use_urls_for_media;
 
-		// Load font size
+		// Load font
 		$this->font_size = $GVE_CONFIG["dot"]["fontsize"];
-		$this->settings["fontname"] = $GVE_CONFIG["default_fontname"];
+		$this->settings["defaulttypeface"] = $GVE_CONFIG["default_typeface"];
+		$this->settings["typeface"] = $this->settings["defaulttypeface"];
+        $this->settings["typefaces"] = $GVE_CONFIG["settings"]["typefaces"];
 
 		// Load colors
 		$this->colors["colorm"] = $GVE_CONFIG["dot"]["colorm"];
@@ -81,7 +84,8 @@ class Dot {
 		$this->colors["colorx_nr"] = $GVE_CONFIG["dot"]["colorx_nr"];
 		$this->colors["coloru_nr"] = $GVE_CONFIG["dot"]["coloru_nr"];
 		$this->colors["colorfam"] = $GVE_CONFIG["dot"]["colorfam"];
-
+		$this->colors["font_color"]["name"] = $GVE_CONFIG["dot"]["fontcolor_name"];
+        $this->colors["font_color"]["details"] = $GVE_CONFIG["dot"]["fontcolor_details"];
 		// Default settings
 		$this->settings["diagram_type"] = "simple";
 		$this->settings["diagram_type_combined_with_photo"] = true;
@@ -169,8 +173,26 @@ class Dot {
 	 *
 	 * @param string $font_size
 	 */
-	function setFontSize($font_size) {
+	function setFontSize(string $font_size) {
 		$this->font_size = $font_size;
+	}
+
+    /**
+	 * Function to set font colour for name
+	 *
+	 * @param string $font_color
+	 */
+	function setFontColorName(string $font_color) {
+		$this->colors["font_color"]["name"] = $font_color;
+	}
+
+    /**
+	 * Function to set font colour for details (date of birth, place of marriage, etc)
+	 *
+	 * @param string $font_color
+	 */
+	function setFontColorDetails(string $font_color) {
+        $this->colors["font_color"]["details"] = $font_color;
 	}
 
 	/**
@@ -188,7 +210,8 @@ class Dot {
 		$this->indi_search_method[$method] = TRUE;
 	}
 
-	function getDOTDump() {
+	function getDOTDump(): string
+    {
 		$out = "";
 
 		// --- DEBUG ---
@@ -685,11 +708,10 @@ class Dot {
 		$out .= "pagedir=\"LT\"\n";
 		$out .= "bgcolor=\"#eeeeee\"\n";
 		$out .= "edge [ style=solid, arrowhead=normal arrowtail=none];\n";
-		// I need Arial font because of UTF-8 characters - feel free to change it
 		if ($this->settings["diagram_type"] == "simple") {
-			$out .= "node [ shape=box, style=filled fontsize=\"" . $this->font_size ."\" fontname=\"" . $this->settings["fontname"] ."\"];\n";
+			$out .= "node [ shape=box, style=filled fontsize=\"" . $this->font_size ."\" fontname=\"" . $this->settings["typeface"] ."\"];\n";
 		} else {
-			$out .= "node [ shape=plaintext fontsize=\"" . $this->font_size ."\" fontname=\"" . $this->settings["fontname"] ."\"];\n";
+			$out .= "node [ shape=plaintext fontsize=\"" . $this->font_size ."\" fontname=\"" . $this->settings["typefaces"][$this->settings["typeface"]] .", " . $this->settings["typefaces"][$this->settings["defaulttypeface"]] . ", Sans\"];\n";
 		}
 		return $out;
 	}
@@ -867,9 +889,9 @@ class Dot {
 		if ($this->settings["diagram_type"] == "simple") {
 			if ($this->settings["show_url"]) {
 				// substr($_SERVER['QUERY_STRING'], 0, strrpos($_SERVER['QUERY_STRING'], '/'))
-				$out .= "color=\"" . $bordercolor . "\", fillcolor=\"" . $fillcolor . "\", target=\"_blank\", href=\"" . $this->convertToHTMLSC($link) . "\" label="; #ESL!!! 20090213 without convertToHTMLSC the dot file has invalid data
+				$out .= "color=\"" . $bordercolor . "\", fillcolor=\"" . $fillcolor . "\", fontcolor=\"" . $this->colors["font_color"]["name"] . "\", target=\"_blank\", href=\"" . $this->convertToHTMLSC($link) . "\" label="; #ESL!!! 20090213 without convertToHTMLSC the dot file has invalid data
 			} else {
-				$out .= "color=\"" . $bordercolor . "\", fillcolor=\"" . $fillcolor . "\", label=";
+				$out .= "color=\"" . $bordercolor . "\", fillcolor=\"" . $fillcolor . "\", fontcolor=\"" . $this->colors["font_color"]["name"] . "\", label=";
 			}
 			$out .= '"';
 			$out .= str_replace('"','\"',$name) . '\n' . $this->settings["birth_text"] . $birthdate . " " . (empty($birthplace)?'':'('.$birthplace.')') . '\l';
@@ -894,7 +916,7 @@ class Dot {
 			if ($this->settings["diagram_type"] == "combined") {
 				$out .= "<TABLE BORDER=\"0\" CELLBORDER=\"0\" CELLPADDING=\"2\" CELLSPACING=\"0\" BGCOLOR=\"#ffffff\">";
 			} else {
-				$out .= "<TABLE COLOR=\"#999999\" BORDER=\"1\" CELLBORDER=\"0\" CELLPADDING=\"2\" CELLSPACING=\"0\" BGCOLOR=\"#fefefe\">";
+				$out .= "<TABLE COLOR=\"" . $bordercolor . "\" BORDER=\"1\" CELLBORDER=\"0\" CELLPADDING=\"2\" CELLSPACING=\"0\" BGCOLOR=\"#fefefe\">";
 			}
 
 			// Top line (colour only)
@@ -914,15 +936,15 @@ class Dot {
 
 			// Show name
 			if ($this->settings["show_url"]) {
-				$out .= "<TD ALIGN=\"LEFT\" BALIGN=\"LEFT\" CELLPADDING=\"5\" PORT=\"dat\" HREF=\"" . $this->convertToHTMLSC($link) . "\" ><FONT COLOR=\"#555555\" POINT-SIZE=\"" . ($this->font_size + 2) ."\">" . $name . "</FONT>";
+				$out .= "<TD ALIGN=\"LEFT\" BALIGN=\"LEFT\" CELLPADDING=\"5\" PORT=\"dat\" HREF=\"" . $this->convertToHTMLSC($link) . "\" ><FONT COLOR=\"" . $this->colors["font_color"]["name"] . "\" POINT-SIZE=\"" . ($this->font_size + 2) ."\">" . $name . "</FONT>";
 			} else {
-				$out .= "<TD ALIGN=\"LEFT\" BALIGN=\"LEFT\" CELLPADDING=\"5\" PORT=\"dat\"><FONT COLOR=\"#555555\" POINT-SIZE=\"" . ($this->font_size + 2) ."\">" . $name . "</FONT>";
+				$out .= "<TD ALIGN=\"LEFT\" BALIGN=\"LEFT\" CELLPADDING=\"5\" PORT=\"dat\"><FONT COLOR=\"" . $this->colors["font_color"]["name"] . "\" POINT-SIZE=\"" . ($this->font_size + 2) ."\">" . $name . "</FONT>";
 			}
 			$out .= "<BR />";
-			$out .= "<FONT COLOR=\"#777777\" POINT-SIZE=\"" . ($this->font_size) ."\">" . $this->settings["birth_text"] . " $birthdate " . (empty($birthplace)?"":"($birthplace)") . "</FONT>";
+			$out .= "<FONT COLOR=\"" . $this->colors["font_color"]["details"] . "\" POINT-SIZE=\"" . ($this->font_size) ."\">" . $this->settings["birth_text"] . " $birthdate " . (empty($birthplace)?"":"($birthplace)") . "</FONT>";
 			$out .= "<BR />";
 			if ($isdead) {
-				$out .= "<FONT COLOR=\"#777777\" POINT-SIZE=\"" . ($this->font_size) ."\">" . $this->settings["death_text"] . " $deathdate " . (empty($deathplace)?"":"($deathplace)") . "</FONT>";
+				$out .= "<FONT COLOR=\"" . $this->colors["font_color"]["details"] . "\" POINT-SIZE=\"" . ($this->font_size) ."\">" . $this->settings["death_text"] . " $deathdate " . (empty($deathplace)?"":"($deathplace)") . "</FONT>";
 			} else {
 				$out .= " ";
 			}
@@ -1040,7 +1062,7 @@ class Dot {
 			$out .= "label=<";
 
 			// --- Print table ---
-			$out .= "<TABLE COLOR=\"#999999\" BORDER=\"0\" CELLBORDER=\"1\" CELLPADDING=\"2\" CELLSPACING=\"0\">";
+			$out .= "<TABLE COLOR=\"#606060\" BORDER=\"0\" CELLBORDER=\"1\" CELLPADDING=\"2\" CELLSPACING=\"0\">";
 
 			// --- Print couple ---
 			$out .= "<TR>";
@@ -1096,7 +1118,7 @@ class Dot {
 					$out .= "<TD COLSPAN=\"2\" CELLPADDING=\"0\" PORT=\"marr\" BGCOLOR=\"" . $fillcolor . "\">";
 				}
 
-				$out .= (empty($marriagedate)?"":$marriagedate) . "<BR />" . (empty($marriageplace)?"":"(".$marriageplace.")") . $family;
+				$out .= "<FONT COLOR=\"". $this->colors["font_color"]["details"] ."\" POINT-SIZE=\"10\">" . (empty($marriagedate)?"":$marriagedate) . "<BR />" . (empty($marriageplace)?"":"(".$marriageplace.")") . $family . "</FONT>";
 				$out .= "</TD>";
 				$out .= "</TR>";
 			}
@@ -1107,11 +1129,11 @@ class Dot {
 		} else {
 		// Non-combined type
 			if ($this->settings["show_url"]) {
-				$out .= "color=\"#999999\",fillcolor=\"" . $fillcolor . "\", href=\"" . $this->convertToHTMLSC($link) . "\", target=\"_blank\", shape=ellipse, style=filled"; #ESL!!! 20090213 without convertToHTMLSC the dot file has invalid data
+				$out .= "color=\"#606060\",fillcolor=\"" . $fillcolor . "\", href=\"" . $this->convertToHTMLSC($link) . "\", target=\"_blank\", shape=ellipse, style=filled"; #ESL!!! 20090213 without convertToHTMLSC the dot file has invalid data
 			} else {
-				$out .= "color=\"#999999\",fillcolor=\"" . $fillcolor . "\", shape=ellipse, style=filled";
+				$out .= "color=\"#606060\",fillcolor=\"" . $fillcolor . "\", shape=ellipse, style=filled";
 			}
-			$out .= ", label=" . '"' . (empty($marriagedate)?'':$marriagedate.'\n') . (empty($marriageplace)?'':'('.$marriageplace.')') . $family . '"';
+			$out .= ", label=" . "<<TABLE border=\"0\" CELLPADDING=\"0\" CELLSPACING=\"0\"><TR><TD><FONT COLOR=\"". $this->colors["font_color"]["details"] ."\" POINT-SIZE=\"10\">" . (empty($marriagedate)?"":$marriagedate) . "<BR />" . (empty($marriageplace)?"":"(".$marriageplace.")") . $family . "</FONT></TD></TR></TABLE>>";
         }
 
 		$out .= "];\n";

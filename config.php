@@ -104,6 +104,8 @@ $GVE_CONFIG["dot"]["coloru_nr"] = "#D6EED6";	// Default color of not blood-relat
 $GVE_CONFIG["dot"]["colorfam"] = "#FFFFEE";	// Default color of families (different light yellow)
 $GVE_CONFIG["dot"]["colorch"] = "#FF0000"; // Default color of changed (waiting for validation) records
 $GVE_CONFIG["dot"]["fontsize"] = "10";	// Default font size
+$GVE_CONFIG["dot"]["fontcolor_name"] = "#333333";	// Default font colour for name
+$GVE_CONFIG["dot"]["fontcolor_details"] = "#555555";	// Default font colour for date/place of birth/death etc.
 
 // Page and drawing size settings
 $GVE_CONFIG["default_pagesize"] = "A4";
@@ -126,7 +128,8 @@ $GVE_CONFIG["directions"]["TB"] = "Top-to-Bottom";
 $GVE_CONFIG["directions"]["LR"] = "Left-to-Right";
 
 // Font name
-$GVE_CONFIG["default_fontname"] = "Arial";
+$GVE_CONFIG["default_typeface"] = 0;
+$GVE_CONFIG["settings"]["typefaces"] = [0 => "Arial", 10 => "Brush Script MT" ,  20 => "Courier New", 30 => "Garamond", 40 => "Georgia", 50 => "Tahoma", 60 => "Times New Roman", 70 => "Trebuchet MS", 80 => "Verdana"];
 
 // mclimit settings (number of iterations to help to reduce crossings)
 $GVE_CONFIG["default_mclimit"] = "50";
