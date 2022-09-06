@@ -279,7 +279,6 @@ use Fisharebest\Webtrees\Tree;
             <label class=" col-sm-4 col-form-label wt-page-options-label" for="vars[use_abbr_place]"><?= I18N::translate('Abbreviated place names') ?></label>
             <div class="col-sm-8 wt-page-options-value">
                 <?= view('components/select', ['name' => 'vars[use_abbr_place]', 'selected' => $vars['use_abbr_place'], 'options' => updateTranslations($gve_config["settings"]["use_abbr_places"])]) ?>
-                <small class="form-text text-muted"></small>
             </div>
         </div>
         <div id="appearance-advanced" <?= $vars["adv_appear"] == "show" ? '' : 'style="display:none"' ?>>
@@ -414,6 +413,25 @@ use Fisharebest\Webtrees\Tree;
                         <label for="vars[nodesep]"><?= I18N::translate('Between individuals on the same level') ?>:</label>
                         <div class="col-auto">
                             <input type="text" onclick="togglePercent(this, false)" onblur="togglePercent(this, true)" class="form-control col-sm-6" size="10" name="vars[nodesep]" id="vars[nodesep]" value="<?= $vars["nodesep"] ?>">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <label class=" col-sm-4 col-form-label wt-page-options-label"><?= I18N::translate('Font') ?></label>
+                <div class="col-sm-8 wt-page-options-value">
+                    <div class="row">
+                        <label for="vars[typeface]"><?= I18N::translate('Typeface') ?>:</label>
+                        <div class="col-auto">
+                            <?= view('components/select', ['name' => 'vars[typeface]', 'selected' => $vars['typeface'], 'options' => updateTranslations($gve_config["settings"]["typefaces"])]) ?>
+                        </div>
+                        <label for="vars[fontcolor_name]"><?= I18N::translate('Font color for names') ?>:</label>
+                        <div class="col-auto">
+                            <input type="text" name="vars[fontcolor_name]" id="vars[fontcolor_name]" value="<?= $vars["fontcolor_name"] ?>" />
+                        </div>
+                        <label for="vars[fontcolor_details]"><?= I18N::translate('Font color for details') ?>:</label>
+                        <div class="col-auto">
+                            <input type="text" name="vars[fontcolor_details]" id="vars[fontcolor_details]" value="<?= $vars["fontcolor_details"] ?>" />
                         </div>
                     </div>
                 </div>

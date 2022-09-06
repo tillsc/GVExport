@@ -189,7 +189,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
             "show_url" => "show_url",
             "show_pid" => "DEFAULT", // This is set to DEFAULT so we can tell if it was loaded from cookie or not
             "show_fid" => "",
-            "use_abbr_place" => "Full place name",
+            "use_abbr_place" => $GVE_CONFIG["settings"]["use_abbr_place"],
             "debug" => ($GVE_CONFIG['debug'] ? "debug" : ""),
             "dpi" => $GVE_CONFIG["settings"]["dpi"],
             "ranksep" => $GVE_CONFIG["settings"]["ranksep"],
@@ -200,7 +200,10 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
             "download" => TRUE,
             "usecart" => $GVE_CONFIG["settings"]["usecart"],
             "adv_people" => $GVE_CONFIG["settings"]["adv_people"],
-            "adv_appear" => $GVE_CONFIG["settings"]["adv_appear"]
+            "adv_appear" => $GVE_CONFIG["settings"]["adv_appear"],
+            "typeface" => $GVE_CONFIG["default_typeface"],
+            "fontcolor_name" => $GVE_CONFIG["dot"]["fontcolor_name"],
+            "fontcolor_details" => $GVE_CONFIG["dot"]["fontcolor_details"]
         ];
         if (!isset($_REQUEST['reset']) and isset($_COOKIE["GVEUserDefaults"]) and $_COOKIE["GVEUserDefaults"] != "") {
             foreach (explode("|", $_COOKIE["GVEUserDefaults"]) as $s) {
@@ -475,12 +478,20 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
             $dot->setSettings("show_lt_editor", TRUE);
         }
 
+        if (isset($vars['fontcolor_name'])) {
+            $dot->setFontColorName($vars['fontcolor_name']);
+        }
+
+        if (isset($vars['fontcolor_details'])) {
+            $dot->setFontColorDetails($vars['fontcolor_details']);
+        }
+
         if (isset($vars['fontsize'])) {
             $dot->setFontSize($vars['fontsize']);
         }
 
-        if (isset($vars['fontname'])) {
-            $dot->setSettings("fontname", $vars['fontname']);
+        if (isset($vars['typeface'])) {
+            $dot->setSettings("typeface", $vars['typeface']);
         }
 
         if (isset($vars['pagebrk'])) {
