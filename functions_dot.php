@@ -154,7 +154,7 @@ class Dot {
 	 * @param string $setting
 	 * @param mixed $value
 	 */
-	function setSettings($setting, $value) {
+	function setSettings(string $setting, $value) {
 		$this->settings[$setting] = $value;
 	}
 
@@ -206,7 +206,7 @@ class Dot {
 	 *
 	 * @param string $method
 	 */
-	function setIndiSearchMethod($method) {
+	function setIndiSearchMethod(string $method) {
 		$this->indi_search_method[$method] = TRUE;
 	}
 
@@ -381,6 +381,22 @@ class Dot {
 		// -------------
 	}
 
+    /**
+     *  Check if XREF in list of starting individuals
+     * @param  string $pid Xref to check
+     * @return bool
+     */
+    function isStartingIndividual($pid): bool
+    {
+        $indis = explode(",", $this->settings["indi"]);
+        for ($i=0;$i<count($indis);$i++) {
+            if (trim($indis[$i]) == $pid) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 	/**
 	 * This function updates our family and individual arrays to remove records that mess up
 	 * the "combined" mode. This is particularly important when including a "stop" individual,
@@ -450,13 +466,10 @@ class Dot {
 			$this->families = $functionsCC->getFamilies();
 		}
 
-		$out = "";
-		$out .= $this->printDOTHeader();
+        $out = $this->printDOTHeader();
 
 		// ### Print the individuals list ###
-		if ($this->settings["diagram_type"] == "combined") {
-			// Do nothing, print only families
-		} else {
+		if ($this->settings["diagram_type"] != "combined") {
 			foreach ($this->individuals as $pid) {
 				$out .= $this->printPerson($pid['pid'], $pid['rel']);
 			}
@@ -464,12 +477,12 @@ class Dot {
 
 		// ### Print the families list ###
 		// If no_fams option is not checked then we print the families
-		if ($this->settings["no_fams"] == FALSE) {
+		if (!$this->settings["no_fams"]) {
 			foreach ($this->families as $fid=>$fam_data) {
 				if ($this->settings["diagram_type"] == "combined") {
 					// We do not show those families which has no parents and children in case of "combined" view;
-					if ((isset($this->families[$fid]["has_children"]) && $this->families[$fid]["has_children"] == TRUE)
-							|| (isset($this->families[$fid]["has_parents"]) && $this->families[$fid]["has_parents"] == TRUE)
+					if ((isset($this->families[$fid]["has_children"]) && $this->families[$fid]["has_children"])
+							|| (isset($this->families[$fid]["has_parents"]) && $this->families[$fid]["has_parents"])
 							) {
 						$out .= $this->printFamily($fid);
 					}
@@ -481,14 +494,12 @@ class Dot {
 
 		// ### Print the connections ###
 		// If no_fams option is not checked
-		if ($this->settings["no_fams"] == FALSE) {
+		if (!$this->settings["no_fams"]) {
 			foreach ($this->families as $fid=>$set) {
 				// COMBINED type diagram
 				if ($this->settings["diagram_type"] == "combined") {
-					if (substr($fid, 0, 2) == "F_") {
-						// In case of dummy family do nothing, because it has no children
-						//$this->families[$fid]["has_children"] = FALSE;
-					} else {
+                    // In case of dummy family do nothing, because it has no children
+					if (substr($fid, 0, 2) != "F_") {
 						// Get the family data
 						$f = $this->getUpdatedFamily($fid);
 
@@ -537,10 +548,7 @@ class Dot {
 		} else {
 		// If no_fams option is checked then we do not print the families
 			foreach ($this->families as $fid=>$set) {
-				if ($this->settings["diagram_type"] == "combined") {
-					/*
-					*/
-				} else {
+				if ($this->settings["diagram_type"] != "combined") {
 					$f = $this->getUpdatedFamily($fid);
 					// Draw an arrow from HUSB and WIFE to FAM
 					$husb_id = empty($f->husband()) ? null : $f->husband()->xref();
@@ -569,7 +577,7 @@ class Dot {
 	/**
 	 * Returns an abbreviated version of the PLAC string.
 	 *
-	 * @param	string	Place string in long format (Town,County,State/Region,Country)
+	 * @param	string $place_long Place string in long format (Town,County,State/Region,Country)
 	 * @return	string	The abbreviated place name
 	 */
 	function getFormattedPlace(string $place_long) {
@@ -632,11 +640,11 @@ class Dot {
  	 * If a custom colour was used then this function will pull it from the form
  	 * otherwise it will use the default colours in the config file
  	 *
- 	 * @param char $gender (F/M/U)
+ 	 * @param string $gender (F/M/U)
  	 * @param boolean $related (TRUE/FALSE) Person is blood-related
  	 * @return string $colour (#RRGGBB)
  	 */
-	function getGenderColour($gender, $related = TRUE) {
+	function getGenderColour(string $gender, bool $related = TRUE) {
 		global $GVE_CONFIG;
 		// Determine the fill color
 		if ($gender == 'F') {
@@ -677,8 +685,7 @@ class Dot {
  	 */
 	function getFamilyColour() {
 		// Determine the fill color
-		$fillcolor = $this->colors["colorfam"];
-		return $fillcolor;
+        return $this->colors["colorfam"];
 	}
 
 	/**
@@ -686,7 +693,8 @@ class Dot {
 	 *
 	 * @return	string	DOT header text
 	 */
-	function printDOTHeader() {
+	function printDOTHeader(): string
+    {
 		$out = "";
 		$out .= "digraph WT_Graph {\n";
 		// Using pagebreak
@@ -1178,9 +1186,8 @@ class Dot {
 		}
 
 		$individuals[$pid]['pid'] = $pid;
-
 		// Overwrite the 'related' status if it was not set before or it's 'false' (for those people who are added as both related and non-related)
-		if (!isset($individuals[$pid]['rel']) || (!$individuals[$pid]['rel'] && $rel)) {
+		if (!isset($individuals[$pid]['rel']) || (!$individuals[$pid]['rel'] && $rel) || $this->isStartingIndividual($pid)) {
 			if ($this->settings["mark_not_related"]) {
 				$individuals[$pid]['rel'] = $rel;
 			} else {
