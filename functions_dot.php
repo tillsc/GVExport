@@ -370,10 +370,29 @@ class Dot {
 		} else {
 			// if multiple indis are defined
 			$indis = explode(",", $this->settings["indi"]);
+            $indiLists = array();
 			for ($i=0;$i<count($indis);$i++) {
-				$this->addIndiToList("Start | Code 16", trim($indis[$i]), $this->indi_search_method["ance"], $this->indi_search_method["desc"], $this->indi_search_method["spou"], $this->indi_search_method["sibl"], TRUE, 0, 0, $individuals, $families, $full);
+                $indiLists[$i] = array();
+				$this->addIndiToList("Start | Code 16", trim($indis[$i]), $this->indi_search_method["ance"], $this->indi_search_method["desc"], $this->indi_search_method["spou"], $this->indi_search_method["sibl"], TRUE, 0, 0, $indiLists[$i], $families, $full);
 			}
+            // Merge multiple lists from the different starting persons into one list
+            // Taking extra care to ensure if one list marks a person as related then
+            // they should be marked as related in the final tree
+            $individuals = $indiLists[0];
+            for($i=1;$i<count($indiLists);$i++) {
+                $indiList = $indiLists[$i];
+                foreach ($indiList as $key => $value) {
+                    if (isset($individuals[$key])) {
+                        if (!$individuals[$key]["rel"] && $value["rel"]) {
+                            $individuals[$key]["rel"] = true;
+                        }
+                    } else {
+                        $individuals[$key] = $value;
+                    }
+                }
+            }
 		}
+
 		// -- DEBUG ---
 		if ($this->settings["debug"]) {
 			$this->printDebug("Finished individuals list: ".print_r($individuals));
@@ -1187,7 +1206,7 @@ class Dot {
 
 		$individuals[$pid]['pid'] = $pid;
 		// Overwrite the 'related' status if it was not set before or it's 'false' (for those people who are added as both related and non-related)
-		if (!isset($individuals[$pid]['rel']) || (!$individuals[$pid]['rel'] && $rel) || $this->isStartingIndividual($pid)) {
+		if (!isset($individuals[$pid]['rel']) || (!$individuals[$pid]['rel'] && $rel)) {
 			if ($this->settings["mark_not_related"]) {
 				$individuals[$pid]['rel'] = $rel;
 			} else {
