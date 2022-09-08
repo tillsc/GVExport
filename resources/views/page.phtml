@@ -630,6 +630,12 @@ use Fisharebest\Webtrees\Tree;
             }
             return response.text();
         }).then(function (dotStr) {
+            // Check we actually got a DOT returned - sometimes webtrees gives an error
+            if (dotStr.indexOf("<!DOCTYPE html>") !== -1) {
+                showToast("E:<?= I18N::translate('Login expired. Reloading page...'); ?>");
+                setTimeout(function(){location.reload();}, 3000);
+                return false;
+            }
             // Grab our messages and individual and family record counts from
             // our return string - and remove them before passing the rest
             // of the string to DOT processor
