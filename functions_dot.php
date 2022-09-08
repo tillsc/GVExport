@@ -499,12 +499,7 @@ class Dot {
 		if (!$this->settings["no_fams"]) {
 			foreach ($this->families as $fid=>$fam_data) {
 				if ($this->settings["diagram_type"] == "combined") {
-					// We do not show those families which has no parents and children in case of "combined" view;
-					if ((isset($this->families[$fid]["has_children"]) && $this->families[$fid]["has_children"])
-							|| (isset($this->families[$fid]["has_parents"]) && $this->families[$fid]["has_parents"])
-							) {
-						$out .= $this->printFamily($fid);
-					}
+                    $out .= $this->printFamily($fid);
 				} elseif ($this->settings["diagram_type"] != "combined") {
 					$out .= $this->printFamily($fid);
 				}
@@ -1611,7 +1606,7 @@ class Dot {
 						if ($this->settings["mark_not_related"] == TRUE) {
 							$this->addIndiToList($pid."|Code 6", $spouse_id, $this->indi_search_method["any"] && $ance, $this->indi_search_method["any"] && $desc, $this->indi_search_method["any"], $this->indi_search_method["any"], FALSE, $ind, $level, $individuals, $families, $full);
 						} else {
-							$this->addIndiToList($pid."|Code 7", $spouse_id, $this->indi_search_method["any"], $this->indi_search_method["any"], $this->indi_search_method["any"], $this->indi_search_method["any"], TRUE, $ind, $level, $individuals, $families, $full);
+							$this->addIndiToList($pid."|Code 7", $spouse_id, $this->indi_search_method["any"], $this->indi_search_method["any"] && $level > -1*$desc_level, $this->indi_search_method["any"], $this->indi_search_method["any"], TRUE, $ind, $level, $individuals, $families, $full);
 						}
 					}
 
