@@ -32,6 +32,8 @@ Some further but non-exhaustive instructions can be found in [this forum post](h
 Help and support
 ----------------
 
+Information on using GVExport can be found in [the wiki](https://github.com/Neriderc/GVExport/wiki). A German wiki is available [here](https://wiki.genealogy.net/Webtrees_Handbuch/Anleitung_f%C3%BCr_Webmaster/Erweiterungsmodule/GVExport).
+
 If you need help with GVExport, please [create an issue](https://github.com/Neriderc/GVExport/issues) on GitHub.
 
 If you find a bug or something isn't working, please [create an issue](https://github.com/Neriderc/GVExport/issues).
