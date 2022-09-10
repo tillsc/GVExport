@@ -106,6 +106,12 @@ $GVE_CONFIG["dot"]["colorch"] = "#FF0000"; // Default color of changed (waiting 
 $GVE_CONFIG["dot"]["fontsize"] = "10";	// Default font size
 $GVE_CONFIG["dot"]["fontcolor_name"] = "#333333";	// Default font colour for name
 $GVE_CONFIG["dot"]["fontcolor_details"] = "#555555";	// Default font colour for date/place of birth/death etc.
+$GVE_CONFIG["dot"]["arrow_default"] = "#555555";	// Default colour for arrows between records
+$GVE_CONFIG["dot"]["arrow_related"] = "#222266";	// Default colour for arrows from family record to child by birth
+$GVE_CONFIG["dot"]["arrow_not_related"] = "#226622";	// Default colour for arrows from family records to child other than birth (adopted, etc)
+$GVE_CONFIG["settings"]["color_arrow_related"] = "";
+
+
 
 // Page and drawing size settings
 $GVE_CONFIG["default_pagesize"] = "A4";

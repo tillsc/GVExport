@@ -203,7 +203,11 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
             "adv_appear" => $GVE_CONFIG["settings"]["adv_appear"],
             "typeface" => $GVE_CONFIG["default_typeface"],
             "fontcolor_name" => $GVE_CONFIG["dot"]["fontcolor_name"],
-            "fontcolor_details" => $GVE_CONFIG["dot"]["fontcolor_details"]
+            "fontcolor_details" => $GVE_CONFIG["dot"]["fontcolor_details"],
+            "arrow_default" => $GVE_CONFIG["dot"]["arrow_default"],
+            "arrow_related" => $GVE_CONFIG["dot"]["arrow_related"],
+            "arrow_not_related" => $GVE_CONFIG["dot"]["arrow_not_related"],
+            "color_arrow_related" => $GVE_CONFIG["settings"]["color_arrow_related"]
         ];
         if (!isset($_REQUEST['reset']) and isset($_COOKIE["GVEUserDefaults"]) and $_COOKIE["GVEUserDefaults"] != "") {
             foreach (explode("|", $_COOKIE["GVEUserDefaults"]) as $s) {
@@ -497,6 +501,22 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
         if (isset($vars['pagebrk'])) {
             $dot->setSettings("use_pagesize", $vars['psize']);
             $dot->setPageSize($vars['psize']);
+        }
+
+        if (isset($vars['arrow_default'])) {
+            $dot->setArrowColour("default", $vars['arrow_default']);
+        }
+
+        if (isset($vars['arrow_related'])) {
+            $dot->setArrowColour("related", $vars['arrow_related']);
+        }
+
+        if (isset($vars['arrow_not_related'])) {
+            $dot->setArrowColour("not_related", $vars['arrow_not_related']);
+        }
+
+        if (isset($vars["color_arrow_related"])) {
+            $dot->setColourArrowRelated($vars['color_arrow_related']);
         }
 
         if (isset($vars['grdir'])) {

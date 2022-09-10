@@ -86,8 +86,13 @@ class Dot {
 		$this->colors["colorfam"] = $GVE_CONFIG["dot"]["colorfam"];
 		$this->colors["font_color"]["name"] = $GVE_CONFIG["dot"]["fontcolor_name"];
         $this->colors["font_color"]["details"] = $GVE_CONFIG["dot"]["fontcolor_details"];
+        $this->colors["arrows"]["default"] = $GVE_CONFIG["dot"]["arrow_default"];
+        $this->colors["arrows"]["related"] = $GVE_CONFIG["dot"]["arrow_related"];
+        $this->colors["arrows"]["not_related"] = $GVE_CONFIG["dot"]["arrow_not_related"];
+
 		// Default settings
-		$this->settings["diagram_type"] = "simple";
+        $this->settings["color_arrow_related"] = $GVE_CONFIG["settings"]["color_arrow_related"];
+        $this->settings["diagram_type"] = "simple";
 		$this->settings["diagram_type_combined_with_photo"] = true;
 		$this->settings["indi"] = "";
 		$this->settings["multi_indi"] = FALSE;
@@ -176,6 +181,16 @@ class Dot {
 	function setFontSize(string $font_size) {
 		$this->font_size = $font_size;
 	}
+
+    function setArrowColour(string $type, string $value)
+    {
+        $this->colors["arrows"][$type] = $value;
+    }
+
+    function setColourArrowRelated(string $value)
+    {
+        $this->settings["color_arrow_related"] = $value;
+    }
 
     /**
 	 * Function to set font colour for name
@@ -428,17 +443,21 @@ class Dot {
 	function removeGhosts(array &$individuals, array &$families) {
 		foreach ($individuals as $i) {
 			foreach ($i["fams"] as $f) {
-				// If not dummy family, the family has no children, and one of the spouse records are missing
-				if (substr($f, 0, 2) != "F_" && !isset($families[$f]["has_children"]) && (!isset($families[$f]["husb_id"]) || !isset($families[$f]["wife_id"]))) {
-					// Remove this family from both the individual record of families and from the family list
-					unset($families[$f]);
-					unset($individuals[$i["pid"]]["fams"][$f]);
-				}
+                if (isset($f["fid"])) {
+                    $xref = $f["fid"];
+                    // If not dummy family, the family has no children, and one of the spouse records are missing
+                    if (substr($xref, 0, 2) != "F_" && !isset($families[$xref]["has_children"]) && (!isset($families[$xref]["husb_id"]) || !isset($families[$xref]["wife_id"]))) {
+                        // Remove this family from both the individual record of families and from the family list
+                        unset($families[$xref]);
+                        unset($individuals[$i["pid"]]["fams"][$xref]);
+                    }
+                }
 			}
 		}
 	}
 
-	function createDOTDump() {
+	function createDOTDump(): string
+    {
 		// If no individuals in the clippings cart (or option chosen to overide), use standard method
 		if (!functionsClippingsCart::isIndividualInCart($this->tree) || !$this->settings["usecart"] ) {
 			// Create our tree
@@ -522,8 +541,16 @@ class Dot {
 							if (!empty($child) && (isset($this->individuals[$child->xref()]))) {
 								$fams = isset($this->individuals[$child->xref()]["fams"]) ? $this->individuals[$child->xref()]["fams"] : [];
 								foreach ($fams as $fam) {
-									$out .= $this->convertID($fid) . " -> " . $this->convertID($fam) . ":" . $this->convertID($child->xref()) . " [color=\"#555555\", arrowsize=0.3] \n";
-								}
+                                    if (isset($fam["fid"])) {
+                                        $xref = $fam["fid"];
+                                        if (isset($this->individuals[$child->xref()]["fams"][$fid])) {
+                                            $arrowColor = $this->settings["color_arrow_related"] == "color_arrow_related" ? $this->colors["arrows"]["not_related"] : $this->colors["arrows"]["default"];
+                                        } else {
+                                            $arrowColor = $this->settings["color_arrow_related"] == "color_arrow_related" ? $this->colors["arrows"]["related"] : $this->colors["arrows"]["default"];
+                                        }
+                                        $out .= $this->convertID($fid) . " -> " . $this->convertID($xref) . ":" . $this->convertID($child->xref()) . " [color=\"$arrowColor\", arrowsize=0.3] \n";
+                                    }
+                                }
 							}
 						}
 					}
@@ -545,16 +572,21 @@ class Dot {
 
 					// Draw an arrow from HUSB to FAM
 					if (!empty($husb_id) && (isset($this->individuals[$husb_id]))) {
-						$out .= $this->convertID($husb_id) . " -> " . $this->convertID($fid) ." [color=\"#555555\", arrowsize=0.3]\n";
+						$out .= $this->convertID($husb_id) . " -> " . $this->convertID($fid) ." [color=\"" . $this->colors["arrows"]["default"] . "\", arrowsize=0.3]\n";
 					}
 					// Draw an arrow from WIFE to FAM
 					if (!empty($wife_id) && (isset($this->individuals[$wife_id]))) {
-						$out .= $this->convertID($wife_id) . " -> ". $this->convertID($fid) ." [color=\"#555555\", arrowsize=0.3]\n";
+						$out .= $this->convertID($wife_id) . " -> ". $this->convertID($fid) ." [color=\"" . $this->colors["arrows"]["default"] . "\", arrowsize=0.3]\n";
 					}
 					// Draw an arrow from FAM to each CHIL
 					foreach ($f->children() as $child) {
 						if (!empty($child) && (isset($this->individuals[$child->xref()]))) {
-							$out .= $this->convertID($fid) . " -> " . $this->convertID($child->xref()) . " [color=\"#555555\", arrowsize=0.3]\n";
+                            if (isset($this->individuals[$child->xref()]["fams"][$fid])) {
+                                $arrowColor = $this->settings["color_arrow_related"] == "color_arrow_related" ? $this->colors["arrows"]["not_related"] : $this->colors["arrows"]["default"];
+                            } else {
+                                $arrowColor = $this->settings["color_arrow_related"] == "color_arrow_related" ? $this->colors["arrows"]["related"] : $this->colors["arrows"]["default"];
+                            }
+							$out .= $this->convertID($fid) . " -> " . $this->convertID($child->xref()) . " [color=\"$arrowColor\", arrowsize=0.3]\n";
 						}
 					}
 				}
@@ -1177,7 +1209,6 @@ class Dot {
 	 * @param array $individuals array of individuals to be updated (passed by reference)
 	 * @param array $families array of families to be updated (passed by reference)
 	 * @param boolean $full whether we are scanning full tree of relatives, ignoring settings
-	 * @param array $relList A list of relatives to be highlighted as blood relatives
 	 */
 	function addIndiToList($sourcePID, $pid, bool $ance, bool $desc, bool $spou, bool $sibl, bool $rel, int $ind, int $level, array &$individuals, array &$families, bool $full) {
 		// Seen this XREF before and skipped, so just skip again without further checks
@@ -1241,7 +1272,7 @@ class Dot {
 
 				foreach ($fams as $fam) {
 					$fid = $fam->xref();
-					$individuals[$pid]["fams"][$fid] = $fid;
+					$individuals[$pid]["fams"][$fid]["fid"] = $fid;
 
 					if (isset($families[$fid]["fid"]) && ($families[$fid]["fid"] == $fid)) {
 						// Family ID already added
@@ -1275,7 +1306,7 @@ class Dot {
 				}
 			} else {
 				// If there is no spouse family we create a dummy one
-				$individuals[$pid]["fams"]["F_$pid"] = "F_$pid";
+				$individuals[$pid]["fams"]["F_$pid"]["fid"] = "F_$pid";
 				$this->addFamToList("F_$pid", $families);
 
 				// --- DEBUG ---
@@ -1342,10 +1373,6 @@ class Dot {
 						// Get the family object
 						$f = $this->getUpdatedFamily($fid);
 
-						// First check if we are related to our own family
-						$relationshipType = $this->getRelationshipType($i, $f, $ind);
-
-
 						if (isset($families[$fid]["fid"]) && ($families[$fid]["fid"]== $fid)) {
 							// Family ID already added
 							// do nothing
@@ -1368,6 +1395,9 @@ class Dot {
 
 						// Work out if indi has adoptive relationship to this family
 						$relationshipType = $this->getRelationshipType($i, $fam, $ind);
+                        if ($relationshipType != "") {
+                            $individuals[$pid]["fams"][$fid]["reltype"] = $relationshipType;
+                        }
 						// Add father & mother
 						$h = $f->husband();
 						$w = $f->wife();
@@ -1521,6 +1551,7 @@ class Dot {
 							// Work out if indi has adoptive relationship to this family
 							$relationshipType = $this->getRelationshipType($child, $f, $ind);
 							if ($relationshipType != "") {
+                                $individuals[$child_id]["fams"][$f->xref()]["reltype"] = $relationshipType;
 								$related = false;
 							} else {
 								$related = $rel;
@@ -1664,6 +1695,7 @@ class Dot {
 							// Work out if indi has adoptive relationship to this family
 							$relationshipType = $this->getRelationshipType($child, $fam, $ind);
 							if ($relationshipType != "") {
+                                $individuals[$child_id]["fams"][$fid]["reltype"] = $relationshipType;
 								$related = false;
 							} else {
 								$related = $rel;
