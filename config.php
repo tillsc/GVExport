@@ -127,6 +127,7 @@ $GVE_CONFIG["settings"]["dpi"] = "72"; // default DPI (75: screen, 300: print)
 $GVE_CONFIG["settings"]["ranksep"] = "100%";
 $GVE_CONFIG["settings"]["nodesep"] = "100%";
 $GVE_CONFIG["settings"]["space_base"] = .15;
+$GVE_CONFIG["settings"]["auto_update"] = "auto_update";
 
 // Direction of graph
 $GVE_CONFIG["default_direction"] = "LR";

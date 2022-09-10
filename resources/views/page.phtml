@@ -55,13 +55,14 @@ use Fisharebest\Webtrees\Tree;
 <script type="text/javascript">
     const cartempty = <?= $cartempty ? "true" : "false" ?>;
     const CLIENT_ERRORS = ["<?= I18N::translate('Your browser does not support exporting images this large. Please reduce number of records, reduce DPI setting, or use SVG option.') ?>"];
+    let autoUpdate = <?= $vars["auto_update"] == "auto_update" ? 'true' : 'false' ?>;
 </script>
 
 <h2 class="wt-page-title">
     <?= $title ?>
 </h2>
 
-<form action="<?= $module->chartUrl($individual) ?>" method="post" class="wt-page-options sidebar d-print-none" id="gvexport">
+<form action="<?= $module->chartUrl($individual) ?>" method="post" class="wt-page-options sidebar d-print-none" id="gvexport" onchange="runAutoUpdate(autoUpdate)">
 
     <div class="pull-right btn-hover">
         <a href="#" class="hide-form btn btn-secondary">X</a>
@@ -513,12 +514,18 @@ use Fisharebest\Webtrees\Tree;
                 <?= view('components/select', ['name' => 'vars[otype]', 'selected' => $vars['otype'], 'options' => $otypes]) ?>
                 <small id="emailHelp" class="form-text text-muted"><?= $nographviz ? I18N::translate("Options limited as GraphViz not installed on server") : "" ?></small>
             </div>
+            <label class="col-sm-4 col-form-label wt-page-options-label"><?= I18N::translate('Browser render') ?></label>
+            <div class="col-sm-8 wt-page-options-value">
+                <label for="vars[auto_update]"><?= I18N::translate('Auto-update') ?></label>
+                <input type="hidden" name="vars[auto_update]" value="no">
+                <input type="checkbox" onclick="toggleUpdateButton('update-browser')" name="vars[auto_update]" id="vars[auto_update]" value="auto_update" <?= $vars["auto_update"] == "auto_update" ? 'checked' : '' ?>>
+            </div>
         </div>
 
     </div>
 
     <div class="sidebar__buttons">
-        <button type="submit" class="btn btn-primary update-browser-rendering"><?= /* I18N: A button label. */ I18N::translate('Update') ?></button>
+        <button type="submit" class="btn btn-primary update-browser-rendering" id="update-browser" <?php if ($vars["auto_update"] == "auto_update") { echo 'style="display: none"'; } ?>><?= /* I18N: A button label. */ I18N::translate('Update') ?></button>
         <button type="submit" class="btn btn-secondary main-action" name="render"><?= /* I18N: A button label. */ I18N::translate('Download') ?></button>
         <a href="<?= $module->chartUrl($individual, ['reset' => '1']) ?>" class="btn btn-outline-secondary"><?= /* I18N: A button label. */ I18N::translate('Reset') ?></a>
     </div>
