@@ -91,11 +91,37 @@
 }
 
 .check-list {
-    width: 90%;
+    width: 295px;
     vertical-align: top;
     margin-left: 10px;
+    margin-bottom: 5px;
 }
 
-#rendering{
+#rendering {
     background-color: #eeeeee;
+}
+
+.picker-label {
+    margin-left: 3px;
+    margin-bottom: 1px;
+    display: flex;
+    align-items: center;
+    min-height: 32px;
+}
+
+.picker {
+    vertical-align: top;
+    width: 32px;
+    float: right;
+    margin-right: 10px !important;
+}
+
+.color_arrow_related .picker {
+    margin-right: 2px !important;
+}
+
+.color_arrow_related {
+    margin-left: 20px;
+    margin-right: 3px;
+    padding: 2px !important;
 }

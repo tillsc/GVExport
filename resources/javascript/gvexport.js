@@ -181,6 +181,13 @@ function showHide(element, show) {
     }
 }
 
+function toggleArrowColor(css_id) {
+    const element = document.getElementById(css_id);
+    const visible = element.style.display !== "none";
+    showHide(element, !visible);
+}
+
+
 // Show a toast message
 // message - the message to show
 function showToast(message) {

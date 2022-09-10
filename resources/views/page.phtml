@@ -55,7 +55,6 @@ use Fisharebest\Webtrees\Tree;
 <script type="text/javascript">
     const cartempty = <?= $cartempty ? "true" : "false" ?>;
     const CLIENT_ERRORS = ["<?= I18N::translate('Your browser does not support exporting images this large. Please reduce number of records, reduce DPI setting, or use SVG option.') ?>"];
-    const translations = {"Show advanced settings":"<?= I18N::translate('Show fart advanced settings');?>"};
 </script>
 
 <h2 class="wt-page-title">
@@ -425,15 +424,32 @@ use Fisharebest\Webtrees\Tree;
                         <div class="col-auto">
                             <?= view('components/select', ['name' => 'vars[typeface]', 'selected' => $vars['typeface'], 'options' => updateTranslations($gve_config["settings"]["typefaces"])]) ?>
                         </div>
-                        <label for="vars[fontcolor_name]"><?= I18N::translate('Font color for names') ?>:</label>
-                        <div class="col-auto">
-                            <input type="text" name="vars[fontcolor_name]" id="vars[fontcolor_name]" value="<?= $vars["fontcolor_name"] ?>" />
+
+                        <div>
+                            <input type="color" class="picker" name="vars[fontcolor_name]" id="vars[fontcolor_name]" value="<?= $vars["fontcolor_name"] ?>" /><label for="vars[fontcolor_name]" class="picker-label"><?= I18N::translate('Font color for names') ?></label>
                         </div>
-                        <label for="vars[fontcolor_details]"><?= I18N::translate('Font color for details') ?>:</label>
-                        <div class="col-auto">
-                            <input type="text" name="vars[fontcolor_details]" id="vars[fontcolor_details]" value="<?= $vars["fontcolor_details"] ?>" />
+
+                        <div>
+                            <input type="color" class="picker" name="vars[fontcolor_details]" id="vars[fontcolor_details]" value="<?= $vars["fontcolor_details"] ?>" /><label for="vars[fontcolor_details]" class="picker-label"><?= I18N::translate('Font color for details') ?></label>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <label class=" col-sm-4 col-form-label wt-page-options-label"><?= I18N::translate('Relationship arrows') ?></label>
+                <div class="col-sm-8 wt-page-options-value">
+                        <div class="col-auto">
+                            <input type="color" class="picker" name="vars[arrow_default]" id="vars[arrow_default]" value="<?= $vars["arrow_default"] ?>" /><label for="vars[arrow_default]" class="picker-label"><?= I18N::translate('Arrow color') ?></label>
+                        </div>
+                        <input type="hidden" name="vars[color_arrow_related]" value="no">
+                        <input type="checkbox" name="vars[color_arrow_related]" onclick="toggleArrowColor('arrow_group')" id="vars[color_arrow_related]" value="color_arrow_related" <?= $vars["color_arrow_related"] == "color_arrow_related" ? 'checked' : '' ?>><label for="vars[color_arrow_related]" class="check-list"><?= I18N::translate('Show blood relationship in different color') ?></label>
+
+                        <div id="arrow_group" class="color_arrow_related col-auto wt-page-options-value" <?= $vars["color_arrow_related"] != "color_arrow_related" ? 'style="display:none;"' : '' ?>>
+                            <div class="sub-group">
+                                <input type="color" class="picker" name="vars[arrow_related]" id="vars[arrow_related]" value="<?= $vars["arrow_related"] ?>" /><label for="vars[arrow_related]" class="picker-label"><?= I18N::translate('Related by birth') ?></label>
+                                <input type="color" class="picker" name="vars[arrow_not_related]" id="vars[arrow_not_related]" value="<?= $vars["arrow_not_related"] ?>" /><label for="vars[arrow_not_related]" class="picker-label"><?= I18N::translate('Related other than by birth') ?></label>
+                            </div>
+                        </div>
                 </div>
             </div>
             <!--
