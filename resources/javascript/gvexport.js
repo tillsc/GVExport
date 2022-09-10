@@ -340,3 +340,17 @@ function setStateFastRelationCheck() {
         document.getElementById("vars[fastnr]").disabled = false;
     }
 }
+
+function runAutoUpdate(on) {
+    if (on) {
+        updateRender();
+    }
+}
+
+function toggleUpdateButton(css_id) {
+    const element = document.getElementById(css_id);
+    const visible = element.style.display !== "none";
+    showHide(element, !visible);
+    autoUpdate = visible;
+    updateRender();
+}

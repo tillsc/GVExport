@@ -136,6 +136,7 @@ class Dot {
 
 		$this->settings["adv_people"] = $GVE_CONFIG["settings"]["adv_people"];
 		$this->settings["adv_appear"] = $GVE_CONFIG["settings"]["adv_appear"];
+		$this->settings["auto_update"] = $GVE_CONFIG["settings"]["auto_update"];
 	}
 
 	function setPageSize($pagesize, $size_x = FALSE, $size_y = FALSE) {

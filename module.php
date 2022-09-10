@@ -207,7 +207,8 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
             "arrow_default" => $GVE_CONFIG["dot"]["arrow_default"],
             "arrow_related" => $GVE_CONFIG["dot"]["arrow_related"],
             "arrow_not_related" => $GVE_CONFIG["dot"]["arrow_not_related"],
-            "color_arrow_related" => $GVE_CONFIG["settings"]["color_arrow_related"]
+            "color_arrow_related" => $GVE_CONFIG["settings"]["color_arrow_related"],
+            "auto_update" => $GVE_CONFIG["settings"]["auto_update"]
         ];
         if (!isset($_REQUEST['reset']) and isset($_COOKIE["GVEUserDefaults"]) and $_COOKIE["GVEUserDefaults"] != "") {
             foreach (explode("|", $_COOKIE["GVEUserDefaults"]) as $s) {
@@ -578,6 +579,10 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
         }
         if (isset($vars['adv_appear'])) {
             $dot->setSettings("adv_appear", $vars['adv_appear']);
+        }
+
+        if (isset($vars['auto_update'])) {
+            $dot->setSettings("auto_update", "auto_update");
         }
 
         if (isset($vars['debug'])) {
