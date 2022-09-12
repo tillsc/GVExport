@@ -295,3 +295,49 @@ msgstr "Verbindungen außerhalb des sichtbaren Bereichs ignorieren, um die Berec
 msgid "Non-relatives"
 msgstr "Nicht-Verwandte"
 
+#: 
+msgid "Font"
+msgstr "Schrift"
+
+#: 
+msgid "Typeface"
+msgstr "Schriftart"
+
+#: 
+msgid "Font color for names"
+msgstr "Schriftfarbe für Namen"
+
+#: 
+msgid "Font color for details"
+msgstr "Schriftfarbe für Details"
+
+#. When you are no longer logged in, GVExport can't load the browser render until the page is refreshed. This message is shown before automatically reloading the page.
+#: 
+msgid "Login expired. Reloading page..."
+msgstr "Anmeldung ist abgelaufen. Seite wird neu geladen ..."
+
+#. Label for section that lets you change the colour of arrows that represent relationships between records
+#: 
+msgid "Relationship arrows"
+msgstr "Beziehungspfeile"
+
+#. Label for setting the main arrow colour
+#: 
+msgid "Arrow color"
+msgstr "Pfeilfarbe"
+
+#. When enabled makes arrows from family to child different colours based on if the child is related to the family by birth or otherwise (e.g. adoption)
+#: 
+msgid "Show blood relationship in different color"
+msgstr "Zeige Blutsverwandtschaft in anderer Farbe"
+
+#. Label for colour picker to select colour of arrow for children related by birth
+#: 
+msgid "Related by birth"
+msgstr "Beziehung durch Geburt"
+
+#. Label for colour picker to select colour of arrow for children not related by birth (e.g. adoption)
+#: 
+msgid "Related other than by birth"
+msgstr "Beziehung nicht durch Geburt"
+

@@ -57,7 +57,7 @@ msgstr "Neven en nichten"
 
 #: 
 msgid "Spouses"
-msgstr "Huwelijkspartners"
+msgstr "Partners"
 
 #: 
 msgid "Include Descendants"
@@ -69,7 +69,7 @@ msgstr "Max. niveaus"
 
 #: 
 msgid "Mark not blood-related people with different color"
-msgstr "Markeer niet-bloedverwante mensen met verschillende kleur"
+msgstr "Markeer niet-bloedverwante mensen met een andere kleur"
 
 #: 
 msgid "Add URL to individuals and families"
@@ -157,7 +157,7 @@ msgstr "Aantal iteraties (MCLIMIT)"
 
 #: 
 msgid "helps to reduce the crossings on the graph. This can be really slow (up to 10..15x compared to the 20 setting)"
-msgstr "helpt om de kruisingen op de grafiek te verminderen. Dit kan erg traag zijn (tot 10..15x vergeleken met de 20 instelling)"
+msgstr "helpt om de kruisingen op de grafiek te verminderen. Dit kan erg traag zijn (tot 10..15x vergeleken met de 20-instelling)"
 
 #: 
 msgid "DPI"
@@ -294,4 +294,50 @@ msgstr "Negeer niet-zichtbare relaties om de verwantschapscontrole te versnellen
 #: 
 msgid "Non-relatives"
 msgstr "Niet-verwanten"
+
+#: 
+msgid "Font"
+msgstr "Lettertype"
+
+#: 
+msgid "Typeface"
+msgstr "Lettertypegroep"
+
+#: 
+msgid "Font color for names"
+msgstr "Tekstkleur voor namen"
+
+#: 
+msgid "Font color for details"
+msgstr "Tekstkleur voor details"
+
+#. When you are no longer logged in, GVExport can't load the browser render until the page is refreshed. This message is shown before automatically reloading the page.
+#: 
+msgid "Login expired. Reloading page..."
+msgstr "Aanmelding is verlopen. De pagina wordt opnieuw geladen..."
+
+#. Label for section that lets you change the colour of arrows that represent relationships between records
+#: 
+msgid "Relationship arrows"
+msgstr "Verwantschapspijlen"
+
+#. Label for setting the main arrow colour
+#: 
+msgid "Arrow color"
+msgstr "Pijlkleur"
+
+#. When enabled makes arrows from family to child different colours based on if the child is related to the family by birth or otherwise (e.g. adoption)
+#: 
+msgid "Show blood relationship in different color"
+msgstr "Toon bloedverwantschap in een andere kleur"
+
+#. Label for colour picker to select colour of arrow for children related by birth
+#: 
+msgid "Related by birth"
+msgstr "Verwant door geboorte"
+
+#. Label for colour picker to select colour of arrow for children not related by birth (e.g. adoption)
+#: 
+msgid "Related other than by birth"
+msgstr "Verwant anders dan door geboorte"
 
