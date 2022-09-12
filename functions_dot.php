@@ -463,7 +463,7 @@ class Dot {
 		if (!functionsClippingsCart::isIndividualInCart($this->tree) || !$this->settings["usecart"] ) {
 			// Create our tree
 			$this->createIndiList($this->individuals, $this->families, false);
-			if ($this->settings["diagram_type"] == "combined") {
+			if ($this->settings["diagram_type"] == "combined" && $this->indi_search_method["spou"] != "") {
 				$this->removeGhosts($this->individuals, $this->families);
 			}
 			// If option to display related in another colour is selected,
