@@ -1695,8 +1695,10 @@ class Dot {
 
 							// Work out if indi has adoptive relationship to this family
 							$relationshipType = $this->getRelationshipType($child, $fam, $ind);
-							if ($relationshipType != "") {
-                                $individuals[$child_id]["fams"][$fid]["reltype"] = $relationshipType;
+                            // Work out if WE have adoptive relationship to this family
+                            $sourceRelationshipType = $this->getRelationshipType($i, $fam, $ind);
+							if ($relationshipType != "" || $sourceRelationshipType != "") {
+                                if ($relationshipType != "") $individuals[$child_id]["fams"][$fid]["reltype"] = $relationshipType;
 								$related = false;
 							} else {
 								$related = $rel;
