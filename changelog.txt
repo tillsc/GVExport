@@ -3,15 +3,30 @@
 	GVExport module for Webtrees
 =====================================================================
 
-Version 2.1.10
+Version 2.1.11 (2022-09-11)
+  - New         : Font colours can now be customised
+  - New         : Automatically reload page when webtrees login expired
+  - New         : Relationship arrows from family to children can now be shown in different colours based on blood or non-blood relationship (e.g. adopted)
+  - New         : Relationship arrow colours can now be customised
+  - New         : Changing options now automatically updates the browser render (with option to disable)
+  - Fixed       : Fix for missing records in combined mode
+  - Fixed       : Fixed issue where descendants could be missing when there were multiple starting individuals
 
-Version 2.1.9 (2022-08-30):
+Version 2.1.10 (2022-09-04):
   - New         : Refreshed diagram design
   - New         : Advanced option to skip scanning tree for unseen relative links to speed up generation at the expense of accuracy
   - Fixed       : Children with pedigree other than by birth no longer show as non-related even when this option is disabled
   - Fixed       : Fix for endless loop in specific tree scenario when option to display non-relatives in a different colour is selected
   - Fixed       : Fix for page render not generating on page load when scripts load in unusual order (particularly, external script loads before internal script element)
   - Fixed       : Fixed issue where some server setups would not load GVExport because of null country in country list
+
+Version 2.1.9 (2022-08-30)
+  - New         : Added toast message when invalid starting individual provided
+  - New         : GVExport now checks if it is up-to-date using the webtrees built in check in control panel
+  - Changed     : Moved some settings to "Advanced" sections
+  - Fixed       : Export to SVG, PNG, JPEG without GraphViz now works in Chrome, Edge
+  - Fixed       : Foster and other non-relative pedigrees are now shown as non-related
+  - Fixed       : GVExport now remembers the selected output type after generating the browser render (instead of reverting to DOT)
 
 Version 2.1.8 (2022-08-21):
   - New         : Export to SVG, PNG, and JPG without needing GraphViz installed
