@@ -662,12 +662,14 @@ use Fisharebest\Webtrees\Tree;
             // Grab our messages and individual and family record counts from
             // our return string - and remove them before passing the rest
             // of the string to DOT processor
-            messages = dotStr.substring(0,dotStr.indexOf("|"));
-            dotStr = dotStr.substring(dotStr.indexOf("|")+1);
-            indiNum = dotStr.substring(0,dotStr.indexOf("|"));
-            dotStr = dotStr.substring(dotStr.indexOf("|")+1);
-            famNum = dotStr.substring(0,dotStr.indexOf("|"));
-            dotStr = dotStr.substring(dotStr.indexOf("|")+1);
+            if (dotStr.indexOf("digraph WT_Graph {") !== -1) {
+                messages = dotStr.substring(0, dotStr.indexOf("|"));
+                dotStr = dotStr.substring(dotStr.indexOf("|") + 1);
+                indiNum = dotStr.substring(0, dotStr.indexOf("|"));
+                dotStr = dotStr.substring(dotStr.indexOf("|") + 1);
+                famNum = dotStr.substring(0, dotStr.indexOf("|"));
+                dotStr = dotStr.substring(dotStr.indexOf("|") + 1);
+            }
             lastDotStr = dotStr;
             const images = [...lastDotStr.matchAll(/<IMG[^>]+SRC="([^"]*)/gmi)].map(function (matches) {
                 return {

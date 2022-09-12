@@ -463,7 +463,7 @@ class Dot {
 		if (!functionsClippingsCart::isIndividualInCart($this->tree) || !$this->settings["usecart"] ) {
 			// Create our tree
 			$this->createIndiList($this->individuals, $this->families, false);
-			if ($this->settings["diagram_type"] == "combined") {
+			if ($this->settings["diagram_type"] == "combined" && $this->indi_search_method["spou"] != "") {
 				$this->removeGhosts($this->individuals, $this->families);
 			}
 			// If option to display related in another colour is selected,
@@ -1695,8 +1695,10 @@ class Dot {
 
 							// Work out if indi has adoptive relationship to this family
 							$relationshipType = $this->getRelationshipType($child, $fam, $ind);
-							if ($relationshipType != "") {
-                                $individuals[$child_id]["fams"][$fid]["reltype"] = $relationshipType;
+                            // Work out if WE have adoptive relationship to this family
+                            $sourceRelationshipType = $this->getRelationshipType($i, $fam, $ind);
+							if ($relationshipType != "" || $sourceRelationshipType != "") {
+                                if ($relationshipType != "") $individuals[$child_id]["fams"][$fid]["reltype"] = $relationshipType;
 								$related = false;
 							} else {
 								$related = $rel;
