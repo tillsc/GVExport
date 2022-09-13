@@ -170,7 +170,7 @@ use Fisharebest\Webtrees\Tree;
                     </div>
                     <div class="col-auto mx-3">
                         <input type="hidden" name="vars[indiany]" value="no">
-                        <input type="checkbox" onclick="updateRelationOption('indiany')" name="vars[indiany]" id="vars[indiany]" value="any" <?= $vars["indiany"] == "any" ? 'checked' : '' ?> <?= !$cartempty ? "disabled" : ""; ?>>
+                        <input class="cart_toggle" type="checkbox" onclick="updateRelationOption('indiany')" name="vars[indiany]" id="vars[indiany]" value="any" <?= $vars["indiany"] == "any" ? 'checked' : '' ?> <?= !$cartempty ? "disabled" : ""; ?>>
                         <label for="vars[indiany]"><?= I18N::translate('Anyone') ?></label>
                     </div>
                 </div>
