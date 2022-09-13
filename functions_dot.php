@@ -316,7 +316,7 @@ class Dot {
 	 * @param integer $ind the indent level for printing the debug log
 	 * @return string
 	 */
-	function getRelationshipType($i, $f, int $ind): string
+	function getRelationshipType($i, $f, int $ind = 0): string
 	{
 		$fid = $f->xref();
 		$facts = $i->facts();
@@ -459,7 +459,7 @@ class Dot {
 
 	function createDOTDump(): string
     {
-		// If no individuals in the clippings cart (or option chosen to overide), use standard method
+		// If no individuals in the clippings cart (or option chosen to override), use standard method
 		if (!functionsClippingsCart::isIndividualInCart($this->tree) || !$this->settings["usecart"] ) {
 			// Create our tree
 			$this->createIndiList($this->individuals, $this->families, false);
@@ -542,15 +542,8 @@ class Dot {
 							if (!empty($child) && (isset($this->individuals[$child->xref()]))) {
 								$fams = isset($this->individuals[$child->xref()]["fams"]) ? $this->individuals[$child->xref()]["fams"] : [];
 								foreach ($fams as $fam) {
-                                    if (isset($fam["fid"])) {
-                                        $xref = $fam["fid"];
-                                        if (isset($this->individuals[$child->xref()]["fams"][$fid])) {
-                                            $arrowColor = $this->settings["color_arrow_related"] == "color_arrow_related" ? $this->colors["arrows"]["not_related"] : $this->colors["arrows"]["default"];
-                                        } else {
-                                            $arrowColor = $this->settings["color_arrow_related"] == "color_arrow_related" ? $this->colors["arrows"]["related"] : $this->colors["arrows"]["default"];
-                                        }
-                                        $out .= $this->convertID($fid) . " -> " . $this->convertID($xref) . ":" . $this->convertID($child->xref()) . " [color=\"$arrowColor\", arrowsize=0.3] \n";
-                                    }
+                                    $arrowColor = $this->getArrowColor($child, $fid);
+                                    $out .= $this->convertID($fid) . " -> " . $this->convertID($fam) . ":" . $this->convertID($child->xref()) . " [color=\"$arrowColor\", arrowsize=0.3] \n";
                                 }
 							}
 						}
@@ -582,11 +575,7 @@ class Dot {
 					// Draw an arrow from FAM to each CHIL
 					foreach ($f->children() as $child) {
 						if (!empty($child) && (isset($this->individuals[$child->xref()]))) {
-                            if (isset($this->individuals[$child->xref()]["fams"][$fid])) {
-                                $arrowColor = $this->settings["color_arrow_related"] == "color_arrow_related" ? $this->colors["arrows"]["not_related"] : $this->colors["arrows"]["default"];
-                            } else {
-                                $arrowColor = $this->settings["color_arrow_related"] == "color_arrow_related" ? $this->colors["arrows"]["related"] : $this->colors["arrows"]["default"];
-                            }
+                            $arrowColor = $this->getArrowColor($child, $fid);
 							$out .= $this->convertID($fid) . " -> " . $this->convertID($child->xref()) . " [color=\"$arrowColor\", arrowsize=0.3]\n";
 						}
 					}
@@ -1273,9 +1262,9 @@ class Dot {
 
 				foreach ($fams as $fam) {
 					$fid = $fam->xref();
-					$individuals[$pid]["fams"][$fid]["fid"] = $fid;
+					$individuals[$pid]["fams"][$fid] = $fid;
 
-					if (isset($families[$fid]["fid"]) && ($families[$fid]["fid"] == $fid)) {
+					if (isset($families[$fid]) && ($families[$fid] == $fid)) {
 						// Family ID already added
 						// do nothing
 						// --- DEBUG ---
@@ -1307,7 +1296,7 @@ class Dot {
 				}
 			} else {
 				// If there is no spouse family we create a dummy one
-				$individuals[$pid]["fams"]["F_$pid"]["fid"] = "F_$pid";
+				$individuals[$pid]["fams"]["F_$pid"] = "F_$pid";
 				$this->addFamToList("F_$pid", $families);
 
 				// --- DEBUG ---
@@ -1396,9 +1385,6 @@ class Dot {
 
 						// Work out if indi has adoptive relationship to this family
 						$relationshipType = $this->getRelationshipType($i, $fam, $ind);
-                        if ($relationshipType != "") {
-                            $individuals[$pid]["fams"][$fid]["reltype"] = $relationshipType;
-                        }
 						// Add father & mother
 						$h = $f->husband();
 						$w = $f->wife();
@@ -1552,7 +1538,6 @@ class Dot {
 							// Work out if indi has adoptive relationship to this family
 							$relationshipType = $this->getRelationshipType($child, $f, $ind);
 							if ($relationshipType != "") {
-                                $individuals[$child_id]["fams"][$f->xref()]["reltype"] = $relationshipType;
 								$related = false;
 							} else {
 								$related = $rel;
@@ -1698,7 +1683,6 @@ class Dot {
                             // Work out if WE have adoptive relationship to this family
                             $sourceRelationshipType = $this->getRelationshipType($i, $fam, $ind);
 							if ($relationshipType != "" || $sourceRelationshipType != "") {
-                                if ($relationshipType != "") $individuals[$child_id]["fams"][$fid]["reltype"] = $relationshipType;
 								$related = false;
 							} else {
 								$related = $rel;
@@ -1828,5 +1812,21 @@ class Dot {
 	function convertID($id) {
 		return preg_replace("/\:/", "_", $id);
 	}
+
+    public function getArrowColor($i, $fid)
+    {
+        $relationshipType = "";
+        if (substr($fid, 0, 2) != "F_") {
+            $f = $this->getUpdatedFamily($fid);
+            $relationshipType = $this->getRelationshipType($i, $f);
+        }
+
+        if ($relationshipType != "") {
+            $arrowColor = $this->settings["color_arrow_related"] == "color_arrow_related" ? $this->colors["arrows"]["not_related"] : $this->colors["arrows"]["default"];
+        } else {
+            $arrowColor = $this->settings["color_arrow_related"] == "color_arrow_related" ? $this->colors["arrows"]["related"] : $this->colors["arrows"]["default"];
+        }
+        return $arrowColor;
+    }
 }
 ?>
