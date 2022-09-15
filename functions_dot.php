@@ -980,9 +980,9 @@ class Dot {
 
 			// Show name
 			if ($this->settings["show_url"]) {
-				$out .= "<TD ALIGN=\"LEFT\" BALIGN=\"LEFT\" CELLPADDING=\"5\" PORT=\"dat\" HREF=\"" . $this->convertToHTMLSC($link) . "\" ><FONT COLOR=\"" . $this->colors["font_color"]["name"] . "\" POINT-SIZE=\"" . ($this->font_size + 2) ."\">" . $name . "</FONT>";
+				$out .= "<TD ALIGN=\"LEFT\" BALIGN=\"LEFT\"  TARGET=\"_BLANK\" CELLPADDING=\"5\" PORT=\"dat\" HREF=\"" . $this->convertToHTMLSC($link) . "\" ><FONT COLOR=\"" . $this->colors["font_color"]["name"] . "\" POINT-SIZE=\"" . ($this->font_size + 2) ."\">" . $name . "</FONT>";
 			} else {
-				$out .= "<TD ALIGN=\"LEFT\" BALIGN=\"LEFT\" CELLPADDING=\"5\" PORT=\"dat\"><FONT COLOR=\"" . $this->colors["font_color"]["name"] . "\" POINT-SIZE=\"" . ($this->font_size + 2) ."\">" . $name . "</FONT>";
+				$out .= "<TD ALIGN=\"LEFT\" BALIGN=\"LEFT\"  TARGET=\"_BLANK\" CELLPADDING=\"5\" PORT=\"dat\"><FONT COLOR=\"" . $this->colors["font_color"]["name"] . "\" POINT-SIZE=\"" . ($this->font_size + 2) ."\">" . $name . "</FONT>";
 			}
 			$out .= "<BR />";
 			$out .= "<FONT COLOR=\"" . $this->colors["font_color"]["details"] . "\" POINT-SIZE=\"" . ($this->font_size) ."\">" . $this->settings["birth_text"] . " $birthdate " . (empty($birthplace)?"":"($birthplace)") . "</FONT>";
@@ -1150,11 +1150,8 @@ class Dot {
 			}
 
 			$out .= "</TR>";
-
-			// --- Print marriage ---
-			if (substr($fid, 0, 2) == "F_") {
-				// If it is a dummy FAM, then do nothing
-			} else {
+            // --- Print marriage ---
+			if (substr($fid, 0, 2) !== "F_" && !(empty($marriagedate) && empty($marriageplace) && $family == "") && ($this->settings["show_my"] || $this->settings["show_mp"] || $this->settings["show_fid"])) {
 				$out .= "<TR>";
 				if ($this->settings["show_url"]) {
 					$out .= "<TD COLSPAN=\"2\" CELLPADDING=\"0\" PORT=\"marr\" TARGET=\"_BLANK\" HREF=\"" . $this->convertToHTMLSC($link) . "\" BGCOLOR=\"" . $fillcolor . "\">"; #ESL!!! 20090213 without convertToHTMLSC the dot file has invalid data
@@ -1162,7 +1159,7 @@ class Dot {
 					$out .= "<TD COLSPAN=\"2\" CELLPADDING=\"0\" PORT=\"marr\" BGCOLOR=\"" . $fillcolor . "\">";
 				}
 
-				$out .= "<FONT COLOR=\"". $this->colors["font_color"]["details"] ."\" POINT-SIZE=\"10\">" . (empty($marriagedate)?"":$marriagedate) . "<BR />" . (empty($marriageplace)?"":"(".$marriageplace.")") . $family . "</FONT>";
+				$out .= "<FONT COLOR=\"". $this->colors["font_color"]["details"] ."\" POINT-SIZE=\"" . ($this->font_size) ."\">" . (empty($marriagedate)?"":$marriagedate) . "<BR />" . (empty($marriageplace)?"":"(".$marriageplace.")") . $family . "</FONT>";
 				$out .= "</TD>";
 				$out .= "</TR>";
 			}
@@ -1177,7 +1174,7 @@ class Dot {
 			} else {
 				$out .= "color=\"#606060\",fillcolor=\"" . $fillcolor . "\", shape=ellipse, style=filled";
 			}
-			$out .= ", label=" . "<<TABLE border=\"0\" CELLPADDING=\"0\" CELLSPACING=\"0\"><TR><TD><FONT COLOR=\"". $this->colors["font_color"]["details"] ."\" POINT-SIZE=\"10\">" . (empty($marriagedate)?"":$marriagedate) . "<BR />" . (empty($marriageplace)?"":"(".$marriageplace.")") . $family . "</FONT></TD></TR></TABLE>>";
+			$out .= ", label=" . "<<TABLE border=\"0\" CELLPADDING=\"0\" CELLSPACING=\"0\"><TR><TD><FONT COLOR=\"". $this->colors["font_color"]["details"] ."\" POINT-SIZE=\"" . ($this->font_size) ."\">" . (empty($marriagedate)?"":$marriagedate) . "<BR />" . (empty($marriageplace)?"":"(".$marriageplace.")") . $family . "</FONT></TD></TR></TABLE>>";
         }
 
 		$out .= "];\n";
