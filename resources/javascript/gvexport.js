@@ -333,17 +333,34 @@ function toggleAdvanced(caller, id) {
 }
 
 function setStateFastRelationCheck() {
-    if ((!cartempty && document.getElementById("vars[usecart]_yes").checked) || !document.getElementById("vars[marknr]").checked)
-    {
-        document.getElementById("vars[fastnr]").disabled = true;
-    } else {
-        document.getElementById("vars[fastnr]").disabled = false;
+    document.getElementById("vars[fastnr]").disabled = ((!cartempty && document.getElementById("vars[usecart]_yes").checked) || !document.getElementById("vars[marknr]").checked);
+}
+
+function removeURLParameter(parameter) {
+    updateURLParameter(parameter, "", true);
+}
+
+function updateURLParameter(parameter, value, remove) {
+    let url=document.location.href.split("?")[0];
+    let args=document.location.href.split("?")[1];
+    let params = new URLSearchParams(args);
+    if (params.toString().search(parameter) !== -1) {
+        if (remove) {
+            params.delete(parameter);
+        } else {
+            params.set(parameter, value);
+        }
+        history.pushState(null, '', url + "?" + params.toString());
     }
 }
 
-function runAutoUpdate(on) {
-    if (on) {
-        updateRender();
+function formChanged(autoUpdate) {
+    let xref = document.getElementById('pid').value.trim();
+    if (xref !== "") {
+        if (autoUpdate) {
+            updateRender();
+        }
+        updateURLParameter("xref",xref);
     }
 }
 
