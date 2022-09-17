@@ -276,6 +276,13 @@ use Fisharebest\Webtrees\Tree;
         </div>
 
         <div class="row form-group">
+            <label class=" col-sm-4 col-form-label wt-page-options-label" for="vars[use_abbr_name]"><?= I18N::translate('Abbreviated names') ?></label>
+            <div class="col-sm-8 wt-page-options-value">
+                <?= view('components/select', ['name' => 'vars[use_abbr_name]', 'selected' => $vars['use_abbr_name'], 'options' => updateTranslations($gve_config["settings"]["use_abbr_names"])]) ?>
+            </div>
+        </div>
+
+        <div class="row form-group">
             <label class=" col-sm-4 col-form-label wt-page-options-label" for="vars[use_abbr_place]"><?= I18N::translate('Abbreviated place names') ?></label>
             <div class="col-sm-8 wt-page-options-value">
                 <?= view('components/select', ['name' => 'vars[use_abbr_place]', 'selected' => $vars['use_abbr_place'], 'options' => updateTranslations($gve_config["settings"]["use_abbr_places"])]) ?>

@@ -118,6 +118,9 @@ class Dot {
 
 		$this->settings["use_abbr_place"] = $GVE_CONFIG["settings"]["use_abbr_place"];
 		$this->settings["use_abbr_places"] = $GVE_CONFIG["settings"]["use_abbr_places"];
+        $this->settings["use_abbr_name"] = $GVE_CONFIG["settings"]["use_abbr_name"];
+		$this->settings["use_abbr_names"] = $GVE_CONFIG["settings"]["use_abbr_names"];
+
 		$this->settings["countries"] = $GVE_CONFIG["countries"];
 		$this->settings["download"] = $GVE_CONFIG["settings"]["download"];
 		$this->settings["debug"] = $GVE_CONFIG["debug"];
@@ -274,7 +277,9 @@ class Dot {
 	 * @param string $pid XREF of the person, for adding to name if enabled
 	 * @return string Returns formatted name
 	 */
-	function formatName($name, $pid): string {
+	function getFormattedName($nameArray, $pid): string {
+
+        $name = $this->getAbbreviatedName($nameArray);
 		// Show nickname in quotes
 		$name = str_replace(array('<q class="wt-nickname">', '</q>'), array('"', '"'), $name);
 
@@ -309,6 +314,52 @@ class Dot {
 		return $name;
 	}
 
+    function getAbbreviatedName($nameArray)
+    {
+        switch ($this->settings["use_abbr_name"]) {
+            case 0: /* Full name */
+                return $nameArray["full"];
+            case 10: /* Given and Surnames */
+                return $nameArray["givn"] . " " . $nameArray["surn"];
+            case 20: /* Given names */
+                return $nameArray["givn"];
+            case 30: /* First given name only */
+                return explode(" ", $nameArray["givn"])[0];
+            case 40: /* Surname(s) */
+                return $nameArray["surn"];
+            case 50: /* Initials only */
+                // Split by space or hyphen to get different names
+                $givenParts = preg_split('/[\s-]/', $nameArray["givn"]);
+                $initials = substr($givenParts[0],0,1);
+                if (isset($givenParts[1])) {
+                    $initials .= substr($givenParts[1],0,1);
+                }
+                $surnameParts = preg_split('/[\s-]/', $nameArray["surn"]);
+                $initials .= substr($surnameParts[0],0,1);
+                if (isset($surnameParts[1])) {
+                    // If there is a hyphen in the surname found before the first space
+                    $spacePos = strpos($nameArray["surn"], " ");
+                    if (strpos(substr($nameArray["surn"], 0, $spacePos ?: strlen($nameArray["surn"])), "-")) {
+                        $initials .= "-";
+                    }
+                    $initials .= substr($surnameParts[1],0,1);
+                }
+                return $initials;
+            case 60: /* Given name initials and Surname */
+                // Split by space or hyphan to get different names
+                $givenParts = preg_split('/[\s-]/', $nameArray["givn"]);
+                $initials = substr($givenParts[0],0,1) . ".";
+                if (isset($givenParts[1])) {
+                    $initials .= substr($givenParts[1],0,1) . ".";
+                }
+                return $initials . " " . $nameArray["surn"];
+            case 70: /* Don't show names */
+                return " ";
+            default:
+                return $nameArray["full"];
+
+        }
+    }
 	/** Checks if provided individual is related by
 	 * adoption or foster to the provided family record
 	 * @param Individual $i webtrees individual object for the person to check
@@ -616,7 +667,8 @@ class Dot {
 	 * @param	string $place_long Place string in long format (Town,County,State/Region,Country)
 	 * @return	string	The abbreviated place name
 	 */
-	function getFormattedPlace(string $place_long) {
+	function getAbbreviatedPlace(string $place_long): string
+    {
 		// If chose no abbreviating, then return string untouched
 		if ($this->settings["use_abbr_place"] == 0 /* Full place name */) {
 			return $place_long;
@@ -818,7 +870,6 @@ class Dot {
 		global $GVE_CONFIG, $pgv_changes, $lang_short_cut, $LANGUAGE, $GEDCOM, $pgv_lang;
 
 		$out = "";
-		$editor = "";
 		$bordercolor = "#606060";	// Border color of the INDI's box
 
 		// Get the personal data
@@ -826,6 +877,7 @@ class Dot {
 			// In case of dummy individual
 			$fillcolor = $this->getGenderColour('U', false);
 			$isdead = false;
+            $deathdate = "";
 			$birthdate = "";
 			$birthplace = "";
 			$link = "";
@@ -871,7 +923,7 @@ class Dot {
 
 			if ($this->settings["show_bp"]) {
 				// Show birth place
-				$birthplace = $this->getFormattedPlace($i->getBirthPlace()->gedcomName());
+				$birthplace = $this->getAbbreviatedPlace($i->getBirthPlace()->gedcomName());
 			} else {
 				$birthplace = "";
 			}
@@ -911,13 +963,14 @@ class Dot {
 
 			if ($this->settings["show_dp"]) {
 				// Show death place
-				$deathplace = $this->getFormattedPlace($i->getDeathPlace()->gedcomName());
+				$deathplace = $this->getAbbreviatedPlace($i->getDeathPlace()->gedcomName());
 			} else {
 				$deathplace = "";
 			}
-
-			// --- Name ---
-			$name = $i->fullName();//@@ Meliza Amity
+            // --- Name ---
+            $names = $i->getAllNames();
+            $nameArray = $names[$i->getPrimaryName()];
+            $name = $this->getFormattedName($nameArray, $pid);
 			$addname = $i->alternateName();//@@ Meliza Amity
 			if (!empty($addname)) {
 				if ($this->settings["diagram_type"] == "simple")
@@ -925,8 +978,6 @@ class Dot {
 				else
 					$name .= '<BR />' . $addname;//@@ Meliza Amity
 			}
-			// Handle webtrees tags for formatting name
-			$name = $this->formatName($name, $pid);
 		}
 
 		// --- Printing the INDI details ---
@@ -945,9 +996,6 @@ class Dot {
 				$out .= " ";
 			}
 			$out .= '\l';
-			if (!empty($editor)) {
-				$out .= '\n' . strip_tags($editor);
-			}
 			$out .= '"';
 		} else {
 			// Convert birth & death place to get rid of characters which mess up the HTML output
@@ -955,50 +1003,55 @@ class Dot {
 			if ($isdead) {
 				$deathplace = $this->convertToHTMLSC($deathplace);
 			}
-
+            $href = $this->settings["show_url"] ? " HREF=\"" . $this->convertToHTMLSC($link) . "\"" : "";
 			// Draw table
 			if ($this->settings["diagram_type"] == "combined") {
-				$out .= "<TABLE BORDER=\"0\" CELLBORDER=\"0\" CELLPADDING=\"2\" CELLSPACING=\"0\" BGCOLOR=\"#ffffff\">";
+				$out .= "<TABLE BORDER=\"0\" CELLBORDER=\"0\" CELLPADDING=\"2\" CELLSPACING=\"0\" BGCOLOR=\"#ffffff\" $href>";
 			} else {
-				$out .= "<TABLE COLOR=\"" . $bordercolor . "\" BORDER=\"1\" CELLBORDER=\"0\" CELLPADDING=\"2\" CELLSPACING=\"0\" BGCOLOR=\"#fefefe\">";
+				$out .= "<TABLE COLOR=\"" . $bordercolor . "\" BORDER=\"1\" CELLBORDER=\"0\" CELLPADDING=\"2\" CELLSPACING=\"0\" BGCOLOR=\"#fefefe\" $href>";
 			}
 
 			// Top line (colour only)
 			$out .= "<TR><TD COLSPAN=\"2\" CELLPADDING=\"2\" BGCOLOR=\"$fillcolor\" PORT=\"nam\"></TD></TR>";
 
+            $birthData = " $birthdate " . (empty($birthplace) ? "" : "($birthplace)");
+            $deathData = " $deathdate " . (empty($deathplace) ? "" : "($deathplace)");
+
 			// Second row (photo, name, birth & death data)
-			$out .= "<TR>";
-			// Show photo
-			if (($this->settings["diagram_type_combined_with_photo"])) {
-                if (isset($this->individuals[$pid]["pic"]) && !empty($this->individuals[$pid]["pic"])) {
-                    $out .= "<TD ROWSPAN=\"2\" CELLPADDING=\"1\" PORT=\"pic\" WIDTH=\"" . ($this->font_size * 3.5) . "\" HEIGHT=\"" . ($this->font_size * 4) . "\" FIXEDSIZE=\"true\"><IMG SCALE=\"false\" SRC=\"" . $this->individuals[$pid]["pic"] . "\" /></TD>";
-                } else {
-                    // Blank cell zero width to keep the height right
-                    $out .= "<TD ROWSPAN=\"2\" CELLPADDING=\"1\" PORT=\"pic\" WIDTH=\"0\" HEIGHT=\"" . ($this->font_size * 4) . "\" FIXEDSIZE=\"true\"></TD>";
+            if (trim($name . $birthData . $deathData) != "") {
+                $out .= "<TR>";
+                // Show photo
+                if (($this->settings["diagram_type_combined_with_photo"])) {
+                    if (isset($this->individuals[$pid]["pic"]) && !empty($this->individuals[$pid]["pic"])) {
+                        $out .= "<TD ROWSPAN=\"2\" CELLPADDING=\"1\" PORT=\"pic\" WIDTH=\"" . ($this->font_size * 3.5) . "\" HEIGHT=\"" . ($this->font_size * 4) . "\" FIXEDSIZE=\"true\"><IMG SCALE=\"false\" SRC=\"" . $this->individuals[$pid]["pic"] . "\" /></TD>";
+                    } else {
+                        // Blank cell zero width to keep the height right
+                        $out .= "<TD ROWSPAN=\"2\" CELLPADDING=\"1\" PORT=\"pic\" WIDTH=\"0\" HEIGHT=\"" . ($this->font_size * 4) . "\" FIXEDSIZE=\"true\"></TD>";
+                    }
                 }
-			}
+                $out .= "<TD ALIGN=\"LEFT\" BALIGN=\"LEFT\"  TARGET=\"_BLANK\" CELLPADDING=\"5\" PORT=\"dat\">";
+                // Show name
+                if (trim($name) != "") {
+                    $out .= "<FONT COLOR=\"" . $this->colors["font_color"]["name"] . "\" POINT-SIZE=\"" . ($this->font_size + 2) . "\">" . $name . "</FONT>";
+                    if (trim($birthData . $deathData) != "") {
+                        $out .= "<BR />";
+                    }
+                }
+                if (trim($birthData) != "") {
+                    $out .= "<FONT COLOR=\"" . $this->colors["font_color"]["details"] . "\" POINT-SIZE=\"" . ($this->font_size) . "\">" . $this->settings["birth_text"] . $birthData . "</FONT>";
+                    if (trim($deathData) != "") {
+                        $out .= "<BR />";
+                    }
+                }
+                if ($isdead && trim($deathData) !== "") {
+                    $out .= "<FONT COLOR=\"" . $this->colors["font_color"]["details"] . "\" POINT-SIZE=\"" . ($this->font_size) . "\">" . $this->settings["death_text"] . $deathData . "</FONT>";
+                } else {
+                    $out .= " ";
+                }
 
-			// Show name
-			if ($this->settings["show_url"]) {
-				$out .= "<TD ALIGN=\"LEFT\" BALIGN=\"LEFT\"  TARGET=\"_BLANK\" CELLPADDING=\"5\" PORT=\"dat\" HREF=\"" . $this->convertToHTMLSC($link) . "\" ><FONT COLOR=\"" . $this->colors["font_color"]["name"] . "\" POINT-SIZE=\"" . ($this->font_size + 2) ."\">" . $name . "</FONT>";
-			} else {
-				$out .= "<TD ALIGN=\"LEFT\" BALIGN=\"LEFT\"  TARGET=\"_BLANK\" CELLPADDING=\"5\" PORT=\"dat\"><FONT COLOR=\"" . $this->colors["font_color"]["name"] . "\" POINT-SIZE=\"" . ($this->font_size + 2) ."\">" . $name . "</FONT>";
-			}
-			$out .= "<BR />";
-			$out .= "<FONT COLOR=\"" . $this->colors["font_color"]["details"] . "\" POINT-SIZE=\"" . ($this->font_size) ."\">" . $this->settings["birth_text"] . " $birthdate " . (empty($birthplace)?"":"($birthplace)") . "</FONT>";
-			$out .= "<BR />";
-			if ($isdead) {
-				$out .= "<FONT COLOR=\"" . $this->colors["font_color"]["details"] . "\" POINT-SIZE=\"" . ($this->font_size) ."\">" . $this->settings["death_text"] . " $deathdate " . (empty($deathplace)?"":"($deathplace)") . "</FONT>";
-			} else {
-				$out .= " ";
-			}
-			if (!empty($editor)) {
-				$out .= "<BR/>" . $editor;
-			}
-
-			$out .= "</TD>";
-			$out .= "</TR>";
-
+                $out .= "</TD>";
+                $out .= "</TR>";
+            }
 			// Close table
 			$out .= "</TABLE>";
 		}
@@ -1079,7 +1132,7 @@ class Dot {
 
 			// Show marriage place
 			if ($this->settings["show_mp"] && !empty($f->getMarriage()) && !empty($f->getMarriagePlace())) {
-				$marriageplace = $this->getFormattedPlace($f->getMarriagePlace()->gedcomName());
+				$marriageplace = $this->getAbbreviatedPlace($f->getMarriagePlace()->gedcomName());
 			} else {
 				$marriageplace = "";
 			}
@@ -1170,11 +1223,19 @@ class Dot {
 		} else {
 		// Non-combined type
 			if ($this->settings["show_url"]) {
-				$out .= "color=\"#606060\",fillcolor=\"" . $fillcolor . "\", href=\"" . $this->convertToHTMLSC($link) . "\", target=\"_blank\", shape=ellipse, style=filled"; #ESL!!! 20090213 without convertToHTMLSC the dot file has invalid data
-			} else {
-				$out .= "color=\"#606060\",fillcolor=\"" . $fillcolor . "\", shape=ellipse, style=filled";
-			}
-			$out .= ", label=" . "<<TABLE border=\"0\" CELLPADDING=\"0\" CELLSPACING=\"0\"><TR><TD><FONT COLOR=\"". $this->colors["font_color"]["details"] ."\" POINT-SIZE=\"" . ($this->font_size) ."\">" . (empty($marriagedate)?"":$marriagedate) . "<BR />" . (empty($marriageplace)?"":"(".$marriageplace.")") . $family . "</FONT></TD></TR></TABLE>>";
+                $href = "href=\"" . $this->convertToHTMLSC($link) . "\", target=\"_blank\", ";
+            } else {
+                $href = "";
+            }
+            // If names, birth details, and death details are all disabled - show a smaller marriage circle to match the small tiles for individuals.
+            if (!$this->settings["show_by"] && !$this->settings["show_bp"] && !$this->settings["show_dy"] && !$this->settings["show_dp"] && !$this->settings["show_my"] && !$this->settings["show_pid"] && !$this->settings["show_fid"] && $this->settings["use_abbr_names"][$this->settings["use_abbr_name"]] == "Don't show names") {
+                $shape = "point, height=0.1";
+            } else {
+                $shape = "ellipse";
+            }
+            $out .= "color=\"#606060\",fillcolor=\"" . $fillcolor . "\", $href shape=$shape, style=filled";
+			//$out .= ", label=" . "<<TABLE border=\"0\" CELLPADDING=\"0\" CELLSPACING=\"0\"><TR><TD><FONT COLOR=\"". $this->colors["font_color"]["details"] ."\" POINT-SIZE=\"" . ($this->font_size) ."\">" . (empty($marriagedate)?"":$marriagedate) . "<BR />" . (empty($marriageplace)?"":"(".$marriageplace.")") . $family . "</FONT></TD></TR></TABLE>>";
+			$out .= ", label=" . "< >";
         }
 
 		$out .= "];\n";
