@@ -165,7 +165,6 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
             "indiinc" => "indi",
             "diagtype" => "decorated",
             "with_photos" => "",
-            //"use_abbr_place" => ($GVE_CONFIG['settings']['use_abbr_place'] ? "use_abbr_place" : ""),  // duplicated key
             "show_by" => "show_by",
             "bd_type" => "gedcom",
             "show_bp" => "show_bp",
@@ -190,6 +189,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
             "show_pid" => "DEFAULT", // This is set to DEFAULT so we can tell if it was loaded from cookie or not
             "show_fid" => "",
             "use_abbr_place" => $GVE_CONFIG["settings"]["use_abbr_place"],
+            "use_abbr_name" => $GVE_CONFIG["settings"]["use_abbr_name"],
             "debug" => ($GVE_CONFIG['debug'] ? "debug" : ""),
             "dpi" => $GVE_CONFIG["settings"]["dpi"],
             "ranksep" => $GVE_CONFIG["settings"]["ranksep"],
@@ -565,6 +565,10 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
 
         if (isset($vars['use_abbr_place'])) {
             $dot->setSettings("use_abbr_place", $vars['use_abbr_place']);
+        }
+
+        if (isset($vars['use_abbr_name'])) {
+            $dot->setSettings("use_abbr_name", $vars['use_abbr_name']);
         }
 
         if (isset($vars['usecart'])) {

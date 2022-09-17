@@ -148,6 +148,7 @@ $GVE_CONFIG["custom"]["death_text"] = "+";	// Text shown on chart before the dea
 
 // Settings
 $GVE_CONFIG["settings"]["use_abbr_place"] = "Full place name";
+$GVE_CONFIG["settings"]["use_abbr_name"] = "Full name";
 $GVE_CONFIG["settings"]["download"] = TRUE;
 
 // Deafult max levels of ancestors
@@ -176,8 +177,9 @@ foreach ($json as $row) {
 	$GVE_CONFIG["countries"]["iso2"][strtolower($row["Name"])] = $row["ISO3166-1-Alpha-2"];
 	$GVE_CONFIG["countries"]["iso3"][strtolower($row["Name"])] = $row["ISO3166-1-Alpha-3"];
 }
-// Options for abbreviating place names
+// Options for abbreviating
 $GVE_CONFIG["settings"]["use_abbr_places"] = [0 => "Full place name", 10 => "City and Country" ,  20 => "City and 2 Letter ISO Country Code", 30 => "City and 3 Letter ISO Country Code"];
+$GVE_CONFIG["settings"]["use_abbr_names"] = [0 => "Full name", 10 => "Given and Surnames", 20 => "Given names" , 30 => "First given name only", 40 => "Surname", 50 => "Initials only", 60 => "Given name initials and Surname", 70 => "Don't show names"];
 
 // Check if exec function is available to prevent error if webserver has disabled it
 // From: https://stackoverflow.com/questions/3938120/check-if-exec-is-disabled
