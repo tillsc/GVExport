@@ -1698,12 +1698,7 @@ class Dot {
 							//var_dump($fams);
 						}
 						// -------------
-
-						if ($this->settings["mark_not_related"] == TRUE) {
-							$this->addIndiToList($pid."|Code 6", $spouse_id, $this->indi_search_method["any"] && $ance, $this->indi_search_method["any"] && $desc, $this->indi_search_method["any"], $this->indi_search_method["any"], FALSE, $ind, $level, $individuals, $families, $full);
-						} else {
-							$this->addIndiToList($pid."|Code 7", $spouse_id, $this->indi_search_method["any"], $this->indi_search_method["any"] && $level > -1*$desc_level, $this->indi_search_method["any"], $this->indi_search_method["any"], TRUE, $ind, $level, $individuals, $families, $full);
-						}
+                        $this->addIndiToList($pid."|Code 6", $spouse_id, $this->indi_search_method["any"] && $ance, $this->indi_search_method["any"] && $desc, $this->indi_search_method["any"], $this->indi_search_method["any"], FALSE, $ind, $level, $individuals, $families, $full);
 					}
 
 				}
