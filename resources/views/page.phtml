@@ -702,10 +702,10 @@ use Fisharebest\Webtrees\Tree;
             // Clear current rendering then append new element to the page
             rendering.innerHTML = "";
             rendering.appendChild(element);
-            const fullZoom = Math.min(2, rendering.getBoundingClientRect().width / element.getBBox().width);
+            const fullZoom = Math.min(4, rendering.getBoundingClientRect().width / element.getBBox().width);
             panzoom(element, {
                 maxZoom: 4,
-                minZoom: fullZoom / 2,
+                minZoom: fullZoom / 4,
                 initialZoom: fullZoom
             });
             showToast(`<?= I18N::translate('Generated ${indiNum} individuals and ${famNum} family records'); ?>`, 5000);
