@@ -239,15 +239,15 @@ use Fisharebest\Webtrees\Tree;
             <label class="col-sm-4 col-form-label wt-page-options-label"><?= I18N::translate('Diagram Type') ?></label>
             <div class="col-sm-8 wt-page-options-value">
                 <div class="row">
-                    <div class="col-auto mx-3">
+                    <div class="col-auto">
                         <input type="radio" onclick="togglePhotos(false)" name="vars[diagtype]" id="vars[diagtype]_simple" value="simple" <?= $vars["diagtype"] == "simple" ? 'checked' : '' ?>>
                         <label for="vars[diagtype]_simple"><?= I18N::translate('Simple') ?></label>
                     </div>
-                    <div class="col-auto mx-3">
+                    <div class="col-auto">
                         <input type="radio" onclick="togglePhotos(true)" name="vars[diagtype]" id="vars[diagtype]_decorated" value="decorated" <?= $vars["diagtype"] == "decorated" ? 'checked' : '' ?>>
                         <label for="vars[diagtype]_decorated"><?= I18N::translate('Decorated') ?></label>
                     </div>
-                    <div class="col-auto mx-3">
+                    <div class="col-auto">
                         <input type="radio" onclick="togglePhotos(true)" name="vars[diagtype]" id="vars[diagtype]_combined" value="combined" <?= $vars["diagtype"] == "combined" ? 'checked' : '' ?>>
                         <label for="vars[diagtype]_combined"><?= I18N::translate('Combined') ?></label>
                     </div>
