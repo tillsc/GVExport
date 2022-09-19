@@ -747,25 +747,25 @@ class Dot {
 		global $GVE_CONFIG;
 		// Determine the fill color
 		if ($gender == 'F') {
-			if ($related) {
+			if ($related || !$this->settings["mark_not_related"]) {
 				$fillcolor = $this->colors["colorf"];
 			} else  {
 				$fillcolor = $this->colors["colorf_nr"];
 			}
 		} elseif ($gender == 'M'){
-			if ($related) {
+			if ($related || !$this->settings["mark_not_related"]) {
 				$fillcolor = $this->colors["colorm"];
 			} else  {
 				$fillcolor = $this->colors["colorm_nr"];
 			}
 		} elseif ($gender == 'X'){
-			if ($related) {
+			if ($related || !$this->settings["mark_not_related"]) {
 				$fillcolor = $this->colors["colorx"];
 			} else  {
 				$fillcolor = $this->colors["colorx_nr"];
 			}
 		} else {
-			if ($related) {
+			if ($related || !$this->settings["mark_not_related"]) {
 				$fillcolor = $this->colors["coloru"];
 			} else  {
 				$fillcolor = $this->colors["coloru_nr"];
@@ -1303,12 +1303,9 @@ class Dot {
 
 		$individuals[$pid]['pid'] = $pid;
 		// Overwrite the 'related' status if it was not set before or it's 'false' (for those people who are added as both related and non-related)
-		if (!isset($individuals[$pid]['rel']) || (!$individuals[$pid]['rel'] && $rel)) {
-			if ($this->settings["mark_not_related"]) {
+
+        if (!isset($individuals[$pid]['rel']) || (!$individuals[$pid]['rel'] && $rel)) {
 				$individuals[$pid]['rel'] = $rel;
-			} else {
-				$individuals[$pid]['rel'] = TRUE;
-			}
 		} else {
 			// We've already added this person
 			return false;
