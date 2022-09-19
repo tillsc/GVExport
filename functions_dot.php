@@ -273,7 +273,7 @@ class Dot {
 	}
 
 	/** Add formatting to name before adding to DOT
-	 * @param string $name full name of the person
+	 * @param array $nameArray webtrees name array for the person
 	 * @param string $pid XREF of the person, for adding to name if enabled
 	 * @return string Returns formatted name
 	 */
@@ -285,28 +285,30 @@ class Dot {
         $name = str_replace(array("@N.N.", "@P.N."), "...", $name);
 		// Show nickname in quotes
 		$name = str_replace(array('<q class="wt-nickname">', '</q>'), array('"', '"'), $name);
+        if ($this->settings["diagram_type"] != "simple") {
+            // Show preferred name as underlined by replacing span with underline tags
+            $pos_start = strpos($name, '<span class="starredname">');
+            while ($pos_start != false) {
+                // Start by replacing the </span>
+                $pos_end = strpos(substr($name, $pos_start), "</span>") + $pos_start;
+                if ($pos_end) {
+                    $name = substr_replace($name, "_/U_", $pos_end, strlen("</span>"));
+                }
 
-		// Show preferred name as underlined by replacing span with underline tags
-		$pos_start = strpos($name,'<span class="starredname">');
-		while ($pos_start != false) {
-			// Start by replacing the </span>
-			$pos_end = strpos(substr($name, $pos_start), "</span>") + $pos_start;
-			if ($pos_end) {
-				$name = substr_replace($name, "_/U_", $pos_end, strlen("</span>"));
-			}
+                // Next do the starting tags
+                $pos_start = strpos($name, '<span class="starredname">');
+                if ($pos_start !== false) {
+                    $name = substr_replace($name, "_U_", $pos_start, strlen('<span class="starredname">'));
+                }
+                $pos_start = strpos($name, '<span class="starredname">');
+            }
+        }
+        $name = strip_tags($name);
 
-			// Next do the starting tags
-			$pos_start = strpos($name,'<span class="starredname">');
-			if ($pos_start !== false) {
-				$name = substr_replace($name, "_U_", $pos_start, strlen('<span class="starredname">'));
-			}
-			$pos_start = strpos($name,'<span class="starredname">');
-		}
-		$name = strip_tags($name);
-		// We use _ instead of < >, remove tags, then switch them to proper tags. This lets
-		// us control the tags included in an environment where we don't normally have control
-		$name = str_replace("_U_", "<u>", $name);
-		$name = str_replace("_/U_", "</u> ", $name);
+        // We use _ instead of < >, remove tags, then switch them to proper tags. This lets
+        // us control the tags included in an environment where we don't normally have control
+        $name = str_replace("_U_", "<u>", $name);
+        $name = str_replace("_/U_", "</u> ", $name);
 
 		// If PID already in name (from another module), remove it so we don't add twice
 		$name = str_replace(" (" . $pid . ")", "", $name);
@@ -745,25 +747,25 @@ class Dot {
 		global $GVE_CONFIG;
 		// Determine the fill color
 		if ($gender == 'F') {
-			if ($related) {
+			if ($related || !$this->settings["mark_not_related"]) {
 				$fillcolor = $this->colors["colorf"];
 			} else  {
 				$fillcolor = $this->colors["colorf_nr"];
 			}
 		} elseif ($gender == 'M'){
-			if ($related) {
+			if ($related || !$this->settings["mark_not_related"]) {
 				$fillcolor = $this->colors["colorm"];
 			} else  {
 				$fillcolor = $this->colors["colorm_nr"];
 			}
 		} elseif ($gender == 'X'){
-			if ($related) {
+			if ($related || !$this->settings["mark_not_related"]) {
 				$fillcolor = $this->colors["colorx"];
 			} else  {
 				$fillcolor = $this->colors["colorx_nr"];
 			}
 		} else {
-			if ($related) {
+			if ($related || !$this->settings["mark_not_related"]) {
 				$fillcolor = $this->colors["coloru"];
 			} else  {
 				$fillcolor = $this->colors["coloru_nr"];
@@ -1301,12 +1303,9 @@ class Dot {
 
 		$individuals[$pid]['pid'] = $pid;
 		// Overwrite the 'related' status if it was not set before or it's 'false' (for those people who are added as both related and non-related)
-		if (!isset($individuals[$pid]['rel']) || (!$individuals[$pid]['rel'] && $rel)) {
-			if ($this->settings["mark_not_related"]) {
+
+        if (!isset($individuals[$pid]['rel']) || (!$individuals[$pid]['rel'] && $rel)) {
 				$individuals[$pid]['rel'] = $rel;
-			} else {
-				$individuals[$pid]['rel'] = TRUE;
-			}
 		} else {
 			// We've already added this person
 			return false;
