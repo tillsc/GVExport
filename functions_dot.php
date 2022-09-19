@@ -280,6 +280,9 @@ class Dot {
 	function getFormattedName($nameArray, $pid): string {
 
         $name = $this->getAbbreviatedName($nameArray);
+
+        // Tidy webtrees terms for missing names
+        $name = str_replace(array("@N.N.", "@P.N."), "...", $name);
 		// Show nickname in quotes
 		$name = str_replace(array('<q class="wt-nickname">', '</q>'), array('"', '"'), $name);
 
@@ -346,7 +349,7 @@ class Dot {
                 }
                 return $initials;
             case 60: /* Given name initials and Surname */
-                // Split by space or hyphan to get different names
+                // Split by space or hyphen to get different names
                 $givenParts = preg_split('/[\s-]/', $nameArray["givn"]);
                 $initials = substr($givenParts[0],0,1) . ".";
                 if (isset($givenParts[1])) {
@@ -570,7 +573,13 @@ class Dot {
 		if (!$this->settings["no_fams"]) {
 			foreach ($this->families as $fid=>$fam_data) {
 				if ($this->settings["diagram_type"] == "combined") {
-                    $out .= $this->printFamily($fid);
+                    // We do not show those families which has no parents and children in case of "combined" view;
+                    if ((isset($this->families[$fid]["has_children"]) && $this->families[$fid]["has_children"])
+                        || (isset($this->families[$fid]["has_parents"]) && $this->families[$fid]["has_parents"])
+                        || ((isset($this->families[$fid]["husb_id"]) && $this->families[$fid]["husb_id"]) && (isset($this->families[$fid]["wife_id"]) && $this->families[$fid]["wife_id"]))
+                    ) {
+                        $out .= $this->printFamily($fid);
+                    }
 				} elseif ($this->settings["diagram_type"] != "combined") {
 					$out .= $this->printFamily($fid);
 				}
@@ -1010,26 +1019,37 @@ class Dot {
 			} else {
 				$out .= "<TABLE COLOR=\"" . $bordercolor . "\" BORDER=\"1\" CELLBORDER=\"0\" CELLPADDING=\"2\" CELLSPACING=\"0\" BGCOLOR=\"#fefefe\" $href>";
 			}
-
-			// Top line (colour only)
-			$out .= "<TR><TD COLSPAN=\"2\" CELLPADDING=\"2\" BGCOLOR=\"$fillcolor\" PORT=\"nam\"></TD></TR>";
-
             $birthData = " $birthdate " . (empty($birthplace) ? "" : "($birthplace)");
             $deathData = " $deathdate " . (empty($deathplace) ? "" : "($deathplace)");
 
+            $detailsExist = trim($name . $birthData . $deathData) != "";
+
+            if (!$detailsExist && !$this->settings["diagram_type_combined_with_photo"]) {
+                // No information in out tiles so make coloured boxes
+                $size = "WIDTH=\"" . ($this->font_size * 3) . "\" HEIGHT=\"" . ($this->font_size * 3) . "\"";
+            } else {
+                $size = ""; // Let it sort out size itself
+            }
+			// Top line (colour only)
+			$out .= "<TR><TD COLSPAN=\"2\" CELLPADDING=\"2\" BGCOLOR=\"$fillcolor\" PORT=\"nam\" $size></TD></TR>";
+
+
+
 			// Second row (photo, name, birth & death data)
-            if (trim($name . $birthData . $deathData) != "") {
+            if ($detailsExist || $this->settings["diagram_type_combined_with_photo"]) {
                 $out .= "<TR>";
                 // Show photo
-                if (($this->settings["diagram_type_combined_with_photo"])) {
+                if ($this->settings["diagram_type_combined_with_photo"]) {
                     if (isset($this->individuals[$pid]["pic"]) && !empty($this->individuals[$pid]["pic"])) {
-                        $out .= "<TD ROWSPAN=\"2\" CELLPADDING=\"1\" PORT=\"pic\" WIDTH=\"" . ($this->font_size * 3.5) . "\" HEIGHT=\"" . ($this->font_size * 4) . "\" FIXEDSIZE=\"true\"><IMG SCALE=\"false\" SRC=\"" . $this->individuals[$pid]["pic"] . "\" /></TD>";
+                        $out .= "<TD ROWSPAN=\"2\" CELLPADDING=\"1\" PORT=\"pic\" WIDTH=\"" . ($this->font_size * 3.5) . "\" HEIGHT=\"" . ($this->font_size * 4) . "\" FIXEDSIZE=\"true\" ALIGN=\"CENTER\"><IMG SCALE=\"false\" SRC=\"" . $this->individuals[$pid]["pic"] . "\" /></TD>";
                     } else {
                         // Blank cell zero width to keep the height right
-                        $out .= "<TD ROWSPAN=\"2\" CELLPADDING=\"1\" PORT=\"pic\" WIDTH=\"0\" HEIGHT=\"" . ($this->font_size * 4) . "\" FIXEDSIZE=\"true\"></TD>";
+                        $out .= "<TD ROWSPAN=\"2\" CELLPADDING=\"1\" PORT=\"pic\" WIDTH=\"" . ($detailsExist ? "0" : ($this->font_size * 3.5)) . "\" HEIGHT=\"" . ($this->font_size * 4) . "\" FIXEDSIZE=\"true\"></TD>";
                     }
                 }
-                $out .= "<TD ALIGN=\"LEFT\" BALIGN=\"LEFT\"  TARGET=\"_BLANK\" CELLPADDING=\"5\" PORT=\"dat\">";
+                if ($detailsExist) {
+                    $out .= "<TD ALIGN=\"LEFT\" BALIGN=\"LEFT\"  TARGET=\"_BLANK\" CELLPADDING=\"4\" PORT=\"dat\">";
+                }
                 // Show name
                 if (trim($name) != "") {
                     $out .= "<FONT COLOR=\"" . $this->colors["font_color"]["name"] . "\" POINT-SIZE=\"" . ($this->font_size + 2) . "\">" . $name . "</FONT>";
@@ -1049,7 +1069,9 @@ class Dot {
                     $out .= " ";
                 }
 
-                $out .= "</TD>";
+                if ($detailsExist) {
+                    $out .= "</TD>";
+                }
                 $out .= "</TR>";
             }
 			// Close table
@@ -1229,13 +1251,12 @@ class Dot {
             }
             // If names, birth details, and death details are all disabled - show a smaller marriage circle to match the small tiles for individuals.
             if (!$this->settings["show_by"] && !$this->settings["show_bp"] && !$this->settings["show_dy"] && !$this->settings["show_dp"] && !$this->settings["show_my"] && !$this->settings["show_pid"] && !$this->settings["show_fid"] && $this->settings["use_abbr_names"][$this->settings["use_abbr_name"]] == "Don't show names") {
-                $shape = "point, height=0.1";
+                $out .= "color=\"#606060\",fillcolor=\"" . $fillcolor . "\", $href shape=point, height=0.2, style=filled";
+                $out .= ", label=" . "< >";
             } else {
-                $shape = "ellipse";
+                $out .= "color=\"#606060\",fillcolor=\"" . $fillcolor . "\", $href shape=ellipse, style=filled";
+                $out .= ", label=" . "<<TABLE border=\"0\" CELLPADDING=\"0\" CELLSPACING=\"0\"><TR><TD><FONT COLOR=\"". $this->colors["font_color"]["details"] ."\" POINT-SIZE=\"" . ($this->font_size) ."\">" . (empty($marriagedate)?"":$marriagedate) . "<BR />" . (empty($marriageplace)?"":"(".$marriageplace.")") . $family . "</FONT></TD></TR></TABLE>>";
             }
-            $out .= "color=\"#606060\",fillcolor=\"" . $fillcolor . "\", $href shape=$shape, style=filled";
-			//$out .= ", label=" . "<<TABLE border=\"0\" CELLPADDING=\"0\" CELLSPACING=\"0\"><TR><TD><FONT COLOR=\"". $this->colors["font_color"]["details"] ."\" POINT-SIZE=\"" . ($this->font_size) ."\">" . (empty($marriagedate)?"":$marriagedate) . "<BR />" . (empty($marriageplace)?"":"(".$marriageplace.")") . $family . "</FONT></TD></TR></TABLE>>";
-			$out .= ", label=" . "< >";
         }
 
 		$out .= "];\n";
