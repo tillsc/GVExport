@@ -986,13 +986,15 @@ class Dot {
             $names = $i->getAllNames();
             $nameArray = $names[$i->getPrimaryName()];
             $name = $this->getFormattedName($nameArray, $pid);
-			$addname = $this->getFormattedName([$i->alternateName()],"");//@@ Meliza Amity
-			if (!empty($addname)) {
-				if ($this->settings["diagram_type"] == "simple")
-					$name .= '\n' . $addname;//@@ Meliza Amity
-				else
-					$name .= '<BR />' . $addname;//@@ Meliza Amity
-			}
+            if ($this->settings["use_abbr_name"] !== "70") { /* don't show names setting */
+                $addname = $this->getFormattedName([$i->alternateName()], "");//@@ Meliza Amity
+                if (!empty($addname)) {
+                    if ($this->settings["diagram_type"] == "simple")
+                        $name .= '\n' . $addname;//@@ Meliza Amity
+                    else
+                        $name .= '<BR />' . $addname;//@@ Meliza Amity
+                }
+            }
 		}
 
 		// --- Printing the INDI details ---
