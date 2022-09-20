@@ -39,6 +39,7 @@ use Fisharebest\Webtrees\I18n;
 //use League\Flysystem\Util;
 use Fisharebest\Webtrees\Site;
 use Fisharebest\Webtrees\Registry;
+use http\Params;
 
 
 /**
@@ -278,8 +279,11 @@ class Dot {
 	 * @return string Returns formatted name
 	 */
 	function getFormattedName($nameArray, $pid): string {
-
-        $name = $this->getAbbreviatedName($nameArray);
+        if (isset($nameArray['full'])) {
+            $name = $this->getAbbreviatedName($nameArray);
+        } else {
+            $name = $nameArray[0];
+        }
 
         // Tidy webtrees terms for missing names
         $name = str_replace(array("@N.N.", "@P.N."), "...", $name);
@@ -982,7 +986,7 @@ class Dot {
             $names = $i->getAllNames();
             $nameArray = $names[$i->getPrimaryName()];
             $name = $this->getFormattedName($nameArray, $pid);
-			$addname = $i->alternateName();//@@ Meliza Amity
+			$addname = $this->getFormattedName([$i->alternateName()],"");//@@ Meliza Amity
 			if (!empty($addname)) {
 				if ($this->settings["diagram_type"] == "simple")
 					$name .= '\n' . $addname;//@@ Meliza Amity
