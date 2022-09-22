@@ -986,9 +986,11 @@ class Dot {
             $names = $i->getAllNames();
             $nameArray = $names[$i->getPrimaryName()];
             $name = $this->getFormattedName($nameArray, $pid);
-            if ($this->settings["use_abbr_name"] !== "70") { /* don't show names setting */
-                $addname = $this->getFormattedName([$i->alternateName()], "");//@@ Meliza Amity
-                if (!empty($addname)) {
+
+            if ($i->getPrimaryName() !== $i->getSecondaryName()) {
+                $altNameArray = $names[$i->getSecondaryName()];
+                $addname = $this->getFormattedName($altNameArray, "");
+                if (!empty($addname) && trim($addname) !== "" && $this->settings["use_abbr_name"] < 50) {
                     if ($this->settings["diagram_type"] == "simple")
                         $name .= '\n' . $addname;//@@ Meliza Amity
                     else
