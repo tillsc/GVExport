@@ -125,3 +125,21 @@
     margin-right: 3px;
     padding: 2px !important;
 }
+
+.indi_list_item {
+    border: 1px;
+    border-style: solid;
+    background-color: white;
+    border-radius: 5px;
+    margin: 3px;
+}
+
+#indi_list {
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+.remove-item {
+    float: right;
+    margin-right: 5px;
+}

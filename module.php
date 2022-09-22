@@ -280,20 +280,15 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
         $tree = $request->getAttribute('tree');
         assert($tree instanceof Tree);
 
-        $individual = $this->getIndividual($tree, $_REQUEST['pid']);            // is this defined in all cases ???
-        unset($_REQUEST["vars"]["debug"]);
-        if (isset($_REQUEST["vars"]["debug"])) {
-            return $this->showDOTFile($individual->tree(), $individual);
+        $individual = $this->getIndividual($tree, $_GET['xref']);
+        $temp_dir = $this->saveDOTFile($individual->tree(), $individual, $_REQUEST["vars"]["otype"] == 'svg' || $_REQUEST["vars"]["otype"] == 'dot');
+        // If browser mode, output dot instead of selected file
+        if (isset($_POST["browser"]) && $_POST["browser"] == "true") {
+            $browser = true;
         } else {
-            $temp_dir = $this->saveDOTFile($individual->tree(), $individual, $_REQUEST["vars"]["otype"] == 'svg' || $_REQUEST["vars"]["otype"] == 'dot');
-            // If browser mode, output dot instead of selected file
-            if (isset($_POST["browser"]) && $_POST["browser"] == "true") {
-                $browser = true;
-            } else {
-                $browser = false;
-            }
-            return $this->downloadFile($temp_dir, $browser ? "dot" : $_REQUEST["vars"]["otype"]);
+            $browser = false;
         }
+        return $this->downloadFile($temp_dir, $browser ? "dot" : $_REQUEST["vars"]["otype"]);
     }
 
     /**
@@ -397,11 +392,9 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
 
         // INDI id
         if (!empty($vars["other_pids"])) {
-            $dot->setSettings("indi", $individual->xref() .','. $vars["other_pids"]);
-            $dot->setSettings("multi_indi", TRUE);
+            $dot->setSettings("indi", $vars["other_pids"]);
         } else {
-            $dot->setSettings("indi", $individual->xref());
-            $dot->setSettings("multi_indi", FALSE);
+            $dot->setSettings("indi", "");
         }
         // Stop PIDs
         if (!empty($vars["other_stop_pids"]) || !empty($vars["stop_pid"])) {

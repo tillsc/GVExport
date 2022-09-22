@@ -96,7 +96,6 @@ class Dot {
         $this->settings["diagram_type"] = "simple";
 		$this->settings["diagram_type_combined_with_photo"] = true;
 		$this->settings["indi"] = "";
-		$this->settings["multi_indi"] = FALSE;
 		$this->settings["use_pagesize"] = "";
 		$this->settings["page_margin"] = $GVE_CONFIG["default_margin"];
 		$this->settings["show_lt_editor"] = FALSE;
@@ -311,6 +310,7 @@ class Dot {
 
         // We use _ instead of < >, remove tags, then switch them to proper tags. This lets
         // us control the tags included in an environment where we don't normally have control
+        $name = str_replace("_U__/U_", "", $name); // remove blank tags
         $name = str_replace("_U_", "<u>", $name);
         $name = str_replace("_/U_", "</u> ", $name);
 
@@ -441,33 +441,30 @@ class Dot {
 	}
 
 	function createIndiList (&$individuals, &$families, $full) {
-		if (!$this->settings["multi_indi"]) {
-			$this->addIndiToList("Start | Code 15", $this->settings["indi"], $this->indi_search_method["ance"], $this->indi_search_method["desc"], $this->indi_search_method["spou"], $this->indi_search_method["sibl"], TRUE, 0, 0, $individuals, $families, $full);
-		} else {
-			// if multiple indis are defined
-			$indis = explode(",", $this->settings["indi"]);
-            $indiLists = array();
-			for ($i=0;$i<count($indis);$i++) {
-                $indiLists[$i] = array();
-				$this->addIndiToList("Start | Code 16", trim($indis[$i]), $this->indi_search_method["ance"], $this->indi_search_method["desc"], $this->indi_search_method["spou"], $this->indi_search_method["sibl"], TRUE, 0, 0, $indiLists[$i], $families, $full);
-			}
-            // Merge multiple lists from the different starting persons into one list
-            // Taking extra care to ensure if one list marks a person as related then
-            // they should be marked as related in the final tree
-            $individuals = $indiLists[0];
-            for($i=1;$i<count($indiLists);$i++) {
-                $indiList = $indiLists[$i];
-                foreach ($indiList as $key => $value) {
-                    if (isset($individuals[$key])) {
-                        if (!$individuals[$key]["rel"] && $value["rel"]) {
-                            $individuals[$key]["rel"] = true;
-                        }
-                    } else {
-                        $individuals[$key] = $value;
+        $indis = explode(",", $this->settings["indi"]);
+        $indiLists = array();
+        for ($i=0;$i<count($indis);$i++) {
+            $indiLists[$i] = array();
+            if (trim($indis[$i]) !== "") {
+                $this->addIndiToList("Start | Code 16", trim($indis[$i]), $this->indi_search_method["ance"], $this->indi_search_method["desc"], $this->indi_search_method["spou"], $this->indi_search_method["sibl"], TRUE, 0, 0, $indiLists[$i], $families, $full);
+            }
+        }
+        // Merge multiple lists from the different starting persons into one list
+        // Taking extra care to ensure if one list marks a person as related then
+        // they should be marked as related in the final tree
+        $individuals = $indiLists[0];
+        for($i=1;$i<count($indiLists);$i++) {
+            $indiList = $indiLists[$i];
+            foreach ($indiList as $key => $value) {
+                if (isset($individuals[$key])) {
+                    if (!$individuals[$key]["rel"] && $value["rel"]) {
+                        $individuals[$key]["rel"] = true;
                     }
+                } else {
+                    $individuals[$key] = $value;
                 }
             }
-		}
+        }
 
 		// -- DEBUG ---
 		if ($this->settings["debug"]) {

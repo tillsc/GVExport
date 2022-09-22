@@ -11,7 +11,7 @@ const appendPidTo = function (sourceId, targetId) {
     if (ids.indexOf(newId) === -1) {
         ids.push(newId);
     }
-    document.getElementById(targetId).value = ids.join(", ");
+    document.getElementById(targetId).value = ids.join(",");
 };
 
 
@@ -77,7 +77,8 @@ function defaultValueWhenBlank(element, value) {
 
 function checkIndiBlank() {
     let el = document.getElementsByClassName("item");
-    return el.length === 0;
+    let list = document.getElementById('vars[other_pids]');
+    return el.length === 0 && list.value.toString().length === 0;
 }
 
 // This function ensures that if certain options are checked in regard to which relations to include,
@@ -355,8 +356,10 @@ function updateURLParameter(parameter, value, remove) {
 }
 
 function formChanged(autoUpdate) {
+    const el = document.getElementsByClassName("item");
     let xref = document.getElementById('pid').value.trim();
-    if (xref !== "") {
+    if (xref !== "" && el.item(0) !== null) {
+        addXrefToList(xref);
         if (autoUpdate) {
             updateRender();
         }
@@ -364,10 +367,62 @@ function formChanged(autoUpdate) {
     }
 }
 
+function loadXrefList(url) {
+    let xref_list = document.getElementById('vars[other_pids]').value.trim();
+    let xrefs = xref_list.split(",");
+    for (let i=0; i<xrefs.length; i++) {
+        loadIndividualDetails(url, xrefs[i]);
+    }
+}
+
+function loadIndividualDetails(url, xref) {
+    fetch(url + xref.trim()).then(async (response) => {
+        const data = await response.json();
+        let contents = "";
+        if (data["data"].length !== 0) {
+            contents = data["data"][0]["text"];
+        } else {
+            contents = xref;
+        }
+        const listElement = document.getElementById("indi_list");
+        const newListItem = document.createElement("div");
+        newListItem.className = "indi_list_item";
+        newListItem.setAttribute("data-xref", xref);
+        newListItem.innerHTML = contents + "<div class=\"remove-item\" onclick=\"removeItem(this.parentElement)\"><a href='#'>×</a></div>";
+        listElement.appendChild(newListItem);
+    })
+}
+
+function addXrefToList(xref) {
+    let list = document.getElementById('vars[other_pids]');
+    const regex = new RegExp(`(?<=,|^)(${xref})(?=,|$)`);
+    if (!regex.test(list.value.replaceAll(" ",""))) {
+        loadIndividualDetails(url, xref);
+    }
+    appendPidTo('pid', 'vars[other_pids]');
+    clearIndiSelect();
+}
+
+function clearIndiSelect() {
+    let dropdown = document.getElementById('pid');
+    dropdown.tomselect.clear();
+}
 function toggleUpdateButton(css_id) {
     const element = document.getElementById(css_id);
     const visible = element.style.display !== "none";
     showHide(element, !visible);
     autoUpdate = visible;
     updateRender();
+}
+
+function removeItem(element) {
+    let xref = element.getAttribute("data-xref").trim();
+    let list = document.getElementById('vars[other_pids]');
+    const regex = new RegExp(`(?<=,|^)(${xref})(?=,|$)`);
+    list.value = list.value.replaceAll(" ","").replace(regex, "");
+    list.value = list.value.replace(",,", ",");
+    element.remove();
+    if (autoUpdate) {
+        updateRender();
+    }
 }
