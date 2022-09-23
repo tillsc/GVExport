@@ -129,7 +129,7 @@ use Fisharebest\Webtrees\Tree;
                     <?= view('components/select-individual', ['name' => 'pid', 'id' => 'pid', 'tree' => $tree, 'individual' => "", 'required'=>false]); ?>
                     <div class="red-text" id="indi-error"></div>
                 </div>
-                <div class="input-group mt-1" style="display: none;">
+                <div class="input-group mt-1" style="display: nonde;">
                     <input type="text" class="form-control" name="vars[other_pids]" id="vars[other_pids]" value="<?= $vars['other_pids'] ?>">
                     <div class="input-group-append">
                         <button type="button" class="btn btn-outline-secondary" onclick="appendPidTo('pid', 'vars[other_pids]')">⏎</button>
@@ -568,6 +568,7 @@ use Fisharebest\Webtrees\Tree;
     var rendering = document.getElementById('rendering');
 
     function pageLoaded() {
+        fixListEmpty();
         // Load browser render when page has loaded
         updateRender();
         loadXrefList(url);

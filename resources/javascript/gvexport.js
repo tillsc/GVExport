@@ -338,32 +338,44 @@ function setStateFastRelationCheck() {
 }
 
 function removeURLParameter(parameter) {
-    updateURLParameter(parameter, "", true);
+    updateURLParameter(parameter, "", "remove");
 }
 
-function updateURLParameter(parameter, value, remove) {
+function updateURLParameter(parameter, value, action) {
     let url=document.location.href.split("?")[0];
     let args=document.location.href.split("?")[1];
     let params = new URLSearchParams(args);
     if (params.toString().search(parameter) !== -1) {
-        if (remove) {
+        if (action === "remove") {
             params.delete(parameter);
-        } else {
+        } else if (action === "update") {
             params.set(parameter, value);
+        } else {
+            return params.get(parameter);
         }
         history.pushState(null, '', url + "?" + params.toString());
     }
 }
 
+function getURLParameter(parameter) {
+    return updateURLParameter(parameter, "", "get").replace("#","");
+}
+
+function fixListEmpty() {
+    const el = document.getElementById('vars[other_pids]');
+    if (el.value.replace(",","").trim() === "") {
+        let xref = getURLParameter("xref");
+        el.value = xref;
+    }
+}
 function formChanged(autoUpdate) {
-    const el = document.getElementsByClassName("item");
     let xref = document.getElementById('pid').value.trim();
-    if (xref !== "" && el.item(0) !== null) {
+    if (xref !== "") {
         addXrefToList(xref);
-        if (autoUpdate) {
-            updateRender();
-        }
         updateURLParameter("xref",xref);
+    }
+    if (autoUpdate) {
+        updateRender();
     }
 }
 
@@ -371,7 +383,9 @@ function loadXrefList(url) {
     let xref_list = document.getElementById('vars[other_pids]').value.trim();
     let xrefs = xref_list.split(",");
     for (let i=0; i<xrefs.length; i++) {
-        loadIndividualDetails(url, xrefs[i]);
+        if (xrefs[i].trim() !== "") {
+            loadIndividualDetails(url, xrefs[i]);
+        }
     }
 }
 
@@ -405,7 +419,13 @@ function addXrefToList(xref) {
 
 function clearIndiSelect() {
     let dropdown = document.getElementById('pid');
-    dropdown.tomselect.clear();
+    if (typeof dropdown.tomselect !== 'undefined') {
+        dropdown.tomselect.clear();
+    } else {
+        setTimeout(function () {
+            clearIndiSelect();
+        }, 100);
+    }
 }
 function toggleUpdateButton(css_id) {
     const element = document.getElementById(css_id);
