@@ -129,7 +129,7 @@ use Fisharebest\Webtrees\Tree;
                     <?= view('components/select-individual', ['name' => 'pid', 'id' => 'pid', 'tree' => $tree, 'individual' => "", 'required'=>false]); ?>
                     <div class="red-text" id="indi-error"></div>
                 </div>
-                <div class="input-group mt-1" style="display: nonde;">
+                <div class="input-group mt-1" style="display: none;">
                     <input type="text" class="form-control" name="vars[other_pids]" id="vars[other_pids]" value="<?= $vars['other_pids'] ?>">
                     <div class="input-group-append">
                         <button type="button" class="btn btn-outline-secondary" onclick="appendPidTo('pid', 'vars[other_pids]')">⏎</button>
@@ -575,6 +575,8 @@ use Fisharebest\Webtrees\Tree;
         // Remove reset parameter from URL when page loaded, to prevent
         // further resets when page reloaded
         removeURLParameter("reset");
+        // Remove options from selection list if already selected
+        setInterval(function () {removeSelectedOptions()}, 100);
     }
 
     // Trigger action when "Update" button clicked

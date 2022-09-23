@@ -446,3 +446,16 @@ function removeItem(element) {
         updateRender();
     }
 }
+
+// clear options from the dropdown if they are already in our list
+function removeSelectedOptions() {
+    document.getElementById('vars[other_pids]').value.split(",").forEach(function (id) {
+        id = id.trim();
+        if (id !== "") {
+            let dropdown = document.getElementById('pid');
+            if (typeof dropdown.tomselect !== 'undefined') {
+                dropdown.tomselect.removeOption(id);
+            }
+        }
+    });
+}
