@@ -99,6 +99,7 @@
 
 #rendering {
     background-color: #eeeeee;
+    min-height: 300px;
 }
 
 .picker-label {
