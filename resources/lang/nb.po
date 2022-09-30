@@ -295,3 +295,94 @@ msgstr ""
 msgid "Non-relatives"
 msgstr ""
 
+#: 
+msgid "Font"
+msgstr ""
+
+#: 
+msgid "Typeface"
+msgstr ""
+
+#: 
+msgid "Font color for names"
+msgstr ""
+
+#: 
+msgid "Font color for details"
+msgstr ""
+
+#. When you are no longer logged in, GVExport can't load the browser render until the page is refreshed. This message is shown before automatically reloading the page.
+#: 
+msgid "Login expired. Reloading page..."
+msgstr ""
+
+#. Label for section that lets you change the colour of arrows that represent relationships between records
+#: 
+msgid "Relationship arrows"
+msgstr ""
+
+#. Label for setting the main arrow colour
+#: 
+msgid "Arrow color"
+msgstr ""
+
+#. When enabled makes arrows from family to child different colours based on if the child is related to the family by birth or otherwise (e.g. adoption)
+#: 
+msgid "Show blood relationship in different color"
+msgstr ""
+
+#. Label for colour picker to select colour of arrow for children related by birth
+#: 
+msgid "Related by birth"
+msgstr ""
+
+#. Label for colour picker to select colour of arrow for children not related by birth (e.g. adoption)
+#: 
+msgid "Related other than by birth"
+msgstr ""
+
+#. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
+#: 
+msgid "Full name"
+msgstr ""
+
+#. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
+#: 
+msgid "Given and surnames"
+msgstr ""
+
+#. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
+#: 
+msgid "Given names"
+msgstr ""
+
+#. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
+#: 
+msgid "Surnames"
+msgstr ""
+
+#. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
+#: 
+msgid "Don't show names"
+msgstr ""
+
+#. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
+#: 
+msgid "First given name only"
+msgstr ""
+
+#. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
+#: 
+msgid "Initials only"
+msgstr ""
+
+#. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
+#: 
+msgid "Given name initials and Surname"
+msgstr ""
+
+#. This is to replace "Spouses" in the options of people to include - "Spouses" implies marriage but the couples are not necessarily married.
+#: 
+msgid "Partners"
+msgstr ""
+

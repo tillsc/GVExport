@@ -341,3 +341,48 @@ msgstr "Beziehung durch Geburt"
 msgid "Related other than by birth"
 msgstr "Beziehung nicht durch Geburt"
 
+#. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
+#: 
+msgid "Full name"
+msgstr "vollständiger Name"
+
+#. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
+#: 
+msgid "Given and surnames"
+msgstr "Vor- und Nachnamen"
+
+#. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
+#: 
+msgid "Given names"
+msgstr "Vornamen"
+
+#. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
+#: 
+msgid "Surnames"
+msgstr "Nachnamen"
+
+#. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
+#: 
+msgid "Don't show names"
+msgstr "Zeige keine Namen"
+
+#. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
+#: 
+msgid "First given name only"
+msgstr "Nur der erste Vorname"
+
+#. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
+#: 
+msgid "Initials only"
+msgstr "Nur Initialen"
+
+#. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
+#: 
+msgid "Given name initials and Surname"
+msgstr "Initialen der Vornamen und Nachnamen"
+
+#. This is to replace "Spouses" in the options of people to include - "Spouses" implies marriage but the couples are not necessarily married.
+#: 
+msgid "Partners"
+msgstr "Partner"
+

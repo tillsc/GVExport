@@ -64,7 +64,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
 
     use ModuleCustomTrait;
     use ModuleChartTrait;
-    public const CUSTOM_VERSION     = '2.1.11';
+    public const CUSTOM_VERSION     = '2.1.12';
     public const CUSTOM_MODULE      = "GVExport";
     public const CUSTOM_LATEST      = 'https://raw.githubusercontent.com/Neriderc/' . self::CUSTOM_MODULE. '/main/latest-version.txt';
     public const SUPPORT_URL        = 'https://github.com/Neriderc/GVExport';

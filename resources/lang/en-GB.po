@@ -343,3 +343,58 @@ msgstr "Related by birth"
 msgid "Related other than by birth"
 msgstr "Related other than by birth"
 
+#. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
+#: 
+msgid "Full name"
+msgstr "Full name"
+
+#. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
+#: 
+msgid "Given and surnames"
+msgstr "Given and surnames"
+
+#. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
+#: 
+msgid "Given names"
+msgstr "Given names"
+
+#. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
+#: 
+msgid "Surnames"
+msgstr "Surnames"
+
+#. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
+#: 
+msgid "Don't show names"
+msgstr "Don't show names"
+
+#. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
+#: 
+msgid "First given name only"
+msgstr "First given name only"
+
+#. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
+#: 
+msgid "Initials only"
+msgstr "Initials only"
+
+#. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
+#: 
+msgid "Given name initials and Surname"
+msgstr "Given name initials and Surname"
+
+#. This is to replace "Spouses" in the options of people to include - "Spouses" implies marriage but the couples are not necessarily married.
+#: 
+msgid "Partners"
+msgstr "Partners"
+
+#. Option section where option to auto-update is presented
+#: 
+msgid "Browser render"
+msgstr "Browser render"
+
+#. Whether to automatically update the diagram in the browser whenever something is changed. If unselected, user must click "Update" button before browser render is refreshed after a change.
+#: 
+msgid "Auto-update"
+msgstr "Auto-update"
+

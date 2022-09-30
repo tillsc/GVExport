@@ -5,395 +5,384 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: POEditor.com\n"
 "Project-Id-Version: GVExport\n"
-"Language: ca\n"
+"Language: pl\n"
 
 #: 
 msgid "Update"
-msgstr "Actualitzar"
+msgstr "Aktualizuj"
 
 #: 
 msgid "Render serverside"
-msgstr "Renderitzar ajl servidor"
+msgstr "Renderuj po stronie serwera"
 
 #: 
 msgid "Reset"
-msgstr "Restabliment"
+msgstr "Resetuj"
 
 #: 
 msgid "Diagram preferences"
-msgstr "Preferències de diagrama"
+msgstr "Preferencje diagramu"
 
 #: 
 msgid "Appearance"
-msgstr "Aparença"
+msgstr "Wygląd"
 
 #: 
 msgid "Output Settings"
-msgstr "Configuració d'eixida"
+msgstr "Ustawienia Wyjściowe"
 
 #: 
 msgid "Include anyone related to"
-msgstr "Incloure a qualsevol persona relacionada amb"
+msgstr "Uwzględnij wszystkie osoby związane z"
 
 #: 
 msgid "Stop processing on"
-msgstr "Detindre el processament en"
+msgstr "Zatrzymaj przetwarzanie"
 
 #: 
 msgid "Include Ancestors"
-msgstr "Incloure avantpassats"
+msgstr "Uwzględnij przodków"
 
 #: 
 msgid "Include"
-msgstr "Incloure"
+msgstr "Uwzględnij"
 
 #: 
 msgid "Siblings"
-msgstr "germans"
+msgstr "Rodzeństwo"
 
 #: 
 msgid "Cousins"
-msgstr "Cosins"
+msgstr "Kuzynów"
 
 #: 
 msgid "Spouses"
-msgstr "Cònjuges"
+msgstr "Małżonków"
 
 #: 
 msgid "Include Descendants"
-msgstr "Incloure descendents"
+msgstr "Uwzględnij potomków"
 
 #: 
 msgid "Max Levels"
-msgstr "Nivells màxims"
+msgstr "Maksymalne poziomy"
 
 #: 
 msgid "Mark not blood-related people with different color"
-msgstr "Marcar persones no consanguínies amb diferent color"
+msgstr "Nie oznaczaj osób spokrewnionych o innym kolorze skóry"
 
 #: 
 msgid "Add URL to individuals and families"
-msgstr "Agregar URL a individus i famílies"
+msgstr "Dodawanie adresów URL do osób i rodzin"
 
 #: 
 msgid "Use abbreviated placenames"
-msgstr "Utilitzar topònims abreujats"
+msgstr "Używaj skróconych nazw miejsc"
 
 #: 
 msgid "Show Birth Date"
-msgstr "Mostrar data de naixement"
+msgstr "Pokaż Datę Urodzenia"
 
 #: 
 msgid "Show Birth Place"
-msgstr "Mostrar indret de naixement"
+msgstr "Pokaż Miejsce Urodzenia"
 
 #: 
 msgid "Show Death Date"
-msgstr "Mostrar data de defunció"
+msgstr "Pokaż Datę Śmierci"
 
 #: 
 msgid "Full Date"
-msgstr "Data completa"
+msgstr "Pełna Data"
 
 #: 
 msgid "Year"
-msgstr "Any"
+msgstr "Rok"
 
 #: 
 msgid "Show Death Place"
-msgstr "Mostrar lloc de defunció"
+msgstr "Pokaż Miejsce Śmierci"
 
 #: 
 msgid "Show Family ID"
-msgstr "Mostrar ID familiar"
+msgstr "Pokaż ID Rodziny"
 
 #: 
 msgid "Show Marriage Date"
-msgstr "Mostrar data de casament"
+msgstr "Pokaż Datę Ślubu"
 
 #: 
 msgid "Show Marriage Place"
-msgstr "Mostrar indret de casament"
+msgstr "Pokaż Miejsce Ślubu"
 
 #: 
 msgid "Graph Direction"
-msgstr "Direcció del gràfic"
+msgstr "Kierunek Diagramu"
 
 #: 
 msgid "Diagram Type"
-msgstr "Tipus de diagrama"
+msgstr "Typ Diagramu"
 
 #: 
 msgid "Simple"
-msgstr "Senzill"
+msgstr "Prosty"
 
 #: 
 msgid "Decorated"
-msgstr "Decorat"
+msgstr "Dekoracyjny"
 
 #: 
 msgid "Combined"
-msgstr "Combinat"
+msgstr "Połączony"
 
 #: 
 msgid "Add photos"
-msgstr "Afegir fotos"
+msgstr "Dodaj zdjęcia"
 
 #: 
 msgid "Only Decorated or Combined"
-msgstr "Sols decorat o combinat"
+msgstr "Tylko Dekoracyjny i Połączony"
 
 #: 
 msgid "Output File Type"
-msgstr "Tipus d'arxiu d'eixida"
+msgstr "Typ Pliku Wyjściowego"
 
 #: 
 msgid "Generate a file for download"
-msgstr "Generar arxiu per a descàrrega"
+msgstr "Generuj plik do pobrania"
 
 #: 
 msgid "Number of iterations (MCLIMIT)"
-msgstr "Nombre d'iteracions (MCLIMIT)"
+msgstr "Liczba Iteracji (MCLIMIT)"
 
 #: 
 msgid "helps to reduce the crossings on the graph. This can be really slow (up to 10..15x compared to the 20 setting)"
-msgstr "Ajuda a reduir els encreuaments al gràfic. Això pot ser molt lent (fins a 10..15x en comparació amb la configuració de 20)"
+msgstr "pomaga zmniejszyć liczbę skrzyżowanych linji na wykresie. Może to być naprawdę powolne (do 10..15x w porównaniu do ustawienia 20)"
 
 #: 
 msgid "DPI"
-msgstr "PPP"
+msgstr "DPI"
 
 #: 
 msgid "Show Selection"
-msgstr "Mostrar selecció"
+msgstr "Pokaż Wybrane"
 
 #: 
 msgid "SVG only"
-msgstr "Només SVG"
+msgstr "Tylko SVG"
 
 #: 
 msgid "Top-to-Bottom"
-msgstr "De d'alt a baix"
+msgstr "Od Góry Do Dołu"
 
 #: 
 msgid "Left-to-Right"
-msgstr "D'esquerra a dreta"
+msgstr "Od Lewej Do Prawej"
 
 #: 
 msgid "Space between generations"
-msgstr "Espai entre generacions"
+msgstr "Przestrzeń między pokoleniami"
 
 #: 
 msgid "Space between individuals on the same level"
-msgstr "Espai entre individus del mateix nivell"
+msgstr "Przestrzeń między osobami na tym samym poziomie"
 
 #: 
 msgid "Error running GVExport in Browser mode"
-msgstr "Error en executar GVExport en manera navegador"
+msgstr "Błąd uruchamiania GVExport w trybie przeglądarki"
 
 #: 
 msgid "Preview"
-msgstr "Vista prèvia"
+msgstr "Podgląd"
 
 #: 
 msgid "Download"
-msgstr "Descarregar"
+msgstr "Pobierz"
 
 #: 
 msgid "Full place name"
-msgstr "Topònim complet"
+msgstr "Full place name"
 
 #: 
 msgid "City and Country"
-msgstr "Ciutat i país"
+msgstr "Miasto i Kraj"
 
 #: 
 msgid "City and 2 Letter ISO Country Code"
-msgstr "Ciutat i codi de país ISO de dues lletres"
+msgstr "Miasto i 2 Litery Kodu  ISO Kraju"
 
 #: 
 msgid "City and 3 Letter ISO Country Code"
-msgstr "Ciutat i codi de país ISO de tres lletres"
+msgstr "Miasto i 3 Litery Kodu  ISO Kraju"
 
 #: 
 msgid "Space"
-msgstr "Espai"
+msgstr "Odstęp"
 
 #: 
 msgid "Between generations"
-msgstr "Entre generacions"
+msgstr "Między pokoleniami"
 
 #: 
 msgid "Between individuals on the same level"
-msgstr "Entre individus del mateix nivell"
+msgstr "Between individuals on the same level"
 
 #: 
 msgid "Abbreviated place names"
-msgstr "Topònims abreujats"
+msgstr "Skrócone nazwy miejscowości"
 
 #: 
 msgid "People to be included"
-msgstr "Persones a incloure"
+msgstr "Osoby, które należy uwzględnić"
 
 #: 
 msgid "Show Individual ID"
-msgstr "Mostrar ID individual"
+msgstr "Pokaż indywidualne ID"
 
 #: 
 msgid "Options limited as GraphViz not installed on server"
-msgstr "Opcions limitades, perquè GraphViz no està instal·lat al servidor"
+msgstr "Opcje ograniczone, ponieważ GraphViz nie jest zainstalowany na serwerze"
 
 #: 
 msgid "Anyone"
-msgstr "Ningú"
+msgstr "Wszyscy"
 
 #: 
 msgid "All relatives"
-msgstr ""
+msgstr "Wszyscy krewni"
 
 #: 
 msgid "You have items in the clippings cart, which can be used for the diagram instead of the below options."
-msgstr ""
+msgstr "Masz elementy w koszyku wycinków, które można wykorzystać do diagramu zamiast poniższych opcji."
 
 #: 
 msgid "Use clippings cart"
-msgstr ""
+msgstr "Użyj koszyka wycinków"
 
 #: 
 msgid "Ignore clippings cart"
-msgstr ""
+msgstr "Ignoruj koszyk wycinków"
 
 #: 
 msgid "Warning"
-msgstr ""
+msgstr "Ostrzeżenie"
 
 #: 
 msgid "Individual required"
-msgstr ""
+msgstr "Indywidualne wymagania"
 
 #: 
 msgid "Generated ${indiNum} individuals and ${famNum} family records"
-msgstr ""
+msgstr "Generuj ${indiNum} osoby i ${famNum} rejestru rodzinnego"
 
 #: 
 msgid "Invalid starting individual:"
-msgstr ""
+msgstr "Nieprawidłowa osoba startowa:"
 
 #: 
 msgid "Your browser does not support exporting images this large. Please reduce number of records, reduce DPI setting, or use SVG option."
-msgstr ""
+msgstr "Twoja przeglądarka nie obsługuje eksportowania tak dużych obrazów. Zmniejsz liczbę rekordów, zmniejsz ustawienie DPI lub użyj opcji SVG."
 
 #: 
 msgid "Toggle advanced settings"
-msgstr ""
+msgstr "Ustawienia zaawansowane"
 
 #: 
 msgid "Ignore unseen links to speed up relative check"
-msgstr ""
+msgstr "Ignoruj niewidoczne linki, aby przyspieszyć sprawdzanie"
 
 #: 
 msgid "Non-relatives"
-msgstr ""
+msgstr "Osoby niespokrewnione"
 
 #: 
 msgid "Font"
-msgstr ""
+msgstr "Czcionka"
 
 #: 
 msgid "Typeface"
-msgstr ""
+msgstr "Krój pisma"
 
 #: 
 msgid "Font color for names"
-msgstr ""
+msgstr "Kolor czcionki dla nazwisk"
 
 #: 
 msgid "Font color for details"
-msgstr ""
+msgstr "Kolor czcionki dla szczegółów"
 
 #. When you are no longer logged in, GVExport can't load the browser render until the page is refreshed. This message is shown before automatically reloading the page.
 #: 
 msgid "Login expired. Reloading page..."
-msgstr ""
+msgstr "Login wygasł. Strona ładuje się ponownie.."
 
 #. Label for section that lets you change the colour of arrows that represent relationships between records
 #: 
 msgid "Relationship arrows"
-msgstr "Fletxes de relació "
+msgstr "Strzałki relacji"
 
 #. Label for setting the main arrow colour
 #: 
 msgid "Arrow color"
-msgstr "Color de la fletxa"
+msgstr "Kolor strzałek"
 
 #. When enabled makes arrows from family to child different colours based on if the child is related to the family by birth or otherwise (e.g. adoption)
 #: 
 msgid "Show blood relationship in different color"
-msgstr "Mostra la consanguinitat de diferent color"
+msgstr "Pokaż związek krwi w innym kolorze"
 
 #. Label for colour picker to select colour of arrow for children related by birth
 #: 
 msgid "Related by birth"
-msgstr "Relacionat per naiximent"
+msgstr "Relacje przez urodzenie"
 
 #. Label for colour picker to select colour of arrow for children not related by birth (e.g. adoption)
 #: 
 msgid "Related other than by birth"
-msgstr "Relacionats que no siguin per naixement"
+msgstr "Relacje inne niż przez urodzenie"
 
 #. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
 #: 
 msgid "Full name"
-msgstr "Nom complet"
+msgstr "Imię i nazwisko"
 
 #. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
 #: 
 msgid "Given and surnames"
-msgstr "Nom i cognoms"
+msgstr "Imię i nazwiska"
 
 #. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
 #: 
 msgid "Given names"
-msgstr "Nom"
+msgstr "Imiona"
 
 #. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
 #: 
 msgid "Surnames"
-msgstr "Cognoms\n"
-""
+msgstr "Nazwiska"
 
 #. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
 #: 
 msgid "Don't show names"
-msgstr "No mostris noms"
+msgstr "Nie pokazuj imion"
 
 #. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
 #: 
 msgid "First given name only"
-msgstr "Nom i cognoms només"
+msgstr "Pokaż tylko imię"
 
 #. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
 #: 
 msgid "Initials only"
-msgstr "Nomès Inicials"
+msgstr "Tylko inicjały"
 
 #. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
 #: 
 msgid "Given name initials and Surname"
-msgstr "Inicials del nom i cognoms"
+msgstr "Pokaż Inicjały imienia i nazwisko"
 
 #. This is to replace "Spouses" in the options of people to include - "Spouses" implies marriage but the couples are not necessarily married.
 #: 
 msgid "Partners"
-msgstr "Parella"
-
-#. Option section where option to auto-update is presented
-#: 
-msgid "Browser render"
-msgstr "Renderització del navegador "
-
-#. Whether to automatically update the diagram in the browser whenever something is changed. If unselected, user must click "Update" button before browser render is refreshed after a change.
-#: 
-msgid "Auto-update"
-msgstr "Actualització"
+msgstr "Partnerzy"
 
