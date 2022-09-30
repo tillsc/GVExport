@@ -3,6 +3,16 @@
 	GVExport module for Webtrees
 =====================================================================
 
+Version 2.1.12 (2022-09-30)
+  - New         : Added option for abbreviating (or removing) names
+  - New         : Polish translation added  
+  - Changed     : Rename "Spouses" to "Partners" as records are included regardless of marital status
+  - Changed     : Hiding birth/death/marriage details now handled nicer
+  - Changed     : Family record in combined mode now shown only if there is something to show
+  - Fixed       : Fixed refreshing page causing starting individual to revert
+  - Fixed       : Relationship arrow colour now correct for records loaded from clippings cart
+  - Fixed       : Further fixes to correct which records are included based on settings
+
 Version 2.1.11 (2022-09-11)
   - New         : Font colours can now be customised
   - New         : Automatically reload page when webtrees login expired
