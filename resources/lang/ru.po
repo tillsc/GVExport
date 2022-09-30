@@ -232,10 +232,6 @@ msgid "Abbreviated place names"
 msgstr "Сокращенные названия мест"
 
 #: 
-msgid "You have items in the clippings cart, so clippings cart items will be used for the diagram instead of the below options."
-msgstr "У вас есть товары в корзине вырезок, поэтому для диаграммы вместо приведенных ниже параметров будут использоваться товары корзины вырезок."
-
-#: 
 msgid "People to be included"
 msgstr "Люди, которые должны быть включены"
 
@@ -249,5 +245,144 @@ msgstr "Параметры ограничены, так как GraphViz не у�
 
 #: 
 msgid "Anyone"
-msgstr ""
+msgstr "Любой"
+
+#: 
+msgid "All relatives"
+msgstr "Все родственники"
+
+#: 
+msgid "You have items in the clippings cart, which can be used for the diagram instead of the below options."
+msgstr "У вас есть элементы в корзине для вырезок, которые можно использовать для диаграммы вместо приведенных ниже вариантов."
+
+#: 
+msgid "Use clippings cart"
+msgstr "Используйте корзину вырезок"
+
+#: 
+msgid "Ignore clippings cart"
+msgstr "Игнорировать корзину вырезок"
+
+#: 
+msgid "Warning"
+msgstr "Предупреждение"
+
+#: 
+msgid "Individual required"
+msgstr "Индивидуальный требуется"
+
+#: 
+msgid "Generated ${indiNum} individuals and ${famNum} family records"
+msgstr "Сгенерировано ${indiNum} отдельных лиц и ${famNum} семейных записей."
+
+#: 
+msgid "Invalid starting individual:"
+msgstr "Недействительный стартовый человек:"
+
+#: 
+msgid "Your browser does not support exporting images this large. Please reduce number of records, reduce DPI setting, or use SVG option."
+msgstr "Ваш браузер не поддерживает экспорт изображений такого размера. Пожалуйста, уменьшите количество записей, уменьшите настройку DPI или используйте опцию SVG."
+
+#: 
+msgid "Toggle advanced settings"
+msgstr "Переключить дополнительные настройки"
+
+#: 
+msgid "Ignore unseen links to speed up relative check"
+msgstr "Игнорировать невидимые ссылки, чтобы ускорить относительную проверку"
+
+#: 
+msgid "Non-relatives"
+msgstr "Не родственники"
+
+#: 
+msgid "Font"
+msgstr "Шрифт"
+
+#: 
+msgid "Typeface"
+msgstr "Шрифт"
+
+#: 
+msgid "Font color for names"
+msgstr "Цвет шрифта для имен"
+
+#: 
+msgid "Font color for details"
+msgstr "Цвет шрифта для деталей"
+
+#. When you are no longer logged in, GVExport can't load the browser render until the page is refreshed. This message is shown before automatically reloading the page.
+#: 
+msgid "Login expired. Reloading page..."
+msgstr "Срок действия логина истек. Перезагрузка страницы..."
+
+#. Label for section that lets you change the colour of arrows that represent relationships between records
+#: 
+msgid "Relationship arrows"
+msgstr "Стрелки отношений"
+
+#. Label for setting the main arrow colour
+#: 
+msgid "Arrow color"
+msgstr "Цвет стрелки"
+
+#. When enabled makes arrows from family to child different colours based on if the child is related to the family by birth or otherwise (e.g. adoption)
+#: 
+msgid "Show blood relationship in different color"
+msgstr "Покажите кровные отношения другим цветом"
+
+#. Label for colour picker to select colour of arrow for children related by birth
+#: 
+msgid "Related by birth"
+msgstr "Родственники по рождению"
+
+#. Label for colour picker to select colour of arrow for children not related by birth (e.g. adoption)
+#: 
+msgid "Related other than by birth"
+msgstr "Родственники, кроме как по рождению (например, усыновление)"
+
+#. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
+#: 
+msgid "Full name"
+msgstr "ФИО"
+
+#. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
+#: 
+msgid "Given and surnames"
+msgstr "Данные и фамилии"
+
+#. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
+#: 
+msgid "Given names"
+msgstr "Данное имя"
+
+#. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
+#: 
+msgid "Surnames"
+msgstr "Фамилии"
+
+#. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
+#: 
+msgid "Don't show names"
+msgstr "Не показывать имена"
+
+#. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
+#: 
+msgid "First given name only"
+msgstr "Только первое имя"
+
+#. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
+#: 
+msgid "Initials only"
+msgstr "Только инициалы"
+
+#. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
+#: 
+msgid "Given name initials and Surname"
+msgstr "Настоящее имя инициалы и фамилия"
+
+#. This is to replace "Spouses" in the options of people to include - "Spouses" implies marriage but the couples are not necessarily married.
+#: 
+msgid "Partners"
+msgstr "Партнеры"
 
