@@ -411,7 +411,7 @@ function addXrefToList(xref) {
     let list = document.getElementById('vars[other_pids]');
     const regex = new RegExp(`(?<=,|^)(${xref})(?=,|$)`);
     if (!regex.test(list.value.replaceAll(" ",""))) {
-        loadIndividualDetails(url, xref);
+        loadIndividualDetails(TOMSELECT_URL, xref);
     }
     appendPidTo('pid', 'vars[other_pids]');
     clearIndiSelect();
@@ -458,4 +458,19 @@ function removeSelectedOptions() {
             }
         }
     });
+}
+
+// Clear the list of starting individuals
+function clearIndiList() {
+    document.getElementById('vars[other_pids]').value = "";
+    document.getElementById('indi_list').innerHTML = "";
+}
+
+// Refresh the list of starting individuals
+function refreshIndisFromXREFS(onchange) {
+    // If triggered from onchange event, only proceed if auto-update enabled
+    if (!onchange || autoUpdate) {
+        document.getElementById('indi_list').innerHTML = "";
+        loadXrefList(TOMSELECT_URL);
+    }
 }
