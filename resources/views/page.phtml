@@ -126,7 +126,7 @@ use Fisharebest\Webtrees\Tree;
                 <div id="indi_list">
 
                 </div>
-                <div class="clear_list"><a href="#" onclick="clearIndiList()"><?= I18N::translate('Clear all') ?></a></div>
+                <div id="clear_list"><a href="#" onclick="clearIndiList()"><?= I18N::translate('Clear all') ?></a></div>
                 <div class="cart_toggle_hide" <?php if ($greypeople) { echo 'style="display: none"'; } ?>>
                     <?= view('components/select-individual', ['name' => 'pid', 'id' => 'pid', 'tree' => $tree, 'individual' => "", 'required'=>false]); ?>
                     <div class="red-text" id="indi-error"></div>

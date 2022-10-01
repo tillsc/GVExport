@@ -387,6 +387,7 @@ function loadXrefList(url) {
             loadIndividualDetails(url, xrefs[i]);
         }
     }
+    updateClearAll();
 }
 
 function loadIndividualDetails(url, xref) {
@@ -404,6 +405,7 @@ function loadIndividualDetails(url, xref) {
         newListItem.setAttribute("data-xref", xref);
         newListItem.innerHTML = contents + "<div class=\"remove-item\" onclick=\"removeItem(this.parentElement)\"><a href='#'>×</a></div>";
         listElement.appendChild(newListItem);
+        updateClearAll();
     })
 }
 
@@ -442,6 +444,7 @@ function removeItem(element) {
     list.value = list.value.replaceAll(" ","").replace(regex, "");
     list.value = list.value.replace(",,", ",");
     element.remove();
+    updateClearAll();
     if (autoUpdate) {
         updateRender();
     }
@@ -464,6 +467,8 @@ function removeSelectedOptions() {
 function clearIndiList() {
     document.getElementById('vars[other_pids]').value = "";
     document.getElementById('indi_list').innerHTML = "";
+    updateClearAll();
+    updateRender();
 }
 
 // Refresh the list of starting individuals
@@ -472,5 +477,16 @@ function refreshIndisFromXREFS(onchange) {
     if (!onchange || autoUpdate) {
         document.getElementById('indi_list').innerHTML = "";
         loadXrefList(TOMSELECT_URL);
+    }
+}
+
+// Show or hide Clear All option based on check
+function updateClearAll() {
+    let clearElement = document.getElementById('clear_list');
+    let listItems = document.getElementsByClassName('indi_list_item');
+    if (listItems.length > 1) {
+        showHide(clearElement, true);
+    } else {
+        showHide(clearElement, false);
     }
 }
