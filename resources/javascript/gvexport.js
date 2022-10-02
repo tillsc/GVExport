@@ -361,18 +361,24 @@ function getURLParameter(parameter) {
     return updateURLParameter(parameter, "", "get").replace("#","");
 }
 
-function fixListEmpty() {
+function loadURLXref() {
+    const xref = getURLParameter("xref");
     const el = document.getElementById('vars[other_pids]');
     if (el.value.replace(",","").trim() === "") {
-        let xref = getURLParameter("xref");
         el.value = xref;
+    } else {
+        const xrefs = el.value.split(",");
+        if (xrefs.length === 1) {
+            el.value = "";
+        }
+        addIndiToList(xref);
     }
 }
 function formChanged(autoUpdate) {
     let xref = document.getElementById('pid').value.trim();
     if (xref !== "") {
-        addXrefToList(xref);
-        updateURLParameter("xref",xref);
+        addIndiToList(xref);
+        updateURLParameter("xref",xref,"update");
     }
     if (autoUpdate) {
         updateRender();
@@ -393,7 +399,7 @@ function loadXrefList(url) {
 function loadIndividualDetails(url, xref) {
     fetch(url + xref.trim()).then(async (response) => {
         const data = await response.json();
-        let contents = "";
+        let contents;
         if (data["data"].length !== 0) {
             contents = data["data"][0]["text"];
         } else {
@@ -409,14 +415,24 @@ function loadIndividualDetails(url, xref) {
     })
 }
 
-function addXrefToList(xref) {
+function addIndiToList(xref) {
     let list = document.getElementById('vars[other_pids]');
     const regex = new RegExp(`(?<=,|^)(${xref})(?=,|$)`);
     if (!regex.test(list.value.replaceAll(" ",""))) {
         loadIndividualDetails(TOMSELECT_URL, xref);
+        appendXrefToList(xref);
     }
-    appendPidTo('pid', 'vars[other_pids]');
     clearIndiSelect();
+}
+
+function appendXrefToList(xref) {
+    const list = document.getElementById('vars[other_pids]');
+    if (list.value.replace(",","").trim() === "") {
+        list.value = xref;
+    } else {
+        list.value += "," + xref;
+        list.value = list.value.replaceAll(",,",",");
+    }
 }
 
 function clearIndiSelect() {
@@ -444,6 +460,7 @@ function removeItem(element) {
     list.value = list.value.replaceAll(" ","").replace(regex, "");
     list.value = list.value.replace(",,", ",");
     element.remove();
+    updateURLParameter("xref",list.value.split(",")[0].trim(),"update");
     updateClearAll();
     if (autoUpdate) {
         updateRender();

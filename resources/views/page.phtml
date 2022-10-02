@@ -43,8 +43,8 @@ use Fisharebest\Webtrees\Tree;
             pageLoaded();
         } else {
             // If external script loads before inline script, then wait
-            // 100 milliseconds before trying to run page loaded function.
-            setTimeout(pageLoaded, 100);
+            // before trying to run page loaded function.
+            setTimeout(pageLoaded, 200);
         }
     };
     newScript.setAttribute("type","text/javascript");
@@ -575,15 +575,15 @@ use Fisharebest\Webtrees\Tree;
     var rendering = document.getElementById('rendering');
 
     function pageLoaded() {
-        fixListEmpty();
-        // Load browser render when page has loaded
-        updateRender();
         loadXrefList(TOMSELECT_URL);
+        loadURLXref();
         // Remove reset parameter from URL when page loaded, to prevent
         // further resets when page reloaded
         removeURLParameter("reset");
         // Remove options from selection list if already selected
         setInterval(function () {removeSelectedOptions()}, 100);
+        // Load browser render when page has loaded
+        updateRender();
     }
 
     // Trigger action when "Update" button clicked
