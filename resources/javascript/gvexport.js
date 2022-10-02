@@ -11,7 +11,7 @@ const appendPidTo = function (sourceId, targetId) {
     if (ids.indexOf(newId) === -1) {
         ids.push(newId);
     }
-    document.getElementById(targetId).value = ids.join(", ");
+    document.getElementById(targetId).value = ids.join(",");
 };
 
 
@@ -77,7 +77,8 @@ function defaultValueWhenBlank(element, value) {
 
 function checkIndiBlank() {
     let el = document.getElementsByClassName("item");
-    return el.length === 0;
+    let list = document.getElementById('vars[other_pids]');
+    return el.length === 0 && list.value.toString().length === 0;
 }
 
 // This function ensures that if certain options are checked in regard to which relations to include,
@@ -337,37 +338,172 @@ function setStateFastRelationCheck() {
 }
 
 function removeURLParameter(parameter) {
-    updateURLParameter(parameter, "", true);
+    updateURLParameter(parameter, "", "remove");
 }
 
-function updateURLParameter(parameter, value, remove) {
+function updateURLParameter(parameter, value, action) {
     let url=document.location.href.split("?")[0];
     let args=document.location.href.split("?")[1];
     let params = new URLSearchParams(args);
     if (params.toString().search(parameter) !== -1) {
-        if (remove) {
+        if (action === "remove") {
             params.delete(parameter);
-        } else {
+        } else if (action === "update") {
             params.set(parameter, value);
+        } else {
+            return params.get(parameter);
         }
         history.pushState(null, '', url + "?" + params.toString());
     }
 }
 
+function getURLParameter(parameter) {
+    return updateURLParameter(parameter, "", "get").replace("#","");
+}
+
+function loadURLXref() {
+    const xref = getURLParameter("xref");
+    const el = document.getElementById('vars[other_pids]');
+    if (el.value.replace(",","").trim() === "") {
+        el.value = xref;
+    } else {
+        const xrefs = el.value.split(",");
+        if (xrefs.length === 1) {
+            el.value = "";
+        }
+        addIndiToList(xref);
+    }
+}
 function formChanged(autoUpdate) {
     let xref = document.getElementById('pid').value.trim();
     if (xref !== "") {
-        if (autoUpdate) {
-            updateRender();
-        }
-        updateURLParameter("xref",xref);
+        addIndiToList(xref);
+        updateURLParameter("xref",xref,"update");
+    }
+    if (autoUpdate) {
+        updateRender();
     }
 }
 
+function loadXrefList(url) {
+    let xref_list = document.getElementById('vars[other_pids]').value.trim();
+    let xrefs = xref_list.split(",");
+    for (let i=0; i<xrefs.length; i++) {
+        if (xrefs[i].trim() !== "") {
+            loadIndividualDetails(url, xrefs[i]);
+        }
+    }
+    updateClearAll();
+}
+
+function loadIndividualDetails(url, xref) {
+    fetch(url + xref.trim()).then(async (response) => {
+        const data = await response.json();
+        let contents;
+        if (data["data"].length !== 0) {
+            contents = data["data"][0]["text"];
+        } else {
+            contents = xref;
+        }
+        const listElement = document.getElementById("indi_list");
+        const newListItem = document.createElement("div");
+        newListItem.className = "indi_list_item";
+        newListItem.setAttribute("data-xref", xref);
+        newListItem.innerHTML = contents + "<div class=\"remove-item\" onclick=\"removeItem(this.parentElement)\"><a href='#'>×</a></div>";
+        listElement.appendChild(newListItem);
+        updateClearAll();
+    })
+}
+
+function addIndiToList(xref) {
+    let list = document.getElementById('vars[other_pids]');
+    const regex = new RegExp(`(?<=,|^)(${xref})(?=,|$)`);
+    if (!regex.test(list.value.replaceAll(" ",""))) {
+        loadIndividualDetails(TOMSELECT_URL, xref);
+        appendXrefToList(xref);
+    }
+    clearIndiSelect();
+}
+
+function appendXrefToList(xref) {
+    const list = document.getElementById('vars[other_pids]');
+    if (list.value.replace(",","").trim() === "") {
+        list.value = xref;
+    } else {
+        list.value += "," + xref;
+        list.value = list.value.replaceAll(",,",",");
+    }
+}
+
+function clearIndiSelect() {
+    let dropdown = document.getElementById('pid');
+    if (typeof dropdown.tomselect !== 'undefined') {
+        dropdown.tomselect.clear();
+    } else {
+        setTimeout(function () {
+            clearIndiSelect();
+        }, 100);
+    }
+}
 function toggleUpdateButton(css_id) {
     const element = document.getElementById(css_id);
     const visible = element.style.display !== "none";
     showHide(element, !visible);
     autoUpdate = visible;
     updateRender();
+}
+
+function removeItem(element) {
+    let xref = element.getAttribute("data-xref").trim();
+    let list = document.getElementById('vars[other_pids]');
+    const regex = new RegExp(`(?<=,|^)(${xref})(?=,|$)`);
+    list.value = list.value.replaceAll(" ","").replace(regex, "");
+    list.value = list.value.replace(",,", ",");
+    element.remove();
+    updateURLParameter("xref",list.value.split(",")[0].trim(),"update");
+    updateClearAll();
+    if (autoUpdate) {
+        updateRender();
+    }
+}
+
+// clear options from the dropdown if they are already in our list
+function removeSelectedOptions() {
+    document.getElementById('vars[other_pids]').value.split(",").forEach(function (id) {
+        id = id.trim();
+        if (id !== "") {
+            let dropdown = document.getElementById('pid');
+            if (typeof dropdown.tomselect !== 'undefined') {
+                dropdown.tomselect.removeOption(id);
+            }
+        }
+    });
+}
+
+// Clear the list of starting individuals
+function clearIndiList() {
+    document.getElementById('vars[other_pids]').value = "";
+    document.getElementById('indi_list').innerHTML = "";
+    updateClearAll();
+    updateRender();
+}
+
+// Refresh the list of starting individuals
+function refreshIndisFromXREFS(onchange) {
+    // If triggered from onchange event, only proceed if auto-update enabled
+    if (!onchange || autoUpdate) {
+        document.getElementById('indi_list').innerHTML = "";
+        loadXrefList(TOMSELECT_URL);
+    }
+}
+
+// Show or hide Clear All option based on check
+function updateClearAll() {
+    let clearElement = document.getElementById('clear_list');
+    let listItems = document.getElementsByClassName('indi_list_item');
+    if (listItems.length > 1) {
+        showHide(clearElement, true);
+    } else {
+        showHide(clearElement, false);
+    }
 }

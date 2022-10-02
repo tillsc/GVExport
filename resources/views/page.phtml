@@ -6,6 +6,7 @@ use Fisharebest\Webtrees\I18N;
 use Fisharebest\Webtrees\Individual;
 use Fisharebest\Webtrees\Tree;
 
+
 /*
  * tbd: better documentation of all transferred variables
  */
@@ -42,8 +43,8 @@ use Fisharebest\Webtrees\Tree;
             pageLoaded();
         } else {
             // If external script loads before inline script, then wait
-            // 100 milliseconds before trying to run page loaded function.
-            setTimeout(pageLoaded, 100);
+            // before trying to run page loaded function.
+            setTimeout(pageLoaded, 200);
         }
     };
     newScript.setAttribute("type","text/javascript");
@@ -55,6 +56,8 @@ use Fisharebest\Webtrees\Tree;
 <script type="text/javascript">
     const cartempty = <?= $cartempty ? "true" : "false" ?>;
     const CLIENT_ERRORS = ["<?= I18N::translate('Your browser does not support exporting images this large. Please reduce number of records, reduce DPI setting, or use SVG option.') ?>"];
+    <? $url = explode("/" . $tree->name() . "/", $individual->url())[0] . "/" . $tree->name() . "/tom-select-individual?at=&query="; ?>
+    const TOMSELECT_URL = "<?= $url; ?>";
     let autoUpdate = <?= $vars["auto_update"] == "auto_update" ? 'true' : 'false' ?>;
 </script>
 
@@ -120,15 +123,13 @@ use Fisharebest\Webtrees\Tree;
         <div class="row form-group">
             <label class=" col-sm-4 col-form-label wt-page-options-label" for="pid"><?= I18N::translate('Include anyone related to') ?></label>
             <div class="col-sm-8 wt-page-options-value">
-                <div class="cart_toggle_hide" <?php if ($greypeople) { echo 'style="display: none"'; } ?>>
-                    <?= view('components/select-individual', ['name' => 'pid', 'id' => 'pid', 'tree' => $tree, 'individual' => $individual]); ?>
-                    <div class="red-text" id="indi-error"></div>
+                <div id="indi_list">
+
                 </div>
-                <div class="input-group mt-1">
-                    <input class="cart_toggle" type="text" class="form-control" name="vars[other_pids]" id="vars[other_pids]" value="<?= $vars['other_pids'] ?>">
-                    <div class="input-group-append">
-                        <button type="button" class="btn btn-outline-secondary" onclick="appendPidTo('pid', 'vars[other_pids]')">⏎</button>
-                    </div>
+                <div id="clear_list"><a href="#" onclick="clearIndiList()"><?= I18N::translate('Clear all') ?></a></div>
+                <div class="cart_toggle_hide" <?php if ($greypeople) { echo 'style="display: none"'; } ?>>
+                    <?= view('components/select-individual', ['name' => 'pid', 'id' => 'pid', 'tree' => $tree, 'individual' => "", 'required'=>false]); ?>
+                    <div class="red-text" id="indi-error"></div>
                 </div>
             </div>
         </div>
@@ -193,6 +194,18 @@ use Fisharebest\Webtrees\Tree;
             </div>
         </div>
         <div id="people-advanced" <?= $vars["adv_people"] == "show" ? '' : 'style="display:none"'; ?>>
+            <div class="row form-group">
+                <label class=" col-sm-4 col-form-label wt-page-options-label" for="pid"><?= I18N::translate('XREFs of included individuals') ?></label>
+                <div class="col-sm-8 wt-page-options-value">
+                    <div class="input-group mt-1">
+                        <input type="text" class="form-control" name="vars[other_pids]" id="vars[other_pids]" value="<?= $vars['other_pids'] ?>" onchange="refreshIndisFromXREFS(true)">
+                        <div class="input-group-append">
+                            <button type="button" class="btn btn-outline-secondary" onclick="refreshIndisFromXREFS(false)">⟳</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
             <div class="row form-group">
                 <label class=" col-sm-4 col-form-label wt-page-options-label" for="vars[other_stop_pids]"><?= I18N::translate('Stop processing on') ?></label>
                 <div class="col-sm-8 wt-page-options-value">
@@ -562,12 +575,15 @@ use Fisharebest\Webtrees\Tree;
     var rendering = document.getElementById('rendering');
 
     function pageLoaded() {
-        // Load browser render when page has loaded
-        updateRender()
-
+        loadXrefList(TOMSELECT_URL);
+        loadURLXref();
         // Remove reset parameter from URL when page loaded, to prevent
         // further resets when page reloaded
         removeURLParameter("reset");
+        // Remove options from selection list if already selected
+        setInterval(function () {removeSelectedOptions()}, 100);
+        // Load browser render when page has loaded
+        updateRender();
     }
 
     // Trigger action when "Update" button clicked
