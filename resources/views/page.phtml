@@ -404,14 +404,6 @@ use Fisharebest\Webtrees\Tree;
             </div>
 
             <div class="row form-group">
-                <label class=" col-sm-4 col-form-label wt-page-options-label" for="vars[grdir]"><?= I18N::translate('Number of iterations (MCLIMIT)') ?></label>
-                <div class="col-sm-8 wt-page-options-value">
-                    <?= view('components/select', ['name' => 'vars[mclimit]', 'selected' => $vars['mclimit'], 'options' => $gve_config["mclimits"]]) ?>
-                    <small class="form-text text-muted"><?= I18N::translate('helps to reduce the crossings on the graph. This can be really slow (up to 10..15x compared to the 20 setting)') ?></small>
-                </div>
-            </div>
-
-            <div class="row form-group">
                 <label class=" col-sm-4 col-form-label wt-page-options-label" for="vars[dpi]"><?= I18N::translate('DPI') ?></label>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="row">
