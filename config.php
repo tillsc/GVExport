@@ -139,7 +139,7 @@ $GVE_CONFIG["default_typeface"] = 0;
 $GVE_CONFIG["settings"]["typefaces"] = [0 => "Arial", 10 => "Brush Script MT" ,  20 => "Courier New", 30 => "Garamond", 40 => "Georgia", 50 => "Tahoma", 60 => "Times New Roman", 70 => "Trebuchet MS", 80 => "Verdana"];
 
 // mclimit settings (number of iterations to help to reduce crossings)
-$GVE_CONFIG["default_mclimit"] = "50";
+$GVE_CONFIG["default_mclimit"] = "1";
 $GVE_CONFIG["mclimits"] = ["1" => "1", "5" => "5" , "20" => "20", "50" => "50", "100" => "100"];
 
 // Customization
