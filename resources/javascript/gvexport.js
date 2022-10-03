@@ -341,6 +341,11 @@ function removeURLParameter(parameter) {
     updateURLParameter(parameter, "", "remove");
 }
 
+function changeURLXref(xref) {
+    if (xref !== "") {
+        updateURLParameter("xref",xref,"update");
+    }
+}
 function updateURLParameter(parameter, value, action) {
     let url=document.location.href.split("?")[0];
     let args=document.location.href.split("?")[1];
@@ -378,7 +383,7 @@ function formChanged(autoUpdate) {
     let xref = document.getElementById('pid').value.trim();
     if (xref !== "") {
         addIndiToList(xref);
-        updateURLParameter("xref",xref,"update");
+        changeURLXref(xref);
     }
     if (autoUpdate) {
         updateRender();
@@ -398,19 +403,23 @@ function loadXrefList(url) {
 
 function loadIndividualDetails(url, xref) {
     fetch(url + xref.trim()).then(async (response) => {
-        const data = await response.json();
-        let contents;
-        if (data["data"].length !== 0) {
-            contents = data["data"][0]["text"];
-        } else {
-            contents = xref;
+        // Multiple promises can be for the same xref - don't add if a duplicate
+        let item = document.querySelector(`[data-xref="${xref}"]`);
+        if (item == null) {
+            const data = await response.json();
+            let contents;
+            if (data["data"].length !== 0) {
+                contents = data["data"][0]["text"];
+            } else {
+                contents = xref;
+            }
+            const listElement = document.getElementById("indi_list");
+            const newListItem = document.createElement("div");
+            newListItem.className = "indi_list_item";
+            newListItem.setAttribute("data-xref", xref);
+            newListItem.innerHTML = contents + "<div class=\"remove-item\" onclick=\"removeItem(this.parentElement)\"><a href='#'>×</a></div>";
+            listElement.appendChild(newListItem);
         }
-        const listElement = document.getElementById("indi_list");
-        const newListItem = document.createElement("div");
-        newListItem.className = "indi_list_item";
-        newListItem.setAttribute("data-xref", xref);
-        newListItem.innerHTML = contents + "<div class=\"remove-item\" onclick=\"removeItem(this.parentElement)\"><a href='#'>×</a></div>";
-        listElement.appendChild(newListItem);
         updateClearAll();
     })
 }
@@ -460,7 +469,7 @@ function removeItem(element) {
     list.value = list.value.replaceAll(" ","").replace(regex, "");
     list.value = list.value.replace(",,", ",");
     element.remove();
-    updateURLParameter("xref",list.value.split(",")[0].trim(),"update");
+    changeURLXref(list.value.split(",")[0].trim());
     updateClearAll();
     if (autoUpdate) {
         updateRender();
