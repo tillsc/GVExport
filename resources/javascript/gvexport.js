@@ -403,9 +403,6 @@ function loadXrefList(url) {
 
 function loadIndividualDetails(url, xref) {
     fetch(url + xref.trim()).then(async (response) => {
-        // Multiple promises can be for the same xref - don't add if a duplicate
-        let item = document.querySelector(`[data-xref="${xref}"]`);
-        if (item == null) {
             const data = await response.json();
             let contents;
             if (data["data"].length !== 0) {
@@ -418,8 +415,13 @@ function loadIndividualDetails(url, xref) {
             newListItem.className = "indi_list_item";
             newListItem.setAttribute("data-xref", xref);
             newListItem.innerHTML = contents + "<div class=\"remove-item\" onclick=\"removeItem(this.parentElement)\"><a href='#'>×</a></div>";
-            listElement.appendChild(newListItem);
-        }
+            // Multiple promises can be for the same xref - don't add if a duplicate
+            let item = document.querySelector(`[data-xref="${xref}"]`);
+            if (item == null) {
+                listElement.appendChild(newListItem);
+            } else {
+                newListItem.remove();
+            }
         updateClearAll();
     })
 }
@@ -428,8 +430,9 @@ function addIndiToList(xref) {
     let list = document.getElementById('vars[other_pids]');
     const regex = new RegExp(`(?<=,|^)(${xref})(?=,|$)`);
     if (!regex.test(list.value.replaceAll(" ",""))) {
-        loadIndividualDetails(TOMSELECT_URL, xref);
         appendXrefToList(xref);
+        loadIndividualDetails(TOMSELECT_URL, xref);
+
     }
     clearIndiSelect();
 }
