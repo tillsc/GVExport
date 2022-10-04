@@ -74,6 +74,7 @@ class Dot {
 		$this->settings["defaulttypeface"] = $GVE_CONFIG["default_typeface"];
 		$this->settings["typeface"] = $this->settings["defaulttypeface"];
         $this->settings["typefaces"] = $GVE_CONFIG["settings"]["typefaces"];
+        $this->settings["typeface_fallback"] = $GVE_CONFIG["settings"]["typeface_fallback"];
 
 		// Load colors
 		$this->colors["colorm"] = $GVE_CONFIG["dot"]["colorm"];
@@ -819,7 +820,7 @@ class Dot {
 		if ($this->settings["diagram_type"] == "simple") {
 			$out .= "node [ shape=box, style=filled fontsize=\"" . $this->font_size ."\" fontname=\"" . $this->settings["typeface"] ."\"];\n";
 		} else {
-			$out .= "node [ shape=plaintext fontsize=\"" . $this->font_size ."\" fontname=\"" . $this->settings["typefaces"][$this->settings["typeface"]] .", " . $this->settings["typefaces"][$this->settings["defaulttypeface"]] . ", Sans\"];\n";
+			$out .= "node [ shape=plaintext fontsize=\"" . $this->font_size ."\" fontname=\"" . $this->settings["typefaces"][$this->settings["typeface"]] . ", " . $this->settings["typeface_fallback"][$this->settings["typeface"]] .", " . $this->settings["typefaces"][$this->settings["defaulttypeface"]] . ", Sans\"];\n";
 		}
 		return $out;
 	}

@@ -136,7 +136,8 @@ $GVE_CONFIG["directions"]["LR"] = "Left-to-Right";
 
 // Font name
 $GVE_CONFIG["default_typeface"] = 0;
-$GVE_CONFIG["settings"]["typefaces"] = [0 => "Arial", 10 => "Brush Script MT" ,  20 => "Courier New", 30 => "Garamond", 40 => "Georgia", 50 => "Tahoma", 60 => "Times New Roman", 70 => "Trebuchet MS", 80 => "Verdana"];
+$GVE_CONFIG["settings"]["typefaces"] =         [0 => "Arial", 10 => "Brush Script MT" ,  20 => "Courier New", 30 => "Garamond", 40 => "Georgia", 50 => "Tahoma", 60 => "Times New Roman", 70 => "Trebuchet MS", 80 => "Verdana"];
+$GVE_CONFIG["settings"]["typeface_fallback"] = [0 => "Sans",  10 => "Cursive" ,          20 => "Monospace",   30 => "Serif",    40 => "Serif",   50 => "Sans",   60 => "Serif",           70 => "Sans",         80 => "Sans"];
 
 // mclimit settings (number of iterations to help to reduce crossings)
 $GVE_CONFIG["default_mclimit"] = "1";
