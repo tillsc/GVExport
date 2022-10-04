@@ -17,17 +17,14 @@ Installation of GVExport
 
 To install GVExport, copy files to modules_v4 directory in webtrees and rename the folder to GVExport. For more detail, see the [install instructions](https://github.com/Neriderc/GVExport/wiki/Installing-the-module).
 
-GraphViz
---------
-
-By default GVExport can display the output in the browser. To generate files such as PNG, JPG, SVG, and PDF, the GraphViz software is needed on the server. See [Installation of GraphViz](https://github.com/Neriderc/GVExport/wiki/Installation-of-GraphViz).
-
 GVExport Module
 ---------------
 
 Once installed (and enabled), go to *Charts -> GVExport* to see the options.
 
-Some further but non-exhaustive instructions can be found in [this forum post](https://www.webtrees.net/index.php/en/forum/4-customising/35801-display-complex-all-in-on-tree-with-gvexport?start=0) from the previous version.
+See [How to use GVExport](https://github.com/Neriderc/GVExport/wiki/How-to-use-GVExport) for help using GVExport for the first time.
+
+For more information on the options, see [Detailed information on each option](https://github.com/Neriderc/GVExport/wiki/Detailed-information-on-each-option).
 
 Help and support
 ----------------
