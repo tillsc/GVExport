@@ -903,39 +903,13 @@ class Dot {
 
 			// --- Birth data ---
 			if ($this->settings["show_by"]) {
-				$birthdate_var = $i->getBirthDate(FALSE);
-				$q1 = $birthdate_var->qual1;
-				$d1 = $birthdate_var->minimumDate()->format(I18N::dateFormat());
-				$dy = $birthdate_var->minimumDate()->format("%Y");
-				$q2 = $birthdate_var->qual2;
-				if ($birthdate_var->minimumDate() == $birthdate_var->maximumDate())
-					$d2 = '';
-				else
-					$d2 = $birthdate_var->maximumDate()->format(I18N::dateFormat());
-				$q3 = '';
-				if ($this->settings["bd_type"] == "gedcom") {
-					// Show full GEDCOM date
-					if (is_object($birthdate_var)) {
-						// Workaround for PGV 4.1.5 SVN, it gives back an object not a string
-						$birthdate = trim("{$q1} {$d1} {$q2} {$d2} {$q3}");
-					} else {
-						$birthdate = $birthdate_var;
-					}
-				} else {
-					// Show birth year only
-					if (is_object($birthdate_var)) {
-						// Workaround for PGV 4.1.5 SVN, it gives back an object not a string
-						$birthdate = trim("{$q1} {$dy}");
-					} else {
-						$birthdate = substr($birthdate_var, -4, 4);
-					}
-				}
+                $birthdate = $this->formatDate($i->getBirthDate(FALSE), $this->settings["bd_type"] !== "gedcom");
 			} else {
 				$birthdate = "";
 			}
 
 			if ($this->settings["show_bp"]) {
-				// Show birth place
+				// Show birthplace
 				$birthplace = $this->getAbbreviatedPlace($i->getBirthPlace()->gedcomName());
 			} else {
 				$birthplace = "";
@@ -943,33 +917,11 @@ class Dot {
 
 			// --- Death data ---
 			if ($this->settings["show_dy"]) {
-				$deathdate_var = $i->getDeathDate(FALSE);
-				$q1 = $deathdate_var->qual1;
-				$d1 = $deathdate_var->minimumDate()->format(I18N::dateFormat());
-				$dy = $deathdate_var->minimumDate()->format("%Y");
-				$q2 = $deathdate_var->qual2;
-				if ($deathdate_var->minimumDate() == $deathdate_var->maximumDate())
-					$d2 = '';
-				else
-					$d2 = $deathdate_var->maximumDate()->format(I18N::dateFormat());
-				$q3 = '';
-				if ($this->settings["dd_type"] == "gedcom") {
-					// Show full GEDCOM date
-					if (is_object($deathdate_var)) {
-						// Workaround for PGV 4.1.5 SVN, it gives back an object not a string
-						$deathdate = trim("{$q1} {$d1} {$q2} {$d2} {$q3}");
-					} else {
-						$deathdate = $deathdate_var;
-					}
-				} else {
-					// Show death year only
-					if (is_object($deathdate_var)) {
-						// Workaround for PGV 4.1.5 SVN, it gives back an object not a string
-						$deathdate = trim("{$q1} {$dy}");
-					} else {
-						$deathdate = substr($deathdate_var, -4, 4);
-					}
-				}
+                if ($this->settings["show_by"]) {
+                    $deathdate = $this->formatDate($i->getDeathDate(FALSE), $this->settings["dd_type"] !== "gedcom");
+                } else {
+                    $deathdate = "";
+                }
 			} else {
 				$deathdate = "";
 			}
@@ -1129,33 +1081,11 @@ class Dot {
 
 			// Show marriage year
 			if ($this->settings["show_my"]) {
-				$marrdate_var = $f->getMarriageDate(FALSE);
-				$q1=$marrdate_var->qual1;
-				$d1=$marrdate_var->minimumDate()->format(I18N::dateFormat());
-				$dy=$marrdate_var->minimumDate()->format("%Y");
-				$q2=$marrdate_var->qual2;
-				if ($marrdate_var->minimumDate() == $marrdate_var->maximumDate())
-					$d2='';
-				else
-					$d2=$marrdate_var->maximumDate()->format(I18N::dateFormat());
-				$q3='';
-				if ($this->settings["md_type"] == "gedcom") {
-				// Show full GEDCOM date
-					if (is_object($marrdate_var)) {
-						// Workaround for PGV 4.1.5 SVN, it gives back an object not a string
-						$marriagedate = trim("{$q1} {$d1} {$q2} {$d2} {$q3}");
-					} else {
-						$marriagedate = $marrdate_var;
-					}
-				} else {
-					// Show birth year only
-					if (is_object($marrdate_var)) {
-						// Workaround for PGV 4.1.5 SVN, it gives back an object not a string
-						$marriagedate = trim("{$q1} {$dy}");
-					} else {
-						$marriagedate = substr($marrdate_var, -4, 4);
-					}
-				}
+                if ($this->settings["show_by"]) {
+                    $marriagedate = $this->formatDate($f->getMarriageDate(FALSE), $this->settings["md_type"] !== "gedcom");
+                } else {
+                    $marriagedate = "";
+                }
 			} else {
 				$marriagedate = "";
 			}
@@ -1906,6 +1836,62 @@ class Dot {
             $arrowColor = $this->settings["color_arrow_related"] == "color_arrow_related" ? $this->colors["arrows"]["related"] : $this->colors["arrows"]["default"];
         }
         return $arrowColor;
+    }
+    public function formatDate($date, $yearOnly = false, $date_format = null) {
+        $date_format = $date_format ?? I18N::dateFormat();
+        $q1 = $date->qual1;
+        $d1 = $date->minimumDate()->format($date_format, $date->qual1);
+        $q2 = $date->qual2;
+        if ($date->maximumDate() === null) {
+            $d2 = '';
+        } else {
+            $d2 = $date->maximumDate()->format($date_format, $q2);
+        }
+        $dy = $date->minimumDate()->format("%Y");
+
+        if (!$yearOnly) {
+            switch ($q1 . $q2) {
+                case '':
+                    $tmp = $d1;
+                    break;
+                case 'ABT':
+                    $tmp = "~" . $d1;
+                    break;
+                case 'CAL':
+                    $tmp = I18N::translate('calculated %s', $d1);
+                    break;
+                case 'EST':
+                    $tmp = "±" . $d1;
+                    break;
+                case 'INT':
+                    $tmp = I18N::translate('interpreted %s (%s)', $d1, e($this->text));
+                    break;
+                case 'BEF':
+                    $tmp = "&lt;" . $d1;
+                    break;
+                case 'AFT':
+                    $tmp = "&gt;" . $d1;
+                    break;
+                case 'FROM':
+                    $tmp = I18N::translate('from %s', $d1);
+                    break;
+                case 'TO':
+                    $tmp = I18N::translate('to %s', $d1);
+                    break;
+                case 'BETAND':
+                    $tmp = "&gt;" . $d1 . "&lt;" . $d2;
+                    break;
+                case 'FROMTO':
+                    $tmp = I18N::translate('from %s to %s', $d1, $d2);
+                    break;
+                default:
+                    $tmp = '';
+                    break;
+            }
+        } else {
+            $tmp = trim("{$q1} {$dy}");
+        }
+        return $tmp;
     }
 }
 ?>
