@@ -1855,22 +1855,22 @@ class Dot {
                     $tmp = $d1;
                     break;
                 case 'ABT':
-                    $tmp = "~" . $d1;
+                    $tmp = "~ " . $d1;
                     break;
                 case 'CAL':
                     $tmp = I18N::translate('calculated %s', $d1);
                     break;
                 case 'EST':
-                    $tmp = "±" . $d1;
+                    $tmp = "± " . $d1;
                     break;
                 case 'INT':
                     $tmp = I18N::translate('interpreted %s (%s)', $d1, e($this->text));
                     break;
                 case 'BEF':
-                    $tmp = "&lt;" . $d1;
+                    $tmp = "&lt; " . $d1;
                     break;
                 case 'AFT':
-                    $tmp = "&gt;" . $d1;
+                    $tmp = "&gt; " . $d1;
                     break;
                 case 'FROM':
                     $tmp = I18N::translate('from %s', $d1);
@@ -1879,7 +1879,7 @@ class Dot {
                     $tmp = I18N::translate('to %s', $d1);
                     break;
                 case 'BETAND':
-                    $tmp = "&gt;" . $d1 . "&lt;" . $d2;
+                    $tmp = "&gt; " . $d1 . " &lt; " . $d2;
                     break;
                 case 'FROMTO':
                     $tmp = I18N::translate('from %s to %s', $d1, $d2);
