@@ -150,7 +150,7 @@ function getPos(el, rel)
 
 
 // Toggle items based on if the items in the cart should be used or not
-// enable - if set to true, use cart. Update form to disable options. Set to false to reverse.
+// enable - if set to true, use cart. Update form to disable options. Set to "false" to reverse.
 function toggleCart(enable) {
     const el = document.getElementsByClassName("cart_toggle");
     for (let i = 0; i < el.length; i++) {

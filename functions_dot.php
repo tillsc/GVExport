@@ -39,35 +39,32 @@ use Fisharebest\Webtrees\I18n;
 //use League\Flysystem\Util;
 use Fisharebest\Webtrees\Site;
 use Fisharebest\Webtrees\Registry;
-use http\Params;
-
 
 /**
  * Main class for managing the DOT file
  *
  */
 class Dot {
-	var $individuals = array();
-	var $skipList = array();
-	var $families = array();
-	var $indi_search_method = array("ance" => FALSE, "desc" => FALSE, "spou" => FALSE, "sibl" => FALSE, "cous" => FALSE, "any" => FALSE);
-	var $font_size;
-	var $colors = array();
-	var $settings = array();
-	var $pagesize = array();
-    var $messages = array(); // messages for toast system
+	var array $individuals = array();
+	var array $skipList = array();
+	var array $families = array();
+	var array $indi_search_method = array("ance" => FALSE, "desc" => FALSE, "spou" => FALSE, "sibl" => FALSE, "cous" => FALSE, "any" => FALSE);
+	var string $font_size;
+	var array $colors = array();
+	var array $settings = array();
+	var array $pagesize = array();
+    var array $messages = array(); // messages for toast system
 	private const ERROR_CHAR = "E:"; // Messages that start with this will be highlighted
-    private $tree, $file_system, $use_urls_for_media;
+    private $tree, $file_system;
 
     /**
 	 * Constructor of Dot class
 	 */
-	function __construct($tree, $file_system, $use_urls_for_media) {
+	function __construct($tree, $file_system) {
 		global $GVE_CONFIG;
 		// Load settings from config file
 		$this->tree = $tree;
 		$this->file_system = $file_system;
-		$this->use_urls_for_media = $use_urls_for_media;
 
 		// Load font
 		$this->font_size = $GVE_CONFIG["dot"]["fontsize"];
@@ -174,7 +171,7 @@ class Dot {
 	 * @param string $color_type
 	 * @param string $color
 	 */
-	function setColor($color_type, $color) {
+	function setColor(string $color_type, string $color) {
 		$this->colors[$color_type] = $color;
 	}
 
@@ -207,7 +204,7 @@ class Dot {
 	}
 
     /**
-	 * Function to set font colour for details (date of birth, place of marriage, etc)
+	 * Function to set font colour for details (date of birth, place of marriage, etc.)
 	 *
 	 * @param string $font_color
 	 */
@@ -278,7 +275,7 @@ class Dot {
 	 * @param string $pid XREF of the person, for adding to name if enabled
 	 * @return string Returns formatted name
 	 */
-	function getFormattedName($nameArray, $pid): string {
+	function getFormattedName(array $nameArray, string $pid): string {
         if (isset($nameArray['full'])) {
             $name = $this->getAbbreviatedName($nameArray);
         } else {
@@ -315,7 +312,7 @@ class Dot {
         $name = str_replace("_U_", "<u>", $name);
         $name = str_replace("_/U_", "</u> ", $name);
 
-		// If PID already in name (from another module), remove it so we don't add twice
+		// If PID already in name (from another module), remove it, so we don't add twice
 		$name = str_replace(" (" . $pid . ")", "", $name);
 		if ($this->settings["show_pid"]) {
 			// Show INDI id
@@ -427,7 +424,7 @@ class Dot {
 			}
 		}
 		// If we found no record of non-blood relationship, return blank
-		// Otherwise return the type ("BOTH/HUSB/WIFE for adoptions, "OTHER" for anything else)
+		// Otherwise return the type (BOTH/HUSB/WIFE for adoptions, "OTHER" for anything else)
 		if (!isset($adopfamcadoptype)) {
 			return "";
 		}
@@ -451,7 +448,7 @@ class Dot {
             }
         }
         // Merge multiple lists from the different starting persons into one list
-        // Taking extra care to ensure if one list marks a person as related then
+        // Taking extra care to ensure if one list marks a person as related
         // they should be marked as related in the final tree
         $individuals = $indiLists[0];
         for($i=1;$i<count($indiLists);$i++) {
@@ -476,10 +473,10 @@ class Dot {
 
     /**
      *  Check if XREF in list of starting individuals
-     * @param  string $pid Xref to check
+     * @param string $pid Xref to check
      * @return bool
      */
-    function isStartingIndividual($pid): bool
+    function isStartingIndividual(string $pid): bool
     {
         $indis = explode(",", $this->settings["indi"]);
         for ($i=0;$i<count($indis);$i++) {
@@ -702,14 +699,13 @@ class Dot {
 					}
 					$place .= trim($place_chunks[$chunk_count - 1]);
 				}
-				return $place;
-			} else {
+            } else {
 				/* Otherwise, we have chosen one of the ISO code options */
 				switch ($this->settings["use_abbr_place"]) {
-					case 20: //City and 2 Letter ISO Country Code
+					case 20: //City and 2-Letter ISO Country Code
 						$code = "iso2";
 						break;
-					case 30: //City and 3 Letter ISO Country Code
+					case 30: //City and 3-Letter ISO Country Code
 						$code = "iso3";
 						break;
 					default:
@@ -730,9 +726,9 @@ class Dot {
 						$place .= trim($place_chunks[$chunk_count - 1]);
 					}
 				}
-				return $place;
-			}
-		}
+            }
+            return $place;
+        }
 	}
 
 	/**
@@ -745,8 +741,8 @@ class Dot {
  	 * @param boolean $related (TRUE/FALSE) Person is blood-related
  	 * @return string $colour (#RRGGBB)
  	 */
-	function getGenderColour(string $gender, bool $related = TRUE) {
-		global $GVE_CONFIG;
+	function getGenderColour(string $gender, bool $related = TRUE): string
+    {
 		// Determine the fill color
 		if ($gender == 'F') {
 			if ($related || !$this->settings["mark_not_related"]) {
@@ -784,7 +780,8 @@ class Dot {
  	 *
  	 * @return string colour (#RRGGBB)
  	 */
-	function getFamilyColour() {
+	function getFamilyColour(): string
+    {
 		// Determine the fill color
         return $this->colors["colorfam"];
 	}
@@ -796,8 +793,7 @@ class Dot {
 	 */
 	function printDOTHeader(): string
     {
-		$out = "";
-		$out .= "digraph WT_Graph {\n";
+        $out = "digraph WT_Graph {\n";
 		// Using pagebreak
 		if (!empty($this->settings["use_pagesize"])) {
 			$out .= "ratio=\"auto\"\n";
@@ -830,31 +826,29 @@ class Dot {
 	 *
 	 * @return	string	DOT header text
 	 */
-	function printDOTFooter() {
-		$out = "";
-		$out .= "}\n";
-		return $out;
+	function printDOTFooter(): string
+    {
+        return "}\n";
 	}
 
 	/**
 	 * Gives back a text with HTML special chars
 	 *
-	 * @param	string	$text	String to convert
+	 * @param string $text	String to convert
 	 * @return	string	Converted string
 	 */
-	function convertToHTMLSC($text) {
-		$out = htmlspecialchars($text, ENT_QUOTES, "UTF-8");
-		return $out;
+	function convertToHTMLSC(string $text): string
+    {
+        return htmlspecialchars($text, ENT_QUOTES, "UTF-8");
 	}
 
 	/**
 	 * Prints the line for a single person.
 	 *
-	 * @param integer $pid Person ID
+	 * @param string $pid Person ID
 	 */
-	function printPerson($pid, $related = TRUE) {
-		global $GVE_CONFIG, $pgv_changes, $GEDCOM, $pgv_lang;
-
+	function printPerson(string $pid, $related = TRUE): string
+    {
 		$out = "";
 		$out .= $this->convertID($pid); // Convert the ID, so linked GEDCOMs are displayed properly
 		$out .= " [ ";
@@ -877,14 +871,13 @@ class Dot {
 	/**
 	 * Prints the data for a single person.
 	 *
-	 * @param integer $pid Person ID
+	 * @param string $pid Person ID
 	 */
-	function printPersonLabel($pid, $related = TRUE) {
-		global $GVE_CONFIG, $pgv_changes, $lang_short_cut, $LANGUAGE, $GEDCOM, $pgv_lang;
-
+	function printPersonLabel(string $pid, $related = TRUE): string
+    {
 		$out = "";
 		$bordercolor = "#606060";	// Border color of the INDI's box
-
+        $deathplace = "";
 		// Get the personal data
 		if ($this->settings["diagram_type"] == "combined" && ( substr($pid, 0, 3) == "I_H" || substr($pid, 0, 3) == "I_W" )) {
 			// In case of dummy individual
@@ -925,12 +918,9 @@ class Dot {
 			} else {
 				$deathdate = "";
 			}
-
 			if ($this->settings["show_dp"]) {
 				// Show death place
 				$deathplace = $this->getAbbreviatedPlace($i->getDeathPlace()->gedcomName());
-			} else {
-				$deathplace = "";
 			}
             // --- Name ---
             $names = $i->getAllNames();
@@ -1044,11 +1034,10 @@ class Dot {
 	/**
 	 * Prints the line for drawing a box for a family.
 	 *
-	 * @param integer $fid Family ID
+	 * @param string $fid Family ID
 	 */
-	function printFamily($fid) {
-		global $GVE_CONFIG, $pgv_changes, $lang_short_cut, $LANGUAGE, $GEDCOM, $pgv_lang;
-
+	function printFamily(string $fid): string
+    {
 		$out = "";
 
 		$out .= $this->convertID($fid);
@@ -1062,10 +1051,9 @@ class Dot {
 		}
 
 		// --- Data collection ---
-		// If a "dummy" family is set (begins with "F_"), then there is no marriage & family data, so no need for querying PGV...
+		// If a "dummy" family is set (begins with "F_"), then there is no marriage & family data, so no need for querying webtrees...
 		if (substr($fid, 0, 2) == "F_") {
 			$fillcolor = $this->getFamilyColour();
-			$marriageyear = "";
 			$marriageplace = "";
 			$husb_id = $this->families[$fid]["husb_id"];
 			$wife_id = $this->families[$fid]["wife_id"];
@@ -1073,7 +1061,7 @@ class Dot {
 				$unkn_id = $this->families[$fid]["unkn_id"];
 			}
 			$link = "#";
-		// Querying PGV for the data of a FAM object
+		// Querying webtrees for the data of a FAM object
 		} else {
 			$f = $this->getUpdatedFamily($fid);
 			$fillcolor = $this->getFamilyColour();
@@ -1082,7 +1070,8 @@ class Dot {
 			// Show marriage year
 			if ($this->settings["show_my"]) {
                 if ($this->settings["show_by"]) {
-                    $marriagedate = $this->formatDate($f->getMarriageDate(FALSE), $this->settings["md_type"] !== "gedcom");
+                    $marriagedate = $this->formatDate($f
+                        ->getMarriageDate(FALSE), $this->settings["md_type"] !== "gedcom");
                 } else {
                     $marriagedate = "";
                 }
@@ -1098,20 +1087,9 @@ class Dot {
 			}
 
 			// Get the husband's and wife's id from PGV
-			//$husb_id = $f->getHusbId();
-			//$wife_id = $f->wifeId();
-			if (isset($this->families[$fid]["husb_id"])) {
-				$husb_id = $this->families[$fid]["husb_id"];
-			} else {
-				$husb_id = "";
-			}
-			if (isset($this->families[$fid]["wife_id"])) {
-				$wife_id = $this->families[$fid]["wife_id"];
-			} else {
-				$wife_id = "";
-			}
+            $husb_id = $this->families[$fid]["husb_id"] ?? "";
+            $wife_id = $this->families[$fid]["wife_id"] ?? "";
 		}
-
 
 		// --- Printing ---
 		// "Combined" type
@@ -1126,39 +1104,16 @@ class Dot {
 
 			if (!empty($unkn_id)) {
 				// Print unknown gender INDI
-				if (isset($this->individuals[$unkn_id]['rel']) && ($this->individuals[$unkn_id]['rel'] == FALSE)) {
-					$related = FALSE;
-				} else {
-					$related = TRUE;
-				}
-				$out .= "<TD CELLPADDING=\"0\" PORT=\"" . $unkn_id . "\">";
-				$out .= $this->printPersonLabel($unkn_id, $related);
-				$out .= "</TD>";
-			} else {
+                $out = $this->addPersonLabel($unkn_id, $out);
+            } else {
 				// Print husband
-				//$husb_id = $f->getHusbId();
 				if (!empty($husb_id)) {
-					if (isset($this->individuals[$husb_id]['rel']) && ($this->individuals[$husb_id]['rel'] == FALSE)) {
-						$related = FALSE;
-					} else {
-						$related = TRUE;
-					}
-					$out .= "<TD CELLPADDING=\"0\" PORT=\"" . $husb_id . "\">";
-					$out .= $this->printPersonLabel($husb_id, $related);
-					$out .= "</TD>";
+                    $out = $this->addPersonLabel($husb_id, $out);
 				}
 
 				// Print wife
-				//$wife_id = $f->wifeId();
 				if (!empty($wife_id)) {
-					if (isset($this->individuals[$wife_id]['rel']) && ($this->individuals[$wife_id]['rel'] == FALSE)) {
-						$related = FALSE;
-					} else {
-						$related = TRUE;
-					}
-					$out .= "<TD CELLPADDING=\"0\" PORT=\"" . $wife_id . "\">";
-					$out .= $this->printPersonLabel($wife_id, $related);
-					$out .= "</TD>";
+                    $out = $this->addPersonLabel($wife_id, $out);
 				}
 			}
 
@@ -1217,7 +1172,8 @@ class Dot {
 	 * @param array $families array of families to be updated (passed by reference)
 	 * @param boolean $full whether we are scanning full tree of relatives, ignoring settings
 	 */
-	function addIndiToList($sourcePID, $pid, bool $ance, bool $desc, bool $spou, bool $sibl, bool $rel, int $ind, int $level, array &$individuals, array &$families, bool $full) {
+	function addIndiToList($sourcePID, string $pid, bool $ance, bool $desc, bool $spou, bool $sibl, bool $rel, int $ind, int $level, array &$individuals, array &$families, bool $full): bool
+    {
 		// Seen this XREF before and skipped, so just skip again without further checks
 		if (isset($this->skipList[$pid])) {
 			return false;
@@ -1238,7 +1194,7 @@ class Dot {
 		}
 
 		$individuals[$pid]['pid'] = $pid;
-		// Overwrite the 'related' status if it was not set before or it's 'false' (for those people who are added as both related and non-related)
+		// Overwrite the 'related' status if it was not set before, or it's 'false' (for those people who are added as both related and non-related)
 
         if (!isset($individuals[$pid]['rel']) || (!$individuals[$pid]['rel'] && $rel)) {
 				$individuals[$pid]['rel'] = $rel;
@@ -1339,7 +1295,7 @@ class Dot {
 
 		// Check that INDI is listed in stop pids (should we stop the tree processing or not?)
 		$stop_proc = FALSE;
-		if (isset($this->settings["stop_proc"]) && $this->settings["stop_proc"] == TRUE) {
+		if (isset($this->settings["stop_proc"]) && $this->settings["stop_proc"]) {
 			$stop_pids = explode(",", $this->settings["stop_pids"]);
 			for ($j=0;$j<count($stop_pids);$j++) {
 				if ($pid == trim($stop_pids[$j])){
@@ -1608,8 +1564,8 @@ class Dot {
                     // And the coerced into webtrees by Iain MacDonald
                     $h = $f->husband();
 					if ($h) {
+                        $w = $f->wife();
                         if($h->xref() == $pid) {
-                            $w = $f->wife();
                             if($w) {
                                 $spouse_id = $w->xref();
                                 $families[$fid]["husb_id"] = $pid;
@@ -1617,7 +1573,6 @@ class Dot {
                             }
                         }
                         else {
-                            $w = $f->wife();
                             if($w && $w->xref() == $pid) {
                                 $spouse_id = $h->xref();
                                 $families[$fid]["husb_id"] = $spouse_id;
@@ -1665,7 +1620,7 @@ class Dot {
 						}
 						// -------------
 					} else {
-							$this->addFamToList($fid, $families);
+                        $this->addFamToList($fid, $families);
 
 						// --- DEBUG ---
 						if ($this->settings["debug"]) {
@@ -1765,7 +1720,8 @@ class Dot {
 			$this->printDebug("}\n", $ind);
 		}
 		// -------------
-	}
+        return false;
+    }
 
 	/**
 	 * Adds a family to the family list
@@ -1784,16 +1740,12 @@ class Dot {
  	 *
 	 * @param string $pid Individual's GEDCOM id (Ixxx)
 	 */
-	function addPhotoToIndi($pid) {
+	function addPhotoToIndi(string $pid) {
 		$i = Registry::individualFactory()->make($pid, $this->tree);
 		$m = $i->findHighlightedMediaFile();
 		if (empty($m)) {
 			return null;
-		}
-		else if (false && $this->use_urls_for_media) {
-			return $m->downloadUrl('inline');
-		}
-		else if (!$m->isExternal() && $m->fileExists($this->file_system)) {
+		} else if (!$m->isExternal() && $m->fileExists($this->file_system)) {
 			// If we are rendering in the browser, provide the URL, otherwise provide the server side file location
 			if (isset($_REQUEST["render"])) {
 				return Site::getPreference('INDEX_DIRECTORY').$this->tree->getPreference('MEDIA_DIRECTORY').$m->filename();
@@ -1819,7 +1771,7 @@ class Dot {
 
 	// Linked IDs has a colon, it needs to be replaced
 	function convertID($id) {
-		return preg_replace("/\:/", "_", $id);
+		return preg_replace("/:/", "_", $id);
 	}
 
     public function getArrowColor($i, $fid)
@@ -1864,7 +1816,7 @@ class Dot {
                     $tmp = "± " . $d1;
                     break;
                 case 'INT':
-                    $tmp = I18N::translate('interpreted %s (%s)', $d1, e($this->text));
+                    $tmp = I18N::translate('interpreted %s', $d1);
                     break;
                 case 'BEF':
                     $tmp = "&lt; " . $d1;
@@ -1889,9 +1841,27 @@ class Dot {
                     break;
             }
         } else {
-            $tmp = trim("{$q1} {$dy}");
+            $tmp = trim("$q1 $dy");
         }
         return $tmp;
     }
+
+    /** Add the DOT code to include this individual in the diagram.
+     *
+     * @param string $pid
+     * @param string $out
+     * @return string
+     */
+    public function addPersonLabel(string $pid, string $out): string
+    {
+        if (isset($this->individuals[$pid]['rel']) && !$this->individuals[$pid]['rel']) {
+            $related = FALSE;
+        } else {
+            $related = TRUE;
+        }
+        $out .= "<TD CELLPADDING=\"0\" PORT=\"" . $pid . "\">";
+        $out .= $this->printPersonLabel($pid, $related);
+        $out .= "</TD>";
+        return $out;
+    }
 }
-?>
