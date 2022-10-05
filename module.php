@@ -281,7 +281,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
         assert($tree instanceof Tree);
 
         $individual = $this->getIndividual($tree, $_GET['xref']);
-        $temp_dir = $this->saveDOTFile($individual->tree(), $individual, $_REQUEST["vars"]["otype"] == 'svg' || $_REQUEST["vars"]["otype"] == 'dot');
+        $temp_dir = $this->saveDOTFile($individual->tree(), $individual);
         // If browser mode, output dot instead of selected file
         if (isset($_POST["browser"]) && $_POST["browser"] == "true") {
             $browser = true;
@@ -338,7 +338,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
      *
      * @return	string	Directory where the file is saved
      */
-    function saveDOTFile($tree, $individual, $use_urls_for_media)
+    function saveDOTFile($tree, $individual)
     {
         global $GVE_CONFIG;
 
@@ -349,7 +349,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
         }
 
         // Create the dump
-        $contents = $this->createGraphVizDump($tree, $individual, $temp_dir, $use_urls_for_media);
+        $contents = $this->createGraphVizDump($tree, $individual, $temp_dir);
 
         // Put the contents into the file
         $fid = fopen($temp_dir . "/" . $GVE_CONFIG["filename"] . ".dot", "w");
@@ -371,12 +371,12 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
         //print nl2br( $contents);
     }
 
-    function createGraphVizDump($tree, $individual, $temp_dir, $use_urls_for_media)
+    function createGraphVizDump($tree, $individual, $temp_dir)
     {
         require(dirname(__FILE__) . "/functions_dot.php");
 
         $out = "";
-        $dot = new Dot($tree, Registry::filesystem()->data(), $use_urls_for_media);
+        $dot = new Dot($tree, Registry::filesystem()->data());
 
         $vars = $_REQUEST['vars'];
 
