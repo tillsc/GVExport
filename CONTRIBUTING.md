@@ -69,7 +69,7 @@ It's all manual currently, please [create an issue](https://github.com/Neriderc/
 
 If you're keen and available to do testing of pull requests or regression testing before releases, please [create an issue](https://github.com/Neriderc/GVExport/issues) and volunteer.
 
-We would also hapily accept automated tests if that's your thing.
+We would also happily accept automated tests if that's your thing.
 
 # How to report a bug
 If you find a security vulnerability, do NOT open an issue. See [SECURITY.md](https://github.com/Neriderc/GVExport/blob/master/SECURITY.md)) for the email address to contact.
@@ -80,10 +80,11 @@ For any other bugs or potential bugs, please [create an issue](https://github.co
 
 GVExport is a module for webtrees, that is used to visualise a family tree and allows you to download the visualisation in various file formats. This repository is making many changes over the previous abandoned repo that it was forked from, but with some ideas in mind:
 
+- GVExport only supports the latest version of webtrees, but should support all configurations that the latest version of webtrees supports. For example, the latest webtrees supports PHP7.4 as well as PHP8.0, so we should too.
 - Changes should not remove existing functionality
-- New features are great, but the tool should work for both beginner and advanced users. The options should be powerful but not confusing. We intend to move many options to the control panel settings, to help separate advanced features from the regular UI.
-- Currently downloading output requires GraphViz to be installed on the server. Our road map includes reducing this dependancy.
-- Our roadmap also includes quality of life changes such as improving error messages and adding validation to fields to prevent submitting values that don't make sense.
+- New features are great, but the tool should work for both beginner and advanced users. The options should be powerful but not confusing. We have created hidden "advanced" sections, to help separate advanced features from the regular UI.
+- We plan to include quality of life changes such as improving error messages and adding validation to fields to prevent submitting values that don't make sense.
+- Mobile browsers are not yet tested and supported - but we hope this will change once desktop development settles down.
 
 Please check the [issues list](https://github.com/Neriderc/GVExport/issues) and the [project board](https://github.com/users/Neriderc/projects/1/views/1) to see what has been discussed and what is on the roadmap. Any ideas that aren't specifically mentioned can be added by creating a new issue.
 
