@@ -571,8 +571,8 @@ use Fisharebest\Webtrees\Tree;
 
     function pageLoaded() {
         TOMSELECT_URL = document.getElementById('pid').getAttribute("data-url") + "&query=";
-        loadXrefList(TOMSELECT_URL);
         loadURLXref();
+        loadXrefList(TOMSELECT_URL);
         // Remove reset parameter from URL when page loaded, to prevent
         // further resets when page reloaded
         removeURLParameter("reset");

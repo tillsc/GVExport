@@ -471,6 +471,12 @@ function removeItem(element) {
     const regex = new RegExp(`(?<=,|^)(${xref})(?=,|$)`);
     list.value = list.value.replaceAll(" ","").replace(regex, "");
     list.value = list.value.replace(",,", ",");
+    if (list.value.substring(0,1) === ",") {
+        list.value = list.value.substring(1);
+    }
+    if (list.value.substring(list.value.length-1) === ",") {
+        list.value = list.value.substring(0, list.value.length-1);
+    }
     element.remove();
     changeURLXref(list.value.split(",")[0].trim());
     updateClearAll();
