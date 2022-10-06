@@ -344,7 +344,7 @@ msgstr "Beziehung nicht durch Geburt"
 #. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
 #: 
 msgid "Full name"
-msgstr "vollständiger Name"
+msgstr "Vollständiger Name"
 
 #. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
 #: 
@@ -385,4 +385,24 @@ msgstr "Initialen der Vornamen und Nachnamen"
 #: 
 msgid "Partners"
 msgstr "Partner"
+
+#. Option section where option to auto-update is presented
+#: 
+msgid "Browser render"
+msgstr "Darstellung im Browser"
+
+#. Whether to automatically update the diagram in the browser whenever something is changed. If unselected, user must click "Update" button before browser render is refreshed after a change.
+#: 
+msgid "Auto-update"
+msgstr "Automatische Aktualisierung"
+
+#. Button to clear all selected individuals (in new individual selection functionality) https://s3.eu-west-1.amazonaws.com/po-pub/i/EsrRESKU3YALMqSOyVudt0L1.png
+#: 
+msgid "Clear all"
+msgstr "Alle entfernen"
+
+#. With the new way of showing the selected starting individuals, the XREF list is now moved to the advanced section. This is the description of this field that lists the XREFs of the starting individuals that used to be under the person select dropdown.
+#: 
+msgid "XREFs of included individuals"
+msgstr "XREFs der einbezogenen Personen"
 
