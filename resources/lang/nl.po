@@ -396,3 +396,13 @@ msgstr "Browserweergave"
 msgid "Auto-update"
 msgstr "Automatisch bijwerken"
 
+#. Button to clear all selected individuals (in new individual selection functionality) https://s3.eu-west-1.amazonaws.com/po-pub/i/EsrRESKU3YALMqSOyVudt0L1.png
+#: 
+msgid "Clear all"
+msgstr "Alles wissen"
+
+#. With the new way of showing the selected starting individuals, the XREF list is now moved to the advanced section. This is the description of this field that lists the XREFs of the starting individuals that used to be under the person select dropdown.
+#: 
+msgid "XREFs of included individuals"
+msgstr "XREF's van opgenomen personen"
+
