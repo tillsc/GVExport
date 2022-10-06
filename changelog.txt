@@ -3,6 +3,13 @@
 	GVExport module for Webtrees
 =====================================================================
 
+Version 2.1.13 (2022-10-06)
+  - New         : Redesigned selection process for starting individuals
+  - New         : Some date qualifiers are now shown as symbols, translated words otherwise. E.g. "ABT" now shows as "~".
+  - Changed     : Some changes to which records are shown under certain circumstances
+  - Removed     : MCLIMIT setting removed from UI as no evidence it does anything in context of GVExport. Still available in config.php.
+  - Fixed       : Changed fonts to have a generic family font to fall back to. E.g. "Times New Roman" will now fall back to "Serif"
+
 Version 2.1.12 (2022-09-30)
   - New         : Added option for abbreviating (or removing) names
   - New         : Polish translation added  
