@@ -502,7 +502,7 @@ class Dot {
                 if (isset($f["fid"])) {
                     $xref = $f["fid"];
                     // If not dummy family, the family has no children, and one of the spouse records are missing
-                    if (substr($xref, 0, 2) != "F_" && !isset($families[$xref]["has_children"]) && (!isset($families[$xref]["husb_id"]) || !isset($families[$xref]["wife_id"]))) {
+                    if (substr($xref, 0, 2) != "F_" && (!isset($families[$xref]["has_children"]) || !$families[$xref]["has_children"]) && (!isset($families[$xref]["husb_id"]) || !isset($families[$xref]["wife_id"]))) {
                         // Remove this family from both the individual record of families and from the family list
                         unset($families[$xref]);
                         unset($individuals[$i["pid"]]["fams"][$xref]);
@@ -518,9 +518,22 @@ class Dot {
 		if (!functionsClippingsCart::isIndividualInCart($this->tree) || !$this->settings["usecart"] ) {
 			// Create our tree
 			$this->createIndiList($this->individuals, $this->families, false);
-			if ($this->settings["diagram_type"] == "combined" && $this->indi_search_method["spou"] != "") {
-				$this->removeGhosts($this->individuals, $this->families);
-			}
+			if ($this->settings["diagram_type"] == "combined") {
+                if ($this->indi_search_method["spou"] != "") {
+                    $this->removeGhosts($this->individuals, $this->families);
+                }
+			} else {
+                // Remove families with only one link
+                foreach ($this->families as $f) {
+                    $xref = $f["fid"];
+                    // If not dummy family, the family has no children, and one of the spouse records are missing
+                    if (substr($xref, 0, 2) != "F_" && (!isset($this->families[$xref]["has_children"]) || !$this->families[$xref]["has_children"]) && (!isset($this->families[$xref]["husb_id"]) || !isset($this->families[$xref]["wife_id"]))) {
+                        // Remove this family from the family list
+                        unset($this->families[$xref]);
+                    }
+                }
+            }
+
 			// If option to display related in another colour is selected,
 			// check if any non-related persons in tree
 			$relList = array();
@@ -1182,7 +1195,9 @@ class Dot {
 		// Set ancestor/descendant levels in case these options disabled
 		$ance_level = $this->indi_search_method["ance"] ? $this->settings["ance_level"] : 0;
 		$desc_level = $this->indi_search_method["desc"] ? $this->settings["desc_level"] : 0;
-
+        if ($this->settings["desc_level"] == 0) {
+            $desc = false;
+        }
 		// Get updated INDI data
 		$i = $this->getUpdatedPerson($pid);
 
@@ -1491,9 +1506,12 @@ class Dot {
 						}
 						// -------------
 					}
-					$families[$fid]["has_children"] = TRUE;
+
 
 					$children = $f->children();
+                    if (sizeof($children) !== 0) {
+                        $families[$fid]["has_children"] = TRUE;
+                    }
 					foreach ($children as $child) {
 						$child_id = $child->xref();
 						if (!empty($child_id)) {
@@ -1524,7 +1542,7 @@ class Dot {
 			}
 
 			// Add spouses
-			if (($spou && !$desc) || ($spou && $desc && $level > -1*$desc_level) || ($spou && $this->settings["diagram_type"] == "combined")) {
+			if (($spou && !$desc) || ($spou && $desc && $level >= -1*$desc_level) || ($spou && $this->settings["diagram_type"] == "combined")) {
 				$fams = $i->spouseFamilies();
 
 				// --- DEBUG ---
