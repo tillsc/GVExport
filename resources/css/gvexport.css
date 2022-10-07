@@ -100,6 +100,9 @@
 #rendering {
     background-color: #eeeeee;
     min-height: 300px;
+    width: 100%;
+    height: 100%;
+    margin: 0;
 }
 
 .picker-label {
@@ -149,4 +152,14 @@
 #clear_list {
     text-align: right;
     margin-right: 20px;
+}
+
+#render-container {
+    position: absolute;
+}
+.fullscreen {
+    position: absolute;
+    top: 0px;
+    right: 10px;
+    font-size: 2em;
 }
