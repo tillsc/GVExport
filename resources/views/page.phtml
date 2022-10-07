@@ -554,8 +554,9 @@ use Fisharebest\Webtrees\Tree;
     <a href="#" class="btn btn-outline-secondary"><?= I18N::translate('Show Selection') ?></a>
 </div>
 
-<div class="h-100 w-100 border-1">
-    <div id="rendering" hidden class="my-3" style="height: 500px; border: 1px solid black; overflow: hidden"></div>
+<div id="render-container">
+    <div id="rendering" hidden style="border: 1px solid black; overflow: hidden"></div>
+    <a href="#" title="<?= I18N::translate('Fullscreen') ?>" onclick="toggleFullscreen()" class="fullscreen">⛶</a>
 </div>
 
 <script type="text/javascript">
@@ -647,8 +648,13 @@ use Fisharebest\Webtrees\Tree;
         rendering.innerHTML = '<div class="d-flex justify-content-center h-100"><div class="spinner-border align-self-center" role="status"><span class="sr-only">Loading...</span></div></div>';
         rendering.hidden = false;
 
+        const MARGIN = 50;
         const h = window.innerHeight - document.querySelector('.wt-header-wrapper').getBoundingClientRect().height - document.querySelector('.wt-footers').getBoundingClientRect().height;
-        rendering.style.height = h + "px";
+        const w = window.innerWidth - MARGIN*2;
+
+        document.getElementById('render-container').style.height = h + "px";
+        document.getElementById('render-container').style.width = w + "px";
+        document.getElementById('render-container').style.left = MARGIN + "px";
 
 
         window.fetch(form.getAttribute('action'), {
