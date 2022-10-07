@@ -102,7 +102,11 @@ $GVE_CONFIG["dot"]["colorf_nr"] = "#FDF2F2";	// Default color of not blood-relat
 $GVE_CONFIG["dot"]["colorx_nr"] = "#FCF7E3";	// Default color of not blood-related Other gender individuals
 $GVE_CONFIG["dot"]["coloru_nr"] = "#D6EED6";	// Default color of not blood-related unknown gender individuals
 $GVE_CONFIG["dot"]["colorfam"] = "#FFFFEE";	// Default color of families (different light yellow)
-$GVE_CONFIG["dot"]["colorch"] = "#FF0000"; // Default color of changed (waiting for validation) records
+$GVE_CONFIG["dot"]["colorbg"] = "#eeeeee"; // Background of diagram (light grey)
+$GVE_CONFIG["dot"]["colorindibg"] = "#fefefe"; // Background of individual tile (except simple mode)
+$GVE_CONFIG["dot"]["colorborder"] = "#606060"; // Outline colour
+
+
 $GVE_CONFIG["dot"]["fontsize"] = "10";	// Default font size
 $GVE_CONFIG["dot"]["fontcolor_name"] = "#333333";	// Default font colour for name
 $GVE_CONFIG["dot"]["fontcolor_details"] = "#555555";	// Default font colour for date/place of birth/death etc.

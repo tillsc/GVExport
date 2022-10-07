@@ -208,6 +208,18 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
             "arrow_related" => $GVE_CONFIG["dot"]["arrow_related"],
             "arrow_not_related" => $GVE_CONFIG["dot"]["arrow_not_related"],
             "color_arrow_related" => $GVE_CONFIG["settings"]["color_arrow_related"],
+            "colorm" => $GVE_CONFIG["dot"]["colorm"],
+            "colorf" => $GVE_CONFIG["dot"]["colorf"],
+            "colorx" => $GVE_CONFIG["dot"]["colorx"],
+            "coloru" => $GVE_CONFIG["dot"]["coloru"],
+            "colorm_nr" => $GVE_CONFIG["dot"]["colorm_nr"],
+            "colorf_nr" => $GVE_CONFIG["dot"]["colorf_nr"],
+            "colorx_nr" => $GVE_CONFIG["dot"]["colorx_nr"],
+            "coloru_nr" => $GVE_CONFIG["dot"]["coloru_nr"],
+            "colorfam" => $GVE_CONFIG["dot"]["colorfam"],
+            "colorbg" => $GVE_CONFIG["dot"]["colorbg"],
+            "colorindibg" => $GVE_CONFIG["dot"]["colorindibg"],
+            "colorborder" => $GVE_CONFIG["dot"]["colorborder"],
             "auto_update" => $GVE_CONFIG["settings"]["auto_update"]
         ];
         if (!isset($_REQUEST['reset']) and isset($_COOKIE["GVEUserDefaults"]) and $_COOKIE["GVEUserDefaults"] != "") {
@@ -298,7 +310,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
      * @param string $file_type
      */
 
-    function downloadFile($temp_dir, $file_type)
+    function downloadFile(string $temp_dir, string $file_type)
     {
         global $GVE_CONFIG;
 
@@ -338,7 +350,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
      *
      * @return	string	Directory where the file is saved
      */
-    function saveDOTFile($tree, $individual)
+    function saveDOTFile($tree, $individual): string
     {
         global $GVE_CONFIG;
 
@@ -359,19 +371,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
         return $temp_dir;
     }
 
-    function showDOTFile($tree, $individual)
-    {
-
-        // Create the dump
-        $temp_dir = sys_get_temp_dir_my() . "/" . md5(Auth::id());
-        header("Content-Type: text/html; charset=UTF-8");
-        $contents = $this->createGraphVizDump($tree, $individual, $temp_dir, true);
-        $contents = "<pre>" . htmlspecialchars($contents, ENT_QUOTES) . "</pre>";
-        print $contents;
-        //print nl2br( $contents);
-    }
-
-    function createGraphVizDump($tree, $individual, $temp_dir)
+    function createGraphVizDump($tree, $individual, $temp_dir): string
     {
         require(dirname(__FILE__) . "/functions_dot.php");
 
@@ -586,21 +586,42 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
             $dot->setSettings("debug", TRUE);
         }
 
-
-        if (false) {                                // ?
-            // Set custom colors
-            if ($_REQUEST["vars"]["colorm"] == "custom") {
-                $dot->setColor("colorm", $_REQUEST["colorm_custom_var"]);
-            }
-            if ($_REQUEST["vars"]["colorf"] == "custom") {
-                $dot->setColor("colorf", $_REQUEST["colorf_custom_var"]);
-            }
-            if ($_REQUEST["vars"]["coloru"] == "custom") {
-                $dot->setColor("coloru", $_REQUEST["coloru_custom_var"]);
-            }
-            if ($_REQUEST["vars"]["colorfam"] == "custom") {
-                $dot->setColor("colorfam", $_REQUEST["colorfam_custom_var"]);
-            }
+        // Set custom colors
+        if (isset($_REQUEST["vars"]["colorm"])) {
+            $dot->setColor("colorm", $_REQUEST["vars"]["colorm"]);
+        }
+        if (isset($_REQUEST["vars"]["colorf"])) {
+            $dot->setColor("colorf", $_REQUEST["vars"]["colorf"]);
+        }
+        if (isset($_REQUEST["vars"]["colorx"])) {
+            $dot->setColor("colorx", $_REQUEST["vars"]["colorx"]);
+        }
+        if (isset($_REQUEST["vars"]["coloru"])) {
+            $dot->setColor("coloru", $_REQUEST["vars"]["coloru"]);
+        }
+        if (isset($_REQUEST["vars"]["colorm_nr"])) {
+            $dot->setColor("colorm_nr", $_REQUEST["vars"]["colorm_nr"]);
+        }
+        if (isset($_REQUEST["vars"]["colorf_nr"])) {
+            $dot->setColor("colorf_nr", $_REQUEST["vars"]["colorf_nr"]);
+        }
+        if (isset($_REQUEST["vars"]["colorx_nr"])) {
+            $dot->setColor("colorx_nr", $_REQUEST["vars"]["colorx_nr"]);
+        }
+        if (isset($_REQUEST["vars"]["coloru_nr"])) {
+            $dot->setColor("coloru_nr", $_REQUEST["vars"]["coloru_nr"]);
+        }
+        if (isset($_REQUEST["vars"]["colorfam"])) {
+            $dot->setColor("colorfam", $_REQUEST["vars"]["colorfam"]);
+        }
+        if (isset($_REQUEST["vars"]["colorbg"])) {
+            $dot->setColor("colorbg", $_REQUEST["vars"]["colorbg"]);
+        }
+        if (isset($_REQUEST["vars"]["colorindibg"])) {
+            $dot->setColor("colorindibg", $_REQUEST["vars"]["colorindibg"]);
+        }
+        if (isset($_REQUEST["vars"]["colorborder"])) {
+            $dot->setColor("colorborder", $_REQUEST["vars"]["colorborder"]);
         }
 
         // Settings

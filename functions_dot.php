@@ -83,6 +83,9 @@ class Dot {
 		$this->colors["colorx_nr"] = $GVE_CONFIG["dot"]["colorx_nr"];
 		$this->colors["coloru_nr"] = $GVE_CONFIG["dot"]["coloru_nr"];
 		$this->colors["colorfam"] = $GVE_CONFIG["dot"]["colorfam"];
+		$this->colors["colorbg"] = $GVE_CONFIG["dot"]["colorbg"];
+		$this->colors["colorindibg"] = $GVE_CONFIG["dot"]["colorindibg"];
+		$this->colors["colorborder"] = $GVE_CONFIG["dot"]["colorborder"];
 		$this->colors["font_color"]["name"] = $GVE_CONFIG["dot"]["fontcolor_name"];
         $this->colors["font_color"]["details"] = $GVE_CONFIG["dot"]["fontcolor_details"];
         $this->colors["arrows"]["default"] = $GVE_CONFIG["dot"]["arrow_default"];
@@ -471,22 +474,6 @@ class Dot {
 		// -------------
 	}
 
-    /**
-     *  Check if XREF in list of starting individuals
-     * @param string $pid Xref to check
-     * @return bool
-     */
-    function isStartingIndividual(string $pid): bool
-    {
-        $indis = explode(",", $this->settings["indi"]);
-        for ($i=0;$i<count($indis);$i++) {
-            if (trim($indis[$i]) == $pid) {
-                return true;
-            }
-        }
-        return false;
-    }
-
 	/**
 	 * This function updates our family and individual arrays to remove records that mess up
 	 * the "combined" mode. This is particularly important when including a "stop" individual,
@@ -824,7 +811,7 @@ class Dot {
 		$out .= "mclimit=\"" . $this->settings["mclimit"] . "\"\n";
 		$out .= "rankdir=\"" . $this->settings["graph_dir"] . "\"\n";
 		$out .= "pagedir=\"LT\"\n";
-		$out .= "bgcolor=\"#eeeeee\"\n";
+		$out .= "bgcolor=\"" . $this->colors['colorbg'] . "\"\n";
 		$out .= "edge [ style=solid, arrowhead=normal arrowtail=none];\n";
 		if ($this->settings["diagram_type"] == "simple") {
 			$out .= "node [ shape=box, style=filled fontsize=\"" . $this->font_size ."\" fontname=\"" . $this->settings["typeface"] ."\"];\n";
@@ -889,7 +876,7 @@ class Dot {
 	function printPersonLabel(string $pid, $related = TRUE): string
     {
 		$out = "";
-		$bordercolor = "#606060";	// Border color of the INDI's box
+		$bordercolor = $this->colors["colorborder"];	// Border color of the INDI's box
         $deathplace = "";
 		// Get the personal data
 		if ($this->settings["diagram_type"] == "combined" && ( substr($pid, 0, 3) == "I_H" || substr($pid, 0, 3) == "I_W" )) {
@@ -978,9 +965,9 @@ class Dot {
             $href = $this->settings["show_url"] ? " HREF=\"" . $this->convertToHTMLSC($link) . "\"" : "";
 			// Draw table
 			if ($this->settings["diagram_type"] == "combined") {
-				$out .= "<TABLE BORDER=\"0\" CELLBORDER=\"0\" CELLPADDING=\"2\" CELLSPACING=\"0\" BGCOLOR=\"#ffffff\" $href>";
+				$out .= "<TABLE BORDER=\"0\" CELLBORDER=\"0\" CELLPADDING=\"2\" CELLSPACING=\"0\" BGCOLOR=\"" . $this->colors["colorindibg"] . "\" $href>";
 			} else {
-				$out .= "<TABLE COLOR=\"" . $bordercolor . "\" BORDER=\"1\" CELLBORDER=\"0\" CELLPADDING=\"2\" CELLSPACING=\"0\" BGCOLOR=\"#fefefe\" $href>";
+				$out .= "<TABLE COLOR=\"" . $bordercolor . "\" BORDER=\"1\" CELLBORDER=\"0\" CELLPADDING=\"2\" CELLSPACING=\"0\" BGCOLOR=\"" . $this->colors["colorindibg"] . "\" $href>";
 			}
             $birthData = " $birthdate " . (empty($birthplace) ? "" : "($birthplace)");
             $deathData = " $deathdate " . (empty($deathplace) ? "" : "($deathplace)");
@@ -1110,7 +1097,7 @@ class Dot {
 			$out .= "label=<";
 
 			// --- Print table ---
-			$out .= "<TABLE COLOR=\"#606060\" BORDER=\"0\" CELLBORDER=\"1\" CELLPADDING=\"2\" CELLSPACING=\"0\">";
+			$out .= "<TABLE COLOR=\"" . $this->colors["colorborder"] . "\" BORDER=\"0\" CELLBORDER=\"1\" CELLPADDING=\"2\" CELLSPACING=\"0\">";
 
 			// --- Print couple ---
 			$out .= "<TR>";
@@ -1157,10 +1144,10 @@ class Dot {
             }
             // If names, birth details, and death details are all disabled - show a smaller marriage circle to match the small tiles for individuals.
             if (!$this->settings["show_by"] && !$this->settings["show_bp"] && !$this->settings["show_dy"] && !$this->settings["show_dp"] && !$this->settings["show_my"] && !$this->settings["show_pid"] && !$this->settings["show_fid"] && $this->settings["use_abbr_names"][$this->settings["use_abbr_name"]] == "Don't show names") {
-                $out .= "color=\"#606060\",fillcolor=\"" . $fillcolor . "\", $href shape=point, height=0.2, style=filled";
+                $out .= "color=\"" . $this->colors["colorborder"] . "\",fillcolor=\"" . $fillcolor . "\", $href shape=point, height=0.2, style=filled";
                 $out .= ", label=" . "< >";
             } else {
-                $out .= "color=\"#606060\",fillcolor=\"" . $fillcolor . "\", $href shape=ellipse, style=filled";
+                $out .= "color=\"" . $this->colors["colorborder"] . "\",fillcolor=\"" . $fillcolor . "\", $href shape=ellipse, style=filled";
                 $out .= ", label=" . "<<TABLE border=\"0\" CELLPADDING=\"0\" CELLSPACING=\"0\"><TR><TD><FONT COLOR=\"". $this->colors["font_color"]["details"] ."\" POINT-SIZE=\"" . ($this->font_size) ."\">" . (empty($marriagedate)?"":$marriagedate) . "<BR />" . (empty($marriageplace)?"":"(".$marriageplace.")") . $family . "</FONT></TD></TR></TABLE>>";
             }
         }

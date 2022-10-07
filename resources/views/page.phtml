@@ -468,58 +468,52 @@ use Fisharebest\Webtrees\Tree;
                         </div>
                 </div>
             </div>
-            <!--
-                <input type=" checkbox" name="vars[no_fams]" id="no_fams_var" value="no_fams\"" . ((isset($userDefaultVars[" no_fams"]) and $userDefaultVars["no_fams"]=="no_fams" ) ? " checked=" checked\"" : "" ) . " />" . "No family containers, just individuals
-                $out .= '</td></tr>';
-
-                // Font name
-                <tr><td class=" descriptionbox wrap\">" . "Font Name" . "
-                                </td>
-                                <td class="optionbox" style="text-align: left;\">
-                                    <input type="text" name="vars[fontname]" id="fontname_var" value="" . $GVE_CONFIG["default_fontname"] . "" />
-                                </td>
-                            </tr>
-
-                            // Font size
-                            <tr>
-                                <td class="descriptionbox wrap\">" . "Font Size" . "</td>
-                                <td class="optionbox" style="text-align: left;\">
-                                    <input type="text" size="2" name="vars[fontsize]" id="fontsize_var" value="" . (isset($userDefaultVars["fontsize"]) ? $userDefaultVars["fontsize"] : $GVE_CONFIG["dot"]["fontsize"]) . "" />
-                                </td>
-                            </tr>
-
-                            // Custom colors
-                            $out .= '<tr>
-                                <td class="descriptionbox wrap">' . "Color code of male individuals" . '</td>';
-                                <td class="optionbox" style="text-align: left;\">
-                                    $out .= '<input type="radio" name="vars[colorm]" id="colorm_var" value="default" onclick="document.setup_gvexport_allinontree.colorm_custom_var.disabled=true;"' . ((isset($userDefaultVars[' colorm']) and $userDefaultVars['colorm']=="custom" ) ? '' : ' checked="checked"' ) . ' />' ; $out .='<input type="text" name="colorm_default_var" id="colorm_default_var" value="' . "Default" . '" readonly="readonly" style="background: ' . $GVE_CONFIG['dot']['colorm'] . ';"/>' ; $out .='<input type="radio" name="vars[colorm]" id="colorm_var" value="custom" onclick="gve_enablecustomcolor(\' colorm_custom_var\');"' . ((isset($userDefaultVars['colorm']) and $userDefaultVars['colorm']=="custom" ) ? ' checked="checked"' : '' ) . ' />' ; $defcustcol=isset($userDefaultVars['colorm_custom']) ? $userDefaultVars['colorm_custom'] : $GVE_CONFIG["dot"]["colorm"]; <input type="text" name="colorm_custom_var" id="colorm_custom_var" value="$defcustcol" style="background-color: $defcustcol\"" . ((isset($userDefaultVars['colorm']) and $userDefaultVars['colorm'] == " custom") ? '' : ' disabled="disabled"' ) . " onblur=" document.setup_gvexport_allinontree.colorm_custom_var.style.backgroundColor=document.setup_gvexport_allinontree.colorm_custom_var.value;" />
-                                    $out .= '</td>
-                            </tr>';
-                            $out .= '<tr>
-                                <td class="descriptionbox wrap">' . "Color code of female individuals" . '</td>';
-                                <td class="optionbox" style="text-align: left;\">
-                                    $out .= '<input type="radio" name="vars[colorf]" id="colorf_var" value="default" onclick="document.setup_gvexport_allinontree.colorf_custom_var.disabled=true;"' . ((isset($userDefaultVars[' colorf']) and $userDefaultVars['colorf']=="custom" ) ? '' : ' checked="checked"' ) . ' />' ; $out .='<input type="text" name="colorf_default_var" id="colorf_default_var" value="' . "Default" . '" readonly="readonly" style="background: ' . $GVE_CONFIG['dot']['colorf'] . ';"/>' ; $out .='<input type="radio" name="vars[colorf]" id="colorf_var" value="custom" onclick="gve_enablecustomcolor(\' colorf_custom_var\');"' . ((isset($userDefaultVars['colorf']) and $userDefaultVars['colorf']=="custom" ) ? ' checked="checked"' : '' ) . ' />' ; $defcustcol=isset($userDefaultVars['colorf_custom']) ? $userDefaultVars['colorf_custom'] : $GVE_CONFIG["dot"]["colorf"]; <input type="text" name="colorf_custom_var" id="colorf_custom_var" value="$defcustcol" style="background-color: $defcustcol\"" . ((isset($userDefaultVars['colorf']) and $userDefaultVars['colorf'] == " custom") ? '' : ' disabled="disabled"' ) . " onblur=" document.setup_gvexport_allinontree.colorf_custom_var.style.backgroundColor=document.setup_gvexport_allinontree.colorf_custom_var.value;" />
-                                    $out .= '</td>
-                            </tr>';
-                            $out .= '<tr>
-                                <td class="descriptionbox wrap">' . "Color code of unknown individuals" . '</td>';
-                                <td class="optionbox" style="text-align: left;\">
-                                    $out .= '<input type="radio" name="vars[coloru]" id="coloru_var" value="default" onclick="document.setup_gvexport_allinontree.coloru_custom_var.disabled=true;"' . ((isset($userDefaultVars[' coloru']) and $userDefaultVars['coloru']=="custom" ) ? '' : ' checked="checked"' ) . ' />' ; $out .='<input type="text" name="coloru_default_var" id="coloru_default_var" value="' . "Default" . '" readonly="readonly" style="background: ' . $GVE_CONFIG['dot']['coloru'] . ';"/>' ; $out .='<input type="radio" name="vars[coloru]" id="coloru_var" value="custom" onclick="gve_enablecustomcolor(\' coloru_custom_var\');"' . ((isset($userDefaultVars['coloru']) and $userDefaultVars['coloru']=="custom" ) ? ' checked="checked"' : '' ) . ' />' ; $defcustcol=isset($userDefaultVars['coloru_custom']) ? $userDefaultVars['coloru_custom'] : $GVE_CONFIG["dot"]["coloru"]; <input type="text" name="coloru_custom_var" id="coloru_custom_var" value="$defcustcol" style="background-color: $defcustcol\"" . ((isset($userDefaultVars['coloru']) and $userDefaultVars['coloru'] == " custom") ? '' : ' disabled="disabled"' ) . " onblur=" document.setup_gvexport_allinontree.coloru_custom_var.style.backgroundColor=document.setup_gvexport_allinontree.coloru_custom_var.value;" />
-                                    $out .= '</td>
-                            </tr>';
-                            $out .= '<tr>
-                                <td class="descriptionbox wrap">' . "Color code of families" . '</td>';
-                                <td class="optionbox" style="text-align: left;\">
-                                    $out .= '<input type="radio" name="vars[colorfam]" id="colorfam_var" value="default" onclick="document.setup_gvexport_allinontree.colorfam_custom_var.disabled=true;"' . ((isset($userDefaultVars[' colorfam']) and $userDefaultVars['colorfam']=="custom" ) ? '' : ' checked="checked"' ) . ' />' ; $out .='<input type="text" name="colorfam_default_var" id="colorfam_default_var" value="' . "Default" . '" readonly="readonly" style="background: ' . $GVE_CONFIG['dot']['colorfam'] . ';"/>' ; $out .='<input type="radio" name="vars[colorfam]" id="colorfam_var" value="custom" onclick="gve_enablecustomcolor(\' colorfam_custom_var\');"' . ((isset($userDefaultVars['colorfam']) and $userDefaultVars['colorfam']=="custom" ) ? ' checked="checked"' : '' ) . ' />' ; $defcustcol=isset($userDefaultVars['colorfam_custom']) ? $userDefaultVars['colorfam_custom'] : $GVE_CONFIG["dot"]["colorfam"]; <input type="text" name="colorfam_custom_var" id="colorfam_custom_var" value="$defcustcol" style="background-color: $defcustcol\"" . ((isset($userDefaultVars['colorfam']) and $userDefaultVars['colorfam'] == " custom") ? '' : ' disabled="disabled"' ) . " onblur=" document.setup_gvexport_allinontree.colorfam_custom_var.style.backgroundColor=document.setup_gvexport_allinontree.colorfam_custom_var.value;" />
-                                    $out .= '</td>
-                            </tr>';
-
-                        </table>
+            <div class="row form-group">
+                <label class=" col-sm-4 col-form-label wt-page-options-label"><?= I18N::translate('Tile colors') ?></label>
+                <div class="col-sm-8 wt-page-options-value">
+                    <div class="col-auto">
+                        <input type="color" class="picker" name="vars[colorm]" id="vars[colorm]" value="<?= $vars["colorm"] ?>" /><label for="vars[colorm]" class="picker-label"><?= I18N::translate('Male individuals') ?></label>
                     </div>
-                </td>
-            </tr>
-
-            -->
+                    <div class="col-auto">
+                        <input type="color" class="picker" name="vars[colorf]" id="vars[colorf]" value="<?= $vars["colorf"] ?>" /><label for="vars[colorf]" class="picker-label"><?= I18N::translate('Female individuals') ?></label>
+                    </div>
+                    <div class="col-auto">
+                        <input type="color" class="picker" name="vars[colorx]" id="vars[colorx]" value="<?= $vars["colorx"] ?>" /><label for="vars[colorx]" class="picker-label"><?= I18N::translate('Other gender individuals') ?></label>
+                    </div>
+                    <div class="col-auto">
+                        <input type="color" class="picker" name="vars[coloru]" id="vars[coloru]" value="<?= $vars["coloru"] ?>" /><label for="vars[coloru]" class="picker-label"><?= I18N::translate('Unknown gender individuals') ?></label>
+                    </div>
+                    <div class="col-auto">
+                        <input type="color" class="picker" name="vars[colorm_nr]" id="vars[colorm_nr]" value="<?= $vars["colorm_nr"] ?>" /><label for="vars[colorm_nr]" class="picker-label"><?= I18N::translate('Not blood-related male individuals') ?></label>
+                    </div>
+                    <div class="col-auto">
+                        <input type="color" class="picker" name="vars[colorf_nr]" id="vars[colorf_nr]" value="<?= $vars["colorf_nr"] ?>" /><label for="vars[colorf_nr]" class="picker-label"><?= I18N::translate('Not blood-related female individuals') ?></label>
+                    </div>
+                    <div class="col-auto">
+                        <input type="color" class="picker" name="vars[colorx_nr]" id="vars[colorx_nr]" value="<?= $vars["colorx_nr"] ?>" /><label for="vars[colorx_nr]" class="picker-label"><?= I18N::translate('Not blood-related other gender individuals') ?></label>
+                    </div>
+                    <div class="col-auto">
+                        <input type="color" class="picker" name="vars[coloru_nr]" id="vars[coloru_nr]" value="<?= $vars["coloru_nr"] ?>" /><label for="vars[coloru_nr]" class="picker-label"><?= I18N::translate('Not blood-related unknown gender individuals') ?></label>
+                    </div>
+                    <div class="col-auto">
+                        <input type="color" class="picker" name="vars[colorindibg]" id="vars[colorindibg]" value="<?= $vars["colorindibg"] ?>" /><label for="vars[colorindibg]" class="picker-label"><?= I18N::translate('Individual background color') ?></label>
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <label class=" col-sm-4 col-form-label wt-page-options-label"><?= I18N::translate('Other colours') ?></label>
+                <div class="col-sm-8 wt-page-options-value">
+                    <div class="col-auto">
+                        <input type="color" class="picker" name="vars[colorfam]" id="vars[colorfam]" value="<?= $vars["colorfam"] ?>" /><label for="vars[colorfam]" class="picker-label"><?= I18N::translate('Family background') ?></label>
+                    </div>
+                    <div class="col-auto">
+                        <input type="color" class="picker" name="vars[colorborder]" id="vars[colorborder]" value="<?= $vars["colorborder"] ?>" /><label for="vars[colorborder]" class="picker-label"><?= I18N::translate('Outline colour') ?></label>
+                    </div>
+                    <div class="col-auto">
+                        <input type="color" class="picker" name="vars[colorbg]" id="vars[colorbg]" value="<?= $vars["colorbg"] ?>" /><label for="vars[colorbg]" class="picker-label"><?= I18N::translate('Diagram background color') ?></label>
+                    </div>
+                </div>
+            </div>
         </div>
         <a href="#" onclick="toggleAdvanced(this, 'appearance-advanced')"><div class="wt-page-options-label advanced-settings-btn"><?= ($vars["adv_appear"] == "show" ? '↑ ' : '↓ ') . I18N::translate('Toggle advanced settings') . ($vars["adv_appear"] == "show" ? ' ↑' : ' ↓'); ?></div></a>
         <h3><?= /* I18N: Appearance heading */ I18N::translate('Output Settings') ?></h3>
@@ -555,7 +549,7 @@ use Fisharebest\Webtrees\Tree;
 </div>
 
 <div id="render-container">
-    <div id="rendering" hidden style="border: 1px solid black; overflow: hidden"></div>
+    <div id="rendering" hidden style="border: 1px solid black; overflow: hidden; background-color: <?= $vars["colorbg"] ?>;"></div>
     <a href="#" title="<?= I18N::translate('Fullscreen') ?>" onclick="toggleFullscreen()" class="fullscreen">⛶</a>
 </div>
 
@@ -630,6 +624,10 @@ use Fisharebest\Webtrees\Tree;
         // Set browser value to true so we can return other info with DOT file
         // that can't be included with downloaded file
         document.getElementById("browser").value = "true";
+
+        // Update render element background to match diagram background
+        document.getElementById("rendering").style.background = document.getElementById("vars[colorbg]").value;
+
         // Enable disabled fields so they are included in serialised data - this means the values are remembered
         const el = document.getElementsByClassName("cart_toggle");
         for (let i = 0; i < el.length; i++) {
