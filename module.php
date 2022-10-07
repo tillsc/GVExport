@@ -38,7 +38,7 @@ require_once(dirname(__FILE__) . "/functionsClippingsCart.php");
 //use Fig\Http\Message\RequestMethodInterface;
 use Fisharebest\Webtrees\Auth;
 use Fisharebest\Webtrees\Registry;
-//use Fisharebest\Webtrees\I18N;
+use Fisharebest\Webtrees\I18N;
 use Fisharebest\Localization\Translation;
 use Fisharebest\Webtrees\Individual;
 use Fisharebest\Webtrees\Module\AbstractModule;
@@ -46,6 +46,9 @@ use Fisharebest\Webtrees\Module\ModuleCustomInterface;
 use Fisharebest\Webtrees\Module\ModuleChartInterface;
 use Fisharebest\Webtrees\Module\ModuleCustomTrait;
 use Fisharebest\Webtrees\Module\ModuleChartTrait;
+use Fisharebest\Webtrees\Module\ModuleConfigInterface;
+use Fisharebest\Webtrees\Module\ModuleConfigTrait;
+use Fisharebest\Webtrees\FlashMessages;
 use Fisharebest\Webtrees\Menu;
 use Fisharebest\Webtrees\View;
 use Fisharebest\Webtrees\Tree;
@@ -59,11 +62,12 @@ use Psr\Http\Message\StreamFactoryInterface;
 /**
  * Main class for GVExport module
  */
-class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleChartInterface
+class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleChartInterface, ModuleConfigInterface
 {
 
     use ModuleCustomTrait;
     use ModuleChartTrait;
+    use ModuleConfigTrait;
     public const CUSTOM_VERSION     = '2.1.13.1';
     public const CUSTOM_MODULE      = "GVExport";
     public const CUSTOM_LATEST      = 'https://raw.githubusercontent.com/Neriderc/' . self::CUSTOM_MODULE. '/main/latest-version.txt';
@@ -301,6 +305,51 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
             $browser = false;
         }
         return $this->downloadFile($temp_dir, $browser ? "dot" : $_REQUEST["vars"]["otype"]);
+    }
+
+    private function getAdminSettingsList(): array
+    {
+        return [];
+    }
+
+    /**
+     * @param ServerRequestInterface $request
+     * @return ResponseInterface
+     */
+    public function getAdminAction(ServerRequestInterface $request): ResponseInterface
+    {
+        $this->layout = 'layouts/administration';
+        $response = [];
+
+        $preferences = $this->getAdminSettingsList();
+        foreach ($preferences as $preference) {
+            $response[$preference] = $this->getAdminSettingValue($preference);
+        }
+
+        $response['title'] = $this->title();
+        $response['description'] = $this->description();
+        $response['uses_sorting'] = true;
+
+        return $this->viewResponse($this->name() . '::' . 'settings', $response);
+    }
+    private function saveAdminPreferences($params) {
+        
+    }
+    /**
+     * save the user preferences in the database
+     *
+     * @param ServerRequestInterface $request
+     * @return ResponseInterface
+     */
+    public function postAdminAction(ServerRequestInterface $request): ResponseInterface
+    {
+        $params = (array) $request->getParsedBody();
+        if ($params['save'] === '1') {
+            $this->saveAdminPreferences($params);
+            FlashMessages::addMessage(I18N::translate('The preferences for the module “%s” have been updated.',
+                $this->title()), 'success');
+        }
+        return redirect($this->getConfigLink());
     }
 
     /**

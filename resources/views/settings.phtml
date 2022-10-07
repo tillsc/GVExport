@@ -1,0 +1,53 @@
+<?php
+
+namespace vendor\WebtreesModules\gvexport;
+
+use Fisharebest\Webtrees\I18N;
+use Fisharebest\Webtrees\View;
+use Fisharebest\Webtrees\Http\RequestHandlers\ControlPanel;
+
+?>
+
+<?= view('components/breadcrumbs', ['links' => [route(ControlPanel::class) => I18N::translate('Control panel'), $title]]) ?>
+
+<h1><?= $title ?></h1>
+<p><?= $description ?></p>
+
+    <div class="hh-extended-family mb-5">
+        <form method="post">
+            <?= csrf_field() ?>
+            <input type="hidden" name="save" id="save" value="1">
+
+            <button type="submit" class="btn btn-primary">
+                <?= view('icons/save') ?>
+                <?= I18N::translate('save') ?>
+            </button>
+        </form>
+    </div>
+
+    <?php View::push('javascript') ?>
+    <script>
+        $('.wt-table-menu td.move').click(function () {
+            var row = $(this).closest('tr');
+
+            if ($(this).hasClass('up')) {
+                row.prev().before(row);
+            } else {
+                row.next().after(row);
+            }
+
+            return false;
+        });
+    </script>
+    <?php View::endpush() ?>
+
+    <?php View::push('styles') ?>
+    <style>
+        .wt-table-menu tr:first-child .wt-icon-arrow-up {
+            display:none;
+        }
+        .wt-table-menu tr:last-child .wt-icon-arrow-down {
+            display:none;
+        }
+    </style>
+    <?php View::endpush() ?>
