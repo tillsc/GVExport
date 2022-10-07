@@ -550,7 +550,8 @@ use Fisharebest\Webtrees\Tree;
 
 <div id="render-container">
     <div id="rendering" hidden style="border: 1px solid black; overflow: hidden; background-color: <?= $vars["colorbg"] ?>;"></div>
-    <a href="#" title="<?= I18N::translate('Fullscreen') ?>" onclick="toggleFullscreen()" class="fullscreen">⛶</a>
+    <a href="#" title="<?= I18N::translate('Fullscreen') ?>" onclick="toggleFullscreen()" class="fullscreen" id="fullscreenButton">⛶</a>
+    <a href="#" title="<?= I18N::translate('Fullscreen') ?>" onclick="toggleFullscreen()" class="fullscreen" id="fullscreenClose" style="display: none;">✖</a>
 </div>
 
 <script type="text/javascript">
@@ -573,6 +574,8 @@ use Fisharebest\Webtrees\Tree;
         removeURLParameter("reset");
         // Remove options from selection list if already selected
         setInterval(function () {removeSelectedOptions()}, 100);
+        // Listen for fullscreen change
+        handleFullscreen();
         // Load browser render when page has loaded
         updateRender();
     }
@@ -649,11 +652,15 @@ use Fisharebest\Webtrees\Tree;
         const MARGIN = 50;
         const h = window.innerHeight - document.querySelector('.wt-header-wrapper').getBoundingClientRect().height - document.querySelector('.wt-footers').getBoundingClientRect().height;
         const w = window.innerWidth - MARGIN*2;
-
+        const wtMainContainer = document.getElementsByClassName('wt-main-container').item(0);
+        const wtTitle = document.getElementsByClassName("wt-page-title").item(0);
+        // Set size of render element to fit browser
         document.getElementById('render-container').style.height = h + "px";
         document.getElementById('render-container').style.width = w + "px";
         document.getElementById('render-container').style.left = MARGIN + "px";
-
+        // Set size of container element so webtrees footer is in the right place
+        const totalHeight = MARGIN + wtTitle.getBoundingClientRect().height + getComputedProperty(wtTitle, 'margin-bottom') + h + getComputedProperty(wtMainContainer, 'padding-top');
+        wtMainContainer.style.height = totalHeight + "px";
 
         window.fetch(form.getAttribute('action'), {
             method: form.getAttribute('method'),
