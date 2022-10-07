@@ -962,7 +962,7 @@ class Dot {
 			if ($isdead) {
 				$deathplace = $this->convertToHTMLSC($deathplace);
 			}
-            $href = $this->settings["show_url"] ? " HREF=\"" . $this->convertToHTMLSC($link) . "\"" : "";
+            $href = $this->settings["show_url"] ? "TARGET=\"_blank\" HREF=\"" . $this->convertToHTMLSC($link) . "\"" : "";
 			// Draw table
 			if ($this->settings["diagram_type"] == "combined") {
 				$out .= "<TABLE BORDER=\"0\" CELLBORDER=\"0\" CELLPADDING=\"2\" CELLSPACING=\"0\" BGCOLOR=\"" . $this->colors["colorindibg"] . "\" $href>";
@@ -1138,7 +1138,7 @@ class Dot {
 		} else {
 		// Non-combined type
 			if ($this->settings["show_url"]) {
-                $href = "href=\"" . $this->convertToHTMLSC($link) . "\", target=\"_blank\", ";
+                $href = "target=\"_blank\" href=\"" . $this->convertToHTMLSC($link) . "\", target=\"_blank\", ";
             } else {
                 $href = "";
             }
