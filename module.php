@@ -32,13 +32,14 @@ namespace vendor\WebtreesModules\gvexport;
 require_once(dirname(__FILE__) . "/config.php");
 require(dirname(__FILE__) . "/utils.php");
 require_once(dirname(__FILE__) . "/functionsClippingsCart.php");
+require_once(dirname(__FILE__) . "/functionsAdmin.php");
 
 //use Aura\Router\RouterContainer;
 //use Exception;
 //use Fig\Http\Message\RequestMethodInterface;
 use Fisharebest\Webtrees\Auth;
 use Fisharebest\Webtrees\Registry;
-//use Fisharebest\Webtrees\I18N;
+use Fisharebest\Webtrees\I18N;
 use Fisharebest\Localization\Translation;
 use Fisharebest\Webtrees\Individual;
 use Fisharebest\Webtrees\Module\AbstractModule;
@@ -46,6 +47,9 @@ use Fisharebest\Webtrees\Module\ModuleCustomInterface;
 use Fisharebest\Webtrees\Module\ModuleChartInterface;
 use Fisharebest\Webtrees\Module\ModuleCustomTrait;
 use Fisharebest\Webtrees\Module\ModuleChartTrait;
+use Fisharebest\Webtrees\Module\ModuleConfigInterface;
+use Fisharebest\Webtrees\Module\ModuleConfigTrait;
+use Fisharebest\Webtrees\FlashMessages;
 use Fisharebest\Webtrees\Menu;
 use Fisharebest\Webtrees\View;
 use Fisharebest\Webtrees\Tree;
@@ -59,11 +63,12 @@ use Psr\Http\Message\StreamFactoryInterface;
 /**
  * Main class for GVExport module
  */
-class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleChartInterface
+class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleChartInterface, ModuleConfigInterface
 {
 
     use ModuleCustomTrait;
     use ModuleChartTrait;
+    use ModuleConfigTrait;
     public const CUSTOM_VERSION     = '2.1.13.1';
     public const CUSTOM_MODULE      = "GVExport";
     public const CUSTOM_LATEST      = 'https://raw.githubusercontent.com/Neriderc/' . self::CUSTOM_MODULE. '/main/latest-version.txt';
@@ -157,71 +162,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
 
         $individual = $this->getIndividual($tree, $request->getQueryParams()['xref']);
 
-		$userDefaultVars = [ //Defaults (this could be defined in the config?)
-            "otype" => "svg",
-            "grdir" => $GVE_CONFIG["default_direction"],
-            "mclimit" => $GVE_CONFIG["default_mclimit"],
-            "psize" => $GVE_CONFIG["default_pagesize"],
-            "indiinc" => "indi",
-            "diagtype" => "decorated",
-            "with_photos" => "",
-            "show_by" => "show_by",
-            "bd_type" => "gedcom",
-            "show_bp" => "show_bp",
-            "show_dy" => "show_dy",
-            "dd_type" => "gedcom",
-            "show_dp" => "show_dp",
-            "show_my" => "show_my",
-            "md_type" => "gedcom",
-            "show_mp" => "show_mp",
-            "indiance" => "ance",
-            "ance_level" => $GVE_CONFIG["settings"]["ance_level"],
-            "indisibl" => "sibl",
-            "indicous" => "cous",
-            "tree_type" => "tree_type",
-            "indidesc" => "desc",
-            "desc_level" => $GVE_CONFIG["settings"]["desc_level"],
-            "indispou" => "spou",
-            "indiany" => "",
-            "marknr" => "",
-            "fastnr" => "",
-            "show_url" => "show_url",
-            "show_pid" => "DEFAULT", // This is set to DEFAULT so we can tell if it was loaded from cookie or not
-            "show_fid" => "",
-            "use_abbr_place" => $GVE_CONFIG["settings"]["use_abbr_place"],
-            "use_abbr_name" => $GVE_CONFIG["settings"]["use_abbr_name"],
-            "debug" => ($GVE_CONFIG['debug'] ? "debug" : ""),
-            "dpi" => $GVE_CONFIG["settings"]["dpi"],
-            "ranksep" => $GVE_CONFIG["settings"]["ranksep"],
-            "nodesep" => $GVE_CONFIG["settings"]["nodesep"],
-            "other_pids" => "",
-            "stop_pid" => "",
-            "other_stop_pids" => "",
-            "download" => TRUE,
-            "usecart" => $GVE_CONFIG["settings"]["usecart"],
-            "adv_people" => $GVE_CONFIG["settings"]["adv_people"],
-            "adv_appear" => $GVE_CONFIG["settings"]["adv_appear"],
-            "typeface" => $GVE_CONFIG["default_typeface"],
-            "fontcolor_name" => $GVE_CONFIG["dot"]["fontcolor_name"],
-            "fontcolor_details" => $GVE_CONFIG["dot"]["fontcolor_details"],
-            "arrow_default" => $GVE_CONFIG["dot"]["arrow_default"],
-            "arrow_related" => $GVE_CONFIG["dot"]["arrow_related"],
-            "arrow_not_related" => $GVE_CONFIG["dot"]["arrow_not_related"],
-            "color_arrow_related" => $GVE_CONFIG["settings"]["color_arrow_related"],
-            "colorm" => $GVE_CONFIG["dot"]["colorm"],
-            "colorf" => $GVE_CONFIG["dot"]["colorf"],
-            "colorx" => $GVE_CONFIG["dot"]["colorx"],
-            "coloru" => $GVE_CONFIG["dot"]["coloru"],
-            "colorm_nr" => $GVE_CONFIG["dot"]["colorm_nr"],
-            "colorf_nr" => $GVE_CONFIG["dot"]["colorf_nr"],
-            "colorx_nr" => $GVE_CONFIG["dot"]["colorx_nr"],
-            "coloru_nr" => $GVE_CONFIG["dot"]["coloru_nr"],
-            "colorfam" => $GVE_CONFIG["dot"]["colorfam"],
-            "colorbg" => $GVE_CONFIG["dot"]["colorbg"],
-            "colorindibg" => $GVE_CONFIG["dot"]["colorindibg"],
-            "colorborder" => $GVE_CONFIG["dot"]["colorborder"],
-            "auto_update" => $GVE_CONFIG["settings"]["auto_update"]
-        ];
+		$userDefaultVars = getAdminSettings($this);
         if (!isset($_REQUEST['reset']) and isset($_COOKIE["GVEUserDefaults"]) and $_COOKIE["GVEUserDefaults"] != "") {
             foreach (explode("|", $_COOKIE["GVEUserDefaults"]) as $s) {
                 $arr = explode("=", $s);
@@ -301,6 +242,54 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
             $browser = false;
         }
         return $this->downloadFile($temp_dir, $browser ? "dot" : $_REQUEST["vars"]["otype"]);
+    }
+
+    /**
+     * @param ServerRequestInterface $request
+     * @return ResponseInterface
+     */
+    public function getAdminAction(ServerRequestInterface $request): ResponseInterface
+    {
+        global $GVE_CONFIG;
+
+        $this->layout = 'layouts/administration';
+
+        $otypes = array();
+        foreach ($GVE_CONFIG["output"] as $fmt => $val) {
+            if (isset($GVE_CONFIG["output"][$fmt]["label"]) and isset($GVE_CONFIG["output"][$fmt]["extension"])) {
+                $lbl = $GVE_CONFIG["output"][$fmt]["label"];
+                $ext = $GVE_CONFIG["output"][$fmt]["extension"];
+                $otypes[$ext] = $lbl;
+            }
+        }
+        $response['module'] = $this;
+        $response['otypes'] = $otypes;
+        $response['vars'] = getAdminSettings($this);
+        $response['gve_config'] = $GVE_CONFIG;
+        $response['title'] = $this->title();
+        $response['description'] = $this->description();
+        $response['uses_sorting'] = true;
+        $response['gvexport_css']  = route('module', ['module' => $this->name(), 'action' => 'Css']);
+        $response['gvexport_js']  = route('module', ['module' => $this->name(), 'action' => 'JS']);
+
+        return $this->viewResponse($this->name() . '::' . 'settings', $response);
+    }
+
+    /**
+     * save the user preferences in the database
+     *
+     * @param ServerRequestInterface $request
+     * @return ResponseInterface
+     */
+    public function postAdminAction(ServerRequestInterface $request): ResponseInterface
+    {
+        $params = (array) $request->getParsedBody();
+        if ($params['save'] === '1') {
+            saveAdminPreferences($params, $this);
+            FlashMessages::addMessage(I18N::translate('The preferences for the module “%s” have been updated.',
+                $this->title()), 'success');
+        }
+        return redirect($this->getConfigLink());
     }
 
     /**
