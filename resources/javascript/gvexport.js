@@ -27,17 +27,6 @@ function showSidebar(e) {
     e.preventDefault();
 }
 
-document.querySelector(".hide-form").addEventListener("click", hideSidebar);
-
-
-document.querySelector(".sidebar__toggler a").addEventListener("click", showSidebar);
-
-document.addEventListener("keydown", function(e) {
-    if (e.key === "Esc" || e.key === "Escape") {
-        document.querySelector(".sidebar").hidden ? showSidebar(e) : hideSidebar(e);
-    }
-});
-
 // Enable or disable the option to add photos.
 // This is used when selecting diagram type, as only
 // some types support photos.

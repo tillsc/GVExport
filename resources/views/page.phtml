@@ -551,7 +551,7 @@ use Fisharebest\Webtrees\Tree;
 <div id="render-container">
     <div id="rendering" hidden style="border: 1px solid black; overflow: hidden; background-color: <?= $vars["colorbg"] ?>;"></div>
     <a href="#" title="<?= I18N::translate('Fullscreen') ?>" onclick="toggleFullscreen()" class="fullscreen" id="fullscreenButton">⛶</a>
-    <a href="#" title="<?= I18N::translate('Fullscreen') ?>" onclick="toggleFullscreen()" class="fullscreen" id="fullscreenClose" style="display: none;">✖</a>
+    <a href="#" title="<?= I18N::translate('Exit fullscreen') ?>" onclick="toggleFullscreen()" class="fullscreen" id="fullscreenClose" style="display: none;">✖</a>
 </div>
 
 <script type="text/javascript">
@@ -578,6 +578,17 @@ use Fisharebest\Webtrees\Tree;
         handleFullscreen();
         // Load browser render when page has loaded
         updateRender();
+
+        document.querySelector(".hide-form").addEventListener("click", hideSidebar);
+
+
+        document.querySelector(".sidebar__toggler a").addEventListener("click", showSidebar);
+
+        document.addEventListener("keydown", function(e) {
+            if (e.key === "Esc" || e.key === "Escape") {
+                document.querySelector(".sidebar").hidden ? showSidebar(e) : hideSidebar(e);
+            }
+        });
     }
 
     // Trigger action when "Update" button clicked
@@ -772,6 +783,7 @@ use Fisharebest\Webtrees\Tree;
         let er = document.getElementById(id);
         er.innerText="";
     }
+
 </script>
 
 <div id="toast-container"></div>
