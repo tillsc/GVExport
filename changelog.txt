@@ -3,6 +3,13 @@
 	GVExport module for Webtrees
 =====================================================================
 
+Version 2.1.14 (2022-10-10)
+  - New         : GVExport now supports mobile browsers
+  - New         : You can now export PDF without GraphViz on the server
+  - New         : Added option to show starting persons in a different colour to find them easily
+  - New         : You can now set default values for users in the module settings in the webtrees control panel
+  - New         : Added more options to customise colours used. All colours should now be user customisable.
+
 Version 2.1.13 (2022-10-06)
   - New         : Redesigned selection process for starting individuals
   - New         : Some date qualifiers are now shown as symbols, translated words otherwise. E.g. "ABT" now shows as "~".
