@@ -171,12 +171,12 @@ function showHide(element, show) {
     }
 }
 
-function toggleArrowColor(css_id) {
+// Hide a displayed element or show a hidden one
+function toggleShowID(css_id) {
     const element = document.getElementById(css_id);
     const visible = element.style.display !== "none";
     showHide(element, !visible);
 }
-
 
 // Show a toast message
 // message - the message to show
@@ -548,6 +548,7 @@ function toggleFullscreen() {
     }
 }
 
+// Add a listener to trigger when the user goes fullscreen or exits fullscreen
 function handleFullscreen() {
     if (document.addEventListener)
     {
@@ -558,6 +559,7 @@ function handleFullscreen() {
     }
 }
 
+// This function is run when the fullscreen state is changed
 function handleFullscreenExit()
 {
     if (!document.webkitIsFullScreen && !document.mozFullScreen && !document.msFullscreenElement)
@@ -570,6 +572,7 @@ function handleFullscreenExit()
     }
 }
 
+// Get the computed property of an element
 function getComputedProperty(element, property) {
     const style = getComputedStyle(element);
     return (parseFloat(style.getPropertyValue(property)));

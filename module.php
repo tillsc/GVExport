@@ -232,7 +232,6 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
     {
         $tree = $request->getAttribute('tree');
         assert($tree instanceof Tree);
-
         $individual = $this->getIndividual($tree, $_GET['xref']);
         $temp_dir = $this->saveDOTFile($individual->tree(), $individual);
         // If browser mode, output dot instead of selected file
@@ -264,11 +263,9 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
         }
         $response['module'] = $this;
         $response['otypes'] = $otypes;
-        $response['vars'] = getAdminSettings($this, isset($_REQUEST['reset']) && $_REQUEST['reset'] != "1");
+        $response['vars'] = getAdminSettings($this, isset($_REQUEST['reset']) && $_REQUEST['reset'] === "1");
         $response['gve_config'] = $GVE_CONFIG;
         $response['title'] = $this->title();
-        $response['description'] = $this->description();
-        $response['uses_sorting'] = true;
         $response['gvexport_css']  = route('module', ['module' => $this->name(), 'action' => 'Css']);
         $response['gvexport_js']  = route('module', ['module' => $this->name(), 'action' => 'JS']);
 
@@ -608,6 +605,12 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
         }
         if (isset($_REQUEST["vars"]["colorindibg"])) {
             $dot->setColor("colorindibg", $_REQUEST["vars"]["colorindibg"]);
+        }
+        if (isset($_REQUEST["vars"]["startcol"])) {
+            $dot->setSettings("startcol", $_REQUEST["vars"]["startcol"]);
+        }
+        if (isset($_REQUEST["vars"]["colorstartbg"])) {
+            $dot->setColor("colorstartbg", $_REQUEST["vars"]["colorstartbg"]);
         }
         if (isset($_REQUEST["vars"]["colorborder"])) {
             $dot->setColor("colorborder", $_REQUEST["vars"]["colorborder"]);

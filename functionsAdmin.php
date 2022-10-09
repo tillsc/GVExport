@@ -1,7 +1,6 @@
 <?php
 /* Functions for Control Panel settings page */
 
-
 /** Retrieve default settings for GVExport
  *  (from Control Panel settings or defaults)
  * @param $module
@@ -40,7 +39,7 @@ function getAdminSettings($module, bool $reset): array
         "marknr" => "",
         "fastnr" => "",
         "show_url" => "show_url",
-        "show_pid" => "DEFAULT", // This is set to DEFAULT so we can tell if it was loaded from cookie or not
+        "show_pid" => "DEFAULT", // This is set to DEFAULT, so we can tell if it was loaded from cookie or not
         "show_fid" => "",
         "use_abbr_place" => $GVE_CONFIG["settings"]["use_abbr_place"],
         "use_abbr_name" => $GVE_CONFIG["settings"]["use_abbr_name"],
@@ -73,6 +72,8 @@ function getAdminSettings($module, bool $reset): array
         "colorfam" => $GVE_CONFIG["dot"]["colorfam"],
         "colorbg" => $GVE_CONFIG["dot"]["colorbg"],
         "colorindibg" => $GVE_CONFIG["dot"]["colorindibg"],
+        "startcol" => $GVE_CONFIG["settings"]["startcol"],
+        "colorstartbg" => $GVE_CONFIG["dot"]["colorstartbg"],
         "colorborder" => $GVE_CONFIG["dot"]["colorborder"],
         "auto_update" => $GVE_CONFIG["settings"]["auto_update"]
     ];

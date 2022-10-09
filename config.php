@@ -104,6 +104,8 @@ $GVE_CONFIG["dot"]["coloru_nr"] = "#D6EED6";	// Default color of not blood-relat
 $GVE_CONFIG["dot"]["colorfam"] = "#FFFFEE";	// Default color of families (different light yellow)
 $GVE_CONFIG["dot"]["colorbg"] = "#eeeeee"; // Background of diagram (light grey)
 $GVE_CONFIG["dot"]["colorindibg"] = "#fefefe"; // Background of individual tile (except simple mode)
+$GVE_CONFIG["settings"]["startcol"] = "false"; // Whether to use a different colour for starting individuals
+$GVE_CONFIG["dot"]["colorstartbg"] = "#FFFDC3"; // Background of starting individuals
 $GVE_CONFIG["dot"]["colorborder"] = "#606060"; // Outline colour
 
 

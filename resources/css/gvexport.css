@@ -119,11 +119,11 @@
     margin-right: 10px !important;
 }
 
-.color_arrow_related .picker {
+.color_subgroup .picker {
     margin-right: 2px !important;
 }
 
-.color_arrow_related {
+.color_subgroup {
     margin-left: 20px;
     margin-right: 3px;
     padding: 2px !important;
