@@ -73,6 +73,10 @@ $GVE_CONFIG["output"]["jpg"]["extension"] = "jpg";
 $GVE_CONFIG["output"]["jpg"]["exec"] = $GVE_CONFIG["graphviz_bin"] . " -Tjpg -o" . $GVE_CONFIG["filename"] . ".jpg " . $GVE_CONFIG["filename"] . ".dot";
 $GVE_CONFIG["output"]["jpg"]["cont_type"] = "image/jpeg";
 
+$GVE_CONFIG["output"]["pdf"]["label"] = "PDF"; #ESL!!! 20090213
+$GVE_CONFIG["output"]["pdf"]["extension"] = "pdf";
+$GVE_CONFIG["output"]["pdf"]["exec"] = $GVE_CONFIG["graphviz_bin"] . " -Tpdf -o" . $GVE_CONFIG["filename"] . ".pdf " . $GVE_CONFIG["filename"] . ".dot";
+$GVE_CONFIG["output"]["pdf"]["cont_type"] = "application/pdf";
 
 if ( !empty( $GVE_CONFIG["graphviz_bin"]) && $GVE_CONFIG["graphviz_bin"] != "") {
 
@@ -80,11 +84,6 @@ if ( !empty( $GVE_CONFIG["graphviz_bin"]) && $GVE_CONFIG["graphviz_bin"] != "") 
 	$GVE_CONFIG["output"]["gif"]["extension"] = "gif";
 	$GVE_CONFIG["output"]["gif"]["exec"] = $GVE_CONFIG["graphviz_bin"] . " -Tgif -o" . $GVE_CONFIG["filename"] . ".gif " . $GVE_CONFIG["filename"] . ".dot";
 	$GVE_CONFIG["output"]["gif"]["cont_type"] = "image/gif";
-
-	$GVE_CONFIG["output"]["pdf"]["label"] = "PDF"; #ESL!!! 20090213
-	$GVE_CONFIG["output"]["pdf"]["extension"] = "pdf";
-	$GVE_CONFIG["output"]["pdf"]["exec"] = $GVE_CONFIG["graphviz_bin"] . " -Tpdf -o" . $GVE_CONFIG["filename"] . ".pdf " . $GVE_CONFIG["filename"] . ".dot";
-	$GVE_CONFIG["output"]["pdf"]["cont_type"] = "application/pdf";
 
 	$GVE_CONFIG["output"]["ps"]["label"] = "PS"; #ESL!!! 20090213
 	$GVE_CONFIG["output"]["ps"]["extension"] = "ps";
