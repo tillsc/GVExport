@@ -208,6 +208,10 @@ function downloadSVGAsText() {
     replaceImageURLs(svgData, "svg", null);
 }
 
+function downloadSVGAsPDF() {
+    downloadSVGAsImage("pdf");
+}
+
 function downloadSVGAsPNG() {
     downloadSVGAsImage("png");
 }
@@ -249,6 +253,8 @@ function downloadSVGAsImage(type) {
         const dataURL = canvas.toDataURL('image/'+type);
         if (dataURL.length < 10) {
             showToast("E:"+CLIENT_ERRORS[0]); // Canvas too big
+        } else if (type === "pdf") {
+            createPdfFromImage(dataURL, img.width, img.height);
         } else {
             downloadLink(dataURL, "gvexport." + type);
         }
@@ -576,4 +582,15 @@ function handleFullscreenExit()
 function getComputedProperty(element, property) {
     const style = getComputedStyle(element);
     return (parseFloat(style.getPropertyValue(property)));
+}
+
+// Create and download a PDF version of the provided image
+function createPdfFromImage(imgData, width, height) {
+    const orientation = width >= height ? 'landscape' : 'portrait';
+    const dpi = document.getElementById('vars[dpi]').value;
+    const widthInches = width/dpi;
+    const heightInches = height/dpi;
+    var doc = new jsPDF({orientation: orientation, format: [widthInches, heightInches], unit: 'in'});
+    doc.addImage(imgData, "PNG", 0, 0, widthInches, heightInches);
+    doc.save("gvexport.pdf");
 }
