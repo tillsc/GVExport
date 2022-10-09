@@ -406,3 +406,129 @@ msgstr "Clear all"
 msgid "XREFs of included individuals"
 msgstr "XREFs of included individuals"
 
+#. Option to show given or surnames, initials, or to hide names completely:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/5r0R5U4uGRS1qz8NuOCtuIN1.png
+#: 
+msgid "Abbreviated names"
+msgstr "Abbreviated names"
+
+#. This is shown when hovering over the new "Fullscreen" button. 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/FNnRXD7QT9BrgV0wMgPIdrY2.png 
+#. 
+#. This is shown at the top right of the browser render:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/f2Rt9T3BJXkNbeqoeazeDJkE.png
+#: 
+msgid "Fullscreen"
+msgstr "Fullscreen"
+
+#. Option allowing user to change colour used for male individuals (default is a light blue)
+#: 
+msgid "Male individuals"
+msgstr "Male individuals"
+
+#. Option allowing user to change colour of female individuals (default is pink)
+#: 
+msgid "Female individuals"
+msgstr "Female individuals"
+
+#. Option allowing user to change colour of individuals where gender is "Other"
+#: 
+msgid "Other gender individuals"
+msgstr "Other gender individuals"
+
+#. Option allowing user to change the colour of individuals where the gender is unknown (default is light green)
+#: 
+msgid "Unknown gender individuals"
+msgstr "Unknown gender individuals"
+
+#. Option allowing user to change colour of non-blood related male individuals (if the option to display in a different colour is selected). Default is a very pale blue.
+#: 
+msgid "Not blood-related male individuals"
+msgstr "Not blood-related male individuals"
+
+#. Option allowing user to change colour of non-blood related female individuals (if the option to display in a different colour is selected). Default is a very pale pink.
+#: 
+msgid "Not blood-related female individuals"
+msgstr "Not blood-related female individuals"
+
+#. Option allowing user to change colour of non-blood related other gender individuals (if the option to display in a different colour is selected). Default is a very pale yellow.
+#: 
+msgid "Not blood-related other gender individuals"
+msgstr "Not blood-related other gender individuals"
+
+#. Option allowing user to change colour of non-blood related unknown gender individuals (if the option to display in a different colour is selected). Default is a very pale green.
+#: 
+msgid "Not blood-related unknown gender individuals"
+msgstr "Not blood-related unknown gender individuals"
+
+#. Option allowing user to change the background colour of individual tiles (decorated and combined modes)
+#: 
+msgid "Individual background color"
+msgstr "Individual background color"
+
+#. Section where user can change colours related to the tiles showing each individual:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/tCBByut2gnWNyBHlbEjXM4wm.png
+#: 
+msgid "Tile colors"
+msgstr "Tile colors"
+
+#. Section where colours can be changed, where this is unrelated to other sections:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/HkIwBd2gotM7LpP7LA074oOI.png
+#: 
+msgid "Other colours"
+msgstr "Other colors"
+
+#. Option where user can change the background colour of the family record (ovals in simple/decorated mode, attached rectangle in combined mode). Default is a light yellow.
+#: 
+msgid "Family background"
+msgstr "Family background"
+
+#. Option where user can change the colour of the borders of the tiles and family records.
+#: 
+msgid "Outline colour"
+msgstr "Outline color"
+
+#. Option where user can change the colour of the background behind the diagram
+#: 
+msgid "Diagram background color"
+msgstr "Diagram background color"
+
+#. Shown in tooltip when hovering over close button in fullscreen mode
+#: 
+msgid "Exit fullscreen"
+msgstr "Exit fullscreen"
+
+#. This is a section title on the control panel settings page where the default values can be configured by the admin.
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/oc2QJRdngdisManSLq1kEN2g.png
+#: 
+msgid "Default values for GVExport"
+msgstr "Default values for GVExport"
+
+#. A description at the top of the control panel page where the admin can set default values.
+#. 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/oc2QJRdngdisManSLq1kEN2g.png
+#: 
+msgid "Values here are used as default values for new users of GVExport, and are used when users choose to reset the settings."
+msgstr "Values here are used as default values for new users of GVExport, and are used when users choose to reset the settings."
+
+#. In the control panel the admin can set default values for GVExport. This button resets these values to the GVExport defaults.  https://s3.eu-west-1.amazonaws.com/po-pub/i/RaXrJonKH38DYcc5TcU1PLSv.png
+#: 
+msgid "reset to defaults"
+msgstr "reset to defaults"
+
+#. Checkbox option to enable a different background colour for starting individuals, to help find them easier on the diagram:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/afEtoto6Qnv1HlJn0zqAiMtP.png 
+#. 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/eo7ytnyRCth5W2Sq76da71Ph.png
+#: 
+msgid "Show starting persons in different color"
+msgstr "Show starting persons in different color"
+
+#. Option to change the background colour for starting individuals, to help find them easier on the diagram:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/afEtoto6Qnv1HlJn0zqAiMtP.png 
+#. 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/eo7ytnyRCth5W2Sq76da71Ph.png
+#: 
+msgid "Starting persons background color"
+msgstr "Starting persons background color"
+

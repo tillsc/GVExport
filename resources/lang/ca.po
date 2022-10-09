@@ -249,72 +249,72 @@ msgstr "Ningú"
 
 #: 
 msgid "All relatives"
-msgstr ""
+msgstr "Tots els familiars"
 
 #: 
 msgid "You have items in the clippings cart, which can be used for the diagram instead of the below options."
-msgstr ""
+msgstr "Té elements en el carret de retallades, que es poden utilitzar per al diagrama en lloc de les següents opcions."
 
 #: 
 msgid "Use clippings cart"
-msgstr ""
+msgstr "Utilitzar el carret de retallades"
 
 #: 
 msgid "Ignore clippings cart"
-msgstr ""
+msgstr "Ignorar el carret de retallades"
 
 #: 
 msgid "Warning"
-msgstr ""
+msgstr "Advertiment"
 
 #: 
 msgid "Individual required"
-msgstr ""
+msgstr "Es requereix individu"
 
 #: 
 msgid "Generated ${indiNum} individuals and ${famNum} family records"
-msgstr ""
+msgstr "Generació de ${indiNum} individus i ${indiNum} registres familiars"
 
 #: 
 msgid "Invalid starting individual:"
-msgstr ""
+msgstr "l'individu inicial no és vàlid:"
 
 #: 
 msgid "Your browser does not support exporting images this large. Please reduce number of records, reduce DPI setting, or use SVG option."
-msgstr ""
+msgstr "El seu navegador no admet l'exportació d'imatges tan grans. Reduïsca el nombre de registres, reduïsca la configuració de DPI o utilitze l'opció SVG."
 
 #: 
 msgid "Toggle advanced settings"
-msgstr ""
+msgstr "Alternar la configuració avançada"
 
 #: 
 msgid "Ignore unseen links to speed up relative check"
-msgstr ""
+msgstr "Ignorar els enllaços invisibles per a accelerar la comprovació relativa"
 
 #: 
 msgid "Non-relatives"
-msgstr ""
+msgstr "No familiars"
 
 #: 
 msgid "Font"
-msgstr ""
+msgstr "Font"
 
 #: 
 msgid "Typeface"
-msgstr ""
+msgstr "Tipus de lletra"
 
 #: 
 msgid "Font color for names"
-msgstr ""
+msgstr "Color de la font per a noms"
 
 #: 
 msgid "Font color for details"
-msgstr ""
+msgstr "Color de la font per a més detalls"
 
 #. When you are no longer logged in, GVExport can't load the browser render until the page is refreshed. This message is shown before automatically reloading the page.
 #: 
 msgid "Login expired. Reloading page..."
-msgstr ""
+msgstr "Inici de sessió caducat. Recarregant pàgina..."
 
 #. Label for section that lets you change the colour of arrows that represent relationships between records
 #: 
@@ -406,4 +406,130 @@ msgstr "Esborra-ho tot"
 #: 
 msgid "XREFs of included individuals"
 msgstr "XREF de persones incloses"
+
+#. Option to show given or surnames, initials, or to hide names completely:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/5r0R5U4uGRS1qz8NuOCtuIN1.png
+#: 
+msgid "Abbreviated names"
+msgstr "Noms abreujats"
+
+#. This is shown when hovering over the new "Fullscreen" button. 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/FNnRXD7QT9BrgV0wMgPIdrY2.png 
+#. 
+#. This is shown at the top right of the browser render:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/f2Rt9T3BJXkNbeqoeazeDJkE.png
+#: 
+msgid "Fullscreen"
+msgstr "Pantalla completa"
+
+#. Option allowing user to change colour used for male individuals (default is a light blue)
+#: 
+msgid "Male individuals"
+msgstr "Individus masculins"
+
+#. Option allowing user to change colour of female individuals (default is pink)
+#: 
+msgid "Female individuals"
+msgstr "Individus femenins"
+
+#. Option allowing user to change colour of individuals where gender is "Other"
+#: 
+msgid "Other gender individuals"
+msgstr "Altres identitats sexuals"
+
+#. Option allowing user to change the colour of individuals where the gender is unknown (default is light green)
+#: 
+msgid "Unknown gender individuals"
+msgstr "Individus de sexe desconegut"
+
+#. Option allowing user to change colour of non-blood related male individuals (if the option to display in a different colour is selected). Default is a very pale blue.
+#: 
+msgid "Not blood-related male individuals"
+msgstr "Individus masculins no consanguinis"
+
+#. Option allowing user to change colour of non-blood related female individuals (if the option to display in a different colour is selected). Default is a very pale pink.
+#: 
+msgid "Not blood-related female individuals"
+msgstr "Individus femenins no consanguinis"
+
+#. Option allowing user to change colour of non-blood related other gender individuals (if the option to display in a different colour is selected). Default is a very pale yellow.
+#: 
+msgid "Not blood-related other gender individuals"
+msgstr "No relacionats consanguinis amb altres identitats sexuals"
+
+#. Option allowing user to change colour of non-blood related unknown gender individuals (if the option to display in a different colour is selected). Default is a very pale green.
+#: 
+msgid "Not blood-related unknown gender individuals"
+msgstr "Individus de sexe desconegut no consanguinis"
+
+#. Option allowing user to change the background colour of individual tiles (decorated and combined modes)
+#: 
+msgid "Individual background color"
+msgstr "Color de fons individual"
+
+#. Section where user can change colours related to the tiles showing each individual:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/tCBByut2gnWNyBHlbEjXM4wm.png
+#: 
+msgid "Tile colors"
+msgstr "Colors de taulells"
+
+#. Section where colours can be changed, where this is unrelated to other sections:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/HkIwBd2gotM7LpP7LA074oOI.png
+#: 
+msgid "Other colours"
+msgstr "Altres colors"
+
+#. Option where user can change the background colour of the family record (ovals in simple/decorated mode, attached rectangle in combined mode). Default is a light yellow.
+#: 
+msgid "Family background"
+msgstr "Antecedents familiars"
+
+#. Option where user can change the colour of the borders of the tiles and family records.
+#: 
+msgid "Outline colour"
+msgstr "Color del contorn"
+
+#. Option where user can change the colour of the background behind the diagram
+#: 
+msgid "Diagram background color"
+msgstr "Color del fons del diagrama"
+
+#. Shown in tooltip when hovering over close button in fullscreen mode
+#: 
+msgid "Exit fullscreen"
+msgstr "Eixir de la pantalla completa"
+
+#. This is a section title on the control panel settings page where the default values can be configured by the admin.
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/oc2QJRdngdisManSLq1kEN2g.png
+#: 
+msgid "Default values for GVExport"
+msgstr "Valors predeterminats per a GVExport"
+
+#. A description at the top of the control panel page where the admin can set default values.
+#. 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/oc2QJRdngdisManSLq1kEN2g.png
+#: 
+msgid "Values here are used as default values for new users of GVExport, and are used when users choose to reset the settings."
+msgstr "Els valors aquí s'utilitzen com a valors predeterminats per als nous usuaris de GVExport, i s'utilitzen quan els usuaris trien restablir la configuració."
+
+#. In the control panel the admin can set default values for GVExport. This button resets these values to the GVExport defaults.  https://s3.eu-west-1.amazonaws.com/po-pub/i/RaXrJonKH38DYcc5TcU1PLSv.png
+#: 
+msgid "reset to defaults"
+msgstr "Restablir als valors predeterminats"
+
+#. Checkbox option to enable a different background colour for starting individuals, to help find them easier on the diagram:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/afEtoto6Qnv1HlJn0zqAiMtP.png 
+#. 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/eo7ytnyRCth5W2Sq76da71Ph.png
+#: 
+msgid "Show starting persons in different color"
+msgstr "Mostrar les persones incials amb diferent color"
+
+#. Option to change the background colour for starting individuals, to help find them easier on the diagram:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/afEtoto6Qnv1HlJn0zqAiMtP.png 
+#. 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/eo7ytnyRCth5W2Sq76da71Ph.png
+#: 
+msgid "Starting persons background color"
+msgstr "Color del fons per a les persones inicials"
 
