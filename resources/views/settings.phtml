@@ -6,6 +6,16 @@ use Fisharebest\Webtrees\I18N;
 use Fisharebest\Webtrees\View;
 use Fisharebest\Webtrees\Http\RequestHandlers\ControlPanel;
 
+/**
+ * @var string      $gvexport_css           used in javascript code as a link to the css file
+ * @var string      $gvexport_js            used in javascript code as a link to the external script file
+ * @var string      $title                  title of this page
+ * @var array       $vars                   array of saved settings
+ * @var array       $otypes                 output file type options
+ * @var array       $gve_config             array of default settings
+ * @var ?           $module                 this module
+ */
+
 ?>
 
 <?= view('components/breadcrumbs', ['links' => [route(ControlPanel::class) => I18N::translate('Control panel'), $title]]) ?>
@@ -339,7 +349,7 @@ use Fisharebest\Webtrees\Http\RequestHandlers\ControlPanel;
                     <input type="hidden" name="vars[color_arrow_related]" value="no">
                     <input type="checkbox" name="vars[color_arrow_related]" id="vars[color_arrow_related]" value="color_arrow_related" <?= $vars["color_arrow_related"] == "color_arrow_related" ? 'checked' : '' ?>><label for="vars[color_arrow_related]" class="check-list"><?= I18N::translate('Show blood relationship in different color') ?></label>
 
-                    <div id="arrow_group" class="color_arrow_related col-auto wt-page-options-value">
+                    <div id="arrow_group" class="color_subgroup col-auto wt-page-options-value">
                         <div class="sub-group">
                             <input type="color" class="picker" name="vars[arrow_related]" id="vars[arrow_related]" value="<?= $vars["arrow_related"] ?>" /><label for="vars[arrow_related]" class="picker-label"><?= I18N::translate('Related by birth') ?></label>
                             <input type="color" class="picker" name="vars[arrow_not_related]" id="vars[arrow_not_related]" value="<?= $vars["arrow_not_related"] ?>" /><label for="vars[arrow_not_related]" class="picker-label"><?= I18N::translate('Related other than by birth') ?></label>
@@ -376,6 +386,11 @@ use Fisharebest\Webtrees\Http\RequestHandlers\ControlPanel;
                     </div>
                     <div class="col-auto">
                         <input type="color" class="picker" name="vars[colorindibg]" id="vars[colorindibg]" value="<?= $vars["colorindibg"] ?>" /><label for="vars[colorindibg]" class="picker-label"><?= I18N::translate('Individual background color') ?></label>
+                    </div>
+                    <input type="hidden" name="vars[startcol]" value="false">
+                    <input type="checkbox" name="vars[startcol]" id="vars[startcol]" value="true" <?= $vars["startcol"] == "true" ? 'checked' : '' ?>><label for="vars[startcol]" class="check-list"><?= I18N::translate('Show starting persons in different color') ?></label>
+                    <div class="col-auto" id="startcol_option">
+                        <input type="color" class="picker" name="vars[colorstartbg]" id="vars[colorstartbg]" value="<?= $vars["colorstartbg"] ?>" /><label for="vars[colorstartbg]" class="picker-label"><?= I18N::translate('Starting persons background color') ?></label>
                     </div>
                 </div>
             </div>

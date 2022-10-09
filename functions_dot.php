@@ -85,6 +85,7 @@ class Dot {
 		$this->colors["colorfam"] = $GVE_CONFIG["dot"]["colorfam"];
 		$this->colors["colorbg"] = $GVE_CONFIG["dot"]["colorbg"];
 		$this->colors["colorindibg"] = $GVE_CONFIG["dot"]["colorindibg"];
+		$this->colors["colorstartbg"] = $GVE_CONFIG["dot"]["colorstartbg"];
 		$this->colors["colorborder"] = $GVE_CONFIG["dot"]["colorborder"];
 		$this->colors["font_color"]["name"] = $GVE_CONFIG["dot"]["fontcolor_name"];
         $this->colors["font_color"]["details"] = $GVE_CONFIG["dot"]["fontcolor_details"];
@@ -94,6 +95,7 @@ class Dot {
 
 		// Default settings
         $this->settings["color_arrow_related"] = $GVE_CONFIG["settings"]["color_arrow_related"];
+        $this->settings["startcol"] = $GVE_CONFIG["settings"]["startcol"];
         $this->settings["diagram_type"] = "simple";
 		$this->settings["diagram_type_combined_with_photo"] = true;
 		$this->settings["indi"] = "";
@@ -964,10 +966,11 @@ class Dot {
 			}
             $href = $this->settings["show_url"] ? "TARGET=\"_blank\" HREF=\"" . $this->convertToHTMLSC($link) . "\"" : "";
 			// Draw table
+            $indibgcolor = $this->isStartingIndividual($pid) && $this->settings['startcol'] == "true" ? $this->colors["colorstartbg"] : $this->colors["colorindibg"];
 			if ($this->settings["diagram_type"] == "combined") {
-				$out .= "<TABLE BORDER=\"0\" CELLBORDER=\"0\" CELLPADDING=\"2\" CELLSPACING=\"0\" BGCOLOR=\"" . $this->colors["colorindibg"] . "\" $href>";
+				$out .= "<TABLE BORDER=\"0\" CELLBORDER=\"0\" CELLPADDING=\"2\" CELLSPACING=\"0\" BGCOLOR=\"" . $indibgcolor . "\" $href>";
 			} else {
-				$out .= "<TABLE COLOR=\"" . $bordercolor . "\" BORDER=\"1\" CELLBORDER=\"0\" CELLPADDING=\"2\" CELLSPACING=\"0\" BGCOLOR=\"" . $this->colors["colorindibg"] . "\" $href>";
+				$out .= "<TABLE COLOR=\"" . $bordercolor . "\" BORDER=\"1\" CELLBORDER=\"0\" CELLPADDING=\"2\" CELLSPACING=\"0\" BGCOLOR=\"" . $indibgcolor . "\" $href>";
 			}
             $birthData = " $birthdate " . (empty($birthplace) ? "" : "($birthplace)");
             $deathData = " $deathdate " . (empty($deathplace) ? "" : "($deathplace)");
@@ -1868,5 +1871,21 @@ class Dot {
         $out .= $this->printPersonLabel($pid, $related);
         $out .= "</TD>";
         return $out;
+    }
+
+    /**
+     *  Check if XREF in list of starting individuals
+     * @param string $pid Xref to check
+     * @return bool
+     */
+    function isStartingIndividual(string $pid): bool
+    {
+        $indis = explode(",", $this->settings["indi"]);
+        for ($i=0;$i<count($indis);$i++) {
+            if (trim($indis[$i]) == $pid) {
+                return true;
+            }
+        }
+        return false;
     }
 }
