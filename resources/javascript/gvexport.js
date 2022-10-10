@@ -409,7 +409,8 @@ function loadIndividualDetails(url, xref) {
             const newListItem = document.createElement("div");
             newListItem.className = "indi_list_item";
             newListItem.setAttribute("data-xref", xref);
-            newListItem.innerHTML = contents + "<div class=\"remove-item\" onclick=\"removeItem(this.parentElement)\"><a href='#'>×</a></div>";
+            newListItem.setAttribute("onclick", "scrollToRecord('"+xref+"')");
+            newListItem.innerHTML = contents + "<div class=\"remove-item\" onclick=\"removeItem(event, this.parentElement)\"><a href='#'>×</a></div>";
             // Multiple promises can be for the same xref - don't add if a duplicate
             let item = document.querySelector(`[data-xref="${xref}"]`);
             if (item == null) {
@@ -460,7 +461,8 @@ function toggleUpdateButton(css_id) {
     updateRender();
 }
 
-function removeItem(element) {
+function removeItem(e, element) {
+    e.stopPropagation();
     let xref = element.getAttribute("data-xref").trim();
     let list = document.getElementById('vars[other_pids]');
     const regex = new RegExp(`(?<=,|^)(${xref})(?=,|$)`);
@@ -593,4 +595,49 @@ function createPdfFromImage(imgData, width, height) {
     var doc = new jsPDF({orientation: orientation, format: [widthInches, heightInches], unit: 'in'});
     doc.addImage(imgData, "PNG", 0, 0, widthInches, heightInches);
     doc.save("gvexport.pdf");
+}
+
+// If the browser render is available, scroll to the xref provided (if it exists)
+function scrollToRecord(xref) {
+    const rendering = document.getElementById('rendering');
+    const svg = rendering.getElementsByTagName('svg')[0].cloneNode(true);
+    let titles = svg.getElementsByTagName('title');
+    for (i=0; i<titles.length; i++) {
+        if (titles[i].innerHTML === xref) {
+            let minX = null;
+            let minY = null;
+            let maxX = null;
+            let maxY = null;
+            const group = titles[i].parentElement;
+            // We need to locate the element within the SVG. We use "polygon" here because it is the
+            // only element that will always exist and that also has position information
+            // (other elements like text, image, etc can be disabled by the user)
+            const points = group.getElementsByTagName('polygon')[0].getAttribute('points').split(" ");
+            // Find largest and smallest X and Y value out of all the points of the polygon
+            for (j=0; j<points.length; j++) {
+                const x = parseFloat(points[j].split(",")[0]);
+                const y = parseFloat(points[j].split(",")[1]);
+                if (minX === null || x < minX) {
+                    minX = x;
+                }
+                if (minY === null || y < minY) {
+                    minY = y;
+                }
+                if (maxX === null || x > maxX) {
+                    maxX = x;
+                }
+                if (maxY === null || y > maxY) {
+                    maxY = y;
+                }
+            }
+            // Get the average of the largest and smallest so we can position the element in the middle
+            let x = (minX+maxX)/2;
+            let y = (minY+maxY)/2;
+            // Why do we multiply the scale by 1 and 1/3?
+            let zoom = panzoomInst.getTransform().scale*(1 + 1/3);
+            panzoomInst.smoothMoveTo((rendering.offsetWidth/2) - x*zoom,(rendering.offsetHeight/2)-parseFloat(svg.getAttribute('height'))*zoom-y*zoom);
+            return true;
+        }
+    }
+    return false;
 }
