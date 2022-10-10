@@ -563,6 +563,7 @@ use Fisharebest\Webtrees\Tree;
 
 <script type="text/javascript">
     const graphvizAvailable = <?= $nographviz ? "false" : "true" ?>;
+    let panzoomInst = null;
     let jsPDF = null;
     var workerURL = '<?= $module->assetUrl('javascript/full.renderer.js'); ?>';
     var viz = new Viz({
@@ -748,7 +749,7 @@ use Fisharebest\Webtrees\Tree;
             rendering.innerHTML = "";
             rendering.appendChild(element);
             const fullZoom = Math.min(4, rendering.getBoundingClientRect().width / element.getBBox().width);
-            panzoom(element, {
+            panzoomInst = panzoom(element, {
                 maxZoom: 4,
                 minZoom: fullZoom / 4,
                 initialZoom: fullZoom
@@ -760,6 +761,9 @@ use Fisharebest\Webtrees\Tree;
                     showToast(message[i]);
                 }
             }
+            // Scroll render to first starting individual
+            scrollToRecord(document.getElementById('vars[other_pids]').value.split(",")[0].trim());
+
             return element;
         }).catch(function (error) {
             rendering.innerHTML = '<div class="alert alert-danger" role="alert"><?= I18N::translate('Error running GVExport in Browser mode') ?>:<br>' + error + '</div>';
