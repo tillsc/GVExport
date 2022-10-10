@@ -84,7 +84,7 @@ GVExport is a module for webtrees, that is used to visualise a family tree and a
 - Changes should not remove existing functionality
 - New features are great, but the tool should work for both beginner and advanced users. The options should be powerful but not confusing. We have created hidden "advanced" sections, to help separate advanced features from the regular UI.
 - We plan to include quality of life changes such as improving error messages and adding validation to fields to prevent submitting values that don't make sense.
-- Mobile browsers are not yet tested and supported - but we hope this will change once desktop development settles down.
+- Mobile browsers are supported, so feel free to report issues with mobile.
 
 Please check the [issues list](https://github.com/Neriderc/GVExport/issues) and the [project board](https://github.com/users/Neriderc/projects/1/views/1) to see what has been discussed and what is on the roadmap. Any ideas that aren't specifically mentioned can be added by creating a new issue.
 
