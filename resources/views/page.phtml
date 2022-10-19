@@ -273,40 +273,42 @@ use Fisharebest\Webtrees\Tree;
             </div>
         </div>
 
-        <?php if ($tree->getPreference('SHOW_HIGHLIGHT_IMAGES') == '1') { ?>
+        <div id="appearance-advanced" <?= $vars["adv_appear"] == "show" ? '' : 'style="display:none"' ?>>
+
+            <?php if ($tree->getPreference('SHOW_HIGHLIGHT_IMAGES') == '1') { ?>
+                <div class="row form-group">
+                    <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[with_photos]"><?= I18N::translate('Add photos') ?></label>
+                    <div class="col-sm-8 wt-page-options-value">
+                        <input type="hidden" name="vars[with_photos]" value="no">
+                        <input type="checkbox" name="vars[with_photos]" id="vars[with_photos]" value="with_photos" <?= $vars["with_photos"] == "with_photos" ? 'checked' : '' ?>>
+                        <span class="text-muted">(<?= I18N::translate('Only Decorated or Combined') ?>)</span>
+                    </div>
+                </div>
+            <?php } ?>
+
             <div class="row form-group">
-                <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[with_photos]"><?= I18N::translate('Add photos') ?></label>
+                <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[show_url]"><?= I18N::translate('Add URL to individuals and families') ?></label>
                 <div class="col-sm-8 wt-page-options-value">
-                    <input type="hidden" name="vars[with_photos]" value="no">
-                    <input type="checkbox" name="vars[with_photos]" id="vars[with_photos]" value="with_photos" <?= $vars["with_photos"] == "with_photos" ? 'checked' : '' ?>>
-                    <span class="text-muted">(<?= I18N::translate('Only Decorated or Combined') ?>)</span>
+                    <input type="hidden" name="vars[show_url]" value="no">
+                    <input type="checkbox" name="vars[show_url]" id="vars[show_url]" value="show_url" <?= $vars["show_url"] == "show_url" ? 'checked' : '' ?>>
+                    <span class="text-muted">(<?= I18N::translate('SVG only') ?>)</span>
                 </div>
             </div>
-        <?php } ?>
 
-        <div class="row form-group">
-            <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[show_url]"><?= I18N::translate('Add URL to individuals and families') ?></label>
-            <div class="col-sm-8 wt-page-options-value">
-                <input type="hidden" name="vars[show_url]" value="no">
-                <input type="checkbox" name="vars[show_url]" id="vars[show_url]" value="show_url" <?= $vars["show_url"] == "show_url" ? 'checked' : '' ?>>
-                <span class="text-muted">(<?= I18N::translate('SVG only') ?>)</span>
+            <div class="row form-group">
+                <label class=" col-sm-4 col-form-label wt-page-options-label" for="vars[use_abbr_name]"><?= I18N::translate('Abbreviated names') ?></label>
+                <div class="col-sm-8 wt-page-options-value">
+                    <?= view('components/select', ['name' => 'vars[use_abbr_name]', 'selected' => $vars['use_abbr_name'], 'options' => updateTranslations($gve_config["settings"]["use_abbr_names"])]) ?>
+                </div>
             </div>
-        </div>
 
-        <div class="row form-group">
-            <label class=" col-sm-4 col-form-label wt-page-options-label" for="vars[use_abbr_name]"><?= I18N::translate('Abbreviated names') ?></label>
-            <div class="col-sm-8 wt-page-options-value">
-                <?= view('components/select', ['name' => 'vars[use_abbr_name]', 'selected' => $vars['use_abbr_name'], 'options' => updateTranslations($gve_config["settings"]["use_abbr_names"])]) ?>
+            <div class="row form-group">
+                <label class=" col-sm-4 col-form-label wt-page-options-label" for="vars[use_abbr_place]"><?= I18N::translate('Abbreviated place names') ?></label>
+                <div class="col-sm-8 wt-page-options-value">
+                    <?= view('components/select', ['name' => 'vars[use_abbr_place]', 'selected' => $vars['use_abbr_place'], 'options' => updateTranslations($gve_config["settings"]["use_abbr_places"])]) ?>
+                </div>
             </div>
-        </div>
-
-        <div class="row form-group">
-            <label class=" col-sm-4 col-form-label wt-page-options-label" for="vars[use_abbr_place]"><?= I18N::translate('Abbreviated place names') ?></label>
-            <div class="col-sm-8 wt-page-options-value">
-                <?= view('components/select', ['name' => 'vars[use_abbr_place]', 'selected' => $vars['use_abbr_place'], 'options' => updateTranslations($gve_config["settings"]["use_abbr_places"])]) ?>
-            </div>
-        </div>
-        <div id="appearance-advanced" <?= $vars["adv_appear"] == "show" ? '' : 'style="display:none"' ?>>
+            
             <div class="row form-group">
                 <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[show_pid]"><?= I18N::translate('Show Individual ID') ?></label>
                 <div class="col-sm-8 wt-page-options-value">

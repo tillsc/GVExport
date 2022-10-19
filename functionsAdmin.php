@@ -17,7 +17,7 @@ function getAdminSettings($module, bool $reset): array
         "psize" => $GVE_CONFIG["default_pagesize"],
         "indiinc" => "indi",
         "diagtype" => "decorated",
-        "with_photos" => "",
+        "with_photos" => "with_photos",
         "show_by" => "show_by",
         "bd_type" => "gedcom",
         "show_bp" => "show_bp",
