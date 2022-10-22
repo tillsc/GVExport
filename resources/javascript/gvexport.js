@@ -641,3 +641,57 @@ function scrollToRecord(xref) {
     }
     return false;
 }
+
+// Return distance between two points
+function getDistance(x1, y1, x2, y2){
+    let x = x2 - x1;
+    let y = y2 - y1;
+    return Math.sqrt(x * x + y * y);
+}
+
+function handleTileClick() {
+    const MIN_DRAG = 100;
+    let startx;
+    let starty;
+
+    let linkElements = document.querySelectorAll("svg a");
+    for (let i = 0; i < linkElements.length; i++) {
+        linkElements[i].addEventListener("mousedown", function(e) {
+            startx = e.clientX;
+            starty = e.clientY;
+        });
+        // Only trigger links if not dragging
+        linkElements[i].addEventListener("click", function(e) {
+            if (getDistance(startx, starty, e.clientX, e.clientY) >= MIN_DRAG) {
+                e.preventDefault();
+            }
+        });
+    }
+}
+
+// This function is run when the page is loaded
+function pageLoaded() {
+    jsPDF = window.jspdf.jsPDF;
+    TOMSELECT_URL = document.getElementById('pid').getAttribute("data-url") + "&query=";
+    loadURLXref();
+    loadXrefList(TOMSELECT_URL);
+    // Remove reset parameter from URL when page loaded, to prevent
+    // further resets when page reloaded
+    removeURLParameter("reset");
+    // Remove options from selection list if already selected
+    setInterval(function () {removeSelectedOptions()}, 100);
+    // Listen for fullscreen change
+    handleFullscreen();
+    // Load browser render when page has loaded
+    updateRender();
+
+    document.querySelector(".hide-form").addEventListener("click", hideSidebar);
+
+    document.querySelector(".sidebar__toggler a").addEventListener("click", showSidebar);
+
+    document.addEventListener("keydown", function(e) {
+        if (e.key === "Esc" || e.key === "Escape") {
+            document.querySelector(".sidebar").hidden ? showSidebar(e) : hideSidebar(e);
+        }
+    });
+}
