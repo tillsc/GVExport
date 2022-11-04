@@ -109,6 +109,7 @@ $GVE_CONFIG["dot"]["colorborder"] = "#606060"; // Outline colour
 
 
 $GVE_CONFIG["dot"]["fontsize"] = "10";	// Default font size
+$GVE_CONFIG["dot"]["fontsize_name"] = "12";	// Default font size
 $GVE_CONFIG["dot"]["fontcolor_name"] = "#333333";	// Default font colour for name
 $GVE_CONFIG["dot"]["fontcolor_details"] = "#555555";	// Default font colour for date/place of birth/death etc.
 $GVE_CONFIG["dot"]["arrow_default"] = "#555555";	// Default colour for arrows between records

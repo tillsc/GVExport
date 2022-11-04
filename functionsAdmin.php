@@ -57,6 +57,8 @@ function getAdminSettings($module, bool $reset): array
         "typeface" => $GVE_CONFIG["default_typeface"],
         "fontcolor_name" => $GVE_CONFIG["dot"]["fontcolor_name"],
         "fontcolor_details" => $GVE_CONFIG["dot"]["fontcolor_details"],
+        "fontsize" => $GVE_CONFIG["dot"]["fontsize"],
+        "fontsize_name" => $GVE_CONFIG["dot"]["fontsize_name"],
         "arrow_default" => $GVE_CONFIG["dot"]["arrow_default"],
         "arrow_related" => $GVE_CONFIG["dot"]["arrow_related"],
         "arrow_not_related" => $GVE_CONFIG["dot"]["arrow_not_related"],

@@ -471,7 +471,11 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
         }
 
         if (isset($vars['fontsize'])) {
-            $dot->setFontSize($vars['fontsize']);
+            $dot->setFontSize($vars['fontsize'], 'base');
+        }
+
+        if (isset($vars['fontsize_name'])) {
+            $dot->setFontSize($vars['fontsize_name'], 'name');
         }
 
         if (isset($vars['typeface'])) {
