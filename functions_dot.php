@@ -37,6 +37,7 @@ require_once("functionsClippingsCart.php");
 use Fisharebest\Webtrees\Family;
 use Fisharebest\Webtrees\I18n;
 //use League\Flysystem\Util;
+use Fisharebest\Webtrees\Individual;
 use Fisharebest\Webtrees\Site;
 use Fisharebest\Webtrees\Registry;
 
@@ -50,6 +51,7 @@ class Dot {
 	var array $families = array();
 	var array $indi_search_method = array("ance" => FALSE, "desc" => FALSE, "spou" => FALSE, "sibl" => FALSE, "cous" => FALSE, "any" => FALSE);
 	var string $font_size;
+    var string $font_size_name;
 	var array $colors = array();
 	var array $settings = array();
 	var array $pagesize = array();
@@ -62,12 +64,13 @@ class Dot {
 	 */
 	function __construct($tree, $file_system) {
 		global $GVE_CONFIG;
-		// Load settings from config file
 		$this->tree = $tree;
 		$this->file_system = $file_system;
+    // Load settings from config file
 
 		// Load font
 		$this->font_size = $GVE_CONFIG["dot"]["fontsize"];
+        $this->font_size_name = $GVE_CONFIG["dot"]["fontsize_name"];
 		$this->settings["defaulttypeface"] = $GVE_CONFIG["default_typeface"];
 		$this->settings["typeface"] = $this->settings["defaulttypeface"];
         $this->settings["typefaces"] = $GVE_CONFIG["settings"]["typefaces"];
@@ -184,9 +187,14 @@ class Dot {
 	 * Function to set font size
 	 *
 	 * @param string $font_size
+	 * @param string $type
 	 */
-	function setFontSize(string $font_size) {
-		$this->font_size = $font_size;
+	function setFontSize(string $font_size, string $type) {
+        if ($type == 'name') {
+            $this->font_size_name = $font_size;
+        } else {
+            $this->font_size = $font_size;
+        }
 	}
 
     function setArrowColour(string $type, string $value)
@@ -898,7 +906,7 @@ class Dot {
 
 			// --- Birth data ---
 			if ($this->settings["show_by"]) {
-                $birthdate = $this->formatDate($i->getBirthDate(FALSE), $this->settings["bd_type"] !== "gedcom");
+                $birthdate = $this->formatDate($i->getBirthDate(), $this->settings["bd_type"] !== "gedcom");
 			} else {
 				$birthdate = "";
 			}
@@ -913,7 +921,7 @@ class Dot {
 			// --- Death data ---
 			if ($this->settings["show_dy"]) {
                 if ($this->settings["show_by"]) {
-                    $deathdate = $this->formatDate($i->getDeathDate(FALSE), $this->settings["dd_type"] !== "gedcom");
+                    $deathdate = $this->formatDate($i->getDeathDate(), $this->settings["dd_type"] !== "gedcom");
                 } else {
                     $deathdate = "";
                 }
@@ -1005,7 +1013,7 @@ class Dot {
                 }
                 // Show name
                 if (trim($name) != "") {
-                    $out .= "<FONT COLOR=\"" . $this->colors["font_color"]["name"] . "\" POINT-SIZE=\"" . ($this->font_size + 2) . "\">" . $name . "</FONT>";
+                    $out .= "<FONT COLOR=\"" . $this->colors["font_color"]["name"] . "\" POINT-SIZE=\"" . ($this->font_size_name) . "\">" . $name . "</FONT>";
                     if (trim($birthData . $deathData) != "") {
                         $out .= "<BR />";
                     }
@@ -1074,7 +1082,7 @@ class Dot {
 			if ($this->settings["show_my"]) {
                 if ($this->settings["show_by"]) {
                     $marriagedate = $this->formatDate($f
-                        ->getMarriageDate(FALSE), $this->settings["md_type"] !== "gedcom");
+                        ->getMarriageDate(), $this->settings["md_type"] !== "gedcom");
                 } else {
                     $marriagedate = "";
                 }
@@ -1227,7 +1235,7 @@ class Dot {
 		// Add the family nr which he/she belongs to as spouse (needed when "combined" mode is used)
 		if ($this->settings["diagram_type"] == "combined") {
 			$fams = $i->spouseFamilies();
-			if (count($fams) > 0) {
+			if ($fams->count() > 0) {
 
 				// --- DEBUG ---
 				if ($this->settings["debug"]) {
@@ -1330,7 +1338,7 @@ class Dot {
 				}
 				// -------------
 
-				if (count($famc) > 0) {
+				if ($famc->count() > 0) {
 					// For every family where the INDI is listed as CHILD
 					foreach ($famc as $fam) {
 						// Get the family ID
@@ -1338,25 +1346,22 @@ class Dot {
 						// Get the family object
 						$f = $this->getUpdatedFamily($fid);
 
-						if (isset($families[$fid]["fid"]) && ($families[$fid]["fid"]== $fid)) {
-							// Family ID already added
-							// do nothing
-							// --- DEBUG ---
-							if ($this->settings["debug"]) {
-								$this->printDebug("($pid) -- FAM ($fid) already added\n", $ind);
-								//var_dump($fams);
-							}
-							// -------------
-						} else {
-							$this->addFamToList($fid, $families);
+                        if (isset($families[$fid]["fid"]) && ($families[$fid]["fid"]== $fid)) {
+                            // Family ID already added, do nothing
+                            // --- DEBUG ---
+                            if ($this->settings["debug"]) {
+                                $this->printDebug("($pid) -- FAM ($fid) already added\n", $ind);
+                            }
+                            // -------------
+                        } else {
+                            $this->addFamToList($fid, $families);
 
-							// --- DEBUG ---
-							if ($this->settings["debug"]) {
-								$this->printDebug("($pid) -- FAM ($fid) added\n", $ind);
-								//var_dump($fams);
-							}
-							// -------------
-						}
+                            // --- DEBUG ---
+                            if ($this->settings["debug"]) {
+                                $this->printDebug("($pid) -- FAM ($fid) added\n", $ind);
+                            }
+                            // -------------
+                        }
 
 						// Work out if indi has adoptive relationship to this family
 						$relationshipType = $this->getRelationshipType($i, $fam, $ind);
@@ -1547,25 +1552,22 @@ class Dot {
 					$fid = $fam->xref();
 					$f = $this->getUpdatedFamily($fid);
 
-					if (isset($families[$fid]["fid"]) && ($families[$fid]["fid"]== $fid)) {
-						// Family ID already added
-						// do nothing
-						// --- DEBUG ---
-						if ($this->settings["debug"]) {
-							$this->printDebug("($pid) -- FAM ($fid) already added\n", $ind);
-							//var_dump($fams);
-						}
-						// -------------
-					} else {
-						$this->addFamToList($fid, $families);
+                    if (isset($families[$fid]["fid"]) && ($families[$fid]["fid"]== $fid)) {
+                        // Family ID already added, do nothing
+                        // --- DEBUG ---
+                        if ($this->settings["debug"]) {
+                            $this->printDebug("($pid) -- FAM ($fid) already added\n", $ind);
+                        }
+                        // -------------
+                    } else {
+                        $this->addFamToList($fid, $families);
 
-						// --- DEBUG ---
-						if ($this->settings["debug"]) {
-							$this->printDebug("($pid) -- FAM ($fid) added\n", $ind);
-							//var_dump($fams);
-						}
-						// -------------
-					}
+                        // --- DEBUG ---
+                        if ($this->settings["debug"]) {
+                            $this->printDebug("($pid) -- FAM ($fid) added\n", $ind);
+                        }
+                        // -------------
+                    }
 
 					//$spouse_id = $f->getSpouseId($pid);
 					// Alternative method of getting the $spouse_id - workaround by Till Schulte-Coerne
@@ -1619,12 +1621,10 @@ class Dot {
 					$f = $this->getUpdatedFamily($fid);
 
 					if (isset($families[$fid]["fid"]) && ($families[$fid]["fid"]== $fid)) {
-						// Family ID already added
-						// do nothing
+						// Family ID already added, do nothing
 						// --- DEBUG ---
 						if ($this->settings["debug"]) {
 							$this->printDebug("($pid) -- FAM ($fid) already added\n", $ind);
-							//var_dump($fams);
 						}
 						// -------------
 					} else {
@@ -1633,7 +1633,6 @@ class Dot {
 						// --- DEBUG ---
 						if ($this->settings["debug"]) {
 							$this->printDebug("($pid) -- FAM ($fid) added\n", $ind);
-							//var_dump($fams);
 						}
 						// -------------
 					}
@@ -1765,11 +1764,13 @@ class Dot {
 		}
 	}
 
-	function getUpdatedFamily($fid) {
+	function getUpdatedFamily($fid): ?Family
+    {
 		return Registry::familyFactory()->make($fid, $this->tree);
 	}
 
-	function getUpdatedPerson($pid) {
+	function getUpdatedPerson($pid): ?Individual
+    {
 		return Registry::individualFactory()->make($pid, $this->tree);
 	}
 

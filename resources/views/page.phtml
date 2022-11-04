@@ -22,6 +22,7 @@ use Fisharebest\Webtrees\Tree;
  * @var array       $gve_config             array of default settings
  * @var bool        $cartempty              are there any individuals (INDI records) in the clippings cart?
  * @var ?           $module                 this module
+ * @var bool        $nographviz             true if GraphViz not installed
  */
 
 ?>
@@ -444,7 +445,14 @@ use Fisharebest\Webtrees\Tree;
                         <div class="col-auto">
                             <?= view('components/select', ['name' => 'vars[typeface]', 'selected' => $vars['typeface'], 'options' => updateTranslations($gve_config["settings"]["typefaces"])]) ?>
                         </div>
-
+                        <label for="vars[fontsize]"><?= I18N::translate('Standard font size') ?>:</label>
+                        <div class="col-auto">
+                            <input type="text" class="form-control col-sm-6" size="10" name="vars[fontsize]" id="vars[fontsize]" value="<?= $vars["fontsize"] ?>">
+                        </div>
+                        <label for="vars[fontsize_name]"><?= I18N::translate('Name font size') ?>:</label>
+                        <div class="col-auto">
+                            <input type="text" class="form-control col-sm-6" size="10" name="vars[fontsize_name]" id="vars[fontsize_name]" value="<?= $vars["fontsize_name"] ?>">
+                        </div>
                         <div>
                             <input type="color" class="picker" name="vars[fontcolor_name]" id="vars[fontcolor_name]" value="<?= $vars["fontcolor_name"] ?>" /><label for="vars[fontcolor_name]" class="picker-label"><?= I18N::translate('Font color for names') ?></label>
                         </div>
@@ -567,8 +575,8 @@ use Fisharebest\Webtrees\Tree;
     const graphvizAvailable = <?= $nographviz ? "false" : "true" ?>;
     let panzoomInst = null;
     let jsPDF = null;
-    var workerURL = '<?= $module->assetUrl('javascript/full.renderer.js'); ?>';
-    var viz = new Viz({
+    const workerURL = '<?= $module->assetUrl('javascript/full.renderer.js'); ?>';
+    let viz = new Viz({
         workerURL: workerURL
     });
 
@@ -601,7 +609,7 @@ use Fisharebest\Webtrees\Tree;
         // Also check if GraphViz installed. If so then let it handle it,
         // but if not, trigger client side actions
         if (!graphvizAvailable) {
-            output = document.getElementById('vars[otype]').value;
+            const output = document.getElementById('vars[otype]').value;
             switch(output) {
                 case "png":
                     downloadSVGAsPNG();
