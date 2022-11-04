@@ -445,11 +445,11 @@ use Fisharebest\Webtrees\Tree;
                         <div class="col-auto">
                             <?= view('components/select', ['name' => 'vars[typeface]', 'selected' => $vars['typeface'], 'options' => updateTranslations($gve_config["settings"]["typefaces"])]) ?>
                         </div>
-                        <label for="vars[fontsize]"><?= I18N::translate('Standard font size') ?>:</label>
+                        <label for="vars[fontsize]"><?= I18N::translate('Font size for details') ?>:</label>
                         <div class="col-auto">
                             <input type="text" class="form-control col-sm-6" size="10" name="vars[fontsize]" id="vars[fontsize]" value="<?= $vars["fontsize"] ?>">
                         </div>
-                        <label for="vars[fontsize_name]"><?= I18N::translate('Name font size') ?>:</label>
+                        <label for="vars[fontsize_name]"><?= I18N::translate('Font size for names') ?>:</label>
                         <div class="col-auto">
                             <input type="text" class="form-control col-sm-6" size="10" name="vars[fontsize_name]" id="vars[fontsize_name]" value="<?= $vars["fontsize_name"] ?>">
                         </div>
