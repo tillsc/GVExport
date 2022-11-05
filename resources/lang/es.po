@@ -28,7 +28,8 @@ msgid "Appearance"
 msgstr "Apariencia"
 
 #: 
-msgid "Output Settings"
+#, fuzzy
+msgid "Output settings"
 msgstr "Opciones de salida"
 
 #: 
@@ -40,7 +41,8 @@ msgid "Stop processing on"
 msgstr "Detener proceso en"
 
 #: 
-msgid "Include Ancestors"
+#, fuzzy
+msgid "Include ancestors"
 msgstr "Incluir Ancestros"
 
 #: 
@@ -60,11 +62,13 @@ msgid "Spouses"
 msgstr "Esposas"
 
 #: 
-msgid "Include Descendants"
+#, fuzzy
+msgid "Include descendants"
 msgstr "Incluir Descendientes"
 
 #: 
-msgid "Max Levels"
+#, fuzzy
+msgid "Max levels"
 msgstr "Nivel Max"
 
 #: 
@@ -80,19 +84,23 @@ msgid "Use abbreviated placenames"
 msgstr "Usar nombres de lugares abreviados"
 
 #: 
-msgid "Show Birth Date"
+#, fuzzy
+msgid "Show birth date"
 msgstr "Mostrar Fecha de Nacimiento"
 
 #: 
-msgid "Show Birth Place"
+#, fuzzy
+msgid "Show birth place"
 msgstr "Mostrar lugar de nacimiento"
 
 #: 
-msgid "Show Death Date"
+#, fuzzy
+msgid "Show death date"
 msgstr "Mostrar fecha de Defunción"
 
 #: 
-msgid "Full Date"
+#, fuzzy
+msgid "Full date"
 msgstr "Fecha Completa"
 
 #: 
@@ -100,27 +108,33 @@ msgid "Year"
 msgstr "Año"
 
 #: 
-msgid "Show Death Place"
+#, fuzzy
+msgid "Show death place"
 msgstr "Mostrar lugar de muerte"
 
 #: 
-msgid "Show Family ID"
+#, fuzzy
+msgid "Show family XREF"
 msgstr "Mostrar ID Familia"
 
 #: 
-msgid "Show Marriage Date"
+#, fuzzy
+msgid "Show marriage date"
 msgstr "Mostrar fecha de matrimonio"
 
 #: 
-msgid "Show Marriage Place"
+#, fuzzy
+msgid "Show marriage place"
 msgstr "Mostrar lugar de matrimonio"
 
 #: 
-msgid "Graph Direction"
+#, fuzzy
+msgid "Graph direction"
 msgstr "Dirección del gráfico"
 
 #: 
-msgid "Diagram Type"
+#, fuzzy
+msgid "Diagram type"
 msgstr "Tipo de diagrama"
 
 #: 
@@ -144,16 +158,13 @@ msgid "Only Decorated or Combined"
 msgstr "Solo Decorado o Combinado"
 
 #: 
-msgid "Output File Type"
+#, fuzzy
+msgid "Output file type"
 msgstr "Tipo de archivo de salida"
 
 #: 
 msgid "Generate a file for download"
 msgstr "Generar un archivo para descargar"
-
-#: 
-msgid "Choose DOT if you don't have GraphViz installed on server."
-msgstr "Elija DOT si no tiene GraphViz instalado en el servidor."
 
 #: 
 msgid "Number of iterations (MCLIMIT)"
@@ -168,7 +179,8 @@ msgid "DPI"
 msgstr "DPI"
 
 #: 
-msgid "Show Selection"
+#, fuzzy
+msgid "Show options"
 msgstr "Mostrar selección"
 
 #: 
@@ -176,11 +188,13 @@ msgid "SVG only"
 msgstr "Solo SVG"
 
 #: 
-msgid "Top-to-Bottom"
+#, fuzzy
+msgid "Top-to-bottom"
 msgstr "Arriba-a-Abajo"
 
 #: 
-msgid "Left-to-Right"
+#, fuzzy
+msgid "Left-to-right"
 msgstr "Izquierda-a-Derecha"
 
 #: 
@@ -192,12 +206,14 @@ msgid "Space between individuals on the same level"
 msgstr "Espacio entre individuos en el mismo nivel"
 
 #: 
-msgid "Error running GVExport in Browser mode"
+#, fuzzy
+msgid "Error running GVExport in browser mode"
 msgstr "Error al ejecutar GVExport en modo navegador"
 
 #: 
 msgid "Preview"
-msgstr "Previo"
+msgstr "Previsualizar\n"
+""
 
 #: 
 msgid "Download"
@@ -208,15 +224,18 @@ msgid "Full place name"
 msgstr "Nombre completo del lugar"
 
 #: 
-msgid "City and Country"
+#, fuzzy
+msgid "City and country"
 msgstr "Ciudad y país"
 
 #: 
-msgid "City and 2 Letter ISO Country Code"
+#, fuzzy
+msgid "City and 2 letter ISO country code"
 msgstr "Ciudad y código de país ISO de 2 letras"
 
 #: 
-msgid "City and 3 Letter ISO Country Code"
+#, fuzzy
+msgid "City and 3 letter ISO country code"
 msgstr "Ciudad y código de país ISO de 3 letras"
 
 #: 
@@ -236,14 +255,316 @@ msgid "Abbreviated place names"
 msgstr "Nombres de lugares abreviados"
 
 #: 
-msgid "You have items in the clippings cart, so clippings cart items will be used for the diagram instead of the below options."
-msgstr "Tiene elementos en el carrito de recortes, por lo que los elementos del carrito de recortes se utilizarán para el diagrama en lugar de las siguientes opciones."
-
-#: 
 msgid "People to be included"
 msgstr "Personas a incluir"
 
 #: 
-msgid "Show Individual ID"
+#, fuzzy
+msgid "Show individual XREF"
 msgstr "Mostrar ID individual"
+
+#: 
+msgid "Options limited as GraphViz not installed on server"
+msgstr ""
+
+#: 
+msgid "Anyone"
+msgstr ""
+
+#: 
+msgid "All relatives"
+msgstr ""
+
+#: 
+msgid "You have items in the clippings cart, which can be used for the diagram instead of the below options."
+msgstr ""
+
+#: 
+msgid "Use clippings cart"
+msgstr ""
+
+#: 
+msgid "Ignore clippings cart"
+msgstr ""
+
+#: 
+msgid "Warning"
+msgstr ""
+
+#: 
+msgid "Individual required"
+msgstr ""
+
+#: 
+msgid "Generated ${indiNum} individuals and ${famNum} family records"
+msgstr ""
+
+#: 
+msgid "Invalid starting individual:"
+msgstr ""
+
+#: 
+msgid "Your browser does not support exporting images this large. Please reduce number of records, reduce DPI setting, or use SVG option."
+msgstr ""
+
+#: 
+msgid "Toggle advanced settings"
+msgstr ""
+
+#: 
+msgid "Ignore unseen links to speed up relative check"
+msgstr ""
+
+#: 
+msgid "Non-relatives"
+msgstr ""
+
+#: 
+msgid "Font"
+msgstr ""
+
+#: 
+msgid "Typeface"
+msgstr ""
+
+#: 
+msgid "Font color for names"
+msgstr ""
+
+#: 
+msgid "Font color for details"
+msgstr ""
+
+#. When you are no longer logged in, GVExport can't load the browser render until the page is refreshed. This message is shown before automatically reloading the page.
+#: 
+msgid "Login expired. Reloading page..."
+msgstr ""
+
+#. Label for section that lets you change the colour of arrows that represent relationships between records
+#: 
+msgid "Relationship arrows"
+msgstr ""
+
+#. Label for setting the main arrow colour
+#: 
+msgid "Arrow color"
+msgstr ""
+
+#. When enabled makes arrows from family to child different colours based on if the child is related to the family by birth or otherwise (e.g. adoption)
+#: 
+msgid "Show blood relationship in different color"
+msgstr ""
+
+#. Label for colour picker to select colour of arrow for children related by birth
+#: 
+msgid "Related by birth"
+msgstr ""
+
+#. Label for colour picker to select colour of arrow for children not related by birth (e.g. adoption)
+#: 
+msgid "Related other than by birth"
+msgstr ""
+
+#. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
+#: 
+msgid "Full name"
+msgstr ""
+
+#. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
+#: 
+msgid "Given and surnames"
+msgstr ""
+
+#. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
+#: 
+msgid "Given names"
+msgstr ""
+
+#. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
+#: 
+msgid "Surnames"
+msgstr ""
+
+#. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
+#: 
+msgid "Don't show names"
+msgstr ""
+
+#. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
+#: 
+msgid "First given name only"
+msgstr ""
+
+#. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
+#: 
+msgid "Initials only"
+msgstr ""
+
+#. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
+#: 
+msgid "Given name initials and surname"
+msgstr ""
+
+#. This is to replace "Spouses" in the options of people to include - "Spouses" implies marriage but the couples are not necessarily married.
+#: 
+msgid "Partners"
+msgstr ""
+
+#. Option section where option to auto-update is presented
+#: 
+msgid "Browser render"
+msgstr ""
+
+#. Whether to automatically update the diagram in the browser whenever something is changed. If unselected, user must click "Update" button before browser render is refreshed after a change.
+#: 
+msgid "Auto-update"
+msgstr ""
+
+#. Button to clear all selected individuals (in new individual selection functionality) https://s3.eu-west-1.amazonaws.com/po-pub/i/EsrRESKU3YALMqSOyVudt0L1.png
+#: 
+msgid "Clear all"
+msgstr ""
+
+#. With the new way of showing the selected starting individuals, the XREF list is now moved to the advanced section. This is the description of this field that lists the XREFs of the starting individuals that used to be under the person select dropdown.
+#: 
+msgid "XREFs of included individuals"
+msgstr ""
+
+#. Option to show given or surnames, initials, or to hide names completely:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/5r0R5U4uGRS1qz8NuOCtuIN1.png
+#: 
+msgid "Abbreviated names"
+msgstr ""
+
+#. This is shown when hovering over the new "Fullscreen" button. 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/FNnRXD7QT9BrgV0wMgPIdrY2.png 
+#. 
+#. This is shown at the top right of the browser render:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/f2Rt9T3BJXkNbeqoeazeDJkE.png
+#: 
+msgid "Fullscreen"
+msgstr ""
+
+#. Option allowing user to change colour used for male individuals (default is a light blue)
+#: 
+msgid "Male individuals"
+msgstr ""
+
+#. Option allowing user to change colour of female individuals (default is pink)
+#: 
+msgid "Female individuals"
+msgstr ""
+
+#. Option allowing user to change colour of individuals where gender is "Other"
+#: 
+msgid "Other gender individuals"
+msgstr ""
+
+#. Option allowing user to change the colour of individuals where the gender is unknown (default is light green)
+#: 
+msgid "Unknown gender individuals"
+msgstr ""
+
+#. Option allowing user to change colour of non-blood related male individuals (if the option to display in a different colour is selected). Default is a very pale blue.
+#: 
+msgid "Not blood-related male individuals"
+msgstr ""
+
+#. Option allowing user to change colour of non-blood related female individuals (if the option to display in a different colour is selected). Default is a very pale pink.
+#: 
+msgid "Not blood-related female individuals"
+msgstr ""
+
+#. Option allowing user to change colour of non-blood related other gender individuals (if the option to display in a different colour is selected). Default is a very pale yellow.
+#: 
+msgid "Not blood-related other gender individuals"
+msgstr ""
+
+#. Option allowing user to change colour of non-blood related unknown gender individuals (if the option to display in a different colour is selected). Default is a very pale green.
+#: 
+msgid "Not blood-related unknown gender individuals"
+msgstr ""
+
+#. Option allowing user to change the background colour of individual tiles (decorated and combined modes)
+#: 
+msgid "Individual background color"
+msgstr ""
+
+#. Section where user can change colours related to the tiles showing each individual:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/tCBByut2gnWNyBHlbEjXM4wm.png
+#: 
+msgid "Tile colors"
+msgstr ""
+
+#. Section where colours can be changed, where this is unrelated to other sections:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/HkIwBd2gotM7LpP7LA074oOI.png
+#: 
+msgid "Other colours"
+msgstr ""
+
+#. Option where user can change the background colour of the family record (ovals in simple/decorated mode, attached rectangle in combined mode). Default is a light yellow.
+#: 
+msgid "Family background"
+msgstr ""
+
+#. Option where user can change the colour of the borders of the tiles and family records.
+#: 
+msgid "Outline colour"
+msgstr ""
+
+#. Option where user can change the colour of the background behind the diagram
+#: 
+msgid "Diagram background color"
+msgstr ""
+
+#. Shown in tooltip when hovering over close button in fullscreen mode
+#: 
+msgid "Exit fullscreen"
+msgstr ""
+
+#. This is a section title on the control panel settings page where the default values can be configured by the admin.
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/oc2QJRdngdisManSLq1kEN2g.png
+#: 
+msgid "Default values for GVExport"
+msgstr ""
+
+#. A description at the top of the control panel page where the admin can set default values.
+#. 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/oc2QJRdngdisManSLq1kEN2g.png
+#: 
+msgid "Values here are used as default values for new users of GVExport, and are used when users choose to reset the settings."
+msgstr ""
+
+#. In the control panel the admin can set default values for GVExport. This button resets these values to the GVExport defaults.  https://s3.eu-west-1.amazonaws.com/po-pub/i/RaXrJonKH38DYcc5TcU1PLSv.png
+#: 
+msgid "reset to defaults"
+msgstr ""
+
+#. Checkbox option to enable a different background colour for starting individuals, to help find them easier on the diagram:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/afEtoto6Qnv1HlJn0zqAiMtP.png 
+#. 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/eo7ytnyRCth5W2Sq76da71Ph.png
+#: 
+msgid "Show starting persons in different color"
+msgstr ""
+
+#. Option to change the background colour for starting individuals, to help find them easier on the diagram:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/afEtoto6Qnv1HlJn0zqAiMtP.png 
+#. 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/eo7ytnyRCth5W2Sq76da71Ph.png
+#: 
+msgid "Starting persons background color"
+msgstr ""
+
+#. Option to change font size. This affects (at the time of writing) all diagram text except for names which have their own setting:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/IdWIcmNdrOj4l1yTgxv6MpVW.png
+#: 
+msgid "Font size for details"
+msgstr ""
+
+#. The font size to use for the names of individuals:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/IdWIcmNdrOj4l1yTgxv6MpVW.png
+#: 
+msgid "Font size for names"
+msgstr ""
 

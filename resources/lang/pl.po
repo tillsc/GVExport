@@ -28,7 +28,8 @@ msgid "Appearance"
 msgstr "Wygląd"
 
 #: 
-msgid "Output Settings"
+#, fuzzy
+msgid "Output settings"
 msgstr "Ustawienia Wyjściowe"
 
 #: 
@@ -40,7 +41,8 @@ msgid "Stop processing on"
 msgstr "Zatrzymaj przetwarzanie"
 
 #: 
-msgid "Include Ancestors"
+#, fuzzy
+msgid "Include ancestors"
 msgstr "Uwzględnij przodków"
 
 #: 
@@ -60,11 +62,13 @@ msgid "Spouses"
 msgstr "Małżonków"
 
 #: 
-msgid "Include Descendants"
+#, fuzzy
+msgid "Include descendants"
 msgstr "Uwzględnij potomków"
 
 #: 
-msgid "Max Levels"
+#, fuzzy
+msgid "Max levels"
 msgstr "Maksymalne poziomy"
 
 #: 
@@ -80,19 +84,23 @@ msgid "Use abbreviated placenames"
 msgstr "Używaj skróconych nazw miejsc"
 
 #: 
-msgid "Show Birth Date"
+#, fuzzy
+msgid "Show birth date"
 msgstr "Pokaż Datę Urodzenia"
 
 #: 
-msgid "Show Birth Place"
+#, fuzzy
+msgid "Show birth place"
 msgstr "Pokaż Miejsce Urodzenia"
 
 #: 
-msgid "Show Death Date"
+#, fuzzy
+msgid "Show death date"
 msgstr "Pokaż Datę Śmierci"
 
 #: 
-msgid "Full Date"
+#, fuzzy
+msgid "Full date"
 msgstr "Pełna Data"
 
 #: 
@@ -100,27 +108,33 @@ msgid "Year"
 msgstr "Rok"
 
 #: 
-msgid "Show Death Place"
+#, fuzzy
+msgid "Show death place"
 msgstr "Pokaż Miejsce Śmierci"
 
 #: 
-msgid "Show Family ID"
+#, fuzzy
+msgid "Show family XREF"
 msgstr "Pokaż ID Rodziny"
 
 #: 
-msgid "Show Marriage Date"
+#, fuzzy
+msgid "Show marriage date"
 msgstr "Pokaż Datę Ślubu"
 
 #: 
-msgid "Show Marriage Place"
+#, fuzzy
+msgid "Show marriage place"
 msgstr "Pokaż Miejsce Ślubu"
 
 #: 
-msgid "Graph Direction"
+#, fuzzy
+msgid "Graph direction"
 msgstr "Kierunek Diagramu"
 
 #: 
-msgid "Diagram Type"
+#, fuzzy
+msgid "Diagram type"
 msgstr "Typ Diagramu"
 
 #: 
@@ -144,7 +158,8 @@ msgid "Only Decorated or Combined"
 msgstr "Tylko Dekoracyjny i Połączony"
 
 #: 
-msgid "Output File Type"
+#, fuzzy
+msgid "Output file type"
 msgstr "Typ Pliku Wyjściowego"
 
 #: 
@@ -164,7 +179,8 @@ msgid "DPI"
 msgstr "DPI"
 
 #: 
-msgid "Show Selection"
+#, fuzzy
+msgid "Show options"
 msgstr "Pokaż Wybrane"
 
 #: 
@@ -172,11 +188,13 @@ msgid "SVG only"
 msgstr "Tylko SVG"
 
 #: 
-msgid "Top-to-Bottom"
+#, fuzzy
+msgid "Top-to-bottom"
 msgstr "Od Góry Do Dołu"
 
 #: 
-msgid "Left-to-Right"
+#, fuzzy
+msgid "Left-to-right"
 msgstr "Od Lewej Do Prawej"
 
 #: 
@@ -188,7 +206,8 @@ msgid "Space between individuals on the same level"
 msgstr "Przestrzeń między osobami na tym samym poziomie"
 
 #: 
-msgid "Error running GVExport in Browser mode"
+#, fuzzy
+msgid "Error running GVExport in browser mode"
 msgstr "Błąd uruchamiania GVExport w trybie przeglądarki"
 
 #: 
@@ -204,15 +223,18 @@ msgid "Full place name"
 msgstr "Full place name"
 
 #: 
-msgid "City and Country"
+#, fuzzy
+msgid "City and country"
 msgstr "Miasto i Kraj"
 
 #: 
-msgid "City and 2 Letter ISO Country Code"
+#, fuzzy
+msgid "City and 2 letter ISO country code"
 msgstr "Miasto i 2 Litery Kodu  ISO Kraju"
 
 #: 
-msgid "City and 3 Letter ISO Country Code"
+#, fuzzy
+msgid "City and 3 letter ISO country code"
 msgstr "Miasto i 3 Litery Kodu  ISO Kraju"
 
 #: 
@@ -236,7 +258,8 @@ msgid "People to be included"
 msgstr "Osoby, które należy uwzględnić"
 
 #: 
-msgid "Show Individual ID"
+#, fuzzy
+msgid "Show individual XREF"
 msgstr "Pokaż indywidualne ID"
 
 #: 
@@ -378,7 +401,8 @@ msgstr "Tylko inicjały"
 
 #. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
 #: 
-msgid "Given name initials and Surname"
+#, fuzzy
+msgid "Given name initials and surname"
 msgstr "Pokaż Inicjały imienia i nazwisko"
 
 #. This is to replace "Spouses" in the options of people to include - "Spouses" implies marriage but the couples are not necessarily married.
@@ -531,4 +555,16 @@ msgstr "Pokaż osoby startujące w innym kolorze"
 #: 
 msgid "Starting persons background color"
 msgstr "Kolor tła osób rozpoczynających"
+
+#. Option to change font size. This affects (at the time of writing) all diagram text except for names which have their own setting:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/IdWIcmNdrOj4l1yTgxv6MpVW.png
+#: 
+msgid "Font size for details"
+msgstr ""
+
+#. The font size to use for the names of individuals:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/IdWIcmNdrOj4l1yTgxv6MpVW.png
+#: 
+msgid "Font size for names"
+msgstr ""
 

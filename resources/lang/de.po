@@ -28,7 +28,8 @@ msgid "Appearance"
 msgstr "Gestaltung des Diagramms"
 
 #: 
-msgid "Output Settings"
+#, fuzzy
+msgid "Output settings"
 msgstr "Ausgabe-Einstellungen"
 
 #: 
@@ -40,7 +41,8 @@ msgid "Stop processing on"
 msgstr "Beende Bearbeitung bei"
 
 #: 
-msgid "Include Ancestors"
+#, fuzzy
+msgid "Include ancestors"
 msgstr "Vorfahren einbeziehen"
 
 #: 
@@ -60,11 +62,13 @@ msgid "Spouses"
 msgstr "Partner"
 
 #: 
-msgid "Include Descendants"
+#, fuzzy
+msgid "Include descendants"
 msgstr "Nachkommen einbeziehen"
 
 #: 
-msgid "Max Levels"
+#, fuzzy
+msgid "Max levels"
 msgstr "Maximale Generationen"
 
 #: 
@@ -80,19 +84,23 @@ msgid "Use abbreviated placenames"
 msgstr "Benutzung abgek&uuml;rzter Ortsnamen"
 
 #: 
-msgid "Show Birth Date"
+#, fuzzy
+msgid "Show birth date"
 msgstr "Zeige Geburtsdatum"
 
 #: 
-msgid "Show Birth Place"
+#, fuzzy
+msgid "Show birth place"
 msgstr "Zeige Geburtsort"
 
 #: 
-msgid "Show Death Date"
+#, fuzzy
+msgid "Show death date"
 msgstr "Zeige Sterbedatum"
 
 #: 
-msgid "Full Date"
+#, fuzzy
+msgid "Full date"
 msgstr "Vollständiges Datum"
 
 #: 
@@ -100,27 +108,33 @@ msgid "Year"
 msgstr "Jahr"
 
 #: 
-msgid "Show Death Place"
+#, fuzzy
+msgid "Show death place"
 msgstr "Zeige Sterbeort"
 
 #: 
-msgid "Show Family ID"
+#, fuzzy
+msgid "Show family XREF"
 msgstr "Zeige XREF einer Familie"
 
 #: 
-msgid "Show Marriage Date"
+#, fuzzy
+msgid "Show marriage date"
 msgstr "Zeige Heiratsdatum"
 
 #: 
-msgid "Show Marriage Place"
+#, fuzzy
+msgid "Show marriage place"
 msgstr "Zeige Heiratsort"
 
 #: 
-msgid "Graph Direction"
+#, fuzzy
+msgid "Graph direction"
 msgstr "Diagrammrichtung"
 
 #: 
-msgid "Diagram Type"
+#, fuzzy
+msgid "Diagram type"
 msgstr "Diagrammtyp"
 
 #: 
@@ -144,7 +158,8 @@ msgid "Only Decorated or Combined"
 msgstr "nur bei \"dekoriert\" oder \"kombiniert\""
 
 #: 
-msgid "Output File Type"
+#, fuzzy
+msgid "Output file type"
 msgstr "Ausgabedatei-Typ"
 
 #: 
@@ -164,7 +179,8 @@ msgid "DPI"
 msgstr "DPI (Punkte pro Zoll)"
 
 #: 
-msgid "Show Selection"
+#, fuzzy
+msgid "Show options"
 msgstr "Zeige Auswahl"
 
 #: 
@@ -172,11 +188,13 @@ msgid "SVG only"
 msgstr "nur SVG"
 
 #: 
-msgid "Top-to-Bottom"
+#, fuzzy
+msgid "Top-to-bottom"
 msgstr "von oben nach unten"
 
 #: 
-msgid "Left-to-Right"
+#, fuzzy
+msgid "Left-to-right"
 msgstr "von links nach rechts"
 
 #: 
@@ -188,7 +206,8 @@ msgid "Space between individuals on the same level"
 msgstr "Abstand zwischen den Personen auf der selben Ebene"
 
 #: 
-msgid "Error running GVExport in Browser mode"
+#, fuzzy
+msgid "Error running GVExport in browser mode"
 msgstr "Fehler bei der Ausführung von GVExport im Browser"
 
 #: 
@@ -204,15 +223,18 @@ msgid "Full place name"
 msgstr "Vollständige Ortsnamen"
 
 #: 
-msgid "City and Country"
+#, fuzzy
+msgid "City and country"
 msgstr "Ort und Land"
 
 #: 
-msgid "City and 2 Letter ISO Country Code"
+#, fuzzy
+msgid "City and 2 letter ISO country code"
 msgstr "Ort und 2-Buchstaben ISO-Länder-Code"
 
 #: 
-msgid "City and 3 Letter ISO Country Code"
+#, fuzzy
+msgid "City and 3 letter ISO country code"
 msgstr "Ort und 3-Buchstaben ISO-Länder-Code"
 
 #: 
@@ -236,7 +258,8 @@ msgid "People to be included"
 msgstr "Einzubeziehende Personen"
 
 #: 
-msgid "Show Individual ID"
+#, fuzzy
+msgid "Show individual XREF"
 msgstr "Zeige XREF einer Person"
 
 #: 
@@ -378,7 +401,8 @@ msgstr "Nur Initialen"
 
 #. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
 #: 
-msgid "Given name initials and Surname"
+#, fuzzy
+msgid "Given name initials and surname"
 msgstr "Initialen der Vornamen und Nachnamen"
 
 #. This is to replace "Spouses" in the options of people to include - "Spouses" implies marriage but the couples are not necessarily married.
@@ -476,7 +500,7 @@ msgstr "Kachelfarben"
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/HkIwBd2gotM7LpP7LA074oOI.png
 #: 
 msgid "Other colours"
-msgstr "andere Farben"
+msgstr "Andere Farben"
 
 #. Option where user can change the background colour of the family record (ovals in simple/decorated mode, attached rectangle in combined mode). Default is a light yellow.
 #: 
@@ -531,4 +555,18 @@ msgstr "Zeige Startpersonen in unterschiedlicher Farbe"
 #: 
 msgid "Starting persons background color"
 msgstr "Hintergrundfarbe der Startpersonen"
+
+#. Option to change font size. This affects (at the time of writing) all diagram text except for names which have their own setting:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/IdWIcmNdrOj4l1yTgxv6MpVW.png
+#: 
+#, fuzzy
+msgid "Font size for details"
+msgstr "Schriftgröße (Standard)"
+
+#. The font size to use for the names of individuals:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/IdWIcmNdrOj4l1yTgxv6MpVW.png
+#: 
+#, fuzzy
+msgid "Font size for names"
+msgstr "Schriftgröße (Namen)"
 
