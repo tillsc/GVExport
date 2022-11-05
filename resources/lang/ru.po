@@ -28,7 +28,8 @@ msgid "Appearance"
 msgstr "вид"
 
 #: 
-msgid "Output Settings"
+#, fuzzy
+msgid "Output settings"
 msgstr "Настройки вывода"
 
 #: 
@@ -40,7 +41,8 @@ msgid "Stop processing on"
 msgstr "Остановить обработку"
 
 #: 
-msgid "Include Ancestors"
+#, fuzzy
+msgid "Include ancestors"
 msgstr "Включить предков"
 
 #: 
@@ -60,11 +62,13 @@ msgid "Spouses"
 msgstr "Супруги"
 
 #: 
-msgid "Include Descendants"
+#, fuzzy
+msgid "Include descendants"
 msgstr "Включить потомков"
 
 #: 
-msgid "Max Levels"
+#, fuzzy
+msgid "Max levels"
 msgstr "Максимальные уровни"
 
 #: 
@@ -80,19 +84,23 @@ msgid "Use abbreviated placenames"
 msgstr "Используйте сокращенные географические названия"
 
 #: 
-msgid "Show Birth Date"
+#, fuzzy
+msgid "Show birth date"
 msgstr "Показать дату рождения"
 
 #: 
-msgid "Show Birth Place"
+#, fuzzy
+msgid "Show birth place"
 msgstr "Показать место рождения"
 
 #: 
-msgid "Show Death Date"
+#, fuzzy
+msgid "Show death date"
 msgstr "Показать дату смерти"
 
 #: 
-msgid "Full Date"
+#, fuzzy
+msgid "Full date"
 msgstr "Полная дата"
 
 #: 
@@ -100,27 +108,33 @@ msgid "Year"
 msgstr "Год"
 
 #: 
-msgid "Show Death Place"
+#, fuzzy
+msgid "Show death place"
 msgstr "Показать место смерти"
 
 #: 
-msgid "Show Family ID"
+#, fuzzy
+msgid "Show family XREF"
 msgstr "Показать удостоверение семьи"
 
 #: 
-msgid "Show Marriage Date"
+#, fuzzy
+msgid "Show marriage date"
 msgstr "Показать дату брака"
 
 #: 
-msgid "Show Marriage Place"
+#, fuzzy
+msgid "Show marriage place"
 msgstr "Показать место заключения брака"
 
 #: 
-msgid "Graph Direction"
+#, fuzzy
+msgid "Graph direction"
 msgstr "Направление графика"
 
 #: 
-msgid "Diagram Type"
+#, fuzzy
+msgid "Diagram type"
 msgstr "Тип диаграммы"
 
 #: 
@@ -144,7 +158,8 @@ msgid "Only Decorated or Combined"
 msgstr "Только декорированные или комбинированные"
 
 #: 
-msgid "Output File Type"
+#, fuzzy
+msgid "Output file type"
 msgstr "Тип выходного файла"
 
 #: 
@@ -164,7 +179,8 @@ msgid "DPI"
 msgstr "DPI"
 
 #: 
-msgid "Show Selection"
+#, fuzzy
+msgid "Show options"
 msgstr "Выбор шоу"
 
 #: 
@@ -172,11 +188,13 @@ msgid "SVG only"
 msgstr "Только SVG"
 
 #: 
-msgid "Top-to-Bottom"
+#, fuzzy
+msgid "Top-to-bottom"
 msgstr "Сверху вниз"
 
 #: 
-msgid "Left-to-Right"
+#, fuzzy
+msgid "Left-to-right"
 msgstr "Слева направо"
 
 #: 
@@ -188,7 +206,8 @@ msgid "Space between individuals on the same level"
 msgstr "Пространство между людьми, находящимися на одном уровне"
 
 #: 
-msgid "Error running GVExport in Browser mode"
+#, fuzzy
+msgid "Error running GVExport in browser mode"
 msgstr "Ошибка при запуске GVExport в режиме браузера"
 
 #: 
@@ -204,15 +223,18 @@ msgid "Full place name"
 msgstr "Полное название места"
 
 #: 
-msgid "City and Country"
+#, fuzzy
+msgid "City and country"
 msgstr "Город и страна"
 
 #: 
-msgid "City and 2 Letter ISO Country Code"
+#, fuzzy
+msgid "City and 2 letter ISO country code"
 msgstr "Город и 2-буквенный код страны ISO"
 
 #: 
-msgid "City and 3 Letter ISO Country Code"
+#, fuzzy
+msgid "City and 3 letter ISO country code"
 msgstr "Город и 3-буквенный код страны ISO"
 
 #: 
@@ -236,7 +258,8 @@ msgid "People to be included"
 msgstr "Люди, которые должны быть включены"
 
 #: 
-msgid "Show Individual ID"
+#, fuzzy
+msgid "Show individual XREF"
 msgstr "Показать индивидуальный идентификатор"
 
 #: 
@@ -378,7 +401,8 @@ msgstr "Только инициалы"
 
 #. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
 #: 
-msgid "Given name initials and Surname"
+#, fuzzy
+msgid "Given name initials and surname"
 msgstr "Настоящее имя инициалы и фамилия"
 
 #. This is to replace "Spouses" in the options of people to include - "Spouses" implies marriage but the couples are not necessarily married.
@@ -496,25 +520,25 @@ msgstr "Цвет фона диаграммы"
 #. Shown in tooltip when hovering over close button in fullscreen mode
 #: 
 msgid "Exit fullscreen"
-msgstr ""
+msgstr "Выйти из полноэкранного режима"
 
 #. This is a section title on the control panel settings page where the default values can be configured by the admin.
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/oc2QJRdngdisManSLq1kEN2g.png
 #: 
 msgid "Default values for GVExport"
-msgstr ""
+msgstr "Значения по умолчанию для GVExport"
 
 #. A description at the top of the control panel page where the admin can set default values.
 #. 
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/oc2QJRdngdisManSLq1kEN2g.png
 #: 
 msgid "Values here are used as default values for new users of GVExport, and are used when users choose to reset the settings."
-msgstr ""
+msgstr "Значения здесь используются в качестве значений по умолчанию для новых пользователей GVExport и используются, когда пользователи решают сбросить настройки."
 
 #. In the control panel the admin can set default values for GVExport. This button resets these values to the GVExport defaults.  https://s3.eu-west-1.amazonaws.com/po-pub/i/RaXrJonKH38DYcc5TcU1PLSv.png
 #: 
 msgid "reset to defaults"
-msgstr ""
+msgstr "сбросить настройки по умолчанию"
 
 #. Checkbox option to enable a different background colour for starting individuals, to help find them easier on the diagram:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/afEtoto6Qnv1HlJn0zqAiMtP.png 
@@ -522,7 +546,7 @@ msgstr ""
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/eo7ytnyRCth5W2Sq76da71Ph.png
 #: 
 msgid "Show starting persons in different color"
-msgstr ""
+msgstr "Показывать начинающих людей другим цветом"
 
 #. Option to change the background colour for starting individuals, to help find them easier on the diagram:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/afEtoto6Qnv1HlJn0zqAiMtP.png 
@@ -530,5 +554,19 @@ msgstr ""
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/eo7ytnyRCth5W2Sq76da71Ph.png
 #: 
 msgid "Starting persons background color"
-msgstr ""
+msgstr "Цвет фона начальных лиц"
+
+#. Option to change font size. This affects (at the time of writing) all diagram text except for names which have their own setting:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/IdWIcmNdrOj4l1yTgxv6MpVW.png
+#: 
+#, fuzzy
+msgid "Font size for details"
+msgstr "Стандартный размер шрифта"
+
+#. The font size to use for the names of individuals:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/IdWIcmNdrOj4l1yTgxv6MpVW.png
+#: 
+#, fuzzy
+msgid "Font size for names"
+msgstr "Размер шрифта имени"
 

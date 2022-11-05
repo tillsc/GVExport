@@ -137,8 +137,8 @@ $GVE_CONFIG["settings"]["auto_update"] = "auto_update";
 
 // Direction of graph
 $GVE_CONFIG["default_direction"] = "LR";
-$GVE_CONFIG["directions"]["TB"] = "Top-to-Bottom";
-$GVE_CONFIG["directions"]["LR"] = "Left-to-Right";
+$GVE_CONFIG["directions"]["TB"] = "Top-to-bottom";
+$GVE_CONFIG["directions"]["LR"] = "Left-to-right";
 
 // Font name
 $GVE_CONFIG["default_typeface"] = 0;
@@ -185,8 +185,8 @@ foreach ($json as $row) {
 	$GVE_CONFIG["countries"]["iso3"][strtolower($row["Name"])] = $row["ISO3166-1-Alpha-3"];
 }
 // Options for abbreviating
-$GVE_CONFIG["settings"]["use_abbr_places"] = [0 => "Full place name", 10 => "City and Country" ,  20 => "City and 2 Letter ISO Country Code", 30 => "City and 3 Letter ISO Country Code"];
-$GVE_CONFIG["settings"]["use_abbr_names"] = [0 => "Full name", 10 => "Given and Surnames", 20 => "Given names" , 30 => "First given name only", 40 => "Surnames", 50 => "Initials only", 60 => "Given name initials and Surname", 70 => "Don't show names"];
+$GVE_CONFIG["settings"]["use_abbr_places"] = [0 => "Full place name", 10 => "City and country" ,  20 => "City and 2 letter ISO country code", 30 => "City and 3 letter ISO country code"];
+$GVE_CONFIG["settings"]["use_abbr_names"] = [0 => "Full name", 10 => "Given and surnames", 20 => "Given names" , 30 => "First given name only", 40 => "Surnames", 50 => "Initials only", 60 => "Given name initials and surname", 70 => "Don't show names"];
 
 // Check if exec function is available to prevent error if webserver has disabled it
 // From: https://stackoverflow.com/questions/3938120/check-if-exec-is-disabled

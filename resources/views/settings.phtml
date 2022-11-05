@@ -63,7 +63,7 @@ use Fisharebest\Webtrees\Http\RequestHandlers\ControlPanel;
             </div>
 
             <div class="row">
-                <label class="col-sm-4 col-form-label" for="vars[indiance]"><?= I18N::translate('Include Ancestors') ?></label>
+                <label class="col-sm-4 col-form-label" for="vars[indiance]"><?= I18N::translate('Include ancestors') ?></label>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="row">
                         <div class="col-auto mx-3">
@@ -71,7 +71,7 @@ use Fisharebest\Webtrees\Http\RequestHandlers\ControlPanel;
                             <input class="cart_toggle" type="checkbox" name="vars[indiance]" id="vars[indiance]" value="ance" <?= $vars["indiance"] == "ance" ? 'checked' : '' ?>>
                         </div>
                         <div class="col-auto row">
-                            <label for="vars[ance_level]" class="col-sm-6"><?= I18N::translate('Max Levels') ?>:</label>
+                            <label for="vars[ance_level]" class="col-sm-6"><?= I18N::translate('Max levels') ?>:</label>
                             <input class="cart_toggle" onblur="defaultValueWhenBlank(this, 0)" type="text" class="form-control col-sm-6" size="10" name="vars[ance_level]" id="vars[ance_level]" value="<?= $vars["ance_level"] ?>">
                         </div>
                     </div>
@@ -107,7 +107,7 @@ use Fisharebest\Webtrees\Http\RequestHandlers\ControlPanel;
             </div>
 
             <div class="row">
-                <label class="col-sm-4 col-form-label" for="vars[indidesc]"><?= I18N::translate('Include Descendants') ?></label>
+                <label class="col-sm-4 col-form-label" for="vars[indidesc]"><?= I18N::translate('Include descendants') ?></label>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="row">
                         <div class="col-auto mx-3">
@@ -115,7 +115,7 @@ use Fisharebest\Webtrees\Http\RequestHandlers\ControlPanel;
                             <input class="cart_toggle" type="checkbox" name="vars[indidesc]" id="vars[indidesc]" value="desc" <?= $vars["indidesc"] == "desc" ? 'checked' : '' ?>>
                         </div>
                         <div class="col-auto row">
-                            <label for="vars[desc_level]" class="col-sm-6"><?= I18N::translate('Max Levels') ?>:</label>
+                            <label for="vars[desc_level]" class="col-sm-6"><?= I18N::translate('Max levels') ?>:</label>
                             <input class="cart_toggle"  onblur="defaultValueWhenBlank(this, 0)" type="text" class="form-control col-sm-6" size="10" name="vars[desc_level]" id="vars[desc_level]" value="<?= $vars["desc_level"] ?>">
                         </div>
                     </div>
@@ -137,14 +137,14 @@ use Fisharebest\Webtrees\Http\RequestHandlers\ControlPanel;
             <h3><?= /* I18N: Appearance heading */ I18N::translate('Appearance') ?></h3>
 
             <div class="row">
-                <label class=" col-sm-4 col-form-label" for="vars[grdir]"><?= I18N::translate('Graph Direction') ?></label>
+                <label class=" col-sm-4 col-form-label" for="vars[grdir]"><?= I18N::translate('Graph direction') ?></label>
                 <div class="col-sm-8 wt-page-options-value">
                     <?= view('components/select', ['name' => 'vars[grdir]', 'selected' => $vars['grdir'], 'options' => updateTranslations($gve_config["directions"])]) ?>
                 </div>
             </div>
 
             <div class="row">
-                <label class="col-sm-4 col-form-label"><?= I18N::translate('Diagram Type') ?></label>
+                <label class="col-sm-4 col-form-label"><?= I18N::translate('Diagram type') ?></label>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="row">
                         <div class="col-auto">
@@ -195,7 +195,7 @@ use Fisharebest\Webtrees\Http\RequestHandlers\ControlPanel;
                 </div>
             </div>
             <div class="row">
-                <label class="col-sm-4 col-form-label" for="vars[show_pid]"><?= I18N::translate('Show Individual ID') ?></label>
+                <label class="col-sm-4 col-form-label" for="vars[show_pid]"><?= I18N::translate('Show individual XREF') ?></label>
                 <div class="col-sm-8 wt-page-options-value">
                     <input type="hidden" name="vars[show_pid]" value="no">
                     <input type="checkbox" name="vars[show_pid]" id="vars[show_pid]" value="show_pid" <?= $vars["show_pid"] == "show_pid" ? 'checked' : '' ?>>
@@ -203,7 +203,7 @@ use Fisharebest\Webtrees\Http\RequestHandlers\ControlPanel;
             </div>
 
             <div class="row">
-                <label class="col-sm-4 col-form-label" for="vars[show_by]"><?= I18N::translate('Show Birth Date') ?></label>
+                <label class="col-sm-4 col-form-label" for="vars[show_by]"><?= I18N::translate('Show birth date') ?></label>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="row">
                         <div class="col-auto mx-3">
@@ -216,14 +216,14 @@ use Fisharebest\Webtrees\Http\RequestHandlers\ControlPanel;
                         </div>
                         <div class="col-auto mx-3">
                             <input type="radio" name="vars[bd_type]" id="vars[bd_type]_gedcom" value="gedcom" <?= $vars["bd_type"] == "gedcom" ? 'checked' : '' ?>>
-                            <label for="vars[bd_type]_gedcom"><?= I18N::translate('Full Date') ?></label>
+                            <label for="vars[bd_type]_gedcom"><?= I18N::translate('Full date') ?></label>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="row">
-                <label class="col-sm-4 col-form-label" for="vars[show_bp]"><?= I18N::translate('Show Birth Place') ?></label>
+                <label class="col-sm-4 col-form-label" for="vars[show_bp]"><?= I18N::translate('Show birth place') ?></label>
                 <div class="col-sm-8 wt-page-options-value">
                     <input type="hidden" name="vars[show_bp]" value="no">
                     <input type="checkbox" name="vars[show_bp]" id="vars[show_bp]" value="show_bp" <?= $vars["show_bp"] == "show_bp" ? 'checked' : '' ?>>
@@ -231,7 +231,7 @@ use Fisharebest\Webtrees\Http\RequestHandlers\ControlPanel;
             </div>
 
             <div class="row">
-                <label class="col-sm-4 col-form-label" for="vars[show_dy]"><?= I18N::translate('Show Death Date') ?></label>
+                <label class="col-sm-4 col-form-label" for="vars[show_dy]"><?= I18N::translate('Show death date') ?></label>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="row">
                         <div class="col-auto mx-3">
@@ -244,14 +244,14 @@ use Fisharebest\Webtrees\Http\RequestHandlers\ControlPanel;
                         </div>
                         <div class="col-auto mx-3">
                             <input type="radio" name="vars[dd_type]" id="vars[dd_type]_gedcom" value="gedcom" <?= $vars["dd_type"] == "gedcom" ? 'checked' : '' ?>>
-                            <label for="vars[dd_type]_gedcom"><?= I18N::translate('Full Date') ?></label>
+                            <label for="vars[dd_type]_gedcom"><?= I18N::translate('Full date') ?></label>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="row">
-                <label class="col-sm-4 col-form-label" for="vars[show_dp]"><?= I18N::translate('Show Death Place') ?></label>
+                <label class="col-sm-4 col-form-label" for="vars[show_dp]"><?= I18N::translate('Show death place') ?></label>
                 <div class="col-sm-8 wt-page-options-value">
                     <input type="hidden" name="vars[show_dp]" value="no">
                     <input type="checkbox" name="vars[show_dp]" id="vars[show_dp]" value="show_dp" <?= $vars["show_dp"] == "show_dp" ? 'checked' : '' ?>>
@@ -260,7 +260,7 @@ use Fisharebest\Webtrees\Http\RequestHandlers\ControlPanel;
 
 
             <div class="row">
-                <label class="col-sm-4 col-form-label" for="vars[show_fid]"><?= I18N::translate('Show Family ID') ?></label>
+                <label class="col-sm-4 col-form-label" for="vars[show_fid]"><?= I18N::translate('Show family XREF') ?></label>
                 <div class="col-sm-8 wt-page-options-value">
                     <input type="hidden" name="vars[show_fid]" value="no">
                     <input type="checkbox" name="vars[show_fid]" id="vars[show_fid]" value="show_fid" <?= $vars["show_fid"] == "show_fid" ? 'checked' : '' ?>>
@@ -268,7 +268,7 @@ use Fisharebest\Webtrees\Http\RequestHandlers\ControlPanel;
             </div>
 
             <div class="row">
-                <label class="col-sm-4 col-form-label" for="vars[show_my]"><?= I18N::translate('Show Marriage Date') ?></label>
+                <label class="col-sm-4 col-form-label" for="vars[show_my]"><?= I18N::translate('Show marriage date') ?></label>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="row">
                         <div class="col-auto mx-3">
@@ -281,14 +281,14 @@ use Fisharebest\Webtrees\Http\RequestHandlers\ControlPanel;
                         </div>
                         <div class="col-auto mx-3">
                             <input type="radio" name="vars[md_type]" id="vars[md_type]_gedcom" value="gedcom" <?= $vars["md_type"] == "gedcom" ? 'checked' : '' ?>>
-                            <label for="vars[md_type]_gedcom"><?= I18N::translate('Full Date') ?></label>
+                            <label for="vars[md_type]_gedcom"><?= I18N::translate('Full date') ?></label>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="row">
-                <label class="col-sm-4 col-form-label" for="vars[show_mp]"><?= I18N::translate('Show Marriage Place') ?></label>
+                <label class="col-sm-4 col-form-label" for="vars[show_mp]"><?= I18N::translate('Show marriage place') ?></label>
                 <div class="col-sm-8 wt-page-options-value">
                     <input type="hidden" name="vars[show_mp]" value="no">
                     <input type="checkbox" name="vars[show_mp]" id="vars[show_mp]" value="show_mp" <?= $vars["show_mp"] == "show_mp" ? 'checked' : '' ?>>
@@ -329,13 +329,13 @@ use Fisharebest\Webtrees\Http\RequestHandlers\ControlPanel;
                         <div class="col-auto">
                             <?= view('components/select', ['name' => 'vars[typeface]', 'selected' => $vars['typeface'], 'options' => updateTranslations($gve_config["settings"]["typefaces"])]) ?>
                         </div>
-                        <label for="vars[fontsize]"><?= I18N::translate('Standard font size') ?>:</label>
-                        <div class="col-auto">
-                            <input type="text" class="form-control col-sm-6" size="10" name="vars[fontsize]" id="vars[fontsize]" value="<?= $vars["fontsize"] ?>">
-                        </div>
-                        <label for="vars[fontsize_name]"><?= I18N::translate('Name font size') ?>:</label>
+                        <label for="vars[fontsize_name]"><?= I18N::translate('Font size for names') ?>:</label>
                         <div class="col-auto">
                             <input type="text" class="form-control col-sm-6" size="10" name="vars[fontsize_name]" id="vars[fontsize_name]" value="<?= $vars["fontsize_name"] ?>">
+                        </div>
+                        <label for="vars[fontsize]"><?= I18N::translate('Font size for details') ?>:</label>
+                        <div class="col-auto">
+                            <input type="text" class="form-control col-sm-6" size="10" name="vars[fontsize]" id="vars[fontsize]" value="<?= $vars["fontsize"] ?>">
                         </div>
                         <div>
                             <input type="color" class="picker" name="vars[fontcolor_name]" id="vars[fontcolor_name]" value="<?= $vars["fontcolor_name"] ?>" /><label for="vars[fontcolor_name]" class="picker-label"><?= I18N::translate('Font color for names') ?></label>

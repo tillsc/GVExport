@@ -28,8 +28,9 @@ msgid "Appearance"
 msgstr "Appearance"
 
 #: 
-msgid "Output Settings"
-msgstr "Output Settings"
+#, fuzzy
+msgid "Output settings"
+msgstr "Output settings"
 
 #: 
 msgid "Include anyone related to"
@@ -40,8 +41,9 @@ msgid "Stop processing on"
 msgstr "Stop processing on"
 
 #: 
-msgid "Include Ancestors"
-msgstr "Include Ancestors"
+#, fuzzy
+msgid "Include ancestors"
+msgstr "Include ancestors"
 
 #: 
 msgid "Include"
@@ -60,12 +62,14 @@ msgid "Spouses"
 msgstr "Spouses"
 
 #: 
-msgid "Include Descendants"
-msgstr "Include Descendants"
+#, fuzzy
+msgid "Include descendants"
+msgstr "Include descendants"
 
 #: 
-msgid "Max Levels"
-msgstr "Max Levels"
+#, fuzzy
+msgid "Max levels"
+msgstr "Max levels"
 
 #: 
 msgid "Mark not blood-related people with different color"
@@ -80,48 +84,58 @@ msgid "Use abbreviated placenames"
 msgstr "Use abbreviated placenames"
 
 #: 
-msgid "Show Birth Date"
-msgstr "Show Birth Date"
+#, fuzzy
+msgid "Show birth date"
+msgstr "Show birth date"
 
 #: 
-msgid "Show Birth Place"
-msgstr "Show Birth Place"
+#, fuzzy
+msgid "Show birth place"
+msgstr "Show birth place"
 
 #: 
-msgid "Show Death Date"
-msgstr "Show Death Date"
+#, fuzzy
+msgid "Show death date"
+msgstr "Show death date"
 
 #: 
-msgid "Full Date"
-msgstr "Full Date"
+#, fuzzy
+msgid "Full date"
+msgstr "Full date"
 
 #: 
 msgid "Year"
 msgstr "Year"
 
 #: 
-msgid "Show Death Place"
-msgstr "Show Death Place"
+#, fuzzy
+msgid "Show death place"
+msgstr "Show death place"
 
 #: 
-msgid "Show Family ID"
-msgstr "Show Family ID"
+#, fuzzy
+msgid "Show family XREF"
+msgstr "Show family XREF"
 
 #: 
-msgid "Show Marriage Date"
-msgstr "Show Marriage Date"
+#, fuzzy
+msgid "Show marriage date"
+msgstr "Show marriage date"
 
 #: 
-msgid "Show Marriage Place"
-msgstr "Show Marriage Place"
+#, fuzzy
+msgid "Show marriage place"
+msgstr "Show marriage place"
 
 #: 
-msgid "Graph Direction"
-msgstr "Graph Direction"
+#, fuzzy
+msgid "Graph direction"
+msgstr "Graph direction"
 
 #: 
-msgid "Diagram Type"
-msgstr "Diagram Type"
+#, fuzzy
+msgid "Diagram type"
+msgstr "Diagram type"
 
 #: 
 msgid "Simple"
@@ -144,8 +158,9 @@ msgid "Only Decorated or Combined"
 msgstr "Only Decorated or Combined"
 
 #: 
-msgid "Output File Type"
-msgstr "Output File Type"
+#, fuzzy
+msgid "Output file type"
+msgstr "Output file type"
 
 #: 
 msgid "Generate a file for download"
@@ -166,20 +181,23 @@ msgid "DPI"
 msgstr "DPI"
 
 #: 
-msgid "Show Selection"
-msgstr "Show Selection"
+#, fuzzy
+msgid "Show options"
+msgstr "Show options"
 
 #: 
 msgid "SVG only"
 msgstr "SVG only"
 
 #: 
-msgid "Top-to-Bottom"
-msgstr "Top-to-Bottom"
+#, fuzzy
+msgid "Top-to-bottom"
+msgstr "Top-to-bottom"
 
 #: 
-msgid "Left-to-Right"
-msgstr "Left-to-Right"
+#, fuzzy
+msgid "Left-to-right"
+msgstr "Left-to-right"
 
 #: 
 msgid "Space between generations"
@@ -190,8 +208,9 @@ msgid "Space between individuals on the same level"
 msgstr "Space between individuals on the same level"
 
 #: 
-msgid "Error running GVExport in Browser mode"
-msgstr "Error running GVExport in Browser mode"
+#, fuzzy
+msgid "Error running GVExport in browser mode"
+msgstr "Error running GVExport in browser mode"
 
 #: 
 msgid "Preview"
@@ -206,16 +225,19 @@ msgid "Full place name"
 msgstr "Full place name"
 
 #: 
-msgid "City and Country"
-msgstr "City and Country"
+#, fuzzy
+msgid "City and country"
+msgstr "City and country"
 
 #: 
-msgid "City and 2 Letter ISO Country Code"
-msgstr "City and 2 Letter ISO Country Code"
+#, fuzzy
+msgid "City and 2 letter ISO country code"
+msgstr "City and 2 letter ISO country code"
 
 #: 
-msgid "City and 3 Letter ISO Country Code"
-msgstr "City and 3 Letter ISO Country Code"
+#, fuzzy
+msgid "City and 3 letter ISO country code"
+msgstr "City and 3 letter ISO country code"
 
 #: 
 msgid "Space"
@@ -238,8 +260,9 @@ msgid "People to be included"
 msgstr "People to be included"
 
 #: 
-msgid "Show Individual ID"
-msgstr "Show Individual ID"
+#, fuzzy
+msgid "Show individual XREF"
+msgstr "Show individual XREF"
 
 #: 
 msgid "Options limited as GraphViz not installed on server"
@@ -380,8 +403,9 @@ msgstr "Initials only"
 
 #. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
 #: 
-msgid "Given name initials and Surname"
-msgstr "Given name initials and Surname"
+#, fuzzy
+msgid "Given name initials and surname"
+msgstr "Given name initials and surname"
 
 #. This is to replace "Spouses" in the options of people to include - "Spouses" implies marriage but the couples are not necessarily married.
 #: 
@@ -533,4 +557,18 @@ msgstr "Show starting persons in different colour"
 #: 
 msgid "Starting persons background color"
 msgstr "Starting persons background colour"
+
+#. Option to change font size. This affects (at the time of writing) all diagram text except for names which have their own setting:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/IdWIcmNdrOj4l1yTgxv6MpVW.png
+#: 
+#, fuzzy
+msgid "Font size for details"
+msgstr "Font size for details"
+
+#. The font size to use for the names of individuals:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/IdWIcmNdrOj4l1yTgxv6MpVW.png
+#: 
+#, fuzzy
+msgid "Font size for names"
+msgstr "Font size for names"
 

@@ -28,7 +28,8 @@ msgid "Appearance"
 msgstr "Aparença"
 
 #: 
-msgid "Output Settings"
+#, fuzzy
+msgid "Output settings"
 msgstr "Configuració d'eixida"
 
 #: 
@@ -40,7 +41,8 @@ msgid "Stop processing on"
 msgstr "Detindre el processament en"
 
 #: 
-msgid "Include Ancestors"
+#, fuzzy
+msgid "Include ancestors"
 msgstr "Incloure avantpassats"
 
 #: 
@@ -60,11 +62,13 @@ msgid "Spouses"
 msgstr "Cònjuges"
 
 #: 
-msgid "Include Descendants"
+#, fuzzy
+msgid "Include descendants"
 msgstr "Incloure descendents"
 
 #: 
-msgid "Max Levels"
+#, fuzzy
+msgid "Max levels"
 msgstr "Nivells màxims"
 
 #: 
@@ -80,19 +84,23 @@ msgid "Use abbreviated placenames"
 msgstr "Utilitzar topònims abreujats"
 
 #: 
-msgid "Show Birth Date"
+#, fuzzy
+msgid "Show birth date"
 msgstr "Mostrar data de naixement"
 
 #: 
-msgid "Show Birth Place"
+#, fuzzy
+msgid "Show birth place"
 msgstr "Mostrar indret de naixement"
 
 #: 
-msgid "Show Death Date"
+#, fuzzy
+msgid "Show death date"
 msgstr "Mostrar data de defunció"
 
 #: 
-msgid "Full Date"
+#, fuzzy
+msgid "Full date"
 msgstr "Data completa"
 
 #: 
@@ -100,27 +108,33 @@ msgid "Year"
 msgstr "Any"
 
 #: 
-msgid "Show Death Place"
+#, fuzzy
+msgid "Show death place"
 msgstr "Mostrar lloc de defunció"
 
 #: 
-msgid "Show Family ID"
+#, fuzzy
+msgid "Show family XREF"
 msgstr "Mostrar ID familiar"
 
 #: 
-msgid "Show Marriage Date"
+#, fuzzy
+msgid "Show marriage date"
 msgstr "Mostrar data de casament"
 
 #: 
-msgid "Show Marriage Place"
+#, fuzzy
+msgid "Show marriage place"
 msgstr "Mostrar indret de casament"
 
 #: 
-msgid "Graph Direction"
+#, fuzzy
+msgid "Graph direction"
 msgstr "Direcció del gràfic"
 
 #: 
-msgid "Diagram Type"
+#, fuzzy
+msgid "Diagram type"
 msgstr "Tipus de diagrama"
 
 #: 
@@ -144,7 +158,8 @@ msgid "Only Decorated or Combined"
 msgstr "Sols decorat o combinat"
 
 #: 
-msgid "Output File Type"
+#, fuzzy
+msgid "Output file type"
 msgstr "Tipus d'arxiu d'eixida"
 
 #: 
@@ -164,7 +179,8 @@ msgid "DPI"
 msgstr "PPP"
 
 #: 
-msgid "Show Selection"
+#, fuzzy
+msgid "Show options"
 msgstr "Mostrar selecció"
 
 #: 
@@ -172,11 +188,13 @@ msgid "SVG only"
 msgstr "Només SVG"
 
 #: 
-msgid "Top-to-Bottom"
+#, fuzzy
+msgid "Top-to-bottom"
 msgstr "De d'alt a baix"
 
 #: 
-msgid "Left-to-Right"
+#, fuzzy
+msgid "Left-to-right"
 msgstr "D'esquerra a dreta"
 
 #: 
@@ -188,7 +206,8 @@ msgid "Space between individuals on the same level"
 msgstr "Espai entre individus del mateix nivell"
 
 #: 
-msgid "Error running GVExport in Browser mode"
+#, fuzzy
+msgid "Error running GVExport in browser mode"
 msgstr "Error en executar GVExport en manera navegador"
 
 #: 
@@ -204,15 +223,18 @@ msgid "Full place name"
 msgstr "Topònim complet"
 
 #: 
-msgid "City and Country"
+#, fuzzy
+msgid "City and country"
 msgstr "Ciutat i país"
 
 #: 
-msgid "City and 2 Letter ISO Country Code"
+#, fuzzy
+msgid "City and 2 letter ISO country code"
 msgstr "Ciutat i codi de país ISO de dues lletres"
 
 #: 
-msgid "City and 3 Letter ISO Country Code"
+#, fuzzy
+msgid "City and 3 letter ISO country code"
 msgstr "Ciutat i codi de país ISO de tres lletres"
 
 #: 
@@ -236,7 +258,8 @@ msgid "People to be included"
 msgstr "Persones a incloure"
 
 #: 
-msgid "Show Individual ID"
+#, fuzzy
+msgid "Show individual XREF"
 msgstr "Mostrar ID individual"
 
 #: 
@@ -379,7 +402,8 @@ msgstr "Nomès Inicials"
 
 #. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
 #: 
-msgid "Given name initials and Surname"
+#, fuzzy
+msgid "Given name initials and surname"
 msgstr "Inicials del nom i cognoms"
 
 #. This is to replace "Spouses" in the options of people to include - "Spouses" implies marriage but the couples are not necessarily married.
@@ -532,4 +556,18 @@ msgstr "Mostrar les persones incials amb diferent color"
 #: 
 msgid "Starting persons background color"
 msgstr "Color del fons per a les persones inicials"
+
+#. Option to change font size. This affects (at the time of writing) all diagram text except for names which have their own setting:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/IdWIcmNdrOj4l1yTgxv6MpVW.png
+#: 
+#, fuzzy
+msgid "Font size for details"
+msgstr "Mida de font estàndard"
+
+#. The font size to use for the names of individuals:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/IdWIcmNdrOj4l1yTgxv6MpVW.png
+#: 
+#, fuzzy
+msgid "Font size for names"
+msgstr "Mida de font"
 
