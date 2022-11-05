@@ -3,6 +3,15 @@
 	GVExport module for Webtrees
 =====================================================================
 
+Version 2.1.15 (2022-11-05)
+  - New         : Click on starting individual to have browser rendering scroll to that person
+  - New         : Allow user to change font sizes
+  - Changed     : Updated capitalisation of some terms and changed ID to XREF to align with current webtrees terminology
+  - Changed     : Moved URL and photo options to advanced section, photos now enabled by default
+  - Fixed       : Fixed links not working on mobile
+  - Fixed       : When dragging browser rendering, link no longer opened if you started dragging on a tile with URLs enabled
+
+
 Version 2.1.14 (2022-10-10)
   - New         : GVExport now supports mobile browsers
   - New         : You can now export PDF without GraphViz on the server
