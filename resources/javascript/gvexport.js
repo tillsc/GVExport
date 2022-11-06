@@ -603,40 +603,43 @@ function scrollToRecord(xref) {
     const svg = rendering.getElementsByTagName('svg')[0].cloneNode(true);
     let titles = svg.getElementsByTagName('title');
     for (i=0; i<titles.length; i++) {
-        if (titles[i].innerHTML === xref) {
-            let minX = null;
-            let minY = null;
-            let maxX = null;
-            let maxY = null;
-            const group = titles[i].parentElement;
-            // We need to locate the element within the SVG. We use "polygon" here because it is the
-            // only element that will always exist and that also has position information
-            // (other elements like text, image, etc can be disabled by the user)
-            const points = group.getElementsByTagName('polygon')[0].getAttribute('points').split(" ");
-            // Find largest and smallest X and Y value out of all the points of the polygon
-            for (j=0; j<points.length; j++) {
-                const x = parseFloat(points[j].split(",")[0]);
-                const y = parseFloat(points[j].split(",")[1]);
-                if (minX === null || x < minX) {
-                    minX = x;
+        let xrefs = titles[i].innerHTML.split("_");
+        for (j=0; j<xrefs.length; j++) {
+            if (xrefs[j] === xref) {
+                let minX = null;
+                let minY = null;
+                let maxX = null;
+                let maxY = null;
+                const group = titles[i].parentElement;
+                // We need to locate the element within the SVG. We use "polygon" here because it is the
+                // only element that will always exist and that also has position information
+                // (other elements like text, image, etc can be disabled by the user)
+                const points = group.getElementsByTagName('polygon')[0].getAttribute('points').split(" ");
+                // Find largest and smallest X and Y value out of all the points of the polygon
+                for (j = 0; j < points.length; j++) {
+                    const x = parseFloat(points[j].split(",")[0]);
+                    const y = parseFloat(points[j].split(",")[1]);
+                    if (minX === null || x < minX) {
+                        minX = x;
+                    }
+                    if (minY === null || y < minY) {
+                        minY = y;
+                    }
+                    if (maxX === null || x > maxX) {
+                        maxX = x;
+                    }
+                    if (maxY === null || y > maxY) {
+                        maxY = y;
+                    }
                 }
-                if (minY === null || y < minY) {
-                    minY = y;
-                }
-                if (maxX === null || x > maxX) {
-                    maxX = x;
-                }
-                if (maxY === null || y > maxY) {
-                    maxY = y;
-                }
+                // Get the average of the largest and smallest so we can position the element in the middle
+                let x = (minX + maxX) / 2;
+                let y = (minY + maxY) / 2;
+                // Why do we multiply the scale by 1 and 1/3?
+                let zoom = panzoomInst.getTransform().scale * (1 + 1 / 3);
+                panzoomInst.smoothMoveTo((rendering.offsetWidth / 2) - x * zoom, (rendering.offsetHeight / 2) - parseFloat(svg.getAttribute('height')) * zoom - y * zoom);
+                return true;
             }
-            // Get the average of the largest and smallest so we can position the element in the middle
-            let x = (minX+maxX)/2;
-            let y = (minY+maxY)/2;
-            // Why do we multiply the scale by 1 and 1/3?
-            let zoom = panzoomInst.getTransform().scale*(1 + 1/3);
-            panzoomInst.smoothMoveTo((rendering.offsetWidth/2) - x*zoom,(rendering.offsetHeight/2)-parseFloat(svg.getAttribute('height'))*zoom-y*zoom);
-            return true;
         }
     }
     return false;

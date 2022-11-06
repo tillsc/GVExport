@@ -29,7 +29,7 @@ use Fisharebest\Webtrees\Tree;
 
 <script type="text/javascript">
     // stylesheet
-    var newSheet = document.createElement("link");
+    const newSheet = document.createElement("link");
     newSheet.setAttribute("rel","stylesheet");
     newSheet.setAttribute("type","text/css");
     newSheet.setAttribute("href","<?= $gvexport_css ?>");
@@ -46,7 +46,7 @@ use Fisharebest\Webtrees\Tree;
     }
     
     // Javascript functions
-    var newScript = document.createElement("script");
+    const newScript = document.createElement("script");
     newScript.onload = function() {
         // Check that a) our function that runs on page load has been loaded, and
         // b), jQuery exists (as this comes via webtrees)
@@ -150,7 +150,7 @@ use Fisharebest\Webtrees\Tree;
                     </div>
                     <div class="col-auto row">
                         <label for="vars[ance_level]" class="col-sm-6"><?= I18N::translate('Max levels') ?>:</label>
-                        <input class="cart_toggle" onblur="defaultValueWhenBlank(this, 0)" type="text" class="form-control col-sm-6" size="10" name="vars[ance_level]" id="vars[ance_level]" value="<?= $vars["ance_level"] ?>">
+                        <input onblur="defaultValueWhenBlank(this, 0)" type="text" class="cart_toggle form-control col-sm-6" size="10" name="vars[ance_level]" id="vars[ance_level]" value="<?= $vars["ance_level"] ?>">
                     </div>
                 </div>
             </div>
@@ -194,14 +194,14 @@ use Fisharebest\Webtrees\Tree;
                     </div>
                     <div class="col-auto row">
                         <label for="vars[desc_level]" class="col-sm-6"><?= I18N::translate('Max levels') ?>:</label>
-                        <input class="cart_toggle"  onblur="defaultValueWhenBlank(this, 0)" type="text" class="form-control col-sm-6" size="10" name="vars[desc_level]" id="vars[desc_level]" value="<?= $vars["desc_level"] ?>">
+                        <input onblur="defaultValueWhenBlank(this, 0)" type="text" class="cart_toggle form-control col-sm-6" size="10" name="vars[desc_level]" id="vars[desc_level]" value="<?= $vars["desc_level"] ?>">
                     </div>
                 </div>
             </div>
         </div>
         <div id="people-advanced" <?= $vars["adv_people"] == "show" ? '' : 'style="display:none"'; ?>>
             <div class="row form-group">
-                <label class=" col-sm-4 col-form-label wt-page-options-label" for="pid"><?= I18N::translate('XREFs of included individuals') ?></label>
+                <label class=" col-sm-4 col-form-label wt-page-options-label" for="vars[other_pids]"><?= I18N::translate('XREFs of included individuals') ?></label>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="input-group mt-1">
                         <input type="text" class="form-control" name="vars[other_pids]" id="vars[other_pids]" value="<?= $vars['other_pids'] ?>" onchange="refreshIndisFromXREFS(true)">
@@ -221,7 +221,7 @@ use Fisharebest\Webtrees\Tree;
                         ?>
                     </div>
                     <div class="input-group mt-1">
-                        <input class="cart_toggle" type="text" class="form-control" name="vars[other_stop_pids]" id="vars[other_stop_pids]" value="<?= $vars['other_stop_pids'] ?>">
+                        <input type="text" class="cart_toggle form-control" name="vars[other_stop_pids]" id="vars[other_stop_pids]" value="<?= $vars['other_stop_pids'] ?>">
                         <div class="input-group-append">
                             <button type="button" class="btn btn-outline-secondary" onclick="appendPidTo('vars[stop_pid]', 'vars[other_stop_pids]')">⏎</button>
                         </div>
@@ -580,9 +580,8 @@ use Fisharebest\Webtrees\Tree;
         workerURL: workerURL
     });
 
-    var form = document.getElementById('gvexport');
-    var rendering = document.getElementById('rendering');
-
+    const form = document.getElementById('gvexport');
+    const rendering = document.getElementById('rendering');
 
 
     // Trigger action when "Update" button clicked
@@ -738,7 +737,7 @@ use Fisharebest\Webtrees\Tree;
                 maxZoom: 4,
                 minZoom: fullZoom / 4,
                 initialZoom: fullZoom,
-                onTouch: function(e) {
+                onTouch: function() {
                     // Fix links not working on mobile
                     return false; // tells the library to not preventDefault.
                 }
