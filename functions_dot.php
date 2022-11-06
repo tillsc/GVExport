@@ -583,16 +583,17 @@ class Dot {
 		// If no_fams option is not checked then we print the families
 		if (!$this->settings["no_fams"]) {
 			foreach ($this->families as $fid=>$fam_data) {
-				if ($this->settings["diagram_type"] == "combined") {
+                if ($this->settings["diagram_type"] == "combined") {
+                    $nodeName = $this->generateFamilyNodeName($fid);
                     // We do not show those families which has no parents and children in case of "combined" view;
                     if ((isset($this->families[$fid]["has_children"]) && $this->families[$fid]["has_children"])
                         || (isset($this->families[$fid]["has_parents"]) && $this->families[$fid]["has_parents"])
                         || ((isset($this->families[$fid]["husb_id"]) && $this->families[$fid]["husb_id"]) && (isset($this->families[$fid]["wife_id"]) && $this->families[$fid]["wife_id"]))
                     ) {
-                        $out .= $this->printFamily($fid);
+                        $out .= $this->printFamily($fid, $nodeName);
                     }
 				} elseif ($this->settings["diagram_type"] != "combined") {
-					$out .= $this->printFamily($fid);
+					$out .= $this->printFamily($fid, $fid);
 				}
 			}
 		}
@@ -601,8 +602,9 @@ class Dot {
 		// If no_fams option is not checked
 		if (!$this->settings["no_fams"]) {
 			foreach ($this->families as $fid=>$set) {
-				// COMBINED type diagram
+                // COMBINED type diagram
 				if ($this->settings["diagram_type"] == "combined") {
+                    $nodeName = $this->generateFamilyNodeName($fid);
                     // In case of dummy family do nothing, because it has no children
 					if (substr($fid, 0, 2) != "F_") {
 						// Get the family data
@@ -613,8 +615,9 @@ class Dot {
 							if (!empty($child) && (isset($this->individuals[$child->xref()]))) {
 								$fams = isset($this->individuals[$child->xref()]["fams"]) ? $this->individuals[$child->xref()]["fams"] : [];
 								foreach ($fams as $fam) {
+                                    $famName = $this->generateFamilyNodeName($fam);
                                     $arrowColor = $this->getArrowColor($child, $fid);
-                                    $out .= $this->convertID($fid) . " -> " . $this->convertID($fam) . ":" . $this->convertID($child->xref()) . " [color=\"$arrowColor\", arrowsize=0.3] \n";
+                                    $out .= $nodeName . " -> " . $famName . ":" . $this->convertID($child->xref()) . " [color=\"$arrowColor\", arrowsize=0.3] \n";
                                 }
 							}
 						}
@@ -1046,12 +1049,13 @@ class Dot {
 	 * Prints the line for drawing a box for a family.
 	 *
 	 * @param string $fid Family ID
+	 * @param string $nodeName Name of DOT file node we are creating
 	 */
-	function printFamily(string $fid): string
+	function printFamily(string $fid, string $nodeName): string
     {
 		$out = "";
 
-		$out .= $this->convertID($fid);
+		$out .= $nodeName;
 		$out .= " [ ";
 
 		// Showing the ID of the family, if set
@@ -1879,7 +1883,7 @@ class Dot {
      * @param string $pid Xref to check
      * @return bool
      */
-    function isStartingIndividual(string $pid): bool
+    private function isStartingIndividual(string $pid): bool
     {
         $indis = explode(",", $this->settings["indi"]);
         for ($i=0;$i<count($indis);$i++) {
@@ -1888,5 +1892,14 @@ class Dot {
             }
         }
         return false;
+    }
+
+    /**
+     * @param string $fid XREF of the family for this node
+     * @return string
+     */
+    private function generateFamilyNodeName(string $fid): string
+    {
+        return $this->convertID($fid) . (isset($this->families[$fid]["husb_id"]) ? "_" . $this->families[$fid]["husb_id"] : "") . (isset($this->families[$fid]["wife_id"]) ? "_" . $this->families[$fid]["wife_id"] : "") . (isset($this->families[$fid]["unkn_id"]) ? "_" . $this->families[$fid]["unkn_id"] : "");
     }
 }
