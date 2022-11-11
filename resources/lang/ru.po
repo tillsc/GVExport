@@ -25,10 +25,9 @@ msgstr "Настройки диаграммы"
 
 #: 
 msgid "Appearance"
-msgstr "вид"
+msgstr "Вид"
 
 #: 
-#, fuzzy
 msgid "Output settings"
 msgstr "Настройки вывода"
 
@@ -41,7 +40,6 @@ msgid "Stop processing on"
 msgstr "Остановить обработку"
 
 #: 
-#, fuzzy
 msgid "Include ancestors"
 msgstr "Включить предков"
 
@@ -55,19 +53,17 @@ msgstr "Братья и сестры"
 
 #: 
 msgid "Cousins"
-msgstr " Кузены"
+msgstr "Кузены"
 
 #: 
 msgid "Spouses"
 msgstr "Супруги"
 
 #: 
-#, fuzzy
 msgid "Include descendants"
 msgstr "Включить потомков"
 
 #: 
-#, fuzzy
 msgid "Max levels"
 msgstr "Максимальные уровни"
 
@@ -84,22 +80,18 @@ msgid "Use abbreviated placenames"
 msgstr "Используйте сокращенные географические названия"
 
 #: 
-#, fuzzy
 msgid "Show birth date"
 msgstr "Показать дату рождения"
 
 #: 
-#, fuzzy
 msgid "Show birth place"
 msgstr "Показать место рождения"
 
 #: 
-#, fuzzy
 msgid "Show death date"
 msgstr "Показать дату смерти"
 
 #: 
-#, fuzzy
 msgid "Full date"
 msgstr "Полная дата"
 
@@ -108,32 +100,26 @@ msgid "Year"
 msgstr "Год"
 
 #: 
-#, fuzzy
 msgid "Show death place"
 msgstr "Показать место смерти"
 
 #: 
-#, fuzzy
 msgid "Show family XREF"
-msgstr "Показать удостоверение семьи"
+msgstr "Показать идентификатор семьи"
 
 #: 
-#, fuzzy
 msgid "Show marriage date"
 msgstr "Показать дату брака"
 
 #: 
-#, fuzzy
 msgid "Show marriage place"
 msgstr "Показать место заключения брака"
 
 #: 
-#, fuzzy
 msgid "Graph direction"
 msgstr "Направление графика"
 
 #: 
-#, fuzzy
 msgid "Diagram type"
 msgstr "Тип диаграммы"
 
@@ -158,7 +144,6 @@ msgid "Only Decorated or Combined"
 msgstr "Только декорированные или комбинированные"
 
 #: 
-#, fuzzy
 msgid "Output file type"
 msgstr "Тип выходного файла"
 
@@ -179,21 +164,14 @@ msgid "DPI"
 msgstr "DPI"
 
 #: 
-#, fuzzy
 msgid "Show options"
-msgstr "Выбор шоу"
+msgstr "Показать параметры"
 
 #: 
-msgid "SVG only"
-msgstr "Только SVG"
-
-#: 
-#, fuzzy
 msgid "Top-to-bottom"
 msgstr "Сверху вниз"
 
 #: 
-#, fuzzy
 msgid "Left-to-right"
 msgstr "Слева направо"
 
@@ -206,7 +184,6 @@ msgid "Space between individuals on the same level"
 msgstr "Пространство между людьми, находящимися на одном уровне"
 
 #: 
-#, fuzzy
 msgid "Error running GVExport in browser mode"
 msgstr "Ошибка при запуске GVExport в режиме браузера"
 
@@ -223,17 +200,14 @@ msgid "Full place name"
 msgstr "Полное название места"
 
 #: 
-#, fuzzy
 msgid "City and country"
 msgstr "Город и страна"
 
 #: 
-#, fuzzy
 msgid "City and 2 letter ISO country code"
 msgstr "Город и 2-буквенный код страны ISO"
 
 #: 
-#, fuzzy
 msgid "City and 3 letter ISO country code"
 msgstr "Город и 3-буквенный код страны ISO"
 
@@ -258,7 +232,6 @@ msgid "People to be included"
 msgstr "Люди, которые должны быть включены"
 
 #: 
-#, fuzzy
 msgid "Show individual XREF"
 msgstr "Показать индивидуальный идентификатор"
 
@@ -401,7 +374,6 @@ msgstr "Только инициалы"
 
 #. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
 #: 
-#, fuzzy
 msgid "Given name initials and surname"
 msgstr "Настоящее имя инициалы и фамилия"
 
@@ -559,14 +531,67 @@ msgstr "Цвет фона начальных лиц"
 #. Option to change font size. This affects (at the time of writing) all diagram text except for names which have their own setting:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/IdWIcmNdrOj4l1yTgxv6MpVW.png
 #: 
-#, fuzzy
 msgid "Font size for details"
-msgstr "Стандартный размер шрифта"
+msgstr "Размер шрифта для деталей"
 
 #. The font size to use for the names of individuals:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/IdWIcmNdrOj4l1yTgxv6MpVW.png
 #: 
-#, fuzzy
 msgid "Font size for names"
 msgstr "Размер шрифта имени"
+
+#. Note limitation for adding URLs:  https://s3.eu-west-1.amazonaws.com/po-pub/i/ativPbmheBQQboYLANZmlHYY.png
+#: 
+msgid "browser and SVG only"
+msgstr "только браузер и SVG"
+
+#. Note limitation for adding URLs:  https://s3.eu-west-1.amazonaws.com/po-pub/i/8gzkcNUo2oj43PpU7Dou5ZEr.png
+#: 
+msgid "browser, SVG, and PDF only"
+msgstr "только браузер, SVG и PDF"
+
+#. This help message is displayed when the user clicks the help icon next to "Include anyone related to". https://s3.eu-west-1.amazonaws.com/po-pub/i/4sXDKFJMwoE5PBYZqEPOIV7W.png
+#: 
+msgid "This is our starting point. Choose a person to base the diagram around. You might choose yourself.</p><p>You can choose as many starting individuals as you wish. A tree will be created for each starting individual based on the settings, then the trees are merged to create one tree for the diagram.</p><p>Click the X to remove a record from the list. If two or more records are listed, a \"Clear all\" option will appear to allow you to remove all records.</p><p>You can also click on an individual in this list to have the diagram in the browser scroll to that person.</p><p>When you next come to the page, the default individual or the last individual you were looking at in webtrees will be loaded. If there was just one saved individual then it will be replaced with the individual provided by webtrees on coming to the page. If there were multiple in the list, then the individual provided by webtrees will be added to the list (if not already in it). So be sure to double-check you are only including individuals you are looking for when first loading the page."
+msgstr "Это наша отправная точка. Выберите человека, на основе которого будет построена диаграмма. Вы можете выбрать сами.</p><p>Вы можете выбрать столько стартовых персонажей, сколько пожелаете. Дерево будет создано для каждого начального человека на основе настроек, затем деревья будут объединены, чтобы создать одно дерево для диаграммы.</p><p>Нажмите X, чтобы удалить запись из списка. Если в списке две или более записей, появится опция \\\"Очистить все\\\", позволяющая удалить все записи.</p><p>Вы также можете щелкнуть человека в этом списке, чтобы открыть диаграмму в браузере. прокрутите до этого человека.</p><p>Когда вы в следующий раз зайдете на страницу, будет загружен человек по умолчанию или последний человек, которого вы просматривали в веб-деревьях. Если был только один сохраненный человек, то он будет заменен на человека, предоставленного веб-деревьями при переходе на страницу. Если в списке их несколько, то человек, предоставленный веб-деревьями, будет добавлен в список (если еще не в нем). Поэтому не забудьте дважды проверить, что вы включаете только тех, кого ищете, при первой загрузке страницы."
+
+#. This help message is displayed when the user clicks the help icon next to "Include ancestors".  https://s3.eu-west-1.amazonaws.com/po-pub/i/UoTrlDpngydDdWmJPau99ZV4.png
+#: 
+msgid "Tick this option to include ancestors of your starting person(s) and anyone in the tree.</p><h4>Max levels</h4><p>The number of generations of ancestors to include. For example, if you chose yourself as your starting person, you may want the diagram to include relatives back to your great-grandparents. In this case, you would type 3 in this box, to include your parents' generation, your grandparents' generation, and your great-grandparents' generation."
+msgstr "Отметьте эту опцию, чтобы включить предков ваших начальных людей и всех в дереве.</p><h4>Максимальное количество уровней</h4><p>Количество поколений предков, которые нужно включить. Например, если вы выбрали себя в качестве исходного человека, вы можете захотеть, чтобы на диаграмме были указаны родственники ваших прабабушек и дедушек. В этом случае вы должны ввести 3 в это поле, чтобы включить поколение ваших родителей, поколение ваших бабушек и дедушек и поколение ваших прабабушек и дедушек."
+
+#. This help message is displayed when the user clicks the help icon next to "Include".  https://s3.eu-west-1.amazonaws.com/po-pub/i/G2LwgKcPjaAwzcCXllEaXa13.png
+#: 
+msgid "This section lets you decide what type of relatives to include when generating the diagram.</p><h4>Siblings</h4><p>Include brothers and sisters of anyone in the tree.</p><h4>All relations</h4><p>Include cousins, nieces, nephews, and their descendants when generating the tree. Requires \"Siblings\" to be selected.</p><h4>Partners</h4><p>Include the husbands, wives, and partners of those in the tree even if they aren't blood-relatives. There is another option \"Mark not blood-related people with different color\" that allows these people to be marked in a different colour.</p><h4>Anyone</h4><p>Follow all links regardless of whether the person is related. In practice, this generally means that the family of non-relatives (i.e. spouses) are included in the tree.</p><p>Use this option to include all records of the selected generations. Note that only records with a link are included, so you may need to include more ancestor generations (or more starting individuals) to get all your records to show."
+msgstr "В этом разделе вы можете решить, какой тип родственников включить в диаграмму.</p><h4>Родственные братья и сестры</h4><p>Включить братьев и сестер любого человека в дереве.</p><h4>Все отношения </h4><p>Включить двоюродных братьев, племянниц, племянников и их потомков при создании дерева. Требуется выбрать \"Братья и сестры\".</p><h4>Партнеры</h4><p>Включите мужей, жен и партнеров тех, кто указан в дереве, даже если они не являются кровными родственниками. Существует еще одна опция \"Отметить людей, не связанных с кровью, другим цветом\", которая позволяет помечать этих людей другим цветом.</p><h4>Все</h4><p>Перейти по всем ссылкам независимо от того, является ли человек относится. На практике это обычно означает, что в дерево включаются семьи, не являющиеся родственниками (т. е. супруги).</p><p>Используйте этот параметр, чтобы включить все записи выбранных поколений. Обратите внимание, что включены только записи со ссылкой, поэтому вам может потребоваться включить больше поколений предков (или больше начальных особей), чтобы отобразить все ваши записи."
+
+#. This help message is displayed when the user clicks the help icon next to "Include descendants".  https://s3.eu-west-1.amazonaws.com/po-pub/i/TNXFdoP4fIHVQnScVvnfvKA1.png
+#: 
+msgid "Whether to include children, grandchildren, etc. of people listed in the tree.</p><h4>Max levels</h4><p>The number of generations of descendants to include. For example, if you chose yourself as your starting person, you may want the diagram to include descendants down to your great-grandchildren. In this case, you would type 3 in this box, to include your children and others of their generation, your grandchildren, and your great-grandchildren's generation."
+msgstr "Следует ли включать детей, внуков и т. д. людей, перечисленных в дереве.</p><h4>Максимальное количество уровней</h4><p>Количество поколений потомков, которые необходимо включить. Например, если вы выбрали себя в качестве отправной точки, вы можете захотеть, чтобы диаграмма включала потомков вплоть до ваших правнуков. В этом случае вы должны ввести 3 в это поле, чтобы включить ваших детей и других людей их поколения, ваших внуков и ваших правнуков."
+
+#. This help message is displayed when the user clicks the help icon next to "Graph direction". https://s3.eu-west-1.amazonaws.com/po-pub/i/MpbVhXyRxeLgMO8FZVXHZhHG.png
+#: 
+msgid "There are two display options here:<ul><li>Left to right - The default option, columns of generations are created with the older generations to the left and younger to the right.<li>Top to bottom - Rows of generations are created, with the older generations at the top and the younger at the bottom."
+msgstr "Здесь есть два варианта отображения:<ul><li>Слева направо — вариант по умолчанию, столбцы поколений создаются так, что старшие поколения располагаются слева, а младшие — справа.<li>Сверху вниз — ряды поколений со старшим поколением наверху и младшим внизу."
+
+#. This help message is displayed when the user clicks the help icon next to "Diagram type". https://s3.eu-west-1.amazonaws.com/po-pub/i/dt2T4x9RshJsWKWZ7fQ4zFlu.png
+#: 
+msgid "The options here are:<ul><li>Simple - A box per person, coloured based on sex. No photos allowed.<li>Decorated - A more refined box, which also allows photos to be included.<li>Combined - Each couple is one box instead of one per person. Also allows photos.</ul>"
+msgstr "Доступны следующие варианты:<ul><li>Простой — коробка на человека, окрашенная в зависимости от пола. Фотографии не допускаются.<li>Украшенная — более изысканная коробка, в которую также можно добавлять фотографии.<li>Комбинированная — каждая пара представляет собой одну коробку, а не одну на человека. Также разрешает фотографии.</ul>"
+
+#. This help message is displayed when the user clicks the help icon next to "Output file type". https://s3.eu-west-1.amazonaws.com/po-pub/i/apq6Tgv91ZGJTGcUfFH3V1VE.png
+#: 
+msgid "The output file type you want. This is ignored when rendering in the browser, it is only used when you download a file. File types SVG, PNG, JPEG, and PDF can be downloaded, in addition to the GraphViz DOT format.</p><p>There are some minor differences if you have GraphViz installed on the server:<ul><li>There are two more file types, GIF and PostScript (PS). Most people would not need these.<li>PDF files may be smaller and can include URLs<li>You may be able to include more records</ul>"
+msgstr "Тип выходного файла, который вы хотите. Это игнорируется при рендеринге в браузере, используется только при загрузке файла. Типы файлов SVG, PNG, JPEG и PDF могут быть загружены в дополнение к формату GraphViz DOT.</p><p>Есть некоторые незначительные отличия, если на сервере установлен GraphViz:<ul><li>Есть есть еще два типа файлов, GIF и PostScript (PS). Большинству людей они не понадобятся.<li>Файлы PDF могут быть меньше и могут содержать URL-адреса<li>Возможно, вы сможете включить больше записей</ul>"
+
+#. This help message is displayed when the user clicks the help icon next to "Browser render". https://s3.eu-west-1.amazonaws.com/po-pub/i/obqZqWV3JxLlYqmWek7FPMfW.png
+#: 
+msgid "If selected, the browser rendered diagram will automatically update when any option is changed. This will also hide the \"Update\" button."
+msgstr "Если выбрано, отображаемая в браузере диаграмма будет автоматически обновляться при изменении любого параметра. Это также скроет кнопку «Обновить»."
+
+#. Help button that will show a help page when clicked
+#: 
+msgid "Help"
+msgstr "Помощь"
 

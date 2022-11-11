@@ -551,9 +551,10 @@ use Fisharebest\Webtrees\Tree;
     </div>
 
     <div class="sidebar__buttons">
-        <button type="submit" class="btn btn-primary update-browser-rendering" id="update-browser" <?php if ($vars["auto_update"] == "auto_update") { echo 'style="display: none"'; } ?>><?= /* I18N: A button label. */ I18N::translate('Update') ?></button>
-        <button type="submit" class="btn btn-secondary main-action" name="render"><?= /* I18N: A button label. */ I18N::translate('Download') ?></button>
-        <a href="<?= $module->chartUrl($individual, ['reset' => '1']) ?>" class="btn btn-outline-secondary"><?= /* I18N: A button label. */ I18N::translate('Reset') ?></a>
+        <button type="submit" class="btn btn-primary update-browser-rendering" id="update-browser" <?php if ($vars["auto_update"] == "auto_update") { echo 'style="display: none"'; } ?>><?= I18N::translate('Update') ?></button>
+        <button type="submit" class="btn btn-secondary main-action" name="render"><?= I18N::translate('Download') ?></button>
+        <a href="<?= $module->chartUrl($individual, ['reset' => '1']) ?>" class="btn btn-outline-secondary"><?= I18N::translate('Reset') ?></a>
+        <button class="btn btn-outline-secondary main-action" name="help" onclick="return showHelp('Help')"><?= I18N::translate('Help') ?></button>
     </div>
 
     <input type="hidden" id="browser" name="browser" value="false">

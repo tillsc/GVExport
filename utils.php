@@ -46,7 +46,8 @@ function sys_get_temp_dir_my() {
 
 
 
-function is__writable($path) {
+function is__writable($path): bool
+{
 	//will work in despite of Windows ACLs bug
 	//NOTE: use a trailing slash for folders!!!
 	//see http://bugs.php.net/bug.php?id=27609

@@ -28,7 +28,6 @@ msgid "Appearance"
 msgstr "Weergave"
 
 #: 
-#, fuzzy
 msgid "Output settings"
 msgstr "Uitvoerinstellingen"
 
@@ -41,7 +40,6 @@ msgid "Stop processing on"
 msgstr "Stop verwerking bij"
 
 #: 
-#, fuzzy
 msgid "Include ancestors"
 msgstr "Inclusief voorouders"
 
@@ -62,12 +60,10 @@ msgid "Spouses"
 msgstr "Partners"
 
 #: 
-#, fuzzy
 msgid "Include descendants"
 msgstr "Inclusief afstammelingen"
 
 #: 
-#, fuzzy
 msgid "Max levels"
 msgstr "Max. niveaus"
 
@@ -84,22 +80,18 @@ msgid "Use abbreviated placenames"
 msgstr "Gebruik verkorte plaatsnamen"
 
 #: 
-#, fuzzy
 msgid "Show birth date"
 msgstr "Toon geboortedatum"
 
 #: 
-#, fuzzy
 msgid "Show birth place"
 msgstr "Toon geboorteplaats"
 
 #: 
-#, fuzzy
 msgid "Show death date"
 msgstr "Toon overlijdensdatum"
 
 #: 
-#, fuzzy
 msgid "Full date"
 msgstr "Volledige datum"
 
@@ -108,32 +100,26 @@ msgid "Year"
 msgstr "Jaar"
 
 #: 
-#, fuzzy
 msgid "Show death place"
 msgstr "Toon overlijdensplaats"
 
 #: 
-#, fuzzy
 msgid "Show family XREF"
-msgstr "Toon gezins-ID"
+msgstr "Toon gezins-XREF"
 
 #: 
-#, fuzzy
 msgid "Show marriage date"
 msgstr "Toon huwelijksdatum"
 
 #: 
-#, fuzzy
 msgid "Show marriage place"
 msgstr "Toon huwelijksplaats"
 
 #: 
-#, fuzzy
 msgid "Graph direction"
 msgstr "Grafiekrichting"
 
 #: 
-#, fuzzy
 msgid "Diagram type"
 msgstr "Diagramtype"
 
@@ -158,7 +144,6 @@ msgid "Only Decorated or Combined"
 msgstr "Alleen versierd of gecombineerd"
 
 #: 
-#, fuzzy
 msgid "Output file type"
 msgstr "Type uitvoerbestand"
 
@@ -179,21 +164,14 @@ msgid "DPI"
 msgstr "DPI"
 
 #: 
-#, fuzzy
 msgid "Show options"
-msgstr "Toon selectie"
+msgstr "Toon opties"
 
 #: 
-msgid "SVG only"
-msgstr "Alleen SVG"
-
-#: 
-#, fuzzy
 msgid "Top-to-bottom"
 msgstr "Van boven naar beneden"
 
 #: 
-#, fuzzy
 msgid "Left-to-right"
 msgstr "Van links naar rechts"
 
@@ -206,7 +184,6 @@ msgid "Space between individuals on the same level"
 msgstr "Ruimte tussen personen op hetzelfde niveau"
 
 #: 
-#, fuzzy
 msgid "Error running GVExport in browser mode"
 msgstr "Fout bij het uitvoeren van GVExport in browsermodus"
 
@@ -223,17 +200,14 @@ msgid "Full place name"
 msgstr "Volledige plaatsnaam"
 
 #: 
-#, fuzzy
 msgid "City and country"
 msgstr "Plaats en land"
 
 #: 
-#, fuzzy
 msgid "City and 2 letter ISO country code"
 msgstr "Plaats en 2-letterige ISO-landcode"
 
 #: 
-#, fuzzy
 msgid "City and 3 letter ISO country code"
 msgstr "Plaats en 3-letterige ISO-landcode"
 
@@ -258,9 +232,8 @@ msgid "People to be included"
 msgstr "Inclusief de volgende personen"
 
 #: 
-#, fuzzy
 msgid "Show individual XREF"
-msgstr "Toon persoons-ID"
+msgstr "Toon persoons-XREF"
 
 #: 
 msgid "Options limited as GraphViz not installed on server"
@@ -401,7 +374,6 @@ msgstr "Alleen initialen"
 
 #. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
 #: 
-#, fuzzy
 msgid "Given name initials and surname"
 msgstr "Voorletters en achternaam"
 
@@ -559,14 +531,67 @@ msgstr "Achtergrondkleur startpersonen"
 #. Option to change font size. This affects (at the time of writing) all diagram text except for names which have their own setting:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/IdWIcmNdrOj4l1yTgxv6MpVW.png
 #: 
-#, fuzzy
 msgid "Font size for details"
-msgstr "Standaardlettergrootte"
+msgstr "Lettergrootte voor details"
 
 #. The font size to use for the names of individuals:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/IdWIcmNdrOj4l1yTgxv6MpVW.png
 #: 
-#, fuzzy
 msgid "Font size for names"
-msgstr "Lettergrootte naam"
+msgstr "Lettergrootte voor namen"
+
+#. Note limitation for adding URLs:  https://s3.eu-west-1.amazonaws.com/po-pub/i/ativPbmheBQQboYLANZmlHYY.png
+#: 
+msgid "browser and SVG only"
+msgstr "alleen browser en SVG"
+
+#. Note limitation for adding URLs:  https://s3.eu-west-1.amazonaws.com/po-pub/i/8gzkcNUo2oj43PpU7Dou5ZEr.png
+#: 
+msgid "browser, SVG, and PDF only"
+msgstr "alleen browser, SVG en PDF"
+
+#. This help message is displayed when the user clicks the help icon next to "Include anyone related to". https://s3.eu-west-1.amazonaws.com/po-pub/i/4sXDKFJMwoE5PBYZqEPOIV7W.png
+#: 
+msgid "This is our starting point. Choose a person to base the diagram around. You might choose yourself.</p><p>You can choose as many starting individuals as you wish. A tree will be created for each starting individual based on the settings, then the trees are merged to create one tree for the diagram.</p><p>Click the X to remove a record from the list. If two or more records are listed, a \"Clear all\" option will appear to allow you to remove all records.</p><p>You can also click on an individual in this list to have the diagram in the browser scroll to that person.</p><p>When you next come to the page, the default individual or the last individual you were looking at in webtrees will be loaded. If there was just one saved individual then it will be replaced with the individual provided by webtrees on coming to the page. If there were multiple in the list, then the individual provided by webtrees will be added to the list (if not already in it). So be sure to double-check you are only including individuals you are looking for when first loading the page."
+msgstr "Dit is ons startpunt. Kies een persoon om het diagram op te baseren. U kunt uzelf kiezen.</p><p>U kunt zoveel startpersonen kiezen als u wilt. Voor elke startpersoon wordt een boom gemaakt op basis van de instellingen, waarna de bomen worden samengevoegd tot één boom voor het diagram.</p><p>Klik op de X om een record uit de lijst te verwijderen. Als er twee of meer records in de lijst staan, verschijnt een optie \"Alles wissen\" waarmee alle records verwijderd kunnen worden.</p><p>U kunt ook op een persoon in deze lijst klikken om het diagram in de browser naar die persoon te laten scrollen.</p><p>Wanneer u de volgende keer op de pagina komt, wordt de standaardpersoon of de laatste persoon die u in webtrees hebt bekeken, geladen. Als er slechts één persoon was opgeslagen, wordt deze vervangen door de persoon die door webtrees is verstrekt wanneer u op de pagina komt. Als er meerdere personen in de lijst stonden, dan zal de persoon die door webtrees is geleverd aan de lijst worden toegevoegd (als die er nog niet in stond). Dus zorg ervoor dat u alleen peronen opneemt die u zoekt als de pagina voor het eerst wordt geladen."
+
+#. This help message is displayed when the user clicks the help icon next to "Include ancestors".  https://s3.eu-west-1.amazonaws.com/po-pub/i/UoTrlDpngydDdWmJPau99ZV4.png
+#: 
+msgid "Tick this option to include ancestors of your starting person(s) and anyone in the tree.</p><h4>Max levels</h4><p>The number of generations of ancestors to include. For example, if you chose yourself as your starting person, you may want the diagram to include relatives back to your great-grandparents. In this case, you would type 3 in this box, to include your parents' generation, your grandparents' generation, and your great-grandparents' generation."
+msgstr "Vink deze optie aan om voorouders op te nemen van de startperso(o)n(en) en iedereen in de boom.</p><h4>Max niveaus</h4><p>Het aantal generaties voorouders dat moet worden opgenomen. Als u bijvoorbeeld uzelf als startpersoon hebt gekozen, wilt u misschien dat het diagram ook familieleden bevat die teruggaan tot uw overgrootouders. In dat geval typt u 3 in dit vak, om de generatie van uw ouders, uw grootouders en uw overgrootouders op te nemen."
+
+#. This help message is displayed when the user clicks the help icon next to "Include".  https://s3.eu-west-1.amazonaws.com/po-pub/i/G2LwgKcPjaAwzcCXllEaXa13.png
+#: 
+msgid "This section lets you decide what type of relatives to include when generating the diagram.</p><h4>Siblings</h4><p>Include brothers and sisters of anyone in the tree.</p><h4>All relations</h4><p>Include cousins, nieces, nephews, and their descendants when generating the tree. Requires \"Siblings\" to be selected.</p><h4>Partners</h4><p>Include the husbands, wives, and partners of those in the tree even if they aren't blood-relatives. There is another option \"Mark not blood-related people with different color\" that allows these people to be marked in a different colour.</p><h4>Anyone</h4><p>Follow all links regardless of whether the person is related. In practice, this generally means that the family of non-relatives (i.e. spouses) are included in the tree.</p><p>Use this option to include all records of the selected generations. Note that only records with a link are included, so you may need to include more ancestor generations (or more starting individuals) to get all your records to show."
+msgstr "Hier kunt u bepalen welk type familieleden u wilt opnemen bij het genereren van het diagram.</p><h4>Broers en zussen</h4><p>Broers en zussen van iedereen in de boom opnemen.</p><h4>Alle relaties</h4><p>Neven en nichten en hun nakomelingen opnemen bij het genereren van de boom. Vereist dat \"Broers en zussen\" is geselecteerd.</p><h4>Partners</h4><p>Omvat de echtgenoten, echtgenotes en partners van degenen in de stamboom, zelfs als zij geen bloedverwanten zijn. Er is een andere optie \"Niet-bloedverwanten met andere kleur markeren\" waarmee deze personen met een andere kleur kunnen worden gemarkeerd.</p><h4>Iedereen</h4><p>Volg alle koppelingen, ongeacht of de persoon verwant is. In de praktijk betekent dit meestal dat de familie van niet-verwanten (zoals echtgenoten) in de boom wordt opgenomen.</p><p>Gebruik deze optie om alle records van de geselecteerde generaties op te nemen. Merk op dat alleen records met een link worden opgenomen, dus het is mogelijk dat u meer vooroudergeneraties (of meer startpersonen) moet opnemen om alle records te tonen."
+
+#. This help message is displayed when the user clicks the help icon next to "Include descendants".  https://s3.eu-west-1.amazonaws.com/po-pub/i/TNXFdoP4fIHVQnScVvnfvKA1.png
+#: 
+msgid "Whether to include children, grandchildren, etc. of people listed in the tree.</p><h4>Max levels</h4><p>The number of generations of descendants to include. For example, if you chose yourself as your starting person, you may want the diagram to include descendants down to your great-grandchildren. In this case, you would type 3 in this box, to include your children and others of their generation, your grandchildren, and your great-grandchildren's generation."
+msgstr "Of kinderen, kleinkinderen, enz. van personen in de boom moeten worden opgenomen.</p><h4>Max niveaus</h4><p>Het aantal generaties nakomelingen dat moet worden opgenomen. Als u bijvoorbeeld uzelf als startpersoon hebt gekozen, wilt u misschien dat het diagram ook de nakomelingen tot aan uw achterkleinkinderen bevat. In dat geval typt u 3 in dit vak, om uw kinderen en anderen van hun generatie, uw kleinkinderen en de generatie van uw achterkleinkinderen op te nemen."
+
+#. This help message is displayed when the user clicks the help icon next to "Graph direction". https://s3.eu-west-1.amazonaws.com/po-pub/i/MpbVhXyRxeLgMO8FZVXHZhHG.png
+#: 
+msgid "There are two display options here:<ul><li>Left to right - The default option, columns of generations are created with the older generations to the left and younger to the right.<li>Top to bottom - Rows of generations are created, with the older generations at the top and the younger at the bottom."
+msgstr "Er zijn hier twee weergaveopties:<ul><li>Links naar rechts - De standaardoptie, kolommen met generaties worden gemaakt met de oudere generaties aan de linkerkant en jongere aan de rechterkant.<li>Van boven naar beneden - Rijen met generaties worden gemaakt, met de oudere generaties bovenaan en de jongere onderaan."
+
+#. This help message is displayed when the user clicks the help icon next to "Diagram type". https://s3.eu-west-1.amazonaws.com/po-pub/i/dt2T4x9RshJsWKWZ7fQ4zFlu.png
+#: 
+msgid "The options here are:<ul><li>Simple - A box per person, coloured based on sex. No photos allowed.<li>Decorated - A more refined box, which also allows photos to be included.<li>Combined - Each couple is one box instead of one per person. Also allows photos.</ul>"
+msgstr "De opties hier zijn:<ul><li>Eenvoudig - Een vak per persoon, gekleurd op basis van geslacht. Geen foto's toegestaan.<li>Versierd - Een meer verfijnd vak, waarin ook foto's kunnen worden opgenomen.<li>Gecombineerd - Elk paar is één vak in plaats van één per persoon. Staat ook foto's toe.</ul>"
+
+#. This help message is displayed when the user clicks the help icon next to "Output file type". https://s3.eu-west-1.amazonaws.com/po-pub/i/apq6Tgv91ZGJTGcUfFH3V1VE.png
+#: 
+msgid "The output file type you want. This is ignored when rendering in the browser, it is only used when you download a file. File types SVG, PNG, JPEG, and PDF can be downloaded, in addition to the GraphViz DOT format.</p><p>There are some minor differences if you have GraphViz installed on the server:<ul><li>There are two more file types, GIF and PostScript (PS). Most people would not need these.<li>PDF files may be smaller and can include URLs<li>You may be able to include more records</ul>"
+msgstr "Het gewenste uitvoerbestandstype. Dit wordt genegeerd bij het opbouwen in de browser, het wordt alleen gebruikt wanneer u een bestand downloadt. Bestandstypen SVG, PNG, JPEG en PDF kunnen worden gedownload, naast het GraphViz DOT-formaat.</p><p>Er zijn enkele kleine verschillen als u GraphViz op de server hebt geïnstalleerd:<ul><li>Er zijn nog twee bestandstypen, GIF en PostScript (PS). De meeste mensen hebben deze niet nodig.<li>PDF-bestanden zijn mogelijk kleiner en kunnen URL's bevatten<li>U kunt mogelijk meer records opnemen</ul>"
+
+#. This help message is displayed when the user clicks the help icon next to "Browser render". https://s3.eu-west-1.amazonaws.com/po-pub/i/obqZqWV3JxLlYqmWek7FPMfW.png
+#: 
+msgid "If selected, the browser rendered diagram will automatically update when any option is changed. This will also hide the \"Update\" button."
+msgstr "Indien geselecteerd, wordt het door de browser weergegeven diagram automatisch bijgewerkt wanneer een optie wordt gewijzigd. Hierdoor wordt ook de knop \"Bijwerken\" verborgen."
+
+#. Help button that will show a help page when clicked
+#: 
+msgid "Help"
+msgstr "Help"
 
