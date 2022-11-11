@@ -127,7 +127,7 @@ use Fisharebest\Webtrees\Tree;
         <?php } ?>
 
         <div class="row form-group">
-            <label class=" col-sm-4 col-form-label wt-page-options-label" for="pid"><?= I18N::translate('Include anyone related to') ?></label>
+            <?= addLabelWithHelp('pid', 'Include anyone related to'); ?>
             <div class="col-sm-8 wt-page-options-value">
                 <div id="indi_list">
 
@@ -141,7 +141,7 @@ use Fisharebest\Webtrees\Tree;
         </div>
 
         <div class="row form-group">
-            <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[indiance]"><?= I18N::translate('Include ancestors') ?></label>
+            <?= addLabelWithHelp('vars[indiance]', 'Include ancestors'); ?>
             <div class="col-sm-8 wt-page-options-value">
                 <div class="row">
                     <div class="col-auto mx-3">
@@ -157,7 +157,7 @@ use Fisharebest\Webtrees\Tree;
         </div>
 
         <div class="row form-group">
-            <label class="col-sm-4 col-form-label wt-page-options-label"><?= I18N::translate('Include') ?></label>
+            <?= addLabelWithHelp('', 'Include'); ?>
             <div class="col-sm-8 wt-page-options-value">
                 <div class="row">
                     <div class="col-auto mx-3">
@@ -185,7 +185,7 @@ use Fisharebest\Webtrees\Tree;
         </div>
 
         <div class="row form-group">
-            <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[indidesc]"><?= I18N::translate('Include descendants') ?></label>
+            <?= addLabelWithHelp('vars[indidesc]', 'Include descendants'); ?>
             <div class="col-sm-8 wt-page-options-value">
                 <div class="row">
                     <div class="col-auto mx-3">
@@ -248,14 +248,14 @@ use Fisharebest\Webtrees\Tree;
         <h3><?= /* I18N: Appearance heading */ I18N::translate('Appearance') ?></h3>
 
         <div class="row form-group">
-            <label class=" col-sm-4 col-form-label wt-page-options-label" for="vars[grdir]"><?= I18N::translate('Graph direction') ?></label>
+            <?= addLabelWithHelp('vars[grdir]', 'Graph direction'); ?>
             <div class="col-sm-8 wt-page-options-value">
                 <?= view('components/select', ['name' => 'vars[grdir]', 'selected' => $vars['grdir'], 'options' => updateTranslations($gve_config["directions"])]) ?>
             </div>
         </div>
 
         <div class="row form-group">
-            <label class="col-sm-4 col-form-label wt-page-options-label"><?= I18N::translate('Diagram type') ?></label>
+            <?= addLabelWithHelp('', 'Diagram type'); ?>
             <div class="col-sm-8 wt-page-options-value">
                 <div class="row">
                     <div class="col-auto">
@@ -535,12 +535,12 @@ use Fisharebest\Webtrees\Tree;
         <a href="#" onclick="toggleAdvanced(this, 'appearance-advanced')"><div class="wt-page-options-label advanced-settings-btn"><?= ($vars["adv_appear"] == "show" ? '↑ ' : '↓ ') . I18N::translate('Toggle advanced settings') . ($vars["adv_appear"] == "show" ? ' ↑' : ' ↓'); ?></div></a>
         <h3><?= /* I18N: Appearance heading */ I18N::translate('Output settings') ?></h3>
         <div class="row form-group">
-            <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[otype]"><?= I18N::translate('Output file type') ?></label>
+            <?= addLabelWithHelp('vars[otype]', 'Output file type'); ?>
             <div class="col-sm-8 wt-page-options-value">
                 <?= view('components/select', ['name' => 'vars[otype]', 'selected' => $vars['otype'], 'options' => $otypes]) ?>
                 <small id="emailHelp" class="form-text text-muted"><?= $nographviz ? I18N::translate("Options limited as GraphViz not installed on server") : "" ?></small>
             </div>
-            <label class="col-sm-4 col-form-label wt-page-options-label"><?= I18N::translate('Browser render') ?></label>
+            <?= addLabelWithHelp('vars[auto_update]', 'Browser render'); ?>
             <div class="col-sm-8 wt-page-options-value">
                 <label for="vars[auto_update]"><?= I18N::translate('Auto-update') ?></label>
                 <input type="hidden" name="vars[auto_update]" value="no">
@@ -787,8 +787,10 @@ use Fisharebest\Webtrees\Tree;
         let er = document.getElementById(id);
         er.innerText="";
     }
-
 </script>
+
+<?php // Include help text
+include_once(dirname(__FILE__) . '/../../help.phtml'); ?>
 
 <div id="toast-container"></div>
 

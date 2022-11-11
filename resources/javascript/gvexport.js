@@ -698,3 +698,23 @@ function pageLoaded() {
         }
     });
 }
+
+// Function to show a help message
+// item - the help item identifier
+function showHelp(item) {
+    let helpText = getHelpText(item);
+    const modal = document.createElement("div");
+    modal.className = "modal";
+    modal.innerHTML = "<div class=\"modal-content\">\n" +
+        "<span class='close' onclick='this.parentElement.parentElement.remove()'>&times;</span>\n" +
+        "<p>" + helpText + "</p>\n" +
+        "</div>"
+    document.body.appendChild(modal);
+    // When the user clicks anywhere outside the modal, close it
+    window.onclick = function(event) {
+        if (event.target === modal) {
+            modal.remove();
+        }
+    }
+    return false;
+}
