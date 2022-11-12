@@ -557,7 +557,8 @@ msgstr "Это наша отправная точка. Выберите чело
 
 #. This help message is displayed when the user clicks the help icon next to "Include ancestors".  https://s3.eu-west-1.amazonaws.com/po-pub/i/UoTrlDpngydDdWmJPau99ZV4.png
 #: 
-msgid "Tick this option to include ancestors of your starting person(s) and anyone in the tree.</p><h4>Max levels</h4><p>The number of generations of ancestors to include. For example, if you chose yourself as your starting person, you may want the diagram to include relatives back to your great-grandparents. In this case, you would type 3 in this box, to include your parents' generation, your grandparents' generation, and your great-grandparents' generation."
+#, fuzzy
+msgid "Tick this option to include ancestors of your starting person(s) and anyone in the tree.</p><h4>Max levels</h4><p>The number of generations of ancestors to include. For example, if you chose yourself as your starting person, you may want the diagram to include relatives back to your great-grandparents. In this case, you would type \"3\" in this box, to include your parents' generation, your grandparents' generation, and your great-grandparents' generation."
 msgstr "Отметьте эту опцию, чтобы включить предков ваших начальных людей и всех в дереве.</p><h4>Максимальное количество уровней</h4><p>Количество поколений предков, которые нужно включить. Например, если вы выбрали себя в качестве исходного человека, вы можете захотеть, чтобы на диаграмме были указаны родственники ваших прабабушек и дедушек. В этом случае вы должны ввести 3 в это поле, чтобы включить поколение ваших родителей, поколение ваших бабушек и дедушек и поколение ваших прабабушек и дедушек."
 
 #. This help message is displayed when the user clicks the help icon next to "Include".  https://s3.eu-west-1.amazonaws.com/po-pub/i/G2LwgKcPjaAwzcCXllEaXa13.png
@@ -567,7 +568,8 @@ msgstr "В этом разделе вы можете решить, какой т
 
 #. This help message is displayed when the user clicks the help icon next to "Include descendants".  https://s3.eu-west-1.amazonaws.com/po-pub/i/TNXFdoP4fIHVQnScVvnfvKA1.png
 #: 
-msgid "Whether to include children, grandchildren, etc. of people listed in the tree.</p><h4>Max levels</h4><p>The number of generations of descendants to include. For example, if you chose yourself as your starting person, you may want the diagram to include descendants down to your great-grandchildren. In this case, you would type 3 in this box, to include your children and others of their generation, your grandchildren, and your great-grandchildren's generation."
+#, fuzzy
+msgid "Whether to include children, grandchildren, etc. of people listed in the tree.</p><h4>Max levels</h4><p>The number of generations of descendants to include. For example, if you chose yourself as your starting person, you may want the diagram to include descendants down to your great-grandchildren. In this case, you would type \"3\" in this box, to include your children and others of their generation, your grandchildren, and your great-grandchildren's generation."
 msgstr "Следует ли включать детей, внуков и т. д. людей, перечисленных в дереве.</p><h4>Максимальное количество уровней</h4><p>Количество поколений потомков, которые необходимо включить. Например, если вы выбрали себя в качестве отправной точки, вы можете захотеть, чтобы диаграмма включала потомков вплоть до ваших правнуков. В этом случае вы должны ввести 3 в это поле, чтобы включить ваших детей и других людей их поколения, ваших внуков и ваших правнуков."
 
 #. This help message is displayed when the user clicks the help icon next to "Graph direction". https://s3.eu-west-1.amazonaws.com/po-pub/i/MpbVhXyRxeLgMO8FZVXHZhHG.png
@@ -582,16 +584,31 @@ msgstr "Доступны следующие варианты:<ul><li>Прост�
 
 #. This help message is displayed when the user clicks the help icon next to "Output file type". https://s3.eu-west-1.amazonaws.com/po-pub/i/apq6Tgv91ZGJTGcUfFH3V1VE.png
 #: 
-msgid "The output file type you want. This is ignored when rendering in the browser, it is only used when you download a file. File types SVG, PNG, JPEG, and PDF can be downloaded, in addition to the GraphViz DOT format.</p><p>There are some minor differences if you have GraphViz installed on the server:<ul><li>There are two more file types, GIF and PostScript (PS). Most people would not need these.<li>PDF files may be smaller and can include URLs<li>You may be able to include more records</ul>"
+#, fuzzy
+msgid "The output file type you want. This is ignored when rendering in the browser, it is only used when you download a file. File types SVG, PNG, JPG, and PDF can be downloaded, in addition to the GraphViz DOT format.</p><p>There are some minor differences if you have GraphViz installed on the server:<ul><li>There are two more file types, GIF and PostScript (PS). Most people would not need these.<li>PDF files may be smaller and can include URLs<li>You may be able to include more records</ul>"
 msgstr "Тип выходного файла, который вы хотите. Это игнорируется при рендеринге в браузере, используется только при загрузке файла. Типы файлов SVG, PNG, JPEG и PDF могут быть загружены в дополнение к формату GraphViz DOT.</p><p>Есть некоторые незначительные отличия, если на сервере установлен GraphViz:<ul><li>Есть есть еще два типа файлов, GIF и PostScript (PS). Большинству людей они не понадобятся.<li>Файлы PDF могут быть меньше и могут содержать URL-адреса<li>Возможно, вы сможете включить больше записей</ul>"
 
 #. This help message is displayed when the user clicks the help icon next to "Browser render". https://s3.eu-west-1.amazonaws.com/po-pub/i/obqZqWV3JxLlYqmWek7FPMfW.png
 #: 
-msgid "If selected, the browser rendered diagram will automatically update when any option is changed. This will also hide the \"Update\" button."
+#, fuzzy
+msgid "If the option \"Auto-update\" is selected, the browser rendered diagram will automatically update when any option is changed. This will also hide the \"Update\" button."
 msgstr "Если выбрано, отображаемая в браузере диаграмма будет автоматически обновляться при изменении любого параметра. Это также скроет кнопку «Обновить»."
 
 #. Help button that will show a help page when clicked
 #: 
 msgid "Help"
 msgstr "Помощь"
+
+#. This message is shown when clicking a new "Help" button. It links to English pages, so this may need some customising for each language. Link to the German page in the German language (possibly with an additional link to the English one), add some sort of note that the linked pages are in English, feel free to be flexible in what you write to keep it helpful. 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/bDIbs7uTn254cSfZeqaATIBr.png 
+#. 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/vyDHWXC9qcax65t9gW4YjvMv.png
+#: 
+msgid "GVExport is a webtrees module that allows you to create complex visual family trees, using a tool called GraphViz to display the tree. Select a starting person, adjust the settings, and see that person's family tree.</p><p>Some fields have an icon <span class=\"info-icon btn btn-primary\">i</span> next to them, clicking this will give you some more information about that field. Not all fields are covered (yet).</p><p>Advanced configurations are possible by toggling advanced settings by clicking the \"Toggle advanced settings\" option at the end of each section. Clicking the ⛶ at the top right corner of the browser rendering will display the browser rendering in full screen. You can also use the webtrees \"Clippings Cart\" feature to select records, which GVExport can then use instead of the \"People to be included\" settings. </p><p>There are several buttons that take action based on the settings that you have chosen:<ul><li>Update: Clicking this updates the browser render (this is hidden if auto-update is enabled).<li>Download: Clicking this will download the diagram in the format chosen in the \"Output file type\" option. <li>Reset: Clicking this will reset the settings to the default values. Default values can be changed by an administrator in the webtrees Control Panel.<li>Help: Shows this help message.</ul></p><p>For more information, see the <a href=\"https://github.com/Neriderc/GVExport/wiki\" class=\"help-link\">GVExport Wiki</a>.</p><p>You can also ask a question, provide feedback, or suggest features on our <a href=\"https://github.com/Neriderc/GVExport\" class=\"help-link\">GitHub page</a>. Just <a href=\"https://github.com/Neriderc/GVExport/issues/new\" class=\"help-link\">open an issue</a>, or <a href=\"https://github.com/Neriderc/GVExport/issues\" class=\"help-link\">browse existing issues</a>."
+msgstr ""
+
+#. This message should never be shown, but it is a backup message for the help messages in the case that the text cannot be found - it's effectively an error message.
+#: 
+msgid "Help information not found"
+msgstr ""
 
