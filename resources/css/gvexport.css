@@ -220,11 +220,15 @@
     padding: 0 !important;
     font-size: 15px;
     line-height: 14px;
-    margin-top: 6px;
     height: 16px;
     opacity: 0.8;
 }
 
 .label-text {
     width: calc(100% - 16px);
+    margin-top: -6px;
+}
+
+.help-link {
+    text-decoration: underline;
 }

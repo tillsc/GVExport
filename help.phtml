@@ -20,7 +20,7 @@
     $help[7][0] = "Browser render";
     $help[7][1] = "If selected, the browser rendered diagram will automatically update when any option is changed. This will also hide the \"Update\" button.";
     $help[8][0] = "Help";
-    $help[8][1] = "Some fields have an icon <span class=\"info-icon btn btn-primary\">i</span> next to them, clicking this will give you some more information about that field. Not all fields are covered (yet).<p>For more information, see the <a href=\"https://github.com/Neriderc/GVExport/wiki\">English Wiki</a> or the <a href=\"https://wiki.genealogy.net/Webtrees_Handbuch/Anleitung_f%C3%BCr_Webmaster/Erweiterungsmodule/GVExport\">German Wiki</a>.</p><p>You can also ask a question, provide feedback, or suggest features on our <a href=\"https://github.com/Neriderc/GVExport\">GitHub page</a>. Just <a href=\"https://github.com/Neriderc/GVExport/issues/new\">open an issue</a>.";
+    $help[8][1] = "GVExport is a webtrees module that allows you to create complex visual family trees, using a tool called GraphViz to display the tree. Select a starting person, adjust the settings, and see that person's family tree.</p><p>Some fields have an icon <span class=\"info-icon btn btn-primary\">i</span> next to them, clicking this will give you some more information about that field. Not all fields are covered (yet).<p>For more information, see the <a href=\"https://github.com/Neriderc/GVExport/wiki\" class=\"help-link\">GVExport Wiki</a>.</p><p>You can also ask a question, provide feedback, or suggest features on our <a href=\"https://github.com/Neriderc/GVExport\" class=\"help-link\">GitHub page</a>. Just <a href=\"https://github.com/Neriderc/GVExport/issues/new\" class=\"help-link\">open an issue</a>, or <a href=\"https://github.com/Neriderc/GVExport/issues\" class=\"help-link\">browse existing issues</a>.";
     ?>
 <script type="text/javascript">
 // Function to get help text based on identifier
@@ -35,7 +35,7 @@ function getHelpText(item) {
             }
         ?>
         default:
-            return  <?= I18N::translate("Help information not found"); ?>;
+            return  '<?= I18N::translate("Help information not found"); ?>';
     }
 }
 </script>
