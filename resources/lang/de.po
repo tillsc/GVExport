@@ -69,7 +69,7 @@ msgstr "Maximale Generationen"
 
 #: 
 msgid "Mark not blood-related people with different color"
-msgstr "Nicht blutsverwandten Personen in einer anderen Farbe markieren"
+msgstr "Nicht blutsverwandte Personen in einer anderen Farbe markieren"
 
 #: 
 msgid "Add URL to individuals and families"
@@ -145,7 +145,7 @@ msgstr "Nur bei \"dekoriert\" oder \"kombiniert\""
 
 #: 
 msgid "Output file type"
-msgstr "Ausgabedatei-Typ"
+msgstr "Ausgabedateityp"
 
 #: 
 msgid "Generate a file for download"
@@ -170,12 +170,12 @@ msgstr "Auswahlmöglichkeiten zeigen"
 #: 
 #, fuzzy
 msgid "Top-to-bottom"
-msgstr "von oben nach unten"
+msgstr "Von oben nach unten"
 
 #: 
 #, fuzzy
 msgid "Left-to-right"
-msgstr "von links nach rechts"
+msgstr "Von links nach rechts"
 
 #: 
 msgid "Space between generations"
@@ -545,32 +545,34 @@ msgstr "Schriftgröße für Namen"
 #. Note limitation for adding URLs:  https://s3.eu-west-1.amazonaws.com/po-pub/i/ativPbmheBQQboYLANZmlHYY.png
 #: 
 msgid "browser and SVG only"
-msgstr "nur im Browser und bei SVG"
+msgstr "Nur im Browser und bei SVG"
 
 #. Note limitation for adding URLs:  https://s3.eu-west-1.amazonaws.com/po-pub/i/8gzkcNUo2oj43PpU7Dou5ZEr.png
 #: 
 msgid "browser, SVG, and PDF only"
-msgstr "nur im Browser, bei SVG und PDF"
+msgstr "Nur im Browser, bei SVG und PDF"
 
 #. This help message is displayed when the user clicks the help icon next to "Include anyone related to". https://s3.eu-west-1.amazonaws.com/po-pub/i/4sXDKFJMwoE5PBYZqEPOIV7W.png
 #: 
 msgid "This is our starting point. Choose a person to base the diagram around. You might choose yourself.</p><p>You can choose as many starting individuals as you wish. A tree will be created for each starting individual based on the settings, then the trees are merged to create one tree for the diagram.</p><p>Click the X to remove a record from the list. If two or more records are listed, a \"Clear all\" option will appear to allow you to remove all records.</p><p>You can also click on an individual in this list to have the diagram in the browser scroll to that person.</p><p>When you next come to the page, the default individual or the last individual you were looking at in webtrees will be loaded. If there was just one saved individual then it will be replaced with the individual provided by webtrees on coming to the page. If there were multiple in the list, then the individual provided by webtrees will be added to the list (if not already in it). So be sure to double-check you are only including individuals you are looking for when first loading the page."
-msgstr "Das ist unser Ausgangspunkt. Wählen Sie eine Person aus, um die herum das Diagramm erstellt werden soll. Sie können sie selbst auswählen.</p><p>Sie können auch mehrere Startpersonen auswählen. Basierend auf den übrigen Einstellungen wird für jede Startperson ein Baum erstellt, dann werden diese Bäume zusammengeführt, um so das Diagramm zu erstellen.</p><p>Klicken Sie auf das X, um eine Person aus der Liste zu entfernen. Wenn zwei oder mehr Personen aufgelistet sind, erscheint die Option „Alle löschen“, mit der Sie alle Personen entfernen können.</p><p>Sie können auch auf eine Person in dieser Liste klicken, damit im Diagramm auf diese Person fokussiert wird.</p><p>Wenn Sie das nächste Mal auf diese Seite kommen, wird die Standardperson oder die letzte Person, die Sie sich in webtrees angesehen haben, geladen. Wenn es nur eine gespeicherte Person gab, wird diese beim Aufrufen der Seite durch die von webtrees bereitgestellte Person ersetzt. Wenn es mehrere Personen in der Liste gab, wird die von webtrees bereitgestellte Person zur Liste hinzugefügt (falls sie nicht bereits darin enthalten ist). Vergewissern Sie sich also beim Laden der Seite, dass nur diejenigen Personen einbezogen wurden, nach denen Sie suchen wollen."
+msgstr "Suchen Sie nach einer Person im Auswahlfeld, um die herum das Diagramm erstellt werden soll. Alternativ kann auch der Inhalt des Sammelbehälters angezeigt werden.</p><p>Sie können die Startperson selbst auswählen und Sie können auch mehrere Startpersonen selektieren. Basierend auf den übrigen Einstellungen wird dann für jede Startperson ein Baum erstellt; diese werden für die Darstellung des Diagramms zusammengeführt.</p><p>Klicken Sie auf das X, um eine Person aus der Liste zu entfernen. Wenn zwei oder mehr Personen aufgelistet sind, erscheint die Option „Alle löschen“, mit der Sie alle Personen in einem Schritt entfernen können.</p><p>Sie können auch auf eine Person in dieser Liste klicken, damit im Diagramm auf diese Person zentriert wird.</p><p>Wenn Sie das nächste Mal auf diese Seite kommen, wird die Standardperson oder die letzte Person, die Sie sich in webtrees angesehen haben, geladen. Wenn es nur eine gespeicherte Person gab, wird diese beim Aufrufen der Seite durch die von webtrees bereitgestellte Person ersetzt. Wenn es mehrere Personen in der Liste gab, wird die von webtrees bereitgestellte Person zur Liste hinzugefügt (falls sie nicht bereits darin enthalten ist). Vergewissern Sie sich also beim Laden der Seite, dass nur diejenigen Personen einbezogen wurden, die Sie dargestellt haben wollen."
 
 #. This help message is displayed when the user clicks the help icon next to "Include ancestors".  https://s3.eu-west-1.amazonaws.com/po-pub/i/UoTrlDpngydDdWmJPau99ZV4.png
 #: 
-msgid "Tick this option to include ancestors of your starting person(s) and anyone in the tree.</p><h4>Max levels</h4><p>The number of generations of ancestors to include. For example, if you chose yourself as your starting person, you may want the diagram to include relatives back to your great-grandparents. In this case, you would type 3 in this box, to include your parents' generation, your grandparents' generation, and your great-grandparents' generation."
-msgstr "Aktivieren Sie diese Option, um die Vorfahren ihrer Startperson(en) und weiterer Personen im Stammbaum einzuschließen.</p><h4>Maximale Ebenen</h4><p>Die Anzahl der einzuschließenden Generationen von Vorfahren. Wenn Sie beispielsweise sich selbst als Startperson gewählt haben und nun möchten, dass das Diagramm Verwandte bis zu ihren Urgroßeltern enthält, geben Sie in diesem Feld eine 3 ein, damit die Generation ihrer Eltern, ihrer Großeltern und ihrer Urgroßeltern einbezogen wird."
+#, fuzzy
+msgid "Tick this option to include ancestors of your starting person(s) and anyone in the tree.</p><h4>Max levels</h4><p>The number of generations of ancestors to include. For example, if you chose yourself as your starting person, you may want the diagram to include relatives back to your great-grandparents. In this case, you would type \"3\" in this box, to include your parents' generation, your grandparents' generation, and your great-grandparents' generation."
+msgstr "Aktivieren Sie diese Option, um die Vorfahren ihrer Startperson(en) und weiterer Personen im Stammbaum einzuschließen.</p><h4>Maximale Generationen</h4><p>Die Anzahl der einzuschließenden Generationen von Vorfahren. Wenn Sie beispielsweise sich selbst als Startperson gewählt haben und nun möchten, dass das Diagramm Verwandte bis zu ihren Urgroßeltern enthält, geben Sie in diesem Feld eine \"3\" ein, damit die Generation ihrer Eltern, ihrer Großeltern und ihrer Urgroßeltern einbezogen wird."
 
 #. This help message is displayed when the user clicks the help icon next to "Include".  https://s3.eu-west-1.amazonaws.com/po-pub/i/G2LwgKcPjaAwzcCXllEaXa13.png
 #: 
 msgid "This section lets you decide what type of relatives to include when generating the diagram.</p><h4>Siblings</h4><p>Include brothers and sisters of anyone in the tree.</p><h4>All relations</h4><p>Include cousins, nieces, nephews, and their descendants when generating the tree. Requires \"Siblings\" to be selected.</p><h4>Partners</h4><p>Include the husbands, wives, and partners of those in the tree even if they aren't blood-relatives. There is another option \"Mark not blood-related people with different color\" that allows these people to be marked in a different colour.</p><h4>Anyone</h4><p>Follow all links regardless of whether the person is related. In practice, this generally means that the family of non-relatives (i.e. spouses) are included in the tree.</p><p>Use this option to include all records of the selected generations. Note that only records with a link are included, so you may need to include more ancestor generations (or more starting individuals) to get all your records to show."
-msgstr "In diesem Abschnitt können Sie entscheiden, welche Arten von Verwandten bei der Erstellung des Diagramms berücksichtigt werden sollen.</p><h4>Geschwister</h4><p>Brüder und Schwestern aller Personen im Stammbaum werden einbezogen.</p><h4>Alle Verwandten </h4><p>Dies bezieht Cousins, Cousinen, Nichten, Neffen und ggf. deren Nachkommen in die Erstellung des Stammbaums ein. Diese Option erfordert auch die Auswahl von „Geschwister“.</p><h4>Partner</h4><p>Schließen Sie die Ehemänner, Ehefrauen und Partner der Personen im Stammbaum ein, auch wenn sie keine Blutsverwandten sind. Es gibt eine weitere Option „Nicht blutsverwandte Personen mit anderer Farbe markieren“, mit der diese Personen in einer anderen Farbe dargestellt werden.</p><h4>Jeder</h4><p>Dies Option folgt allen Verbindungen, unabhängig davon, ob die Person verwandt ist. Dies bedeutet im Allgemeinen, dass auch die Familien von über die Partner verschwägerten Personen in den Baum aufgenommen werden.</p><p>Verwenden Sie diese Option, um alle Datensätze der ausgewählten Generationen einzuschließen. Beachten Sie, dass nur Personen mit einer Verbindung zum Personenkreis im Diagramm enthalten sind, sodass Sie möglicherweise mehr Vorfahrengenerationen (oder mehr Startpersonen) hinzufügen müssen, wenn Sie alle ihre Datensätze anzeigen wollen."
+msgstr "In diesem Abschnitt können Sie entscheiden, welche Arten von Verwandten bei der Erstellung des Diagramms berücksichtigt werden sollen.</p><h4>Geschwister</h4><p>Brüder und Schwestern aller Personen im Stammbaum werden einbezogen.</p><h4>Alle Verwandten </h4><p>Dies bezieht Cousins, Cousinen, Nichten, Neffen und ggf. deren Nachkommen in die Erstellung des Stammbaums ein. Diese Option erfordert auch die Auswahl von „Geschwister“.</p><h4>Partner</h4><p>Schließen Sie die Ehemänner, Ehefrauen und Partner der Personen im Stammbaum ein, auch wenn sie keine Blutsverwandten sind. Es gibt eine weitere Option „Nicht blutsverwandte Personen in einer anderen Farbe markieren“, mit der diese Personen in einer anderen Farbe dargestellt werden können.</p><h4>Jeder</h4><p>Diese Option folgt allen Verbindungen, unabhängig davon, ob die Person verwandt ist. Dies bedeutet im Allgemeinen, dass auch die Familien von über die Partner verschwägerten Personen in den Baum aufgenommen werden.</p><p>Verwenden Sie diese Option, um alle Datensätze der ausgewählten Generationen einzuschließen. Beachten Sie, dass nur Personen mit einer Verbindung zum Personenkreis im Diagramm enthalten sind, sodass Sie möglicherweise mehr Vorfahrengenerationen (oder mehr Startpersonen) hinzufügen müssen, wenn Sie alle ihre Datensätze anzeigen wollen."
 
 #. This help message is displayed when the user clicks the help icon next to "Include descendants".  https://s3.eu-west-1.amazonaws.com/po-pub/i/TNXFdoP4fIHVQnScVvnfvKA1.png
 #: 
-msgid "Whether to include children, grandchildren, etc. of people listed in the tree.</p><h4>Max levels</h4><p>The number of generations of descendants to include. For example, if you chose yourself as your starting person, you may want the diagram to include descendants down to your great-grandchildren. In this case, you would type 3 in this box, to include your children and others of their generation, your grandchildren, and your great-grandchildren's generation."
-msgstr "Hier wählen Sie, ob Kinder, Enkelkinder usw. für die im Baum aufgelisteten Personen eingeschlossen werden sollen.</p><h4>Maximale Ebenen</h4><p>Die Anzahl der Generationen von Nachkommen, die eingeschlossen werden sollen. Wenn Sie beispielsweise sich selbst als Startperson gewählt haben, und Sie möchten, dass das Diagramm Nachkommen bis zu ihren Urenkeln enthält, geben Sie in diesem Fall eine 3 in diesem Feld ein, damit ihre Kinder, ihre Enkel und die Generation ihrer Urenkel eingeschlossen werden."
+#, fuzzy
+msgid "Whether to include children, grandchildren, etc. of people listed in the tree.</p><h4>Max levels</h4><p>The number of generations of descendants to include. For example, if you chose yourself as your starting person, you may want the diagram to include descendants down to your great-grandchildren. In this case, you would type \"3\" in this box, to include your children and others of their generation, your grandchildren, and your great-grandchildren's generation."
+msgstr "Hier wählen Sie, ob Kinder, Enkelkinder usw. für die im Baum aufgelisteten Personen eingeschlossen werden sollen.</p><h4>Maximale Generationen</h4><p>Die Anzahl der Generationen von Nachkommen, die eingeschlossen werden sollen. Wenn Sie beispielsweise sich selbst als Startperson gewählt haben, und Sie möchten, dass das Diagramm Nachkommen bis zu ihren Urenkeln enthält, geben Sie in diesem Fall eine \"3\" in diesem Feld ein, damit ihre Kinder, ihre Enkel und die Generation ihrer Urenkel eingeschlossen werden."
 
 #. This help message is displayed when the user clicks the help icon next to "Graph direction". https://s3.eu-west-1.amazonaws.com/po-pub/i/MpbVhXyRxeLgMO8FZVXHZhHG.png
 #: 
@@ -580,20 +582,36 @@ msgstr "Hier gibt es zwei Anzeigeoptionen:<ul><li>Von links nach rechts – Dies
 #. This help message is displayed when the user clicks the help icon next to "Diagram type". https://s3.eu-west-1.amazonaws.com/po-pub/i/dt2T4x9RshJsWKWZ7fQ4zFlu.png
 #: 
 msgid "The options here are:<ul><li>Simple - A box per person, coloured based on sex. No photos allowed.<li>Decorated - A more refined box, which also allows photos to be included.<li>Combined - Each couple is one box instead of one per person. Also allows photos.</ul>"
-msgstr "Die Optionen hier sind:<ul><li>Einfach - Ein Kästchen pro Person, gefärbt nach Geschlecht. Fotos werden nicht unterstützt.<li>Dekoriert – Ein aufwändiger gestaltetes Kästchen, das auch das Einfügen von Fotos ermöglicht.<li>Kombiniert – Für jedes Paar gibt es ein Kästchen, anstatt einem pro Person. Fotos sind möglich.</ul>"
+msgstr "Die Optionen hier sind<ul><li>Einfach - Ein Kästchen pro Person, gefärbt nach Geschlecht. Fotos werden nicht unterstützt.<li>Dekoriert – Ein aufwändiger gestaltetes Personenkästchen, das auch das Einfügen von Fotos ermöglicht.<li>Kombiniert – Für jedes Paar gibt es ein Kästchen, anstatt einem pro Person. Fotos sind möglich.</ul>"
 
 #. This help message is displayed when the user clicks the help icon next to "Output file type". https://s3.eu-west-1.amazonaws.com/po-pub/i/apq6Tgv91ZGJTGcUfFH3V1VE.png
 #: 
-msgid "The output file type you want. This is ignored when rendering in the browser, it is only used when you download a file. File types SVG, PNG, JPEG, and PDF can be downloaded, in addition to the GraphViz DOT format.</p><p>There are some minor differences if you have GraphViz installed on the server:<ul><li>There are two more file types, GIF and PostScript (PS). Most people would not need these.<li>PDF files may be smaller and can include URLs<li>You may be able to include more records</ul>"
-msgstr "Der gewünschte Ausgabedateityp kann hier gewählt werden.. Dieser wird beim Rendern im Browser ignoriert, er wird nur verwendet, wenn Sie eine Datei herunterladen. Die Dateitypen SVG, PNG, JPEG und PDF können zusätzlich zum GraphViz DOT-Format ausgewählt werden.</p><p>Es gibt einige kleinere Unterschiede, falls Sie GraphViz auf dem Server installiert haben:<ul><li>Dann sind zwei weitere Dateitypen, GIF und PostScript (PS) verfügbar. Das werden aber die meisten von Ihnen nicht benötigen.<li>PDF-Dateien können kleiner sein und können URLs enthalten.<li>Sie können möglicherweise mehr Datensätze einfügen</ul>"
+#, fuzzy
+msgid "The output file type you want. This is ignored when rendering in the browser, it is only used when you download a file. File types SVG, PNG, JPG, and PDF can be downloaded, in addition to the GraphViz DOT format.</p><p>There are some minor differences if you have GraphViz installed on the server:<ul><li>There are two more file types, GIF and PostScript (PS). Most people would not need these.<li>PDF files may be smaller and can include URLs<li>You may be able to include more records</ul>"
+msgstr "Der gewünschte Ausgabedateityp kann hier gewählt werden.. Dieser wird beim Rendern im Browser ignoriert, er wird nur verwendet, wenn Sie eine Datei herunterladen. Die Dateitypen SVG, PNG, JPG und PDF können zusätzlich zum GraphViz DOT-Format ausgewählt werden.</p><p>Es gibt einige kleinere Unterschiede, falls Sie GraphViz auf dem Server installiert haben:<ul><li>Dann sind zwei weitere Dateitypen, GIF und PostScript (PS) verfügbar. Das werden aber die meisten von Ihnen nicht benötigen.<li>PDF-Dateien können kleiner sein und können URLs enthalten.<li>Sie können möglicherweise mehr Datensätze einfügen</ul>"
 
 #. This help message is displayed when the user clicks the help icon next to "Browser render". https://s3.eu-west-1.amazonaws.com/po-pub/i/obqZqWV3JxLlYqmWek7FPMfW.png
 #: 
-msgid "If selected, the browser rendered diagram will automatically update when any option is changed. This will also hide the \"Update\" button."
+#, fuzzy
+msgid "If the option \"Auto-update\" is selected, the browser rendered diagram will automatically update when any option is changed. This will also hide the \"Update\" button."
 msgstr "Wenn diese Option ausgewählt ist, wird das vom Browser gerenderte Diagramm automatisch aktualisiert, sobald irgendeine Option geändert wird. Dadurch wird auch die Schaltfläche \"Aktualisieren\" ausgeblendet."
 
 #. Help button that will show a help page when clicked
 #: 
 msgid "Help"
 msgstr "Hilfe"
+
+#. This message is shown when clicking a new "Help" button. It links to English pages, so this may need some customising for each language. Link to the German page in the German language (possibly with an additional link to the English one), add some sort of note that the linked pages are in English, feel free to be flexible in what you write to keep it helpful. 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/bDIbs7uTn254cSfZeqaATIBr.png 
+#. 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/vyDHWXC9qcax65t9gW4YjvMv.png
+#: 
+#, fuzzy
+msgid "GVExport is a webtrees module that allows you to create complex visual family trees, using a tool called GraphViz to display the tree. Select a starting person, adjust the settings, and see that person's family tree.</p><p>Some fields have an icon <span class=\"info-icon btn btn-primary\">i</span> next to them, clicking this will give you some more information about that field. Not all fields are covered (yet).</p><p>Advanced configurations are possible by toggling advanced settings by clicking the \"Toggle advanced settings\" option at the end of each section. Clicking the ⛶ at the top right corner of the browser rendering will display the browser rendering in full screen. You can also use the webtrees \"Clippings Cart\" feature to select records, which GVExport can then use instead of the \"People to be included\" settings. </p><p>There are several buttons that take action based on the settings that you have chosen:<ul><li>Update: Clicking this updates the browser render (this is hidden if auto-update is enabled).<li>Download: Clicking this will download the diagram in the format chosen in the \"Output file type\" option. <li>Reset: Clicking this will reset the settings to the default values. Default values can be changed by an administrator in the webtrees Control Panel.<li>Help: Shows this help message.</ul></p><p>For more information, see the <a href=\"https://github.com/Neriderc/GVExport/wiki\" class=\"help-link\">GVExport Wiki</a>.</p><p>You can also ask a question, provide feedback, or suggest features on our <a href=\"https://github.com/Neriderc/GVExport\" class=\"help-link\">GitHub page</a>. Just <a href=\"https://github.com/Neriderc/GVExport/issues/new\" class=\"help-link\">open an issue</a>, or <a href=\"https://github.com/Neriderc/GVExport/issues\" class=\"help-link\">browse existing issues</a>."
+msgstr "GVExport ist ein webtrees-Modul, mit dem Sie komplexe Stammbaumdiagramme erstellen können. Zur Darstellung des Diagramms wird  das Tool \"GraphViz\" verwendet. Wählen Sie eine Startperson aus, passen Sie die Einstellungen an und sehen Sie sich den Stammbaum dieser Person an.</p><p>Neben einigen Feldern befindet sich das <span class=\"info-icon btn btn-primary\">i</span> Symbol; wenn Sie darauf klicken, erhalten Sie weitere Informationen zu diesem Feld. Es sind (noch) nicht alle Felder abgedeckt.<p>Weitere Informationen finden Sie in Englischer Sprache im <a href=\"https://github.com/Neriderc/GVExport/wiki\" class=\"help-link\">GVExport-Wiki</a > und im deutschen <a href=\"https://wiki.genealogy.net/Webtrees_Handbuch/Anleitung_für_Webmaster/Erweiterungsmodule/GVExport\" class=\"help-link\">webtrees-Handbuch</a>.</p><p>In <a href=\"https://github.com/Neriderc/GVExport\" class=\"help-link\">GitHub</a> können Sie auch Fragen stellen, Feedback geben oder neue Funktionen vorschlagen. Öffnen Sie dazu einen \"<a href=\"https://github.com/Neriderc/GVExport/issues/new\" class=\"help-link\">issue</a>\" nachdem Sie die <a href=\"https://github. com/Neriderc/GVExport/issues\" class=\"help-link\">vorhandenen Problempunkte</a> durchsucht haben."
+
+#. This message should never be shown, but it is a backup message for the help messages in the case that the text cannot be found - it's effectively an error message.
+#: 
+msgid "Help information not found"
+msgstr "Hilfetext wurde nicht gefunden"
 
