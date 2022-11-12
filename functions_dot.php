@@ -1761,7 +1761,7 @@ class Dot {
 			if (isset($_REQUEST["render"])) {
 				return Site::getPreference('INDEX_DIRECTORY').$this->tree->getPreference('MEDIA_DIRECTORY').$m->filename();
 			} else {
-				return str_replace("&","%26",$m->imageUrl(200,200,"contain"));
+				return str_replace("&","%26",$m->imageUrl($this->settings["dpi"]*2,$this->settings["dpi"]*2,"contain"));
 			}
 		} else {
 			return null;
