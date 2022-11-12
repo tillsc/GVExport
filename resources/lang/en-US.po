@@ -28,7 +28,6 @@ msgid "Appearance"
 msgstr "Appearance"
 
 #: 
-#, fuzzy
 msgid "Output settings"
 msgstr "Output settings"
 
@@ -41,7 +40,6 @@ msgid "Stop processing on"
 msgstr "Stop processing on"
 
 #: 
-#, fuzzy
 msgid "Include ancestors"
 msgstr "Include ancestors"
 
@@ -62,12 +60,10 @@ msgid "Spouses"
 msgstr "Spouses"
 
 #: 
-#, fuzzy
 msgid "Include descendants"
 msgstr "Include descendants"
 
 #: 
-#, fuzzy
 msgid "Max levels"
 msgstr "Max levels"
 
@@ -84,22 +80,18 @@ msgid "Use abbreviated placenames"
 msgstr "Use abbreviated placenames"
 
 #: 
-#, fuzzy
 msgid "Show birth date"
 msgstr "Show birth date"
 
 #: 
-#, fuzzy
 msgid "Show birth place"
 msgstr "Show birth place"
 
 #: 
-#, fuzzy
 msgid "Show death date"
 msgstr "Show death date"
 
 #: 
-#, fuzzy
 msgid "Full date"
 msgstr "Full date"
 
@@ -108,32 +100,26 @@ msgid "Year"
 msgstr "Year"
 
 #: 
-#, fuzzy
 msgid "Show death place"
 msgstr "Show death place"
 
 #: 
-#, fuzzy
 msgid "Show family XREF"
 msgstr "Show family XREF"
 
 #: 
-#, fuzzy
 msgid "Show marriage date"
 msgstr "Show marriage date"
 
 #: 
-#, fuzzy
 msgid "Show marriage place"
 msgstr "Show marriage place"
 
 #: 
-#, fuzzy
 msgid "Graph direction"
 msgstr "Graph direction"
 
 #: 
-#, fuzzy
 msgid "Diagram type"
 msgstr "Diagram type"
 
@@ -158,7 +144,6 @@ msgid "Only Decorated or Combined"
 msgstr "Only Decorated or Combined"
 
 #: 
-#, fuzzy
 msgid "Output file type"
 msgstr "Output file type"
 
@@ -179,21 +164,14 @@ msgid "DPI"
 msgstr "DPI"
 
 #: 
-#, fuzzy
 msgid "Show options"
 msgstr "Show options"
 
 #: 
-msgid "SVG only"
-msgstr "SVG only"
-
-#: 
-#, fuzzy
 msgid "Top-to-bottom"
 msgstr "Top-to-bottom"
 
 #: 
-#, fuzzy
 msgid "Left-to-right"
 msgstr "Left-to-right"
 
@@ -206,7 +184,6 @@ msgid "Space between individuals on the same level"
 msgstr "Space between individuals on the same level"
 
 #: 
-#, fuzzy
 msgid "Error running GVExport in browser mode"
 msgstr "Error running GVExport in browser mode"
 
@@ -223,17 +200,14 @@ msgid "Full place name"
 msgstr "Full place name"
 
 #: 
-#, fuzzy
 msgid "City and country"
 msgstr "City and country"
 
 #: 
-#, fuzzy
 msgid "City and 2 letter ISO country code"
 msgstr "City and 2 letter ISO country code"
 
 #: 
-#, fuzzy
 msgid "City and 3 letter ISO country code"
 msgstr "City and 3 letter ISO country code"
 
@@ -258,7 +232,6 @@ msgid "People to be included"
 msgstr "People to be included"
 
 #: 
-#, fuzzy
 msgid "Show individual XREF"
 msgstr "Show individual XREF"
 
@@ -401,7 +374,6 @@ msgstr "Initials only"
 
 #. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
 #: 
-#, fuzzy
 msgid "Given name initials and surname"
 msgstr "Given name initials and surname"
 
@@ -567,4 +539,59 @@ msgstr "Font size for details"
 #: 
 msgid "Font size for names"
 msgstr "Font size for names"
+
+#. Note limitation for adding URLs:  https://s3.eu-west-1.amazonaws.com/po-pub/i/ativPbmheBQQboYLANZmlHYY.png
+#: 
+msgid "browser and SVG only"
+msgstr "browser and SVG only"
+
+#. Note limitation for adding URLs:  https://s3.eu-west-1.amazonaws.com/po-pub/i/8gzkcNUo2oj43PpU7Dou5ZEr.png
+#: 
+msgid "browser, SVG, and PDF only"
+msgstr "browser, SVG, and PDF only"
+
+#. This help message is displayed when the user clicks the help icon next to "Include anyone related to". https://s3.eu-west-1.amazonaws.com/po-pub/i/4sXDKFJMwoE5PBYZqEPOIV7W.png
+#: 
+msgid "This is our starting point. Choose a person to base the diagram around. You might choose yourself.</p><p>You can choose as many starting individuals as you wish. A tree will be created for each starting individual based on the settings, then the trees are merged to create one tree for the diagram.</p><p>Click the X to remove a record from the list. If two or more records are listed, a \"Clear all\" option will appear to allow you to remove all records.</p><p>You can also click on an individual in this list to have the diagram in the browser scroll to that person.</p><p>When you next come to the page, the default individual or the last individual you were looking at in webtrees will be loaded. If there was just one saved individual then it will be replaced with the individual provided by webtrees on coming to the page. If there were multiple in the list, then the individual provided by webtrees will be added to the list (if not already in it). So be sure to double-check you are only including individuals you are looking for when first loading the page."
+msgstr "This is our starting point. Choose a person to base the diagram around. You might choose yourself.</p><p>You can choose as many starting individuals as you wish. A tree will be created for each starting individual based on the settings, then the trees are merged to create one tree for the diagram.</p><p>Click the X to remove a record from the list. If two or more records are listed, a \"Clear all\" option will appear to allow you to remove all records.</p><p>You can also click on an individual in this list to have the diagram in the browser scroll to that person.</p><p>When you next come to the page, the default individual or the last individual you were looking at in webtrees will be loaded. If there was just one saved individual then it will be replaced with the individual provided by webtrees on coming to the page. If there were multiple in the list, then the individual provided by webtrees will be added to the list (if not already in it). So be sure to double-check you are only including individuals you are looking for when first loading the page."
+
+#. This help message is displayed when the user clicks the help icon next to "Include ancestors".  https://s3.eu-west-1.amazonaws.com/po-pub/i/UoTrlDpngydDdWmJPau99ZV4.png
+#: 
+msgid "Tick this option to include ancestors of your starting person(s) and anyone in the tree.</p><h4>Max levels</h4><p>The number of generations of ancestors to include. For example, if you chose yourself as your starting person, you may want the diagram to include relatives back to your great-grandparents. In this case, you would type 3 in this box, to include your parents' generation, your grandparents' generation, and your great-grandparents' generation."
+msgstr "Tick this option to include ancestors of your starting person(s) and anyone in the tree.</p><h4>Max levels</h4><p>The number of generations of ancestors to include. For example, if you chose yourself as your starting person, you may want the diagram to include relatives back to your great-grandparents. In this case, you would type 3 in this box, to include your parents' generation, your grandparents' generation, and your great-grandparents' generation."
+
+#. This help message is displayed when the user clicks the help icon next to "Include".  https://s3.eu-west-1.amazonaws.com/po-pub/i/G2LwgKcPjaAwzcCXllEaXa13.png
+#: 
+msgid "This section lets you decide what type of relatives to include when generating the diagram.</p><h4>Siblings</h4><p>Include brothers and sisters of anyone in the tree.</p><h4>All relations</h4><p>Include cousins, nieces, nephews, and their descendants when generating the tree. Requires \"Siblings\" to be selected.</p><h4>Partners</h4><p>Include the husbands, wives, and partners of those in the tree even if they aren't blood-relatives. There is another option \"Mark not blood-related people with different color\" that allows these people to be marked in a different colour.</p><h4>Anyone</h4><p>Follow all links regardless of whether the person is related. In practice, this generally means that the family of non-relatives (i.e. spouses) are included in the tree.</p><p>Use this option to include all records of the selected generations. Note that only records with a link are included, so you may need to include more ancestor generations (or more starting individuals) to get all your records to show."
+msgstr "This section lets you decide what type of relatives to include when generating the diagram.</p><h4>Siblings</h4><p>Include brothers and sisters of anyone in the tree.</p><h4>All relations</h4><p>Include cousins, nieces, nephews, and their descendants when generating the tree. Requires \"Siblings\" to be selected.</p><h4>Partners</h4><p>Include the husbands, wives, and partners of those in the tree even if they aren't blood-relatives. There is another option \"Mark not blood-related people with different color\" that allows these people to be marked in a different color.</p><h4>Anyone</h4><p>Follow all links regardless of whether the person is related. In practice, this generally means that the family of non-relatives (i.e. spouses) are included in the tree.</p><p>Use this option to include all records of the selected generations. Note that only records with a link are included, so you may need to include more ancestor generations (or more starting individuals) to get all your records to show."
+
+#. This help message is displayed when the user clicks the help icon next to "Include descendants".  https://s3.eu-west-1.amazonaws.com/po-pub/i/TNXFdoP4fIHVQnScVvnfvKA1.png
+#: 
+msgid "Whether to include children, grandchildren, etc. of people listed in the tree.</p><h4>Max levels</h4><p>The number of generations of descendants to include. For example, if you chose yourself as your starting person, you may want the diagram to include descendants down to your great-grandchildren. In this case, you would type 3 in this box, to include your children and others of their generation, your grandchildren, and your great-grandchildren's generation."
+msgstr "Whether to include children, grandchildren, etc. of people listed in the tree.</p><h4>Max levels</h4><p>The number of generations of descendants to include. For example, if you chose yourself as your starting person, you may want the diagram to include descendants down to your great-grandchildren. In this case, you would type 3 in this box, to include your children and others of their generation, your grandchildren, and your great-grandchildren's generation."
+
+#. This help message is displayed when the user clicks the help icon next to "Graph direction". https://s3.eu-west-1.amazonaws.com/po-pub/i/MpbVhXyRxeLgMO8FZVXHZhHG.png
+#: 
+msgid "There are two display options here:<ul><li>Left to right - The default option, columns of generations are created with the older generations to the left and younger to the right.<li>Top to bottom - Rows of generations are created, with the older generations at the top and the younger at the bottom."
+msgstr "There are two display options here:<ul><li>Left to right - The default option, columns of generations are created with the older generations to the left and younger to the right.<li>Top to bottom - Rows of generations are created, with the older generations at the top and the younger at the bottom."
+
+#. This help message is displayed when the user clicks the help icon next to "Diagram type". https://s3.eu-west-1.amazonaws.com/po-pub/i/dt2T4x9RshJsWKWZ7fQ4zFlu.png
+#: 
+msgid "The options here are:<ul><li>Simple - A box per person, coloured based on sex. No photos allowed.<li>Decorated - A more refined box, which also allows photos to be included.<li>Combined - Each couple is one box instead of one per person. Also allows photos.</ul>"
+msgstr "The options here are:<ul><li>Simple - A box per person, colored based on sex. No photos allowed.<li>Decorated - A more refined box, which also allows photos to be included.<li>Combined - Each couple is one box instead of one per person. Also allows photos.</ul>"
+
+#. This help message is displayed when the user clicks the help icon next to "Output file type". https://s3.eu-west-1.amazonaws.com/po-pub/i/apq6Tgv91ZGJTGcUfFH3V1VE.png
+#: 
+msgid "The output file type you want. This is ignored when rendering in the browser, it is only used when you download a file. File types SVG, PNG, JPEG, and PDF can be downloaded, in addition to the GraphViz DOT format.</p><p>There are some minor differences if you have GraphViz installed on the server:<ul><li>There are two more file types, GIF and PostScript (PS). Most people would not need these.<li>PDF files may be smaller and can include URLs<li>You may be able to include more records</ul>"
+msgstr "The output file type you want. This is ignored when rendering in the browser, it is only used when you download a file. File types SVG, PNG, JPEG, and PDF can be downloaded, in addition to the GraphViz DOT format.</p><p>There are some minor differences if you have GraphViz installed on the server:<ul><li>There are two more file types, GIF and PostScript (PS). Most people would not need these.<li>PDF files may be smaller and can include URLs<li>You may be able to include more records</ul>"
+
+#. This help message is displayed when the user clicks the help icon next to "Browser render". https://s3.eu-west-1.amazonaws.com/po-pub/i/obqZqWV3JxLlYqmWek7FPMfW.png
+#: 
+msgid "If selected, the browser rendered diagram will automatically update when any option is changed. This will also hide the \"Update\" button."
+msgstr "If selected, the browser rendered diagram will automatically update when any option is changed. This will also hide the \"Update\" button."
+
+#. Help button that will show a help page when clicked
+#: 
+msgid "Help"
+msgstr "Help"
 
