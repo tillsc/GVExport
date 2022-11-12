@@ -592,7 +592,7 @@ function createPdfFromImage(imgData, width, height) {
     const dpi = document.getElementById('vars[dpi]').value;
     const widthInches = width/dpi;
     const heightInches = height/dpi;
-    var doc = new jsPDF({orientation: orientation, format: [widthInches, heightInches], unit: 'in'});
+    const doc = new jsPDF({orientation: orientation, format: [widthInches, heightInches], unit: 'in'});
     doc.addImage(imgData, "PNG", 0, 0, widthInches, heightInches);
     doc.save("gvexport.pdf");
 }
@@ -602,9 +602,9 @@ function scrollToRecord(xref) {
     const rendering = document.getElementById('rendering');
     const svg = rendering.getElementsByTagName('svg')[0].cloneNode(true);
     let titles = svg.getElementsByTagName('title');
-    for (i=0; i<titles.length; i++) {
+    for (let i=0; i<titles.length; i++) {
         let xrefs = titles[i].innerHTML.split("_");
-        for (j=0; j<xrefs.length; j++) {
+        for (let j=0; j<xrefs.length; j++) {
             if (xrefs[j] === xref) {
                 let minX = null;
                 let minY = null;
@@ -613,7 +613,7 @@ function scrollToRecord(xref) {
                 const group = titles[i].parentElement;
                 // We need to locate the element within the SVG. We use "polygon" here because it is the
                 // only element that will always exist and that also has position information
-                // (other elements like text, image, etc can be disabled by the user)
+                // (other elements like text, image, etc. can be disabled by the user)
                 const points = group.getElementsByTagName('polygon')[0].getAttribute('points').split(" ");
                 // Find largest and smallest X and Y value out of all the points of the polygon
                 for (j = 0; j < points.length; j++) {
@@ -632,12 +632,13 @@ function scrollToRecord(xref) {
                         maxY = y;
                     }
                 }
-                // Get the average of the largest and smallest so we can position the element in the middle
+                // Get the average of the largest and smallest, so we can position the element in the middle
                 let x = (minX + maxX) / 2;
                 let y = (minY + maxY) / 2;
                 // Why do we multiply the scale by 1 and 1/3?
-                let zoom = panzoomInst.getTransform().scale * (1 + 1 / 3);
-                panzoomInst.smoothMoveTo((rendering.offsetWidth / 2) - x * zoom, (rendering.offsetHeight / 2) - parseFloat(svg.getAttribute('height')) * zoom - y * zoom);
+                let zoombase = panzoomInst.getTransform().scale * (1 + 1 / 3);
+                let zoom = zoombase * parseFloat(document.getElementById("vars[dpi]").value)/72;
+                panzoomInst.smoothMoveTo((rendering.offsetWidth / 2) - x * zoom, (rendering.offsetHeight / 2) - parseFloat(svg.getAttribute('height')) * zoombase - y * zoom);
                 return true;
             }
         }
@@ -674,7 +675,7 @@ function handleTileClick() {
 
 // This function is run when the page is loaded
 function pageLoaded() {
-    jsPDF = window.jspdf.jsPDF;
+    jsPDFInst = window.jspdf.jsPDF;
     TOMSELECT_URL = document.getElementById('pid').getAttribute("data-url") + "&query=";
     loadURLXref();
     loadXrefList(TOMSELECT_URL);
