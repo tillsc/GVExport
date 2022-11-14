@@ -22,7 +22,7 @@ use Fisharebest\Webtrees\Tree;
  * @var array       $gve_config             array of default settings
  * @var bool        $cartempty              are there any individuals (INDI records) in the clippings cart?
  * @var ?           $module                 this module
- * @var bool        $nographviz             true if GraphViz not installed
+ * @var bool        $nographviz             true if Graphviz not installed
  */
 
 ?>
@@ -538,7 +538,7 @@ use Fisharebest\Webtrees\Tree;
             <?= addLabelWithHelp('vars[otype]', 'Output file type'); ?>
             <div class="col-sm-8 wt-page-options-value">
                 <?= view('components/select', ['name' => 'vars[otype]', 'selected' => $vars['otype'], 'options' => $otypes]) ?>
-                <small id="emailHelp" class="form-text text-muted"><?= $nographviz ? I18N::translate("Options limited as GraphViz not installed on server") : "" ?></small>
+                <small id="emailHelp" class="form-text text-muted"><?= $nographviz ? I18N::translate("Options limited as Graphviz not installed on server") : "" ?></small>
             </div>
             <?= addLabelWithHelp('vars[auto_update]', 'Browser render'); ?>
             <div class="col-sm-8 wt-page-options-value">
@@ -606,7 +606,7 @@ use Fisharebest\Webtrees\Tree;
             e.preventDefault();
         }
 
-        // Also check if GraphViz installed. If so then let it handle it,
+        // Also check if Graphviz installed. If so then let it handle it,
         // but if not, trigger client side actions
         if (!graphvizAvailable) {
             const output = document.getElementById('vars[otype]').value;
