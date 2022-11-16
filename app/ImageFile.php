@@ -95,9 +95,18 @@ class ImageFile
     private function saveImage($image, $temp_image_file_path): bool
     {
         $dir = dirname($temp_image_file_path);
+
+        // We definitely do not want to overwrite any data - make sure our temp
+        // directory is not in the webtrees directory to reduce risk
+        $webtrees_dir = explode("webtrees",Site::getPreference('INDEX_DIRECTORY'))[0] . "webtrees";
+        if (substr($temp_image_file_path, 0, strlen($webtrees_dir)) == $webtrees_dir) {
+            die("Error: Temp directory cannot be within webtrees directory");
+        }
+
         if (!is_dir($dir)) {
             mkdir($dir);
         }
+
         switch ($this->type) {
             case IMAGETYPE_GIF:
                 imagegif($image, $temp_image_file_path);
