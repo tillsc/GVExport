@@ -353,14 +353,16 @@ class Dot {
                     $initials .= substr($givenParts[1],0,1);
                 }
                 $surnameParts = preg_split('/[\s-]/', $nameArray["surn"]);
-                $initials .= substr($surnameParts[0],0,1);
-                if (isset($surnameParts[1])) {
-                    // If there is a hyphen in the surname found before the first space
-                    $spacePos = strpos($nameArray["surn"], " ");
-                    if (strpos(substr($nameArray["surn"], 0, $spacePos ?: strlen($nameArray["surn"])), "-")) {
-                        $initials .= "-";
+                if (substr($surnameParts[0],0,1) != "@") {
+                    $initials .= substr($surnameParts[0], 0, 1);
+                    if (isset($surnameParts[1])) {
+                        // If there is a hyphen in the surname found before the first space
+                        $spacePos = strpos($nameArray["surn"], " ");
+                        if (strpos(substr($nameArray["surn"], 0, $spacePos ?: strlen($nameArray["surn"])), "-")) {
+                            $initials .= "-";
+                        }
+                        $initials .= substr($surnameParts[1], 0, 1);
                     }
-                    $initials .= substr($surnameParts[1],0,1);
                 }
                 return $initials;
             case 60: /* Given name initials and Surname */
