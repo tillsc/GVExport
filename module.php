@@ -30,13 +30,11 @@
 namespace vendor\WebtreesModules\gvexport;
 
 require_once(dirname(__FILE__) . "/config.php");
-require(dirname(__FILE__) . "/utils.php");
-require_once(dirname(__FILE__) . "/functionsClippingsCart.php");
-require_once(dirname(__FILE__) . "/functionsAdmin.php");
+require_once(dirname(__FILE__) . "/app/utils.php");
+require_once(dirname(__FILE__) . "/app/functionsClippingsCart.php");
+require_once(dirname(__FILE__) . "/app/functionsAdmin.php");
+require_once(dirname(__FILE__) . "/app/OutputFile.php");
 
-//use Aura\Router\RouterContainer;
-//use Exception;
-//use Fig\Http\Message\RequestMethodInterface;
 use Fisharebest\Webtrees\Auth;
 use Fisharebest\Webtrees\Registry;
 use Fisharebest\Webtrees\I18N;
@@ -231,16 +229,13 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
     public function postChartAction(ServerRequestInterface $request): ResponseInterface
     {
         $tree = $request->getAttribute('tree');
-        assert($tree instanceof Tree);
-        $individual = $this->getIndividual($tree, $_GET['xref']);
-        $temp_dir = $this->saveDOTFile($individual->tree(), $individual);
+        $temp_dir = $this->saveDOTFile($tree);
+
         // If browser mode, output dot instead of selected file
-        if (isset($_POST["browser"]) && $_POST["browser"] == "true") {
-            $browser = true;
-        } else {
-            $browser = false;
-        }
-        return $this->downloadFile($temp_dir, $browser ? "dot" : $_REQUEST["vars"]["otype"]);
+        $file_type = isset($_POST["browser"]) && $_POST["browser"] == "true" ? "dot" : $_REQUEST["vars"]["otype"];
+
+        $outputFile = new OutputFile($temp_dir, $file_type);
+        return $outputFile->downloadFile();
     }
 
     /**
@@ -290,53 +285,11 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
     }
 
     /**
-     * Download a DOT file to the user's computer
-     *
-     * @param string $temp_dir
-     * @param string $file_type
-     */
-
-    function downloadFile(string $temp_dir, string $file_type)
-    {
-        global $GVE_CONFIG;
-
-        $basename = $GVE_CONFIG["filename"] . "." . $GVE_CONFIG["output"][$file_type]["extension"]; // new
-        $filename = $temp_dir . "/" . $basename; // new
-        if (!empty($GVE_CONFIG["output"][$file_type]["exec"])) {
-            // Multi-platform operability (by Thomas Ledoux)
-            //$old_dir = getcwd(); // save the current directory
-            //chdir($temp_dir); // change to the right directory for generation
-            $shell_cmd = str_replace($GVE_CONFIG["filename"],  $temp_dir . "/" .$GVE_CONFIG["filename"], $GVE_CONFIG["output"][$file_type]["exec"]);
-            exec($shell_cmd." 2>&1", $stdout_output, $return_var); // new
-            //chdir($old_dir); // back to the saved directory
-            if ($return_var !== 0) // check correct output generation
-            {
-                die("Error (return code $return_var) executing command \"$shell_cmd\" in \"".getcwd()."\".<br>Check path and Graphviz functionality!<br><pre>".(join("\n", $stdout_output))."</pre>"); // new
-            }
-        }
-
-        if (@$GVE_CONFIG["output"][$file_type]["rewrite_media_paths"]) {
-            $str = file_get_contents($filename);
-            $str = str_replace(Webtrees::DATA_DIR, "./data/", $str);
-            file_put_contents($filename, $str);
-        }
-
-        $stream = app(StreamFactoryInterface::class)->createStreamFromFile($filename);
-
-        $response_factory = app(ResponseFactoryInterface::class);
-
-        return $response_factory->createResponse()
-            ->withBody($stream)
-            ->withHeader('Content-Type', $GVE_CONFIG["output"][$file_type]["cont_type"])
-            ->withHeader('Content-Disposition', "attachment; filename=" . $basename);
-    }
-
-    /**
      * Creates and saves a DOT file
      *
      * @return	string	Directory where the file is saved
      */
-    function saveDOTFile($tree, $individual): string
+    function saveDOTFile($tree): string
     {
         global $GVE_CONFIG;
 
@@ -347,7 +300,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
         }
 
         // Create the dump
-        $contents = $this->createGraphVizDump($tree, $individual, $temp_dir);
+        $contents = $this->createGraphVizDump($tree, $temp_dir);
 
         // Put the contents into the file
         $fid = fopen($temp_dir . "/" . $GVE_CONFIG["filename"] . ".dot", "w");
@@ -357,9 +310,9 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
         return $temp_dir;
     }
 
-    function createGraphVizDump($tree, $individual, $temp_dir): string
+    function createGraphVizDump($tree, $temp_dir): string
     {
-        require(dirname(__FILE__) . "/functions_dot.php");
+        require_once(dirname(__FILE__) . "/app/Dot.php");
 
         $out = "";
         $dot = new Dot($tree, Registry::filesystem()->data());

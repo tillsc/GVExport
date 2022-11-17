@@ -104,4 +104,5 @@ function addLabelWithHelp(string $for, string $text): string
 {
 	return '<label class="col-sm-4 col-form-label wt-page-options-label label-group" for="' . $for .'"><span class="label-text">' . I18N::translate($text) . "</span>" . addInfoButton($text) . '</label>';
 }
+
 ?>

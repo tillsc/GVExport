@@ -55,8 +55,6 @@ $GVE_CONFIG["output"]["svg"]["label"] = "SVG"; #ESL!!! 20090213
 $GVE_CONFIG["output"]["svg"]["extension"] = "svg";
 $GVE_CONFIG["output"]["svg"]["exec"] = $GVE_CONFIG["graphviz_bin"] . " -Tsvg:cairo -o" . $GVE_CONFIG["filename"] . ".svg " . $GVE_CONFIG["filename"] . ".dot";
 $GVE_CONFIG["output"]["svg"]["cont_type"] = "image/svg+xml";
-$GVE_CONFIG["output"]["svg"]["rewrite_media_paths"] = true;
-
 
 $GVE_CONFIG["output"]["dot"]["label"] = "DOT"; #ESL!!! 20090213
 $GVE_CONFIG["output"]["dot"]["extension"] = "dot";

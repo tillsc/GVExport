@@ -30,16 +30,14 @@
 
 namespace vendor\WebtreesModules\gvexport;
 
-// Load the config file
-require_once(dirname(__FILE__)."/config.php");
-require_once("functionsClippingsCart.php");
-
+use Fisharebest\Webtrees\Auth;
 use Fisharebest\Webtrees\Family;
 use Fisharebest\Webtrees\I18n;
 //use League\Flysystem\Util;
 use Fisharebest\Webtrees\Individual;
 use Fisharebest\Webtrees\Site;
 use Fisharebest\Webtrees\Registry;
+use Psr\Http\Message\StreamFactoryInterface;
 
 /**
  * Main class for managing the DOT file
@@ -355,14 +353,16 @@ class Dot {
                     $initials .= substr($givenParts[1],0,1);
                 }
                 $surnameParts = preg_split('/[\s-]/', $nameArray["surn"]);
-                $initials .= substr($surnameParts[0],0,1);
-                if (isset($surnameParts[1])) {
-                    // If there is a hyphen in the surname found before the first space
-                    $spacePos = strpos($nameArray["surn"], " ");
-                    if (strpos(substr($nameArray["surn"], 0, $spacePos ?: strlen($nameArray["surn"])), "-")) {
-                        $initials .= "-";
+                if (substr($surnameParts[0],0,1) != "@") {
+                    $initials .= substr($surnameParts[0], 0, 1);
+                    if (isset($surnameParts[1])) {
+                        // If there is a hyphen in the surname found before the first space
+                        $spacePos = strpos($nameArray["surn"], " ");
+                        if (strpos(substr($nameArray["surn"], 0, $spacePos ?: strlen($nameArray["surn"])), "-")) {
+                            $initials .= "-";
+                        }
+                        $initials .= substr($surnameParts[1], 0, 1);
                     }
-                    $initials .= substr($surnameParts[1],0,1);
                 }
                 return $initials;
             case 60: /* Given name initials and Surname */
@@ -565,7 +565,7 @@ class Dot {
 			}
 		} else {
 		// If individuals in clipping cart and option chosen to use them, then proceed
-			$functionsCC = new functionsClippingsCart($this->tree, $this->isPhotoRequired(), ($this->settings["diagram_type"] == "combined"));
+			$functionsCC = new functionsClippingsCart($this->tree, $this->isPhotoRequired(), ($this->settings["diagram_type"] == "combined"), $this->settings["dpi"]);
 			$this->individuals = $functionsCC->getIndividuals();
 			$this->families = $functionsCC->getFamilies();
 		}
@@ -1758,8 +1758,10 @@ class Dot {
 			return null;
 		} else if (!$m->isExternal() && $m->fileExists($this->file_system)) {
 			// If we are rendering in the browser, provide the URL, otherwise provide the server side file location
-			if (isset($_REQUEST["render"])) {
-				return Site::getPreference('INDEX_DIRECTORY').$this->tree->getPreference('MEDIA_DIRECTORY').$m->filename();
+			if (isset($_REQUEST["download"])) {
+                require_once(dirname(__FILE__) . "/ImageFile.php");
+                $image = new ImageFile($m, $this->tree, $this->settings["dpi"] * 2);
+				return $image->getImageLocation();
 			} else {
 				return str_replace("&","%26",$m->imageUrl($this->settings["dpi"]*2,$this->settings["dpi"]*2,"contain"));
 			}
