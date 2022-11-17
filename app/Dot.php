@@ -30,12 +30,9 @@
 
 namespace vendor\WebtreesModules\gvexport;
 
-use Fisharebest\Webtrees\Auth;
 use Fisharebest\Webtrees\Family;
 use Fisharebest\Webtrees\I18n;
-//use League\Flysystem\Util;
 use Fisharebest\Webtrees\Individual;
-use Fisharebest\Webtrees\Site;
 use Fisharebest\Webtrees\Registry;
 use Psr\Http\Message\StreamFactoryInterface;
 

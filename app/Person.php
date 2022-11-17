@@ -271,7 +271,13 @@ class Person
         return $name;
     }
 
-    function getAbbreviatedName($nameArray)
+
+    /** Abbreviate name based on settings
+     *
+     * @param $nameArray array of names from webtrees
+     * @return false|mixed|string
+     */
+    function getAbbreviatedName(array $nameArray)
     {
         switch ($this->dot->settings["use_abbr_name"]) {
             case 0: /* Full name */

@@ -74,6 +74,7 @@ class functionsClippingsCart {
 	private Tree $tree;
 	private bool $photoIsRequired;
 	private bool $combinedMode;
+	private int $dpi;
 
 	// ------------ definition of const
 
@@ -93,8 +94,9 @@ class functionsClippingsCart {
 	 * @param bool $photoIsRequired
 	 * @param bool $combinedMode
 	 */
-	function __construct(Tree $tree, bool $photoIsRequired, bool $combinedMode) {
+	function __construct(Tree $tree, bool $photoIsRequired, bool $combinedMode, int $dpi) {
 		$this->tree = $tree;
+		$this->dpi = $dpi;
 		$this->photoIsRequired = $photoIsRequired;
 		$this->combinedMode = $combinedMode;
 		$this->individuals = [];
@@ -395,7 +397,7 @@ class functionsClippingsCart {
 				if (isset($_REQUEST["render"])) {
 					return Site::getPreference('INDEX_DIRECTORY') . $this->tree->getPreference('MEDIA_DIRECTORY') . $mediaFile->filename();
 				} else {
-					return str_replace("&", "%26", $mediaFile->imageUrl(200, 200, "contain"));
+					return str_replace("&", "%26", $mediaFile->imageUrl($this->dpi, $this->dpi, "contain"));
 				}
 			}
 		}
