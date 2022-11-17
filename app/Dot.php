@@ -281,113 +281,15 @@ class Dot {
 			($this->settings["diagram_type_combined_with_photo"]));
 	}
 
-	/** Add formatting to name before adding to DOT
-	 * @param array $nameArray webtrees name array for the person
-	 * @param string $pid XREF of the person, for adding to name if enabled
-	 * @return string Returns formatted name
-	 */
-	function getFormattedName(array $nameArray, string $pid): string {
-        if (isset($nameArray['full'])) {
-            $name = $this->getAbbreviatedName($nameArray);
-        } else {
-            $name = $nameArray[0];
-        }
 
-        // Tidy webtrees terms for missing names
-        $name = str_replace(array("@N.N.", "@P.N."), "...", $name);
-		// Show nickname in quotes
-		$name = str_replace(array('<q class="wt-nickname">', '</q>'), array('"', '"'), $name);
-        if ($this->settings["diagram_type"] != "simple") {
-            // Show preferred name as underlined by replacing span with underline tags
-            $pos_start = strpos($name, '<span class="starredname">');
-            while ($pos_start != false) {
-                // Start by replacing the </span>
-                $pos_end = strpos(substr($name, $pos_start), "</span>") + $pos_start;
-                if ($pos_end) {
-                    $name = substr_replace($name, "_/U_", $pos_end, strlen("</span>"));
-                }
-
-                // Next do the starting tags
-                $pos_start = strpos($name, '<span class="starredname">');
-                if ($pos_start !== false) {
-                    $name = substr_replace($name, "_U_", $pos_start, strlen('<span class="starredname">'));
-                }
-                $pos_start = strpos($name, '<span class="starredname">');
-            }
-        }
-        $name = strip_tags($name);
-
-        // We use _ instead of < >, remove tags, then switch them to proper tags. This lets
-        // us control the tags included in an environment where we don't normally have control
-        $name = str_replace("_U__/U_", "", $name); // remove blank tags
-        $name = str_replace("_U_", "<u>", $name);
-        $name = str_replace("_/U_", "</u> ", $name);
-
-		// If PID already in name (from another module), remove it, so we don't add twice
-		$name = str_replace(" (" . $pid . ")", "", $name);
-		if ($this->settings["show_pid"]) {
-			// Show INDI id
-			$name = $name . " (" . $pid . ")";
-		}
-		return $name;
-	}
-
-    function getAbbreviatedName($nameArray)
-    {
-        switch ($this->settings["use_abbr_name"]) {
-            case 0: /* Full name */
-                return $nameArray["full"];
-            case 10: /* Given and Surnames */
-                return $nameArray["givn"] . " " . $nameArray["surn"];
-            case 20: /* Given names */
-                return $nameArray["givn"];
-            case 30: /* First given name only */
-                return explode(" ", $nameArray["givn"])[0];
-            case 40: /* Surname(s) */
-                return $nameArray["surn"];
-            case 50: /* Initials only */
-                // Split by space or hyphen to get different names
-                $givenParts = preg_split('/[\s-]/', $nameArray["givn"]);
-                $initials = substr($givenParts[0],0,1);
-                if (isset($givenParts[1])) {
-                    $initials .= substr($givenParts[1],0,1);
-                }
-                $surnameParts = preg_split('/[\s-]/', $nameArray["surn"]);
-                if (substr($surnameParts[0],0,1) != "@") {
-                    $initials .= substr($surnameParts[0], 0, 1);
-                    if (isset($surnameParts[1])) {
-                        // If there is a hyphen in the surname found before the first space
-                        $spacePos = strpos($nameArray["surn"], " ");
-                        if (strpos(substr($nameArray["surn"], 0, $spacePos ?: strlen($nameArray["surn"])), "-")) {
-                            $initials .= "-";
-                        }
-                        $initials .= substr($surnameParts[1], 0, 1);
-                    }
-                }
-                return $initials;
-            case 60: /* Given name initials and Surname */
-                // Split by space or hyphen to get different names
-                $givenParts = preg_split('/[\s-]/', $nameArray["givn"]);
-                $initials = substr($givenParts[0],0,1) . ".";
-                if (isset($givenParts[1])) {
-                    $initials .= substr($givenParts[1],0,1) . ".";
-                }
-                return $initials . " " . $nameArray["surn"];
-            case 70: /* Don't show names */
-                return " ";
-            default:
-                return $nameArray["full"];
-
-        }
-    }
 	/** Checks if provided individual is related by
 	 * adoption or foster to the provided family record
-	 * @param Individual $i webtrees individual object for the person to check
-	 * @param Family $f webtrees family object for the family to check against
+	 * @param object $i webtrees individual object for the person to check
+	 * @param object $f webtrees family object for the family to check against
 	 * @param integer $ind the indent level for printing the debug log
 	 * @return string
 	 */
-	function getRelationshipType($i, $f, int $ind = 0): string
+	function getRelationshipType(object $i, object $f, int $ind = 0): string
 	{
 		$fid = $f->xref();
 		$facts = $i->facts();
@@ -493,7 +395,7 @@ class Dot {
 	 * @param array $families // List of family records
 	 * @return void
 	 */
-	function removeGhosts(array &$individuals, array &$families) {
+	private function removeGhosts(array &$individuals, array &$families) {
 		foreach ($individuals as $i) {
 			foreach ($i["fams"] as $f) {
                 if (isset($f["fid"])) {
@@ -574,8 +476,9 @@ class Dot {
 
 		// ### Print the individuals list ###
 		if ($this->settings["diagram_type"] != "combined") {
-			foreach ($this->individuals as $pid) {
-				$out .= $this->printPerson($pid['pid'], $pid['rel']);
+			foreach ($this->individuals as $person_attributes) {
+                $person = new Person($person_attributes, $this);
+				$out .= $person->printPerson();
 			}
 		}
 
@@ -685,66 +588,6 @@ class Dot {
 	}
 
 	/**
-	 * Returns an abbreviated version of the PLAC string.
-	 *
-	 * @param	string $place_long Place string in long format (Town,County,State/Region,Country)
-	 * @return	string	The abbreviated place name
-	 */
-	function getAbbreviatedPlace(string $place_long): string
-    {
-		// If chose no abbreviating, then return string untouched
-		if ($this->settings["use_abbr_place"] == 0 /* Full place name */) {
-			return $place_long;
-		} else {
-			// Cut the place name up into pieces using the commas
-			$place_chunks = explode(",", $place_long);
-			$place = "";
-			$chunk_count = count($place_chunks);
-			// Add city to out return string as we always keep this
-			if (!empty($place_chunks[0])) {
-				$place .= trim($place_chunks[0]);
-			}
-			// Chose to keep just the first and last sections
-			if ($this->settings["use_abbr_place"] == 10 /* City and Country */) {
-				if (!empty($place_chunks[$chunk_count - 1]) && ($chunk_count > 1)) {
-					if (!empty($place)) {
-						$place .= ", ";
-					}
-					$place .= trim($place_chunks[$chunk_count - 1]);
-				}
-            } else {
-				/* Otherwise, we have chosen one of the ISO code options */
-				switch ($this->settings["use_abbr_place"]) {
-					case 20: //City and 2-Letter ISO Country Code
-						$code = "iso2";
-						break;
-					case 30: //City and 3-Letter ISO Country Code
-						$code = "iso3";
-						break;
-					default:
-						return $place_long;
-				}
-				/* It's possible the place name string was blank, meaning our return variable is
-					   still blank. We don't want to add a comma if that's the case. */
-				if (!empty($place) && !empty($place_chunks[$chunk_count - 1]) && ($chunk_count > 1)) {
-					$place .= ", ";
-				}
-				/* Look up our country in the array of country names.
-				   It must be an exact match, or it won't be abbreviated to the country code. */
-				if (isset($this->settings["countries"][$code][strtolower(trim($place_chunks[$chunk_count - 1]))])) {
-					$place .= $this->settings["countries"][$code][strtolower(trim($place_chunks[$chunk_count - 1]))];
-				} else {
-					// We didn't find out country in the abbreviation list, so just add the full country name
-					if (!empty($place_chunks[$chunk_count - 1]) && ($chunk_count > 1)) {
-						$place .= trim($place_chunks[$chunk_count - 1]);
-					}
-				}
-            }
-            return $place;
-        }
-	}
-
-	/**
  	 * Gets the colour associated with the given gender
  	 *
  	 * If a custom colour was used then this function will pull it from the form
@@ -759,30 +602,30 @@ class Dot {
 		// Determine the fill color
 		if ($gender == 'F') {
 			if ($related || !$this->settings["mark_not_related"]) {
-				$fillcolor = $this->colors["colorf"];
+				$fill_color = $this->colors["colorf"];
 			} else  {
-				$fillcolor = $this->colors["colorf_nr"];
+				$fill_color = $this->colors["colorf_nr"];
 			}
 		} elseif ($gender == 'M'){
 			if ($related || !$this->settings["mark_not_related"]) {
-				$fillcolor = $this->colors["colorm"];
+				$fill_color = $this->colors["colorm"];
 			} else  {
-				$fillcolor = $this->colors["colorm_nr"];
+				$fill_color = $this->colors["colorm_nr"];
 			}
 		} elseif ($gender == 'X'){
 			if ($related || !$this->settings["mark_not_related"]) {
-				$fillcolor = $this->colors["colorx"];
+				$fill_color = $this->colors["colorx"];
 			} else  {
-				$fillcolor = $this->colors["colorx_nr"];
+				$fill_color = $this->colors["colorx_nr"];
 			}
 		} else {
 			if ($related || !$this->settings["mark_not_related"]) {
-				$fillcolor = $this->colors["coloru"];
+				$fill_color = $this->colors["coloru"];
 			} else  {
-				$fillcolor = $this->colors["coloru_nr"];
+				$fill_color = $this->colors["coloru_nr"];
 			}
 		}
-		return $fillcolor;
+		return $fill_color;
 	}
 
 	/**
@@ -845,207 +688,6 @@ class Dot {
 	}
 
 	/**
-	 * Gives back a text with HTML special chars
-	 *
-	 * @param string $text	String to convert
-	 * @return	string	Converted string
-	 */
-	function convertToHTMLSC(string $text): string
-    {
-        return htmlspecialchars($text, ENT_QUOTES, "UTF-8");
-	}
-
-	/**
-	 * Prints the line for a single person.
-	 *
-	 * @param string $pid Person ID
-	 */
-	function printPerson(string $pid, $related = TRUE): string
-    {
-		$out = "";
-		$out .= $this->convertID($pid); // Convert the ID, so linked GEDCOMs are displayed properly
-		$out .= " [ ";
-
-		if ($this->settings["diagram_type"] == "simple") {
-			// Simple output
-			$out .= $this->printPersonLabel($pid, $related);
-		} else {
-			// HTML style output
-			$out .= "label=<";
-			$out .= $this->printPersonLabel($pid, $related);
-			$out .= ">";
-		}
-
-		$out .= "];\n";
-
-		return $out;
-	}
-
-	/**
-	 * Prints the data for a single person.
-	 *
-	 * @param string $pid Person ID
-	 */
-	function printPersonLabel(string $pid, $related = TRUE): string
-    {
-		$out = "";
-		$bordercolor = $this->colors["colorborder"];	// Border color of the INDI's box
-        $deathplace = "";
-		// Get the personal data
-		if ($this->settings["diagram_type"] == "combined" && ( substr($pid, 0, 3) == "I_H" || substr($pid, 0, 3) == "I_W" )) {
-			// In case of dummy individual
-			$fillcolor = $this->getGenderColour('U', false);
-			$isdead = false;
-            $deathdate = "";
-			$birthdate = "";
-			$birthplace = "";
-			$link = "";
-			$name = " ";
-		} else {
-			$i = $this->getUpdatedPerson($pid);
-			$fillcolor = $this->getGenderColour($i->sex(), $related);        // Background color is set to specified
-			$isdead = $i->isDead();
-			$link = $i->url();
-
-			// --- Birth data ---
-			if ($this->settings["show_by"]) {
-                $birthdate = $this->formatDate($i->getBirthDate(), $this->settings["bd_type"] !== "gedcom");
-			} else {
-				$birthdate = "";
-			}
-
-			if ($this->settings["show_bp"]) {
-				// Show birthplace
-				$birthplace = $this->getAbbreviatedPlace($i->getBirthPlace()->gedcomName());
-			} else {
-				$birthplace = "";
-			}
-
-			// --- Death data ---
-			if ($this->settings["show_dy"]) {
-                if ($this->settings["show_by"]) {
-                    $deathdate = $this->formatDate($i->getDeathDate(), $this->settings["dd_type"] !== "gedcom");
-                } else {
-                    $deathdate = "";
-                }
-			} else {
-				$deathdate = "";
-			}
-			if ($this->settings["show_dp"]) {
-				// Show death place
-				$deathplace = $this->getAbbreviatedPlace($i->getDeathPlace()->gedcomName());
-			}
-            // --- Name ---
-            $names = $i->getAllNames();
-            $nameArray = $names[$i->getPrimaryName()];
-            $name = $this->getFormattedName($nameArray, $pid);
-
-            if ($i->getPrimaryName() !== $i->getSecondaryName()) {
-                $altNameArray = $names[$i->getSecondaryName()];
-                $addname = $this->getFormattedName($altNameArray, "");
-                if (!empty($addname) && trim($addname) !== "" && $this->settings["use_abbr_name"] < 50) {
-                    if ($this->settings["diagram_type"] == "simple")
-                        $name .= '\n' . $addname;//@@ Meliza Amity
-                    else
-                        $name .= '<BR />' . $addname;//@@ Meliza Amity
-                }
-            }
-		}
-
-		// --- Printing the INDI details ---
-		if ($this->settings["diagram_type"] == "simple") {
-			if ($this->settings["show_url"]) {
-				// substr($_SERVER['QUERY_STRING'], 0, strrpos($_SERVER['QUERY_STRING'], '/'))
-				$out .= "color=\"" . $bordercolor . "\", fillcolor=\"" . $fillcolor . "\", fontcolor=\"" . $this->colors["font_color"]["name"] . "\", target=\"_blank\", href=\"" . $this->convertToHTMLSC($link) . "\" label="; #ESL!!! 20090213 without convertToHTMLSC the dot file has invalid data
-			} else {
-				$out .= "color=\"" . $bordercolor . "\", fillcolor=\"" . $fillcolor . "\", fontcolor=\"" . $this->colors["font_color"]["name"] . "\", label=";
-			}
-			$out .= '"';
-			$out .= str_replace('"','\"',$name) . '\n' . $this->settings["birth_text"] . $birthdate . " " . (empty($birthplace)?'':'('.$birthplace.')') . '\l';
-			if ($isdead) {
-				$out .= $this->settings["death_text"] . $deathdate . " " . (empty($deathplace)?'':'('.$deathplace.')');
-			} else {
-				$out .= " ";
-			}
-			$out .= '\l';
-			$out .= '"';
-		} else {
-			// Convert birth & death place to get rid of characters which mess up the HTML output
-			$birthplace = $this->convertToHTMLSC($birthplace);
-			if ($isdead) {
-				$deathplace = $this->convertToHTMLSC($deathplace);
-			}
-            $href = $this->settings["show_url"] ? "TARGET=\"_blank\" HREF=\"" . $this->convertToHTMLSC($link) . "\"" : "";
-			// Draw table
-            $indibgcolor = $this->isStartingIndividual($pid) && $this->settings['startcol'] == "true" ? $this->colors["colorstartbg"] : $this->colors["colorindibg"];
-			if ($this->settings["diagram_type"] == "combined") {
-				$out .= "<TABLE BORDER=\"0\" CELLBORDER=\"0\" CELLPADDING=\"2\" CELLSPACING=\"0\" BGCOLOR=\"" . $indibgcolor . "\" $href>";
-			} else {
-				$out .= "<TABLE COLOR=\"" . $bordercolor . "\" BORDER=\"1\" CELLBORDER=\"0\" CELLPADDING=\"2\" CELLSPACING=\"0\" BGCOLOR=\"" . $indibgcolor . "\" $href>";
-			}
-            $birthData = " $birthdate " . (empty($birthplace) ? "" : "($birthplace)");
-            $deathData = " $deathdate " . (empty($deathplace) ? "" : "($deathplace)");
-
-            $detailsExist = trim($name . $birthData . $deathData) != "";
-
-            if (!$detailsExist && !$this->settings["diagram_type_combined_with_photo"]) {
-                // No information in out tiles so make coloured boxes
-                $size = "WIDTH=\"" . ($this->font_size * 3) . "\" HEIGHT=\"" . ($this->font_size * 3) . "\"";
-            } else {
-                $size = ""; // Let it sort out size itself
-            }
-			// Top line (colour only)
-			$out .= "<TR><TD COLSPAN=\"2\" CELLPADDING=\"2\" BGCOLOR=\"$fillcolor\" PORT=\"nam\" $size></TD></TR>";
-
-
-
-			// Second row (photo, name, birth & death data)
-            if ($detailsExist || $this->settings["diagram_type_combined_with_photo"]) {
-                $out .= "<TR>";
-                // Show photo
-                if ($this->settings["diagram_type_combined_with_photo"]) {
-                    if (isset($this->individuals[$pid]["pic"]) && !empty($this->individuals[$pid]["pic"])) {
-                        $out .= "<TD ROWSPAN=\"2\" CELLPADDING=\"1\" PORT=\"pic\" WIDTH=\"" . ($this->font_size * 3.5) . "\" HEIGHT=\"" . ($this->font_size * 4) . "\" FIXEDSIZE=\"true\" ALIGN=\"CENTER\"><IMG SCALE=\"false\" SRC=\"" . $this->individuals[$pid]["pic"] . "\" /></TD>";
-                    } else {
-                        // Blank cell zero width to keep the height right
-                        $out .= "<TD ROWSPAN=\"2\" CELLPADDING=\"1\" PORT=\"pic\" WIDTH=\"" . ($detailsExist ? "0" : ($this->font_size * 3.5)) . "\" HEIGHT=\"" . ($this->font_size * 4) . "\" FIXEDSIZE=\"true\"></TD>";
-                    }
-                }
-                if ($detailsExist) {
-                    $out .= "<TD ALIGN=\"LEFT\" BALIGN=\"LEFT\"  TARGET=\"_BLANK\" CELLPADDING=\"4\" PORT=\"dat\">";
-                }
-                // Show name
-                if (trim($name) != "") {
-                    $out .= "<FONT COLOR=\"" . $this->colors["font_color"]["name"] . "\" POINT-SIZE=\"" . ($this->font_size_name) . "\">" . $name . "</FONT>";
-                    if (trim($birthData . $deathData) != "") {
-                        $out .= "<BR />";
-                    }
-                }
-                if (trim($birthData) != "") {
-                    $out .= "<FONT COLOR=\"" . $this->colors["font_color"]["details"] . "\" POINT-SIZE=\"" . ($this->font_size) . "\">" . $this->settings["birth_text"] . $birthData . "</FONT>";
-                    if (trim($deathData) != "") {
-                        $out .= "<BR />";
-                    }
-                }
-                if ($isdead && trim($deathData) !== "") {
-                    $out .= "<FONT COLOR=\"" . $this->colors["font_color"]["details"] . "\" POINT-SIZE=\"" . ($this->font_size) . "\">" . $this->settings["death_text"] . $deathData . "</FONT>";
-                } else {
-                    $out .= " ";
-                }
-
-                if ($detailsExist) {
-                    $out .= "</TD>";
-                }
-                $out .= "</TR>";
-            }
-			// Close table
-			$out .= "</TABLE>";
-		}
-
-		return $out;
-	}
-
-	/**
 	 * Prints the line for drawing a box for a family.
 	 *
 	 * @param string $fid Family ID
@@ -1053,9 +695,8 @@ class Dot {
 	 */
 	function printFamily(string $fid, string $nodeName): string
     {
-		$out = "";
 
-		$out .= $nodeName;
+        $out = $nodeName;
 		$out .= " [ ";
 
 		// Showing the ID of the family, if set
@@ -1068,7 +709,7 @@ class Dot {
 		// --- Data collection ---
 		// If a "dummy" family is set (begins with "F_"), then there is no marriage & family data, so no need for querying webtrees...
 		if (substr($fid, 0, 2) == "F_") {
-			$fillcolor = $this->getFamilyColour();
+			$fill_color = $this->getFamilyColour();
 			$marriageplace = "";
 			$husb_id = $this->families[$fid]["husb_id"];
 			$wife_id = $this->families[$fid]["wife_id"];
@@ -1079,7 +720,7 @@ class Dot {
 		// Querying webtrees for the data of a FAM object
 		} else {
 			$f = $this->getUpdatedFamily($fid);
-			$fillcolor = $this->getFamilyColour();
+			$fill_color = $this->getFamilyColour();
 			$link = $f->url();
 
 			// Show marriage year
@@ -1096,7 +737,7 @@ class Dot {
 
 			// Show marriage place
 			if ($this->settings["show_mp"] && !empty($f->getMarriage()) && !empty($f->getMarriagePlace())) {
-				$marriageplace = $this->getAbbreviatedPlace($f->getMarriagePlace()->gedcomName());
+				$marriageplace = $this->getAbbreviatedPlace($f->getMarriagePlace()->gedcomName(), $this->settings);
 			} else {
 				$marriageplace = "";
 			}
@@ -1119,16 +760,19 @@ class Dot {
 
 			if (!empty($unkn_id)) {
 				// Print unknown gender INDI
-                $out = $this->addPersonLabel($unkn_id, $out);
+                $person = new Person([], $this);
+                $out = $person->addPersonLabel($unkn_id, $out);
             } else {
 				// Print husband
 				if (!empty($husb_id)) {
-                    $out = $this->addPersonLabel($husb_id, $out);
+                    $person = new Person([], $this);
+                    $out = $person->addPersonLabel($husb_id, $out);
 				}
 
 				// Print wife
 				if (!empty($wife_id)) {
-                    $out = $this->addPersonLabel($wife_id, $out);
+                    $person = new Person([], $this);
+                    $out = $person->addPersonLabel($wife_id, $out);
 				}
 			}
 
@@ -1137,9 +781,9 @@ class Dot {
 			if (substr($fid, 0, 2) !== "F_" && !(empty($marriagedate) && empty($marriageplace) && $family == "") && ($this->settings["show_my"] || $this->settings["show_mp"] || $this->settings["show_fid"])) {
 				$out .= "<TR>";
 				if ($this->settings["show_url"]) {
-					$out .= "<TD COLSPAN=\"2\" CELLPADDING=\"0\" PORT=\"marr\" TARGET=\"_BLANK\" HREF=\"" . $this->convertToHTMLSC($link) . "\" BGCOLOR=\"" . $fillcolor . "\">"; #ESL!!! 20090213 without convertToHTMLSC the dot file has invalid data
+					$out .= "<TD COLSPAN=\"2\" CELLPADDING=\"0\" PORT=\"marr\" TARGET=\"_BLANK\" HREF=\"" . $this->convertToHTMLSC($link) . "\" BGCOLOR=\"" . $fill_color . "\">"; #ESL!!! 20090213 without convertToHTMLSC the dot file has invalid data
 				} else {
-					$out .= "<TD COLSPAN=\"2\" CELLPADDING=\"0\" PORT=\"marr\" BGCOLOR=\"" . $fillcolor . "\">";
+					$out .= "<TD COLSPAN=\"2\" CELLPADDING=\"0\" PORT=\"marr\" BGCOLOR=\"" . $fill_color . "\">";
 				}
 
 				$out .= "<FONT COLOR=\"". $this->colors["font_color"]["details"] ."\" POINT-SIZE=\"" . ($this->font_size) ."\">" . (empty($marriagedate)?"":$marriagedate) . "<BR />" . (empty($marriageplace)?"":"(".$marriageplace.")") . $family . "</FONT>";
@@ -1159,10 +803,10 @@ class Dot {
             }
             // If names, birth details, and death details are all disabled - show a smaller marriage circle to match the small tiles for individuals.
             if (!$this->settings["show_by"] && !$this->settings["show_bp"] && !$this->settings["show_dy"] && !$this->settings["show_dp"] && !$this->settings["show_my"] && !$this->settings["show_pid"] && !$this->settings["show_fid"] && $this->settings["use_abbr_names"][$this->settings["use_abbr_name"]] == "Don't show names") {
-                $out .= "color=\"" . $this->colors["colorborder"] . "\",fillcolor=\"" . $fillcolor . "\", $href shape=point, height=0.2, style=filled";
+                $out .= "color=\"" . $this->colors["colorborder"] . "\",fillcolor=\"" . $fill_color . "\", $href shape=point, height=0.2, style=filled";
                 $out .= ", label=" . "< >";
             } else {
-                $out .= "color=\"" . $this->colors["colorborder"] . "\",fillcolor=\"" . $fillcolor . "\", $href shape=ellipse, style=filled";
+                $out .= "color=\"" . $this->colors["colorborder"] . "\",fillcolor=\"" . $fill_color . "\", $href shape=ellipse, style=filled";
                 $out .= ", label=" . "<<TABLE border=\"0\" CELLPADDING=\"0\" CELLSPACING=\"0\"><TR><TD><FONT COLOR=\"". $this->colors["font_color"]["details"] ."\" POINT-SIZE=\"" . ($this->font_size) ."\">" . (empty($marriagedate)?"":$marriagedate) . "<BR />" . (empty($marriageplace)?"":"(".$marriageplace.")") . $family . "</FONT></TD></TR></TABLE>>";
             }
         }
@@ -1350,22 +994,7 @@ class Dot {
 						// Get the family object
 						$f = $this->getUpdatedFamily($fid);
 
-                        if (isset($families[$fid]["fid"]) && ($families[$fid]["fid"]== $fid)) {
-                            // Family ID already added, do nothing
-                            // --- DEBUG ---
-                            if ($this->settings["debug"]) {
-                                $this->printDebug("($pid) -- FAM ($fid) already added\n", $ind);
-                            }
-                            // -------------
-                        } else {
-                            $this->addFamToList($fid, $families);
-
-                            // --- DEBUG ---
-                            if ($this->settings["debug"]) {
-                                $this->printDebug("($pid) -- FAM ($fid) added\n", $ind);
-                            }
-                            // -------------
-                        }
+                        $this->addIndiFamilies($fid, $pid, $ind, $families);
 
 						// Work out if indi has adoptive relationship to this family
 						$relationshipType = $this->getRelationshipType($i, $fam, $ind);
@@ -1486,26 +1115,7 @@ class Dot {
                         }
                     }
 
-					if (isset($families[$fid]["fid"]) && ($families[$fid]["fid"]== $fid)) {
-						// Family ID already added
-						// do nothing
-						// --- DEBUG ---
-						if ($this->settings["debug"]) {
-							$this->printDebug("($pid) -- FAM ($fid) already added\n", $ind);
-							//var_dump($fams);
-						}
-						// -------------
-					} else {
-						$this->addFamToList($fid, $families);
-
-						// --- DEBUG ---
-						if ($this->settings["debug"]) {
-							$this->printDebug("($pid) -- FAM ($fid) added\n", $ind);
-							//var_dump($fams);
-						}
-						// -------------
-					}
-
+                    $this->addIndiFamilies($fid, $pid, $ind, $families);
 
 					$children = $f->children();
                     if (sizeof($children) !== 0) {
@@ -1556,22 +1166,7 @@ class Dot {
 					$fid = $fam->xref();
 					$f = $this->getUpdatedFamily($fid);
 
-                    if (isset($families[$fid]["fid"]) && ($families[$fid]["fid"]== $fid)) {
-                        // Family ID already added, do nothing
-                        // --- DEBUG ---
-                        if ($this->settings["debug"]) {
-                            $this->printDebug("($pid) -- FAM ($fid) already added\n", $ind);
-                        }
-                        // -------------
-                    } else {
-                        $this->addFamToList($fid, $families);
-
-                        // --- DEBUG ---
-                        if ($this->settings["debug"]) {
-                            $this->printDebug("($pid) -- FAM ($fid) added\n", $ind);
-                        }
-                        // -------------
-                    }
+                    $this->addIndiFamilies($fid, $pid, $ind, $families);
 
 					//$spouse_id = $f->getSpouseId($pid);
 					// Alternative method of getting the $spouse_id - workaround by Till Schulte-Coerne
@@ -1624,22 +1219,7 @@ class Dot {
 					$fid = $fam->xref();
 					$f = $this->getUpdatedFamily($fid);
 
-					if (isset($families[$fid]["fid"]) && ($families[$fid]["fid"]== $fid)) {
-						// Family ID already added, do nothing
-						// --- DEBUG ---
-						if ($this->settings["debug"]) {
-							$this->printDebug("($pid) -- FAM ($fid) already added\n", $ind);
-						}
-						// -------------
-					} else {
-                        $this->addFamToList($fid, $families);
-
-						// --- DEBUG ---
-						if ($this->settings["debug"]) {
-							$this->printDebug("($pid) -- FAM ($fid) added\n", $ind);
-						}
-						// -------------
-					}
+                    $this->addIndiFamilies($fid, $pid, $ind, $families);
 
 					$children = $f->children();
 					foreach ($children as $child) {
@@ -1784,10 +1364,6 @@ class Dot {
 		print(str_repeat("\t", $ind) . $txt);
 	}
 
-	// Linked IDs has a colon, it needs to be replaced
-	function convertID($id) {
-		return preg_replace("/:/", "_", $id);
-	}
 
     public function getArrowColor($i, $fid)
     {
@@ -1804,7 +1380,113 @@ class Dot {
         }
         return $arrowColor;
     }
-    public function formatDate($date, $yearOnly = false, $date_format = null) {
+
+    /**
+     * @param string $fid XREF of the family for this node
+     * @return string
+     */
+    private function generateFamilyNodeName(string $fid): string
+    {
+        return $this->convertID($fid) . (isset($this->families[$fid]["husb_id"]) ? "_" . $this->families[$fid]["husb_id"] : "") . (isset($this->families[$fid]["wife_id"]) ? "_" . $this->families[$fid]["wife_id"] : "") . (isset($this->families[$fid]["unkn_id"]) ? "_" . $this->families[$fid]["unkn_id"] : "");
+    }
+
+    private function addIndiFamilies($fid, $pid, $ind, &$families)
+    {
+        if (isset($families[$fid]["fid"]) && ($families[$fid]["fid"]== $fid)) {
+            // Family ID already added, do nothing
+            // --- DEBUG ---
+            if ($this->settings["debug"]) {
+                $this->printDebug("($pid) -- FAM ($fid) already added\n", $ind);
+            }
+            // -------------
+        } else {
+            $this->addFamToList($fid, $families);
+
+            // --- DEBUG ---
+            if ($this->settings["debug"]) {
+                $this->printDebug("($pid) -- FAM ($fid) added\n", $ind);
+            }
+            // -------------
+        }
+    }
+
+    /**
+     * Returns an abbreviated version of the PLAC string.
+     *
+     * @param	string $place_long Place string in long format (Town,County,State/Region,Country)
+     * @return	string	The abbreviated place name
+     */
+    public static function getAbbreviatedPlace(string $place_long, array $settings): string
+    {
+        // If chose no abbreviating, then return string untouched
+        if ($settings["use_abbr_place"] == 0 /* Full place name */) {
+            return $place_long;
+        } else {
+            // Cut the place name up into pieces using the commas
+            $place_chunks = explode(",", $place_long);
+            $place = "";
+            $chunk_count = count($place_chunks);
+            // Add city to out return string as we always keep this
+            if (!empty($place_chunks[0])) {
+                $place .= trim($place_chunks[0]);
+            }
+            // Chose to keep just the first and last sections
+            if ($settings["use_abbr_place"] == 10 /* City and Country */) {
+                if (!empty($place_chunks[$chunk_count - 1]) && ($chunk_count > 1)) {
+                    if (!empty($place)) {
+                        $place .= ", ";
+                    }
+                    $place .= trim($place_chunks[$chunk_count - 1]);
+                }
+            } else {
+                /* Otherwise, we have chosen one of the ISO code options */
+                switch ($settings["use_abbr_place"]) {
+                    case 20: //City and 2-Letter ISO Country Code
+                        $code = "iso2";
+                        break;
+                    case 30: //City and 3-Letter ISO Country Code
+                        $code = "iso3";
+                        break;
+                    default:
+                        return $place_long;
+                }
+                /* It's possible the place name string was blank, meaning our return variable is
+                       still blank. We don't want to add a comma if that's the case. */
+                if (!empty($place) && !empty($place_chunks[$chunk_count - 1]) && ($chunk_count > 1)) {
+                    $place .= ", ";
+                }
+                /* Look up our country in the array of country names.
+                   It must be an exact match, or it won't be abbreviated to the country code. */
+                if (isset($settings["countries"][$code][strtolower(trim($place_chunks[$chunk_count - 1]))])) {
+                    $place .= $settings["countries"][$code][strtolower(trim($place_chunks[$chunk_count - 1]))];
+                } else {
+                    // We didn't find out country in the abbreviation list, so just add the full country name
+                    if (!empty($place_chunks[$chunk_count - 1]) && ($chunk_count > 1)) {
+                        $place .= trim($place_chunks[$chunk_count - 1]);
+                    }
+                }
+            }
+            return $place;
+        }
+    }
+
+    /**
+     * Gives back a text with HTML special chars
+     *
+     * @param string $text	String to convert
+     * @return	string	Converted string
+     */
+    public static function convertToHTMLSC(string $text): string
+    {
+        return htmlspecialchars($text, ENT_QUOTES, "UTF-8");
+    }
+
+    // Linked IDs has a colon, it needs to be replaced
+    public static function convertID($id) {
+        return preg_replace("/:/", "_", $id);
+    }
+
+    public static function formatDate($date, $yearOnly = false, $date_format = null) {
         $date_format = $date_format ?? I18N::dateFormat();
         $q1 = $date->qual1;
         $d1 = $date->minimumDate()->format($date_format, $date->qual1);
@@ -1859,49 +1541,5 @@ class Dot {
             $tmp = trim("$q1 $dy");
         }
         return $tmp;
-    }
-
-    /** Add the DOT code to include this individual in the diagram.
-     *
-     * @param string $pid
-     * @param string $out
-     * @return string
-     */
-    public function addPersonLabel(string $pid, string $out): string
-    {
-        if (isset($this->individuals[$pid]['rel']) && !$this->individuals[$pid]['rel']) {
-            $related = FALSE;
-        } else {
-            $related = TRUE;
-        }
-        $out .= "<TD CELLPADDING=\"0\" PORT=\"" . $pid . "\">";
-        $out .= $this->printPersonLabel($pid, $related);
-        $out .= "</TD>";
-        return $out;
-    }
-
-    /**
-     *  Check if XREF in list of starting individuals
-     * @param string $pid Xref to check
-     * @return bool
-     */
-    private function isStartingIndividual(string $pid): bool
-    {
-        $indis = explode(",", $this->settings["indi"]);
-        for ($i=0;$i<count($indis);$i++) {
-            if (trim($indis[$i]) == $pid) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * @param string $fid XREF of the family for this node
-     * @return string
-     */
-    private function generateFamilyNodeName(string $fid): string
-    {
-        return $this->convertID($fid) . (isset($this->families[$fid]["husb_id"]) ? "_" . $this->families[$fid]["husb_id"] : "") . (isset($this->families[$fid]["wife_id"]) ? "_" . $this->families[$fid]["wife_id"] : "") . (isset($this->families[$fid]["unkn_id"]) ? "_" . $this->families[$fid]["unkn_id"] : "");
     }
 }

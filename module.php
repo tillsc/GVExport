@@ -34,6 +34,7 @@ require_once(dirname(__FILE__) . "/app/utils.php");
 require_once(dirname(__FILE__) . "/app/functionsClippingsCart.php");
 require_once(dirname(__FILE__) . "/app/functionsAdmin.php");
 require_once(dirname(__FILE__) . "/app/OutputFile.php");
+require_once(dirname(__FILE__) . "/app/Person.php");
 
 use Fisharebest\Webtrees\Auth;
 use Fisharebest\Webtrees\Registry;
