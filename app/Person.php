@@ -225,7 +225,7 @@ class Person
      * @param string $pid XREF of the person, for adding to name if enabled
      * @return string Returns formatted name
      */
-    function getFormattedName(array $nameArray, string $pid): string {
+    public function getFormattedName(array $nameArray, string $pid): string {
         if (isset($nameArray['full'])) {
             $name = $this->getAbbreviatedName($nameArray);
         } else {
@@ -277,7 +277,7 @@ class Person
      * @param $nameArray array of names from webtrees
      * @return false|mixed|string
      */
-    function getAbbreviatedName(array $nameArray)
+    private function getAbbreviatedName(array $nameArray)
     {
         switch ($this->dot->settings["use_abbr_name"]) {
             case 0: /* Full name */

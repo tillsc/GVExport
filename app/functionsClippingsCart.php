@@ -93,6 +93,7 @@ class functionsClippingsCart {
 	 * @param Tree $tree
 	 * @param bool $photoIsRequired
 	 * @param bool $combinedMode
+	 * @param int $dpi
 	 */
 	function __construct(Tree $tree, bool $photoIsRequired, bool $combinedMode, int $dpi) {
 		$this->tree = $tree;
@@ -337,8 +338,8 @@ class functionsClippingsCart {
 	{
 		$cart = Session::get('cart', []);
 		$xrefs = array_keys($cart[$tree->name()] ?? []);
-		$xrefs = array_map('strval', $xrefs);           			// PHP converts numeric keys to integers
-		return $xrefs;
+		// PHP converts numeric keys to integers
+		return array_map('strval', $xrefs);
 	}
 
 	/**
@@ -427,4 +428,3 @@ class functionsClippingsCart {
 		return null;
 	}
 }
-?>

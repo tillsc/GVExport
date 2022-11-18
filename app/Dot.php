@@ -52,7 +52,8 @@ class Dot {
 	var array $pagesize = array();
     var array $messages = array(); // messages for toast system
 	private const ERROR_CHAR = "E:"; // Messages that start with this will be highlighted
-    private $tree, $file_system;
+    private $tree;
+    private object $file_system;
 
     /**
 	 * Constructor of Dot class
@@ -143,7 +144,7 @@ class Dot {
 		$this->settings["auto_update"] = $GVE_CONFIG["settings"]["auto_update"];
 	}
 
-	function setPageSize($pagesize, $size_x = FALSE, $size_y = FALSE) {
+	public function setPageSize($pagesize, $size_x = FALSE, $size_y = FALSE) {
 		global $GVE_CONFIG;
 		if ($pagesize == "Custom" && isset($size_x) && isset($size_y)) {
 			$this->pagesize["x"] = $size_x;
@@ -164,7 +165,7 @@ class Dot {
 	 * @param string $setting
 	 * @param mixed $value
 	 */
-	function setSettings(string $setting, $value) {
+    public function setSettings(string $setting, $value) {
 		$this->settings[$setting] = $value;
 	}
 
@@ -174,7 +175,7 @@ class Dot {
 	 * @param string $color_type
 	 * @param string $color
 	 */
-	function setColor(string $color_type, string $color) {
+    public function setColor(string $color_type, string $color) {
 		$this->colors[$color_type] = $color;
 	}
 
@@ -184,7 +185,7 @@ class Dot {
 	 * @param string $font_size
 	 * @param string $type
 	 */
-	function setFontSize(string $font_size, string $type) {
+    public function setFontSize(string $font_size, string $type) {
         if ($type == 'name') {
             $this->font_size_name = $font_size;
         } else {
@@ -192,12 +193,12 @@ class Dot {
         }
 	}
 
-    function setArrowColour(string $type, string $value)
+    public function setArrowColour(string $type, string $value)
     {
         $this->colors["arrows"][$type] = $value;
     }
 
-    function setColourArrowRelated(string $value)
+    public function setColourArrowRelated(string $value)
     {
         $this->settings["color_arrow_related"] = $value;
     }
@@ -207,7 +208,7 @@ class Dot {
 	 *
 	 * @param string $font_color
 	 */
-	function setFontColorName(string $font_color) {
+    public function setFontColorName(string $font_color) {
 		$this->colors["font_color"]["name"] = $font_color;
 	}
 
@@ -216,7 +217,7 @@ class Dot {
 	 *
 	 * @param string $font_color
 	 */
-	function setFontColorDetails(string $font_color) {
+    public function setFontColorDetails(string $font_color) {
         $this->colors["font_color"]["details"] = $font_color;
 	}
 
@@ -231,11 +232,11 @@ class Dot {
 	 *
 	 * @param string $method
 	 */
-	function setIndiSearchMethod(string $method) {
+    public function setIndiSearchMethod(string $method) {
 		$this->indi_search_method[$method] = TRUE;
 	}
 
-	function getDOTDump(): string
+    public function getDOTDump(): string
     {
 		$out = "";
 
@@ -286,7 +287,7 @@ class Dot {
 	 * @param integer $ind the indent level for printing the debug log
 	 * @return string
 	 */
-	function getRelationshipType(object $i, object $f, int $ind = 0): string
+	private function getRelationshipType(object $i, object $f, int $ind = 0): string
 	{
 		$fid = $f->xref();
 		$facts = $i->facts();
@@ -350,7 +351,14 @@ class Dot {
 		return $adopfamcadoptype;
 	}
 
-	function createIndiList (&$individuals, &$families, $full) {
+    /** Populate $individuals and $families arrays with lists of the individuals and families
+     *  that will be included in the diagram.
+     * @param array $individuals    Array to pupulate individuals to
+     * @param array $families       Array to populate families to
+     * @param bool $full            Whether max levels setting should be ignored to generate a full tree of relatives
+     * @return void                 Directly updates arrays so no return value
+     */
+    private function createIndiList (array &$individuals, array &$families, bool $full) {
         $indis = explode(",", $this->settings["indi"]);
         $indiLists = array();
         for ($i=0;$i<count($indis);$i++) {
@@ -1478,13 +1486,23 @@ class Dot {
         return htmlspecialchars($text, ENT_QUOTES, "UTF-8");
     }
 
-    // Linked IDs has a colon, it needs to be replaced
+    /** Linked IDs have a colon, it needs to be replaced
+     * @param $id
+     * @return array|string|string[]|null
+     */
     public static function convertID($id) {
         return preg_replace("/:/", "_", $id);
     }
 
-    public static function formatDate($date, $yearOnly = false, $date_format = null) {
-        $date_format = $date_format ?? I18N::dateFormat();
+    /** Format a date for display in the diagram
+     *
+     * @param object $date             The date
+     * @param bool $yearOnly    Whether to only show year and not day/month
+     * @return string
+     */
+    public static function formatDate(object $date, bool $yearOnly = false): string
+    {
+        $date_format = I18N::dateFormat();
         $q1 = $date->qual1;
         $d1 = $date->minimumDate()->format($date_format, $date->qual1);
         $q2 = $date->qual2;
