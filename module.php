@@ -34,6 +34,7 @@ require_once(dirname(__FILE__) . "/app/utils.php");
 require_once(dirname(__FILE__) . "/app/functionsClippingsCart.php");
 require_once(dirname(__FILE__) . "/app/functionsAdmin.php");
 require_once(dirname(__FILE__) . "/app/OutputFile.php");
+require_once(dirname(__FILE__) . "/app/Person.php");
 
 use Fisharebest\Webtrees\Auth;
 use Fisharebest\Webtrees\Registry;
@@ -51,7 +52,6 @@ use Fisharebest\Webtrees\FlashMessages;
 use Fisharebest\Webtrees\Menu;
 use Fisharebest\Webtrees\View;
 use Fisharebest\Webtrees\Tree;
-use Fisharebest\Webtrees\Webtrees;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
@@ -146,9 +146,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
     public function getIndividual($tree, $xref): Individual
     {
         $individual = Registry::individualFactory()->make($xref, $tree);
-        $individual = Auth::checkIndividualAccess($individual, false, true);
-
-        return $individual;
+        return Auth::checkIndividualAccess($individual, false, true);
     }
 
     public function getChartAction(ServerRequestInterface $request): ResponseInterface
@@ -170,14 +168,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
             }
         }
 
-        $otypes = array();
-        foreach ($GVE_CONFIG["output"] as $fmt => $val) {
-            if (isset($GVE_CONFIG["output"][$fmt]["label"]) and isset($GVE_CONFIG["output"][$fmt]["extension"])) {
-                $lbl = $GVE_CONFIG["output"][$fmt]["label"];
-                $ext = $GVE_CONFIG["output"][$fmt]["extension"];
-                $otypes[$ext] = $lbl;
-            }
-        }
+        $otypes = $this->getOTypes();
 
         return $this->viewResponse($this->name() . '::page', [
             'gvexport_css'  => route('module', ['module' => $this->name(), 'action' => 'Css']),
@@ -248,14 +239,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
 
         $this->layout = 'layouts/administration';
 
-        $otypes = array();
-        foreach ($GVE_CONFIG["output"] as $fmt => $val) {
-            if (isset($GVE_CONFIG["output"][$fmt]["label"]) and isset($GVE_CONFIG["output"][$fmt]["extension"])) {
-                $lbl = $GVE_CONFIG["output"][$fmt]["label"];
-                $ext = $GVE_CONFIG["output"][$fmt]["extension"];
-                $otypes[$ext] = $lbl;
-            }
-        }
+        $otypes = $this->getOTypes();
         $response['module'] = $this;
         $response['otypes'] = $otypes;
         $response['vars'] = getAdminSettings($this, isset($_REQUEST['reset']) && $_REQUEST['reset'] === "1");
@@ -595,7 +579,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
         // Get out DOT file
         $out .= $dot->getDOTDump();
         if (isset($_POST["browser"]) && $_POST["browser"] == "true") {
-            // Add in our counts of individuals and families so we can show a message
+            // Add in our counts of individuals and families, so we can show a message
             $indinum = sizeof($dot->individuals);
             $famnum = sizeof($dot->families);
             // Add any error messages or other messages for showing toast
@@ -628,6 +612,24 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
         } else {
             return [];
         }
+    }
+
+    /** Return list of available output types
+     *
+     * @return array
+     */
+    private function getOTypes(): array
+    {
+        global $GVE_CONFIG;
+        $otypes = array();
+        foreach ($GVE_CONFIG["output"] as $fmt => $val) {
+            if (isset($GVE_CONFIG["output"][$fmt]["label"]) and isset($GVE_CONFIG["output"][$fmt]["extension"])) {
+                $lbl = $GVE_CONFIG["output"][$fmt]["label"];
+                $ext = $GVE_CONFIG["output"][$fmt]["extension"];
+                $otypes[$ext] = $lbl;
+            }
+        }
+        return $otypes;
     }
 }
 

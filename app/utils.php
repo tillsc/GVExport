@@ -6,18 +6,19 @@ use Fisharebest\Webtrees\I18N;
 	*
 	* Based on http://www.phpit.net/
 	* article/creating-zip-tar-archives-dynamically-php/2/
-	*
+	* No longer exists - see https://web.archive.org/web/20080208194622/http://www.phpit.net/article/creating-zip-tar-archives-dynamically-php/2/
+ 	*
 	* changed to prevent SAFE_MODE restrictions
 	*
 	* @return	string	System temp dir
 	*/
 function sys_get_temp_dir_my() {
     // Try to get from environment variable
-  	if ( !empty( $_ENV['TMP']) && is__writable($_ENV,'TMP') ) {
+  	if ( !empty( $_ENV['TMP']) && is__writable($_ENV['TMP']) ) {
 		return realpath( $_ENV['TMP']);
-  	} elseif ( !empty( $_ENV['TMPDIR']) && is__writable($_ENV,'TMPDIR') ) {
+  	} elseif ( !empty( $_ENV['TMPDIR']) && is__writable($_ENV['TMPDIR']) ) {
 		return realpath( $_ENV['TMPDIR']);
-  	} elseif ( !empty( $_ENV['TEMP']) && is__writable($_ENV,'TEMP') ) {
+  	} elseif ( !empty( $_ENV['TEMP']) && is__writable($_ENV['TEMP']) ) {
 		return realpath( $_ENV['TEMP'] );
   	}
   	// Detect by creating a temporary file
@@ -104,5 +105,3 @@ function addLabelWithHelp(string $for, string $text): string
 {
 	return '<label class="col-sm-4 col-form-label wt-page-options-label label-group" for="' . $for .'"><span class="label-text">' . I18N::translate($text) . "</span>" . addInfoButton($text) . '</label>';
 }
-
-?>
