@@ -380,23 +380,27 @@ function formChanged(autoUpdate) {
         addIndiToList(xref);
         changeURLXref(xref);
     }
+    let stopXref = document.getElementById('vars[stop_pid]').value.trim();
+    if (stopXref !== "") {
+        addIndiToStopList(stopXref);
+    }
     if (autoUpdate) {
         updateRender();
     }
 }
 
-function loadXrefList(url) {
-    let xref_list = document.getElementById('vars[other_pids]').value.trim();
+function loadXrefList(url, xrefListId, indiListId) {
+    let xref_list = document.getElementById(xrefListId).value.trim();
     let xrefs = xref_list.split(",");
     for (let i=0; i<xrefs.length; i++) {
         if (xrefs[i].trim() !== "") {
-            loadIndividualDetails(url, xrefs[i]);
+            loadIndividualDetails(url, xrefs[i], indiListId);
         }
     }
     updateClearAll();
 }
 
-function loadIndividualDetails(url, xref) {
+function loadIndividualDetails(url, xref, list) {
     fetch(url + xref.trim()).then(async (response) => {
             const data = await response.json();
             let contents;
@@ -405,12 +409,18 @@ function loadIndividualDetails(url, xref) {
             } else {
                 contents = xref;
             }
-            const listElement = document.getElementById("indi_list");
+            const listElement = document.getElementById(list);
             const newListItem = document.createElement("div");
             newListItem.className = "indi_list_item";
             newListItem.setAttribute("data-xref", xref);
             newListItem.setAttribute("onclick", "scrollToRecord('"+xref+"')");
-            newListItem.innerHTML = contents + "<div class=\"remove-item\" onclick=\"removeItem(event, this.parentElement)\"><a href='#'>×</a></div>";
+            let otherXrefId;
+            if (list === "indi_list") {
+                otherXrefId = "vars[other_pids]";
+            } else {
+                otherXrefId = "vars[other_stop_pids]";
+            }
+            newListItem.innerHTML = contents + "<div class=\"remove-item\" onclick=\"removeItem(event, this.parentElement, '" + otherXrefId + "')\"><a href='#'>×</a></div>";
             // Multiple promises can be for the same xref - don't add if a duplicate
             let item = document.querySelector(`[data-xref="${xref}"]`);
             if (item == null) {
@@ -426,15 +436,25 @@ function addIndiToList(xref) {
     let list = document.getElementById('vars[other_pids]');
     const regex = new RegExp(`(?<=,|^)(${xref})(?=,|$)`);
     if (!regex.test(list.value.replaceAll(" ",""))) {
-        appendXrefToList(xref);
-        loadIndividualDetails(TOMSELECT_URL, xref);
+        appendXrefToList(xref, 'vars[other_pids]');
+        loadIndividualDetails(TOMSELECT_URL, xref, 'indi_list');
 
     }
-    clearIndiSelect();
+    clearIndiSelect('pid');
 }
 
-function appendXrefToList(xref) {
-    const list = document.getElementById('vars[other_pids]');
+function addIndiToStopList(xref) {
+    let list = document.getElementById('vars[other_stop_pids]');
+    const regex = new RegExp(`(?<=,|^)(${xref})(?=,|$)`);
+    if (!regex.test(list.value.replaceAll(" ",""))) {
+        appendXrefToList(xref, 'vars[other_stop_pids]');
+        loadIndividualDetails(TOMSELECT_URL, xref, 'stop_indi_list');
+    }
+    clearIndiSelect('vars[stop_pid]');
+}
+
+function appendXrefToList(xref, elementId) {
+    const list = document.getElementById(elementId);
     if (list.value.replace(",","").trim() === "") {
         list.value = xref;
     } else {
@@ -443,13 +463,13 @@ function appendXrefToList(xref) {
     }
 }
 
-function clearIndiSelect() {
-    let dropdown = document.getElementById('pid');
+function clearIndiSelect(selectId) {
+    let dropdown = document.getElementById(selectId);
     if (typeof dropdown.tomselect !== 'undefined') {
         dropdown.tomselect.clear();
     } else {
         setTimeout(function () {
-            clearIndiSelect();
+            clearIndiSelect(selectId);
         }, 100);
     }
 }
@@ -461,10 +481,10 @@ function toggleUpdateButton(css_id) {
     updateRender();
 }
 
-function removeItem(e, element) {
+function removeItem(e, element, xrefListId) {
     e.stopPropagation();
     let xref = element.getAttribute("data-xref").trim();
-    let list = document.getElementById('vars[other_pids]');
+    let list = document.getElementById(xrefListId);
     const regex = new RegExp(`(?<=,|^)(${xref})(?=,|$)`);
     list.value = list.value.replaceAll(" ","").replace(regex, "");
     list.value = list.value.replace(",,", ",");
@@ -502,20 +522,36 @@ function clearIndiList() {
     updateClearAll();
     updateRender();
 }
+// Clear the list of starting individuals
+function clearStopIndiList() {
+    document.getElementById('vars[other_stop_pids]').value = "";
+    document.getElementById('stop_indi_list').innerHTML = "";
+    updateClearAll();
+    updateRender();
+}
 
-// Refresh the list of starting individuals
+// Refresh the list of starting and stopping individuals
 function refreshIndisFromXREFS(onchange) {
     // If triggered from onchange event, only proceed if auto-update enabled
     if (!onchange || autoUpdate) {
         document.getElementById('indi_list').innerHTML = "";
-        loadXrefList(TOMSELECT_URL);
+        loadXrefList(TOMSELECT_URL, 'vars[other_pids]', 'indi_list');
+        document.getElementById('stop_indi_list').innerHTML = "";
+        loadXrefList(TOMSELECT_URL, 'vars[other_stop_pids]', 'stop_indi_list');
     }
 }
 
-// Show or hide Clear All option based on check
+// Trigger clearAll update for each instance
 function updateClearAll() {
-    let clearElement = document.getElementById('clear_list');
-    let listItems = document.getElementsByClassName('indi_list_item');
+    updateClearAllElements('clear_list', 'indi_list');
+    updateClearAllElements('clear_stop_list', 'stop_indi_list');
+}
+
+// Show or hide Clear All options based on check
+function updateClearAllElements(clearElementId, listItemElementId) {
+    let clearElement = document.getElementById(clearElementId);
+    let listItemElement = document.getElementById(listItemElementId);
+    let listItems = listItemElement.getElementsByClassName('indi_list_item');
     if (listItems.length > 1) {
         showHide(clearElement, true);
     } else {
@@ -678,7 +714,8 @@ function pageLoaded() {
     jsPDFInst = window.jspdf.jsPDF;
     TOMSELECT_URL = document.getElementById('pid').getAttribute("data-url") + "&query=";
     loadURLXref();
-    loadXrefList(TOMSELECT_URL);
+    loadXrefList(TOMSELECT_URL, 'vars[other_pids]', 'indi_list');
+    loadXrefList(TOMSELECT_URL, 'vars[other_stop_pids]', 'stop_indi_list');
     // Remove reset parameter from URL when page loaded, to prevent
     // further resets when page reloaded
     removeURLParameter("reset");

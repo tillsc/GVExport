@@ -215,15 +215,19 @@ use Fisharebest\Webtrees\Tree;
             <div class="row form-group">
                 <label class=" col-sm-4 col-form-label wt-page-options-label" for="vars[other_stop_pids]"><?= I18N::translate('Stop processing on') ?></label>
                 <div class="col-sm-8 wt-page-options-value">
+                    <div id="stop_indi_list">
+
+                    </div>
+                    <div id="clear_stop_list"><a href="#" onclick="clearStopIndiList()"><?= I18N::translate('Clear all') ?></a></div>
                     <div class="cart_toggle_hide" <?php if ($greypeople) { echo 'style="display: none"'; } ?>>
                         <?php
                         echo view('components/select-individual', ['name' => 'vars[stop_pid]', 'id' => 'vars[stop_pid]', 'tree' => $tree, 'xref' => $vars['stop_pid']]);
                         ?>
                     </div>
                     <div class="input-group mt-1">
-                        <input type="text" class="cart_toggle form-control" name="vars[other_stop_pids]" id="vars[other_stop_pids]" value="<?= $vars['other_stop_pids'] ?>">
+                        <input type="text" class="cart_toggle form-control" name="vars[other_stop_pids]" id="vars[other_stop_pids]" value="<?= $vars['other_stop_pids'] ?>" onchange="refreshIndisFromXREFS(true)">
                         <div class="input-group-append">
-                            <button type="button" class="btn btn-outline-secondary" onclick="appendPidTo('vars[stop_pid]', 'vars[other_stop_pids]')">⏎</button>
+                            <button type="button" class="btn btn-outline-secondary" onclick="refreshIndisFromXREFS(false)">⟳</button>
                         </div>
                     </div>
                 </div>
