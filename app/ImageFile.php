@@ -38,7 +38,7 @@ class ImageFile
             $image = $this->loadImage($full_media_path);
             if ($image) {
                 $img_resized = imagescale($image, $this->dpi, -1);
-                if ($this->saveImage($img_resized, $temp_image_file)) {
+                if ($this->saveImage($img_resized, $temp_image_file, $full_media_path)) {
                     return $temp_dir . "/" . $filename;
                 } else {
                     // Resize failed for some reason, despite being supported format
@@ -90,9 +90,10 @@ class ImageFile
      *
      * @param $image
      * @param $temp_image_file_path
+     * @param $full_media_path
      * @return bool
      */
-    private function saveImage($image, $temp_image_file_path): bool
+    private function saveImage($image, $temp_image_file_path, $full_media_path): bool
     {
         $dir = dirname($temp_image_file_path);
 
@@ -101,6 +102,10 @@ class ImageFile
         $webtrees_dir = explode("webtrees",Site::getPreference('INDEX_DIRECTORY'))[0] . "webtrees";
         if (substr($temp_image_file_path, 0, strlen($webtrees_dir)) == $webtrees_dir) {
             die("Error: Temp directory cannot be within webtrees directory");
+        }
+        // Also check our temp file path is not the same as our media path
+        if (realpath($temp_image_file_path) == realpath($full_media_path)) {
+            die("Error: Temp file path cannot be the same as the media path");
         }
 
         if (!is_dir($dir)) {
