@@ -267,7 +267,7 @@ use Fisharebest\Webtrees\Tree;
                         <label for="vars[diagtype]_simple"><?= I18N::translate('Simple') ?></label>
                     </div>
                     <div class="col-auto">
-                        <input type="radio" onclick="togglePhotos(true)" name="vars[diagtype]" id="vars[diagtype]_decorated" value="decorated" <?= $vars["diagtype"] == "decorated" ? 'checked' : '' ?>>
+                        <input type="radio" onclick="togglePhotos(true)" name="vars[diagtype]" id="vars[diagtype]_decorated" value="decorated" data-cy="diagram_type_decorated" <?= $vars["diagtype"] == "decorated" ? 'checked' : '' ?>>
                         <label for="vars[diagtype]_decorated"><?= I18N::translate('Decorated') ?></label>
                     </div>
                     <div class="col-auto">
@@ -285,7 +285,7 @@ use Fisharebest\Webtrees\Tree;
                     <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[with_photos]"><?= I18N::translate('Add photos') ?></label>
                     <div class="col-sm-8 wt-page-options-value">
                         <input type="hidden" name="vars[with_photos]" value="no">
-                        <input type="checkbox" name="vars[with_photos]" id="vars[with_photos]" value="with_photos" <?= $vars["with_photos"] == "with_photos" ? 'checked' : '' ?>>
+                        <input type="checkbox" name="vars[with_photos]" id="vars[with_photos]" value="with_photos" data-cy="with_photos" <?= $vars["with_photos"] == "with_photos" ? 'checked' : '' ?>>
                         <span class="text-muted">(<?= I18N::translate('Only Decorated or Combined') ?>)</span>
                     </div>
                 </div>
@@ -536,7 +536,7 @@ use Fisharebest\Webtrees\Tree;
                 </div>
             </div>
         </div>
-        <a href="#" onclick="toggleAdvanced(this, 'appearance-advanced')"><div class="wt-page-options-label advanced-settings-btn"><?= ($vars["adv_appear"] == "show" ? '↑ ' : '↓ ') . I18N::translate('Toggle advanced settings') . ($vars["adv_appear"] == "show" ? ' ↑' : ' ↓'); ?></div></a>
+        <a href="#" onclick="toggleAdvanced(this, 'appearance-advanced')"><div class="wt-page-options-label advanced-settings-btn" data-cy="appearance-advanced"><?= ($vars["adv_appear"] == "show" ? '↑ ' : '↓ ') . I18N::translate('Toggle advanced settings') . ($vars["adv_appear"] == "show" ? ' ↑' : ' ↓'); ?></div></a>
         <h3><?= /* I18N: Appearance heading */ I18N::translate('Output settings') ?></h3>
         <div class="row form-group">
             <?= addLabelWithHelp('vars[otype]', 'Output file type'); ?>
@@ -579,7 +579,6 @@ use Fisharebest\Webtrees\Tree;
 <script type="text/javascript">
     const graphvizAvailable = <?= $nographviz ? "false" : "true" ?>;
     let panzoomInst = null;
-    let jsPDFInst = null;
     const workerURL = '<?= $module->assetUrl('javascript/full.renderer.js'); ?>';
     let viz = new Viz({
         workerURL: workerURL

@@ -628,7 +628,7 @@ function createPdfFromImage(imgData, width, height) {
     const dpi = document.getElementById('vars[dpi]').value;
     const widthInches = width/dpi;
     const heightInches = height/dpi;
-    const doc = new jsPDF({orientation: orientation, format: [widthInches, heightInches], unit: 'in'});
+    const doc = new window.jspdf.jsPDF({orientation: orientation, format: [widthInches, heightInches], unit: 'in'});
     doc.addImage(imgData, "PNG", 0, 0, widthInches, heightInches);
     doc.save("gvexport.pdf");
 }
@@ -711,7 +711,6 @@ function handleTileClick() {
 
 // This function is run when the page is loaded
 function pageLoaded() {
-    jsPDFInst = window.jspdf.jsPDF;
     TOMSELECT_URL = document.getElementById('pid').getAttribute("data-url") + "&query=";
     loadURLXref();
     loadXrefList(TOMSELECT_URL, 'vars[other_pids]', 'indi_list');
