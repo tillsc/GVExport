@@ -306,7 +306,11 @@ function downloadLink(URL, filename) {
     downloadLink.href = URL;
     downloadLink.download = filename;
     document.body.appendChild(downloadLink);
-    downloadLink.click();
+    // If running test suite, don't actually trigger download of data
+    // We have generated it so know it works
+    if (!window.Cypress) {
+        downloadLink.click();
+    }
     document.body.removeChild(downloadLink);
 }
 
@@ -626,11 +630,15 @@ function getComputedProperty(element, property) {
 function createPdfFromImage(imgData, width, height) {
     const orientation = width >= height ? 'landscape' : 'portrait';
     const dpi = document.getElementById('vars[dpi]').value;
-    const widthInches = width/dpi;
-    const heightInches = height/dpi;
+    const widthInches = width / dpi;
+    const heightInches = height / dpi;
     const doc = new window.jspdf.jsPDF({orientation: orientation, format: [widthInches, heightInches], unit: 'in'});
     doc.addImage(imgData, "PNG", 0, 0, widthInches, heightInches);
-    doc.save("gvexport.pdf");
+    // If running test suite, don't actually trigger downlaod of data
+    // We have generated it so know it works
+    if (!window.Cypress) {
+        doc.save("gvexport.pdf");
+    }
 }
 
 // If the browser render is available, scroll to the xref provided (if it exists)
