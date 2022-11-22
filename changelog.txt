@@ -3,6 +3,13 @@
 	GVExport module for Webtrees
 =====================================================================
 
+Version 2.1.16 (2022-11-22)
+  - New         : Use starting person selection system for stopping persons
+  - New         : Resize images based on DPI for SVG output (and PDF if GraphViz installed on server)
+  - New         : Added help messages for some options (more to come)
+  - Fixed       : Fixed issues with scroll-so-person not working in combined mode
+  - Fixed       : Fixed issues with scroll-so-person not working if DPI changed
+
 Version 2.1.15 (2022-11-05)
   - New         : Click on starting individual to have browser rendering scroll to that person
   - New         : Allow user to change font sizes
