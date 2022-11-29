@@ -753,8 +753,15 @@ use Fisharebest\Webtrees\Tree;
                     showToast(message[i]);
                 }
             }
-            // Scroll render to first starting individual
-            scrollToRecord(document.getElementById('vars[other_pids]').value.split(",")[0].trim());
+            // Scroll render to last starting individual
+            let indiList = document.getElementById('vars[other_pids]').value.split(",");
+            for (let i = indiList.length-1; i>=0; i--) {
+                if (indiList[i].trim() !== "") {
+                    scrollToRecord(indiList[i].trim());
+                    break;
+                }
+            }
+
             handleTileClick();
 
             return element;
