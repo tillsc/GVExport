@@ -180,7 +180,7 @@ class Person
                 // Show photo
                 if ($this->dot->settings["diagram_type_combined_with_photo"]) {
                     if (isset($this->dot->individuals[$pid]["pic"]) && !empty($this->dot->individuals[$pid]["pic"])) {
-                        $out .= "<TD ROWSPAN=\"2\" CELLPADDING=\"1\" PORT=\"pic\" WIDTH=\"" . ($this->dot->font_size * 3.5) . "\" HEIGHT=\"" . ($this->dot->font_size * 4) . "\" FIXEDSIZE=\"true\" ALIGN=\"CENTER\"><IMG SCALE=\"false\" SRC=\"" . $this->dot->individuals[$pid]["pic"] . "\" /></TD>";
+                        $out .= "<TD ROWSPAN=\"2\" CELLPADDING=\"1\" PORT=\"pic\" WIDTH=\"" . ($this->dot->font_size * 4) . "\" HEIGHT=\"" . ($this->dot->font_size * 4) . "\" FIXEDSIZE=\"true\" ALIGN=\"CENTER\"><IMG SCALE=\"true\" SRC=\"" . $this->dot->individuals[$pid]["pic"] . "\" /></TD>";
                     } else {
                         // Blank cell zero width to keep the height right
                         $out .= "<TD ROWSPAN=\"2\" CELLPADDING=\"1\" PORT=\"pic\" WIDTH=\"" . ($detailsExist ? "0" : ($this->dot->font_size * 3.5)) . "\" HEIGHT=\"" . ($this->dot->font_size * 4) . "\" FIXEDSIZE=\"true\"></TD>";
