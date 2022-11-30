@@ -107,7 +107,7 @@ use Fisharebest\Webtrees\Tree;
         ?>
 
             <div class="row form-group">
-                <label class="col-sm-4 col-form-label wt-page-options-label"><?= I18N::translate('Warning') ?></label>
+                <?= addLabelWithHelp('', 'Clippings cart'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <?= I18N::translate('You have items in the clippings cart, which can be used for the diagram instead of the below options.') ?>
                     <div class="col-sm-8 wt-page-options-value">
@@ -201,7 +201,7 @@ use Fisharebest\Webtrees\Tree;
         </div>
         <div id="people-advanced" <?= $vars["adv_people"] == "show" ? '' : 'style="display:none"'; ?>>
             <div class="row form-group">
-                <label class=" col-sm-4 col-form-label wt-page-options-label" for="vars[other_pids]"><?= I18N::translate('XREFs of included individuals') ?></label>
+                <?= addLabelWithHelp('vars[other_pids]', 'XREFs of included individuals'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="input-group mt-1">
                         <input type="text" class="form-control" name="vars[other_pids]" id="vars[other_pids]" value="<?= $vars['other_pids'] ?>" onchange="refreshIndisFromXREFS(true)">
@@ -213,7 +213,7 @@ use Fisharebest\Webtrees\Tree;
                 </div>
             </div>
             <div class="row form-group">
-                <label class=" col-sm-4 col-form-label wt-page-options-label" for="vars[other_stop_pids]"><?= I18N::translate('Stop processing on') ?></label>
+                <?= addLabelWithHelp('vars[other_stop_pids]', 'Stop processing on'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <div id="stop_indi_list">
 
@@ -233,7 +233,7 @@ use Fisharebest\Webtrees\Tree;
                 </div>
             </div>
             <div class="row form-group">
-                <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[marknr]"><?= I18N::translate('Non-relatives') ?></label>
+                <?= addLabelWithHelp('vars[marknr]', 'Non-relatives'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <input type="hidden" name="vars[marknr]" value="no">
                     <input class="cart_toggle" onclick="setStateFastRelationCheck();"  type="checkbox" name="vars[marknr]" id="vars[marknr]" value="marknr" <?= $vars["marknr"] == "marknr" ? 'checked' : '' ?>>
@@ -282,7 +282,7 @@ use Fisharebest\Webtrees\Tree;
 
             <?php if ($tree->getPreference('SHOW_HIGHLIGHT_IMAGES') == '1') { ?>
                 <div class="row form-group">
-                    <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[with_photos]"><?= I18N::translate('Add photos') ?></label>
+                    <?= addLabelWithHelp('vars[with_photos]', 'Add photos'); ?>
                     <div class="col-sm-8 wt-page-options-value">
                         <input type="hidden" name="vars[with_photos]" value="no">
                         <input type="checkbox" name="vars[with_photos]" id="vars[with_photos]" value="with_photos" <?= $vars["with_photos"] == "with_photos" ? 'checked' : '' ?>>
@@ -292,7 +292,7 @@ use Fisharebest\Webtrees\Tree;
             <?php } ?>
 
             <div class="row form-group">
-                <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[show_url]"><?= I18N::translate('Add URL to individuals and families') ?></label>
+                <?= addLabelWithHelp('vars[show_url]', 'Add URL to individuals and families'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <input type="hidden" name="vars[show_url]" value="no">
                     <input type="checkbox" name="vars[show_url]" id="vars[show_url]" value="show_url" <?= $vars["show_url"] == "show_url" ? 'checked' : '' ?>>
@@ -301,21 +301,21 @@ use Fisharebest\Webtrees\Tree;
             </div>
 
             <div class="row form-group">
-                <label class=" col-sm-4 col-form-label wt-page-options-label" for="vars[use_abbr_name]"><?= I18N::translate('Abbreviated names') ?></label>
+                <?= addLabelWithHelp('vars[use_abbr_name]', 'Abbreviated names'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <?= view('components/select', ['name' => 'vars[use_abbr_name]', 'selected' => $vars['use_abbr_name'], 'options' => updateTranslations($gve_config["settings"]["use_abbr_names"])]) ?>
                 </div>
             </div>
 
             <div class="row form-group">
-                <label class=" col-sm-4 col-form-label wt-page-options-label" for="vars[use_abbr_place]"><?= I18N::translate('Abbreviated place names') ?></label>
+                <?= addLabelWithHelp('vars[use_abbr_place]', 'Abbreviated place names'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <?= view('components/select', ['name' => 'vars[use_abbr_place]', 'selected' => $vars['use_abbr_place'], 'options' => updateTranslations($gve_config["settings"]["use_abbr_places"])]) ?>
                 </div>
             </div>
             
             <div class="row form-group">
-                <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[show_pid]"><?= I18N::translate('Show individual XREF') ?></label>
+                <?= addLabelWithHelp('vars[show_pid]', 'Show individual XREF'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <input type="hidden" name="vars[show_pid]" value="no">
                     <input type="checkbox" name="vars[show_pid]" id="vars[show_pid]" value="show_pid" <?= $vars["show_pid"] == "show_pid" || $overridePID ? 'checked' : '' ?>>
@@ -323,7 +323,7 @@ use Fisharebest\Webtrees\Tree;
             </div>
 
             <div class="row form-group">
-                <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[show_by]"><?= I18N::translate('Show birth date') ?></label>
+                <?= addLabelWithHelp('vars[show_by]', 'Show birth date'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="row">
                         <div class="col-auto mx-3">
@@ -343,7 +343,7 @@ use Fisharebest\Webtrees\Tree;
             </div>
 
             <div class="row form-group">
-                <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[show_bp]"><?= I18N::translate('Show birth place') ?></label>
+                <?= addLabelWithHelp('vars[show_bp]', 'Show birth place'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <input type="hidden" name="vars[show_bp]" value="no">
                     <input type="checkbox" name="vars[show_bp]" id="vars[show_bp]" value="show_bp" <?= $vars["show_bp"] == "show_bp" ? 'checked' : '' ?>>
@@ -351,7 +351,7 @@ use Fisharebest\Webtrees\Tree;
             </div>
 
             <div class="row form-group">
-                <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[show_dy]"><?= I18N::translate('Show death date') ?></label>
+                <?= addLabelWithHelp('vars[show_dy]', 'Show death date'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="row">
                         <div class="col-auto mx-3">
@@ -371,7 +371,7 @@ use Fisharebest\Webtrees\Tree;
             </div>
 
             <div class="row form-group">
-                <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[show_dp]"><?= I18N::translate('Show death place') ?></label>
+                <?= addLabelWithHelp('vars[show_dp]', 'Show death place'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <input type="hidden" name="vars[show_dp]" value="no">
                     <input type="checkbox" name="vars[show_dp]" id="vars[show_dp]" value="show_dp" <?= $vars["show_dp"] == "show_dp" ? 'checked' : '' ?>>
@@ -380,7 +380,7 @@ use Fisharebest\Webtrees\Tree;
 
 
             <div class="row form-group">
-                <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[show_fid]"><?= I18N::translate('Show family XREF') ?></label>
+                <?= addLabelWithHelp('vars[show_fid]', 'Show family XREF'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <input type="hidden" name="vars[show_fid]" value="no">
                     <input type="checkbox" name="vars[show_fid]" id="vars[show_fid]" value="show_fid" <?= $vars["show_fid"] == "show_fid" ? 'checked' : '' ?>>
@@ -388,7 +388,7 @@ use Fisharebest\Webtrees\Tree;
             </div>
 
             <div class="row form-group">
-                <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[show_my]"><?= I18N::translate('Show marriage date') ?></label>
+                <?= addLabelWithHelp('vars[show_my]', 'Show marriage date'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="row">
                         <div class="col-auto mx-3">
@@ -408,7 +408,7 @@ use Fisharebest\Webtrees\Tree;
             </div>
 
             <div class="row form-group">
-                <label class="col-sm-4 col-form-label wt-page-options-label" for="vars[show_mp]"><?= I18N::translate('Show marriage place') ?></label>
+                <?= addLabelWithHelp('vars[show_mp]', 'Show marriage place'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <input type="hidden" name="vars[show_mp]" value="no">
                     <input type="checkbox" name="vars[show_mp]" id="vars[show_mp]" value="show_mp" <?= $vars["show_mp"] == "show_mp" ? 'checked' : '' ?>>
@@ -416,7 +416,7 @@ use Fisharebest\Webtrees\Tree;
             </div>
 
             <div class="row form-group">
-                <label class=" col-sm-4 col-form-label wt-page-options-label" for="vars[dpi]"><?= I18N::translate('DPI') ?></label>
+                <?= addLabelWithHelp('vars[dpi]', 'DPI'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="row">
                         <div class="col-auto">
@@ -427,7 +427,7 @@ use Fisharebest\Webtrees\Tree;
             </div>
 
             <div class="row form-group">
-                <label class=" col-sm-4 col-form-label wt-page-options-label" for="vars[dpi]"><?= I18N::translate('Space') ?></label>
+                <?= addLabelWithHelp('', 'Space'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="row">
                         <label for="vars[ranksep]"><?= I18N::translate('Between generations') ?>:</label>
@@ -442,7 +442,7 @@ use Fisharebest\Webtrees\Tree;
                 </div>
             </div>
             <div class="row form-group">
-                <label class=" col-sm-4 col-form-label wt-page-options-label"><?= I18N::translate('Font') ?></label>
+                <?= addLabelWithHelp('', 'Font'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="row">
                         <label for="vars[typeface]"><?= I18N::translate('Typeface') ?>:</label>
@@ -468,7 +468,7 @@ use Fisharebest\Webtrees\Tree;
                 </div>
             </div>
             <div class="row form-group">
-                <label class=" col-sm-4 col-form-label wt-page-options-label"><?= I18N::translate('Relationship arrows') ?></label>
+                <?= addLabelWithHelp('', 'Relationship arrows'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                         <div class="col-auto">
                             <input type="color" class="picker" name="vars[arrow_default]" id="vars[arrow_default]" value="<?= $vars["arrow_default"] ?>" /><label for="vars[arrow_default]" class="picker-label"><?= I18N::translate('Arrow color') ?></label>
@@ -485,7 +485,7 @@ use Fisharebest\Webtrees\Tree;
                 </div>
             </div>
             <div class="row form-group">
-                <label class=" col-sm-4 col-form-label wt-page-options-label"><?= I18N::translate('Tile colors') ?></label>
+                <?= addLabelWithHelp('', 'Tile colors'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="col-auto">
                         <input type="color" class="picker" name="vars[colorm]" id="vars[colorm]" value="<?= $vars["colorm"] ?>" /><label for="vars[colorm]" class="picker-label"><?= I18N::translate('Male individuals') ?></label>
@@ -522,7 +522,7 @@ use Fisharebest\Webtrees\Tree;
                 </div>
             </div>
             <div class="row form-group">
-                <label class=" col-sm-4 col-form-label wt-page-options-label"><?= I18N::translate('Other colours') ?></label>
+                <?= addLabelWithHelp('', 'Other colours'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="col-auto">
                         <input type="color" class="picker" name="vars[colorfam]" id="vars[colorfam]" value="<?= $vars["colorfam"] ?>" /><label for="vars[colorfam]" class="picker-label"><?= I18N::translate('Family background') ?></label>
