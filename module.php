@@ -29,12 +29,18 @@
 
 namespace vendor\WebtreesModules\gvexport;
 
-require_once(dirname(__FILE__) . "/config.php");
-require_once(dirname(__FILE__) . "/app/utils.php");
-require_once(dirname(__FILE__) . "/app/functionsClippingsCart.php");
-require_once(dirname(__FILE__) . "/app/functionsAdmin.php");
-require_once(dirname(__FILE__) . "/app/OutputFile.php");
-require_once(dirname(__FILE__) . "/app/Person.php");
+require_once dirname(__FILE__) . "/config.php";
+require_once dirname(__FILE__) . "/app/utils.php";
+require_once dirname(__FILE__) . "/app/functionsClippingsCart.php";
+require_once dirname(__FILE__) . "/app/functionsAdmin.php";
+
+// Auto-load class files
+spl_autoload_register(function ($class) {
+    if (strpos($class, "\gvexport\\")) {
+        $name = basename(dirname(__FILE__) . "/app/" . str_replace('\\', '/',$class . '.php'));
+        include dirname(__FILE__) . "/app/" . $name;
+    }
+});
 
 use Fisharebest\Webtrees\Auth;
 use Fisharebest\Webtrees\Registry;
@@ -159,13 +165,11 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
         $individual = $this->getIndividual($tree, $request->getQueryParams()['xref']);
 
 		$userDefaultVars = getAdminSettings($this, false);
-        if (!isset($_REQUEST['reset']) and isset($_COOKIE["GVEUserDefaults"]) and $_COOKIE["GVEUserDefaults"] != "") {
-            foreach (explode("|", $_COOKIE["GVEUserDefaults"]) as $s) {
-                $arr = explode("=", $s);
-                if (count($arr) == 2) {
-                    $userDefaultVars[$arr[0]] = $arr[1];
-                }
-            }
+        if (!isset($_REQUEST['reset'])) {
+            $cookie = new Cookie($tree);
+            // Load settings from cookie *on top* of our default settings,
+            // in case cookie does not have a value for all settings
+            $userDefaultVars = $cookie->load($userDefaultVars);
         }
 
         $otypes = $this->getOTypes();
@@ -296,18 +300,13 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
 
     function createGraphVizDump($tree, $temp_dir): string
     {
-        require_once(dirname(__FILE__) . "/app/Dot.php");
-
         $out = "";
         $dot = new Dot($tree, Registry::filesystem()->data());
-
         $vars = $_REQUEST['vars'];
 
-        $cookieStr = "";
-        foreach ($vars as $key => $value)
-            $cookieStr .= "$key=$value|";
+        $cookie = new Cookie($tree);
+        $cookie->set($vars);
 
-        setcookie("GVEUserDefaults", $cookieStr, time() + (3600 * 24 * 365));
 
         if (isset($temp_dir)) {
             $dot->setSettings("temp_dir", $temp_dir);

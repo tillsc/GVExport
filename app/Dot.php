@@ -1344,7 +1344,6 @@ class Dot {
 		} else if (!$m->isExternal() && $m->fileExists($this->file_system)) {
 			// If we are rendering in the browser, provide the URL, otherwise provide the server side file location
 			if (isset($_REQUEST["download"])) {
-                require_once(dirname(__FILE__) . "/ImageFile.php");
                 $image = new ImageFile($m, $this->tree, $this->settings["dpi"] * 2);
 				return $image->getImageLocation();
 			} else {
