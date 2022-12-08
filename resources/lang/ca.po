@@ -13,11 +13,11 @@ msgstr "Actualitzar"
 
 #: 
 msgid "Render serverside"
-msgstr "Renderitzar ajl servidor"
+msgstr "Renderitzar al servidor"
 
 #: 
 msgid "Reset"
-msgstr "Restabliment"
+msgstr "Reinicialitzar"
 
 #: 
 msgid "Diagram preferences"
@@ -144,7 +144,6 @@ msgid "Only Decorated or Combined"
 msgstr "Sols decorat o combinat"
 
 #: 
-#, fuzzy
 msgid "Output file type"
 msgstr "Tipus d'arxiu d'eixida"
 
@@ -237,7 +236,6 @@ msgid "Show individual XREF"
 msgstr "Mostrar XREF individual"
 
 #: 
-#, fuzzy
 msgid "Options limited as Graphviz not installed on server"
 msgstr "Opcions limitades, perquè GraphViz no està instal·lat al servidor"
 
@@ -604,11 +602,144 @@ msgstr "Ajuda"
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/vyDHWXC9qcax65t9gW4YjvMv.png
 #: 
 #, fuzzy
-msgid "GVExport is a webtrees module that allows you to create complex visual family trees, using a tool called Graphviz to display the tree. Select a starting person, adjust the settings, and see that person's family tree.</p><p>Some fields have an icon <span class=\"info-icon btn btn-primary\">i</span> next to them, clicking this will give you some more information about that field. Not all fields are covered (yet).</p><p>Advanced configurations are possible by toggling advanced settings by clicking the \"Toggle advanced settings\" option at the end of each section. Clicking the ⛶ in the top right corner of the browser rendering will display the browser rendering in full screen. You can also use the webtrees \"Clippings Cart\" feature to select records, which GVExport can then use instead of the \"People to be included\" settings. </p><p>There are several buttons that take action based on the settings that you have chosen:<ul><li>Update: Clicking this updates the browser render (this is hidden if auto-update is enabled).<li>Download: Clicking this will download the diagram in the format chosen in the \"Output file type\" option. <li>Reset: Clicking this will reset the settings to the default values. Default values can be changed by an administrator in the webtrees Control Panel.<li>Help: Shows this help message.</ul></p><p>For more information, see the <a href=\"https://github.com/Neriderc/GVExport/wiki\" class=\"help-link\">GVExport Wiki</a>.</p><p>You can also ask a question, provide feedback, or suggest features on our <a href=\"https://github.com/Neriderc/GVExport\" class=\"help-link\">GitHub page</a>. Just <a href=\"https://github.com/Neriderc/GVExport/issues/new\" class=\"help-link\">open an issue</a>, or <a href=\"https://github.com/Neriderc/GVExport/issues\" class=\"help-link\">browse existing issues</a>."
+msgid "GVExport is a webtrees module that allows you to create complex visual family trees, using a tool called Graphviz to display the tree. Select a starting person, adjust the settings, and see that person's family tree.</p><p>Some fields have an icon <span class=\"info-icon btn btn-primary\">i</span> next to them, clicking this will give you some more information about that field.</p><p>Advanced configurations are possible by toggling advanced settings by clicking the \"Toggle advanced settings\" option at the end of each section. Clicking the ⛶ in the top right corner of the browser rendering will display the browser rendering in full screen. You can also use the webtrees \"Clippings Cart\" feature to select records, which GVExport can then use instead of the \"People to be included\" settings. </p><p>There are several buttons that take action based on the settings that you have chosen:<ul><li>Update: Clicking this updates the browser render (this is hidden if auto-update is enabled).<li>Download: Clicking this will download the diagram in the format chosen in the \"Output file type\" option. <li>Reset: Clicking this will reset the settings to the default values. Default values can be changed by an administrator in the webtrees Control Panel.<li>Help: Shows this help message.</ul></p><p>For more information, see the <a href=\"https://github.com/Neriderc/GVExport/wiki\" class=\"help-link\">GVExport Wiki</a>.</p><p>You can also ask a question, provide feedback, or suggest features on our <a href=\"https://github.com/Neriderc/GVExport\" class=\"help-link\">GitHub page</a>. Just <a href=\"https://github.com/Neriderc/GVExport/issues/new\" class=\"help-link\">open an issue</a>, or <a href=\"https://github.com/Neriderc/GVExport/issues\" class=\"help-link\">browse existing issues</a>."
 msgstr "GVExport és un mòdul de webtrees que li permet crear arbres genealògics visuals complexos, utilitzant una eina anomenada Graphviz per a mostrar l'arbre. Seleccione una persona inicial, ajuste la configuració i veja l'arbre genealògic d'aqueixa persona.</p><p>Alguns camps tenen una icona <span class=\"info-icon btn btn-primary\">i</span> al costat d'ells, en fer clic  li donarà més informació sobre aqueix camp. No tots els camps estan coberts (encara).</p><p>Les configuracions avançades són possibles alternant la configuració avançada fent clic en l'opció \"Alternar configuració avançada\" al final de cada secció. En fer clic ⛶ a la cantonada superior dreta de la representació del navegador, es mostrarà la representació del navegador en pantalla completa. També pot usar la funció \"Cistella de retallades\" de webtrees per a seleccionar registres, que GVExport pot usar en lloc de la configuració de \"Persones a incloure\". </p><p>Hi ha diversos botons que prenen mesures en funció de la configuració que haja triat:<ul><li>Update: En fer clic aquí, s'actualitza el renderitzat del navegador (això s'oculta si l'actualització automàtica està habilitada).<li>Descarregar: En fer clic aquí, es descarregarà el diagrama en el format triat en l'opció \"Tipus d'arxiu d'eixida\". <li>Restablir: En fer clic aquí, es restablirà la configuració als valors predeterminats. Els valors predeterminats poden ser canviats per un administrador en el Panell de control de webtrees.<li>Help: Mostra aquest missatge d'ajuda.</ul></p><p>Per a obtindre més informació, consulte el <a href=\"https://github.com/Neriderc/gvexport/wiki\" class=\"help-link\">GVExport Wiki</a>.</p><p>També pot fer una pregunta, proporcionar comentaris o suggerir característiques en la nostra <a href=\"https://github.com/Neriderc/gvexport\" class=\"help-link\">GitHub page</a>. Simplement <a href=\"https://github.com/Neriderc/gvexport/issues/new\" class=\"help-link\">obrir un problema</a>, o <a href=\"https://github.com/Neriderc/gvexport/issues\" class=\"help-link\">examinar problemes existents</a>."
 
 #. This message should never be shown, but it is a backup message for the help messages in the case that the text cannot be found - it's effectively an error message.
 #: 
 msgid "Help information not found"
 msgstr "Informació d'ajuda no trobada"
+
+#. This is the help text that the user will see if they click the i next to the Clippings cart message that shows only when there is an item in the clippings cart:  https://s3.eu-west-1.amazonaws.com/po-pub/i/lzypnHfQAPcoljhGbgSsaEVb.png
+#: 
+msgid "Within webtrees, you can add items to the clippings cart. This is usually done by navigating to a record within webtrees then selecting the \"Clippings cart\" option near the top of the screen.</p><p> If you have added individuals and the related family and media records to the clippings cart, these can be used to display the diagram instead of the criteria in the \"People to be included\" section.</p><p>If you have individuals in the clippings cart but don't wish to use these, you have the option to ignore the clippings cart."
+msgstr "Dins dels arbres web, pot agregar articles al carret de retallades. Això generalment es fa navegant a un registre dins dels arbres web i després seleccionant l'opció \"Carro de retallades\" prop de la part superior de la pantalla.\n"
+"</p><p>Si ha agregat individus al carret de retallades, aquests es poden usar per a mostrar el diagrama en lloc dels criteris en la secció \"Persones a incloure\".</p><p>\n"
+"Si té persones en el carret de retallades, però no desitja utilitzar, tens l'opció d'ignorar el carret de retallades."
+
+#. This is help text shown when the user clicks the "i" button next to the "XREFs of included individuals" option:   https://s3.eu-west-1.amazonaws.com/po-pub/i/YVGpSuKpIAjyOMoLTigbrzcU.png
+#: 
+msgid "This is a list of XREFs that represents the records listed in the \"Include anyone related to\" section. You may edit this box and click the refresh button in order to load your list of XREFs into the selection list."
+msgstr "Aquesta és una llista de XREF que representa els registres enumerats en la secció \"Incloure a qualsevol persona relacionada amb\". Pot editar aquest quadre i fer clic en el botó d'actualització per a carregar la seua llista de XREF en la llista de selecció."
+
+#. Help text shown when user clicks "i" next to "Stop processing on":  https://s3.eu-west-1.amazonaws.com/po-pub/i/aVjMepnhrUVmbSJnm5JjsdOp.png
+#: 
+#, fuzzy
+msgid "If the module reaches one of these people, don't grow the tree from here. For example, if you chose yourself as the starting point, you might want to include all of your blood relatives except your mother's side of the family. Add your mother as a person to \"Stop processing on\". The tree will still include your mother, but it won't include her parents, siblings, etc.</p><p>Choose a person in the top box, and they will be added to the list. Their XREF will also be included in the bottom box (which can be edited directly if needed)."
+msgstr "Si el mòdul arriba a una d'aquestes persones, no inicie l'arbre des d'ací. Per exemple, si et vas elegir tu mateix com a punt de partida, és possible que desitges incloure a tots els teus parents consanguinis, excepte al costat matern de la família. Agregue a la seua mare com a persona a \"Deixar de processar\". L'arbre continuarà incloent a la teua mare, però no inclourà als seus pares, germans, etc.</p><p>\n"
+"Trie una persona en el quadre superior, i s'agregaran a la llista. El seu XREF també s'inclourà en el quadre inferior (que es pot editar directament si és necessari)."
+
+#. Help text shown when user clicks "i" next to option "Non-relatives":  https://s3.eu-west-1.amazonaws.com/po-pub/i/Lq1O4swJShMh36BPEhJiSujt.png
+#: 
+#, fuzzy
+msgid "This section has two related options.<h4>Mark not blood-related people with different color</h4><p>Where spouses are included and are not blood-related to anyone in the \"Include anyone related to\" field, if this option is selected they will be highlighted in a much duller color than the standard blue/pink for relatives.</p><p>Note that when this option is selected, and non-relatives are found in the selected records, then a full tree scan is performed to identify if an individual is related by a more distant link (see next option).</p><h4>Ignore unseen links to speed up relative check</h4><p>This option is only available when the previous option is selected. When the option to display non-relatives in a different colour is selected, normally a scan is performed starting from the starting individuals and branching to all relatives regardless of display settings. This ensures that if a person is related via a link not displayed, they will still show as related.</p><p>Enabling this option prevents the full scan of the tree which can greatly speed up the generation of the diagram on larger trees, but may reduce accuracy of the colouring of non-relatives."
+msgstr "Aquesta secció té dues opcions relacionades.<h4>Marcar a les persones no relacionades consanguíniament amb diferent color</h4><p> Quan els cònjuges estan inclosos i no estan relacionats consanguíniament amb ningú en el camp \"Incloure a algú relacionat amb\", si se selecciona aquesta opció, es ressaltaran en un color molt més apagat que el blau / rosa estàndard per a familiars.⁣</p>\n"
+"<p>Tinga en compte que quan se selecciona aquesta opció, i els no parents es troben en els registres seleccionats, després es realitza un escaneig d'arbre complet per a identificar si un individu està relacionat per un enllaç més distant (veure següent opció).</p><h4>\n"
+"Ignore enllaços no vistos per a accelerar la verificació relativa</h4><p>Aquesta opció només està disponible quan se selecciona l'opció anterior. Quan se selecciona l'opció de mostrar als no parents en un color diferent, normalment es du a terme un escaneig a partir dels individus inicials i es ramifica a tots els parents, independentment de la configuració de visualització. Això assegura que si una persona està relacionada a través d'un enllaç que no es mostra, continuarà mostrant-se com relacionada.</p><p> Habilitar aquesta opció evita l'escaneig complet de l'arbre, la qual cosa pot accelerar en gran manera la generació del diagrama en arbres més grans, però pot reduir la precisió de la coloració dels no parents."
+
+#. Help text shown when user clicks the "i" next to "Show photos" in the advanced appearance section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/Xpn8Y8LiWnYphmjJe9eJO6ub.png
+#: 
+msgid "Whether to display the photo from the individual's page in the tree. This is only supported for Decorated and Combined diagram types."
+msgstr "Si es desitja mostrar la foto de la pàgina de l'individu en l'arbre. Això només s'admet per als tipus de diagrama decorats i combinats."
+
+#. Help text shown when user clicks "Add URL to individuals and families" option:  https://s3.eu-west-1.amazonaws.com/po-pub/i/QREJLhm9Besbu8r11RXghPYN.png
+#: 
+msgid "For SVG (and PDF if GraphViz installed on server) output, links can be included. This way you can click on the person in the diagram to be taken to their webtrees page."
+msgstr "Per a l'eixida SVG (i PDF si GraphViz està instal·lat en el servidor), es poden incloure enllaços. D'aquesta manera, pot fer clic en la persona en el diagrama per a ser redirigit a la seua pàgina webtrees."
+
+#. Help text shown when user clicks the "i" next to "Abbreviated names":   https://s3.eu-west-1.amazonaws.com/po-pub/i/rIQKFYaokaQndqxKRMkSoZDA.png
+#: 
+msgid "There are several options to shorten the names of individuals displayed.</p><h4>Full name</h4><p>The default option, this shows the primary name and any nickname. This option currently is the only one where the preferred name is underlined, and is the only one to show nicknames (in \\\"quotes\\\").<h4>Given and surnames</h4><p>Like the full name, but without nicknames.</p><h4>Given names</h4><p>Just the given names are displayed.<h4>First given names only</h4><p>Just the first word of the name in the given names field.</p><h4>Surnames</h4><p>Just the surnames are displayed.</p><h4>Initials only</h4><p>This displays initials only, for example \\\"JFK\\\".</p><h4>Given name initials and Surname</h4><p>This shows initials for the first and second given name, as well as the full surname. For example: \\\"J.F. Kennedy\\\"</p><h4>Don't show names</h4><p>No names are shown. If birth and death details are also disabled then it is possible to show only photos or even just coloured boxes."
+msgstr "Hi ha diverses opcions per a abreujar els noms de les persones que es mostren.</p><h4> Nom \n"
+"complet</h4><p>L'opció predeterminada, això mostra el nom principal i qualsevol malnom. Aquesta opció actualment és l'única on el nom preferit està subratllat, i és l'única que mostra malnoms (en \\\"cometes\\\").⁣<h4>Nom i cognoms</h4><p>Com el nom complet, però sense malnoms.</p><h4>Noms de pila</h4><p>Només es mostren les inicials dels noms de pila.<h4>Només primers noms </h4><p>Només la primera paraula del nom en el camp de noms de pila.\n"
+"</p><h4>Cognoms</h4><p>Només es mostren els cognoms.</p><h4>\n"
+"Només inicials </h4><p>\n"
+"Això mostra només inicials, per exemple \\\"JFK\\\".</p><h4>Inicials del nom i Cognom</h4><p>Això mostra les inicials del primer i segon nom, així com el cognom complet. Per exemple: \\\"J.F. Kennedy\\\"</p><h4>No mostrar noms</h4><p>\n"
+"No es mostren noms. Si els detalls de naixement i mort també estan desactivats, llavors és possible mostrar només fotos o fins i tot quadres de colors."
+
+#. Help text shown when user clicks the "i" next to "Abbreviate place names":  https://s3.eu-west-1.amazonaws.com/po-pub/i/Ek3gve1dtOPTm63m5WeKiEjl.png
+#: 
+msgid "There are several options to shorten place names (for place of birth, place of marriage, place of death).</p><h4>Full place name</h4><p>The place name is printed in full.</p><h4>City and Country</h4><p>The first and last section of the place name is used, using commas to split the sections. For example, \\\"London, England, United Kingdom\\\" would be shortened to \\\"London, United Kingdom\\\"</p><h4>City and 2 Letter ISO Country Code</h4><p>The first and last section of the place name is used, using commas to split the sections. The country is then converted to the ISO3166-1-Alpha-2 country code. </p><p>For example, \\\"Calgary, Alberta, Canada\\\" would be shortened to \\\"Calgary, CA\\\"</p><h4>City and 3 Letter ISO Country Code</h4><p>The first and last section of the place name is used, using commas to split the sections. The country is then converted to the ISO3166-1-Alpha-3 country code.</p><p>For example, \\\"Calgary, Alberta, Canada\\\" would be shortened to \\\"Calgary, CAN\\\"<h4>Note</h4><p>The CLDR display name is used for matching. The data comes from <a href=\\\"https://www.datahub.io/core/country-codes\\\" class=\\\"help-link\\\">Datahub</a> but has been modified as for example the original CLDR name for the United Kingdom is \\\"UK\\\", and the original CLDR name for the United States is \\\"US\\\". Matching against these countries for the purposes of abbreviation is therefore pointless. So changes have been made to make this work better. Please <a href=\\\"https://github.com/Neriderc/GVExport/issues/new\\\" class=\\\"help-link\\\">open an issue</a> on GitHub if you find a country is not abbreviating correctly."
+msgstr "Hi ha diverses opcions per a abreujar els noms de llocs (per a lloc de naixement, lloc de matrimoni, lloc de mort).</p><h4>Nom complet del lloc.</h4><p>El nom del lloc està imprés íntegrament.</p><h4>Ciutat i País</h4><p>S'utilitza la primera i última secció del nom del lloc, Usar comes per a dividir les seccions. Per exemple, \\\"Londres, Anglaterra, el Regne Unit\\\" s'acurtaria a \\\"Londres, el Regne Unit\\\"</p><h4>Ciutat i codi de país ISO de 2 lletres</h4><p>\n"
+"Es fa servir la primera i l'última secció del nom del lloc, utilitzant comes per a dividir les seccions. El país es converteix al codi de país ISO3166-1-Alpha-2. </p><p>Per exemple, \\\"Calgary, Alberta, el Canadà\\\" s'acurtaria a \\\"Calgary, CA\\\"</p><h4>Ciutat i codi de país ISO de 3 lletres</h4><p> Es fa servir la primera i l'última secció del nom del lloc, emprant comes per a dividir les seccions. El país es converteix al codi de país ISO3166-1-Alpha-3.</p><p>\n"
+"Per exemple, \\\"Calgary, Alberta, Canadà\\\" s'acurtaria a \\\"Calgary, CAN\\\"<h4>Nota</h4><p>\n"
+"Nota El nom per a mostrar CLDR s'utilitza per a la coincidència. Les dades provenen de <a href=\\\"https://www.datahub.io/core/country-codes\\\" class=\\\"help-link\\\">Datahub</a>, però s'han modificat perquè, per exemple, el nom CLDR original per al Regne Unit és \\\"UK\\\", i el nom CLDR original per als Estats Units és \\\"US\\\". Per tant, no té sentit fer coincidir amb aquests països a l'efecte d'abreviatura. Així que s'han fet canvis perquè això funcione millor. Per favor, <a href=\\\"https://github.com/Neriderc/GVExport/issues/new\\\" class=\\\"help-link\\\">obri un problema</a> en GitHub si trobes que un país no s'abreuja correctament."
+
+#. Help text shown when user clicks the "i" next to "Show individual XREF":   https://s3.eu-west-1.amazonaws.com/po-pub/i/z0ydquyzpwfL2pZbkf4ZsjXv.png
+#: 
+msgid "Whether to include the XREF of individuals in the diagram."
+msgstr "Si s'ha d'incloure l'ID de persona de webtrees en l'eixida."
+
+#. Help text shown when user clicks the "i" next to "Show birth date":  https://s3.eu-west-1.amazonaws.com/po-pub/i/K0f3sazuGOU8Bc4k816wfldH.png
+#: 
+msgid "Check the box if you would like to include the birthdate of individuals in the output.</p><p>You can also choose whether to show the full date of birth or just the year."
+msgstr "Marque la casella si desitja incloure la data de naixement de les persones en l'eixida. </p><p>També pot triar si desitja mostrar la data de naixement completa o només l'any."
+
+#. Help text shown when user clicks the "i" next to "Show birth place":    https://s3.eu-west-1.amazonaws.com/po-pub/i/f0NMn7pmbDd8EmGi9s3Ps4Sm.png
+#: 
+msgid "Whether to show the place of birth in the output. Also see option for abbreviating place names."
+msgstr "Si s'ha de mostrar el lloc de naixement en l'eixida. Consulte també l'opció per a abreujar noms de llocs."
+
+#. Help text shown when user clicks the "i" next to "Show death date":     https://s3.eu-west-1.amazonaws.com/po-pub/i/fNNY3AothlpEk6RVHwu18jBq.png
+#: 
+msgid "Check the box if you would like to include the death date of individuals in the output.</p><p>You can also choose whether to show the full date of death or just the year."
+msgstr "Marque la casella si desitja incloure la data de mort de les persones en l'eixida.</p><p>També pot triar si desitja mostrar la data completa de la mort o només l'any."
+
+#. Help text shown when user clicks the "i" next to "Show death place":     https://s3.eu-west-1.amazonaws.com/po-pub/i/zwFpvOQOHvWtGCscz5jgN1LV.png
+#: 
+msgid "Whether to show the place of death in the output. Also see option for abbreviating place names."
+msgstr "Si cal mostrar el lloc de la mort en l'eixida. Consulte també l'opció per a abreujar noms de llocs."
+
+#. Help text shown when user clicks the "i" next to "Show family XREF":     https://s3.eu-west-1.amazonaws.com/po-pub/i/pUSNfbB0jvF2zxYRn8wQCCQ8.png
+#: 
+msgid "Whether to include the XREF of families in the output."
+msgstr "Si s'ha d'incloure l'ID de família de webtrees en l'eixida."
+
+#. Help text shown when user clicks the "i" next to "Show marriage date":      https://s3.eu-west-1.amazonaws.com/po-pub/i/WcVSfrpda3aaoTR6k8TKg4CC.png
+#: 
+msgid "Check the box if you would like to include the date of marriage in the output.</p><p>You can also choose whether to show the full date of marriage or just the year."
+msgstr "Marque la casella si desitja incloure la data de matrimoni en l'eixida.</p><p>També pot triar si desitja mostrar la data completa del matrimoni o només l'any."
+
+#. Help text shown when user clicks the "i" next to "Show marriage place":      https://s3.eu-west-1.amazonaws.com/po-pub/i/jYVeBKSFMcZhilwfeHgbyWqH.png
+#: 
+msgid "Whether to show the place of marriage in the output. Also see option for abbreviating place names."
+msgstr "Si mostrar el lloc del matrimoni en l'eixida. Consulte també l'opció per a abreujar noms de llocs."
+
+#. Help text shown when user clicks the "i" next to "DPI":      https://s3.eu-west-1.amazonaws.com/po-pub/i/40xFZyQ8fdzDhsLDzvifNDAr.png
+#: 
+msgid "For output such as JPG and PNG, this setting will product higher quality output when it is larger, but will also increase the file size. Smaller values will produce smaller files, but the quality will be worse and if the value is too low you may not be able to read text."
+msgstr "Per a eixides JPG i PNG, aquesta configuració produirà una eixida de major qualitat quan siga més gran, però també augmentarà la grandària de l'arxiu. Els valors més xicotets produiran arxius més xicotets, però la qualitat serà pitjor i si el valor és massa baix, és possible que no puga llegir el text."
+
+#. Help text shown when user clicks the "i" next to "Space":  https://s3.eu-west-1.amazonaws.com/po-pub/i/hEJcjkJ8xvGsTPoHjq5nT8L6.png
+#: 
+msgid "These options affect the distance between nodes on the diagram.</p><h4>Between generations</h4><p>How close you want generations on the output. For example, for left to right output, smaller numbers will bring the columns of individuals closer together, while larger numbers would push them further apart.</p><h4>Between individuals on the same level</h4><p>How close you want the individuals of the same generation on the output. For example, for left to right output, smaller numbers will mean less space vertically between the boxes, while larger numbers would push them further apart."
+msgstr "Aquestes opcions afecten la distància entre nodes en el diagrama.</p><h4>Entre generacions</h4><p>\n"
+"Què tan a prop desitja generacions en l'eixida. Per exemple, per a l'eixida d'esquerra a dreta, els números més xicotets acostaran les columnes d'individus, mentre que els números més grans els separarien encara més.</p><h4>\n"
+"Entre individus en el mateix nivell</h4><p>\n"
+"Què tan a prop desitja que els individus de la mateixa generació estiguen en l'eixida. Per exemple, per a l'eixida d'esquerra a dreta, els números més xicotets significaran menys espai vertical entre les caixes, mentre que els números més grans els separarien encara més."
+
+#. Help text shown when user clicks the "i" next to "Font":  https://s3.eu-west-1.amazonaws.com/po-pub/i/SMqr3gHBplFqJ4C0yRnFBpkp.png
+#: 
+msgid "This section lets you configure the typeface and colour of text.</p><h4>Typeface</h4><p>This list lets you pick from a number of known websafe font typefaces. They must be installed on the system or a fallback typeface will be used. These options are known to be installed on almost all systems and that is why they have been chosen.</p><h4>Font size for names</h4><p>Set the font point size for the names of individuals. In Simple mode this is ignored as all text uses the details font size.</p><h4>Font size for details</h4><p>This changes the font point size for all text except for names. For example, the date and place of marriage, and the date and place of birth and death. In simple mode this is also used for the font size of names.</p><h4>Font colour for names</h4><p>This changes the colour of the font for names. In the simple mode, this sets the font for all text in an individual record's box. Note that the colour picker is provided by your browser, and is handled differently depending on which browser you are using.</p><h4>Font colour for details</h4><p>This changes the colour of the font of all text except for names, for example, the date and place of marriage, and the date and place of birth and death. In the simple mode, this sets the font for the details in the family record (marriage date and place) as the same font is used for the whole individual record (the font colour for names). Note that the colour picker is provided by your browser, and is handled differently depending on which browser you are using."
+msgstr "Aquesta secció li permet configurar la lletra tipogràfica i el color del text.</p><h4>Tipografia</h4><p>Aquesta llista li permet triar entre una sèrie de lletres tipogràfiques de fonts segures per a la web conegudes. Han d'instal·lar-se en el sistema o s'utilitzarà una família tipogràfica alternativa. Se sap que aquestes opcions estan instal·lades en quasi tots els sistemes i és per això que s'han triat.</p><h4>\n"
+"Grandària de la font per als noms</h4><p>Establisca la grandària del punt de la font per als noms de les persones. En la manera simple, això s'omet perquè tot el text fa servir la grandària de la font de detalls.</p><h4>Grandària de la font per als detalls</h4><p>Això canvia la grandària del punt de la font per a tot el text excepte per als noms. Per exemple, la data i el lloc del matrimoni, i la data i el lloc de naixement i mort. En la manera simple, això també s'usa per a la grandària de la font dels noms.</p><h4>Color de la font per als noms</h4><p>Això canvia el color de la font per als noms. En la manera simple, estableix la font per a tot el text en el quadre d'un registre individual. Tinga en compte que el selector de color és proporcionat pel seu navegador i es maneja de manera diferent segons el navegador que estiga utilitzant.</p><h4>\n"
+"Color de la font per a més detalls</h4><p>Això canvia el color de la font de tot el text excepte els noms, per exemple, la data i el lloc del matrimoni, i la data i el lloc de naixement i mort. En la manera simple, això estableix la font per als detalls en el registre familiar (data i lloc de matrimoni), ja que la mateixa font s'usa per a tot el registre individual (el color de font per als noms). Tinga en compte que el selector de color és proporcionat pel seu navegador i es maneja de manera diferent segons el navegador que estiga fent servir."
+
+#. Help text shown when user clicks the "i" next to "Relationship arrows":  https://s3.eu-west-1.amazonaws.com/po-pub/i/49vIt5p3NoEIm5t9CgmVtYt6.png
+#: 
+msgid "This section lets you customise the arrows that link records together.</p><h4>Arrow colour</h4><p>This is the main colour for arrows. This is used for all arrows if the next option is disabled, otherwise it is used for arrows from a spouse to the family record.</p><h4>Show blood relationship in a different colour</h4><p>If this option is selected, the relationship arrows between a family record and children will use different colours depending on if the relationship is by birth, or a different type of relationship (e.g. adoption). If this is disabled, all relationship arrows use the above default colour.</p><ul><li>Related by birth - If the above option is enabled, this sets the colour of arrows from a family record to a child that is related by birth.<li>Related other than by birth - If the above option is enabled, this sets the colour of arrows from a family record to a child that is not related by birth (e.g. foster or adopted)."
+msgstr "Aquesta secció li permet personalitzar les fletxes que vinculen els registres.</p><h4>Color de fletxa</h4><p>Aquest és el color principal de les fletxes. Això s'usa per a totes les fletxes si la següent opció està desactivada, en cas contrari s'usa per a les fletxes d'un cònjuge al registre familiar.</p><h4>\n"
+"Mostrar relació de consanguinitat en un color diferent</h4><p>Si se selecciona aquesta opció, les fletxes de relació entre un registre familiar i fills usaran diferents colors depenent de si la relació és per naixement, o un tipus diferent de relació (per exemple, adopció). Si això està desactivat, totes les fletxes de relació utilitzen el color predeterminat anterior.</p><ul><li>\n"
+"\n"
+"Relacionat per naixement: si l'opció anterior està habilitada, això estableix el color de les fletxes d'un registre familiar a un xiquet que està relacionat per naixement.<li>Relacionat que no siga per naixement - Si l'opció anterior està habilitada, això estableix el color de les fletxes d'un registre familiar a un xiquet que no està relacionat per naixement (per exemple, adoptiu o adoptat)."
+
+#. Help text shown when user clicks the "i" next to "Tile colours":  https://s3.eu-west-1.amazonaws.com/po-pub/i/gzXTu0XdLd6V1GhSjjDRbXoj.png
+#: 
+msgid "This section allows you to change the colours of the different parts of the tiles shown for each individual. Click the coloured box to change the colour. This uses your browser's colour picker, so will look different depending on what browser you are using."
+msgstr "Aquesta secció li permet canviar els colors de les diferents parts dels taulells que es mostren per a cada individu. Faça clic en el quadre de color per a canviar el color. Això utilitza el selector de color del seu navegador, per la qual cosa es veurà diferent depenent del navegador que estiga utilitzant."
+
+#. Help text shown when user clicks the "i" next to "Other colours":  https://s3.eu-west-1.amazonaws.com/po-pub/i/LrHottxOgQWJC1752fcbOh36.png
+#: 
+msgid "This section allows you to change colours associated with the diagram that are not part of the individual tile above. Click the coloured box to change the colour. This uses your browser's colour picker, so will look different depending on what browser you are using."
+msgstr ""
 
