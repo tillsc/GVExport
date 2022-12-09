@@ -168,7 +168,10 @@ $GVE_CONFIG["settings"]["adv_appear"] = FALSE;
 $GVE_CONFIG["settings"]["adv_people"] = FALSE;
 
 // Debug mode (if set to true the DOT file & other debug info will be dumped on screen)
-$GVE_CONFIG["debug"] = FALSE;
+$GVE_CONFIG["debug"] = false;
+// Whether the debug settings should be shown in the settings menu - will then override above
+$GVE_CONFIG["show_debug"] = false;
+
 
 // Load country data for abbreviating place names
 // Data comes from https://www.datahub.io/core/country-codes
