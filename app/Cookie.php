@@ -42,11 +42,8 @@ class Cookie
      * @return void
      */
     public function set($vars) {
-        $cookieStr = "";
-        foreach ($vars as $key => $value) {
-            $cookieStr .= "$key=$value|";
-        }
-        setcookie($this->name, $cookieStr, time() + (3600 * 24 * 365));
+        $json_cookie = json_encode($vars);
+        setcookie($this->name, $json_cookie, time() + (3600 * 24 * 365));
     }
 
     /**
@@ -58,10 +55,19 @@ class Cookie
     public function load($userDefaultVars): array
     {
         if (isset($_COOKIE[$this->name]) and $_COOKIE[$this->name] != "") {
-            foreach (explode("|", $_COOKIE[$this->name]) as $s) {
-                $arr = explode("=", $s);
-                if (count($arr) == 2) {
-                    $userDefaultVars[$arr[0]] = $arr[1];
+            $json_cookie = json_decode($_COOKIE[$this->name]);
+            if (json_last_error() === JSON_ERROR_NONE) {
+                foreach ($json_cookie as $key => $value) {
+                    $userDefaultVars[$key] = $value;
+                }
+            } else {
+                // We might still have settings saved under the old system
+                // if JSON not valid, attempt to load using old system.
+                foreach (explode("|", $_COOKIE[$this->name]) as $s) {
+                    $arr = explode("=", $s);
+                    if (count($arr) == 2) {
+                        $userDefaultVars[$arr[0]] = $arr[1];
+                    }
                 }
             }
         }
