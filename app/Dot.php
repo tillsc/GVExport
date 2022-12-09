@@ -54,6 +54,7 @@ class Dot {
 	private const ERROR_CHAR = "E:"; // Messages that start with this will be highlighted
     private $tree;
     private object $file_system;
+    public string $debug_string = "";
 
     /**
 	 * Constructor of Dot class
@@ -236,27 +237,6 @@ class Dot {
 		$this->indi_search_method[$method] = TRUE;
 	}
 
-    public function getDOTDump(): string
-    {
-		$out = "";
-
-		// --- DEBUG ---
-		if ($this->settings["debug"]) {
-			print("<pre>");
-		}
-		// -------------
-
-		$out .= $this->createDOTDump();
-
-		// --- DEBUG ---
-		if ($this->settings["debug"]) {
-			print("</pre>");
-		}
-		// -------------
-
-		return $out;
-	}
-
 	/**
 	 * get preference in this tree to show thumbnails
 	 * @param object $tree
@@ -383,12 +363,6 @@ class Dot {
                 }
             }
         }
-
-		// -- DEBUG ---
-		if ($this->settings["debug"]) {
-			$this->printDebug("Finished individuals list: ".print_r($individuals));
-		}
-		// -------------
 	}
 
 	/**
@@ -1365,7 +1339,7 @@ class Dot {
 	}
 
 	function printDebug($txt, $ind = 0) {
-		print(str_repeat("\t", $ind) . $txt);
+		$this->debug_string .= (str_repeat("\t", $ind) . $txt);
 	}
 
 

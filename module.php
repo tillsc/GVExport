@@ -508,7 +508,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
             $dot->setSettings("auto_update", "auto_update");
         }
 
-        if (isset($vars['debug'])) {
+        if (isset($vars['debug']) && $vars['debug'] == "debug") {
             $dot->setSettings("debug", TRUE);
         }
 
@@ -576,18 +576,13 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
         }
 
         // Get out DOT file
-        $out .= $dot->getDOTDump();
+        $out .= $dot->createDOTDump();
         if (isset($_POST["browser"]) && $_POST["browser"] == "true") {
-            // Add in our counts of individuals and families, so we can show a message
-            $indinum = sizeof($dot->individuals);
-            $famnum = sizeof($dot->families);
-            // Add any error messages or other messages for showing toast
-            $messageString = "";
-            foreach ($dot->messages as $message) {
-                $messageString .= "^".$message;
-            }
-            // Send our string of information
-            $r = substr($messageString, 1) . "|". $indinum . "|" . $famnum . "|" . $out;
+            $dot->messages[] = I18N::translate('Generated %s individuals and %s family records', sizeof($dot->individuals), sizeof($dot->families));
+            $response['messages'] = $dot->messages;
+            $response['debug'] = $dot->debug_string;
+            $response['dot'] = $out;
+            $r = json_encode($response);
         } else {
             $r = $out;
         }

@@ -79,6 +79,8 @@ function getHelpText(item) {
                 echo "<p>" . str_replace("'","&apos;",I18N::translate($help[$i][1])) . "</p>';\n";
             }
         ?>
+        case "debug":
+            return '<textarea cols=50 rows=20 onclick="this.select()">' + debug_string + '</textarea>';
         default:
             return  '<?= I18N::translate("Help information not found"); ?>';
     }
