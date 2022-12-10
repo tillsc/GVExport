@@ -47,32 +47,32 @@ use Fisharebest\Webtrees\Http\RequestHandlers\ControlPanel;
             </div>
 
             <div class="row">
-                <label class="col-sm-4 col-form-label" for="vars[indiance]"><?= I18N::translate('Use clippings cart') ?></label>
+                <label class="col-sm-4 col-form-label" for="indiance"><?= I18N::translate('Use clippings cart') ?></label>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="row">
                         <div class="col-auto mx-3">
-                            <input type="radio" name="vars[usecart]" id="vars[usecart]_yes" value="usecart" <?= $vars["usecart"] == "usecart" ? 'checked' : '' ?>>
-                            <label for="vars[usecart]_yes"><?= I18N::translate('Use clippings cart') ?></label>
+                            <input type="radio" name="vars[usecart]" id="usecart_yes" value="usecart" <?= $vars["usecart"] == "usecart" ? 'checked' : '' ?>>
+                            <label for="usecart_yes"><?= I18N::translate('Use clippings cart') ?></label>
                         </div>
                         <div class="col-auto mx-3">
-                            <input type="radio" name="vars[usecart]" id="vars[usecart]_no" value="ignorecart" <?= $vars["usecart"] == "ignorecart" ? 'checked' : '' ?>>
-                            <label for="vars[usecart]_no"><?= I18N::translate('Ignore clippings cart') ?></label>
+                            <input type="radio" name="vars[usecart]" id="usecart_no" value="ignorecart" <?= $vars["usecart"] == "ignorecart" ? 'checked' : '' ?>>
+                            <label for="usecart_no"><?= I18N::translate('Ignore clippings cart') ?></label>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="row">
-                <label class="col-sm-4 col-form-label" for="vars[indiance]"><?= I18N::translate('Include ancestors') ?></label>
+                <label class="col-sm-4 col-form-label" for="indiance"><?= I18N::translate('Include ancestors') ?></label>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="row">
                         <div class="col-auto mx-3">
                             <input type="hidden" name="vars[indiance]" value="no">
-                            <input class="cart_toggle" type="checkbox" name="vars[indiance]" id="vars[indiance]" value="ance" <?= $vars["indiance"] == "ance" ? 'checked' : '' ?>>
+                            <input class="cart_toggle" type="checkbox" name="indiance" id="indiance" value="ance" <?= $vars["indiance"] == "ance" ? 'checked' : '' ?>>
                         </div>
                         <div class="col-auto row">
-                            <label for="vars[ance_level]" class="col-sm-6"><?= I18N::translate('Max levels') ?>:</label>
-                            <input class="cart_toggle" onblur="defaultValueWhenBlank(this, 0)" type="text" class="form-control col-sm-6" size="10" name="vars[ance_level]" id="vars[ance_level]" value="<?= $vars["ance_level"] ?>">
+                            <label for="ance_level" class="col-sm-6"><?= I18N::translate('Max levels') ?>:</label>
+                            <input class="cart_toggle" onblur="defaultValueWhenBlank(this, 0)" type="text" class="form-control col-sm-6" size="10" name="vars[ance_level]" id="ance_level" value="<?= $vars["ance_level"] ?>">
                         </div>
                     </div>
                 </div>
@@ -84,62 +84,62 @@ use Fisharebest\Webtrees\Http\RequestHandlers\ControlPanel;
                     <div class="row">
                         <div class="col-auto mx-3">
                             <input type="hidden" name="vars[indisibl]" value="no">
-                            <input class="cart_toggle" type="checkbox" onclick="updateRelationOption('indisibl')" name="vars[indisibl]" id="vars[indisibl]" value="sibl" <?= $vars["indisibl"] == "sibl" ? 'checked' : '' ?>>
-                            <label for="vars[indisibl]"><?= I18N::translate('Siblings') ?></label>
+                            <input class="cart_toggle" type="checkbox" onclick="updateRelationOption('indisibl')" name="vars[indisibl]" id="indisibl" value="sibl" <?= $vars["indisibl"] == "sibl" ? 'checked' : '' ?>>
+                            <label for="indisibl"><?= I18N::translate('Siblings') ?></label>
                         </div>
                         <div class="col-auto mx-3">
                             <input type="hidden" name="vars[indicous]" value="no">
-                            <input class="cart_toggle" onclick="updateRelationOption('indicous')" type="checkbox" name="vars[indicous]" id="vars[indicous]" value="cous" <?= $vars["indicous"] == "cous" ? 'checked' : '' ?>>
-                            <label for="vars[indicous]"><?= I18N::translate('All relatives') ?></label>
+                            <input class="cart_toggle" onclick="updateRelationOption('indicous')" type="checkbox" name="vars[indicous]" id="indicous" value="cous" <?= $vars["indicous"] == "cous" ? 'checked' : '' ?>>
+                            <label for="indicous"><?= I18N::translate('All relatives') ?></label>
                         </div>
                         <div class="col-auto mx-3">
                             <input type="hidden" name="vars[indispou]" value="no">
-                            <input class="cart_toggle" type="checkbox" onclick="updateRelationOption('indispou')" name="vars[indispou]" id="vars[indispou]" value="spou" <?= $vars["indispou"] == "spou" ? 'checked' : '' ?>>
-                            <label for="vars[indispou]"><?= I18N::translate('Partners') ?></label>
+                            <input class="cart_toggle" type="checkbox" onclick="updateRelationOption('indispou')" name="vars[indispou]" id="indispou" value="spou" <?= $vars["indispou"] == "spou" ? 'checked' : '' ?>>
+                            <label for="indispou"><?= I18N::translate('Partners') ?></label>
                         </div>
                         <div class="col-auto mx-3">
                             <input type="hidden" name="vars[indiany]" value="no">
-                            <input class="cart_toggle" type="checkbox" onclick="updateRelationOption('indiany')" name="vars[indiany]" id="vars[indiany]" value="any" <?= $vars["indiany"] == "any" ? 'checked' : '' ?> >
-                            <label for="vars[indiany]"><?= I18N::translate('Anyone') ?></label>
+                            <input class="cart_toggle" type="checkbox" onclick="updateRelationOption('indiany')" name="vars[indiany]" id="indiany" value="any" <?= $vars["indiany"] == "any" ? 'checked' : '' ?> >
+                            <label for="indiany"><?= I18N::translate('Anyone') ?></label>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="row">
-                <label class="col-sm-4 col-form-label" for="vars[indidesc]"><?= I18N::translate('Include descendants') ?></label>
+                <label class="col-sm-4 col-form-label" for="indidesc"><?= I18N::translate('Include descendants') ?></label>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="row">
                         <div class="col-auto mx-3">
                             <input type="hidden" name="vars[indidesc]" value="no">
-                            <input class="cart_toggle" type="checkbox" name="vars[indidesc]" id="vars[indidesc]" value="desc" <?= $vars["indidesc"] == "desc" ? 'checked' : '' ?>>
+                            <input class="cart_toggle" type="checkbox" name="vars[indidesc]" id="indidesc" value="desc" <?= $vars["indidesc"] == "desc" ? 'checked' : '' ?>>
                         </div>
                         <div class="col-auto row">
-                            <label for="vars[desc_level]" class="col-sm-6"><?= I18N::translate('Max levels') ?>:</label>
-                            <input class="cart_toggle"  onblur="defaultValueWhenBlank(this, 0)" type="text" class="form-control col-sm-6" size="10" name="vars[desc_level]" id="vars[desc_level]" value="<?= $vars["desc_level"] ?>">
+                            <label for="desc_level" class="col-sm-6"><?= I18N::translate('Max levels') ?>:</label>
+                            <input class="cart_toggle"  onblur="defaultValueWhenBlank(this, 0)" type="text" class="form-control col-sm-6" size="10" name="vars[desc_level]" id="desc_level" value="<?= $vars["desc_level"] ?>">
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row">
-                <label class="col-sm-4 col-form-label" for="vars[marknr]"><?= I18N::translate('Non-relatives') ?></label>
+                <label class="col-sm-4 col-form-label" for="marknr"><?= I18N::translate('Non-relatives') ?></label>
                 <div class="col-sm-8 wt-page-options-value">
                     <input type="hidden" name="vars[marknr]" value="no">
-                    <input class="cart_toggle" type="checkbox" name="vars[marknr]" id="vars[marknr]" value="marknr" <?= $vars["marknr"] == "marknr" ? 'checked' : '' ?>>
-                    <label class="check-list" for="vars[marknr]"><?= I18N::translate('Mark not blood-related people with different color') ?></label>
+                    <input class="cart_toggle" type="checkbox" name="vars[marknr]" id="marknr" value="marknr" <?= $vars["marknr"] == "marknr" ? 'checked' : '' ?>>
+                    <label class="check-list" for="marknr"><?= I18N::translate('Mark not blood-related people with different color') ?></label>
                     <br/>
                     <input type="hidden" name="vars[fastnr]" value="no">
-                    <input class="cart_toggle" type="checkbox" name="vars[fastnr]" id="vars[fastnr]" value="fastnr" <?= $vars["fastnr"] == "fastnr" ? 'checked' : '' ?>>
-                    <label class="check-list" for="vars[fastnr]"><?= I18N::translate('Ignore unseen links to speed up relative check') ?></label>
+                    <input class="cart_toggle" type="checkbox" name="vars[fastnr]" id="fastnr" value="fastnr" <?= $vars["fastnr"] == "fastnr" ? 'checked' : '' ?>>
+                    <label class="check-list" for="fastnr"><?= I18N::translate('Ignore unseen links to speed up relative check') ?></label>
                 </div>
             </div>
 
             <h3><?= /* I18N: Appearance heading */ I18N::translate('Appearance') ?></h3>
 
             <div class="row">
-                <label class=" col-sm-4 col-form-label" for="vars[grdir]"><?= I18N::translate('Graph direction') ?></label>
+                <label class=" col-sm-4 col-form-label" for="grdir"><?= I18N::translate('Graph direction') ?></label>
                 <div class="col-sm-8 wt-page-options-value">
-                    <?= view('components/select', ['name' => 'vars[grdir]', 'selected' => $vars['grdir'], 'options' => updateTranslations($gve_config["directions"])]) ?>
+                    <?= view('components/select', ['name' => 'vars[grdir]', 'id' => 'grdir', 'selected' => $vars['grdir'], 'options' => updateTranslations($gve_config["directions"])]) ?>
                 </div>
             </div>
 
@@ -148,175 +148,175 @@ use Fisharebest\Webtrees\Http\RequestHandlers\ControlPanel;
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="row">
                         <div class="col-auto">
-                            <input type="radio" name="vars[diagtype]" id="vars[diagtype]_simple" value="simple" <?= $vars["diagtype"] == "simple" ? 'checked' : '' ?>>
-                            <label for="vars[diagtype]_simple"><?= I18N::translate('Simple') ?></label>
+                            <input type="radio" name="vars[diagtype]" id="diagtype_simple" value="simple" <?= $vars["diagtype"] == "simple" ? 'checked' : '' ?>>
+                            <label for="diagtype_simple"><?= I18N::translate('Simple') ?></label>
                         </div>
                         <div class="col-auto">
-                            <input type="radio" name="vars[diagtype]" id="vars[diagtype]_decorated" value="decorated" <?= $vars["diagtype"] == "decorated" ? 'checked' : '' ?>>
-                            <label for="vars[diagtype]_decorated"><?= I18N::translate('Decorated') ?></label>
+                            <input type="radio" name="vars[diagtype]" id="diagtype_decorated" value="decorated" <?= $vars["diagtype"] == "decorated" ? 'checked' : '' ?>>
+                            <label for="diagtype_decorated"><?= I18N::translate('Decorated') ?></label>
                         </div>
                         <div class="col-auto">
-                            <input type="radio" name="vars[diagtype]" id="vars[diagtype]_combined" value="combined" <?= $vars["diagtype"] == "combined" ? 'checked' : '' ?>>
-                            <label for="vars[diagtype]_combined"><?= I18N::translate('Combined') ?></label>
+                            <input type="radio" name="vars[diagtype]" id="diagtype_combined" value="combined" <?= $vars["diagtype"] == "combined" ? 'checked' : '' ?>>
+                            <label for="diagtype_combined"><?= I18N::translate('Combined') ?></label>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="row">
-                <label class="col-sm-4 col-form-label" for="vars[with_photos]"><?= I18N::translate('Add photos') ?></label>
+                <label class="col-sm-4 col-form-label" for="with_photos"><?= I18N::translate('Add photos') ?></label>
                 <div class="col-sm-8 wt-page-options-value">
                     <input type="hidden" name="vars[with_photos]" value="no">
-                    <input type="checkbox" name="vars[with_photos]" id="vars[with_photos]" value="with_photos" <?= $vars["with_photos"] == "with_photos" ? 'checked' : '' ?>>
+                    <input type="checkbox" name="vars[with_photos]" id="with_photos" value="with_photos" <?= $vars["with_photos"] == "with_photos" ? 'checked' : '' ?>>
                     <span class="text-muted">(<?= I18N::translate('Only Decorated or Combined') ?>)</span>
                 </div>
             </div>
 
             <div class="row">
-                <label class="col-sm-4 col-form-label" for="vars[show_url]"><?= I18N::translate('Add URL to individuals and families') ?></label>
+                <label class="col-sm-4 col-form-label" for="show_url"><?= I18N::translate('Add URL to individuals and families') ?></label>
                 <div class="col-sm-8 wt-page-options-value">
                     <input type="hidden" name="vars[show_url]" value="no">
-                    <input type="checkbox" name="vars[show_url]" id="vars[show_url]" value="show_url" <?= $vars["show_url"] == "show_url" ? 'checked' : '' ?>>
+                    <input type="checkbox" name="vars[show_url]" id="show_url" value="show_url" <?= $vars["show_url"] == "show_url" ? 'checked' : '' ?>>
                     <span class="text-muted">(<?= I18N::translate('SVG only') ?>)</span>
                 </div>
             </div>
 
             <div class="row">
-                <label class=" col-sm-4 col-form-label" for="vars[use_abbr_name]"><?= I18N::translate('Abbreviated names') ?></label>
+                <label class=" col-sm-4 col-form-label" for="use_abbr_name"><?= I18N::translate('Abbreviated names') ?></label>
                 <div class="col-sm-8 wt-page-options-value">
                     <?= view('components/select', ['name' => 'vars[use_abbr_name]', 'selected' => $vars['use_abbr_name'], 'options' => updateTranslations($gve_config["settings"]["use_abbr_names"])]) ?>
                 </div>
             </div>
 
             <div class="row">
-                <label class=" col-sm-4 col-form-label" for="vars[use_abbr_place]"><?= I18N::translate('Abbreviated place names') ?></label>
+                <label class=" col-sm-4 col-form-label" for="use_abbr_place"><?= I18N::translate('Abbreviated place names') ?></label>
                 <div class="col-sm-8 wt-page-options-value">
                     <?= view('components/select', ['name' => 'vars[use_abbr_place]', 'selected' => $vars['use_abbr_place'], 'options' => updateTranslations($gve_config["settings"]["use_abbr_places"])]) ?>
                 </div>
             </div>
             <div class="row">
-                <label class="col-sm-4 col-form-label" for="vars[show_pid]"><?= I18N::translate('Show individual XREF') ?></label>
+                <label class="col-sm-4 col-form-label" for="show_pid"><?= I18N::translate('Show individual XREF') ?></label>
                 <div class="col-sm-8 wt-page-options-value">
                     <input type="hidden" name="vars[show_pid]" value="no">
-                    <input type="checkbox" name="vars[show_pid]" id="vars[show_pid]" value="show_pid" <?= $vars["show_pid"] == "show_pid" ? 'checked' : '' ?>>
+                    <input type="checkbox" name="vars[show_pid]" id="show_pid" value="show_pid" <?= $vars["show_pid"] == "show_pid" ? 'checked' : '' ?>>
                 </div>
             </div>
 
             <div class="row">
-                <label class="col-sm-4 col-form-label" for="vars[show_by]"><?= I18N::translate('Show birth date') ?></label>
+                <label class="col-sm-4 col-form-label" for="show_by"><?= I18N::translate('Show birth date') ?></label>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="row">
                         <div class="col-auto mx-3">
                             <input type="hidden" name="vars[show_by]" value="no">
-                            <input type="checkbox" name="vars[show_by]" id="vars[show_by]" value="show_by" <?= $vars["show_by"] == "show_by" ? 'checked' : '' ?>>
+                            <input type="checkbox" name="vars[show_by]" id="show_by" value="show_by" <?= $vars["show_by"] == "show_by" ? 'checked' : '' ?>>
                         </div>
                         <div class="col-auto mx-3">
-                            <input type="radio" name="vars[bd_type]" id="vars[bd_type]_y" value="y" <?= $vars["bd_type"] == "y" ? 'checked' : '' ?>>
-                            <label for="vars[bd_type]_y"><?= I18N::translate('Year') ?></label>
+                            <input type="radio" name="vars[bd_type]" id="bd_type_y" value="y" <?= $vars["bd_type"] == "y" ? 'checked' : '' ?>>
+                            <label for="bd_type_y"><?= I18N::translate('Year') ?></label>
                         </div>
                         <div class="col-auto mx-3">
-                            <input type="radio" name="vars[bd_type]" id="vars[bd_type]_gedcom" value="gedcom" <?= $vars["bd_type"] == "gedcom" ? 'checked' : '' ?>>
-                            <label for="vars[bd_type]_gedcom"><?= I18N::translate('Full date') ?></label>
+                            <input type="radio" name="vars[bd_type]" id="bd_type_gedcom" value="gedcom" <?= $vars["bd_type"] == "gedcom" ? 'checked' : '' ?>>
+                            <label for="bd_type_gedcom"><?= I18N::translate('Full date') ?></label>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="row">
-                <label class="col-sm-4 col-form-label" for="vars[show_bp]"><?= I18N::translate('Show birth place') ?></label>
+                <label class="col-sm-4 col-form-label" for="show_bp"><?= I18N::translate('Show birth place') ?></label>
                 <div class="col-sm-8 wt-page-options-value">
                     <input type="hidden" name="vars[show_bp]" value="no">
-                    <input type="checkbox" name="vars[show_bp]" id="vars[show_bp]" value="show_bp" <?= $vars["show_bp"] == "show_bp" ? 'checked' : '' ?>>
+                    <input type="checkbox" name="vars[show_bp]" id="show_bp" value="show_bp" <?= $vars["show_bp"] == "show_bp" ? 'checked' : '' ?>>
                 </div>
             </div>
 
             <div class="row">
-                <label class="col-sm-4 col-form-label" for="vars[show_dy]"><?= I18N::translate('Show death date') ?></label>
+                <label class="col-sm-4 col-form-label" for="show_dy"><?= I18N::translate('Show death date') ?></label>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="row">
                         <div class="col-auto mx-3">
                             <input type="hidden" name="vars[show_dy]" value="no">
-                            <input type="checkbox" name="vars[show_dy]" id="vars[show_dy]" value="show_dy" <?= $vars["show_dy"] == "show_dy" ? 'checked' : '' ?>>
+                            <input type="checkbox" name="vars[show_dy]" id="show_dy" value="show_dy" <?= $vars["show_dy"] == "show_dy" ? 'checked' : '' ?>>
                         </div>
                         <div class="col-auto mx-3">
-                            <input type="radio" name="vars[dd_type]" id="vars[dd_type]_y" value="y" <?= $vars["dd_type"] == "y" ? 'checked' : '' ?>>
-                            <label for="vars[dd_type]_y"><?= I18N::translate('Year') ?></label>
+                            <input type="radio" name="vars[dd_type]" id="dd_type_y" value="y" <?= $vars["dd_type"] == "y" ? 'checked' : '' ?>>
+                            <label for="dd_type_y"><?= I18N::translate('Year') ?></label>
                         </div>
                         <div class="col-auto mx-3">
-                            <input type="radio" name="vars[dd_type]" id="vars[dd_type]_gedcom" value="gedcom" <?= $vars["dd_type"] == "gedcom" ? 'checked' : '' ?>>
-                            <label for="vars[dd_type]_gedcom"><?= I18N::translate('Full date') ?></label>
+                            <input type="radio" name="vars[dd_type]" id="dd_type_gedcom" value="gedcom" <?= $vars["dd_type"] == "gedcom" ? 'checked' : '' ?>>
+                            <label for="dd_type_gedcom"><?= I18N::translate('Full date') ?></label>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="row">
-                <label class="col-sm-4 col-form-label" for="vars[show_dp]"><?= I18N::translate('Show death place') ?></label>
+                <label class="col-sm-4 col-form-label" for="show_dp"><?= I18N::translate('Show death place') ?></label>
                 <div class="col-sm-8 wt-page-options-value">
                     <input type="hidden" name="vars[show_dp]" value="no">
-                    <input type="checkbox" name="vars[show_dp]" id="vars[show_dp]" value="show_dp" <?= $vars["show_dp"] == "show_dp" ? 'checked' : '' ?>>
+                    <input type="checkbox" name="vars[show_dp]" id="show_dp" value="show_dp" <?= $vars["show_dp"] == "show_dp" ? 'checked' : '' ?>>
                 </div>
             </div>
 
 
             <div class="row">
-                <label class="col-sm-4 col-form-label" for="vars[show_fid]"><?= I18N::translate('Show family XREF') ?></label>
+                <label class="col-sm-4 col-form-label" for="show_fid"><?= I18N::translate('Show family XREF') ?></label>
                 <div class="col-sm-8 wt-page-options-value">
                     <input type="hidden" name="vars[show_fid]" value="no">
-                    <input type="checkbox" name="vars[show_fid]" id="vars[show_fid]" value="show_fid" <?= $vars["show_fid"] == "show_fid" ? 'checked' : '' ?>>
+                    <input type="checkbox" name="vars[show_fid]" id="show_fid" value="show_fid" <?= $vars["show_fid"] == "show_fid" ? 'checked' : '' ?>>
                 </div>
             </div>
 
             <div class="row">
-                <label class="col-sm-4 col-form-label" for="vars[show_my]"><?= I18N::translate('Show marriage date') ?></label>
+                <label class="col-sm-4 col-form-label" for="show_my"><?= I18N::translate('Show marriage date') ?></label>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="row">
                         <div class="col-auto mx-3">
                             <input type="hidden" name="vars[show_my]" value="no">
-                            <input type="checkbox" name="vars[show_my]" id="vars[show_my]" value="show_my" <?= $vars["show_my"] == "show_my" ? 'checked' : '' ?>>
+                            <input type="checkbox" name="vars[show_my]" id="show_my" value="show_my" <?= $vars["show_my"] == "show_my" ? 'checked' : '' ?>>
                         </div>
                         <div class="col-auto mx-3">
-                            <input type="radio" name="vars[md_type]" id="vars[md_type]_y" value="y" <?= $vars["md_type"] == "y" ? 'checked' : '' ?>>
-                            <label for="vars[md_type]_y"><?= I18N::translate('Year') ?></label>
+                            <input type="radio" name="vars[md_type]" id="md_type_y" value="y" <?= $vars["md_type"] == "y" ? 'checked' : '' ?>>
+                            <label for="md_type_y"><?= I18N::translate('Year') ?></label>
                         </div>
                         <div class="col-auto mx-3">
-                            <input type="radio" name="vars[md_type]" id="vars[md_type]_gedcom" value="gedcom" <?= $vars["md_type"] == "gedcom" ? 'checked' : '' ?>>
-                            <label for="vars[md_type]_gedcom"><?= I18N::translate('Full date') ?></label>
+                            <input type="radio" name="vars[md_type]" id="md_type_gedcom" value="gedcom" <?= $vars["md_type"] == "gedcom" ? 'checked' : '' ?>>
+                            <label for="md_type_gedcom"><?= I18N::translate('Full date') ?></label>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="row">
-                <label class="col-sm-4 col-form-label" for="vars[show_mp]"><?= I18N::translate('Show marriage place') ?></label>
+                <label class="col-sm-4 col-form-label" for="show_mp"><?= I18N::translate('Show marriage place') ?></label>
                 <div class="col-sm-8 wt-page-options-value">
                     <input type="hidden" name="vars[show_mp]" value="no">
-                    <input type="checkbox" name="vars[show_mp]" id="vars[show_mp]" value="show_mp" <?= $vars["show_mp"] == "show_mp" ? 'checked' : '' ?>>
+                    <input type="checkbox" name="vars[show_mp]" id="show_mp" value="show_mp" <?= $vars["show_mp"] == "show_mp" ? 'checked' : '' ?>>
                 </div>
             </div>
 
             <div class="row">
-                <label class=" col-sm-4 col-form-label" for="vars[dpi]"><?= I18N::translate('DPI') ?></label>
+                <label class=" col-sm-4 col-form-label" for="dpi"><?= I18N::translate('DPI') ?></label>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="row">
                         <div class="col-auto">
-                            <input type="text" onblur="defaultValueWhenBlank(this, 72)" class="form-control" size="10" name="vars[dpi]" id="vars[dpi]" value="<?= $vars["dpi"] ?>">
+                            <input type="text" onblur="defaultValueWhenBlank(this, 72)" class="form-control" size="10" name="vars[dpi]" id="dpi" value="<?= $vars["dpi"] ?>">
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="row">
-                <label class=" col-sm-4 col-form-label" for="vars[dpi]"><?= I18N::translate('Space') ?></label>
+                <label class=" col-sm-4 col-form-label" for="dpi"><?= I18N::translate('Space') ?></label>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="row">
-                        <label for="vars[ranksep]"><?= I18N::translate('Between generations') ?>:</label>
+                        <label for="ranksep"><?= I18N::translate('Between generations') ?>:</label>
                         <div class="col-auto">
-                            <input type="text" onclick="togglePercent(this, false)" onblur="togglePercent(this, true)" class="form-control col-sm-6" size="10" name="vars[ranksep]" id="vars[ranksep]" value="<?= $vars["ranksep"] ?>">
+                            <input type="text" onclick="togglePercent(this, false)" onblur="togglePercent(this, true)" class="form-control col-sm-6" size="10" name="vars[ranksep]" id="ranksep" value="<?= $vars["ranksep"] ?>">
                         </div>
-                        <label for="vars[nodesep]"><?= I18N::translate('Between individuals on the same level') ?>:</label>
+                        <label for="nodesep"><?= I18N::translate('Between individuals on the same level') ?>:</label>
                         <div class="col-auto">
-                            <input type="text" onclick="togglePercent(this, false)" onblur="togglePercent(this, true)" class="form-control col-sm-6" size="10" name="vars[nodesep]" id="vars[nodesep]" value="<?= $vars["nodesep"] ?>">
+                            <input type="text" onclick="togglePercent(this, false)" onblur="togglePercent(this, true)" class="form-control col-sm-6" size="10" name="vars[nodesep]" id="nodesep" value="<?= $vars["nodesep"] ?>">
                         </div>
                     </div>
                 </div>
@@ -325,24 +325,24 @@ use Fisharebest\Webtrees\Http\RequestHandlers\ControlPanel;
                 <label class=" col-sm-4 col-form-label"><?= I18N::translate('Font') ?></label>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="row">
-                        <label for="vars[typeface]"><?= I18N::translate('Typeface') ?>:</label>
+                        <label for="typeface"><?= I18N::translate('Typeface') ?>:</label>
                         <div class="col-auto">
                             <?= view('components/select', ['name' => 'vars[typeface]', 'selected' => $vars['typeface'], 'options' => updateTranslations($gve_config["settings"]["typefaces"])]) ?>
                         </div>
-                        <label for="vars[fontsize_name]"><?= I18N::translate('Font size for names') ?>:</label>
+                        <label for="fontsize_name"><?= I18N::translate('Font size for names') ?>:</label>
                         <div class="col-auto">
-                            <input type="text" class="form-control col-sm-6" size="10" name="vars[fontsize_name]" id="vars[fontsize_name]" value="<?= $vars["fontsize_name"] ?>">
+                            <input type="text" class="form-control col-sm-6" size="10" name="vars[fontsize_name]" id="fontsize_name" value="<?= $vars["fontsize_name"] ?>">
                         </div>
-                        <label for="vars[fontsize]"><?= I18N::translate('Font size for details') ?>:</label>
+                        <label for="fontsize"><?= I18N::translate('Font size for details') ?>:</label>
                         <div class="col-auto">
-                            <input type="text" class="form-control col-sm-6" size="10" name="vars[fontsize]" id="vars[fontsize]" value="<?= $vars["fontsize"] ?>">
+                            <input type="text" class="form-control col-sm-6" size="10" name="vars[fontsize]" id="fontsize" value="<?= $vars["fontsize"] ?>">
                         </div>
                         <div>
-                            <input type="color" class="picker" name="vars[fontcolor_name]" id="vars[fontcolor_name]" value="<?= $vars["fontcolor_name"] ?>" /><label for="vars[fontcolor_name]" class="picker-label"><?= I18N::translate('Font color for names') ?></label>
+                            <input type="color" class="picker" name="vars[fontcolor_name]" id="fontcolor_name" value="<?= $vars["fontcolor_name"] ?>" /><label for="fontcolor_name" class="picker-label"><?= I18N::translate('Font color for names') ?></label>
                         </div>
 
                         <div>
-                            <input type="color" class="picker" name="vars[fontcolor_details]" id="vars[fontcolor_details]" value="<?= $vars["fontcolor_details"] ?>" /><label for="vars[fontcolor_details]" class="picker-label"><?= I18N::translate('Font color for details') ?></label>
+                            <input type="color" class="picker" name="vars[fontcolor_details]" id="fontcolor_details" value="<?= $vars["fontcolor_details"] ?>" /><label for="fontcolor_details" class="picker-label"><?= I18N::translate('Font color for details') ?></label>
                         </div>
                     </div>
                 </div>
@@ -351,15 +351,15 @@ use Fisharebest\Webtrees\Http\RequestHandlers\ControlPanel;
                 <label class=" col-sm-4 col-form-label"><?= I18N::translate('Relationship arrows') ?></label>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="col-auto">
-                        <input type="color" class="picker" name="vars[arrow_default]" id="vars[arrow_default]" value="<?= $vars["arrow_default"] ?>" /><label for="vars[arrow_default]" class="picker-label"><?= I18N::translate('Arrow color') ?></label>
+                        <input type="color" class="picker" name="vars[arrow_default]" id="arrow_default" value="<?= $vars["arrow_default"] ?>" /><label for="arrow_default" class="picker-label"><?= I18N::translate('Arrow color') ?></label>
                     </div>
                     <input type="hidden" name="vars[color_arrow_related]" value="no">
-                    <input type="checkbox" name="vars[color_arrow_related]" id="vars[color_arrow_related]" value="color_arrow_related" <?= $vars["color_arrow_related"] == "color_arrow_related" ? 'checked' : '' ?>><label for="vars[color_arrow_related]" class="check-list"><?= I18N::translate('Show blood relationship in different color') ?></label>
+                    <input type="checkbox" name="vars[color_arrow_related]" id="color_arrow_related" value="color_arrow_related" <?= $vars["color_arrow_related"] == "color_arrow_related" ? 'checked' : '' ?>><label for="color_arrow_related" class="check-list"><?= I18N::translate('Show blood relationship in different color') ?></label>
 
                     <div id="arrow_group" class="color_subgroup col-auto wt-page-options-value">
                         <div class="sub-group">
-                            <input type="color" class="picker" name="vars[arrow_related]" id="vars[arrow_related]" value="<?= $vars["arrow_related"] ?>" /><label for="vars[arrow_related]" class="picker-label"><?= I18N::translate('Related by birth') ?></label>
-                            <input type="color" class="picker" name="vars[arrow_not_related]" id="vars[arrow_not_related]" value="<?= $vars["arrow_not_related"] ?>" /><label for="vars[arrow_not_related]" class="picker-label"><?= I18N::translate('Related other than by birth') ?></label>
+                            <input type="color" class="picker" name="vars[arrow_related]" id="arrow_related" value="<?= $vars["arrow_related"] ?>" /><label for="arrow_related" class="picker-label"><?= I18N::translate('Related by birth') ?></label>
+                            <input type="color" class="picker" name="vars[arrow_not_related]" id="arrow_not_related" value="<?= $vars["arrow_not_related"] ?>" /><label for="arrow_not_related" class="picker-label"><?= I18N::translate('Related other than by birth') ?></label>
                         </div>
                     </div>
                 </div>
@@ -368,36 +368,36 @@ use Fisharebest\Webtrees\Http\RequestHandlers\ControlPanel;
                 <label class=" col-sm-4 col-form-label"><?= I18N::translate('Tile colors') ?></label>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="col-auto">
-                        <input type="color" class="picker" name="vars[colorm]" id="vars[colorm]" value="<?= $vars["colorm"] ?>" /><label for="vars[colorm]" class="picker-label"><?= I18N::translate('Male individuals') ?></label>
+                        <input type="color" class="picker" name="vars[colorm]" id="colorm" value="<?= $vars["colorm"] ?>" /><label for="colorm" class="picker-label"><?= I18N::translate('Male individuals') ?></label>
                     </div>
                     <div class="col-auto">
-                        <input type="color" class="picker" name="vars[colorf]" id="vars[colorf]" value="<?= $vars["colorf"] ?>" /><label for="vars[colorf]" class="picker-label"><?= I18N::translate('Female individuals') ?></label>
+                        <input type="color" class="picker" name="vars[colorf]" id="colorf" value="<?= $vars["colorf"] ?>" /><label for="colorf" class="picker-label"><?= I18N::translate('Female individuals') ?></label>
                     </div>
                     <div class="col-auto">
-                        <input type="color" class="picker" name="vars[colorx]" id="vars[colorx]" value="<?= $vars["colorx"] ?>" /><label for="vars[colorx]" class="picker-label"><?= I18N::translate('Other gender individuals') ?></label>
+                        <input type="color" class="picker" name="vars[colorx]" id="colorx" value="<?= $vars["colorx"] ?>" /><label for="colorx" class="picker-label"><?= I18N::translate('Other gender individuals') ?></label>
                     </div>
                     <div class="col-auto">
-                        <input type="color" class="picker" name="vars[coloru]" id="vars[coloru]" value="<?= $vars["coloru"] ?>" /><label for="vars[coloru]" class="picker-label"><?= I18N::translate('Unknown gender individuals') ?></label>
+                        <input type="color" class="picker" name="vars[coloru]" id="coloru" value="<?= $vars["coloru"] ?>" /><label for="coloru" class="picker-label"><?= I18N::translate('Unknown gender individuals') ?></label>
                     </div>
                     <div class="col-auto">
-                        <input type="color" class="picker" name="vars[colorm_nr]" id="vars[colorm_nr]" value="<?= $vars["colorm_nr"] ?>" /><label for="vars[colorm_nr]" class="picker-label"><?= I18N::translate('Not blood-related male individuals') ?></label>
+                        <input type="color" class="picker" name="vars[colorm_nr]" id="colorm_nr" value="<?= $vars["colorm_nr"] ?>" /><label for="colorm_nr" class="picker-label"><?= I18N::translate('Not blood-related male individuals') ?></label>
                     </div>
                     <div class="col-auto">
-                        <input type="color" class="picker" name="vars[colorf_nr]" id="vars[colorf_nr]" value="<?= $vars["colorf_nr"] ?>" /><label for="vars[colorf_nr]" class="picker-label"><?= I18N::translate('Not blood-related female individuals') ?></label>
+                        <input type="color" class="picker" name="vars[colorf_nr]" id="colorf_nr" value="<?= $vars["colorf_nr"] ?>" /><label for="colorf_nr" class="picker-label"><?= I18N::translate('Not blood-related female individuals') ?></label>
                     </div>
                     <div class="col-auto">
-                        <input type="color" class="picker" name="vars[colorx_nr]" id="vars[colorx_nr]" value="<?= $vars["colorx_nr"] ?>" /><label for="vars[colorx_nr]" class="picker-label"><?= I18N::translate('Not blood-related other gender individuals') ?></label>
+                        <input type="color" class="picker" name="vars[colorx_nr]" id="colorx_nr" value="<?= $vars["colorx_nr"] ?>" /><label for="colorx_nr" class="picker-label"><?= I18N::translate('Not blood-related other gender individuals') ?></label>
                     </div>
                     <div class="col-auto">
-                        <input type="color" class="picker" name="vars[coloru_nr]" id="vars[coloru_nr]" value="<?= $vars["coloru_nr"] ?>" /><label for="vars[coloru_nr]" class="picker-label"><?= I18N::translate('Not blood-related unknown gender individuals') ?></label>
+                        <input type="color" class="picker" name="vars[coloru_nr]" id="coloru_nr" value="<?= $vars["coloru_nr"] ?>" /><label for="coloru_nr" class="picker-label"><?= I18N::translate('Not blood-related unknown gender individuals') ?></label>
                     </div>
                     <div class="col-auto">
-                        <input type="color" class="picker" name="vars[colorindibg]" id="vars[colorindibg]" value="<?= $vars["colorindibg"] ?>" /><label for="vars[colorindibg]" class="picker-label"><?= I18N::translate('Individual background color') ?></label>
+                        <input type="color" class="picker" name="vars[colorindibg]" id="colorindibg" value="<?= $vars["colorindibg"] ?>" /><label for="colorindibg" class="picker-label"><?= I18N::translate('Individual background color') ?></label>
                     </div>
                     <input type="hidden" name="vars[startcol]" value="false">
-                    <input type="checkbox" name="vars[startcol]" id="vars[startcol]" value="true" <?= $vars["startcol"] == "true" ? 'checked' : '' ?>><label for="vars[startcol]" class="check-list"><?= I18N::translate('Show starting persons in different color') ?></label>
+                    <input type="checkbox" name="vars[startcol]" id="startcol" value="true" <?= $vars["startcol"] == "true" ? 'checked' : '' ?>><label for="startcol" class="check-list"><?= I18N::translate('Show starting persons in different color') ?></label>
                     <div class="col-auto" id="startcol_option">
-                        <input type="color" class="picker" name="vars[colorstartbg]" id="vars[colorstartbg]" value="<?= $vars["colorstartbg"] ?>" /><label for="vars[colorstartbg]" class="picker-label"><?= I18N::translate('Starting persons background color') ?></label>
+                        <input type="color" class="picker" name="vars[colorstartbg]" id="colorstartbg" value="<?= $vars["colorstartbg"] ?>" /><label for="colorstartbg" class="picker-label"><?= I18N::translate('Starting persons background color') ?></label>
                     </div>
                 </div>
             </div>
@@ -405,27 +405,27 @@ use Fisharebest\Webtrees\Http\RequestHandlers\ControlPanel;
                 <label class=" col-sm-4 col-form-label"><?= I18N::translate('Other colours') ?></label>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="col-auto">
-                        <input type="color" class="picker" name="vars[colorfam]" id="vars[colorfam]" value="<?= $vars["colorfam"] ?>" /><label for="vars[colorfam]" class="picker-label"><?= I18N::translate('Family background') ?></label>
+                        <input type="color" class="picker" name="vars[colorfam]" id="colorfam" value="<?= $vars["colorfam"] ?>" /><label for="colorfam" class="picker-label"><?= I18N::translate('Family background') ?></label>
                     </div>
                     <div class="col-auto">
-                        <input type="color" class="picker" name="vars[colorborder]" id="vars[colorborder]" value="<?= $vars["colorborder"] ?>" /><label for="vars[colorborder]" class="picker-label"><?= I18N::translate('Outline colour') ?></label>
+                        <input type="color" class="picker" name="vars[colorborder]" id="colorborder" value="<?= $vars["colorborder"] ?>" /><label for="colorborder" class="picker-label"><?= I18N::translate('Outline colour') ?></label>
                     </div>
                     <div class="col-auto">
-                        <input type="color" class="picker" name="vars[colorbg]" id="vars[colorbg]" value="<?= $vars["colorbg"] ?>" /><label for="vars[colorbg]" class="picker-label"><?= I18N::translate('Diagram background color') ?></label>
+                        <input type="color" class="picker" name="vars[colorbg]" id="colorbg" value="<?= $vars["colorbg"] ?>" /><label for="colorbg" class="picker-label"><?= I18N::translate('Diagram background color') ?></label>
                     </div>
                 </div>
             </div>
             <h3><?= /* I18N: Appearance heading */ I18N::translate('Output Settings') ?></h3>
             <div class="row">
-                <label class="col-sm-4 col-form-label" for="vars[otype]"><?= I18N::translate('Output File Type') ?></label>
+                <label class="col-sm-4 col-form-label" for="otype"><?= I18N::translate('Output File Type') ?></label>
                 <div class="col-sm-8 wt-page-options-value">
                     <?= view('components/select', ['name' => 'vars[otype]', 'selected' => $vars['otype'], 'options' => $otypes]) ?>
                 </div>
                 <label class="col-sm-4 col-form-label"><?= I18N::translate('Browser render') ?></label>
                 <div class="col-sm-8 wt-page-options-value">
-                    <label for="vars[auto_update]"><?= I18N::translate('Auto-update') ?></label>
+                    <label for="auto_update"><?= I18N::translate('Auto-update') ?></label>
                     <input type="hidden" name="vars[auto_update]" value="no">
-                    <input type="checkbox" name="vars[auto_update]" id="vars[auto_update]" value="auto_update" <?= $vars["auto_update"] == "auto_update" ? 'checked' : '' ?>>
+                    <input type="checkbox" name="vars[auto_update]" id="auto_update" value="auto_update" <?= $vars["auto_update"] == "auto_update" ? 'checked' : '' ?>>
                 </div>
             </div>
 

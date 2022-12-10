@@ -166,6 +166,7 @@ $GVE_CONFIG["settings"]["usecart"] = TRUE;
 // Hide advanced settings by default
 $GVE_CONFIG["settings"]["adv_appear"] = FALSE;
 $GVE_CONFIG["settings"]["adv_people"] = FALSE;
+$GVE_CONFIG["settings"]["adv_files"] = FALSE;
 
 // Debug mode (if set to true the DOT file & other debug info will be dumped on screen)
 $GVE_CONFIG["debug"] = false;

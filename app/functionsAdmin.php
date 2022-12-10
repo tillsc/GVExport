@@ -54,6 +54,7 @@ function getAdminSettings($module, bool $reset): array
         "usecart" => $GVE_CONFIG["settings"]["usecart"],
         "adv_people" => $GVE_CONFIG["settings"]["adv_people"],
         "adv_appear" => $GVE_CONFIG["settings"]["adv_appear"],
+        "adv_files" => $GVE_CONFIG["settings"]["adv_files"],
         "typeface" => $GVE_CONFIG["default_typeface"],
         "fontcolor_name" => $GVE_CONFIG["dot"]["fontcolor_name"],
         "fontcolor_details" => $GVE_CONFIG["dot"]["fontcolor_details"],

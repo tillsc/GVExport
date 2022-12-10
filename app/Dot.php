@@ -142,6 +142,7 @@ class Dot {
 
 		$this->settings["adv_people"] = $GVE_CONFIG["settings"]["adv_people"];
 		$this->settings["adv_appear"] = $GVE_CONFIG["settings"]["adv_appear"];
+		$this->settings["adv_files"] = $GVE_CONFIG["settings"]["adv_files"];
 		$this->settings["auto_update"] = $GVE_CONFIG["settings"]["auto_update"];
 	}
 

@@ -31,7 +31,7 @@ function showSidebar(e) {
 // This is used when selecting diagram type, as only
 // some types support photos.
 function togglePhotos(enable) {
-    document.getElementById("vars[with_photos]").disabled = !enable;
+    document.getElementById("with_photos").disabled = !enable;
 }
 
 // Add or remove the % sign from the text input
@@ -66,7 +66,7 @@ function defaultValueWhenBlank(element, value) {
 
 function checkIndiBlank() {
     let el = document.getElementsByClassName("item");
-    let list = document.getElementById('vars[other_pids]');
+    let list = document.getElementById('other_pids');
     return el.length === 0 && list.value.toString().length === 0;
 }
 
@@ -77,42 +77,42 @@ function updateRelationOption(field) {
     // If user clicked "All relatives"
     if (field === "indicous") {
         // If function triggered by checking "All relatives" field, ensure "Siblings" is checked
-        if (document.getElementById("vars[indicous]").checked) {
-            document.getElementById("vars[indisibl]").checked = true;
+        if (document.getElementById("indicous").checked) {
+            document.getElementById("indisibl").checked = true;
         }
         // If "All relatives" unchecked, uncheck "Anyone"
-        if (!document.getElementById("vars[indicous]").checked) {
-            document.getElementById("vars[indiany]").checked = false;
+        if (!document.getElementById("indicous").checked) {
+            document.getElementById("indiany").checked = false;
         }
     }
     // If user clicked "Siblings"
     if (field === "indisibl") {
         // If function triggered by unchecking "Siblings" field, ensure "All relatives" is unchecked
-        if (!document.getElementById("vars[indisibl]").checked) {
-            document.getElementById("vars[indicous]").checked = false;
+        if (!document.getElementById("indisibl").checked) {
+            document.getElementById("indicous").checked = false;
         }
         // If "Siblings" unchecked, uncheck "Anyone"
-        if (!document.getElementById("vars[indisibl]").checked) {
-            document.getElementById("vars[indiany]").checked = false;
+        if (!document.getElementById("indisibl").checked) {
+            document.getElementById("indiany").checked = false;
         }
     }
     // If user clicked "Spouses"
     if (field === "indispou") {
         // If function triggered by checking "All relatives" field, ensure "Siblings" is checked
-        if (!document.getElementById("vars[indisibl]").checked) {
-            document.getElementById("vars[indicous]").checked = false;
+        if (!document.getElementById("indisibl").checked) {
+            document.getElementById("indicous").checked = false;
         }
         // If "Spouses" unchecked, uncheck "Anyone"
-        if (!document.getElementById("vars[indispou]").checked) {
-            document.getElementById("vars[indiany]").checked = false;
+        if (!document.getElementById("indispou").checked) {
+            document.getElementById("indiany").checked = false;
         }
     }
     // If function triggered by checking "All relatives" field, ensure everything else is checked
     if (field === "indiany") {
-        if (document.getElementById("vars[indiany]").checked) {
-            document.getElementById("vars[indicous]").checked = true;
-            document.getElementById("vars[indisibl]").checked = true;
-            document.getElementById("vars[indispou]").checked = true;
+        if (document.getElementById("indiany").checked) {
+            document.getElementById("indicous").checked = true;
+            document.getElementById("indisibl").checked = true;
+            document.getElementById("indispou").checked = true;
 
         }
     }
@@ -316,9 +316,11 @@ function downloadLink(URL, filename) {
 
 // Toggle the showing of an advanced settings section
 // id - the id of the element we are toggling
-function toggleAdvanced(caller, id) {
+function toggleAdvanced(caller, id, visible = null) {
     const el = document.getElementById(id);
-    const visible = el.style.display !== "none";
+    if (visible === null) {
+        visible = el.style.display !== "none";
+    }
     showHide(el, !visible);
     if (visible) {
         caller.innerHTML = caller.innerHTML.replaceAll("↑","↓");
@@ -333,7 +335,7 @@ function toggleAdvanced(caller, id) {
 }
 
 function setStateFastRelationCheck() {
-    document.getElementById("vars[fastnr]").disabled = ((!cartempty && document.getElementById("vars[usecart]_yes").checked) || !document.getElementById("vars[marknr]").checked);
+    document.getElementById("fastnr").disabled = ((!cartempty && document.getElementById("usecart_yes").checked) || !document.getElementById("marknr").checked);
 }
 
 function removeURLParameter(parameter) {
@@ -367,7 +369,7 @@ function getURLParameter(parameter) {
 
 function loadURLXref() {
     const xref = getURLParameter("xref");
-    const el = document.getElementById('vars[other_pids]');
+    const el = document.getElementById('other_pids');
     if (el.value.replace(",","").trim() === "") {
         el.value = xref;
     } else {
@@ -384,7 +386,7 @@ function formChanged(autoUpdate) {
         addIndiToList(xref);
         changeURLXref(xref);
     }
-    let stopXref = document.getElementById('vars[stop_pid]').value.trim();
+    let stopXref = document.getElementById('stop_pid').value.trim();
     if (stopXref !== "") {
         addIndiToStopList(stopXref);
     }
@@ -420,9 +422,9 @@ function loadIndividualDetails(url, xref, list) {
             newListItem.setAttribute("onclick", "scrollToRecord('"+xref+"')");
             let otherXrefId;
             if (list === "indi_list") {
-                otherXrefId = "vars[other_pids]";
+                otherXrefId = "other_pids";
             } else {
-                otherXrefId = "vars[other_stop_pids]";
+                otherXrefId = "other_stop_pids";
             }
             newListItem.innerHTML = contents + "<div class=\"remove-item\" onclick=\"removeItem(event, this.parentElement, '" + otherXrefId + "')\"><a href='#'>×</a></div>";
             // Multiple promises can be for the same xref - don't add if a duplicate
@@ -437,10 +439,10 @@ function loadIndividualDetails(url, xref, list) {
 }
 
 function addIndiToList(xref) {
-    let list = document.getElementById('vars[other_pids]');
+    let list = document.getElementById('other_pids');
     const regex = new RegExp(`(?<=,|^)(${xref})(?=,|$)`);
     if (!regex.test(list.value.replaceAll(" ",""))) {
-        appendXrefToList(xref, 'vars[other_pids]');
+        appendXrefToList(xref, 'other_pids');
         loadIndividualDetails(TOMSELECT_URL, xref, 'indi_list');
 
     }
@@ -448,13 +450,13 @@ function addIndiToList(xref) {
 }
 
 function addIndiToStopList(xref) {
-    let list = document.getElementById('vars[other_stop_pids]');
+    let list = document.getElementById('other_stop_pids');
     const regex = new RegExp(`(?<=,|^)(${xref})(?=,|$)`);
     if (!regex.test(list.value.replaceAll(" ",""))) {
-        appendXrefToList(xref, 'vars[other_stop_pids]');
+        appendXrefToList(xref, 'other_stop_pids');
         loadIndividualDetails(TOMSELECT_URL, xref, 'stop_indi_list');
     }
-    clearIndiSelect('vars[stop_pid]');
+    clearIndiSelect('stop_pid');
 }
 
 function appendXrefToList(xref, elementId) {
@@ -477,10 +479,12 @@ function clearIndiSelect(selectId) {
         }, 100);
     }
 }
-function toggleUpdateButton(css_id) {
-    const element = document.getElementById(css_id);
-    const visible = element.style.display !== "none";
-    showHide(element, !visible);
+function toggleUpdateButton() {
+    const updateBtn = document.getElementById('update-browser');
+    const autoSettingBox = document.getElementById('auto_update');
+
+    const visible = autoSettingBox.value === 'auto_update';
+    showHide(updateBtn, visible);
     autoUpdate = visible;
     updateRender();
 }
@@ -508,7 +512,7 @@ function removeItem(e, element, xrefListId) {
 
 // clear options from the dropdown if they are already in our list
 function removeSelectedOptions() {
-    document.getElementById('vars[other_pids]').value.split(",").forEach(function (id) {
+    document.getElementById('other_pids').value.split(",").forEach(function (id) {
         id = id.trim();
         if (id !== "") {
             let dropdown = document.getElementById('pid');
@@ -521,14 +525,14 @@ function removeSelectedOptions() {
 
 // Clear the list of starting individuals
 function clearIndiList() {
-    document.getElementById('vars[other_pids]').value = "";
+    document.getElementById('other_pids').value = "";
     document.getElementById('indi_list').innerHTML = "";
     updateClearAll();
     updateRender();
 }
 // Clear the list of starting individuals
 function clearStopIndiList() {
-    document.getElementById('vars[other_stop_pids]').value = "";
+    document.getElementById('other_stop_pids').value = "";
     document.getElementById('stop_indi_list').innerHTML = "";
     updateClearAll();
     updateRender();
@@ -539,9 +543,9 @@ function refreshIndisFromXREFS(onchange) {
     // If triggered from onchange event, only proceed if auto-update enabled
     if (!onchange || autoUpdate) {
         document.getElementById('indi_list').innerHTML = "";
-        loadXrefList(TOMSELECT_URL, 'vars[other_pids]', 'indi_list');
+        loadXrefList(TOMSELECT_URL, 'other_pids', 'indi_list');
         document.getElementById('stop_indi_list').innerHTML = "";
-        loadXrefList(TOMSELECT_URL, 'vars[other_stop_pids]', 'stop_indi_list');
+        loadXrefList(TOMSELECT_URL, 'other_stop_pids', 'stop_indi_list');
     }
 }
 
@@ -629,7 +633,7 @@ function getComputedProperty(element, property) {
 // Create and download a PDF version of the provided image
 function createPdfFromImage(imgData, width, height) {
     const orientation = width >= height ? 'landscape' : 'portrait';
-    const dpi = document.getElementById('vars[dpi]').value;
+    const dpi = document.getElementById('dpi').value;
     const widthInches = width / dpi;
     const heightInches = height / dpi;
     const doc = new window.jspdf.jsPDF({orientation: orientation, format: [widthInches, heightInches], unit: 'in'});
@@ -681,7 +685,7 @@ function scrollToRecord(xref) {
                 let y = (minY + maxY) / 2;
                 // Why do we multiply the scale by 1 and 1/3?
                 let zoombase = panzoomInst.getTransform().scale * (1 + 1 / 3);
-                let zoom = zoombase * parseFloat(document.getElementById("vars[dpi]").value)/72;
+                let zoom = zoombase * parseFloat(document.getElementById("dpi").value)/72;
                 panzoomInst.smoothMoveTo((rendering.offsetWidth / 2) - x * zoom, (rendering.offsetHeight / 2) - parseFloat(svg.getAttribute('height')) * zoombase - y * zoom);
                 return true;
             }
@@ -721,8 +725,8 @@ function handleTileClick() {
 function pageLoaded() {
     TOMSELECT_URL = document.getElementById('pid').getAttribute("data-url") + "&query=";
     loadURLXref();
-    loadXrefList(TOMSELECT_URL, 'vars[other_pids]', 'indi_list');
-    loadXrefList(TOMSELECT_URL, 'vars[other_stop_pids]', 'stop_indi_list');
+    loadXrefList(TOMSELECT_URL, 'other_pids', 'indi_list');
+    loadXrefList(TOMSELECT_URL, 'other_stop_pids', 'stop_indi_list');
     // Remove reset parameter from URL when page loaded, to prevent
     // further resets when page reloaded
     removeURLParameter("reset");
@@ -762,4 +766,100 @@ function showHelp(item) {
         }
     }
     return false;
+}
+
+/**
+ * Downloads settings as JSON file
+ */
+function downloadSettingsFile(reloadSettings) {
+    if (reloadSettings) {
+        settings_json = "";
+    }
+    updateRender();
+    setTimeout(() => {
+        if (settings_json != "") {
+            let file = new Blob([settings_json], {type: "text/plain"});
+            let url = URL.createObjectURL(file);
+            downloadLink(url, TREE_NAME + ".json")
+        } else {
+            downloadSettingsFile(false);
+        }
+    }, 100);
+}
+
+/**
+ * Loads settings from uploaded file
+ */
+function uploadSettingsFile(input) {
+    if (input.files.length === 0) {
+        return;
+    }
+    const file = input.files[0];
+    let reader = new FileReader();
+    reader.onload = (e) => {
+        loadSettings(e.target.result);
+    };
+    reader.onerror = (e) => alert(e.target.error.name);
+    reader.readAsText(file);
+}
+
+function loadSettings(data) {
+    let settings;
+    try {
+        settings = JSON.parse(data);
+    } catch (e) {
+        showToast("Failed to load settings: " + e);
+        return false;
+    }
+    Object.keys(settings).forEach (function(key){
+        let el = document.getElementById(key);
+        if (el == null) {
+            switch (key) {
+                case 'diagtype':
+                    setCheckStatus(document.getElementById('diagtype_simple'), settings[key] === 'simple');
+                    setCheckStatus(document.getElementById('diagtype_decorated'), settings[key] === 'decorated');
+                    setCheckStatus(document.getElementById('diagtype_combined'), settings[key] === 'combined');
+                    break;
+                case 'bd_type':
+                    setCheckStatus(document.getElementById('bd_type_y'), settings[key] === 'y');
+                    setCheckStatus(document.getElementById('bd_type_gedcom'), settings[key] === 'gedcom');
+                    break;
+                case 'dd_type':
+                    setCheckStatus(document.getElementById('dd_type_y'), settings[key] === 'y');
+                    setCheckStatus(document.getElementById('dd_type_gedcom'), settings[key] === 'gedcom');
+                    break;
+                case 'md_type':
+                    setCheckStatus(document.getElementById('md_type_y'), settings[key] === 'y');
+                    setCheckStatus(document.getElementById('md_type_gedcom'), settings[key] === 'gedcom');
+                    break;
+                case 'adv_people':
+                    toggleAdvanced(document.getElementById('people-advanced-button'), 'people-advanced', settings[key] === 'adv_people');
+                    break;
+                case 'adv_appear':
+                    toggleAdvanced(document.getElementById('appearance-advanced-button'), 'appearance-advanced', settings[key] === 'adv_appear');
+                    break;
+                case 'adv_files':
+                    toggleAdvanced(document.getElementById('files-advanced-button'), 'files-advanced', settings[key] === 'adv_files');
+                    break;
+                default:
+            }
+        } else {
+            if (el.type === 'checkbox' || el.type === 'radio') {
+                setCheckStatus(el, el.value === settings[key]);
+            } else {
+                el.value = settings[key];
+            }
+        }
+    });
+    setStateFastRelationCheck();
+    showHide(document.getElementById('arrow_group'),document.getElementById('color_arrow_related').checked)
+    showHide(document.getElementById('startcol_option'),document.getElementById('startcol').checked)
+}
+
+function setCheckStatus(el, checked) {
+    if (checked) {
+        el.setAttribute('checked', 'true');
+    } else {
+        el.removeAttribute('checked');
+    }
 }
