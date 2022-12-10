@@ -503,6 +503,9 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
         if (isset($vars['adv_appear'])) {
             $dot->setSettings("adv_appear", $vars['adv_appear']);
         }
+        if (isset($vars['adv_files'])) {
+            $dot->setSettings("adv_files", $vars['adv_files']);
+        }
 
         if (isset($vars['auto_update'])) {
             $dot->setSettings("auto_update", "auto_update");
@@ -582,6 +585,8 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
             $response['messages'] = $dot->messages;
             $response['debug'] = $dot->debug_string;
             $response['dot'] = $out;
+            $cookie = new Cookie($tree);
+            $response['settings'] = json_encode($cookie->load([]));
             $r = json_encode($response);
         } else {
             $r = $out;
