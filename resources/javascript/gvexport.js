@@ -774,10 +774,11 @@ function showHelp(item) {
 function downloadSettingsFile(reloadSettings) {
     if (reloadSettings) {
         settings_json = "";
+        updateRender();
     }
-    updateRender();
+
     setTimeout(() => {
-        if (settings_json != "") {
+        if (settings_json !== "") {
             let file = new Blob([settings_json], {type: "text/plain"});
             let url = URL.createObjectURL(file);
             downloadLink(url, TREE_NAME + ".json")
@@ -799,7 +800,7 @@ function uploadSettingsFile(input) {
     reader.onload = (e) => {
         loadSettings(e.target.result);
     };
-    reader.onerror = (e) => alert(e.target.error.name);
+    reader.onerror = (e) => showToast(e.target.error.name);
     reader.readAsText(file);
 }
 
