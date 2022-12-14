@@ -12,7 +12,6 @@ class Settings
             "otype" => 'svg',
             "grdir" => 'LR', // Direction of graph
             "mclimit" => "1", // Graphviz MCLIMIT setting - number of times to regenerate graph for reduced crossings
-            "psize" => $GVE_CONFIG["default_pagesize"],
             "indiinc" => "indi",
             "diagtype" => "decorated",
             "with_photos" => "with_photos",

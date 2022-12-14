@@ -49,7 +49,6 @@ class Dot {
     var string $font_size_name;
 	var array $colors = array();
 	var array $settings = array();
-	var array $pagesize = array();
     var array $messages = array(); // messages for toast system
 	private const ERROR_CHAR = "E:"; // Messages that start with this will be highlighted
     private $tree;
@@ -99,8 +98,6 @@ class Dot {
         $this->settings["diagram_type"] = "simple";
 		$this->settings["diagram_type_combined_with_photo"] = true;
 		$this->settings["indi"] = "";
-		$this->settings["use_pagesize"] = "";
-		$this->settings["page_margin"] = $GVE_CONFIG["default_margin"];
 		$this->settings["show_lt_editor"] = FALSE;
 		$this->settings["mark_not_related"] = FALSE;
 		$this->settings["fast_not_related"] = FALSE;
@@ -144,21 +141,6 @@ class Dot {
 		$this->settings["adv_appear"] = $GVE_CONFIG["settings"]["adv_appear"];
 		$this->settings["adv_files"] = $GVE_CONFIG["settings"]["adv_files"];
 		$this->settings["auto_update"] = $GVE_CONFIG["settings"]["auto_update"];
-	}
-
-	public function setPageSize($pagesize, $size_x = FALSE, $size_y = FALSE) {
-		global $GVE_CONFIG;
-		if ($pagesize == "Custom" && isset($size_x) && isset($size_y)) {
-			$this->pagesize["x"] = $size_x;
-			$this->pagesize["y"] = $size_y;
-		} elseif (!empty($pagesize) && isset($GVE_CONFIG["pagesize"][$pagesize]["x"]) && isset($GVE_CONFIG["pagesize"][$pagesize]["y"])) {
-			$this->pagesize["x"] = $GVE_CONFIG["pagesize"][$pagesize]["x"];
-			$this->pagesize["y"] = $GVE_CONFIG["pagesize"][$pagesize]["y"];
-		} else {
-			$pagesize = $GVE_CONFIG["default_pagesize"];
-			$this->pagesize["x"] = $GVE_CONFIG["pagesize"][$pagesize]["x"];
-			$this->pagesize["y"] = $GVE_CONFIG["pagesize"][$pagesize]["y"];
-		}
 	}
 
 	/**
@@ -630,17 +612,6 @@ class Dot {
 	function printDOTHeader(): string
     {
         $out = "digraph WT_Graph {\n";
-		// Using pagebreak
-		if (!empty($this->settings["use_pagesize"])) {
-			$out .= "ratio=\"auto\"\n";
-			//$out .= "/* PAGESIZE: " . $this->settings["use_pagesize"] . " */";
-			// Size of the page
-			$out .= "page=\"" . $this->pagesize["x"] . "," . $this->pagesize["y"] . "\"\n";
-			// Size of the drawing (pagesize - 1 inch)
-			$out .= "size=\"" . ($this->pagesize["x"] - $this->settings["page_margin"]) . "," . ($this->pagesize["y"] - $this->settings["page_margin"]) . "\"\n";
-			//$out .= "size=\"50, 50\"\n";
-		}
-
 		$out .= "ranksep=\"" . str_replace("%","",$this->settings["ranksep"])*$this->settings["space_base"]/100 . " equally\"\n";
 		$out .= "nodesep=\"" . str_replace("%","",$this->settings["nodesep"])*$this->settings["space_base"]/100	 . "\"\n";
 		$out .= "dpi=\"" . $this->settings["dpi"] . "\"\n";

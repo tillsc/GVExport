@@ -417,11 +417,6 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
             $dot->setSettings("typeface", $vars['typeface']);
         }
 
-        if (isset($vars['pagebrk'])) {
-            $dot->setSettings("use_pagesize", $vars['psize']);
-            $dot->setPageSize($vars['psize']);
-        }
-
         if (isset($vars['arrow_default'])) {
             $dot->setArrowColour("default", $vars['arrow_default']);
         }

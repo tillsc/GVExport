@@ -115,18 +115,6 @@ $GVE_CONFIG["dot"]["arrow_related"] = "#222266";	// Default colour for arrows fr
 $GVE_CONFIG["dot"]["arrow_not_related"] = "#226622";	// Default colour for arrows from family records to child other than birth (adopted, etc)
 $GVE_CONFIG["settings"]["color_arrow_related"] = "";
 
-
-
-// Page and drawing size settings
-$GVE_CONFIG["default_pagesize"] = "A4";
-$GVE_CONFIG["default_margin"] = "0.5"; // in inches on every side
-//A4
-$GVE_CONFIG["pagesize"]["A4"]["x"] = "8.267";
-$GVE_CONFIG["pagesize"]["A4"]["y"] = "11.692";
-//Letter
-$GVE_CONFIG["pagesize"]["Letter"]["x"] = "8.5";
-$GVE_CONFIG["pagesize"]["Letter"]["y"] = "11";
-
 $GVE_CONFIG["settings"]["dpi"] = "72"; // default DPI (75: screen, 300: print)
 $GVE_CONFIG["settings"]["ranksep"] = "100%";
 $GVE_CONFIG["settings"]["nodesep"] = "100%";
