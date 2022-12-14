@@ -25,7 +25,6 @@ use Fisharebest\Webtrees\Tree;
  * @var bool        $nographviz             true if Graphviz not installed
  */
 
-$page = new MainPage();
 ?>
 
 <script type="text/javascript">
@@ -60,7 +59,7 @@ $page = new MainPage();
 </script>
 <script src="<?= $module->assetUrl('javascript/viz.js'); ?>"></script>
 <script src="<?= $module->assetUrl('javascript/panzoom.min.js'); ?>"></script>
-<script src="<?= $module->assetUrl('javascript/jspdf.umd.min.js'); ?>"></script>
+<script src="<?= $nographviz ? $module->assetUrl('javascript/jspdf.umd.min.js') : ""; ?>"></script>
 <script type="text/javascript">
     const cartempty = <?= $cartempty ? "true" : "false" ?>;
     const CLIENT_ERRORS = ["<?= I18N::translate('Your browser does not support exporting images this large. Please reduce number of records, reduce DPI setting, or use SVG option.') ?>"];
