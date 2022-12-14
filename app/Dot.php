@@ -632,7 +632,6 @@ class Dot {
         $out = "digraph WT_Graph {\n";
 		// Using pagebreak
 		if (!empty($this->settings["use_pagesize"])) {
-            echo "test";
 			$out .= "ratio=\"auto\"\n";
 			//$out .= "/* PAGESIZE: " . $this->settings["use_pagesize"] . " */";
 			// Size of the page

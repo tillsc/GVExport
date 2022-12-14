@@ -30,7 +30,6 @@
 namespace vendor\WebtreesModules\gvexport;
 
 require_once dirname(__FILE__) . "/config.php";
-require_once dirname(__FILE__) . "/app/utils.php";
 require_once dirname(__FILE__) . "/app/functionsClippingsCart.php";
 
 // Auto-load class files
@@ -282,7 +281,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
         global $GVE_CONFIG;
 
         // Make a unique directory to the tmp dir
-        $temp_dir = sys_get_temp_dir_my() . "/" . md5(Auth::id());
+        $temp_dir = (new File())->sys_get_temp_dir_my() . "/" . md5(Auth::id());
         if (!is_dir("$temp_dir")) {
             mkdir("$temp_dir");
         }
