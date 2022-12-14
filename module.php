@@ -32,7 +32,6 @@ namespace vendor\WebtreesModules\gvexport;
 require_once dirname(__FILE__) . "/config.php";
 require_once dirname(__FILE__) . "/app/utils.php";
 require_once dirname(__FILE__) . "/app/functionsClippingsCart.php";
-require_once dirname(__FILE__) . "/app/functionsAdmin.php";
 
 // Auto-load class files
 spl_autoload_register(function ($class) {
@@ -42,6 +41,7 @@ spl_autoload_register(function ($class) {
     }
 });
 
+use Cassandra\Set;
 use Fisharebest\Webtrees\Auth;
 use Fisharebest\Webtrees\Registry;
 use Fisharebest\Webtrees\I18N;
@@ -163,8 +163,8 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
         assert($tree instanceof Tree);
 
         $individual = $this->getIndividual($tree, $request->getQueryParams()['xref']);
-
-		$userDefaultVars = getAdminSettings($this, false);
+        $settings = new Settings($this);
+		$userDefaultVars = $settings->getAdminSettings(false);
         if (!isset($_REQUEST['reset'])) {
             $cookie = new Cookie($tree);
             // Load settings from cookie *on top* of our default settings,
@@ -246,7 +246,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
         $otypes = $this->getOTypes();
         $response['module'] = $this;
         $response['otypes'] = $otypes;
-        $response['vars'] = getAdminSettings($this, isset($_REQUEST['reset']) && $_REQUEST['reset'] === "1");
+        $response['vars'] = (new Settings($this))->getAdminSettings(isset($_REQUEST['reset']) && $_REQUEST['reset'] === "1");
         $response['gve_config'] = $GVE_CONFIG;
         $response['title'] = $this->title();
         $response['gvexport_css']  = route('module', ['module' => $this->name(), 'action' => 'Css']);
@@ -265,7 +265,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
     {
         $params = (array) $request->getParsedBody();
         if ($params['save'] === '1') {
-            saveAdminPreferences($params, $this);
+            (new Settings($this))->saveAdminSettings($params['vars']);
             FlashMessages::addMessage(I18N::translate('The preferences for the module “%s” have been updated.',
                 $this->title()), 'success');
         }

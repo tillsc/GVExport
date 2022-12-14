@@ -104,8 +104,8 @@ class Dot {
 		$this->settings["show_lt_editor"] = FALSE;
 		$this->settings["mark_not_related"] = FALSE;
 		$this->settings["fast_not_related"] = FALSE;
-		$this->settings["graph_dir"] = $GVE_CONFIG["default_direction"];
-		$this->settings["mclimit"] = $GVE_CONFIG["default_mclimit"];
+		$this->settings["graph_dir"] = "LR";
+		$this->settings["mclimit"] = "1";
 
 		$this->settings["show_by"] = FALSE;
 		$this->settings["show_bp"] = FALSE;
@@ -632,6 +632,7 @@ class Dot {
         $out = "digraph WT_Graph {\n";
 		// Using pagebreak
 		if (!empty($this->settings["use_pagesize"])) {
+            echo "test";
 			$out .= "ratio=\"auto\"\n";
 			//$out .= "/* PAGESIZE: " . $this->settings["use_pagesize"] . " */";
 			// Size of the page
