@@ -824,10 +824,11 @@ use Fisharebest\Webtrees\Tree;
         let er = document.getElementById(id);
         er.innerText="";
     }
-</script>
 
-<?php // Include help text
-include_once(dirname(__FILE__) . '/../../app/help.phtml'); ?>
+    <?
+    (new Help())->addHelpMessageJavaScript();
+    ?>
+</script>
 
 <div id="toast-container"></div>
 
