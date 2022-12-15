@@ -67,7 +67,7 @@ class Person
     function printPersonLabel(string $pid, $related = TRUE): string
     {
         $out = "";
-        $bordercolor = $this->dot->colors["colorborder"];	// Border color of the INDI's box
+        $bordercolor = $this->dot->settings["colorborder"];	// Border color of the INDI's box
         $death_place = "";
         // Get the personal data
         if ($this->dot->settings["diagram_type"] == "combined" && ( substr($pid, 0, 3) == "I_H" || substr($pid, 0, 3) == "I_W" )) {
@@ -133,9 +133,9 @@ class Person
         // --- Printing the INDI details ---
         if ($this->dot->settings["diagram_type"] == "simple") {
             if ($this->dot->settings["show_url"]) {
-                $out .= "color=\"" . $bordercolor . "\", fillcolor=\"" . $fill_color . "\", fontcolor=\"" . $this->dot->colors["font_color"]["name"] . "\", target=\"_blank\", href=\"" . Dot::convertToHTMLSC($link) . "\" label="; #ESL!!! 20090213 without convertToHTMLSC the dot file has invalid data
+                $out .= "color=\"" . $bordercolor . "\", fillcolor=\"" . $fill_color . "\", fontcolor=\"" . $this->dot->settings["font_color"]["name"] . "\", target=\"_blank\", href=\"" . Dot::convertToHTMLSC($link) . "\" label="; #ESL!!! 20090213 without convertToHTMLSC the dot file has invalid data
             } else {
-                $out .= "color=\"" . $bordercolor . "\", fillcolor=\"" . $fill_color . "\", fontcolor=\"" . $this->dot->colors["font_color"]["name"] . "\", label=";
+                $out .= "color=\"" . $bordercolor . "\", fillcolor=\"" . $fill_color . "\", fontcolor=\"" . $this->dot->settings["font_color"]["name"] . "\", label=";
             }
             $out .= '"';
             $out .= str_replace('"','\"',$name) . '\n' . $this->dot->settings["birth_text"] . $birthdate . " " . (empty($birthplace)?'':'('.$birthplace.')') . '\l';
@@ -154,7 +154,7 @@ class Person
             }
             $href = $this->dot->settings["show_url"] ? "TARGET=\"_blank\" HREF=\"" . Dot::convertToHTMLSC($link) . "\"" : "";
             // Draw table
-            $indibgcolor = $this->isStartingIndividual($pid) && $this->dot->settings['startcol'] == "true" ? $this->dot->colors["colorstartbg"] : $this->dot->colors["colorindibg"];
+            $indibgcolor = $this->isStartingIndividual($pid) && $this->dot->settings['startcol'] == "true" ? $this->dot->settings["colorstartbg"] : $this->dot->settings["colorindibg"];
             if ($this->dot->settings["diagram_type"] == "combined") {
                 $out .= "<TABLE BORDER=\"0\" CELLBORDER=\"0\" CELLPADDING=\"2\" CELLSPACING=\"0\" BGCOLOR=\"" . $indibgcolor . "\" $href>";
             } else {
@@ -191,19 +191,19 @@ class Person
                 }
                 // Show name
                 if (trim($name) != "") {
-                    $out .= "<FONT COLOR=\"" . $this->dot->colors["font_color"]["name"] . "\" POINT-SIZE=\"" . ($this->dot->font_size_name) . "\">" . $name . "</FONT>";
+                    $out .= "<FONT COLOR=\"" . $this->dot->settings["font_color"]["name"] . "\" POINT-SIZE=\"" . ($this->dot->font_size_name) . "\">" . $name . "</FONT>";
                     if (trim($birthData . $deathData) != "") {
                         $out .= "<BR />";
                     }
                 }
                 if (trim($birthData) != "") {
-                    $out .= "<FONT COLOR=\"" . $this->dot->colors["font_color"]["details"] . "\" POINT-SIZE=\"" . ($this->dot->font_size) . "\">" . $this->dot->settings["birth_text"] . $birthData . "</FONT>";
+                    $out .= "<FONT COLOR=\"" . $this->dot->settings["font_color"]["details"] . "\" POINT-SIZE=\"" . ($this->dot->font_size) . "\">" . $this->dot->settings["birth_text"] . $birthData . "</FONT>";
                     if (trim($deathData) != "") {
                         $out .= "<BR />";
                     }
                 }
                 if ($isdead && trim($deathData) !== "") {
-                    $out .= "<FONT COLOR=\"" . $this->dot->colors["font_color"]["details"] . "\" POINT-SIZE=\"" . ($this->dot->font_size) . "\">" . $this->dot->settings["death_text"] . $deathData . "</FONT>";
+                    $out .= "<FONT COLOR=\"" . $this->dot->settings["font_color"]["details"] . "\" POINT-SIZE=\"" . ($this->dot->font_size) . "\">" . $this->dot->settings["death_text"] . $deathData . "</FONT>";
                 } else {
                     $out .= " ";
                 }

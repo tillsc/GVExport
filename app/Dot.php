@@ -49,7 +49,6 @@ class Dot {
     var string $font_size_name;
 	var array $colors = array();
 	var array $settings = array();
-	var array $pagesize = array();
     var array $messages = array(); // messages for toast system
 	private const ERROR_CHAR = "E:"; // Messages that start with this will be highlighted
     private $tree;
@@ -59,106 +58,12 @@ class Dot {
     /**
 	 * Constructor of Dot class
 	 */
-	function __construct($tree, $file_system) {
-		global $GVE_CONFIG;
+	function __construct($tree, $module, $file_system) {
 		$this->tree = $tree;
 		$this->file_system = $file_system;
     // Load settings from config file
-
-		// Load font
-		$this->font_size = $GVE_CONFIG["dot"]["fontsize"];
-        $this->font_size_name = $GVE_CONFIG["dot"]["fontsize_name"];
-		$this->settings["defaulttypeface"] = $GVE_CONFIG["default_typeface"];
-		$this->settings["typeface"] = $this->settings["defaulttypeface"];
-        $this->settings["typefaces"] = $GVE_CONFIG["settings"]["typefaces"];
-        $this->settings["typeface_fallback"] = $GVE_CONFIG["settings"]["typeface_fallback"];
-
-		// Load colors
-		$this->colors["colorm"] = $GVE_CONFIG["dot"]["colorm"];
-		$this->colors["colorf"] = $GVE_CONFIG["dot"]["colorf"];
-		$this->colors["colorx"] = $GVE_CONFIG["dot"]["colorx"];
-		$this->colors["coloru"] = $GVE_CONFIG["dot"]["coloru"];
-		$this->colors["colorm_nr"] = $GVE_CONFIG["dot"]["colorm_nr"];
-		$this->colors["colorf_nr"] = $GVE_CONFIG["dot"]["colorf_nr"];
-		$this->colors["colorx_nr"] = $GVE_CONFIG["dot"]["colorx_nr"];
-		$this->colors["coloru_nr"] = $GVE_CONFIG["dot"]["coloru_nr"];
-		$this->colors["colorfam"] = $GVE_CONFIG["dot"]["colorfam"];
-		$this->colors["colorbg"] = $GVE_CONFIG["dot"]["colorbg"];
-		$this->colors["colorindibg"] = $GVE_CONFIG["dot"]["colorindibg"];
-		$this->colors["colorstartbg"] = $GVE_CONFIG["dot"]["colorstartbg"];
-		$this->colors["colorborder"] = $GVE_CONFIG["dot"]["colorborder"];
-		$this->colors["font_color"]["name"] = $GVE_CONFIG["dot"]["fontcolor_name"];
-        $this->colors["font_color"]["details"] = $GVE_CONFIG["dot"]["fontcolor_details"];
-        $this->colors["arrows"]["default"] = $GVE_CONFIG["dot"]["arrow_default"];
-        $this->colors["arrows"]["related"] = $GVE_CONFIG["dot"]["arrow_related"];
-        $this->colors["arrows"]["not_related"] = $GVE_CONFIG["dot"]["arrow_not_related"];
-
-		// Default settings
-        $this->settings["color_arrow_related"] = $GVE_CONFIG["settings"]["color_arrow_related"];
-        $this->settings["startcol"] = $GVE_CONFIG["settings"]["startcol"];
-        $this->settings["diagram_type"] = "simple";
-		$this->settings["diagram_type_combined_with_photo"] = true;
-		$this->settings["indi"] = "";
-		$this->settings["use_pagesize"] = "";
-		$this->settings["page_margin"] = $GVE_CONFIG["default_margin"];
-		$this->settings["show_lt_editor"] = FALSE;
-		$this->settings["mark_not_related"] = FALSE;
-		$this->settings["fast_not_related"] = FALSE;
-		$this->settings["graph_dir"] = $GVE_CONFIG["default_direction"];
-		$this->settings["mclimit"] = $GVE_CONFIG["default_mclimit"];
-
-		$this->settings["show_by"] = FALSE;
-		$this->settings["show_bp"] = FALSE;
-		$this->settings["show_dy"] = FALSE;
-		$this->settings["show_dp"] = FALSE;
-		$this->settings["show_my"] = FALSE;
-		$this->settings["show_mp"] = FALSE;
-		$this->settings["show_pid"] = FALSE;
-		$this->settings["show_fid"] = FALSE;
-		$this->settings["show_url"] = FALSE;
-
-		$this->settings["no_fams"] = FALSE;
-
-		$this->settings["use_abbr_place"] = $GVE_CONFIG["settings"]["use_abbr_place"];
-		$this->settings["use_abbr_places"] = $GVE_CONFIG["settings"]["use_abbr_places"];
-        $this->settings["use_abbr_name"] = $GVE_CONFIG["settings"]["use_abbr_name"];
-		$this->settings["use_abbr_names"] = $GVE_CONFIG["settings"]["use_abbr_names"];
-
-		$this->settings["countries"] = $GVE_CONFIG["countries"];
-		$this->settings["download"] = $GVE_CONFIG["settings"]["download"];
-		$this->settings["debug"] = $GVE_CONFIG["debug"];
-
-		$this->settings["ance_level"] = $GVE_CONFIG["settings"]["ance_level"];
-		$this->settings["desc_level"] = $GVE_CONFIG["settings"]["desc_level"];
-		$this->settings["usecart"] = $GVE_CONFIG["settings"]["usecart"];
-
-		$this->settings["birth_text"] = $GVE_CONFIG["custom"]["birth_text"];
-		$this->settings["death_text"] = $GVE_CONFIG["custom"]["death_text"];
-
-		$this->settings["dpi"] = $GVE_CONFIG["settings"]["dpi"];
-		$this->settings["ranksep"] = $GVE_CONFIG["settings"]["ranksep"];
-		$this->settings["nodesep"] = $GVE_CONFIG["settings"]["nodesep"];
-		$this->settings["space_base"] = $GVE_CONFIG["settings"]["space_base"];
-
-		$this->settings["adv_people"] = $GVE_CONFIG["settings"]["adv_people"];
-		$this->settings["adv_appear"] = $GVE_CONFIG["settings"]["adv_appear"];
-		$this->settings["adv_files"] = $GVE_CONFIG["settings"]["adv_files"];
-		$this->settings["auto_update"] = $GVE_CONFIG["settings"]["auto_update"];
-	}
-
-	public function setPageSize($pagesize, $size_x = FALSE, $size_y = FALSE) {
-		global $GVE_CONFIG;
-		if ($pagesize == "Custom" && isset($size_x) && isset($size_y)) {
-			$this->pagesize["x"] = $size_x;
-			$this->pagesize["y"] = $size_y;
-		} elseif (!empty($pagesize) && isset($GVE_CONFIG["pagesize"][$pagesize]["x"]) && isset($GVE_CONFIG["pagesize"][$pagesize]["y"])) {
-			$this->pagesize["x"] = $GVE_CONFIG["pagesize"][$pagesize]["x"];
-			$this->pagesize["y"] = $GVE_CONFIG["pagesize"][$pagesize]["y"];
-		} else {
-			$pagesize = $GVE_CONFIG["default_pagesize"];
-			$this->pagesize["x"] = $GVE_CONFIG["pagesize"][$pagesize]["x"];
-			$this->pagesize["y"] = $GVE_CONFIG["pagesize"][$pagesize]["y"];
-		}
+        $this->settings=(new Settings($module))->getSettings();
+        $this->settings["no_fams"] = FALSE;
 	}
 
 	/**
@@ -178,7 +83,7 @@ class Dot {
 	 * @param string $color
 	 */
     public function setColor(string $color_type, string $color) {
-		$this->colors[$color_type] = $color;
+		$this->settings[$color_type] = $color;
 	}
 
 	/**
@@ -197,7 +102,7 @@ class Dot {
 
     public function setArrowColour(string $type, string $value)
     {
-        $this->colors["arrows"][$type] = $value;
+        $this->settings["arrows"][$type] = $value;
     }
 
     public function setColourArrowRelated(string $value)
@@ -211,7 +116,7 @@ class Dot {
 	 * @param string $font_color
 	 */
     public function setFontColorName(string $font_color) {
-		$this->colors["font_color"]["name"] = $font_color;
+		$this->settings["font_color"]["name"] = $font_color;
 	}
 
     /**
@@ -220,7 +125,7 @@ class Dot {
 	 * @param string $font_color
 	 */
     public function setFontColorDetails(string $font_color) {
-        $this->colors["font_color"]["details"] = $font_color;
+        $this->settings["font_color"]["details"] = $font_color;
 	}
 
 	/**
@@ -418,7 +323,7 @@ class Dot {
 			$relList = array();
 			$relFams = array();
 			$NonrelativeExists = FALSE;
-			if ($this->settings["mark_not_related"] && !$this->settings["fast_not_related"]) {
+			if ($this->settings["marknr"] && !$this->settings["fastnr"]) {
 				foreach ($this->individuals as $indi) {
 					if (!$indi['rel']) {
 						$NonrelativeExists = TRUE;
@@ -523,11 +428,11 @@ class Dot {
 
 					// Draw an arrow from HUSB to FAM
 					if (!empty($husb_id) && (isset($this->individuals[$husb_id]))) {
-						$out .= $this->convertID($husb_id) . " -> " . $this->convertID($fid) ." [color=\"" . $this->colors["arrows"]["default"] . "\", arrowsize=0.3]\n";
+						$out .= $this->convertID($husb_id) . " -> " . $this->convertID($fid) ." [color=\"" . $this->settings["arrows"]["default"] . "\", arrowsize=0.3]\n";
 					}
 					// Draw an arrow from WIFE to FAM
 					if (!empty($wife_id) && (isset($this->individuals[$wife_id]))) {
-						$out .= $this->convertID($wife_id) . " -> ". $this->convertID($fid) ." [color=\"" . $this->colors["arrows"]["default"] . "\", arrowsize=0.3]\n";
+						$out .= $this->convertID($wife_id) . " -> ". $this->convertID($fid) ." [color=\"" . $this->settings["arrows"]["default"] . "\", arrowsize=0.3]\n";
 					}
 					// Draw an arrow from FAM to each CHIL
 					foreach ($f->children() as $child) {
@@ -581,28 +486,28 @@ class Dot {
     {
 		// Determine the fill color
 		if ($gender == 'F') {
-			if ($related || !$this->settings["mark_not_related"]) {
-				$fill_color = $this->colors["colorf"];
+			if ($related || !$this->settings["marknr"]) {
+				$fill_color = $this->settings["colorf"];
 			} else  {
-				$fill_color = $this->colors["colorf_nr"];
+				$fill_color = $this->settings["colorf_nr"];
 			}
 		} elseif ($gender == 'M'){
-			if ($related || !$this->settings["mark_not_related"]) {
-				$fill_color = $this->colors["colorm"];
+			if ($related || !$this->settings["marknr"]) {
+				$fill_color = $this->settings["colorm"];
 			} else  {
-				$fill_color = $this->colors["colorm_nr"];
+				$fill_color = $this->settings["colorm_nr"];
 			}
 		} elseif ($gender == 'X'){
-			if ($related || !$this->settings["mark_not_related"]) {
-				$fill_color = $this->colors["colorx"];
+			if ($related || !$this->settings["marknr"]) {
+				$fill_color = $this->settings["colorx"];
 			} else  {
-				$fill_color = $this->colors["colorx_nr"];
+				$fill_color = $this->settings["colorx_nr"];
 			}
 		} else {
-			if ($related || !$this->settings["mark_not_related"]) {
-				$fill_color = $this->colors["coloru"];
+			if ($related || !$this->settings["marknr"]) {
+				$fill_color = $this->settings["coloru"];
 			} else  {
-				$fill_color = $this->colors["coloru_nr"];
+				$fill_color = $this->settings["coloru_nr"];
 			}
 		}
 		return $fill_color;
@@ -619,7 +524,7 @@ class Dot {
 	function getFamilyColour(): string
     {
 		// Determine the fill color
-        return $this->colors["colorfam"];
+        return $this->settings["colorfam"];
 	}
 
 	/**
@@ -630,24 +535,13 @@ class Dot {
 	function printDOTHeader(): string
     {
         $out = "digraph WT_Graph {\n";
-		// Using pagebreak
-		if (!empty($this->settings["use_pagesize"])) {
-			$out .= "ratio=\"auto\"\n";
-			//$out .= "/* PAGESIZE: " . $this->settings["use_pagesize"] . " */";
-			// Size of the page
-			$out .= "page=\"" . $this->pagesize["x"] . "," . $this->pagesize["y"] . "\"\n";
-			// Size of the drawing (pagesize - 1 inch)
-			$out .= "size=\"" . ($this->pagesize["x"] - $this->settings["page_margin"]) . "," . ($this->pagesize["y"] - $this->settings["page_margin"]) . "\"\n";
-			//$out .= "size=\"50, 50\"\n";
-		}
-
 		$out .= "ranksep=\"" . str_replace("%","",$this->settings["ranksep"])*$this->settings["space_base"]/100 . " equally\"\n";
 		$out .= "nodesep=\"" . str_replace("%","",$this->settings["nodesep"])*$this->settings["space_base"]/100	 . "\"\n";
 		$out .= "dpi=\"" . $this->settings["dpi"] . "\"\n";
 		$out .= "mclimit=\"" . $this->settings["mclimit"] . "\"\n";
 		$out .= "rankdir=\"" . $this->settings["graph_dir"] . "\"\n";
 		$out .= "pagedir=\"LT\"\n";
-		$out .= "bgcolor=\"" . $this->colors['colorbg'] . "\"\n";
+		$out .= "bgcolor=\"" . $this->settings['colorbg'] . "\"\n";
 		$out .= "edge [ style=solid, arrowhead=normal arrowtail=none];\n";
 		if ($this->settings["diagram_type"] == "simple") {
 			$out .= "node [ shape=box, style=filled fontsize=\"" . $this->font_size ."\" fontname=\"" . $this->settings["typeface"] ."\"];\n";
@@ -733,7 +627,7 @@ class Dot {
 			$out .= "label=<";
 
 			// --- Print table ---
-			$out .= "<TABLE COLOR=\"" . $this->colors["colorborder"] . "\" BORDER=\"0\" CELLBORDER=\"1\" CELLPADDING=\"2\" CELLSPACING=\"0\">";
+			$out .= "<TABLE COLOR=\"" . $this->settings["colorborder"] . "\" BORDER=\"0\" CELLBORDER=\"1\" CELLPADDING=\"2\" CELLSPACING=\"0\">";
 
 			// --- Print couple ---
 			$out .= "<TR>";
@@ -766,7 +660,7 @@ class Dot {
 					$out .= "<TD COLSPAN=\"2\" CELLPADDING=\"0\" PORT=\"marr\" BGCOLOR=\"" . $fill_color . "\">";
 				}
 
-				$out .= "<FONT COLOR=\"". $this->colors["font_color"]["details"] ."\" POINT-SIZE=\"" . ($this->font_size) ."\">" . (empty($marriagedate)?"":$marriagedate) . "<BR />" . (empty($marriageplace)?"":"(".$marriageplace.")") . $family . "</FONT>";
+				$out .= "<FONT COLOR=\"". $this->settings["font_color"]["details"] ."\" POINT-SIZE=\"" . ($this->font_size) ."\">" . (empty($marriagedate)?"":$marriagedate) . "<BR />" . (empty($marriageplace)?"":"(".$marriageplace.")") . $family . "</FONT>";
 				$out .= "</TD>";
 				$out .= "</TR>";
 			}
@@ -783,11 +677,11 @@ class Dot {
             }
             // If names, birth details, and death details are all disabled - show a smaller marriage circle to match the small tiles for individuals.
             if (!$this->settings["show_by"] && !$this->settings["show_bp"] && !$this->settings["show_dy"] && !$this->settings["show_dp"] && !$this->settings["show_my"] && !$this->settings["show_pid"] && !$this->settings["show_fid"] && $this->settings["use_abbr_names"][$this->settings["use_abbr_name"]] == "Don't show names") {
-                $out .= "color=\"" . $this->colors["colorborder"] . "\",fillcolor=\"" . $fill_color . "\", $href shape=point, height=0.2, style=filled";
+                $out .= "color=\"" . $this->settings["colorborder"] . "\",fillcolor=\"" . $fill_color . "\", $href shape=point, height=0.2, style=filled";
                 $out .= ", label=" . "< >";
             } else {
-                $out .= "color=\"" . $this->colors["colorborder"] . "\",fillcolor=\"" . $fill_color . "\", $href shape=ellipse, style=filled";
-                $out .= ", label=" . "<<TABLE border=\"0\" CELLPADDING=\"0\" CELLSPACING=\"0\"><TR><TD><FONT COLOR=\"". $this->colors["font_color"]["details"] ."\" POINT-SIZE=\"" . ($this->font_size) ."\">" . (empty($marriagedate)?"":$marriagedate) . "<BR />" . (empty($marriageplace)?"":"(".$marriageplace.")") . $family . "</FONT></TD></TR></TABLE>>";
+                $out .= "color=\"" . $this->settings["colorborder"] . "\",fillcolor=\"" . $fill_color . "\", $href shape=ellipse, style=filled";
+                $out .= ", label=" . "<<TABLE border=\"0\" CELLPADDING=\"0\" CELLSPACING=\"0\"><TR><TD><FONT COLOR=\"". $this->settings["font_color"]["details"] ."\" POINT-SIZE=\"" . ($this->font_size) ."\">" . (empty($marriagedate)?"":$marriagedate) . "<BR />" . (empty($marriageplace)?"":"(".$marriageplace.")") . $family . "</FONT></TD></TR></TABLE>>";
             }
         }
 
@@ -1353,9 +1247,9 @@ class Dot {
         }
 
         if ($relationshipType != "") {
-            $arrowColor = $this->settings["color_arrow_related"] == "color_arrow_related" ? $this->colors["arrows"]["not_related"] : $this->colors["arrows"]["default"];
+            $arrowColor = $this->settings["color_arrow_related"] == "color_arrow_related" ? $this->settings["arrows"]["not_related"] : $this->settings["arrows"]["default"];
         } else {
-            $arrowColor = $this->settings["color_arrow_related"] == "color_arrow_related" ? $this->colors["arrows"]["related"] : $this->colors["arrows"]["default"];
+            $arrowColor = $this->settings["color_arrow_related"] == "color_arrow_related" ? $this->settings["arrows"]["related"] : $this->settings["arrows"]["default"];
         }
         return $arrowColor;
     }
