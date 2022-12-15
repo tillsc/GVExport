@@ -156,14 +156,11 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
 
     public function getChartAction(ServerRequestInterface $request): ResponseInterface
     {
-        global $GVE_CONFIG;
-
         $tree = $request->getAttribute('tree');
         assert($tree instanceof Tree);
 
         $individual = $this->getIndividual($tree, $request->getQueryParams()['xref']);
-        $settings = new Settings($this);
-		$userDefaultVars = $settings->getAdminSettings(false);
+		$userDefaultVars = (new Settings($this))->getSettings();
         if (!isset($_REQUEST['reset'])) {
             $cookie = new Cookie($tree);
             // Load settings from cookie *on top* of our default settings,
@@ -171,7 +168,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
             $userDefaultVars = $cookie->load($userDefaultVars);
         }
 
-        $otypes = $this->getOTypes();
+        $otypes = $this->getOTypes($userDefaultVars);
 
         return $this->viewResponse($this->name() . '::page', [
             'gvexport_css'  => route('module', ['module' => $this->name(), 'action' => 'Css']),
@@ -181,10 +178,8 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
             'title'         => 'GVExport',
             'vars'          => $userDefaultVars,
             'otypes'        => $otypes,
-            'gve_config'    => $GVE_CONFIG,
             'cartempty'     => !functionsClippingsCart::isIndividualInCart($tree),
-            'module'        => $this,
-            'nographviz' => $GVE_CONFIG["graphviz_bin"] == ""
+            'module'        => $this
         ]);
     }
 
@@ -228,7 +223,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
         // If browser mode, output dot instead of selected file
         $file_type = isset($_POST["browser"]) && $_POST["browser"] == "true" ? "dot" : $_REQUEST["vars"]["otype"];
 
-        $outputFile = new OutputFile($temp_dir, $file_type);
+        $outputFile = new OutputFile($temp_dir, $file_type, $this);
         return $outputFile->downloadFile();
     }
 
@@ -238,15 +233,11 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
      */
     public function getAdminAction(ServerRequestInterface $request): ResponseInterface
     {
-        global $GVE_CONFIG;
-
         $this->layout = 'layouts/administration';
-
-        $otypes = $this->getOTypes();
+        $otypes = $this->getOTypes((new Settings($this))->getSettings());
         $response['module'] = $this;
         $response['otypes'] = $otypes;
-        $response['vars'] = (new Settings($this))->getAdminSettings(isset($_REQUEST['reset']) && $_REQUEST['reset'] === "1");
-        $response['gve_config'] = $GVE_CONFIG;
+        $response['vars'] = (new Settings($this))->getSettings(isset($_REQUEST['reset']) && $_REQUEST['reset'] === "1");
         $response['title'] = $this->title();
         $response['gvexport_css']  = route('module', ['module' => $this->name(), 'action' => 'Css']);
         $response['gvexport_js']  = route('module', ['module' => $this->name(), 'action' => 'JS']);
@@ -278,8 +269,6 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
      */
     function saveDOTFile($tree): string
     {
-        global $GVE_CONFIG;
-
         // Make a unique directory to the tmp dir
         $temp_dir = (new File())->sys_get_temp_dir_my() . "/" . md5(Auth::id());
         if (!is_dir("$temp_dir")) {
@@ -290,7 +279,8 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
         $contents = $this->createGraphVizDump($tree, $temp_dir);
 
         // Put the contents into the file
-        $fid = fopen($temp_dir . "/" . $GVE_CONFIG["filename"] . ".dot", "w");
+        $settings = (new Settings($this))->getSettings();
+        $fid = fopen($temp_dir . "/" . $settings['filename'] . ".dot", "w");
         fwrite($fid, $contents);
         fclose($fid);
 
@@ -300,7 +290,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
     function createGraphVizDump($tree, $temp_dir): string
     {
         $out = "";
-        $dot = new Dot($tree, Registry::filesystem()->data());
+        $dot = new Dot($tree, $this, Registry::filesystem()->data());
         $vars = $_REQUEST['vars'];
 
         $cookie = new Cookie($tree);
@@ -318,8 +308,8 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
             $dot->setSettings("indi", "");
         }
         // Stop PIDs
-        if (!empty($vars["other_stop_pids"]) || !empty($vars["stop_pid"])) {
-            $dot->setSettings("stop_pids", $vars["stop_pid"] .','. $vars["other_stop_pids"]);
+        if (!empty($vars["other_stop_pids"])) {
+            $dot->setSettings("stop_pids", $vars["other_stop_pids"]);
             $dot->setSettings("stop_proc", TRUE);
         } else {
             $dot->setSettings("stop_proc", FALSE);
@@ -611,14 +601,13 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
      *
      * @return array
      */
-    private function getOTypes(): array
+    private function getOTypes($vars): array
     {
-        global $GVE_CONFIG;
         $otypes = array();
-        foreach ($GVE_CONFIG["output"] as $fmt => $val) {
-            if (isset($GVE_CONFIG["output"][$fmt]["label"]) and isset($GVE_CONFIG["output"][$fmt]["extension"])) {
-                $lbl = $GVE_CONFIG["output"][$fmt]["label"];
-                $ext = $GVE_CONFIG["output"][$fmt]["extension"];
+        foreach ($vars['graphviz_config']["output"] as $fmt => $val) {
+            if (isset($vars['graphviz_config']["output"][$fmt]["label"]) and isset($vars['graphviz_config']["output"][$fmt]["extension"])) {
+                $lbl = $vars['graphviz_config']["output"][$fmt]["label"];
+                $ext = $vars['graphviz_config']["output"][$fmt]["extension"];
                 $otypes[$ext] = $lbl;
             }
         }

@@ -4,80 +4,24 @@ namespace vendor\WebtreesModules\gvexport;
 
 class Settings
 {
-    public array $defaultSettings;
+    private array $defaultSettings;
     private $module;
-    function __construct($module){
-        global $GVE_CONFIG;
-        $this->defaultSettings = [
-            "otype" => 'svg',
-            "grdir" => 'LR', // Direction of graph
-            "mclimit" => "1", // Graphviz MCLIMIT setting - number of times to regenerate graph for reduced crossings
-            "indiinc" => "indi",
-            "diagtype" => "decorated",
-            "with_photos" => "with_photos",
-            "show_by" => "show_by",
-            "bd_type" => "gedcom",
-            "show_bp" => "show_bp",
-            "show_dy" => "show_dy",
-            "dd_type" => "gedcom",
-            "show_dp" => "show_dp",
-            "show_my" => "show_my",
-            "md_type" => "gedcom",
-            "show_mp" => "show_mp",
-            "indiance" => "ance",
-            "ance_level" => $GVE_CONFIG["settings"]["ance_level"],
-            "indisibl" => "sibl",
-            "indicous" => "cous",
-            "tree_type" => "tree_type",
-            "indidesc" => "desc",
-            "desc_level" => $GVE_CONFIG["settings"]["desc_level"],
-            "indispou" => "spou",
-            "indiany" => "",
-            "marknr" => "",
-            "fastnr" => "",
-            "show_url" => "show_url",
-            "show_pid" => "DEFAULT", // This is set to DEFAULT, so we can tell if it was loaded from cookie or not
-            "show_fid" => "",
-            "use_abbr_place" => $GVE_CONFIG["settings"]["use_abbr_place"],
-            "use_abbr_name" => $GVE_CONFIG["settings"]["use_abbr_name"],
-            "debug" => ($GVE_CONFIG['debug'] ? "debug" : ""),
-            "dpi" => $GVE_CONFIG["settings"]["dpi"],
-            "ranksep" => $GVE_CONFIG["settings"]["ranksep"],
-            "nodesep" => $GVE_CONFIG["settings"]["nodesep"],
-            "other_pids" => "",
-            "stop_pid" => "",
-            "other_stop_pids" => "",
-            "download" => TRUE,
-            "usecart" => $GVE_CONFIG["settings"]["usecart"],
-            "adv_people" => $GVE_CONFIG["settings"]["adv_people"],
-            "adv_appear" => $GVE_CONFIG["settings"]["adv_appear"],
-            "adv_files" => $GVE_CONFIG["settings"]["adv_files"],
-            "typeface" => $GVE_CONFIG["default_typeface"],
-            "fontcolor_name" => $GVE_CONFIG["dot"]["fontcolor_name"],
-            "fontcolor_details" => $GVE_CONFIG["dot"]["fontcolor_details"],
-            "fontsize" => $GVE_CONFIG["dot"]["fontsize"],
-            "fontsize_name" => $GVE_CONFIG["dot"]["fontsize_name"],
-            "arrow_default" => $GVE_CONFIG["dot"]["arrow_default"],
-            "arrow_related" => $GVE_CONFIG["dot"]["arrow_related"],
-            "arrow_not_related" => $GVE_CONFIG["dot"]["arrow_not_related"],
-            "color_arrow_related" => $GVE_CONFIG["settings"]["color_arrow_related"],
-            "colorm" => $GVE_CONFIG["dot"]["colorm"],
-            "colorf" => $GVE_CONFIG["dot"]["colorf"],
-            "colorx" => $GVE_CONFIG["dot"]["colorx"],
-            "coloru" => $GVE_CONFIG["dot"]["coloru"],
-            "colorm_nr" => $GVE_CONFIG["dot"]["colorm_nr"],
-            "colorf_nr" => $GVE_CONFIG["dot"]["colorf_nr"],
-            "colorx_nr" => $GVE_CONFIG["dot"]["colorx_nr"],
-            "coloru_nr" => $GVE_CONFIG["dot"]["coloru_nr"],
-            "colorfam" => $GVE_CONFIG["dot"]["colorfam"],
-            "colorbg" => $GVE_CONFIG["dot"]["colorbg"],
-            "colorindibg" => $GVE_CONFIG["dot"]["colorindibg"],
-            "startcol" => $GVE_CONFIG["settings"]["startcol"],
-            "colorstartbg" => $GVE_CONFIG["dot"]["colorstartbg"],
-            "colorborder" => $GVE_CONFIG["dot"]["colorborder"],
-            "auto_update" => $GVE_CONFIG["settings"]["auto_update"]
-        ];
+    public function __construct($module){
+        // Load settings from config file
+        $this->defaultSettings = include dirname(__FILE__) . "/../config.php";
+        // Add options lists
+        $this->defaultSettings['typefaces'] = [0 => "Arial", 10 => "Brush Script MT", 20 => "Courier New", 30 => "Garamond", 40 => "Georgia", 50 => "Tahoma", 60 => "Times New Roman", 70 => "Trebuchet MS", 80 => "Verdana"];
+        $this->defaultSettings['typeface_fallback'] = [0 => "Sans",  10 => "Cursive", 20 => "Monospace", 30 => "Serif", 40 => "Serif", 50 => "Sans", 60 => "Serif", 70 => "Sans", 80 => "Sans"];
+        $this->defaultSettings['directions']['TB'] = "Top-to-bottom";
+        $this->defaultSettings['directions']['LR'] = "Left-to-right";
+        $this->defaultSettings['use_abbr_places'] = [0 => "Full place name", 10 => "City and country" ,  20 => "City and 2 letter ISO country code", 30 => "City and 3 letter ISO country code"];
+        $this->defaultSettings['use_abbr_names'] = [0 => "Full name", 10 => "Given and surnames", 20 => "Given names" , 30 => "First given name only", 40 => "Surnames", 50 => "Initials only", 60 => "Given name initials and surname", 70 => "Don't show names"];
         $this->module = $module;
+        $this->defaultSettings['countries'] = $this->getCountryAbbreviations();
+        if (!$this->isGraphvizAvailable($this->defaultSettings['graphviz_bin'])) {
+            $this->defaultSettings['graphviz_bin'] = "";
+        }
+        $this->defaultSettings['graphviz_config'] = $this->getGraphvizSettings($this->defaultSettings);
     }
 
     /**
@@ -86,7 +30,7 @@ class Settings
      * @param bool $reset
      * @return array
      */
-    function getAdminSettings(bool $reset): array
+    public function getSettings(bool $reset = false): array
     {
         $settings = $this->defaultSettings;
         if (!$reset) {
@@ -106,10 +50,130 @@ class Settings
      * @param $params
      * @return void
      */
-    function saveAdminSettings($settings) {
+    public function saveAdminSettings($settings) {
         foreach ($settings as $preference=>$value) {
             $this->module->setPreference($preference, $value);
         }
     }
 
+    /**
+     * Check if exec function is available to prevent error if webserver has disabled it
+     * From: https://stackoverflow.com/questions/3938120/check-if-exec-is-disabled
+     * @return bool
+     */
+    private function is_exec_available(): bool
+    {
+        static $available;
+
+        if (!isset($available)) {
+            $available = true;
+            if (ini_get('safe_mode')) {
+                $available = false;
+            } else {
+                $d = ini_get('disable_functions');
+                $s = ini_get('suhosin.executor.func.blacklist');
+                if ("$d$s") {
+                    $array = preg_split('/,\s*/', "$d,$s");
+                    if (in_array('exec', $array)) {
+                        $available = false;
+                    }
+                }
+            }
+        }
+
+        return $available;
+    }
+
+    /**
+     * Check if Graphviz is available
+     *
+     * @param $binPath
+     * @return mixed|string
+     */
+    private function isGraphvizAvailable($binPath)
+    {
+        static $outcome;
+
+        if (!isset($outcome)) {
+            if ($binPath == "") {
+                $outcome = false;
+                return false;
+            }
+            $stdout_output = null;
+            $return_var = null;
+            if ($this->is_exec_available()) {
+                exec($binPath . " -V" . " 2>&1", $stdout_output, $return_var);
+            }
+            if (!$this->is_exec_available() || $return_var !== 0) {
+                $outcome = false;
+            } else {
+                $outcome = true;
+            }
+        }
+        return $outcome;
+    }
+
+    /**
+     * Load country data for abbreviating place names
+     * Data comes from https://www.datahub.io/core/country-codes
+     * This material is licensed by its maintainers under the Public Domain Dedication and License, however,
+     * they note that the data is ultimately sourced from ISO who have an unclear licence regarding use,
+     * particularly around commercial use. Though all data sources providing ISO data have this problem.
+     * @return array
+     */
+    private function getCountryAbbreviations(): array
+    {
+        $string = file_get_contents(dirname(__FILE__) . "/../resources/data/country-codes_json.json");
+        $json = json_decode($string, true);
+        $countries = [];
+        foreach ($json as $row) {
+            $countries['iso2'][strtolower($row['Name'])] = $row['ISO3166-1-Alpha-2'];
+            $countries['iso3'][strtolower($row['Name'])] = $row['ISO3166-1-Alpha-3'];
+        }
+        return $countries;
+    }
+
+    private function getGraphvizSettings($settings): array
+    {
+        // Output file formats
+        $Graphviz['output']['svg']['label'] = "SVG"; #ESL!!! 20090213
+        $Graphviz['output']['svg']['extension'] = "svg";
+        $Graphviz['output']['svg']['exec'] = $settings['graphviz_bin'] . " -Tsvg:cairo -o" . $settings['filename'] . ".svg " . $settings['filename'] . ".dot";
+        $Graphviz['output']['svg']['cont_type'] = "image/svg+xml";
+
+        $Graphviz['output']['dot']['label'] = "DOT"; #ESL!!! 20090213
+        $Graphviz['output']['dot']['extension'] = "dot";
+        $Graphviz['output']['dot']['exec'] = "";
+        $Graphviz['output']['dot']['cont_type'] = "text/plain; charset=utf-8";
+
+        $Graphviz['output']['png']['label'] = "PNG"; #ESL!!! 20090213
+        $Graphviz['output']['png']['extension'] = "png";
+        $Graphviz['output']['png']['exec'] = $settings['graphviz_bin'] . " -Tpng -o" . $settings['filename'] . ".png " . $settings['filename'] . ".dot";
+        $Graphviz['output']['png']['cont_type'] = "image/png";
+
+        $Graphviz['output']['jpg']['label'] = "JPG"; #ESL!!! 20090213
+        $Graphviz['output']['jpg']['extension'] = "jpg";
+        $Graphviz['output']['jpg']['exec'] = $settings['graphviz_bin'] . " -Tjpg -o" . $settings['filename'] . ".jpg " . $settings['filename'] . ".dot";
+        $Graphviz['output']['jpg']['cont_type'] = "image/jpeg";
+
+        $Graphviz['output']['pdf']['label'] = "PDF"; #ESL!!! 20090213
+        $Graphviz['output']['pdf']['extension'] = "pdf";
+        $Graphviz['output']['pdf']['exec'] = $settings['graphviz_bin'] . " -Tpdf -o" . $settings['filename'] . ".pdf " . $settings['filename'] . ".dot";
+        $Graphviz['output']['pdf']['cont_type'] = "application/pdf";
+
+        if ( !empty( $settings['graphviz_bin']) && $settings['graphviz_bin'] != "") {
+
+            $Graphviz['output']['gif']['label'] = "GIF"; #ESL!!! 20090213
+            $Graphviz['output']['gif']['extension'] = "gif";
+            $Graphviz['output']['gif']['exec'] = $settings['graphviz_bin'] . " -Tgif -o" . $settings['filename'] . ".gif " . $settings['filename'] . ".dot";
+            $Graphviz['output']['gif']['cont_type'] = "image/gif";
+
+            $Graphviz['output']['ps']['label'] = "PS"; #ESL!!! 20090213
+            $Graphviz['output']['ps']['extension'] = "ps";
+            $Graphviz['output']['ps']['exec'] = $settings['graphviz_bin'] . " -Tps2 -o" . $settings['filename'] . ".ps " . $settings['filename'] . ".dot";
+            $Graphviz['output']['ps']['cont_type'] = "application/postscript";
+        }
+
+        return $Graphviz;
+    }
 }

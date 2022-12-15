@@ -1,200 +1,85 @@
 <?php
 /**
- * Main config file for GVExport Module
- * phpGedView: Genealogy Viewer
- * Copyright (C) 2002 to 2005	John Finlay and Others
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- *
- * @package PhpGedView
- * @subpackage Modules, GVExport
- * @version 0.8.0
- * @author Ferenc Kurucz <korbendallas1976@gmail.com>
+ * Default options for GVExport can be set here.
+ * Note that the administrator in webtrees can set most of these default values in the control panel settings page for GVExport
+ * Control panel settings override these settings
  */
 
-if (preg_match("/\Wconfig.php/", $_SERVER["SCRIPT_NAME"])>0) {
-	print "Got your hand caught in the cookie jar.";
-	exit;
-}
-
-global $GVE_CONFIG;
-
-// GraphViz binary
-$GVE_CONFIG["graphviz_bin"] = "/usr/bin/dot"; // Default on Debian Linux
-//$GVE_CONFIG["graphviz_bin"] = "/usr/local/bin/dot"; // Default if you compiled Graphviz from source
-//$GVE_CONFIG["graphviz_bin"] = "c:\\Graphviz2.17\\bin\\dot.exe"; // for Windows (install dot.exe in a directory with no blank spaces)
-//$GVE_CONFIG["graphviz_bin"] = ""; // Uncomment this line if you don't have GraphViz installed on the server
-
-$GVE_CONFIG["filename"] = "gvexport";
-
-// Test we can actually access GraphViz
-$stdout_output = null;
-$return_var = null;
-if (is_exec_available()) {
-	exec($GVE_CONFIG["graphviz_bin"] . " -V" . " 2>&1", $stdout_output, $return_var);
-}
-if (!is_exec_available() || $return_var !== 0)
-{
-	$GVE_CONFIG["graphviz_bin"] = "";
-}
-
-// Output file formats
-$GVE_CONFIG["output"]["svg"]["label"] = "SVG"; #ESL!!! 20090213
-$GVE_CONFIG["output"]["svg"]["extension"] = "svg";
-$GVE_CONFIG["output"]["svg"]["exec"] = $GVE_CONFIG["graphviz_bin"] . " -Tsvg:cairo -o" . $GVE_CONFIG["filename"] . ".svg " . $GVE_CONFIG["filename"] . ".dot";
-$GVE_CONFIG["output"]["svg"]["cont_type"] = "image/svg+xml";
-
-$GVE_CONFIG["output"]["dot"]["label"] = "DOT"; #ESL!!! 20090213
-$GVE_CONFIG["output"]["dot"]["extension"] = "dot";
-$GVE_CONFIG["output"]["dot"]["exec"] = "";
-$GVE_CONFIG["output"]["dot"]["cont_type"] = "text/plain; charset=utf-8";
-
-$GVE_CONFIG["output"]["png"]["label"] = "PNG"; #ESL!!! 20090213
-$GVE_CONFIG["output"]["png"]["extension"] = "png";
-$GVE_CONFIG["output"]["png"]["exec"] = $GVE_CONFIG["graphviz_bin"] . " -Tpng -o" . $GVE_CONFIG["filename"] . ".png " . $GVE_CONFIG["filename"] . ".dot";
-$GVE_CONFIG["output"]["png"]["cont_type"] = "image/png";
-
-$GVE_CONFIG["output"]["jpg"]["label"] = "JPG"; #ESL!!! 20090213
-$GVE_CONFIG["output"]["jpg"]["extension"] = "jpg";
-$GVE_CONFIG["output"]["jpg"]["exec"] = $GVE_CONFIG["graphviz_bin"] . " -Tjpg -o" . $GVE_CONFIG["filename"] . ".jpg " . $GVE_CONFIG["filename"] . ".dot";
-$GVE_CONFIG["output"]["jpg"]["cont_type"] = "image/jpeg";
-
-$GVE_CONFIG["output"]["pdf"]["label"] = "PDF"; #ESL!!! 20090213
-$GVE_CONFIG["output"]["pdf"]["extension"] = "pdf";
-$GVE_CONFIG["output"]["pdf"]["exec"] = $GVE_CONFIG["graphviz_bin"] . " -Tpdf -o" . $GVE_CONFIG["filename"] . ".pdf " . $GVE_CONFIG["filename"] . ".dot";
-$GVE_CONFIG["output"]["pdf"]["cont_type"] = "application/pdf";
-
-if ( !empty( $GVE_CONFIG["graphviz_bin"]) && $GVE_CONFIG["graphviz_bin"] != "") {
-
-	$GVE_CONFIG["output"]["gif"]["label"] = "GIF"; #ESL!!! 20090213
-	$GVE_CONFIG["output"]["gif"]["extension"] = "gif";
-	$GVE_CONFIG["output"]["gif"]["exec"] = $GVE_CONFIG["graphviz_bin"] . " -Tgif -o" . $GVE_CONFIG["filename"] . ".gif " . $GVE_CONFIG["filename"] . ".dot";
-	$GVE_CONFIG["output"]["gif"]["cont_type"] = "image/gif";
-
-	$GVE_CONFIG["output"]["ps"]["label"] = "PS"; #ESL!!! 20090213
-	$GVE_CONFIG["output"]["ps"]["extension"] = "ps";
-	$GVE_CONFIG["output"]["ps"]["exec"] = $GVE_CONFIG["graphviz_bin"] . " -Tps2 -o" . $GVE_CONFIG["filename"] . ".ps " . $GVE_CONFIG["filename"] . ".dot";
-	$GVE_CONFIG["output"]["ps"]["cont_type"] = "application/postscript";
-}
-
-// Default colors - please use #RRGGBB format
-$GVE_CONFIG["dot"]["colorm"] = "#ADD8E6";	// Default color of male individuals (light blue)
-$GVE_CONFIG["dot"]["colorf"] = "#FFB6C1";	// Default color of female individuals (light pink)
-$GVE_CONFIG["dot"]["colorx"] = "#FCEAA1";	// Default color of Other gender individuals (light yellow)
-$GVE_CONFIG["dot"]["coloru"] = "#CCEECC";	// Default color of unknown gender individuals (light green)
-$GVE_CONFIG["dot"]["colorm_nr"] = "#EEF8F8";	// Default color of not blood-related male individuals
-$GVE_CONFIG["dot"]["colorf_nr"] = "#FDF2F2";	// Default color of not blood-related female individuals
-$GVE_CONFIG["dot"]["colorx_nr"] = "#FCF7E3";	// Default color of not blood-related Other gender individuals
-$GVE_CONFIG["dot"]["coloru_nr"] = "#D6EED6";	// Default color of not blood-related unknown gender individuals
-$GVE_CONFIG["dot"]["colorfam"] = "#FFFFEE";	// Default color of families (different light yellow)
-$GVE_CONFIG["dot"]["colorbg"] = "#eeeeee"; // Background of diagram (light grey)
-$GVE_CONFIG["dot"]["colorindibg"] = "#fefefe"; // Background of individual tile (except simple mode)
-$GVE_CONFIG["settings"]["startcol"] = "false"; // Whether to use a different colour for starting individuals
-$GVE_CONFIG["dot"]["colorstartbg"] = "#FFFDC3"; // Background of starting individuals
-$GVE_CONFIG["dot"]["colorborder"] = "#606060"; // Outline colour
-
-
-$GVE_CONFIG["dot"]["fontsize"] = "10";	// Default font size
-$GVE_CONFIG["dot"]["fontsize_name"] = "12";	// Default font size
-$GVE_CONFIG["dot"]["fontcolor_name"] = "#333333";	// Default font colour for name
-$GVE_CONFIG["dot"]["fontcolor_details"] = "#555555";	// Default font colour for date/place of birth/death etc.
-$GVE_CONFIG["dot"]["arrow_default"] = "#555555";	// Default colour for arrows between records
-$GVE_CONFIG["dot"]["arrow_related"] = "#222266";	// Default colour for arrows from family record to child by birth
-$GVE_CONFIG["dot"]["arrow_not_related"] = "#226622";	// Default colour for arrows from family records to child other than birth (adopted, etc)
-$GVE_CONFIG["settings"]["color_arrow_related"] = "";
-
-$GVE_CONFIG["settings"]["dpi"] = "72"; // default DPI (75: screen, 300: print)
-$GVE_CONFIG["settings"]["ranksep"] = "100%";
-$GVE_CONFIG["settings"]["nodesep"] = "100%";
-$GVE_CONFIG["settings"]["space_base"] = .15;
-$GVE_CONFIG["settings"]["auto_update"] = "auto_update";
-
-// Direction of graph
-$GVE_CONFIG["directions"]["TB"] = "Top-to-bottom";
-$GVE_CONFIG["directions"]["LR"] = "Left-to-right";
-
-// Font name
-$GVE_CONFIG["default_typeface"] = 0;
-$GVE_CONFIG["settings"]["typefaces"] =         [0 => "Arial", 10 => "Brush Script MT" ,  20 => "Courier New", 30 => "Garamond", 40 => "Georgia", 50 => "Tahoma", 60 => "Times New Roman", 70 => "Trebuchet MS", 80 => "Verdana"];
-$GVE_CONFIG["settings"]["typeface_fallback"] = [0 => "Sans",  10 => "Cursive" ,          20 => "Monospace",   30 => "Serif",    40 => "Serif",   50 => "Sans",   60 => "Serif",           70 => "Sans",         80 => "Sans"];
-
-// Customization
-$GVE_CONFIG["custom"]["birth_text"] = "*";	// Text shown on chart before the birth date
-$GVE_CONFIG["custom"]["death_text"] = "+";	// Text shown on chart before the death date
-
-// Settings
-$GVE_CONFIG["settings"]["use_abbr_place"] = "Full place name";
-$GVE_CONFIG["settings"]["use_abbr_name"] = "Full name";
-$GVE_CONFIG["settings"]["download"] = TRUE;
-
-// Deafult max levels of ancestors
-$GVE_CONFIG["settings"]["ance_level"] = 2;
-// Deafult max levels of descendants
-$GVE_CONFIG["settings"]["desc_level"] = 2;
-// By default, if there are clippings in the clippings cart then use them
-$GVE_CONFIG["settings"]["usecart"] = TRUE;
-
-// Hide advanced settings by default
-$GVE_CONFIG["settings"]["adv_appear"] = FALSE;
-$GVE_CONFIG["settings"]["adv_people"] = FALSE;
-$GVE_CONFIG["settings"]["adv_files"] = FALSE;
-
-// Debug mode (if set to true the DOT file & other debug info will be dumped on screen)
-$GVE_CONFIG["debug"] = false;
-// Whether the debug settings should be shown in the settings menu - will then override above
-$GVE_CONFIG["show_debug"] = false;
-
-
-// Load country data for abbreviating place names
-// Data comes from https://www.datahub.io/core/country-codes
-// This material is licensed by its maintainers under the Public Domain Dedication and License, however,
-// they note that the data is ultimately sourced from ISO who have an unclear licence regarding use,
-// particularly around commercial use. Though all data sources providing ISO data have this problem.
-$string = file_get_contents(dirname(__FILE__)."/resources/data/country-codes_json.json");
-$json = json_decode($string, true);
-
-foreach ($json as $row) {
-	$GVE_CONFIG["countries"]["iso2"][strtolower($row["Name"])] = $row["ISO3166-1-Alpha-2"];
-	$GVE_CONFIG["countries"]["iso3"][strtolower($row["Name"])] = $row["ISO3166-1-Alpha-3"];
-}
-// Options for abbreviating
-$GVE_CONFIG["settings"]["use_abbr_places"] = [0 => "Full place name", 10 => "City and country" ,  20 => "City and 2 letter ISO country code", 30 => "City and 3 letter ISO country code"];
-$GVE_CONFIG["settings"]["use_abbr_names"] = [0 => "Full name", 10 => "Given and surnames", 20 => "Given names" , 30 => "First given name only", 40 => "Surnames", 50 => "Initials only", 60 => "Given name initials and surname", 70 => "Don't show names"];
-
-// Check if exec function is available to prevent error if webserver has disabled it
-// From: https://stackoverflow.com/questions/3938120/check-if-exec-is-disabled
-function is_exec_available() {
-	static $available;
-
-	if (!isset($available)) {
-		$available = true;
-		if (ini_get('safe_mode')) {
-			$available = false;
-		} else {
-			$d = ini_get('disable_functions');
-			$s = ini_get('suhosin.executor.func.blacklist');
-			if ("$d$s") {
-				$array = preg_split('/,\s*/', "$d,$s");
-				if (in_array('exec', $array)) {
-					$available = false;
-				}
-			}
-		}
-	}
-
-	return $available;
-}
+return array(
+	// Set path to Graphviz binary
+	'graphviz_bin' => '/usr/bin/dot', // Default on Debian Linux
+	// 'graphviz_bin' => '/usr/local/bin/dot', // Default if you compiled Graphviz from source
+	// 'graphviz_bin' => 'c:\\Graphviz2.17\\bin\\dot.exe', // for Windows (install dot.exe in a directory with no blank spaces)
+	// 'graphviz_bin' => '', // Uncomment this line if you don't have GraphViz installed on the server
+	'filename' => 'gvexport', // Output file name used for downloads
+	'otype' => 'svg', // Default output file type
+	'grdir' => 'LR', // Direction of graph
+	'mclimit' => '1', // Graphviz MCLIMIT setting - number of times to regenerate graph for reduced crossings
+	'diagtype' => 'decorated', // Default diagram type setting
+	'with_photos' => 'with_photos', // Whether to include photos in diagram
+	'show_by' => 'show_by', // Whether to show birthdate for individuals
+	'bd_type' => 'gedcom', // Whether to show just the year or the full GEDCOM date of birth
+	'show_bp' => 'show_bp', // Whether to show birthplace for individuals
+	'show_dy' => 'show_dy', // Whether to show death date  for individuals
+	'dd_type' => 'gedcom', // Whether to show just the year or the full GEDCOM date pf death
+	'show_dp' => 'show_dp', // Whether to show death date for individuals
+	'show_my' => 'show_my', // Whether to show marriage date on the family record
+	'md_type' => 'gedcom', // Whether to show just the year or the full GEDCOM date of marriage
+	'show_mp' => 'show_mp', // Whether to show the place of marriage on the family record
+	'indiance' => 'ance', // If ancestors should be included when calculating who to show in the diagram
+	'ance_level' => 2, // Default setting for number of ancestor generations to include
+	'indisibl' => 'sibl', // Whether to include siblings when calculating who to include in the diagram
+	'indicous' => 'cous', // Whether to include all relatives (i.e. cousins and nieces/nephews in addition to siblings) when calculating who to include in the diagram
+	'indidesc' => 'desc', // If descendants should be included when calculating who to show in the diagram
+	'desc_level' => 2, // Default setting for number of descendant generations to include
+	'indispou' => 'spou', // Whether to include spouses when calculating who to include in the diagram
+	'indiany' => '', // Whether to include all linked records regardless of relationship when calculating who to include in the diagram
+	'marknr' => '', // Whether to display non-relatives in a different colour
+	'fastnr' => '', // Whether to skip checking links outside the displayed tree when checking for non-relatives, to speed up generation of the diagram
+	'show_url' => 'show_url', // Whether to embed links to the webtrees records in the diagram for supported file types
+	'show_pid' => 'DEFAULT', // This is set to DEFAULT, so we can tell if it was loaded from cookie or not
+	'show_fid' => '', // Whether to show the family XREF
+	'use_abbr_place' => 'Full place name', // Default abbreviation setting for place names
+	'use_abbr_name' => 'Full name', // Default abbreviation settings for individual's names
+	'debug' => false, // Debug mode (if set to true then the debug steps are run)
+	'show_debug' => false, // If set to true, a debug panel is shown
+	'dpi' => '72', // default resolution - increase if text or photos look blurry, decrease if you have memory issues
+	'ranksep' => '100%', // Separation between generations as a % of default (e.g. 200% is double spacing)
+	'nodesep' => '100%', // Separation between individuals in diagram
+	'space_base' => .15, // Base value for above, e.g. 100% is the same as this value
+	'other_pids' => '', // Default XREFs to load - normally left blank
+	'other_stop_pids' => '', // Default XREFs to stop traversing tree at, normally left blank
+	'usecart' => TRUE, // When true, if there are clippings in the clippings cart then use them
+	'adv_people' => FALSE, // Whether to show advanced settings by default for People to be included section
+	'adv_appear' => FALSE, // Whether to show advanced settings by default for Appearance section
+	'adv_files' => FALSE, // Whether to show advanced settings by default for File settings section
+	'typeface' => 0, // Default font value, based on list of fonts 'typefaces'
+	'defaulttypeface' => 0, // Fallback font value, if above typeface not available
+	'fontcolor_name' => '#333333',	// Default font colour for name
+	'fontcolor_details' => '#555555',	// Default font colour for date/place of birth/death etc.
+	'fontsize' => '10',	// Default font size for everything except name
+	'fontsize_name' => '12',	// Default font size for name
+	'arrow_default' => '#555555', // Default colour for arrows between records
+	'arrow_related' => '#222266', // Default colour for arrows from family record to child by birth
+	'arrow_not_related' => '#226622',	// Default colour for arrows from family records to child other than birth (adopted, etc)
+	'color_arrow_related' => '', // If arrows should be coloured based on blood-relationship or not
+	'colorm' => '#ADD8E6', // Default color of male individuals (light blue)
+	'colorf' => '#FFB6C1', // Default color of female individuals (light pink)
+	'colorx' => '#FCEAA1', // Default color of Other gender individuals (light yellow)
+	'coloru' => '#CCEECC', // Default color of unknown gender individuals (light green)
+	'colorm_nr' => '#EEF8F8', // Default color of not blood-related male individuals
+	'colorf_nr' => '#FDF2F2', // Default color of not blood-related female individuals
+	'colorx_nr' => '#FCF7E3', // Default color of not blood-related Other gender individuals
+	'coloru_nr' => '#D6EED6', // Default color of not blood-related unknown gender individuals
+	'colorfam' => '#FFFFEE', // Default color of families (different light yellow)
+	'colorbg' => '#eeeeee', // Background of diagram (light grey)
+	'colorindibg' => '#fefefe', // Background of individual tile (except simple mode)
+	'startcol' => 'false', // Whether to use a different colour for starting individuals
+	'colorstartbg' => '#FFFDC3', // Background of starting individuals
+	'colorborder' => '#606060', // Outline colour
+	'birth_text' => '*', // Text shown on chart before the birthdate
+	'death_text' => '+', // Text shown on chart before the death date
+	'auto_update' => 'auto_update', // If auto-updating browser render on change is enabled or not
+);
 
 ?>

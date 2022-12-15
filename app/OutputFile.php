@@ -14,12 +14,13 @@ class OutputFile
     var string $tempDir;
     var string $fileType;
     var string $baseName;
+    var array $settings;
 
-    function __construct($temp_dir, $file_type) {
-        global $GVE_CONFIG;
+    function __construct($temp_dir, $file_type, $module) {
+        $this->settings = (new Settings($module))->getSettings();
         $this->tempDir = $temp_dir;
         $this->fileType = $file_type;
-        $this->baseName = $GVE_CONFIG["filename"] . "." . $GVE_CONFIG["output"][$file_type]["extension"];
+        $this->baseName = $this->settings['filename'] . "." . $this->settings['graphviz_config']['output'][$file_type]['extension'];
     }
 
     /**
@@ -29,12 +30,11 @@ class OutputFile
      */
     function downloadFile()
     {
-        global $GVE_CONFIG;
         $stream = $this->getFileStream();
         $response_factory = app(ResponseFactoryInterface::class);
         return $response_factory->createResponse()
             ->withBody($stream)
-            ->withHeader('Content-Type', $GVE_CONFIG["output"][$this->fileType]["cont_type"])
+            ->withHeader('Content-Type', $this->settings['graphviz_config']['output'][$this->fileType]['cont_type'])
             ->withHeader('Content-Disposition', "attachment; filename=" . $this->baseName);
     }
 
@@ -44,10 +44,9 @@ class OutputFile
      * @return mixed
      */
     private function getFileStream() {
-        global $GVE_CONFIG;
         $filename = $this->tempDir . "/" . $this->baseName;
-        if (!empty($GVE_CONFIG["output"][$this->fileType]["exec"])) {
-            $shell_cmd = str_replace($GVE_CONFIG["filename"],  $this->tempDir . "/" .$GVE_CONFIG["filename"], $GVE_CONFIG["output"][$this->fileType]["exec"]);
+        if (!empty($this->settings['graphviz_config']['output'][$this->fileType]['exec'])) {
+            $shell_cmd = str_replace($this->settings['filename'],  $this->tempDir . "/" .$this->settings['graphviz_config']['filename'], $this->settings['graphviz_config']['output'][$this->fileType]['exec']);
             exec($shell_cmd." 2>&1", $stdout_output, $return_var);
             if ($return_var !== 0)
             {
