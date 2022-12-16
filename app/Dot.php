@@ -574,7 +574,7 @@ class Dot {
 		$out .= " [ ";
 
 		// Showing the ID of the family, if set
-		if ($this->settings["show_fid"]) {
+		if ($this->settings["show_fid"] == "show_fid") {
 			$family = " (" . $fid . ")";
 		} else {
 			$family = "";
