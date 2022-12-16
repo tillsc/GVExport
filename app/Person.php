@@ -264,7 +264,7 @@ class Person
 
         // If PID already in name (from another module), remove it, so we don't add twice
         $name = str_replace(" (" . $pid . ")", "", $name);
-        if ($this->dot->settings["show_pid"]) {
+        if ($this->dot->settings["show_pid"] == "show_pid") {
             // Show INDI id
             $name = $name . " (" . $pid . ")";
         }
