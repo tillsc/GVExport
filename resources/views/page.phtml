@@ -600,6 +600,7 @@ $xref = $individual->xref();
     <input type="hidden" id="people-advanced-hidden" name="vars[adv_people]" value="<?= $vars["adv_people"] === "show" ? 'show' : '' ?>">
     <input type="hidden" id="appearance-advanced-hidden" name="vars[adv_appear]" value="<?= $vars["adv_appear"] === "show" ? 'show' : '' ?>">
     <input type="hidden" id="files-advanced-hidden" name="vars[adv_files]" value="<?= $vars["adv_files"] === "show" ? 'show' : '' ?>">
+    <div id="toast-container"></div>
 </form>
 
 <div class="sidebar__toggler" hidden>
@@ -799,11 +800,21 @@ $xref = $individual->xref();
 
             return element;
         }).catch(function (error) {
-            rendering.innerHTML = '<div class="alert alert-danger" role="alert"><?= I18N::translate('Error running GVExport in browser mode') ?>:<br>' + error + '</div>';
-            if (lastDotStr) {
-                rendering.innerHTML = rendering.innerHTML + '<h4>DOT contents</h4><pre id="dot-text"></pre>';
-                document.getElementById('dot-text').appendChild(document.createTextNode(lastDotStr));
+            if (error.message.includes("TOTAL_MEMORY")) {
+                if (graphvizAvailable) {
+                    showToast("E: <?= I18N::translate('Memory limit reached. Please reduce number of records or use download option.'); ?>");
+                } else {
+                        showToast("E: <?= I18N::translate('Memory limit reached. Please reduce number of records or install Graphviz on server and use download option.'); ?>");
+                }
+                rendering.innerHTML = "";
+            } else {
+                rendering.innerHTML = '<div class="alert alert-danger" role="alert"><?= I18N::translate('Error running GVExport in browser mode') ?>:<br>' + error + '</div>';
+                if (lastDotStr) {
+                    rendering.innerHTML = rendering.innerHTML + '<h4>DOT contents</h4><pre id="dot-text"></pre>';
+                    document.getElementById('dot-text').appendChild(document.createTextNode(lastDotStr));
+                }
             }
+
 
             // Create a new Viz instance (@see Caveats page for more info)
             viz = new Viz({
@@ -836,13 +847,3 @@ $xref = $individual->xref();
     ?>
 </script>
 
-<div id="toast-container"></div>
-
-<template id=dropdown>
-    <div style="position: relative; z-index: 10000">
-        <a class="btn btn-secondary btn-sm m-0" style="position: relative; overflow: hidden" onclick="this.parentNode.querySelector('.content').hidden = false;">V</a>
-        <ul class="content list-group" hidden>
-            <li class="list-group-item">Klick!</li>
-        </ul>
-    </div>
-</template>
