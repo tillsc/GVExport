@@ -42,6 +42,7 @@ spl_autoload_register(function ($class) {
 
 use Cassandra\Set;
 use Fisharebest\Webtrees\Auth;
+use Fisharebest\Webtrees\Contracts\UserInterface;
 use Fisharebest\Webtrees\Registry;
 use Fisharebest\Webtrees\I18N;
 use Fisharebest\Localization\Translation;
@@ -158,8 +159,12 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
     {
         $tree = $request->getAttribute('tree');
         assert($tree instanceof Tree);
-
-        $individual = $this->getIndividual($tree, $request->getQueryParams()['xref']);
+        if (isset($request->getQueryParams()['xref'])) {
+            $xref = $request->getQueryParams()['xref'];
+        } else {
+            $xref = $tree->getUserPreference(Auth::user(), UserInterface::PREF_TREE_ACCOUNT_XREF);
+        }
+        $individual = $this->getIndividual($tree, $tree->significantIndividual(Auth::user(), $xref)->xref());
 		$userDefaultVars = (new Settings($this))->getSettings();
         if (!isset($_REQUEST['reset'])) {
             $cookie = new Cookie($tree);

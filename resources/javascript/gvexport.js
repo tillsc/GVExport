@@ -348,19 +348,25 @@ function changeURLXref(xref) {
     }
 }
 function updateURLParameter(parameter, value, action) {
-    let url=document.location.href.split("?")[0];
-    let args=document.location.href.split("?")[1];
-    let params = new URLSearchParams(args);
-    if (params.toString().search(parameter) !== -1) {
-        if (action === "remove") {
-            params.delete(parameter);
-        } else if (action === "update") {
-            params.set(parameter, value);
-        } else {
-            return params.get(parameter);
+    let split = document.location.href.split("?");
+    let url = split[0];
+    if (split.length > 1) {
+        let args = split[1];
+        let params = new URLSearchParams(args);
+        if (params.toString().search(parameter) !== -1) {
+            if (action === "remove") {
+                params.delete(parameter);
+            } else if (action === "update") {
+                params.set(parameter, value);
+            } else {
+                return params.get(parameter);
+            }
         }
         history.pushState(null, '', url + "?" + params.toString());
+    } else if (action === "update") {
+        history.pushState(null, '', url + "?" +  parameter + "=" + value);
     }
+    return "";
 }
 
 function getURLParameter(parameter) {

@@ -2,8 +2,11 @@
 
 namespace vendor\WebtreesModules\gvexport;
 
+use Fisharebest\Webtrees\Auth;
+use Fisharebest\Webtrees\Contracts\UserInterface;
 use Fisharebest\Webtrees\I18N;
 use Fisharebest\Webtrees\Individual;
+use Fisharebest\Webtrees\Registry;
 use Fisharebest\Webtrees\Tree;
 
 
@@ -25,6 +28,7 @@ use Fisharebest\Webtrees\Tree;
 
 $settings = (new Settings($module))->getSettings();
 $nographviz = $settings['graphviz_bin'] == "";
+$xref = $individual->xref();
 ?>
 
 <script type="text/javascript">
@@ -37,6 +41,7 @@ $nographviz = $settings['graphviz_bin'] == "";
 
     function runPageLoaded() {
         if (typeof pageLoaded === 'function' && typeof jQuery === 'function') {
+            changeURLXref('<?= $xref; ?>');
             pageLoaded();
         } else {
             // If external script loads before inline script, then wait
@@ -55,7 +60,6 @@ $nographviz = $settings['graphviz_bin'] == "";
     newScript.setAttribute("type","text/javascript");
     newScript.setAttribute("src","<?= $gvexport_js ?>");
     document.head.appendChild(newScript);
-
 </script>
 <script src="<?= $module->assetUrl('javascript/viz.js'); ?>"></script>
 <script src="<?= $module->assetUrl('javascript/panzoom.min.js'); ?>"></script>
@@ -92,9 +96,8 @@ $nographviz = $settings['graphviz_bin'] == "";
         /* Check if another module (e.g. vesta classic) is adding the XREF to
            the name. If so, we want to enable the XREF option for individuals
            unless we already have a saved setting */
-        $individual = $module->getIndividual($tree, $_GET["xref"]);
         $startName = $individual->fullName();
-        $name = str_replace(" (" . $_GET["xref"] . ")", "", $startName);
+        $name = str_replace(" (" . $xref . ")", "", $startName);
         if ($startName != $name && $vars["show_pid"] == "DEFAULT") {
             $overridePID = true;
         } else {
