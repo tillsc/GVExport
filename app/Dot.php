@@ -34,6 +34,7 @@ use Fisharebest\Webtrees\Family;
 use Fisharebest\Webtrees\I18n;
 use Fisharebest\Webtrees\Individual;
 use Fisharebest\Webtrees\Registry;
+use Fisharebest\Webtrees\Tree;
 use Psr\Http\Message\StreamFactoryInterface;
 
 /**
@@ -47,11 +48,10 @@ class Dot {
 	var array $indi_search_method = array("ance" => FALSE, "desc" => FALSE, "spou" => FALSE, "sibl" => FALSE, "cous" => FALSE, "any" => FALSE);
 	var string $font_size;
     var string $font_size_name;
-	var array $colors = array();
 	var array $settings = array();
     var array $messages = array(); // messages for toast system
 	private const ERROR_CHAR = "E:"; // Messages that start with this will be highlighted
-    private $tree;
+    private Tree $tree;
     private object $file_system;
     public string $debug_string = "";
 
@@ -77,16 +77,6 @@ class Dot {
 	}
 
 	/**
-	 * Function to set gender and family colors
-	 *
-	 * @param string $color_type
-	 * @param string $color
-	 */
-    public function setColor(string $color_type, string $color) {
-		$this->settings[$color_type] = $color;
-	}
-
-	/**
 	 * Function to set font size
 	 *
 	 * @param string $font_size
@@ -103,11 +93,6 @@ class Dot {
     public function setArrowColour(string $type, string $value)
     {
         $this->settings["arrows"][$type] = $value;
-    }
-
-    public function setColourArrowRelated(string $value)
-    {
-        $this->settings["color_arrow_related"] = $value;
     }
 
     /**

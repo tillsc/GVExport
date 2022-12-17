@@ -425,7 +425,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
         }
 
         if (isset($vars["color_arrow_related"])) {
-            $dot->setColourArrowRelated($vars['color_arrow_related']);
+            $dot->setSettings('color_arrow_related', $vars['color_arrow_related']);
         }
 
         if (isset($vars['grdir'])) {
@@ -506,46 +506,46 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
 
         // Set custom colors
         if (isset($_REQUEST["vars"]["colorm"])) {
-            $dot->setColor("colorm", $_REQUEST["vars"]["colorm"]);
+            $dot->setSettings("colorm", $_REQUEST["vars"]["colorm"]);
         }
         if (isset($_REQUEST["vars"]["colorf"])) {
-            $dot->setColor("colorf", $_REQUEST["vars"]["colorf"]);
+            $dot->setSettings("colorf", $_REQUEST["vars"]["colorf"]);
         }
         if (isset($_REQUEST["vars"]["colorx"])) {
-            $dot->setColor("colorx", $_REQUEST["vars"]["colorx"]);
+            $dot->setSettings("colorx", $_REQUEST["vars"]["colorx"]);
         }
         if (isset($_REQUEST["vars"]["coloru"])) {
-            $dot->setColor("coloru", $_REQUEST["vars"]["coloru"]);
+            $dot->setSettings("coloru", $_REQUEST["vars"]["coloru"]);
         }
         if (isset($_REQUEST["vars"]["colorm_nr"])) {
-            $dot->setColor("colorm_nr", $_REQUEST["vars"]["colorm_nr"]);
+            $dot->setSettings("colorm_nr", $_REQUEST["vars"]["colorm_nr"]);
         }
         if (isset($_REQUEST["vars"]["colorf_nr"])) {
-            $dot->setColor("colorf_nr", $_REQUEST["vars"]["colorf_nr"]);
+            $dot->setSettings("colorf_nr", $_REQUEST["vars"]["colorf_nr"]);
         }
         if (isset($_REQUEST["vars"]["colorx_nr"])) {
-            $dot->setColor("colorx_nr", $_REQUEST["vars"]["colorx_nr"]);
+            $dot->setSettings("colorx_nr", $_REQUEST["vars"]["colorx_nr"]);
         }
         if (isset($_REQUEST["vars"]["coloru_nr"])) {
-            $dot->setColor("coloru_nr", $_REQUEST["vars"]["coloru_nr"]);
+            $dot->setSettings("coloru_nr", $_REQUEST["vars"]["coloru_nr"]);
         }
         if (isset($_REQUEST["vars"]["colorfam"])) {
-            $dot->setColor("colorfam", $_REQUEST["vars"]["colorfam"]);
+            $dot->setSettings("colorfam", $_REQUEST["vars"]["colorfam"]);
         }
         if (isset($_REQUEST["vars"]["colorbg"])) {
-            $dot->setColor("colorbg", $_REQUEST["vars"]["colorbg"]);
+            $dot->setSettings("colorbg", $_REQUEST["vars"]["colorbg"]);
         }
         if (isset($_REQUEST["vars"]["colorindibg"])) {
-            $dot->setColor("colorindibg", $_REQUEST["vars"]["colorindibg"]);
+            $dot->setSettings("colorindibg", $_REQUEST["vars"]["colorindibg"]);
         }
         if (isset($_REQUEST["vars"]["startcol"])) {
             $dot->setSettings("startcol", $_REQUEST["vars"]["startcol"]);
         }
         if (isset($_REQUEST["vars"]["colorstartbg"])) {
-            $dot->setColor("colorstartbg", $_REQUEST["vars"]["colorstartbg"]);
+            $dot->setSettings("colorstartbg", $_REQUEST["vars"]["colorstartbg"]);
         }
         if (isset($_REQUEST["vars"]["colorborder"])) {
-            $dot->setColor("colorborder", $_REQUEST["vars"]["colorborder"]);
+            $dot->setSettings("colorborder", $_REQUEST["vars"]["colorborder"]);
         }
 
         // Settings
