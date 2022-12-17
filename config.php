@@ -42,7 +42,7 @@ return array(
 	'use_abbr_place' => 'Full place name', // Default abbreviation setting for place names
 	'use_abbr_name' => 'Full name', // Default abbreviation settings for individual's names
 	'debug' => false, // Debug mode (if set to true then the debug steps are run)
-	'show_debug' => true, // If set to true, a debug panel is shown
+	'show_debug' => false, // If set to true, a debug panel is shown
 	'use_graphviz' => true, // If Graphviz installed, we can still choose not to use it
 	'dpi' => '72', // default resolution - increase if text or photos look blurry, decrease if you have memory issues
 	'ranksep' => '100%', // Separation between generations as a % of default (e.g. 200% is double spacing)

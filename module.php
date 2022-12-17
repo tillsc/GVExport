@@ -500,8 +500,8 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
             $dot->setSettings("auto_update", "auto_update");
         }
 
-        if (isset($vars['debug']) && $vars['debug'] == "debug") {
-            $dot->setSettings("debug", TRUE);
+        if (isset($vars['debug'])) {
+            $dot->setSettings("debug", $vars['debug'] == "debug");
         }
 
         // Set custom colors
