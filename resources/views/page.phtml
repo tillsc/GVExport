@@ -584,7 +584,7 @@ $xref = $individual->xref();
             <div class="col-sm-8 wt-page-options-value">
                 <label for="use_graphviz"><?= I18N::translate('Use Graphviz') ?></label>
                 <input type="hidden" name="vars[use_graphviz]" value="no">
-                <input type="checkbox" name="vars[use_graphviz]" id="use_graphviz" value="use_graphviz" <?= $vars["use_graphviz"] == "use_graphviz" ? 'checked' : '' ?> <?= $settings['graphviz_bin'] == "" ? "disabled" : ""?>><br></div>
+                <input type="checkbox" name="vars[use_graphviz]" id="use_graphviz" value="use_graphviz" onclick="setGraphvizAvailable(this.value==='use_graphviz');" <?= $vars["use_graphviz"] == "use_graphviz" ? 'checked' : '' ?> <?= $settings['graphviz_bin'] == "" ? "disabled" : ""?>><br></div>
         </div>
         <? } ?>
     </div>
@@ -613,7 +613,7 @@ $xref = $individual->xref();
 </div>
 
 <script type="text/javascript">
-    const graphvizAvailable = <?= $nographviz ? "false" : "true" ?>;
+    let graphvizAvailable = <?= $nographviz ? "false" : "true" ?>;
     let panzoomInst = null;
     const workerURL = '<?= $module->assetUrl('javascript/full.renderer.js'); ?>';
     let viz = new Viz({
@@ -644,7 +644,6 @@ $xref = $individual->xref();
             addError("indi-error","<?= I18N::translate("Individual required") ?>");
             e.preventDefault();
         }
-
         // Also check if Graphviz installed. If so then let it handle it,
         // but if not, trigger client side actions
         if (!graphvizAvailable) {
@@ -754,7 +753,6 @@ $xref = $individual->xref();
                 images: images
             });
         }).then(function (element) {
-            prompt(element);
             // Now we have to clean up the generated SVG.
 
             // remove title tags, so we don't get weird data on hover,
@@ -806,7 +804,6 @@ $xref = $individual->xref();
                 rendering.innerHTML = rendering.innerHTML + '<h4>DOT contents</h4><pre id="dot-text"></pre>';
                 document.getElementById('dot-text').appendChild(document.createTextNode(lastDotStr));
             }
-            console.error(error);
 
             // Create a new Viz instance (@see Caveats page for more info)
             viz = new Viz({

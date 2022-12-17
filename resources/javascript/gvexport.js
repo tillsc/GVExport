@@ -870,3 +870,7 @@ function setCheckStatus(el, checked) {
         el.removeAttribute('checked');
     }
 }
+
+function setGraphvizAvailable(available) {
+    graphvizAvailable = available;
+}
