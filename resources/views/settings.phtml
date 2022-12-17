@@ -14,7 +14,8 @@ use Fisharebest\Webtrees\Http\RequestHandlers\ControlPanel;
  * @var array       $otypes                 output file type options
  * @var ?           $module                 this module
  */
-$settings = (new Settings($module))->getSettings();
+$settingsObj = new Settings($module);
+$settings = $settingsObj->getSettings();
 ?>
 
 <?= view('components/breadcrumbs', ['links' => [route(ControlPanel::class) => I18N::translate('Control panel'), $title]]) ?>
@@ -445,7 +446,7 @@ $settings = (new Settings($module))->getSettings();
                 <div class="col-sm-8 wt-page-options-value">
                     <label for="use_graphviz"><?= I18N::translate('Use Graphviz on server') ?></label>
                     <input type="hidden" name="vars[use_graphviz]" value="no">
-                    <input type="checkbox" name="vars[use_graphviz]" id="use_graphviz" value="use_graphviz" onclick="setGraphvizAvailable(this.value==='use_graphviz');" <?= $vars["use_graphviz"] == "use_graphviz" ? 'checked' : '' ?> <?= $settings['graphviz_bin'] == "" ? "disabled" : ""?>><br></div>
+                    <input type="checkbox" name="vars[use_graphviz]" id="use_graphviz" value="use_graphviz" onclick="setGraphvizAvailable(this.value==='use_graphviz');" <?= $vars["use_graphviz"] == "use_graphviz" ? 'checked' : '' ?> <?= isset($settings['graphviz_faked'])  ? "" : "disabled"; ?>><br></div>
             </div>
         </div>
 

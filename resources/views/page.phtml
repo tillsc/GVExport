@@ -38,7 +38,6 @@ $xref = $individual->xref();
     newSheet.setAttribute("type","text/css");
     newSheet.setAttribute("href","<?= $gvexport_css ?>");
     document.head.appendChild(newSheet);
-
     function runPageLoaded() {
         if (typeof pageLoaded === 'function' && typeof jQuery === 'function') {
             changeURLXref('<?= $xref; ?>');
@@ -584,7 +583,7 @@ $xref = $individual->xref();
             <div class="col-sm-8 wt-page-options-value">
                 <label for="use_graphviz"><?= I18N::translate('Use Graphviz on server') ?></label>
                 <input type="hidden" name="vars[use_graphviz]" value="no">
-                <input type="checkbox" name="vars[use_graphviz]" id="use_graphviz" value="use_graphviz" onclick="setGraphvizAvailable(this.value==='use_graphviz');" <?= $vars["use_graphviz"] == "use_graphviz" ? 'checked' : '' ?> <?= $settings['graphviz_bin'] == "" ? "disabled" : ""?>><br></div>
+                <input type="checkbox" name="vars[use_graphviz]" id="use_graphviz" value="use_graphviz" onclick="setGraphvizAvailable(this.value==='use_graphviz');" <?= $vars["use_graphviz"] == "use_graphviz" ? 'checked' : '' ?> <?= isset($settings['graphviz_faked'])  ? "" : "disabled"; ?>><br></div>
         </div>
         <? } ?>
     </div>
