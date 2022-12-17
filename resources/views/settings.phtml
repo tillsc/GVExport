@@ -14,7 +14,8 @@ use Fisharebest\Webtrees\Http\RequestHandlers\ControlPanel;
  * @var array       $otypes                 output file type options
  * @var ?           $module                 this module
  */
-$settings = (new Settings($module))->getSettings();
+$settingsObj = new Settings($module);
+$settings = $settingsObj->getSettings();
 ?>
 
 <?= view('components/breadcrumbs', ['links' => [route(ControlPanel::class) => I18N::translate('Control panel'), $title]]) ?>
@@ -414,7 +415,7 @@ $settings = (new Settings($module))->getSettings();
                     </div>
                 </div>
             </div>
-            <h3><?= /* I18N: Appearance heading */ I18N::translate('Output Settings') ?></h3>
+            <h3><?= /* I18N: Appearance heading */ I18N::translate('File Settings') ?></h3>
             <div class="row">
                 <label class="col-sm-4 col-form-label" for="otype"><?= I18N::translate('Output File Type') ?></label>
                 <div class="col-sm-8 wt-page-options-value">
@@ -427,7 +428,26 @@ $settings = (new Settings($module))->getSettings();
                     <input type="checkbox" name="vars[auto_update]" id="auto_update" value="auto_update" <?= $vars["auto_update"] == "auto_update" ? 'checked' : '' ?>>
                 </div>
             </div>
-
+            <h3><?= I18N::translate('Debug') ?></h3>
+            <div class="row form-group">
+                <label class="col-sm-4 col-form-label"><?= I18N::translate('Debug mode') ?></label>
+                <div class="col-sm-8 wt-page-options-value">
+                    <label for="debug"><?= I18N::translate('Show debug panel') ?></label>
+                    <input type="hidden" name="vars[show_debug]" value="no">
+                    <input type="checkbox" name="vars[show_debug]" id="show_debug" value="show_debug" <?= $vars["show_debug"] == "show_debug" ? 'checked' : '' ?>><br>
+                </div>
+                <label class="col-sm-4 col-form-label" for="debug"><?= I18N::translate('Debug mode') ?></label>
+                <div class="col-sm-8 wt-page-options-value">
+                    <label for="debug"><?= I18N::translate('Enable debug mode') ?></label>
+                    <input type="hidden" name="vars[debug]" value="no">
+                    <input type="checkbox" name="vars[debug]" id="debug" value="debug" <?= $vars["debug"] == "debug" ? 'checked' : '' ?>><br>
+                </div>
+                <label class="col-sm-4 col-form-label" for="use_graphviz"><?= I18N::translate('Graphviz') ?></label>
+                <div class="col-sm-8 wt-page-options-value">
+                    <label for="use_graphviz"><?= I18N::translate('Use Graphviz on server') ?></label>
+                    <input type="hidden" name="vars[use_graphviz]" value="no">
+                    <input type="checkbox" name="vars[use_graphviz]" id="use_graphviz" value="use_graphviz" onclick="setGraphvizAvailable(this.value==='use_graphviz');" <?= $vars["use_graphviz"] == "use_graphviz" ? 'checked' : '' ?> <?= isset($settings['graphviz_faked'])  ? "" : "disabled"; ?>><br></div>
+            </div>
         </div>
 
         <input type="hidden" name="save" id="save" value="1">

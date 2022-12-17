@@ -3,6 +3,14 @@
 	GVExport module for Webtrees
 =====================================================================
 
+Version 2.1.17 (2022-12-)
+  - New         : Save settings to file and load from file
+  - New         : All options should now have help messages
+  - Change      : Settings now remembered per tree, if you have multiple trees
+  - Change      : Added debug panel when debug mode active
+  - Change      : Browser now scrolls to last added individual instead of first in list
+  - Fixed       : Resolved issue with photos being stretched for users with Graphviz installed server-side
+
 Version 2.1.16 (2022-11-22)
   - New         : Use starting person selection system for stopping persons
   - New         : Resize images based on DPI for SVG output (and PDF if GraphViz installed on server)
@@ -224,18 +232,18 @@ Version 0.5.1 (2007-12-12)
 
 Version 0.5.0 (2007-12-02)
 	- Fixed		: PHP error during "simple" graph processing
-	- New		: INDI id and FAM id can be shown on graph (TODO #4)
-	- New		: Clickable containers (INDI and FAM), which opens the indi/fam page in PGV (TODO #2)
-	- New		: Last editor's username can be shown (TODO #4)
+	- New		: INDI id and FAM id can be shown on graph
+	- New		: Clickable containers (INDI and FAM), which opens the indi/fam page in PGV
+	- New		: Last editor's username can be shown
 
 Version 0.4.9 (2007-11-30)
-	- Fixed		: (Now really fixed) Unvalidated individuals and families are shown (TODO #1)
+	- Fixed		: (Now really fixed) Unvalidated individuals and families are shown
 	- New		: Graph direction selectable (Top-to-Bottom or Left-to-Right)
 	- New		: Combined graph mode (husband and wife in a single cell together with marriage info) - works correctly only in partial tree mode
 	- New		: Data shown in the container can be selected
 
 Version 0.4.8 (2007-11-29)
-	- Fixed		: Unvalidated individuals and families are shown (TODO #1)
+	- Fixed		: Unvalidated individuals and families are shown
 
 Version 0.4.7 (2007-11-28)
 	- Fixed		: Error handling for GraphViz exec (Pasquale Ceres <pasquale_ceres at yahoo it>)
@@ -290,12 +298,3 @@ Version 0.2 (2007-11-21)
 
 Version 0.1 (2007-11-15)
 	- Initial version
-
-=====================================================================
-	TODO
-=====================================================================
-	- Cleanup code
-	- Comment code
-	- PS export
-	- Customisable containers
-	- PHP coding style (mainly ' and ")

@@ -40,6 +40,10 @@ class Settings
                     $settings[$preference] = $pref;
                 }
             }
+            if ($settings['use_graphviz'] == 'no' && $settings['graphviz_bin'] != "") {
+                $settings['graphviz_bin'] = "";
+                $settings['graphviz_faked'] = TRUE;
+            }
         }
         return $settings;
     }

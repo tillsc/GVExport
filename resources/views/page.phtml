@@ -27,7 +27,7 @@ use Fisharebest\Webtrees\Tree;
  */
 
 $settings = (new Settings($module))->getSettings();
-$nographviz = $settings['graphviz_bin'] == "";
+$nographviz = $vars['graphviz_bin'] == "";
 $xref = $individual->xref();
 ?>
 
@@ -38,7 +38,6 @@ $xref = $individual->xref();
     newSheet.setAttribute("type","text/css");
     newSheet.setAttribute("href","<?= $gvexport_css ?>");
     document.head.appendChild(newSheet);
-
     function runPageLoaded() {
         if (typeof pageLoaded === 'function' && typeof jQuery === 'function') {
             changeURLXref('<?= $xref; ?>');
@@ -113,7 +112,7 @@ $xref = $individual->xref();
         ?>
 
             <div class="row form-group">
-                <?= MainPage::addLabelWithHelp('', 'Clippings cart'); ?>
+                <?= MainPage::addLabel('', 'Clippings cart'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <?= I18N::translate('You have items in the clippings cart, which can be used for the diagram instead of the below options.') ?>
                     <div class="col-sm-8 wt-page-options-value">
@@ -133,7 +132,7 @@ $xref = $individual->xref();
         <?php } ?>
 
         <div class="row form-group">
-            <?= MainPage::addLabelWithHelp('pid', 'Include anyone related to'); ?>
+            <?= MainPage::addLabel('pid', 'Include anyone related to'); ?>
             <div class="col-sm-8 wt-page-options-value">
                 <div id="indi_list">
 
@@ -147,7 +146,7 @@ $xref = $individual->xref();
         </div>
 
         <div class="row form-group">
-            <?= MainPage::addLabelWithHelp('indiance', 'Include ancestors'); ?>
+            <?= MainPage::addLabel('indiance', 'Include ancestors'); ?>
             <div class="col-sm-8 wt-page-options-value">
                 <div class="row">
                     <div class="col-auto mx-3">
@@ -163,7 +162,7 @@ $xref = $individual->xref();
         </div>
 
         <div class="row form-group">
-            <?= MainPage::addLabelWithHelp('', 'Include'); ?>
+            <?= MainPage::addLabel('', 'Include'); ?>
             <div class="col-sm-8 wt-page-options-value">
                 <div class="row">
                     <div class="col-auto mx-3">
@@ -191,7 +190,7 @@ $xref = $individual->xref();
         </div>
 
         <div class="row form-group">
-            <?= MainPage::addLabelWithHelp('indidesc', 'Include descendants'); ?>
+            <?= MainPage::addLabel('indidesc', 'Include descendants'); ?>
             <div class="col-sm-8 wt-page-options-value">
                 <div class="row">
                     <div class="col-auto mx-3">
@@ -208,7 +207,7 @@ $xref = $individual->xref();
         </div>
         <div id="people-advanced" <?= $vars["adv_people"] == "show" ? '' : 'style="display:none"'; ?>>
             <div class="row form-group">
-                <?= MainPage::addLabelWithHelp('other_pids', 'XREFs of included individuals'); ?>
+                <?= MainPage::addLabel('other_pids', 'XREFs of included individuals'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="input-group mt-1">
                         <input type="text" class="form-control" name="vars[other_pids]" id="other_pids" value="<?= $vars['other_pids'] ?>" onchange="refreshIndisFromXREFS(true)">
@@ -220,7 +219,7 @@ $xref = $individual->xref();
                 </div>
             </div>
             <div class="row form-group">
-                <?= MainPage::addLabelWithHelp('other_stop_pids', 'Stop processing on'); ?>
+                <?= MainPage::addLabel('other_stop_pids', 'Stop processing on'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <div id="stop_indi_list">
 
@@ -240,7 +239,7 @@ $xref = $individual->xref();
                 </div>
             </div>
             <div class="row form-group">
-                <?= MainPage::addLabelWithHelp('marknr', 'Non-relatives'); ?>
+                <?= MainPage::addLabel('marknr', 'Non-relatives'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <input type="hidden" name="vars[marknr]" value="no">
                     <input class="cart_toggle" onclick="setStateFastRelationCheck();" type="checkbox" name="vars[marknr]" id="marknr" value="marknr" <?= $vars["marknr"] == "marknr" ? 'checked' : '' ?>>
@@ -256,14 +255,14 @@ $xref = $individual->xref();
 
         <h3><?= I18N::translate('Appearance') ?></h3>
         <div class="row form-group">
-            <?= MainPage::addLabelWithHelp('grdir', 'Graph direction'); ?>
+            <?= MainPage::addLabel('grdir', 'Graph direction'); ?>
             <div class="col-sm-8 wt-page-options-value">
                 <?= view('components/select', ['name' => 'vars[grdir]', 'id' => 'grdir', 'selected' => $vars['grdir'], 'options' => MainPage::updateTranslations($settings["directions"])]) ?>
             </div>
         </div>
 
         <div class="row form-group">
-            <?= MainPage::addLabelWithHelp('', 'Diagram type'); ?>
+            <?= MainPage::addLabel('', 'Diagram type'); ?>
             <div class="col-sm-8 wt-page-options-value">
                 <div class="row">
                     <div class="col-auto">
@@ -286,7 +285,7 @@ $xref = $individual->xref();
 
             <?php if ($tree->getPreference('SHOW_HIGHLIGHT_IMAGES') == '1') { ?>
                 <div class="row form-group">
-                    <?= MainPage::addLabelWithHelp('with_photos', 'Add photos'); ?>
+                    <?= MainPage::addLabel('with_photos', 'Add photos'); ?>
                     <div class="col-sm-8 wt-page-options-value">
                         <input type="hidden" name="vars[with_photos]" value="no">
                         <input type="checkbox" name="vars[with_photos]" id="with_photos" value="with_photos" <?= $vars["with_photos"] == "with_photos" ? 'checked' : '' ?>>
@@ -296,7 +295,7 @@ $xref = $individual->xref();
             <?php } ?>
 
             <div class="row form-group">
-                <?= MainPage::addLabelWithHelp('show_url', 'Add URL to individuals and families'); ?>
+                <?= MainPage::addLabel('show_url', 'Add URL to individuals and families'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <input type="hidden" name="vars[show_url]" value="no">
                     <input type="checkbox" name="vars[show_url]" id="show_url" value="show_url" <?= $vars["show_url"] == "show_url" ? 'checked' : '' ?>>
@@ -305,21 +304,21 @@ $xref = $individual->xref();
             </div>
 
             <div class="row form-group">
-                <?= MainPage::addLabelWithHelp('use_abbr_name', 'Abbreviated names'); ?>
+                <?= MainPage::addLabel('use_abbr_name', 'Abbreviated names'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <?= view('components/select', ['name' => 'vars[use_abbr_name]', 'id' => 'use_abbr_name', 'selected' => $vars['use_abbr_name'], 'options' => MainPage::updateTranslations($settings["use_abbr_names"])]) ?>
                 </div>
             </div>
 
             <div class="row form-group">
-                <?= MainPage::addLabelWithHelp('use_abbr_place', 'Abbreviated place names'); ?>
+                <?= MainPage::addLabel('use_abbr_place', 'Abbreviated place names'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <?= view('components/select', ['name' => 'vars[use_abbr_place]', 'id' => 'use_abbr_place', 'selected' => $vars['use_abbr_place'], 'options' => MainPage::updateTranslations($settings["use_abbr_places"])]) ?>
                 </div>
             </div>
             
             <div class="row form-group">
-                <?= MainPage::addLabelWithHelp('show_pid', 'Show individual XREF'); ?>
+                <?= MainPage::addLabel('show_pid', 'Show individual XREF'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <input type="hidden" name="vars[show_pid]" value="no">
                     <input type="checkbox" name="vars[show_pid]" id="show_pid" value="show_pid" <?= $vars["show_pid"] == "show_pid" || $overridePID ? 'checked' : '' ?>>
@@ -327,7 +326,7 @@ $xref = $individual->xref();
             </div>
 
             <div class="row form-group">
-                <?= MainPage::addLabelWithHelp('show_by', 'Show birth date'); ?>
+                <?= MainPage::addLabel('show_by', 'Show birth date'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="row">
                         <div class="col-auto mx-3">
@@ -347,7 +346,7 @@ $xref = $individual->xref();
             </div>
 
             <div class="row form-group">
-                <?= MainPage::addLabelWithHelp('show_bp', 'Show birth place'); ?>
+                <?= MainPage::addLabel('show_bp', 'Show birth place'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <input type="hidden" name="vars[show_bp]" value="no">
                     <input type="checkbox" name="vars[show_bp]" id="show_bp" value="show_bp" <?= $vars["show_bp"] == "show_bp" ? 'checked' : '' ?>>
@@ -355,7 +354,7 @@ $xref = $individual->xref();
             </div>
 
             <div class="row form-group">
-                <?= MainPage::addLabelWithHelp('show_dy', 'Show death date'); ?>
+                <?= MainPage::addLabel('show_dy', 'Show death date'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="row">
                         <div class="col-auto mx-3">
@@ -375,7 +374,7 @@ $xref = $individual->xref();
             </div>
 
             <div class="row form-group">
-                <?= MainPage::addLabelWithHelp('show_dp', 'Show death place'); ?>
+                <?= MainPage::addLabel('show_dp', 'Show death place'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <input type="hidden" name="vars[show_dp]" value="no">
                     <input type="checkbox" name="vars[show_dp]" id="show_dp" value="show_dp" <?= $vars["show_dp"] == "show_dp" ? 'checked' : '' ?>>
@@ -384,7 +383,7 @@ $xref = $individual->xref();
 
 
             <div class="row form-group">
-                <?= MainPage::addLabelWithHelp('show_fid', 'Show family XREF'); ?>
+                <?= MainPage::addLabel('show_fid', 'Show family XREF'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <input type="hidden" name="vars[show_fid]" value="no">
                     <input type="checkbox" name="vars[show_fid]" id="show_fid" value="show_fid" <?= $vars["show_fid"] == "show_fid" ? 'checked' : '' ?>>
@@ -392,7 +391,7 @@ $xref = $individual->xref();
             </div>
 
             <div class="row form-group">
-                <?= MainPage::addLabelWithHelp('show_my', 'Show marriage date'); ?>
+                <?= MainPage::addLabel('show_my', 'Show marriage date'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="row">
                         <div class="col-auto mx-3">
@@ -412,7 +411,7 @@ $xref = $individual->xref();
             </div>
 
             <div class="row form-group">
-                <?= MainPage::addLabelWithHelp('show_mp', 'Show marriage place'); ?>
+                <?= MainPage::addLabel('show_mp', 'Show marriage place'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <input type="hidden" name="vars[show_mp]" value="no">
                     <input type="checkbox" name="vars[show_mp]" id="show_mp" value="show_mp" <?= $vars["show_mp"] == "show_mp" ? 'checked' : '' ?>>
@@ -420,7 +419,7 @@ $xref = $individual->xref();
             </div>
 
             <div class="row form-group">
-                <?= MainPage::addLabelWithHelp('dpi', 'DPI'); ?>
+                <?= MainPage::addLabel('dpi', 'DPI'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="row">
                         <div class="col-auto">
@@ -432,7 +431,7 @@ $xref = $individual->xref();
             </div>
 
             <div class="row form-group">
-                <?= MainPage::addLabelWithHelp('', 'Space'); ?>
+                <?= MainPage::addLabel('', 'Space'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="row">
                         <label for="ranksep"><?= I18N::translate('Between generations') ?>:</label>
@@ -449,7 +448,7 @@ $xref = $individual->xref();
                 </div>
             </div>
             <div class="row form-group">
-                <?= MainPage::addLabelWithHelp('', 'Font'); ?>
+                <?= MainPage::addLabel('', 'Font'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="row">
                         <label for="typeface"><?= I18N::translate('Typeface') ?>:</label>
@@ -475,7 +474,7 @@ $xref = $individual->xref();
                 </div>
             </div>
             <div class="row form-group">
-                <?= MainPage::addLabelWithHelp('', 'Relationship arrows'); ?>
+                <?= MainPage::addLabel('', 'Relationship arrows'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                         <div class="col-auto">
                             <input type="color" class="picker" name="vars[arrow_default]" id="arrow_default" value="<?= $vars["arrow_default"] ?>" /><label for="arrow_default" class="picker-label"><?= I18N::translate('Arrow color') ?></label>
@@ -492,7 +491,7 @@ $xref = $individual->xref();
                 </div>
             </div>
             <div class="row form-group">
-                <?= MainPage::addLabelWithHelp('', 'Tile colors'); ?>
+                <?= MainPage::addLabel('', 'Tile colors'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="col-auto">
                         <input type="color" class="picker" name="vars[colorm]" id="colorm" value="<?= $vars["colorm"] ?>" /><label for="colorm" class="picker-label"><?= I18N::translate('Male individuals') ?></label>
@@ -529,7 +528,7 @@ $xref = $individual->xref();
                 </div>
             </div>
             <div class="row form-group">
-                <?= MainPage::addLabelWithHelp('', 'Other colours'); ?>
+                <?= MainPage::addLabel('', 'Other colours'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="col-auto">
                         <input type="color" class="picker" name="vars[colorfam]" id="colorfam" value="<?= $vars["colorfam"] ?>" /><label for="colorfam" class="picker-label"><?= I18N::translate('Family background') ?></label>
@@ -546,7 +545,7 @@ $xref = $individual->xref();
         <a href="#" id="appearance-advanced-button" onclick="toggleAdvanced(this, 'appearance-advanced')"><div class="wt-page-options-label advanced-settings-btn"><?= ($vars["adv_appear"] == "show" ? '↑ ' : '↓ ') . I18N::translate('Toggle advanced settings') . ($vars["adv_appear"] == "show" ? ' ↑' : ' ↓'); ?></div></a>
         <h3><?= I18N::translate('File settings') ?></h3>
         <div class="row form-group">
-            <?= MainPage::addLabelWithHelp('otype', 'Output file type'); ?>
+            <?= MainPage::addLabel('otype', 'Output file type'); ?>
             <div class="col-sm-8 wt-page-options-value">
                 <?= view('components/select', ['name' => 'vars[otype]', 'id' => 'otype', 'selected' => $vars['otype'], 'options' => $otypes]) ?>
                 <small id="emailHelp" class="form-text text-muted"><?= $nographviz ? I18N::translate("Options limited as Graphviz not installed on server") : "" ?></small>
@@ -554,13 +553,13 @@ $xref = $individual->xref();
         </div>
         <div id="files-advanced" <?= $vars["adv_files"] == "show" ? '' : 'style="display:none"'; ?>>
             <div class="row form-group">
-                <?= MainPage::addLabelWithHelp('auto_update', 'Browser render'); ?>
+                <?= MainPage::addLabel('auto_update', 'Browser render'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <label for="auto_update"><?= I18N::translate('Auto-update') ?></label>
                     <input type="hidden" name="vars[auto_update]" value="no">
                     <input type="checkbox" onclick="toggleUpdateButton()" name="vars[auto_update]" id="auto_update" value="auto_update" <?= $vars["auto_update"] == "auto_update" ? 'checked' : '' ?>>
                 </div>
-                <?= MainPage::addLabelWithHelp('', 'Settings file'); ?>
+                <?= MainPage::addLabel('', 'Settings file'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <label for="save_settings"><?= I18N::translate('Save settings to file') ?></label><br>
                     <button class="btn btn-outline-secondary" type="button" name="save_settings" id="save_settings" onclick="downloadSettingsFile(true)"><?= I18N::translate('Download') ?></button><br>
@@ -570,16 +569,21 @@ $xref = $individual->xref();
             </div>
         </div>
         <a href="#" id="files-advanced-button" onclick="toggleAdvanced(this, 'files-advanced')"><div class="wt-page-options-label advanced-settings-btn"><?= ($vars["adv_files"] == "show" ? '↑ ' : '↓ ') . I18N::translate('Toggle advanced settings') . ($vars["adv_files"] == "show" ? ' ↑' : ' ↓'); ?></div></a>
-        <? if ($settings["show_debug"]) { ?>
+        <? if ($settings["show_debug"] == "show_debug") { ?>
         <h3><?= I18N::translate('Debug') ?></h3>
         <div class="row form-group">
-            <?= MainPage::addLabelWithHelp('debug', 'Debug mode'); ?>
+            <?= MainPage::addLabel('debug', 'Debug mode', FALSE); ?>
             <div class="col-sm-8 wt-page-options-value">
                 <label for="debug"><?= I18N::translate('Enable debug mode') ?></label>
                 <input type="hidden" name="vars[debug]" value="no">
                 <input type="checkbox" name="vars[debug]" id="debug" value="debug" <?= $vars["debug"] == "debug" ? 'checked' : '' ?>><br>
                 <button class="btn btn-outline-secondary" type="button" name="debug_view" onclick="return showHelp('debug');"><?= I18N::translate('View debug log') ?></button>
             </div>
+            <?= MainPage::addLabel('use_graphviz', 'Graphviz', FALSE); ?>
+            <div class="col-sm-8 wt-page-options-value">
+                <label for="use_graphviz"><?= I18N::translate('Use Graphviz on server') ?></label>
+                <input type="hidden" name="vars[use_graphviz]" value="no">
+                <input type="checkbox" name="vars[use_graphviz]" id="use_graphviz" value="use_graphviz" onclick="setGraphvizAvailable(this.value==='use_graphviz');" <?= $vars["use_graphviz"] == "use_graphviz" ? 'checked' : '' ?> <?= isset($settings['graphviz_faked'])  ? "" : "disabled"; ?>><br></div>
         </div>
         <? } ?>
     </div>
@@ -595,6 +599,7 @@ $xref = $individual->xref();
     <input type="hidden" id="people-advanced-hidden" name="vars[adv_people]" value="<?= $vars["adv_people"] === "show" ? 'show' : '' ?>">
     <input type="hidden" id="appearance-advanced-hidden" name="vars[adv_appear]" value="<?= $vars["adv_appear"] === "show" ? 'show' : '' ?>">
     <input type="hidden" id="files-advanced-hidden" name="vars[adv_files]" value="<?= $vars["adv_files"] === "show" ? 'show' : '' ?>">
+    <div id="toast-container"></div>
 </form>
 
 <div class="sidebar__toggler" hidden>
@@ -608,7 +613,7 @@ $xref = $individual->xref();
 </div>
 
 <script type="text/javascript">
-    const graphvizAvailable = <?= $nographviz ? "false" : "true" ?>;
+    let graphvizAvailable = <?= $nographviz ? "false" : "true" ?>;
     let panzoomInst = null;
     const workerURL = '<?= $module->assetUrl('javascript/full.renderer.js'); ?>';
     let viz = new Viz({
@@ -639,7 +644,6 @@ $xref = $individual->xref();
             addError("indi-error","<?= I18N::translate("Individual required") ?>");
             e.preventDefault();
         }
-
         // Also check if Graphviz installed. If so then let it handle it,
         // but if not, trigger client side actions
         if (!graphvizAvailable) {
@@ -795,12 +799,21 @@ $xref = $individual->xref();
 
             return element;
         }).catch(function (error) {
-            rendering.innerHTML = '<div class="alert alert-danger" role="alert"><?= I18N::translate('Error running GVExport in browser mode') ?>:<br>' + error + '</div>';
-            if (lastDotStr) {
-                rendering.innerHTML = rendering.innerHTML + '<h4>DOT contents</h4><pre id="dot-text"></pre>';
-                document.getElementById('dot-text').appendChild(document.createTextNode(lastDotStr));
+            if (error.message.includes("TOTAL_MEMORY")) {
+                if (graphvizAvailable) {
+                    showToast("E: <?= I18N::translate('Memory limit reached. Please reduce number of records or use download option.'); ?>");
+                } else {
+                        showToast("E: <?= I18N::translate('Memory limit reached. Please reduce number of records or install Graphviz on server and use download option.'); ?>");
+                }
+                rendering.innerHTML = "";
+            } else {
+                rendering.innerHTML = '<div class="alert alert-danger" role="alert"><?= I18N::translate('Error running GVExport in browser mode') ?>:<br>' + error + '</div>';
+                if (lastDotStr) {
+                    rendering.innerHTML = rendering.innerHTML + '<h4>DOT contents</h4><pre id="dot-text"></pre>';
+                    document.getElementById('dot-text').appendChild(document.createTextNode(lastDotStr));
+                }
             }
-            console.error(error);
+
 
             // Create a new Viz instance (@see Caveats page for more info)
             viz = new Viz({
@@ -833,13 +846,3 @@ $xref = $individual->xref();
     ?>
 </script>
 
-<div id="toast-container"></div>
-
-<template id=dropdown>
-    <div style="position: relative; z-index: 10000">
-        <a class="btn btn-secondary btn-sm m-0" style="position: relative; overflow: hidden" onclick="this.parentNode.querySelector('.content').hidden = false;">V</a>
-        <ul class="content list-group" hidden>
-            <li class="list-group-item">Klick!</li>
-        </ul>
-    </div>
-</template>

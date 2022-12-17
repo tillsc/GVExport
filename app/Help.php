@@ -92,7 +92,7 @@ function getHelpText(item) {
 
             for ($i=0; $i<sizeof($this->help); $i++) {
                 echo "case \"" . $this->help[$i][0] . "\":\n";
-                echo "    return '<h3>" . I18N::translate($this->help[$i][0]) . "</h3>";
+                echo "    return '<h3>" . str_replace("'","&apos;",I18N::translate($this->help[$i][0])) . "</h3>";
                 echo "<p>" . str_replace("'","&apos;",I18N::translate($this->help[$i][1])) . "</p>';\n";
             }
         echo "case \"debug\":
