@@ -268,8 +268,8 @@ msgid "Individual required"
 msgstr "Persoon vereist"
 
 #: 
-msgid "Generated ${indiNum} individuals and ${famNum} family records"
-msgstr "${indiNum} persoons- en ${famNum} gezinsrecords gegenereerd"
+msgid "Generated %s individuals and %s family records"
+msgstr "%s persoons- en %s gezinsrecords gegenereerd"
 
 #: 
 msgid "Invalid starting individual:"
@@ -717,4 +717,70 @@ msgstr "In dit gedeelte kunt u de kleuren van de verschillende onderdelen van de
 #: 
 msgid "This section allows you to change colours associated with the diagram that are not part of the individual tile above. Click the coloured box to change the colour. This uses your browser's colour picker, so will look different depending on what browser you are using."
 msgstr "In dit gedeelte kunt u kleuren veranderen die bij het diagram horen maar die geen deel uitmaken van de persoonstegel hierboven. Klik op het gekleurde vakje om de kleur te veranderen. Dit gebruikt de kleurenkiezer van uw browser, dus zal het er anders uitzien afhankelijk van de browser die u gebruikt."
+
+#. "Output settings" was renamed to "File settings".
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/zY6fWYDbmG93zn0ODfvgtr3y.png
+#: 
+msgid "File settings"
+msgstr "Bestandsinstellingen"
+
+#. Name of section for saving settings to file and loading again:  https://s3.eu-west-1.amazonaws.com/po-pub/i/YRg7L3jSSfj41FX0tHDSUY4M.png
+#: 
+msgid "Settings file"
+msgstr "Instellingenbestand"
+
+#. Text to explain what happens when you click Download button:  https://s3.eu-west-1.amazonaws.com/po-pub/i/binGwth9kTmNWFiKZra36B1E.png
+#: 
+msgid "Save settings to file"
+msgstr "Instellingen opslaan in bestand"
+
+#. Text to explain what happens when you choose to upload file. Note that the actual file upload is provided by the browser and will use the browser's (or operating system) language.  https://s3.eu-west-1.amazonaws.com/po-pub/i/2woaCucdJquUy6lUnQYS8k51.png
+#: 
+msgid "Load settings from file"
+msgstr "Instellingen laden uit bestand"
+
+#. Help text for downloading saved settings to a file, and uploading these settings:  https://s3.eu-west-1.amazonaws.com/po-pub/i/HfxRre2VQe9TVyl8dtX3RhVj.png
+#: 
+msgid "Here you are able to save the chosen settings to a file, and to load that file at a later time.</p><p>For example, you may have many diagrams you create from your tree. You may want to save the settings used for each diagram so that in future you can regenerate the diagram to include any new information."
+msgstr "Hier kunt u de gekozen instellingen opslaan in een bestand, en dat bestand op een later tijdstip laden.</p><p>Als u bijvoorbeeld veel diagrammen van uw boomstructuur maakt dan kunt u de instellingen voor elk diagram opslaan, zodat u in de toekomst het diagram opnieuw kunt genereren met nieuwe informatie."
+
+#. For development use, you can now enable a debug panel. Needs translation as option will appear on Control Panel page:  https://s3.eu-west-1.amazonaws.com/po-pub/i/UzABfGKv12F3PBzS3wVzoHCm.png 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/36sF1oj0dbyyJzl0meXi1ixY.png
+#: 
+msgid "Debug mode"
+msgstr "Foutopsporingsmodus"
+
+#. For development use, you can now enable a debug panel. Needs translation as option will appear on Control Panel page:  https://s3.eu-west-1.amazonaws.com/po-pub/i/UzABfGKv12F3PBzS3wVzoHCm.png 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/36sF1oj0dbyyJzl0meXi1ixY.png
+#: 
+msgid "Show debug panel"
+msgstr "Toon foutopsporingspaneel"
+
+#. For development use, you can now disable debug mode easily. Needs translation as option will appear on Control Panel page:  https://s3.eu-west-1.amazonaws.com/po-pub/i/UzABfGKv12F3PBzS3wVzoHCm.png 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/36sF1oj0dbyyJzl0meXi1ixY.png
+#: 
+msgid "Enable debug mode"
+msgstr "Foutopsporingsmodus inschakelen"
+
+#. For development use, you can now disable Graphviz on server even if you have it installed. Needs translation as option will appear on Control Panel page:  https://s3.eu-west-1.amazonaws.com/po-pub/i/UzABfGKv12F3PBzS3wVzoHCm.png 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/36sF1oj0dbyyJzl0meXi1ixY.png
+#: 
+msgid "Use Graphviz on server"
+msgstr "Gebruik Graphviz op de server"
+
+#. Section heading. You can now enable a debug panel for development use. Needs translation as option will appear on Control Panel page:  https://s3.eu-west-1.amazonaws.com/po-pub/i/UzABfGKv12F3PBzS3wVzoHCm.png 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/36sF1oj0dbyyJzl0meXi1ixY.png
+#: 
+msgid "Debug"
+msgstr "Fouten opsporen"
+
+#. If browser-renderer can't generate a diagram this large, show an error message. This message is shown when Graphviz is installed on server.  https://s3.eu-west-1.amazonaws.com/po-pub/i/5MKDjkAnfKKolIoTeVqEBaKp.png
+#: 
+msgid "Memory limit reached. Please reduce number of records or use download option."
+msgstr "Geheugenlimiet bereikt. Verminder het aantal records of gebruik de downloadoptie."
+
+#. If browser-renderer can't generate a diagram this large, show an error message. This message is shown when Graphviz is NOT installed on server.   https://s3.eu-west-1.amazonaws.com/po-pub/i/1cmo1QxxPNuy3bjgntERYAOC.png
+#: 
+msgid "Memory limit reached. Please reduce number of records or install Graphviz on server and use download option."
+msgstr "Geheugenlimiet bereikt. Verminder het aantal records of installeer Graphviz op de server en gebruik de downloadoptie."
 
