@@ -71,6 +71,9 @@ class Cookie
                 }
             }
         }
+        if ($userDefaultVars['use_graphviz'] == 'no') {
+            $userDefaultVars['graphviz_bin'] = "";
+        }
         return $userDefaultVars;
     }
 }

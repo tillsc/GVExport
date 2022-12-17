@@ -27,7 +27,7 @@ use Fisharebest\Webtrees\Tree;
  */
 
 $settings = (new Settings($module))->getSettings();
-$nographviz = $settings['graphviz_bin'] == "";
+$nographviz = $vars['graphviz_bin'] == "";
 $xref = $individual->xref();
 ?>
 
@@ -580,6 +580,11 @@ $xref = $individual->xref();
                 <input type="checkbox" name="vars[debug]" id="debug" value="debug" <?= $vars["debug"] == "debug" ? 'checked' : '' ?>><br>
                 <button class="btn btn-outline-secondary" type="button" name="debug_view" onclick="return showHelp('debug');"><?= I18N::translate('View debug log') ?></button>
             </div>
+            <?= MainPage::addLabelWithHelp('use_graphviz', 'Graphviz'); ?>
+            <div class="col-sm-8 wt-page-options-value">
+                <label for="use_graphviz"><?= I18N::translate('Use Graphviz') ?></label>
+                <input type="hidden" name="vars[use_graphviz]" value="no">
+                <input type="checkbox" name="vars[use_graphviz]" id="use_graphviz" value="use_graphviz" <?= $vars["use_graphviz"] == "use_graphviz" ? 'checked' : '' ?> <?= $settings['graphviz_bin'] == "" ? "disabled" : ""?>><br></div>
         </div>
         <? } ?>
     </div>
@@ -749,6 +754,7 @@ $xref = $individual->xref();
                 images: images
             });
         }).then(function (element) {
+            prompt(element);
             // Now we have to clean up the generated SVG.
 
             // remove title tags, so we don't get weird data on hover,
