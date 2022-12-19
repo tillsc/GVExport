@@ -62,7 +62,7 @@ class Dot {
 		$this->tree = $tree;
 		$this->file_system = $file_system;
     // Load settings from config file
-        $this->settings=(new Settings($module))->getSettings();
+        $this->settings=(new Settings())->getAdminSettings($module);
         $this->settings["no_fams"] = FALSE;
 	}
 

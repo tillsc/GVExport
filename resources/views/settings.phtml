@@ -14,8 +14,8 @@ use Fisharebest\Webtrees\Http\RequestHandlers\ControlPanel;
  * @var array       $otypes                 output file type options
  * @var ?           $module                 this module
  */
-$settingsObj = new Settings($module);
-$settings = $settingsObj->getSettings();
+$settingsObj = new Settings();
+$settings = $settingsObj->getAdminSettings($module);
 ?>
 
 <?= view('components/breadcrumbs', ['links' => [route(ControlPanel::class) => I18N::translate('Control panel'), $title]]) ?>

@@ -40,7 +40,6 @@ spl_autoload_register(function ($class) {
     }
 });
 
-use Cassandra\Set;
 use Fisharebest\Webtrees\Auth;
 use Fisharebest\Webtrees\Contracts\UserInterface;
 use Fisharebest\Webtrees\Registry;
@@ -165,12 +164,11 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
             $xref = $tree->getUserPreference(Auth::user(), UserInterface::PREF_TREE_ACCOUNT_XREF);
         }
         $individual = $this->getIndividual($tree, $tree->significantIndividual(Auth::user(), $xref)->xref());
-		$userDefaultVars = (new Settings($this))->getSettings();
+		$userDefaultVars = (new Settings())->getAdminSettings($this);
         if (!isset($_REQUEST['reset'])) {
-            $cookie = new Cookie($tree);
-            // Load settings from cookie *on top* of our default settings,
-            // in case cookie does not have a value for all settings
-            $userDefaultVars = $cookie->load($userDefaultVars);
+            // Load settings from webtrees
+            $settings = new Settings();
+            $userDefaultVars = $settings->loadUserSettings($this, $tree);
         }
 
         $otypes = $this->getOTypes($userDefaultVars);
@@ -239,10 +237,10 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
     public function getAdminAction(ServerRequestInterface $request): ResponseInterface
     {
         $this->layout = 'layouts/administration';
-        $otypes = $this->getOTypes((new Settings($this))->getSettings());
+        $otypes = $this->getOTypes((new Settings())->getAdminSettings($this));
         $response['module'] = $this;
         $response['otypes'] = $otypes;
-        $response['vars'] = (new Settings($this))->getSettings(isset($_REQUEST['reset']) && $_REQUEST['reset'] === "1");
+        $response['vars'] = (new Settings())->getAdminSettings($this, isset($_REQUEST['reset']) && $_REQUEST['reset'] === "1");
         $response['title'] = $this->title();
         $response['gvexport_css']  = route('module', ['module' => $this->name(), 'action' => 'Css']);
         $response['gvexport_js']  = route('module', ['module' => $this->name(), 'action' => 'JS']);
@@ -260,7 +258,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
     {
         $params = (array) $request->getParsedBody();
         if ($params['save'] === '1') {
-            (new Settings($this))->saveAdminSettings($params['vars']);
+            (new Settings())->saveAdminSettings($this, $params['vars']);
             FlashMessages::addMessage(I18N::translate('The preferences for the module “%s” have been updated.',
                 $this->title()), 'success');
         }
@@ -284,7 +282,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
         $contents = $this->createGraphVizDump($tree, $temp_dir);
 
         // Put the contents into the file
-        $settings = (new Settings($this))->getSettings();
+        $settings = (new Settings())->getAdminSettings($this);
         $fid = fopen($temp_dir . "/" . $settings['filename'] . ".dot", "w");
         fwrite($fid, $contents);
         fclose($fid);
@@ -298,8 +296,8 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
         $dot = new Dot($tree, $this, Registry::filesystem()->data());
         $vars = $_REQUEST['vars'];
 
-        $cookie = new Cookie($tree);
-        $cookie->set($vars);
+        $settings = new Settings();
+        $settings->saveUserSettings($tree,$vars);
 
 
         if (isset($temp_dir)) {
@@ -574,8 +572,8 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
             $response['messages'] = $dot->messages;
             $response['debug'] = $dot->debug_string;
             $response['dot'] = $out;
-            $cookie = new Cookie($tree);
-            $response['settings'] = json_encode($cookie->load([]));
+            $settings = new Cookie($tree);
+            $response['settings'] = json_encode($settings->load([]));
             $r = json_encode($response);
         } else {
             $r = $out;
@@ -604,6 +602,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
 
     /** Return list of available output types
      *
+     * @param $vars
      * @return array
      */
     private function getOTypes($vars): array
