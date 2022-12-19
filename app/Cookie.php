@@ -2,31 +2,34 @@
 
 namespace vendor\WebtreesModules\gvexport;
 
+use Fisharebest\Webtrees\Tree;
+
 /**
  * A cookie object for saving settings
  */
 class Cookie
 {
     private string $name;
+    private Tree $tree;
 
     /**
      * Name for the cookie is generated based on tree name
      * @param $tree
      */
     function __construct($tree) {
-        $this->name = $this->getName($tree);
+        $this->tree = $tree;
+        $this->name = $this->getName();
     }
 
     /**
      * Return the name of the cookie
      *
-     * @param $tree
      * @return string
      */
-    private function getName($tree): string
+    private function getName(): string
     {
         // Get name of tree from webtrees
-        $name = $tree->name();
+        $name = $this->tree->name();
         // Replace space with underscore
         $name =  preg_replace('/\s/', '_', $name);
         // alphanumeric / underscore characters only

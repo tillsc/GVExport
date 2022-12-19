@@ -2,11 +2,13 @@
 
 namespace vendor\WebtreesModules\gvexport;
 
+use Fisharebest\Webtrees\Auth;
+
 class Settings
 {
+    private const GUEST_USER_ID = 0;
     private array $defaultSettings;
-    private $module;
-    public function __construct($module){
+    public function __construct(){
         // Load settings from config file
         $this->defaultSettings = include dirname(__FILE__) . "/../config.php";
         // Add options lists
@@ -16,7 +18,6 @@ class Settings
         $this->defaultSettings['directions']['LR'] = "Left-to-right";
         $this->defaultSettings['use_abbr_places'] = [0 => "Full place name", 10 => "City and country" ,  20 => "City and 2 letter ISO country code", 30 => "City and 3 letter ISO country code"];
         $this->defaultSettings['use_abbr_names'] = [0 => "Full name", 10 => "Given and surnames", 20 => "Given names" , 30 => "First given name only", 40 => "Surnames", 50 => "Initials only", 60 => "Given name initials and surname", 70 => "Don't show names"];
-        $this->module = $module;
         $this->defaultSettings['countries'] = $this->getCountryAbbreviations();
         if (!$this->isGraphvizAvailable($this->defaultSettings['graphviz_bin'])) {
             $this->defaultSettings['graphviz_bin'] = "";
@@ -27,15 +28,16 @@ class Settings
     /**
      * Retrieve the currently set default settings from the admin page
      *
+     * @param $module
      * @param bool $reset
      * @return array
      */
-    public function getSettings(bool $reset = false): array
+    public function getAdminSettings($module, bool $reset = false): array
     {
         $settings = $this->defaultSettings;
         if (!$reset) {
             foreach ($settings as $preference => $value) {
-                $pref = $this->module->getPreference($preference, "preference not set");
+                $pref = $module->getPreference($preference, "preference not set");
                 if ($pref != "preference not set") {
                     $settings[$preference] = $pref;
                 }
@@ -49,14 +51,66 @@ class Settings
     }
 
     /**
-     *  Save the provided settings to webtrees storage
+     * Retrieve the user settings from webtrees storage
      *
-     * @param $params
+     * @param $module
+     * @param $tree
+     * @param bool $reset
+     * @return array
+     */
+    public function loadUserSettings($module, $tree, bool $reset = false): array
+    {
+        $settings = $this->getAdminSettings($module);
+        if (!$reset) {
+            if (Auth::user()->id() == Settings::GUEST_USER_ID) {
+                $cookie = new Cookie($tree);
+                $settings = $cookie->load($settings);
+            } else {
+                foreach ($settings as $preference => $value) {
+                    $pref = $tree->getUserPreference(Auth::user(), "GVE_" . $preference, "preference not set");
+                    if ($pref != "preference not set") {
+                        $settings[$preference] = $pref;
+                    }
+                }
+            }
+            if ($settings['use_graphviz'] == 'no' && $settings['graphviz_bin'] != "") {
+                $settings['graphviz_bin'] = "";
+                $settings['graphviz_faked'] = TRUE;
+            }
+        }
+        return $settings;
+    }
+
+    /**
+     *  Save the provided settings to webtrees admin storage
+     *
+     * @param $module
+     * @param $settings
      * @return void
      */
-    public function saveAdminSettings($settings) {
+    public function saveAdminSettings($module, $settings) {
         foreach ($settings as $preference=>$value) {
-            $this->module->setPreference($preference, $value);
+            $module->setPreference($preference, $value);
+        }
+    }
+
+    /**
+     *  Save the provided settings to webtrees user per-tree storage
+     *
+     * @param $tree
+     * @param $settings
+     * @return void
+     */
+    public function saveUserSettings($tree, $settings) {
+        if (Auth::user()->id() == Settings::GUEST_USER_ID) {
+            $cookie = new Cookie($tree);
+            $cookie->set($settings);
+        } else {
+            foreach ($settings as $preference => $value) {
+                if ($this->shouldSaveSetting($preference)) {
+                    $tree->setUserPreference(Auth::user(), "GVE_" . $preference, $value);
+                }
+            }
         }
     }
 
@@ -179,5 +233,28 @@ class Settings
         }
 
         return $Graphviz;
+    }
+
+    /**
+     * Returns whether a setting shouldn't be saved to cookies/preferences
+     *
+     * @param string $preference
+     * @return bool
+     */
+    private function shouldSaveSetting(string $preference): bool
+    {
+        switch ($preference) {
+            case 'graphviz_bin':
+            case 'graphviz_config':
+            case 'typefaces':
+            case 'typeface_fallback':
+            case 'directions':
+            case 'use_abbr_places':
+            case 'use_abbr_names':
+            case 'countries':
+                return false;
+            default:
+                return true;
+        }
     }
 }

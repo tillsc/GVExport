@@ -17,7 +17,7 @@ class OutputFile
     var array $settings;
 
     function __construct($temp_dir, $file_type, $module) {
-        $this->settings = (new Settings($module))->getSettings();
+        $this->settings = (new Settings())->getAdminSettings($module);
         $this->tempDir = $temp_dir;
         $this->fileType = $file_type;
         $this->baseName = $this->settings['filename'] . "." . $this->settings['graphviz_config']['output'][$file_type]['extension'];
