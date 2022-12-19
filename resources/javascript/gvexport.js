@@ -489,7 +489,7 @@ function toggleUpdateButton() {
     const updateBtn = document.getElementById('update-browser');
     const autoSettingBox = document.getElementById('auto_update');
 
-    const visible = autoSettingBox.value === 'auto_update';
+    const visible = !autoSettingBox.checked;
     showHide(updateBtn, visible);
     autoUpdate = visible;
     updateRender();
