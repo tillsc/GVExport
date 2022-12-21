@@ -3,7 +3,6 @@
 namespace vendor\WebtreesModules\gvexport;
 
 use Fisharebest\Webtrees\I18N;
-use Fisharebest\Webtrees\View;
 use Fisharebest\Webtrees\Http\RequestHandlers\ControlPanel;
 
 /**
@@ -24,14 +23,14 @@ $settings = $settingsObj->getAdminSettings($module);
 <p><?= I18N::translate('Values here are used as default values for new users of GVExport, and are used when users choose to reset the settings.'); ?></p>
 <script type="text/javascript">
     // stylesheet
-    var newSheet = document.createElement("link");
+    const newSheet = document.createElement("link");
     newSheet.setAttribute("rel","stylesheet");
     newSheet.setAttribute("type","text/css");
     newSheet.setAttribute("href","<?= $gvexport_css ?>");
     document.head.appendChild(newSheet);
 
     // Javascript functions
-    var newScript = document.createElement("script");
+    const newScript = document.createElement("script");
     newScript.setAttribute("type","text/javascript");
     newScript.setAttribute("src","<?= $gvexport_js ?>");
     document.head.appendChild(newScript);
@@ -72,7 +71,7 @@ $settings = $settingsObj->getAdminSettings($module);
                         </div>
                         <div class="col-auto row">
                             <label for="ance_level" class="col-sm-6"><?= I18N::translate('Max levels') ?>:</label>
-                            <input class="cart_toggle" onblur="defaultValueWhenBlank(this, 0)" type="text" class="form-control col-sm-6" size="10" name="vars[ance_level]" id="ance_level" value="<?= $vars["ance_level"] ?>">
+                            <input onblur="defaultValueWhenBlank(this, 0)" type="text" class="cart_toggle form-control col-sm-6" size="10" name="vars[ance_level]" id="ance_level" value="<?= $vars["ance_level"] ?>">
                         </div>
                     </div>
                 </div>
@@ -446,7 +445,7 @@ $settings = $settingsObj->getAdminSettings($module);
                 <div class="col-sm-8 wt-page-options-value">
                     <label for="use_graphviz"><?= I18N::translate('Use Graphviz on server') ?></label>
                     <input type="hidden" name="vars[use_graphviz]" value="no">
-                    <input type="checkbox" name="vars[use_graphviz]" id="use_graphviz" value="use_graphviz" onclick="setGraphvizAvailable(this.value==='use_graphviz');" <?= $vars["use_graphviz"] == "use_graphviz" ? 'checked' : '' ?> <?= isset($settings['graphviz_faked'])  ? "" : "disabled"; ?>><br></div>
+                    <input type="checkbox" name="vars[use_graphviz]" id="use_graphviz" value="use_graphviz" onclick="setGraphvizAvailable(this.value==='use_graphviz');" <?= $vars["use_graphviz"] == "use_graphviz" ? 'checked' : '' ?> <?= (new Settings())->getDefaultSettings()['graphviz_bin'] == "" ? "disabled" : ""; ?>><br></div>
             </div>
         </div>
 

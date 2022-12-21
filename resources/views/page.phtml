@@ -26,7 +26,7 @@ use Fisharebest\Webtrees\Tree;
  * @var ?           $module                 this module
  */
 
-$settings = (new Settings())->getAdminSettings($module);
+$settings = (new Settings())->getDefaultSettings();
 $nographviz = $vars['graphviz_bin'] == "";
 $xref = $individual->xref();
 ?>
@@ -150,7 +150,6 @@ $xref = $individual->xref();
             <div class="col-sm-8 wt-page-options-value">
                 <div class="row">
                     <div class="col-auto mx-3">
-                        <input type="hidden" name="vars[indiance]" value="no">
                         <input class="cart_toggle" type="checkbox" name="vars[indiance]" id="indiance" value="ance" <?= $vars["indiance"] == "ance" ? 'checked' : '' ?>>
                     </div>
                     <div class="col-auto row">
@@ -194,7 +193,6 @@ $xref = $individual->xref();
             <div class="col-sm-8 wt-page-options-value">
                 <div class="row">
                     <div class="col-auto mx-3">
-                        <input type="hidden" name="vars[indidesc]" value="no">
                         <input class="cart_toggle" type="checkbox" name="vars[indidesc]" id="indidesc" value="desc" <?= $vars["indidesc"] == "desc" ? 'checked' : '' ?>>
                     </div>
                     <div class="col-auto row">
@@ -583,7 +581,7 @@ $xref = $individual->xref();
             <div class="col-sm-8 wt-page-options-value">
                 <label for="use_graphviz"><?= I18N::translate('Use Graphviz on server') ?></label>
                 <input type="hidden" name="vars[use_graphviz]" value="no">
-                <input type="checkbox" name="vars[use_graphviz]" id="use_graphviz" value="use_graphviz" onclick="setGraphvizAvailable(this.value==='use_graphviz');" <?= $vars["use_graphviz"] == "use_graphviz" ? 'checked' : '' ?> <?= isset($settings['graphviz_faked'])  ? "" : "disabled"; ?>><br></div>
+                <input type="checkbox" name="vars[use_graphviz]" id="use_graphviz" value="use_graphviz" onclick="setGraphvizAvailable(this.value==='use_graphviz');" <?= $vars["use_graphviz"] == "use_graphviz" ? 'checked' : '' ?> <?= (new Settings())->getDefaultSettings()['graphviz_bin'] == "" ? "disabled" : ""; ?>><br></div>
         </div>
         <? } ?>
     </div>

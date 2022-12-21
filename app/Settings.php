@@ -32,19 +32,24 @@ class Settings
      * @param bool $reset
      * @return array
      */
-    public function getAdminSettings($module, bool $reset = false): array
+    public function getDefaultSettings(): array
+    {
+        return $this->defaultSettings;
+    }
+    /**
+     * Retrieve the currently set default settings from the admin page
+     *
+     * @param $module
+     * @param bool $reset
+     * @return array
+     */
+    public function getAdminSettings($module): array
     {
         $settings = $this->defaultSettings;
-        if (!$reset) {
-            foreach ($settings as $preference => $value) {
-                $pref = $module->getPreference($preference, "preference not set");
-                if ($pref != "preference not set") {
-                    $settings[$preference] = $pref;
-                }
-            }
-            if ($settings['use_graphviz'] == 'no' && $settings['graphviz_bin'] != "") {
-                $settings['graphviz_bin'] = "";
-                $settings['graphviz_faked'] = TRUE;
+        foreach ($settings as $preference => $value) {
+            $pref = $module->getPreference($preference, "preference not set");
+            if ($pref != "preference not set") {
+                $settings[$preference] = $pref;
             }
         }
         return $settings;
@@ -75,7 +80,6 @@ class Settings
             }
             if ($settings['use_graphviz'] == 'no' && $settings['graphviz_bin'] != "") {
                 $settings['graphviz_bin'] = "";
-                $settings['graphviz_faked'] = TRUE;
             }
         }
         return $settings;
