@@ -62,7 +62,7 @@ $xref = $individual->xref();
 </script>
 <script src="<?= $module->assetUrl('javascript/viz.js'); ?>"></script>
 <script src="<?= $module->assetUrl('javascript/panzoom.min.js'); ?>"></script>
-<script src="<?= $nographviz ? $module->assetUrl('javascript/jspdf.umd.min.js') : ""; ?>"></script>
+<?= $nographviz ? "<script src=\"" . $module->assetUrl('javascript/jspdf.umd.min.js') . "</script>" : ""; ?>">
 <script type="text/javascript">
     const cartempty = <?= $cartempty ? "true" : "false" ?>;
     const CLIENT_ERRORS = ["<?= I18N::translate('Your browser does not support exporting images this large. Please reduce number of records, reduce DPI setting, or use SVG option.') ?>"];
@@ -725,7 +725,6 @@ $xref = $individual->xref();
                     height: '150px'
                 };
             });
-            console.log("Starting render (found " + images.length + " images)");
             return viz.renderSVGElement(lastDotStr, {
                 images: images
             });
@@ -744,7 +743,6 @@ $xref = $individual->xref();
             element.innerHTML = element.innerHTML.replaceAll("<title>WT_Graph</title>", "");
             // Set SVG viewBox to height/width so image is not cut off
             element.setAttribute("viewBox", "0 0 "+element.getAttribute("width").replace("pt","")+" "+element.getAttribute("height").replace("pt",""));
-            console.log("Appending SVG", element);
             // Clear current rendering then append new element to the page
             rendering.innerHTML = "";
             rendering.appendChild(element);
@@ -818,8 +816,6 @@ $xref = $individual->xref();
         er.innerText="";
     }
 
-    <?
-    (new Help())->addHelpMessageJavaScript();
-    ?>
+    <?php echo (new Help())->addHelpMessageJavaScript(); ?>
 </script>
 

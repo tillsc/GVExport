@@ -45,8 +45,18 @@ class Cookie
      * @return void
      */
     public function set($vars) {
-        $json_cookie = json_encode($vars);
-        setcookie($this->name, $json_cookie, time() + (3600 * 24 * 365));
+        $cookieArray = [];
+        foreach ($vars as $preference => $value) {
+            if (Settings::shouldSaveSetting($preference)) {
+                $cookieArray[$preference] = $value;
+            }
+        }
+        $json_cookie = json_encode($cookieArray);
+        $cookie_options = array (
+            'expires' => time() + (3600 * 24 * 365),
+            'samesite' => 'Strict'
+        );
+        setcookie($this->name, $json_cookie, $cookie_options);
     }
 
     /**

@@ -111,7 +111,7 @@ class Settings
             $cookie->set($settings);
         } else {
             foreach ($settings as $preference => $value) {
-                if ($this->shouldSaveSetting($preference)) {
+                if (Settings::shouldSaveSetting($preference)) {
                     $tree->setUserPreference(Auth::user(), "GVE_" . $preference, $value);
                 }
             }
@@ -245,7 +245,7 @@ class Settings
      * @param string $preference
      * @return bool
      */
-    private function shouldSaveSetting(string $preference): bool
+    public static function shouldSaveSetting(string $preference): bool
     {
         switch ($preference) {
             case 'graphviz_bin':
@@ -256,6 +256,7 @@ class Settings
             case 'use_abbr_places':
             case 'use_abbr_names':
             case 'countries':
+            case 'temp_dir':
                 return false;
             default:
                 return true;
