@@ -133,9 +133,9 @@ class Person
         // --- Printing the INDI details ---
         if ($this->dot->settings["diagram_type"] == "simple") {
             if ($this->dot->settings["show_url"]) {
-                $out .= "color=\"" . $bordercolor . "\", fillcolor=\"" . $fill_color . "\", fontcolor=\"" . $this->dot->settings["font_color"]["name"] . "\", target=\"_blank\", href=\"" . Dot::convertToHTMLSC($link) . "\" label="; #ESL!!! 20090213 without convertToHTMLSC the dot file has invalid data
+                $out .= "color=\"" . $bordercolor . "\", fillcolor=\"" . $fill_color . "\", fontcolor=\"" . $this->dot->settings["font_color_name"] . "\", target=\"_blank\", href=\"" . Dot::convertToHTMLSC($link) . "\" label="; #ESL!!! 20090213 without convertToHTMLSC the dot file has invalid data
             } else {
-                $out .= "color=\"" . $bordercolor . "\", fillcolor=\"" . $fill_color . "\", fontcolor=\"" . $this->dot->settings["font_color"]["name"] . "\", label=";
+                $out .= "color=\"" . $bordercolor . "\", fillcolor=\"" . $fill_color . "\", fontcolor=\"" . $this->dot->settings["font_color_name"] . "\", label=";
             }
             $out .= '"';
             $out .= str_replace('"','\"',$name) . '\n' . $this->dot->settings["birth_text"] . $birthdate . " " . (empty($birthplace)?'':'('.$birthplace.')') . '\l';
@@ -165,7 +165,7 @@ class Person
 
             $detailsExist = trim($name . $birthData . $deathData) != "";
 
-            if (!$detailsExist && !$this->dot->settings["diagram_type_combined_with_photo"]) {
+            if (!$detailsExist && !$this->dot->settings["with_photos"]) {
                 // No information in our tiles so make coloured boxes
                 $size = "WIDTH=\"" . ($this->dot->font_size * 3) . "\" HEIGHT=\"" . ($this->dot->font_size * 3) . "\"";
             } else {
@@ -175,10 +175,10 @@ class Person
             $out .= "<TR><TD COLSPAN=\"2\" CELLPADDING=\"2\" BGCOLOR=\"$fill_color\" PORT=\"nam\" $size></TD></TR>";
 
             // Second row (photo, name, birth & death data)
-            if ($detailsExist || $this->dot->settings["diagram_type_combined_with_photo"]) {
+            if ($detailsExist || $this->dot->settings["with_photos"]) {
                 $out .= "<TR>";
                 // Show photo
-                if ($this->dot->settings["diagram_type_combined_with_photo"]) {
+                if ($this->dot->settings["with_photos"]) {
                     if (isset($this->dot->individuals[$pid]["pic"]) && !empty($this->dot->individuals[$pid]["pic"])) {
                         $out .= "<TD ROWSPAN=\"2\" CELLPADDING=\"1\" PORT=\"pic\" WIDTH=\"" . ($this->dot->font_size * 4) . "\" HEIGHT=\"" . ($this->dot->font_size * 4) . "\" FIXEDSIZE=\"true\" ALIGN=\"CENTER\"><IMG SCALE=\"true\" SRC=\"" . $this->dot->individuals[$pid]["pic"] . "\" /></TD>";
                     } else {
@@ -191,19 +191,19 @@ class Person
                 }
                 // Show name
                 if (trim($name) != "") {
-                    $out .= "<FONT COLOR=\"" . $this->dot->settings["font_color"]["name"] . "\" POINT-SIZE=\"" . ($this->dot->font_size_name) . "\">" . $name . "</FONT>";
+                    $out .= "<FONT COLOR=\"" . $this->dot->settings["font_color_name"] . "\" POINT-SIZE=\"" . ($this->dot->font_size_name) . "\">" . $name . "</FONT>";
                     if (trim($birthData . $deathData) != "") {
                         $out .= "<BR />";
                     }
                 }
                 if (trim($birthData) != "") {
-                    $out .= "<FONT COLOR=\"" . $this->dot->settings["font_color"]["details"] . "\" POINT-SIZE=\"" . ($this->dot->font_size) . "\">" . $this->dot->settings["birth_text"] . $birthData . "</FONT>";
+                    $out .= "<FONT COLOR=\"" . $this->dot->settings["font_color_details"] . "\" POINT-SIZE=\"" . ($this->dot->font_size) . "\">" . $this->dot->settings["birth_text"] . $birthData . "</FONT>";
                     if (trim($deathData) != "") {
                         $out .= "<BR />";
                     }
                 }
                 if ($isdead && trim($deathData) !== "") {
-                    $out .= "<FONT COLOR=\"" . $this->dot->settings["font_color"]["details"] . "\" POINT-SIZE=\"" . ($this->dot->font_size) . "\">" . $this->dot->settings["death_text"] . $deathData . "</FONT>";
+                    $out .= "<FONT COLOR=\"" . $this->dot->settings["font_color_details"] . "\" POINT-SIZE=\"" . ($this->dot->font_size) . "\">" . $this->dot->settings["death_text"] . $deathData . "</FONT>";
                 } else {
                     $out .= " ";
                 }

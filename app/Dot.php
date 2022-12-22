@@ -101,7 +101,7 @@ class Dot {
 	 * @param string $font_color
 	 */
     public function setFontColorName(string $font_color) {
-		$this->settings["font_color"]["name"] = $font_color;
+		$this->settings["font_color_name"] = $font_color;
 	}
 
     /**
@@ -110,7 +110,7 @@ class Dot {
 	 * @param string $font_color
 	 */
     public function setFontColorDetails(string $font_color) {
-        $this->settings["font_color"]["details"] = $font_color;
+        $this->settings["font_color_details"] = $font_color;
 	}
 
 	/**
@@ -147,7 +147,7 @@ class Dot {
 	private function isPhotoRequired(): bool
 	{
 		return ($this->isTreePreferenceShowingThumbnails($this->tree) &&
-			($this->settings["diagram_type_combined_with_photo"]));
+			($this->settings["with_photos"]));
 	}
 
 
@@ -413,11 +413,11 @@ class Dot {
 
 					// Draw an arrow from HUSB to FAM
 					if (!empty($husb_id) && (isset($this->individuals[$husb_id]))) {
-						$out .= $this->convertID($husb_id) . " -> " . $this->convertID($fid) ." [color=\"" . $this->settings["arrows"]["default"] . "\", arrowsize=0.3]\n";
+						$out .= $this->convertID($husb_id) . " -> " . $this->convertID($fid) ." [color=\"" . $this->settings["arrow_default"] . "\", arrowsize=0.3]\n";
 					}
 					// Draw an arrow from WIFE to FAM
 					if (!empty($wife_id) && (isset($this->individuals[$wife_id]))) {
-						$out .= $this->convertID($wife_id) . " -> ". $this->convertID($fid) ." [color=\"" . $this->settings["arrows"]["default"] . "\", arrowsize=0.3]\n";
+						$out .= $this->convertID($wife_id) . " -> ". $this->convertID($fid) ." [color=\"" . $this->settings["arrow_default"] . "\", arrowsize=0.3]\n";
 					}
 					// Draw an arrow from FAM to each CHIL
 					foreach ($f->children() as $child) {
@@ -644,7 +644,7 @@ class Dot {
 					$out .= "<TD COLSPAN=\"2\" CELLPADDING=\"0\" PORT=\"marr\" BGCOLOR=\"" . $fill_color . "\">";
 				}
 
-				$out .= "<FONT COLOR=\"". $this->settings["font_color"]["details"] ."\" POINT-SIZE=\"" . ($this->font_size) ."\">" . (empty($marriagedate)?"":$marriagedate) . "<BR />" . (empty($marriageplace)?"":"(".$marriageplace.")") . $family . "</FONT>";
+				$out .= "<FONT COLOR=\"". $this->settings["font_color_details"] ."\" POINT-SIZE=\"" . ($this->font_size) ."\">" . (empty($marriagedate)?"":$marriagedate) . "<BR />" . (empty($marriageplace)?"":"(".$marriageplace.")") . $family . "</FONT>";
 				$out .= "</TD>";
 				$out .= "</TR>";
 			}
@@ -665,7 +665,7 @@ class Dot {
                 $out .= ", label=" . "< >";
             } else {
                 $out .= "color=\"" . $this->settings["colorborder"] . "\",fillcolor=\"" . $fill_color . "\", $href shape=ellipse, style=filled";
-                $out .= ", label=" . "<<TABLE border=\"0\" CELLPADDING=\"0\" CELLSPACING=\"0\"><TR><TD><FONT COLOR=\"". $this->settings["font_color"]["details"] ."\" POINT-SIZE=\"" . ($this->font_size) ."\">" . (empty($marriagedate)?"":$marriagedate) . "<BR />" . (empty($marriageplace)?"":"(".$marriageplace.")") . $family . "</FONT></TD></TR></TABLE>>";
+                $out .= ", label=" . "<<TABLE border=\"0\" CELLPADDING=\"0\" CELLSPACING=\"0\"><TR><TD><FONT COLOR=\"". $this->settings["font_color_details"] ."\" POINT-SIZE=\"" . ($this->font_size) ."\">" . (empty($marriagedate)?"":$marriagedate) . "<BR />" . (empty($marriageplace)?"":"(".$marriageplace.")") . $family . "</FONT></TD></TR></TABLE>>";
             }
         }
 
@@ -734,7 +734,7 @@ class Dot {
 		}
 		// -------------
 		// Add photo
-		if ($this->settings["diagram_type_combined_with_photo"] && $this->isPhotoRequired()) {
+		if ($this->settings["with_photos"] && $this->isPhotoRequired()) {
 			$individuals[$pid]["pic"] = $this->addPhotoToIndi($pid);
 		}
 
@@ -1231,9 +1231,9 @@ class Dot {
         }
 
         if ($relationshipType != "") {
-            $arrowColor = $this->settings["color_arrow_related"] == "color_arrow_related" ? $this->settings["arrows"]["not_related"] : $this->settings["arrows"]["default"];
+            $arrowColor = $this->settings["color_arrow_related"] == "color_arrow_related" ? $this->settings["arrows"]["not_related"] : $this->settings["arrow_default"];
         } else {
-            $arrowColor = $this->settings["color_arrow_related"] == "color_arrow_related" ? $this->settings["arrows"]["related"] : $this->settings["arrows"]["default"];
+            $arrowColor = $this->settings["color_arrow_related"] == "color_arrow_related" ? $this->settings["arrows"]["related"] : $this->settings["arrow_default"];
         }
         return $arrowColor;
     }
