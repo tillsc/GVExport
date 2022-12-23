@@ -167,7 +167,7 @@ class Person
 
             if (!$detailsExist && !$this->dot->settings["with_photos"]) {
                 // No information in our tiles so make coloured boxes
-                $size = "WIDTH=\"" . ($this->dot->font_size * 3) . "\" HEIGHT=\"" . ($this->dot->font_size * 3) . "\"";
+                $size = "WIDTH=\"" . ($this->dot->settings["fontsize"] * 3) . "\" HEIGHT=\"" . ($this->dot->settings["fontsize"] * 3) . "\"";
             } else {
                 $size = ""; // Let it sort out size itself
             }
@@ -180,10 +180,10 @@ class Person
                 // Show photo
                 if ($this->dot->settings["with_photos"]) {
                     if (isset($this->dot->individuals[$pid]["pic"]) && !empty($this->dot->individuals[$pid]["pic"])) {
-                        $out .= "<TD ROWSPAN=\"2\" CELLPADDING=\"1\" PORT=\"pic\" WIDTH=\"" . ($this->dot->font_size * 4) . "\" HEIGHT=\"" . ($this->dot->font_size * 4) . "\" FIXEDSIZE=\"true\" ALIGN=\"CENTER\"><IMG SCALE=\"true\" SRC=\"" . $this->dot->individuals[$pid]["pic"] . "\" /></TD>";
+                        $out .= "<TD ROWSPAN=\"2\" CELLPADDING=\"1\" PORT=\"pic\" WIDTH=\"" . ($this->dot->settings["fontsize"] * 4) . "\" HEIGHT=\"" . ($this->dot->settings["fontsize"] * 4) . "\" FIXEDSIZE=\"true\" ALIGN=\"CENTER\"><IMG SCALE=\"true\" SRC=\"" . $this->dot->individuals[$pid]["pic"] . "\" /></TD>";
                     } else {
                         // Blank cell zero width to keep the height right
-                        $out .= "<TD ROWSPAN=\"2\" CELLPADDING=\"1\" PORT=\"pic\" WIDTH=\"" . ($detailsExist ? "0" : ($this->dot->font_size * 3.5)) . "\" HEIGHT=\"" . ($this->dot->font_size * 4) . "\" FIXEDSIZE=\"true\"></TD>";
+                        $out .= "<TD ROWSPAN=\"2\" CELLPADDING=\"1\" PORT=\"pic\" WIDTH=\"" . ($detailsExist ? "0" : ($this->dot->settings["fontsize"] * 3.5)) . "\" HEIGHT=\"" . ($this->dot->settings["fontsize"] * 4) . "\" FIXEDSIZE=\"true\"></TD>";
                     }
                 }
                 if ($detailsExist) {
@@ -191,19 +191,19 @@ class Person
                 }
                 // Show name
                 if (trim($name) != "") {
-                    $out .= "<FONT COLOR=\"" . $this->dot->settings["font_color_name"] . "\" POINT-SIZE=\"" . ($this->dot->font_size_name) . "\">" . $name . "</FONT>";
+                    $out .= "<FONT COLOR=\"" . $this->dot->settings["font_color_name"] . "\" POINT-SIZE=\"" . ($this->dot->settings["fontsize"]) . "\">" . $name . "</FONT>";
                     if (trim($birthData . $deathData) != "") {
                         $out .= "<BR />";
                     }
                 }
                 if (trim($birthData) != "") {
-                    $out .= "<FONT COLOR=\"" . $this->dot->settings["font_color_details"] . "\" POINT-SIZE=\"" . ($this->dot->font_size) . "\">" . $this->dot->settings["birth_text"] . $birthData . "</FONT>";
+                    $out .= "<FONT COLOR=\"" . $this->dot->settings["font_color_details"] . "\" POINT-SIZE=\"" . ($this->dot->settings["fontsize"]) . "\">" . $this->dot->settings["birth_text"] . $birthData . "</FONT>";
                     if (trim($deathData) != "") {
                         $out .= "<BR />";
                     }
                 }
                 if ($isdead && trim($deathData) !== "") {
-                    $out .= "<FONT COLOR=\"" . $this->dot->settings["font_color_details"] . "\" POINT-SIZE=\"" . ($this->dot->font_size) . "\">" . $this->dot->settings["death_text"] . $deathData . "</FONT>";
+                    $out .= "<FONT COLOR=\"" . $this->dot->settings["font_color_details"] . "\" POINT-SIZE=\"" . ($this->dot->settings["fontsize"]) . "\">" . $this->dot->settings["death_text"] . $deathData . "</FONT>";
                 } else {
                     $out .= " ";
                 }

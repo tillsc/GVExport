@@ -2,6 +2,7 @@
 
 namespace vendor\WebtreesModules\gvexport;
 
+use Cassandra\Set;
 use Fisharebest\Webtrees\Auth;
 
 class Settings
@@ -47,11 +48,14 @@ class Settings
     {
         $settings = $this->defaultSettings;
         foreach ($settings as $preference => $value) {
-            $pref = $module->getPreference($preference, "preference not set");
-            if ($pref != "preference not set") {
-                $settings[$preference] = $pref;
+            if (Settings::shouldLoadSetting($preference)) {
+                $pref = $module->getPreference($preference, "preference not set");
+                if ($pref != "preference not set") {
+                    $settings[$preference] = $pref;
+                }
             }
         }
+
         return $settings;
     }
 
@@ -72,16 +76,20 @@ class Settings
                 $settings = $cookie->load($settings);
             } else {
                 foreach ($settings as $preference => $value) {
-                    $pref = $tree->getUserPreference(Auth::user(), "GVE_" . $preference, "preference not set");
-                    if ($pref != "preference not set") {
-                        $settings[$preference] = $pref;
+                    if (Settings::shouldLoadSetting($preference)) {
+                        $pref = $tree->getUserPreference(Auth::user(), "GVE_" . $preference, "preference not set");
+                        if ($pref != "preference not set") {
+                            $settings[$preference] = $pref;
+                        }
                     }
                 }
             }
-            if ($settings['use_graphviz'] == 'no' && $settings['graphviz_bin'] != "") {
+
+            if (!isset($settings['use_graphviz']) && $settings['graphviz_bin'] != "") {
                 $settings['graphviz_bin'] = "";
             }
         }
+        //echo "test" . $settings['use_graphviz'];
         return $settings;
     }
 
@@ -93,8 +101,15 @@ class Settings
      * @return void
      */
     public function saveAdminSettings($module, $settings) {
-        foreach ($settings as $preference=>$value) {
-            $module->setPreference($preference, $value);
+        $saveSettings = $this->defaultSettings;
+        foreach ($saveSettings as $preference=>$value) {
+            if (Settings::shouldSaveSetting($preference, true)) {
+                if (isset($settings[$preference])) {
+                    $module->setPreference($preference, $value);
+                } else {
+                    $module->setPreference($preference, false);
+                }
+            }
         }
     }
 
@@ -245,21 +260,35 @@ class Settings
      * @param string $preference
      * @return bool
      */
-    public static function shouldSaveSetting(string $preference): bool
+    public static function shouldSaveSetting(string $preference, bool $admin = false): bool
     {
         switch ($preference) {
             case 'graphviz_bin':
             case 'graphviz_config':
             case 'typefaces':
             case 'typeface_fallback':
+            case 'defaulttypeface':
             case 'directions':
             case 'use_abbr_places':
             case 'use_abbr_names':
             case 'countries':
             case 'temp_dir':
+            case 'space_base':
                 return false;
+            case 'show_debug':
+                return $admin;
             default:
                 return true;
         }
+    }
+
+    /**
+     * Currently an alias for shouldLoadSetting as the criteria are the same
+     *
+     * @return bool
+     */
+    public static function shouldLoadSetting($setting): bool
+    {
+        return Settings::shouldSaveSetting($setting);
     }
 }
