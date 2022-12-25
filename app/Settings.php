@@ -48,14 +48,13 @@ class Settings
     {
         $settings = $this->defaultSettings;
         foreach ($settings as $preference => $value) {
-            if (Settings::shouldLoadSetting($preference)) {
+            if (Settings::shouldLoadSetting($preference, true)) {
                 $pref = $module->getPreference($preference, "preference not set");
                 if ($pref != "preference not set") {
                     $settings[$preference] = $pref;
                 }
             }
         }
-
         return $settings;
     }
 
@@ -84,12 +83,10 @@ class Settings
                     }
                 }
             }
-
-            if (!isset($settings['use_graphviz']) && $settings['graphviz_bin'] != "") {
+            if (!$settings['use_graphviz'] && $settings['graphviz_bin'] != "") {
                 $settings['graphviz_bin'] = "";
             }
         }
-        //echo "test" . $settings['use_graphviz'];
         return $settings;
     }
 
@@ -105,7 +102,7 @@ class Settings
         foreach ($saveSettings as $preference=>$value) {
             if (Settings::shouldSaveSetting($preference, true)) {
                 if (isset($settings[$preference])) {
-                    $module->setPreference($preference, $value);
+                    $module->setPreference($preference, $settings[$preference]);
                 } else {
                     $module->setPreference($preference, false);
                 }
@@ -287,8 +284,8 @@ class Settings
      *
      * @return bool
      */
-    public static function shouldLoadSetting($setting): bool
+    public static function shouldLoadSetting($setting, $admin = false): bool
     {
-        return Settings::shouldSaveSetting($setting);
+        return Settings::shouldSaveSetting($setting, $admin);
     }
 }

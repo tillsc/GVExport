@@ -3,6 +3,7 @@
  * Default options for GVExport can be set here.
  * Note that the administrator in webtrees can set most of these default values in the control panel settings page for GVExport
  * Control panel settings override these settings
+ * TODO since 2.1.17 release will clear settings, consider changing some of these names to ones we are happy with long term
  */
 
 return array(
@@ -13,9 +14,9 @@ return array(
 	// 'graphviz_bin' => '', // Uncomment this line if you don't have GraphViz installed on the server
 	'filename' => 'gvexport', // Output file name used for downloads
 	'otype' => 'svg', // Default output file type
-	'grdir' => 'LR', // Direction of graph
+	'graph_dir' => 'LR', // Direction of graph
 	'mclimit' => '1', // Graphviz MCLIMIT setting - number of times to regenerate graph for reduced crossings
-	'diagtype' => 'decorated', // Default diagram type setting
+	'diagram_type' => 'decorated', // Default diagram type setting
 	'with_photos' => true, // Whether to include photos in diagram
 	'show_by' => true, // Whether to show birthdate for individuals
 	'bd_type' => 'gedcom', // Whether to show just the year or the full GEDCOM date of birth
@@ -29,7 +30,7 @@ return array(
 	'indiance' => 'ance', // If ancestors should be included when calculating who to show in the diagram
 	'ance_level' => 2, // Default setting for number of ancestor generations to include
 	'indisibl' => true, // Whether to include siblings when calculating who to include in the diagram
-	'indicous' => true, // Whether to include all relatives (i.e. cousins and nieces/nephews in addition to siblings) when calculating who to include in the diagram
+	'indirels' => true, // Whether to include all relatives (i.e. cousins and nieces/nephews in addition to siblings) when calculating who to include in the diagram
 	'indidesc' => true, // If descendants should be included when calculating who to show in the diagram
 	'desc_level' => 2, // Default setting for number of descendant generations to include
 	'indispou' => true, // Whether to include spouses when calculating who to include in the diagram
@@ -60,9 +61,9 @@ return array(
 	'fontcolor_details' => '#555555',	// Default font colour for date/place of birth/death etc.
 	'fontsize' => '10',	// Default font size for everything except name
 	'fontsize_name' => '12',	// Default font size for name
-	'arrow_default' => '#555555', // Default colour for arrows between records
-	'arrow_related' => '#222266', // Default colour for arrows from family record to child by birth
-	'arrow_not_related' => '#226622',	// Default colour for arrows from family records to child other than birth (adopted, etc)
+	'arrows_default' => '#555555', // Default colour for arrows between records
+	'arrows_related' => '#222266', // Default colour for arrows from family record to child by birth
+	'arrows_not_related' => '#226622',	// Default colour for arrows from family records to child other than birth (adopted, etc)
 	'color_arrow_related' => '', // If arrows should be coloured based on blood-relationship or not
 	'colorm' => '#ADD8E6', // Default color of male individuals (light blue)
 	'colorf' => '#FFB6C1', // Default color of female individuals (light pink)

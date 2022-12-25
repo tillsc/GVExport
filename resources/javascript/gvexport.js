@@ -75,13 +75,13 @@ function checkIndiBlank() {
 // all be selected
 function updateRelationOption(field) {
     // If user clicked "All relatives"
-    if (field === "indicous") {
+    if (field === "indirels") {
         // If function triggered by checking "All relatives" field, ensure "Siblings" is checked
-        if (document.getElementById("indicous").checked) {
+        if (document.getElementById("indirels").checked) {
             document.getElementById("indisibl").checked = true;
         }
         // If "All relatives" unchecked, uncheck "Anyone"
-        if (!document.getElementById("indicous").checked) {
+        if (!document.getElementById("indirels").checked) {
             document.getElementById("indiany").checked = false;
         }
     }
@@ -89,7 +89,7 @@ function updateRelationOption(field) {
     if (field === "indisibl") {
         // If function triggered by unchecking "Siblings" field, ensure "All relatives" is unchecked
         if (!document.getElementById("indisibl").checked) {
-            document.getElementById("indicous").checked = false;
+            document.getElementById("indirels").checked = false;
         }
         // If "Siblings" unchecked, uncheck "Anyone"
         if (!document.getElementById("indisibl").checked) {
@@ -100,7 +100,7 @@ function updateRelationOption(field) {
     if (field === "indispou") {
         // If function triggered by checking "All relatives" field, ensure "Siblings" is checked
         if (!document.getElementById("indisibl").checked) {
-            document.getElementById("indicous").checked = false;
+            document.getElementById("indirels").checked = false;
         }
         // If "Spouses" unchecked, uncheck "Anyone"
         if (!document.getElementById("indispou").checked) {
@@ -110,7 +110,7 @@ function updateRelationOption(field) {
     // If function triggered by checking "All relatives" field, ensure everything else is checked
     if (field === "indiany") {
         if (document.getElementById("indiany").checked) {
-            document.getElementById("indicous").checked = true;
+            document.getElementById("indirels").checked = true;
             document.getElementById("indisibl").checked = true;
             document.getElementById("indispou").checked = true;
 
@@ -822,7 +822,7 @@ function loadSettings(data) {
         let el = document.getElementById(key);
         if (el == null) {
             switch (key) {
-                case 'diagtype':
+                case 'diagram_type':
                     setCheckStatus(document.getElementById('diagtype_simple'), settings[key] === 'simple');
                     setCheckStatus(document.getElementById('diagtype_decorated'), settings[key] === 'decorated');
                     setCheckStatus(document.getElementById('diagtype_combined'), settings[key] === 'combined');

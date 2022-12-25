@@ -133,9 +133,9 @@ class Person
         // --- Printing the INDI details ---
         if ($this->dot->settings["diagram_type"] == "simple") {
             if ($this->dot->settings["show_url"]) {
-                $out .= "color=\"" . $bordercolor . "\", fillcolor=\"" . $fill_color . "\", fontcolor=\"" . $this->dot->settings["font_color_name"] . "\", target=\"_blank\", href=\"" . Dot::convertToHTMLSC($link) . "\" label="; #ESL!!! 20090213 without convertToHTMLSC the dot file has invalid data
+                $out .= "color=\"" . $bordercolor . "\", fillcolor=\"" . $fill_color . "\", fontcolor=\"" . $this->dot->settings["fontcolor_name"] . "\", target=\"_blank\", href=\"" . Dot::convertToHTMLSC($link) . "\" label="; #ESL!!! 20090213 without convertToHTMLSC the dot file has invalid data
             } else {
-                $out .= "color=\"" . $bordercolor . "\", fillcolor=\"" . $fill_color . "\", fontcolor=\"" . $this->dot->settings["font_color_name"] . "\", label=";
+                $out .= "color=\"" . $bordercolor . "\", fillcolor=\"" . $fill_color . "\", fontcolor=\"" . $this->dot->settings["fontcolor_name"] . "\", label=";
             }
             $out .= '"';
             $out .= str_replace('"','\"',$name) . '\n' . $this->dot->settings["birth_text"] . $birthdate . " " . (empty($birthplace)?'':'('.$birthplace.')') . '\l';
@@ -191,19 +191,19 @@ class Person
                 }
                 // Show name
                 if (trim($name) != "") {
-                    $out .= "<FONT COLOR=\"" . $this->dot->settings["font_color_name"] . "\" POINT-SIZE=\"" . ($this->dot->settings["fontsize"]) . "\">" . $name . "</FONT>";
+                    $out .= "<FONT COLOR=\"" . $this->dot->settings["fontcolor_name"] . "\" POINT-SIZE=\"" . ($this->dot->settings["fontsize_name"]) . "\">" . $name . "</FONT>";
                     if (trim($birthData . $deathData) != "") {
                         $out .= "<BR />";
                     }
                 }
                 if (trim($birthData) != "") {
-                    $out .= "<FONT COLOR=\"" . $this->dot->settings["font_color_details"] . "\" POINT-SIZE=\"" . ($this->dot->settings["fontsize"]) . "\">" . $this->dot->settings["birth_text"] . $birthData . "</FONT>";
+                    $out .= "<FONT COLOR=\"" . $this->dot->settings["fontcolor_details"] . "\" POINT-SIZE=\"" . ($this->dot->settings["fontsize"]) . "\">" . $this->dot->settings["birth_text"] . $birthData . "</FONT>";
                     if (trim($deathData) != "") {
                         $out .= "<BR />";
                     }
                 }
                 if ($isdead && trim($deathData) !== "") {
-                    $out .= "<FONT COLOR=\"" . $this->dot->settings["font_color_details"] . "\" POINT-SIZE=\"" . ($this->dot->settings["fontsize"]) . "\">" . $this->dot->settings["death_text"] . $deathData . "</FONT>";
+                    $out .= "<FONT COLOR=\"" . $this->dot->settings["fontcolor_details"] . "\" POINT-SIZE=\"" . ($this->dot->settings["fontsize"]) . "\">" . $this->dot->settings["death_text"] . $deathData . "</FONT>";
                 } else {
                     $out .= " ";
                 }
@@ -264,7 +264,7 @@ class Person
 
         // If PID already in name (from another module), remove it, so we don't add twice
         $name = str_replace(" (" . $pid . ")", "", $name);
-        if ($this->dot->settings["show_pid"] == "show_pid") {
+        if ($this->dot->settings["show_pid"] && $this->dot->settings["show_pid"] != "DEFAULT") {
             // Show INDI id
             $name = $name . " (" . $pid . ")";
         }

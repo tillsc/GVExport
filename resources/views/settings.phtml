@@ -15,7 +15,6 @@ use Fisharebest\Webtrees\Http\RequestHandlers\ControlPanel;
  */
 $settingsObj = new Settings();
 $settings = $settingsObj->getDefaultSettings();
-echo "test" . $vars["show_debug"];
 ?>
 
 <?= view('components/breadcrumbs', ['links' => [route(ControlPanel::class) => I18N::translate('Control panel'), $title]]) ?>
@@ -86,8 +85,8 @@ echo "test" . $vars["show_debug"];
                             <label for="indisibl"><?= I18N::translate('Siblings') ?></label>
                         </div>
                         <div class="col-auto mx-3">
-                            <input class="cart_toggle" onclick="updateRelationOption('indicous')" type="checkbox" name="vars[indicous]" id="indicous" value="cous" <?= $vars["indicous"] ? 'checked' : '' ?>>
-                            <label for="indicous"><?= I18N::translate('All relatives') ?></label>
+                            <input class="cart_toggle" onclick="updateRelationOption('indirels')" type="checkbox" name="vars[indirels]" id="indirels" value="rels" <?= $vars["indirels"] ? 'checked' : '' ?>>
+                            <label for="indirels"><?= I18N::translate('All relatives') ?></label>
                         </div>
                         <div class="col-auto mx-3">
                             <input class="cart_toggle" type="checkbox" onclick="updateRelationOption('indispou')" name="vars[indispou]" id="indispou" value="spou" <?= $vars["indispou"] ? 'checked' : '' ?>>
@@ -129,9 +128,9 @@ echo "test" . $vars["show_debug"];
             <h3><?= /* I18N: Appearance heading */ I18N::translate('Appearance') ?></h3>
 
             <div class="row">
-                <label class=" col-sm-4 col-form-label" for="grdir"><?= I18N::translate('Graph direction') ?></label>
+                <label class=" col-sm-4 col-form-label" for="graph_dir"><?= I18N::translate('Graph direction') ?></label>
                 <div class="col-sm-8 wt-page-options-value">
-                    <?= view('components/select', ['name' => 'vars[grdir]', 'id' => 'grdir', 'selected' => $vars['grdir'], 'options' => MainPage::updateTranslations($settings["directions"])]) ?>
+                    <?= view('components/select', ['name' => 'vars[graph_dir]', 'id' => 'graph_dir', 'selected' => $vars['graph_dir'], 'options' => MainPage::updateTranslations($settings["directions"])]) ?>
                 </div>
             </div>
 
@@ -140,15 +139,16 @@ echo "test" . $vars["show_debug"];
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="row">
                         <div class="col-auto">
-                            <input type="radio" name="vars[diagtype]" id="diagtype_simple" value="simple" <?= $vars["diagtype"] == "simple" ? 'checked' : '' ?>>
+                            <?= $vars["diagram_type"]; ?>
+                            <input type="radio" name="vars[diagram_type]" id="diagtype_simple" value="simple" <?= $vars["diagram_type"] == "simple" ? 'checked' : '' ?>>
                             <label for="diagtype_simple"><?= I18N::translate('Simple') ?></label>
                         </div>
                         <div class="col-auto">
-                            <input type="radio" name="vars[diagtype]" id="diagtype_decorated" value="decorated" <?= $vars["diagtype"] == "decorated" ? 'checked' : '' ?>>
+                            <input type="radio" name="vars[diagram_type]" id="diagtype_decorated" value="decorated" <?= $vars["diagram_type"] == "decorated" ? 'checked' : '' ?>>
                             <label for="diagtype_decorated"><?= I18N::translate('Decorated') ?></label>
                         </div>
                         <div class="col-auto">
-                            <input type="radio" name="vars[diagtype]" id="diagtype_combined" value="combined" <?= $vars["diagtype"] == "combined" ? 'checked' : '' ?>>
+                            <input type="radio" name="vars[diagram_type]" id="diagtype_combined" value="combined" <?= $vars["diagram_type"] == "combined" ? 'checked' : '' ?>>
                             <label for="diagtype_combined"><?= I18N::translate('Combined') ?></label>
                         </div>
                     </div>
@@ -174,20 +174,20 @@ echo "test" . $vars["show_debug"];
             <div class="row">
                 <label class=" col-sm-4 col-form-label" for="use_abbr_name"><?= I18N::translate('Abbreviated names') ?></label>
                 <div class="col-sm-8 wt-page-options-value">
-                    <?= view('components/select', ['name' => 'vars[use_abbr_name]', 'selected' => $vars['use_abbr_name'], 'options' => MainPage::updateTranslations($settings["use_abbr_names"])]) ?>
+                    <?= view('components/select', ['name' => 'vars[use_abbr_name]', 'id' => 'use_abbr_name', 'selected' => $vars['use_abbr_name'], 'options' => MainPage::updateTranslations($settings["use_abbr_names"])]) ?>
                 </div>
             </div>
 
             <div class="row">
                 <label class=" col-sm-4 col-form-label" for="use_abbr_place"><?= I18N::translate('Abbreviated place names') ?></label>
                 <div class="col-sm-8 wt-page-options-value">
-                    <?= view('components/select', ['name' => 'vars[use_abbr_place]', 'selected' => $vars['use_abbr_place'], 'options' => MainPage::updateTranslations($settings["use_abbr_places"])]) ?>
+                    <?= view('components/select', ['name' => 'vars[use_abbr_place]', 'id' => 'use_abbr_place', 'selected' => $vars['use_abbr_place'], 'options' => MainPage::updateTranslations($settings["use_abbr_places"])]) ?>
                 </div>
             </div>
             <div class="row">
                 <label class="col-sm-4 col-form-label" for="show_pid"><?= I18N::translate('Show individual XREF') ?></label>
                 <div class="col-sm-8 wt-page-options-value">
-                    <input type="checkbox" name="vars[show_pid]" id="show_pid" value="show_pid" <?= $vars["show_pid"] ? 'checked' : '' ?>>
+                    <input type="checkbox" name="vars[show_pid]" id="show_pid" value="show_pid" <?= $vars["show_pid"] && $vars["show_pid"] != "DEFAULT" ? 'checked' : '' ?>>
                 </div>
             </div>
 
@@ -309,7 +309,7 @@ echo "test" . $vars["show_debug"];
                     <div class="row">
                         <label for="typeface"><?= I18N::translate('Typeface') ?>:</label>
                         <div class="col-auto">
-                            <?= view('components/select', ['name' => 'vars[typeface]', 'selected' => $vars['typeface'], 'options' => MainPage::updateTranslations($settings["typefaces"])]) ?>
+                            <?= view('components/select', ['name' => 'vars[typeface]', 'id' => 'typeface', 'selected' => $vars['typeface'], 'options' => MainPage::updateTranslations($settings["typefaces"])]) ?>
                         </div>
                         <label for="fontsize_name"><?= I18N::translate('Font size for names') ?>:</label>
                         <div class="col-auto">
@@ -333,14 +333,14 @@ echo "test" . $vars["show_debug"];
                 <label class=" col-sm-4 col-form-label"><?= I18N::translate('Relationship arrows') ?></label>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="col-auto">
-                        <input type="color" class="picker" name="vars[arrow_default]" id="arrow_default" value="<?= $vars["arrow_default"] ?>" /><label for="arrow_default" class="picker-label"><?= I18N::translate('Arrow color') ?></label>
+                        <input type="color" class="picker" name="vars[arrows_default]" id="arrows_default" value="<?= $vars["arrows_default"] ?>" /><label for="arrows_default" class="picker-label"><?= I18N::translate('Arrow color') ?></label>
                     </div>
                     <input type="checkbox" name="vars[color_arrow_related]" id="color_arrow_related" value="color_arrow_related" <?= $vars["color_arrow_related"] ? 'checked' : '' ?>><label for="color_arrow_related" class="check-list"><?= I18N::translate('Show blood relationship in different color') ?></label>
 
                     <div id="arrow_group" class="color_subgroup col-auto wt-page-options-value">
                         <div class="sub-group">
-                            <input type="color" class="picker" name="vars[arrow_related]" id="arrow_related" value="<?= $vars["arrow_related"] ?>" /><label for="arrow_related" class="picker-label"><?= I18N::translate('Related by birth') ?></label>
-                            <input type="color" class="picker" name="vars[arrow_not_related]" id="arrow_not_related" value="<?= $vars["arrow_not_related"] ?>" /><label for="arrow_not_related" class="picker-label"><?= I18N::translate('Related other than by birth') ?></label>
+                            <input type="color" class="picker" name="vars[arrows_related]" id="arrows_related" value="<?= $vars["arrows_related"] ?>" /><label for="arrows_related" class="picker-label"><?= I18N::translate('Related by birth') ?></label>
+                            <input type="color" class="picker" name="vars[arrows_not_related]" id="arrows_not_related" value="<?= $vars["arrows_not_related"] ?>" /><label for="arrows_not_related" class="picker-label"><?= I18N::translate('Related other than by birth') ?></label>
                         </div>
                     </div>
                 </div>
@@ -399,7 +399,7 @@ echo "test" . $vars["show_debug"];
             <div class="row">
                 <label class="col-sm-4 col-form-label" for="otype"><?= I18N::translate('Output File Type') ?></label>
                 <div class="col-sm-8 wt-page-options-value">
-                    <?= view('components/select', ['name' => 'vars[otype]', 'selected' => $vars['otype'], 'options' => $otypes]) ?>
+                    <?= view('components/select', ['name' => 'vars[otype]', 'id' => 'otype', 'selected' => $vars['otype'], 'options' => $otypes]) ?>
                 </div>
                 <label class="col-sm-4 col-form-label"><?= I18N::translate('Browser render') ?></label>
                 <div class="col-sm-8 wt-page-options-value">

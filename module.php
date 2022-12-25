@@ -170,6 +170,11 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
             // Load settings from webtrees
             $settings = new Settings();
             $userDefaultVars = $settings->loadUserSettings($this, $tree);
+
+        } else {
+            if (!$userDefaultVars['use_graphviz'] && $userDefaultVars['graphviz_bin'] != "") {
+                $userDefaultVars['graphviz_bin'] = "";
+            }
         }
         $otypes = $this->getOTypes($userDefaultVars);
 
@@ -245,6 +250,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
         } else {
             $response['vars'] = (new Settings())->getAdminSettings($this);
         }
+
         $response['title'] = $this->title();
         $response['gvexport_css']  = route('module', ['module' => $this->name(), 'action' => 'Css']);
         $response['gvexport_js']  = route('module', ['module' => $this->name(), 'action' => 'JS']);

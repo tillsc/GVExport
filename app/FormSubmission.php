@@ -20,27 +20,14 @@ class FormSubmission
         } else {
             $settings['stop_proc'] = false;
         }
-
-        if (isset($vars['indiance'])) {
-            $settings['indiance'] = true;
-        }
-        if (isset($vars['indidesc'])) {
-            $settings['indidesc'] = true;
-        }
+        $settings['indiance'] = isset($vars['indiance']);
+        $settings['indidesc'] = isset($vars['indidesc']);
 
         // If "Anyone" option is picked, then other relations options also must be set
-        if (isset($vars['indisibl']) || isset($vars['indiany'])) {
-            $settings['indisibl'] = true;
-        }
-        if (isset($vars['indispou']) || isset($vars['indiany'])) {
-            $settings['indispou'] = true;
-        }
-        if (isset($vars['indicous']) || isset($vars['indiany'])) {
-            $settings['coindicousus'] = true;
-        }
-        if (isset($vars['indiany'])) {
-            $settings['indiany'] = true;
-        }
+        $settings['indisibl'] = isset($vars['indisibl']) || isset($vars['indiany']);
+        $settings['indispou'] = isset($vars['indispou']) || isset($vars['indiany']);
+        $settings['indirels'] = isset($vars['indirels']) || isset($vars['indiany']);
+        $settings['indiany'] = isset($vars['indiany']);
 
         if (isset($vars['ance_level'])) {
             $settings['ance_level'] = $vars["ance_level"];
@@ -61,11 +48,11 @@ class FormSubmission
         $settings['fastnr'] = isset($vars['fastnr']);
 
         if (isset($vars['fontcolor_name'])) {
-            $settings["font_color_name"] = $vars['fontcolor_name'];
+            $settings["fontcolor_name"] = $vars['fontcolor_name'];
         }
 
         if (isset($vars['fontcolor_details'])) {
-            $settings["font_color_details"] = $vars['fontcolor_details'];
+            $settings["fontcolor_details"] = $vars['fontcolor_details'];
         }
 
         if (isset($vars['fontsize'])) {
@@ -81,23 +68,23 @@ class FormSubmission
         }
 
         if (isset($vars['arrows_default'])) {
-            $settings['arrow_default'] = $vars['arrow_default'];
+            $settings['arrows_default'] = $vars['arrows_default'];
         }
 
         if (isset($vars['arrows_related'])) {
-            $settings['arrow_related'] = $vars['arrow_related'];
+            $settings['arrows_related'] = $vars['arrows_related'];
         }
 
         if (isset($vars['arrows_not_related'])) {
-            $settings['arrow_not_related'] = $vars['arrow_not_related'];
+            $settings['arrows_not_related'] = $vars['arrows_not_related'];
         }
 
         if (isset($vars["color_arrow_related"])) {
             $settings['color_arrow_related'] = $vars['color_arrow_related'];
         }
 
-        if (isset($vars['grdir'])) {
-            $settings['graph_dir'] = $vars['grdir'];
+        if (isset($vars['graph_dir'])) {
+            $settings['graph_dir'] = $vars['graph_dir'];
         }
 
         // Which data to show
@@ -135,6 +122,7 @@ class FormSubmission
         $settings['auto_update'] = isset($vars['auto_update']);
         $settings['debug'] = isset($vars['debug']);
         $settings['show_debug'] = isset($vars['show_debug']);
+        $settings['use_graphviz'] = isset($vars['use_graphviz']);
 
         // Set custom colors
         if (isset($vars["colorm"])) {
@@ -170,9 +158,7 @@ class FormSubmission
         if (isset($vars["colorindibg"])) {
             $settings['colorindibg'] = $vars["colorindibg"];
         }
-        if (isset($vars["startcol"])) {
-            $settings['startcol'] = $vars["startcol"];
-        }
+        $settings['startcol'] = isset($vars["startcol"]);
         if (isset($vars["colorstartbg"])) {
             $settings['colorstartbg'] = $vars["colorstartbg"];
         }
@@ -180,8 +166,8 @@ class FormSubmission
             $settings['colorborder'] = $vars["colorborder"];
         }
         // Settings
-        if (!empty($vars['diagtype'])) {
-            $settings['diagram_type'] = $vars['diagtype'];
+        if (!empty($vars['diagram_type'])) {
+            $settings['diagram_type'] = $vars['diagram_type'];
 
         }
         $settings['with_photos'] = isset($vars['with_photos']);

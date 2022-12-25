@@ -45,9 +45,7 @@ class Dot {
 	var array $individuals = array();
 	var array $skipList = array();
 	var array $families = array();
-	var array $indi_search_method = array("ance" => FALSE, "desc" => FALSE, "spou" => FALSE, "sibl" => FALSE, "cous" => FALSE, "any" => FALSE);
-	var string $font_size;
-    var string $font_size_name;
+	var array $indi_search_method = array("ance" => FALSE, "desc" => FALSE, "spou" => FALSE, "sibl" => FALSE, "rels" => FALSE, "any" => FALSE);
 	var array $settings = array();
     var array $messages = array(); // messages for toast system
 	private const ERROR_CHAR = "E:"; // Messages that start with this will be highlighted
@@ -179,12 +177,13 @@ class Dot {
      * @return void                 Directly updates arrays so no return value
      */
     private function createIndiList (array &$individuals, array &$families, bool $full) {
+        $this->indi_search_method = array("ance" => $this->settings["indiance"], "desc" => $this->settings["indidesc"], "spou" => $this->settings["indispou"], "sibl" => $this->settings["indisibl"], "rels" => $this->settings["indirels"], "any" => $this->settings["indiany"]);
         $indis = explode(",", $this->settings["indi"]);
         $indiLists = array();
         for ($i=0;$i<count($indis);$i++) {
             $indiLists[$i] = array();
             if (trim($indis[$i]) !== "") {
-                $this->addIndiToList("Start | Code 16", trim($indis[$i]), $this->settings["indiance"], $this->settings["indidesc"], $this->settings["indispou"], $this->settings["indisibl"], TRUE, 0, 0, $indiLists[$i], $families, $full);
+                $this->addIndiToList("Start | Code 16", trim($indis[$i]), $this->indi_search_method["ance"], $this->indi_search_method["desc"], $this->indi_search_method["spou"], $this->indi_search_method["sibl"], TRUE, 0, 0, $indiLists[$i], $families, $full);
             }
         }
         // Merge multiple lists from the different starting persons into one list
@@ -237,7 +236,7 @@ class Dot {
 			// Create our tree
 			$this->createIndiList($this->individuals, $this->families, false);
 			if ($this->settings["diagram_type"] == "combined") {
-                if ($this->settings["indispou"] != "") {
+                if ($this->indi_search_method["spou"] != "") {
                     $this->removeGhosts($this->individuals, $this->families);
                 }
 			} else {
@@ -269,7 +268,7 @@ class Dot {
 				if ($NonrelativeExists) {
 					// Save and change some settings before generating full tree
 					$save = $this->indi_search_method;
-					$this->indi_search_method = array("ance" => TRUE, "desc" => TRUE, "spou" => FALSE, "sibl" => TRUE, "cous" => TRUE, "any" => FALSE);
+					$this->indi_search_method = array("ance" => TRUE, "desc" => TRUE, "spou" => FALSE, "sibl" => TRUE, "rels" => TRUE, "any" => FALSE);
 					// Generate full tree of relatives
 					$this->createIndiList($relList, $relFams, true);
 					// Restore settings
@@ -362,11 +361,11 @@ class Dot {
 
 					// Draw an arrow from HUSB to FAM
 					if (!empty($husb_id) && (isset($this->individuals[$husb_id]))) {
-						$out .= $this->convertID($husb_id) . " -> " . $this->convertID($fid) ." [color=\"" . $this->settings["arrow_default"] . "\", arrowsize=0.3]\n";
+						$out .= $this->convertID($husb_id) . " -> " . $this->convertID($fid) ." [color=\"" . $this->settings["arrows_default"] . "\", arrowsize=0.3]\n";
 					}
 					// Draw an arrow from WIFE to FAM
 					if (!empty($wife_id) && (isset($this->individuals[$wife_id]))) {
-						$out .= $this->convertID($wife_id) . " -> ". $this->convertID($fid) ." [color=\"" . $this->settings["arrow_default"] . "\", arrowsize=0.3]\n";
+						$out .= $this->convertID($wife_id) . " -> ". $this->convertID($fid) ." [color=\"" . $this->settings["arrows_default"] . "\", arrowsize=0.3]\n";
 					}
 					// Draw an arrow from FAM to each CHIL
 					foreach ($f->children() as $child) {
@@ -480,7 +479,7 @@ class Dot {
 		if ($this->settings["diagram_type"] == "simple") {
 			$out .= "node [ shape=box, style=filled fontsize=\"" . $this->settings['fontsize'] ."\" fontname=\"" . $this->settings["typeface"] ."\"];\n";
 		} else {
-			$out .= "node [ shape=plaintext fontsize=\"" . $this->settings['fontsize'] ."\" fontname=\""  . ", " . $this->settings["typeface_fallback"][$this->settings["typeface"]] .", " . $this->settings["typefaces"][$this->settings["defaulttypeface"]] . ", Sans\"];\n";
+			$out .= "node [ shape=plaintext fontsize=\"" . $this->settings['fontsize'] ."\" fontname=\"" . $this->settings["typefaces"][$this->settings["typeface"]] . ", " . $this->settings["typeface_fallback"][$this->settings["typeface"]] .", " . $this->settings["typefaces"][$this->settings["defaulttypeface"]] . ", Sans\"];\n";
 		}
 		return $out;
 	}
@@ -593,7 +592,7 @@ class Dot {
 					$out .= "<TD COLSPAN=\"2\" CELLPADDING=\"0\" PORT=\"marr\" BGCOLOR=\"" . $fill_color . "\">";
 				}
 
-				$out .= "<FONT COLOR=\"". $this->settings["font_color_details"] ."\" POINT-SIZE=\"" . ($this->settings["fontsize"]) ."\">" . (empty($marriagedate)?"":$marriagedate) . "<BR />" . (empty($marriageplace)?"":"(".$marriageplace.")") . $family . "</FONT>";
+				$out .= "<FONT COLOR=\"". $this->settings["fontcolor_details"] ."\" POINT-SIZE=\"" . ($this->settings["fontsize"]) ."\">" . (empty($marriagedate)?"":$marriagedate) . "<BR />" . (empty($marriageplace)?"":"(".$marriageplace.")") . $family . "</FONT>";
 				$out .= "</TD>";
 				$out .= "</TR>";
 			}
@@ -614,7 +613,7 @@ class Dot {
                 $out .= ", label=" . "< >";
             } else {
                 $out .= "color=\"" . $this->settings["colorborder"] . "\",fillcolor=\"" . $fill_color . "\", $href shape=ellipse, style=filled";
-                $out .= ", label=" . "<<TABLE border=\"0\" CELLPADDING=\"0\" CELLSPACING=\"0\"><TR><TD><FONT COLOR=\"". $this->settings["font_color_details"] ."\" POINT-SIZE=\"" . ($this->settings["fontsize"]) ."\">" . (empty($marriagedate)?"":$marriagedate) . "<BR />" . (empty($marriageplace)?"":"(".$marriageplace.")") . $family . "</FONT></TD></TR></TABLE>>";
+                $out .= ", label=" . "<<TABLE border=\"0\" CELLPADDING=\"0\" CELLSPACING=\"0\"><TR><TD><FONT COLOR=\"". $this->settings["fontcolor_details"] ."\" POINT-SIZE=\"" . ($this->settings["fontsize"]) ."\">" . (empty($marriagedate)?"":$marriagedate) . "<BR />" . (empty($marriageplace)?"":"(".$marriageplace.")") . $family . "</FONT></TD></TR></TABLE>>";
             }
         }
 
@@ -646,8 +645,8 @@ class Dot {
 		}
 
 		// Set ancestor/descendant levels in case these options disabled
-		$ance_level = $this->settings["indiance"] ? $this->settings["ance_level"] : 0;
-		$desc_level = $this->settings["indidesc"] ? $this->settings["desc_level"] : 0;
+		$ance_level = $this->indi_search_method["ance"] ? $this->settings["ance_level"] : 0;
+		$desc_level = $this->indi_search_method["desc"] ? $this->settings["desc_level"] : 0;
         if ($this->settings["desc_level"] == 0) {
             $desc = false;
         }
@@ -828,7 +827,7 @@ class Dot {
 									//var_dump($fams);
 								}
 								// -------------
-								$this->addIndiToList($pid."|Code 1", $husb_id, TRUE, FALSE, $this->settings["indispou"] && $relationshipType !== "BOTH", $this->settings["indisibl"], FALSE, $ind, $level+1, $individuals, $families, $full);
+								$this->addIndiToList($pid."|Code 1", $husb_id, TRUE, FALSE, $this->indi_search_method["spou"] && $relationshipType !== "BOTH", $this->indi_search_method["sibl"], FALSE, $ind, $level+1, $individuals, $families, $full);
 							} else {
 								// --- DEBUG ---
 								if ($this->settings["debug"]) {
@@ -836,7 +835,7 @@ class Dot {
 									//var_dump($fams);
 								}
 								// -------------
-								$this->addIndiToList($pid."|Code 2", $husb_id, TRUE, FALSE, $this->settings["indispou"], $this->settings["indisibl"], $rel && $relationshipType == "", $ind, $level+1, $individuals, $families, $full);
+								$this->addIndiToList($pid."|Code 2", $husb_id, TRUE, FALSE, $this->indi_search_method["spou"], $this->indi_search_method["sibl"], $rel && $relationshipType == "", $ind, $level+1, $individuals, $families, $full);
 
 							}
 						}
@@ -851,7 +850,7 @@ class Dot {
 									//var_dump($fams);
 								}
 								// -------------
-								$this->addIndiToList($pid."|Code 3", $wife_id, TRUE, FALSE, $this->settings["indispou"] && $relationshipType !== "BOTH", $this->settings["indisibl"], FALSE, $ind, $level+1, $individuals, $families, $full);
+								$this->addIndiToList($pid."|Code 3", $wife_id, TRUE, FALSE, $this->indi_search_method["spou"] && $relationshipType !== "BOTH", $this->indi_search_method["sibl"], FALSE, $ind, $level+1, $individuals, $families, $full);
 							} else {
 								// --- DEBUG ---
 								if ($this->settings["debug"]) {
@@ -859,7 +858,7 @@ class Dot {
 									//var_dump($fams);
 								}
 								// -------------
-								$this->addIndiToList($pid."|Code 4", $wife_id, TRUE, FALSE, $this->settings["indispou"], $this->settings["indisibl"], $rel && $relationshipType == "", $ind, $level+1, $individuals, $families, $full);
+								$this->addIndiToList($pid."|Code 4", $wife_id, TRUE, FALSE, $this->indi_search_method["spou"], $this->indi_search_method["sibl"], $rel && $relationshipType == "", $ind, $level+1, $individuals, $families, $full);
 
 							}
 						}
@@ -947,10 +946,10 @@ class Dot {
 								$related = $rel;
 							}
 
-							if ($this->settings["indiany"]) {
-								$this->addIndiToList($pid."|Code 14", $child_id, TRUE, FALSE, $this->settings["indispou"], FALSE, FALSE, $ind, $level-1, $individuals, $families, $full);
+							if ($this->indi_search_method["any"]) {
+								$this->addIndiToList($pid."|Code 14", $child_id, TRUE, FALSE, $this->indi_search_method["spou"], FALSE, FALSE, $ind, $level-1, $individuals, $families, $full);
 							}
-							$this->addIndiToList($pid."|Code 5", $child_id, FALSE, TRUE, $this->settings["indispou"], FALSE, $related, $ind, $level-1, $individuals, $families, $full);
+							$this->addIndiToList($pid."|Code 5", $child_id, FALSE, TRUE, $this->indi_search_method["spou"], FALSE, $related, $ind, $level-1, $individuals, $families, $full);
 
 						}
 					}
@@ -1004,7 +1003,7 @@ class Dot {
 							//var_dump($fams);
 						}
 						// -------------
-                        $this->addIndiToList($pid."|Code 6", $spouse_id, $this->settings["indiany"] && $ance, $this->settings["indiany"] && $desc, $this->settings["indiany"], $this->settings["indiany"], FALSE, $ind, $level, $individuals, $families, $full);
+                        $this->addIndiToList($pid."|Code 6", $spouse_id, $this->indi_search_method["any"] && $ance, $this->indi_search_method["any"] && $desc, $this->indi_search_method["any"], $this->indi_search_method["any"], FALSE, $ind, $level, $individuals, $families, $full);
 					}
 
 				}
@@ -1051,10 +1050,10 @@ class Dot {
 							}
 
 							// If searching for cousins, then the descendants of ancestors' siblings should be added
-							if ($this->settings["indicous"]) {
-								$this->addIndiToList($pid."|Code 8", $child_id, TRUE, TRUE, $this->settings["indispou"], FALSE, $related, $ind, $level, $individuals, $families, $full);
+							if ($this->indi_search_method["rels"]) {
+								$this->addIndiToList($pid."|Code 8", $child_id, TRUE, TRUE, $this->indi_search_method["spou"], FALSE, $related, $ind, $level, $individuals, $families, $full);
 							} else {
-								$this->addIndiToList($pid."|Code 9", $child_id, TRUE, FALSE, $this->settings["indispou"], FALSE, $related, $ind, $level, $individuals, $families, $full);
+								$this->addIndiToList($pid."|Code 9", $child_id, TRUE, FALSE, $this->indi_search_method["spou"], FALSE, $related, $ind, $level, $individuals, $families, $full);
 							}
 
 						}
@@ -1100,10 +1099,10 @@ class Dot {
 							// -------------
 
 							// If searching for step-cousins, then the descendants of ancestors' siblings should be added
-							if ($this->settings["indicous"]) {
-								$this->addIndiToList($pid."|Code 10", $child_id, FALSE, TRUE, $this->settings["indispou"], FALSE, $rel, $ind, $level, $individuals, $families, $full);
+							if ($this->indi_search_method["rels"]) {
+								$this->addIndiToList($pid."|Code 10", $child_id, FALSE, TRUE, $this->indi_search_method["spou"], FALSE, $rel, $ind, $level, $individuals, $families, $full);
 							} else {
-								$this->addIndiToList($pid."|Code 11", $child_id, TRUE, FALSE, $this->settings["indispou"], FALSE, $rel, $ind, $level, $individuals, $families, $full);
+								$this->addIndiToList($pid."|Code 11", $child_id, TRUE, FALSE, $this->indi_search_method["spou"], FALSE, $rel, $ind, $level, $individuals, $families, $full);
 							}
 						}
 					}
@@ -1180,9 +1179,9 @@ class Dot {
         }
 
         if ($relationshipType != "") {
-            $arrowColor = $this->settings["color_arrow_related"] == "color_arrow_related" ? $this->settings["arrow_not_related"] : $this->settings["arrow_default"];
+            $arrowColor = $this->settings["color_arrow_related"] == "color_arrow_related" ? $this->settings["arrows_not_related"] : $this->settings["arrows_default"];
         } else {
-            $arrowColor = $this->settings["color_arrow_related"] == "color_arrow_related" ? $this->settings["arrow_related"] : $this->settings["arrow_default"];
+            $arrowColor = $this->settings["color_arrow_related"] == "color_arrow_related" ? $this->settings["arrows_related"] : $this->settings["arrows_default"];
         }
         return $arrowColor;
     }
