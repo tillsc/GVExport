@@ -859,8 +859,8 @@ function loadSettings(data) {
         }
     });
     setStateFastRelationCheck();
-    showHide(document.getElementById('arrow_group'),document.getElementById('color_arrow_related').checked)
-    showHide(document.getElementById('startcol_option'),document.getElementById('startcol').checked)
+    showHide(document.getElementById('arrow_group'),document.getElementById('colour_arrow_related').checked)
+    showHide(document.getElementById('startcol_option'),document.getElementById('highlight_start_individuals').checked)
 }
 
 function setCheckStatus(el, checked) {

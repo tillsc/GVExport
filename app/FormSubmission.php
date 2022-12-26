@@ -79,8 +79,8 @@ class FormSubmission
             $settings['arrows_not_related'] = $vars['arrows_not_related'];
         }
 
-        if (isset($vars["color_arrow_related"])) {
-            $settings['color_arrow_related'] = $vars['color_arrow_related'];
+        if (isset($vars["colour_arrow_related"])) {
+            $settings['colour_arrow_related'] = $vars['colour_arrow_related'];
         }
 
         if (isset($vars['graph_dir'])) {
@@ -125,45 +125,45 @@ class FormSubmission
         $settings['enable_graphviz'] = isset($vars['enable_graphviz']);
 
         // Set custom colors
-        if (isset($vars["colorm"])) {
-            $settings['colorm'] = $vars["colorm"];
+        if (isset($vars["male_colour"])) {
+            $settings['male_colour'] = $vars["male_colour"];
         }
-        if (isset($vars["colorf"])) {
-            $settings['colorf'] = $vars["colorf"];
+        if (isset($vars["female_colour"])) {
+            $settings['female_colour'] = $vars["female_colour"];
         }
-        if (isset($vars["colorx"])) {
-            $settings['colorx'] = $vars["colorx"];
+        if (isset($vars["other_gender_colour"])) {
+            $settings['other_gender_colour'] = $vars["other_gender_colour"];
         }
-        if (isset($vars["coloru"])) {
-            $settings['coloru'] = $vars["coloru"];
+        if (isset($vars["unknown_gender_colour"])) {
+            $settings['unknown_gender_colour'] = $vars["unknown_gender_colour"];
         }
-        if (isset($vars["colorm_nr"])) {
-            $settings['colorm_nr'] = $vars["colorm_nr"];
+        if (isset($vars["male_unrelated_colour"])) {
+            $settings['male_unrelated_colour'] = $vars["male_unrelated_colour"];
         }
-        if (isset($vars["colorf_nr"])) {
-            $settings['colorf_nr'] = $vars["colorf_nr"];
+        if (isset($vars["female_unrelated_colour"])) {
+            $settings['female_unrelated_colour'] = $vars["female_unrelated_colour"];
         }
-        if (isset($vars["colorx_nr"])) {
-            $settings['colorx_nr'] = $vars["colorx_nr"];
+        if (isset($vars["other_gender_unrel_colour"])) {
+            $settings['other_gender_unrel_colour'] = $vars["other_gender_unrel_colour"];
         }
-        if (isset($vars["coloru_nr"])) {
-            $settings['coloru_nr'] = $vars["coloru_nr"];
+        if (isset($vars["unknown_gender_unrel_colour"])) {
+            $settings['unknown_gender_unrel_colour'] = $vars["unknown_gender_unrel_colour"];
         }
-        if (isset($vars["colorfam"])) {
-            $settings['colorfam'] = $vars["colorfam"];
+        if (isset($vars["family_colour"])) {
+            $settings['family_colour'] = $vars["family_colour"];
         }
-        if (isset($vars["colorbg"])) {
-            $settings['colorbg'] = $vars["colorbg"];
+        if (isset($vars["background_colour"])) {
+            $settings['background_colour'] = $vars["background_colour"];
         }
-        if (isset($vars["colorindibg"])) {
-            $settings['colorindibg'] = $vars["colorindibg"];
+        if (isset($vars["individual_background_colour"])) {
+            $settings['individual_background_colour'] = $vars["individual_background_colour"];
         }
-        $settings['startcol'] = isset($vars["startcol"]);
-        if (isset($vars["colorstartbg"])) {
-            $settings['colorstartbg'] = $vars["colorstartbg"];
+        $settings['highlight_start_individuals'] = isset($vars["highlight_start_individuals"]);
+        if (isset($vars["highlight_colour"])) {
+            $settings['highlight_colour'] = $vars["highlight_colour"];
         }
-        if (isset($vars["colorborder"])) {
-            $settings['colorborder'] = $vars["colorborder"];
+        if (isset($vars["border_colour"])) {
+            $settings['border_colour'] = $vars["border_colour"];
         }
         // Settings
         if (!empty($vars['diagram_type'])) {

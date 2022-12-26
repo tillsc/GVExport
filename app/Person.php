@@ -67,7 +67,7 @@ class Person
     function printPersonLabel(string $pid, $related = TRUE): string
     {
         $out = "";
-        $bordercolor = $this->dot->settings["colorborder"];	// Border color of the INDI's box
+        $bordercolor = $this->dot->settings["border_colour"];	// Border color of the INDI's box
         $death_place = "";
         // Get the personal data
         if ($this->dot->settings["diagram_type"] == "combined" && ( substr($pid, 0, 3) == "I_H" || substr($pid, 0, 3) == "I_W" )) {
@@ -138,9 +138,9 @@ class Person
                 $out .= "color=\"" . $bordercolor . "\", fillcolor=\"" . $fill_color . "\", fontcolor=\"" . $this->dot->settings["fontcolor_name"] . "\", label=";
             }
             $out .= '"';
-            $out .= str_replace('"','\"',$name) . '\n' . $this->dot->settings["birth_text"] . $birthdate . " " . (empty($birthplace)?'':'('.$birthplace.')') . '\l';
+            $out .= str_replace('"','\"',$name) . '\n' . $this->dot->settings["birth_prefix"] . $birthdate . " " . (empty($birthplace)?'':'('.$birthplace.')') . '\l';
             if ($isdead) {
-                $out .= $this->dot->settings["death_text"] . $death_date . " " . (empty($death_place)?'':'('.$death_place.')');
+                $out .= $this->dot->settings["death_prefix"] . $death_date . " " . (empty($death_place)?'':'('.$death_place.')');
             } else {
                 $out .= " ";
             }
@@ -154,7 +154,7 @@ class Person
             }
             $href = $this->dot->settings["add_links"] ? "TARGET=\"_blank\" HREF=\"" . Dot::convertToHTMLSC($link) . "\"" : "";
             // Draw table
-            $indibgcolor = $this->isStartingIndividual($pid) && $this->dot->settings['startcol'] == "true" ? $this->dot->settings["colorstartbg"] : $this->dot->settings["colorindibg"];
+            $indibgcolor = $this->isStartingIndividual($pid) && $this->dot->settings['highlight_start_individuals'] == "true" ? $this->dot->settings["highlight_colour"] : $this->dot->settings["individual_background_colour"];
             if ($this->dot->settings["diagram_type"] == "combined") {
                 $out .= "<TABLE BORDER=\"0\" CELLBORDER=\"0\" CELLPADDING=\"2\" CELLSPACING=\"0\" BGCOLOR=\"" . $indibgcolor . "\" $href>";
             } else {
@@ -197,13 +197,13 @@ class Person
                     }
                 }
                 if (trim($birthData) != "") {
-                    $out .= "<FONT COLOR=\"" . $this->dot->settings["fontcolor_details"] . "\" POINT-SIZE=\"" . ($this->dot->settings["font_size"]) . "\">" . $this->dot->settings["birth_text"] . $birthData . "</FONT>";
+                    $out .= "<FONT COLOR=\"" . $this->dot->settings["fontcolor_details"] . "\" POINT-SIZE=\"" . ($this->dot->settings["font_size"]) . "\">" . $this->dot->settings["birth_prefix"] . $birthData . "</FONT>";
                     if (trim($deathData) != "") {
                         $out .= "<BR />";
                     }
                 }
                 if ($isdead && trim($deathData) !== "") {
-                    $out .= "<FONT COLOR=\"" . $this->dot->settings["fontcolor_details"] . "\" POINT-SIZE=\"" . ($this->dot->settings["font_size"]) . "\">" . $this->dot->settings["death_text"] . $deathData . "</FONT>";
+                    $out .= "<FONT COLOR=\"" . $this->dot->settings["fontcolor_details"] . "\" POINT-SIZE=\"" . ($this->dot->settings["font_size"]) . "\">" . $this->dot->settings["death_prefix"] . $deathData . "</FONT>";
                 } else {
                     $out .= " ";
                 }

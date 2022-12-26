@@ -420,27 +420,27 @@ class Dot {
 		// Determine the fill color
 		if ($gender == 'F') {
 			if ($related || !$this->settings["mark_not_related"]) {
-				$fill_color = $this->settings["colorf"];
+				$fill_color = $this->settings["female_colour"];
 			} else  {
-				$fill_color = $this->settings["colorf_nr"];
+				$fill_color = $this->settings["female_unrelated_colour"];
 			}
 		} elseif ($gender == 'M'){
 			if ($related || !$this->settings["mark_not_related"]) {
-				$fill_color = $this->settings["colorm"];
+				$fill_color = $this->settings["male_colour"];
 			} else  {
-				$fill_color = $this->settings["colorm_nr"];
+				$fill_color = $this->settings["male_unrelated_colour"];
 			}
 		} elseif ($gender == 'X'){
 			if ($related || !$this->settings["mark_not_related"]) {
-				$fill_color = $this->settings["colorx"];
+				$fill_color = $this->settings["other_gender_colour"];
 			} else  {
-				$fill_color = $this->settings["colorx_nr"];
+				$fill_color = $this->settings["other_gender_unrel_colour"];
 			}
 		} else {
 			if ($related || !$this->settings["mark_not_related"]) {
-				$fill_color = $this->settings["coloru"];
+				$fill_color = $this->settings["unknown_gender_colour"];
 			} else  {
-				$fill_color = $this->settings["coloru_nr"];
+				$fill_color = $this->settings["unknown_gender_unrel_colour"];
 			}
 		}
 		return $fill_color;
@@ -457,7 +457,7 @@ class Dot {
 	function getFamilyColour(): string
     {
 		// Determine the fill color
-        return $this->settings["colorfam"];
+        return $this->settings["family_colour"];
 	}
 
 	/**
@@ -474,7 +474,7 @@ class Dot {
 		$out .= "mclimit=\"" . $this->settings["mclimit"] . "\"\n";
 		$out .= "rankdir=\"" . $this->settings["graph_dir"] . "\"\n";
 		$out .= "pagedir=\"LT\"\n";
-		$out .= "bgcolor=\"" . $this->settings['colorbg'] . "\"\n";
+		$out .= "bgcolor=\"" . $this->settings['background_colour'] . "\"\n";
 		$out .= "edge [ style=solid, arrowhead=normal arrowtail=none];\n";
 		if ($this->settings["diagram_type"] == "simple") {
 			$out .= "node [ shape=box, style=filled font_size=\"" . $this->settings['font_size'] ."\" fontname=\"" . $this->settings["typeface"] ."\"];\n";
@@ -559,7 +559,7 @@ class Dot {
 			$out .= "label=<";
 
 			// --- Print table ---
-			$out .= "<TABLE COLOR=\"" . $this->settings["colorborder"] . "\" BORDER=\"0\" CELLBORDER=\"1\" CELLPADDING=\"2\" CELLSPACING=\"0\">";
+			$out .= "<TABLE COLOR=\"" . $this->settings["border_colour"] . "\" BORDER=\"0\" CELLBORDER=\"1\" CELLPADDING=\"2\" CELLSPACING=\"0\">";
 
 			// --- Print couple ---
 			$out .= "<TR>";
@@ -609,10 +609,10 @@ class Dot {
             }
             // If names, birth details, and death details are all disabled - show a smaller marriage circle to match the small tiles for individuals.
             if (!$this->settings["show_birthdate"] && !$this->settings["show_birthplace"] && !$this->settings["show_death_date"] && !$this->settings["show_death_place"] && !$this->settings["show_marriage_date"] && !$this->settings["show_xref_individuals"] && !$this->settings["show_xref_families"] && $this->settings["use_abbr_names"][$this->settings["use_abbr_name"]] == "Don't show names") {
-                $out .= "color=\"" . $this->settings["colorborder"] . "\",fillcolor=\"" . $fill_color . "\", $href shape=point, height=0.2, style=filled";
+                $out .= "color=\"" . $this->settings["border_colour"] . "\",fillcolor=\"" . $fill_color . "\", $href shape=point, height=0.2, style=filled";
                 $out .= ", label=" . "< >";
             } else {
-                $out .= "color=\"" . $this->settings["colorborder"] . "\",fillcolor=\"" . $fill_color . "\", $href shape=ellipse, style=filled";
+                $out .= "color=\"" . $this->settings["border_colour"] . "\",fillcolor=\"" . $fill_color . "\", $href shape=ellipse, style=filled";
                 $out .= ", label=" . "<<TABLE border=\"0\" CELLPADDING=\"0\" CELLSPACING=\"0\"><TR><TD><FONT COLOR=\"". $this->settings["fontcolor_details"] ."\" POINT-SIZE=\"" . ($this->settings["font_size"]) ."\">" . (empty($marriagedate)?"":$marriagedate) . "<BR />" . (empty($marriageplace)?"":"(".$marriageplace.")") . $family . "</FONT></TD></TR></TABLE>>";
             }
         }
@@ -1179,9 +1179,9 @@ class Dot {
         }
 
         if ($relationshipType != "") {
-            $arrowColor = $this->settings["color_arrow_related"] == "color_arrow_related" ? $this->settings["arrows_not_related"] : $this->settings["arrows_default"];
+            $arrowColor = $this->settings["colour_arrow_related"] == "colour_arrow_related" ? $this->settings["arrows_not_related"] : $this->settings["arrows_default"];
         } else {
-            $arrowColor = $this->settings["color_arrow_related"] == "color_arrow_related" ? $this->settings["arrows_related"] : $this->settings["arrows_default"];
+            $arrowColor = $this->settings["colour_arrow_related"] == "colour_arrow_related" ? $this->settings["arrows_related"] : $this->settings["arrows_default"];
         }
         return $arrowColor;
     }

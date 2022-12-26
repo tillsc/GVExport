@@ -257,6 +257,7 @@ class Settings
      * Returns whether a setting shouldn't be saved to cookies/preferences
      *
      * @param string $preference
+     * @param bool $admin
      * @return bool
      */
     public static function shouldSaveSetting(string $preference, bool $admin = false): bool
@@ -284,9 +285,11 @@ class Settings
     /**
      * Currently an alias for shouldLoadSetting as the criteria are the same
      *
+     * @param $setting
+     * @param bool $admin
      * @return bool
      */
-    public static function shouldLoadSetting($setting, $admin = false): bool
+    public static function shouldLoadSetting($setting, bool $admin = false): bool
     {
         return Settings::shouldSaveSetting($setting, $admin);
     }
