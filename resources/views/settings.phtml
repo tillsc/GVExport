@@ -139,7 +139,6 @@ $settings = $settingsObj->getDefaultSettings();
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="row">
                         <div class="col-auto">
-                            <?= $vars["diagram_type"]; ?>
                             <input type="radio" name="vars[diagram_type]" id="diagtype_simple" value="simple" <?= $vars["diagram_type"] == "simple" ? 'checked' : '' ?>>
                             <label for="diagtype_simple"><?= I18N::translate('Simple') ?></label>
                         </div>

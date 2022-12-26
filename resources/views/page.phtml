@@ -574,9 +574,9 @@ $xref = $individual->xref();
     </div>
 
     <input type="hidden" id="browser" name="browser" value="false">
-    <input type="hidden" id="people-advanced-hidden" name="vars[adv_people]" value="<?= $vars["adv_people"] === "show" ? 'show' : '' ?>">
-    <input type="hidden" id="appearance-advanced-hidden" name="vars[adv_appear]" value="<?= $vars["adv_appear"] === "show" ? 'show' : '' ?>">
-    <input type="hidden" id="files-advanced-hidden" name="vars[adv_files]" value="<?= $vars["adv_files"] === "show" ? 'show' : '' ?>">
+    <input type="hidden" id="people-advanced-hidden" name="vars[adv_people]" value="<?= $vars["adv_people"] ? 'show' : '' ?>">
+    <input type="hidden" id="appearance-advanced-hidden" name="vars[adv_appear]" value="<?= $vars["adv_appear"] ? 'show' : '' ?>">
+    <input type="hidden" id="files-advanced-hidden" name="vars[adv_files]" value="<?= $vars["adv_files"] ? 'show' : '' ?>">
     <div id="toast-container"></div>
 </form>
 

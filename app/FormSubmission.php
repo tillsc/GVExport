@@ -116,9 +116,15 @@ class FormSubmission
         }
 
         $settings['use_cart'] = isset($vars['use_cart']);
-        $settings['adv_people'] = isset($vars['adv_people']);
-        $settings['adv_appear'] = isset($vars['adv_appear']);
-        $settings['adv_files'] = isset($vars['adv_files']);
+        if (isset($vars['adv_people'])) {
+            $settings['adv_people'] = $vars['adv_people'];
+        }
+        if (isset($vars['adv_appear'])) {
+            $settings['adv_appear'] = $vars['adv_appear'];
+        }
+        if (isset($vars['adv_files'])) {
+            $settings['adv_files'] = $vars['adv_files'];
+        }
         $settings['auto_update'] = isset($vars['auto_update']);
         $settings['enable_debug_mode'] = isset($vars['enable_debug_mode']);
         $settings['show_debug_panel'] = isset($vars['show_debug_panel']);
