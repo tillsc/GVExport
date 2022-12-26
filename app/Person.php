@@ -86,13 +86,13 @@ class Person
             $link = $i->url();
 
             // --- Birth data ---
-            if ($this->dot->settings["show_by"]) {
-                $birthdate = Dot::formatDate($i->getBirthDate(), $this->dot->settings["bd_type"] !== "gedcom");
+            if ($this->dot->settings["show_birthdate"]) {
+                $birthdate = Dot::formatDate($i->getBirthDate(), $this->dot->settings["birthdate_year_only"]);
             } else {
                 $birthdate = "";
             }
 
-            if ($this->dot->settings["show_bp"]) {
+            if ($this->dot->settings["show_birthplace"]) {
                 // Show birthplace
                 $birthplace = Dot::getAbbreviatedPlace($i->getBirthPlace()->gedcomName(), $this->dot->settings);
             } else {
@@ -100,16 +100,16 @@ class Person
             }
 
             // --- Death data ---
-            if ($this->dot->settings["show_dy"]) {
-                if ($this->dot->settings["show_by"]) {
-                    $death_date = Dot::formatDate($i->getDeathDate(), $this->dot->settings["dd_type"] !== "gedcom");
+            if ($this->dot->settings["show_death_date"]) {
+                if ($this->dot->settings["show_birthdate"]) {
+                    $death_date = Dot::formatDate($i->getDeathDate(), $this->dot->settings["death_date_year_only"] !== "gedcom");
                 } else {
                     $death_date = "";
                 }
             } else {
                 $death_date = "";
             }
-            if ($this->dot->settings["show_dp"]) {
+            if ($this->dot->settings["show_death_place"]) {
                 // Show death place
                 $death_place = Dot::getAbbreviatedPlace($i->getDeathPlace()->gedcomName(), $this->dot->settings);
             }
@@ -132,7 +132,7 @@ class Person
 
         // --- Printing the INDI details ---
         if ($this->dot->settings["diagram_type"] == "simple") {
-            if ($this->dot->settings["show_url"]) {
+            if ($this->dot->settings["add_links"]) {
                 $out .= "color=\"" . $bordercolor . "\", fillcolor=\"" . $fill_color . "\", fontcolor=\"" . $this->dot->settings["fontcolor_name"] . "\", target=\"_blank\", href=\"" . Dot::convertToHTMLSC($link) . "\" label="; #ESL!!! 20090213 without convertToHTMLSC the dot file has invalid data
             } else {
                 $out .= "color=\"" . $bordercolor . "\", fillcolor=\"" . $fill_color . "\", fontcolor=\"" . $this->dot->settings["fontcolor_name"] . "\", label=";
@@ -152,7 +152,7 @@ class Person
             if ($isdead) {
                 $death_place = Dot::convertToHTMLSC($death_place);
             }
-            $href = $this->dot->settings["show_url"] ? "TARGET=\"_blank\" HREF=\"" . Dot::convertToHTMLSC($link) . "\"" : "";
+            $href = $this->dot->settings["add_links"] ? "TARGET=\"_blank\" HREF=\"" . Dot::convertToHTMLSC($link) . "\"" : "";
             // Draw table
             $indibgcolor = $this->isStartingIndividual($pid) && $this->dot->settings['startcol'] == "true" ? $this->dot->settings["colorstartbg"] : $this->dot->settings["colorindibg"];
             if ($this->dot->settings["diagram_type"] == "combined") {
@@ -165,9 +165,9 @@ class Person
 
             $detailsExist = trim($name . $birthData . $deathData) != "";
 
-            if (!$detailsExist && !$this->dot->settings["with_photos"]) {
+            if (!$detailsExist && !$this->dot->settings["show_photos"]) {
                 // No information in our tiles so make coloured boxes
-                $size = "WIDTH=\"" . ($this->dot->settings["fontsize"] * 3) . "\" HEIGHT=\"" . ($this->dot->settings["fontsize"] * 3) . "\"";
+                $size = "WIDTH=\"" . ($this->dot->settings["font_size"] * 3) . "\" HEIGHT=\"" . ($this->dot->settings["font_size"] * 3) . "\"";
             } else {
                 $size = ""; // Let it sort out size itself
             }
@@ -175,15 +175,15 @@ class Person
             $out .= "<TR><TD COLSPAN=\"2\" CELLPADDING=\"2\" BGCOLOR=\"$fill_color\" PORT=\"nam\" $size></TD></TR>";
 
             // Second row (photo, name, birth & death data)
-            if ($detailsExist || $this->dot->settings["with_photos"]) {
+            if ($detailsExist || $this->dot->settings["show_photos"]) {
                 $out .= "<TR>";
                 // Show photo
-                if ($this->dot->settings["with_photos"]) {
+                if ($this->dot->settings["show_photos"]) {
                     if (isset($this->dot->individuals[$pid]["pic"]) && !empty($this->dot->individuals[$pid]["pic"])) {
-                        $out .= "<TD ROWSPAN=\"2\" CELLPADDING=\"1\" PORT=\"pic\" WIDTH=\"" . ($this->dot->settings["fontsize"] * 4) . "\" HEIGHT=\"" . ($this->dot->settings["fontsize"] * 4) . "\" FIXEDSIZE=\"true\" ALIGN=\"CENTER\"><IMG SCALE=\"true\" SRC=\"" . $this->dot->individuals[$pid]["pic"] . "\" /></TD>";
+                        $out .= "<TD ROWSPAN=\"2\" CELLPADDING=\"1\" PORT=\"pic\" WIDTH=\"" . ($this->dot->settings["font_size"] * 4) . "\" HEIGHT=\"" . ($this->dot->settings["font_size"] * 4) . "\" FIXEDSIZE=\"true\" ALIGN=\"CENTER\"><IMG SCALE=\"true\" SRC=\"" . $this->dot->individuals[$pid]["pic"] . "\" /></TD>";
                     } else {
                         // Blank cell zero width to keep the height right
-                        $out .= "<TD ROWSPAN=\"2\" CELLPADDING=\"1\" PORT=\"pic\" WIDTH=\"" . ($detailsExist ? "0" : ($this->dot->settings["fontsize"] * 3.5)) . "\" HEIGHT=\"" . ($this->dot->settings["fontsize"] * 4) . "\" FIXEDSIZE=\"true\"></TD>";
+                        $out .= "<TD ROWSPAN=\"2\" CELLPADDING=\"1\" PORT=\"pic\" WIDTH=\"" . ($detailsExist ? "0" : ($this->dot->settings["font_size"] * 3.5)) . "\" HEIGHT=\"" . ($this->dot->settings["font_size"] * 4) . "\" FIXEDSIZE=\"true\"></TD>";
                     }
                 }
                 if ($detailsExist) {
@@ -191,19 +191,19 @@ class Person
                 }
                 // Show name
                 if (trim($name) != "") {
-                    $out .= "<FONT COLOR=\"" . $this->dot->settings["fontcolor_name"] . "\" POINT-SIZE=\"" . ($this->dot->settings["fontsize_name"]) . "\">" . $name . "</FONT>";
+                    $out .= "<FONT COLOR=\"" . $this->dot->settings["fontcolor_name"] . "\" POINT-SIZE=\"" . ($this->dot->settings["font_size_name"]) . "\">" . $name . "</FONT>";
                     if (trim($birthData . $deathData) != "") {
                         $out .= "<BR />";
                     }
                 }
                 if (trim($birthData) != "") {
-                    $out .= "<FONT COLOR=\"" . $this->dot->settings["fontcolor_details"] . "\" POINT-SIZE=\"" . ($this->dot->settings["fontsize"]) . "\">" . $this->dot->settings["birth_text"] . $birthData . "</FONT>";
+                    $out .= "<FONT COLOR=\"" . $this->dot->settings["fontcolor_details"] . "\" POINT-SIZE=\"" . ($this->dot->settings["font_size"]) . "\">" . $this->dot->settings["birth_text"] . $birthData . "</FONT>";
                     if (trim($deathData) != "") {
                         $out .= "<BR />";
                     }
                 }
                 if ($isdead && trim($deathData) !== "") {
-                    $out .= "<FONT COLOR=\"" . $this->dot->settings["fontcolor_details"] . "\" POINT-SIZE=\"" . ($this->dot->settings["fontsize"]) . "\">" . $this->dot->settings["death_text"] . $deathData . "</FONT>";
+                    $out .= "<FONT COLOR=\"" . $this->dot->settings["fontcolor_details"] . "\" POINT-SIZE=\"" . ($this->dot->settings["font_size"]) . "\">" . $this->dot->settings["death_text"] . $deathData . "</FONT>";
                 } else {
                     $out .= " ";
                 }
@@ -264,7 +264,7 @@ class Person
 
         // If PID already in name (from another module), remove it, so we don't add twice
         $name = str_replace(" (" . $pid . ")", "", $name);
-        if ($this->dot->settings["show_pid"] && $this->dot->settings["show_pid"] != "DEFAULT") {
+        if ($this->dot->settings["show_xref_individuals"] && !isset($vars["first_run_xref_check"])) {
             // Show INDI id
             $name = $name . " (" . $pid . ")";
         }

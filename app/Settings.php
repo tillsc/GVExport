@@ -79,11 +79,13 @@ class Settings
                         $pref = $tree->getUserPreference(Auth::user(), "GVE_" . $preference, "preference not set");
                         if ($pref != "preference not set") {
                             $settings[$preference] = $pref;
+                        } else if ($preference == 'show_xref_individuals') {
+                            $settings['first_run_xref_check'] = true;
                         }
                     }
                 }
             }
-            if (!$settings['use_graphviz'] && $settings['graphviz_bin'] != "") {
+            if (!$settings['enable_graphviz'] && $settings['graphviz_bin'] != "") {
                 $settings['graphviz_bin'] = "";
             }
         }
@@ -264,7 +266,7 @@ class Settings
             case 'graphviz_config':
             case 'typefaces':
             case 'typeface_fallback':
-            case 'defaulttypeface':
+            case 'default_typeface':
             case 'directions':
             case 'use_abbr_places':
             case 'use_abbr_names':
@@ -272,7 +274,7 @@ class Settings
             case 'temp_dir':
             case 'space_base':
                 return false;
-            case 'show_debug':
+            case 'show_debug_panel':
                 return $admin;
             default:
                 return true;

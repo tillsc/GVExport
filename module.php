@@ -172,7 +172,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
             $userDefaultVars = $settings->loadUserSettings($this, $tree);
 
         } else {
-            if (!$userDefaultVars['use_graphviz'] && $userDefaultVars['graphviz_bin'] != "") {
+            if (!$userDefaultVars['enable_graphviz'] && $userDefaultVars['graphviz_bin'] != "") {
                 $userDefaultVars['graphviz_bin'] = "";
             }
         }
@@ -229,7 +229,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
         $temp_dir = $this->saveDOTFile($tree);
 
         // If browser mode, output dot instead of selected file
-        $file_type = isset($_POST["browser"]) && $_POST["browser"] == "true" ? "dot" : $_REQUEST["vars"]["otype"];
+        $file_type = isset($_POST["browser"]) && $_POST["browser"] == "true" ? "dot" : $_REQUEST["vars"]["output_type"];
 
         $outputFile = new OutputFile($temp_dir, $file_type, $this);
         return $outputFile->downloadFile();
@@ -323,7 +323,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
         if (isset($_POST["browser"]) && $_POST["browser"] == "true") {
             $dot->messages[] = I18N::translate('Generated %s individuals and %s family records', sizeof($dot->individuals), sizeof($dot->families));
             $response['messages'] = $dot->messages;
-            $response['debug'] = $dot->debug_string;
+            $response['enable_debug_mode'] = $dot->debug_string;
             $response['dot'] = $out;
             $settings = new Cookie($tree);
             $response['settings'] = json_encode($settings->load([]));

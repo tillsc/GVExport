@@ -84,7 +84,7 @@ class Cookie
                 }
             }
         }
-        if (!isset($userDefaultVars['use_graphviz'])){
+        if (!isset($userDefaultVars['enable_graphviz'])){
             $userDefaultVars['graphviz_bin'] = "";
         }
         return $userDefaultVars;

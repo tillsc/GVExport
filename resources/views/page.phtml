@@ -24,7 +24,6 @@ use Fisharebest\Webtrees\Tree;
  */
 
 $settings = (new Settings())->getDefaultSettings();
-echo "startcol" . $vars['startcol'];
 $usegraphviz = $vars['graphviz_bin'] != "";
 $xref = $individual->xref();
 ?>
@@ -95,7 +94,7 @@ $xref = $individual->xref();
            unless we already have a saved setting */
         $startName = $individual->fullName();
         $name = str_replace(" (" . $xref . ")", "", $startName);
-        if ($startName != $name && $vars["show_pid"] == "DEFAULT") {
+        if ($startName != $name && isset($vars["first_run_xref_check"])) {
             $overridePID = true;
         } else {
             $overridePID = false;
@@ -104,7 +103,7 @@ $xref = $individual->xref();
         $greypeople = false;
         // Check if there are INDI records in the clippings cart, to decide what options to allow
         if (!$cartempty) {
-        if ($vars["usecart"]) {
+        if ($vars["use_cart"]) {
             $greypeople = true;
         }
         ?>
@@ -116,11 +115,11 @@ $xref = $individual->xref();
                     <div class="col-sm-8 wt-page-options-value">
                         <div class="row">
                             <div class="col-auto mx-3">
-                                <input type="radio" onclick="toggleCart(true)" name="vars[usecart]" id="usecart_yes" value="usecart" <?= $vars["usecart"] ? 'checked' : '' ?>>
+                                <input type="radio" onclick="toggleCart(true)" name="vars[use_cart]" id="usecart_yes" value="use_cart" <?= $vars["use_cart"] ? 'checked' : '' ?>>
                                 <label for="usecart_yes"><?= I18N::translate('Use clippings cart') ?></label>
                             </div>
                             <div class="col-auto mx-3">
-                                <input type="radio" onclick="toggleCart(false)" name="vars[usecart]" id="usecart_no" value="ignorecart" <?= !$vars["usecart"] ? 'checked' : '' ?>>
+                                <input type="radio" onclick="toggleCart(false)" name="vars[use_cart]" id="usecart_no" value="ignorecart" <?= !$vars["use_cart"] ? 'checked' : '' ?>>
                                 <label for="usecart_no"><?= I18N::translate('Ignore clippings cart') ?></label>
                             </div>
                         </div>
@@ -144,15 +143,15 @@ $xref = $individual->xref();
         </div>
 
         <div class="row form-group">
-            <?= MainPage::addLabel('indiance', 'Include ancestors'); ?>
+            <?= MainPage::addLabel('include_ancestors', 'Include ancestors'); ?>
             <div class="col-sm-8 wt-page-options-value">
                 <div class="row">
                     <div class="col-auto mx-3">
-                        <input class="cart_toggle" type="checkbox" name="vars[indiance]" id="indiance" value="ance" <?= $vars["indiance"] ? 'checked' : '' ?>>
+                        <input class="cart_toggle" type="checkbox" name="vars[include_ancestors]" id="include_ancestors" value="ance" <?= $vars["include_ancestors"] ? 'checked' : '' ?>>
                     </div>
                     <div class="col-auto row">
-                        <label for="ance_level" class="col-sm-6"><?= I18N::translate('Max levels') ?>:</label>
-                        <input onblur="defaultValueWhenBlank(this, 0)" type="text" class="cart_toggle form-control col-sm-6" size="10" name="vars[ance_level]" id="ance_level" value="<?= $vars["ance_level"] ?>">
+                        <label for="ancestor_levels" class="col-sm-6"><?= I18N::translate('Max levels') ?>:</label>
+                        <input onblur="defaultValueWhenBlank(this, 0)" type="text" class="cart_toggle form-control col-sm-6" size="10" name="vars[ancestor_levels]" id="ancestor_levels" value="<?= $vars["ancestor_levels"] ?>">
                     </div>
                 </div>
             </div>
@@ -163,46 +162,46 @@ $xref = $individual->xref();
             <div class="col-sm-8 wt-page-options-value">
                 <div class="row">
                     <div class="col-auto mx-3">
-                        <input class="cart_toggle" type="checkbox" onclick="updateRelationOption('indisibl')" name="vars[indisibl]" id="indisibl" value="sibl" <?= $vars["indisibl"] ? 'checked' : '' ?>>
-                        <label for="indisibl"><?= I18N::translate('Siblings') ?></label>
+                        <input class="cart_toggle" type="checkbox" onclick="updateRelationOption('include_siblings')" name="vars[include_siblings]" id="include_siblings" value="sibl" <?= $vars["include_siblings"] ? 'checked' : '' ?>>
+                        <label for="include_siblings"><?= I18N::translate('Siblings') ?></label>
                     </div>
                     <div class="col-auto mx-3">
-                        <input class="cart_toggle" onclick="updateRelationOption('indirels')" type="checkbox" name="vars[indirels]" id="indirels" value="rels" <?= $vars["indirels"] ? 'checked' : '' ?>>
-                        <label for="indirels"><?= I18N::translate('All relatives') ?></label>
+                        <input class="cart_toggle" onclick="updateRelationOption('include_all_relatives')" type="checkbox" name="vars[include_all_relatives]" id="include_all_relatives" value="rels" <?= $vars["include_all_relatives"] ? 'checked' : '' ?>>
+                        <label for="include_all_relatives"><?= I18N::translate('All relatives') ?></label>
                     </div>
                     <div class="col-auto mx-3">
-                        <input class="cart_toggle" type="checkbox" onclick="updateRelationOption('indispou')" name="vars[indispou]" id="indispou" value="spou" <?= $vars["indispou"] ? 'checked' : '' ?>>
-                        <label for="indispou"><?= I18N::translate('Partners') ?></label>
+                        <input class="cart_toggle" type="checkbox" onclick="updateRelationOption('include_spouses')" name="vars[include_spouses]" id="include_spouses" value="spou" <?= $vars["include_spouses"] ? 'checked' : '' ?>>
+                        <label for="include_spouses"><?= I18N::translate('Partners') ?></label>
                     </div>
                     <div class="col-auto mx-3">
-                        <input class="cart_toggle" type="checkbox" onclick="updateRelationOption('indiany')" name="vars[indiany]" id="indiany" value="any" <?= $vars["indiany"] ? 'checked' : '' ?> <?= !$cartempty ? "disabled" : ""; ?>>
-                        <label for="indiany"><?= I18N::translate('Anyone') ?></label>
+                        <input class="cart_toggle" type="checkbox" onclick="updateRelationOption('include_all')" name="vars[include_all]" id="include_all" value="any" <?= $vars["include_all"] ? 'checked' : '' ?> <?= !$cartempty ? "disabled" : ""; ?>>
+                        <label for="include_all"><?= I18N::translate('Anyone') ?></label>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="row form-group">
-            <?= MainPage::addLabel('indidesc', 'Include descendants'); ?>
+            <?= MainPage::addLabel('include_descendants', 'Include descendants'); ?>
             <div class="col-sm-8 wt-page-options-value">
                 <div class="row">
                     <div class="col-auto mx-3">
-                        <input class="cart_toggle" type="checkbox" name="vars[indidesc]" id="indidesc" value="desc" <?= $vars["indidesc"] ? 'checked' : '' ?>>
+                        <input class="cart_toggle" type="checkbox" name="vars[include_descendants]" id="include_descendants" value="desc" <?= $vars["include_descendants"] ? 'checked' : '' ?>>
                     </div>
                     <div class="col-auto row">
-                        <label for="desc_level" class="col-sm-6"><?= I18N::translate('Max levels') ?>:</label>
-                        <input onblur="defaultValueWhenBlank(this, 0)" type="text" class="cart_toggle form-control col-sm-6" size="10" name="vars[desc_level]" id="desc_level"
-                               value="<?= $vars["desc_level"] ?>">
+                        <label for="descendant_levels" class="col-sm-6"><?= I18N::translate('Max levels') ?>:</label>
+                        <input onblur="defaultValueWhenBlank(this, 0)" type="text" class="cart_toggle form-control col-sm-6" size="10" name="vars[descendant_levels]" id="descendant_levels"
+                               value="<?= $vars["descendant_levels"] ?>">
                     </div>
                 </div>
             </div>
         </div>
         <div id="people-advanced" <?= $vars["adv_people"] ? '' : 'style="display:none"'; ?>>
             <div class="row form-group">
-                <?= MainPage::addLabel('other_pids', 'XREFs of included individuals'); ?>
+                <?= MainPage::addLabel('xref_list', 'XREFs of included individuals'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="input-group mt-1">
-                        <input type="text" class="form-control" name="vars[other_pids]" id="other_pids" value="<?= $vars['other_pids'] ?>" onchange="refreshIndisFromXREFS(true)">
+                        <input type="text" class="form-control" name="vars[xref_list]" id="xref_list" value="<?= $vars['xref_list'] ?>" onchange="refreshIndisFromXREFS(true)">
                         <div class="input-group-append">
                             <button type="button" class="btn btn-outline-secondary" onclick="refreshIndisFromXREFS(false)">⟳</button>
                         </div>
@@ -211,7 +210,7 @@ $xref = $individual->xref();
                 </div>
             </div>
             <div class="row form-group">
-                <?= MainPage::addLabel('other_stop_pids', 'Stop processing on'); ?>
+                <?= MainPage::addLabel('stop_xref_list', 'Stop processing on'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <div id="stop_indi_list">
 
@@ -223,7 +222,7 @@ $xref = $individual->xref();
                         ?>
                     </div>
                     <div class="input-group mt-1">
-                        <input type="text" class="cart_toggle form-control" name="vars[other_stop_pids]" id="other_stop_pids" value="<?= $vars['other_stop_pids'] ?>" onchange="refreshIndisFromXREFS(true)">
+                        <input type="text" class="cart_toggle form-control" name="vars[stop_xref_list]" id="stop_xref_list" value="<?= $vars['stop_xref_list'] ?>" onchange="refreshIndisFromXREFS(true)">
                         <div class="input-group-append">
                             <button type="button" class="btn btn-outline-secondary" onclick="refreshIndisFromXREFS(false)">⟳</button>
                         </div>
@@ -231,13 +230,13 @@ $xref = $individual->xref();
                 </div>
             </div>
             <div class="row form-group">
-                <?= MainPage::addLabel('marknr', 'Non-relatives'); ?>
+                <?= MainPage::addLabel('mark_not_related', 'Non-relatives'); ?>
                 <div class="col-sm-8 wt-page-options-value">
-                    <input class="cart_toggle" onclick="setStateFastRelationCheck();" type="checkbox" name="vars[marknr]" id="marknr" value="marknr" <?= $vars["marknr"] ? 'checked' : '' ?>>
-                    <label class="check-list" for="marknr"><?= I18N::translate('Mark not blood-related people with different color') ?></label>
+                    <input class="cart_toggle" onclick="setStateFastRelationCheck();" type="checkbox" name="vars[mark_not_related]" id="mark_not_related" value="mark_not_related" <?= $vars["mark_not_related"] ? 'checked' : '' ?>>
+                    <label class="check-list" for="mark_not_related"><?= I18N::translate('Mark not blood-related people with different color') ?></label>
                     <br/>
-                    <input class="cart_toggle" type="checkbox" name="vars[fastnr]" id="fastnr" value="fastnr" <?= $vars["fastnr"] ? 'checked' : '' ?>>
-                    <label class="check-list" for="fastnr"><?= I18N::translate('Ignore unseen links to speed up relative check') ?></label>
+                    <input class="cart_toggle" type="checkbox" name="vars[faster_relationship_checking]" id="faster_relationship_checking" value="faster_relationship_checking" <?= $vars["faster_relationship_checking"] ? 'checked' : '' ?>>
+                    <label class="check-list" for="faster_relationship_checking"><?= I18N::translate('Ignore unseen links to speed up relative check') ?></label>
                 </div>
             </div>
         </div>
@@ -275,18 +274,18 @@ $xref = $individual->xref();
 
             <?php if ($tree->getPreference('SHOW_HIGHLIGHT_IMAGES') == '1') { ?>
                 <div class="row form-group">
-                    <?= MainPage::addLabel('with_photos', 'Add photos'); ?>
+                    <?= MainPage::addLabel('show_photos', 'Add photos'); ?>
                     <div class="col-sm-8 wt-page-options-value">
-                        <input type="checkbox" name="vars[with_photos]" id="with_photos" value="with_photos" <?= $vars["with_photos"] ? 'checked' : '' ?>>
+                        <input type="checkbox" name="vars[show_photos]" id="show_photos" value="show_photos" <?= $vars["show_photos"] ? 'checked' : '' ?>>
                         <span class="text-muted">(<?= I18N::translate('Only Decorated or Combined') ?>)</span>
                     </div>
                 </div>
             <?php } ?>
 
             <div class="row form-group">
-                <?= MainPage::addLabel('show_url', 'Add URL to individuals and families'); ?>
+                <?= MainPage::addLabel('add_links', 'Add URL to individuals and families'); ?>
                 <div class="col-sm-8 wt-page-options-value">
-                    <input type="checkbox" name="vars[show_url]" id="show_url" value="show_url" <?= $vars["show_url"] ? 'checked' : '' ?>>
+                    <input type="checkbox" name="vars[add_links]" id="add_links" value="add_links" <?= $vars["add_links"] ? 'checked' : '' ?>>
                     <span class="text-muted">(<?= $usegraphviz ? I18N::translate('browser, SVG, and PDF only') : I18N::translate('browser and SVG only'); ?>)</span>
                 </div>
             </div>
@@ -306,25 +305,25 @@ $xref = $individual->xref();
             </div>
             
             <div class="row form-group">
-                <?= MainPage::addLabel('show_pid', 'Show individual XREF'); ?>
+                <?= MainPage::addLabel('show_xref_individuals', 'Show individual XREF'); ?>
                 <div class="col-sm-8 wt-page-options-value">
-                    <input type="checkbox" name="vars[show_pid]" id="show_pid" value="show_pid" <?= $vars["show_pid"] || $overridePID ? 'checked' : '' ?>>
+                    <input type="checkbox" name="vars[show_xref_individuals]" id="show_xref_individuals" value="show_xref_individuals" <?= $vars["show_xref_individuals"] || $overridePID ? 'checked' : '' ?>>
                 </div>
             </div>
 
             <div class="row form-group">
-                <?= MainPage::addLabel('show_by', 'Show birth date'); ?>
+                <?= MainPage::addLabel('show_birthdate', 'Show birth date'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="row">
                         <div class="col-auto mx-3">
-                            <input type="checkbox" name="vars[show_by]" id="show_by" value="show_by" <?= $vars["show_by"] ? 'checked' : '' ?>>
+                            <input type="checkbox" name="vars[show_birthdate]" id="show_birthdate" value="show_birthdate" <?= $vars["show_birthdate"] ? 'checked' : '' ?>>
                         </div>
                         <div class="col-auto mx-3">
-                            <input type="radio" name="vars[bd_type]" id="bd_type_y" value="y" <?= $vars["bd_type"] == "y" ? 'checked' : '' ?>>
+                            <input type="radio" name="vars[birthdate_year_only]" id="bd_type_y" value="true" <?= $vars["birthdate_year_only"] ? 'checked' : '' ?>>
                             <label for="bd_type_y"><?= I18N::translate('Year') ?></label>
                         </div>
                         <div class="col-auto mx-3">
-                            <input type="radio" name="vars[bd_type]" id="bd_type_gedcom" value="gedcom" <?= $vars["bd_type"] == "gedcom" ? 'checked' : '' ?>>
+                            <input type="radio" name="vars[birthdate_year_only]" id="bd_type_gedcom" value="false" <?= !$vars["birthdate_year_only"] ? 'checked' : '' ?>>
                             <label for="bd_type_gedcom"><?= I18N::translate('Full date') ?></label>
                         </div>
                     </div>
@@ -332,25 +331,25 @@ $xref = $individual->xref();
             </div>
 
             <div class="row form-group">
-                <?= MainPage::addLabel('show_bp', 'Show birth place'); ?>
+                <?= MainPage::addLabel('show_birthplace', 'Show birth place'); ?>
                 <div class="col-sm-8 wt-page-options-value">
-                    <input type="checkbox" name="vars[show_bp]" id="show_bp" value="show_bp" <?= $vars["show_bp"] ? 'checked' : '' ?>>
+                    <input type="checkbox" name="vars[show_birthplace]" id="show_birthplace" value="show_birthplace" <?= $vars["show_birthplace"] ? 'checked' : '' ?>>
                 </div>
             </div>
 
             <div class="row form-group">
-                <?= MainPage::addLabel('show_dy', 'Show death date'); ?>
+                <?= MainPage::addLabel('show_death_date', 'Show death date'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="row">
                         <div class="col-auto mx-3">
-                            <input type="checkbox" name="vars[show_dy]" id="show_dy" value="show_dy" <?= $vars["show_dy"] ? 'checked' : '' ?>>
+                            <input type="checkbox" name="vars[show_death_date]" id="show_death_date" value="show_death_date" <?= $vars["show_death_date"] ? 'checked' : '' ?>>
                         </div>
                         <div class="col-auto mx-3">
-                            <input type="radio" name="vars[dd_type]" id="dd_type_y" value="y" <?= $vars["dd_type"] == "y" ? 'checked' : '' ?>>
+                            <input type="radio" name="vars[death_date_year_only]" id="dd_type_y" value="true" <?= $vars["death_date_year_only"] ? 'checked' : '' ?>>
                             <label for="dd_type_y"><?= I18N::translate('Year') ?></label>
                         </div>
                         <div class="col-auto mx-3">
-                            <input type="radio" name="vars[dd_type]" id="dd_type_gedcom" value="gedcom" <?= $vars["dd_type"] == "gedcom" ? 'checked' : '' ?>>
+                            <input type="radio" name="vars[death_date_year_only]" id="dd_type_gedcom" value="false" <?= !$vars["death_date_year_only"] ? 'checked' : '' ?>>
                             <label for="dd_type_gedcom"><?= I18N::translate('Full date') ?></label>
                         </div>
                     </div>
@@ -358,33 +357,33 @@ $xref = $individual->xref();
             </div>
 
             <div class="row form-group">
-                <?= MainPage::addLabel('show_dp', 'Show death place'); ?>
+                <?= MainPage::addLabel('show_death_place', 'Show death place'); ?>
                 <div class="col-sm-8 wt-page-options-value">
-                    <input type="checkbox" name="vars[show_dp]" id="show_dp" value="show_dp" <?= $vars["show_dp"] ? 'checked' : '' ?>>
+                    <input type="checkbox" name="vars[show_death_place]" id="show_death_place" value="show_death_place" <?= $vars["show_death_place"] ? 'checked' : '' ?>>
                 </div>
             </div>
 
 
             <div class="row form-group">
-                <?= MainPage::addLabel('show_fid', 'Show family XREF'); ?>
+                <?= MainPage::addLabel('show_xref_families', 'Show family XREF'); ?>
                 <div class="col-sm-8 wt-page-options-value">
-                    <input type="checkbox" name="vars[show_fid]" id="show_fid" value="show_fid" <?= $vars["show_fid"] ? 'checked' : '' ?>>
+                    <input type="checkbox" name="vars[show_xref_families]" id="show_xref_families" value="show_xref_families" <?= $vars["show_xref_families"] ? 'checked' : '' ?>>
                 </div>
             </div>
 
             <div class="row form-group">
-                <?= MainPage::addLabel('show_my', 'Show marriage date'); ?>
+                <?= MainPage::addLabel('show_marriage_date', 'Show marriage date'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="row">
                         <div class="col-auto mx-3">
-                            <input type="checkbox" name="vars[show_my]" id="show_my" value="show_my" <?= $vars["show_my"] ? 'checked' : '' ?>>
+                            <input type="checkbox" name="vars[show_marriage_date]" id="show_marriage_date" value="show_marriage_date" <?= $vars["show_marriage_date"] ? 'checked' : '' ?>>
                         </div>
                         <div class="col-auto mx-3">
-                            <input type="radio" name="vars[md_type]" id="md_type_y" value="y" <?= $vars["md_type"] == "y" ? 'checked' : '' ?>>
+                            <input type="radio" name="vars[marriage_date_year_only]" id="md_type_y" value="true" <?= $vars["marriage_date_year_only"] ? 'checked' : '' ?>>
                             <label for="md_type_y"><?= I18N::translate('Year') ?></label>
                         </div>
                         <div class="col-auto mx-3">
-                            <input type="radio" name="vars[md_type]" id="md_type_gedcom" value="gedcom" <?= $vars["md_type"] == "gedcom" ? 'checked' : '' ?>>
+                            <input type="radio" name="vars[marriage_date_year_only]" id="md_type_gedcom" value="false" <?= !$vars["marriage_date_year_only"] ? 'checked' : '' ?>>
                             <label for="md_type_gedcom"><?= I18N::translate('Full date') ?></label>
                         </div>
                     </div>
@@ -392,9 +391,9 @@ $xref = $individual->xref();
             </div>
 
             <div class="row form-group">
-                <?= MainPage::addLabel('show_mp', 'Show marriage place'); ?>
+                <?= MainPage::addLabel('show_marriage_place', 'Show marriage place'); ?>
                 <div class="col-sm-8 wt-page-options-value">
-                    <input type="checkbox" name="vars[show_mp]" id="show_mp" value="show_mp" <?= $vars["show_mp"] ? 'checked' : '' ?>>
+                    <input type="checkbox" name="vars[show_marriage_place]" id="show_marriage_place" value="show_marriage_place" <?= $vars["show_marriage_place"] ? 'checked' : '' ?>>
                 </div>
             </div>
 
@@ -435,13 +434,13 @@ $xref = $individual->xref();
                         <div class="col-auto">
                             <?= view('components/select', ['name' => 'vars[typeface]', 'id' => 'typeface', 'selected' => $vars['typeface'], 'options' => MainPage::updateTranslations($settings["typefaces"])]) ?>
                         </div>
-                        <label for="fontsize_name"><?= I18N::translate('Font size for names') ?>:</label>
+                        <label for="font_size_name"><?= I18N::translate('Font size for names') ?>:</label>
                         <div class="col-auto">
-                            <input type="text" class="form-control col-sm-6" size="10" name="vars[fontsize_name]" id="fontsize_name" value="<?= $vars["fontsize_name"] ?>">
+                            <input type="text" class="form-control col-sm-6" size="10" name="vars[font_size_name]" id="font_size_name" value="<?= $vars["font_size_name"] ?>">
                         </div>
-                        <label for="fontsize"><?= I18N::translate('Font size for details') ?>:</label>
+                        <label for="font_size"><?= I18N::translate('Font size for details') ?>:</label>
                         <div class="col-auto">
-                            <input type="text" class="form-control col-sm-6" size="10" name="vars[fontsize]" id="fontsize" value="<?= $vars["fontsize"] ?>">
+                            <input type="text" class="form-control col-sm-6" size="10" name="vars[font_size]" id="font_size" value="<?= $vars["font_size"] ?>">
                         </div>
                         <div>
                             <input type="color" class="picker" name="vars[fontcolor_name]" id="fontcolor_name" value="<?= $vars["fontcolor_name"] ?>" /><label for="fontcolor_name" class="picker-label"><?= I18N::translate('Font color for names') ?></label>
@@ -523,9 +522,9 @@ $xref = $individual->xref();
         <a href="#" id="appearance-advanced-button" onclick="toggleAdvanced(this, 'appearance-advanced')"><div class="wt-page-options-label advanced-settings-btn"><?= ($vars["adv_appear"] ? '↑ ' : '↓ ') . I18N::translate('Toggle advanced settings') . ($vars["adv_appear"] ? ' ↑' : ' ↓'); ?></div></a>
         <h3><?= I18N::translate('File settings') ?></h3>
         <div class="row form-group">
-            <?= MainPage::addLabel('otype', 'Output file type'); ?>
+            <?= MainPage::addLabel('output_type', 'Output file type'); ?>
             <div class="col-sm-8 wt-page-options-value">
-                <?= view('components/select', ['name' => 'vars[otype]', 'id' => 'otype', 'selected' => $vars['otype'], 'options' => $otypes]) ?>
+                <?= view('components/select', ['name' => 'vars[output_type]', 'id' => 'output_type', 'selected' => $vars['output_type'], 'options' => $otypes]) ?>
                 <small id="emailHelp" class="form-text text-muted"><?= $usegraphviz ? "" : I18N::translate("Options limited as Graphviz not installed on server") ?></small>
             </div>
         </div>
@@ -546,23 +545,23 @@ $xref = $individual->xref();
             </div>
         </div>
         <a href="#" id="files-advanced-button" onclick="toggleAdvanced(this, 'files-advanced')"><div class="wt-page-options-label advanced-settings-btn"><?= ($vars["adv_files"] ? '↑ ' : '↓ ') . I18N::translate('Toggle advanced settings') . ($vars["adv_files"] ? ' ↑' : ' ↓'); ?></div></a>
-        <?php if ($vars["show_debug"]) { ?>
+        <?php if ($vars["show_debug_panel"]) { ?>
         <h3><?= I18N::translate('Debug') ?></h3>
         <div class="row form-group">
-            <?= MainPage::addLabel('debug', 'Debug mode', FALSE); ?>
+            <?= MainPage::addLabel('enable_debug_mode', 'Debug mode', FALSE); ?>
             <div class="col-sm-8 wt-page-options-value">
-                <label for="debug"><?= I18N::translate('Enable debug mode') ?></label>
-                <input type="checkbox" name="vars[debug]" id="debug" value="debug" <?= $vars["debug"] ? 'checked' : '' ?>><br>
-                <button class="btn btn-outline-secondary" type="button" name="debug_view" onclick="return showHelp('debug');"><?= I18N::translate('View debug log') ?></button>
+                <label for="enable_debug_mode"><?= I18N::translate('Enable debug mode') ?></label>
+                <input type="checkbox" name="vars[enable_debug_mode]" id="enable_debug_mode" value="enable_debug_mode" <?= $vars["enable_debug_mode"] ? 'checked' : '' ?>><br>
+                <button class="btn btn-outline-secondary" type="button" name="debug_view" onclick="return showHelp('enable_debug_mode');"><?= I18N::translate('View debug log') ?></button>
             </div>
-            <?= MainPage::addLabel('debug', 'Settings JSON', FALSE); ?>
+            <?= MainPage::addLabel('enable_debug_mode', 'Settings JSON', FALSE); ?>
             <div class="col-sm-8 wt-page-options-value">
                 <button class="btn btn-outline-secondary" type="button" name="debug_view" onclick="return showHelp('debug_settings');"><?= I18N::translate('View settings JSON') ?></button>
             </div>
-            <?= MainPage::addLabel('use_graphviz', 'Graphviz', FALSE); ?>
+            <?= MainPage::addLabel('enable_graphviz', 'Graphviz', FALSE); ?>
             <div class="col-sm-8 wt-page-options-value">
-                <label for="use_graphviz"><?= I18N::translate('Use Graphviz on server') ?></label>
-                <input type="checkbox" name="vars[use_graphviz]" id="use_graphviz" value="use_graphviz" onclick="setGraphvizAvailable(this.value==='use_graphviz');" <?= $vars["use_graphviz"] ? 'checked' : '' ?> <?= (new Settings())->getDefaultSettings()['graphviz_bin'] == "" ? "disabled" : ""; ?>><br></div>
+                <label for="enable_graphviz"><?= I18N::translate('Use Graphviz on server') ?></label>
+                <input type="checkbox" name="vars[enable_graphviz]" id="enable_graphviz" value="enable_graphviz" onclick="setGraphvizAvailable(this.value==='enable_graphviz');" <?= $vars["enable_graphviz"] ? 'checked' : '' ?> <?= (new Settings())->getDefaultSettings()['graphviz_bin'] == "" ? "disabled" : ""; ?>><br></div>
         </div>
         <?php } ?>
     </div>
@@ -626,7 +625,7 @@ $xref = $individual->xref();
         // Also check if Graphviz installed. If so then let it handle it,
         // but if not, trigger client side actions
         if (!graphvizAvailable) {
-            const output = document.getElementById('otype').value;
+            const output = document.getElementById('output_type').value;
             switch(output) {
                 case "png":
                     downloadSVGAsPNG();
@@ -716,7 +715,7 @@ $xref = $individual->xref();
             lastDotStr = jsonResponse.dot;
             if (lastDotStr.indexOf("digraph WT_Graph {") !== -1) {
                 messages = jsonResponse.messages;
-                debug_string = jsonResponse.debug;
+                debug_string = jsonResponse.enable_debug_mode;
                 settings_json = jsonResponse.settings;
             }
 
@@ -764,7 +763,7 @@ $xref = $individual->xref();
                 }
             }
             // Scroll render to last starting individual
-            let indiList = document.getElementById('other_pids').value.split(",");
+            let indiList = document.getElementById('xref_list').value.split(",");
             for (let i = indiList.length-1; i>=0; i--) {
                 if (indiList[i].trim() !== "") {
                     scrollToRecord(indiList[i].trim());
