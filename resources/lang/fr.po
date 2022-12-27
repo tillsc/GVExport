@@ -1,0 +1,786 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: POEditor.com\n"
+"Project-Id-Version: GVExport\n"
+"Language: fr\n"
+
+#: 
+msgid "Update"
+msgstr "Mettre à jour"
+
+#: 
+msgid "Render serverside"
+msgstr "Rendu côté serveur"
+
+#: 
+msgid "Reset"
+msgstr "Réinitialiser"
+
+#: 
+msgid "Diagram preferences"
+msgstr "Préférences du diagramme"
+
+#: 
+msgid "Appearance"
+msgstr "Apparence"
+
+#: 
+msgid "Output settings"
+msgstr "Paramètres de sortie"
+
+#: 
+msgid "Include anyone related to"
+msgstr "Inclure toute personne liée à"
+
+#: 
+msgid "Stop processing on"
+msgstr "Arrêter le traitement sur"
+
+#: 
+msgid "Include ancestors"
+msgstr "Inclure les ancêtres"
+
+#: 
+msgid "Include"
+msgstr "Inclure"
+
+#: 
+msgid "Siblings"
+msgstr "Fratrie"
+
+#: 
+msgid "Cousins"
+msgstr "Cousins"
+
+#: 
+msgid "Spouses"
+msgstr "Conjoints"
+
+#: 
+msgid "Include descendants"
+msgstr "Inclure les descendants"
+
+#: 
+msgid "Max levels"
+msgstr "Niveaux maximums"
+
+#: 
+msgid "Mark not blood-related people with different color"
+msgstr "Marquer les personnes non liées par le sang avec des couleurs différentes"
+
+#: 
+msgid "Add URL to individuals and families"
+msgstr "Ajouter un URL vers les individus et familles"
+
+#: 
+msgid "Use abbreviated placenames"
+msgstr "Utiliser les noms de lieux abrégés"
+
+#: 
+msgid "Show birth date"
+msgstr "Montrer la date de naissance"
+
+#: 
+msgid "Show birth place"
+msgstr "Montrer la place de naissance"
+
+#: 
+msgid "Show death date"
+msgstr "Montrer la date de décès"
+
+#: 
+msgid "Full date"
+msgstr "Date complète"
+
+#: 
+msgid "Year"
+msgstr "Année"
+
+#: 
+msgid "Show death place"
+msgstr "Montrer la place de décès"
+
+#: 
+msgid "Show family XREF"
+msgstr "Montrer la XREF de la famille"
+
+#: 
+msgid "Show marriage date"
+msgstr "Montrer la date de mariage"
+
+#: 
+msgid "Show marriage place"
+msgstr "Montrer la place de mariage"
+
+#: 
+msgid "Graph direction"
+msgstr "Direction du graphe"
+
+#: 
+msgid "Diagram type"
+msgstr "Type de diagramme"
+
+#: 
+msgid "Simple"
+msgstr "Simple"
+
+#: 
+msgid "Decorated"
+msgstr "Décoré"
+
+#: 
+msgid "Combined"
+msgstr "Combiné"
+
+#: 
+msgid "Add photos"
+msgstr "Ajouter des photos"
+
+#: 
+msgid "Only Decorated or Combined"
+msgstr "Seulement décoré ou combiné"
+
+#: 
+msgid "Output file type"
+msgstr "Type de fichier de sortie"
+
+#: 
+msgid "Generate a file for download"
+msgstr "Générer un fichier à télécharger"
+
+#: 
+msgid "Number of iterations (MCLIMIT)"
+msgstr "Nombre d'itérations (MCLIMIT)"
+
+#: 
+msgid "helps to reduce the crossings on the graph. This can be really slow (up to 10..15x compared to the 20 setting)"
+msgstr "Aide à réduite les croisements sur le graphe. Peut être très lent (jusqu'à 10..15x comparé au paramètre 20)"
+
+#: 
+msgid "DPI"
+msgstr "PPP"
+
+#: 
+msgid "Show options"
+msgstr "Montrer les options"
+
+#: 
+msgid "Top-to-bottom"
+msgstr "Haut-en-bas"
+
+#: 
+msgid "Left-to-right"
+msgstr "Gauche-à-droite"
+
+#: 
+msgid "Space between generations"
+msgstr "Espace entre les générations"
+
+#: 
+msgid "Space between individuals on the same level"
+msgstr "Espace entre les individus du même niveau"
+
+#: 
+msgid "Error running GVExport in browser mode"
+msgstr "Erreur d’exécution de GVExport dans le mode navigateur"
+
+#: 
+msgid "Preview"
+msgstr "Prévisualisation"
+
+#: 
+msgid "Download"
+msgstr "Télécharger"
+
+#: 
+msgid "Full place name"
+msgstr "Nom de place complet"
+
+#: 
+msgid "City and country"
+msgstr "Ville et pays"
+
+#: 
+msgid "City and 2 letter ISO country code"
+msgstr "Ville et 2 lettres de codes pays ISO"
+
+#: 
+msgid "City and 3 letter ISO country code"
+msgstr "Ville et 3 lettres de codes pays ISO"
+
+#: 
+msgid "Space"
+msgstr "Espace"
+
+#: 
+msgid "Between generations"
+msgstr "Entre les générations"
+
+#: 
+msgid "Between individuals on the same level"
+msgstr "Entre les individus du même niveau"
+
+#: 
+msgid "Abbreviated place names"
+msgstr "Noms de places abrégés"
+
+#: 
+msgid "People to be included"
+msgstr "Personnes à inclure"
+
+#: 
+msgid "Show individual XREF"
+msgstr "Montrer le XREF individuel"
+
+#: 
+msgid "Options limited as Graphviz not installed on server"
+msgstr "Options limitées parce que Graphviz n’est pas installé sur le serveur"
+
+#: 
+msgid "Anyone"
+msgstr "Tout le monde"
+
+#: 
+msgid "All relatives"
+msgstr "Tous les parents"
+
+#: 
+msgid "You have items in the clippings cart, which can be used for the diagram instead of the below options."
+msgstr "Vous avez des objets dans le panier qui peuvent être utilisé pour le diagramme au lieu des options ci dessous."
+
+#: 
+msgid "Use clippings cart"
+msgstr "Utiliser le panier"
+
+#: 
+msgid "Ignore clippings cart"
+msgstr "Ignorer le panier"
+
+#: 
+msgid "Warning"
+msgstr "Attention"
+
+#: 
+msgid "Individual required"
+msgstr "Personne requise"
+
+#: 
+msgid "Generated %s individuals and %s family records"
+msgstr "Généré individus % et enregistremetns familiaux %"
+
+#: 
+msgid "Invalid starting individual:"
+msgstr "Personne de départ invalide"
+
+#: 
+msgid "Your browser does not support exporting images this large. Please reduce number of records, reduce DPI setting, or use SVG option."
+msgstr "Votre navigateur ne supporte pas l’exportation d’images si larges. Veuillez réduire le nombre d’enregistrements, les paramètres PPP, ou utilisez l’option SVG."
+
+#: 
+msgid "Toggle advanced settings"
+msgstr "Développer les paramètres avancés"
+
+#: 
+msgid "Ignore unseen links to speed up relative check"
+msgstr "Ignorer liens invisibles pour augmenter vitesse de calcul de parenté"
+
+#: 
+msgid "Non-relatives"
+msgstr "Sans parenté"
+
+#: 
+msgid "Font"
+msgstr "Police"
+
+#: 
+msgid "Typeface"
+msgstr "Style de police"
+
+#: 
+msgid "Font color for names"
+msgstr "Couleur de fonte pour les noms"
+
+#: 
+msgid "Font color for details"
+msgstr "Couleur de fonte pour les détails"
+
+#. When you are no longer logged in, GVExport can't load the browser render until the page is refreshed. This message is shown before automatically reloading the page.
+#: 
+msgid "Login expired. Reloading page..."
+msgstr "Identification expirée. Rechargement de la page…"
+
+#. Label for section that lets you change the colour of arrows that represent relationships between records
+#: 
+msgid "Relationship arrows"
+msgstr "Flèche relationnelle"
+
+#. Label for setting the main arrow colour
+#: 
+msgid "Arrow color"
+msgstr "Couleur de la flèche"
+
+#. When enabled makes arrows from family to child different colours based on if the child is related to the family by birth or otherwise (e.g. adoption)
+#: 
+msgid "Show blood relationship in different color"
+msgstr "Montrer relation de sang en autre couleur"
+
+#. Label for colour picker to select colour of arrow for children related by birth
+#: 
+msgid "Related by birth"
+msgstr "Parenté de naissence"
+
+#. Label for colour picker to select colour of arrow for children not related by birth (e.g. adoption)
+#: 
+msgid "Related other than by birth"
+msgstr "Parenté autre que de naissence"
+
+#. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
+#: 
+msgid "Full name"
+msgstr "Nom complet"
+
+#. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
+#: 
+msgid "Given and surnames"
+msgstr "Prénoms et noms de famille"
+
+#. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
+#: 
+msgid "Given names"
+msgstr "Prénoms"
+
+#. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
+#: 
+msgid "Surnames"
+msgstr "Noms de famille"
+
+#. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
+#: 
+msgid "Don't show names"
+msgstr "Ne pas montrer les noms"
+
+#. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
+#: 
+msgid "First given name only"
+msgstr "Prénom uniquement"
+
+#. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
+#: 
+msgid "Initials only"
+msgstr "Initiales seulement"
+
+#. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
+#: 
+msgid "Given name initials and surname"
+msgstr "Initiales du prénom et nom de famille"
+
+#. This is to replace "Spouses" in the options of people to include - "Spouses" implies marriage but the couples are not necessarily married.
+#: 
+msgid "Partners"
+msgstr "Partenaires"
+
+#. Option section where option to auto-update is presented
+#: 
+msgid "Browser render"
+msgstr "Présenter dans le navigateur"
+
+#. Whether to automatically update the diagram in the browser whenever something is changed. If unselected, user must click "Update" button before browser render is refreshed after a change.
+#: 
+msgid "Auto-update"
+msgstr "Mise à jour automatique"
+
+#. Button to clear all selected individuals (in new individual selection functionality) https://s3.eu-west-1.amazonaws.com/po-pub/i/EsrRESKU3YALMqSOyVudt0L1.png
+#: 
+msgid "Clear all"
+msgstr "Effacer tout"
+
+#. With the new way of showing the selected starting individuals, the XREF list is now moved to the advanced section. This is the description of this field that lists the XREFs of the starting individuals that used to be under the person select dropdown.
+#: 
+msgid "XREFs of included individuals"
+msgstr "XREFs des individus inclus"
+
+#. Option to show given or surnames, initials, or to hide names completely:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/5r0R5U4uGRS1qz8NuOCtuIN1.png
+#: 
+msgid "Abbreviated names"
+msgstr "Noms abbréviés"
+
+#. This is shown when hovering over the new "Fullscreen" button. 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/FNnRXD7QT9BrgV0wMgPIdrY2.png 
+#. 
+#. This is shown at the top right of the browser render:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/f2Rt9T3BJXkNbeqoeazeDJkE.png
+#: 
+msgid "Fullscreen"
+msgstr "Plein écran"
+
+#. Option allowing user to change colour used for male individuals (default is a light blue)
+#: 
+msgid "Male individuals"
+msgstr "Individus masculins"
+
+#. Option allowing user to change colour of female individuals (default is pink)
+#: 
+msgid "Female individuals"
+msgstr "Individus féminins"
+
+#. Option allowing user to change colour of individuals where gender is "Other"
+#: 
+msgid "Other gender individuals"
+msgstr "Individus d’un autre genre"
+
+#. Option allowing user to change the colour of individuals where the gender is unknown (default is light green)
+#: 
+msgid "Unknown gender individuals"
+msgstr "Individus d’un genre inconnu"
+
+#. Option allowing user to change colour of non-blood related male individuals (if the option to display in a different colour is selected). Default is a very pale blue.
+#: 
+msgid "Not blood-related male individuals"
+msgstr "Individus masculins sans lien de parenté de sang"
+
+#. Option allowing user to change colour of non-blood related female individuals (if the option to display in a different colour is selected). Default is a very pale pink.
+#: 
+msgid "Not blood-related female individuals"
+msgstr "Individus féminins sans lien de parenté de sang"
+
+#. Option allowing user to change colour of non-blood related other gender individuals (if the option to display in a different colour is selected). Default is a very pale yellow.
+#: 
+msgid "Not blood-related other gender individuals"
+msgstr "Individus autre gendre sans lien de parenté de sang"
+
+#. Option allowing user to change colour of non-blood related unknown gender individuals (if the option to display in a different colour is selected). Default is a very pale green.
+#: 
+msgid "Not blood-related unknown gender individuals"
+msgstr "Individus gendre inconnu sans lien de parenté de sang"
+
+#. Option allowing user to change the background colour of individual tiles (decorated and combined modes)
+#: 
+msgid "Individual background color"
+msgstr "Couleur de fond de l’individu"
+
+#. Section where user can change colours related to the tiles showing each individual:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/tCBByut2gnWNyBHlbEjXM4wm.png
+#: 
+msgid "Tile colors"
+msgstr "Couleurs de tuiles"
+
+#. Section where colours can be changed, where this is unrelated to other sections:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/HkIwBd2gotM7LpP7LA074oOI.png
+#: 
+msgid "Other colours"
+msgstr "Autres couleurs"
+
+#. Option where user can change the background colour of the family record (ovals in simple/decorated mode, attached rectangle in combined mode). Default is a light yellow.
+#: 
+msgid "Family background"
+msgstr "Arrière-plan de la famille"
+
+#. Option where user can change the colour of the borders of the tiles and family records.
+#: 
+msgid "Outline colour"
+msgstr "Couleur de bordure"
+
+#. Option where user can change the colour of the background behind the diagram
+#: 
+msgid "Diagram background color"
+msgstr "Couleur de fond du diagramme"
+
+#. Shown in tooltip when hovering over close button in fullscreen mode
+#: 
+msgid "Exit fullscreen"
+msgstr "Sortir du plein écran"
+
+#. This is a section title on the control panel settings page where the default values can be configured by the admin.
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/oc2QJRdngdisManSLq1kEN2g.png
+#: 
+msgid "Default values for GVExport"
+msgstr "Valeurs par défaut pour GVExport"
+
+#. A description at the top of the control panel page where the admin can set default values.
+#. 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/oc2QJRdngdisManSLq1kEN2g.png
+#: 
+msgid "Values here are used as default values for new users of GVExport, and are used when users choose to reset the settings."
+msgstr "Les valeurs sont ici utilisées comme valeurs par défaut pour les nouveaux utilisateurs de GVExport et lorsque les utilisateurs choisissent de réinitialiser les paramètres."
+
+#. In the control panel the admin can set default values for GVExport. This button resets these values to the GVExport defaults.  https://s3.eu-west-1.amazonaws.com/po-pub/i/RaXrJonKH38DYcc5TcU1PLSv.png
+#: 
+msgid "reset to defaults"
+msgstr "Réinitialiser les valeurs"
+
+#. Checkbox option to enable a different background colour for starting individuals, to help find them easier on the diagram:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/afEtoto6Qnv1HlJn0zqAiMtP.png 
+#. 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/eo7ytnyRCth5W2Sq76da71Ph.png
+#: 
+msgid "Show starting persons in different color"
+msgstr "Montrer les personnes de départ dans une couleur différente"
+
+#. Option to change the background colour for starting individuals, to help find them easier on the diagram:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/afEtoto6Qnv1HlJn0zqAiMtP.png 
+#. 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/eo7ytnyRCth5W2Sq76da71Ph.png
+#: 
+msgid "Starting persons background color"
+msgstr "Couleur de fond pour les personnes de départ"
+
+#. Option to change font size. This affects (at the time of writing) all diagram text except for names which have their own setting:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/IdWIcmNdrOj4l1yTgxv6MpVW.png
+#: 
+msgid "Font size for details"
+msgstr "Taille de fonte pour les détails"
+
+#. The font size to use for the names of individuals:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/IdWIcmNdrOj4l1yTgxv6MpVW.png
+#: 
+msgid "Font size for names"
+msgstr "Taille de fonte pour les noms"
+
+#. Note limitation for adding URLs:  https://s3.eu-west-1.amazonaws.com/po-pub/i/ativPbmheBQQboYLANZmlHYY.png
+#: 
+msgid "browser and SVG only"
+msgstr "navigateur et SVG seulement"
+
+#. Note limitation for adding URLs:  https://s3.eu-west-1.amazonaws.com/po-pub/i/8gzkcNUo2oj43PpU7Dou5ZEr.png
+#: 
+msgid "browser, SVG, and PDF only"
+msgstr "navigateur, SVG et PDF seulement"
+
+#. This help message is displayed when the user clicks the help icon next to "Include anyone related to". https://s3.eu-west-1.amazonaws.com/po-pub/i/4sXDKFJMwoE5PBYZqEPOIV7W.png
+#: 
+msgid "This is our starting point. Choose a person to base the diagram around. You might choose yourself.</p><p>You can choose as many starting individuals as you wish. A tree will be created for each starting individual based on the settings, then the trees are merged to create one tree for the diagram.</p><p>Click the X to remove a record from the list. If two or more records are listed, a \"Clear all\" option will appear to allow you to remove all records.</p><p>You can also click on an individual in this list to have the diagram in the browser scroll to that person.</p><p>When you next come to the page, the default individual or the last individual you were looking at in webtrees will be loaded. If there was just one saved individual then it will be replaced with the individual provided by webtrees on coming to the page. If there were multiple in the list, then the individual provided by webtrees will be added to the list (if not already in it). So be sure to double-check you are only including individuals you are looking for when first loading the page."
+msgstr "Ceci est le point de départ. Choisissez une personne à la base du diagramme. Vous pouvez vous choisir.</p><p>Vous pouvez choisir autant d’individus de départ que vous le désirez. Un arbre va être créé pour chaque personne de départ basé sur vos paramètres, puis les arbres vont être fusionnés pour créer un arbre pour le diagramme.</p><p>Cliquez le X pour enlever un record de la liste. Si deux ou plusieurs personnes sont listées, une option \"Effacer tout\" va apparaître pour vous permettre d’enlever tous vos records.</p><p>La prochaine fois que vous viendrez sur cette page, la personne par défaut ou la dernière personne que vous avez regardé sur Webtrees va être chargée. S’il y avait seulement une personne sauvegardée, alors elle va être remplacée par la personne fournie par Webtrees dans la page d’accueil. S’il y en avait plusieurs dans la liste, alors l’individu fourni par Webtrees va être ajouté à la liste (s’il n’y est pas encore). Donc, vérifiez bien que vous incluez seulement les individus que vous recherchez lorsque vous chargez la page."
+
+#. This help message is displayed when the user clicks the help icon next to "Include ancestors".  https://s3.eu-west-1.amazonaws.com/po-pub/i/UoTrlDpngydDdWmJPau99ZV4.png
+#: 
+msgid "Tick this option to include ancestors of your starting person(s) and anyone in the tree.</p><h4>Max levels</h4><p>The number of generations of ancestors to include. For example, if you chose yourself as your starting person, you may want the diagram to include relatives back to your great-grandparents. In this case, you would type \"3\" in this box, to include your parents' generation, your grandparents' generation, and your great-grandparents' generation."
+msgstr "Cochez cette option pour inclure les ancêtres de votre (vos) personne(s) de départ et tout un chacun sur l’arbre.</p><h4>Niveaux maximums</h4><p>Le nombre de générations d’ancêtres à inclure. Par exemple, si vous vous choisissez comme personne de départ, vous pourriez vouloir que le diagramme inclue les proches jusqu’à vos arrières-grands-parents. Dans ce cas, vous devez écrire \"3\" dans cette case, pour inclure la génération de vos parents, de vos grands-parents et de vos arrières-grands-parents."
+
+#. This help message is displayed when the user clicks the help icon next to "Include".  https://s3.eu-west-1.amazonaws.com/po-pub/i/G2LwgKcPjaAwzcCXllEaXa13.png
+#: 
+msgid "This section lets you decide what type of relatives to include when generating the diagram.</p><h4>Siblings</h4><p>Include brothers and sisters of anyone in the tree.</p><h4>All relations</h4><p>Include cousins, nieces, nephews, and their descendants when generating the tree. Requires \"Siblings\" to be selected.</p><h4>Partners</h4><p>Include the husbands, wives, and partners of those in the tree even if they aren't blood-relatives. There is another option \"Mark not blood-related people with different color\" that allows these people to be marked in a different colour.</p><h4>Anyone</h4><p>Follow all links regardless of whether the person is related. In practice, this generally means that the family of non-relatives (i.e. spouses) are included in the tree.</p><p>Use this option to include all records of the selected generations. Note that only records with a link are included, so you may need to include more ancestor generations (or more starting individuals) to get all your records to show."
+msgstr "Cette section vous laisse décider quel type de proches il faut inclure lors de la génération du diagramme.</p><h4>Frères et sœurs</h4><p>Inclus les frères et sœurs de tout le monde dans l’arbre.</p><h4>Toutes les relations</h4><p>Inclus les cousins, nièces et neveux, et leurs descendants. Requiert la sélection de \"Frères et sœurs\".</p><h4>Partenaires</h4><p>Inclus les époux, épouses et partenaires des personnes dans l’arbre même si elles ne sont pas liées par le sang. Il y a une autre option \"Marquer les personnes non liées par le sang avec une couleur différente\" pour permettre à ces personnes d’être marquées par une couleur différente.</p><h4>Tout le monde</h4><p>Suit tous les liens, peu importe si la personne est liée. En pratique, cela signifie généralement que la famille des personnes non-liées (p. ex. épouses) sont inclues dans l’arbre.</p><p>Utilisez cette option pour inclure tous les records dans la génération sélectionnée. Notez que seuls les records avec un lien sont inclus, vous pourriez donc devoir inclure plus générations d’ancêtres (ou plus d’individus de départ) pour afficher tous vos records."
+
+#. This help message is displayed when the user clicks the help icon next to "Include descendants".  https://s3.eu-west-1.amazonaws.com/po-pub/i/TNXFdoP4fIHVQnScVvnfvKA1.png
+#: 
+msgid "Whether to include children, grandchildren, etc. of people listed in the tree.</p><h4>Max levels</h4><p>The number of generations of descendants to include. For example, if you chose yourself as your starting person, you may want the diagram to include descendants down to your great-grandchildren. In this case, you would type \"3\" in this box, to include your children and others of their generation, your grandchildren, and your great-grandchildren's generation."
+msgstr "Pour inclure les enfants, petits-enfants, etc. de personnes listées dans l’arbre.</p><h4>Niveaux max</4><p>Le nombre de générations de descendants à inclure. Par exemple, si vous vous choisissez vous-mêmes comme personne de départ, vous pourriez vouloir que le diagramme inclue les descendants jusqu’à vos arrières-grands-enfants. Dans ce cas, vous écricriez \"3\" dans cette case, pour inclure la génération de vos enfants et d’autres de cette génération, de vos petits-enfants, et de vos arrières-petits-enfants."
+
+#. This help message is displayed when the user clicks the help icon next to "Graph direction". https://s3.eu-west-1.amazonaws.com/po-pub/i/MpbVhXyRxeLgMO8FZVXHZhHG.png
+#: 
+msgid "There are two display options here:<ul><li>Left to right - The default option, columns of generations are created with the older generations to the left and younger to the right.<li>Top to bottom - Rows of generations are created, with the older generations at the top and the younger at the bottom."
+msgstr "Il y a deux options d’affichage ici :<ul><li>Gauche à droite - L’option par défaut, les colonnes de générations sont créées avec la génération la plus vieille à gauche et la plus jeune à droite.<li>Haut en bas - Les rangs de générations sont créés avec la génération la plus vieille en haut et le plus jeune en bas."
+
+#. This help message is displayed when the user clicks the help icon next to "Diagram type". https://s3.eu-west-1.amazonaws.com/po-pub/i/dt2T4x9RshJsWKWZ7fQ4zFlu.png
+#: 
+msgid "The options here are:<ul><li>Simple - A box per person, coloured based on sex. No photos allowed.<li>Decorated - A more refined box, which also allows photos to be included.<li>Combined - Each couple is one box instead of one per person. Also allows photos.</ul>"
+msgstr "Les options sont :<ul><li>Simple - Une case par personne, couleur basée sur le sexe. Aucune photo n’est permise.<li>Décoré - une case plus affinée, permettant aussi d’inclure des photos.<li>Combiné - Chaque couple est une case à la place d’une case par personne. Accepte aussi les photos.</ul>"
+
+#. This help message is displayed when the user clicks the help icon next to "Output file type". https://s3.eu-west-1.amazonaws.com/po-pub/i/apq6Tgv91ZGJTGcUfFH3V1VE.png
+#: 
+msgid "The output file type you want. This is ignored when rendering in the browser, it is only used when you download a file. File types SVG, PNG, JPG, and PDF can be downloaded, in addition to the Graphviz DOT format.</p><p>There are some minor differences if you have Graphviz installed on the server:<ul><li>There are two more file types, GIF and PostScript (PS). Most people would not need these.<li>PDF files may be smaller and can include URLs<li>You may be able to include more records</ul>"
+msgstr "Le type de fichier de rendu que vous désirez. Ceci est ignoré si le rendu est fait par le navigateur, c’est uniquement utilisé lorsque vous téléchargez le fichier. Les fichiers de type SVG, PNG, JPG et PDF peuvent être téléchargés, en plus du format Graphviz DOT.</p><p>Il y a quelques différences mineures lorsque vous avez Graphviz installé sur le serveur :<ul><li>Il y a deux types de fichiers supplémentaires, GIF et PostScript (PS). La majorité des personnes n’ont pas besoin de ceux-ci.<li>Les fichiers PDF peuvent être plus petits et peuvent inclure les URLs<li>Vous pourriez inclure plus de records</ul>"
+
+#. This help message is displayed when the user clicks the help icon next to "Browser render". https://s3.eu-west-1.amazonaws.com/po-pub/i/obqZqWV3JxLlYqmWek7FPMfW.png
+#: 
+msgid "If the option \"Auto-update\" is selected, the browser rendered diagram will automatically update when any option is changed. This will also hide the \"Update\" button."
+msgstr "Si cette option \"Mise à jour auto\" est sélectionnée, le diagramme rendu par navigateur va automatiquement être mis à jour lorsqu’une option est modifiée. Cela va aussi cacher le bouton \"Mettre à jour\"."
+
+#. Help button that will show a help page when clicked
+#: 
+msgid "Help"
+msgstr "Aide"
+
+#. This message is shown when clicking a new "Help" button. It links to English pages, so this may need some customising for each language. Link to the German page in the German language (possibly with an additional link to the English one), add some sort of note that the linked pages are in English, feel free to be flexible in what you write to keep it helpful. 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/bDIbs7uTn254cSfZeqaATIBr.png 
+#. 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/vyDHWXC9qcax65t9gW4YjvMv.png
+#: 
+msgid "GVExport is a webtrees module that allows you to create complex visual family trees, using a tool called Graphviz to display the tree. Select a starting person, adjust the settings, and see that person's family tree.</p><p>Some fields have an icon <span class=\"info-icon btn btn-primary\">i</span> next to them, clicking this will give you some more information about that field.</p><p>Advanced configurations are possible by toggling advanced settings by clicking the \"Toggle advanced settings\" option at the end of each section. Clicking the ⛶ in the top right corner of the browser rendering will display the browser rendering in full screen. You can also use the webtrees \"Clippings Cart\" feature to select records, which GVExport can then use instead of the \"People to be included\" settings. </p><p>There are several buttons that take action based on the settings that you have chosen:<ul><li>Update: Clicking this updates the browser render (this is hidden if auto-update is enabled).<li>Download: Clicking this will download the diagram in the format chosen in the \"Output file type\" option. <li>Reset: Clicking this will reset the settings to the default values. Default values can be changed by an administrator in the webtrees Control Panel.<li>Help: Shows this help message.</ul></p><p>For more information, see the <a href=\"https://github.com/Neriderc/GVExport/wiki\" class=\"help-link\">GVExport Wiki</a>.</p><p>You can also ask a question, provide feedback, or suggest features on our <a href=\"https://github.com/Neriderc/GVExport\" class=\"help-link\">GitHub page</a>. Just <a href=\"https://github.com/Neriderc/GVExport/issues/new\" class=\"help-link\">open an issue</a>, or <a href=\"https://github.com/Neriderc/GVExport/issues\" class=\"help-link\">browse existing issues</a>."
+msgstr "GVExport est un module Webtrees qui vous permet de créer des arbres généalogiques visuels complexes, en utilisant un outil appelé Graphviz pour afficher l’arbre. Sélectionnez une personne de départ, ajustez les paramètres et voyez l’arbre généalogique de la personne.</p><p>Certains champs ont une icône <span class=\"info-icon btn btn-primary\">i</span> à côté d’eux, cliquez dessus vous donnera quelques informations supplémentaires à propos de ce champ.</p><p>Des configurations avancées sont possibles en dépliant les paramètres avancés en cliquant l’option \"Déplier les paramètres avancés\" à la fin de chaque section. Cliquer le ⛶ dans le coin supérieur droit du rendu du navigateur va afficher le rendu en plein écran. Vous pouvez aussi utiliser la fonctionnalité de Webtrees \"Panier\" pour sélectionner les records, que GVExport peut ensuite utiliser à la place du paramètre \"Personnes à inclure\".</p><p>Il y a plusieurs boutons qui agissent selon les paramètres que vous avez choisi :<ul><li>Mise à jour : Cliquer sur ceci met à jour le rendu du navigateur (ce bouton est caché si la mise à jour automatique est activée).<li>Télécharger : Cliquer sur ceci va télécharger le diagramme dans le format choisi dans l’option \"Type de fichier de sortie\".<li>Réinitialiser : Cliquer ceci va remettre les paramètres à leurs valeurs par défaut. Les valeurs par défaut peuvent être changées par un administrateur dans le Panneau de Contrôle Webtrees.<li>Aide : Affiche ce message d’aide.</ul></p><p>Pour plus d’information, voyez <a href=\"https://github.com/Neriderc/GVExport/wiki\" class=\"help-link\">GVExport Wiki</a>.</p><p>Vous pouvez aussi poser une question, fournir un feedback, ou proposer des fonctionnalités dans notre <a href=\"https://github.com/Neriderc/GVExport\" class=\"help-link\">page Github</a>. Vous n’avez qu’à<a href=\"https://github.com/Neriderc/GVExport/issues/new\" class=\"help-link\">ouvrir une \"issue\"a>, ou <a href=\"https://github.com/Neriderc/GVExport/issues\" class=\"help-link\">parcourir les \"issues\" existantes</a>."
+
+#. This message should never be shown, but it is a backup message for the help messages in the case that the text cannot be found - it's effectively an error message.
+#: 
+msgid "Help information not found"
+msgstr "Information d’aide non trouvée"
+
+#. This is the help text that the user will see if they click the i next to the Clippings cart message that shows only when there is an item in the clippings cart:  https://s3.eu-west-1.amazonaws.com/po-pub/i/lzypnHfQAPcoljhGbgSsaEVb.png
+#: 
+msgid "Within webtrees, you can add items to the clippings cart. This is usually done by navigating to a record within webtrees then selecting the \"Clippings cart\" option near the top of the screen.</p><p> If you have added individuals and the related family and media records to the clippings cart, these can be used to display the diagram instead of the criteria in the \"People to be included\" section.</p><p>If you have individuals in the clippings cart but don't wish to use these, you have the option to ignore the clippings cart."
+msgstr "À l’intérieur de Webtrees, vous pouvez ajouter des items au panier. C’est généralement fait en naviguant vers un record à l’intérieur de Webtrees puis en sélectionnant l’option \"Panier\" près du haut de l’écran.</p><p> Si vous avez ajouté des individus et leur famille relative et des médias au panier, ils peuvent être utilisés pour afficher le diagramme à la place des critères dans la section \"Personnes à inclure\".</p><p>Si vous avez des individus dans le panier mais que vous ne voulez pas les utiliser, vous pouvez ignorer le panier."
+
+#. This is help text shown when the user clicks the "i" button next to the "XREFs of included individuals" option:   https://s3.eu-west-1.amazonaws.com/po-pub/i/YVGpSuKpIAjyOMoLTigbrzcU.png
+#: 
+msgid "This is a list of XREFs that represents the records listed in the \"Include anyone related to\" section. You may edit this box and click the refresh button in order to load your list of XREFs into the selection list."
+msgstr "Ceci est une liste de XREFs qui représente les records listés dans la section \"inclure toute personne liée à\". Vous pouvez éditer cette case et cliquer le bouton de réactualisation pour charger votre liste de XREFs dans la section liste."
+
+#. Help text shown when user clicks "i" next to "Stop processing on":  https://s3.eu-west-1.amazonaws.com/po-pub/i/aVjMepnhrUVmbSJnm5JjsdOp.png
+#: 
+msgid "If the module reaches one of these people, don't grow the tree from here. For example, if you chose yourself as the starting point, you might want to include all of your blood relatives except your mother's side of the family. Add your mother as a person to \"Stop processing on\". The tree will still include your mother, but it won't include her parents, siblings, etc.</p><p>Choose a person in the top box, and they will be added to the list. Their XREF will also be included in the bottom box (which can be edited directly if needed)."
+msgstr "Si le module atteint une de ces personnes, n’augmentez pas l’arbre par ici. Par exemple, si vous vous choisissez comme point de départ, vous pourriez vouloir inclure tous vos proches liés par le sang à l’exception votre famille du côté de votre mère. Ajoutez votre mère comme personne où \"Arrêter de procéder sur\". L’arbre va toujours inclure votre mère, mais ne va par inclure ses parents, frères et sœurs, etc.</p><p>Choisissez une personne dans la case du haut, et elle va être ajoutée à la liste. Son XREF va aussi être inclus dans la case du bas (qui peut être édité directement si nécessaire)."
+
+#. Help text shown when user clicks "i" next to option "Non-relatives":  https://s3.eu-west-1.amazonaws.com/po-pub/i/Lq1O4swJShMh36BPEhJiSujt.png
+#: 
+msgid "This section has two related options.<h4>Mark not blood-related people with different color</h4><p>Where spouses are included and are not blood-related to anyone in the \"Include anyone related to\" field, if this option is selected they will be highlighted in a much duller color than the standard blue/pink for relatives.</p><p>Note that when this option is selected, and non-relatives are found in the selected records, then a full tree scan is performed to identify if an individual is related by a more distant link (see next option).</p><h4>Ignore unseen links to speed up relative check</h4><p>This option is only available when the previous option is selected. When the option to display non-relatives in a different colour is selected, normally a scan is performed starting from the starting individuals and branching to all relatives regardless of display settings. This ensures that if a person is related via a link not displayed, they will still show as related.</p><p>Enabling this option prevents the full scan of the tree which can greatly speed up the generation of the diagram on larger trees, but may reduce accuracy of the colouring of non-relatives."
+msgstr "Cette section a deux options reliées.<h4>Marquer les personnes non-liées par un lien de sang avec une couleur différente</h4><p>Lorsque des conjoints sont inclus et sont non liés par un lien de sang avec quiconque dans le champ \"Inclure toute personne reliée à\", si cette option est sélectionnée, ils seront surlignés dans une couleur beaucoup plus terne que le bleu/rose standard pour les proches.</p><p>Notez que lorsque cette option est sélectionnée, et que des personnes non-apparentées sont trouvées dans les records sélectionnés, un scan complet de l’arbre est performé pour identifier si un individu est lié par un lien plus distant (voyez option suivante).</p><h4>Ignorer les liens non-vus pour accélérer la vérification des proches</h4><p>Cette option est seulement disponible lorsque la précédente option est sélectionnée. Lorsque cette précédente option est sélectionnée, normalement, un scan est performé depuis les individus de départ et reliant tous les proches sans égards aux paramètres d’affichage. Ceci garantit que si une personne est reliée par un lien non-affiché, elle sera toujours affichée comme reliée.</p><p>Activer cette option évite le scan complet de l’arbre pour accélérer fortement la génération du diagramme pour les arbres plus larges, mais peut réduire la précision du coloriage des personnes non-apparentées."
+
+#. Help text shown when user clicks the "i" next to "Show photos" in the advanced appearance section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/Xpn8Y8LiWnYphmjJe9eJO6ub.png
+#: 
+msgid "Whether to display the photo from the individual's page in the tree. This is only supported for Decorated and Combined diagram types."
+msgstr "Pour afficher la photo de la page de l’individu dans l’arbre. Ceci est seulement supporté pour les diagrammes de type Décoré ou Combiné."
+
+#. Help text shown when user clicks "Add URL to individuals and families" option:  https://s3.eu-west-1.amazonaws.com/po-pub/i/QREJLhm9Besbu8r11RXghPYN.png
+#: 
+msgid "For SVG (and PDF if GraphViz installed on server) output, links can be included. This way you can click on the person in the diagram to be taken to their webtrees page."
+msgstr "Pour les rendus SVG (et PDF si Graphviz est installé sur le serveur), les liens peuvent être inclus. Ainsi vous pouvez cliquer sur une personne dans le diagramme pour être mené vers sa page Webtrees."
+
+#. Help text shown when user clicks the "i" next to "Abbreviated names":   https://s3.eu-west-1.amazonaws.com/po-pub/i/rIQKFYaokaQndqxKRMkSoZDA.png
+#: 
+msgid "There are several options to shorten the names of individuals displayed.</p><h4>Full name</h4><p>The default option, this shows the primary name and any nickname. This option currently is the only one where the preferred name is underlined, and is the only one to show nicknames (in \\\"quotes\\\").<h4>Given and surnames</h4><p>Like the full name, but without nicknames.</p><h4>Given names</h4><p>Just the given names are displayed.<h4>First given names only</h4><p>Just the first word of the name in the given names field.</p><h4>Surnames</h4><p>Just the surnames are displayed.</p><h4>Initials only</h4><p>This displays initials only, for example \\\"JFK\\\".</p><h4>Given name initials and Surname</h4><p>This shows initials for the first and second given name, as well as the full surname. For example: \\\"J.F. Kennedy\\\"</p><h4>Don't show names</h4><p>No names are shown. If birth and death details are also disabled then it is possible to show only photos or even just coloured boxes."
+msgstr "Il y a plusieurs options pour raccourcir l’affichage des noms des individus.</p></h4>Nom complet</h4><p>L’option par défaut, elle affiche le nom principal et le surnom. Cette option est actuellement la seule où le nom préféré est souligné, et la seule à montrer les surnoms (dans des \\\"citations\\\").<h4>Prénoms et noms de famille</h4><p>Comme le nom complet, mais sans le surnom.</p><h4>Prénoms</h4><p>Seulement les prénoms sont affichés.<h4>Premiers prénoms seulement</h4><p>Seulement le premier mot du nom dans le champ des prénoms.</p><h4>Noms de famille</h4><p>Seulement les noms de famille sont affichés.</p><h4>Initiales seulement</h4>N’afiche que les initiales, par exemple \\\"JFK\\\".</p><h4>Initiales du prénom et Nom de famille</h4><p>Affiche les initiales pour le premier et le deuxième prénom, en plus du nom de famille complet. Par exemple: \\\"J.F. Kennedy\\\"</p><h4>Ne pas montrer les noms</h4><p>Aucun nom n’est montré. Si les détails de naissance et de décès sont aussi désactivés, alors il est possible de montrer seulement les photos ou seulement les cases colorées."
+
+#. Help text shown when user clicks the "i" next to "Abbreviate place names":  https://s3.eu-west-1.amazonaws.com/po-pub/i/Ek3gve1dtOPTm63m5WeKiEjl.png
+#: 
+msgid "There are several options to shorten place names (for place of birth, place of marriage, place of death).</p><h4>Full place name</h4><p>The place name is printed in full.</p><h4>City and Country</h4><p>The first and last section of the place name is used, using commas to split the sections. For example, \\\"London, England, United Kingdom\\\" would be shortened to \\\"London, United Kingdom\\\"</p><h4>City and 2 Letter ISO Country Code</h4><p>The first and last section of the place name is used, using commas to split the sections. The country is then converted to the ISO3166-1-Alpha-2 country code. </p><p>For example, \\\"Calgary, Alberta, Canada\\\" would be shortened to \\\"Calgary, CA\\\"</p><h4>City and 3 Letter ISO Country Code</h4><p>The first and last section of the place name is used, using commas to split the sections. The country is then converted to the ISO3166-1-Alpha-3 country code.</p><p>For example, \\\"Calgary, Alberta, Canada\\\" would be shortened to \\\"Calgary, CAN\\\"<h4>Note</h4><p>The CLDR display name is used for matching. The data comes from <a href=\\\"https://www.datahub.io/core/country-codes\\\" class=\\\"help-link\\\">Datahub</a> but has been modified as for example the original CLDR name for the United Kingdom is \\\"UK\\\", and the original CLDR name for the United States is \\\"US\\\". Matching against these countries for the purposes of abbreviation is therefore pointless. So changes have been made to make this work better. Please <a href=\\\"https://github.com/Neriderc/GVExport/issues/new\\\" class=\\\"help-link\\\">open an issue</a> on GitHub if you find a country is not abbreviating correctly."
+msgstr "Il y a plusieurs options pour raccourcir les noms de places (pour celles de naissance, de mariage, de décès).</p><h4>Nom de place complète</h4><p>Le nom de place est imprimé dans son intégralité.</p><h4>Ville et Pays</h4><p>La première et la dernière section du nom de la place sont utilisés, avec des virgules pour séparer les sections. Par exemple, \\\"Londres, Angleterre, Royaume-Uni\\\" va être raccourci en \\\"Londres, Royaume-Uni\\\"</p><h4>Ville et deux lettres du Code ISO des pays</h4><p>La première et la dernière section du nom de place est utilisé, avec des virgules pour séparer les sections. Le nom de pays est converti au code des pays ISO3166-1-Alpha-2.</p><p>Par exemple, \\\"Calgary, Alberta, Canada\\\" va être raccourci en \\\"Calgary, CA\\\"</p><h4>Ville et 3 lettres du Code ISO des pays</h4><p>La première et la dernière section du nom de la place est utilisée, avec des virgules pour séparer la section. Le pays est alors converti au code des pays ISO3166-1-Alpha-3.</p><p>Par exemple, \\\"Calgary, Alberta, Canada\\\" va être raccourci en \\\"Calgary, CAN\\\"<h4>Note</h4><p>Le nom d’affichage CLDR est utilisé pour faire correspondre. Les données viennent de  <a href=\\\"https://www.datahub.io/core/country-codes\\\" class=\\\"help-link\\\">Datahub</a> mais ont été modifiées comme par exemple le CLDR d’origine pour le Royaume-Uni est \\\"UK\\\" et le CLDR d’origine pour les États-Unis est \\\"US\\\". Trouver une correspondance pour ces pays pour le but d’abréger est dès lors inutile. Des changements ont donc été faits pour mieux faire fonctionner cela. Veuillez <a href=\\\"https://github.com/Neriderc/GVExport/issues/new\\\" class=\\\"help-link\\\">ouvrir une \"issue\"</a> sur Github si vous trouvez un pays qui n’est pas abrégé correctement."
+
+#. Help text shown when user clicks the "i" next to "Show individual XREF":   https://s3.eu-west-1.amazonaws.com/po-pub/i/z0ydquyzpwfL2pZbkf4ZsjXv.png
+#: 
+msgid "Whether to include the XREF of individuals in the diagram."
+msgstr "S’il faut inclure le XREF des individus dans le diagramme."
+
+#. Help text shown when user clicks the "i" next to "Show birth date":  https://s3.eu-west-1.amazonaws.com/po-pub/i/K0f3sazuGOU8Bc4k816wfldH.png
+#: 
+msgid "Check the box if you would like to include the birthdate of individuals in the output.</p><p>You can also choose whether to show the full date of birth or just the year."
+msgstr "Cochez la case si vous désirez inclure la date d’anniversaire des individus dans le rendu.</p><p>Vous pouvez aussi choisir d’afficher la date d’anniversaire complète ou seulement l’année."
+
+#. Help text shown when user clicks the "i" next to "Show birth place":    https://s3.eu-west-1.amazonaws.com/po-pub/i/f0NMn7pmbDd8EmGi9s3Ps4Sm.png
+#: 
+msgid "Whether to show the place of birth in the output. Also see option for abbreviating place names."
+msgstr "Pour afficher la place de naissance dans le rendu. Affiche aussi l’option pour abréger les noms de places."
+
+#. Help text shown when user clicks the "i" next to "Show death date":     https://s3.eu-west-1.amazonaws.com/po-pub/i/fNNY3AothlpEk6RVHwu18jBq.png
+#: 
+msgid "Check the box if you would like to include the death date of individuals in the output.</p><p>You can also choose whether to show the full date of death or just the year."
+msgstr "Cochez la case si vous voulez que la date de décès des individus soit inclue dans le rendu.</p><p>Vous pouvez aussi choisir d’afficher la date de décès complète ou seulement l’année."
+
+#. Help text shown when user clicks the "i" next to "Show death place":     https://s3.eu-west-1.amazonaws.com/po-pub/i/zwFpvOQOHvWtGCscz5jgN1LV.png
+#: 
+msgid "Whether to show the place of death in the output. Also see option for abbreviating place names."
+msgstr "Pour afficher la place du décès dans le rendu. Affiche aussi l’option pour abréger les noms de places."
+
+#. Help text shown when user clicks the "i" next to "Show family XREF":     https://s3.eu-west-1.amazonaws.com/po-pub/i/pUSNfbB0jvF2zxYRn8wQCCQ8.png
+#: 
+msgid "Whether to include the XREF of families in the output."
+msgstr "Pour inclure le XREF des familles dans le rendu."
+
+#. Help text shown when user clicks the "i" next to "Show marriage date":      https://s3.eu-west-1.amazonaws.com/po-pub/i/WcVSfrpda3aaoTR6k8TKg4CC.png
+#: 
+msgid "Check the box if you would like to include the date of marriage in the output.</p><p>You can also choose whether to show the full date of marriage or just the year."
+msgstr "Cochez la case si vous voulez que la date de mariage soit inclue dans le rendu.</p><p>Vous pouvez aussi choisir d’afficher la date de mariage complète ou seulement l’année."
+
+#. Help text shown when user clicks the "i" next to "Show marriage place":      https://s3.eu-west-1.amazonaws.com/po-pub/i/jYVeBKSFMcZhilwfeHgbyWqH.png
+#: 
+msgid "Whether to show the place of marriage in the output. Also see option for abbreviating place names."
+msgstr "Pour afficher la place du mariage dans le rendu. Affiche aussi l’option pour abréger les noms de place."
+
+#. Help text shown when user clicks the "i" next to "DPI":      https://s3.eu-west-1.amazonaws.com/po-pub/i/40xFZyQ8fdzDhsLDzvifNDAr.png
+#: 
+msgid "For output such as JPG and PNG, this setting will product higher quality output when it is larger, but will also increase the file size. Smaller values will produce smaller files, but the quality will be worse and if the value is too low you may not be able to read text."
+msgstr "Pour un fichier tel que JPG ou PNG, ce paramètre va produire une meilleure qualité de sortie lorsque c’est plus large, mais aussi accroître la taille du fichier. Des valeurs plus petites vont produire des fichiers plus petits, mais la qualité sera moindre et si la valeur est trop basse vous ne pourrez peut-être pas lire le texte."
+
+#. Help text shown when user clicks the "i" next to "Space":  https://s3.eu-west-1.amazonaws.com/po-pub/i/hEJcjkJ8xvGsTPoHjq5nT8L6.png
+#: 
+msgid "These options affect the distance between nodes on the diagram.</p><h4>Between generations</h4><p>How close you want generations on the output. For example, for left to right output, smaller numbers will bring the columns of individuals closer together, while larger numbers would push them further apart.</p><h4>Between individuals on the same level</h4><p>How close you want the individuals of the same generation on the output. For example, for left to right output, smaller numbers will mean less space vertically between the boxes, while larger numbers would push them further apart."
+msgstr "Ces options affectent la distance entre les nœuds du diagramme.</p><h4>Entre les générations</h4><p>Quelle proximité voulez-vous entre les générations. Par exemple, pour un rendu de gauche à droite, des nombres plus petits vont rapprocher les colonnes d’individus, alors que de larges nombres vont les éloigner.</p><h4>Entre les individus d’un même niveau</h4><p>Quelle proximité voulez-vous entre les individus d’une même génération. Par exemple, pour un rendu de gauche à droite, des nombres plus petits vont réduire l’espace vertical entre les cases, alors que les nombres plus larges vont les augmenter."
+
+#. Help text shown when user clicks the "i" next to "Font":  https://s3.eu-west-1.amazonaws.com/po-pub/i/SMqr3gHBplFqJ4C0yRnFBpkp.png
+#: 
+msgid "This section lets you configure the typeface and colour of text.</p><h4>Typeface</h4><p>This list lets you pick from a number of known websafe font typefaces. They must be installed on the system or a fallback typeface will be used. These options are known to be installed on almost all systems and that is why they have been chosen.</p><h4>Font size for names</h4><p>Set the font point size for the names of individuals. In Simple mode this is ignored as all text uses the details font size.</p><h4>Font size for details</h4><p>This changes the font point size for all text except for names. For example, the date and place of marriage, and the date and place of birth and death. In simple mode this is also used for the font size of names.</p><h4>Font colour for names</h4><p>This changes the colour of the font for names. In the simple mode, this sets the font for all text in an individual record's box. Note that the colour picker is provided by your browser, and is handled differently depending on which browser you are using.</p><h4>Font colour for details</h4><p>This changes the colour of the font of all text except for names, for example, the date and place of marriage, and the date and place of birth and death. In the simple mode, this sets the font for the details in the family record (marriage date and place) as the same font is used for the whole individual record (the font colour for names). Note that the colour picker is provided by your browser, and is handled differently depending on which browser you are using."
+msgstr "Cette section vous permet de configurer la police d’écriture et la couleur du texte.</p><h4>Police d’écriture</h4><p>Cette liste vous permet de choisir parmi un nombre de polices d’écritures connues. Elles doivent être installés sur votre système ou une police d’écriture de secours sera utilisée. Ces options sont connues pour être installées sur presque tous les systèmes et c’est pourquoi elles ont été choisies.</p><h4>Taille de fonte pour les noms</h4><p>Configure la taille de fontes pour les noms des individus. Dans le mode Simple, Ceci est ignoré et tout texte utilise la taille de fonte des détails.</p><h4>Taille de fonte pour les détails</h4><p>Ceci change la taille de fonte pour tout texte, sauf pour les noms. Par exemple, la date et la place du mariage, et la date et la place de la naissance et du décès. Dans le mode Simple, ceci est aussi utilisé pour la taille des fontes des noms.</p><h4>Couleur de fonte pour les noms</h4><p>Ceci change la couleur de fonte pour les noms. Dans le mode Simple, il configure la fonte pour tout le texte de la case d’un individu. Notez que le sélectionneur de couleur est fourni par votre navigateur et qu’il peut être assez différent en fonction de quel navigateur vous utilisez.</p><h4>Couleur de fonte pour les détails</h4><p>ceci change la couleur de fonte pour tout texte, sauf pour les noms, par exemple, la date et la place du mariage, et la date et la place de naissance et de décès. Dans le mode Simple, il configure la fonte pour les détails dans le record de famille (mariage, date et place) car la même fonte est utilisée pour l’individu dans son ensemble (la couleur de fonte pour les noms). Notez que le sélectionneur de couleur est fourni par votre navigateur et qu’il peut être assez différent en fonction de quel navigateur vous utilisez."
+
+#. Help text shown when user clicks the "i" next to "Relationship arrows":  https://s3.eu-west-1.amazonaws.com/po-pub/i/49vIt5p3NoEIm5t9CgmVtYt6.png
+#: 
+msgid "This section lets you customise the arrows that link records together.</p><h4>Arrow colour</h4><p>This is the main colour for arrows. This is used for all arrows if the next option is disabled, otherwise it is used for arrows from a spouse to the family record.</p><h4>Show blood relationship in a different colour</h4><p>If this option is selected, the relationship arrows between a family record and children will use different colours depending on if the relationship is by birth, or a different type of relationship (e.g. adoption). If this is disabled, all relationship arrows use the above default colour.</p><ul><li>Related by birth - If the above option is enabled, this sets the colour of arrows from a family record to a child that is related by birth.<li>Related other than by birth - If the above option is enabled, this sets the colour of arrows from a family record to a child that is not related by birth (e.g. foster or adopted)."
+msgstr "Cette section vous permet de paramétrer les flèches qui relient les records ensemble.</p><h4>Couleur de flèche</h4><p>Ceci est la couleur principale des flèches. C’est utilisé par toutes les flèches si l’option suivante est désactivée, sinon c’est utilisé pour les flèches d’un conjoint au record de la famille.</p><h4>Afficher la relation de sang dans une couleur différente</h4><p>Si cette option est sélectionnée, les flèches de relation entre le record d’une famille et les enfants vont utiliser des couleurs différentes en fonction de si la relation est par naissance, et si la relation est d’un type différent (p. ex. l’adoption). Si c’est désactivé, toutes les flèches de relation utilisent la couleur par défaut ci-dessus.</p><ul><li>Relié par la naissance - si l’option si dessus est activées, ceci paramètre la couleur des flèches depuis le record de famille vers un enfant qui est relié par la naissance.<li>Relié autrement que par la naissance - Si cette option est activée, ceci paramètre la couleur des flèches depuis le record d’une famille vers un enfant qui n’est pas relié par la naissance (p. ex. famille d’accueil ou adoption)."
+
+#. Help text shown when user clicks the "i" next to "Tile colours":  https://s3.eu-west-1.amazonaws.com/po-pub/i/gzXTu0XdLd6V1GhSjjDRbXoj.png
+#: 
+msgid "This section allows you to change the colours of the different parts of the tiles shown for each individual. Click the coloured box to change the colour. This uses your browser's colour picker, so will look different depending on what browser you are using."
+msgstr "Cette section vous permet de changer les couleurs des différentes parties des tuiles affichées pour chaque individu. Cliquez sur la case de couleur pour changer la couleur. Le sélecteur de couleurs de votre navigateur est utilisé, il va donc être différent en fonction de quel navigateur vous utilisez."
+
+#. Help text shown when user clicks the "i" next to "Other colours":  https://s3.eu-west-1.amazonaws.com/po-pub/i/LrHottxOgQWJC1752fcbOh36.png
+#: 
+msgid "This section allows you to change colours associated with the diagram that are not part of the individual tile above. Click the coloured box to change the colour. This uses your browser's colour picker, so will look different depending on what browser you are using."
+msgstr "Cette section vous permet de changer les couleurs associées au diagramme qui ne font pas partie de la tuile d’individu plus haut. Cliquez sur la case de couleur pour changer la couleur. Le sélecteur de couleurs de votre navigateur est utilisé, il va donc être différent en fonction de quel navigateur vous utilisez."
+
+#. "Output settings" was renamed to "File settings".
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/zY6fWYDbmG93zn0ODfvgtr3y.png
+#: 
+msgid "File settings"
+msgstr "Paramètres du fichier"
+
+#. Name of section for saving settings to file and loading again:  https://s3.eu-west-1.amazonaws.com/po-pub/i/YRg7L3jSSfj41FX0tHDSUY4M.png
+#: 
+msgid "Settings file"
+msgstr "Fichier de paramètres"
+
+#. Text to explain what happens when you click Download button:  https://s3.eu-west-1.amazonaws.com/po-pub/i/binGwth9kTmNWFiKZra36B1E.png
+#: 
+msgid "Save settings to file"
+msgstr "Sauver les paramètres dans le fichier"
+
+#. Text to explain what happens when you choose to upload file. Note that the actual file upload is provided by the browser and will use the browser's (or operating system) language.  https://s3.eu-west-1.amazonaws.com/po-pub/i/2woaCucdJquUy6lUnQYS8k51.png
+#: 
+msgid "Load settings from file"
+msgstr "Charles les paramètres depuis le fichier"
+
+#. Help text for downloading saved settings to a file, and uploading these settings:  https://s3.eu-west-1.amazonaws.com/po-pub/i/HfxRre2VQe9TVyl8dtX3RhVj.png
+#: 
+msgid "Here you are able to save the chosen settings to a file, and to load that file at a later time.</p><p>For example, you may have many diagrams you create from your tree. You may want to save the settings used for each diagram so that in future you can regenerate the diagram to include any new information."
+msgstr "Ici, vous pouvez sauver vos paramètres choisis dans un fichier, et charger ce fichier à une date ultérieure.</p><p>Par exemple, vous pouvez avoir créé plusieurs diagrammes de votre arbre. vous pourriez vouloir sauvegarder les paramètres utilisés pour chaque diagramme pour pouvoir, dans le futur, régénérer le diagramme et y inclure toute nouvelle information."
+
+#. For development use, you can now enable a debug panel. Needs translation as option will appear on Control Panel page:  https://s3.eu-west-1.amazonaws.com/po-pub/i/UzABfGKv12F3PBzS3wVzoHCm.png 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/36sF1oj0dbyyJzl0meXi1ixY.png
+#: 
+msgid "Debug mode"
+msgstr "Mode débogage"
+
+#. For development use, you can now enable a debug panel. Needs translation as option will appear on Control Panel page:  https://s3.eu-west-1.amazonaws.com/po-pub/i/UzABfGKv12F3PBzS3wVzoHCm.png 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/36sF1oj0dbyyJzl0meXi1ixY.png
+#: 
+msgid "Show debug panel"
+msgstr "Afficher le panneau de débogage"
+
+#. For development use, you can now disable debug mode easily. Needs translation as option will appear on Control Panel page:  https://s3.eu-west-1.amazonaws.com/po-pub/i/UzABfGKv12F3PBzS3wVzoHCm.png 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/36sF1oj0dbyyJzl0meXi1ixY.png
+#: 
+msgid "Enable debug mode"
+msgstr "Activer le mode débogage"
+
+#. For development use, you can now disable Graphviz on server even if you have it installed. Needs translation as option will appear on Control Panel page:  https://s3.eu-west-1.amazonaws.com/po-pub/i/UzABfGKv12F3PBzS3wVzoHCm.png 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/36sF1oj0dbyyJzl0meXi1ixY.png
+#: 
+msgid "Use Graphviz on server"
+msgstr "Utiliser Graphviz sur le serveur"
+
+#. Section heading. You can now enable a debug panel for development use. Needs translation as option will appear on Control Panel page:  https://s3.eu-west-1.amazonaws.com/po-pub/i/UzABfGKv12F3PBzS3wVzoHCm.png 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/36sF1oj0dbyyJzl0meXi1ixY.png
+#: 
+msgid "Debug"
+msgstr "Débogage"
+
+#. If browser-renderer can't generate a diagram this large, show an error message. This message is shown when Graphviz is installed on server.  https://s3.eu-west-1.amazonaws.com/po-pub/i/5MKDjkAnfKKolIoTeVqEBaKp.png
+#: 
+msgid "Memory limit reached. Please reduce number of records or use download option."
+msgstr "Limite de mémoire atteinte. Veuillez réduire le nombre de records ou utiliser l’option de téléchargement."
+
+#. If browser-renderer can't generate a diagram this large, show an error message. This message is shown when Graphviz is NOT installed on server.   https://s3.eu-west-1.amazonaws.com/po-pub/i/1cmo1QxxPNuy3bjgntERYAOC.png
+#: 
+msgid "Memory limit reached. Please reduce number of records or install Graphviz on server and use download option."
+msgstr "Limite de mémoire atteinte. Veuillez réduire le nombre de records ou installer Graphviz sur le serveur et utilisez l’option de téléchargement."
+
