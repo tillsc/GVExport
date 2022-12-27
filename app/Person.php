@@ -101,11 +101,7 @@ class Person
 
             // --- Death data ---
             if ($this->dot->settings["show_death_date"]) {
-                if ($this->dot->settings["show_birthdate"]) {
-                    $death_date = Dot::formatDate($i->getDeathDate(), $this->dot->settings["death_date_year_only"] !== "gedcom");
-                } else {
-                    $death_date = "";
-                }
+                $death_date = Dot::formatDate($i->getDeathDate(), $this->dot->settings["death_date_year_only"]);
             } else {
                 $death_date = "";
             }

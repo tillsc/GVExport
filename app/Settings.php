@@ -274,6 +274,8 @@ class Settings
             case 'countries':
             case 'temp_dir':
             case 'space_base':
+            case 'birth_prefix':
+            case 'death_prefix':
                 return false;
             case 'show_debug_panel':
                 return $admin;

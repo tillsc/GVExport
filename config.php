@@ -13,9 +13,9 @@ return array(
 	// 'graphviz_bin' => '', // Uncomment this line if you don't have GraphViz installed on the server
 	'filename' => 'gvexport', // Output file name used for downloads
 	'output_type' => 'svg', // Default output file type
-	'graph_dir' => 'LR', // Direction of graph
+	'graph_dir' => 'LR', // Direction of graph. 'LR' for Left-to-right, 'TB' for Top-to-bottom
 	'mclimit' => '1', // Graphviz MCLIMIT setting - number of times to regenerate graph for reduced crossings
-	'diagram_type' => 'decorated', // Default diagram type setting
+	'diagram_type' => 'decorated', // Default diagram type setting. 'simple', 'decorated', or 'combined'
 	'show_photos' => true, // Whether to include photos in diagram
 	'show_birthdate' => true, // Whether to show birthdate for individuals
 	'birthdate_year_only' => false, // Whether to show just the year or the full GEDCOM date of birth
@@ -39,8 +39,8 @@ return array(
 	'add_links' => true, // Whether to embed links to the webtrees records in the diagram for supported file types
 	'show_xref_individuals' => false, // Whether to show the XREF of individuals
 	'show_xref_families' => false, // Whether to show the family XREF
-	'use_abbr_place' => 'Full place name', // Default abbreviation setting for place names
-	'use_abbr_name' => 'Full name', // Default abbreviation settings for individual's names
+	'use_abbr_place' => 0, // Default abbreviation setting for place names
+	'use_abbr_name' => 0, // Default abbreviation settings for individual's names
 	'enable_debug_mode' => false, // Debug mode (if set to true then the debug steps are run)
 	'show_debug_panel' => false, // If set to true, a debug panel is shown
 	'enable_graphviz' => true, // If Graphviz installed, we can still choose not to use it by setting this to false
@@ -73,8 +73,8 @@ return array(
 	'other_gender_unrel_colour' => '#FCF7E3', // Default color of not blood-related Other gender individuals
 	'unknown_gender_unrel_colour' => '#D6EED6', // Default color of not blood-related unknown gender individuals
 	'family_colour' => '#FFFFEE', // Default color of families (different light yellow)
-	'background_colour' => '#eeeeee', // Background of diagram (light grey)
-	'individual_background_colour' => '#fefefe', // Background of individual tile (except simple mode)
+	'background_colour' => '#EEEEEE', // Background of diagram (light grey)
+	'individual_background_colour' => '#FEFEFE', // Background of individual tile (except simple mode)
 	'highlight_start_individuals' => false, // Whether to use a different colour for starting individuals
 	'highlight_colour' => '#FFFDC3', // Background of starting individuals
 	'border_colour' => '#606060', // Outline colour

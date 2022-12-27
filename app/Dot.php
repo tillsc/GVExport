@@ -532,11 +532,7 @@ class Dot {
 
 			// Show marriage year
 			if ($this->settings["show_marriage_date"]) {
-                if ($this->settings["show_birthdate"]) {
-                    $marriagedate = $this->formatDate($f->getMarriageDate(), $this->settings["marriage_date_year_only"] !== "gedcom");
-                } else {
-                    $marriagedate = "";
-                }
+                $marriagedate = $this->formatDate($f->getMarriageDate(), $this->settings["marriage_date_year_only"]);
 			} else {
 				$marriagedate = "";
 			}
