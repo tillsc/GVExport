@@ -81,25 +81,29 @@ class Help
 
     /**
      * Adds JavaScript code for function that provides the help text
-     * @return void
+     * @return string
      */
-    public function addHelpMessageJavaScript() {
-        echo "
+    public function addHelpMessageJavaScript(): string
+    {
+        $msg = "
 // Function to get help text based on identifier
 // item - the help item identifier
 function getHelpText(item) {
     switch (item) {";
 
             for ($i=0; $i<sizeof($this->help); $i++) {
-                echo "case \"" . $this->help[$i][0] . "\":\n";
-                echo "    return '<h3>" . str_replace("'","&apos;",I18N::translate($this->help[$i][0])) . "</h3>";
-                echo "<p>" . str_replace("'","&apos;",I18N::translate($this->help[$i][1])) . "</p>';\n";
+                $msg .= "case \"" . $this->help[$i][0] . "\":\n";
+                $msg .= "    return '<h3>" . str_replace("'","&apos;",I18N::translate($this->help[$i][0])) . "</h3>";
+                $msg .= "<p>" . str_replace("'","&apos;",I18N::translate($this->help[$i][1])) . "</p>';\n";
             }
-        echo "case \"debug\":
+        $msg .= "case \"enable_debug_mode\":
             return '<textarea cols=50 rows=20 onclick=\"this.select()\">' + debug_string + '</textarea>';
+        case \"debug_settings\":
+            return '<textarea cols=50 rows=20 onclick=\"this.select()\">' + settings_json + '</textarea>';
         default:
             return  '" . I18N::translate("Help information not found") . "';
         }
     }";
+        return $msg;
     }
 }

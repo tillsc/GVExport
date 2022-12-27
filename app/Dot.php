@@ -45,9 +45,7 @@ class Dot {
 	var array $individuals = array();
 	var array $skipList = array();
 	var array $families = array();
-	var array $indi_search_method = array("ance" => FALSE, "desc" => FALSE, "spou" => FALSE, "sibl" => FALSE, "cous" => FALSE, "any" => FALSE);
-	var string $font_size;
-    var string $font_size_name;
+	var array $indi_search_method = array("ance" => FALSE, "desc" => FALSE, "spou" => FALSE, "sibl" => FALSE, "rels" => FALSE, "any" => FALSE);
 	var array $settings = array();
     var array $messages = array(); // messages for toast system
 	private const ERROR_CHAR = "E:"; // Messages that start with this will be highlighted
@@ -62,70 +60,19 @@ class Dot {
 		$this->tree = $tree;
 		$this->file_system = $file_system;
     // Load settings from config file
-        $this->settings=(new Settings())->getAdminSettings($module);
+        $this->settings=(new Settings())->loadUserSettings($module,$tree);
         $this->settings["no_fams"] = FALSE;
 	}
 
-	/**
-	 * Function to set settings
-	 *
-	 * @param string $setting
-	 * @param mixed $value
-	 */
-    public function setSettings(string $setting, $value) {
-		$this->settings[$setting] = $value;
-	}
-
-	/**
-	 * Function to set font size
-	 *
-	 * @param string $font_size
-	 * @param string $type
-	 */
-    public function setFontSize(string $font_size, string $type) {
-        if ($type == 'name') {
-            $this->font_size_name = $font_size;
-        } else {
-            $this->font_size = $font_size;
+    /**
+     * Function to set settings
+     *
+     * @param array $vars
+     */
+    public function setSettings(array $vars) {
+        foreach ($vars as $preference => $value) {
+            $this->settings[$preference] = $value;
         }
-	}
-
-    public function setArrowColour(string $type, string $value)
-    {
-        $this->settings["arrows"][$type] = $value;
-    }
-
-    /**
-	 * Function to set font colour for name
-	 *
-	 * @param string $font_color
-	 */
-    public function setFontColorName(string $font_color) {
-		$this->settings["font_color"]["name"] = $font_color;
-	}
-
-    /**
-	 * Function to set font colour for details (date of birth, place of marriage, etc.)
-	 *
-	 * @param string $font_color
-	 */
-    public function setFontColorDetails(string $font_color) {
-        $this->settings["font_color"]["details"] = $font_color;
-	}
-
-	/**
-	 * Sets the method used during the search of individuals
-	 *
-	 * The method could be:
-	 *  "ance" - search for ancestors
-	 *  "desc" - search for descendants
-	 *  "spou" - search for spouses
-	 *  "sibl" - search for siblings
-	 *
-	 * @param string $method
-	 */
-    public function setIndiSearchMethod(string $method) {
-		$this->indi_search_method[$method] = TRUE;
 	}
 
 	/**
@@ -147,7 +94,7 @@ class Dot {
 	private function isPhotoRequired(): bool
 	{
 		return ($this->isTreePreferenceShowingThumbnails($this->tree) &&
-			($this->settings["diagram_type_combined_with_photo"]));
+			($this->settings["show_photos"]));
 	}
 
 
@@ -177,7 +124,7 @@ class Dot {
 						if ($GEDFamID == $fid) {
 							$famFound = TRUE;
 							// ---DEBUG---
-							if ($this->settings["debug"]) {
+							if ($this->settings["enable_debug_mode"]) {
 									$this->printDebug("(".$i->xref().") -- ADOP record: " . preg_replace("/\n/", " | ", $gedcom) . "\n", $ind);
 							}
 							// -----------
@@ -214,7 +161,7 @@ class Dot {
 		}
 
 		// --- DEBUG ---
-		if ($this->settings["debug"]) {
+		if ($this->settings["enable_debug_mode"]) {
 			$this->printDebug("-- Link between individual ".$i->xref()." and family ".$fid." is ".($adopfamcadoptype=="" ? "blood" : $adopfamcadoptype).".\n", $ind);
 		}
 		// -------------
@@ -230,6 +177,7 @@ class Dot {
      * @return void                 Directly updates arrays so no return value
      */
     private function createIndiList (array &$individuals, array &$families, bool $full) {
+        $this->indi_search_method = array("ance" => $this->settings["include_ancestors"], "desc" => $this->settings["include_descendants"], "spou" => $this->settings["include_spouses"], "sibl" => $this->settings["include_siblings"], "rels" => $this->settings["include_all_relatives"], "any" => $this->settings["include_all"]);
         $indis = explode(",", $this->settings["indi"]);
         $indiLists = array();
         for ($i=0;$i<count($indis);$i++) {
@@ -284,7 +232,7 @@ class Dot {
 	function createDOTDump(): string
     {
 		// If no individuals in the clippings cart (or option chosen to override), use standard method
-		if (!functionsClippingsCart::isIndividualInCart($this->tree) || !$this->settings["usecart"] ) {
+		if (!functionsClippingsCart::isIndividualInCart($this->tree) || !$this->settings["use_cart"] ) {
 			// Create our tree
 			$this->createIndiList($this->individuals, $this->families, false);
 			if ($this->settings["diagram_type"] == "combined") {
@@ -308,7 +256,7 @@ class Dot {
 			$relList = array();
 			$relFams = array();
 			$NonrelativeExists = FALSE;
-			if ($this->settings["marknr"] && !$this->settings["fastnr"]) {
+			if ($this->settings["mark_not_related"] && !$this->settings["faster_relationship_checking"]) {
 				foreach ($this->individuals as $indi) {
 					if (!$indi['rel']) {
 						$NonrelativeExists = TRUE;
@@ -320,7 +268,7 @@ class Dot {
 				if ($NonrelativeExists) {
 					// Save and change some settings before generating full tree
 					$save = $this->indi_search_method;
-					$this->indi_search_method = array("ance" => TRUE, "desc" => TRUE, "spou" => FALSE, "sibl" => TRUE, "cous" => TRUE, "any" => FALSE);
+					$this->indi_search_method = array("ance" => TRUE, "desc" => TRUE, "spou" => FALSE, "sibl" => TRUE, "rels" => TRUE, "any" => FALSE);
 					// Generate full tree of relatives
 					$this->createIndiList($relList, $relFams, true);
 					// Restore settings
@@ -413,11 +361,11 @@ class Dot {
 
 					// Draw an arrow from HUSB to FAM
 					if (!empty($husb_id) && (isset($this->individuals[$husb_id]))) {
-						$out .= $this->convertID($husb_id) . " -> " . $this->convertID($fid) ." [color=\"" . $this->settings["arrows"]["default"] . "\", arrowsize=0.3]\n";
+						$out .= $this->convertID($husb_id) . " -> " . $this->convertID($fid) ." [color=\"" . $this->settings["arrows_default"] . "\", arrowsize=0.3]\n";
 					}
 					// Draw an arrow from WIFE to FAM
 					if (!empty($wife_id) && (isset($this->individuals[$wife_id]))) {
-						$out .= $this->convertID($wife_id) . " -> ". $this->convertID($fid) ." [color=\"" . $this->settings["arrows"]["default"] . "\", arrowsize=0.3]\n";
+						$out .= $this->convertID($wife_id) . " -> ". $this->convertID($fid) ." [color=\"" . $this->settings["arrows_default"] . "\", arrowsize=0.3]\n";
 					}
 					// Draw an arrow from FAM to each CHIL
 					foreach ($f->children() as $child) {
@@ -471,28 +419,28 @@ class Dot {
     {
 		// Determine the fill color
 		if ($gender == 'F') {
-			if ($related || !$this->settings["marknr"]) {
-				$fill_color = $this->settings["colorf"];
+			if ($related || !$this->settings["mark_not_related"]) {
+				$fill_color = $this->settings["female_colour"];
 			} else  {
-				$fill_color = $this->settings["colorf_nr"];
+				$fill_color = $this->settings["female_unrelated_colour"];
 			}
 		} elseif ($gender == 'M'){
-			if ($related || !$this->settings["marknr"]) {
-				$fill_color = $this->settings["colorm"];
+			if ($related || !$this->settings["mark_not_related"]) {
+				$fill_color = $this->settings["male_colour"];
 			} else  {
-				$fill_color = $this->settings["colorm_nr"];
+				$fill_color = $this->settings["male_unrelated_colour"];
 			}
 		} elseif ($gender == 'X'){
-			if ($related || !$this->settings["marknr"]) {
-				$fill_color = $this->settings["colorx"];
+			if ($related || !$this->settings["mark_not_related"]) {
+				$fill_color = $this->settings["other_gender_colour"];
 			} else  {
-				$fill_color = $this->settings["colorx_nr"];
+				$fill_color = $this->settings["other_gender_unrel_colour"];
 			}
 		} else {
-			if ($related || !$this->settings["marknr"]) {
-				$fill_color = $this->settings["coloru"];
+			if ($related || !$this->settings["mark_not_related"]) {
+				$fill_color = $this->settings["unknown_gender_colour"];
 			} else  {
-				$fill_color = $this->settings["coloru_nr"];
+				$fill_color = $this->settings["unknown_gender_unrel_colour"];
 			}
 		}
 		return $fill_color;
@@ -509,7 +457,7 @@ class Dot {
 	function getFamilyColour(): string
     {
 		// Determine the fill color
-        return $this->settings["colorfam"];
+        return $this->settings["family_colour"];
 	}
 
 	/**
@@ -526,12 +474,12 @@ class Dot {
 		$out .= "mclimit=\"" . $this->settings["mclimit"] . "\"\n";
 		$out .= "rankdir=\"" . $this->settings["graph_dir"] . "\"\n";
 		$out .= "pagedir=\"LT\"\n";
-		$out .= "bgcolor=\"" . $this->settings['colorbg'] . "\"\n";
+		$out .= "bgcolor=\"" . $this->settings['background_colour'] . "\"\n";
 		$out .= "edge [ style=solid, arrowhead=normal arrowtail=none];\n";
 		if ($this->settings["diagram_type"] == "simple") {
-			$out .= "node [ shape=box, style=filled fontsize=\"" . $this->font_size ."\" fontname=\"" . $this->settings["typeface"] ."\"];\n";
+			$out .= "node [ shape=box, style=filled font_size=\"" . $this->settings['font_size'] ."\" fontname=\"" . $this->settings["typeface"] ."\"];\n";
 		} else {
-			$out .= "node [ shape=plaintext fontsize=\"" . $this->font_size ."\" fontname=\"" . $this->settings["typefaces"][$this->settings["typeface"]] . ", " . $this->settings["typeface_fallback"][$this->settings["typeface"]] .", " . $this->settings["typefaces"][$this->settings["defaulttypeface"]] . ", Sans\"];\n";
+			$out .= "node [ shape=plaintext font_size=\"" . $this->settings['font_size'] ."\" fontname=\"" . $this->settings["typefaces"][$this->settings["typeface"]] . ", " . $this->settings["typeface_fallback"][$this->settings["typeface"]] .", " . $this->settings["typefaces"][$this->settings["default_typeface"]] . ", Sans\"];\n";
 		}
 		return $out;
 	}
@@ -559,7 +507,7 @@ class Dot {
 		$out .= " [ ";
 
 		// Showing the ID of the family, if set
-		if ($this->settings["show_fid"] == "show_fid") {
+		if ($this->settings["show_xref_families"] == "show_xref_families") {
 			$family = " (" . $fid . ")";
 		} else {
 			$family = "";
@@ -583,19 +531,14 @@ class Dot {
 			$link = $f->url();
 
 			// Show marriage year
-			if ($this->settings["show_my"]) {
-                if ($this->settings["show_by"]) {
-                    $marriagedate = $this->formatDate($f
-                        ->getMarriageDate(), $this->settings["md_type"] !== "gedcom");
-                } else {
-                    $marriagedate = "";
-                }
+			if ($this->settings["show_marriage_date"]) {
+                $marriagedate = $this->formatDate($f->getMarriageDate(), $this->settings["marriage_date_year_only"]);
 			} else {
 				$marriagedate = "";
 			}
 
 			// Show marriage place
-			if ($this->settings["show_mp"] && !empty($f->getMarriage()) && !empty($f->getMarriagePlace())) {
+			if ($this->settings["show_marriage_place"] && !empty($f->getMarriage()) && !empty($f->getMarriagePlace())) {
 				$marriageplace = $this->getAbbreviatedPlace($f->getMarriagePlace()->gedcomName(), $this->settings);
 			} else {
 				$marriageplace = "";
@@ -612,7 +555,7 @@ class Dot {
 			$out .= "label=<";
 
 			// --- Print table ---
-			$out .= "<TABLE COLOR=\"" . $this->settings["colorborder"] . "\" BORDER=\"0\" CELLBORDER=\"1\" CELLPADDING=\"2\" CELLSPACING=\"0\">";
+			$out .= "<TABLE COLOR=\"" . $this->settings["border_colour"] . "\" BORDER=\"0\" CELLBORDER=\"1\" CELLPADDING=\"2\" CELLSPACING=\"0\">";
 
 			// --- Print couple ---
 			$out .= "<TR>";
@@ -637,15 +580,15 @@ class Dot {
 
 			$out .= "</TR>";
             // --- Print marriage ---
-			if (substr($fid, 0, 2) !== "F_" && !(empty($marriagedate) && empty($marriageplace) && $family == "") && ($this->settings["show_my"] || $this->settings["show_mp"] || $this->settings["show_fid"])) {
+			if (substr($fid, 0, 2) !== "F_" && !(empty($marriagedate) && empty($marriageplace) && $family == "") && ($this->settings["show_marriage_date"] || $this->settings["show_marriage_place"] || $this->settings["show_xref_families"])) {
 				$out .= "<TR>";
-				if ($this->settings["show_url"]) {
+				if ($this->settings["add_links"]) {
 					$out .= "<TD COLSPAN=\"2\" CELLPADDING=\"0\" PORT=\"marr\" TARGET=\"_BLANK\" HREF=\"" . $this->convertToHTMLSC($link) . "\" BGCOLOR=\"" . $fill_color . "\">"; #ESL!!! 20090213 without convertToHTMLSC the dot file has invalid data
 				} else {
 					$out .= "<TD COLSPAN=\"2\" CELLPADDING=\"0\" PORT=\"marr\" BGCOLOR=\"" . $fill_color . "\">";
 				}
 
-				$out .= "<FONT COLOR=\"". $this->settings["font_color"]["details"] ."\" POINT-SIZE=\"" . ($this->font_size) ."\">" . (empty($marriagedate)?"":$marriagedate) . "<BR />" . (empty($marriageplace)?"":"(".$marriageplace.")") . $family . "</FONT>";
+				$out .= "<FONT COLOR=\"". $this->settings["fontcolor_details"] ."\" POINT-SIZE=\"" . ($this->settings["font_size"]) ."\">" . (empty($marriagedate)?"":$marriagedate) . "<BR />" . (empty($marriageplace)?"":"(".$marriageplace.")") . $family . "</FONT>";
 				$out .= "</TD>";
 				$out .= "</TR>";
 			}
@@ -655,18 +598,18 @@ class Dot {
 			$out .= ">";
 		} else {
 		// Non-combined type
-			if ($this->settings["show_url"]) {
+			if ($this->settings["add_links"]) {
                 $href = "target=\"_blank\" href=\"" . $this->convertToHTMLSC($link) . "\", target=\"_blank\", ";
             } else {
                 $href = "";
             }
             // If names, birth details, and death details are all disabled - show a smaller marriage circle to match the small tiles for individuals.
-            if (!$this->settings["show_by"] && !$this->settings["show_bp"] && !$this->settings["show_dy"] && !$this->settings["show_dp"] && !$this->settings["show_my"] && !$this->settings["show_pid"] && !$this->settings["show_fid"] && $this->settings["use_abbr_names"][$this->settings["use_abbr_name"]] == "Don't show names") {
-                $out .= "color=\"" . $this->settings["colorborder"] . "\",fillcolor=\"" . $fill_color . "\", $href shape=point, height=0.2, style=filled";
+            if (!$this->settings["show_birthdate"] && !$this->settings["show_birthplace"] && !$this->settings["show_death_date"] && !$this->settings["show_death_place"] && !$this->settings["show_marriage_date"] && !$this->settings["show_xref_individuals"] && !$this->settings["show_xref_families"] && $this->settings["use_abbr_names"][$this->settings["use_abbr_name"]] == "Don't show names") {
+                $out .= "color=\"" . $this->settings["border_colour"] . "\",fillcolor=\"" . $fill_color . "\", $href shape=point, height=0.2, style=filled";
                 $out .= ", label=" . "< >";
             } else {
-                $out .= "color=\"" . $this->settings["colorborder"] . "\",fillcolor=\"" . $fill_color . "\", $href shape=ellipse, style=filled";
-                $out .= ", label=" . "<<TABLE border=\"0\" CELLPADDING=\"0\" CELLSPACING=\"0\"><TR><TD><FONT COLOR=\"". $this->settings["font_color"]["details"] ."\" POINT-SIZE=\"" . ($this->font_size) ."\">" . (empty($marriagedate)?"":$marriagedate) . "<BR />" . (empty($marriageplace)?"":"(".$marriageplace.")") . $family . "</FONT></TD></TR></TABLE>>";
+                $out .= "color=\"" . $this->settings["border_colour"] . "\",fillcolor=\"" . $fill_color . "\", $href shape=ellipse, style=filled";
+                $out .= ", label=" . "<<TABLE border=\"0\" CELLPADDING=\"0\" CELLSPACING=\"0\"><TR><TD><FONT COLOR=\"". $this->settings["fontcolor_details"] ."\" POINT-SIZE=\"" . ($this->settings["font_size"]) ."\">" . (empty($marriagedate)?"":$marriagedate) . "<BR />" . (empty($marriageplace)?"":"(".$marriageplace.")") . $family . "</FONT></TD></TR></TABLE>>";
             }
         }
 
@@ -698,9 +641,9 @@ class Dot {
 		}
 
 		// Set ancestor/descendant levels in case these options disabled
-		$ance_level = $this->indi_search_method["ance"] ? $this->settings["ance_level"] : 0;
-		$desc_level = $this->indi_search_method["desc"] ? $this->settings["desc_level"] : 0;
-        if ($this->settings["desc_level"] == 0) {
+		$ance_level = $this->indi_search_method["ance"] ? $this->settings["ancestor_levels"] : 0;
+		$desc_level = $this->indi_search_method["desc"] ? $this->settings["descendant_levels"] : 0;
+        if ($this->settings["descendant_levels"] == 0) {
             $desc = false;
         }
 		// Get updated INDI data
@@ -723,7 +666,7 @@ class Dot {
 			return false;
 		}
 		// --- DEBUG ---
-		if ($this->settings["debug"]) {
+		if ($this->settings["enable_debug_mode"]) {
 			$individual = $this->getUpdatedPerson($pid);
 			$this->printDebug("Name: ".strip_tags($individual->fullName()), $ind);
 			$this->printDebug("Source PID: ".$sourcePID, $ind);
@@ -735,7 +678,7 @@ class Dot {
 		}
 		// -------------
 		// Add photo
-		if ($this->settings["diagram_type_combined_with_photo"] && $this->isPhotoRequired()) {
+		if ($this->settings["show_photos"] && $this->isPhotoRequired()) {
 			$individuals[$pid]["pic"] = $this->addPhotoToIndi($pid);
 		}
 
@@ -745,7 +688,7 @@ class Dot {
 			if ($fams->count() > 0) {
 
 				// --- DEBUG ---
-				if ($this->settings["debug"]) {
+				if ($this->settings["enable_debug_mode"]) {
 					$this->printDebug("($pid) - /COMBINED MODE/ adding FAMs where INDI is marked as spouse:\n", $ind);
 				}
 				// -------------
@@ -758,7 +701,7 @@ class Dot {
 						// Family ID already added
 						// do nothing
 						// --- DEBUG ---
-						if ($this->settings["debug"]) {
+						if ($this->settings["enable_debug_mode"]) {
 							$this->printDebug("($pid) -- FAM ($fid) already added\n", $ind);
 							//var_dump($fams);
 						}
@@ -767,7 +710,7 @@ class Dot {
 						$this->addFamToList($fid, $families);
 
 						// --- DEBUG ---
-						if ($this->settings["debug"]) {
+						if ($this->settings["enable_debug_mode"]) {
 							$this->printDebug("($pid) -- FAM ($fid) added\n", $ind);
 							//var_dump($fams);
 						}
@@ -790,7 +733,7 @@ class Dot {
 				$this->addFamToList("F_$pid", $families);
 
 				// --- DEBUG ---
-				if ($this->settings["debug"]) {
+				if ($this->settings["enable_debug_mode"]) {
 					$this->printDebug("($pid) - /COMBINED MODE/ adding dummy FAM (F_$pid), because this INDI does not belong to any family as spouse\n", $ind);
 				}
 				// -------------
@@ -820,7 +763,7 @@ class Dot {
 			for ($j=0;$j<count($stop_pids);$j++) {
 				if ($pid == trim($stop_pids[$j])){
 					// --- DEBUG ---
-					if ($this->settings["debug"]) {
+					if ($this->settings["enable_debug_mode"]) {
 						$this->printDebug("($pid) -- STOP processing, because INDI is listed in the \"Stop tree processing on INDIs\"\n", $ind);
 					}
 					// -------------
@@ -838,7 +781,7 @@ class Dot {
 				$famc = $i->childFamilies();
 
 				// --- DEBUG ---
-				if ($this->settings["debug"]) {
+				if ($this->settings["enable_debug_mode"]) {
 					$this->printDebug("($pid) - adding ANCESTORS (LEVEL: $level)\n", $ind);
 					$this->printDebug("($pid) -- adding FAMs, where this INDI is listed as a child (to find his/her parents):\n", $ind);
 					//var_dump($fams);
@@ -875,7 +818,7 @@ class Dot {
 
 							if ($relationshipType == "BOTH" || $relationshipType == "HUSB") {
 								// --- DEBUG ---
-								if ($this->settings["debug"]) {
+								if ($this->settings["enable_debug_mode"]) {
 									$this->printDebug("($pid) -- adding an _ADOPTING_ PARENT /FATHER/ with INDI id ($husb_id) from FAM ($fid):\n", $ind);
 									//var_dump($fams);
 								}
@@ -883,7 +826,7 @@ class Dot {
 								$this->addIndiToList($pid."|Code 1", $husb_id, TRUE, FALSE, $this->indi_search_method["spou"] && $relationshipType !== "BOTH", $this->indi_search_method["sibl"], FALSE, $ind, $level+1, $individuals, $families, $full);
 							} else {
 								// --- DEBUG ---
-								if ($this->settings["debug"]) {
+								if ($this->settings["enable_debug_mode"]) {
 									$this->printDebug("($pid) -- adding a PARENT /FATHER/ with INDI id ($husb_id) from FAM ($fid):\n", $ind);
 									//var_dump($fams);
 								}
@@ -898,7 +841,7 @@ class Dot {
 
 							if ($relationshipType == "BOTH" || $relationshipType == "WIFE") {
 								// --- DEBUG ---
-								if ($this->settings["debug"]) {
+								if ($this->settings["enable_debug_mode"]) {
 									$this->printDebug("($pid) -- adding an _ADOPTING_ PARENT /MOTHER/ with INDI id ($wife_id) from FAM ($fid):\n", $ind);
 									//var_dump($fams);
 								}
@@ -906,7 +849,7 @@ class Dot {
 								$this->addIndiToList($pid."|Code 3", $wife_id, TRUE, FALSE, $this->indi_search_method["spou"] && $relationshipType !== "BOTH", $this->indi_search_method["sibl"], FALSE, $ind, $level+1, $individuals, $families, $full);
 							} else {
 								// --- DEBUG ---
-								if ($this->settings["debug"]) {
+								if ($this->settings["enable_debug_mode"]) {
 									$this->printDebug("($pid) -- adding a PARENT /MOTHER/ with INDI id ($wife_id) from FAM ($fid):\n", $ind);
 									//var_dump($fams);
 								}
@@ -942,8 +885,8 @@ class Dot {
 				$fams = $i->spouseFamilies();
 
 				// --- DEBUG ---
-				if ($this->settings["debug"]) {
-					$this->printDebug("($pid) - adding DESCENDANTS (LEVEL: $level, DESC_LEVEL: $desc_level)\n", $ind);
+				if ($this->settings["enable_debug_mode"]) {
+					$this->printDebug("($pid) - adding DESCENDANTS (LEVEL: $level, descendant_levels: $desc_level)\n", $ind);
 					$this->printDebug("($pid) -- adding FAMs, where this INDI is listed as a spouse (to find his/her children):\n", $ind);
 
 					//var_dump($fams);
@@ -985,7 +928,7 @@ class Dot {
 						if (!empty($child_id)) {
 
 							// --- DEBUG ---
-							if ($this->settings["debug"]) {
+							if ($this->settings["enable_debug_mode"]) {
 								$this->printDebug("($pid) -- adding a CHILD with INDI id ($child_id) from FAM ($fid):\n", $ind);
 								//var_dump($fams);
 							}
@@ -1014,7 +957,7 @@ class Dot {
 				$fams = $i->spouseFamilies();
 
 				// --- DEBUG ---
-				if ($this->settings["debug"]) {
+				if ($this->settings["enable_debug_mode"]) {
 					$this->printDebug("($pid) - adding SPOUSES\n", $ind);
 					$this->printDebug("($pid) -- adding FAMs, where this INDI is listed as a spouse (to find his/her spouse(s)):\n", $ind);
 					//var_dump($fams);
@@ -1051,7 +994,7 @@ class Dot {
 
 					if (!empty($spouse_id)) {
 						// --- DEBUG ---
-						if ($this->settings["debug"]) {
+						if ($this->settings["enable_debug_mode"]) {
 							$this->printDebug("($pid) -- adding SPOUSE with INDI id ($spouse_id) from FAM ($fid):\n", $ind);
 							//var_dump($fams);
 						}
@@ -1067,7 +1010,7 @@ class Dot {
 				$famc = $i->childFamilies();
 
 				// --- DEBUG ---
-				if ($this->settings["debug"]) {
+				if ($this->settings["enable_debug_mode"]) {
 					$this->printDebug("($pid) - adding SIBLINGS (LEVEL: $level)\n", $ind);
 					$this->printDebug("($pid) -- adding FAMs, where this INDI is listed as a child (to find his/her siblings):\n", $ind);
 					//var_dump($fams);
@@ -1086,7 +1029,7 @@ class Dot {
 						if (!empty($child_id) && ($child_id != $pid)) {
 							$families[$fid]["has_children"] = TRUE;
 							// --- DEBUG ---
-							if ($this->settings["debug"]) {
+							if ($this->settings["enable_debug_mode"]) {
 								$this->printDebug("($pid) -- adding a SIBLING with INDI id ($child_id) from FAM ($fid):\n", $ind);
 								//var_dump($fams);
 							}
@@ -1103,7 +1046,7 @@ class Dot {
 							}
 
 							// If searching for cousins, then the descendants of ancestors' siblings should be added
-							if ($this->indi_search_method["cous"]) {
+							if ($this->indi_search_method["rels"]) {
 								$this->addIndiToList($pid."|Code 8", $child_id, TRUE, TRUE, $this->indi_search_method["spou"], FALSE, $related, $ind, $level, $individuals, $families, $full);
 							} else {
 								$this->addIndiToList($pid."|Code 9", $child_id, TRUE, FALSE, $this->indi_search_method["spou"], FALSE, $related, $ind, $level, $individuals, $families, $full);
@@ -1119,7 +1062,7 @@ class Dot {
 				$fams = $i->childStepFamilies();
 
 				// --- DEBUG ---
-				if ($this->settings["debug"]) {
+				if ($this->settings["enable_debug_mode"]) {
 					$this->printDebug("($pid) - adding STEP-SIBLINGS (LEVEL: $level)\n", $ind);
 					$this->printDebug("($pid) -- adding FAMs, where this INDI's parents are listed as spouses (to find his/her step-siblings):\n", $ind);
 					//var_dump($fams);
@@ -1132,7 +1075,7 @@ class Dot {
 					$this->addFamToList($fid, $families);
 
 					// --- DEBUG ---
-					if ($this->settings["debug"]) {
+					if ($this->settings["enable_debug_mode"]) {
 						$this->printDebug("($pid) -- FAM ($fid) added\n", $ind);
 						//var_dump($fams);
 					}
@@ -1145,14 +1088,14 @@ class Dot {
 						if (!empty($child_id) && ($child_id != $pid)) {
 							$families[$fid]["has_children"] = TRUE;
 							// --- DEBUG ---
-							if ($this->settings["debug"]) {
+							if ($this->settings["enable_debug_mode"]) {
 								$this->printDebug("($pid) -- adding a STEP-SIBLING with INDI id ($child_id) from FAM ($fid):\n", $ind);
 								//var_dump($fams);
 							}
 							// -------------
 
 							// If searching for step-cousins, then the descendants of ancestors' siblings should be added
-							if ($this->indi_search_method["cous"]) {
+							if ($this->indi_search_method["rels"]) {
 								$this->addIndiToList($pid."|Code 10", $child_id, FALSE, TRUE, $this->indi_search_method["spou"], FALSE, $rel, $ind, $level, $individuals, $families, $full);
 							} else {
 								$this->addIndiToList($pid."|Code 11", $child_id, TRUE, FALSE, $this->indi_search_method["spou"], FALSE, $rel, $ind, $level, $individuals, $families, $full);
@@ -1165,7 +1108,7 @@ class Dot {
 
 
 		// --- DEBUG ---
-		if ($this->settings["debug"]) {
+		if ($this->settings["enable_debug_mode"]) {
 			$ind--;
 			$this->printDebug("}\n", $ind);
 		}
@@ -1232,9 +1175,9 @@ class Dot {
         }
 
         if ($relationshipType != "") {
-            $arrowColor = $this->settings["color_arrow_related"] == "color_arrow_related" ? $this->settings["arrows"]["not_related"] : $this->settings["arrows"]["default"];
+            $arrowColor = $this->settings["colour_arrow_related"] == "colour_arrow_related" ? $this->settings["arrows_not_related"] : $this->settings["arrows_default"];
         } else {
-            $arrowColor = $this->settings["color_arrow_related"] == "color_arrow_related" ? $this->settings["arrows"]["related"] : $this->settings["arrows"]["default"];
+            $arrowColor = $this->settings["colour_arrow_related"] == "colour_arrow_related" ? $this->settings["arrows_related"] : $this->settings["arrows_default"];
         }
         return $arrowColor;
     }
@@ -1253,7 +1196,7 @@ class Dot {
         if (isset($families[$fid]["fid"]) && ($families[$fid]["fid"]== $fid)) {
             // Family ID already added, do nothing
             // --- DEBUG ---
-            if ($this->settings["debug"]) {
+            if ($this->settings["enable_debug_mode"]) {
                 $this->printDebug("($pid) -- FAM ($fid) already added\n", $ind);
             }
             // -------------
@@ -1261,7 +1204,7 @@ class Dot {
             $this->addFamToList($fid, $families);
 
             // --- DEBUG ---
-            if ($this->settings["debug"]) {
+            if ($this->settings["enable_debug_mode"]) {
                 $this->printDebug("($pid) -- FAM ($fid) added\n", $ind);
             }
             // -------------

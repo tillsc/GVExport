@@ -165,12 +165,17 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
         }
         $individual = $this->getIndividual($tree, $tree->significantIndividual(Auth::user(), $xref)->xref());
 		$userDefaultVars = (new Settings())->getAdminSettings($this);
+
         if (!isset($_REQUEST['reset'])) {
             // Load settings from webtrees
             $settings = new Settings();
             $userDefaultVars = $settings->loadUserSettings($this, $tree);
-        }
 
+        } else {
+            if (!$userDefaultVars['enable_graphviz'] && $userDefaultVars['graphviz_bin'] != "") {
+                $userDefaultVars['graphviz_bin'] = "";
+            }
+        }
         $otypes = $this->getOTypes($userDefaultVars);
 
         return $this->viewResponse($this->name() . '::page', [
@@ -224,7 +229,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
         $temp_dir = $this->saveDOTFile($tree);
 
         // If browser mode, output dot instead of selected file
-        $file_type = isset($_POST["browser"]) && $_POST["browser"] == "true" ? "dot" : $_REQUEST["vars"]["otype"];
+        $file_type = isset($_POST["browser"]) && $_POST["browser"] == "true" ? "dot" : $_REQUEST["vars"]["output_type"];
 
         $outputFile = new OutputFile($temp_dir, $file_type, $this);
         return $outputFile->downloadFile();
@@ -240,7 +245,12 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
         $otypes = $this->getOTypes((new Settings())->getAdminSettings($this));
         $response['module'] = $this;
         $response['otypes'] = $otypes;
-        $response['vars'] = (new Settings())->getAdminSettings($this, isset($_REQUEST['reset']) && $_REQUEST['reset'] === "1");
+        if (isset($_REQUEST['reset']) && $_REQUEST['reset'] === "1") {
+            $response['vars'] = (new Settings())->getDefaultSettings();
+        } else {
+            $response['vars'] = (new Settings())->getAdminSettings($this);
+        }
+
         $response['title'] = $this->title();
         $response['gvexport_css']  = route('module', ['module' => $this->name(), 'action' => 'Css']);
         $response['gvexport_js']  = route('module', ['module' => $this->name(), 'action' => 'JS']);
@@ -257,8 +267,10 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
     public function postAdminAction(ServerRequestInterface $request): ResponseInterface
     {
         $params = (array) $request->getParsedBody();
+        $formSubmission = new FormSubmission();
+        $vars = $formSubmission->load($_REQUEST['vars']);
         if ($params['save'] === '1') {
-            (new Settings())->saveAdminSettings($this, $params['vars']);
+            (new Settings())->saveAdminSettings($this, $vars);
             FlashMessages::addMessage(I18N::translate('The preferences for the module “%s” have been updated.',
                 $this->title()), 'success');
         }
@@ -294,283 +306,24 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
     {
         $out = "";
         $dot = new Dot($tree, $this, Registry::filesystem()->data());
-        $vars = $_REQUEST['vars'];
+
+
+
+        $formSubmission = new FormSubmission();
+        $vars = $formSubmission->load($_REQUEST['vars']);
+        if (isset($temp_dir)) {
+            $vars['temp_dir'] = $temp_dir;
+        }
+        $dot->setSettings($vars);
 
         $settings = new Settings();
-        $settings->saveUserSettings($tree,$vars);
-
-
-        if (isset($temp_dir)) {
-            $dot->setSettings("temp_dir", $temp_dir);
-        }
-
-        // INDI id
-        if (!empty($vars["other_pids"])) {
-            $dot->setSettings("indi", $vars["other_pids"]);
-        } else {
-            $dot->setSettings("indi", "");
-        }
-        // Stop PIDs
-        if (!empty($vars["other_stop_pids"])) {
-            $dot->setSettings("stop_pids", $vars["other_stop_pids"]);
-            $dot->setSettings("stop_proc", TRUE);
-        } else {
-            $dot->setSettings("stop_proc", FALSE);
-        }
-
-		if ($vars['indiance'] == 'ance') {
-			$dot->setIndiSearchMethod("ance");
-		}
-        if ($vars['indidesc'] == 'desc') {
-            $dot->setIndiSearchMethod("desc");
-        }
-
-        // If "Anyone" option is picked, then other relations options also must be set
-		if ($vars['indisibl'] == 'sibl' || $vars['indiany'] == 'any') {
-			$dot->setIndiSearchMethod("sibl");
-		}
-		if ($vars['indispou'] == 'spou' || $vars['indiany'] == 'any') {
-			$dot->setIndiSearchMethod("spou");
-		}
-		if ($vars['indicous'] == 'cous' || $vars['indiany'] == 'any') {
-			$dot->setIndiSearchMethod("cous");
-		}
-        if ($vars['indiany'] == 'any') {
-            $dot->setIndiSearchMethod("any");
-        }
-
-		if (isset($vars['ance_level'])) {
-			$dot->setSettings("ance_level", $_REQUEST["vars"]["ance_level"]);
-		} else {
-			$dot->setSettings("ance_level", 0);
-		}
-		if (isset($vars['desc_level'])) {
-			$dot->setSettings("desc_level", $_REQUEST["vars"]["desc_level"]);
-		} else {
-			$dot->setSettings("desc_level", 0);
-		}
-
-        // If "Anyone" option is picked, then other relations options also must be set
-        if ($vars['indisibl'] == 'sibl' || $vars['indiany'] == 'any') {
-            $dot->setIndiSearchMethod("sibl");
-        }
-        if ($vars['indispou'] == 'spou' || $vars['indiany'] == 'any') {
-            $dot->setIndiSearchMethod("spou");
-        }
-        if ($vars['indicous'] == 'cous' || $vars['indiany'] == 'any') {
-            $dot->setIndiSearchMethod("cous");
-        }
-        if ($vars['indiany'] == 'any') {
-            $dot->setIndiSearchMethod("any");
-        }
-
-        if (isset($vars['ance_level'])) {
-            $dot->setSettings("ance_level", $_REQUEST["vars"]["ance_level"]);
-        } else {
-            $dot->setSettings("ance_level", 0);
-        }
-        if (isset($vars['desc_level'])) {
-            $dot->setSettings("desc_level", $_REQUEST["vars"]["desc_level"]);
-        } else {
-            $dot->setSettings("desc_level", 0);
-        }
-
-        if (isset($_REQUEST["vars"]["mclimit"])) {
-            $dot->setSettings("mclimit", $_REQUEST["vars"]["mclimit"]);
-        }
-
-        if ($vars['marknr'] == 'marknr') {
-            $dot->setSettings("mark_not_related", TRUE);
-        }
-        if ($vars['fastnr'] == 'fastnr') {
-            $dot->setSettings("fast_not_related", TRUE);
-        }
-
-        if (isset($vars['show_lt_editor'])) {
-            $dot->setSettings("show_lt_editor", TRUE);
-        }
-
-        if (isset($vars['fontcolor_name'])) {
-            $dot->setFontColorName($vars['fontcolor_name']);
-        }
-
-        if (isset($vars['fontcolor_details'])) {
-            $dot->setFontColorDetails($vars['fontcolor_details']);
-        }
-
-        if (isset($vars['fontsize'])) {
-            $dot->setFontSize($vars['fontsize'], 'base');
-        }
-
-        if (isset($vars['fontsize_name'])) {
-            $dot->setFontSize($vars['fontsize_name'], 'name');
-        }
-
-        if (isset($vars['typeface'])) {
-            $dot->setSettings("typeface", $vars['typeface']);
-        }
-
-        if (isset($vars['arrow_default'])) {
-            $dot->setArrowColour("default", $vars['arrow_default']);
-        }
-
-        if (isset($vars['arrow_related'])) {
-            $dot->setArrowColour("related", $vars['arrow_related']);
-        }
-
-        if (isset($vars['arrow_not_related'])) {
-            $dot->setArrowColour("not_related", $vars['arrow_not_related']);
-        }
-
-        if (isset($vars["color_arrow_related"])) {
-            $dot->setSettings('color_arrow_related', $vars['color_arrow_related']);
-        }
-
-        if (isset($vars['grdir'])) {
-            $dot->setSettings("graph_dir", $vars['grdir']);
-        }
-
-        // Which data to show
-        if ($vars['show_by'] == 'show_by') {
-            $dot->setSettings("show_by", TRUE);
-        }
-        if (isset($vars['bd_type'])) {
-            $dot->setSettings("bd_type", $vars['bd_type']);
-        }
-        if ($vars['show_bp'] == 'show_bp') {
-            $dot->setSettings("show_bp", TRUE);
-        }
-        if ($vars['show_dy'] == 'show_dy') {
-            $dot->setSettings("show_dy", TRUE);
-        }
-        if (isset($vars['dd_type'])) {
-            $dot->setSettings("dd_type", $vars['dd_type']);
-        }
-        if ($vars['show_dp'] == 'show_dp') {
-            $dot->setSettings("show_dp", TRUE);
-        }
-        if ($vars['show_my'] == 'show_my') {
-            $dot->setSettings("show_my", TRUE);
-        }
-        if (isset($vars['md_type'])) {
-            $dot->setSettings("md_type", $vars['md_type']);
-        }
-        if ($vars['show_mp'] == 'show_mp') {
-            $dot->setSettings("show_mp", TRUE);
-        }
-        if ($vars['show_pid'] == 'show_pid') {
-            $dot->setSettings("show_pid", TRUE);
-        }
-        if ($vars['show_fid'] == 'show_fid') {
-            $dot->setSettings("show_fid", TRUE);
-        }
-
-        if ($vars['show_url'] == 'show_url') {
-            $dot->setSettings("show_url", TRUE);
-        }
-
-        if (isset($vars['use_abbr_place'])) {
-            $dot->setSettings("use_abbr_place", $vars['use_abbr_place']);
-        }
-
-        if (isset($vars['use_abbr_name'])) {
-            $dot->setSettings("use_abbr_name", $vars['use_abbr_name']);
-        }
-
-        if (isset($vars['usecart'])) {
-            if ($_REQUEST["vars"]["usecart"] == "usecart") {
-                $dot->setSettings("usecart", TRUE);
-            } else {
-                $dot->setSettings("usecart", FALSE);
-            }
-        }
-        if (isset($vars['adv_people'])) {
-            $dot->setSettings("adv_people", $vars['adv_people']);
-        }
-        if (isset($vars['adv_appear'])) {
-            $dot->setSettings("adv_appear", $vars['adv_appear']);
-        }
-        if (isset($vars['adv_files'])) {
-            $dot->setSettings("adv_files", $vars['adv_files']);
-        }
-
-        if (isset($vars['auto_update'])) {
-            $dot->setSettings("auto_update", "auto_update");
-        }
-
-        if (isset($vars['debug'])) {
-            $dot->setSettings("debug", $vars['debug'] == "debug");
-        }
-
-        // Set custom colors
-        if (isset($_REQUEST["vars"]["colorm"])) {
-            $dot->setSettings("colorm", $_REQUEST["vars"]["colorm"]);
-        }
-        if (isset($_REQUEST["vars"]["colorf"])) {
-            $dot->setSettings("colorf", $_REQUEST["vars"]["colorf"]);
-        }
-        if (isset($_REQUEST["vars"]["colorx"])) {
-            $dot->setSettings("colorx", $_REQUEST["vars"]["colorx"]);
-        }
-        if (isset($_REQUEST["vars"]["coloru"])) {
-            $dot->setSettings("coloru", $_REQUEST["vars"]["coloru"]);
-        }
-        if (isset($_REQUEST["vars"]["colorm_nr"])) {
-            $dot->setSettings("colorm_nr", $_REQUEST["vars"]["colorm_nr"]);
-        }
-        if (isset($_REQUEST["vars"]["colorf_nr"])) {
-            $dot->setSettings("colorf_nr", $_REQUEST["vars"]["colorf_nr"]);
-        }
-        if (isset($_REQUEST["vars"]["colorx_nr"])) {
-            $dot->setSettings("colorx_nr", $_REQUEST["vars"]["colorx_nr"]);
-        }
-        if (isset($_REQUEST["vars"]["coloru_nr"])) {
-            $dot->setSettings("coloru_nr", $_REQUEST["vars"]["coloru_nr"]);
-        }
-        if (isset($_REQUEST["vars"]["colorfam"])) {
-            $dot->setSettings("colorfam", $_REQUEST["vars"]["colorfam"]);
-        }
-        if (isset($_REQUEST["vars"]["colorbg"])) {
-            $dot->setSettings("colorbg", $_REQUEST["vars"]["colorbg"]);
-        }
-        if (isset($_REQUEST["vars"]["colorindibg"])) {
-            $dot->setSettings("colorindibg", $_REQUEST["vars"]["colorindibg"]);
-        }
-        if (isset($_REQUEST["vars"]["startcol"])) {
-            $dot->setSettings("startcol", $_REQUEST["vars"]["startcol"]);
-        }
-        if (isset($_REQUEST["vars"]["colorstartbg"])) {
-            $dot->setSettings("colorstartbg", $_REQUEST["vars"]["colorstartbg"]);
-        }
-        if (isset($_REQUEST["vars"]["colorborder"])) {
-            $dot->setSettings("colorborder", $_REQUEST["vars"]["colorborder"]);
-        }
-
-        // Settings
-        if (!empty($vars['diagtype'])) {
-            $dot->setSettings("diagram_type", $vars['diagtype']);
-            $dot->setSettings("diagram_type_combined_with_photo", $vars['with_photos'] == 'with_photos');
-        }
-        if (!empty($vars['no_fams'])) {
-            $dot->setSettings("no_fams", $vars['no_fams']);
-        }
-
-        if (isset($vars['dpi'])) {
-            $dot->setSettings("dpi", $vars['dpi']);
-        }
-        if (isset($vars['ranksep'])) {
-            $dot->setSettings("ranksep", $vars['ranksep']);
-        }
-        if (isset($vars['nodesep'])) {
-            $dot->setSettings("nodesep", $vars['nodesep']);
-        }
-
+        $settings->saveUserSettings($tree,$dot->settings);
         // Get out DOT file
         $out .= $dot->createDOTDump();
         if (isset($_POST["browser"]) && $_POST["browser"] == "true") {
             $dot->messages[] = I18N::translate('Generated %s individuals and %s family records', sizeof($dot->individuals), sizeof($dot->families));
             $response['messages'] = $dot->messages;
-            $response['debug'] = $dot->debug_string;
+            $response['enable_debug_mode'] = $dot->debug_string;
             $response['dot'] = $out;
             $settings = new Cookie($tree);
             $response['settings'] = json_encode($settings->load([]));
