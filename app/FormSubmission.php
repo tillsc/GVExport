@@ -45,14 +45,14 @@ class FormSubmission
         }
 
         $settings['mark_not_related'] = isset($vars['mark_not_related']);
-        $settings['faster_relationship_checking'] = isset($vars['faster_relationship_checking']);
+        $settings['faster_relation_check'] = isset($vars['faster_relation_check']);
 
-        if (isset($vars['fontcolor_name'])) {
-            $settings["fontcolor_name"] = $vars['fontcolor_name'];
+        if (isset($vars['font_colour_name'])) {
+            $settings["font_colour_name"] = $vars['font_colour_name'];
         }
 
-        if (isset($vars['fontcolor_details'])) {
-            $settings["fontcolor_details"] = $vars['fontcolor_details'];
+        if (isset($vars['font_colour_details'])) {
+            $settings["font_colour_details"] = $vars['font_colour_details'];
         }
 
         if (isset($vars['font_size'])) {
@@ -99,8 +99,8 @@ class FormSubmission
         }
         $settings['show_death_place'] = isset($vars['show_death_place']);
         $settings['show_marriage_date'] = isset($vars['show_marriage_date']);
-        if (isset($vars['marriage_date_year_only'])) {
-            $settings['marriage_date_year_only'] = $vars['marriage_date_year_only'] == 'true';
+        if (isset($vars['marr_date_year_only'])) {
+            $settings['marr_date_year_only'] = $vars['marr_date_year_only'] == 'true';
         }
         $settings['show_marriage_place'] = isset($vars['show_marriage_place']);
         $settings['show_xref_individuals'] = isset($vars['show_xref_individuals']);
@@ -131,45 +131,45 @@ class FormSubmission
         $settings['enable_graphviz'] = isset($vars['enable_graphviz']);
 
         // Set custom colors
-        if (isset($vars["male_colour"])) {
-            $settings['male_colour'] = $vars["male_colour"];
+        if (isset($vars["male_col"])) {
+            $settings['male_col'] = $vars["male_col"];
         }
-        if (isset($vars["female_colour"])) {
-            $settings['female_colour'] = $vars["female_colour"];
+        if (isset($vars["female_col"])) {
+            $settings['female_col'] = $vars["female_col"];
         }
-        if (isset($vars["other_gender_colour"])) {
-            $settings['other_gender_colour'] = $vars["other_gender_colour"];
+        if (isset($vars["other_gender_col"])) {
+            $settings['other_gender_col'] = $vars["other_gender_col"];
         }
-        if (isset($vars["unknown_gender_colour"])) {
-            $settings['unknown_gender_colour'] = $vars["unknown_gender_colour"];
+        if (isset($vars["unknown_gender_col"])) {
+            $settings['unknown_gender_col'] = $vars["unknown_gender_col"];
         }
-        if (isset($vars["male_unrelated_colour"])) {
-            $settings['male_unrelated_colour'] = $vars["male_unrelated_colour"];
+        if (isset($vars["male_unrelated_col"])) {
+            $settings['male_unrelated_col'] = $vars["male_unrelated_col"];
         }
-        if (isset($vars["female_unrelated_colour"])) {
-            $settings['female_unrelated_colour'] = $vars["female_unrelated_colour"];
+        if (isset($vars["female_unrelated_col"])) {
+            $settings['female_unrelated_col'] = $vars["female_unrelated_col"];
         }
-        if (isset($vars["other_gender_unrel_colour"])) {
-            $settings['other_gender_unrel_colour'] = $vars["other_gender_unrel_colour"];
+        if (isset($vars["oth_gender_unrel_col"])) {
+            $settings['oth_gender_unrel_col'] = $vars["oth_gender_unrel_col"];
         }
-        if (isset($vars["unknown_gender_unrel_colour"])) {
-            $settings['unknown_gender_unrel_colour'] = $vars["unknown_gender_unrel_colour"];
+        if (isset($vars["unkn_gender_unrel_col"])) {
+            $settings['unkn_gender_unrel_col'] = $vars["unkn_gender_unrel_col"];
         }
-        if (isset($vars["family_colour"])) {
-            $settings['family_colour'] = $vars["family_colour"];
+        if (isset($vars["family_col"])) {
+            $settings['family_col'] = $vars["family_col"];
         }
-        if (isset($vars["background_colour"])) {
-            $settings['background_colour'] = $vars["background_colour"];
+        if (isset($vars["background_col"])) {
+            $settings['background_col'] = $vars["background_col"];
         }
-        if (isset($vars["individual_background_colour"])) {
-            $settings['individual_background_colour'] = $vars["individual_background_colour"];
+        if (isset($vars["indi_background_col"])) {
+            $settings['indi_background_col'] = $vars["indi_background_col"];
         }
-        $settings['highlight_start_individuals'] = isset($vars["highlight_start_individuals"]);
-        if (isset($vars["highlight_colour"])) {
-            $settings['highlight_colour'] = $vars["highlight_colour"];
+        $settings['highlight_start_indis'] = isset($vars["highlight_start_indis"]);
+        if (isset($vars["highlight_col"])) {
+            $settings['highlight_col'] = $vars["highlight_col"];
         }
-        if (isset($vars["border_colour"])) {
-            $settings['border_colour'] = $vars["border_colour"];
+        if (isset($vars["border_col"])) {
+            $settings['border_col'] = $vars["border_col"];
         }
         // Settings
         if (!empty($vars['diagram_type'])) {

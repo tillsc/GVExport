@@ -256,7 +256,7 @@ class Dot {
 			$relList = array();
 			$relFams = array();
 			$NonrelativeExists = FALSE;
-			if ($this->settings["mark_not_related"] && !$this->settings["faster_relationship_checking"]) {
+			if ($this->settings["mark_not_related"] && !$this->settings["faster_relation_check"]) {
 				foreach ($this->individuals as $indi) {
 					if (!$indi['rel']) {
 						$NonrelativeExists = TRUE;
@@ -420,27 +420,27 @@ class Dot {
 		// Determine the fill color
 		if ($gender == 'F') {
 			if ($related || !$this->settings["mark_not_related"]) {
-				$fill_color = $this->settings["female_colour"];
+				$fill_color = $this->settings["female_col"];
 			} else  {
-				$fill_color = $this->settings["female_unrelated_colour"];
+				$fill_color = $this->settings["female_unrelated_col"];
 			}
 		} elseif ($gender == 'M'){
 			if ($related || !$this->settings["mark_not_related"]) {
-				$fill_color = $this->settings["male_colour"];
+				$fill_color = $this->settings["male_col"];
 			} else  {
-				$fill_color = $this->settings["male_unrelated_colour"];
+				$fill_color = $this->settings["male_unrelated_col"];
 			}
 		} elseif ($gender == 'X'){
 			if ($related || !$this->settings["mark_not_related"]) {
-				$fill_color = $this->settings["other_gender_colour"];
+				$fill_color = $this->settings["other_gender_col"];
 			} else  {
-				$fill_color = $this->settings["other_gender_unrel_colour"];
+				$fill_color = $this->settings["oth_gender_unrel_col"];
 			}
 		} else {
 			if ($related || !$this->settings["mark_not_related"]) {
-				$fill_color = $this->settings["unknown_gender_colour"];
+				$fill_color = $this->settings["unknown_gender_col"];
 			} else  {
-				$fill_color = $this->settings["unknown_gender_unrel_colour"];
+				$fill_color = $this->settings["unkn_gender_unrel_col"];
 			}
 		}
 		return $fill_color;
@@ -457,7 +457,7 @@ class Dot {
 	function getFamilyColour(): string
     {
 		// Determine the fill color
-        return $this->settings["family_colour"];
+        return $this->settings["family_col"];
 	}
 
 	/**
@@ -474,7 +474,7 @@ class Dot {
 		$out .= "mclimit=\"" . $this->settings["mclimit"] . "\"\n";
 		$out .= "rankdir=\"" . $this->settings["graph_dir"] . "\"\n";
 		$out .= "pagedir=\"LT\"\n";
-		$out .= "bgcolor=\"" . $this->settings['background_colour'] . "\"\n";
+		$out .= "bgcolor=\"" . $this->settings['background_col'] . "\"\n";
 		$out .= "edge [ style=solid, arrowhead=normal arrowtail=none];\n";
 		if ($this->settings["diagram_type"] == "simple") {
 			$out .= "node [ shape=box, style=filled font_size=\"" . $this->settings['font_size'] ."\" fontname=\"" . $this->settings["typeface"] ."\"];\n";
@@ -532,7 +532,7 @@ class Dot {
 
 			// Show marriage year
 			if ($this->settings["show_marriage_date"]) {
-                $marriagedate = $this->formatDate($f->getMarriageDate(), $this->settings["marriage_date_year_only"]);
+                $marriagedate = $this->formatDate($f->getMarriageDate(), $this->settings["marr_date_year_only"]);
 			} else {
 				$marriagedate = "";
 			}
@@ -555,7 +555,7 @@ class Dot {
 			$out .= "label=<";
 
 			// --- Print table ---
-			$out .= "<TABLE COLOR=\"" . $this->settings["border_colour"] . "\" BORDER=\"0\" CELLBORDER=\"1\" CELLPADDING=\"2\" CELLSPACING=\"0\">";
+			$out .= "<TABLE COLOR=\"" . $this->settings["border_col"] . "\" BORDER=\"0\" CELLBORDER=\"1\" CELLPADDING=\"2\" CELLSPACING=\"0\">";
 
 			// --- Print couple ---
 			$out .= "<TR>";
@@ -588,7 +588,7 @@ class Dot {
 					$out .= "<TD COLSPAN=\"2\" CELLPADDING=\"0\" PORT=\"marr\" BGCOLOR=\"" . $fill_color . "\">";
 				}
 
-				$out .= "<FONT COLOR=\"". $this->settings["fontcolor_details"] ."\" POINT-SIZE=\"" . ($this->settings["font_size"]) ."\">" . (empty($marriagedate)?"":$marriagedate) . "<BR />" . (empty($marriageplace)?"":"(".$marriageplace.")") . $family . "</FONT>";
+				$out .= "<FONT COLOR=\"". $this->settings["font_colour_details"] ."\" POINT-SIZE=\"" . ($this->settings["font_size"]) ."\">" . (empty($marriagedate)?"":$marriagedate) . "<BR />" . (empty($marriageplace)?"":"(".$marriageplace.")") . $family . "</FONT>";
 				$out .= "</TD>";
 				$out .= "</TR>";
 			}
@@ -605,11 +605,11 @@ class Dot {
             }
             // If names, birth details, and death details are all disabled - show a smaller marriage circle to match the small tiles for individuals.
             if (!$this->settings["show_birthdate"] && !$this->settings["show_birthplace"] && !$this->settings["show_death_date"] && !$this->settings["show_death_place"] && !$this->settings["show_marriage_date"] && !$this->settings["show_xref_individuals"] && !$this->settings["show_xref_families"] && $this->settings["use_abbr_names"][$this->settings["use_abbr_name"]] == "Don't show names") {
-                $out .= "color=\"" . $this->settings["border_colour"] . "\",fillcolor=\"" . $fill_color . "\", $href shape=point, height=0.2, style=filled";
+                $out .= "color=\"" . $this->settings["border_col"] . "\",fillcolor=\"" . $fill_color . "\", $href shape=point, height=0.2, style=filled";
                 $out .= ", label=" . "< >";
             } else {
-                $out .= "color=\"" . $this->settings["border_colour"] . "\",fillcolor=\"" . $fill_color . "\", $href shape=ellipse, style=filled";
-                $out .= ", label=" . "<<TABLE border=\"0\" CELLPADDING=\"0\" CELLSPACING=\"0\"><TR><TD><FONT COLOR=\"". $this->settings["fontcolor_details"] ."\" POINT-SIZE=\"" . ($this->settings["font_size"]) ."\">" . (empty($marriagedate)?"":$marriagedate) . "<BR />" . (empty($marriageplace)?"":"(".$marriageplace.")") . $family . "</FONT></TD></TR></TABLE>>";
+                $out .= "color=\"" . $this->settings["border_col"] . "\",fillcolor=\"" . $fill_color . "\", $href shape=ellipse, style=filled";
+                $out .= ", label=" . "<<TABLE border=\"0\" CELLPADDING=\"0\" CELLSPACING=\"0\"><TR><TD><FONT COLOR=\"". $this->settings["font_colour_details"] ."\" POINT-SIZE=\"" . ($this->settings["font_size"]) ."\">" . (empty($marriagedate)?"":$marriagedate) . "<BR />" . (empty($marriageplace)?"":"(".$marriageplace.")") . $family . "</FONT></TD></TR></TABLE>>";
             }
         }
 

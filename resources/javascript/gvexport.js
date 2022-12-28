@@ -335,7 +335,7 @@ function toggleAdvanced(caller, id, visible = null) {
 }
 
 function setStateFastRelationCheck() {
-    document.getElementById("faster_relationship_checking").disabled = ((!cartempty && document.getElementById("usecart_yes").checked) || !document.getElementById("mark_not_related").checked);
+    document.getElementById("faster_relation_check").disabled = ((!cartempty && document.getElementById("usecart_yes").checked) || !document.getElementById("mark_not_related").checked);
 }
 
 function removeURLParameter(parameter) {
@@ -835,7 +835,7 @@ function loadSettings(data) {
                     setCheckStatus(document.getElementById('dd_type_y'), settings[key] === 'true');
                     setCheckStatus(document.getElementById('dd_type_gedcom'), settings[key] === 'false');
                     break;
-                case 'marriage_date_year_only':
+                case 'marr_date_year_only':
                     setCheckStatus(document.getElementById('md_type_y'), settings[key] === 'true');
                     setCheckStatus(document.getElementById('md_type_gedcom'), settings[key] === 'false');
                     break;
@@ -860,7 +860,7 @@ function loadSettings(data) {
     });
     setStateFastRelationCheck();
     showHide(document.getElementById('arrow_group'),document.getElementById('colour_arrow_related').checked)
-    showHide(document.getElementById('startcol_option'),document.getElementById('highlight_start_individuals').checked)
+    showHide(document.getElementById('startcol_option'),document.getElementById('highlight_start_indis').checked)
 }
 
 function setCheckStatus(el, checked) {
