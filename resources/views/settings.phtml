@@ -120,8 +120,8 @@ $settings = $settingsObj->getDefaultSettings();
                     <input class="cart_toggle" type="checkbox" name="vars[mark_not_related]" id="mark_not_related" value="mark_not_related" <?= $vars["mark_not_related"] ? 'checked' : '' ?>>
                     <label class="check-list" for="mark_not_related"><?= I18N::translate('Mark not blood-related people with different color') ?></label>
                     <br/>
-                    <input class="cart_toggle" type="checkbox" name="vars[faster_relationship_checking]" id="faster_relationship_checking" value="faster_relationship_checking" <?= $vars["faster_relationship_checking"] ? 'checked' : '' ?>>
-                    <label class="check-list" for="faster_relationship_checking"><?= I18N::translate('Ignore unseen links to speed up relative check') ?></label>
+                    <input class="cart_toggle" type="checkbox" name="vars[faster_relation_check]" id="faster_relation_check" value="faster_relation_check" <?= $vars["faster_relation_check"] ? 'checked' : '' ?>>
+                    <label class="check-list" for="faster_relation_check"><?= I18N::translate('Ignore unseen links to speed up relative check') ?></label>
                 </div>
             </div>
 
@@ -258,11 +258,11 @@ $settings = $settingsObj->getDefaultSettings();
                             <input type="checkbox" name="vars[show_marriage_date]" id="show_marriage_date" value="show_marriage_date" <?= $vars["show_marriage_date"] ? 'checked' : '' ?>>
                         </div>
                         <div class="col-auto mx-3">
-                            <input type="radio" name="vars[marriage_date_year_only]" id="md_type_y" value="true" <?= $vars["marriage_date_year_only"] ? 'checked' : '' ?>>
+                            <input type="radio" name="vars[marr_date_year_only]" id="md_type_y" value="true" <?= $vars["marr_date_year_only"] ? 'checked' : '' ?>>
                             <label for="md_type_y"><?= I18N::translate('Year') ?></label>
                         </div>
                         <div class="col-auto mx-3">
-                            <input type="radio" name="vars[marriage_date_year_only]" id="md_type_gedcom" value="false" <?= !$vars["marriage_date_year_only"] ? 'checked' : '' ?>>
+                            <input type="radio" name="vars[marr_date_year_only]" id="md_type_gedcom" value="false" <?= !$vars["marr_date_year_only"] ? 'checked' : '' ?>>
                             <label for="md_type_gedcom"><?= I18N::translate('Full date') ?></label>
                         </div>
                     </div>
@@ -319,11 +319,11 @@ $settings = $settingsObj->getDefaultSettings();
                             <input type="text" class="form-control col-sm-6" size="10" name="vars[font_size]" id="font_size" value="<?= $vars["font_size"] ?>">
                         </div>
                         <div>
-                            <input type="color" class="picker" name="vars[fontcolor_name]" id="fontcolor_name" value="<?= $vars["fontcolor_name"] ?>" /><label for="fontcolor_name" class="picker-label"><?= I18N::translate('Font color for names') ?></label>
+                            <input type="color" class="picker" name="vars[font_colour_name]" id="font_colour_name" value="<?= $vars["font_colour_name"] ?>" /><label for="font_colour_name" class="picker-label"><?= I18N::translate('Font color for names') ?></label>
                         </div>
 
                         <div>
-                            <input type="color" class="picker" name="vars[fontcolor_details]" id="fontcolor_details" value="<?= $vars["fontcolor_details"] ?>" /><label for="fontcolor_details" class="picker-label"><?= I18N::translate('Font color for details') ?></label>
+                            <input type="color" class="picker" name="vars[font_colour_details]" id="font_colour_details" value="<?= $vars["font_colour_details"] ?>" /><label for="font_colour_details" class="picker-label"><?= I18N::translate('Font color for details') ?></label>
                         </div>
                     </div>
                 </div>
@@ -348,35 +348,35 @@ $settings = $settingsObj->getDefaultSettings();
                 <label class=" col-sm-4 col-form-label"><?= I18N::translate('Tile colors') ?></label>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="col-auto">
-                        <input type="color" class="picker" name="vars[male_colour]" id="male_colour" value="<?= $vars["male_colour"] ?>" /><label for="male_colour" class="picker-label"><?= I18N::translate('Male individuals') ?></label>
+                        <input type="color" class="picker" name="vars[male_col]" id="male_col" value="<?= $vars["male_col"] ?>" /><label for="male_col" class="picker-label"><?= I18N::translate('Male individuals') ?></label>
                     </div>
                     <div class="col-auto">
-                        <input type="color" class="picker" name="vars[female_colour]" id="female_colour" value="<?= $vars["female_colour"] ?>" /><label for="female_colour" class="picker-label"><?= I18N::translate('Female individuals') ?></label>
+                        <input type="color" class="picker" name="vars[female_col]" id="female_col" value="<?= $vars["female_col"] ?>" /><label for="female_col" class="picker-label"><?= I18N::translate('Female individuals') ?></label>
                     </div>
                     <div class="col-auto">
-                        <input type="color" class="picker" name="vars[other_gender_colour]" id="other_gender_colour" value="<?= $vars["other_gender_colour"] ?>" /><label for="other_gender_colour" class="picker-label"><?= I18N::translate('Other gender individuals') ?></label>
+                        <input type="color" class="picker" name="vars[other_gender_col]" id="other_gender_col" value="<?= $vars["other_gender_col"] ?>" /><label for="other_gender_col" class="picker-label"><?= I18N::translate('Other gender individuals') ?></label>
                     </div>
                     <div class="col-auto">
-                        <input type="color" class="picker" name="vars[unknown_gender_colour]" id="unknown_gender_colour" value="<?= $vars["unknown_gender_colour"] ?>" /><label for="unknown_gender_colour" class="picker-label"><?= I18N::translate('Unknown gender individuals') ?></label>
+                        <input type="color" class="picker" name="vars[unknown_gender_col]" id="unknown_gender_col" value="<?= $vars["unknown_gender_col"] ?>" /><label for="unknown_gender_col" class="picker-label"><?= I18N::translate('Unknown gender individuals') ?></label>
                     </div>
                     <div class="col-auto">
-                        <input type="color" class="picker" name="vars[male_unrelated_colour]" id="male_unrelated_colour" value="<?= $vars["male_unrelated_colour"] ?>" /><label for="male_unrelated_colour" class="picker-label"><?= I18N::translate('Not blood-related male individuals') ?></label>
+                        <input type="color" class="picker" name="vars[male_unrelated_col]" id="male_unrelated_col" value="<?= $vars["male_unrelated_col"] ?>" /><label for="male_unrelated_col" class="picker-label"><?= I18N::translate('Not blood-related male individuals') ?></label>
                     </div>
                     <div class="col-auto">
-                        <input type="color" class="picker" name="vars[female_unrelated_colour]" id="female_unrelated_colour" value="<?= $vars["female_unrelated_colour"] ?>" /><label for="female_unrelated_colour" class="picker-label"><?= I18N::translate('Not blood-related female individuals') ?></label>
+                        <input type="color" class="picker" name="vars[female_unrelated_col]" id="female_unrelated_col" value="<?= $vars["female_unrelated_col"] ?>" /><label for="female_unrelated_col" class="picker-label"><?= I18N::translate('Not blood-related female individuals') ?></label>
                     </div>
                     <div class="col-auto">
-                        <input type="color" class="picker" name="vars[other_gender_unrel_colour]" id="other_gender_unrel_colour" value="<?= $vars["other_gender_unrel_colour"] ?>" /><label for="other_gender_unrel_colour" class="picker-label"><?= I18N::translate('Not blood-related other gender individuals') ?></label>
+                        <input type="color" class="picker" name="vars[oth_gender_unrel_col]" id="oth_gender_unrel_col" value="<?= $vars["oth_gender_unrel_col"] ?>" /><label for="oth_gender_unrel_col" class="picker-label"><?= I18N::translate('Not blood-related other gender individuals') ?></label>
                     </div>
                     <div class="col-auto">
-                        <input type="color" class="picker" name="vars[unknown_gender_unrel_colour]" id="unknown_gender_unrel_colour" value="<?= $vars["unknown_gender_unrel_colour"] ?>" /><label for="unknown_gender_unrel_colour" class="picker-label"><?= I18N::translate('Not blood-related unknown gender individuals') ?></label>
+                        <input type="color" class="picker" name="vars[unkn_gender_unrel_col]" id="unkn_gender_unrel_col" value="<?= $vars["unkn_gender_unrel_col"] ?>" /><label for="unkn_gender_unrel_col" class="picker-label"><?= I18N::translate('Not blood-related unknown gender individuals') ?></label>
                     </div>
                     <div class="col-auto">
-                        <input type="color" class="picker" name="vars[individual_background_colour]" id="individual_background_colour" value="<?= $vars["individual_background_colour"] ?>" /><label for="individual_background_colour" class="picker-label"><?= I18N::translate('Individual background color') ?></label>
+                        <input type="color" class="picker" name="vars[indi_background_col]" id="indi_background_col" value="<?= $vars["indi_background_col"] ?>" /><label for="indi_background_col" class="picker-label"><?= I18N::translate('Individual background color') ?></label>
                     </div>
-                    <input type="checkbox" name="vars[highlight_start_individuals]" id="highlight_start_individuals" value="true" <?= $vars["highlight_start_individuals"] ? 'checked' : '' ?>><label for="highlight_start_individuals" class="check-list"><?= I18N::translate('Show starting persons in different color') ?></label>
+                    <input type="checkbox" name="vars[highlight_start_indis]" id="highlight_start_indis" value="true" <?= $vars["highlight_start_indis"] ? 'checked' : '' ?>><label for="highlight_start_indis" class="check-list"><?= I18N::translate('Show starting persons in different color') ?></label>
                     <div class="col-auto" id="startcol_option">
-                        <input type="color" class="picker" name="vars[highlight_colour]" id="highlight_colour" value="<?= $vars["highlight_colour"] ?>" /><label for="highlight_colour" class="picker-label"><?= I18N::translate('Starting persons background color') ?></label>
+                        <input type="color" class="picker" name="vars[highlight_col]" id="highlight_col" value="<?= $vars["highlight_col"] ?>" /><label for="highlight_col" class="picker-label"><?= I18N::translate('Starting persons background color') ?></label>
                     </div>
                 </div>
             </div>
@@ -384,13 +384,13 @@ $settings = $settingsObj->getDefaultSettings();
                 <label class=" col-sm-4 col-form-label"><?= I18N::translate('Other colours') ?></label>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="col-auto">
-                        <input type="color" class="picker" name="vars[family_colour]" id="family_colour" value="<?= $vars["family_colour"] ?>" /><label for="family_colour" class="picker-label"><?= I18N::translate('Family background') ?></label>
+                        <input type="color" class="picker" name="vars[family_col]" id="family_col" value="<?= $vars["family_col"] ?>" /><label for="family_col" class="picker-label"><?= I18N::translate('Family background') ?></label>
                     </div>
                     <div class="col-auto">
-                        <input type="color" class="picker" name="vars[border_colour]" id="border_colour" value="<?= $vars["border_colour"] ?>" /><label for="border_colour" class="picker-label"><?= I18N::translate('Outline colour') ?></label>
+                        <input type="color" class="picker" name="vars[border_col]" id="border_col" value="<?= $vars["border_col"] ?>" /><label for="border_col" class="picker-label"><?= I18N::translate('Outline colour') ?></label>
                     </div>
                     <div class="col-auto">
-                        <input type="color" class="picker" name="vars[background_colour]" id="background_colour" value="<?= $vars["background_colour"] ?>" /><label for="background_colour" class="picker-label"><?= I18N::translate('Diagram background color') ?></label>
+                        <input type="color" class="picker" name="vars[background_col]" id="background_col" value="<?= $vars["background_col"] ?>" /><label for="background_col" class="picker-label"><?= I18N::translate('Diagram background color') ?></label>
                     </div>
                 </div>
             </div>

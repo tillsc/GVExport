@@ -8,6 +8,7 @@ use Fisharebest\Webtrees\Auth;
 class Settings
 {
     private const GUEST_USER_ID = 0;
+    private const PREFERENCE_PREFIX = "GVE_";
     private array $defaultSettings;
     public function __construct(){
         // Load settings from config file
@@ -76,7 +77,7 @@ class Settings
             } else {
                 foreach ($settings as $preference => $value) {
                     if (Settings::shouldLoadSetting($preference)) {
-                        $pref = $tree->getUserPreference(Auth::user(), "GVE_" . $preference, "preference not set");
+                        $pref = $tree->getUserPreference(Auth::user(), Settings::PREFERENCE_PREFIX . $preference, "preference not set");
                         if ($pref != "preference not set") {
                             $settings[$preference] = $pref;
                         } else if ($preference == 'show_xref_individuals') {
@@ -126,7 +127,7 @@ class Settings
         } else {
             foreach ($settings as $preference => $value) {
                 if (Settings::shouldSaveSetting($preference)) {
-                    $tree->setUserPreference(Auth::user(), "GVE_" . $preference, $value);
+                    $tree->setUserPreference(Auth::user(), Settings::PREFERENCE_PREFIX . $preference, $value);
                 }
             }
         }
@@ -294,5 +295,17 @@ class Settings
     public static function shouldLoadSetting($setting, bool $admin = false): bool
     {
         return Settings::shouldSaveSetting($setting, $admin);
+    }
+
+    public function getSettingsJson($module, $tree)
+    {
+        $userSettings = $this->loadUserSettings($module, $tree);
+        $settings = [];
+        foreach ($userSettings as $preference => $value) {
+            if (Settings::shouldSaveSetting($preference)) {
+                $settings[$preference] = $value;
+            }
+        }
+        return json_encode($settings);
     }
 }

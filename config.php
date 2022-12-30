@@ -4,7 +4,6 @@
  * Note that the administrator in webtrees can set most of these default values in the control panel settings page for GVExport
  * Control panel settings override these settings
  */
-
 return array(
 	// Set path to Graphviz binary
 	'graphviz_bin' => '/usr/bin/dot', // Default on Debian Linux
@@ -24,7 +23,7 @@ return array(
 	'death_date_year_only' => false, // Whether to show just the year or the full GEDCOM date pf death
 	'show_death_place' => true, // Whether to show death date for individuals
 	'show_marriage_date' => true, // Whether to show marriage date on the family record
-	'marriage_date_year_only' => false, // Whether to show just the year or the full GEDCOM date of marriage
+	'marr_date_year_only' => false, // Whether to show just the year or the full GEDCOM date of marriage
 	'show_marriage_place' => true, // Whether to show the place of marriage on the family record
 	'include_ancestors' => true, // If ancestors should be included when calculating who to show in the diagram
 	'ancestor_levels' => 2, // Default setting for number of ancestor generations to include
@@ -35,7 +34,7 @@ return array(
 	'include_spouses' => true, // Whether to include spouses when calculating who to include in the diagram
 	'include_all' => false, // Whether to include all linked records regardless of relationship when calculating who to include in the diagram
 	'mark_not_related' => false, // Whether to display non-relatives in a different colour
-	'faster_relationship_checking' => false, // Whether to skip checking links outside the displayed tree when checking for non-relatives, to speed up generation of the diagram at the expense of accuracy
+	'faster_relation_check' => false, // Whether to skip checking links outside the displayed tree when checking for non-relatives, to speed up generation of the diagram at the expense of accuracy
 	'add_links' => true, // Whether to embed links to the webtrees records in the diagram for supported file types
 	'show_xref_individuals' => false, // Whether to show the XREF of individuals
 	'show_xref_families' => false, // Whether to show the family XREF
@@ -56,28 +55,28 @@ return array(
 	'adv_files' => false, // Whether to show advanced settings by default for File settings section
 	'typeface' => 0, // Default font value, based on list of font 'typefaces'
 	'default_typeface' => 0, // Fallback font value, if above typeface not available
-	'fontcolor_name' => '#333333',	// Default font colour for name
-	'fontcolor_details' => '#555555',	// Default font colour for date/place of birth/death etc.
+	'font_colour_name' => '#333333',	// Default font colour for name
+	'font_colour_details' => '#555555',	// Default font colour for date/place of birth/death etc.
 	'font_size' => '10',	// Default font size for everything except name
 	'font_size_name' => '12',	// Default font size for name
 	'arrows_default' => '#555555', // Default colour for arrows between records
 	'arrows_related' => '#222266', // Default colour for arrows from family record to child by birth
 	'arrows_not_related' => '#226622',	// Default colour for arrows from family records to child other than birth (adopted, etc)
 	'colour_arrow_related' => false, // If arrows should be coloured based on blood-relationship or not
-	'male_colour' => '#ADD8E6', // Default color of male individuals (light blue)
-	'female_colour' => '#FFB6C1', // Default color of female individuals (light pink)
-	'other_gender_colour' => '#FCEAA1', // Default color of Other gender individuals (light yellow)
-	'unknown_gender_colour' => '#CCEECC', // Default color of unknown gender individuals (light green)
-	'male_unrelated_colour' => '#EEF8F8', // Default color of not blood-related male individuals
-	'female_unrelated_colour' => '#FDF2F2', // Default color of not blood-related female individuals
-	'other_gender_unrel_colour' => '#FCF7E3', // Default color of not blood-related Other gender individuals
-	'unknown_gender_unrel_colour' => '#D6EED6', // Default color of not blood-related unknown gender individuals
-	'family_colour' => '#FFFFEE', // Default color of families (different light yellow)
-	'background_colour' => '#EEEEEE', // Background of diagram (light grey)
-	'individual_background_colour' => '#FEFEFE', // Background of individual tile (except simple mode)
-	'highlight_start_individuals' => false, // Whether to use a different colour for starting individuals
-	'highlight_colour' => '#FFFDC3', // Background of starting individuals
-	'border_colour' => '#606060', // Outline colour
+	'male_col' => '#ADD8E6', // Default color of male individuals (light blue)
+	'female_col' => '#FFB6C1', // Default color of female individuals (light pink)
+	'other_gender_col' => '#FCEAA1', // Default color of Other gender individuals (light yellow)
+	'unknown_gender_col' => '#CCEECC', // Default color of unknown gender individuals (light green)
+	'male_unrelated_col' => '#EEF8F8', // Default color of not blood-related male individuals
+	'female_unrelated_col' => '#FDF2F2', // Default color of not blood-related female individuals
+	'oth_gender_unrel_col' => '#FCF7E3', // Default color of not blood-related Other gender individuals
+	'unkn_gender_unrel_col' => '#D6EED6', // Default color of not blood-related unknown gender individuals
+	'family_col' => '#FFFFEE', // Default color of families (different light yellow)
+	'background_col' => '#EEEEEE', // Background of diagram (light grey)
+	'indi_background_col' => '#FEFEFE', // Background of individual tile (except simple mode)
+	'highlight_start_indis' => false, // Whether to use a different colour for starting individuals
+	'highlight_col' => '#FFFDC3', // Background of starting individuals
+	'border_col' => '#606060', // Outline colour
 	'birth_prefix' => '*', // Text shown on chart before the birthdate
 	'death_prefix' => '+', // Text shown on chart before the death date
 	'auto_update' => true // If auto-updating browser render on change is enabled or not
