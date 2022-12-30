@@ -296,4 +296,16 @@ class Settings
     {
         return Settings::shouldSaveSetting($setting, $admin);
     }
+
+    public function getSettingsJson($module, $tree)
+    {
+        $userSettings = $this->loadUserSettings($module, $tree);
+        $settings = [];
+        foreach ($userSettings as $preference => $value) {
+            if (Settings::shouldSaveSetting($preference)) {
+                $settings[$preference] = $value;
+            }
+        }
+        return json_encode($settings);
+    }
 }

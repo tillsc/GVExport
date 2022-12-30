@@ -79,9 +79,7 @@ class FormSubmission
             $settings['arrows_not_related'] = $vars['arrows_not_related'];
         }
 
-        if (isset($vars["colour_arrow_related"])) {
-            $settings['colour_arrow_related'] = $vars['colour_arrow_related'];
-        }
+        $settings['colour_arrow_related'] = isset($vars['colour_arrow_related']);
 
         if (isset($vars['graph_dir'])) {
             $settings['graph_dir'] = $vars['graph_dir'];
@@ -189,6 +187,9 @@ class FormSubmission
         }
         if (isset($vars['nodesep'])) {
             $settings['nodesep'] = $vars['nodesep'];
+        }
+        if (isset($vars['output_type'])) {
+            $settings['output_type'] = $vars['output_type'];
         }
         return $settings;
     }
