@@ -44,6 +44,18 @@ class FormSubmission
             $settings['mclimit'] = $vars["mclimit"];
         }
 
+        if (isset($vars["filename"])) {
+            $settings['filename'] = $vars["filename"];
+        }
+
+        if (isset($vars["birth_prefix"])) {
+            $settings['birth_prefix'] = $vars["birth_prefix"];
+        }
+
+        if (isset($vars["death_prefix"])) {
+            $settings['death_prefix'] = $vars["death_prefix"];
+        }
+
         $settings['mark_not_related'] = isset($vars['mark_not_related']);
         $settings['faster_relation_check'] = isset($vars['faster_relation_check']);
 

@@ -31,13 +31,33 @@ $settings = $settingsObj->getDefaultSettings();
 
     // Javascript functions
     const newScript = document.createElement("script");
+    newScript.onload = function() {
+        removeURLParameter("reset");
+    };
     newScript.setAttribute("type","text/javascript");
     newScript.setAttribute("src","<?= $gvexport_js ?>");
     document.head.appendChild(newScript);
+
 </script>
 <div class="mb-5">
     <form method="post">
         <?= csrf_field() ?>
+        <h2><?= I18N::translate('Settings for GVExport'); ?></h2>
+        <div class="row form-group">
+            <label class="col-sm-4 col-form-label"><?= I18N::translate('Administrator settings') ?></label>
+            <div class="col-sm-8 wt-page-options-value">
+                <label for="filename"><?= I18N::translate('Download file name') ?>:</label>
+                <input class="form-control col-sm-6" type="text" name="vars[filename]" id="filename" value="<?= e($vars["filename"]) ?>">
+                <label for="mclimit"><?= I18N::translate('Graphviz MCLIMIT setting') ?>:</label>
+                <input class="form-control col-sm-6" type="text" name="vars[mclimit]" id="mclimit" value="<?= e($vars["mclimit"]); ?>">
+                <label for="birth_prefix"><?= I18N::translate('Birth date prefix') ?>:</label>
+                <input class="form-control col-sm-6" type="text" name="vars[birth_prefix]" id="birth_prefix" value="<?= e($vars["birth_prefix"]); ?>">
+                <label for="death_prefix"><?= I18N::translate('Death date prefix') ?>:</label>
+                <input class="form-control col-sm-6" type="text" name="vars[death_prefix]" id="death_prefix" value="<?= e($vars["death_prefix"]); ?>">
+            </div>
+        </div>
+        <div>
+        </div>
         <h2><?= I18N::translate('Default values for GVExport'); ?></h2>
 
         <div>
@@ -109,7 +129,7 @@ $settings = $settingsObj->getDefaultSettings();
                         </div>
                         <div class="col-auto row">
                             <label for="descendant_levels" class="col-sm-6"><?= I18N::translate('Max levels') ?>:</label>
-                            <input class="cart_toggle"  onblur="defaultValueWhenBlank(this, 0)" type="text" class="form-control col-sm-6" size="10" name="vars[descendant_levels]" id="descendant_levels" value="<?= $vars["descendant_levels"] ?>">
+                            <input onblur="defaultValueWhenBlank(this, 0)" type="text" class="form-control col-sm-6 cart_toggle" size="10" name="vars[descendant_levels]" id="descendant_levels" value="<?= $vars["descendant_levels"] ?>">
                         </div>
                     </div>
                 </div>

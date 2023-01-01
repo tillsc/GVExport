@@ -56,6 +56,7 @@ class Settings
                 }
             }
         }
+        $settings['graphviz_config'] = $this->getGraphvizSettings($settings);
         return $settings;
     }
 
@@ -275,10 +276,12 @@ class Settings
             case 'countries':
             case 'temp_dir':
             case 'space_base':
-            case 'birth_prefix':
-            case 'death_prefix':
                 return false;
             case 'show_debug_panel':
+            case 'filename':
+            case 'mclimit':
+            case 'birth_prefix':
+            case 'death_prefix':
                 return $admin;
             default:
                 return true;
