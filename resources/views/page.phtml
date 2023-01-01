@@ -37,7 +37,7 @@ $xref = $individual->xref();
     document.head.appendChild(newSheet);
     function runPageLoaded() {
         if (typeof pageLoaded === 'function' && typeof jQuery === 'function') {
-            changeURLXref('<?= $xref; ?>');
+            changeURLXref('<?= e($xref); ?>');
             pageLoaded();
         } else {
             // If external script loads before inline script, then wait
@@ -67,7 +67,8 @@ $xref = $individual->xref();
     let debug_string = "";
     let TOMSELECT_URL = "";
     let settings_json = "";
-    const TREE_NAME = "<?= $tree->name(); ?>";
+    let download_file_name = "<?= e($settings['filename']); ?>";
+    const TREE_NAME = "<?= e($tree->name()); ?>";
 </script>
 
 <h2 class="wt-page-title">
@@ -151,7 +152,7 @@ $xref = $individual->xref();
                     </div>
                     <div class="col-auto row">
                         <label for="ancestor_levels" class="col-sm-6"><?= I18N::translate('Max levels') ?>:</label>
-                        <input onblur="defaultValueWhenBlank(this, 0)" type="text" class="cart_toggle form-control col-sm-6" size="10" name="vars[ancestor_levels]" id="ancestor_levels" value="<?= $vars["ancestor_levels"] ?>">
+                        <input onblur="defaultValueWhenBlank(this, 0)" type="text" class="cart_toggle form-control col-sm-6" size="10" name="vars[ancestor_levels]" id="ancestor_levels" value="<?= I18N::digits($vars["ancestor_levels"]); ?>">
                     </div>
                 </div>
             </div>
@@ -191,7 +192,7 @@ $xref = $individual->xref();
                     <div class="col-auto row">
                         <label for="descendant_levels" class="col-sm-6"><?= I18N::translate('Max levels') ?>:</label>
                         <input onblur="defaultValueWhenBlank(this, 0)" type="text" class="cart_toggle form-control col-sm-6" size="10" name="vars[descendant_levels]" id="descendant_levels"
-                               value="<?= $vars["descendant_levels"] ?>">
+                               value="<?= I18N::digits($vars["descendant_levels"]); ?>">
                     </div>
                 </div>
             </div>
@@ -201,7 +202,7 @@ $xref = $individual->xref();
                 <?= MainPage::addLabel('xref_list', 'XREFs of included individuals'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="input-group mt-1">
-                        <input type="text" class="form-control" name="vars[xref_list]" id="xref_list" value="<?= $vars['xref_list'] ?>" onchange="refreshIndisFromXREFS(true)">
+                        <input type="text" class="form-control" name="vars[xref_list]" id="xref_list" value="<?= e($vars['xref_list']) ?>" onchange="refreshIndisFromXREFS(true)">
                         <div class="input-group-append">
                             <button type="button" class="btn btn-outline-secondary" onclick="refreshIndisFromXREFS(false)">⟳</button>
                         </div>
@@ -222,7 +223,7 @@ $xref = $individual->xref();
                         ?>
                     </div>
                     <div class="input-group mt-1">
-                        <input type="text" class="cart_toggle form-control" name="vars[stop_xref_list]" id="stop_xref_list" value="<?= $vars['stop_xref_list'] ?>" onchange="refreshIndisFromXREFS(true)">
+                        <input type="text" class="cart_toggle form-control" name="vars[stop_xref_list]" id="stop_xref_list" value="<?= e($vars['stop_xref_list']); ?>" onchange="refreshIndisFromXREFS(true)">
                         <div class="input-group-append">
                             <button type="button" class="btn btn-outline-secondary" onclick="refreshIndisFromXREFS(false)">⟳</button>
                         </div>
@@ -246,7 +247,7 @@ $xref = $individual->xref();
         <div class="row form-group">
             <?= MainPage::addLabel('graph_dir', 'Graph direction'); ?>
             <div class="col-sm-8 wt-page-options-value">
-                <?= view('components/select', ['name' => 'vars[graph_dir]', 'id' => 'graph_dir', 'selected' => $vars['graph_dir'], 'options' => MainPage::updateTranslations($settings["directions"])]) ?>
+                <?= view('components/select', ['name' => 'vars[graph_dir]', 'id' => 'graph_dir', 'selected' => e($vars['graph_dir']), 'options' => MainPage::updateTranslations($settings["directions"])]) ?>
             </div>
         </div>
 
@@ -293,14 +294,14 @@ $xref = $individual->xref();
             <div class="row form-group">
                 <?= MainPage::addLabel('use_abbr_name', 'Abbreviated names'); ?>
                 <div class="col-sm-8 wt-page-options-value">
-                    <?= view('components/select', ['name' => 'vars[use_abbr_name]', 'id' => 'use_abbr_name', 'selected' => $vars['use_abbr_name'], 'options' => MainPage::updateTranslations($settings["use_abbr_names"])]) ?>
+                    <?= view('components/select', ['name' => 'vars[use_abbr_name]', 'id' => 'use_abbr_name', 'selected' => I18N::digits($vars['use_abbr_name']), 'options' => MainPage::updateTranslations($settings["use_abbr_names"])]) ?>
                 </div>
             </div>
 
             <div class="row form-group">
                 <?= MainPage::addLabel('use_abbr_place', 'Abbreviated place names'); ?>
                 <div class="col-sm-8 wt-page-options-value">
-                    <?= view('components/select', ['name' => 'vars[use_abbr_place]', 'id' => 'use_abbr_place', 'selected' => $vars['use_abbr_place'], 'options' => MainPage::updateTranslations($settings["use_abbr_places"])]) ?>
+                    <?= view('components/select', ['name' => 'vars[use_abbr_place]', 'id' => 'use_abbr_place', 'selected' => I18N::digits($vars['use_abbr_place']), 'options' => MainPage::updateTranslations($settings["use_abbr_places"])]) ?>
                 </div>
             </div>
             
@@ -403,7 +404,7 @@ $xref = $individual->xref();
                     <div class="row">
                         <div class="col-auto">
                             <input type="text" onblur="defaultValueWhenBlank(this, 72)" class="form-control" size="10" name="vars[dpi]" id="dpi"
-                                   value="<?= $vars["dpi"] ?>">
+                                   value="<?= I18N::digits($vars["dpi"]); ?>">
                         </div>
                     </div>
                 </div>
@@ -416,12 +417,12 @@ $xref = $individual->xref();
                         <label for="ranksep"><?= I18N::translate('Between generations') ?>:</label>
                         <div class="col-auto">
                             <input type="text" onclick="togglePercent(this, false)" onblur="togglePercent(this, true)" class="form-control col-sm-6" size="10" name="vars[ranksep]" id="ranksep"
-                                   value="<?= $vars["ranksep"] ?>">
+                                   value="<?= e($vars["ranksep"]) ?>">
                         </div>
                         <label for="nodesep"><?= I18N::translate('Between individuals on the same level') ?>:</label>
                         <div class="col-auto">
                             <input type="text" onclick="togglePercent(this, false)" onblur="togglePercent(this, true)" class="form-control col-sm-6" size="10" name="vars[nodesep]" id="nodesep"
-                                   value="<?= $vars["nodesep"] ?>">
+                                   value="<?= e($vars["nodesep"]) ?>">
                         </div>
                     </div>
                 </div>
@@ -432,22 +433,22 @@ $xref = $individual->xref();
                     <div class="row">
                         <label for="typeface"><?= I18N::translate('Typeface') ?>:</label>
                         <div class="col-auto">
-                            <?= view('components/select', ['name' => 'vars[typeface]', 'id' => 'typeface', 'selected' => $vars['typeface'], 'options' => MainPage::updateTranslations($settings["typefaces"])]) ?>
+                            <?= view('components/select', ['name' => 'vars[typeface]', 'id' => 'typeface', 'selected' => I18N::digits($vars['typeface']), 'options' => MainPage::updateTranslations($settings["typefaces"])]) ?>
                         </div>
                         <label for="font_size_name"><?= I18N::translate('Font size for names') ?>:</label>
                         <div class="col-auto">
-                            <input type="text" class="form-control col-sm-6" size="10" name="vars[font_size_name]" id="font_size_name" value="<?= $vars["font_size_name"] ?>">
+                            <input type="text" class="form-control col-sm-6" size="10" name="vars[font_size_name]" id="font_size_name" value="<?= I18N::digits($vars["font_size_name"]); ?>">
                         </div>
                         <label for="font_size"><?= I18N::translate('Font size for details') ?>:</label>
                         <div class="col-auto">
-                            <input type="text" class="form-control col-sm-6" size="10" name="vars[font_size]" id="font_size" value="<?= $vars["font_size"] ?>">
+                            <input type="text" class="form-control col-sm-6" size="10" name="vars[font_size]" id="font_size" value="<?= I18N::digits($vars["font_size"]); ?>">
                         </div>
                         <div>
-                            <input type="color" class="picker" name="vars[font_colour_name]" id="font_colour_name" value="<?= $vars["font_colour_name"] ?>" /><label for="font_colour_name" class="picker-label"><?= I18N::translate('Font color for names') ?></label>
+                            <input type="color" class="picker" name="vars[font_colour_name]" id="font_colour_name" value="<?= e($vars["font_colour_name"]); ?>" /><label for="font_colour_name" class="picker-label"><?= I18N::translate('Font color for names') ?></label>
                         </div>
 
                         <div>
-                            <input type="color" class="picker" name="vars[font_colour_details]" id="font_colour_details" value="<?= $vars["font_colour_details"] ?>" /><label for="font_colour_details" class="picker-label"><?= I18N::translate('Font color for details') ?></label>
+                            <input type="color" class="picker" name="vars[font_colour_details]" id="font_colour_details" value="<?= e($vars["font_colour_details"]); ?>" /><label for="font_colour_details" class="picker-label"><?= I18N::translate('Font color for details') ?></label>
                         </div>
                     </div>
                 </div>
@@ -456,14 +457,14 @@ $xref = $individual->xref();
                 <?= MainPage::addLabel('', 'Relationship arrows'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                         <div class="col-auto">
-                            <input type="color" class="picker" name="vars[arrows_default]" id="arrows_default" value="<?= $vars["arrows_default"] ?>" /><label for="arrows_default" class="picker-label"><?= I18N::translate('Arrow color') ?></label>
+                            <input type="color" class="picker" name="vars[arrows_default]" id="arrows_default" value="<?= e($vars["arrows_default"]); ?>" /><label for="arrows_default" class="picker-label"><?= I18N::translate('Arrow color') ?></label>
                         </div>
                         <input type="checkbox" name="vars[colour_arrow_related]" onclick="showHide(document.getElementById('arrow_group'),this.checked)" id="colour_arrow_related" value="colour_arrow_related" <?= $vars["colour_arrow_related"] ? 'checked' : '' ?>><label for="colour_arrow_related" class="check-list"><?= I18N::translate('Show blood relationship in different color') ?></label>
 
                         <div id="arrow_group" class="color_subgroup col-auto wt-page-options-value" <?= !$vars["colour_arrow_related"] ? 'style="display:none;"' : '' ?>>
                             <div class="sub-group">
-                                <input type="color" class="picker" name="vars[arrows_related]" id="arrows_related" value="<?= $vars["arrows_related"] ?>" /><label for="arrows_related" class="picker-label"><?= I18N::translate('Related by birth') ?></label>
-                                <input type="color" class="picker" name="vars[arrows_not_related]" id="arrows_not_related" value="<?= $vars["arrows_not_related"] ?>" /><label for="arrows_not_related" class="picker-label"><?= I18N::translate('Related other than by birth') ?></label>
+                                <input type="color" class="picker" name="vars[arrows_related]" id="arrows_related" value="<?= e($vars["arrows_related"]); ?>" /><label for="arrows_related" class="picker-label"><?= I18N::translate('Related by birth') ?></label>
+                                <input type="color" class="picker" name="vars[arrows_not_related]" id="arrows_not_related" value="<?= e($vars["arrows_not_related"]); ?>" /><label for="arrows_not_related" class="picker-label"><?= I18N::translate('Related other than by birth') ?></label>
                             </div>
                         </div>
                 </div>
@@ -472,35 +473,35 @@ $xref = $individual->xref();
                 <?= MainPage::addLabel('', 'Tile colors'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="col-auto">
-                        <input type="color" class="picker" name="vars[male_col]" id="male_col" value="<?= $vars["male_col"] ?>" /><label for="male_col" class="picker-label"><?= I18N::translate('Male individuals') ?></label>
+                        <input type="color" class="picker" name="vars[male_col]" id="male_col" value="<?= e($vars["male_col"]); ?>" /><label for="male_col" class="picker-label"><?= I18N::translate('Male individuals') ?></label>
                     </div>
                     <div class="col-auto">
-                        <input type="color" class="picker" name="vars[female_col]" id="female_col" value="<?= $vars["female_col"] ?>" /><label for="female_col" class="picker-label"><?= I18N::translate('Female individuals') ?></label>
+                        <input type="color" class="picker" name="vars[female_col]" id="female_col" value="<?= e($vars["female_col"]); ?>" /><label for="female_col" class="picker-label"><?= I18N::translate('Female individuals') ?></label>
                     </div>
                     <div class="col-auto">
-                        <input type="color" class="picker" name="vars[other_gender_col]" id="other_gender_col" value="<?= $vars["other_gender_col"] ?>" /><label for="other_gender_col" class="picker-label"><?= I18N::translate('Other gender individuals') ?></label>
+                        <input type="color" class="picker" name="vars[other_gender_col]" id="other_gender_col" value="<?= e($vars["other_gender_col"]); ?>" /><label for="other_gender_col" class="picker-label"><?= I18N::translate('Other gender individuals') ?></label>
                     </div>
                     <div class="col-auto">
-                        <input type="color" class="picker" name="vars[unknown_gender_col]" id="unknown_gender_col" value="<?= $vars["unknown_gender_col"] ?>" /><label for="unknown_gender_col" class="picker-label"><?= I18N::translate('Unknown gender individuals') ?></label>
+                        <input type="color" class="picker" name="vars[unknown_gender_col]" id="unknown_gender_col" value="<?= e($vars["unknown_gender_col"]); ?>" /><label for="unknown_gender_col" class="picker-label"><?= I18N::translate('Unknown gender individuals') ?></label>
                     </div>
                     <div class="col-auto">
-                        <input type="color" class="picker" name="vars[male_unrelated_col]" id="male_unrelated_col" value="<?= $vars["male_unrelated_col"] ?>" /><label for="male_unrelated_col" class="picker-label"><?= I18N::translate('Not blood-related male individuals') ?></label>
+                        <input type="color" class="picker" name="vars[male_unrelated_col]" id="male_unrelated_col" value="<?= e($vars["male_unrelated_col"]); ?>" /><label for="male_unrelated_col" class="picker-label"><?= I18N::translate('Not blood-related male individuals') ?></label>
                     </div>
                     <div class="col-auto">
-                        <input type="color" class="picker" name="vars[female_unrelated_col]" id="female_unrelated_col" value="<?= $vars["female_unrelated_col"] ?>" /><label for="female_unrelated_col" class="picker-label"><?= I18N::translate('Not blood-related female individuals') ?></label>
+                        <input type="color" class="picker" name="vars[female_unrelated_col]" id="female_unrelated_col" value="<?= e($vars["female_unrelated_col"]); ?>" /><label for="female_unrelated_col" class="picker-label"><?= I18N::translate('Not blood-related female individuals') ?></label>
                     </div>
                     <div class="col-auto">
-                        <input type="color" class="picker" name="vars[oth_gender_unrel_col]" id="oth_gender_unrel_col" value="<?= $vars["oth_gender_unrel_col"] ?>" /><label for="oth_gender_unrel_col" class="picker-label"><?= I18N::translate('Not blood-related other gender individuals') ?></label>
+                        <input type="color" class="picker" name="vars[oth_gender_unrel_col]" id="oth_gender_unrel_col" value="<?= e($vars["oth_gender_unrel_col"]); ?>" /><label for="oth_gender_unrel_col" class="picker-label"><?= I18N::translate('Not blood-related other gender individuals') ?></label>
                     </div>
                     <div class="col-auto">
-                        <input type="color" class="picker" name="vars[unkn_gender_unrel_col]" id="unkn_gender_unrel_col" value="<?= $vars["unkn_gender_unrel_col"] ?>" /><label for="unkn_gender_unrel_col" class="picker-label"><?= I18N::translate('Not blood-related unknown gender individuals') ?></label>
+                        <input type="color" class="picker" name="vars[unkn_gender_unrel_col]" id="unkn_gender_unrel_col" value="<?= e($vars["unkn_gender_unrel_col"]); ?>" /><label for="unkn_gender_unrel_col" class="picker-label"><?= I18N::translate('Not blood-related unknown gender individuals') ?></label>
                     </div>
                     <div class="col-auto">
-                        <input type="color" class="picker" name="vars[indi_background_col]" id="indi_background_col" value="<?= $vars["indi_background_col"] ?>" /><label for="indi_background_col" class="picker-label"><?= I18N::translate('Individual background color') ?></label>
+                        <input type="color" class="picker" name="vars[indi_background_col]" id="indi_background_col" value="<?= e($vars["indi_background_col"]); ?>" /><label for="indi_background_col" class="picker-label"><?= I18N::translate('Individual background color') ?></label>
                     </div>
                     <input type="checkbox" name="vars[highlight_start_indis]" onclick="showHide(document.getElementById('startcol_option'),this.checked)" id="highlight_start_indis" value="true" <?= $vars["highlight_start_indis"] ? 'checked' : '' ?>><label for="highlight_start_indis" class="check-list"><?= I18N::translate('Show starting persons in different color') ?></label>
                     <div class="color_subgroup col-auto wt-page-options-value" id="startcol_option"  <?= $vars["highlight_start_indis"] != "true" ? 'style="display:none;"' : '' ?>>
-                        <input type="color" class="picker" name="vars[highlight_col]" id="highlight_col" value="<?= $vars["highlight_col"] ?>" /><label for="highlight_col" class="picker-label"><?= I18N::translate('Starting persons background color') ?></label>
+                        <input type="color" class="picker" name="vars[highlight_col]" id="highlight_col" value="<?= e($vars["highlight_col"]); ?>" /><label for="highlight_col" class="picker-label"><?= I18N::translate('Starting persons background color') ?></label>
                     </div>
                 </div>
             </div>
@@ -508,13 +509,13 @@ $xref = $individual->xref();
                 <?= MainPage::addLabel('', 'Other colours'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="col-auto">
-                        <input type="color" class="picker" name="vars[family_col]" id="family_col" value="<?= $vars["family_col"] ?>" /><label for="family_col" class="picker-label"><?= I18N::translate('Family background') ?></label>
+                        <input type="color" class="picker" name="vars[family_col]" id="family_col" value="<?= e($vars["family_col"]); ?>" /><label for="family_col" class="picker-label"><?= I18N::translate('Family background') ?></label>
                     </div>
                     <div class="col-auto">
-                        <input type="color" class="picker" name="vars[border_col]" id="border_col" value="<?= $vars["border_col"] ?>" /><label for="border_col" class="picker-label"><?= I18N::translate('Outline colour') ?></label>
+                        <input type="color" class="picker" name="vars[border_col]" id="border_col" value="<?= e($vars["border_col"]); ?>" /><label for="border_col" class="picker-label"><?= I18N::translate('Outline colour') ?></label>
                     </div>
                     <div class="col-auto">
-                        <input type="color" class="picker" name="vars[background_col]" id="background_col" value="<?= $vars["background_col"] ?>" /><label for="background_col" class="picker-label"><?= I18N::translate('Diagram background color') ?></label>
+                        <input type="color" class="picker" name="vars[background_col]" id="background_col" value="<?= e($vars["background_col"]); ?>" /><label for="background_col" class="picker-label"><?= I18N::translate('Diagram background color') ?></label>
                     </div>
                 </div>
             </div>
@@ -524,7 +525,7 @@ $xref = $individual->xref();
         <div class="row form-group">
             <?= MainPage::addLabel('output_type', 'Output file type'); ?>
             <div class="col-sm-8 wt-page-options-value">
-                <?= view('components/select', ['name' => 'vars[output_type]', 'id' => 'output_type', 'selected' => $vars['output_type'], 'options' => $otypes]) ?>
+                <?= view('components/select', ['name' => 'vars[output_type]', 'id' => 'output_type', 'selected' => e($vars['output_type']), 'options' => $otypes]) ?>
                 <small id="emailHelp" class="form-text text-muted"><?= $usegraphviz ? "" : I18N::translate("Options limited as Graphviz not installed on server") ?></small>
             </div>
         </div>
