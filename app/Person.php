@@ -329,7 +329,7 @@ class Person
      */
     private function isStartingIndividual(string $pid): bool
     {
-        $indis = explode(",", $this->dot->settings["indi"]);
+        $indis = explode(",", $this->dot->settings['xref_list']);
         for ($i=0;$i<count($indis);$i++) {
             if (trim($indis[$i]) == $pid) {
                 return true;
