@@ -178,7 +178,7 @@ class Dot {
      */
     private function createIndiList (array &$individuals, array &$families, bool $full) {
         $this->indi_search_method = array("ance" => $this->settings["include_ancestors"], "desc" => $this->settings["include_descendants"], "spou" => $this->settings["include_spouses"], "sibl" => $this->settings["include_siblings"], "rels" => $this->settings["include_all_relatives"], "any" => $this->settings["include_all"]);
-        $indis = explode(",", $this->settings["indi"]);
+        $indis = explode(",", $this->settings['xref_list']);
         $indiLists = array();
         for ($i=0;$i<count($indis);$i++) {
             $indiLists[$i] = array();

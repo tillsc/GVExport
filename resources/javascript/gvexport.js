@@ -256,7 +256,7 @@ function downloadSVGAsImage(type) {
         } else if (type === "pdf") {
             createPdfFromImage(dataURL, img.width, img.height);
         } else {
-            downloadLink(dataURL, "gvexport." + type);
+            downloadLink(dataURL, download_file_name + "." + type);
         }
     }
 
@@ -293,7 +293,7 @@ function replaceImageURLs(svg, type, img) {
         if (type === "svg") {
             const svgBlob = new Blob([svg], {type: "image/svg+xml;charset=utf-8"});
             const svgUrl = URL.createObjectURL(svgBlob);
-            downloadLink(svgUrl, "gvexport."+type);
+            downloadLink(svgUrl, download_file_name + "."+type);
         } else {
             img.src = "data:image/svg+xml;utf8," + svg;
         }
@@ -489,8 +489,8 @@ function toggleUpdateButton() {
     const updateBtn = document.getElementById('update-browser');
     const autoSettingBox = document.getElementById('auto_update');
 
-    const visible = !autoSettingBox.checked;
-    showHide(updateBtn, visible);
+    const visible = autoSettingBox.checked;
+    showHide(updateBtn, !visible);
     autoUpdate = visible;
     updateRender();
 }
@@ -644,10 +644,10 @@ function createPdfFromImage(imgData, width, height) {
     const heightInches = height / dpi;
     const doc = new window.jspdf.jsPDF({orientation: orientation, format: [widthInches, heightInches], unit: 'in'});
     doc.addImage(imgData, "PNG", 0, 0, widthInches, heightInches);
-    // If running test suite, don't actually trigger downlaod of data
+    // If running test suite, don't actually trigger download of data
     // We have generated it so know it works
     if (!window.Cypress) {
-        doc.save("gvexport.pdf");
+        doc.save(download_file_name + ".pdf");
     }
 }
 
@@ -853,7 +853,7 @@ function loadSettings(data) {
             }
         } else {
             if (el.type === 'checkbox' || el.type === 'radio') {
-                setCheckStatus(el, settings[key] === "1");
+                setCheckStatus(el, settings[key]);
             } else {
                 el.value = settings[key];
             }
@@ -862,6 +862,7 @@ function loadSettings(data) {
     setStateFastRelationCheck();
     showHide(document.getElementById('arrow_group'),document.getElementById('colour_arrow_related').checked)
     showHide(document.getElementById('startcol_option'),document.getElementById('highlight_start_indis').checked)
+    refreshIndisFromXREFS(false);
 }
 
 function setCheckStatus(el, checked) {

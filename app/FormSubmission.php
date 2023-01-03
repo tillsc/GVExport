@@ -2,6 +2,8 @@
 
 namespace vendor\WebtreesModules\gvexport;
 
+use Fisharebest\Webtrees\Validator;
+
 class FormSubmission
 {
     public function load($vars): array
@@ -9,9 +11,9 @@ class FormSubmission
         $settings = [];
         // INDI id
         if (!empty($vars["xref_list"])) {
-            $settings['indi'] = $vars["xref_list"];
+            $settings['xref_list'] = $vars["xref_list"];
         } else {
-            $settings['indi'] = "";
+            $settings['xref_list'] = "";
         }
         // Stop PIDs
         if (!empty($vars["stop_xref_list"])) {
@@ -42,6 +44,18 @@ class FormSubmission
 
         if (isset($vars["mclimit"])) {
             $settings['mclimit'] = $vars["mclimit"];
+        }
+
+        if (isset($vars["filename"])) {
+            $settings['filename'] = $vars["filename"];
+        }
+
+        if (isset($vars["birth_prefix"])) {
+            $settings['birth_prefix'] = $vars["birth_prefix"];
+        }
+
+        if (isset($vars["death_prefix"])) {
+            $settings['death_prefix'] = $vars["death_prefix"];
         }
 
         $settings['mark_not_related'] = isset($vars['mark_not_related']);
