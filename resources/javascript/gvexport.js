@@ -853,7 +853,7 @@ function loadSettings(data) {
             }
         } else {
             if (el.type === 'checkbox' || el.type === 'radio') {
-                setCheckStatus(el, settings[key] === "1");
+                setCheckStatus(el, settings[key]);
             } else {
                 el.value = settings[key];
             }
@@ -862,6 +862,7 @@ function loadSettings(data) {
     setStateFastRelationCheck();
     showHide(document.getElementById('arrow_group'),document.getElementById('colour_arrow_related').checked)
     showHide(document.getElementById('startcol_option'),document.getElementById('highlight_start_indis').checked)
+    refreshIndisFromXREFS(false);
 }
 
 function setCheckStatus(el, checked) {
