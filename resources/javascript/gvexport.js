@@ -863,6 +863,7 @@ function loadSettings(data) {
     showHide(document.getElementById('arrow_group'),document.getElementById('colour_arrow_related').checked)
     showHide(document.getElementById('startcol_option'),document.getElementById('highlight_start_indis').checked)
     refreshIndisFromXREFS(false);
+    if (autoUpdate) updateRender();
 }
 
 function setCheckStatus(el, checked) {
