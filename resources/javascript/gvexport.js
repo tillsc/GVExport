@@ -828,16 +828,16 @@ function loadSettings(data) {
                     setCheckStatus(document.getElementById('diagtype_combined'), settings[key] === 'combined');
                     break;
                 case 'birthdate_year_only':
-                    setCheckStatus(document.getElementById('bd_type_y'), settings[key] === '1');
-                    setCheckStatus(document.getElementById('bd_type_gedcom'), settings[key] === '');
+                    setCheckStatus(document.getElementById('bd_type_y'), settings[key]);
+                    setCheckStatus(document.getElementById('bd_type_gedcom'), !settings[key]);
                     break;
                 case 'death_date_year_only':
-                    setCheckStatus(document.getElementById('dd_type_y'), settings[key] === '1');
-                    setCheckStatus(document.getElementById('dd_type_gedcom'), settings[key] === '');
+                    setCheckStatus(document.getElementById('dd_type_y'), settings[key]);
+                    setCheckStatus(document.getElementById('dd_type_gedcom'), !settings[key]);
                     break;
                 case 'marr_date_year_only':
-                    setCheckStatus(document.getElementById('md_type_y'), settings[key] === '1');
-                    setCheckStatus(document.getElementById('md_type_gedcom'), settings[key] === '');
+                    setCheckStatus(document.getElementById('md_type_y'), settings[key]);
+                    setCheckStatus(document.getElementById('md_type_gedcom'), !settings[key]);
                     break;
                 case 'adv_people':
                     toggleAdvanced(document.getElementById('people-advanced-button'), 'people-advanced', settings[key] === 'adv_people');
@@ -848,8 +848,14 @@ function loadSettings(data) {
                 case 'adv_files':
                     toggleAdvanced(document.getElementById('files-advanced-button'), 'files-advanced', settings[key] === 'adv_files');
                     break;
+                // If option to use cart is not showing, don't load, but also don't show error
+                case 'use_cart':
+                // These options only exist if debug panel active - don't show error if not found
+                case 'enable_debug_mode':
+                case 'enable_graphviz':
+                    break;
                 default:
-                    showToast(key);
+                    showToast("E:" + CLIENT_ERRORS[1] + " " + key);
             }
         } else {
             if (el.type === 'checkbox' || el.type === 'radio') {
@@ -878,6 +884,11 @@ function setGraphvizAvailable(available) {
     graphvizAvailable = available;
 }
 
+/**
+ * This function exists for automated testing to access settings JSON without having to download the file
+ *
+ * @returns {string}
+ */
 function getSettingsJson() {
     return settings_json;
 }

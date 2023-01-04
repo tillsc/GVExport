@@ -80,7 +80,11 @@ class Settings
                     if (Settings::shouldLoadSetting($preference)) {
                         $pref = $tree->getUserPreference(Auth::user(), Settings::PREFERENCE_PREFIX . $preference, "preference not set");
                         if ($pref != "preference not set") {
-                            $settings[$preference] = $pref;
+                            if ($pref == 'true' || $pref == 'false') {
+                                $settings[$preference] = ($pref == 'true');
+                            } else {
+                                $settings[$preference] = $pref;
+                            }
                         } else if ($preference == 'show_xref_individuals') {
                             $settings['first_run_xref_check'] = true;
                         }
@@ -128,7 +132,11 @@ class Settings
         } else {
             foreach ($settings as $preference => $value) {
                 if (Settings::shouldSaveSetting($preference)) {
-                    $tree->setUserPreference(Auth::user(), Settings::PREFERENCE_PREFIX . $preference, $value);
+                    if (gettype($value) == 'boolean') {
+                        $tree->setUserPreference(Auth::user(), Settings::PREFERENCE_PREFIX . $preference, ($value ? 'true' : 'false'));
+                    } else {
+                        $tree->setUserPreference(Auth::user(), Settings::PREFERENCE_PREFIX . $preference, $value);
+                    }
                 }
             }
         }
@@ -304,9 +312,9 @@ class Settings
     {
         $userSettings = $this->loadUserSettings($module, $tree);
         $settings = [];
-        foreach ($userSettings as $preference => $value) {
+        foreach ($this->defaultSettings as $preference => $value) {
             if (Settings::shouldSaveSetting($preference)) {
-                $settings[$preference] = $value;
+                $settings[$preference] = $userSettings[$preference];
             }
         }
         return json_encode($settings);
