@@ -315,22 +315,25 @@ function downloadLink(URL, filename) {
 }
 
 // Toggle the showing of an advanced settings section
+// button - the button element calling the script
 // id - the id of the element we are toggling
-function toggleAdvanced(caller, id, visible = null) {
+// visible - whether to make element visible or hidden. Null to toggle current state.
+function toggleAdvanced(button, id, visible = null) {
     const el = document.getElementById(id);
+    // If toggling, set to the opposite of corrent state
     if (visible === null) {
-        visible = el.style.display !== "none";
+        visible = el.style.display == "none";
     }
-    showHide(el, !visible);
+    showHide(el, visible);
     if (visible) {
-        caller.innerHTML = caller.innerHTML.replaceAll("↑","↓");
+        button.innerHTML = button.innerHTML.replaceAll("↓","↑");
+        const hidden = document.getElementById(id+"-hidden");
+        hidden.value = "show";
+    } else {
+        button.innerHTML = button.innerHTML.replaceAll("↑","↓");
         // Update our hidden field for saving the state
         const hidden = document.getElementById(id+"-hidden");
         hidden.value = "";
-    } else {
-        caller.innerHTML = caller.innerHTML.replaceAll("↓","↑");
-        const hidden = document.getElementById(id+"-hidden");
-        hidden.value = "show";
     }
 }
 
@@ -839,14 +842,14 @@ function loadSettings(data) {
                     setCheckStatus(document.getElementById('md_type_y'), settings[key]);
                     setCheckStatus(document.getElementById('md_type_gedcom'), !settings[key]);
                     break;
-                case 'adv_people':
-                    toggleAdvanced(document.getElementById('people-advanced-button'), 'people-advanced', settings[key] === 'adv_people');
+                case 'show_adv_people':
+                    toggleAdvanced(document.getElementById('people-advanced-button'), 'people-advanced', settings[key]);
                     break;
-                case 'adv_appear':
-                    toggleAdvanced(document.getElementById('appearance-advanced-button'), 'appearance-advanced', settings[key] === 'adv_appear');
+                case 'show_adv_appear':
+                    toggleAdvanced(document.getElementById('appearance-advanced-button'), 'appearance-advanced', settings[key]);
                     break;
-                case 'adv_files':
-                    toggleAdvanced(document.getElementById('files-advanced-button'), 'files-advanced', settings[key] === 'adv_files');
+                case 'show_adv_files':
+                    toggleAdvanced(document.getElementById('files-advanced-button'), 'files-advanced', settings[key]);
                     break;
                 // If option to use cart is not showing, don't load, but also don't show error
                 case 'use_cart':

@@ -197,7 +197,7 @@ $xref = $individual->xref();
                 </div>
             </div>
         </div>
-        <div id="people-advanced" <?= $vars["adv_people"] ? '' : 'style="display:none"'; ?>>
+        <div id="people-advanced" <?= $vars["show_adv_people"] ? '' : 'style="display:none"'; ?>>
             <div class="row form-group">
                 <?= MainPage::addLabel('xref_list', 'XREFs of included individuals'); ?>
                 <div class="col-sm-8 wt-page-options-value">
@@ -241,7 +241,7 @@ $xref = $individual->xref();
                 </div>
             </div>
         </div>
-        <a href="#" id="people-advanced-button" onclick="toggleAdvanced(this, 'people-advanced')"><div class="wt-page-options-label advanced-settings-btn"><?= ($vars["adv_people"] ? '↑ ' : '↓ ') . I18N::translate('Toggle advanced settings') . ($vars["adv_people"] ? ' ↑' : ' ↓'); ?></div></a>
+        <a href="#" id="people-advanced-button" onclick="toggleAdvanced(this, 'people-advanced')"><div class="wt-page-options-label advanced-settings-btn"><?= ($vars["show_adv_people"] ? '↑ ' : '↓ ') . I18N::translate('Toggle advanced settings') . ($vars["show_adv_people"] ? ' ↑' : ' ↓'); ?></div></a>
 
         <h3><?= I18N::translate('Appearance') ?></h3>
         <div class="row form-group">
@@ -271,7 +271,7 @@ $xref = $individual->xref();
             </div>
         </div>
 
-        <div id="appearance-advanced" <?= $vars["adv_appear"] ? '' : 'style="display:none"' ?>>
+        <div id="appearance-advanced" <?= $vars["show_adv_appear"] ? '' : 'style="display:none"' ?>>
 
             <?php if ($tree->getPreference('SHOW_HIGHLIGHT_IMAGES') == '1') { ?>
                 <div class="row form-group">
@@ -520,7 +520,7 @@ $xref = $individual->xref();
                 </div>
             </div>
         </div>
-        <a href="#" id="appearance-advanced-button" onclick="toggleAdvanced(this, 'appearance-advanced')"><div class="wt-page-options-label advanced-settings-btn"><?= ($vars["adv_appear"] ? '↑ ' : '↓ ') . I18N::translate('Toggle advanced settings') . ($vars["adv_appear"] ? ' ↑' : ' ↓'); ?></div></a>
+        <a href="#" id="appearance-advanced-button" onclick="toggleAdvanced(this, 'appearance-advanced')"><div class="wt-page-options-label advanced-settings-btn"><?= ($vars["show_adv_appear"] ? '↑ ' : '↓ ') . I18N::translate('Toggle advanced settings') . ($vars["show_adv_appear"] ? ' ↑' : ' ↓'); ?></div></a>
         <h3><?= I18N::translate('File settings') ?></h3>
         <div class="row form-group">
             <?= MainPage::addLabel('output_type', 'Output file type'); ?>
@@ -529,7 +529,7 @@ $xref = $individual->xref();
                 <small id="emailHelp" class="form-text text-muted"><?= $usegraphviz ? "" : I18N::translate("Options limited as Graphviz not installed on server") ?></small>
             </div>
         </div>
-        <div id="files-advanced" <?= $vars["adv_files"] ? '' : 'style="display:none"'; ?>>
+        <div id="files-advanced" <?= $vars["show_adv_files"] ? '' : 'style="display:none"'; ?>>
             <div class="row form-group">
                 <?= MainPage::addLabel('auto_update', 'Browser render'); ?>
                 <div class="col-sm-8 wt-page-options-value">
@@ -545,7 +545,7 @@ $xref = $individual->xref();
                 </div>
             </div>
         </div>
-        <a href="#" id="files-advanced-button" onclick="toggleAdvanced(this, 'files-advanced')"><div class="wt-page-options-label advanced-settings-btn"><?= ($vars["adv_files"] ? '↑ ' : '↓ ') . I18N::translate('Toggle advanced settings') . ($vars["adv_files"] ? ' ↑' : ' ↓'); ?></div></a>
+        <a href="#" id="files-advanced-button" onclick="toggleAdvanced(this, 'files-advanced')"><div class="wt-page-options-label advanced-settings-btn"><?= ($vars["show_adv_files"] ? '↑ ' : '↓ ') . I18N::translate('Toggle advanced settings') . ($vars["show_adv_files"] ? ' ↑' : ' ↓'); ?></div></a>
         <?php if ($vars["show_debug_panel"]) { ?>
         <h3><?= I18N::translate('Debug') ?></h3>
         <div class="row form-group">
@@ -575,9 +575,9 @@ $xref = $individual->xref();
     </div>
 
     <input type="hidden" id="browser" name="browser" value="false">
-    <input type="hidden" id="people-advanced-hidden" name="vars[adv_people]" value="<?= $vars["adv_people"] ? 'show' : '' ?>">
-    <input type="hidden" id="appearance-advanced-hidden" name="vars[adv_appear]" value="<?= $vars["adv_appear"] ? 'show' : '' ?>">
-    <input type="hidden" id="files-advanced-hidden" name="vars[adv_files]" value="<?= $vars["adv_files"] ? 'show' : '' ?>">
+    <input type="hidden" id="people-advanced-hidden" name="vars[show_adv_people]" value="<?= $vars["show_adv_people"] ? 'show' : '' ?>">
+    <input type="hidden" id="appearance-advanced-hidden" name="vars[show_adv_appear]" value="<?= $vars["show_adv_appear"] ? 'show' : '' ?>">
+    <input type="hidden" id="files-advanced-hidden" name="vars[show_adv_files]" value="<?= $vars["show_adv_files"] ? 'show' : '' ?>">
     <div id="toast-container"></div>
 </form>
 
