@@ -320,9 +320,9 @@ function downloadLink(URL, filename) {
 // visible - whether to make element visible or hidden. Null to toggle current state.
 function toggleAdvanced(button, id, visible = null) {
     const el = document.getElementById(id);
-    // If toggling, set to the opposite of current state
+    // If toggling, set to the opposite of corrent state
     if (visible === null) {
-        visible = el.style.display === "none";
+        visible = el.style.display == "none";
     }
     showHide(el, visible);
     if (visible) {
@@ -334,9 +334,6 @@ function toggleAdvanced(button, id, visible = null) {
         // Update our hidden field for saving the state
         const hidden = document.getElementById(id+"-hidden");
         hidden.value = "";
-    }
-    if (autoUpdate) {
-        updateRender();
     }
 }
 
