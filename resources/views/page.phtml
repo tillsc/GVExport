@@ -207,7 +207,6 @@ $xref = $individual->xref();
                             <button type="button" class="btn btn-outline-secondary" onclick="refreshIndisFromXREFS(false)">⟳</button>
                         </div>
                     </div>
-
                 </div>
             </div>
             <div class="row form-group">
@@ -536,6 +535,15 @@ $xref = $individual->xref();
                     <label for="auto_update"><?= I18N::translate('Auto-update') ?></label>
                     <input type="checkbox" onclick="toggleUpdateButton()" name="vars[auto_update]" id="auto_update" value="auto_update" <?= $vars["auto_update"] ? 'checked' : '' ?>>
                 </div>
+                <?= MainPage::addLabel('save_settings', 'Save settings'); ?>
+                <div class="col-sm-8 wt-page-options-value">
+                    <div class="input-group mt-1">
+                        <input type="text" class="form-control" name="vars[save_settings]" id="save_settings" placeholder="Settings name">
+                        <div class="input-group-append">
+                            <button type="button" class="btn btn-outline-secondary" onclick=""><?= I18N::translate('Save') ?></button>
+                        </div>
+                    </div>
+                </div>
                 <?= MainPage::addLabel('', 'Settings file'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <label for="save_settings"><?= I18N::translate('Save settings to file') ?></label><br>
@@ -709,8 +717,8 @@ $xref = $individual->xref();
             try {
                 jsonResponse = JSON.parse(response);
             } catch(e) {
-                showToast("E:<?= I18N::translate('Login expired. Reloading page...'); ?>");
-                showToast("E: " + e);
+                showToast(ERROR_CHAR + "<?= I18N::translate('Login expired. Reloading page...'); ?>");
+                showToast(ERROR_CHAR + e);
                 setTimeout(function(){location.reload();}, 3000);
                 return false;
             }
@@ -779,9 +787,9 @@ $xref = $individual->xref();
         }).catch(function (error) {
             if (error.message.includes("TOTAL_MEMORY")) {
                 if (graphvizAvailable) {
-                    showToast("E: <?= I18N::translate('Memory limit reached. Please reduce number of records or use download option.'); ?>");
+                    showToast(ERROR_CHAR + "<?= I18N::translate('Memory limit reached. Please reduce number of records or use download option.'); ?>");
                 } else {
-                        showToast("E: <?= I18N::translate('Memory limit reached. Please reduce number of records or install Graphviz on server and use download option.'); ?>");
+                        showToast(ERROR_CHAR + "<?= I18N::translate('Memory limit reached. Please reduce number of records or install Graphviz on server and use download option.'); ?>");
                 }
                 rendering.innerHTML = "";
             } else {

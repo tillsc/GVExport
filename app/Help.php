@@ -75,7 +75,9 @@ class Help
         $this->help[30][0] = "Other colours";
         $this->help[30][1] = "This section allows you to change colours associated with the diagram that are not part of the individual tile above. Click the coloured box to change the colour. This uses your browser's colour picker, so will look different depending on what browser you are using.";
         $this->help[31][0] = "Settings file";
-        $this->help[31][1] = "Here you are able to save the chosen settings to a file, and to load that file at a later time.</p><p>For example, you may have many diagrams you create from your tree. You may want to save the settings used for each diagram so that in future you can regenerate the diagram to include any new information.";
+        $this->help[31][1] = "Here you are able to save the chosen settings to a file, and to load that file at a later time.</p><p>For example, you may have many diagrams you create from your tree. You may want to save the settings used for each diagram so that in future you can regenerate the diagram to include any new information.</p><p>Also see the option to save settings within GVExport.";
+        $this->help[32][0] = "Save settings";
+        $this->help[32][1] = "Here you are able to save the chosen settings within GVExport. The settings are only accessible within the same user and tree. Click a settings record to load it.</p><p>For example, you may have many diagrams you create from your tree. You may want to save the settings used for each diagram so that in future you can regenerate the diagram to include any new information.</p><p>Also see the option to save settings to a file.";
 
     }
 
