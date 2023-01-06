@@ -81,5 +81,3 @@ return array(
 	'death_prefix' => '+', // Text shown on chart before the death date
 	'auto_update' => true // If auto-updating browser render on change is enabled or not
 );
-
-?>

@@ -1,19 +1,4 @@
 const ERROR_CHAR = "E:";
-const appendPidTo = function (sourceId, targetId) {
-    const ids = [];
-    document.getElementById(targetId).value.split(",").forEach(function (id) {
-        id = id.trim();
-        if (id !== "") {
-            ids.push(id);
-        }
-    });
-    const newId = document.getElementById(sourceId).value.trim();
-    if (ids.indexOf(newId) === -1) {
-        ids.push(newId);
-    }
-    document.getElementById(targetId).value = ids.join(",");
-};
-
 
 function hideSidebar(e) {
     document.querySelector(".sidebar").hidden = true;
@@ -171,13 +156,6 @@ function showHide(element, show) {
     }
 }
 
-// Hide a displayed element or show a hidden one
-function toggleShowID(css_id) {
-    const element = document.getElementById(css_id);
-    const visible = element.style.display !== "none";
-    showHide(element, !visible);
-}
-
 // Show a toast message
 // message - the message to show
 function showToast(message) {
@@ -252,7 +230,7 @@ function downloadSVGAsImage(type) {
         // Download it
         const dataURL = canvas.toDataURL('image/'+type);
         if (dataURL.length < 10) {
-            showToast("E:"+CLIENT_ERRORS[0]); // Canvas too big
+            showToast(ERROR_CHAR+CLIENT_ERRORS[0]); // Canvas too big
         } else if (type === "pdf") {
             createPdfFromImage(dataURL, img.width, img.height);
         } else {
@@ -322,7 +300,7 @@ function toggleAdvanced(button, id, visible = null) {
     const el = document.getElementById(id);
     // If toggling, set to the opposite of corrent state
     if (visible === null) {
-        visible = el.style.display == "none";
+        visible = el.style.display === "none";
     }
     showHide(el, visible);
     if (visible) {
@@ -858,7 +836,7 @@ function loadSettings(data) {
                 case 'enable_graphviz':
                     break;
                 default:
-                    showToast("E:" + CLIENT_ERRORS[1] + " " + key);
+                    showToast(ERROR_CHAR + CLIENT_ERRORS[1] + " " + key);
             }
         } else {
             if (el.type === 'checkbox' || el.type === 'radio') {

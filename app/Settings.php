@@ -2,7 +2,6 @@
 
 namespace vendor\WebtreesModules\gvexport;
 
-use Cassandra\Set;
 use Fisharebest\Webtrees\Auth;
 
 class Settings
@@ -30,19 +29,17 @@ class Settings
     /**
      * Retrieve the currently set default settings from the admin page
      *
-     * @param $module
-     * @param bool $reset
      * @return array
      */
     public function getDefaultSettings(): array
     {
         return $this->defaultSettings;
     }
+
     /**
      * Retrieve the currently set default settings from the admin page
      *
      * @param $module
-     * @param bool $reset
      * @return array
      */
     public function getAdminSettings($module): array
