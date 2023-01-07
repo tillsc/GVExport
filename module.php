@@ -226,13 +226,20 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
     public function postChartAction(ServerRequestInterface $request): ResponseInterface
     {
         $tree = $request->getAttribute('tree');
-        $temp_dir = $this->saveDOTFile($tree);
+        if (isset($_POST['json_data'])) {
+            $api = new ApiHandler();
+            $api->handle($_POST['json_data'], $this, $tree);
+            return $api->getResponse();
+        } else {
 
-        // If browser mode, output dot instead of selected file
-        $file_type = isset($_POST["browser"]) && $_POST["browser"] == "true" ? "dot" : $_REQUEST["vars"]["output_type"];
+            $temp_dir = $this->saveDOTFile($tree);
 
-        $outputFile = new OutputFile($temp_dir, $file_type, $this);
-        return $outputFile->downloadFile();
+            // If browser mode, output dot instead of selected file
+            $file_type = isset($_POST["browser"]) && $_POST["browser"] == "true" ? "dot" : $_REQUEST["vars"]["output_type"];
+
+            $outputFile = new OutputFile($temp_dir, $file_type, $this);
+            return $outputFile->downloadFile();
+        }
     }
 
     /**

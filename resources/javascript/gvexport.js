@@ -873,3 +873,39 @@ function setGraphvizAvailable(available) {
 function getSettingsJson() {
     return settings_json;
 }
+
+function saveSettings() {
+    let request = {"type": "get_settings"};
+    let json = JSON.stringify(request);
+    sendRequest(json, null);
+}
+function sendRequest(json) {
+        var form = document.getElementById('gvexport');
+        var el = document.createElement("input");
+        el.name="json_data";
+        el.value=json;
+        form.appendChild(el);
+        document.body.appendChild(form);
+    document.getElementById("browser").value = "true";
+    data = jQuery(form).serialize();
+    document.getElementById("browser").value = "false";
+    el.remove();
+    window.fetch(form.getAttribute('action'), {
+        method: form.getAttribute('method'),
+        credentials: 'same-origin', // include, *same-origin, omit
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: data
+    }).then(function (response) {
+        if (!response.ok) {
+            return response.text().then(function (errorText) {
+                return Promise.reject(errorText)
+            });
+        }
+        return response.text();
+    }).then(function (response) {
+        if (typeof callback == "function")
+            callback(response);
+    });
+}
