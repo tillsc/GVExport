@@ -547,7 +547,7 @@ $xref = $individual->xref();
                 <?= MainPage::addLabel('', 'Settings file'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <label for="save_settings"><?= I18N::translate('Save settings to file') ?></label><br>
-                    <button class="btn btn-outline-secondary" type="button" name="save_settings" id="save_settings" onclick="downloadSettingsFile(true)"><?= I18N::translate('Download') ?></button><br>
+                    <button class="btn btn-outline-secondary" type="button" name="save_settings" id="save_settings" onclick="downloadSettingsFile()"><?= I18N::translate('Download') ?></button><br>
                     <label for="save_settings"><?= I18N::translate('Load settings from file') ?></label><br>
                     <input type="file" onchange="uploadSettingsFile(this)">
                 </div>
@@ -726,7 +726,6 @@ $xref = $individual->xref();
             if (lastDotStr.indexOf("digraph WT_Graph {") !== -1) {
                 messages = jsonResponse.messages;
                 debug_string = jsonResponse.enable_debug_mode;
-                settings_json = jsonResponse.settings;
             }
 
             const images = [...lastDotStr.matchAll(/<IMG[^>]+SRC="([^"]*)/gmi)].map(function (matches) {

@@ -758,21 +758,14 @@ function showHelp(item) {
 /**
  * Downloads settings as JSON file
  */
-function downloadSettingsFile(reloadSettings) {
-    if (reloadSettings) {
-        settings_json = "";
-        updateRender();
-    }
-
-    setTimeout(() => {
-        if (settings_json !== "") {
-            let file = new Blob([settings_json], {type: "text/plain"});
+function downloadSettingsFile() {
+    saveSettings(function () {
+        getSettings(function (settings_json_string) {
+            let file = new Blob([settings_json_string], {type: "text/plain"});
             let url = URL.createObjectURL(file);
             downloadLink(url, TREE_NAME + ".json")
-        } else {
-            downloadSettingsFile(false);
-        }
-    }, 100);
+        });
+    });
 }
 
 /**
@@ -865,27 +858,27 @@ function setGraphvizAvailable(available) {
     graphvizAvailable = available;
 }
 
-/**
- * This function exists for automated testing to access settings JSON without having to download the file
- *
- * @returns {string}
- */
-function getSettingsJson() {
-    return settings_json;
+function saveSettings(callback = null) {
+    let request = {"type": "save_settings"};
+    let json = JSON.stringify(request);
+    sendRequest(json, callback);
 }
-
-function saveSettings() {
+function getSettings(callback = null) {
     let request = {"type": "get_settings"};
     let json = JSON.stringify(request);
-    sendRequest(json, null);
+    sendRequest(json, function (response) {
+        settings = JSON.parse(response).settings;
+        if (typeof callback == "function")
+            callback(settings);
+    });
 }
-function sendRequest(json) {
-        var form = document.getElementById('gvexport');
-        var el = document.createElement("input");
-        el.name="json_data";
-        el.value=json;
-        form.appendChild(el);
-        document.body.appendChild(form);
+function sendRequest(json, callback) {
+    var form = document.getElementById('gvexport');
+    var el = document.createElement("input");
+    el.name="json_data";
+    el.value=json;
+    form.appendChild(el);
+    document.body.appendChild(form);
     document.getElementById("browser").value = "true";
     data = jQuery(form).serialize();
     document.getElementById("browser").value = "false";
@@ -905,7 +898,8 @@ function sendRequest(json) {
         }
         return response.text();
     }).then(function (response) {
-        if (typeof callback == "function")
+        if (typeof callback == "function") {
             callback(response);
+        }
     });
 }
