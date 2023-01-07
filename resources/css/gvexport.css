@@ -132,7 +132,7 @@
     padding: 2px !important;
 }
 
-.indi_list_item {
+.indi_list_item, .settings_list_item {
     position: relative;
     border: 1px solid;
     background-color: white;

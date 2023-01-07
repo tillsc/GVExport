@@ -537,19 +537,22 @@ $xref = $individual->xref();
                 </div>
                 <?= MainPage::addLabel('save_settings', 'Save settings'); ?>
                 <div class="col-sm-8 wt-page-options-value">
+                    <div id="settings_list">
+
+                    </div>
                     <div class="input-group mt-1">
-                        <input type="text" class="form-control" name="vars[save_settings]" id="save_settings" placeholder="Settings name">
+                        <input type="text" class="form-control" name="vars[save_settings]" id="save_settings" placeholder="<?= I18N::translate('Settings name'); ?>">
                         <div class="input-group-append">
-                            <button type="button" class="btn btn-outline-secondary" onclick="saveSettings()"><?= I18N::translate('Save') ?></button>
+                            <button type="button" class="btn btn-outline-secondary" onclick=""><?= I18N::translate('Save') ?></button>
                         </div>
                     </div>
                 </div>
                 <?= MainPage::addLabel('', 'Settings file'); ?>
                 <div class="col-sm-8 wt-page-options-value">
-                    <label for="save_settings"><?= I18N::translate('Save settings to file') ?></label><br>
-                    <button class="btn btn-outline-secondary" type="button" name="save_settings" id="save_settings" onclick="downloadSettingsFile()"><?= I18N::translate('Download') ?></button><br>
-                    <label for="save_settings"><?= I18N::translate('Load settings from file') ?></label><br>
-                    <input type="file" onchange="uploadSettingsFile(this)">
+                    <label for="download_settings"><?= I18N::translate('Save settings to file') ?></label><br>
+                    <button class="btn btn-outline-secondary" type="button" name="save_settings" id="download_settings" onclick="downloadSettingsFile()"><?= I18N::translate('Download') ?></button><br>
+                    <label for="load_settings"><?= I18N::translate('Load settings from file') ?></label><br>
+                    <input id="load_settings" type="file" onchange="uploadSettingsFile(this)">
                 </div>
             </div>
         </div>

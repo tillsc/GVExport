@@ -1,4 +1,6 @@
 const ERROR_CHAR = "E:";
+const ID_MAIN_SETTINGS = "_MAIN_";
+const ID_ALL_SETTINGS = "_ALL_";
 
 function hideSidebar(e) {
     document.querySelector(".sidebar").hidden = true;
@@ -714,6 +716,7 @@ function pageLoaded() {
     loadURLXref();
     loadXrefList(TOMSELECT_URL, 'xref_list', 'indi_list');
     loadXrefList(TOMSELECT_URL, 'stop_xref_list', 'stop_indi_list');
+    loadSettingsDetails();
     // Remove reset parameter from URL when page loaded, to prevent
     // further resets when page reloaded
     removeURLParameter("reset");
@@ -760,7 +763,7 @@ function showHelp(item) {
  */
 function downloadSettingsFile() {
     saveSettings(function () {
-        getSettings(function (settings_json_string) {
+        getSettings(ID_MAIN_SETTINGS, function (settings_json_string) {
             let file = new Blob([settings_json_string], {type: "text/plain"});
             let url = URL.createObjectURL(file);
             downloadLink(url, TREE_NAME + ".json")
@@ -768,6 +771,9 @@ function downloadSettingsFile() {
     });
 }
 
+function addSavedSettings() {
+
+}
 /**
  * Loads settings from uploaded file
  */
@@ -863,13 +869,21 @@ function saveSettings(callback = null) {
     let json = JSON.stringify(request);
     sendRequest(json, callback);
 }
-function getSettings(callback = null) {
-    let request = {"type": "get_settings"};
+function getSettings(id = ID_ALL_SETTINGS, callback = null) {
+    let request = {
+        "type": "get_settings",
+        "settings_id": id
+    };
     let json = JSON.stringify(request);
     sendRequest(json, function (response) {
-        settings = JSON.parse(response).settings;
-        if (typeof callback == "function")
-            callback(settings);
+        let json = JSON.parse(response);
+        if (json.success) {
+            if (typeof callback == "function") {
+                callback(json.settings);
+            }
+        } else {
+            showToast("Failed to load JSON: " + json.error + "\n JSON: " + response);
+        }
     });
 }
 function sendRequest(json, callback) {
@@ -901,5 +915,29 @@ function sendRequest(json, callback) {
         if (typeof callback == "function") {
             callback(response);
         }
+    });
+}
+
+function loadSettingsDetails() {
+    getSettings(ID_ALL_SETTINGS, function(settings) {
+        let settingsList;
+        try {
+            settingsList = JSON.parse(settings);
+        } catch (e) {
+            showToast("Failed to load saved settings: " + e);
+            return false;
+        }
+        Object.keys(settingsList).forEach (function(key) {
+            const listElement = document.getElementById('settings_list');
+            const newLinkWrapper = document.createElement("a");
+            newLinkWrapper.setAttribute("href", "#");
+            const newListItem = document.createElement("div");
+            newListItem.className = "settings_list_item";
+            newListItem.setAttribute("data-settings", JSON.stringify(settingsList[key]['settings']));
+            newListItem.setAttribute("onclick", "loadSettings(this.getAttribute('data-settings'))");
+            newListItem.innerHTML = "<a href=\"#\">" + settingsList[key]['name'] + "<div class=\"remove-item\" onclick=\"removeItem(event, this.parentElement, '')\"><a href='#'>×</a></div></a>";
+            newLinkWrapper.appendChild(newListItem);
+            listElement.appendChild(newLinkWrapper);
+        });
     });
 }

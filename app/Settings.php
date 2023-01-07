@@ -6,6 +6,8 @@ use Fisharebest\Webtrees\Auth;
 
 class Settings
 {
+    public const ID_MAIN_SETTINGS = "_MAIN_";
+    public const ID_ALL_SETTINGS = "_ALL_";
     private const GUEST_USER_ID = 0;
     private const PREFERENCE_PREFIX = "GVE_";
     private array $defaultSettings;
@@ -65,8 +67,9 @@ class Settings
      * @param bool $reset
      * @return array
      */
-    public function loadUserSettings($module, $tree, bool $reset = false): array
+    public function loadUserSettings($module, $tree, bool $reset = false, $id = ""): array
     {
+        $id_suffix = $id === "" ? "" : "_" . $id;
         $settings = $this->getAdminSettings($module);
         if (!$reset) {
             if (Auth::user()->id() == Settings::GUEST_USER_ID) {
@@ -75,7 +78,7 @@ class Settings
             } else {
                 foreach ($settings as $preference => $value) {
                     if (Settings::shouldLoadSetting($preference)) {
-                        $pref = $tree->getUserPreference(Auth::user(), Settings::PREFERENCE_PREFIX . $preference, "preference not set");
+                        $pref = $tree->getUserPreference(Auth::user(), Settings::PREFERENCE_PREFIX . $preference . $id_suffix , "preference not set");
                         if ($pref != "preference not set") {
                             if ($pref == 'true' || $pref == 'false') {
                                 $settings[$preference] = ($pref == 'true');
@@ -305,9 +308,9 @@ class Settings
         return Settings::shouldSaveSetting($setting, $admin);
     }
 
-    public function getSettingsJson($module, $tree)
+    public function getSettingsJson($module, $tree, $id)
     {
-        $userSettings = $this->loadUserSettings($module, $tree);
+        $userSettings = $this->loadUserSettings($module, $tree, $id);
         $settings = [];
         foreach ($this->defaultSettings as $preference => $value) {
             if (Settings::shouldSaveSetting($preference)) {
@@ -315,5 +318,27 @@ class Settings
             }
         }
         return json_encode($settings);
+    }
+
+    public function getAllSettingsJson($module, $tree)
+    {
+        $settings_list = array();
+        if (Auth::user()->id() == Settings::GUEST_USER_ID) {
+            $id_list = "";
+        } else {
+            $id_list = "";
+        }
+        $ids = explode(',', $id_list);
+        foreach ($ids as $id_value) {
+            $userSettings = $this->loadUserSettings($module, $tree, $id_value);
+            $settings_list[$id_value]['name'] = "Name";
+            $settings_list[$id_value]['settings'] = [];
+            foreach ($this->defaultSettings as $preference => $value) {
+                if (Settings::shouldSaveSetting($preference)) {
+                    $settings_list[$id_value]['settings'][$preference] = $userSettings[$preference];
+                }
+            }
+        }
+        return json_encode($settings_list);
     }
 }

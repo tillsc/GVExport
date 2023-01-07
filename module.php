@@ -332,7 +332,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
             $response['messages'] = $dot->messages;
             $response['enable_debug_mode'] = $dot->debug_string;
             $response['dot'] = $out;
-            $response['settings'] = $settings->getSettingsJson($this, $tree);
+            $response['settings'] = $settings->getSettingsJson($this, $tree, Settings::ID_MAIN_SETTINGS);
             $r = json_encode($response);
         } else {
             $r = $out;
