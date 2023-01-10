@@ -20,18 +20,38 @@ class ApiHandler
         if (json_last_error() === JSON_ERROR_NONE) {
             switch ($request['type']) {
                 case "save_settings":
-                    $id = ""; // TODO new parameter id. if id is null then generate new ID
                     $formSubmission = new FormSubmission();
                     $vars = $formSubmission->load($_REQUEST['vars']);
                     $settings = new Settings();
-                    $settings->saveUserSettings($tree, $vars);
-                    $this->response_data['settings'] = $settings->getSettingsJson($module, $tree, $id);
-                    $this->response_data['success'] = true;
+                    if (isset($request['main']) && !$request['main']) {
+                        $id = $settings->newSettingsId($tree);
+                    } else {
+                        $id = Settings::ID_MAIN_SETTINGS;
+                    }
+
+                    if ($id != "") {
+                        $this->response_data['settings_id'] = $id;
+                        $this->response_data['success'] = $settings->saveUserSettings($tree, $vars, $id);;
+                    } else {
+                        $this->response_data['success'] = false;
+                        $this->response_data['error'] = "Failed to assign new settings ID";
+                    }
                     break;
                 case "get_settings":
-                    if (isset($request['settings_id'])) {
+                    if (isset($request['settings_id']) && (ctype_alnum($request['settings_id']) || in_array($request['settings_id'], [Settings::ID_ALL_SETTINGS, Settings::ID_MAIN_SETTINGS]))) {
                         $settings = new Settings();
-                        $this->response_data['settings'] = $request['settings_id'] == Settings::ID_ALL_SETTINGS ? $settings->getAllSettingsJson($module, $tree) : $settings->getSettingsJson($module, $tree, $request['settings_id']);
+                        $this->response_data['settings'] = ($request['settings_id'] == Settings::ID_ALL_SETTINGS ? $settings->getAllSettingsJson($module, $tree) : $settings->getSettingsJson($module, $tree, $request['settings_id']));
+                        $this->response_data['success'] = true;
+                    } else {
+                        $this->response_data['success'] = false;
+                        $this->response_data['error'] = "invalid settings ID. JSON: " . $json_data;
+                        return false;
+                    }
+                    break;
+                case "delete_settings":
+                    if (isset($request['settings_id']) && ctype_alnum($request['settings_id'])) {
+                        $settings = new Settings();
+                        $settings->deleteUserSettings($tree, $settings, $request['settings_id']);
                         $this->response_data['success'] = true;
                     } else {
                         $this->response_data['success'] = false;

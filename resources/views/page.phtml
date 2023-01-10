@@ -543,7 +543,7 @@ $xref = $individual->xref();
                     <div class="input-group mt-1">
                         <input type="text" class="form-control" name="vars[save_settings]" id="save_settings" placeholder="<?= I18N::translate('Settings name'); ?>">
                         <div class="input-group-append">
-                            <button type="button" class="btn btn-outline-secondary" onclick=""><?= I18N::translate('Save') ?></button>
+                            <button type="button" class="btn btn-outline-secondary" onclick="saveSettingsAdvanced()"><?= I18N::translate('Save') ?></button>
                         </div>
                     </div>
                 </div>
@@ -565,10 +565,6 @@ $xref = $individual->xref();
                 <label for="enable_debug_mode"><?= I18N::translate('Enable debug mode') ?></label>
                 <input type="checkbox" name="vars[enable_debug_mode]" id="enable_debug_mode" value="enable_debug_mode" <?= $vars["enable_debug_mode"] ? 'checked' : '' ?>><br>
                 <button class="btn btn-outline-secondary" type="button" name="debug_view" onclick="return showHelp('enable_debug_mode');"><?= I18N::translate('View debug log') ?></button>
-            </div>
-            <?= MainPage::addLabel('enable_debug_mode', 'Settings JSON', FALSE); ?>
-            <div class="col-sm-8 wt-page-options-value">
-                <button class="btn btn-outline-secondary" type="button" name="debug_view" onclick="return showHelp('debug_settings');"><?= I18N::translate('View settings JSON') ?></button>
             </div>
             <?= MainPage::addLabel('enable_graphviz', 'Graphviz', FALSE); ?>
             <div class="col-sm-8 wt-page-options-value">

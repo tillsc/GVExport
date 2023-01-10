@@ -768,7 +768,7 @@ function downloadSettingsFile() {
             let url = URL.createObjectURL(file);
             downloadLink(url, TREE_NAME + ".json")
         });
-    });
+    }, true);
 }
 
 function addSavedSettings() {
@@ -864,8 +864,11 @@ function setGraphvizAvailable(available) {
     graphvizAvailable = available;
 }
 
-function saveSettings(callback = null) {
-    let request = {"type": "save_settings"};
+function saveSettings(callback = null, main) {
+    let request = {
+        "type": "save_settings",
+        "main": main
+    };
     let json = JSON.stringify(request);
     sendRequest(json, callback);
 }
@@ -927,17 +930,44 @@ function loadSettingsDetails() {
             showToast("Failed to load saved settings: " + e);
             return false;
         }
+        const listElement = document.getElementById('settings_list');
+        listElement.innerHTML = "";
         Object.keys(settingsList).forEach (function(key) {
-            const listElement = document.getElementById('settings_list');
             const newLinkWrapper = document.createElement("a");
             newLinkWrapper.setAttribute("href", "#");
             const newListItem = document.createElement("div");
             newListItem.className = "settings_list_item";
             newListItem.setAttribute("data-settings", JSON.stringify(settingsList[key]['settings']));
+            newListItem.setAttribute("data-id", settingsList[key]['id']);
             newListItem.setAttribute("onclick", "loadSettings(this.getAttribute('data-settings'))");
-            newListItem.innerHTML = "<a href=\"#\">" + settingsList[key]['name'] + "<div class=\"remove-item\" onclick=\"removeItem(event, this.parentElement, '')\"><a href='#'>×</a></div></a>";
+            newListItem.innerHTML = "<a href=\"#\">" + settingsList[key]['name'] + "<div class=\"remove-item\" onclick=\"deleteSettingsAdvanced(event, this)\"><a href='#'>×</a></div></a>";
             newLinkWrapper.appendChild(newListItem);
             listElement.appendChild(newLinkWrapper);
         });
+    });
+}
+
+function saveSettingsAdvanced() {
+    loggedIn = true;
+    if (loggedIn) {
+        saveSettings(function (response) {
+            loadSettingsDetails();
+        }, false);
+    } else {
+
+    }
+}
+function deleteSettingsAdvanced(e, element) {
+    e.stopPropagation();
+    let parentEl = element.parentElement;
+    let id = parentEl.getAttribute("data-id").trim();
+    parentEl.remove();
+    let request = {
+        "type": "delete_settings",
+        "settings_id": id
+    };
+    let json = JSON.stringify(request);
+    sendRequest(json, function (test) {
+        alert(test);
     });
 }

@@ -100,8 +100,6 @@ function getHelpText(item) {
             }
         $msg .= "case \"enable_debug_mode\":
             return '<textarea cols=50 rows=20 onclick=\"this.select()\">' + debug_string + '</textarea>';
-        case \"debug_settings\":
-            return '<textarea cols=50 rows=20 onclick=\"this.select()\">' + settings_json + '</textarea>';
         default:
             return  '" . I18N::translate("Help information not found") . "';
         }

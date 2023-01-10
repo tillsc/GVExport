@@ -10,6 +10,7 @@ class Settings
     public const ID_ALL_SETTINGS = "_ALL_";
     private const GUEST_USER_ID = 0;
     private const PREFERENCE_PREFIX = "GVE_";
+    public const SETTINGS_LIST_PREFERENCE_NAME = "settings_id_list";
     private array $defaultSettings;
     public function __construct(){
         // Load settings from config file
@@ -48,7 +49,7 @@ class Settings
     {
         $settings = $this->defaultSettings;
         foreach ($settings as $preference => $value) {
-            if (Settings::shouldLoadSetting($preference, true)) {
+            if (self::shouldLoadSetting($preference, true)) {
                 $pref = $module->getPreference($preference, "preference not set");
                 if ($pref != "preference not set") {
                     $settings[$preference] = $pref;
@@ -65,20 +66,21 @@ class Settings
      * @param $module
      * @param $tree
      * @param bool $reset
+     * @param string $id
      * @return array
      */
-    public function loadUserSettings($module, $tree, bool $reset = false, $id = ""): array
+    public function loadUserSettings($module, $tree, string $id = self::ID_MAIN_SETTINGS, bool $reset = false): array
     {
-        $id_suffix = $id === "" ? "" : "_" . $id;
+        $id_suffix = $id === self::ID_MAIN_SETTINGS ? "" : "_" . $id;
         $settings = $this->getAdminSettings($module);
         if (!$reset) {
-            if (Auth::user()->id() == Settings::GUEST_USER_ID) {
+            if (Auth::user()->id() == self::GUEST_USER_ID) {
                 $cookie = new Cookie($tree);
                 $settings = $cookie->load($settings);
             } else {
                 foreach ($settings as $preference => $value) {
-                    if (Settings::shouldLoadSetting($preference)) {
-                        $pref = $tree->getUserPreference(Auth::user(), Settings::PREFERENCE_PREFIX . $preference . $id_suffix , "preference not set");
+                    if (self::shouldLoadSetting($preference)) {
+                        $pref = $tree->getUserPreference(Auth::user(), self::PREFERENCE_PREFIX . $preference . $id_suffix , "preference not set");
                         if ($pref != "preference not set") {
                             if ($pref == 'true' || $pref == 'false') {
                                 $settings[$preference] = ($pref == 'true');
@@ -108,7 +110,7 @@ class Settings
     public function saveAdminSettings($module, $settings) {
         $saveSettings = $this->defaultSettings;
         foreach ($saveSettings as $preference=>$value) {
-            if (Settings::shouldSaveSetting($preference, true)) {
+            if (self::shouldSaveSetting($preference, true)) {
                 if (isset($settings[$preference])) {
                     $module->setPreference($preference, $settings[$preference]);
                 } else {
@@ -123,20 +125,41 @@ class Settings
      *
      * @param $tree
      * @param $settings
-     * @return void
+     * @param string $id
+     * @return bool
      */
-    public function saveUserSettings($tree, $settings) {
-        if (Auth::user()->id() == Settings::GUEST_USER_ID) {
-            $cookie = new Cookie($tree);
-            $cookie->set($settings);
+    public function saveUserSettings($tree, $settings, string $id = self::ID_MAIN_SETTINGS) {
+        $id_suffix = $id === self::ID_MAIN_SETTINGS ? "" : "_" . $id;
+        if (Auth::user()->id() == self::GUEST_USER_ID) {
+            if ($id == self::ID_MAIN_SETTINGS) {
+                $cookie = new Cookie($tree);
+                $cookie->set($settings);
+            } else {
+                return false; // No multi-setting support for logged-out users yet
+            }
         } else {
             foreach ($settings as $preference => $value) {
-                if (Settings::shouldSaveSetting($preference)) {
+                if (self::shouldSaveSetting($preference)) {
                     if (gettype($value) == 'boolean') {
-                        $tree->setUserPreference(Auth::user(), Settings::PREFERENCE_PREFIX . $preference, ($value ? 'true' : 'false'));
+                        $tree->setUserPreference(Auth::user(), self::PREFERENCE_PREFIX . $preference . $id_suffix, ($value ? 'true' : 'false'));
                     } else {
-                        $tree->setUserPreference(Auth::user(), Settings::PREFERENCE_PREFIX . $preference, $value);
+                        $tree->setUserPreference(Auth::user(), self::PREFERENCE_PREFIX . $preference . $id_suffix, $value);
                     }
+                }
+            }
+            return true;
+        }
+    }
+
+    public function deleteUserSettings($tree, $settings, $id) {
+        $id_suffix = $id === self::ID_MAIN_SETTINGS ? "" : "_" . $id;
+        if (Auth::user()->id() == self::GUEST_USER_ID) {
+            $cookie = new Cookie($tree);
+            $cookie->deleteCookie($cookie->name . "_" . $id);
+        } else {
+            foreach ($settings as $preference => $value) {
+                if (self::shouldSaveSetting($preference)) {
+                    $tree->setUserPreference(Auth::user(), self::PREFERENCE_PREFIX . $preference . $id_suffix, null);
                 }
             }
         }
@@ -305,15 +328,16 @@ class Settings
      */
     public static function shouldLoadSetting($setting, bool $admin = false): bool
     {
-        return Settings::shouldSaveSetting($setting, $admin);
+        return self::shouldSaveSetting($setting, $admin);
     }
 
     public function getSettingsJson($module, $tree, $id)
     {
         $userSettings = $this->loadUserSettings($module, $tree, $id);
         $settings = [];
+
         foreach ($this->defaultSettings as $preference => $value) {
-            if (Settings::shouldSaveSetting($preference)) {
+            if (self::shouldSaveSetting($preference)) {
                 $settings[$preference] = $userSettings[$preference];
             }
         }
@@ -323,22 +347,61 @@ class Settings
     public function getAllSettingsJson($module, $tree)
     {
         $settings_list = array();
-        if (Auth::user()->id() == Settings::GUEST_USER_ID) {
-            $id_list = "";
-        } else {
-            $id_list = "";
-        }
+        $id_list = $this->getSettingsIdList($tree);
         $ids = explode(',', $id_list);
         foreach ($ids as $id_value) {
             $userSettings = $this->loadUserSettings($module, $tree, $id_value);
-            $settings_list[$id_value]['name'] = "Name";
+            $settings_list[$id_value]['name'] = $id_value;
+            $settings_list[$id_value]['id'] = $id_value;
             $settings_list[$id_value]['settings'] = [];
             foreach ($this->defaultSettings as $preference => $value) {
-                if (Settings::shouldSaveSetting($preference)) {
+                if (self::shouldSaveSetting($preference)) {
                     $settings_list[$id_value]['settings'][$preference] = $userSettings[$preference];
                 }
             }
         }
         return json_encode($settings_list);
+    }
+
+    public function newSettingsId($tree): string
+    {
+        $id_list = $this->getSettingsIdList($tree);
+        $new_id = "";
+
+        if ($id_list == "") {
+            $id_list = "0";
+        } else {
+            $preferences = explode(',', $id_list);
+            $last_id = end($preferences);
+            if ($last_id != "") {
+                $next_id = (int)base_convert($last_id, 36, 10) + 1;
+                $new_id = base_convert($next_id, 10, 36);
+                $id_list = $id_list . "," . $new_id;
+            } else {
+                return "";
+            }
+        }
+
+        $use_cookie = Auth::user()->id() == self::GUEST_USER_ID;
+        if ($use_cookie) {
+            return ""; // No support for logged-out users yet
+        } else {
+            $tree->setUserPreference(Auth::user(), self::PREFERENCE_PREFIX . self::SETTINGS_LIST_PREFERENCE_NAME, $id_list);
+        }
+
+        return $new_id;
+    }
+
+    private function getSettingsIdList($tree) {
+        $use_cookie = Auth::user()->id() == self::GUEST_USER_ID;
+        if ($use_cookie) {
+            return ""; // No support for logged-out users yet
+        } else {
+            $pref_list = $tree->getUserPreference(Auth::user(), self::PREFERENCE_PREFIX . self::SETTINGS_LIST_PREFERENCE_NAME, "preference not set");
+            if ($pref_list == "preference not set") {
+                $pref_list = "";
+            }
+        }
+        return $pref_list;
     }
 }
