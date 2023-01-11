@@ -212,6 +212,11 @@ class FormSubmission
         if (isset($vars['output_type']) && ctype_alpha($vars['output_type'])) {
             $settings['output_type'] = $vars['output_type'];
         }
+        if (!empty($vars['save_settings_name']) && $this->nameStringValid($vars['save_settings_name'])) {
+            $settings['save_settings_name'] = $vars['save_settings_name'];
+        } else {
+            $settings['save_settings_name'] = "Settings";
+        }
         return $settings;
     }
 

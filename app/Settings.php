@@ -11,6 +11,8 @@ class Settings
     private const GUEST_USER_ID = 0;
     private const PREFERENCE_PREFIX = "GVE_";
     public const SETTINGS_LIST_PREFERENCE_NAME = "settings_id_list";
+    const MAX_SETTINGS_ID_LIST_LENGTH = 250;
+    const MAX_SETTINGS_ID_LENGTH = 6;
     private array $defaultSettings;
     public function __construct(){
         // Load settings from config file
@@ -350,14 +352,18 @@ class Settings
         $settings_list = array();
         $id_list = $this->getSettingsIdList($tree);
         $ids = explode(',', $id_list);
-        foreach ($ids as $id_value) {
-            $userSettings = $this->loadUserSettings($module, $tree, $id_value);
-            $settings_list[$id_value]['name'] = $id_value;
-            $settings_list[$id_value]['id'] = $id_value;
-            $settings_list[$id_value]['settings'] = [];
-            foreach ($this->defaultSettings as $preference => $value) {
-                if (self::shouldSaveSetting($preference)) {
-                    $settings_list[$id_value]['settings'][$preference] = $userSettings[$preference];
+        if ($ids != "") {
+            foreach ($ids as $id_value) {
+                if ($id_value != "") {
+                    $userSettings = $this->loadUserSettings($module, $tree, $id_value);
+                    $settings_list[$id_value]['name'] = $userSettings['save_settings_name'];
+                    $settings_list[$id_value]['id'] = $id_value;
+                    $settings_list[$id_value]['settings'] = [];
+                    foreach ($this->defaultSettings as $preference => $value) {
+                        if (self::shouldSaveSetting($preference)) {
+                            $settings_list[$id_value]['settings'][$preference] = $userSettings[$preference];
+                        }
+                    }
                 }
             }
         }
@@ -367,10 +373,10 @@ class Settings
     public function newSettingsId($tree): string
     {
         $id_list = $this->getSettingsIdList($tree);
-        $new_id = "";
 
         if ($id_list == "") {
             $id_list = "0";
+            $new_id = "0";
         } else {
             $preferences = explode(',', $id_list);
             $last_id = end($preferences);
@@ -378,6 +384,9 @@ class Settings
                 $next_id = (int)base_convert($last_id, 36, 10) + 1;
                 $new_id = base_convert($next_id, 10, 36);
                 $id_list = $id_list . "," . $new_id;
+                if (strlen($id_list) > self::MAX_SETTINGS_ID_LIST_LENGTH || strlen($new_id) > self::MAX_SETTINGS_ID_LENGTH) {
+                    return "";
+                }
             } else {
                 return "";
             }

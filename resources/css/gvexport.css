@@ -140,6 +140,14 @@
     margin: 3px;
 }
 
+span.NAME {
+    padding-left: 3px;
+}
+
+.settings_list_item {
+    padding-left: 5px;
+}
+
 #indi_list {
     margin-top: 10px;
     margin-right: 10px;

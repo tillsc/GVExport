@@ -762,13 +762,13 @@ function showHelp(item) {
  * Downloads settings as JSON file
  */
 function downloadSettingsFile() {
-    saveSettings(function () {
+    saveSettings(true, "", function () {
         getSettings(ID_MAIN_SETTINGS, function (settings_json_string) {
             let file = new Blob([settings_json_string], {type: "text/plain"});
             let url = URL.createObjectURL(file);
             downloadLink(url, TREE_NAME + ".json")
         });
-    }, true);
+    });
 }
 
 function addSavedSettings() {
@@ -864,10 +864,12 @@ function setGraphvizAvailable(available) {
     graphvizAvailable = available;
 }
 
-function saveSettings(callback = null, main) {
+function saveSettings(main = true, name = "", callback = null) {
     let request = {
         "type": "save_settings",
-        "main": main
+        "main": main,
+        "name": name
+
     };
     let json = JSON.stringify(request);
     sendRequest(json, callback);
@@ -947,11 +949,23 @@ function loadSettingsDetails() {
 }
 
 function saveSettingsAdvanced() {
+    let name_element = document.getElementById('save_settings_name');
     loggedIn = true;
     if (loggedIn) {
-        saveSettings(function (response) {
-            loadSettingsDetails();
-        }, false);
+        saveSettings(false, name_element.value,function (response) {
+            try {
+                let json = JSON.parse(response);
+                if (json.success) {
+                    loadSettingsDetails();
+                    name_element.value = "";
+                } else {
+                    showToast(ERROR_CHAR + json.error);
+                }
+            } catch (e) {
+                showToast("Failed to load response: " + e);
+                return false;
+            }
+        });
     } else {
 
     }
