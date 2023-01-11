@@ -244,7 +244,7 @@ class FormSubmission
      */
     private function nameStringValid($name): bool
     {
-        return preg_match('/^[A-Za-z0-9_.-]*$/',$name);
+        return preg_match('/^[A-Za-z0-9 _.-]*$/',$name);
     }
     /**
      * @param $name

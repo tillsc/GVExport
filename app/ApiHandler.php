@@ -1,6 +1,7 @@
 <?php
 
 namespace vendor\WebtreesModules\gvexport;
+use Fisharebest\Webtrees\I18N;
 use Fisharebest\Webtrees\Validator;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
@@ -20,7 +21,8 @@ class ApiHandler
         $json_data = Validator::parsedBody($request)->string('json_data');
         $json = json_decode($json_data, true);
         if (json_last_error() === JSON_ERROR_NONE) {
-            switch ($json['type']) {
+            $type = ctype_alnum($json['type']);
+            switch ($type) {
                 case "save_settings":
                     $vars = Validator::parsedBody($request)->array('vars');
                     $formSubmission = new FormSubmission();
@@ -37,7 +39,7 @@ class ApiHandler
                         $this->response_data['success'] = $settings->saveUserSettings($tree, $vars, $id);;
                     } else {
                         $this->response_data['success'] = false;
-                        $this->response_data['error'] = "Failed to assign new settings ID";
+                        $this->response_data['error'] = I18N::translate('Failed to assign new settings ID');
                     }
                     break;
                 case "get_settings":
@@ -47,7 +49,8 @@ class ApiHandler
                         $this->response_data['success'] = true;
                     } else {
                         $this->response_data['success'] = false;
-                        $this->response_data['error'] = "invalid settings ID. JSON: " . $json_data;
+                        $this->response_data['json'] = $json_data;
+                        $this->response_data['error'] = I18N::translate('Invalid settings ID');
                         return false;
                     }
                     break;
@@ -57,19 +60,21 @@ class ApiHandler
                         $settings->deleteUserSettings($tree, $json['settings_id']);
                         $this->response_data['success'] = true;
                     } else {
-                        $this->response_data['success'] = false;
-                        $this->response_data['error'] = "invalid settings ID. JSON: " . $json_data;
+                        $this->response_data['json'] = $json_data;
+                        $this->response_data['error'] = I18N::translate('Invalid settings ID');
                         return false;
                     }
                     break;
                 default:
                     $this->response_data['success'] = false;
-                    $this->response_data['error'] = "invalid request. JSON: " . $json_data;
+                    $this->response_data['json'] = $json_data;
+                    $this->response_data['error'] = I18N::translate('Invalid request') . ": " . $type;
                     return false;
             }
         } else {
             $this->response_data['success'] = false;
-            $this->response_data['error'] = "invalid json: " . json_last_error_msg() . "JSON: " . $json_data;
+            $this->response_data['json'] = $json_data;
+            $this->response_data['error'] = I18N::translate('Invalid JSON') . ": " . json_last_error_msg();
         }
     }
 }

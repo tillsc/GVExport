@@ -887,7 +887,7 @@ function getSettings(id = ID_ALL_SETTINGS, callback = null) {
                 callback(json.settings);
             }
         } else {
-            showToast("Failed to load JSON: " + json.error + "\n JSON: " + response);
+            showToast(ERROR_CHAR + json.error);
         }
     });
 }
