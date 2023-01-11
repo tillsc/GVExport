@@ -1,6 +1,7 @@
 <?php
 
 namespace vendor\WebtreesModules\gvexport;
+use Fisharebest\Webtrees\Validator;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 class ApiHandler
@@ -15,15 +16,17 @@ class ApiHandler
             ->withHeader('Content-Type', "application/json");
     }
 
-    public function handle($json_data, $module, $tree) {
-        $request = json_decode($json_data, true);
+    public function handle($request, $module, $tree) {
+        $json_data = Validator::parsedBody($request)->string('json_data');
+        $json = json_decode($json_data, true);
         if (json_last_error() === JSON_ERROR_NONE) {
-            switch ($request['type']) {
+            switch ($json['type']) {
                 case "save_settings":
+                    $vars = Validator::parsedBody($request)->array('vars');
                     $formSubmission = new FormSubmission();
-                    $vars = $formSubmission->load($_REQUEST['vars']);
+                    $vars = $formSubmission->load($vars);
                     $settings = new Settings();
-                    if (isset($request['main']) && !$request['main']) {
+                    if (isset($json['main']) && !$json['main']) {
                         $id = $settings->newSettingsId($tree);
                     } else {
                         $id = Settings::ID_MAIN_SETTINGS;
@@ -38,9 +41,9 @@ class ApiHandler
                     }
                     break;
                 case "get_settings":
-                    if (isset($request['settings_id']) && (ctype_alnum($request['settings_id']) || in_array($request['settings_id'], [Settings::ID_ALL_SETTINGS, Settings::ID_MAIN_SETTINGS]))) {
+                    if (isset($json['settings_id']) && (ctype_alnum($json['settings_id']) || in_array($json['settings_id'], [Settings::ID_ALL_SETTINGS, Settings::ID_MAIN_SETTINGS]))) {
                         $settings = new Settings();
-                        $this->response_data['settings'] = ($request['settings_id'] == Settings::ID_ALL_SETTINGS ? $settings->getAllSettingsJson($module, $tree) : $settings->getSettingsJson($module, $tree, $request['settings_id']));
+                        $this->response_data['settings'] = ($json['settings_id'] == Settings::ID_ALL_SETTINGS ? $settings->getAllSettingsJson($module, $tree) : $settings->getSettingsJson($module, $tree, $json['settings_id']));
                         $this->response_data['success'] = true;
                     } else {
                         $this->response_data['success'] = false;
@@ -49,9 +52,9 @@ class ApiHandler
                     }
                     break;
                 case "delete_settings":
-                    if (isset($request['settings_id']) && ctype_alnum($request['settings_id'])) {
+                    if (isset($json['settings_id']) && ctype_alnum($json['settings_id']) && !in_array($json['settings_id'], [Settings::ID_ALL_SETTINGS, Settings::ID_MAIN_SETTINGS])) {
                         $settings = new Settings();
-                        $settings->deleteUserSettings($tree, $settings, $request['settings_id']);
+                        $settings->deleteUserSettings($tree, $json['settings_id']);
                         $this->response_data['success'] = true;
                     } else {
                         $this->response_data['success'] = false;

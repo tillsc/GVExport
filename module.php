@@ -55,6 +55,7 @@ use Fisharebest\Webtrees\Module\ModuleConfigInterface;
 use Fisharebest\Webtrees\Module\ModuleConfigTrait;
 use Fisharebest\Webtrees\FlashMessages;
 use Fisharebest\Webtrees\Menu;
+use Fisharebest\Webtrees\Validator;
 use Fisharebest\Webtrees\View;
 use Fisharebest\Webtrees\Tree;
 use Psr\Http\Message\ResponseInterface;
@@ -228,14 +229,13 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
         $tree = $request->getAttribute('tree');
         if (isset($_POST['json_data'])) {
             $api = new ApiHandler();
-            $api->handle($_POST['json_data'], $this, $tree);
+            $api->handle($request, $this, $tree);
             return $api->getResponse();
         } else {
-
-            $temp_dir = $this->saveDOTFile($tree);
-
+            $vars_data = Validator::parsedBody($request)->array('vars');
+            $temp_dir = $this->saveDOTFile($tree, $vars_data);
             // If browser mode, output dot instead of selected file
-            $file_type = isset($_POST["browser"]) && $_POST["browser"] == "true" ? "dot" : $_REQUEST["vars"]["output_type"];
+            $file_type = isset($_POST["browser"]) && $_POST["browser"] == "true" ? "dot" : $vars_data["output_type"];
 
             $outputFile = new OutputFile($temp_dir, $file_type, $this);
             return $outputFile->downloadFile();
@@ -275,7 +275,8 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
     {
         $params = (array) $request->getParsedBody();
         $formSubmission = new FormSubmission();
-        $vars = $formSubmission->load($_REQUEST['vars']);
+        $vars_data = Validator::parsedBody($request)->array('vars');
+        $vars = $formSubmission->load($vars_data);
         if ($params['save'] === '1') {
             (new Settings())->saveAdminSettings($this, $vars);
             FlashMessages::addMessage(I18N::translate('The preferences for the module “%s” have been updated.',
@@ -289,7 +290,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
      *
      * @return	string	Directory where the file is saved
      */
-    function saveDOTFile($tree): string
+    function saveDOTFile($tree, $vars_data): string
     {
         // Make a unique directory to the tmp dir
         $temp_dir = (new File())->sys_get_temp_dir_my() . "/" . md5(Auth::id());
@@ -298,7 +299,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
         }
 
         // Create the dump
-        $contents = $this->createGraphVizDump($tree, $temp_dir);
+        $contents = $this->createGraphVizDump($tree, $vars_data, $temp_dir);
 
         // Put the contents into the file
         $settings = (new Settings())->getAdminSettings($this);
@@ -309,7 +310,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
         return $temp_dir;
     }
 
-    function createGraphVizDump($tree, $temp_dir): string
+    function createGraphVizDump($tree, $vars_data, $temp_dir): string
     {
         $out = "";
         $dot = new Dot($tree, $this, Registry::filesystem()->data());
@@ -317,7 +318,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
 
 
         $formSubmission = new FormSubmission();
-        $vars = $formSubmission->load($_REQUEST['vars']);
+        $vars = $formSubmission->load($vars_data);
         if (isset($temp_dir)) {
             $vars['temp_dir'] = $temp_dir;
         }

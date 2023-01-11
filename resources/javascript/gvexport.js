@@ -300,7 +300,7 @@ function downloadLink(URL, filename) {
 // visible - whether to make element visible or hidden. Null to toggle current state.
 function toggleAdvanced(button, id, visible = null) {
     const el = document.getElementById(id);
-    // If toggling, set to the opposite of corrent state
+    // If toggling, set to the opposite of current state
     if (visible === null) {
         visible = el.style.display === "none";
     }
@@ -895,7 +895,6 @@ function sendRequest(json, callback) {
     el.name="json_data";
     el.value=json;
     form.appendChild(el);
-    document.body.appendChild(form);
     document.getElementById("browser").value = "true";
     data = jQuery(form).serialize();
     document.getElementById("browser").value = "false";

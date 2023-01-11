@@ -134,6 +134,7 @@ class Settings
             if ($id == self::ID_MAIN_SETTINGS) {
                 $cookie = new Cookie($tree);
                 $cookie->set($settings);
+                return true;
             } else {
                 return false; // No multi-setting support for logged-out users yet
             }
@@ -151,15 +152,15 @@ class Settings
         }
     }
 
-    public function deleteUserSettings($tree, $settings, $id) {
-        $id_suffix = $id === self::ID_MAIN_SETTINGS ? "" : "_" . $id;
+    public function deleteUserSettings($tree, $id) {
+        $id_suffix = ($id === self::ID_MAIN_SETTINGS ? "" : "_" . $id);
         if (Auth::user()->id() == self::GUEST_USER_ID) {
-            $cookie = new Cookie($tree);
-            $cookie->deleteCookie($cookie->name . "_" . $id);
+            // No multi-setting option if user logged-out yet
         } else {
+            $settings = $this->defaultSettings;
             foreach ($settings as $preference => $value) {
                 if (self::shouldSaveSetting($preference)) {
-                    $tree->setUserPreference(Auth::user(), self::PREFERENCE_PREFIX . $preference . $id_suffix, null);
+                    $tree->setUserPreference(Auth::user(), self::PREFERENCE_PREFIX . $preference . $id_suffix, "\0");
                 }
             }
         }
