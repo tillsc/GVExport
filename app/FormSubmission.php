@@ -212,8 +212,8 @@ class FormSubmission
         if (isset($vars['output_type']) && ctype_alpha($vars['output_type'])) {
             $settings['output_type'] = $vars['output_type'];
         }
-        if (!empty($vars['save_settings_name']) && $this->nameStringValid($vars['save_settings_name'])) {
-            $settings['save_settings_name'] = $vars['save_settings_name'];
+        if (!empty($vars['save_settings_name'])) {
+            $settings['save_settings_name'] = $this->cleanSettingsName($vars['save_settings_name']);
         } else {
             $settings['save_settings_name'] = "Settings";
         }
@@ -262,5 +262,10 @@ class FormSubmission
     private function isPercent($string): bool
     {
         return preg_match('/^[0-9]*%$/',$string);
+    }
+
+    private function cleanSettingsName($name)
+    {
+        return preg_replace("/[^A-ZÀ-úa-z0-9_ .*+()&^%$#@!-]+/", "", $name);
     }
 }
