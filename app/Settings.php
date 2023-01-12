@@ -331,6 +331,8 @@ class Settings
             case 'countries':
             case 'temp_dir':
             case 'space_base':
+            case 'no_fams':
+            case 'stop_proc':
                 return false;
             case 'show_debug_panel':
             case 'filename':
