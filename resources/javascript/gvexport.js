@@ -849,6 +849,8 @@ function loadSettings(data) {
     showHide(document.getElementById('arrow_group'),document.getElementById('colour_arrow_related').checked)
     showHide(document.getElementById('startcol_option'),document.getElementById('highlight_start_indis').checked)
     refreshIndisFromXREFS(false);
+    // Don't load name from settings into text field - it's already shown on settings element
+    document.getElementById('save_settings_name').value = "";
     if (autoUpdate) updateRender();
 }
 
@@ -864,7 +866,7 @@ function setGraphvizAvailable(available) {
     graphvizAvailable = available;
 }
 
-function saveSettings(main = true, name = "", callback = null) {
+function saveSettings(main = true, name = "") {
     let request = {
         "type": "save_settings",
         "main": main,
@@ -872,58 +874,54 @@ function saveSettings(main = true, name = "", callback = null) {
 
     };
     let json = JSON.stringify(request);
-    sendRequest(json, callback);
+    return sendRequest(json);
 }
-function getSettings(id = ID_ALL_SETTINGS, callback = null) {
+function getSettings(id = ID_ALL_SETTINGS) {
     let request = {
         "type": "get_settings",
         "settings_id": id
     };
     let json = JSON.stringify(request);
-    sendRequest(json, function (response) {
+    return sendRequest(json).then((response) => {
         let json = JSON.parse(response);
         if (json.success) {
-            if (typeof callback == "function") {
-                callback(json.settings);
-            }
+            return json.settings;
         } else {
-            showToast(ERROR_CHAR + json.error);
+            showToast(ERROR_CHAR + json.errorMessage);
         }
     });
 }
-function sendRequest(json, callback) {
-    var form = document.getElementById('gvexport');
-    var el = document.createElement("input");
-    el.name="json_data";
-    el.value=json;
-    form.appendChild(el);
-    document.getElementById("browser").value = "true";
-    data = jQuery(form).serialize();
-    document.getElementById("browser").value = "false";
-    el.remove();
-    window.fetch(form.getAttribute('action'), {
-        method: form.getAttribute('method'),
-        credentials: 'same-origin', // include, *same-origin, omit
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: data
-    }).then(function (response) {
-        if (!response.ok) {
-            return response.text().then(function (errorText) {
-                return Promise.reject(errorText)
-            });
-        }
-        return response.text();
-    }).then(function (response) {
-        if (typeof callback == "function") {
-            callback(response);
-        }
+function sendRequest(json) {
+    return new Promise((resolve, reject) => {
+        var form = document.getElementById('gvexport');
+        var el = document.createElement("input");
+        el.name = "json_data";
+        el.value = json;
+        form.appendChild(el);
+        document.getElementById("browser").value = "true";
+        data = jQuery(form).serialize();
+        document.getElementById("browser").value = "false";
+        el.remove();
+        window.fetch(form.getAttribute('action'), {
+            method: form.getAttribute('method'),
+            credentials: 'same-origin', // include, *same-origin, omit
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: data
+        }).then(function (response) {
+            if (!response.ok) {
+                return response.text().then(function (errorText) {
+                    return reject(errorText)
+                });
+            }
+            resolve(response.text());
+        });
     });
 }
 
 function loadSettingsDetails() {
-    getSettings(ID_ALL_SETTINGS, function(settings) {
+    return getSettings(ID_ALL_SETTINGS).then((settings) => {
         let settingsList;
         try {
             settingsList = JSON.parse(settings);
@@ -950,37 +948,70 @@ function loadSettingsDetails() {
 
 function saveSettingsAdvanced() {
     let name_element = document.getElementById('save_settings_name');
-    loggedIn = true;
-    if (loggedIn) {
-        saveSettings(false, name_element.value,function (response) {
+    isUserLoggedIn().then((loggedIn) => {
+            if (loggedIn) {
+                return saveSettings(false, name_element.value);
+            } else {
+
+            }
+        }
+    ).then((response) => {
             try {
                 let json = JSON.parse(response);
                 if (json.success) {
                     loadSettingsDetails();
                     name_element.value = "";
                 } else {
-                    showToast(ERROR_CHAR + json.error);
+                    showToast(ERROR_CHAR + json.errorMessage);
                 }
             } catch (e) {
                 showToast("Failed to load response: " + e);
                 return false;
             }
-        });
-    } else {
+    }).catch(
+        error => showToast(error)
+    );
 
-    }
 }
 function deleteSettingsAdvanced(e, element) {
     e.stopPropagation();
     let parentEl = element.parentElement;
     let id = parentEl.getAttribute("data-id").trim();
-    parentEl.remove();
     let request = {
         "type": "delete_settings",
         "settings_id": id
     };
     let json = JSON.stringify(request);
-    sendRequest(json, function (test) {
-        alert(test);
+    sendRequest(json).then((response) => {
+        try {
+            let json = JSON.parse(response);
+            if (json.success) {
+                loadSettingsDetails();
+            } else {
+                showToast(ERROR_CHAR + json.errorMessage);
+            }
+        } catch (e) {
+            showToast("Failed to load response: " + e);
+            return false;
+        }
     });
+}
+
+function isUserLoggedIn() {
+        let request = {
+            "type": "is_logged_in"
+        };
+        let json = JSON.stringify(request);
+        return sendRequest(json).then((response) => {
+            try {
+                let json = JSON.parse(response);
+                if (json.success) {
+                    return json.loggedIn;
+                } else {
+                    return Promise.reject(ERROR_CHAR + json.errorMessage);
+                }
+            } catch (e) {
+                reject("Failed to load response: " + e);
+            }
+        });
 }

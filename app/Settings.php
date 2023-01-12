@@ -3,6 +3,9 @@
 namespace vendor\WebtreesModules\gvexport;
 
 use Fisharebest\Webtrees\Auth;
+use Fisharebest\Webtrees\Contracts\UserInterface;
+use Fisharebest\Webtrees\Log;
+use Illuminate\Database\Capsule\Manager as DB;
 
 class Settings
 {
@@ -162,10 +165,28 @@ class Settings
             $settings = $this->defaultSettings;
             foreach ($settings as $preference => $value) {
                 if (self::shouldSaveSetting($preference)) {
-                    $tree->setUserPreference(Auth::user(), self::PREFERENCE_PREFIX . $preference . $id_suffix, "\0");
+                    $this->deleteUserSetting($tree, Auth::user(), self::PREFERENCE_PREFIX . $preference . $id_suffix);
                 }
             }
+            $ids = explode(',', $this->getSettingsIdList($tree));
+            while(($i = array_search($id, $ids)) !== false) {
+                unset($ids[$i]);
+            }
+            $i = array_search($id, $ids);
+            if ($i) {
+                unset($ids[$i]);
+            }
+            $id_list = implode(',', $ids);
+            $tree->setUserPreference(Auth::user(), self::PREFERENCE_PREFIX . self::SETTINGS_LIST_PREFERENCE_NAME, $id_list);
         }
+    }
+
+    private function deleteUserSetting($tree, UserInterface $user, string $setting_name) {
+        DB::table('user_gedcom_setting')
+            ->where('gedcom_id', '=', $tree->id())
+            ->where('user_id', '=', $user->id())
+            ->where('setting_name', '=', $setting_name)
+            ->delete();
     }
 
     /**
@@ -413,5 +434,14 @@ class Settings
             }
         }
         return $pref_list;
+    }
+
+    public static function isUserLoggedIn(): bool
+    {
+        if (Auth::user()->id() == self::GUEST_USER_ID) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }
