@@ -762,12 +762,12 @@ function showHelp(item) {
  * Downloads settings as JSON file
  */
 function downloadSettingsFile() {
-    saveSettings(true, "", function () {
-        getSettings(ID_MAIN_SETTINGS, function (settings_json_string) {
-            let file = new Blob([settings_json_string], {type: "text/plain"});
-            let url = URL.createObjectURL(file);
-            downloadLink(url, TREE_NAME + ".json")
-        });
+    saveSettings(true, "").then(() => {
+        return getSettings(ID_MAIN_SETTINGS);
+    }).then((settings_json_string) => {
+        let file = new Blob([settings_json_string], {type: "text/plain"});
+        let url = URL.createObjectURL(file);
+        downloadLink(url, TREE_NAME + ".json")
     });
 }
 
