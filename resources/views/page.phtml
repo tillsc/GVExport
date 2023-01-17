@@ -62,7 +62,10 @@ $xref = $individual->xref();
 <?= $usegraphviz ? "" : "<script src=\"" . $module->assetUrl('javascript/jspdf.umd.min.js') . "\"></script>"; ?>
 <script type="text/javascript">
     const cartempty = <?= $cartempty ? "true" : "false" ?>;
-    const CLIENT_ERRORS = ["<?= I18N::translate('Your browser does not support exporting images this large. Please reduce number of records, reduce DPI setting, or use SVG option.') ?>", "<?= I18N::translate('Unable to load setting ') ?>"];
+    const CLIENT_ERRORS = [
+        "<?= I18N::translate('Your browser does not support exporting images this large. Please reduce number of records, reduce DPI setting, or use SVG option.') ?>",
+        "<?= I18N::translate('Unable to load setting ') ?>",
+        "<?= I18N::translate('Invalid JSON'); ?>"];
     let autoUpdate = <?= $vars["auto_update"] ? 'true' : 'false' ?>;
     let debug_string = "";
     let TOMSELECT_URL = "";
@@ -543,7 +546,7 @@ $xref = $individual->xref();
                     <div class="input-group mt-1">
                         <input type="text" class="form-control" name="vars[save_settings_name]" id="save_settings_name" placeholder="<?= I18N::translate('Settings name'); ?>">
                         <div class="input-group-append">
-                            <button type="button" class="btn btn-outline-secondary" onclick="saveSettingsAdvanced()"><?= I18N::translate('Save') ?></button>
+                            <button id="save_settings_button" type="button" class="btn btn-outline-secondary" onclick="saveSettingsAdvanced()"><?= I18N::translate('Save') ?></button>
                         </div>
                     </div>
                 </div>

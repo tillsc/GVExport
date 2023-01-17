@@ -35,6 +35,9 @@ class ApiHandler
                 case "is_logged_in":
                     $this->isLoggedIn();
                     break;
+                case "get_tree_name":
+                    $this->getTreeName($tree);
+                    break;
                 default:
                     $this->response_data['success'] = false;
                     $this->response_data['json'] = $json_data;
@@ -84,10 +87,17 @@ class ApiHandler
     public function deleteSettings($json, $tree, string $json_data): void
     {
         if (isset($json['settings_id']) && ctype_alnum($json['settings_id']) && !in_array($json['settings_id'], [Settings::ID_ALL_SETTINGS, Settings::ID_MAIN_SETTINGS])) {
-            $settings = new Settings();
-            $settings->deleteUserSettings($tree, $json['settings_id']);
-            $this->response_data['success'] = true;
+            if (Settings::isUserLoggedIn()) {
+                $settings = new Settings();
+                $settings->deleteUserSettings($tree, $json['settings_id']);
+                $this->response_data['success'] = true;
+            } else {
+                // Is user is not logged in, we should never have got this far
+                $this->response_data['success'] = false;
+                $this->response_data['errorMessage'] = I18N::translate('Invalid');
+            }
         } else {
+            $this->response_data['success'] = false;
             $this->response_data['json'] = $json_data;
             $this->response_data['errorMessage'] = I18N::translate('Invalid settings ID');
         }
@@ -100,6 +110,11 @@ class ApiHandler
         } else {
             $this->response_data['loggedIn'] = false;
         }
+        $this->response_data['success'] = true;
+    }
+    private function getTreeName($tree)
+    {
+        $this->response_data['treeName'] = e($tree->name());
         $this->response_data['success'] = true;
     }
 }

@@ -159,9 +159,7 @@ class Settings
 
     public function deleteUserSettings($tree, $id) {
         $id_suffix = ($id === self::ID_MAIN_SETTINGS ? "" : "_" . $id);
-        if (Auth::user()->id() == self::GUEST_USER_ID) {
-            // No multi-setting option if user logged-out yet
-        } else {
+        if (Settings::isUserLoggedIn()) {
             $settings = $this->defaultSettings;
             foreach ($settings as $preference => $value) {
                 if (self::shouldSaveSetting($preference)) {
@@ -379,14 +377,15 @@ class Settings
             foreach ($ids as $id_value) {
                 if ($id_value != "") {
                     $userSettings = $this->loadUserSettings($module, $tree, $id_value);
-                    $settings_list[$id_value]['name'] = $userSettings['save_settings_name'];
-                    $settings_list[$id_value]['id'] = $id_value;
-                    $settings_list[$id_value]['settings'] = [];
+                    $settings_list[(string) $id_value]['name'] = $userSettings['save_settings_name'];
+                    $settings_list[(string) $id_value]['id'] = $id_value;
+                    $settings = array();
                     foreach ($this->defaultSettings as $preference => $value) {
                         if (self::shouldSaveSetting($preference)) {
-                            $settings_list[$id_value]['settings'][$preference] = $userSettings[$preference];
+                            $settings[$preference] = $userSettings[$preference];
                         }
                     }
+                    $settings_list[(string) $id_value]['settings'] = json_encode($settings);
                 }
             }
         }
