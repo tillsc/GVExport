@@ -1,6 +1,14 @@
 const ERROR_CHAR = "E:";
 const ID_MAIN_SETTINGS = "_MAIN_";
 const ID_ALL_SETTINGS = "_ALL_";
+const SETTINGS_ID_LIST_NAME = 'GVE_settings_id_list';
+const REQUEST_TYPE_GET_TREE_NAME = "get_tree_name";
+const REQUEST_TYPE_DELETE_SETTINGS = "delete_settings";
+const REQUEST_TYPE_SAVE_SETTINGS = "save_settings";
+const REQUEST_TYPE_GET_SETTINGS = "get_settings";
+const REQUEST_TYPE_IS_LOGGED_IN = "is_logged_in";
+let treeName = null;
+let loggedIn = null;
 
 function hideSidebar(e) {
     document.querySelector(".sidebar").hidden = true;
@@ -865,15 +873,16 @@ function setGraphvizAvailable(available) {
 
 function saveSettingsServer(main = true) {
     let request = {
-        "type": "save_settings",
+        "type": REQUEST_TYPE_SAVE_SETTINGS,
         "main": main
     };
     let json = JSON.stringify(request);
     return sendRequest(json);
 }
+
 function getSettingsServer(id = ID_ALL_SETTINGS) {
     let request = {
-        "type": "get_settings",
+        "type": REQUEST_TYPE_GET_SETTINGS,
         "settings_id": id
     };
     let json = JSON.stringify(request);
@@ -890,24 +899,32 @@ function getSettingsServer(id = ID_ALL_SETTINGS) {
         }
     });
 }
+
+
 function getSettingsClient(id = ID_ALL_SETTINGS) {
     return getTreeName().then(async (treeName) => {
         try {
             if (id === ID_ALL_SETTINGS) {
-                if (localStorage.GVE_settings_id_list) {
-                    let settings_list = localStorage.GVE_settings_id_list;
+                if (localStorage.getItem(SETTINGS_ID_LIST_NAME + "_" + treeName)) {
+                    let settings_list = localStorage.getItem(SETTINGS_ID_LIST_NAME + "_" + treeName);
                     let ids = settings_list.split(",");
+                    let promises = ids.map(id_value => getSettingsClient(id_value))
+                    let results = await Promise.all(promises);
+                    console.log(settings_list);
+                    console.log(ids);
+                    console.log(results);
                     let settings = {};
                     for (let i = 0; i < ids.length; i++) {
                         let id_value = ids[i];
-                        let userSettings = await getSettingsClient(id_value);
+                        let userSettings = results[i];
                         if (userSettings === null) {
+                            console.log(ids[i]);
                             return Promise.reject('User settings null');
-                        }
+                        } else {
                         settings[id_value] = {};
                         settings[id_value]['name'] = userSettings['save_settings_name'];
                         settings[id_value]['id'] = id_value;
-                        settings[id_value]['settings'] = JSON.stringify(userSettings);
+                        settings[id_value]['settings'] = JSON.stringify(userSettings);}
                     }
                     return settings;
                 } else {
@@ -1013,10 +1030,11 @@ function saveSettingsAdvanced() {
                 }
             });
         } else {
-            let id = getIdLocal();
-            return saveSettingsClient(id);
+            return getIdLocal().then((id) => {
+                return saveSettingsClient(id);
+            });
         }
-    }).then((response) => {
+    }).then(() => {
         loadSettingsDetails();
         document.getElementById('save_settings_name').value = "";
     }).catch(
@@ -1026,12 +1044,14 @@ function saveSettingsAdvanced() {
 }
 
 function deleteSettingsClient(id) {
-    try {
-        localStorage.removeItem("GVE_Settings_" + id);
-        deleteIdLocal(id);
-    } catch (e) {
-        showToast(e);
-    }
+    getTreeName().then((treeName) => {
+        try {
+            localStorage.removeItem("GVE_Settings_" + treeName + "_" + id);
+            deleteIdLocal(id);
+        } catch (e) {
+            showToast(e);
+        }
+    });
 }
 
 function deleteSettingsAdvanced(e, element) {
@@ -1041,7 +1061,7 @@ function deleteSettingsAdvanced(e, element) {
     isUserLoggedIn().then((loggedIn) => {
         if (loggedIn) {
             let request = {
-                "type": "delete_settings",
+                "type": REQUEST_TYPE_DELETE_SETTINGS,
                 "settings_id": id
             };
             let json = JSON.stringify(request);
@@ -1065,15 +1085,20 @@ function deleteSettingsAdvanced(e, element) {
     });
 }
 
+
 function isUserLoggedIn() {
+    if (loggedIn != null)  {
+        return Promise.resolve(loggedIn);
+    } else {
         let request = {
-            "type": "is_logged_in"
+            "type": REQUEST_TYPE_IS_LOGGED_IN
         };
         let json = JSON.stringify(request);
         return sendRequest(json).then((response) => {
             try {
                 let json = JSON.parse(response);
                 if (json.success) {
+                    loggedIn = json.loggedIn;
                     return json.loggedIn;
                 } else {
                     return Promise.reject(ERROR_CHAR + json.errorMessage);
@@ -1082,17 +1107,22 @@ function isUserLoggedIn() {
                 return Promise.reject("Failed to load response: " + e);
             }
         });
+    }
 }
 
 function getTreeName() {
+    if (treeName != null)  {
+        return Promise.resolve(treeName);
+    } else {
         let request = {
-            "type": "get_tree_name"
+            "type": REQUEST_TYPE_GET_TREE_NAME
         };
         let json = JSON.stringify(request);
         return sendRequest(json).then((response) => {
             try {
                 let json = JSON.parse(response);
                 if (json.success) {
+                    treeName = json.treeName;
                     return json.treeName;
                 } else {
                     return Promise.reject(ERROR_CHAR + json.errorMessage);
@@ -1101,40 +1131,47 @@ function getTreeName() {
                 return Promise.reject("Failed to load response: " + e);
             }
         });
+    }
 }
 
 function saveSettingsClient(id) {
-    return Promise.all([saveSettingsServer(true), getTreeName(), getSettings(ID_MAIN_SETTINGS)])
-        .then(([response, treeName, settings_json_string]) => {
-        localStorage.setItem("GVE_Settings_" + treeName + "_" + id, settings_json_string);
-        return Promise.resolve();
-    });
+    return Promise.all([saveSettingsServer(true), getTreeName()])
+        .then(([response1, treeName]) => {
+            return getSettings(ID_MAIN_SETTINGS)
+                .then((settings_json_string) => {
+                    localStorage.setItem("GVE_Settings_" + treeName + "_" + id, settings_json_string);
+                    return Promise.resolve();
+                });
+        });
 }
 
 function getIdLocal() {
-    let settings_list;
-    let next_id;
+    return getTreeName().then((treeName) => {
+        let next_id;
+        let settings_list = localStorage.getItem(SETTINGS_ID_LIST_NAME + "_" + treeName);
+        if (settings_list) {
+            settings_list = localStorage.getItem(SETTINGS_ID_LIST_NAME + "_" + treeName);
+            let ids = settings_list.split(",");
+            let last_id = ids[ids.length - 1];
+            next_id = (parseInt(last_id, 36) + 1).toString(36);
+            settings_list = ids.join(",") + "," + next_id;
+        } else {
+            next_id = "0";
+            settings_list = next_id;
+        }
 
-    if (localStorage.GVE_settings_id_list) {
-        settings_list = localStorage.GVE_settings_id_list;
-        let ids = settings_list.split(",");
-        let last_id = ids[ids.length-1];
-        next_id = (parseInt(last_id, 36)+1).toString(36);
-        settings_list = ids.join(",") + "," + next_id;
-    } else {
-        next_id = "0";
-        settings_list = next_id;
-    }
-
-    localStorage.GVE_settings_id_list = settings_list;
-    return next_id;
+        localStorage.setItem(SETTINGS_ID_LIST_NAME + "_" + treeName, settings_list);
+        return next_id;
+    });
 }
 
 function deleteIdLocal(id) {
-    let settings_list;
-    if (localStorage.GVE_settings_id_list) {
-        settings_list = localStorage.GVE_settings_id_list;
-        settings_list = settings_list.split(',').filter(item => item !== id).join(',')
-        localStorage.GVE_settings_id_list = settings_list;
-    }
+    return getTreeName().then((treeName) => {
+        let settings_list;
+        if (localStorage.getItem(SETTINGS_ID_LIST_NAME + "_" + treeName) != null) {
+            settings_list = localStorage.getItem(SETTINGS_ID_LIST_NAME + "_" + treeName);
+            settings_list = settings_list.split(',').filter(item => item !== id).join(',')
+            localStorage.setItem(SETTINGS_ID_LIST_NAME + "_" + treeName, settings_list);
+        }
+    });
 }
