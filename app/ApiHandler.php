@@ -24,13 +24,13 @@ class ApiHandler
             $type = FormSubmission::nameStringValid($json['type']) ? $json['type'] : "";
             switch ($type) {
                 case "save_settings":
-                    $this->saveSettings($request, $json, $tree);
+                    $this->saveSettings($module, $request, $json, $tree);
                     break;
                 case "get_settings":
                     $this->getSettings($json, $module, $tree, $json_data);
                     break;
                 case "delete_settings":
-                    $this->deleteSettings($json, $tree, $json_data);
+                    $this->deleteSettings($module, $json, $tree, $json_data);
                     break;
                 case "is_logged_in":
                     $this->isLoggedIn();
@@ -50,21 +50,21 @@ class ApiHandler
         }
     }
 
-    public function saveSettings($request, $json, $tree): void
+    public function saveSettings($module, $request, $json, $tree): void
     {
         $vars = Validator::parsedBody($request)->array('vars');
         $formSubmission = new FormSubmission();
         $vars = $formSubmission->load($vars);
         $settings = new Settings();
         if (isset($json['main']) && !$json['main']) {
-            $id = $settings->newSettingsId($tree);
+            $id = $settings->newSettingsId($module, $tree);
         } else {
             $id = Settings::ID_MAIN_SETTINGS;
         }
 
         if ($id != "") {
             $this->response_data['settings_id'] = $id;
-            $this->response_data['success'] = $settings->saveUserSettings($tree, $vars, $id);;
+            $this->response_data['success'] = $settings->saveUserSettings($module, $tree, $vars, $id);;
         } else {
             $this->response_data['success'] = false;
             $this->response_data['errorMessage'] = I18N::translate('Failed to assign new settings ID');
@@ -84,12 +84,12 @@ class ApiHandler
         }
     }
 
-    public function deleteSettings($json, $tree, string $json_data): void
+    public function deleteSettings($module, $json, $tree, string $json_data): void
     {
         if (isset($json['settings_id']) && ctype_alnum($json['settings_id']) && !in_array($json['settings_id'], [Settings::ID_ALL_SETTINGS, Settings::ID_MAIN_SETTINGS])) {
             if (Settings::isUserLoggedIn()) {
                 $settings = new Settings();
-                $settings->deleteUserSettings($tree, $json['settings_id']);
+                $settings->deleteUserSettings($module, $tree, $json['settings_id']);
                 $this->response_data['success'] = true;
             } else {
                 // Is user is not logged in, we should never have got this far

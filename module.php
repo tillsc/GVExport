@@ -325,7 +325,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
         $dot->setSettings($vars);
 
         $settings = new Settings();
-        $settings->saveUserSettings($tree,$dot->settings, Settings::ID_MAIN_SETTINGS);
+        $settings->saveUserSettings($this, $tree,$dot->settings, Settings::ID_MAIN_SETTINGS);
         // Get out DOT file
         $out .= $dot->createDOTDump();
         if (isset($_POST["browser"]) && $_POST["browser"] == "true") {

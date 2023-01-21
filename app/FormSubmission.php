@@ -21,9 +21,10 @@ class FormSubmission
         }
         // Stop PIDs
         if (!empty($vars["stop_xref_list"]) && $this->xrefListValid($vars["stop_xref_list"])) {
-            $settings['stop_pids'] = $vars["stop_xref_list"];
+            $settings['stop_xref_list'] = $vars["stop_xref_list"];
             $settings['stop_proc'] = true;
         } else {
+            $settings['stop_xref_list'] = "";
             $settings['stop_proc'] = false;
         }
         $settings['include_ancestors'] = isset($vars['include_ancestors']);
