@@ -14,11 +14,12 @@ class Settings
     public const ID_MAIN_SETTINGS = "_MAIN_";
     public const ID_ALL_SETTINGS = "_ALL_";
     private const GUEST_USER_ID = 0;
-    private const ADMIN_PREFERENCE_PREFIX = "Admin_";
-    private const PREFERENCE_PREFIX = "Settings_";
+    private const ADMIN_PREFERENCE_NAME = "Admin_settings";
+    private const PREFERENCE_PREFIX = "Settings";
     public const SETTINGS_LIST_PREFERENCE_NAME = "id_list_";
-    const TREE_PREFIX = "tree_";
-    const ID_PREFIX = "id_";
+    const TREE_PREFIX = "_t_";
+    const USER_PREFIX = "_u_";
+    const ID_PREFIX = "_id_";
     const MAX_SETTINGS_ID_LIST_LENGTH = 250;
     const MAX_SETTINGS_ID_LENGTH = 6;
     private array $defaultSettings;
@@ -58,16 +59,27 @@ class Settings
     public function getAdminSettings($module): array
     {
         $settings = $this->defaultSettings;
-        foreach ($settings as $preference => $value) {
-            if (self::shouldLoadSetting($preference, true)) {
-                $pref = $module->getPreference(self::ADMIN_PREFERENCE_PREFIX . $preference, "preference not set");
-                if ($pref != "preference not set") {
-                    $settings[$preference] = $pref;
+        $loaded = $module->getPreference(self::ADMIN_PREFERENCE_NAME, "preference not set");
+        if ($loaded != "preference not set") {
+            $loaded_settings = json_decode($loaded, true);
+            if (json_last_error() === JSON_ERROR_NONE) {
+                foreach ($settings as $preference => $value) {
+                    if (self::shouldLoadSetting($preference, true)) {
+                        $pref = $loaded_settings[$preference];
+                        if ($pref == 'true' || $pref == 'false') {
+                            $settings[$preference] = ($pref == 'true');
+                        } else {
+                            $settings[$preference] = $pref;
+                        }
+                    }
                 }
+            } else {
+                throw new HttpBadRequestException(I18N::translate('Invalid JSON') . " 1: " . json_last_error_msg() . $loaded);
             }
         }
         $settings['graphviz_config'] = $this->getGraphvizSettings($settings);
         return $settings;
+
     }
 
     /**
@@ -88,7 +100,7 @@ class Settings
                 $cookie = new Cookie($tree);
                 $settings = $cookie->load($settings);
             } else {
-                $loaded = $module->getPreference(self::PREFERENCE_PREFIX . self::TREE_PREFIX . $tree->id() . $id_suffix, "preference not set");
+                $loaded = $module->getPreference(self::PREFERENCE_PREFIX . self::TREE_PREFIX . $tree->id() . self::USER_PREFIX . Auth::user()->id() . $id_suffix, "preference not set");
                 if ($loaded != "preference not set") {
                 $loaded_settings = json_decode($loaded, true);
                     if (json_last_error() === JSON_ERROR_NONE) {
@@ -125,15 +137,22 @@ class Settings
      */
     public function saveAdminSettings($module, $settings) {
         $saveSettings = $this->defaultSettings;
+        $s = [];
         foreach ($saveSettings as $preference=>$value) {
             if (self::shouldSaveSetting($preference, true)) {
                 if (isset($settings[$preference])) {
-                    $module->setPreference(self::ADMIN_PREFERENCE_PREFIX . $preference, $settings[$preference]);
+                    if (gettype($value) == 'boolean') {
+                        $s[$preference] = ($settings[$preference] ? 'true' : 'false');
+                    } else {
+                        $s[$preference] = $settings[$preference];
+                    }
                 } else {
-                    $module->setPreference(self::ADMIN_PREFERENCE_PREFIX . $preference, false);
+                    $s[$preference] = 'false';
                 }
             }
         }
+        $json = json_encode($s);
+        $module->setPreference(self::ADMIN_PREFERENCE_NAME, $json);
     }
 
     /**
@@ -167,7 +186,7 @@ class Settings
                 }
             }
             $json = json_encode($s);
-            $module->setPreference(self::PREFERENCE_PREFIX . self::TREE_PREFIX . $tree->id() . $id_suffix, $json);
+            $module->setPreference(self::PREFERENCE_PREFIX . self::TREE_PREFIX . $tree->id() . self::USER_PREFIX . Auth::user()->id() . $id_suffix, $json);
             return true;
         }
     }
@@ -178,7 +197,7 @@ class Settings
             // Preference isn't actually deleted. Will be cleaned up by webtrees when module removed, or reused
             // if ID count is reset by removing all saved settings from UI. webtrees does not provide
             // functionality to delete preference.
-            $module->setPreference(self::PREFERENCE_PREFIX . self::TREE_PREFIX . $tree->id() . $id_suffix, "");
+            $module->setPreference(self::PREFERENCE_PREFIX . self::TREE_PREFIX . $tree->id() . self::USER_PREFIX . Auth::user()->id() . $id_suffix, "");
 
             $ids = explode(',', $this->getSettingsIdList($module, $tree));
             while(($i = array_search($id, $ids)) !== false) {

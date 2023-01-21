@@ -206,7 +206,7 @@ $settings = $settingsObj->getDefaultSettings();
             <div class="row">
                 <label class="col-sm-4 col-form-label" for="show_xref_individuals"><?= I18N::translate('Show individual XREF') ?></label>
                 <div class="col-sm-8 wt-page-options-value">
-                    <input type="checkbox" name="vars[show_xref_individuals]" id="show_xref_individuals" value="show_xref_individuals" <?= $vars["show_xref_individuals"] && $vars["show_xref_individuals"] != "DEFAULT" ? 'checked' : '' ?>>
+                    <input type="checkbox" name="vars[show_xref_individuals]" id="show_xref_individuals" value="show_xref_individuals" <?= $vars["show_xref_individuals"] ? 'checked' : '' ?>>
                 </div>
             </div>
 
