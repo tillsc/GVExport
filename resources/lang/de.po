@@ -741,8 +741,8 @@ msgstr "Einstellungen aus Datei laden"
 
 #. Help text for downloading saved settings to a file, and uploading these settings:  https://s3.eu-west-1.amazonaws.com/po-pub/i/HfxRre2VQe9TVyl8dtX3RhVj.png
 #: 
-msgid "Here you are able to save the chosen settings to a file, and to load that file at a later time.</p><p>For example, you may have many diagrams you create from your tree. You may want to save the settings used for each diagram so that in future you can regenerate the diagram to include any new information."
-msgstr "Hier können Sie die gewählten Einstellungen in einer Datei speichern und diese Datei zu einem späteren Zeitpunkt wieder laden.</p><p>Sie haben beispielsweise viele Diagramme, die Sie für ihren Baum erstellt haben. Vielleicht möchten Sie die für ein bestimmtes Diagramm verwendeten Einstellungen speichern, damit Sie dieses Diagramm in Zukunft neu erzeugen können, um aktualisierte Informationen darin aufzunehmen."
+msgid "Here you are able to save the chosen settings to a file, and to load that file at a later time.</p><p>For example, you may have many diagrams you create from your tree. You may want to save the settings used for each diagram so that in future you can regenerate the diagram to include any new information.</p><p>Also see the option to save settings within GVExport."
+msgstr "Hier können Sie die gewählten Einstellungen in einer Datei speichern und diese Datei zu einem späteren Zeitpunkt wieder laden.</p><p>Sie haben beispielsweise viele Diagramme, die Sie für ihren Baum erstellt haben. Vielleicht möchten Sie die für ein bestimmtes Diagramm verwendeten Einstellungen speichern, damit Sie dieses Diagramm in Zukunft neu erzeugen können, um aktualisierte Informationen darin aufzunehmen.</p><p>Beachten Sie auch die Option zum Sichern von Einstellungen in GVExport."
 
 #. For development use, you can now enable a debug panel. Needs translation as option will appear on Control Panel page:  https://s3.eu-west-1.amazonaws.com/po-pub/i/UzABfGKv12F3PBzS3wVzoHCm.png 
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/36sF1oj0dbyyJzl0meXi1ixY.png
@@ -783,4 +783,89 @@ msgstr "Speichergrenze wurde erreicht. Bitte reduzieren Sie die Anzahl der Daten
 #: 
 msgid "Memory limit reached. Please reduce number of records or install Graphviz on server and use download option."
 msgstr "Speichergrenze wurde erreicht. Memory limit reached. Bitte reduzieren Sie die Anzahl der Datensätze oder installieren Sie Graphviz auf dem Server und verwenden Sie die Download-Option."
+
+#. This message is shown when loading a settings file and a setting in the file doesn't match up to what we are looking for. The name of the setting is appended on the end:  https://s3.eu-west-1.amazonaws.com/po-pub/i/Mrqls4UxxHPlbZzEE4gz2qgj.png
+#: 
+msgid "Unable to load setting"
+msgstr "Nicht im Stand Einstellungen zu laden"
+
+#. Heading for section in Control Panel for settings that are only available to the administrator: https://s3.eu-west-1.amazonaws.com/po-pub/i/6ZCINR8ZbXR3Wpis2IuYp20i.png
+#: 
+msgid "Settings for GVExport"
+msgstr "Einstellungen GVExport"
+
+#. Group heading for settings only available in control panel: https://s3.eu-west-1.amazonaws.com/po-pub/i/4xkAK3jvXYzWAsk3q7faIpbK.png
+#: 
+msgid "Administrator settings"
+msgstr "Administratoreneinstellungen"
+
+#. Setting that sets the name of the downloaded file. E.g. when downloading JPG format, if you set the file name to "gvexport" then the file will be called "gvexport.jpg":   https://s3.eu-west-1.amazonaws.com/po-pub/i/jg1noFw1w55jgfEMyLD5oc8f.png
+#: 
+msgid "Download file name"
+msgstr "Heruntergeladener Dateiname"
+
+#. The MCLIMIT setting that is directly sent to Graphviz. Higher numbers result in fewer arrows crossing on the diagram but take longer to process.  https://s3.eu-west-1.amazonaws.com/po-pub/i/ayvZCoGAoyQIbE8v60cIVcIz.png
+#: 
+msgid "Graphviz MCLIMIT setting"
+msgstr "Einstellungen Graphviz MCLIMIT"
+
+#. Birth date setting in Control Panel. By default, birth dates on the diagram start with a * prefix. This setting can change this:  https://s3.eu-west-1.amazonaws.com/po-pub/i/uF5UdfYXLFGLQ4TLZysMUpNd.png
+#: 
+msgid "Birth date prefix"
+msgstr "Geburtsdatumvorwahl"
+
+#. Death date setting in Control Panel. By default, death dates on the diagram start with a + prefix. This setting can change this:  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/uF5UdfYXLFGLQ4TLZysMUpNd.png
+#: 
+msgid "Death date prefix"
+msgstr "Sterbedatumvorwahl"
+
+#. Area name for option to save a version of the settings for future use:  https://s3.eu-west-1.amazonaws.com/po-pub/i/n1salnZcGP6xC187FO1dAjpE.png
+#: 
+msgid "Save settings"
+msgstr "Einstellungen speichern"
+
+#. Text on save button in option to save a version of the settings for future use:  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/n1salnZcGP6xC187FO1dAjpE.png
+#: 
+msgid "Save"
+msgstr "Speichern"
+
+#. Placeholder text in text field in option to save a version of the settings for future use. Users will type a name here to call this saved version of the settings:  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/n1salnZcGP6xC187FO1dAjpE.png
+#: 
+msgid "Settings name"
+msgstr "Einstellungen Name"
+
+#. Help text for option to save a version of the settings for future use:  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/n1salnZcGP6xC187FO1dAjpE.png https://s3.eu-west-1.amazonaws.com/po-pub/i/fBbMFauzn9yAXWlI3do9cwmD.png
+#: 
+msgid "Here you are able to save the chosen settings within GVExport. The settings are only accessible within the same user and tree. Click a settings record to load it.</p><p>For example, you may have many diagrams you create from your tree. You may want to save the settings used for each diagram so that in future you can regenerate the diagram to include any new information.</p><p>Also see the option to save settings to a file."
+msgstr "Hier können Sie die gewählten Einstellungen innerhalb von GVExport speichern. Die Einstellungen sind nur für den selben Benutzer und Baum zugänglich. Klicken Sie auf einen Einstellungsdatensatz, um ihn zu laden.</p><p>Zum Beispiel haben Sie möglicherweise viele Diagramme, die Sie aus Ihrem Baum erstellen. Möglicherweise möchten Sie die für jedes Diagramm verwendeten Einstellungen speichern, damit Sie das Diagramm in Zukunft neu generieren können, um überarbeitete Informationen aufzunehmen.</p><p>Siehe auch die Option zum Speichern von Einstellungen in einer Datei."
+
+#. Error message shown when API was not able to assign an ID when saving a version of settings.  https://s3.eu-west-1.amazonaws.com/po-pub/i/SF4w8yDqZ9D7PGWdqvq2cOzq.png 
+#. User may see this when clicking Save button: https://s3.eu-west-1.amazonaws.com/po-pub/i/n1salnZcGP6xC187FO1dAjpE.png
+#. 
+#. Most likely reason for this is that there are too many settings saved.
+#: 
+msgid "Failed to assign new settings ID"
+msgstr "Neue ID einer Einstellung konnte nicht zugewiesen werden"
+
+#. Error message shown to user when an API request to get the settings fails because the settings version ID is invalid.  https://s3.eu-west-1.amazonaws.com/po-pub/i/09WTPGgXqx1UJ4awI72JPxgh.png 
+#. 
+#. Settings IDs are used when saving multiple versions of settings: https://s3.eu-west-1.amazonaws.com/po-pub/i/n1salnZcGP6xC187FO1dAjpE.png
+#: 
+msgid "Invalid settings ID"
+msgstr "Ungültige ID einer Einstellung"
+
+#. Error message shown when an invalid API request type is sent (users would never see this unless something broke):  https://s3.eu-west-1.amazonaws.com/po-pub/i/UigW1X1hdrkKdbkztZ5cwXBd.png
+#: 
+msgid "Invalid request"
+msgstr "Ungültige Anforderung"
+
+#. Error message for if API call has invalid structure. Error message is appended to the end. Users would never see this unless something is broken:  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/0RAGuKLhRU4gotkMYaeu8RdX.png
+#: 
+msgid "Invalid JSON"
+msgstr "Ungültiges JSON"
 
