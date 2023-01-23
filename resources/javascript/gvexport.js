@@ -942,7 +942,9 @@ function getSettingsClient(id = ID_ALL_SETTINGS) {
         } catch(e) {
             return Promise.reject(e);
         }
-    })
+    }).catch((e) => {
+        showToast(ERROR_CHAR + e);
+    });
 }
 
 function getSettings(id = ID_ALL_SETTINGS) {
@@ -955,7 +957,7 @@ function getSettings(id = ID_ALL_SETTINGS) {
             });
         }
     }).catch((error) => {
-        showToast(error);
+        showToast(ERROR_CHAR + error);
     });
 }
 function sendRequest(json) {
@@ -983,6 +985,8 @@ function sendRequest(json) {
                 });
             }
             resolve(response.text());
+        }).catch((e) => {
+            reject(e);
         });
     });
 }
