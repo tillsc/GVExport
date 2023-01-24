@@ -216,7 +216,7 @@ class FormSubmission
         if (!empty($vars['save_settings_name'])) {
             $settings['save_settings_name'] = $this->cleanSettingsName($vars['save_settings_name']);
         } else {
-            $settings['save_settings_name'] = "Settings";
+            $settings['save_settings_name'] = I18N::translate('Settings');
         }
         return $settings;
     }
