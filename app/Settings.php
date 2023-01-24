@@ -16,12 +16,10 @@ class Settings
     private const GUEST_USER_ID = 0;
     private const ADMIN_PREFERENCE_NAME = "Admin_settings";
     private const PREFERENCE_PREFIX = "Settings";
-    public const SETTINGS_LIST_PREFERENCE_NAME = "id_list_";
-    const TREE_PREFIX = "_t_";
-    const USER_PREFIX = "_u_";
-    const ID_PREFIX = "_id_";
-    const MAX_SETTINGS_ID_LIST_LENGTH = 250;
-    const MAX_SETTINGS_ID_LENGTH = 6;
+    public const SETTINGS_LIST_PREFERENCE_NAME = "_id_list";
+    const TREE_PREFIX = "_t";
+    const USER_PREFIX = "_u";
+    private array $settings_json_cache = [];
     private array $defaultSettings;
     public function __construct(){
         // Load settings from config file
@@ -93,29 +91,39 @@ class Settings
      */
     public function loadUserSettings($module, $tree, string $id = self::ID_MAIN_SETTINGS, bool $reset = false): array
     {
-        $id_suffix = $id === self::ID_MAIN_SETTINGS ? "" : "_" . self::ID_PREFIX . $id;
         $settings = $this->getAdminSettings($module);
         if (!$reset) {
             if (Auth::user()->id() == self::GUEST_USER_ID) {
                 $cookie = new Cookie($tree);
                 $settings = $cookie->load($settings);
             } else {
-                $loaded = $module->getPreference(self::PREFERENCE_PREFIX . self::TREE_PREFIX . $tree->id() . self::USER_PREFIX . Auth::user()->id() . $id_suffix, "preference not set");
+                $settings_pref_name = self::PREFERENCE_PREFIX . self::TREE_PREFIX . $tree->id() . self::USER_PREFIX . Auth::user()->id();
+                $loaded = $this->settings_json_cache[$settings_pref_name] ?? $module->getPreference($settings_pref_name, "preference not set");
                 if ($loaded != "preference not set") {
-                $loaded_settings = json_decode($loaded, true);
-                    if (json_last_error() === JSON_ERROR_NONE) {
-                        foreach ($settings as $preference => $value) {
-                            if (self::shouldLoadSetting($preference)) {
-                                $pref = $loaded_settings[$preference];
-                                if ($pref == 'true' || $pref == 'false') {
-                                    $settings[$preference] = ($pref == 'true');
-                                } else {
-                                    $settings[$preference] = $pref;
-                                }
-                            }
-                        }
+                    $all_settings = json_decode($loaded, true);
+                    if ($id == self::ID_ALL_SETTINGS) {
+                        unset($all_settings[self::ID_MAIN_SETTINGS]);
+                        return $all_settings;
                     } else {
-                        throw new HttpBadRequestException(I18N::translate('Invalid JSON') . " 1: " . json_last_error_msg() . $loaded);
+                        if (isset($all_settings[$id]) && json_last_error() === JSON_ERROR_NONE) {
+                            $loaded_settings = json_decode($all_settings[$id]['settings'], true);
+                            if (json_last_error() === JSON_ERROR_NONE) {
+                                foreach ($settings as $preference => $value) {
+                                    if (self::shouldLoadSetting($preference)) {
+                                        $pref = $loaded_settings[$preference];
+                                        if ($pref == 'true' || $pref == 'false') {
+                                            $settings[$preference] = ($pref == 'true');
+                                        } else {
+                                            $settings[$preference] = $pref;
+                                        }
+                                    }
+                                }
+                            } else {
+                                throw new HttpBadRequestException(I18N::translate('Invalid JSON') . " 1: " . json_last_error_msg() . $loaded);
+                            }
+                        } else {
+                            throw new HttpBadRequestException(I18N::translate('Invalid settings ID') . " " . e($id) . ": " . json_last_error_msg());
+                        }
                     }
                 } else {
                     $settings['first_run_xref_check'] = true;
@@ -165,7 +173,6 @@ class Settings
      */
     public function saveUserSettings($module, $tree, $settings, string $id = self::ID_MAIN_SETTINGS): bool
     {
-        $id_suffix = $id === self::ID_MAIN_SETTINGS ? "" : "_" . self::ID_PREFIX . $id;
         if (Auth::user()->id() == self::GUEST_USER_ID) {
             if ($id == self::ID_MAIN_SETTINGS) {
                 $cookie = new Cookie($tree);
@@ -185,30 +192,26 @@ class Settings
                     }
                 }
             }
-            $json = json_encode($s);
-            $module->setPreference(self::PREFERENCE_PREFIX . self::TREE_PREFIX . $tree->id() . self::USER_PREFIX . Auth::user()->id() . $id_suffix, $json);
+
+            $this->addUserSettings($module, $tree, $id, $s);
             return true;
         }
     }
 
     public function deleteUserSettings($module, $tree, $id) {
-        $id_suffix = ($id === self::ID_MAIN_SETTINGS ? "" : "_" . self::ID_PREFIX . $id);
         if (Settings::isUserLoggedIn()) {
-            // Preference isn't actually deleted. Will be cleaned up by webtrees when module removed, or reused
-            // if ID count is reset by removing all saved settings from UI. webtrees does not provide
-            // functionality to delete preference.
-            $module->setPreference(self::PREFERENCE_PREFIX . self::TREE_PREFIX . $tree->id() . self::USER_PREFIX . Auth::user()->id() . $id_suffix, "");
-
-            $ids = explode(',', $this->getSettingsIdList($module, $tree));
-            while(($i = array_search($id, $ids)) !== false) {
-                unset($ids[$i]);
+            $loaded = $module->getPreference(self::PREFERENCE_PREFIX . self::TREE_PREFIX . $tree->id() . self::USER_PREFIX . Auth::user()->id(), "preference not set");
+            if ($loaded != "preference not set") {
+                $all_settings = json_decode($loaded, true);
+                if (isset($all_settings[$id]) && json_last_error() === JSON_ERROR_NONE) {
+                    unset($all_settings[$id]);
+                } else {
+                    throw new HttpBadRequestException(I18N::translate('Invalid settings ID') . " " . e($id) . ": " . json_last_error_msg());
+                }
+                $new_json = json_encode($all_settings);
+                $module->setPreference(self::PREFERENCE_PREFIX . self::TREE_PREFIX . $tree->id() . self::USER_PREFIX . Auth::user()->id(), $new_json);
+                $this->deleteSettingsId($module, $tree, $id);
             }
-            $i = array_search($id, $ids);
-            if ($i) {
-                unset($ids[$i]);
-            }
-            $id_list = implode(',', $ids);
-            $module->setPreference(self::PREFERENCE_PREFIX . self::SETTINGS_LIST_PREFERENCE_NAME . $tree->id(), $id_list);
         }
     }
 
@@ -386,7 +389,7 @@ class Settings
         $settings = [];
 
         foreach ($this->defaultSettings as $preference => $value) {
-            if (self::shouldSaveSetting($preference)) {
+            if (self::shouldLoadSetting($preference)) {
                 $settings[$preference] = $userSettings[$preference];
             }
         }
@@ -395,26 +398,8 @@ class Settings
 
     public function getAllSettingsJson($module, $tree)
     {
-        $settings_list = array();
-        $id_list = $this->getSettingsIdList($module, $tree);
-        $ids = explode(',', $id_list);
-        if ($ids != "") {
-            foreach ($ids as $id_value) {
-                if ($id_value != "") {
-                    $userSettings = $this->loadUserSettings($module, $tree, $id_value);
-                    $settings_list[(string) $id_value]['name'] = $userSettings['save_settings_name'];
-                    $settings_list[(string) $id_value]['id'] = $id_value;
-                    $settings = array();
-                    foreach ($this->defaultSettings as $preference => $value) {
-                        if (self::shouldSaveSetting($preference)) {
-                            $settings[$preference] = $userSettings[$preference];
-                        }
-                    }
-                    $settings_list[(string) $id_value]['settings'] = json_encode($settings);
-                }
-            }
-        }
-        return json_encode($settings_list);
+        $settings = $this->loadUserSettings($module, $tree, Settings::ID_ALL_SETTINGS);
+        return json_encode($settings);
     }
 
     public function newSettingsId($module, $tree): string
@@ -431,22 +416,29 @@ class Settings
                 $next_id = (int)base_convert($last_id, 36, 10) + 1;
                 $new_id = base_convert($next_id, 10, 36);
                 $id_list = $id_list . "," . $new_id;
-                if (strlen($id_list) > self::MAX_SETTINGS_ID_LIST_LENGTH || strlen($new_id) > self::MAX_SETTINGS_ID_LENGTH) {
-                    return "";
-                }
             } else {
                 return "";
             }
         }
-
-        $use_cookie = Auth::user()->id() == self::GUEST_USER_ID;
-        if ($use_cookie) {
-            return ""; // Logged-out users are handled in local storage, this should never happen
-        } else {
-            $module->setPreference(self::PREFERENCE_PREFIX . self::SETTINGS_LIST_PREFERENCE_NAME . $tree->id(), $id_list);
-        }
-
+        $this->setSettingsIdList($module, $tree, $id_list);
         return $new_id;
+    }
+
+    public function deleteSettingsId($module, $tree, $id): string
+    {
+        $id_list = $this->getSettingsIdList($module, $tree);
+        if ($id_list == "") {
+           return false;
+        } else {
+            $preferences = explode(',', $id_list);
+            $key = array_search($id, $preferences);
+            unset($preferences[$key]);
+            if ($this->setSettingsIdList($module, $tree, implode(',', $preferences))) {
+                return true;
+            } else {
+                return false;
+            }
+        }
     }
 
     private function getSettingsIdList($module, $tree) {
@@ -455,7 +447,7 @@ class Settings
         if ($use_cookie) {
             return ""; // Logged-out users are handled via local storage, so this should never happen
         } else {
-            $pref_list = $module->getPreference(self::PREFERENCE_PREFIX . self::SETTINGS_LIST_PREFERENCE_NAME . $tree->id(), "preference not set");
+            $pref_list = $module->getPreference(self::PREFERENCE_PREFIX . self::SETTINGS_LIST_PREFERENCE_NAME . self::TREE_PREFIX . $tree->id(), "preference not set");
             if ($pref_list == "preference not set") {
                 $pref_list = "";
             }
@@ -468,6 +460,33 @@ class Settings
         if (Auth::user()->id() == self::GUEST_USER_ID) {
             return false;
         } else {
+            return true;
+        }
+    }
+
+    private function addUserSettings($module, $tree, $id, array $s)
+    {
+        $prefs_json = $module->getPreference(self::PREFERENCE_PREFIX . self::TREE_PREFIX . $tree->id() . self::USER_PREFIX . Auth::user()->id(), "preference not set");
+        if ($prefs_json == "preference not set") {
+            $settings = [];
+        } else {
+            $settings = json_decode($prefs_json, true);
+        }
+        $json = json_encode($s);
+        $settings[$id]['settings'] = $json;
+        $settings[$id]['name'] = $s['save_settings_name'];
+        $settings[$id]['id'] = $id;
+        $new_json = json_encode($settings);
+        $module->setPreference(self::PREFERENCE_PREFIX . self::TREE_PREFIX . $tree->id() . self::USER_PREFIX . Auth::user()->id(), $new_json);
+    }
+
+    private function setSettingsIdList($module, $tree, string $id_list): bool
+    {
+        $use_cookie = Auth::user()->id() == self::GUEST_USER_ID;
+        if ($use_cookie) {
+            return false; // Logged-out users are handled in local storage, this should never happen
+        } else {
+            $module->setPreference(self::PREFERENCE_PREFIX . self::SETTINGS_LIST_PREFERENCE_NAME . self::TREE_PREFIX . $tree->id(), $id_list);
             return true;
         }
     }

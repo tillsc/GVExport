@@ -844,6 +844,9 @@ function loadSettings(data) {
             }
         } else {
             if (el.type === 'checkbox' || el.type === 'radio') {
+                if (typeof settings[key] == "string") {
+                    settings[key] = (settings[key] === 'true');
+                }
                 setCheckStatus(el, settings[key]);
             } else {
                 el.value = settings[key];
