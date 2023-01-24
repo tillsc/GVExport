@@ -55,6 +55,7 @@ use Fisharebest\Webtrees\Module\ModuleConfigInterface;
 use Fisharebest\Webtrees\Module\ModuleConfigTrait;
 use Fisharebest\Webtrees\FlashMessages;
 use Fisharebest\Webtrees\Menu;
+use Fisharebest\Webtrees\Validator;
 use Fisharebest\Webtrees\View;
 use Fisharebest\Webtrees\Tree;
 use Psr\Http\Message\ResponseInterface;
@@ -226,13 +227,19 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
     public function postChartAction(ServerRequestInterface $request): ResponseInterface
     {
         $tree = $request->getAttribute('tree');
-        $temp_dir = $this->saveDOTFile($tree);
+        if (isset($_POST['json_data'])) {
+            $api = new ApiHandler();
+            $api->handle($request, $this, $tree);
+            return $api->getResponse();
+        } else {
+            $vars_data = Validator::parsedBody($request)->array('vars');
+            $temp_dir = $this->saveDOTFile($tree, $vars_data);
+            // If browser mode, output dot instead of selected file
+            $file_type = isset($_POST["browser"]) && $_POST["browser"] == "true" ? "dot" : $vars_data["output_type"];
 
-        // If browser mode, output dot instead of selected file
-        $file_type = isset($_POST["browser"]) && $_POST["browser"] == "true" ? "dot" : $_REQUEST["vars"]["output_type"];
-
-        $outputFile = new OutputFile($temp_dir, $file_type, $this);
-        return $outputFile->downloadFile();
+            $outputFile = new OutputFile($temp_dir, $file_type, $this);
+            return $outputFile->downloadFile();
+        }
     }
 
     /**
@@ -268,7 +275,8 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
     {
         $params = (array) $request->getParsedBody();
         $formSubmission = new FormSubmission();
-        $vars = $formSubmission->load($_REQUEST['vars']);
+        $vars_data = Validator::parsedBody($request)->array('vars');
+        $vars = $formSubmission->load($vars_data);
         if ($params['save'] === '1') {
             (new Settings())->saveAdminSettings($this, $vars);
             FlashMessages::addMessage(I18N::translate('The preferences for the module “%s” have been updated.',
@@ -282,7 +290,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
      *
      * @return	string	Directory where the file is saved
      */
-    function saveDOTFile($tree): string
+    function saveDOTFile($tree, $vars_data): string
     {
         // Make a unique directory to the tmp dir
         $temp_dir = (new File())->sys_get_temp_dir_my() . "/" . md5(Auth::id());
@@ -291,7 +299,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
         }
 
         // Create the dump
-        $contents = $this->createGraphVizDump($tree, $temp_dir);
+        $contents = $this->createGraphVizDump($tree, $vars_data, $temp_dir);
 
         // Put the contents into the file
         $settings = (new Settings())->getAdminSettings($this);
@@ -302,22 +310,22 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
         return $temp_dir;
     }
 
-    function createGraphVizDump($tree, $temp_dir): string
+    function createGraphVizDump($tree, $vars_data, $temp_dir): string
     {
         $out = "";
-        $dot = new Dot($tree, $this, Registry::filesystem()->data());
+        $dot = new Dot($tree, $this);
 
 
 
         $formSubmission = new FormSubmission();
-        $vars = $formSubmission->load($_REQUEST['vars']);
+        $vars = $formSubmission->load($vars_data);
         if (isset($temp_dir)) {
             $vars['temp_dir'] = $temp_dir;
         }
         $dot->setSettings($vars);
 
         $settings = new Settings();
-        $settings->saveUserSettings($tree,$dot->settings);
+        $settings->saveUserSettings($this, $tree,$dot->settings);
         // Get out DOT file
         $out .= $dot->createDOTDump();
         if (isset($_POST["browser"]) && $_POST["browser"] == "true") {
@@ -325,7 +333,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
             $response['messages'] = $dot->messages;
             $response['enable_debug_mode'] = $dot->debug_string;
             $response['dot'] = $out;
-            $response['settings'] = $settings->getSettingsJson($this, $tree);
+            $response['settings'] = $settings->getSettingsJson($this, $tree, Settings::ID_MAIN_SETTINGS);
             $r = json_encode($response);
         } else {
             $r = $out;

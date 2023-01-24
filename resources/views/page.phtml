@@ -62,7 +62,10 @@ $xref = $individual->xref();
 <?= $usegraphviz ? "" : "<script src=\"" . $module->assetUrl('javascript/jspdf.umd.min.js') . "\"></script>"; ?>
 <script type="text/javascript">
     const cartempty = <?= $cartempty ? "true" : "false" ?>;
-    const CLIENT_ERRORS = ["<?= I18N::translate('Your browser does not support exporting images this large. Please reduce number of records, reduce DPI setting, or use SVG option.') ?>", "<?= I18N::translate('Unable to load setting ') ?>"];
+    const CLIENT_ERRORS = [
+        "<?= I18N::translate('Your browser does not support exporting images this large. Please reduce number of records, reduce DPI setting, or use SVG option.') ?>",
+        "<?= I18N::translate('Unable to load setting ') ?>",
+        "<?= I18N::translate('Invalid JSON'); ?>"];
     let autoUpdate = <?= $vars["auto_update"] ? 'true' : 'false' ?>;
     let debug_string = "";
     let TOMSELECT_URL = "";
@@ -207,7 +210,6 @@ $xref = $individual->xref();
                             <button type="button" class="btn btn-outline-secondary" onclick="refreshIndisFromXREFS(false)">⟳</button>
                         </div>
                     </div>
-
                 </div>
             </div>
             <div class="row form-group">
@@ -536,12 +538,24 @@ $xref = $individual->xref();
                     <label for="auto_update"><?= I18N::translate('Auto-update') ?></label>
                     <input type="checkbox" onclick="toggleUpdateButton()" name="vars[auto_update]" id="auto_update" value="auto_update" <?= $vars["auto_update"] ? 'checked' : '' ?>>
                 </div>
+                <?= MainPage::addLabel('save_settings', 'Save settings'); ?>
+                <div class="col-sm-8 wt-page-options-value">
+                    <div id="settings_list">
+
+                    </div>
+                    <div class="input-group mt-1">
+                        <input type="text" class="form-control" name="vars[save_settings_name]" id="save_settings_name" placeholder="<?= I18N::translate('Settings name'); ?>">
+                        <div class="input-group-append">
+                            <button id="save_settings_button" type="button" class="btn btn-outline-secondary" onclick="saveSettingsAdvanced()"><?= I18N::translate('Save') ?></button>
+                        </div>
+                    </div>
+                </div>
                 <?= MainPage::addLabel('', 'Settings file'); ?>
                 <div class="col-sm-8 wt-page-options-value">
-                    <label for="save_settings"><?= I18N::translate('Save settings to file') ?></label><br>
-                    <button class="btn btn-outline-secondary" type="button" name="save_settings" id="save_settings" onclick="downloadSettingsFile(true)"><?= I18N::translate('Download') ?></button><br>
-                    <label for="save_settings"><?= I18N::translate('Load settings from file') ?></label><br>
-                    <input type="file" onchange="uploadSettingsFile(this)">
+                    <label for="download_settings"><?= I18N::translate('Save settings to file') ?></label><br>
+                    <button class="btn btn-outline-secondary" type="button" name="save_settings" id="download_settings" onclick="downloadSettingsFile()"><?= I18N::translate('Download') ?></button><br>
+                    <label for="load_settings"><?= I18N::translate('Load settings from file') ?></label><br>
+                    <input id="load_settings" type="file" onchange="uploadSettingsFile(this)">
                 </div>
             </div>
         </div>
@@ -554,10 +568,6 @@ $xref = $individual->xref();
                 <label for="enable_debug_mode"><?= I18N::translate('Enable debug mode') ?></label>
                 <input type="checkbox" name="vars[enable_debug_mode]" id="enable_debug_mode" value="enable_debug_mode" <?= $vars["enable_debug_mode"] ? 'checked' : '' ?>><br>
                 <button class="btn btn-outline-secondary" type="button" name="debug_view" onclick="return showHelp('enable_debug_mode');"><?= I18N::translate('View debug log') ?></button>
-            </div>
-            <?= MainPage::addLabel('enable_debug_mode', 'Settings JSON', FALSE); ?>
-            <div class="col-sm-8 wt-page-options-value">
-                <button class="btn btn-outline-secondary" type="button" name="debug_view" onclick="return showHelp('debug_settings');"><?= I18N::translate('View settings JSON') ?></button>
             </div>
             <?= MainPage::addLabel('enable_graphviz', 'Graphviz', FALSE); ?>
             <div class="col-sm-8 wt-page-options-value">
@@ -709,8 +719,8 @@ $xref = $individual->xref();
             try {
                 jsonResponse = JSON.parse(response);
             } catch(e) {
-                showToast("E:<?= I18N::translate('Login expired. Reloading page...'); ?>");
-                showToast("E: " + e);
+                showToast(ERROR_CHAR + "<?= I18N::translate('Login expired. Reloading page...'); ?>");
+                showToast(ERROR_CHAR + e);
                 setTimeout(function(){location.reload();}, 3000);
                 return false;
             }
@@ -718,7 +728,6 @@ $xref = $individual->xref();
             if (lastDotStr.indexOf("digraph WT_Graph {") !== -1) {
                 messages = jsonResponse.messages;
                 debug_string = jsonResponse.enable_debug_mode;
-                settings_json = jsonResponse.settings;
             }
 
             const images = [...lastDotStr.matchAll(/<IMG[^>]+SRC="([^"]*)/gmi)].map(function (matches) {
@@ -779,9 +788,9 @@ $xref = $individual->xref();
         }).catch(function (error) {
             if (error.message.includes("TOTAL_MEMORY")) {
                 if (graphvizAvailable) {
-                    showToast("E: <?= I18N::translate('Memory limit reached. Please reduce number of records or use download option.'); ?>");
+                    showToast(ERROR_CHAR + "<?= I18N::translate('Memory limit reached. Please reduce number of records or use download option.'); ?>");
                 } else {
-                        showToast("E: <?= I18N::translate('Memory limit reached. Please reduce number of records or install Graphviz on server and use download option.'); ?>");
+                        showToast(ERROR_CHAR + "<?= I18N::translate('Memory limit reached. Please reduce number of records or install Graphviz on server and use download option.'); ?>");
                 }
                 rendering.innerHTML = "";
             } else {

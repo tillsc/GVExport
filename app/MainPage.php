@@ -37,6 +37,7 @@ class MainPage
      * Returns the HTML code for the label, the option grouping on the left hand side of the settings
      * @param string $for the id of the input element this label is for
      * @param string $text the text to put on the label
+     * @param bool $help
      * @return string
      */
     public static function addLabel(string $for, string $text, bool $help = TRUE): string

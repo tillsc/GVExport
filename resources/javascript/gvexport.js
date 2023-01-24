@@ -1,19 +1,14 @@
 const ERROR_CHAR = "E:";
-const appendPidTo = function (sourceId, targetId) {
-    const ids = [];
-    document.getElementById(targetId).value.split(",").forEach(function (id) {
-        id = id.trim();
-        if (id !== "") {
-            ids.push(id);
-        }
-    });
-    const newId = document.getElementById(sourceId).value.trim();
-    if (ids.indexOf(newId) === -1) {
-        ids.push(newId);
-    }
-    document.getElementById(targetId).value = ids.join(",");
-};
-
+const ID_MAIN_SETTINGS = "_MAIN_";
+const ID_ALL_SETTINGS = "_ALL_";
+const SETTINGS_ID_LIST_NAME = 'GVE_settings_id_list';
+const REQUEST_TYPE_GET_TREE_NAME = "get_tree_name";
+const REQUEST_TYPE_DELETE_SETTINGS = "delete_settings";
+const REQUEST_TYPE_SAVE_SETTINGS = "save_settings";
+const REQUEST_TYPE_GET_SETTINGS = "get_settings";
+const REQUEST_TYPE_IS_LOGGED_IN = "is_logged_in";
+let treeName = null;
+let loggedIn = null;
 
 function hideSidebar(e) {
     document.querySelector(".sidebar").hidden = true;
@@ -171,13 +166,6 @@ function showHide(element, show) {
     }
 }
 
-// Hide a displayed element or show a hidden one
-function toggleShowID(css_id) {
-    const element = document.getElementById(css_id);
-    const visible = element.style.display !== "none";
-    showHide(element, !visible);
-}
-
 // Show a toast message
 // message - the message to show
 function showToast(message) {
@@ -252,7 +240,7 @@ function downloadSVGAsImage(type) {
         // Download it
         const dataURL = canvas.toDataURL('image/'+type);
         if (dataURL.length < 10) {
-            showToast("E:"+CLIENT_ERRORS[0]); // Canvas too big
+            showToast(ERROR_CHAR+CLIENT_ERRORS[0]); // Canvas too big
         } else if (type === "pdf") {
             createPdfFromImage(dataURL, img.width, img.height);
         } else {
@@ -320,9 +308,9 @@ function downloadLink(URL, filename) {
 // visible - whether to make element visible or hidden. Null to toggle current state.
 function toggleAdvanced(button, id, visible = null) {
     const el = document.getElementById(id);
-    // If toggling, set to the opposite of corrent state
+    // If toggling, set to the opposite of current state
     if (visible === null) {
-        visible = el.style.display == "none";
+        visible = el.style.display === "none";
     }
     showHide(el, visible);
     if (visible) {
@@ -736,6 +724,7 @@ function pageLoaded() {
     loadURLXref();
     loadXrefList(TOMSELECT_URL, 'xref_list', 'indi_list');
     loadXrefList(TOMSELECT_URL, 'stop_xref_list', 'stop_indi_list');
+    loadSettingsDetails();
     // Remove reset parameter from URL when page loaded, to prevent
     // further resets when page reloaded
     removeURLParameter("reset");
@@ -780,21 +769,14 @@ function showHelp(item) {
 /**
  * Downloads settings as JSON file
  */
-function downloadSettingsFile(reloadSettings) {
-    if (reloadSettings) {
-        settings_json = "";
-        updateRender();
-    }
-
-    setTimeout(() => {
-        if (settings_json !== "") {
-            let file = new Blob([settings_json], {type: "text/plain"});
-            let url = URL.createObjectURL(file);
-            downloadLink(url, TREE_NAME + ".json")
-        } else {
-            downloadSettingsFile(false);
-        }
-    }, 100);
+function downloadSettingsFile() {
+    saveSettingsServer(true).then(() => {
+        return getSettings(ID_MAIN_SETTINGS);
+    }).then((settings_json_string) => {
+        let file = new Blob([settings_json_string], {type: "text/plain"});
+        let url = URL.createObjectURL(file);
+        downloadLink(url, TREE_NAME + ".json")
+    });
 }
 
 /**
@@ -821,7 +803,7 @@ function loadSettings(data) {
         showToast("Failed to load settings: " + e);
         return false;
     }
-    Object.keys(settings).forEach (function(key){
+    Object.keys(settings).forEach(function(key){
         let el = document.getElementById(key);
         if (el == null) {
             switch (key) {
@@ -858,10 +840,13 @@ function loadSettings(data) {
                 case 'enable_graphviz':
                     break;
                 default:
-                    showToast("E:" + CLIENT_ERRORS[1] + " " + key);
+                    showToast(ERROR_CHAR + CLIENT_ERRORS[1] + " " + key);
             }
         } else {
             if (el.type === 'checkbox' || el.type === 'radio') {
+                if (typeof settings[key] == "string") {
+                    settings[key] = (settings[key] === 'true');
+                }
                 setCheckStatus(el, settings[key]);
             } else {
                 el.value = settings[key];
@@ -872,6 +857,8 @@ function loadSettings(data) {
     showHide(document.getElementById('arrow_group'),document.getElementById('colour_arrow_related').checked)
     showHide(document.getElementById('startcol_option'),document.getElementById('highlight_start_indis').checked)
     refreshIndisFromXREFS(false);
+    // Don't load name from settings into text field - it's already shown on settings element
+    document.getElementById('save_settings_name').value = "";
     if (autoUpdate) updateRender();
 }
 
@@ -887,11 +874,313 @@ function setGraphvizAvailable(available) {
     graphvizAvailable = available;
 }
 
-/**
- * This function exists for automated testing to access settings JSON without having to download the file
- *
- * @returns {string}
- */
-function getSettingsJson() {
-    return settings_json;
+function saveSettingsServer(main = true) {
+    let request = {
+        "type": REQUEST_TYPE_SAVE_SETTINGS,
+        "main": main
+    };
+    let json = JSON.stringify(request);
+    return sendRequest(json);
+}
+
+function getSettingsServer(id = ID_ALL_SETTINGS) {
+    let request = {
+        "type": REQUEST_TYPE_GET_SETTINGS,
+        "settings_id": id
+    };
+    let json = JSON.stringify(request);
+    return sendRequest(json).then((response) => {
+        try {
+            let json = JSON.parse(response);
+            if (json.success) {
+                return json.settings;
+            } else {
+                return ERROR_CHAR + json.errorMessage;
+            }
+        } catch(e) {
+            showToast(ERROR_CHAR + e);
+        }
+        return false;
+    });
+}
+
+
+function getSettingsClient(id = ID_ALL_SETTINGS) {
+    return getTreeName().then(async (treeName) => {
+        try {
+            if (id === ID_ALL_SETTINGS) {
+                if (localStorage.getItem(SETTINGS_ID_LIST_NAME + "_" + treeName)) {
+                    let settings_list = localStorage.getItem(SETTINGS_ID_LIST_NAME + "_" + treeName);
+                    let ids = settings_list.split(",");
+                    let promises = ids.map(id_value => getSettingsClient(id_value))
+                    let results = await Promise.all(promises);
+                    let settings = {};
+                    for (let i = 0; i < ids.length; i++) {
+                        let id_value = ids[i];
+                        let userSettings = results[i];
+                        if (userSettings === null) {
+                            return Promise.reject('User settings null');
+                        } else {
+                        settings[id_value] = {};
+                        settings[id_value]['name'] = userSettings['save_settings_name'];
+                        settings[id_value]['id'] = id_value;
+                        settings[id_value]['settings'] = JSON.stringify(userSettings);}
+                    }
+                    return settings;
+                } else {
+                    return {};
+                }
+            } else {
+                let settings_id = id === ID_MAIN_SETTINGS ? "" : id;
+                try {
+                    return JSON.parse(localStorage.getItem("GVE_Settings_" + treeName + "_" + settings_id));
+                } catch(e) {
+                    return Promise.reject(e);
+                }
+            }
+
+        } catch(e) {
+            return Promise.reject(e);
+        }
+    }).catch((e) => {
+        showToast(ERROR_CHAR + e);
+    });
+}
+
+function getSettings(id = ID_ALL_SETTINGS) {
+    return isUserLoggedIn().then((loggedIn) => {
+        if (loggedIn || id === ID_MAIN_SETTINGS) {
+            return getSettingsServer(id);
+        } else {
+            return getSettingsClient(id).then((obj) => {
+                return JSON.stringify(obj);
+            });
+        }
+    }).catch((error) => {
+        showToast(ERROR_CHAR + error);
+    });
+}
+function sendRequest(json) {
+    return new Promise((resolve, reject) => {
+        const form = document.getElementById('gvexport');
+        const el = document.createElement("input");
+        el.name = "json_data";
+        el.value = json;
+        form.appendChild(el);
+        document.getElementById("browser").value = "true";
+        let data = jQuery(form).serialize();
+        document.getElementById("browser").value = "false";
+        el.remove();
+        window.fetch(form.getAttribute('action'), {
+            method: form.getAttribute('method'),
+            credentials: 'same-origin', // include, *same-origin, omit
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: data
+        }).then(function (response) {
+            if (!response.ok) {
+                return response.text().then(function (errorText) {
+                    return reject(errorText)
+                });
+            }
+            resolve(response.text());
+        }).catch((e) => {
+            reject(e);
+        });
+    });
+}
+
+function loadSettingsDetails() {
+    getSettings(ID_ALL_SETTINGS).then((settings) => {
+        let settingsList;
+        try {
+            settingsList = JSON.parse(settings);
+        } catch (e) {
+            return CLIENT_ERRORS['2'] + e;
+        }
+        const listElement = document.getElementById('settings_list');
+        listElement.innerHTML = "";
+        Object.keys(settingsList).forEach (function(key) {
+            const newLinkWrapper = document.createElement("a");
+            newLinkWrapper.setAttribute("href", "#");
+            const newListItem = document.createElement("div");
+            newListItem.className = "settings_list_item";
+            newListItem.setAttribute("data-settings", settingsList[key]['settings']);
+            newListItem.setAttribute("data-id", settingsList[key]['id']);
+            newListItem.setAttribute("onclick", "loadSettings(this.getAttribute('data-settings'))");
+            newListItem.innerHTML = "<a href=\"#\">" + settingsList[key]['name'] + "<div class=\"remove-item\" onclick=\"deleteSettingsAdvanced(event, this)\"><a href='#'>×</a></div></a>";
+            newLinkWrapper.appendChild(newListItem);
+            listElement.appendChild(newLinkWrapper);
+        });
+    }).catch(
+        error => showToast(error)
+    );
+}
+
+function saveSettingsAdvanced() {
+    isUserLoggedIn().then((loggedIn) => {
+        if (loggedIn) {
+            return saveSettingsServer(false).then((response)=>{
+                try {
+                    let json = JSON.parse(response);
+                    if (json.success) {
+                        return response;
+                    } else {
+                        return Promise.reject(ERROR_CHAR + json.errorMessage);
+                    }
+                } catch (e) {
+                    return Promise.reject("Failed to load response: " + e);
+                }
+            });
+        } else {
+            return getIdLocal().then((id) => {
+                return saveSettingsClient(id);
+            });
+        }
+    }).then(() => {
+        loadSettingsDetails();
+        document.getElementById('save_settings_name').value = "";
+    }).catch(
+        error => showToast(error)
+    );
+
+}
+
+function deleteSettingsClient(id) {
+    getTreeName().then((treeName) => {
+        try {
+            localStorage.removeItem("GVE_Settings_" + treeName + "_" + id);
+            deleteIdLocal(id);
+        } catch (e) {
+            showToast(e);
+        }
+    });
+}
+
+function deleteSettingsAdvanced(e, element) {
+    e.stopPropagation();
+    let parentEl = element.parentElement;
+    let id = parentEl.getAttribute("data-id").trim();
+    isUserLoggedIn().then((loggedIn) => {
+        if (loggedIn) {
+            let request = {
+                "type": REQUEST_TYPE_DELETE_SETTINGS,
+                "settings_id": id
+            };
+            let json = JSON.stringify(request);
+            sendRequest(json).then((response) => {
+                try {
+                    let json = JSON.parse(response);
+                    if (json.success) {
+                        loadSettingsDetails();
+                    } else {
+                        showToast(ERROR_CHAR + json.errorMessage);
+                    }
+                } catch (e) {
+                    showToast("Failed to load response: " + e);
+                    return false;
+                }
+            });
+        } else {
+            deleteSettingsClient(id);
+            loadSettingsDetails();
+        }
+    });
+}
+
+
+function isUserLoggedIn() {
+    if (loggedIn != null)  {
+        return Promise.resolve(loggedIn);
+    } else {
+        let request = {
+            "type": REQUEST_TYPE_IS_LOGGED_IN
+        };
+        let json = JSON.stringify(request);
+        return sendRequest(json).then((response) => {
+            try {
+                let json = JSON.parse(response);
+                if (json.success) {
+                    loggedIn = json.loggedIn;
+                    return json.loggedIn;
+                } else {
+                    return Promise.reject(ERROR_CHAR + json.errorMessage);
+                }
+            } catch (e) {
+                return Promise.reject("Failed to load response: " + e);
+            }
+        });
+    }
+}
+
+function getTreeName() {
+    if (treeName != null)  {
+        return Promise.resolve(treeName);
+    } else {
+        let request = {
+            "type": REQUEST_TYPE_GET_TREE_NAME
+        };
+        let json = JSON.stringify(request);
+        return sendRequest(json).then((response) => {
+            try {
+                let json = JSON.parse(response);
+                if (json.success) {
+                    treeName = json.treeName.replace(/[^a-zA-Z0-9_]/g, ""); // Only allow characters that play nice
+                    return treeName;
+                } else {
+                    return Promise.reject(ERROR_CHAR + json.errorMessage);
+                }
+            } catch (e) {
+                return Promise.reject("Failed to load response: " + e);
+            }
+        });
+    }
+}
+
+function saveSettingsClient(id) {
+    return Promise.all([saveSettingsServer(true), getTreeName()])
+        .then(([, treeNameLocal]) => {
+            return getSettings(ID_MAIN_SETTINGS).then((settings_json_string) => [settings_json_string,treeNameLocal]);
+        })
+        .then(([settings_json_string, treeNameLocal]) => {
+            try {
+                JSON.parse(settings_json_string);
+            } catch (e) {
+                return Promise.reject("Invalid JSON 2");
+            }
+            localStorage.setItem("GVE_Settings_" + treeNameLocal + "_" + id, settings_json_string);
+            return Promise.resolve();
+        });
+}
+
+function getIdLocal() {
+    return getTreeName().then((treeName) => {
+        let next_id;
+        let settings_list = localStorage.getItem(SETTINGS_ID_LIST_NAME + "_" + treeName);
+        if (settings_list) {
+            settings_list = localStorage.getItem(SETTINGS_ID_LIST_NAME + "_" + treeName);
+            let ids = settings_list.split(",");
+            let last_id = ids[ids.length - 1];
+            next_id = (parseInt(last_id, 36) + 1).toString(36);
+            settings_list = ids.join(",") + "," + next_id;
+        } else {
+            next_id = "0";
+            settings_list = next_id;
+        }
+
+        localStorage.setItem(SETTINGS_ID_LIST_NAME + "_" + treeName, settings_list);
+        return next_id;
+    });
+}
+
+function deleteIdLocal(id) {
+    getTreeName().then((treeName) => {
+        let settings_list;
+        if (localStorage.getItem(SETTINGS_ID_LIST_NAME + "_" + treeName) != null) {
+            settings_list = localStorage.getItem(SETTINGS_ID_LIST_NAME + "_" + treeName);
+            settings_list = settings_list.split(',').filter(item => item !== id).join(',')
+            localStorage.setItem(SETTINGS_ID_LIST_NAME + "_" + treeName, settings_list);
+        }
+    });
 }

@@ -132,12 +132,20 @@
     padding: 2px !important;
 }
 
-.indi_list_item {
+.indi_list_item, .settings_list_item {
     position: relative;
     border: 1px solid;
     background-color: white;
     border-radius: 5px;
     margin: 3px;
+}
+
+span.NAME {
+    padding-left: 3px;
+}
+
+.settings_list_item {
+    padding-left: 5px;
 }
 
 #indi_list {

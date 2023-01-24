@@ -79,7 +79,6 @@ return array(
 	'border_col' => '#606060', // Outline colour
 	'birth_prefix' => '*', // Text shown on chart before the birthdate
 	'death_prefix' => '+', // Text shown on chart before the death date
+    'save_settings_name' => '', // Default value for text field where name of settings can be entered
 	'auto_update' => true // If auto-updating browser render on change is enabled or not
 );
-
-?>
