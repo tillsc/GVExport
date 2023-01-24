@@ -898,7 +898,7 @@ function getSettingsServer(id = ID_ALL_SETTINGS) {
                 return ERROR_CHAR + json.errorMessage;
             }
         } catch(e) {
-            showToast(error);
+            showToast(ERROR_CHAR + e);
         }
     });
 }
@@ -1143,7 +1143,7 @@ function getTreeName() {
 
 function saveSettingsClient(id) {
     return Promise.all([saveSettingsServer(true), getTreeName()])
-        .then(([response1, treeName]) => {
+        .then(([, treeName]) => {
             return getSettings(ID_MAIN_SETTINGS)
                 .then((settings_json_string) => {
                     localStorage.setItem("GVE_Settings_" + treeName + "_" + id, settings_json_string);
@@ -1173,7 +1173,7 @@ function getIdLocal() {
 }
 
 function deleteIdLocal(id) {
-    return getTreeName().then((treeName) => {
+    getTreeName().then((treeName) => {
         let settings_list;
         if (localStorage.getItem(SETTINGS_ID_LIST_NAME + "_" + treeName) != null) {
             settings_list = localStorage.getItem(SETTINGS_ID_LIST_NAME + "_" + treeName);

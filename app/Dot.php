@@ -50,15 +50,13 @@ class Dot {
     var array $messages = array(); // messages for toast system
 	private const ERROR_CHAR = "E:"; // Messages that start with this will be highlighted
     private Tree $tree;
-    private object $file_system;
     public string $debug_string = "";
 
     /**
 	 * Constructor of Dot class
 	 */
-	function __construct($tree, $module, $file_system) {
+	function __construct($tree, $module) {
 		$this->tree = $tree;
-		$this->file_system = $file_system;
     // Load settings from config file
         $this->settings=(new Settings())->loadUserSettings($module,$tree);
         $this->settings["no_fams"] = FALSE;
@@ -1138,7 +1136,7 @@ class Dot {
 		$m = $i->findHighlightedMediaFile();
 		if (empty($m)) {
 			return null;
-		} else if (!$m->isExternal() && $m->fileExists($this->file_system)) {
+		} else if (!$m->isExternal() && $m->fileExists()) {
 			// If we are rendering in the browser, provide the URL, otherwise provide the server side file location
 			if (isset($_REQUEST["download"])) {
                 $image = new ImageFile($m, $this->tree, $this->settings["dpi"] * 2);

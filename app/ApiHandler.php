@@ -64,7 +64,7 @@ class ApiHandler
 
         if ($id != "") {
             $this->response_data['settings_id'] = $id;
-            $this->response_data['success'] = $settings->saveUserSettings($module, $tree, $vars, $id);;
+            $this->response_data['success'] = $settings->saveUserSettings($module, $tree, $vars, $id);
         } else {
             $this->response_data['success'] = false;
             $this->response_data['errorMessage'] = I18N::translate('Failed to assign new settings ID');

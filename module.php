@@ -313,7 +313,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
     function createGraphVizDump($tree, $vars_data, $temp_dir): string
     {
         $out = "";
-        $dot = new Dot($tree, $this, Registry::filesystem()->data());
+        $dot = new Dot($tree, $this);
 
 
 
@@ -325,7 +325,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
         $dot->setSettings($vars);
 
         $settings = new Settings();
-        $settings->saveUserSettings($this, $tree,$dot->settings, Settings::ID_MAIN_SETTINGS);
+        $settings->saveUserSettings($this, $tree,$dot->settings);
         // Get out DOT file
         $out .= $dot->createDOTDump();
         if (isset($_POST["browser"]) && $_POST["browser"] == "true") {

@@ -3,10 +3,12 @@
 	GVExport module for Webtrees
 =====================================================================
 
-Version 2.1.17 (2022-12-)
+Version 2.1.17 (2023-01-)
   - New         : Save settings to file and load from file
   - New         : All options should now have help messages
+  - New         : Added option to save multiple named versions of settings
   - Change      : Settings now remembered per tree, if you have multiple trees
+  - Change      : Settings now remembered per user, saved in webtrees instead of cookie (unless logged out)
   - Change      : Added debug panel when debug mode active
   - Change      : Browser now scrolls to last added individual instead of first in list
   - Fixed       : Resolved issue with photos being stretched for users with Graphviz installed server-side
