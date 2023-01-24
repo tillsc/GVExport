@@ -900,6 +900,7 @@ function getSettingsServer(id = ID_ALL_SETTINGS) {
         } catch(e) {
             showToast(ERROR_CHAR + e);
         }
+        return false;
     });
 }
 
@@ -913,15 +914,11 @@ function getSettingsClient(id = ID_ALL_SETTINGS) {
                     let ids = settings_list.split(",");
                     let promises = ids.map(id_value => getSettingsClient(id_value))
                     let results = await Promise.all(promises);
-                    console.log(settings_list);
-                    console.log(ids);
-                    console.log(results);
                     let settings = {};
                     for (let i = 0; i < ids.length; i++) {
                         let id_value = ids[i];
                         let userSettings = results[i];
                         if (userSettings === null) {
-                            console.log(ids[i]);
                             return Promise.reject('User settings null');
                         } else {
                         settings[id_value] = {};
@@ -1129,8 +1126,8 @@ function getTreeName() {
             try {
                 let json = JSON.parse(response);
                 if (json.success) {
-                    treeName = json.treeName;
-                    return json.treeName;
+                    treeName = json.treeName.replace(/[^a-zA-Z0-9_]/g, ""); // Only allow characters that play nice
+                    return treeName;
                 } else {
                     return Promise.reject(ERROR_CHAR + json.errorMessage);
                 }
@@ -1143,12 +1140,17 @@ function getTreeName() {
 
 function saveSettingsClient(id) {
     return Promise.all([saveSettingsServer(true), getTreeName()])
-        .then(([, treeName]) => {
-            return getSettings(ID_MAIN_SETTINGS)
-                .then((settings_json_string) => {
-                    localStorage.setItem("GVE_Settings_" + treeName + "_" + id, settings_json_string);
-                    return Promise.resolve();
-                });
+        .then(([, treeNameLocal]) => {
+            return getSettings(ID_MAIN_SETTINGS).then((settings_json_string) => [settings_json_string,treeNameLocal]);
+        })
+        .then(([settings_json_string, treeNameLocal]) => {
+            try {
+                JSON.parse(settings_json_string);
+            } catch (e) {
+                return Promise.reject("Invalid JSON 2");
+            }
+            localStorage.setItem("GVE_Settings_" + treeNameLocal + "_" + id, settings_json_string);
+            return Promise.resolve();
         });
 }
 
