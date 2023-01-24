@@ -3,11 +3,8 @@
 namespace vendor\WebtreesModules\gvexport;
 
 use Fisharebest\Webtrees\Auth;
-use Fisharebest\Webtrees\Contracts\UserInterface;
 use Fisharebest\Webtrees\Http\Exceptions\HttpBadRequestException;
 use Fisharebest\Webtrees\I18N;
-use Fisharebest\Webtrees\Log;
-use Illuminate\Database\Capsule\Manager as DB;
 
 class Settings
 {
@@ -166,6 +163,7 @@ class Settings
     /**
      *  Save the provided settings to webtrees user per-tree storage
      *
+     * @param $module
      * @param $tree
      * @param $settings
      * @param string $id
