@@ -757,7 +757,7 @@ class Dot {
 		// Check that INDI is listed in stop pids (should we stop the tree processing or not?)
 		$stop_proc = FALSE;
 		if (isset($this->settings["stop_proc"]) && $this->settings["stop_proc"]) {
-			$stop_pids = explode(",", $this->settings["stop_pids"]);
+			$stop_pids = explode(",", $this->settings["stop_xref_list"]);
 			for ($j=0;$j<count($stop_pids);$j++) {
 				if ($pid == trim($stop_pids[$j])){
 					// --- DEBUG ---
