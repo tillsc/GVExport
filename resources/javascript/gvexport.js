@@ -825,13 +825,13 @@ function loadSettings(data) {
                     setCheckStatus(document.getElementById('md_type_gedcom'), !settings[key]);
                     break;
                 case 'show_adv_people':
-                    toggleAdvanced(document.getElementById('people-advanced-button'), 'people-advanced', settings[key]);
+                    toggleAdvanced(document.getElementById('people-advanced-button'), 'people-advanced', settings[key] === 'true');
                     break;
                 case 'show_adv_appear':
-                    toggleAdvanced(document.getElementById('appearance-advanced-button'), 'appearance-advanced', settings[key]);
+                    toggleAdvanced(document.getElementById('appearance-advanced-button'), 'appearance-advanced', settings[key] === 'true');
                     break;
                 case 'show_adv_files':
-                    toggleAdvanced(document.getElementById('files-advanced-button'), 'files-advanced', settings[key]);
+                    toggleAdvanced(document.getElementById('files-advanced-button'), 'files-advanced', settings[key] === 'true');
                     break;
                 // If option to use cart is not showing, don't load, but also don't show error
                 case 'use_cart':
