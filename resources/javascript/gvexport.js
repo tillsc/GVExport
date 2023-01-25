@@ -483,7 +483,7 @@ function toggleUpdateButton() {
     const visible = autoSettingBox.checked;
     showHide(updateBtn, !visible);
     autoUpdate = visible;
-    updateRender();
+    if (autoUpdate) updateRender();
 }
 
 function removeItem(e, element, xrefListId) {
@@ -525,14 +525,14 @@ function clearIndiList() {
     document.getElementById('xref_list').value = "";
     document.getElementById('indi_list').innerHTML = "";
     updateClearAll();
-    updateRender();
+    if (autoUpdate) updateRender();
 }
 // Clear the list of starting individuals
 function clearStopIndiList() {
     document.getElementById('stop_xref_list').value = "";
     document.getElementById('stop_indi_list').innerHTML = "";
     updateClearAll();
-    updateRender();
+    if (autoUpdate) updateRender();
 }
 
 // Refresh the list of starting and stopping individuals
@@ -733,7 +733,7 @@ function pageLoaded() {
     // Listen for fullscreen change
     handleFullscreen();
     // Load browser render when page has loaded
-    updateRender();
+    if (autoUpdate) updateRender();
 
     document.querySelector(".hide-form").addEventListener("click", hideSidebar);
 
