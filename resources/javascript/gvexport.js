@@ -377,7 +377,7 @@ function loadURLXref() {
         addIndiToList(xref);
     }
 }
-function formChanged(autoUpdate) {
+function formChanged(event, autoUpdate) {
     let xref = document.getElementById('pid').value.trim();
     if (xref !== "") {
         addIndiToList(xref);
@@ -483,7 +483,7 @@ function toggleUpdateButton() {
     const visible = autoSettingBox.checked;
     showHide(updateBtn, !visible);
     autoUpdate = visible;
-    updateRender();
+    if (autoUpdate) updateRender();
 }
 
 function removeItem(e, element, xrefListId) {
@@ -525,14 +525,14 @@ function clearIndiList() {
     document.getElementById('xref_list').value = "";
     document.getElementById('indi_list').innerHTML = "";
     updateClearAll();
-    updateRender();
+    if (autoUpdate) updateRender();
 }
 // Clear the list of starting individuals
 function clearStopIndiList() {
     document.getElementById('stop_xref_list').value = "";
     document.getElementById('stop_indi_list').innerHTML = "";
     updateClearAll();
-    updateRender();
+    if (autoUpdate) updateRender();
 }
 
 // Refresh the list of starting and stopping individuals
@@ -718,6 +718,10 @@ function handleTileClick() {
     }
 }
 
+function handleFormChange() {
+    if (autoUpdate) updateRender();
+}
+
 // This function is run when the page is loaded
 function pageLoaded() {
     TOMSELECT_URL = document.getElementById('pid').getAttribute("data-url") + "&query=";
@@ -733,11 +737,17 @@ function pageLoaded() {
     // Listen for fullscreen change
     handleFullscreen();
     // Load browser render when page has loaded
-    updateRender();
-
+    if (autoUpdate) updateRender();
+    // Handle sidebar
     document.querySelector(".hide-form").addEventListener("click", hideSidebar);
-
     document.querySelector(".sidebar__toggler a").addEventListener("click", showSidebar);
+
+    // Form change events
+    const form = document.getElementById('gvexport');
+    var checkboxElems = form.querySelectorAll("input:not([type='file']), select");
+    for (let i = 0; i < checkboxElems.length; i++) {
+        checkboxElems[i].addEventListener("change", handleFormChange);
+    }
 
     document.addEventListener("keydown", function(e) {
         if (e.key === "Esc" || e.key === "Escape") {
@@ -795,6 +805,13 @@ function uploadSettingsFile(input) {
     reader.readAsText(file);
 }
 
+function toBool(value) {
+    if (typeof value === 'string') {
+        return (value === 'true');
+    } else {
+        return value;
+    }
+}
 function loadSettings(data) {
     let settings;
     try {
@@ -825,13 +842,13 @@ function loadSettings(data) {
                     setCheckStatus(document.getElementById('md_type_gedcom'), !settings[key]);
                     break;
                 case 'show_adv_people':
-                    toggleAdvanced(document.getElementById('people-advanced-button'), 'people-advanced', settings[key]);
+                    toggleAdvanced(document.getElementById('people-advanced-button'), 'people-advanced', toBool(settings[key]));
                     break;
                 case 'show_adv_appear':
-                    toggleAdvanced(document.getElementById('appearance-advanced-button'), 'appearance-advanced', settings[key]);
+                    toggleAdvanced(document.getElementById('appearance-advanced-button'), 'appearance-advanced', toBool(settings[key]));
                     break;
                 case 'show_adv_files':
-                    toggleAdvanced(document.getElementById('files-advanced-button'), 'files-advanced', settings[key]);
+                    toggleAdvanced(document.getElementById('files-advanced-button'), 'files-advanced', toBool(settings[key]));
                     break;
                 // If option to use cart is not showing, don't load, but also don't show error
                 case 'use_cart':
@@ -856,10 +873,13 @@ function loadSettings(data) {
     setStateFastRelationCheck();
     showHide(document.getElementById('arrow_group'),document.getElementById('colour_arrow_related').checked)
     showHide(document.getElementById('startcol_option'),document.getElementById('highlight_start_indis').checked)
-    refreshIndisFromXREFS(false);
     // Don't load name from settings into text field - it's already shown on settings element
     document.getElementById('save_settings_name').value = "";
-    if (autoUpdate) updateRender();
+    if (autoUpdate) {
+        updateRender();
+    } else {
+        refreshIndisFromXREFS(false);
+    }
 }
 
 function setCheckStatus(el, checked) {
