@@ -29,6 +29,7 @@ $xref = $individual->xref();
 ?>
 
 <script type="text/javascript">
+
     // stylesheet
     const newSheet = document.createElement("link");
     newSheet.setAttribute("rel","stylesheet");
@@ -88,6 +89,20 @@ $xref = $individual->xref();
 
         <?= csrf_field() ?>
 
+        <div id="saved_diagrams_panel" <?php if (!$vars["show_diagram_panel"]) echo 'style="display: none"'; ?>>
+            <div class="d-flex">
+                <h3><?= I18N::translate('Saved diagrams') ?></h3>
+            </div>
+
+            <div class="row form-group">
+                <?= MainPage::addLabel('simple_settings_list', 'List of diagrams'); ?>
+                <div class="col-sm-8 wt-page-options-value">
+                    <select id="simple_settings_list" class="form-select">
+                        <option value="-">-</option>
+                    </select>
+                </div>
+            </div>
+        </div>
         <div class="d-flex">
             <h3><?= I18N::translate('People to be included') ?></h3>
         </div>
@@ -535,8 +550,8 @@ $xref = $individual->xref();
             <div class="row form-group">
                 <?= MainPage::addLabel('auto_update', 'Browser render'); ?>
                 <div class="col-sm-8 wt-page-options-value">
-                    <label for="auto_update"><?= I18N::translate('Auto-update') ?></label>
                     <input type="checkbox" onclick="toggleUpdateButton()" name="vars[auto_update]" id="auto_update" value="auto_update" <?= $vars["auto_update"] ? 'checked' : '' ?>>
+                    <label for="auto_update"><?= I18N::translate('Auto-update') ?></label>
                 </div>
                 <?= MainPage::addLabel('save_settings', 'Save settings'); ?>
                 <div class="col-sm-8 wt-page-options-value">
@@ -548,6 +563,10 @@ $xref = $individual->xref();
                         <div class="input-group-append">
                             <button id="save_settings_button" type="button" class="btn btn-outline-secondary" onclick="saveSettingsAdvanced()"><?= I18N::translate('Save') ?></button>
                         </div>
+                    </div>
+                    <div class="col-auto">
+                        <input type="checkbox" onclick="setSavedDiagramsPanel(this)" name="vars[show_diagram_panel]" id="show_diagram_panel" value="show_diagram_panel" <?= $vars["show_diagram_panel"] ? 'checked' : '' ?>>
+                        <label for="show_diagram_panel"><?= I18N::translate('Show saved diagrams panel') ?></label>
                     </div>
                 </div>
                 <?= MainPage::addLabel('', 'Settings file'); ?>

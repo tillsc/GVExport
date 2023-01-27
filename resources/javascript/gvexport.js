@@ -744,11 +744,19 @@ function pageLoaded() {
 
     // Form change events
     const form = document.getElementById('gvexport');
-    var checkboxElems = form.querySelectorAll("input:not([type='file']), select");
+    let checkboxElems = form.querySelectorAll("input:not([type='file']), select:not(#simple_settings_list)");
     for (let i = 0; i < checkboxElems.length; i++) {
         checkboxElems[i].addEventListener("change", handleFormChange);
     }
-
+    let simpleSettingsEl = form.querySelector("#simple_settings_list");
+    simpleSettingsEl.addEventListener('change', function(e) {
+        let element = document.querySelector('.settings_list_item[data-id="' + e.target.value + '"]');
+        if (element !== null) {
+            loadSettings(element.getAttribute('data-settings'));
+        } else if (e.target.value !== '-') {
+            showToast(ERROR_CHAR + 'Settings not found')
+        }
+    })
     document.addEventListener("keydown", function(e) {
         if (e.key === "Esc" || e.key === "Escape") {
             document.querySelector(".sidebar").hidden ? showSidebar(e) : hideSidebar(e);
@@ -1020,6 +1028,10 @@ function loadSettingsDetails() {
             return CLIENT_ERRORS['2'] + e;
         }
         const listElement = document.getElementById('settings_list');
+        const simpleSettingsListEl = document.getElementById('simple_settings_list');
+        if (simpleSettingsListEl !== null) {
+            simpleSettingsListEl.innerHTML = "<option value=\"-\">-</option>";
+        }
         listElement.innerHTML = "";
         Object.keys(settingsList).forEach (function(key) {
             const newLinkWrapper = document.createElement("a");
@@ -1032,6 +1044,13 @@ function loadSettingsDetails() {
             newListItem.innerHTML = "<a href=\"#\">" + settingsList[key]['name'] + "<div class=\"remove-item\" onclick=\"deleteSettingsAdvanced(event, this)\"><a href='#'>×</a></div></a>";
             newLinkWrapper.appendChild(newListItem);
             listElement.appendChild(newLinkWrapper);
+
+            if (simpleSettingsListEl !== null) {
+                let option = document.createElement("option");
+                option.value = settingsList[key]['id'];
+                option.text = settingsList[key]['name'];
+                simpleSettingsListEl.appendChild(option);
+            }
         });
     }).catch(
         error => showToast(error)
@@ -1203,4 +1222,9 @@ function deleteIdLocal(id) {
             localStorage.setItem(SETTINGS_ID_LIST_NAME + "_" + treeName, settings_list);
         }
     });
+}
+
+function setSavedDiagramsPanel(checkbox) {
+    const el = document.getElementById('saved_diagrams_panel');
+    showHide(el, checkbox.checked);
 }
