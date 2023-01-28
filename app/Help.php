@@ -77,8 +77,9 @@ class Help
         $this->help[31][0] = "Settings file";
         $this->help[31][1] = "Here you are able to save the chosen settings to a file, and to load that file at a later time.</p><p>For example, you may have many diagrams you create from your tree. You may want to save the settings used for each diagram so that in future you can regenerate the diagram to include any new information.</p><p>Also see the option to save settings within GVExport.";
         $this->help[32][0] = "Save settings";
-        $this->help[32][1] = "Here you are able to save the chosen settings within GVExport. The settings are only accessible within the same user and tree. Click a settings record to load it.</p><p>For example, you may have many diagrams you create from your tree. You may want to save the settings used for each diagram so that in future you can regenerate the diagram to include any new information.</p><p>Also see the option to save settings to a file.";
-
+        $this->help[32][1] = "Here you are able to save the chosen settings within GVExport. The settings are only accessible within the same user and tree. Click a settings record to load it.</p><p>For example, you may have many diagrams you create from your tree. You may want to save the settings used for each diagram so that in future you can regenerate the diagram to include any new information.</p><p>The \"Show saved diagrams panel\" option adds a new section to the settings that makes the saved settings available as a dropdown list. You may with to use webtree's ability to \"Masquerade as user\" to set up some settings for another user, then enable this option, so they can easily choose different prepared diagrams without needed to delve into the advanced settings.</p><p>Also see the option to save settings to a file.";
+        $this->help[33][0] = "List of diagrams";
+        $this->help[33][1] = "You can select from the list to load some saved settings. Settings can be added or changed using the options in the advanced section of the \"File settings\" section";
     }
 
     /**
