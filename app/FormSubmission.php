@@ -268,6 +268,6 @@ class FormSubmission
 
     private function cleanSettingsName($name)
     {
-        return preg_replace("/[^A-ZÀ-úa-z0-9_ .*+()&^%$#@!-]+/", "", $name);
+        return preg_replace("/[^A-ZÀ-úa-z0-9_ .*+()&^%$#@!'-]+/", "", $name);
     }
 }
