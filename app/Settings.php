@@ -109,11 +109,13 @@ class Settings
                             if (json_last_error() === JSON_ERROR_NONE) {
                                 foreach ($settings as $preference => $value) {
                                     if (self::shouldLoadSetting($preference)) {
-                                        $pref = $loaded_settings[$preference];
-                                        if ($pref == 'true' || $pref == 'false') {
-                                            $settings[$preference] = ($pref == 'true');
-                                        } else {
-                                            $settings[$preference] = $pref;
+                                        if (isset($loaded_settings[$preference])) {
+                                            $pref = $loaded_settings[$preference];
+                                            if ($pref == 'true' || $pref == 'false') {
+                                                $settings[$preference] = ($pref == 'true');
+                                            } else {
+                                                $settings[$preference] = $pref;
+                                            }
                                         }
                                     }
                                 }

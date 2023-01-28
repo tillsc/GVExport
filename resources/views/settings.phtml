@@ -425,6 +425,13 @@ $settings = $settingsObj->getDefaultSettings();
                     <label for="auto_update"><?= I18N::translate('Auto-update') ?></label>
                     <input type="checkbox" name="vars[auto_update]" id="auto_update" value="auto_update" <?= $vars["auto_update"] ? 'checked' : '' ?>>
                 </div>
+                <label class="col-sm-4 col-form-label" for="save_settings"><?= I18N::translate('Save settings') ?></label>
+                <div class="col-sm-8 wt-page-options-value">
+                    <div class="col-auto">
+                        <input type="checkbox" name="vars[show_diagram_panel]" id="show_diagram_panel" value="show_diagram_panel" <?= $vars["show_diagram_panel"] ? 'checked' : '' ?>>
+                        <label for="show_diagram_panel"><?= I18N::translate('Show saved diagrams panel') ?></label>
+                    </div>
+                </div>
             </div>
             <h3><?= I18N::translate('Debug') ?></h3>
             <div class="row form-group">
