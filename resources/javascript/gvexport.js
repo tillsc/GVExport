@@ -423,7 +423,7 @@ function loadIndividualDetails(url, xref, list) {
             } else {
                 otherXrefId = "stop_xref_list";
             }
-            newListItem.innerHTML = contents + "<div class=\"remove-item\" onclick=\"removeItem(event, this.parentElement, '" + otherXrefId + "')\"><a href='#'>×</a></div>";
+            newListItem.innerHTML = contents + "<div class=\"saved-settings-ellipsis\" onclick=\"removeItem(event, this.parentElement, '" + otherXrefId + "')\"><a href='#'>×</a></div>";
             // Multiple promises can be for the same xref - don't add if a duplicate
             let item = document.querySelector(`[data-xref="${xref}"]`);
             if (item == null) {
@@ -722,6 +722,12 @@ function handleFormChange() {
     if (autoUpdate) updateRender();
 }
 
+function removeSettingsEllipsisMenu(menuElement) {
+    document.querySelectorAll('.settings_ellipsis_menu').forEach(e => {
+        if (e !== menuElement) e.remove();
+    });
+}
+
 // This function is run when the page is loaded
 function pageLoaded() {
     TOMSELECT_URL = document.getElementById('pid').getAttribute("data-url") + "&query=";
@@ -761,6 +767,9 @@ function pageLoaded() {
         if (e.key === "Esc" || e.key === "Escape") {
             document.querySelector(".sidebar").hidden ? showSidebar(e) : hideSidebar(e);
         }
+    });
+    document.addEventListener("click", function(event) {
+        removeSettingsEllipsisMenu(event.target);
     });
 }
 
@@ -879,6 +888,7 @@ function loadSettings(data) {
         }
     });
     setStateFastRelationCheck();
+    setSavedDiagramsPanel();
     showHide(document.getElementById('arrow_group'),document.getElementById('colour_arrow_related').checked)
     showHide(document.getElementById('startcol_option'),document.getElementById('highlight_start_indis').checked)
     // Don't load name from settings into text field - it's already shown on settings element
@@ -1041,7 +1051,7 @@ function loadSettingsDetails() {
             newListItem.setAttribute("data-settings", settingsList[key]['settings']);
             newListItem.setAttribute("data-id", settingsList[key]['id']);
             newListItem.setAttribute("onclick", "loadSettings(this.getAttribute('data-settings'))");
-            newListItem.innerHTML = "<a href=\"#\">" + settingsList[key]['name'] + "<div class=\"remove-item\" onclick=\"deleteSettingsAdvanced(event, this)\"><a href='#'>×</a></div></a>";
+            newListItem.innerHTML = "<a href=\"#\">" + settingsList[key]['name'] + "<div class=\"saved-settings-ellipsis\" onclick='showSavedSettingsItemMenu(event)'><a href='#'>…</a></div></a>";
             newLinkWrapper.appendChild(newListItem);
             listElement.appendChild(newLinkWrapper);
 
@@ -1055,6 +1065,31 @@ function loadSettingsDetails() {
     }).catch(
         error => showToast(error)
     );
+}
+
+function showSavedSettingsItemMenu(event) {
+    event.stopImmediatePropagation();
+    removeSettingsEllipsisMenu(event.target);
+    let id = event.target.parentElement.parentElement.getAttribute("data-id");
+    if (id != null) {
+        id = id.trim();
+        let div = document.createElement('div');
+        div.setAttribute('class', 'settings_ellipsis_menu');
+        // Add "Delete" option
+        let deleteEl = document.createElement('a');
+        deleteEl.setAttribute('class', 'settings_ellipsis_menu_item');
+        deleteEl.setAttribute('href', '#');
+        deleteEl.setAttribute('onClick', 'deleteSettingsAdvanced(event, "' + id + '")');
+        deleteEl.innerHTML = '<span class="settings_ellipsis_menu_icon">🗙</span><span>' + TRANSLATE['Delete'] + '</span>';
+        div.appendChild(deleteEl);
+        let copyLinkEl = document.createElement('a');
+        copyLinkEl.setAttribute('class', 'settings_ellipsis_menu_item');
+        copyLinkEl.setAttribute('href', '#');
+        copyLinkEl.setAttribute('onClick', '(event, this)');
+        copyLinkEl.innerHTML = '<span class="settings_ellipsis_menu_icon">🔗</span><span>' + TRANSLATE['Copy link'] + '</span>';
+        div.appendChild(copyLinkEl);
+        event.target.appendChild(div);
+    }
 }
 
 function saveSettingsAdvanced() {
@@ -1097,10 +1132,8 @@ function deleteSettingsClient(id) {
     });
 }
 
-function deleteSettingsAdvanced(e, element) {
+function deleteSettingsAdvanced(e, id) {
     e.stopPropagation();
-    let parentEl = element.parentElement;
-    let id = parentEl.getAttribute("data-id").trim();
     isUserLoggedIn().then((loggedIn) => {
         if (loggedIn) {
             let request = {
@@ -1224,7 +1257,8 @@ function deleteIdLocal(id) {
     });
 }
 
-function setSavedDiagramsPanel(checkbox) {
+function setSavedDiagramsPanel() {
+    const checkbox = document.getElementById('show_diagram_panel');
     const el = document.getElementById('saved_diagrams_panel');
     showHide(el, checkbox.checked);
 }

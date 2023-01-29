@@ -138,6 +138,7 @@
     background-color: white;
     border-radius: 5px;
     margin: 3px;
+    width: 310px;
 }
 
 span.NAME {
@@ -153,7 +154,7 @@ span.NAME {
     margin-right: 10px;
 }
 
-.remove-item {
+.saved-settings-ellipsis {
     position: absolute;
     top: -2px;
     right: 5px;
@@ -239,4 +240,58 @@ span.NAME {
 
 .help-link {
     text-decoration: underline;
+}
+
+.settings_ellipsis_menu {
+    position: absolute;
+    padding: 5px;
+    z-index: 100;
+    background-color: white;
+    border-color: #333333;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 5px 0px 5px 5px;
+
+    width: 120px;
+    left: -105px;
+    top: 28px;
+}
+
+.settings_ellipsis_menu::after {
+    content: "";
+    position: absolute;
+    top: -1px; /* move up 20px */
+    right: -1px; /* move right 20px */
+    width: 10px; /* width of the corner */
+    height: 10px; /* height of the corner */
+    border-color: transparent #333333 transparent transparent;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.settings_ellipsis_menu::before {
+    content: "";
+    position: absolute;
+    top: -5px;
+    right: 1px;
+    width: 10px;
+    height: 10px;
+    background-color: white;
+    border-right: #333333;
+    border-top: #333333;
+    border-left: transparent;
+    border-bottom: transparent;
+    border-style: solid;
+    border-width: 1px;
+    transform: rotate(-45deg);
+    transform-origin: 50% 50%;
+}
+
+.settings_ellipsis_menu_item {
+    display: block;
+}
+
+.settings_ellipsis_menu_icon {
+    display: inline-block;
+    width: 25px;
 }
