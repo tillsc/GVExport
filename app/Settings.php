@@ -216,6 +216,9 @@ class Settings
                 $module->setPreference(self::PREFERENCE_PREFIX . self::TREE_PREFIX . $tree->id() . self::USER_PREFIX . Auth::user()->id(), $new_json);
                 $this->deleteSettingsId($module, $tree, $id);
                 $settingsLink = new settingsLink($module, $tree, $id);
+                if (!$settingsLink->removeTokenRecord()) {
+                    throw new HttpBadRequestException(I18N::translate('Invalid') . " - E1");
+                }
             }
         }
     }

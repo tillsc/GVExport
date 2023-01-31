@@ -115,7 +115,7 @@ class ApiHandler
                 $this->response_data['success'] = true;
             } catch (\Exception $e) {
                 $this->response_data['success'] = false;
-                $this->response_data['errorMessage'] = $e;
+                $this->response_data['errorMessage'] = json_encode($e);
             }
         } else {
             $this->response_data['success'] = false;

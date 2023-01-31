@@ -104,4 +104,22 @@ class settingsLink
             throw new \Exception("Invalid token");
         }
     }
+
+    public function removeTokenRecord(): bool
+    {
+        try {
+            $sharedSettingsList = $this->getSharedSettingsList();
+            foreach ($sharedSettingsList as $key=>$value) {
+                if ($value['user'] === Auth::user()->id() &&
+                    $value['tree'] === $this->tree->id() &&
+                    $value['settings_id'] === $this->id) {
+                    unset($sharedSettingsList[$key]);
+                }
+            }
+            $this->setSharedSettingsList($sharedSettingsList);
+            return true;
+        } catch (\Exception $e) {
+            return false;
+        }
+    }
 }
