@@ -438,7 +438,7 @@ function loadIndividualDetails(url, xref, list) {
             }
             newListItem.innerHTML = contents + "<div class=\"saved-settings-ellipsis\" onclick=\"removeItem(event, this.parentElement, '" + otherXrefId + "')\"><a href='#'>×</a></div>";
             // Multiple promises can be for the same xref - don't add if a duplicate
-            let item = document.querySelector(`[data-xref="${xref}"]`);
+            let item = listElement.querySelector(`[data-xref="${xref}"]`);
             if (item == null) {
                 listElement.appendChild(newListItem);
             } else {
