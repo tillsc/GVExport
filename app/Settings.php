@@ -11,10 +11,10 @@ class Settings
     public const ID_MAIN_SETTINGS = "_MAIN_";
     public const ID_ALL_SETTINGS = "_ALL_";
     private const GUEST_USER_ID = 0;
-    private const ADMIN_PREFERENCE_NAME = "Admin_settings";
-    public const PREFERENCE_PREFIX = "Settings";
+    private const ADMIN_PREFERENCE_NAME = "_admin_settings";
+    public const PREFERENCE_PREFIX = "GVE";
     public const SETTINGS_LIST_PREFERENCE_NAME = "_id_list";
-    public const SAVED_SETTINGS_LIST_PREFERENCE_NAME = "_saved_settings_list";
+    public const SAVED_SETTINGS_LIST_PREFERENCE_NAME = "_shared_settings_list";
     const TREE_PREFIX = "_t";
     const USER_PREFIX = "_u";
     private array $settings_json_cache = [];
@@ -55,7 +55,7 @@ class Settings
     public function getAdminSettings($module): array
     {
         $settings = $this->defaultSettings;
-        $loaded = $module->getPreference(self::ADMIN_PREFERENCE_NAME, "preference not set");
+        $loaded = $module->getPreference(self::PREFERENCE_PREFIX . self::ADMIN_PREFERENCE_NAME, "preference not set");
         if ($loaded != "preference not set") {
             $loaded_settings = json_decode($loaded, true);
             if (json_last_error() === JSON_ERROR_NONE) {
@@ -89,51 +89,52 @@ class Settings
      * @param string $id
      * @return array
      */
-    public function loadUserSettings($module, $tree, string $id = self::ID_MAIN_SETTINGS, bool $reset = false): array
+    public function loadUserSettings($module, $tree, string $id = self::ID_MAIN_SETTINGS, $user_id = null): array
     {
+        if ($user_id === null) {
+            $user_id = Auth::user()->id();
+        }
         $settings = $this->getAdminSettings($module);
-        if (!$reset) {
-            if (Auth::user()->id() == self::GUEST_USER_ID) {
-                $cookie = new Cookie($tree);
-                $settings = $cookie->load($settings);
-            } else {
-                $settings_pref_name = self::PREFERENCE_PREFIX . self::TREE_PREFIX . $tree->id() . self::USER_PREFIX . Auth::user()->id();
-                $loaded = $this->settings_json_cache[$settings_pref_name] ?? $module->getPreference($settings_pref_name, "preference not set");
-                if ($loaded != "preference not set") {
-                    $all_settings = json_decode($loaded, true);
-                    if ($id == self::ID_ALL_SETTINGS) {
-                        unset($all_settings[self::ID_MAIN_SETTINGS]);
-                        return $all_settings;
-                    } else {
-                        if (isset($all_settings[$id]) && json_last_error() === JSON_ERROR_NONE) {
-                            $loaded_settings = json_decode($all_settings[$id]['settings'], true);
-                            if (json_last_error() === JSON_ERROR_NONE) {
-                                foreach ($settings as $preference => $value) {
-                                    if (self::shouldLoadSetting($preference)) {
-                                        if (isset($loaded_settings[$preference])) {
-                                            $pref = $loaded_settings[$preference];
-                                            if ($pref == 'true' || $pref == 'false') {
-                                                $settings[$preference] = ($pref == 'true');
-                                            } else {
-                                                $settings[$preference] = $pref;
-                                            }
+        if ($user_id == self::GUEST_USER_ID) {
+            $cookie = new Cookie($tree);
+            $settings = $cookie->load($settings);
+        } else {
+            $settings_pref_name = self::PREFERENCE_PREFIX . self::TREE_PREFIX . $tree->id() . self::USER_PREFIX . $user_id;
+            $loaded = $this->settings_json_cache[$settings_pref_name] ?? $module->getPreference($settings_pref_name, "preference not set");
+            if ($loaded != "preference not set") {
+                $all_settings = json_decode($loaded, true);
+                if ($id == self::ID_ALL_SETTINGS) {
+                    unset($all_settings[self::ID_MAIN_SETTINGS]);
+                    return $all_settings;
+                } else {
+                    if (isset($all_settings[$id]) && json_last_error() === JSON_ERROR_NONE) {
+                        $loaded_settings = json_decode($all_settings[$id]['settings'], true);
+                        if (json_last_error() === JSON_ERROR_NONE) {
+                            foreach ($settings as $preference => $value) {
+                                if (self::shouldLoadSetting($preference)) {
+                                    if (isset($loaded_settings[$preference])) {
+                                        $pref = $loaded_settings[$preference];
+                                        if ($pref == 'true' || $pref == 'false') {
+                                            $settings[$preference] = ($pref == 'true');
+                                        } else {
+                                            $settings[$preference] = $pref;
                                         }
                                     }
                                 }
-                            } else {
-                                throw new HttpBadRequestException(I18N::translate('Invalid JSON') . " 1: " . json_last_error_msg() . $loaded);
                             }
                         } else {
-                            throw new HttpBadRequestException(I18N::translate('Invalid settings ID') . " " . e($id) . ": " . json_last_error_msg());
+                            throw new HttpBadRequestException(I18N::translate('Invalid JSON') . " 1: " . json_last_error_msg() . $loaded);
                         }
+                    } else {
+                        throw new HttpBadRequestException(I18N::translate('Invalid settings ID') . " " . e($id) . ": " . json_last_error_msg());
                     }
-                } else {
-                    $settings['first_run_xref_check'] = true;
                 }
+            } else {
+                $settings['first_run_xref_check'] = true;
             }
-            if (!$settings['enable_graphviz'] && $settings['graphviz_bin'] != "") {
-                $settings['graphviz_bin'] = "";
-            }
+        }
+        if (!$settings['enable_graphviz'] && $settings['graphviz_bin'] != "") {
+            $settings['graphviz_bin'] = "";
         }
         return $settings;
     }
@@ -162,7 +163,7 @@ class Settings
             }
         }
         $json = json_encode($s);
-        $module->setPreference(self::ADMIN_PREFERENCE_NAME, $json);
+        $module->setPreference(self::PREFERENCE_PREFIX . self::ADMIN_PREFERENCE_NAME, $json);
     }
 
     /**
@@ -214,6 +215,7 @@ class Settings
                 $new_json = json_encode($all_settings);
                 $module->setPreference(self::PREFERENCE_PREFIX . self::TREE_PREFIX . $tree->id() . self::USER_PREFIX . Auth::user()->id(), $new_json);
                 $this->deleteSettingsId($module, $tree, $id);
+                $settingsLink = new settingsLink($module, $tree, $id);
             }
         }
     }
@@ -423,6 +425,20 @@ class Settings
         }
 
         return $response;
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function loadSettingsToken($module, $tree, $token): array
+    {
+        $link = new settingsLink($module, $tree);
+        try {
+            $settings = $link->loadToken($token, $this);
+        } catch (\Exception $e) {
+            throw new \Exception($e);
+        }
+        return $settings;
     }
 
     public function newSettingsId($module, $tree): string

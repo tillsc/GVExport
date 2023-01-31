@@ -2,7 +2,10 @@
 
 namespace vendor\WebtreesModules\gvexport;
 
+use Cassandra\Set;
 use Fisharebest\Webtrees\Auth;
+use Fisharebest\Webtrees\Services\GedcomImportService;
+use Fisharebest\Webtrees\Services\TreeService;
 
 class settingsLink
 {
@@ -11,16 +14,16 @@ class settingsLink
     private string $base_url;
     private $module;
     private $tree;
-    private $user;
+    private $userId;
     private string $id;
 
-    public function __construct($module, $tree, $id)
+    public function __construct($module, $tree, $id = "")
     {
+        $this->module = $module;
+        $this->tree = $tree;
+        $this->id = $id;
         if (Settings::isUserLoggedIn()) {
-            $this->module = $module;
-            $this->tree = $tree;
-            $this->user = Auth::user()->id();
-            $this->id = $id;
+            $this->userId = Auth::user()->id();
             $this->base_url = $module->base_url;
         }
     }
@@ -47,8 +50,8 @@ class settingsLink
             do {
                 $token = substr(str_shuffle(str_repeat("123456789ABCDEFGHIJKLMNPQRSTUVWXYZ", self::TOKEN_LENGTH)), 0, self::TOKEN_LENGTH);
             } while (isset($record[$token]));
-            $record[$token]['user'] = $this->user;
-            $record[$token]['tree'] = $this->tree;
+            $record[$token]['user'] = $this->userId;
+            $record[$token]['tree'] = $this->tree->id();
             $record[$token]['settings_id'] = $this->id;
             $this->setSharedSettingsList($record);
         }
@@ -76,5 +79,29 @@ class settingsLink
     {
         $json = json_encode($record);
         $this->module->setPreference(Settings::PREFERENCE_PREFIX . Settings::SAVED_SETTINGS_LIST_PREFERENCE_NAME, $json);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function loadToken(String $token, Settings $settings): array
+    {
+        $shared_settings_list = $this->getSharedSettingsList();
+        $this->userId = $shared_settings_list[$token]['user'];
+        $tree_service    = new TreeService(new GedcomImportService());
+        $this->tree = $tree_service->find($shared_settings_list[$token]['tree']);
+        $this->id = $shared_settings_list[$token]['settings_id'];
+        if (isset($shared_settings_list[$token])) {
+            $userSettings = $settings->loadUserSettings($this->module, $this->tree, $this->id, $this->userId);
+            $preferences = [];
+            foreach ($settings->getDefaultSettings() as $preference => $value) {
+                if (Settings::shouldLoadSetting($preference)) {
+                    $preferences[$preference] = $userSettings[$preference];
+                }
+            }
+            return $preferences;
+        } else {
+            throw new \Exception("Invalid token");
+        }
     }
 }

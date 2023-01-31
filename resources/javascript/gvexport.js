@@ -8,6 +8,7 @@ const REQUEST_TYPE_SAVE_SETTINGS = "save_settings";
 const REQUEST_TYPE_GET_SETTINGS = "get_settings";
 const REQUEST_TYPE_IS_LOGGED_IN = "is_logged_in";
 const REQUEST_TYPE_GET_SAVED_SETTINGS_LINK = "get_saved_settings_link";
+const REQUEST_TYPE_LOAD_SETTINGS_TOKEN = "load_settings_token";
 let treeName = null;
 let loggedIn = null;
 
@@ -733,6 +734,7 @@ function removeSettingsEllipsisMenu(menuElement) {
 function pageLoaded() {
     TOMSELECT_URL = document.getElementById('pid').getAttribute("data-url") + "&query=";
     loadURLXref();
+    loadUrlToken();
     loadXrefList(TOMSELECT_URL, 'xref_list', 'indi_list');
     loadXrefList(TOMSELECT_URL, 'stop_xref_list', 'stop_indi_list');
     loadSettingsDetails();
@@ -1206,6 +1208,31 @@ function getSavedSettingsLink(e, id) {
     });
 }
 
+function loadUrlToken() {
+    const token = getURLParameter("t");
+    if (token !== "") {
+        let request = {
+            "type": REQUEST_TYPE_LOAD_SETTINGS_TOKEN,
+            "token": token
+        };
+        let json = JSON.stringify(request);
+        sendRequest(json).then((response) => {
+            try {
+                let json = JSON.parse(response);
+                if (json.success) {
+                    let settingsString = JSON.stringify(json.settings);
+                    console.log(settingsString);
+                    loadSettings(settingsString);
+                } else {
+                    showToast(ERROR_CHAR + json.errorMessage);
+                }
+            } catch (e) {
+                showToast("Failed to load response: " + e);
+                return false;
+            }
+        });
+    }
+}
 
 function isUserLoggedIn() {
     if (loggedIn != null)  {

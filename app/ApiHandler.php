@@ -41,6 +41,9 @@ class ApiHandler
                 case "get_saved_settings_link":
                     $this->getSavedSettingsLink($json, $module, $tree, $json_data);
                     break;
+                case "load_settings_token":
+                    $this->loadSettingsToken($json, $module, $tree, $json_data);
+                    break;
                 default:
                     $this->response_data['success'] = false;
                     $this->response_data['json'] = $json_data;
@@ -97,6 +100,23 @@ class ApiHandler
                 $this->response_data['errorMessage'] = $link['error'];
             }
             $this->response_data['success'] = $link['success'];
+        } else {
+            $this->response_data['success'] = false;
+            $this->response_data['json'] = $json_data;
+            $this->response_data['errorMessage'] = I18N::translate('Invalid settings ID');
+        }
+    }
+    public function loadSettingsToken($json, $module, $tree, string $json_data): void
+    {
+        if (isset($json['token']) && (ctype_alnum($json['token']))) {
+            $settings = new Settings();
+            try {
+                $this->response_data['settings'] = $settings->loadSettingsToken($module, $tree, $json['token']);
+                $this->response_data['success'] = true;
+            } catch (\Exception $e) {
+                $this->response_data['success'] = false;
+                $this->response_data['errorMessage'] = $e;
+            }
         } else {
             $this->response_data['success'] = false;
             $this->response_data['json'] = $json_data;
