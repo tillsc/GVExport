@@ -13,16 +13,14 @@ const REQUEST_TYPE_LOAD_SETTINGS_TOKEN = "load_settings_token";
 let treeName = null;
 let loggedIn = null;
 
-function hideSidebar(e) {
+function hideSidebar() {
     document.querySelector(".sidebar").hidden = true;
     document.querySelector(".sidebar__toggler").hidden = false;
-    e.preventDefault();
 }
 
-function showSidebar(e) {
+function showSidebar() {
     document.querySelector(".sidebar__toggler").hidden = true;
     document.querySelector(".sidebar").hidden = false;
-    e.preventDefault();
 }
 
 // Enable or disable the option to add photos.
@@ -765,7 +763,7 @@ function pageLoaded() {
 
     // Form change events
     const form = document.getElementById('gvexport');
-    let checkboxElems = form.querySelectorAll("input:not([type='file']), select:not(#simple_settings_list), select:not(#pid), select:not(#stop_pid)");
+    let checkboxElems = form.querySelectorAll("input:not([type='file']):not(#save_settings_name):not(#pid):not(#stop_pid), select:not(#simple_settings_list)");
     for (let i = 0; i < checkboxElems.length; i++) {
         checkboxElems[i].addEventListener("change", handleFormChange);
     }
@@ -900,6 +898,8 @@ function loadSettings(data) {
                 // These options only exist if debug panel active - don't show error if not found
                 case 'enable_debug_mode':
                 case 'enable_graphviz':
+                // Token is not loaded as an option
+                case 'token':
                     break;
                 default:
                     showToast(ERROR_CHAR + CLIENT_ERRORS[1] + " " + key);
@@ -1278,6 +1278,7 @@ function loadUrlToken() {
                 if (json.success) {
                     let settingsString = JSON.stringify(json.settings);
                     loadSettings(settingsString);
+                    hideSidebar();
                 } else {
                     showToast(ERROR_CHAR + json.errorMessage);
                 }
