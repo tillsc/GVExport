@@ -384,12 +384,18 @@ function loadURLXref() {
         addIndiToList(xref);
     }
 }
-function formChanged(event, autoUpdate) {
+
+function indiSelectChanged() {
     let xref = document.getElementById('pid').value.trim();
     if (xref !== "") {
         addIndiToList(xref);
         changeURLXref(xref);
     }
+    if (autoUpdate) {
+        updateRender();
+    }
+}
+function stopIndiSelectChanged() {
     let stopXref = document.getElementById('stop_pid').value.trim();
     if (stopXref !== "") {
         addIndiToStopList(stopXref);
@@ -758,10 +764,16 @@ function pageLoaded() {
 
     // Form change events
     const form = document.getElementById('gvexport');
-    let checkboxElems = form.querySelectorAll("input:not([type='file']), select:not(#simple_settings_list)");
+    let checkboxElems = form.querySelectorAll("input:not([type='file']), select:not(#simple_settings_list), select:not(#pid), select:not(#stop_pid)");
     for (let i = 0; i < checkboxElems.length; i++) {
         checkboxElems[i].addEventListener("change", handleFormChange);
     }
+    let indiSelectEl = form.querySelector("#pid");
+    indiSelectEl.addEventListener('change', indiSelectChanged);
+
+    let stopIndiSelectEl = form.querySelector("#stop_pid");
+    stopIndiSelectEl.addEventListener('change', stopIndiSelectChanged);
+
     let simpleSettingsEl = form.querySelector("#simple_settings_list");
     simpleSettingsEl.addEventListener('change', function(e) {
         let element = document.querySelector('.settings_list_item[data-id="' + e.target.value + '"]');
