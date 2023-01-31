@@ -363,7 +363,12 @@ function updateURLParameter(parameter, value, action) {
 }
 
 function getURLParameter(parameter) {
-    return updateURLParameter(parameter, "", "get").replace("#","");
+    let result = updateURLParameter(parameter, "", "get");
+    if (result !== null) {
+        return result.replace("#","");
+    } else {
+        return null;
+    }
 }
 
 function loadURLXref() {
@@ -1210,7 +1215,7 @@ function getSavedSettingsLink(e, id) {
 
 function loadUrlToken() {
     const token = getURLParameter("t");
-    if (token !== "") {
+    if (token !== null) {
         let request = {
             "type": REQUEST_TYPE_LOAD_SETTINGS_TOKEN,
             "token": token
