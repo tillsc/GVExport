@@ -89,7 +89,7 @@ class ApiHandler
         } else {
             $this->response_data['success'] = false;
             $this->response_data['json'] = $json_data;
-            $this->response_data['errorMessage'] = I18N::translate('Invalid settings ID') . ":" . e($json['settings_id']);
+            $this->response_data['errorMessage'] = "E6: " . I18N::translate('Invalid settings ID') . ":" . e($json['settings_id']);
         }
     }
     public function getSavedSettingsLink($json, $module, $tree, string $json_data): void
@@ -106,7 +106,7 @@ class ApiHandler
         } else {
             $this->response_data['success'] = false;
             $this->response_data['json'] = $json_data;
-            $this->response_data['errorMessage'] = I18N::translate('Invalid settings ID') . ": E3";
+            $this->response_data['errorMessage'] = "E3: " . I18N::translate('Invalid settings ID');
         }
     }
     public function loadSettingsToken($json, $module, $tree, string $json_data): void
@@ -123,7 +123,7 @@ class ApiHandler
         } else {
             $this->response_data['success'] = false;
             $this->response_data['json'] = $json_data;
-            $this->response_data['errorMessage'] = I18N::translate('Invalid settings ID') . ": E4";
+            $this->response_data['errorMessage'] = "E4: " . I18N::translate('Invalid settings ID');
         }
     }
 
@@ -135,13 +135,13 @@ class ApiHandler
             if ($link) {
                 $this->response_data['success'] = true;
             } else {
-                $this->response_data['errorMessage'] = I18N::translate('Invalid') . ": E2";
+                $this->response_data['errorMessage'] = "E2: " . I18N::translate('Invalid');
                 $this->response_data['success'] = false;
             }
         } else {
             $this->response_data['success'] = false;
             $this->response_data['json'] = $json_data;
-            $this->response_data['errorMessage'] = I18N::translate('Invalid settings ID');
+            $this->response_data['errorMessage'] = "E5: " . I18N::translate('Invalid settings ID');
         }
     }
 

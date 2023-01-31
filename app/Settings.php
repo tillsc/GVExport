@@ -126,7 +126,9 @@ class Settings
                             throw new HttpBadRequestException(I18N::translate('Invalid JSON') . " 1: " . json_last_error_msg() . $loaded);
                         }
                     } else {
-                        throw new HttpBadRequestException(I18N::translate('Invalid settings ID') . " " . e($id) . ": " . json_last_error_msg());
+                        if ($id !== self::ID_MAIN_SETTINGS) {
+                            throw new HttpBadRequestException(I18N::translate('Invalid settings ID') . " " . e($id) . ": " . json_last_error_msg());
+                        }
                     }
                 }
             } else {

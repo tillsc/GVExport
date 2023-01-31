@@ -363,7 +363,7 @@ function updateURLParameter(parameter, value, action) {
 
 function getURLParameter(parameter) {
     let result = updateURLParameter(parameter, "", "get");
-    if (result !== null) {
+    if (result !== null && result !== '') {
         return result.replace("#","");
     } else {
         return null;
@@ -1266,7 +1266,7 @@ function revokeSavedSettingsLink(e, token) {
 
 function loadUrlToken() {
     const token = getURLParameter("t");
-    if (token !== '') {
+    if (token !== null) {
         let request = {
             "type": REQUEST_TYPE_LOAD_SETTINGS_TOKEN,
             "token": token
