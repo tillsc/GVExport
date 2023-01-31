@@ -41,7 +41,7 @@ class settingsLink
             throw new \Exception($error);
         }
 
-        foreach ($record as $key=>$value) {
+        foreach ($record as $key => $value) {
             if ($value['settings_id'] == $this->id) {
                 $token = $key;
             }
@@ -78,6 +78,7 @@ class settingsLink
             return $shared_settings;
         }
     }
+
     private function setSharedSettingsList($record)
     {
         $json = json_encode($record);
@@ -87,11 +88,11 @@ class settingsLink
     /**
      * @throws \Exception
      */
-    public function loadToken(String $token, Settings $settings): array
+    public function loadToken(string $token, Settings $settings): array
     {
         $shared_settings_list = $this->getSharedSettingsList();
         $this->userId = $shared_settings_list[$token]['user'];
-        $tree_service    = new TreeService(new GedcomImportService());
+        $tree_service = new TreeService(new GedcomImportService());
         $this->tree = $tree_service->find($shared_settings_list[$token]['tree']);
         $this->id = $shared_settings_list[$token]['settings_id'];
         if (isset($shared_settings_list[$token])) {
@@ -108,16 +109,20 @@ class settingsLink
         }
     }
 
-    public function removeTokenRecord(): bool
+    public function removeTokenRecord($token = ''): bool
     {
         try {
             $sharedSettingsList = $this->getSharedSettingsList();
-            foreach ($sharedSettingsList as $key=>$value) {
-                if ($value['user'] === Auth::user()->id() &&
-                    $value['tree'] === $this->tree->id() &&
-                    $value['settings_id'] === $this->id) {
-                    unset($sharedSettingsList[$key]);
+            if ($token == '') {
+                foreach ($sharedSettingsList as $key => $value) {
+                    if ($value['user'] === Auth::user()->id() &&
+                        $value['tree'] === $this->tree->id() &&
+                        $value['settings_id'] === $this->id) {
+                        unset($sharedSettingsList[$key]);
+                    }
                 }
+            } else {
+                unset($sharedSettingsList[$token]);
             }
             $this->setSharedSettingsList($sharedSettingsList);
             return true;
@@ -126,7 +131,7 @@ class settingsLink
         }
     }
 
-    public function updateSettingsWithToken($token)
+    public function updateSettingsWithToken($token): bool
     {
         if (Auth::user()->id() == Settings::GUEST_USER_ID) {
             return false;
@@ -134,6 +139,24 @@ class settingsLink
             $settings = $this->settings_obj->loadUserSettings($this->module, $this->tree, $this->id);
             $settings['token'] = $token;
             $this->settings_obj->saveUserSettings($this->module, $this->tree, $settings, $this->id);
+            return true;
         }
+    }
+
+    public function revokeToken($token): bool
+    {
+        try {
+            $sharedSettingsList = $this->getSharedSettingsList();
+            if (isset($sharedSettingsList[$token])) {
+                $this->id = $sharedSettingsList[$token]['settings_id'];
+            } else {
+                return false;
+            }
+        } catch (\Exception $e) {
+            return false;
+        }
+        $clearTokenFromSettings = $this->updateSettingsWithToken('');
+        $removeToken = $this->removeTokenRecord($token);
+        return $clearTokenFromSettings && $removeToken;
     }
 }

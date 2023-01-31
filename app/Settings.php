@@ -548,4 +548,10 @@ class Settings
             }
         }
     }
+
+    public function revokeSettingsToken($module, $tree, $token): bool
+    {
+        $settingsLink = new settingsLink($module, $tree, $this);
+        return $settingsLink->revokeToken($token);
+    }
 }

@@ -44,6 +44,9 @@ class ApiHandler
                 case "load_settings_token":
                     $this->loadSettingsToken($json, $module, $tree, $json_data);
                     break;
+                case "revoke_saved_settings_link":
+                    $this->revokeSettingsToken($json, $module, $tree, $json_data);
+                    break;
                 default:
                     $this->response_data['success'] = false;
                     $this->response_data['json'] = $json_data;
@@ -86,7 +89,7 @@ class ApiHandler
         } else {
             $this->response_data['success'] = false;
             $this->response_data['json'] = $json_data;
-            $this->response_data['errorMessage'] = I18N::translate('Invalid settings ID');
+            $this->response_data['errorMessage'] = I18N::translate('Invalid settings ID') . ":" . e($json['settings_id']);
         }
     }
     public function getSavedSettingsLink($json, $module, $tree, string $json_data): void
@@ -103,7 +106,7 @@ class ApiHandler
         } else {
             $this->response_data['success'] = false;
             $this->response_data['json'] = $json_data;
-            $this->response_data['errorMessage'] = I18N::translate('Invalid settings ID');
+            $this->response_data['errorMessage'] = I18N::translate('Invalid settings ID') . ": E3";
         }
     }
     public function loadSettingsToken($json, $module, $tree, string $json_data): void
@@ -116,6 +119,24 @@ class ApiHandler
             } catch (\Exception $e) {
                 $this->response_data['success'] = false;
                 $this->response_data['errorMessage'] = json_encode($e);
+            }
+        } else {
+            $this->response_data['success'] = false;
+            $this->response_data['json'] = $json_data;
+            $this->response_data['errorMessage'] = I18N::translate('Invalid settings ID') . ": E4";
+        }
+    }
+
+    private function revokeSettingsToken($json, $module, $tree, string $json_data)
+    {
+        if (isset($json['token']) && (ctype_alnum($json['token']))) {
+            $settings = new Settings();
+            $link = $settings->revokeSettingsToken($module, $tree, $json['token']);
+            if ($link) {
+                $this->response_data['success'] = true;
+            } else {
+                $this->response_data['errorMessage'] = I18N::translate('Invalid') . ": E2";
+                $this->response_data['success'] = false;
             }
         } else {
             $this->response_data['success'] = false;
@@ -157,4 +178,5 @@ class ApiHandler
         $this->response_data['treeName'] = e($tree->name());
         $this->response_data['success'] = true;
     }
+
 }

@@ -8,6 +8,7 @@ const REQUEST_TYPE_SAVE_SETTINGS = "save_settings";
 const REQUEST_TYPE_GET_SETTINGS = "get_settings";
 const REQUEST_TYPE_IS_LOGGED_IN = "is_logged_in";
 const REQUEST_TYPE_GET_SAVED_SETTINGS_LINK = "get_saved_settings_link";
+const REQUEST_TYPE_REVOKE_SAVED_SETTINGS_LINK = "revoke_saved_settings_link";
 const REQUEST_TYPE_LOAD_SETTINGS_TOKEN = "load_settings_token";
 let treeName = null;
 let loggedIn = null;
@@ -1123,7 +1124,7 @@ function showSavedSettingsItemMenu(event) {
                     let unshareLinkEl = document.createElement('a');
                     unshareLinkEl.setAttribute('class', 'settings_ellipsis_menu_item');
                     unshareLinkEl.setAttribute('href', '#');
-                    unshareLinkEl.setAttribute('onClick', 'unshareSavedSettingsLink(event, "' + id + '")');
+                    unshareLinkEl.setAttribute('onClick', 'revokeSavedSettingsLink(event, "' + token + '")');
                     unshareLinkEl.innerHTML = '<span class="settings_ellipsis_menu_icon">🚫</span><span>' + TRANSLATE['Revoke link'] + '</span>';
                     div.appendChild(unshareLinkEl);
                 }
@@ -1236,9 +1237,36 @@ function getSavedSettingsLink(e, id) {
     });
 }
 
+function revokeSavedSettingsLink(e, token) {
+    e.stopPropagation();
+    isUserLoggedIn().then((loggedIn) => {
+        if (loggedIn) {
+            let request = {
+                "type": REQUEST_TYPE_REVOKE_SAVED_SETTINGS_LINK,
+                "token": token
+            };
+            let json = JSON.stringify(request);
+            sendRequest(json).then((response) => {
+                loadSettingsDetails();
+                try {
+                    let json = JSON.parse(response);
+                    if (json.success) {
+                        showToast(TRANSLATE['Revoked access to shared link']);
+                    } else {
+                        showToast(ERROR_CHAR + json.errorMessage);
+                    }
+                } catch (e) {
+                    showToast("Failed to load response: " + e);
+                    return false;
+                }
+            });
+        }
+    });
+}
+
 function loadUrlToken() {
     const token = getURLParameter("t");
-    if (token !== null) {
+    if (token !== '') {
         let request = {
             "type": REQUEST_TYPE_LOAD_SETTINGS_TOKEN,
             "token": token
@@ -1249,7 +1277,6 @@ function loadUrlToken() {
                 let json = JSON.parse(response);
                 if (json.success) {
                     let settingsString = JSON.stringify(json.settings);
-                    console.log(settingsString);
                     loadSettings(settingsString);
                 } else {
                     showToast(ERROR_CHAR + json.errorMessage);
