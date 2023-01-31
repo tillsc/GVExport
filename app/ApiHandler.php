@@ -38,6 +38,9 @@ class ApiHandler
                 case "get_tree_name":
                     $this->getTreeName($tree);
                     break;
+                case "get_saved_settings_link":
+                    $this->getSavedSettingsLink($json, $module, $tree, $json_data);
+                    break;
                 default:
                     $this->response_data['success'] = false;
                     $this->response_data['json'] = $json_data;
@@ -77,6 +80,23 @@ class ApiHandler
             $settings = new Settings();
             $this->response_data['settings'] = ($json['settings_id'] == Settings::ID_ALL_SETTINGS ? $settings->getAllSettingsJson($module, $tree) : $settings->getSettingsJson($module, $tree, $json['settings_id']));
             $this->response_data['success'] = true;
+        } else {
+            $this->response_data['success'] = false;
+            $this->response_data['json'] = $json_data;
+            $this->response_data['errorMessage'] = I18N::translate('Invalid settings ID');
+        }
+    }
+    public function getSavedSettingsLink($json, $module, $tree, string $json_data): void
+    {
+        if (isset($json['settings_id']) && (ctype_alnum($json['settings_id']))) {
+            $settings = new Settings();
+            $link = $settings->getSettingsLink($module, $tree, $json['settings_id']);
+            if ($link['success']) {
+                $this->response_data['url'] = $link['url'];
+            } else {
+                $this->response_data['errorMessage'] = $link['error'];
+            }
+            $this->response_data['success'] = $link['success'];
         } else {
             $this->response_data['success'] = false;
             $this->response_data['json'] = $json_data;

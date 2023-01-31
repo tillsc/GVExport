@@ -69,7 +69,10 @@ $xref = $individual->xref();
         "<?= I18N::translate('Invalid JSON'); ?>"];
     const TRANSLATE = {
         "Delete":"<?= I18N::translate('Delete'); ?>",
-        "Copy link":"<?= I18N::translate('Copy link'); ?>"
+        "Copy link":"<?= I18N::translate('Copy link'); ?>",
+        "Copied link to clipboard":"<?= I18N::translate('Copied link to clipboard'); ?>",
+        "Failed to copy link to clipboard":"<?= I18N::translate('Failed to copy link to clipboard'); ?>",
+        "Copy manually below":"<?= I18N::translate('Copy manually below'); ?>"
     }
     let autoUpdate = <?= $vars["auto_update"] ? 'true' : 'false' ?>;
     let debug_string = "";

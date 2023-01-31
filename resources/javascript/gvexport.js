@@ -776,13 +776,12 @@ function pageLoaded() {
 
 // Function to show a help message
 // item - the help item identifier
-function showHelp(item) {
-    let helpText = getHelpText(item);
+function showModal(content) {
     const modal = document.createElement("div");
     modal.className = "modal";
     modal.innerHTML = "<div class=\"modal-content\">\n" +
         "<span class='close' onclick='this.parentElement.parentElement.remove()'>&times;</span>\n" +
-        "<p>" + helpText + "</p>\n" +
+        content + "\n" +
         "</div>"
     document.body.appendChild(modal);
     // When the user clicks anywhere outside the modal, close it
@@ -791,6 +790,14 @@ function showHelp(item) {
             modal.remove();
         }
     }
+    return false;
+}
+// Function to show a help message
+// item - the help item identifier
+function showHelp(item) {
+    let helpText = getHelpText(item);
+    let content = "<p>" + helpText + "</p>";
+    showModal(content);
     return false;
 }
 
@@ -1166,6 +1173,39 @@ function deleteSettingsAdvanced(e, id) {
     });
 }
 
+function getSavedSettingsLink(e, id) {
+    e.stopPropagation();
+    isUserLoggedIn().then((loggedIn) => {
+        if (loggedIn) {
+            let request = {
+                "type": REQUEST_TYPE_GET_SAVED_SETTINGS_LINK,
+                "settings_id": id
+            };
+            let json = JSON.stringify(request);
+            sendRequest(json).then((response) => {
+                try {
+                    let json = JSON.parse(response);
+                    if (json.success) {
+                        copyToClipboard(json.url)
+                            .then(() => {
+                                showToast(TRANSLATE['Copied link to clipboard']);
+                            })
+                            .catch(() => {
+                                showToast(TRANSLATE['Failed to copy link to clipboard']);
+                                showModal('<p>' + TRANSLATE['Failed to copy link to clipboard'] + '. ' + TRANSLATE['Copy manually below'] + ':</p><textarea style="width: 100%">' + json.url + "</textarea>")
+                            });
+                    } else {
+                        showToast(ERROR_CHAR + json.errorMessage);
+                    }
+                } catch (e) {
+                    showToast("Failed to load response: " + e);
+                    return false;
+                }
+            });
+        }
+    });
+}
+
 
 function isUserLoggedIn() {
     if (loggedIn != null)  {
@@ -1266,4 +1306,29 @@ function setSavedDiagramsPanel() {
     const checkbox = document.getElementById('show_diagram_panel');
     const el = document.getElementById('saved_diagrams_panel');
     showHide(el, checkbox.checked);
+}
+
+// From https://stackoverflow.com/questions/51805395/navigator-clipboard-is-undefined
+function copyToClipboard(textToCopy) {
+    // navigator clipboard api needs a secure context (https)
+    if (navigator.clipboard && window.isSecureContext) {
+        // navigator clipboard api method'
+        return navigator.clipboard.writeText(textToCopy);
+    } else {
+        // text area method
+        let textArea = document.createElement("textarea");
+        textArea.value = textToCopy;
+        // make the textarea out of viewport
+        textArea.style.position = "fixed";
+        textArea.style.left = "-999999px";
+        textArea.style.top = "-999999px";
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        return new Promise((res, rej) => {
+            // here the magic happens
+            document.execCommand('copy') ? res() : rej();
+            textArea.remove();
+        });
+    }
 }

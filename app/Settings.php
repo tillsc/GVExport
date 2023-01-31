@@ -12,8 +12,9 @@ class Settings
     public const ID_ALL_SETTINGS = "_ALL_";
     private const GUEST_USER_ID = 0;
     private const ADMIN_PREFERENCE_NAME = "Admin_settings";
-    private const PREFERENCE_PREFIX = "Settings";
+    public const PREFERENCE_PREFIX = "Settings";
     public const SETTINGS_LIST_PREFERENCE_NAME = "_id_list";
+    public const SAVED_SETTINGS_LIST_PREFERENCE_NAME = "_saved_settings_list";
     const TREE_PREFIX = "_t";
     const USER_PREFIX = "_u";
     private array $settings_json_cache = [];
@@ -404,6 +405,26 @@ class Settings
         return json_encode($settings);
     }
 
+    public function getSettingsLink($module, $tree, $id): array
+    {
+        if ($this->doSettingsExist($module, $tree)) {
+            $link = new settingsLink($module, $tree, $id);
+            try {
+                $response['url'] = $link->getUrl();
+                $response['success'] = true;
+            } catch (\Exception $error) {
+                $response['success'] = false;
+                $response['error'] = $error;
+            }
+
+        } else {
+            $response['success'] = false;
+            $response['error'] = "Settings don't exist";
+        }
+
+        return $response;
+    }
+
     public function newSettingsId($module, $tree): string
     {
         $id_list = $this->getSettingsIdList($module, $tree);
@@ -490,6 +511,21 @@ class Settings
         } else {
             $module->setPreference(self::PREFERENCE_PREFIX . self::SETTINGS_LIST_PREFERENCE_NAME . self::TREE_PREFIX . $tree->id(), $id_list);
             return true;
+        }
+    }
+
+    private function doSettingsExist($module, $tree): bool
+    {
+        if (Auth::user()->id() == self::GUEST_USER_ID) {
+            return false;
+        } else {
+            $settings_pref_name = self::PREFERENCE_PREFIX . self::TREE_PREFIX . $tree->id() . self::USER_PREFIX . Auth::user()->id();
+            $loaded = $this->settings_json_cache[$settings_pref_name] ?? $module->getPreference($settings_pref_name, "preference not set");
+            if ($loaded == "preference not set") {
+                return false;
+            } else {
+                return true;
+            }
         }
     }
 }
