@@ -1077,6 +1077,7 @@ function loadSettingsDetails() {
             newListItem.className = "settings_list_item";
             newListItem.setAttribute("data-settings", settingsList[key]['settings']);
             newListItem.setAttribute("data-id", settingsList[key]['id']);
+            newListItem.setAttribute("data-token", settingsList[key]['token']);
             newListItem.setAttribute("onclick", "loadSettings(this.getAttribute('data-settings'))");
             newListItem.innerHTML = "<a href=\"#\">" + settingsList[key]['name'] + "<div class=\"saved-settings-ellipsis\" onclick='showSavedSettingsItemMenu(event)'><a href='#'>…</a></div></a>";
             newLinkWrapper.appendChild(newListItem);
@@ -1096,7 +1097,8 @@ function loadSettingsDetails() {
 
 function showSavedSettingsItemMenu(event) {
     event.stopImmediatePropagation();
-    let id = event.target.parentElement.parentElement.getAttribute("data-id");
+    let id = event.target.parentElement.parentElement.getAttribute('data-id');
+    let token = event.target.parentElement.parentElement.getAttribute('data-token');
     removeSettingsEllipsisMenu(event.target);
     isUserLoggedIn().then((loggedIn) => {
         if (id != null) {
@@ -1108,7 +1110,7 @@ function showSavedSettingsItemMenu(event) {
             deleteEl.setAttribute('class', 'settings_ellipsis_menu_item');
             deleteEl.setAttribute('href', '#');
             deleteEl.setAttribute('onClick', 'deleteSettingsAdvanced(event, "' + id + '")');
-            deleteEl.innerHTML = '<span class="settings_ellipsis_menu_icon">🗙</span><span>' + TRANSLATE['Delete'] + '</span>';
+            deleteEl.innerHTML = '<span class="settings_ellipsis_menu_icon">❌</span><span>' + TRANSLATE['Delete'] + '</span>';
             div.appendChild(deleteEl);
             if (loggedIn) {
                 let copyLinkEl = document.createElement('a');
@@ -1117,6 +1119,14 @@ function showSavedSettingsItemMenu(event) {
                 copyLinkEl.setAttribute('onClick', 'getSavedSettingsLink(event, "' + id + '")');
                 copyLinkEl.innerHTML = '<span class="settings_ellipsis_menu_icon">🔗</span><span>' + TRANSLATE['Copy link'] + '</span>';
                 div.appendChild(copyLinkEl);
+                if (token !== '') {
+                    let unshareLinkEl = document.createElement('a');
+                    unshareLinkEl.setAttribute('class', 'settings_ellipsis_menu_item');
+                    unshareLinkEl.setAttribute('href', '#');
+                    unshareLinkEl.setAttribute('onClick', 'unshareSavedSettingsLink(event, "' + id + '")');
+                    unshareLinkEl.innerHTML = '<span class="settings_ellipsis_menu_icon">🚫</span><span>' + TRANSLATE['Revoke link'] + '</span>';
+                    div.appendChild(unshareLinkEl);
+                }
             }
             event.target.appendChild(div);
         }
@@ -1202,6 +1212,7 @@ function getSavedSettingsLink(e, id) {
             };
             let json = JSON.stringify(request);
             sendRequest(json).then((response) => {
+                loadSettingsDetails();
                 try {
                     let json = JSON.parse(response);
                     if (json.success) {

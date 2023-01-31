@@ -10,7 +10,7 @@ class Settings
 {
     public const ID_MAIN_SETTINGS = "_MAIN_";
     public const ID_ALL_SETTINGS = "_ALL_";
-    private const GUEST_USER_ID = 0;
+    public const GUEST_USER_ID = 0;
     private const ADMIN_PREFERENCE_NAME = "_admin_settings";
     public const PREFERENCE_PREFIX = "GVE";
     public const SETTINGS_LIST_PREFERENCE_NAME = "_id_list";
@@ -215,7 +215,7 @@ class Settings
                 $new_json = json_encode($all_settings);
                 $module->setPreference(self::PREFERENCE_PREFIX . self::TREE_PREFIX . $tree->id() . self::USER_PREFIX . Auth::user()->id(), $new_json);
                 $this->deleteSettingsId($module, $tree, $id);
-                $settingsLink = new settingsLink($module, $tree, $id);
+                $settingsLink = new settingsLink($module, $tree, $this, $id);
                 if (!$settingsLink->removeTokenRecord()) {
                     throw new HttpBadRequestException(I18N::translate('Invalid') . " - E1");
                 }
@@ -413,7 +413,7 @@ class Settings
     public function getSettingsLink($module, $tree, $id): array
     {
         if ($this->doSettingsExist($module, $tree)) {
-            $link = new settingsLink($module, $tree, $id);
+            $link = new settingsLink($module, $tree, $this, $id);
             try {
                 $response['url'] = $link->getUrl();
                 $response['success'] = true;
@@ -435,7 +435,7 @@ class Settings
      */
     public function loadSettingsToken($module, $tree, $token): array
     {
-        $link = new settingsLink($module, $tree);
+        $link = new settingsLink($module, $tree, $this);
         try {
             $settings = $link->loadToken($token, $this);
         } catch (\Exception $e) {
@@ -518,6 +518,7 @@ class Settings
         $settings[$id]['settings'] = $json;
         $settings[$id]['name'] = $s['save_settings_name'];
         $settings[$id]['id'] = $id;
+        $settings[$id]['token'] = empty($s['token']) ? '':$s['token'];
         $new_json = json_encode($settings);
         $module->setPreference(self::PREFERENCE_PREFIX . self::TREE_PREFIX . $tree->id() . self::USER_PREFIX . Auth::user()->id(), $new_json);
     }

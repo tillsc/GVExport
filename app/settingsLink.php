@@ -16,12 +16,14 @@ class settingsLink
     private $tree;
     private $userId;
     private string $id;
+    private Settings $settings_obj;
 
-    public function __construct($module, $tree, $id = "")
+    public function __construct($module, $tree, $parent_obj, $id = "")
     {
         $this->module = $module;
         $this->tree = $tree;
         $this->id = $id;
+        $this->settings_obj = $parent_obj;
         if (Settings::isUserLoggedIn()) {
             $this->userId = Auth::user()->id();
             $this->base_url = $module->base_url;
@@ -54,6 +56,7 @@ class settingsLink
             $record[$token]['tree'] = $this->tree->id();
             $record[$token]['settings_id'] = $this->id;
             $this->setSharedSettingsList($record);
+            $this->updateSettingsWithToken($token);
         }
 
         return $this->base_url . self::TOKEN_PREFIX . $token;
@@ -120,6 +123,17 @@ class settingsLink
             return true;
         } catch (\Exception $e) {
             return false;
+        }
+    }
+
+    public function updateSettingsWithToken($token)
+    {
+        if (Auth::user()->id() == Settings::GUEST_USER_ID) {
+            return false;
+        } else {
+            $settings = $this->settings_obj->loadUserSettings($this->module, $this->tree, $this->id);
+            $settings['token'] = $token;
+            $this->settings_obj->saveUserSettings($this->module, $this->tree, $settings, $this->id);
         }
     }
 }

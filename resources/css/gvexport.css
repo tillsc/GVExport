@@ -251,9 +251,9 @@ span.NAME {
     border-width: 1px;
     border-style: solid;
     border-radius: 5px 0px 5px 5px;
-
-    width: 120px;
-    left: -105px;
+    white-space:nowrap;
+    width: auto;
+    right: 0px;
     top: 28px;
 }
 
