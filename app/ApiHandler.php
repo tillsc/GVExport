@@ -38,6 +38,15 @@ class ApiHandler
                 case "get_tree_name":
                     $this->getTreeName($tree);
                     break;
+                case "get_saved_settings_link":
+                    $this->getSavedSettingsLink($json, $module, $tree, $json_data);
+                    break;
+                case "load_settings_token":
+                    $this->loadSettingsToken($json, $module, $tree, $json_data);
+                    break;
+                case "revoke_saved_settings_link":
+                    $this->revokeSettingsToken($json, $module, $tree, $json_data);
+                    break;
                 default:
                     $this->response_data['success'] = false;
                     $this->response_data['json'] = $json_data;
@@ -80,7 +89,59 @@ class ApiHandler
         } else {
             $this->response_data['success'] = false;
             $this->response_data['json'] = $json_data;
-            $this->response_data['errorMessage'] = I18N::translate('Invalid settings ID');
+            $this->response_data['errorMessage'] = "E6: " . I18N::translate('Invalid settings ID') . ":" . e($json['settings_id']);
+        }
+    }
+    public function getSavedSettingsLink($json, $module, $tree, string $json_data): void
+    {
+        if (isset($json['settings_id']) && (ctype_alnum($json['settings_id']))) {
+            $settings = new Settings();
+            $link = $settings->getSettingsLink($module, $tree, $json['settings_id']);
+            if ($link['success']) {
+                $this->response_data['url'] = $link['url'];
+            } else {
+                $this->response_data['errorMessage'] = $link['error'];
+            }
+            $this->response_data['success'] = $link['success'];
+        } else {
+            $this->response_data['success'] = false;
+            $this->response_data['json'] = $json_data;
+            $this->response_data['errorMessage'] = "E3: " . I18N::translate('Invalid settings ID');
+        }
+    }
+    public function loadSettingsToken($json, $module, $tree, string $json_data): void
+    {
+        if (isset($json['token']) && (ctype_alnum($json['token']))) {
+            $settings = new Settings();
+            try {
+                $this->response_data['settings'] = $settings->loadSettingsToken($module, $tree, $json['token']);
+                $this->response_data['success'] = true;
+            } catch (\Exception $e) {
+                $this->response_data['success'] = false;
+                $this->response_data['errorMessage'] = "E7: " . I18N::translate('Invalid settings ID');
+            }
+        } else {
+            $this->response_data['success'] = false;
+            $this->response_data['json'] = $json_data;
+            $this->response_data['errorMessage'] = "E4: " . I18N::translate('Invalid settings ID');
+        }
+    }
+
+    private function revokeSettingsToken($json, $module, $tree, string $json_data)
+    {
+        if (isset($json['token']) && (ctype_alnum($json['token']))) {
+            $settings = new Settings();
+            $link = $settings->revokeSettingsToken($module, $tree, $json['token']);
+            if ($link) {
+                $this->response_data['success'] = true;
+            } else {
+                $this->response_data['errorMessage'] = "E2: " . I18N::translate('Invalid');
+                $this->response_data['success'] = false;
+            }
+        } else {
+            $this->response_data['success'] = false;
+            $this->response_data['json'] = $json_data;
+            $this->response_data['errorMessage'] = "E5: " . I18N::translate('Invalid settings ID');
         }
     }
 
@@ -117,4 +178,5 @@ class ApiHandler
         $this->response_data['treeName'] = e($tree->name());
         $this->response_data['success'] = true;
     }
+
 }

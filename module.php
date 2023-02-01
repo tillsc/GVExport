@@ -77,6 +77,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
     public const CUSTOM_MODULE      = "GVExport";
     public const CUSTOM_LATEST      = 'https://raw.githubusercontent.com/Neriderc/' . self::CUSTOM_MODULE. '/main/latest-version.txt';
     public const SUPPORT_URL        = 'https://github.com/Neriderc/GVExport';
+    public string $base_url;
 
     public function boot(): void
     {
@@ -228,6 +229,8 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
     {
         $tree = $request->getAttribute('tree');
         if (isset($_POST['json_data'])) {
+            $individual = $this->getIndividual($tree, $tree->significantIndividual(Auth::user(), '')->xref());
+            $this->base_url = explode("?", $this->chartUrl($individual))[0];
             $api = new ApiHandler();
             $api->handle($request, $this, $tree);
             return $api->getResponse();

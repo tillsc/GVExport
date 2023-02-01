@@ -218,6 +218,7 @@ class FormSubmission
         } else {
             $settings['save_settings_name'] = I18N::translate('Settings');
         }
+        $settings['show_diagram_panel'] = isset($vars['show_diagram_panel']);
         return $settings;
     }
 
@@ -267,6 +268,6 @@ class FormSubmission
 
     private function cleanSettingsName($name)
     {
-        return preg_replace("/[^A-ZÀ-úa-z0-9_ .*+()&^%$#@!-]+/", "", $name);
+        return preg_replace("/[^A-ZÀ-úa-z0-9_ .*+()&^%$#@!'-]+/", "", $name);
     }
 }

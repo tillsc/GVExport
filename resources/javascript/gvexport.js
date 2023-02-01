@@ -7,19 +7,20 @@ const REQUEST_TYPE_DELETE_SETTINGS = "delete_settings";
 const REQUEST_TYPE_SAVE_SETTINGS = "save_settings";
 const REQUEST_TYPE_GET_SETTINGS = "get_settings";
 const REQUEST_TYPE_IS_LOGGED_IN = "is_logged_in";
+const REQUEST_TYPE_GET_SAVED_SETTINGS_LINK = "get_saved_settings_link";
+const REQUEST_TYPE_REVOKE_SAVED_SETTINGS_LINK = "revoke_saved_settings_link";
+const REQUEST_TYPE_LOAD_SETTINGS_TOKEN = "load_settings_token";
 let treeName = null;
 let loggedIn = null;
 
-function hideSidebar(e) {
+function hideSidebar() {
     document.querySelector(".sidebar").hidden = true;
     document.querySelector(".sidebar__toggler").hidden = false;
-    e.preventDefault();
 }
 
-function showSidebar(e) {
+function showSidebar() {
     document.querySelector(".sidebar__toggler").hidden = true;
     document.querySelector(".sidebar").hidden = false;
-    e.preventDefault();
 }
 
 // Enable or disable the option to add photos.
@@ -361,28 +362,41 @@ function updateURLParameter(parameter, value, action) {
 }
 
 function getURLParameter(parameter) {
-    return updateURLParameter(parameter, "", "get").replace("#","");
+    let result = updateURLParameter(parameter, "", "get");
+    if (result !== null && result !== '') {
+        return result.replace("#","");
+    } else {
+        return null;
+    }
 }
 
 function loadURLXref() {
     const xref = getURLParameter("xref");
-    const el = document.getElementById('xref_list');
-    if (el.value.replace(",","").trim() === "") {
-        el.value = xref;
-    } else {
-        const xrefs = el.value.split(",");
-        if (xrefs.length === 1) {
-            el.value = "";
+    if (xref !== null) {
+        const el = document.getElementById('xref_list');
+        if (el.value.replace(",", "").trim() === "") {
+            el.value = xref;
+        } else {
+            const xrefs = el.value.split(",");
+            if (xrefs.length === 1) {
+                el.value = "";
+            }
+            addIndiToList(xref);
         }
-        addIndiToList(xref);
     }
 }
-function formChanged(event, autoUpdate) {
+
+function indiSelectChanged() {
     let xref = document.getElementById('pid').value.trim();
     if (xref !== "") {
         addIndiToList(xref);
         changeURLXref(xref);
     }
+    if (autoUpdate) {
+        updateRender();
+    }
+}
+function stopIndiSelectChanged() {
     let stopXref = document.getElementById('stop_pid').value.trim();
     if (stopXref !== "") {
         addIndiToStopList(stopXref);
@@ -423,9 +437,9 @@ function loadIndividualDetails(url, xref, list) {
             } else {
                 otherXrefId = "stop_xref_list";
             }
-            newListItem.innerHTML = contents + "<div class=\"remove-item\" onclick=\"removeItem(event, this.parentElement, '" + otherXrefId + "')\"><a href='#'>×</a></div>";
+            newListItem.innerHTML = contents + "<div class=\"saved-settings-ellipsis\" onclick=\"removeItem(event, this.parentElement, '" + otherXrefId + "')\"><a href='#'>×</a></div>";
             // Multiple promises can be for the same xref - don't add if a duplicate
-            let item = document.querySelector(`[data-xref="${xref}"]`);
+            let item = listElement.querySelector(`[data-xref="${xref}"]`);
             if (item == null) {
                 listElement.appendChild(newListItem);
             } else {
@@ -722,10 +736,17 @@ function handleFormChange() {
     if (autoUpdate) updateRender();
 }
 
+function removeSettingsEllipsisMenu(menuElement) {
+    document.querySelectorAll('.settings_ellipsis_menu').forEach(e => {
+        if (e !== menuElement) e.remove();
+    });
+}
+
 // This function is run when the page is loaded
 function pageLoaded() {
     TOMSELECT_URL = document.getElementById('pid').getAttribute("data-url") + "&query=";
     loadURLXref();
+    loadUrlToken();
     loadXrefList(TOMSELECT_URL, 'xref_list', 'indi_list');
     loadXrefList(TOMSELECT_URL, 'stop_xref_list', 'stop_indi_list');
     loadSettingsDetails();
@@ -744,27 +765,43 @@ function pageLoaded() {
 
     // Form change events
     const form = document.getElementById('gvexport');
-    var checkboxElems = form.querySelectorAll("input:not([type='file']), select");
+    let checkboxElems = form.querySelectorAll("input:not([type='file']):not(#save_settings_name):not(#pid):not(#stop_pid), select:not(#simple_settings_list)");
     for (let i = 0; i < checkboxElems.length; i++) {
         checkboxElems[i].addEventListener("change", handleFormChange);
     }
+    let indiSelectEl = form.querySelector("#pid");
+    indiSelectEl.addEventListener('change', indiSelectChanged);
 
+    let stopIndiSelectEl = form.querySelector("#stop_pid");
+    stopIndiSelectEl.addEventListener('change', stopIndiSelectChanged);
+
+    let simpleSettingsEl = form.querySelector("#simple_settings_list");
+    simpleSettingsEl.addEventListener('change', function(e) {
+        let element = document.querySelector('.settings_list_item[data-id="' + e.target.value + '"]');
+        if (element !== null) {
+            loadSettings(element.getAttribute('data-settings'));
+        } else if (e.target.value !== '-') {
+            showToast(ERROR_CHAR + 'Settings not found')
+        }
+    })
     document.addEventListener("keydown", function(e) {
         if (e.key === "Esc" || e.key === "Escape") {
             document.querySelector(".sidebar").hidden ? showSidebar(e) : hideSidebar(e);
         }
     });
+    document.addEventListener("click", function(event) {
+        removeSettingsEllipsisMenu(event.target);
+    });
 }
 
 // Function to show a help message
 // item - the help item identifier
-function showHelp(item) {
-    let helpText = getHelpText(item);
+function showModal(content) {
     const modal = document.createElement("div");
     modal.className = "modal";
     modal.innerHTML = "<div class=\"modal-content\">\n" +
         "<span class='close' onclick='this.parentElement.parentElement.remove()'>&times;</span>\n" +
-        "<p>" + helpText + "</p>\n" +
+        content + "\n" +
         "</div>"
     document.body.appendChild(modal);
     // When the user clicks anywhere outside the modal, close it
@@ -773,6 +810,14 @@ function showHelp(item) {
             modal.remove();
         }
     }
+    return false;
+}
+// Function to show a help message
+// item - the help item identifier
+function showHelp(item) {
+    let helpText = getHelpText(item);
+    let content = "<p>" + helpText + "</p>";
+    showModal(content);
     return false;
 }
 
@@ -855,6 +900,8 @@ function loadSettings(data) {
                 // These options only exist if debug panel active - don't show error if not found
                 case 'enable_debug_mode':
                 case 'enable_graphviz':
+                // Token is not loaded as an option
+                case 'token':
                     break;
                 default:
                     showToast(ERROR_CHAR + CLIENT_ERRORS[1] + " " + key);
@@ -871,6 +918,7 @@ function loadSettings(data) {
         }
     });
     setStateFastRelationCheck();
+    setSavedDiagramsPanel();
     showHide(document.getElementById('arrow_group'),document.getElementById('colour_arrow_related').checked)
     showHide(document.getElementById('startcol_option'),document.getElementById('highlight_start_indis').checked)
     // Don't load name from settings into text field - it's already shown on settings element
@@ -1020,6 +1068,10 @@ function loadSettingsDetails() {
             return CLIENT_ERRORS['2'] + e;
         }
         const listElement = document.getElementById('settings_list');
+        const simpleSettingsListEl = document.getElementById('simple_settings_list');
+        if (simpleSettingsListEl !== null) {
+            simpleSettingsListEl.innerHTML = "<option value=\"-\">-</option>";
+        }
         listElement.innerHTML = "";
         Object.keys(settingsList).forEach (function(key) {
             const newLinkWrapper = document.createElement("a");
@@ -1028,14 +1080,60 @@ function loadSettingsDetails() {
             newListItem.className = "settings_list_item";
             newListItem.setAttribute("data-settings", settingsList[key]['settings']);
             newListItem.setAttribute("data-id", settingsList[key]['id']);
+            newListItem.setAttribute("data-token", settingsList[key]['token']);
             newListItem.setAttribute("onclick", "loadSettings(this.getAttribute('data-settings'))");
-            newListItem.innerHTML = "<a href=\"#\">" + settingsList[key]['name'] + "<div class=\"remove-item\" onclick=\"deleteSettingsAdvanced(event, this)\"><a href='#'>×</a></div></a>";
+            newListItem.innerHTML = "<a href=\"#\">" + settingsList[key]['name'] + "<div class=\"saved-settings-ellipsis\" onclick='showSavedSettingsItemMenu(event)'><a href='#'>…</a></div></a>";
             newLinkWrapper.appendChild(newListItem);
             listElement.appendChild(newLinkWrapper);
+
+            if (simpleSettingsListEl !== null) {
+                let option = document.createElement("option");
+                option.value = settingsList[key]['id'];
+                option.text = settingsList[key]['name'];
+                simpleSettingsListEl.appendChild(option);
+            }
         });
     }).catch(
         error => showToast(error)
     );
+}
+
+function showSavedSettingsItemMenu(event) {
+    event.stopImmediatePropagation();
+    let id = event.target.parentElement.parentElement.getAttribute('data-id');
+    let token = event.target.parentElement.parentElement.getAttribute('data-token');
+    removeSettingsEllipsisMenu(event.target);
+    isUserLoggedIn().then((loggedIn) => {
+        if (id != null) {
+            id = id.trim();
+            let div = document.createElement('div');
+            div.setAttribute('class', 'settings_ellipsis_menu');
+            // Add "Delete" option
+            let deleteEl = document.createElement('a');
+            deleteEl.setAttribute('class', 'settings_ellipsis_menu_item');
+            deleteEl.setAttribute('href', '#');
+            deleteEl.setAttribute('onClick', 'deleteSettingsAdvanced(event, "' + id + '")');
+            deleteEl.innerHTML = '<span class="settings_ellipsis_menu_icon">❌</span><span>' + TRANSLATE['Delete'] + '</span>';
+            div.appendChild(deleteEl);
+            if (loggedIn) {
+                let copyLinkEl = document.createElement('a');
+                copyLinkEl.setAttribute('class', 'settings_ellipsis_menu_item');
+                copyLinkEl.setAttribute('href', '#');
+                copyLinkEl.setAttribute('onClick', 'getSavedSettingsLink(event, "' + id + '")');
+                copyLinkEl.innerHTML = '<span class="settings_ellipsis_menu_icon">🔗</span><span>' + TRANSLATE['Copy link'] + '</span>';
+                div.appendChild(copyLinkEl);
+                if (token !== '') {
+                    let unshareLinkEl = document.createElement('a');
+                    unshareLinkEl.setAttribute('class', 'settings_ellipsis_menu_item');
+                    unshareLinkEl.setAttribute('href', '#');
+                    unshareLinkEl.setAttribute('onClick', 'revokeSavedSettingsLink(event, "' + token + '")');
+                    unshareLinkEl.innerHTML = '<span class="settings_ellipsis_menu_icon">🚫</span><span>' + TRANSLATE['Revoke link'] + '</span>';
+                    div.appendChild(unshareLinkEl);
+                }
+            }
+            event.target.appendChild(div);
+        }
+    });
 }
 
 function saveSettingsAdvanced() {
@@ -1078,10 +1176,8 @@ function deleteSettingsClient(id) {
     });
 }
 
-function deleteSettingsAdvanced(e, element) {
+function deleteSettingsAdvanced(e, id) {
     e.stopPropagation();
-    let parentEl = element.parentElement;
-    let id = parentEl.getAttribute("data-id").trim();
     isUserLoggedIn().then((loggedIn) => {
         if (loggedIn) {
             let request = {
@@ -1109,6 +1205,92 @@ function deleteSettingsAdvanced(e, element) {
     });
 }
 
+function getSavedSettingsLink(e, id) {
+    e.stopPropagation();
+    isUserLoggedIn().then((loggedIn) => {
+        if (loggedIn) {
+            let request = {
+                "type": REQUEST_TYPE_GET_SAVED_SETTINGS_LINK,
+                "settings_id": id
+            };
+            let json = JSON.stringify(request);
+            sendRequest(json).then((response) => {
+                loadSettingsDetails();
+                try {
+                    let json = JSON.parse(response);
+                    if (json.success) {
+                        copyToClipboard(json.url)
+                            .then(() => {
+                                showToast(TRANSLATE['Copied link to clipboard']);
+                            })
+                            .catch(() => {
+                                showToast(TRANSLATE['Failed to copy link to clipboard']);
+                                showModal('<p>' + TRANSLATE['Failed to copy link to clipboard'] + '. ' + TRANSLATE['Copy manually below'] + ':</p><textarea style="width: 100%">' + json.url + "</textarea>")
+                            });
+                    } else {
+                        showToast(ERROR_CHAR + json.errorMessage);
+                    }
+                } catch (e) {
+                    showToast("Failed to load response: " + e);
+                    return false;
+                }
+            });
+        }
+    });
+}
+
+function revokeSavedSettingsLink(e, token) {
+    e.stopPropagation();
+    isUserLoggedIn().then((loggedIn) => {
+        if (loggedIn) {
+            let request = {
+                "type": REQUEST_TYPE_REVOKE_SAVED_SETTINGS_LINK,
+                "token": token
+            };
+            let json = JSON.stringify(request);
+            sendRequest(json).then((response) => {
+                loadSettingsDetails();
+                try {
+                    let json = JSON.parse(response);
+                    if (json.success) {
+                        showToast(TRANSLATE['Revoked access to shared link']);
+                    } else {
+                        showToast(ERROR_CHAR + json.errorMessage);
+                    }
+                } catch (e) {
+                    showToast("Failed to load response: " + e);
+                    return false;
+                }
+            });
+        }
+    });
+}
+
+function loadUrlToken() {
+    const token = getURLParameter("t");
+    if (token !== null) {
+        let request = {
+            "type": REQUEST_TYPE_LOAD_SETTINGS_TOKEN,
+            "token": token
+        };
+        let json = JSON.stringify(request);
+        sendRequest(json).then((response) => {
+            try {
+                let json = JSON.parse(response);
+                if (json.success) {
+                    let settingsString = JSON.stringify(json.settings);
+                    loadSettings(settingsString);
+                    hideSidebar();
+                } else {
+                    showToast(ERROR_CHAR + json.errorMessage);
+                }
+            } catch (e) {
+                showToast("Failed to load response: " + e);
+                return false;
+            }
+        });
+    }
+}
 
 function isUserLoggedIn() {
     if (loggedIn != null)  {
@@ -1203,4 +1385,35 @@ function deleteIdLocal(id) {
             localStorage.setItem(SETTINGS_ID_LIST_NAME + "_" + treeName, settings_list);
         }
     });
+}
+
+function setSavedDiagramsPanel() {
+    const checkbox = document.getElementById('show_diagram_panel');
+    const el = document.getElementById('saved_diagrams_panel');
+    showHide(el, checkbox.checked);
+}
+
+// From https://stackoverflow.com/questions/51805395/navigator-clipboard-is-undefined
+function copyToClipboard(textToCopy) {
+    // navigator clipboard api needs a secure context (https)
+    if (navigator.clipboard && window.isSecureContext) {
+        // navigator clipboard api method'
+        return navigator.clipboard.writeText(textToCopy);
+    } else {
+        // text area method
+        let textArea = document.createElement("textarea");
+        textArea.value = textToCopy;
+        // make the textarea out of viewport
+        textArea.style.position = "fixed";
+        textArea.style.left = "-999999px";
+        textArea.style.top = "-999999px";
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        return new Promise((res, rej) => {
+            // here the magic happens
+            document.execCommand('copy') ? res() : rej();
+            textArea.remove();
+        });
+    }
 }
