@@ -407,7 +407,10 @@ function stopIndiSelectChanged() {
 }
 
 function loadXrefList(url, xrefListId, indiListId) {
-    let xref_list = document.getElementById(xrefListId).value.trim();
+    let xrefListEl = document.getElementById(xrefListId);
+    let xref_list = xrefListEl.value.trim().toUpperCase();
+    xrefListEl.value = xref_list;
+
     let xrefs = xref_list.split(",");
     for (let i=0; i<xrefs.length; i++) {
         if (xrefs[i].trim() !== "") {
@@ -422,7 +425,11 @@ function loadIndividualDetails(url, xref, list) {
             const data = await response.json();
             let contents;
             if (data["data"].length !== 0) {
-                contents = data["data"][0]["text"];
+                for (i=0; i< data['data'].length; i++) {
+                    if (xref === data['data'][i].value) {
+                        contents = data["data"][i]["text"];
+                    }
+                }
             } else {
                 contents = xref;
             }
