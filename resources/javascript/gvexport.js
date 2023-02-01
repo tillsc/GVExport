@@ -806,8 +806,9 @@ function pageLoaded() {
 function showModal(content) {
     const modal = document.createElement("div");
     modal.className = "modal";
+    modal.id = "modal";
     modal.innerHTML = "<div class=\"modal-content\">\n" +
-        "<span class='close' onclick='this.parentElement.parentElement.remove()'>&times;</span>\n" +
+        '<span class="close" onclick="document.getElementById(' + "'modal'" + ').remove()">&times;</span>\n' +
         content + "\n" +
         "</div>"
     document.body.appendChild(modal);
@@ -1144,7 +1145,7 @@ function showSavedSettingsItemMenu(event) {
     });
 }
 
-function saveSettingsAdvanced() {
+function saveSettingsAdvanced(userPrompted = false) {
     let settingsList = document.getElementsByClassName('settings_list_item');
     let settingsName = document.getElementById('save_settings_name').value;
     let id = null;
@@ -1153,6 +1154,17 @@ function saveSettingsAdvanced() {
             id = settingsList[i].getAttribute('data-id');
         }
     }
+    if (id !== null) {
+        if (userPrompted) {
+            document.getElementById('modal').remove();
+        } else {
+            let message = TRANSLATE["Overwrite settings '%s'?"].replace('%s', settingsName);
+            let buttons = '<div class="modal-button-container"><button class="btn btn-secondary modal-button" onclick="document.getElementById(' + "'modal'" + ').remove()">Cancel</button><button class="btn btn-primary modal-button" onclick="saveSettingsAdvanced(true)">Overwrite</button></div>';
+            showModal('<div class="modal-container">' + message + '<br>' + buttons + '</div>');
+            return false;
+        }
+    }
+
     isUserLoggedIn().then((loggedIn) => {
         if (loggedIn) {
             return saveSettingsServer(false, id).then((response)=>{
