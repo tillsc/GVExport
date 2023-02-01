@@ -118,7 +118,7 @@ class ApiHandler
                 $this->response_data['success'] = true;
             } catch (\Exception $e) {
                 $this->response_data['success'] = false;
-                $this->response_data['errorMessage'] = json_encode($e);
+                $this->response_data['errorMessage'] = "E7: " . I18N::translate('Invalid settings ID');
             }
         } else {
             $this->response_data['success'] = false;
