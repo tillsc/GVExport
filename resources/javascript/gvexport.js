@@ -372,15 +372,17 @@ function getURLParameter(parameter) {
 
 function loadURLXref() {
     const xref = getURLParameter("xref");
-    const el = document.getElementById('xref_list');
-    if (el.value.replace(",","").trim() === "") {
-        el.value = xref;
-    } else {
-        const xrefs = el.value.split(",");
-        if (xrefs.length === 1) {
-            el.value = "";
+    if (xref !== null) {
+        const el = document.getElementById('xref_list');
+        if (el.value.replace(",", "").trim() === "") {
+            el.value = xref;
+        } else {
+            const xrefs = el.value.split(",");
+            if (xrefs.length === 1) {
+                el.value = "";
+            }
+            addIndiToList(xref);
         }
-        addIndiToList(xref);
     }
 }
 
