@@ -393,15 +393,22 @@ class Settings
         return self::shouldSaveSetting($setting, $admin);
     }
 
+    /**
+     * @throws \Exception
+     */
     public function getSettingsJson($module, $tree, $id)
     {
-        $userSettings = $this->loadUserSettings($module, $tree, $id);
-        $settings = [];
+        try {
+            $userSettings = $this->loadUserSettings($module, $tree, $id);
+            $settings = [];
 
-        foreach ($this->defaultSettings as $preference => $value) {
-            if (self::shouldLoadSetting($preference)) {
-                $settings[$preference] = $userSettings[$preference];
+            foreach ($this->defaultSettings as $preference => $value) {
+                if (self::shouldLoadSetting($preference)) {
+                    $settings[$preference] = $userSettings[$preference];
+                }
             }
+        } catch (\Exception $e) {
+            throw new \Exception($e);
         }
         return json_encode($settings);
     }

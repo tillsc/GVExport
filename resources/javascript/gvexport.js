@@ -806,8 +806,9 @@ function pageLoaded() {
 function showModal(content) {
     const modal = document.createElement("div");
     modal.className = "modal";
+    modal.id = "modal";
     modal.innerHTML = "<div class=\"modal-content\">\n" +
-        "<span class='close' onclick='this.parentElement.parentElement.remove()'>&times;</span>\n" +
+        '<span class="close" onclick="document.getElementById(' + "'modal'" + ').remove()">&times;</span>\n' +
         content + "\n" +
         "</div>"
     document.body.appendChild(modal);
@@ -928,8 +929,7 @@ function loadSettings(data) {
     setSavedDiagramsPanel();
     showHide(document.getElementById('arrow_group'),document.getElementById('colour_arrow_related').checked)
     showHide(document.getElementById('startcol_option'),document.getElementById('highlight_start_indis').checked)
-    // Don't load name from settings into text field - it's already shown on settings element
-    document.getElementById('save_settings_name').value = "";
+
     if (autoUpdate) {
         updateRender();
     } else {
@@ -949,10 +949,11 @@ function setGraphvizAvailable(available) {
     graphvizAvailable = available;
 }
 
-function saveSettingsServer(main = true) {
+function saveSettingsServer(main = true, id = null) {
     let request = {
         "type": REQUEST_TYPE_SAVE_SETTINGS,
-        "main": main
+        "main": main,
+        "settings_id": id
     };
     let json = JSON.stringify(request);
     return sendRequest(json);
@@ -1088,6 +1089,7 @@ function loadSettingsDetails() {
             newListItem.setAttribute("data-settings", settingsList[key]['settings']);
             newListItem.setAttribute("data-id", settingsList[key]['id']);
             newListItem.setAttribute("data-token", settingsList[key]['token']);
+            newListItem.setAttribute("data-name", settingsList[key]['name']);
             newListItem.setAttribute("onclick", "loadSettings(this.getAttribute('data-settings'))");
             newListItem.innerHTML = "<a href=\"#\">" + settingsList[key]['name'] + "<div class=\"saved-settings-ellipsis\" onclick='showSavedSettingsItemMenu(event)'><a href='#'>…</a></div></a>";
             newLinkWrapper.appendChild(newListItem);
@@ -1143,10 +1145,29 @@ function showSavedSettingsItemMenu(event) {
     });
 }
 
-function saveSettingsAdvanced() {
+function saveSettingsAdvanced(userPrompted = false) {
+    let settingsList = document.getElementsByClassName('settings_list_item');
+    let settingsName = document.getElementById('save_settings_name').value;
+    let id = null;
+    for (let i=0; i<settingsList.length; i++) {
+        if (settingsList[i].getAttribute('data-name') === settingsName) {
+            id = settingsList[i].getAttribute('data-id');
+        }
+    }
+    if (id !== null) {
+        if (userPrompted) {
+            document.getElementById('modal').remove();
+        } else {
+            let message = TRANSLATE["Overwrite settings '%s'?"].replace('%s', settingsName);
+            let buttons = '<div class="modal-button-container"><button class="btn btn-secondary modal-button" onclick="document.getElementById(' + "'modal'" + ').remove()">Cancel</button><button class="btn btn-primary modal-button" onclick="saveSettingsAdvanced(true)">Overwrite</button></div>';
+            showModal('<div class="modal-container">' + message + '<br>' + buttons + '</div>');
+            return false;
+        }
+    }
+
     isUserLoggedIn().then((loggedIn) => {
         if (loggedIn) {
-            return saveSettingsServer(false).then((response)=>{
+            return saveSettingsServer(false, id).then((response)=>{
                 try {
                     let json = JSON.parse(response);
                     if (json.success) {
@@ -1159,9 +1180,13 @@ function saveSettingsAdvanced() {
                 }
             });
         } else {
-            return getIdLocal().then((id) => {
+            if (id === null) {
+                return getIdLocal().then((newId) => {
+                    return saveSettingsClient(newId);
+                });
+            } else {
                 return saveSettingsClient(id);
-            });
+            }
         }
     }).then(() => {
         loadSettingsDetails();

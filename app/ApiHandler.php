@@ -64,11 +64,16 @@ class ApiHandler
         $vars = Validator::parsedBody($request)->array('vars');
         $formSubmission = new FormSubmission();
         $vars = $formSubmission->load($vars);
+        if (isset($json['settings_id']) && ctype_alnum($json['settings_id']) && !in_array($json['settings_id'], [Settings::ID_ALL_SETTINGS, Settings::ID_MAIN_SETTINGS])) {
+            if ($this->checkIdBelongsToUser($module, $tree, $json['settings_id'])) {
+                $id = $json['settings_id'];
+            }
+        }
         $settings = new Settings();
-        if (isset($json['main']) && !$json['main']) {
-            $id = $settings->newSettingsId($module, $tree);
-        } else {
+        if (!isset($json['main']) || $json['main']) {
             $id = Settings::ID_MAIN_SETTINGS;
+        } else if (empty($id)) {
+            $id = $settings->newSettingsId($module, $tree);
         }
 
         if ($id != "") {
@@ -177,6 +182,17 @@ class ApiHandler
     {
         $this->response_data['treeName'] = e($tree->name());
         $this->response_data['success'] = true;
+    }
+
+    private function checkIdBelongsToUser($module, $tree, $settings_id): bool
+    {
+        $settings = new Settings();
+        try {
+            $settings->getSettingsJson($module, $tree, $settings_id);
+        } catch (\Exception $e) {
+            return false;
+        }
+        return true;
     }
 
 }
