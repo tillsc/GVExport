@@ -9,12 +9,12 @@ use Fisharebest\Webtrees\Services\TreeService;
 
 class settingsLink
 {
-    const TOKEN_PREFIX = "?t=";
+    const TOKEN_PREFIX = "&t=";
     const TOKEN_LENGTH = 10;
     private string $base_url;
     private $module;
     private $tree;
-    private $userId;
+    private int $userId;
     private string $id;
     private Settings $settings_obj;
 
@@ -59,7 +59,7 @@ class settingsLink
             $this->updateSettingsWithToken($token);
         }
 
-        return $this->base_url . self::TOKEN_PREFIX . $token;
+        return str_replace("?&", '?', $this->base_url . self::TOKEN_PREFIX . $token);
     }
 
     /**
