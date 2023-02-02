@@ -230,7 +230,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
         $tree = $request->getAttribute('tree');
         if (isset($_POST['json_data'])) {
             $individual = $this->getIndividual($tree, $tree->significantIndividual(Auth::user(), '')->xref());
-            $this->base_url = explode("?", $this->chartUrl($individual))[0];
+            $this->base_url = $this->strip_param_from_url($this->chartUrl($individual), 'xref');
             $api = new ApiHandler();
             $api->handle($request, $this, $tree);
             return $api->getResponse();
@@ -379,6 +379,27 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
             }
         }
         return $otypes;
+    }
+
+    /**
+     *  From https://stackoverflow.com/questions/4937478/strip-off-specific-parameter-from-urls-querystring
+     *
+     * @param $url
+     * @param $param
+     * @return string
+     */
+    private function strip_param_from_url($url, $param): string
+    {
+        $base_url = strtok($url, '?');                   // Get the base URL
+        $parsed_url = parse_url($url);                   // Parse it
+        if(array_key_exists('query',$parsed_url)) {      // Only execute if there are parameters
+            $query = $parsed_url['query'];               // Get the query string
+            parse_str($query, $parameters);              // Convert Parameters into array
+            unset($parameters[$param]);                  // Delete the one you want
+            $new_query = http_build_query($parameters);  // Rebuilt query string
+            $url =$base_url.'?'.$new_query;              // Finally URL is ready
+        }
+        return $url;
     }
 }
 
