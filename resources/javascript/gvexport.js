@@ -408,7 +408,7 @@ function stopIndiSelectChanged() {
 
 function loadXrefList(url, xrefListId, indiListId) {
     let xrefListEl = document.getElementById(xrefListId);
-    let xref_list = xrefListEl.value.trim().toUpperCase();
+    let xref_list = xrefListEl.value.trim();
     xrefListEl.value = xref_list;
 
     let xrefs = xref_list.split(",");
@@ -424,10 +424,29 @@ function loadIndividualDetails(url, xref, list) {
     fetch(url + xref.trim()).then(async (response) => {
             const data = await response.json();
             let contents;
+            let otherXrefId;
+            if (list === "indi_list") {
+                otherXrefId = "xref_list";
+            } else {
+                otherXrefId = "stop_xref_list";
+            }
             if (data["data"].length !== 0) {
-                for (i=0; i< data['data'].length; i++) {
-                    if (xref === data['data'][i].value) {
+                for (let i=0; i< data['data'].length; i++) {
+                    if (xref.toUpperCase() === data['data'][i].value.toUpperCase()) {
                         contents = data["data"][i]["text"];
+                        // Fix case if mismatched
+                        if (xref !== data['data'][i].value) {
+                            let listEl = document.getElementById(otherXrefId);
+                            let indiList = listEl.value.split(",");
+                            for (let j = indiList.length-1; j>=0; j--) {
+                                if (indiList[j].trim() === xref.trim()) {
+                                    indiList[j] = data["data"][i].value;
+                                    break;
+                                }
+                            }
+                            listEl.value = indiList.join(',');
+                            setTimeout(()=>{refreshIndisFromXREFS(false)}, 100);
+                        }
                     }
                 }
             } else {
@@ -438,12 +457,6 @@ function loadIndividualDetails(url, xref, list) {
             newListItem.className = "indi_list_item";
             newListItem.setAttribute("data-xref", xref);
             newListItem.setAttribute("onclick", "scrollToRecord('"+xref+"')");
-            let otherXrefId;
-            if (list === "indi_list") {
-                otherXrefId = "xref_list";
-            } else {
-                otherXrefId = "stop_xref_list";
-            }
             newListItem.innerHTML = contents + "<div class=\"saved-settings-ellipsis\" onclick=\"removeItem(event, this.parentElement, '" + otherXrefId + "')\"><a href='#'>×</a></div>";
             // Multiple promises can be for the same xref - don't add if a duplicate
             let item = listElement.querySelector(`[data-xref="${xref}"]`);
