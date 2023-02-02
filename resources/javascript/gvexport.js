@@ -446,6 +446,7 @@ function loadIndividualDetails(url, xref, list) {
                             }
                             listEl.value = indiList.join(',');
                             setTimeout(()=>{refreshIndisFromXREFS(false)}, 100);
+                            handleFormChange();
                         }
                     }
                 }
