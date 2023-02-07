@@ -782,17 +782,17 @@ msgstr "Speichergrenze wurde erreicht. Bitte reduzieren Sie die Anzahl der Daten
 #. If browser-renderer can't generate a diagram this large, show an error message. This message is shown when Graphviz is NOT installed on server.   https://s3.eu-west-1.amazonaws.com/po-pub/i/1cmo1QxxPNuy3bjgntERYAOC.png
 #: 
 msgid "Memory limit reached. Please reduce number of records or install Graphviz on server and use download option."
-msgstr "Speichergrenze wurde erreicht. Memory limit reached. Bitte reduzieren Sie die Anzahl der Datensätze oder installieren Sie Graphviz auf dem Server und verwenden Sie die Download-Option."
+msgstr "Speichergrenze wurde erreicht. Bitte reduzieren Sie die Anzahl der Datensätze oder installieren Sie Graphviz auf dem Server und verwenden Sie die Download-Option."
 
 #. This message is shown when loading a settings file and a setting in the file doesn't match up to what we are looking for. The name of the setting is appended on the end:  https://s3.eu-west-1.amazonaws.com/po-pub/i/Mrqls4UxxHPlbZzEE4gz2qgj.png
 #: 
 msgid "Unable to load setting"
-msgstr "Nicht im Stand Einstellungen zu laden"
+msgstr "Das Laden von Einstellungen ist nicht möglich"
 
 #. Heading for section in Control Panel for settings that are only available to the administrator: https://s3.eu-west-1.amazonaws.com/po-pub/i/6ZCINR8ZbXR3Wpis2IuYp20i.png
 #: 
 msgid "Settings for GVExport"
-msgstr "Einstellungen GVExport"
+msgstr "Einstellungen für GVExport"
 
 #. Group heading for settings only available in control panel: https://s3.eu-west-1.amazonaws.com/po-pub/i/4xkAK3jvXYzWAsk3q7faIpbK.png
 #: 
@@ -802,23 +802,23 @@ msgstr "Administratoreneinstellungen"
 #. Setting that sets the name of the downloaded file. E.g. when downloading JPG format, if you set the file name to "gvexport" then the file will be called "gvexport.jpg":   https://s3.eu-west-1.amazonaws.com/po-pub/i/jg1noFw1w55jgfEMyLD5oc8f.png
 #: 
 msgid "Download file name"
-msgstr "Heruntergeladener Dateiname"
+msgstr "Dateiname für den Download"
 
 #. The MCLIMIT setting that is directly sent to Graphviz. Higher numbers result in fewer arrows crossing on the diagram but take longer to process.  https://s3.eu-west-1.amazonaws.com/po-pub/i/ayvZCoGAoyQIbE8v60cIVcIz.png
 #: 
 msgid "Graphviz MCLIMIT setting"
-msgstr "Einstellungen Graphviz MCLIMIT"
+msgstr "Einstellung MCLIMIT für Graphviz"
 
 #. Birth date setting in Control Panel. By default, birth dates on the diagram start with a * prefix. This setting can change this:  https://s3.eu-west-1.amazonaws.com/po-pub/i/uF5UdfYXLFGLQ4TLZysMUpNd.png
 #: 
 msgid "Birth date prefix"
-msgstr "Geburtsdatumvorwahl"
+msgstr "Kennzeichen für Geburtsdatum"
 
 #. Death date setting in Control Panel. By default, death dates on the diagram start with a + prefix. This setting can change this:  
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/uF5UdfYXLFGLQ4TLZysMUpNd.png
 #: 
 msgid "Death date prefix"
-msgstr "Sterbedatumvorwahl"
+msgstr "Kennzeichen für Todesdatum"
 
 #. Area name for option to save a version of the settings for future use:  https://s3.eu-west-1.amazonaws.com/po-pub/i/n1salnZcGP6xC187FO1dAjpE.png
 #: 
@@ -835,13 +835,13 @@ msgstr "Speichern"
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/n1salnZcGP6xC187FO1dAjpE.png
 #: 
 msgid "Settings name"
-msgstr "Einstellungen Name"
+msgstr "Bezeichnung für die Einstellungen"
 
 #. Help text for option to save a version of the settings for future use:  
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/n1salnZcGP6xC187FO1dAjpE.png https://s3.eu-west-1.amazonaws.com/po-pub/i/fBbMFauzn9yAXWlI3do9cwmD.png
 #: 
-msgid "Here you are able to save the chosen settings within GVExport. The settings are only accessible within the same user and tree. Click a settings record to load it.</p><p>For example, you may have many diagrams you create from your tree. You may want to save the settings used for each diagram so that in future you can regenerate the diagram to include any new information.</p><p>Also see the option to save settings to a file."
-msgstr "Hier können Sie die gewählten Einstellungen innerhalb von GVExport speichern. Die Einstellungen sind nur für den selben Benutzer und Baum zugänglich. Klicken Sie auf einen Einstellungsdatensatz, um ihn zu laden.</p><p>Zum Beispiel haben Sie möglicherweise viele Diagramme, die Sie aus Ihrem Baum erstellen. Möglicherweise möchten Sie die für jedes Diagramm verwendeten Einstellungen speichern, damit Sie das Diagramm in Zukunft neu generieren können, um überarbeitete Informationen aufzunehmen.</p><p>Siehe auch die Option zum Speichern von Einstellungen in einer Datei."
+msgid "Here you are able to save the chosen settings within GVExport. The settings are only accessible within the same user and tree. Click a settings record to load it.</p><p>For example, you may have many diagrams you create from your tree. You may want to save the settings used for each diagram so that in future you can regenerate the diagram to include any new information.</p><p>By clicking the ellipsis on a record, you can choose to delete the record, or to copy a link to these settings. When the link is accessed, these settings will be automatically loaded.</p><p>The \"Show saved diagrams panel\" option adds a new section to the settings that makes the saved settings available as a dropdown list. You may with to use webtree's ability to \"Masquerade as user\" to set up some settings for another user, then enable this option, so they can easily choose different prepared diagrams without needed to delve into the advanced settings.</p><p>Also see the option to save settings to a file."
+msgstr "Hier können Sie die gewählten Einstellungen für GVExport speichern. Die Einstellungen sind nur für den selben Benutzer und Stammbaum zugänglich. Klicken Sie auf einen Einstellungsdatensatz, um ihn zu laden.</p><p>Möglicherweise haben Sie viele Diagramme, die Sie für Ihren Stammbaum erstellen. Eventuell möchten Sie die für jedes Diagramm verwendeten Einstellungen speichern, damit Sie das Diagramm in Zukunft neu generieren können, um überarbeitete Informationen aufzunehmen.</p><p>Wenn sie auf die Ellipse eines Datensatzes klicken, können sie auswählen, ob Sie diesen Datensatz löschen wollen oder ob Sie einen Verweis auf diesen Datensatz kopieren wollen. Wenn auf den Verweis zugegriffen wird, werden die Einstellungen aus dem Datensatz geladen.</p><p>Die Option \"Menü gespeicherter Diagramme anzeigen\" fügt im Menü einen neuen Abschnitt hinzu, der die gespeicherten Einstellungsdatensätze als Auswahlliste  präsentiert. Sie können die webtrees-Funktion nutzen, die es Ihnen erlaubt sich als anderen Nutzer auszugeben, um für einen anderen Nutzer einen Einstellungsdatensatz zu erzeugen. Danach können Sie diese Option aktivieren, so dass dieser Nutzer dann die vorbereiteten Diagramme sehr leicht aktivieren kann, ohne tiefer in die erweiterten Optionen eintauchen zu müssen.</p><p>Siehe auch die Option zum Speichern von Einstellungen in einer Datei."
 
 #. Error message shown when API was not able to assign an ID when saving a version of settings.  https://s3.eu-west-1.amazonaws.com/po-pub/i/SF4w8yDqZ9D7PGWdqvq2cOzq.png 
 #. User may see this when clicking Save button: https://s3.eu-west-1.amazonaws.com/po-pub/i/n1salnZcGP6xC187FO1dAjpE.png
@@ -868,4 +868,58 @@ msgstr "Ungültige Anforderung"
 #: 
 msgid "Invalid JSON"
 msgstr "Ungültiges JSON"
+
+#. If you click to save a version of settings, but haven't entered a name, then the default name is "Settings":  https://s3.eu-west-1.amazonaws.com/po-pub/i/1RrJep5HGIKYDumc26xR9kCo.png
+#: 
+msgid "Settings"
+msgstr "Einstellungsdatensätze"
+
+#. This message is shown when clicking the help button in the "Saved diagrams" section (this section is hidden by default): https://s3.eu-west-1.amazonaws.com/po-pub/i/CViHSJI40OkSwCEyVHs79jOh.png  https://s3.eu-west-1.amazonaws.com/po-pub/i/PuoBsz04pts2DU9CAWou7nyc.png
+#: 
+msgid "You can select from the list to load some saved settings. Settings can be added or changed using the options in the advanced section of the \"File settings\" section."
+msgstr "Sie können aus der Liste auswählen, um einen der gespeicherten Einstellungsdatensätze zu laden. Einstellungen können mit den Optionen im Abschnitt „Erweitert“ des Abschnitts „Dateieinstellungen“ hinzugefügt oder geändert werden."
+
+#. When you have saved a named version of settings using the advanced save settings functionality, this is the option to delete the settings:  https://s3.eu-west-1.amazonaws.com/po-pub/i/QHkbIB7B8ZRpp5IVdKiVu1F6.png
+#: 
+msgid "Delete"
+msgstr "Löschen"
+
+#. When you have saved a named version of settings using the advanced save settings functionality, this is the option to copy a link to the settings, where if the user visits this link the settings will be automatically loaded:  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/QHkbIB7B8ZRpp5IVdKiVu1F6.png
+#: 
+msgid "Copy link"
+msgstr "Verweis kopieren"
+
+#. After clicking option to copy link to clipboard for sharing saved settings, this message shows on a toast popup:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/QHkbIB7B8ZRpp5IVdKiVu1F6.png
+#: 
+msgid "Copied link to clipboard"
+msgstr "Verweis  wurde in die Zwischenablage kopiert"
+
+#. If copying shared settings link to clipboard fails (e.g. browser blocks this or not supported), then this message is shown. https://s3.eu-west-1.amazonaws.com/po-pub/i/QHkbIB7B8ZRpp5IVdKiVu1F6.png
+#: 
+msgid "Failed to copy link to clipboard"
+msgstr "Der  Verweis konnte nicht in die Zwischenablage kopiert werden,"
+
+#. As well as toast message, if copying shared settings link to clipboard fails (e.g. browser blocks this or not supported), then a popup will allow copying URL. 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/lhdGkODdwA7aL5isgWiqR726.png
+#: 
+msgid "Copy manually below"
+msgstr "Kopieren Sie ihn unten von Hand"
+
+#. If you save a version of the settings using the advanced settings saving option, if you select the same name as existing settings you will be prompted to overwrite the settings with this message:  https://s3.eu-west-1.amazonaws.com/po-pub/i/DTqDJMZW4xZejUnrsbe5H5fE.png
+#: 
+msgid "Overwrite settings '%s'?"
+msgstr "Soll der Einstellungsdatensatz '%s' überschrieben werden?"
+
+#. Cancel button for modal prompt, for example:  https://s3.eu-west-1.amazonaws.com/po-pub/i/ftZQPpCgap1VOJEArq1KsL66.png
+#: 
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#. If you save a version of the settings using the advanced settings saving option, if you select the same name as existing settings you will be prompted to overwrite the settings, and this is one of the buttons (confirming you wish to overwrite the settings):  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/DTqDJMZW4x
+#: 
+msgid "Overwrite"
+msgstr "Überschreiben"
 
