@@ -42,7 +42,7 @@ class settingsLink
         }
 
         foreach ($record as $key => $value) {
-            if ($value['settings_id'] == $this->id) {
+            if ($value['user'] == $this->userId && $value['tree'] == $this->tree->id() && $value['settings_id'] == $this->id) {
                 $token = $key;
             }
         }
