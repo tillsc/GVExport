@@ -72,7 +72,7 @@ class ApiHandler
         $settings = new Settings();
         if (!isset($json['main']) || $json['main']) {
             $id = Settings::ID_MAIN_SETTINGS;
-        } else if (empty($id)) {
+        } else if (!isset($id) || $id == '') {
             $id = $settings->newSettingsId($module, $tree);
         }
 
