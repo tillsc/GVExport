@@ -897,16 +897,16 @@ function loadSettings(data) {
                     setCheckStatus(document.getElementById('diagtype_combined'), settings[key] === 'combined');
                     break;
                 case 'birthdate_year_only':
-                    setCheckStatus(document.getElementById('bd_type_y'), settings[key]);
-                    setCheckStatus(document.getElementById('bd_type_gedcom'), !settings[key]);
+                    setCheckStatus(document.getElementById('bd_type_y'), toBool(settings[key]));
+                    setCheckStatus(document.getElementById('bd_type_gedcom'), !toBool(settings[key]));
                     break;
                 case 'death_date_year_only':
-                    setCheckStatus(document.getElementById('dd_type_y'), settings[key]);
-                    setCheckStatus(document.getElementById('dd_type_gedcom'), !settings[key]);
+                    setCheckStatus(document.getElementById('dd_type_y'), toBool(settings[key]));
+                    setCheckStatus(document.getElementById('dd_type_gedcom'), !toBool(settings[key]));
                     break;
                 case 'marr_date_year_only':
-                    setCheckStatus(document.getElementById('md_type_y'), settings[key]);
-                    setCheckStatus(document.getElementById('md_type_gedcom'), !settings[key]);
+                    setCheckStatus(document.getElementById('md_type_y'), toBool(settings[key]));
+                    setCheckStatus(document.getElementById('md_type_gedcom'), !toBool(settings[key]));
                     break;
                 case 'show_adv_people':
                     toggleAdvanced(document.getElementById('people-advanced-button'), 'people-advanced', toBool(settings[key]));
@@ -930,10 +930,7 @@ function loadSettings(data) {
             }
         } else {
             if (el.type === 'checkbox' || el.type === 'radio') {
-                if (typeof settings[key] == "string") {
-                    settings[key] = (settings[key] === 'true');
-                }
-                setCheckStatus(el, settings[key]);
+                setCheckStatus(el, toBool(settings[key]));
             } else {
                 el.value = settings[key];
             }
@@ -952,11 +949,7 @@ function loadSettings(data) {
 }
 
 function setCheckStatus(el, checked) {
-    if (checked) {
-        el.setAttribute('checked', 'true');
-    } else {
-        el.removeAttribute('checked');
-    }
+        el.checked = checked;
 }
 
 function setGraphvizAvailable(available) {
@@ -1102,7 +1095,7 @@ function loadSettingsDetails() {
             newListItem.className = "settings_list_item";
             newListItem.setAttribute("data-settings", settingsList[key]['settings']);
             newListItem.setAttribute("data-id", settingsList[key]['id']);
-            newListItem.setAttribute("data-token", settingsList[key]['token']);
+            newListItem.setAttribute("data-token", settingsList[key]['token'] || "");
             newListItem.setAttribute("data-name", settingsList[key]['name']);
             newListItem.setAttribute("onclick", "loadSettings(this.getAttribute('data-settings'))");
             newListItem.innerHTML = "<a href=\"#\">" + settingsList[key]['name'] + "<div class=\"saved-settings-ellipsis\" onclick='showSavedSettingsItemMenu(event)'><a href='#'>…</a></div></a>";
