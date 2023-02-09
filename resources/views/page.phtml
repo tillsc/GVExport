@@ -4,6 +4,8 @@ namespace vendor\WebtreesModules\gvexport;
 
 use Fisharebest\Webtrees\I18N;
 use Fisharebest\Webtrees\Individual;
+use Fisharebest\Webtrees\Module\FamilyTreeFavoritesModule;
+use Fisharebest\Webtrees\Module\UserFavoritesModule;
 use Fisharebest\Webtrees\Tree;
 
 
@@ -75,7 +77,11 @@ $xref = $individual->xref();
         "Copied link to clipboard":"<?= I18N::translate('Copied link to clipboard'); ?>",
         "Failed to copy link to clipboard":"<?= I18N::translate('Failed to copy link to clipboard'); ?>",
         "Copy manually below":"<?= I18N::translate('Copy manually below'); ?>",
-        "Overwrite settings '%s'?":"<?= I18N::translate("Overwrite settings '%s'?", '%s'); ?>"
+        "Overwrite settings '%s'?":"<?= I18N::translate("Overwrite settings '%s'?", '%s'); ?>",
+        "Add to My favorites":"<?= I18N::translate("Add to My favorites"); ?>",
+        "Add to Tree favorites":"<?= I18N::translate("Add to Tree favorites"); ?>",
+        "Added to My favourites":"<?= I18N::translate("Added to My favourites"); ?>",
+        "Added to Tree favourites":"<?= I18N::translate("Added to Tree favourites"); ?>"
     }
     let autoUpdate = <?= $vars["auto_update"] ? 'true' : 'false' ?>;
     let debug_string = "";
@@ -83,8 +89,9 @@ $xref = $individual->xref();
     let settings_json = "";
     let download_file_name = "<?= e($settings['filename']); ?>";
     const TREE_NAME = "<?= e($tree->name()); ?>";
+    const TREE_FAVORITES_MODULE_ACTIVE = <?= $module->module_service->findByInterface(FamilyTreeFavoritesModule::class)->first() === null ? "false" : "true" ?>;
+    const MY_FAVORITES_MODULE_ACTIVE = <?= $module->module_service->findByInterface(UserFavoritesModule::class)->first() === null ? "false" : "true" ?>;
 </script>
-
 <h2 class="wt-page-title">
     <?= $title ?>
 </h2>
