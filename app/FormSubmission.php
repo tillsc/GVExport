@@ -190,6 +190,9 @@ class FormSubmission
         if (isset($vars["highlight_col"]) && $this->isValidColourHex($vars["highlight_col"])) {
             $settings['highlight_col'] = $vars["highlight_col"];
         }
+        if (isset($vars["no_highlight_xref_list"]) && $this->xrefListValid($vars["no_highlight_xref_list"])) {
+            $settings['no_highlight_xref_list'] = $vars["no_highlight_xref_list"];
+        }
         if (isset($vars["border_col"]) && $this->isValidColourHex($vars["border_col"])) {
             $settings['border_col'] = $vars["border_col"];
         }
