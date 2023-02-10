@@ -55,9 +55,11 @@ use Fisharebest\Webtrees\Module\ModuleConfigInterface;
 use Fisharebest\Webtrees\Module\ModuleConfigTrait;
 use Fisharebest\Webtrees\FlashMessages;
 use Fisharebest\Webtrees\Menu;
+use Fisharebest\Webtrees\Services\ModuleService;
 use Fisharebest\Webtrees\Validator;
 use Fisharebest\Webtrees\View;
 use Fisharebest\Webtrees\Tree;
+use Fisharebest\Webtrees\Webtrees;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
@@ -78,6 +80,16 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
     public const CUSTOM_LATEST      = 'https://raw.githubusercontent.com/Neriderc/' . self::CUSTOM_MODULE. '/main/latest-version.txt';
     public const SUPPORT_URL        = 'https://github.com/Neriderc/GVExport';
     public string $base_url;
+    public ModuleService $module_service;
+
+    /**
+     *
+     * @param ModuleService $module_service
+     */
+    public function __construct(ModuleService $module_service)
+    {
+        $this->module_service = $module_service;
+    }
 
     public function boot(): void
     {
@@ -403,4 +415,4 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
     }
 }
 
-return new GVExport();
+return Webtrees::make(GVExport::class);

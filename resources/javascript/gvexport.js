@@ -10,6 +10,8 @@ const REQUEST_TYPE_IS_LOGGED_IN = "is_logged_in";
 const REQUEST_TYPE_GET_SAVED_SETTINGS_LINK = "get_saved_settings_link";
 const REQUEST_TYPE_REVOKE_SAVED_SETTINGS_LINK = "revoke_saved_settings_link";
 const REQUEST_TYPE_LOAD_SETTINGS_TOKEN = "load_settings_token";
+const REQUEST_TYPE_ADD_MY_FAVORITE = "add_my_favorite";
+const REQUEST_TYPE_ADD_TREE_FAVORITE = "add_tree_favorite";
 let treeName = null;
 let loggedIn = null;
 
@@ -1135,7 +1137,7 @@ function showSavedSettingsItemMenu(event) {
                 let copyLinkEl = document.createElement('a');
                 copyLinkEl.setAttribute('class', 'settings_ellipsis_menu_item');
                 copyLinkEl.setAttribute('href', '#');
-                copyLinkEl.setAttribute('onClick', 'getSavedSettingsLink(event, "' + id + '")');
+                copyLinkEl.setAttribute('onClick', 'copySavedSettingsLink(event, "' + id + '")');
                 copyLinkEl.innerHTML = '<span class="settings_ellipsis_menu_icon">🔗</span><span>' + TRANSLATE['Copy link'] + '</span>';
                 div.appendChild(copyLinkEl);
                 if (token !== '') {
@@ -1145,6 +1147,22 @@ function showSavedSettingsItemMenu(event) {
                     unshareLinkEl.setAttribute('onClick', 'revokeSavedSettingsLink(event, "' + token + '")');
                     unshareLinkEl.innerHTML = '<span class="settings_ellipsis_menu_icon">🚫</span><span>' + TRANSLATE['Revoke link'] + '</span>';
                     div.appendChild(unshareLinkEl);
+                }
+                if (MY_FAVORITES_MODULE_ACTIVE) {
+                    let addFavoritesEl = document.createElement('a');
+                    addFavoritesEl.setAttribute('class', 'settings_ellipsis_menu_item');
+                    addFavoritesEl.setAttribute('href', '#');
+                    addFavoritesEl.setAttribute('onClick', 'addUrlToMyFavourites(event, "' + id + '")');
+                    addFavoritesEl.innerHTML = '<span class="settings_ellipsis_menu_icon">🌟</span><span>' + TRANSLATE['Add to My favorites'] + '</span>';
+                    div.appendChild(addFavoritesEl);
+                }
+                if (TREE_FAVORITES_MODULE_ACTIVE) {
+                    let addFavoritesEl = document.createElement('a');
+                    addFavoritesEl.setAttribute('class', 'settings_ellipsis_menu_item');
+                    addFavoritesEl.setAttribute('href', '#');
+                    addFavoritesEl.setAttribute('onClick', 'addUrlToTreeFavourites(event, "' + id + '")');
+                    addFavoritesEl.innerHTML = '<span class="settings_ellipsis_menu_icon">🌲</span><span>' + TRANSLATE['Add to Tree favorites'] + '</span>';
+                    div.appendChild(addFavoritesEl);
                 }
             }
             event.target.appendChild(div);
@@ -1244,28 +1262,33 @@ function deleteSettingsAdvanced(e, id) {
     });
 }
 
-function getSavedSettingsLink(e, id) {
+function copySavedSettingsLink(e, id) {
     e.stopPropagation();
-    isUserLoggedIn().then((loggedIn) => {
+    getSavedSettingsLink(id).then((url)=>{
+        copyToClipboard(url)
+            .then(() => {
+                showToast(TRANSLATE['Copied link to clipboard']);
+            })
+            .catch(() => {
+                showToast(TRANSLATE['Failed to copy link to clipboard']);
+                showModal('<p>' + TRANSLATE['Failed to copy link to clipboard'] + '. ' + TRANSLATE['Copy manually below'] + ':</p><textarea style="width: 100%">' + json.url + "</textarea>")
+            });
+    })
+}
+function getSavedSettingsLink(id) {
+    return isUserLoggedIn().then((loggedIn) => {
         if (loggedIn) {
             let request = {
                 "type": REQUEST_TYPE_GET_SAVED_SETTINGS_LINK,
                 "settings_id": id
             };
             let json = JSON.stringify(request);
-            sendRequest(json).then((response) => {
+            return sendRequest(json).then((response) => {
                 loadSettingsDetails();
                 try {
                     let json = JSON.parse(response);
                     if (json.success) {
-                        copyToClipboard(json.url)
-                            .then(() => {
-                                showToast(TRANSLATE['Copied link to clipboard']);
-                            })
-                            .catch(() => {
-                                showToast(TRANSLATE['Failed to copy link to clipboard']);
-                                showModal('<p>' + TRANSLATE['Failed to copy link to clipboard'] + '. ' + TRANSLATE['Copy manually below'] + ':</p><textarea style="width: 100%">' + json.url + "</textarea>")
-                            });
+                        return json.url;
                     } else {
                         showToast(ERROR_CHAR + json.errorMessage);
                     }
@@ -1293,6 +1316,56 @@ function revokeSavedSettingsLink(e, token) {
                     let json = JSON.parse(response);
                     if (json.success) {
                         showToast(TRANSLATE['Revoked access to shared link']);
+                    } else {
+                        showToast(ERROR_CHAR + json.errorMessage);
+                    }
+                } catch (e) {
+                    showToast("Failed to load response: " + e);
+                    return false;
+                }
+            });
+        }
+    });
+}
+function addUrlToMyFavourites(e, id) {
+    e.stopPropagation();
+    isUserLoggedIn().then((loggedIn) => {
+        if (loggedIn) {
+            let request = {
+                "type": REQUEST_TYPE_ADD_MY_FAVORITE,
+                "settings_id": id
+            };
+            let json = JSON.stringify(request);
+            sendRequest(json).then((response) => {
+                try {
+                    let json = JSON.parse(response);
+                    if (json.success) {
+                        showToast(TRANSLATE['Added to My favourites']);
+                    } else {
+                        showToast(ERROR_CHAR + json.errorMessage);
+                    }
+                } catch (e) {
+                    showToast("Failed to load response: " + e);
+                    return false;
+                }
+            });
+        }
+    });
+}
+function addUrlToTreeFavourites(e, id) {
+    e.stopPropagation();
+    isUserLoggedIn().then((loggedIn) => {
+        if (loggedIn) {
+            let request = {
+                "type": REQUEST_TYPE_ADD_TREE_FAVORITE,
+                "settings_id": id
+            };
+            let json = JSON.stringify(request);
+            sendRequest(json).then((response) => {
+                try {
+                    let json = JSON.parse(response);
+                    if (json.success) {
+                        showToast(TRANSLATE['Added to Tree favourites']);
                     } else {
                         showToast(ERROR_CHAR + json.errorMessage);
                     }

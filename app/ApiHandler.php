@@ -1,6 +1,7 @@
 <?php
 
 namespace vendor\WebtreesModules\gvexport;
+use Fisharebest\Webtrees\Auth;
 use Fisharebest\Webtrees\I18N;
 use Fisharebest\Webtrees\Validator;
 use Psr\Http\Message\ResponseFactoryInterface;
@@ -47,6 +48,12 @@ class ApiHandler
                 case "revoke_saved_settings_link":
                     $this->revokeSettingsToken($json, $module, $tree, $json_data);
                     break;
+                case "add_my_favorite":
+                    $this->addUserFavourite($json, $module, $tree, $json_data);
+                    break;
+                case "add_tree_favorite":
+                    $this->addTreeFavourite($json, $module, $tree, $json_data);
+                    break;
                 default:
                     $this->response_data['success'] = false;
                     $this->response_data['json'] = $json_data;
@@ -57,6 +64,11 @@ class ApiHandler
             $this->response_data['json'] = $json_data;
             $this->response_data['errorMessage'] = I18N::translate('Invalid JSON') . ": " . json_last_error_msg();
         }
+    }
+
+    private function addFailResponse($error, $code = "") {
+        $this->response_data['success'] = false;
+        $this->response_data['errorMessage'] = ($code === '' ? '' : $code . ": ") . I18N::translate($error);
     }
 
     public function saveSettings($module, $request, $json, $tree): void
@@ -80,8 +92,7 @@ class ApiHandler
             $this->response_data['settings_id'] = $id;
             $this->response_data['success'] = $settings->saveUserSettings($module, $tree, $vars, $id);
         } else {
-            $this->response_data['success'] = false;
-            $this->response_data['errorMessage'] = I18N::translate('Failed to assign new settings ID');
+            $this->addFailResponse('Failed to assign new settings ID', 'E10');
         }
     }
 
@@ -92,9 +103,7 @@ class ApiHandler
             $this->response_data['settings'] = ($json['settings_id'] == Settings::ID_ALL_SETTINGS ? $settings->getAllSettingsJson($module, $tree) : $settings->getSettingsJson($module, $tree, $json['settings_id']));
             $this->response_data['success'] = true;
         } else {
-            $this->response_data['success'] = false;
-            $this->response_data['json'] = $json_data;
-            $this->response_data['errorMessage'] = "E6: " . I18N::translate('Invalid settings ID') . ":" . e($json['settings_id']);
+            $this->addFailResponse('Invalid settings ID', 'E6');
         }
     }
     public function getSavedSettingsLink($json, $module, $tree, string $json_data): void
@@ -104,14 +113,12 @@ class ApiHandler
             $link = $settings->getSettingsLink($module, $tree, $json['settings_id']);
             if ($link['success']) {
                 $this->response_data['url'] = $link['url'];
+                $this->response_data['success'] = true;
             } else {
-                $this->response_data['errorMessage'] = $link['error'];
+                $this->addFailResponse($link['error'], 'E11');
             }
-            $this->response_data['success'] = $link['success'];
         } else {
-            $this->response_data['success'] = false;
-            $this->response_data['json'] = $json_data;
-            $this->response_data['errorMessage'] = "E3: " . I18N::translate('Invalid settings ID');
+            $this->addFailResponse('Invalid settings ID', 'E3');
         }
     }
     public function loadSettingsToken($json, $module, $tree, string $json_data): void
@@ -122,13 +129,10 @@ class ApiHandler
                 $this->response_data['settings'] = $settings->loadSettingsToken($module, $tree, $json['token']);
                 $this->response_data['success'] = true;
             } catch (\Exception $e) {
-                $this->response_data['success'] = false;
-                $this->response_data['errorMessage'] = "E7: " . I18N::translate('Invalid settings ID');
+                $this->addFailResponse('Invalid settings ID', 'E7');
             }
         } else {
-            $this->response_data['success'] = false;
-            $this->response_data['json'] = $json_data;
-            $this->response_data['errorMessage'] = "E4: " . I18N::translate('Invalid settings ID');
+            $this->addFailResponse('Invalid settings ID', 'E4');
         }
     }
 
@@ -140,13 +144,10 @@ class ApiHandler
             if ($link) {
                 $this->response_data['success'] = true;
             } else {
-                $this->response_data['errorMessage'] = "E2: " . I18N::translate('Invalid');
-                $this->response_data['success'] = false;
+                $this->addFailResponse('Invalid', 'E2');
             }
         } else {
-            $this->response_data['success'] = false;
-            $this->response_data['json'] = $json_data;
-            $this->response_data['errorMessage'] = "E5: " . I18N::translate('Invalid settings ID');
+            $this->addFailResponse('Invalid settings ID', 'E5');
         }
     }
 
@@ -159,13 +160,10 @@ class ApiHandler
                 $this->response_data['success'] = true;
             } else {
                 // Is user is not logged in, we should never have got this far
-                $this->response_data['success'] = false;
-                $this->response_data['errorMessage'] = I18N::translate('Invalid');
+                $this->addFailResponse('Invalid', 'E12');
             }
         } else {
-            $this->response_data['success'] = false;
-            $this->response_data['json'] = $json_data;
-            $this->response_data['errorMessage'] = I18N::translate('Invalid settings ID');
+            $this->addFailResponse('Invalid settings ID', 'E8');
         }
     }
 
@@ -193,6 +191,39 @@ class ApiHandler
             return false;
         }
         return true;
+    }
+
+    private function addUserFavourite($json, $module, $tree)
+    {
+        $this->addFavourite($json, $module, $tree, Favourite::TYPE_USER_FAVOURITE);
+    }
+
+    private function addTreeFavourite($json, $module, $tree)
+    {
+        if (Auth::isManager($tree)) {
+            $this->addFavourite($json, $module, $tree, Favourite::TYPE_TREE_FAVOURITE);
+        }
+    }
+
+    private function addFavourite($json, $module, $tree, $type): void
+    {
+        if (isset($json['settings_id']) && (ctype_alnum($json['settings_id']))) {
+            $settings = new Settings();
+            $link = $settings->getSettingsLink($module, $tree, $json['settings_id']);
+            $name = $settings->getSettingsName($module, $tree, $json['settings_id']);
+            if ($link['success']) {
+                $favourite = new Favourite($type);
+                if ($favourite->addFavourite($tree, $link['url'], $name)) {
+                    $this->response_data['success'] = true;
+                } else {
+                    $this->addFailResponse('Invalid', 'E13');
+                }
+            } else {
+                $this->addFailResponse($link['error'], 'E11');
+            }
+        } else {
+            $this->addFailResponse('Invalid settings ID', 'E3');
+        }
     }
 
 }
