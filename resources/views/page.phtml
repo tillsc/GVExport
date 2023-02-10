@@ -2,6 +2,7 @@
 
 namespace vendor\WebtreesModules\gvexport;
 
+use Fisharebest\Webtrees\Auth;
 use Fisharebest\Webtrees\I18N;
 use Fisharebest\Webtrees\Individual;
 use Fisharebest\Webtrees\Module\FamilyTreeFavoritesModule;
@@ -89,7 +90,7 @@ $xref = $individual->xref();
     let settings_json = "";
     let download_file_name = "<?= e($settings['filename']); ?>";
     const TREE_NAME = "<?= e($tree->name()); ?>";
-    const TREE_FAVORITES_MODULE_ACTIVE = <?= $module->module_service->findByInterface(FamilyTreeFavoritesModule::class)->first() === null ? "false" : "true" ?>;
+    const TREE_FAVORITES_MODULE_ACTIVE = <?= $module->module_service->findByInterface(FamilyTreeFavoritesModule::class)->first() === null || !Auth::isManager($tree) ? "false" : "true" ?>;
     const MY_FAVORITES_MODULE_ACTIVE = <?= $module->module_service->findByInterface(UserFavoritesModule::class)->first() === null ? "false" : "true" ?>;
 </script>
 <h2 class="wt-page-title">

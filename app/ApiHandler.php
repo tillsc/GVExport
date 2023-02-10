@@ -1,6 +1,7 @@
 <?php
 
 namespace vendor\WebtreesModules\gvexport;
+use Fisharebest\Webtrees\Auth;
 use Fisharebest\Webtrees\I18N;
 use Fisharebest\Webtrees\Validator;
 use Psr\Http\Message\ResponseFactoryInterface;
@@ -199,7 +200,9 @@ class ApiHandler
 
     private function addTreeFavourite($json, $module, $tree)
     {
-        $this->addFavourite($json, $module, $tree, Favourite::TYPE_TREE_FAVOURITE);
+        if (Auth::isManager($tree)) {
+            $this->addFavourite($json, $module, $tree, Favourite::TYPE_TREE_FAVOURITE);
+        }
     }
 
     private function addFavourite($json, $module, $tree, $type): void
