@@ -47,6 +47,12 @@ class ApiHandler
                 case "revoke_saved_settings_link":
                     $this->revokeSettingsToken($json, $module, $tree, $json_data);
                     break;
+                case "add_my_favorite":
+                    $this->addUserFavourite($json, $module, $tree, $json_data);
+                    break;
+                case "add_tree_favorite":
+                    $this->addTreeFavourite($json, $module, $tree, $json_data);
+                    break;
                 default:
                     $this->response_data['success'] = false;
                     $this->response_data['json'] = $json_data;
@@ -184,6 +190,37 @@ class ApiHandler
             return false;
         }
         return true;
+    }
+
+    private function addUserFavourite($json, $module, $tree)
+    {
+        $this->addFavourite($json, $module, $tree, Favourite::TYPE_USER_FAVOURITE);
+    }
+
+    private function addTreeFavourite($json, $module, $tree)
+    {
+        $this->addFavourite($json, $module, $tree, Favourite::TYPE_TREE_FAVOURITE);
+    }
+
+    private function addFavourite($json, $module, $tree, $type): void
+    {
+        if (isset($json['settings_id']) && (ctype_alnum($json['settings_id']))) {
+            $settings = new Settings();
+            $link = $settings->getSettingsLink($module, $tree, $json['settings_id']);
+            $name = $settings->getSettingsName($module, $tree, $json['settings_id']);
+            if ($link['success']) {
+                $favourite = new Favourite($type);
+                if ($favourite->addFavourite($tree, $link['url'], $name)) {
+                    $this->response_data['success'] = true;
+                } else {
+                    $this->addFailResponse('Invalid', 'E13');
+                }
+            } else {
+                $this->addFailResponse($link['error'], 'E11');
+            }
+        } else {
+            $this->addFailResponse('Invalid settings ID', 'E3');
+        }
     }
 
 }

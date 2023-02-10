@@ -563,4 +563,10 @@ class Settings
         $settingsLink = new settingsLink($module, $tree, $this);
         return $settingsLink->revokeToken($token);
     }
+
+    public function getSettingsName($module, $tree, $settings_id)
+    {
+        $userSettings = $this->loadUserSettings($module, $tree, $settings_id);
+        return $userSettings['save_settings_name'];
+    }
 }

@@ -1333,7 +1333,7 @@ function addUrlToMyFavourites(e, id) {
         if (loggedIn) {
             let request = {
                 "type": REQUEST_TYPE_ADD_MY_FAVORITE,
-                "id": id
+                "settings_id": id
             };
             let json = JSON.stringify(request);
             sendRequest(json).then((response) => {
@@ -1341,6 +1341,31 @@ function addUrlToMyFavourites(e, id) {
                     let json = JSON.parse(response);
                     if (json.success) {
                         showToast(TRANSLATE['Added to My favourites']);
+                    } else {
+                        showToast(ERROR_CHAR + json.errorMessage);
+                    }
+                } catch (e) {
+                    showToast("Failed to load response: " + e);
+                    return false;
+                }
+            });
+        }
+    });
+}
+function addUrlToTreeFavourites(e, id) {
+    e.stopPropagation();
+    isUserLoggedIn().then((loggedIn) => {
+        if (loggedIn) {
+            let request = {
+                "type": REQUEST_TYPE_ADD_TREE_FAVORITE,
+                "settings_id": id
+            };
+            let json = JSON.stringify(request);
+            sendRequest(json).then((response) => {
+                try {
+                    let json = JSON.parse(response);
+                    if (json.success) {
+                        showToast(TRANSLATE['Added to Tree favourites']);
                     } else {
                         showToast(ERROR_CHAR + json.errorMessage);
                     }
