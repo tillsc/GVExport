@@ -72,6 +72,7 @@ $xref = $individual->xref();
         "<?= I18N::translate('Invalid JSON'); ?>"];
     const TRANSLATE = {
         "Delete":"<?= I18N::translate('Delete'); ?>",
+        "Download":"<?= I18N::translate('Download'); ?>",
         "Copy link":"<?= I18N::translate('Copy link'); ?>",
         "Revoke link":"<?= I18N::translate('Revoke link'); ?>",
         "Revoked access to shared link":"<?= I18N::translate('Revoked access to shared link'); ?>",
@@ -591,8 +592,6 @@ $xref = $individual->xref();
                 </div>
                 <?= MainPage::addLabel('', 'Settings file'); ?>
                 <div class="col-sm-8 wt-page-options-value">
-                    <label for="download_settings"><?= I18N::translate('Save settings to file') ?></label><br>
-                    <button class="btn btn-outline-secondary" type="button" name="save_settings" id="download_settings" onclick="downloadSettingsFile()"><?= I18N::translate('Download') ?></button><br>
                     <label for="load_settings"><?= I18N::translate('Load settings from file') ?></label><br>
                     <input id="load_settings" type="file" onchange="uploadSettingsFile(this)">
                 </div>
