@@ -848,14 +848,22 @@ function showHelp(item) {
 /**
  * Downloads settings as JSON file
  */
-function downloadSettingsFile() {
-    saveSettingsServer(true).then(() => {
-        return getSettings(ID_MAIN_SETTINGS);
-    }).then((settings_json_string) => {
-        let file = new Blob([settings_json_string], {type: "text/plain"});
-        let url = URL.createObjectURL(file);
-        downloadLink(url, TREE_NAME + ".json")
-    });
+function downloadSettingsFileMenuAction(event) {
+    let parent = event.target.parentElement;
+    while (!parent.dataset.settings) {
+        parent = parent.parentElement;
+    }
+    let settings_json_string = parent.dataset.settings;
+    let settings;
+    try {
+        settings = JSON.parse(settings_json_string);
+    } catch (e) {
+        showToast("Failed to load settings: " + e);
+        return false;
+    }
+    let file = new Blob([settings_json_string], {type: "text/plain"});
+    let url = URL.createObjectURL(file);
+    downloadLink(url, settings['save_settings_name'] + ".json")
 }
 
 /**
@@ -1116,6 +1124,19 @@ function loadSettingsDetails() {
     );
 }
 
+function addSettingsMenuOption(id, div, emoji, text, callback, token = '') {
+    let el = document.createElement('a');
+    el.setAttribute('class', 'settings_ellipsis_menu_item');
+    el.setAttribute('href', '#');
+    el.innerHTML = '<span class="settings_ellipsis_menu_icon">' + emoji + '</span><span>' + TRANSLATE[text] + '</span>';
+    el.id = id;
+    el.token = token;
+    el.addEventListener("click", (e) => {
+        callback(e);
+    });
+    div.appendChild(el);
+}
+
 function showSavedSettingsItemMenu(event) {
     event.stopImmediatePropagation();
     let id = event.target.parentElement.parentElement.getAttribute('data-id');
@@ -1126,43 +1147,18 @@ function showSavedSettingsItemMenu(event) {
             id = id.trim();
             let div = document.createElement('div');
             div.setAttribute('class', 'settings_ellipsis_menu');
-            // Add "Delete" option
-            let deleteEl = document.createElement('a');
-            deleteEl.setAttribute('class', 'settings_ellipsis_menu_item');
-            deleteEl.setAttribute('href', '#');
-            deleteEl.setAttribute('onClick', 'deleteSettingsAdvanced(event, "' + id + '")');
-            deleteEl.innerHTML = '<span class="settings_ellipsis_menu_icon">❌</span><span>' + TRANSLATE['Delete'] + '</span>';
-            div.appendChild(deleteEl);
+            addSettingsMenuOption(id, div, '❌', 'Delete', deleteSettingsMenuAction);
+            addSettingsMenuOption(id, div, '💻', 'Download', downloadSettingsFileMenuAction);
             if (loggedIn) {
-                let copyLinkEl = document.createElement('a');
-                copyLinkEl.setAttribute('class', 'settings_ellipsis_menu_item');
-                copyLinkEl.setAttribute('href', '#');
-                copyLinkEl.setAttribute('onClick', 'copySavedSettingsLink(event, "' + id + '")');
-                copyLinkEl.innerHTML = '<span class="settings_ellipsis_menu_icon">🔗</span><span>' + TRANSLATE['Copy link'] + '</span>';
-                div.appendChild(copyLinkEl);
+                addSettingsMenuOption(id, div, '🔗', 'Copy link', copySavedSettingsLinkMenuAction);
                 if (token !== '') {
-                    let unshareLinkEl = document.createElement('a');
-                    unshareLinkEl.setAttribute('class', 'settings_ellipsis_menu_item');
-                    unshareLinkEl.setAttribute('href', '#');
-                    unshareLinkEl.setAttribute('onClick', 'revokeSavedSettingsLink(event, "' + token + '")');
-                    unshareLinkEl.innerHTML = '<span class="settings_ellipsis_menu_icon">🚫</span><span>' + TRANSLATE['Revoke link'] + '</span>';
-                    div.appendChild(unshareLinkEl);
+                    addSettingsMenuOption(id, div, '🚫', 'Revoke link', revokeSavedSettingsLinkMenuAction, token);
                 }
                 if (MY_FAVORITES_MODULE_ACTIVE) {
-                    let addFavoritesEl = document.createElement('a');
-                    addFavoritesEl.setAttribute('class', 'settings_ellipsis_menu_item');
-                    addFavoritesEl.setAttribute('href', '#');
-                    addFavoritesEl.setAttribute('onClick', 'addUrlToMyFavourites(event, "' + id + '")');
-                    addFavoritesEl.innerHTML = '<span class="settings_ellipsis_menu_icon">🌟</span><span>' + TRANSLATE['Add to My favorites'] + '</span>';
-                    div.appendChild(addFavoritesEl);
+                    addSettingsMenuOption(id, div, '🌟', 'Add to My favorites', addUrlToMyFavouritesMenuAction);
                 }
                 if (TREE_FAVORITES_MODULE_ACTIVE) {
-                    let addFavoritesEl = document.createElement('a');
-                    addFavoritesEl.setAttribute('class', 'settings_ellipsis_menu_item');
-                    addFavoritesEl.setAttribute('href', '#');
-                    addFavoritesEl.setAttribute('onClick', 'addUrlToTreeFavourites(event, "' + id + '")');
-                    addFavoritesEl.innerHTML = '<span class="settings_ellipsis_menu_icon">🌲</span><span>' + TRANSLATE['Add to Tree favorites'] + '</span>';
-                    div.appendChild(addFavoritesEl);
+                    addSettingsMenuOption(id, div, '🌲', 'Add to Tree favorites', addUrlToTreeFavourites);
                 }
             }
             event.target.appendChild(div);
@@ -1233,8 +1229,9 @@ function deleteSettingsClient(id) {
     });
 }
 
-function deleteSettingsAdvanced(e, id) {
+function deleteSettingsMenuAction(e) {
     e.stopPropagation();
+    let id = e.currentTarget.id;
     isUserLoggedIn().then((loggedIn) => {
         if (loggedIn) {
             let request = {
@@ -1262,7 +1259,8 @@ function deleteSettingsAdvanced(e, id) {
     });
 }
 
-function copySavedSettingsLink(e, id) {
+function copySavedSettingsLinkMenuAction(e) {
+    let id = e.currentTarget.id;
     e.stopPropagation();
     getSavedSettingsLink(id).then((url)=>{
         copyToClipboard(url)
@@ -1301,8 +1299,9 @@ function getSavedSettingsLink(id) {
     });
 }
 
-function revokeSavedSettingsLink(e, token) {
+function revokeSavedSettingsLinkMenuAction(e) {
     e.stopPropagation();
+    let token = e.currentTarget.token;
     isUserLoggedIn().then((loggedIn) => {
         if (loggedIn) {
             let request = {
@@ -1327,8 +1326,9 @@ function revokeSavedSettingsLink(e, token) {
         }
     });
 }
-function addUrlToMyFavourites(e, id) {
+function addUrlToMyFavouritesMenuAction(e) {
     e.stopPropagation();
+    let id = e.currentTarget.id;
     isUserLoggedIn().then((loggedIn) => {
         if (loggedIn) {
             let request = {
