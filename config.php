@@ -75,6 +75,7 @@ return array(
 	'background_col' => '#EEEEEE', // Background of diagram (light grey)
 	'indi_background_col' => '#FEFEFE', // Background of individual tile (except simple mode)
 	'highlight_start_indis' => false, // Whether to use a different colour for starting individuals
+    'no_highlight_xref_list' => '', // XREFs in this list are not highlighted
 	'highlight_col' => '#FFFDC3', // Background of starting individuals
 	'border_col' => '#606060', // Outline colour
 	'birth_prefix' => '*', // Text shown on chart before the birthdate

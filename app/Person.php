@@ -8,7 +8,8 @@ class Person
     public array $attributes;
     private Dot $dot;
 
-    function __construct($attributes, $dot) {
+    function __construct($attributes, $dot)
+    {
         $this->attributes = $attributes;
         $this->dot = $dot;
     }
@@ -67,10 +68,10 @@ class Person
     function printPersonLabel(string $pid, $related = TRUE): string
     {
         $out = "";
-        $bordercolor = $this->dot->settings["border_col"];	// Border color of the INDI's box
+        $bordercolor = $this->dot->settings["border_col"];    // Border color of the INDI's box
         $death_place = "";
         // Get the personal data
-        if ($this->dot->settings["diagram_type"] == "combined" && ( substr($pid, 0, 3) == "I_H" || substr($pid, 0, 3) == "I_W" )) {
+        if ($this->dot->settings["diagram_type"] == "combined" && (substr($pid, 0, 3) == "I_H" || substr($pid, 0, 3) == "I_W")) {
             // In case of dummy individual
             $fill_color = $this->dot->getGenderColour('U', false);
             $isdead = false;
@@ -134,9 +135,9 @@ class Person
                 $out .= "color=\"" . $bordercolor . "\", fillcolor=\"" . $fill_color . "\", fontcolor=\"" . $this->dot->settings["font_colour_name"] . "\", label=";
             }
             $out .= '"';
-            $out .= str_replace('"','\"',$name) . '\n' . $this->dot->settings["birth_prefix"] . $birthdate . " " . (empty($birthplace)?'':'('.$birthplace.')') . '\l';
+            $out .= str_replace('"', '\"', $name) . '\n' . $this->dot->settings["birth_prefix"] . $birthdate . " " . (empty($birthplace) ? '' : '(' . $birthplace . ')') . '\l';
             if ($isdead) {
-                $out .= $this->dot->settings["death_prefix"] . $death_date . " " . (empty($death_place)?'':'('.$death_place.')');
+                $out .= $this->dot->settings["death_prefix"] . $death_date . " " . (empty($death_place) ? '' : '(' . $death_place . ')');
             } else {
                 $out .= " ";
             }
@@ -150,7 +151,7 @@ class Person
             }
             $href = $this->dot->settings["add_links"] ? "TARGET=\"_blank\" HREF=\"" . Dot::convertToHTMLSC($link) . "\"" : "";
             // Draw table
-            $indibgcolor = $this->isStartingIndividual($pid) && $this->dot->settings['highlight_start_indis'] == "true" ? $this->dot->settings["highlight_col"] : $this->dot->settings["indi_background_col"];
+            $indibgcolor = $this->isStartingIndividual($pid) && $this->dot->settings['highlight_start_indis'] == "true" && !$this->valueInList($this->dot->settings['no_highlight_xref_list'], $pid) ? $this->dot->settings["highlight_col"] : $this->dot->settings["indi_background_col"];
             if ($this->dot->settings["diagram_type"] == "combined") {
                 $out .= "<TABLE BORDER=\"0\" CELLBORDER=\"0\" CELLPADDING=\"2\" CELLSPACING=\"0\" BGCOLOR=\"" . $indibgcolor . "\" $href>";
             } else {
@@ -221,7 +222,8 @@ class Person
      * @param string $pid XREF of the person, for adding to name if enabled
      * @return string Returns formatted name
      */
-    public function getFormattedName(array $nameArray, string $pid): string {
+    public function getFormattedName(array $nameArray, string $pid): string
+    {
         if (isset($nameArray['full'])) {
             $name = $this->getAbbreviatedName($nameArray);
         } else {
@@ -289,12 +291,12 @@ class Person
             case 50: /* Initials only */
                 // Split by space or hyphen to get different names
                 $givenParts = preg_split('/[\s-]/', $nameArray["givn"]);
-                $initials = substr($givenParts[0],0,1);
+                $initials = substr($givenParts[0], 0, 1);
                 if (isset($givenParts[1])) {
-                    $initials .= substr($givenParts[1],0,1);
+                    $initials .= substr($givenParts[1], 0, 1);
                 }
                 $surnameParts = preg_split('/[\s-]/', $nameArray["surn"]);
-                if (substr($surnameParts[0],0,1) != "@") {
+                if (substr($surnameParts[0], 0, 1) != "@") {
                     $initials .= substr($surnameParts[0], 0, 1);
                     if (isset($surnameParts[1])) {
                         // If there is a hyphen in the surname found before the first space
@@ -309,9 +311,9 @@ class Person
             case 60: /* Given name initials and Surname */
                 // Split by space or hyphen to get different names
                 $givenParts = preg_split('/[\s-]/', $nameArray["givn"]);
-                $initials = substr($givenParts[0],0,1) . ".";
+                $initials = substr($givenParts[0], 0, 1) . ".";
                 if (isset($givenParts[1])) {
-                    $initials .= substr($givenParts[1],0,1) . ".";
+                    $initials .= substr($givenParts[1], 0, 1) . ".";
                 }
                 return $initials . " " . $nameArray["surn"];
             case 70: /* Don't show names */
@@ -330,11 +332,17 @@ class Person
     private function isStartingIndividual(string $pid): bool
     {
         $indis = explode(",", $this->dot->settings['xref_list']);
-        for ($i=0;$i<count($indis);$i++) {
+        for ($i = 0; $i < count($indis); $i++) {
             if (trim($indis[$i]) == $pid) {
                 return true;
             }
         }
         return false;
+    }
+
+    private function valueInList($list, string $value): bool
+    {
+        $list = explode(',', $list);
+        return in_array($value, $list);
     }
 }
