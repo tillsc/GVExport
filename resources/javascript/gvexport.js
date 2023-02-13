@@ -863,7 +863,7 @@ function downloadSettingsFileMenuAction(event) {
     }
     let file = new Blob([settings_json_string], {type: "text/plain"});
     let url = URL.createObjectURL(file);
-    downloadLink(url, settings['save_settings_name'] + ".json")
+    downloadLink(url, TREE_NAME + " - " + settings['save_settings_name'] + ".json")
 }
 
 /**
