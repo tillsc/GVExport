@@ -1352,8 +1352,13 @@ function addUrlToMyFavouritesMenuAction(e) {
         }
     });
 }
-function addUrlToTreeFavourites(e, id) {
+function addUrlToTreeFavourites(e) {
     e.stopPropagation();
+    let parent = event.target.parentElement;
+    while (!parent.dataset.id) {
+        parent = parent.parentElement;
+    }
+    let id = parent.getAttribute('data-id');
     isUserLoggedIn().then((loggedIn) => {
         if (loggedIn) {
             let request = {

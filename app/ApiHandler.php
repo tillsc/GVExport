@@ -222,7 +222,7 @@ class ApiHandler
                 $this->addFailResponse($link['error'], 'E11');
             }
         } else {
-            $this->addFailResponse('Invalid settings ID', 'E3');
+            $this->addFailResponse('Invalid settings ID', 'E14');
         }
     }
 
