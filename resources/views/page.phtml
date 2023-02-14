@@ -724,7 +724,9 @@ $xref = $individual->xref();
         rendering.hidden = false;
 
         const MARGIN = 50;
-        const h = window.innerHeight - document.querySelector('.wt-header-wrapper').getBoundingClientRect().height - document.querySelector('.wt-footers').getBoundingClientRect().height;
+        let footerEl = document.querySelector('.wt-footers');
+        let footerHeight = footerEl ? footerEl.getBoundingClientRect().height : 50;
+        const h = window.innerHeight - document.querySelector('.wt-header-wrapper').getBoundingClientRect().height - footerHeight;
         const w = window.innerWidth - MARGIN*2;
         const wtMainContainer = document.getElementsByClassName('wt-main-container').item(0);
         const wtTitle = document.getElementsByClassName("wt-page-title").item(0);
