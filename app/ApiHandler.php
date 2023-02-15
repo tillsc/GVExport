@@ -1,6 +1,7 @@
 <?php
 
 namespace vendor\WebtreesModules\gvexport;
+use Exception;
 use Fisharebest\Webtrees\Auth;
 use Fisharebest\Webtrees\I18N;
 use Fisharebest\Webtrees\Validator;
@@ -18,6 +19,9 @@ class ApiHandler
             ->withHeader('Content-Type', "application/json");
     }
 
+    /**
+     * @throws Exception
+     */
     public function handle($request, $module, $tree) {
         $json_data = Validator::parsedBody($request)->string('json_data');
         $json = json_decode($json_data, true);
@@ -28,10 +32,10 @@ class ApiHandler
                     $this->saveSettings($module, $request, $json, $tree);
                     break;
                 case "get_settings":
-                    $this->getSettings($json, $module, $tree, $json_data);
+                    $this->getSettings($json, $module, $tree);
                     break;
                 case "delete_settings":
-                    $this->deleteSettings($module, $json, $tree, $json_data);
+                    $this->deleteSettings($module, $json, $tree);
                     break;
                 case "is_logged_in":
                     $this->isLoggedIn();
@@ -40,19 +44,19 @@ class ApiHandler
                     $this->getTreeName($tree);
                     break;
                 case "get_saved_settings_link":
-                    $this->getSavedSettingsLink($json, $module, $tree, $json_data);
+                    $this->getSavedSettingsLink($json, $module, $tree);
                     break;
                 case "load_settings_token":
-                    $this->loadSettingsToken($json, $module, $tree, $json_data);
+                    $this->loadSettingsToken($json, $module, $tree);
                     break;
                 case "revoke_saved_settings_link":
-                    $this->revokeSettingsToken($json, $module, $tree, $json_data);
+                    $this->revokeSettingsToken($json, $module, $tree);
                     break;
                 case "add_my_favorite":
-                    $this->addUserFavourite($json, $module, $tree, $json_data);
+                    $this->addUserFavourite($json, $module, $tree);
                     break;
                 case "add_tree_favorite":
-                    $this->addTreeFavourite($json, $module, $tree, $json_data);
+                    $this->addTreeFavourite($json, $module, $tree);
                     break;
                 default:
                     $this->response_data['success'] = false;
@@ -96,7 +100,10 @@ class ApiHandler
         }
     }
 
-    public function getSettings($json, $module, $tree, string $json_data): void
+    /**
+     * @throws Exception
+     */
+    public function getSettings($json, $module, $tree): void
     {
         if (isset($json['settings_id']) && (ctype_alnum($json['settings_id']) || in_array($json['settings_id'], [Settings::ID_ALL_SETTINGS, Settings::ID_MAIN_SETTINGS]))) {
             $settings = new Settings();
@@ -106,7 +113,7 @@ class ApiHandler
             $this->addFailResponse('Invalid settings ID', 'E6');
         }
     }
-    public function getSavedSettingsLink($json, $module, $tree, string $json_data): void
+    public function getSavedSettingsLink($json, $module, $tree): void
     {
         if (isset($json['settings_id']) && (ctype_alnum($json['settings_id']))) {
             $settings = new Settings();
@@ -121,14 +128,14 @@ class ApiHandler
             $this->addFailResponse('Invalid settings ID', 'E3');
         }
     }
-    public function loadSettingsToken($json, $module, $tree, string $json_data): void
+    public function loadSettingsToken($json, $module, $tree): void
     {
         if (isset($json['token']) && (ctype_alnum($json['token']))) {
             $settings = new Settings();
             try {
                 $this->response_data['settings'] = $settings->loadSettingsToken($module, $tree, $json['token']);
                 $this->response_data['success'] = true;
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $this->addFailResponse('Invalid settings ID', 'E7');
             }
         } else {
@@ -136,7 +143,7 @@ class ApiHandler
         }
     }
 
-    private function revokeSettingsToken($json, $module, $tree, string $json_data)
+    private function revokeSettingsToken($json, $module, $tree)
     {
         if (isset($json['token']) && (ctype_alnum($json['token']))) {
             $settings = new Settings();
@@ -151,7 +158,7 @@ class ApiHandler
         }
     }
 
-    public function deleteSettings($module, $json, $tree, string $json_data): void
+    public function deleteSettings($module, $json, $tree): void
     {
         if (isset($json['settings_id']) && ctype_alnum($json['settings_id']) && !in_array($json['settings_id'], [Settings::ID_ALL_SETTINGS, Settings::ID_MAIN_SETTINGS])) {
             if (Settings::isUserLoggedIn()) {
@@ -187,7 +194,7 @@ class ApiHandler
         $settings = new Settings();
         try {
             $settings->getSettingsJson($module, $tree, $settings_id);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return false;
         }
         return true;

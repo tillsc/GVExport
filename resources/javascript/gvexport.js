@@ -1397,7 +1397,9 @@ function loadUrlToken() {
                 if (json.success) {
                     let settingsString = JSON.stringify(json.settings);
                     loadSettings(settingsString);
-                    hideSidebar();
+                    if(json.settings['auto_update']) {
+                        hideSidebar();
+                    }
                 } else {
                     showToast(ERROR_CHAR + json.errorMessage);
                 }

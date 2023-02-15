@@ -40,6 +40,7 @@ spl_autoload_register(function ($class) {
     }
 });
 
+use Cassandra\Set;
 use Fisharebest\Webtrees\Auth;
 use Fisharebest\Webtrees\Contracts\UserInterface;
 use Fisharebest\Webtrees\Registry;
@@ -168,6 +169,9 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
         return Auth::checkIndividualAccess($individual, false, true);
     }
 
+    /**
+     * @throws \Exception
+     */
     public function getChartAction(ServerRequestInterface $request): ResponseInterface
     {
         $tree = $request->getAttribute('tree');
@@ -179,16 +183,28 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
         }
         $individual = $this->getIndividual($tree, $tree->significantIndividual(Auth::user(), $xref)->xref());
 		$userDefaultVars = (new Settings())->getAdminSettings($this);
-
-        if (!isset($_REQUEST['reset'])) {
-            // Load settings from webtrees
-            $settings = new Settings();
-            $userDefaultVars = $settings->loadUserSettings($this, $tree);
-
-        } else {
+        $settings = new Settings();
+        if (isset($_REQUEST['reset'])){
             if (!$userDefaultVars['enable_graphviz'] && $userDefaultVars['graphviz_bin'] != "") {
                 $userDefaultVars['graphviz_bin'] = "";
             }
+        } else if (isset($_REQUEST['t'])) {
+            try {
+                if (ctype_alnum($_REQUEST['t'])) {
+                    $this->base_url = $this->strip_param_from_url($this->chartUrl($individual), 'xref');
+                    $tokenSettings = $settings->loadSettingsToken($this, $tree, $_REQUEST['t']);
+                    foreach ($tokenSettings as $key => $value) {
+                        $userDefaultVars[$key] = $value;
+                    }
+                } else {
+                    throw new \Exception("Invalid token");
+                }
+            } catch (\Exception $e) {
+                $userDefaultVars = $settings->loadUserSettings($this, $tree);
+            }
+        } else {
+            // Load settings from webtrees
+            $userDefaultVars = $settings->loadUserSettings($this, $tree);
         }
         $otypes = $this->getOTypes($userDefaultVars);
 
