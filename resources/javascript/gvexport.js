@@ -18,7 +18,7 @@ let loggedIn = null;
 function hideSidebar() {
     document.querySelector(".sidebar").hidden = true;
     document.querySelector(".sidebar__toggler").hidden = false;
-}
+    }
 
 function showSidebar() {
     document.querySelector(".sidebar__toggler").hidden = true;
@@ -413,17 +413,24 @@ function loadXrefList(url, xrefListId, indiListId) {
     let xref_list = xrefListEl.value.trim();
     xrefListEl.value = xref_list;
 
+    let promises = [];
     let xrefs = xref_list.split(",");
     for (let i=0; i<xrefs.length; i++) {
         if (xrefs[i].trim() !== "") {
-            loadIndividualDetails(url, xrefs[i], indiListId);
+            promises.push(loadIndividualDetails(url, xrefs[i], indiListId));
         }
     }
-    updateClearAll();
+    Promise.all(promises).then(function () {
+        updateClearAll();
+        toggleHighlightStartPersons(document.getElementById('highlight_start_indis').checked);
+    }).catch(function(error) {
+        showToast("Error");
+        console.log(error);
+    });
 }
 
 function loadIndividualDetails(url, xref, list) {
-    fetch(url + xref.trim()).then(async (response) => {
+    return fetch(url + xref.trim()).then(async (response) => {
             const data = await response.json();
             let contents;
             let otherXrefId;
@@ -788,7 +795,7 @@ function pageLoaded() {
 
     // Form change events
     const form = document.getElementById('gvexport');
-    let checkboxElems = form.querySelectorAll("input:not([type='file']):not(#save_settings_name):not(#pid):not(#stop_pid), select:not(#simple_settings_list)");
+    let checkboxElems = form.querySelectorAll("input:not([type='file']):not(#save_settings_name):not(#pid):not(#stop_pid):not(.highlight_check), select:not(#simple_settings_list)");
     for (let i = 0; i < checkboxElems.length; i++) {
         checkboxElems[i].addEventListener("change", handleFormChange);
     }
@@ -953,9 +960,8 @@ function loadSettings(data) {
 
     if (autoUpdate) {
         updateRender();
-    } else {
-        refreshIndisFromXREFS(false);
     }
+    refreshIndisFromXREFS(false);
 }
 
 function setCheckStatus(el, checked) {
@@ -1535,4 +1541,46 @@ function copyToClipboard(textToCopy) {
             textArea.remove();
         });
     }
+}
+
+function toggleHighlightCheckbox(e) {
+    console.log(e.target.getAttribute('data-xref'));
+}
+
+function toggleHighlightStartPersons(enable) {
+    if (enable) {
+        let list = document.getElementById('highlight_list');
+        let xrefList = document.getElementById('xref_list');
+        let xrefExcludeArray = document.getElementById('no_highlight_xref_list').value.split(',');
+        list.innerHTML = '';
+        let xrefs = xrefList.value.split(",");
+        for (let i=0; i<xrefs.length; i++) {
+            if (xrefs[i].trim() !== "") {
+                const xrefItem = document.createElement('div');
+                const checkboxEl = document.createElement('input');
+                checkboxEl.setAttribute('id', 'highlight_check' + i);
+                checkboxEl.setAttribute('class', 'highlight_check');
+                checkboxEl.setAttribute('type', 'checkbox');
+                checkboxEl.setAttribute('data-xref', xrefs[i]);
+                if (!xrefExcludeArray.includes(xrefs[i])) {
+                    checkboxEl.checked = true;
+                }
+                checkboxEl.addEventListener("click", toggleHighlightCheckbox);
+                xrefItem.appendChild(checkboxEl);
+                const indiItem = document.getElementById('indi_list')
+                    .querySelector('.indi_list_item[data-xref="' + xrefs[i] + '"]');
+                let indiName = "";
+                if (indiItem != null) {
+                    indiName = indiItem.getElementsByClassName("NAME")[0].innerText;
+                }
+                const labelEl = document.createElement('label');
+                labelEl.setAttribute('class', 'highlight_check_label');
+                labelEl.setAttribute('for', 'highlight_check' + i);
+                labelEl.innerHTML = indiName + " (" + xrefs[i] + ")";
+                xrefItem.appendChild(labelEl);
+                list.appendChild(xrefItem);
+            }
+        }
+    }
+    showHide(document.getElementById('startcol_option'),enable);
 }
