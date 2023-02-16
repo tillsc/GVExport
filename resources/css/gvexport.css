@@ -333,3 +333,7 @@ span.NAME {
 .modal-button {
     margin: 5px !important;
 }
+
+.highlight_check_label {
+    margin-left: 10px;
+}

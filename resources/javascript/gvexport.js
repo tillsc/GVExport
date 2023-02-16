@@ -18,7 +18,7 @@ let loggedIn = null;
 function hideSidebar() {
     document.querySelector(".sidebar").hidden = true;
     document.querySelector(".sidebar__toggler").hidden = false;
-}
+    }
 
 function showSidebar() {
     document.querySelector(".sidebar__toggler").hidden = true;
@@ -317,11 +317,11 @@ function toggleAdvanced(button, id, visible = null) {
     }
     showHide(el, visible);
     if (visible) {
-        button.innerHTML = button.innerHTML.replaceAll("↓","↑");
+        button.innerHTML = button.innerHTML.replaceAll("↓','↑");
         const hidden = document.getElementById(id+"-hidden");
         hidden.value = "show";
     } else {
-        button.innerHTML = button.innerHTML.replaceAll("↑","↓");
+        button.innerHTML = button.innerHTML.replaceAll("↑','↓");
         // Update our hidden field for saving the state
         const hidden = document.getElementById(id+"-hidden");
         hidden.value = "";
@@ -366,7 +366,7 @@ function updateURLParameter(parameter, value, action) {
 function getURLParameter(parameter) {
     let result = updateURLParameter(parameter, "", "get");
     if (result !== null && result !== '') {
-        return result.replace("#","");
+        return result.replace("#','");
     } else {
         return null;
     }
@@ -376,10 +376,10 @@ function loadURLXref() {
     const xref = getURLParameter("xref");
     if (xref !== null) {
         const el = document.getElementById('xref_list');
-        if (el.value.replace(",", "").trim() === "") {
+        if (el.value.replace(',', "").trim() === "") {
             el.value = xref;
         } else {
-            const xrefs = el.value.split(",");
+            const xrefs = el.value.split(',');
             if (xrefs.length === 1) {
                 el.value = "";
             }
@@ -413,17 +413,24 @@ function loadXrefList(url, xrefListId, indiListId) {
     let xref_list = xrefListEl.value.trim();
     xrefListEl.value = xref_list;
 
-    let xrefs = xref_list.split(",");
+    let promises = [];
+    let xrefs = xref_list.split(',');
     for (let i=0; i<xrefs.length; i++) {
         if (xrefs[i].trim() !== "") {
-            loadIndividualDetails(url, xrefs[i], indiListId);
+            promises.push(loadIndividualDetails(url, xrefs[i], indiListId));
         }
     }
-    updateClearAll();
+    Promise.all(promises).then(function () {
+        updateClearAll();
+        toggleHighlightStartPersons(document.getElementById('highlight_start_indis').checked);
+    }).catch(function(error) {
+        showToast("Error");
+        console.log(error);
+    });
 }
 
 function loadIndividualDetails(url, xref, list) {
-    fetch(url + xref.trim()).then(async (response) => {
+    return fetch(url + xref.trim()).then(async (response) => {
             const data = await response.json();
             let contents;
             let otherXrefId;
@@ -439,7 +446,7 @@ function loadIndividualDetails(url, xref, list) {
                         // Fix case if mismatched
                         if (xref !== data['data'][i].value) {
                             let listEl = document.getElementById(otherXrefId);
-                            let indiList = listEl.value.split(",");
+                            let indiList = listEl.value.split(',');
                             for (let j = indiList.length-1; j>=0; j--) {
                                 if (indiList[j].trim() === xref.trim()) {
                                     indiList[j] = data["data"][i].value;
@@ -475,9 +482,11 @@ function loadIndividualDetails(url, xref, list) {
 function addIndiToList(xref) {
     let list = document.getElementById('xref_list');
     const regex = new RegExp(`(?<=,|^)(${xref})(?=,|$)`);
-    if (!regex.test(list.value.replaceAll(" ",""))) {
+    if (!regex.test(list.value.replaceAll(" ','"))) {
         appendXrefToList(xref, 'xref_list');
-        loadIndividualDetails(TOMSELECT_URL, xref, 'indi_list');
+        loadIndividualDetails(TOMSELECT_URL, xref, 'indi_list').then(() => {
+            toggleHighlightStartPersons(document.getElementById('highlight_start_indis').checked);
+        })
 
     }
     clearIndiSelect('pid');
@@ -486,7 +495,7 @@ function addIndiToList(xref) {
 function addIndiToStopList(xref) {
     let list = document.getElementById('stop_xref_list');
     const regex = new RegExp(`(?<=,|^)(${xref})(?=,|$)`);
-    if (!regex.test(list.value.replaceAll(" ",""))) {
+    if (!regex.test(list.value.replaceAll(" ','"))) {
         appendXrefToList(xref, 'stop_xref_list');
         loadIndividualDetails(TOMSELECT_URL, xref, 'stop_indi_list');
     }
@@ -495,11 +504,11 @@ function addIndiToStopList(xref) {
 
 function appendXrefToList(xref, elementId) {
     const list = document.getElementById(elementId);
-    if (list.value.replace(",","").trim() === "") {
+    if (list.value.replace(',',"").trim() === "") {
         list.value = xref;
     } else {
-        list.value += "," + xref;
-        list.value = list.value.replaceAll(",,",",");
+        list.value += ',' + xref;
+        list.value = list.value.replaceAll(",,',',");
     }
 }
 
@@ -528,17 +537,19 @@ function removeItem(e, element, xrefListId) {
     let xref = element.getAttribute("data-xref").trim();
     let list = document.getElementById(xrefListId);
     const regex = new RegExp(`(?<=,|^)(${xref})(?=,|$)`);
-    list.value = list.value.replaceAll(" ","").replace(regex, "");
-    list.value = list.value.replace(",,", ",");
-    if (list.value.substring(0,1) === ",") {
+    list.value = list.value.replaceAll(" ','").replace(regex, "");
+    list.value = list.value.replace(",,", ',');
+    if (list.value.substring(0,1) === ',') {
         list.value = list.value.substring(1);
     }
-    if (list.value.substring(list.value.length-1) === ",") {
+    if (list.value.substring(list.value.length-1) === ',') {
         list.value = list.value.substring(0, list.value.length-1);
     }
     element.remove();
-    changeURLXref(list.value.split(",")[0].trim());
+    changeURLXref(list.value.split(',')[0].trim());
     updateClearAll();
+    removeFromXrefList(xref, 'no_highlight_xref_list');
+    toggleHighlightStartPersons(document.getElementById('highlight_start_indis').checked);
     if (autoUpdate) {
         updateRender();
     }
@@ -546,7 +557,7 @@ function removeItem(e, element, xrefListId) {
 
 // clear options from the dropdown if they are already in our list
 function removeSelectedOptions() {
-    document.getElementById('xref_list').value.split(",").forEach(function (id) {
+    document.getElementById('xref_list').value.split(',').forEach(function (id) {
         id = id.trim();
         if (id !== "") {
             let dropdown = document.getElementById('pid');
@@ -699,8 +710,8 @@ function scrollToRecord(xref) {
                 const points = group.getElementsByTagName('polygon')[0].getAttribute('points').split(" ");
                 // Find largest and smallest X and Y value out of all the points of the polygon
                 for (j = 0; j < points.length; j++) {
-                    const x = parseFloat(points[j].split(",")[0]);
-                    const y = parseFloat(points[j].split(",")[1]);
+                    const x = parseFloat(points[j].split(',')[0]);
+                    const y = parseFloat(points[j].split(',')[1]);
                     if (minX === null || x < minX) {
                         minX = x;
                     }
@@ -788,7 +799,7 @@ function pageLoaded() {
 
     // Form change events
     const form = document.getElementById('gvexport');
-    let checkboxElems = form.querySelectorAll("input:not([type='file']):not(#save_settings_name):not(#pid):not(#stop_pid), select:not(#simple_settings_list)");
+    let checkboxElems = form.querySelectorAll("input:not([type='file']):not(#save_settings_name):not(#pid):not(#stop_pid):not(.highlight_check), select:not(#simple_settings_list)");
     for (let i = 0; i < checkboxElems.length; i++) {
         checkboxElems[i].addEventListener("change", handleFormChange);
     }
@@ -953,9 +964,8 @@ function loadSettings(data) {
 
     if (autoUpdate) {
         updateRender();
-    } else {
-        refreshIndisFromXREFS(false);
     }
+    refreshIndisFromXREFS(false);
 }
 
 function setCheckStatus(el, checked) {
@@ -1004,7 +1014,7 @@ function getSettingsClient(id = ID_ALL_SETTINGS) {
             if (id === ID_ALL_SETTINGS) {
                 if (localStorage.getItem(SETTINGS_ID_LIST_NAME + "_" + treeName)) {
                     let settings_list = localStorage.getItem(SETTINGS_ID_LIST_NAME + "_" + treeName);
-                    let ids = settings_list.split(",");
+                    let ids = settings_list.split(',');
                     let promises = ids.map(id_value => getSettingsClient(id_value))
                     let results = await Promise.all(promises);
                     let settings = {};
@@ -1481,10 +1491,10 @@ function getIdLocal() {
         let settings_list = localStorage.getItem(SETTINGS_ID_LIST_NAME + "_" + treeName);
         if (settings_list) {
             settings_list = localStorage.getItem(SETTINGS_ID_LIST_NAME + "_" + treeName);
-            let ids = settings_list.split(",");
+            let ids = settings_list.split(',');
             let last_id = ids[ids.length - 1];
             next_id = (parseInt(last_id, 36) + 1).toString(36);
-            settings_list = ids.join(",") + "," + next_id;
+            settings_list = ids.join(',') + ',' + next_id;
         } else {
             next_id = "0";
             settings_list = next_id;
@@ -1535,4 +1545,76 @@ function copyToClipboard(textToCopy) {
             textArea.remove();
         });
     }
+}
+
+function toggleHighlightCheckbox(e) {
+    let xref = e.target.getAttribute('data-xref');
+    if (e.target.checked) {
+        removeFromXrefList(xref, 'no_highlight_xref_list');
+    } else {
+        addToXrefList(xref, 'no_highlight_xref_list');
+    }
+    handleFormChange();
+}
+
+function addToXrefList(value, listElName) {
+    let xrefExcludeEl = document.getElementById(listElName);
+    let xrefExcludeList = xrefExcludeEl.value;
+    if (xrefExcludeList === "") {
+        xrefExcludeEl.value = value;
+    } else {
+        let xrefExcludeArray = xrefExcludeEl.value.split(',');
+        if (!xrefExcludeArray.includes(value)) {
+            xrefExcludeArray[xrefExcludeArray.length] = value;
+            xrefExcludeEl.value = xrefExcludeArray.join(',');
+        }
+    }
+}
+function removeFromXrefList(value, listElName) {
+    let xrefExcludeEl = document.getElementById(listElName);
+    let xrefExcludeArray = xrefExcludeEl.value.split(',');
+    if (xrefExcludeArray.includes(value)) {
+        const index = xrefExcludeArray.indexOf(value);
+        xrefExcludeArray.splice(index, 1);
+        xrefExcludeEl.value = xrefExcludeArray.join(',');
+    }
+}
+
+
+function toggleHighlightStartPersons(enable) {
+    if (enable) {
+        let list = document.getElementById('highlight_list');
+        let xrefList = document.getElementById('xref_list');
+        let xrefExcludeArray = document.getElementById('no_highlight_xref_list').value.split(',');
+        list.innerHTML = '';
+        let xrefs = xrefList.value.split(',');
+        for (let i=0; i<xrefs.length; i++) {
+            if (xrefs[i].trim() !== "") {
+                const xrefItem = document.createElement('div');
+                const checkboxEl = document.createElement('input');
+                checkboxEl.setAttribute('id', 'highlight_check' + i);
+                checkboxEl.setAttribute('class', 'highlight_check');
+                checkboxEl.setAttribute('type', 'checkbox');
+                checkboxEl.setAttribute('data-xref', xrefs[i]);
+                if (!xrefExcludeArray.includes(xrefs[i])) {
+                    checkboxEl.checked = true;
+                }
+                checkboxEl.addEventListener("click", toggleHighlightCheckbox);
+                xrefItem.appendChild(checkboxEl);
+                const indiItem = document.getElementById('indi_list')
+                    .querySelector('.indi_list_item[data-xref="' + xrefs[i] + '"]');
+                let indiName = "";
+                if (indiItem != null) {
+                    indiName = indiItem.getElementsByClassName("NAME")[0].innerText;
+                }
+                const labelEl = document.createElement('label');
+                labelEl.setAttribute('class', 'highlight_check_label');
+                labelEl.setAttribute('for', 'highlight_check' + i);
+                labelEl.innerHTML = indiName + " (" + xrefs[i] + ")";
+                xrefItem.appendChild(labelEl);
+                list.appendChild(xrefItem);
+            }
+        }
+    }
+    showHide(document.getElementById('startcol_option'),enable);
 }
