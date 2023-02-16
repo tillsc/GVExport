@@ -1544,8 +1544,38 @@ function copyToClipboard(textToCopy) {
 }
 
 function toggleHighlightCheckbox(e) {
-    console.log(e.target.getAttribute('data-xref'));
+    let xref = e.target.getAttribute('data-xref');
+    if (e.target.checked) {
+        removeFromXrefList(xref, 'no_highlight_xref_list');
+    } else {
+        addToXrefList(xref, 'no_highlight_xref_list');
+    }
+    handleFormChange();
 }
+
+function addToXrefList(value, listElName) {
+    let xrefExcludeEl = document.getElementById(listElName);
+    let xrefExcludeList = xrefExcludeEl.value;
+    if (xrefExcludeList === "") {
+        xrefExcludeEl.value = value;
+    } else {
+        let xrefExcludeArray = xrefExcludeEl.value.split(',');
+        if (!xrefExcludeArray.includes(value)) {
+            xrefExcludeArray[xrefExcludeArray.length] = value;
+            xrefExcludeEl.value = xrefExcludeArray.join(',');
+        }
+    }
+}
+function removeFromXrefList(value, listElName) {
+    let xrefExcludeEl = document.getElementById(listElName);
+    let xrefExcludeArray = xrefExcludeEl.value.split(',');
+    if (xrefExcludeArray.includes(value)) {
+        const index = xrefExcludeArray.indexOf(value);
+        xrefExcludeArray.splice(index, 1);
+        xrefExcludeEl.value = xrefExcludeArray.join(',');
+    }
+}
+
 
 function toggleHighlightStartPersons(enable) {
     if (enable) {
