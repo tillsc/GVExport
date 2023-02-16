@@ -82,5 +82,6 @@ return array(
 	'death_prefix' => '+', // Text shown on chart before the death date
     'save_settings_name' => '', // Default value for text field where name of settings can be entered
     'show_diagram_panel' => false, // If set to true, a "Saved diagrams" section is shown at the top, that lists settings saved using the feature to save multiple versions of settings
-    'auto_update' => true // If auto-updating browser render on change is enabled or not
+    'auto_update' => true, // If auto-updating browser render on change is enabled or not
+    'url_xref_treatment' => 'default' // What to do with XREF provided by webtrees when loading page ('default', 'add', 'nothing', or 'overwrite'   )
 );

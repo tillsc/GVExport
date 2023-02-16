@@ -380,10 +380,10 @@ function loadURLXref() {
             el.value = xref;
         } else {
             const xrefs = el.value.split(',');
-            if (xrefs.length === 1) {
+            if (url_xref_treatment === 'default' && xrefs.length === 1 || url_xref_treatment === 'overwrite') {
                 el.value = "";
             }
-            addIndiToList(xref);
+            if (url_xref_treatment !== 'nothing') addIndiToList(xref);
         }
     }
 }
