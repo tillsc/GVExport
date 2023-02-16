@@ -1190,7 +1190,7 @@ function saveSettingsAdvanced(userPrompted = false) {
             document.getElementById('modal').remove();
         } else {
             let message = TRANSLATE["Overwrite settings '%s'?"].replace('%s', settingsName);
-            let buttons = '<div class="modal-button-container"><button class="btn btn-secondary modal-button" onclick="document.getElementById(' + "'modal'" + ').remove()">Cancel</button><button class="btn btn-primary modal-button" onclick="saveSettingsAdvanced(true)">Overwrite</button></div>';
+            let buttons = '<div class="modal-button-container"><button class="btn btn-secondary modal-button" onclick="document.getElementById(' + "'modal'" + ').remove()">' + TRANSLATE['Cancel'] + '</button><button class="btn btn-primary modal-button" onclick="saveSettingsAdvanced(true)">' + TRANSLATE['Overwrite'] + '</button></div>';
             showModal('<div class="modal-container">' + message + '<br>' + buttons + '</div>');
             return false;
         }
