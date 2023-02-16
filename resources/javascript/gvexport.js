@@ -484,7 +484,9 @@ function addIndiToList(xref) {
     const regex = new RegExp(`(?<=,|^)(${xref})(?=,|$)`);
     if (!regex.test(list.value.replaceAll(" ','"))) {
         appendXrefToList(xref, 'xref_list');
-        loadIndividualDetails(TOMSELECT_URL, xref, 'indi_list');
+        loadIndividualDetails(TOMSELECT_URL, xref, 'indi_list').then(() => {
+            toggleHighlightStartPersons(document.getElementById('highlight_start_indis').checked);
+        })
 
     }
     clearIndiSelect('pid');
@@ -546,6 +548,8 @@ function removeItem(e, element, xrefListId) {
     element.remove();
     changeURLXref(list.value.split(',')[0].trim());
     updateClearAll();
+    removeFromXrefList(xref, 'no_highlight_xref_list');
+    toggleHighlightStartPersons(document.getElementById('highlight_start_indis').checked);
     if (autoUpdate) {
         updateRender();
     }
