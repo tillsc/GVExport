@@ -538,7 +538,7 @@ $xref = $individual->xref();
                     <input type="checkbox" name="vars[highlight_start_indis]" onclick="toggleHighlightStartPersons( this.checked)" id="highlight_start_indis" value="true" <?= $vars["highlight_start_indis"] ? 'checked' : '' ?>><label for="highlight_start_indis" class="check-list"><?= I18N::translate('Show starting persons in different color') ?></label>
                     <div class="color_subgroup col-auto wt-page-options-value" id="startcol_option"  <?= $vars["highlight_start_indis"] != "true" ? 'style="display:none;"' : '' ?>>
                         <input type="color" class="picker" name="vars[highlight_col]" id="highlight_col" value="<?= e($vars["highlight_col"]); ?>" /><label for="highlight_col" class="picker-label"><?= I18N::translate('Starting persons background color') ?></label>
-                        <label for="no_highlight_xref_list"><?= I18N::translate("Colour these XREFs:"); ?></label><br>
+                        <label for="no_highlight_xref_list"><?= I18N::translate("Colour these individuals:"); ?></label><br>
                         <div id="highlight_list">
 
                         </div>
