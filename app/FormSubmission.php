@@ -66,6 +66,10 @@ class FormSubmission
         $settings['mark_not_related'] = isset($vars['mark_not_related']);
         $settings['faster_relation_check'] = isset($vars['faster_relation_check']);
 
+        if (isset($vars['url_xref_treatment']) && ctype_alpha($vars['url_xref_treatment'])) {
+            $settings['url_xref_treatment'] = $vars['url_xref_treatment'];
+        }
+
         if (isset($vars['font_colour_name']) && $this->isValidColourHex($vars['font_colour_name'])) {
             $settings["font_colour_name"] = $vars['font_colour_name'];
         }

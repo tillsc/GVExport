@@ -27,6 +27,10 @@ class Settings
         $this->defaultSettings['typeface_fallback'] = [0 => "Sans",  10 => "Cursive", 20 => "Monospace", 30 => "Serif", 40 => "Serif", 50 => "Sans", 60 => "Serif", 70 => "Sans", 80 => "Sans"];
         $this->defaultSettings['directions']['TB'] = "Top-to-bottom";
         $this->defaultSettings['directions']['LR'] = "Left-to-right";
+        $this->defaultSettings['url_xref_treatment_options']['default'] = "Default";
+        $this->defaultSettings['url_xref_treatment_options']['add'] = "Add to list";
+        $this->defaultSettings['url_xref_treatment_options']['nothing'] = "Don't add to list";
+        $this->defaultSettings['url_xref_treatment_options']['overwrite'] = "Overwrite";
         $this->defaultSettings['use_abbr_places'] = [0 => "Full place name", 10 => "City and country" ,  20 => "City and 2 letter ISO country code", 30 => "City and 3 letter ISO country code"];
         $this->defaultSettings['use_abbr_names'] = [0 => "Full name", 10 => "Given and surnames", 20 => "Given names" , 30 => "First given name only", 40 => "Surnames", 50 => "Initials only", 60 => "Given name initials and surname", 70 => "Don't show names"];
         $this->defaultSettings['countries'] = $this->getCountryAbbreviations();
