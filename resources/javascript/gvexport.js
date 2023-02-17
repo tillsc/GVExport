@@ -383,7 +383,13 @@ function loadURLXref() {
             if (url_xref_treatment === 'default' && xrefs.length === 1 || url_xref_treatment === 'overwrite') {
                 el.value = "";
             }
-            if (url_xref_treatment !== 'nothing') addIndiToList(xref);
+            if (url_xref_treatment !== 'nothing') {
+                let startValue = el.value;
+                addIndiToList(xref);
+                if (startValue !== el.value) {
+                    setTimeout(function () {showToast(TRANSLATE['One new source person added to %s existing persons'].replace('%s', xrefs.length.toString()))}, 100);
+                }
+            }
         }
     }
 }
