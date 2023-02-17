@@ -399,9 +399,9 @@ function indiSelectChanged() {
     if (xref !== "") {
         addIndiToList(xref);
         changeURLXref(xref);
-    }
-    if (autoUpdate) {
-        updateRender();
+        if (autoUpdate) {
+            updateRender();
+        }
     }
 }
 function stopIndiSelectChanged() {
@@ -805,7 +805,7 @@ function pageLoaded() {
 
     // Form change events
     const form = document.getElementById('gvexport');
-    let checkboxElems = form.querySelectorAll("input:not([type='file']):not(#save_settings_name):not(#pid):not(#stop_pid):not(.highlight_check), select:not(#simple_settings_list)");
+    let checkboxElems = form.querySelectorAll("input:not([type='file']):not(#save_settings_name):not(#stop_pid):not(.highlight_check), select:not(#simple_settings_list):not(#pid)");
     for (let i = 0; i < checkboxElems.length; i++) {
         checkboxElems[i].addEventListener("change", handleFormChange);
     }
