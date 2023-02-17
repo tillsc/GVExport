@@ -51,9 +51,9 @@ $settings = $settingsObj->getDefaultSettings();
                 <label for="mclimit"><?= I18N::translate('Graphviz MCLIMIT setting') ?>:</label>
                 <input class="form-control col-sm-6" type="text" name="vars[mclimit]" id="mclimit" value="<?= I18N::digits($vars["mclimit"]); ?>">
                 <label for="birth_prefix"><?= I18N::translate('Birth date prefix') ?>:</label>
-                <input class="form-control col-sm-6" type="text" name="vars[birth_prefix]" id="birth_prefix" value="<?= e($vars["birth_prefix"]); ?>">
+                <input class="form-control col-sm-6" type="text" name="vars[birth_prefix]" id="birth_prefix" pattern="^[A-Za-z0-9_ .*+()^%$#@!†-]*$" title="<?= I18N::translate("Letters, numbers, spaces, or the following symbols: ") . "_.*+()^%$#@!†-"; ?>" value="<?= e($vars["birth_prefix"]); ?>">
                 <label for="death_prefix"><?= I18N::translate('Death date prefix') ?>:</label>
-                <input class="form-control col-sm-6" type="text" name="vars[death_prefix]" id="death_prefix" value="<?= e($vars["death_prefix"]); ?>">
+                <input class="form-control col-sm-6" type="text" name="vars[death_prefix]" id="death_prefix" pattern="^[A-Za-z0-9_ .*+()^%$#@!†-]*$" title="<?= I18N::translate("Letters, numbers, spaces, or the following symbols: ") . "_.*+()^%$#@!†-"; ?>" value="<?= e($vars["death_prefix"]); ?>">
             </div>
         </div>
         <div>
@@ -142,6 +142,12 @@ $settings = $settingsObj->getDefaultSettings();
                     <br/>
                     <input class="cart_toggle" type="checkbox" name="vars[faster_relation_check]" id="faster_relation_check" value="faster_relation_check" <?= $vars["faster_relation_check"] ? 'checked' : '' ?>>
                     <label class="check-list" for="faster_relation_check"><?= I18N::translate('Ignore unseen links to speed up relative check') ?></label>
+                </div>
+                <div class="row form-group">
+                    <label class="col-sm-4 col-form-label" for="graph_dir"><?= I18N::translate('Treatment of source individuals') ?></label>
+                    <div class="col-sm-8 wt-page-options-value">
+                        <?= view('components/select', ['name' => 'vars[url_xref_treatment]', 'id' => 'url_xref_treatment', 'selected' => e($vars['url_xref_treatment']), 'options' => MainPage::updateTranslations($settings["url_xref_treatment_options"])]) ?>
+                    </div>
                 </div>
             </div>
 

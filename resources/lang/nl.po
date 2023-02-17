@@ -285,7 +285,7 @@ msgstr "Toon/verberg geavanceerde instellingen"
 
 #: 
 msgid "Ignore unseen links to speed up relative check"
-msgstr "Negeer niet-zichtbare links om de verwantschapscontrole te versnellen"
+msgstr "Negeer niet-zichtbare koppelingen om de verwantschapscontrole te versnellen"
 
 #: 
 msgid "Non-relatives"
@@ -563,7 +563,7 @@ msgstr "Vink deze optie aan om voorouders op te nemen van de startperso(o)n(en) 
 #. This help message is displayed when the user clicks the help icon next to "Include".  https://s3.eu-west-1.amazonaws.com/po-pub/i/G2LwgKcPjaAwzcCXllEaXa13.png
 #: 
 msgid "This section lets you decide what type of relatives to include when generating the diagram.</p><h4>Siblings</h4><p>Include brothers and sisters of anyone in the tree.</p><h4>All relations</h4><p>Include cousins, nieces, nephews, and their descendants when generating the tree. Requires \"Siblings\" to be selected.</p><h4>Partners</h4><p>Include the husbands, wives, and partners of those in the tree even if they aren't blood-relatives. There is another option \"Mark not blood-related people with different color\" that allows these people to be marked in a different colour.</p><h4>Anyone</h4><p>Follow all links regardless of whether the person is related. In practice, this generally means that the family of non-relatives (i.e. spouses) are included in the tree.</p><p>Use this option to include all records of the selected generations. Note that only records with a link are included, so you may need to include more ancestor generations (or more starting individuals) to get all your records to show."
-msgstr "Hier kunt u bepalen welk type familieleden u wilt opnemen bij het genereren van het diagram.</p><h4>Broers en zussen</h4><p>Broers en zussen van iedereen in de boom opnemen.</p><h4>Alle relaties</h4><p>Neven en nichten en hun nakomelingen opnemen bij het genereren van de boom. Vereist dat \"Broers en zussen\" is geselecteerd.</p><h4>Partners</h4><p>Omvat de echtgenoten, echtgenotes en partners van degenen in de stamboom, zelfs als zij geen bloedverwanten zijn. Er is een andere optie \"Niet-bloedverwanten met andere kleur markeren\" waarmee deze personen met een andere kleur kunnen worden gemarkeerd.</p><h4>Iedereen</h4><p>Volg alle koppelingen, ongeacht of de persoon verwant is. In de praktijk betekent dit meestal dat de familie van niet-verwanten (zoals echtgenoten) in de boom wordt opgenomen.</p><p>Gebruik deze optie om alle records van de geselecteerde generaties op te nemen. Merk op dat alleen records met een link worden opgenomen, dus het is mogelijk dat u meer vooroudergeneraties (of meer startpersonen) moet opnemen om alle records te tonen."
+msgstr "Hier kunt u bepalen welk type familieleden u wilt opnemen bij het genereren van het diagram.</p><h4>Broers en zussen</h4><p>Broers en zussen van iedereen in de boom opnemen.</p><h4>Alle relaties</h4><p>Neven en nichten en hun nakomelingen opnemen bij het genereren van de boom. Vereist dat \"Broers en zussen\" is geselecteerd.</p><h4>Partners</h4><p>Omvat de echtgenoten, echtgenotes en partners van degenen in de stamboom, zelfs als zij geen bloedverwanten zijn. Er is een andere optie \"Niet-bloedverwanten met andere kleur markeren\" waarmee deze personen met een andere kleur kunnen worden gemarkeerd.</p><h4>Iedereen</h4><p>Volg alle koppelingen, ongeacht of de persoon verwant is. In de praktijk betekent dit meestal dat de familie van niet-verwanten (zoals echtgenoten) in de boom wordt opgenomen.</p><p>Gebruik deze optie om alle records van de geselecteerde generaties op te nemen. Merk op dat alleen records met een koppeling worden opgenomen, dus het is mogelijk dat u meer vooroudergeneraties (of meer startpersonen) moet opnemen om alle records te tonen."
 
 #. This help message is displayed when the user clicks the help icon next to "Include descendants".  https://s3.eu-west-1.amazonaws.com/po-pub/i/TNXFdoP4fIHVQnScVvnfvKA1.png
 #: 
@@ -626,7 +626,7 @@ msgstr "Als de module één van deze personen bereikt, laat de boom vanaf daar d
 #. Help text shown when user clicks "i" next to option "Non-relatives":  https://s3.eu-west-1.amazonaws.com/po-pub/i/Lq1O4swJShMh36BPEhJiSujt.png
 #: 
 msgid "This section has two related options.<h4>Mark not blood-related people with different color</h4><p>Where spouses are included and are not blood-related to anyone in the \"Include anyone related to\" field, if this option is selected they will be highlighted in a much duller color than the standard blue/pink for relatives.</p><p>Note that when this option is selected, and non-relatives are found in the selected records, then a full tree scan is performed to identify if an individual is related by a more distant link (see next option).</p><h4>Ignore unseen links to speed up relative check</h4><p>This option is only available when the previous option is selected. When the option to display non-relatives in a different colour is selected, normally a scan is performed starting from the starting individuals and branching to all relatives regardless of display settings. This ensures that if a person is related via a link not displayed, they will still show as related.</p><p>Enabling this option prevents the full scan of the tree which can greatly speed up the generation of the diagram on larger trees, but may reduce accuracy of the colouring of non-relatives."
-msgstr "Deze sectie heeft twee gerelateerde opties.<h4>Markeer niet-bloedverwanten met een andere kleur</h4><p>Wanneer partners worden opgenomen die geen bloedverwant zijn van iemand in het veld \"Inclusief iedereen die verwant is met\", worden zij, als deze optie is geselecteerd, gemarkeerd in een veel saaiere kleur dan de standaardkleur blauw/roze voor verwanten.</p><p>Wanneer deze optie is geselecteerd en in de geselecteerde records niet-verwanten worden gevonden, wordt een volledige boomscan uitgevoerd om na te gaan of een persoon verwant is via een verder verwijderde link (zie de volgende optie).</p><h4>Negeer niet-zichtbare links om de verwantschapscontrole te versnellen</h4><p>Deze optie is alleen beschikbaar wanneer de vorige optie is geselecteerd. Als de optie om niet-verwanten in een andere kleur weer te geven is geselecteerd, wordt normaal gesproken een scan uitgevoerd beginnend bij de startpersonen en vertakkend naar alle verwanten, ongeacht de weergave-instellingen. Dit zorgt ervoor dat als een persoon verwant is via een link die niet wordt weergegeven, deze toch als verwant wordt weergegeven.</p><p>Inschakelen van deze optie voorkomt het volledig scannen van de boom, wat het genereren van het diagram bij grotere stambomen aanzienlijk kan versnellen, maar de nauwkeurigheid van de kleuring van niet-verwanten kan verminderen."
+msgstr "Deze sectie heeft twee gerelateerde opties.<h4>Markeer niet-bloedverwanten met een andere kleur</h4><p>Wanneer partners worden opgenomen die geen bloedverwant zijn van iemand in het veld \"Inclusief iedereen die verwant is met\", worden zij, als deze optie is geselecteerd, gemarkeerd in een veel saaiere kleur dan de standaardkleur blauw/roze voor verwanten.</p><p>Wanneer deze optie is geselecteerd en in de geselecteerde records niet-verwanten worden gevonden, wordt een volledige boomscan uitgevoerd om na te gaan of een persoon verwant is via een verder verwijderde koppeling (zie de volgende optie).</p><h4>Negeer niet-zichtbare koppelingen om de verwantschapscontrole te versnellen</h4><p>Deze optie is alleen beschikbaar wanneer de vorige optie is geselecteerd. Als de optie om niet-verwanten in een andere kleur weer te geven is geselecteerd, wordt normaal gesproken een scan uitgevoerd beginnend bij de startpersonen en vertakkend naar alle verwanten, ongeacht de weergave-instellingen. Dit zorgt ervoor dat als een persoon verwant is via een koppeling die niet wordt weergegeven, deze toch als verwant wordt weergegeven.</p><p>Inschakelen van deze optie voorkomt het volledig scannen van de boom, wat het genereren van het diagram bij grotere stambomen aanzienlijk kan versnellen, maar de nauwkeurigheid van de kleuring van niet-verwanten kan verminderen."
 
 #. Help text shown when user clicks the "i" next to "Show photos" in the advanced appearance section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/Xpn8Y8LiWnYphmjJe9eJO6ub.png
 #: 
@@ -741,8 +741,8 @@ msgstr "Instellingen laden uit bestand"
 
 #. Help text for downloading saved settings to a file, and uploading these settings:  https://s3.eu-west-1.amazonaws.com/po-pub/i/HfxRre2VQe9TVyl8dtX3RhVj.png
 #: 
-msgid "Here you are able to save the chosen settings to a file, and to load that file at a later time.</p><p>For example, you may have many diagrams you create from your tree. You may want to save the settings used for each diagram so that in future you can regenerate the diagram to include any new information."
-msgstr "Hier kunt u de gekozen instellingen opslaan in een bestand, en dat bestand op een later tijdstip laden.</p><p>Als u bijvoorbeeld veel diagrammen van uw boomstructuur maakt dan kunt u de instellingen voor elk diagram opslaan, zodat u in de toekomst het diagram opnieuw kunt genereren met nieuwe informatie."
+msgid "If you have saved settings to a file, using the menu on the above saved settings, you can load the settings from the file here."
+msgstr "Hier kunt u via het menu instellingen laden uit een bestand dat u eerder hebt opgeslagen."
 
 #. For development use, you can now enable a debug panel. Needs translation as option will appear on Control Panel page:  https://s3.eu-west-1.amazonaws.com/po-pub/i/UzABfGKv12F3PBzS3wVzoHCm.png 
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/36sF1oj0dbyyJzl0meXi1ixY.png
@@ -783,4 +783,214 @@ msgstr "Geheugenlimiet bereikt. Verminder het aantal records of gebruik de downl
 #: 
 msgid "Memory limit reached. Please reduce number of records or install Graphviz on server and use download option."
 msgstr "Geheugenlimiet bereikt. Verminder het aantal records of installeer Graphviz op de server en gebruik de downloadoptie."
+
+#. This message is shown when loading a settings file and a setting in the file doesn't match up to what we are looking for. The name of the setting is appended on the end:  https://s3.eu-west-1.amazonaws.com/po-pub/i/Mrqls4UxxHPlbZzEE4gz2qgj.png
+#: 
+msgid "Unable to load setting"
+msgstr "Kan instelling niet laden"
+
+#. Heading for section in Control Panel for settings that are only available to the administrator: https://s3.eu-west-1.amazonaws.com/po-pub/i/6ZCINR8ZbXR3Wpis2IuYp20i.png
+#: 
+msgid "Settings for GVExport"
+msgstr "Instellingen voor GVExport"
+
+#. Group heading for settings only available in control panel: https://s3.eu-west-1.amazonaws.com/po-pub/i/4xkAK3jvXYzWAsk3q7faIpbK.png
+#: 
+msgid "Administrator settings"
+msgstr "Beheerdersinstellingen"
+
+#. Setting that sets the name of the downloaded file. E.g. when downloading JPG format, if you set the file name to "gvexport" then the file will be called "gvexport.jpg":   https://s3.eu-west-1.amazonaws.com/po-pub/i/jg1noFw1w55jgfEMyLD5oc8f.png
+#: 
+msgid "Download file name"
+msgstr "Naam downloadbestand"
+
+#. The MCLIMIT setting that is directly sent to Graphviz. Higher numbers result in fewer arrows crossing on the diagram but take longer to process.  https://s3.eu-west-1.amazonaws.com/po-pub/i/ayvZCoGAoyQIbE8v60cIVcIz.png
+#: 
+msgid "Graphviz MCLIMIT setting"
+msgstr "Graphviz MCLIMIT-instelling"
+
+#. Birth date setting in Control Panel. By default, birth dates on the diagram start with a * prefix. This setting can change this:  https://s3.eu-west-1.amazonaws.com/po-pub/i/uF5UdfYXLFGLQ4TLZysMUpNd.png
+#: 
+msgid "Birth date prefix"
+msgstr "Voorvoegsel geboortedatum"
+
+#. Death date setting in Control Panel. By default, death dates on the diagram start with a + prefix. This setting can change this:  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/uF5UdfYXLFGLQ4TLZysMUpNd.png
+#: 
+msgid "Death date prefix"
+msgstr "Voorvoegsel overlijdensdatum"
+
+#. Area name for option to save a version of the settings for future use:  https://s3.eu-west-1.amazonaws.com/po-pub/i/n1salnZcGP6xC187FO1dAjpE.png
+#: 
+msgid "Save settings"
+msgstr "Instellingen opslaan"
+
+#. Text on save button in option to save a version of the settings for future use:  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/n1salnZcGP6xC187FO1dAjpE.png
+#: 
+msgid "Save"
+msgstr "Opslaan"
+
+#. Placeholder text in text field in option to save a version of the settings for future use. Users will type a name here to call this saved version of the settings:  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/n1salnZcGP6xC187FO1dAjpE.png
+#: 
+msgid "Settings name"
+msgstr "Naam instellingen"
+
+#. Help text for option to save a version of the settings for future use:  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/n1salnZcGP6xC187FO1dAjpE.png https://s3.eu-west-1.amazonaws.com/po-pub/i/fBbMFauzn9yAXWlI3do9cwmD.png
+#: 
+msgid "Here you are able to save the chosen settings within GVExport. The settings are only accessible within the same user and tree. Click a settings record to load it.</p><p>For example, you may have many diagrams you create from your tree. You may want to save the settings used for each diagram so that in future you can regenerate the diagram to include any new information.</p><p>If you click the ellipsis on a record, you will see several options. <ul><li>Delete - remove these settings</li><li>Download - download a file holding the settings, which can be loaded at a later date.</li><li>Copy link - if logged in, this allows you to share the settings with others by creating a URL to share with them, which is copied to the clipboard of your device.</li><li>Revoke link - if a sharing link has been created, this will show to allow you to revoke the link, so it can no longer be accessed.</li><li>Add to My favourites - If logged in, this will create a sharing link and add this to the webtrees favourites on your \"My page\" page.</li><li>Add to Tree favourites - If logged in as a tree manager, this will create a sharing link and add this to the webtrees favourites on the tree home page.</li></ul>When logged out, only the Delete and Download options will be available.</p><p>The \"Show saved diagrams panel\" option adds a new section to the settings that makes the saved settings available as a dropdown list. You may wish to use webtree's ability for an administrator to \"Masquerade as user\" to set up some settings for another user, then enable this option, so they can easily choose different prepared diagrams without needed to delve into the advanced settings."
+msgstr "Hier kunt u de gekozen instellingen opslaan binnen GVExport. De instellingen zijn alleen toegankelijk binnen dezelfde gebruiker en stamboom. Klik op een instellingenrecord om deze te laden.</p><p>U heeft bijvoorbeeld veel diagrammen die u vanuit uw stamboom maakt. U kunt de instellingen voor elk diagram opslaan, zodat u in de toekomst het diagram opnieuw kunt genereren om er nieuwe informatie in op te nemen.</p><p>Als u op de ellips op een record klikt, ziet u verschillende opties. <ul><li>Verwijderen - deze instellingen verwijderen</li><li>Download - download een bestand met de instellingen, dat op een later tijdstip kan worden geladen.</li><li>Koppeling kopiëren - als u bent ingelogd, kunt u hiermee de instellingen met anderen delen door een URL te maken die u met hen kunt delen en die naar het klembord van uw apparaat wordt gekopieerd.</li><li>Koppeling intrekken - als een koppeling voor delen is gemaakt, wordt deze weergegeven zodat u de koppeling kunt intrekken, zodat deze niet langer toegankelijk is.</li><li>Toevoegen aan Mijn favorieten - als u bent ingelogd, maakt u een koppeling om te delen en voegt u deze toe aan de webtrees-favorieten op uw pagina \"Mijn favorieten\".</li><li>Toevoegen aan Stamboomfavorieten - als u bent ingelogd als stamboombeheerder, wordt een koppeling voor delen gemaakt en toegevoegd aan de webtreesfavorieten op de startpagina van de stamboom.</li></ul>Als u bent uitgelogd, zijn alleen de opties Verwijderen en Downloaden beschikbaar.</p><p>De optie \"Toon paneel met opgeslagen diagrammen\" voegt een nieuwe sectie toe aan de instellingen die de opgeslagen instellingen beschikbaar maakt als een vervolgkeuzelijst. U wilt misschien in webtrees de beheerdersmogelijkheid \"Vermom uzelf als deze gebruiker\" gebruiken om sommige instellingen voor een andere gebruiker in te stellen, en dan deze optie inschakelen, zodat zij gemakkelijk verschillende voorbereide diagrammen kunnen kiezen zonder in de geavanceerde instellingen te hoeven duiken."
+
+#. Error message shown when API was not able to assign an ID when saving a version of settings.  https://s3.eu-west-1.amazonaws.com/po-pub/i/SF4w8yDqZ9D7PGWdqvq2cOzq.png 
+#. User may see this when clicking Save button: https://s3.eu-west-1.amazonaws.com/po-pub/i/n1salnZcGP6xC187FO1dAjpE.png
+#. 
+#. Most likely reason for this is that there are too many settings saved.
+#: 
+msgid "Failed to assign new settings ID"
+msgstr "ID voor nieuwe instellingen niet toegewezen"
+
+#. Error message shown to user when an API request to get the settings fails because the settings version ID is invalid.  https://s3.eu-west-1.amazonaws.com/po-pub/i/09WTPGgXqx1UJ4awI72JPxgh.png 
+#. 
+#. Settings IDs are used when saving multiple versions of settings: https://s3.eu-west-1.amazonaws.com/po-pub/i/n1salnZcGP6xC187FO1dAjpE.png
+#: 
+msgid "Invalid settings ID"
+msgstr "Ongeldige instellingen-ID"
+
+#. Error message shown when an invalid API request type is sent (users would never see this unless something broke):  https://s3.eu-west-1.amazonaws.com/po-pub/i/UigW1X1hdrkKdbkztZ5cwXBd.png
+#: 
+msgid "Invalid request"
+msgstr "Ongeldige aanvraag"
+
+#. Error message for if API call has invalid structure. Error message is appended to the end. Users would never see this unless something is broken:  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/0RAGuKLhRU4gotkMYaeu8RdX.png
+#: 
+msgid "Invalid JSON"
+msgstr "Ongeldige JSON"
+
+#. If you click to save a version of settings, but haven't entered a name, then the default name is "Settings":  https://s3.eu-west-1.amazonaws.com/po-pub/i/1RrJep5HGIKYDumc26xR9kCo.png
+#: 
+msgid "Settings"
+msgstr "Instellingen"
+
+#. This message is shown when clicking the help button in the "Saved diagrams" section (this section is hidden by default): https://s3.eu-west-1.amazonaws.com/po-pub/i/CViHSJI40OkSwCEyVHs79jOh.png  https://s3.eu-west-1.amazonaws.com/po-pub/i/PuoBsz04pts2DU9CAWou7nyc.png
+#: 
+msgid "You can select from the list to load some saved settings. Settings can be added or changed using the options in the advanced section of the \"File settings\" section."
+msgstr "U kunt uit de lijst kiezen om opgeslagen instellingen te laden. Instellingen kunnen worden toegevoegd of gewijzigd met behulp van de opties in het geavanceerde gedeelte van het onderdeel \"Bestandsinstellingen\"."
+
+#. When you have saved a named version of settings using the advanced save settings functionality, this is the option to delete the settings:  https://s3.eu-west-1.amazonaws.com/po-pub/i/QHkbIB7B8ZRpp5IVdKiVu1F6.png
+#: 
+msgid "Delete"
+msgstr "Verwijderen"
+
+#. When you have saved a named version of settings using the advanced save settings functionality, this is the option to copy a link to the settings, where if the user visits this link the settings will be automatically loaded:  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/QHkbIB7B8ZRpp5IVdKiVu1F6.png
+#: 
+msgid "Copy link"
+msgstr "Koppeling kopiëren"
+
+#. After clicking option to copy link to clipboard for sharing saved settings, this message shows on a toast popup:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/QHkbIB7B8ZRpp5IVdKiVu1F6.png
+#: 
+msgid "Copied link to clipboard"
+msgstr "Koppeling naar klembord gekopieerd"
+
+#. If copying shared settings link to clipboard fails (e.g. browser blocks this or not supported), then this message is shown. https://s3.eu-west-1.amazonaws.com/po-pub/i/QHkbIB7B8ZRpp5IVdKiVu1F6.png
+#: 
+msgid "Failed to copy link to clipboard"
+msgstr "Kopiëren van koppeling naar klembord mislukt"
+
+#. As well as toast message, if copying shared settings link to clipboard fails (e.g. browser blocks this or not supported), then a popup will allow copying URL. 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/lhdGkODdwA7aL5isgWiqR726.png
+#: 
+msgid "Copy manually below"
+msgstr "Kopieer onderstaande koppeling handmatig"
+
+#. If you save a version of the settings using the advanced settings saving option, if you select the same name as existing settings you will be prompted to overwrite the settings with this message:  https://s3.eu-west-1.amazonaws.com/po-pub/i/DTqDJMZW4xZejUnrsbe5H5fE.png
+#: 
+msgid "Overwrite settings '%s'?"
+msgstr "Instellingen '%s' overschrijven?"
+
+#. Cancel button for modal prompt, for example:  https://s3.eu-west-1.amazonaws.com/po-pub/i/ftZQPpCgap1VOJEArq1KsL66.png
+#: 
+msgid "Cancel"
+msgstr "Annuleren"
+
+#. If you save a version of the settings using the advanced settings saving option, if you select the same name as existing settings you will be prompted to overwrite the settings, and this is one of the buttons (confirming you wish to overwrite the settings):  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/DTqDJMZW4x
+#: 
+msgid "Overwrite"
+msgstr "Overschrijven"
+
+#. After choosing to create a sharing link by clicking "Copy link", you can then revoke the link, making the link and token invalid so it can no longer be used.  https://s3.eu-west-1.amazonaws.com/po-pub/i/WZzRNgfk3QNg2yHSJNVgcmOJ.png
+#: 
+msgid "Revoke link"
+msgstr "Koppeling intrekken"
+
+#. Added option to enable an additional panel that lists the available saved settings records:  https://s3.eu-west-1.amazonaws.com/po-pub/i/T42StJjy5G8xo8TPGst42wuA.png 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/CViHSJI40OkSwCEyVHs79jOh.png
+#: 
+msgid "Show saved diagrams panel"
+msgstr "Toon paneel met opgeslagen diagrammen"
+
+#. Option to share settings to an entry in the webtrees user favourites module (on the 'My page' page):  https://s3.eu-west-1.amazonaws.com/po-pub/i/jBnrBz5yEIe6NdBhAUvjuUTU.png
+#: 
+msgid "Add to My favorites"
+msgstr "Toevoegen aan Mijn favorieten"
+
+#. Option to share settings to an entry in the webtrees tree favorites module (on the tree home page):  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/jBnrBz5yEIe6NdBhAUvjuUTU.png
+#: 
+msgid "Add to Tree favorites"
+msgstr "Toevoegen aan Stamboomfavorieten"
+
+#. Option where you can add XREFs to override the option to highlight starting individuals. i.e. when you add XREFs to this list, those individuals will not be highlighted even if option to highlight starting individuals is selected.  https://s3.eu-west-1.amazonaws.com/po-pub/i/peZeLRwsxZTG8ZgMRLTKV8ph.png
+#: 
+msgid "Don't colour these XREFs:"
+msgstr "Kleur deze XREF's niet:"
+
+#. If option enabled to show the extra diagram panel, this is the name of that panel. https://s3.eu-west-1.amazonaws.com/po-pub/i/CViHSJI40OkSwCEyVHs79jOh.png
+#: 
+msgid "Saved diagrams"
+msgstr "Opgeslagen diagrammen"
+
+#. If option enabled to show the extra diagram panel, this is the group name for the diagram dropdown list: https://s3.eu-west-1.amazonaws.com/po-pub/i/CViHSJI40OkSwCEyVHs79jOh.png
+#: 
+msgid "List of diagrams"
+msgstr "Lijst van diagrammen"
+
+#. Option that allows only some starting individuals to be highlighted:  https://s3.eu-west-1.amazonaws.com/po-pub/i/rsS48w1rUU4xnkLH4WDmeK3d.png
+#: 
+msgid "Colour these individuals:"
+msgstr "Kleur deze personen:"
+
+#. Option for what to do with XREF provided from webtrees via URL:  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/vzqSdDBFSfjBF2bkTbkT1G8Z.png
+#: 
+msgid "Treatment of source individuals"
+msgstr "Behandeling van bronpersonen"
+
+#. One of the options for what to do with XREF provided from webtrees via URL:  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/vzqSdDBFSfjBF2bkTbkT1G8Z.png
+#: 
+msgid "Default"
+msgstr "Standaard"
+
+#. One of the options for what to do with XREF provided from webtrees via URL:  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/vzqSdDBFSfjBF2bkTbkT1G8Z.png
+#: 
+msgid "Add to list"
+msgstr "Toevoegen aan lijst"
+
+#. Help text for option for what to do with XREF provided by webtrees via URL:  https://s3.eu-west-1.amazonaws.com/po-pub/i/PF663q9RtqlHI4hKopBs8KEa.png
+#: 
+msgid "When you open GVExport, webtrees provides the record of an individual to the chart. This setting dictates what GVExport should do with this individual.</p><p>The options behave as follows:<ul><li>Default - if there is only one record in the starting individuals list, it will be overwritten. Otherwise, the new individual will be added to the list.</li><li>Add to list - The individual is always added to the list of starting individuals.</li><li>Don't add to list - Ignore the individual.</li><li>Overwrite - Clear the list of starting individuals and only add the new individual to the list.</li></ul></p><h4>Individual record</h4><p>The individual provided is decided by webtrees. If you select GVExport while on the page of an individual, this individual is provided to GVExport. When you come from another page, if the tree has a default individual this person is provided, otherwise the first individual in the tree is provided."
+msgstr "Wanneer u GVExport opent, levert webtrees het record van een persoon aan de grafiek. Deze instelling bepaalt wat GVExport met deze persoon moet doen.</p><p>De opties gedragen zich als volgt:<ul><li>Standaard - als er maar één record in de lijst met startpersonen staat, wordt die overschreven. Anders wordt de nieuwe persoon aan de lijst toegevoegd.</li><li>Toevoegen aan lijst - De persoon wordt altijd toegevoegd aan de lijst van startpersonen.</li><li>Niet toevoegen aan de lijst - Negeer de persoon.</li><li>Overschrijven - De lijst met startpersonen wissen en alleen de nieuwe persoon aan de lijst toevoegen.</li></ul></p><h4>Persoonsrecord</h4><p>De verstrekte persoon wordt bepaald door webtrees. Als u GVExport selecteert terwijl u op de pagina van een persoon bent, wordt deze persoon aan GVExport verstrekt. Als u van een andere pagina komt, wordt, als de stamboom een standaardpersoon heeft, deze persoon verstrekt, anders wordt de eerste persoon in de stamboom verstrekt."
+
+#. One of the options for what to do with XREF provided from webtrees via URL:  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/vzqSdDBFSfjBF2bkTbkT1G8Z.png
+#: 
+msgid "Don't add to list"
+msgstr "Niet toevoegen aan de lijst"
 

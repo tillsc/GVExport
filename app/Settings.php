@@ -366,6 +366,7 @@ class Settings
             case 'typeface_fallback':
             case 'default_typeface':
             case 'directions':
+            case 'url_xref_treatment_options':
             case 'use_abbr_places':
             case 'use_abbr_names':
             case 'countries':

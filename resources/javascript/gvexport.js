@@ -383,7 +383,13 @@ function loadURLXref() {
             if (url_xref_treatment === 'default' && xrefs.length === 1 || url_xref_treatment === 'overwrite') {
                 el.value = "";
             }
-            if (url_xref_treatment !== 'nothing') addIndiToList(xref);
+            if (url_xref_treatment !== 'nothing') {
+                let startValue = el.value;
+                addIndiToList(xref);
+                if (startValue !== el.value && (url_xref_treatment === 'default' || url_xref_treatment === 'add')) {
+                    setTimeout(function () {showToast(TRANSLATE['One new source person added to %s existing persons'].replace('%s', xrefs.length.toString()))}, 100);
+                }
+            }
         }
     }
 }
@@ -393,9 +399,9 @@ function indiSelectChanged() {
     if (xref !== "") {
         addIndiToList(xref);
         changeURLXref(xref);
-    }
-    if (autoUpdate) {
-        updateRender();
+        if (autoUpdate) {
+            updateRender();
+        }
     }
 }
 function stopIndiSelectChanged() {
@@ -799,7 +805,7 @@ function pageLoaded() {
 
     // Form change events
     const form = document.getElementById('gvexport');
-    let checkboxElems = form.querySelectorAll("input:not([type='file']):not(#save_settings_name):not(#pid):not(#stop_pid):not(.highlight_check), select:not(#simple_settings_list)");
+    let checkboxElems = form.querySelectorAll("input:not([type='file']):not(#save_settings_name):not(#stop_pid):not(.highlight_check), select:not(#simple_settings_list):not(#pid)");
     for (let i = 0; i < checkboxElems.length; i++) {
         checkboxElems[i].addEventListener("change", handleFormChange);
     }
@@ -947,7 +953,7 @@ function loadSettings(data) {
                 case 'token':
                     break;
                 default:
-                    showToast(ERROR_CHAR + CLIENT_ERRORS[1] + " " + key);
+                    showToast(ERROR_CHAR + CLIENT_ERRORS[1] + " " + key); // Unable to load setting
             }
         } else {
             if (el.type === 'checkbox' || el.type === 'radio') {
@@ -1190,7 +1196,7 @@ function saveSettingsAdvanced(userPrompted = false) {
             document.getElementById('modal').remove();
         } else {
             let message = TRANSLATE["Overwrite settings '%s'?"].replace('%s', settingsName);
-            let buttons = '<div class="modal-button-container"><button class="btn btn-secondary modal-button" onclick="document.getElementById(' + "'modal'" + ').remove()">Cancel</button><button class="btn btn-primary modal-button" onclick="saveSettingsAdvanced(true)">Overwrite</button></div>';
+            let buttons = '<div class="modal-button-container"><button class="btn btn-secondary modal-button" onclick="document.getElementById(' + "'modal'" + ').remove()">' + TRANSLATE['Cancel'] + '</button><button class="btn btn-primary modal-button" onclick="saveSettingsAdvanced(true)">' + TRANSLATE['Overwrite'] + '</button></div>';
             showModal('<div class="modal-container">' + message + '<br>' + buttons + '</div>');
             return false;
         }

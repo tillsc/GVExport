@@ -261,7 +261,7 @@ class FormSubmission
      */
     private function prefixStringValid($name): bool
     {
-        return preg_match('/^[A-Za-z0-9_ .*+()&^%$#@!-]*$/',$name);
+        return preg_match('/^[A-Za-z0-9_ .*+()^%$#@!†-]*$/',$name);
     }
 
     /**
