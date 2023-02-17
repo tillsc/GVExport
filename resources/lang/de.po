@@ -77,7 +77,7 @@ msgstr "URL zu Personen und Familien hinzuf&uuml;gen"
 
 #: 
 msgid "Use abbreviated placenames"
-msgstr "Abgek&uuml;rzter Ortsnamen verwenden"
+msgstr "Abgekürzte Ortsnamen verwenden"
 
 #: 
 msgid "Show birth date"
@@ -273,7 +273,7 @@ msgstr "Es wurden  %s Personen- und %s Familien-Datensätze erzeugt."
 
 #: 
 msgid "Invalid starting individual:"
-msgstr "Ungültige Startperson:"
+msgstr "Ungültige Quellenperson:"
 
 #: 
 msgid "Your browser does not support exporting images this large. Please reduce number of records, reduce DPI setting, or use SVG option."
@@ -518,7 +518,7 @@ msgstr "Auf Standardwerte zurücksetzen"
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/eo7ytnyRCth5W2Sq76da71Ph.png
 #: 
 msgid "Show starting persons in different color"
-msgstr "Startpersonen in unterschiedlicher Farbe zeigen"
+msgstr "Quellenpersonen in unterschiedlicher Farbe zeigen"
 
 #. Option to change the background colour for starting individuals, to help find them easier on the diagram:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/afEtoto6Qnv1HlJn0zqAiMtP.png 
@@ -526,7 +526,7 @@ msgstr "Startpersonen in unterschiedlicher Farbe zeigen"
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/eo7ytnyRCth5W2Sq76da71Ph.png
 #: 
 msgid "Starting persons background color"
-msgstr "Hintergrundfarbe der Startpersonen"
+msgstr "Hintergrundfarbe der Quellenpersonen"
 
 #. Option to change font size. This affects (at the time of writing) all diagram text except for names which have their own setting:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/IdWIcmNdrOj4l1yTgxv6MpVW.png
@@ -553,12 +553,12 @@ msgstr "Nur im Browser, bei SVG und PDF"
 #. This help message is displayed when the user clicks the help icon next to "Include anyone related to". https://s3.eu-west-1.amazonaws.com/po-pub/i/4sXDKFJMwoE5PBYZqEPOIV7W.png
 #: 
 msgid "This is our starting point. Choose a person to base the diagram around. You might choose yourself.</p><p>You can choose as many starting individuals as you wish. A tree will be created for each starting individual based on the settings, then the trees are merged to create one tree for the diagram.</p><p>Click the X to remove a record from the list. If two or more records are listed, a \"Clear all\" option will appear to allow you to remove all records.</p><p>You can also click on an individual in this list to have the diagram in the browser scroll to that person.</p><p>When you next come to the page, the default individual or the last individual you were looking at in webtrees will be loaded. If there was just one saved individual then it will be replaced with the individual provided by webtrees on coming to the page. If there were multiple in the list, then the individual provided by webtrees will be added to the list (if not already in it). So be sure to double-check you are only including individuals you are looking for when first loading the page."
-msgstr "Suchen Sie nach einer Person im Auswahlfeld, um die herum das Diagramm erstellt werden soll. Sie können sich selbst als Startperson auswählen.</p><p>Sie können auch mehrere Startpersonen selektieren. Basierend auf den übrigen Einstellungen wird dann für jede Startperson ein Baum erstellt; diese werden für die Darstellung des Diagramms zusammengeführt.</p><p>Klicken Sie auf das X, um eine Person aus der Liste zu entfernen. Wenn zwei oder mehr Personen aufgelistet sind, erscheint die Option „Alle löschen“, mit der Sie alle Personen in einem Schritt entfernen können.</p><p>Sie können auch auf eine Person in dieser Liste klicken, damit im Diagramm auf diese Person zentriert wird.</p><p>Wenn Sie das nächste Mal auf diese Seite kommen, wird die Standardperson oder die letzte Person, die Sie sich in webtrees angesehen haben, geladen. Wenn es nur eine gespeicherte Person gab, wird diese beim Aufrufen der Seite durch die von webtrees bereitgestellte Person ersetzt. Wenn es mehrere Personen in der Liste gab, wird die von webtrees bereitgestellte Person zur Liste hinzugefügt (falls sie nicht bereits darin enthalten ist). Vergewissern Sie sich also beim Laden der Seite, dass nur diejenigen Personen einbezogen wurden, die Sie dargestellt haben wollen."
+msgstr "Suchen Sie nach einer Person im Auswahlfeld, um die herum das Diagramm erstellt werden soll. Sie können sich selbst als Quellenperson auswählen.</p><p>Sie können auch mehrere Quellenpersonen selektieren. Basierend auf den übrigen Einstellungen wird dann für jede Quellenperson ein Baum erstellt; diese werden für die Darstellung des Diagramms zusammengeführt.</p><p>Klicken Sie auf das X, um eine Person aus der Liste zu entfernen. Wenn zwei oder mehr Personen aufgelistet sind, erscheint die Option „Alle löschen“, mit der Sie alle Personen in einem Schritt entfernen können.</p><p>Sie können auch auf eine Person in dieser Liste klicken, damit im Diagramm auf diese Person zentriert wird.</p><p>Wenn Sie das nächste Mal auf diese Seite kommen, wird die Standardperson des Stammbaums oder die letzte Person, die Sie sich in webtrees angesehen haben, geladen. Wenn es nur eine gespeicherte Person gab, wird diese beim Aufrufen der Seite durch die von webtrees bereitgestellte Person ersetzt. Wenn es mehrere Personen in der Liste gab, wird die von webtrees bereitgestellte Person zur Liste hinzugefügt (falls sie nicht bereits darin enthalten ist). Vergewissern Sie sich also beim Laden der Seite, dass nur diejenigen Personen einbezogen wurden, die Sie dargestellt haben wollen. Dieses Verhalten wird von der Option \"xxx\" gesteuert."
 
 #. This help message is displayed when the user clicks the help icon next to "Include ancestors".  https://s3.eu-west-1.amazonaws.com/po-pub/i/UoTrlDpngydDdWmJPau99ZV4.png
 #: 
 msgid "Tick this option to include ancestors of your starting person(s) and anyone in the tree.</p><h4>Max levels</h4><p>The number of generations of ancestors to include. For example, if you chose yourself as your starting person, you may want the diagram to include relatives back to your great-grandparents. In this case, you would type \"3\" in this box, to include your parents' generation, your grandparents' generation, and your great-grandparents' generation."
-msgstr "Aktivieren Sie diese Option, um die Vorfahren ihrer Startperson(en) und weiterer Personen im Stammbaum einzuschließen.</p><h4>Maximale Generationen</h4><p>Die Anzahl der einzuschließenden Generationen von Vorfahren. Wenn Sie beispielsweise sich selbst als Startperson gewählt haben und nun möchten, dass das Diagramm Verwandte bis zu ihren Urgroßeltern enthält, geben Sie in diesem Feld eine \"3\" ein, damit die Generation ihrer Eltern, ihrer Großeltern und ihrer Urgroßeltern einbezogen wird."
+msgstr "Aktivieren Sie diese Option, um die Vorfahren ihrer Quellenperson(en) und weiterer Personen im Stammbaum einzuschließen.</p><h4>Maximale Generationen</h4><p>Die Anzahl der einzuschließenden Generationen von Vorfahren. Wenn Sie beispielsweise sich selbst als Startperson gewählt haben und nun möchten, dass das Diagramm Verwandte bis zu ihren Urgroßeltern enthält, geben Sie in diesem Feld eine \"3\" ein, damit die Generation ihrer Eltern, ihrer Großeltern und ihrer Urgroßeltern einbezogen wird."
 
 #. This help message is displayed when the user clicks the help icon next to "Include".  https://s3.eu-west-1.amazonaws.com/po-pub/i/G2LwgKcPjaAwzcCXllEaXa13.png
 #: 
@@ -601,7 +601,7 @@ msgstr "Hilfe"
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/vyDHWXC9qcax65t9gW4YjvMv.png
 #: 
 msgid "GVExport is a webtrees module that allows you to create complex visual family trees, using a tool called Graphviz to display the tree. Select a starting person, adjust the settings, and see that person's family tree.</p><p>Some fields have an icon <span class=\"info-icon btn btn-primary\">i</span> next to them, clicking this will give you some more information about that field.</p><p>Advanced configurations are possible by toggling advanced settings by clicking the \"Toggle advanced settings\" option at the end of each section. Clicking the ⛶ in the top right corner of the browser rendering will display the browser rendering in full screen. You can also use the webtrees \"Clippings Cart\" feature to select records, which GVExport can then use instead of the \"People to be included\" settings. </p><p>There are several buttons that take action based on the settings that you have chosen:<ul><li>Update: Clicking this updates the browser render (this is hidden if auto-update is enabled).<li>Download: Clicking this will download the diagram in the format chosen in the \"Output file type\" option. <li>Reset: Clicking this will reset the settings to the default values. Default values can be changed by an administrator in the webtrees Control Panel.<li>Help: Shows this help message.</ul></p><p>For more information, see the <a href=\"https://github.com/Neriderc/GVExport/wiki\" class=\"help-link\">GVExport Wiki</a>.</p><p>You can also ask a question, provide feedback, or suggest features on our <a href=\"https://github.com/Neriderc/GVExport\" class=\"help-link\">GitHub page</a>. Just <a href=\"https://github.com/Neriderc/GVExport/issues/new\" class=\"help-link\">open an issue</a>, or <a href=\"https://github.com/Neriderc/GVExport/issues\" class=\"help-link\">browse existing issues</a>."
-msgstr "GVExport ist ein webtrees-Modul, mit dem Sie komplexe Stammbaumdiagramme erstellen können. Zur Darstellung des Diagramms wird  das Tool \"GraphViz\" verwendet. Wählen Sie eine Startperson aus, passen Sie die Einstellungen an und sehen Sie sich den Stammbaum dieser Person an.</p><p>Neben einigen Feldern befindet sich das <span class=\"info-icon btn btn-primary\">i</span> Symbol; wenn Sie darauf klicken, erhalten Sie weitere Informationen zu diesem Feld.</p><p>Erweiterte Konfigurationseinstellungen sind möglich, indem Sie die erweiterten Einstellungen umschalten; das können Sie tun, indem Sie am Ende jedes Abschnitts auf die Option „Erweiterte Einstellungen umschalten“ klicken.</p><p>Durch Klicken auf das Symbol ⛶ in der oberen rechten Ecke des Diagramms wird das Diagramm im Vollbildmodus angezeigt.</p><p>Sie können auch die Funktion „Sammelbehälter“ von webtrees verwenden, um Datensätze auszuwählen, die GVExport dann anstelle der Einstellungen im Abschnitt „Einzuschließende Personen“ verwendet.</p><p>Es gibt mehrere Schaltflächen, die basierend auf den von Ihnen gewählten Einstellungen Aktionen ausführen:<ul><li>Aktualisieren: Wenn Sie darauf klicken, wird die Darstellung des Browsers aktualisiert (diese Schaltfläche ist ausgeblendet, wenn die automatische Aktualisierung aktiviert ist).< li>Herunterladen: Wenn Sie darauf klicken, wird das Diagramm in dem Format heruntergeladen, das in der Option \"Ausgabedateityp\" ausgewählt wurde.<li>Zurücksetzen: Wenn Sie darauf klicken, werden die Einstellungen auf die Standardwerte zurückgesetzt. Standardwerte können von einem Administrator im Verwaltungsmenü von webtrees geändert werden.<li>Hilfe: Zeigt diese Hilfemeldung.</ul></p><p>Weitere Informationen finden Sie in Englischer Sprache im <a href=\"https://github.com/Neriderc/GVExport/wiki\" class=\"help-link\">GVExport-Wiki</a > und im deutschen <a href=\"https://wiki.genealogy.net/Webtrees_Handbuch/Anleitung_für_Webmaster/Erweiterungsmodule/GVExport\" class=\"help-link\">webtrees-Handbuch</a>.</p><p>In <a href=\"https://github.com/Neriderc/GVExport\" class=\"help-link\">GitHub</a> können Sie auch Fragen stellen, Feedback geben oder neue Funktionen vorschlagen. Öffnen Sie dazu einen \"<a href=\"https://github.com/Neriderc/GVExport/issues/new\" class=\"help-link\">issue</a>\" nachdem Sie die <a href=\"https://github. com/Neriderc/GVExport/issues\" class=\"help-link\">vorhandenen Problempunkte</a> durchsucht haben."
+msgstr "GVExport ist ein webtrees-Modul, mit dem Sie komplexe Stammbaumdiagramme erstellen können. Zur Darstellung des Diagramms wird  das Tool \"GraphViz\" verwendet. Wählen Sie eine Quellenperson aus, passen Sie die Einstellungen an und sehen Sie sich den Stammbaum dieser Person an.</p><p>Neben einigen Feldern befindet sich das <span class=\"info-icon btn btn-primary\">i</span> Symbol; wenn Sie darauf klicken, erhalten Sie weitere Informationen zu diesem Feld.</p><p>Erweiterte Konfigurationseinstellungen sind möglich, indem Sie die erweiterten Einstellungen umschalten; das können Sie tun, indem Sie am Ende jedes Abschnitts auf die Option „Erweiterte Einstellungen umschalten“ klicken.</p><p>Durch Klicken auf das Symbol ⛶ in der oberen rechten Ecke des Diagramms wird das Diagramm im Vollbildmodus angezeigt.</p><p>Sie können auch die Funktion „Sammelbehälter“ von webtrees verwenden, um Datensätze auszuwählen, die GVExport dann anstelle der Einstellungen im Abschnitt „Einzuschließende Personen“ verwendet.</p><p>Es gibt mehrere Schaltflächen, die basierend auf den von Ihnen gewählten Einstellungen Aktionen ausführen:<ul><li>Aktualisieren: Wenn Sie darauf klicken, wird die Darstellung des Browsers aktualisiert (diese Schaltfläche ist ausgeblendet, wenn die automatische Aktualisierung aktiviert ist).< li>Herunterladen: Wenn Sie darauf klicken, wird das Diagramm in dem Format heruntergeladen, das in der Option \"Ausgabedateityp\" ausgewählt wurde.<li>Zurücksetzen: Wenn Sie darauf klicken, werden die Einstellungen auf die Standardwerte zurückgesetzt. Standardwerte können von einem Administrator im Verwaltungsmenü von webtrees geändert werden.<li>Hilfe: Zeigt diese Hilfemeldung.</ul></p><p>Weitere Informationen finden Sie in Englischer Sprache im <a href=\"https://github.com/Neriderc/GVExport/wiki\" class=\"help-link\">GVExport-Wiki</a > und im deutschen <a href=\"https://wiki.genealogy.net/Webtrees_Handbuch/Anleitung_für_Webmaster/Erweiterungsmodule/GVExport\" class=\"help-link\">webtrees-Handbuch</a>.</p><p>In <a href=\"https://github.com/Neriderc/GVExport\" class=\"help-link\">GitHub</a> können Sie auch Fragen stellen, Feedback geben oder neue Funktionen vorschlagen. Öffnen Sie dazu einen \"<a href=\"https://github.com/Neriderc/GVExport/issues/new\" class=\"help-link\">issue</a>\" nachdem Sie die <a href=\"https://github. com/Neriderc/GVExport/issues\" class=\"help-link\">vorhandenen Problempunkte</a> durchsucht haben."
 
 #. This message should never be shown, but it is a backup message for the help messages in the case that the text cannot be found - it's effectively an error message.
 #: 
@@ -741,8 +741,8 @@ msgstr "Einstellungen aus Datei laden"
 
 #. Help text for downloading saved settings to a file, and uploading these settings:  https://s3.eu-west-1.amazonaws.com/po-pub/i/HfxRre2VQe9TVyl8dtX3RhVj.png
 #: 
-msgid "Here you are able to save the chosen settings to a file, and to load that file at a later time.</p><p>For example, you may have many diagrams you create from your tree. You may want to save the settings used for each diagram so that in future you can regenerate the diagram to include any new information.</p><p>Also see the option to save settings within GVExport."
-msgstr "Hier können Sie die gewählten Einstellungen in einer Datei speichern und diese Datei zu einem späteren Zeitpunkt wieder laden.</p><p>Sie haben beispielsweise viele Diagramme, die Sie für ihren Baum erstellt haben. Vielleicht möchten Sie die für ein bestimmtes Diagramm verwendeten Einstellungen speichern, damit Sie dieses Diagramm in Zukunft neu erzeugen können, um aktualisierte Informationen darin aufzunehmen.</p><p>Beachten Sie auch die Option zum Sichern von Einstellungen in GVExport."
+msgid "If you have saved settings to a file, using the menu on the above saved settings, you can load the settings from the file here."
+msgstr "Falls Sie Einstellungen als Datei gespeichert haben indem Sie das obige Menü zum Sichern von Einstellungen verwendet haben, können Sie diese Einstellungen hier wieder laden."
 
 #. For development use, you can now enable a debug panel. Needs translation as option will appear on Control Panel page:  https://s3.eu-west-1.amazonaws.com/po-pub/i/UzABfGKv12F3PBzS3wVzoHCm.png 
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/36sF1oj0dbyyJzl0meXi1ixY.png
@@ -840,8 +840,8 @@ msgstr "Bezeichnung für die Einstellungen"
 #. Help text for option to save a version of the settings for future use:  
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/n1salnZcGP6xC187FO1dAjpE.png https://s3.eu-west-1.amazonaws.com/po-pub/i/fBbMFauzn9yAXWlI3do9cwmD.png
 #: 
-msgid "Here you are able to save the chosen settings within GVExport. The settings are only accessible within the same user and tree. Click a settings record to load it.</p><p>For example, you may have many diagrams you create from your tree. You may want to save the settings used for each diagram so that in future you can regenerate the diagram to include any new information.</p><p>By clicking the ellipsis on a record, you can choose to delete the record, or to copy a link to these settings. When the link is accessed, these settings will be automatically loaded.</p><p>The \"Show saved diagrams panel\" option adds a new section to the settings that makes the saved settings available as a dropdown list. You may wish to use webtree's ability to \"Masquerade as user\" to set up some settings for another user, then enable this option, so they can easily choose different prepared diagrams without needed to delve into the advanced settings.</p><p>Also see the option to save settings to a file."
-msgstr "Hier können Sie die gewählten Einstellungen für GVExport speichern. Die Einstellungen sind nur für den selben Benutzer und Stammbaum zugänglich. Klicken Sie auf einen Einstellungsdatensatz, um ihn zu laden.</p><p>Möglicherweise haben Sie viele Diagramme, die Sie für Ihren Stammbaum erstellen. Eventuell möchten Sie die für jedes Diagramm verwendeten Einstellungen speichern, damit Sie das Diagramm in Zukunft neu generieren können, um überarbeitete Informationen aufzunehmen.</p><p>Wenn sie auf die Ellipse eines Datensatzes klicken, können sie auswählen, ob Sie diesen Datensatz löschen wollen oder ob Sie einen Verweis auf diesen Datensatz kopieren wollen. Wenn auf den Verweis zugegriffen wird, werden die Einstellungen aus dem Datensatz geladen.</p><p>Die Option \"Menü gespeicherter Diagramme anzeigen\" fügt im Menü einen neuen Abschnitt hinzu, der die gespeicherten Einstellungsdatensätze als Auswahlliste  präsentiert. Sie können die webtrees-Funktion nutzen, die es Ihnen erlaubt sich als anderen Nutzer auszugeben, um für einen anderen Nutzer einen Einstellungsdatensatz zu erzeugen. Danach können Sie diese Option aktivieren, so dass dieser Nutzer dann die vorbereiteten Diagramme sehr leicht aktivieren kann, ohne tiefer in die erweiterten Optionen eintauchen zu müssen.</p><p>Siehe auch die Option zum Speichern von Einstellungen in einer Datei."
+msgid "Here you are able to save the chosen settings within GVExport. The settings are only accessible within the same user and tree. Click a settings record to load it.</p><p>For example, you may have many diagrams you create from your tree. You may want to save the settings used for each diagram so that in future you can regenerate the diagram to include any new information.</p><p>If you click the ellipsis on a record, you will see several options. <ul><li>Delete - remove these settings</li><li>Download - download a file holding the settings, which can be loaded at a later date.</li><li>Copy link - if logged in, this allows you to share the settings with others by creating a URL to share with them, which is copied to the clipboard of your device.</li><li>Revoke link - if a sharing link has been created, this will show to allow you to revoke the link, so it can no longer be accessed.</li><li>Add to My favourites - If logged in, this will create a sharing link and add this to the webtrees favourites on your \"My page\" page.</li><li>Add to Tree favourites - If logged in as a tree manager, this will create a sharing link and add this to the webtrees favourites on the tree home page.</li></ul>When logged out, only the Delete and Download options will be available.</p><p>The \"Show saved diagrams panel\" option adds a new section to the settings that makes the saved settings available as a dropdown list. You may wish to use webtree's ability for an administrator to \"Masquerade as user\" to set up some settings for another user, then enable this option, so they can easily choose different prepared diagrams without needed to delve into the advanced settings."
+msgstr "Hier können Sie die gewählten Einstellungen für GVExport speichern. Die Einstellungen sind nur für den selben Benutzer und Stammbaum zugänglich. Klicken Sie auf einen Einstellungsdatensatz, um ihn zu laden.</p><p>Möglicherweise haben Sie viele Diagramme, die Sie für Ihren Stammbaum erstellen. Eventuell möchten Sie die für jedes Diagramm verwendeten Einstellungen speichern, damit Sie das Diagramm in Zukunft neu generieren können, um überarbeitete Informationen aufzunehmen.</p><p>Wenn Sie auf die Auslassungspunkte \"...\" eines Datensatzes klicken, werden mehrere Optionen angezeigt.<ul><li>Löschen - diesen Einstellungsdatensatz entfernen</li><li>Herunterladen - eine Datei mit den Einstellungen herunterladen, die zu einem späteren Zeitpunkt wieder geladen werden kann.</li><li>Link kopieren - wenn Sie angemeldet sind, können Sie die Einstellungen mit anderen teilen, indem Sie einen Freigabeverweis (URL) erstellen, den Sie weitergeben können und der in die Zwischenablage Ihres Geräts kopiert wird.</li><li>Link widerrufen – wenn zuvor ein Freigabeverweis erstellt wurde, ermöglichen es Ihnen diese Funktion, den Verweis zu widerrufen, sodass nicht mehr darauf zugegriffen werden kann.</li><li>Zu meinen Favoriten hinzufügen – Wenn Sie angemeldet sind, wird hierdurch ein Freigabeverweis erstellt und zu den webtrees-Favoriten auf Ihrer „Meine Seite“ hinzugefügt.</li><li>Zu Stammbaum-Favoriten hinzufügen - wenn Sie als Stammbaum-Manager angemeldet sind, wird hierdurch ein Freigabeverweis erstellt und dieser zu den webtrees-Favoriten auf der Stammbaum-Startseite hinzugefügt.</li></ul>Wenn Sie nicht angemeldet sind, stehen nur die Optionen Löschen und Herunterladen zur Verfügung.</p><p>Die Option „Abschnitt mit gespeicherten Diagrammen anzeigen“ fügt einen neuen Abschnitt zu den Einstellungen hinzu, der die gespeicherten Diagrammeinstellungen als Auswahlliste verfügbar macht. Sie können als Administrator die Fähigkeit von webtrees nutzen, sich als irgendeinen Benutzer auszugeben, um einige Einstellungen für diesen Benutzer einzurichten, und dann diese Option aktivieren, damit dieser Benutzer sehr einfach verschiedene vorbereitete Diagramme auswählen kann, ohne sich mit den erweiterten Einstellungen befassen zu müssen."
 
 #. Error message shown when API was not able to assign an ID when saving a version of settings.  https://s3.eu-west-1.amazonaws.com/po-pub/i/SF4w8yDqZ9D7PGWdqvq2cOzq.png 
 #. User may see this when clicking Save button: https://s3.eu-west-1.amazonaws.com/po-pub/i/n1salnZcGP6xC187FO1dAjpE.png
@@ -899,7 +899,7 @@ msgstr "Verweis  wurde in die Zwischenablage kopiert"
 #. If copying shared settings link to clipboard fails (e.g. browser blocks this or not supported), then this message is shown. https://s3.eu-west-1.amazonaws.com/po-pub/i/QHkbIB7B8ZRpp5IVdKiVu1F6.png
 #: 
 msgid "Failed to copy link to clipboard"
-msgstr "Der  Verweis konnte nicht in die Zwischenablage kopiert werden,"
+msgstr "Der  Verweis konnte nicht in die Zwischenablage kopiert werden"
 
 #. As well as toast message, if copying shared settings link to clipboard fails (e.g. browser blocks this or not supported), then a popup will allow copying URL. 
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/lhdGkODdwA7aL5isgWiqR726.png
@@ -922,4 +922,75 @@ msgstr "Abbrechen"
 #: 
 msgid "Overwrite"
 msgstr "Überschreiben"
+
+#. After choosing to create a sharing link by clicking "Copy link", you can then revoke the link, making the link and token invalid so it can no longer be used.  https://s3.eu-west-1.amazonaws.com/po-pub/i/WZzRNgfk3QNg2yHSJNVgcmOJ.png
+#: 
+msgid "Revoke link"
+msgstr "Verweis zurückziehen"
+
+#. Added option to enable an additional panel that lists the available saved settings records:  https://s3.eu-west-1.amazonaws.com/po-pub/i/T42StJjy5G8xo8TPGst42wuA.png 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/CViHSJI40OkSwCEyVHs79jOh.png
+#: 
+msgid "Show saved diagrams panel"
+msgstr "Abschnitt mit gespeicherten Diagrammen anzeigen"
+
+#. Option to share settings to an entry in the webtrees user favourites module (on the 'My page' page):  https://s3.eu-west-1.amazonaws.com/po-pub/i/jBnrBz5yEIe6NdBhAUvjuUTU.png
+#: 
+msgid "Add to My favorites"
+msgstr "Zu meinen Favoriten hinzufügen"
+
+#. Option to share settings to an entry in the webtrees tree favorites module (on the tree home page):  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/jBnrBz5yEIe6NdBhAUvjuUTU.png
+#: 
+msgid "Add to Tree favorites"
+msgstr "Zu den Stammbaumfavoriten hinzufügen"
+
+#. Option where you can add XREFs to override the option to highlight starting individuals. i.e. when you add XREFs to this list, those individuals will not be highlighted even if option to highlight starting individuals is selected.  https://s3.eu-west-1.amazonaws.com/po-pub/i/peZeLRwsxZTG8ZgMRLTKV8ph.png
+#: 
+msgid "Don't colour these XREFs:"
+msgstr "Diese XREFs nicht einfärben:"
+
+#. If option enabled to show the extra diagram panel, this is the name of that panel. https://s3.eu-west-1.amazonaws.com/po-pub/i/CViHSJI40OkSwCEyVHs79jOh.png
+#: 
+msgid "Saved diagrams"
+msgstr "Gespeicherte Diagramme"
+
+#. If option enabled to show the extra diagram panel, this is the group name for the diagram dropdown list: https://s3.eu-west-1.amazonaws.com/po-pub/i/CViHSJI40OkSwCEyVHs79jOh.png
+#: 
+msgid "List of diagrams"
+msgstr "Diagrammliste"
+
+#. Option that allows only some starting individuals to be highlighted:  https://s3.eu-west-1.amazonaws.com/po-pub/i/rsS48w1rUU4xnkLH4WDmeK3d.png
+#: 
+msgid "Colour these individuals:"
+msgstr "Folgende Personen einfärben:"
+
+#. Option for what to do with XREF provided from webtrees via URL:  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/vzqSdDBFSfjBF2bkTbkT1G8Z.png
+#: 
+msgid "Treatment of source individuals"
+msgstr "Behandlung von Quellenpersonen"
+
+#. One of the options for what to do with XREF provided from webtrees via URL:  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/vzqSdDBFSfjBF2bkTbkT1G8Z.png
+#: 
+msgid "Default"
+msgstr "Standard"
+
+#. One of the options for what to do with XREF provided from webtrees via URL:  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/vzqSdDBFSfjBF2bkTbkT1G8Z.png
+#: 
+msgid "Add to list"
+msgstr "Zur Liste hinzufügen"
+
+#. Help text for option for what to do with XREF provided by webtrees via URL:  https://s3.eu-west-1.amazonaws.com/po-pub/i/PF663q9RtqlHI4hKopBs8KEa.png
+#: 
+msgid "When you open GVExport, webtrees provides the record of an individual to the chart. This setting dictates what GVExport should do with this individual.</p><p>The options behave as follows:<ul><li>Default - if there is only one record in the starting individuals list, it will be overwritten. Otherwise, the new individual will be added to the list.</li><li>Add to list - The individual is always added to the list of starting individuals.</li><li>Don't add to list - Ignore the individual.</li><li>Overwrite - Clear the list of starting individuals and only add the new individual to the list.</li></ul></p><h4>Individual record</h4><p>The individual provided is decided by webtrees. If you select GVExport while on the page of an individual, this individual is provided to GVExport. When you come from another page, if the tree has a default individual this person is provided, otherwise the first individual in the tree is provided."
+msgstr "Wenn Sie GVExport öffnen, stellt webtrees diesem Diagramm den Datensatz einer Person zur Verfügung. Diese Einstellung legt fest, was GVExport mit dieser Person tun soll.</p><p>Die Optionen verhalten sich wie folgt:<ul><li>Standard - wenn es keinen oder nur einen Datensatz in der Liste der Quellenpersonen gibt, wird diese mit der neuen Person überschrieben. Andernfalls wird die neue Person zur Liste hinzugefügt.</li><li>Zur Liste hinzufügen – Die Person wird immer zur Liste der Quellenpersonen hinzugefügt.</li><li>Nicht zur Liste hinzufügen – die neue Person wird ignoriert.</li><li>Überschreiben - die Liste der Quellenpersonen wird gelöscht und die neue Person wird zur Liste hinzugefügt.</li></ul></p><h4>Personendatensatz</h4>< p>Welche Person übergeben wird, entscheidet webtrees. Wenn Sie GVExport aufrufen, während Sie sich auf der Seite einer Person befinden, wird diese Person für GVExport bereitgestellt. Wenn Sie von einer anderen Seite kommen und der Baum eine Standardperson hat, wird diese Person bereitgestellt, andernfalls wird die erste Person im Stammbaum ausgewählt."
+
+#. One of the options for what to do with XREF provided from webtrees via URL:  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/vzqSdDBFSfjBF2bkTbkT1G8Z.png
+#: 
+msgid "Don't add to list"
+msgstr ""
 
