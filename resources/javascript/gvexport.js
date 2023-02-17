@@ -386,7 +386,7 @@ function loadURLXref() {
             if (url_xref_treatment !== 'nothing') {
                 let startValue = el.value;
                 addIndiToList(xref);
-                if (startValue !== el.value) {
+                if (startValue !== el.value && (url_xref_treatment === 'default' || url_xref_treatment === 'add')) {
                     setTimeout(function () {showToast(TRANSLATE['One new source person added to %s existing persons'].replace('%s', xrefs.length.toString()))}, 100);
                 }
             }
