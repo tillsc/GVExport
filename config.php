@@ -79,7 +79,7 @@ return array(
 	'highlight_col' => '#FFFDC3', // Background of starting individuals
 	'border_col' => '#606060', // Outline colour
 	'birth_prefix' => '*', // Text shown on chart before the birthdate
-	'death_prefix' => '+', // Text shown on chart before the death date
+	'death_prefix' => '†', // Text shown on chart before the death date
     'save_settings_name' => '', // Default value for text field where name of settings can be entered
     'show_diagram_panel' => false, // If set to true, a "Saved diagrams" section is shown at the top, that lists settings saved using the feature to save multiple versions of settings
     'auto_update' => true, // If auto-updating browser render on change is enabled or not
