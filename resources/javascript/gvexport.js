@@ -953,7 +953,7 @@ function loadSettings(data) {
                 case 'token':
                     break;
                 default:
-                    showToast(ERROR_CHAR + CLIENT_ERRORS[1] + " " + key);
+                    showToast(ERROR_CHAR + CLIENT_ERRORS[1] + " " + key); // Unable to load setting
             }
         } else {
             if (el.type === 'checkbox' || el.type === 'radio') {
