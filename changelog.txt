@@ -3,15 +3,21 @@
 	GVExport module for Webtrees
 =====================================================================
 
-Version 2.1.17 (2023-01-)
-  - New         : Save settings to file and load from file
+Version 2.1.17 (2023-02-19)
+  - New         : Save a named version of settings
+  - New         : Share link to named settings
+  - New         : Add settings link to webtrees user or tree favourites
+  - New         : Save named settings to file and load from file
   - New         : All options should now have help messages
   - New         : Added option to save multiple named versions of settings
+  - New         : Option to highlight starting individuals can now be applied to only some starting individuals
   - Change      : Settings now remembered per tree, if you have multiple trees
   - Change      : Settings now remembered per user, saved in webtrees instead of cookie (unless logged out)
-  - Change      : Added debug panel when debug mode active
+  - Change      : Added debug panel that can be enabled from the control panel (intended for development environments)
   - Change      : Browser now scrolls to last added individual instead of first in list
+  - Change      : Dagger symbol (†) now default for death prefix symbol, in line with common usage
   - Fixed       : Resolved issue with photos being stretched for users with Graphviz installed server-side
+  - Fixed       : Wrong case of XREF now recognised and corrected in person selection
 
 Version 2.1.16 (2022-11-22)
   - New         : Use starting person selection system for stopping persons
