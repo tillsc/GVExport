@@ -540,7 +540,8 @@ msgstr "Przywróć domyślne"
 #. 
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/eo7ytnyRCth5W2Sq76da71Ph.png
 #: 
-msgid "Show starting persons in different color"
+#, fuzzy
+msgid "Show starting individuals in different color"
 msgstr "Pokaż osoby rozpoczynające w innym kolorze"
 
 #. Option to change the background colour for starting individuals, to help find them easier on the diagram:
@@ -548,7 +549,8 @@ msgstr "Pokaż osoby rozpoczynające w innym kolorze"
 #. 
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/eo7ytnyRCth5W2Sq76da71Ph.png
 #: 
-msgid "Starting persons background color"
+#, fuzzy
+msgid "Starting individuals background color"
 msgstr "Kolor tła osób rozpoczynających"
 
 #. Option to change font size. This affects (at the time of writing) all diagram text except for names which have their own setting:
@@ -575,7 +577,8 @@ msgstr "tylko przeglądarka, SVG i PDF"
 
 #. This help message is displayed when the user clicks the help icon next to "Include anyone related to". https://s3.eu-west-1.amazonaws.com/po-pub/i/4sXDKFJMwoE5PBYZqEPOIV7W.png
 #: 
-msgid "This is our starting point. Choose a person to base the diagram around. You might choose yourself.</p><p>You can choose as many starting individuals as you wish. A tree will be created for each starting individual based on the settings, then the trees are merged to create one tree for the diagram.</p><p>Click the X to remove a record from the list. If two or more records are listed, a \"Clear all\" option will appear to allow you to remove all records.</p><p>You can also click on an individual in this list to have the diagram in the browser scroll to that person.</p><p>When you next come to the page, the default individual or the last individual you were looking at in webtrees will be loaded. If there was just one saved individual then it will be replaced with the individual provided by webtrees on coming to the page. If there were multiple in the list, then the individual provided by webtrees will be added to the list (if not already in it). So be sure to double-check you are only including individuals you are looking for when first loading the page."
+#, fuzzy
+msgid "This is our starting point. Choose a person to base the diagram around. You might choose yourself.</p><p>You can choose as many starting individuals as you wish. A tree will be created for each starting individual based on the settings, then the trees are merged to create one tree for the diagram.</p><p>Click the X to remove a record from the list. If two or more records are listed, a \"Clear all\" option will appear to allow you to remove all records.</p><p>You can also click on an individual in this list to have the diagram in the browser scroll to that person.</p><p>When you next come to the page, the default individual or the last individual you were looking at in webtrees will be loaded. If there was just one saved individual then it will be replaced with the individual provided by webtrees on coming to the page. If there were multiple in the list, then the individual provided by webtrees will be added to the list (if not already in it). So be sure to double-check you are only including individuals you are looking for when first loading the page. This default behaviour can be change with the option \"Treatment of source individuals\" in the advanced section."
 msgstr "To jest nasz punkt wyjścia. Wybierz osobę, na której chcesz oprzeć diagram. Możesz wybrać sam.</p><p> Możesz wybrać dowolną liczbę osób rozpoczynających. Drzewo zostanie utworzone dla każdej początkowej osoby na podstawie ustawień, a następnie drzewa zostaną połączone, aby utworzyć jedno drzewo dla diagramu.</p><p> Kliknij X, aby usunąć rekord z listy. Jeśli na liście znajdują się co najmniej dwa rekordy, pojawi się opcja \"Wyczyść wszystko\", która umożliwia usunięcie wszystkich rekordów.</p><p> Możesz także kliknąć osobę na tej liście, aby przewinąć diagram w przeglądarce do tej osoby.</p><p> Po następnym wejściu na stronę zostanie załadowana domyślna osoba lub ostatnia osoba, którą oglądałeś w drzewach internetowych. Jeśli była tylko jedna zapisana osoba, zostanie ona zastąpiona osobą dostarczoną przez webtrees po wejściu na stronę. Jeśli na liście było ich wiele, osoba dostarczona przez webtrees zostanie dodana do listy (jeśli jeszcze się na niej nie znajduje). Pamiętaj więc, aby dokładnie sprawdzić, czy uwzględniasz tylko osoby, których szukasz przy pierwszym ładowaniu strony."
 
 #. This help message is displayed when the user clicks the help icon next to "Include ancestors".  https://s3.eu-west-1.amazonaws.com/po-pub/i/UoTrlDpngydDdWmJPau99ZV4.png

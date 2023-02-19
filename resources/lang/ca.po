@@ -518,7 +518,8 @@ msgstr "Restablir als valors predeterminats"
 #. 
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/eo7ytnyRCth5W2Sq76da71Ph.png
 #: 
-msgid "Show starting persons in different color"
+#, fuzzy
+msgid "Show starting individuals in different color"
 msgstr "Mostrar les persones incials amb diferent color"
 
 #. Option to change the background colour for starting individuals, to help find them easier on the diagram:
@@ -526,7 +527,8 @@ msgstr "Mostrar les persones incials amb diferent color"
 #. 
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/eo7ytnyRCth5W2Sq76da71Ph.png
 #: 
-msgid "Starting persons background color"
+#, fuzzy
+msgid "Starting individuals background color"
 msgstr "Color del fons per a les persones inicials"
 
 #. Option to change font size. This affects (at the time of writing) all diagram text except for names which have their own setting:
@@ -553,7 +555,8 @@ msgstr "Només navegador SVG i PDF"
 
 #. This help message is displayed when the user clicks the help icon next to "Include anyone related to". https://s3.eu-west-1.amazonaws.com/po-pub/i/4sXDKFJMwoE5PBYZqEPOIV7W.png
 #: 
-msgid "This is our starting point. Choose a person to base the diagram around. You might choose yourself.</p><p>You can choose as many starting individuals as you wish. A tree will be created for each starting individual based on the settings, then the trees are merged to create one tree for the diagram.</p><p>Click the X to remove a record from the list. If two or more records are listed, a \"Clear all\" option will appear to allow you to remove all records.</p><p>You can also click on an individual in this list to have the diagram in the browser scroll to that person.</p><p>When you next come to the page, the default individual or the last individual you were looking at in webtrees will be loaded. If there was just one saved individual then it will be replaced with the individual provided by webtrees on coming to the page. If there were multiple in the list, then the individual provided by webtrees will be added to the list (if not already in it). So be sure to double-check you are only including individuals you are looking for when first loading the page."
+#, fuzzy
+msgid "This is our starting point. Choose a person to base the diagram around. You might choose yourself.</p><p>You can choose as many starting individuals as you wish. A tree will be created for each starting individual based on the settings, then the trees are merged to create one tree for the diagram.</p><p>Click the X to remove a record from the list. If two or more records are listed, a \"Clear all\" option will appear to allow you to remove all records.</p><p>You can also click on an individual in this list to have the diagram in the browser scroll to that person.</p><p>When you next come to the page, the default individual or the last individual you were looking at in webtrees will be loaded. If there was just one saved individual then it will be replaced with the individual provided by webtrees on coming to the page. If there were multiple in the list, then the individual provided by webtrees will be added to the list (if not already in it). So be sure to double-check you are only including individuals you are looking for when first loading the page. This default behaviour can be change with the option \"Treatment of source individuals\" in the advanced section."
 msgstr "Aquest és el nostre punt de partida. Trie una persona per a basar el diagrama. Pot triar-se a si mateix.</p><p>Pot triar tantes persones inicials com desitge. Es crearà un arbre per a cada individu inicial basat en la configuració, després els arbres es fusionaran per a crear un arbre per al diagrama.</p><p>Faça clic en la X per a eliminar un registre de la llista. Si s'enumeren dos o més registres, apareixerà l'opció \"Esborrar tot\" per a permetre-li eliminar tots els registres.</p><p>També pot fer clic en un individu d'aquesta llista perquè el diagrama en el navegador es desplace fins a aquesta persona.</p><p>La pròxima vegada que arribe a la pàgina, es carregarà l'individu predeterminat o l'últim individu que estava mirant en WebTrees. Si només hi havia un individu guardat, llavors serà reemplaçat per l'individu proporcionat per webtrees en arribar a la pàgina. Si hi havia varis en la llista, llavors l'individu proporcionat per webtrees s'agregarà a la llista (si no està ja en ella). Així que assegure's de verificar que només està incloent a les persones que està buscant quan carregue la pàgina per primera vegada."
 
 #. This help message is displayed when the user clicks the help icon next to "Include ancestors".  https://s3.eu-west-1.amazonaws.com/po-pub/i/UoTrlDpngydDdWmJPau99ZV4.png
@@ -1020,5 +1023,5 @@ msgstr "Quan obriu GVExport, webtrees proporciona el registre d'una persona al g
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/vzqSdDBFSfjBF2bkTbkT1G8Z.png
 #: 
 msgid "Don't add to list"
-msgstr ""
+msgstr "No afegeixis a la llist"
 
