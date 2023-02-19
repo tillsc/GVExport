@@ -1185,6 +1185,7 @@ function showSavedSettingsItemMenu(event) {
 function saveSettingsAdvanced(userPrompted = false) {
     let settingsList = document.getElementsByClassName('settings_list_item');
     let settingsName = document.getElementById('save_settings_name').value;
+    if (settingsName === '') settingsName = "Settings";
     let id = null;
     for (let i=0; i<settingsList.length; i++) {
         if (settingsList[i].getAttribute('data-name') === settingsName) {
