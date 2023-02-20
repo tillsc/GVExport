@@ -463,6 +463,9 @@ $settings = $settingsObj->getDefaultSettings();
             <?= view('icons/save') ?>
             <?= I18N::translate('save') ?>
         </button>
-        <a href="<?= $module->getConfigLink() . "?reset=1"; ?>" class="btn btn-outline-secondary"><?= I18N::translate('reset to defaults') ?></a>
+        <? $configLink = $module->getConfigLink();
+            $resetLink = (strpos($configLink, '?') ? "&" : "?") . "reset=1";
+        ?>
+        <a href="<?= $resetLink ?>" class="btn btn-outline-secondary"><?= I18N::translate('reset to defaults') ?></a>
     </form>
 </div>
