@@ -464,7 +464,7 @@ $settings = $settingsObj->getDefaultSettings();
             <?= I18N::translate('save') ?>
         </button>
         <? $configLink = $module->getConfigLink();
-            $resetLink = (strpos($configLink, '?') ? "&" : "?") . "reset=1";
+            $resetLink = $configLink . (strpos($configLink, '?') ? "&" : "?") . "reset=1";
         ?>
         <a href="<?= $resetLink ?>" class="btn btn-outline-secondary"><?= I18N::translate('reset to defaults') ?></a>
     </form>
