@@ -315,7 +315,7 @@ msgstr "Inici de la sessió caducada. Recarregant pàgina.."
 #. Label for section that lets you change the colour of arrows that represent relationships between records
 #: 
 msgid "Relationship arrows"
-msgstr "Fletxes de relació "
+msgstr "Fletxes de relació"
 
 #. Label for setting the main arrow colour
 #: 
@@ -355,8 +355,7 @@ msgstr "Nom"
 #. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
 #: 
 msgid "Surnames"
-msgstr "Cognoms\n"
-""
+msgstr "Cognoms"
 
 #. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
 #: 
@@ -386,7 +385,7 @@ msgstr "Parella"
 #. Option section where option to auto-update is presented
 #: 
 msgid "Browser render"
-msgstr "Renderització del navegador "
+msgstr "Renderització del navegador"
 
 #. Whether to automatically update the diagram in the browser whenever something is changed. If unselected, user must click "Update" button before browser render is refreshed after a change.
 #: 
@@ -520,7 +519,7 @@ msgstr "Restablir als valors predeterminats"
 #: 
 #, fuzzy
 msgid "Show starting individuals in different color"
-msgstr "Mostrar les persones incials amb diferent color"
+msgstr "Mostrar els individus inicials amb diferent color"
 
 #. Option to change the background colour for starting individuals, to help find them easier on the diagram:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/afEtoto6Qnv1HlJn0zqAiMtP.png 
@@ -529,7 +528,7 @@ msgstr "Mostrar les persones incials amb diferent color"
 #: 
 #, fuzzy
 msgid "Starting individuals background color"
-msgstr "Color del fons per a les persones inicials"
+msgstr "Color del fons per als individus inicials"
 
 #. Option to change font size. This affects (at the time of writing) all diagram text except for names which have their own setting:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/IdWIcmNdrOj4l1yTgxv6MpVW.png
@@ -557,7 +556,7 @@ msgstr "Només navegador SVG i PDF"
 #: 
 #, fuzzy
 msgid "This is our starting point. Choose a person to base the diagram around. You might choose yourself.</p><p>You can choose as many starting individuals as you wish. A tree will be created for each starting individual based on the settings, then the trees are merged to create one tree for the diagram.</p><p>Click the X to remove a record from the list. If two or more records are listed, a \"Clear all\" option will appear to allow you to remove all records.</p><p>You can also click on an individual in this list to have the diagram in the browser scroll to that person.</p><p>When you next come to the page, the default individual or the last individual you were looking at in webtrees will be loaded. If there was just one saved individual then it will be replaced with the individual provided by webtrees on coming to the page. If there were multiple in the list, then the individual provided by webtrees will be added to the list (if not already in it). So be sure to double-check you are only including individuals you are looking for when first loading the page. This default behaviour can be change with the option \"Treatment of source individuals\" in the advanced section."
-msgstr "Aquest és el nostre punt de partida. Trie una persona per a basar el diagrama. Pot triar-se a si mateix.</p><p>Pot triar tantes persones inicials com desitge. Es crearà un arbre per a cada individu inicial basat en la configuració, després els arbres es fusionaran per a crear un arbre per al diagrama.</p><p>Faça clic en la X per a eliminar un registre de la llista. Si s'enumeren dos o més registres, apareixerà l'opció \"Esborrar tot\" per a permetre-li eliminar tots els registres.</p><p>També pot fer clic en un individu d'aquesta llista perquè el diagrama en el navegador es desplace fins a aquesta persona.</p><p>La pròxima vegada que arribe a la pàgina, es carregarà l'individu predeterminat o l'últim individu que estava mirant en WebTrees. Si només hi havia un individu guardat, llavors serà reemplaçat per l'individu proporcionat per webtrees en arribar a la pàgina. Si hi havia varis en la llista, llavors l'individu proporcionat per webtrees s'agregarà a la llista (si no està ja en ella). Així que assegure's de verificar que només està incloent a les persones que està buscant quan carregue la pàgina per primera vegada."
+msgstr "Per tant, assegureu-vos de comprovar que només incloeu les persones que busqueu quan carregueu la pàgina per primera vegada. Aquest comportament per defecte es pot canviar amb l'opció \"Tractament d'individus d'origen\" de l'apartat avançat.Aquest és el nostre punt de partida. Trie una persona per a basar el diagrama. Pot triar-se a si mateix.</p><p>Pot triar tantes persones inicials com desitge. Es crearà un arbre per a cada individu inicial basat en la configuració, després els arbres es fusionaran per a crear un arbre per al diagrama.</p><p>Faça clic en la X per a eliminar un registre de la llista. Si s'enumeren dos o més registres, apareixerà l'opció \"Esborrar tot\" per a permetre-li eliminar tots els registres.</p><p>També pot fer clic en un individu d'aquesta llista perquè el diagrama en el navegador es desplace fins a aquesta persona.</p><p>La pròxima vegada que arribe a la pàgina, es carregarà l'individu predeterminat o l'últim individu que estava mirant en WebTrees. Si només hi havia un individu guardat, llavors serà reemplaçat per l'individu proporcionat per webtrees en arribar a la pàgina. Si hi havia varis en la llista, llavors l'individu proporcionat per webtrees s'agregarà a la llista (si no està ja en ella). Així que assegures de verificar que només està incloent a les persones que està buscant quan carregue la pàgina per primera vegada."
 
 #. This help message is displayed when the user clicks the help icon next to "Include ancestors".  https://s3.eu-west-1.amazonaws.com/po-pub/i/UoTrlDpngydDdWmJPau99ZV4.png
 #: 
@@ -616,9 +615,7 @@ msgstr "Informació d'ajuda no trobada"
 #. This is the help text that the user will see if they click the i next to the Clippings cart message that shows only when there is an item in the clippings cart:  https://s3.eu-west-1.amazonaws.com/po-pub/i/lzypnHfQAPcoljhGbgSsaEVb.png
 #: 
 msgid "Within webtrees, you can add items to the clippings cart. This is usually done by navigating to a record within webtrees then selecting the \"Clippings cart\" option near the top of the screen.</p><p> If you have added individuals and the related family and media records to the clippings cart, these can be used to display the diagram instead of the criteria in the \"People to be included\" section.</p><p>If you have individuals in the clippings cart but don't wish to use these, you have the option to ignore the clippings cart."
-msgstr "Dins dels arbres web, pot agregar articles al carret de retallades. Això generalment es fa navegant a un registre dins dels arbres web i després seleccionant l'opció \"Carro de retallades\" prop de la part superior de la pantalla.\n"
-"</p><p>Si ha agregat individus al carret de retallades, aquests es poden usar per a mostrar el diagrama en lloc dels criteris en la secció \"Persones a incloure\".</p><p>\n"
-"Si té persones en el carret de retallades, però no desitja utilitzar, tens l'opció d'ignorar el carret de retallades."
+msgstr "Dins dels arbres web, pot agregar articles al carret de retallades. Això generalment es fa navegant a un registre dins dels arbres web i després seleccionant l'opció \"Carro de retallades\" prop de la part superior de la pantalla.</p><p>Si ha agregat individus al carret de retallades, aquests es poden usar per a mostrar el diagrama en lloc dels criteris en la secció \"Persones a incloure\".</p><p>Si té persones en el carret de retallades, però no desitja utilitzar, tens l'opció d'ignorar el carret de retallades."
 
 #. This is help text shown when the user clicks the "i" button next to the "XREFs of included individuals" option:   https://s3.eu-west-1.amazonaws.com/po-pub/i/YVGpSuKpIAjyOMoLTigbrzcU.png
 #: 
@@ -629,16 +626,13 @@ msgstr "Aquesta és una llista de XREF que representa els registres enumerats en
 #: 
 #, fuzzy
 msgid "If the module reaches one of these people, don't grow the tree from here. For example, if you chose yourself as the starting point, you might want to include all of your blood relatives except your mother's side of the family. Add your mother as a person to \"Stop processing on\". The tree will still include your mother, but it won't include her parents, siblings, etc.</p><p>Choose a person in the top box, and they will be added to the list. Their XREF will also be included in the bottom box (which can be edited directly if needed)."
-msgstr "Si el mòdul arriba a una d'aquestes persones, no inicie l'arbre des d'ací. Per exemple, si et vas elegir tu mateix com a punt de partida, és possible que desitges incloure a tots els teus parents consanguinis, excepte al costat matern de la família. Agregue a la seua mare com a persona a \"Deixar de processar\". L'arbre continuarà incloent a la teua mare, però no inclourà als seus pares, germans, etc.</p><p>\n"
-"Trie una persona en el quadre superior, i s'agregaran a la llista. El seu XREF també s'inclourà en el quadre inferior (que es pot editar directament si és necessari)."
+msgstr "Si el mòdul arriba a una d'aquestes persones, no inicie l'arbre des d'ací. Per exemple, si et vas elegir tu mateix com a punt de partida, és possible que desitges incloure a tots els teus parents consanguinis, excepte al costat matern de la família. Agregue a la seua mare com a persona a \"Deixar de processar\". L'arbre continuarà incloent a la teua mare, però no inclourà als seus pares, germans, etc.</p><p>Trie una persona en el quadre superior, i s'agregaran a la llista. El seu XREF també s'inclourà en el quadre inferior (que es pot editar directament si és necessari)."
 
 #. Help text shown when user clicks "i" next to option "Non-relatives":  https://s3.eu-west-1.amazonaws.com/po-pub/i/Lq1O4swJShMh36BPEhJiSujt.png
 #: 
 #, fuzzy
 msgid "This section has two related options.<h4>Mark not blood-related people with different color</h4><p>Where spouses are included and are not blood-related to anyone in the \"Include anyone related to\" field, if this option is selected they will be highlighted in a much duller color than the standard blue/pink for relatives.</p><p>Note that when this option is selected, and non-relatives are found in the selected records, then a full tree scan is performed to identify if an individual is related by a more distant link (see next option).</p><h4>Ignore unseen links to speed up relative check</h4><p>This option is only available when the previous option is selected. When the option to display non-relatives in a different colour is selected, normally a scan is performed starting from the starting individuals and branching to all relatives regardless of display settings. This ensures that if a person is related via a link not displayed, they will still show as related.</p><p>Enabling this option prevents the full scan of the tree which can greatly speed up the generation of the diagram on larger trees, but may reduce accuracy of the colouring of non-relatives."
-msgstr "Aquesta secció té dues opcions relacionades.<h4>Marcar a les persones no relacionades consanguíniament amb diferent color</h4><p> Quan els cònjuges estan inclosos i no estan relacionats consanguíniament amb ningú en el camp \"Incloure a algú relacionat amb\", si se selecciona aquesta opció, es ressaltaran en un color molt més apagat que el blau / rosa estàndard per a familiars.⁣</p>\n"
-"<p>Tinga en compte que quan se selecciona aquesta opció, i els no parents es troben en els registres seleccionats, després es realitza un escaneig d'arbre complet per a identificar si un individu està relacionat per un enllaç més distant (veure següent opció).</p><h4>\n"
-"Ignore enllaços no vistos per a accelerar la verificació relativa</h4><p>Aquesta opció només està disponible quan se selecciona l'opció anterior. Quan se selecciona l'opció de mostrar als no parents en un color diferent, normalment es du a terme un escaneig a partir dels individus inicials i es ramifica a tots els parents, independentment de la configuració de visualització. Això assegura que si una persona està relacionada a través d'un enllaç que no es mostra, continuarà mostrant-se com relacionada.</p><p> Habilitar aquesta opció evita l'escaneig complet de l'arbre, la qual cosa pot accelerar en gran manera la generació del diagrama en arbres més grans, però pot reduir la precisió de la coloració dels no parents."
+msgstr "Aquesta secció té dues opcions relacionades.<h4>Marcar a les persones no relacionades consanguíniament amb diferent color</h4><p> Quan els cònjuges estan inclosos i no estan relacionats consanguíniament amb ningú en el camp \"Incloure a algú relacionat amb\", si se selecciona aquesta opció, es ressaltaran en un color molt més apagat que el blau / rosa estàndard per a familiars.⁣</p><p>Tinga en compte que quan se selecciona aquesta opció, i els no parents es troben en els registres seleccionats, després es realitza un escaneig d'arbre complet per a identificar si un individu està relacionat per un enllaç més distant (veure següent opció).</p><h4>Ignore enllaços no vistos per a accelerar la verificació relativa</h4><p>Aquesta opció només està disponible quan se selecciona l'opció anterior. Quan se selecciona l'opció de mostrar als no parents en un color diferent, normalment es du a terme un escaneig a partir dels individus inicials i es ramifica a tots els parents, independentment de la configuració de visualització. Això assegura que si una persona està relacionada a través d'un enllaç que no es mostra, continuarà mostrant-se com relacionada.</p><p> Habilitar aquesta opció evita l'escaneig complet de l'arbre, la qual cosa pot accelerar en gran manera la generació del diagrama en arbres més grans, però pot reduir la precisió de la coloració dels no parents."
 
 #. Help text shown when user clicks the "i" next to "Show photos" in the advanced appearance section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/Xpn8Y8LiWnYphmjJe9eJO6ub.png
 #: 
@@ -716,10 +710,7 @@ msgstr "Per a eixides JPG i PNG, aquesta configuració produirà una eixida de m
 #. Help text shown when user clicks the "i" next to "Space":  https://s3.eu-west-1.amazonaws.com/po-pub/i/hEJcjkJ8xvGsTPoHjq5nT8L6.png
 #: 
 msgid "These options affect the distance between nodes on the diagram.</p><h4>Between generations</h4><p>How close you want generations on the output. For example, for left to right output, smaller numbers will bring the columns of individuals closer together, while larger numbers would push them further apart.</p><h4>Between individuals on the same level</h4><p>How close you want the individuals of the same generation on the output. For example, for left to right output, smaller numbers will mean less space vertically between the boxes, while larger numbers would push them further apart."
-msgstr "Aquestes opcions afecten la distància entre nodes en el diagrama.</p><h4>Entre generacions</h4><p>\n"
-"Què tan a prop desitja generacions en l'eixida. Per exemple, per a l'eixida d'esquerra a dreta, els números més xicotets acostaran les columnes d'individus, mentre que els números més grans els separarien encara més.</p><h4>\n"
-"Entre individus en el mateix nivell</h4><p>\n"
-"Què tan a prop desitja que els individus de la mateixa generació estiguen en l'eixida. Per exemple, per a l'eixida d'esquerra a dreta, els números més xicotets significaran menys espai vertical entre les caixes, mentre que els números més grans els separarien encara més."
+msgstr "Aquestes opcions afecten la distància entre nodes en el diagrama.</p><h4>Entre generacions</h4><p>Què tan a prop desitja generacions en l'eixida. Per exemple, per a l'eixida d'esquerra a dreta, els números més xicotets acostaran les columnes d'individus, mentre que els números més grans els separarien encara més.</p><h4>Entre individus en el mateix nivell</h4><p>Què tan a prop desitja que els individus de la mateixa generació estiguen en l'eixida. Per exemple, per a l'eixida d'esquerra a dreta, els números més xicotets significaran menys espai vertical entre les caixes, mentre que els números més grans els separarien encara més."
 
 #. Help text shown when user clicks the "i" next to "Font":  https://s3.eu-west-1.amazonaws.com/po-pub/i/SMqr3gHBplFqJ4C0yRnFBpkp.png
 #: 
@@ -940,7 +931,7 @@ msgstr "Copia manualment a continuació"
 #. If you save a version of the settings using the advanced settings saving option, if you select the same name as existing settings you will be prompted to overwrite the settings with this message:  https://s3.eu-west-1.amazonaws.com/po-pub/i/DTqDJMZW4xZejUnrsbe5H5fE.png
 #: 
 msgid "Overwrite settings '%s'?"
-msgstr "Sobreescriviu els paràmetres \"%s\"?"
+msgstr "Sobreescriviu els paràmetres \\\"%s\\\"?"
 
 #. Cancel button for modal prompt, for example:  https://s3.eu-west-1.amazonaws.com/po-pub/i/ftZQPpCgap1VOJEArq1KsL66.png
 #: 

@@ -99,7 +99,7 @@ function getHelpText(item) {
             for ($i=0; $i<sizeof($this->help); $i++) {
                 $msg .= "case \"" . $this->help[$i][0] . "\":\n";
                 $msg .= "    return '<h3>" . str_replace("'","&apos;",I18N::translate($this->help[$i][0])) . "</h3>";
-                $msg .= "<p>" . str_replace("'","&apos;",I18N::translate($this->help[$i][1])) . "</p>';\n";
+                $msg .= "<p>" . str_replace(array("\r", "\n"), '',str_replace("'","&apos;",I18N::translate($this->help[$i][1]))) . "</p>';\n";
             }
         $msg .= "case \"enable_debug_mode\":
             return '<textarea cols=50 rows=20 onclick=\"this.select()\">' + debug_string + '</textarea>';
