@@ -374,6 +374,7 @@ class Settings
             case 'space_base':
             case 'no_fams':
             case 'stop_proc':
+            case 'compress_cookie':
                 return false;
             case 'show_debug_panel':
             case 'filename':
