@@ -11,6 +11,7 @@ return array(
 	// 'graphviz_bin' => 'c:\\Graphviz2.17\\bin\\dot.exe', // for Windows (install dot.exe in a directory with no blank spaces)
 	// 'graphviz_bin' => '', // Uncomment this line if you don't have GraphViz installed on the server
 	'filename' => 'gvexport', // Output file name used for downloads
+	'compress_cookie' => true, // Whether cookie data should be compressed - particularly important if users can access multiple trees while logged out
 	'output_type' => 'svg', // Default output file type
 	'graph_dir' => 'LR', // Direction of graph. 'LR' for Left-to-right, 'TB' for Top-to-bottom
 	'mclimit' => '1', // Graphviz MCLIMIT setting - number of times to regenerate graph for reduced crossings

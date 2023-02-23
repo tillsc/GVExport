@@ -56,7 +56,8 @@ class Cookie
             'expires' => time() + (3600 * 24 * 365),
             'samesite' => 'Strict'
         );
-        setcookie($this->name, $json_cookie, $cookie_options);
+        $compress = ($vars['compress_cookie'] ? gzdeflate($json_cookie) : $json_cookie);
+        setcookie($this->name, $compress, $cookie_options);
     }
 
     /**
@@ -68,7 +69,12 @@ class Cookie
     public function load($userDefaultVars): array
     {
         if (isset($_COOKIE[$this->name]) and $_COOKIE[$this->name] != "") {
-            $json_cookie = json_decode($_COOKIE[$this->name]);
+            try {
+                $decompressed = gzinflate($_COOKIE[$this->name]);
+            } catch (\Exception $e) {
+                $decompressed = $_COOKIE[$this->name];
+            }
+            $json_cookie = json_decode($decompressed);
             if (json_last_error() === JSON_ERROR_NONE) {
                 foreach ($json_cookie as $key => $value) {
                     $userDefaultVars[$key] = $value;
