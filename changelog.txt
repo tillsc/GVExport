@@ -3,6 +3,11 @@
 	GVExport module for Webtrees
 =====================================================================
 
+Version 2.1.17.1 (2023-02-24)
+  - Fixed       : Admin settings reset does not work
+  - Fixed       : GVExport does not work when language set to Catalan
+  - Change      : Cookie data is now compressed to reduce chance of error from cookie being too large
+
 Version 2.1.17 (2023-02-19)
   - New         : Save a named version of settings
   - New         : Share link to named settings

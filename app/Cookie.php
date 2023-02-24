@@ -56,7 +56,7 @@ class Cookie
             'expires' => time() + (3600 * 24 * 365),
             'samesite' => 'Strict'
         );
-        $compress = ($vars['compress_cookie'] ? gzdeflate($json_cookie) : $json_cookie);
+        $compress = (!empty($vars['compress_cookie']) ? gzdeflate($json_cookie) : $json_cookie);
         setcookie($this->name, $compress, $cookie_options);
     }
 
