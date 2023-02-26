@@ -98,15 +98,24 @@ function getHelpText(item) {
 
             for ($i=0; $i<sizeof($this->help); $i++) {
                 $msg .= "case \"" . $this->help[$i][0] . "\":\n";
-                $msg .= "    return '<h3>" . str_replace("'","&apos;",I18N::translate($this->help[$i][0])) . "</h3>";
-                $msg .= "<p>" . str_replace(array("\r", "\n"), '',str_replace("'","&apos;",I18N::translate($this->help[$i][1]))) . "</p>';\n";
+                $msg .= "    return '<h3>" . $this->translateClean($this->help[$i][0]) . "</h3>";
+                $msg .= "<p>" . $this->translateClean($this->help[$i][1]) . "</p>';\n";
             }
         $msg .= "case \"enable_debug_mode\":
             return '<textarea cols=50 rows=20 onclick=\"this.select()\">' + debug_string + '</textarea>';
         default:
-            return  '" . I18N::translate("Help information not found") . "';
+            return  '" . $this->translateClean("Help information not found") . "';
         }
     }";
         return $msg;
+    }
+
+    /** Take provided translation and remove any line break, replace ' with &apos; to prevent issue with javascript
+     * @param $msg
+     * @return string
+     */
+    private function translateClean($msg): string
+    {
+        return str_replace(array("\r", "\n"), '',str_replace("'","&apos;",I18N::translate($msg)));
     }
 }
