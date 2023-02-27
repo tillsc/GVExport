@@ -3,6 +3,10 @@
 	GVExport module for Webtrees
 =====================================================================
 
+Version 2.1.17.2 (2023-02-27)
+  - Fixed       : Missing translation for message indicating individual added to list from URL
+  - Fixed       : GVExport does not work when language set to Catalan (pretty sure it's fixed this time)
+
 Version 2.1.17.1 (2023-02-24)
   - Fixed       : Admin settings reset does not work
   - Fixed       : GVExport does not work when language set to Catalan

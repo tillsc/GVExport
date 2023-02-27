@@ -966,44 +966,49 @@ msgstr "Не окрашивайте эти XREF:"
 #. If option enabled to show the extra diagram panel, this is the name of that panel. https://s3.eu-west-1.amazonaws.com/po-pub/i/CViHSJI40OkSwCEyVHs79jOh.png
 #: 
 msgid "Saved diagrams"
-msgstr ""
+msgstr "Сохраненные диаграммы"
 
 #. If option enabled to show the extra diagram panel, this is the group name for the diagram dropdown list: https://s3.eu-west-1.amazonaws.com/po-pub/i/CViHSJI40OkSwCEyVHs79jOh.png
 #: 
 msgid "List of diagrams"
-msgstr ""
+msgstr "Список диаграмм"
 
 #. Option that allows only some starting individuals to be highlighted:  https://s3.eu-west-1.amazonaws.com/po-pub/i/rsS48w1rUU4xnkLH4WDmeK3d.png
 #: 
 msgid "Colour these individuals:"
-msgstr ""
+msgstr "Раскрась этих людей:"
 
 #. Option for what to do with XREF provided from webtrees via URL:  
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/vzqSdDBFSfjBF2bkTbkT1G8Z.png
 #: 
 msgid "Treatment of source individuals"
-msgstr ""
+msgstr "Обращение с лицами-источниками"
 
 #. One of the options for what to do with XREF provided from webtrees via URL:  
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/vzqSdDBFSfjBF2bkTbkT1G8Z.png
 #: 
 msgid "Default"
-msgstr ""
+msgstr "По умолчанию"
 
 #. One of the options for what to do with XREF provided from webtrees via URL:  
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/vzqSdDBFSfjBF2bkTbkT1G8Z.png
 #: 
 msgid "Add to list"
-msgstr ""
+msgstr "Добавить в список"
 
 #. Help text for option for what to do with XREF provided by webtrees via URL:  https://s3.eu-west-1.amazonaws.com/po-pub/i/PF663q9RtqlHI4hKopBs8KEa.png
 #: 
 msgid "When you open GVExport, webtrees provides the record of an individual to the chart. This setting dictates what GVExport should do with this individual.</p><p>The options behave as follows:<ul><li>Default - if there is only one record in the starting individuals list, it will be overwritten. Otherwise, the new individual will be added to the list.</li><li>Add to list - The individual is always added to the list of starting individuals.</li><li>Don't add to list - Ignore the individual.</li><li>Overwrite - Clear the list of starting individuals and only add the new individual to the list.</li></ul></p><h4>Individual record</h4><p>The individual provided is decided by webtrees. If you select GVExport while on the page of an individual, this individual is provided to GVExport. When you come from another page, if the tree has a default individual this person is provided, otherwise the first individual in the tree is provided."
-msgstr ""
+msgstr "Когда вы открываете GVExport, веб-деревья предоставляют запись о человеке на диаграмму. Этот параметр определяет, что GVExport должен делать с этим человеком.</p><p>Параметры ведут себя следующим образом:<ul><li>По умолчанию — если в списке начальных лиц есть только одна запись, она будет перезаписана. В противном случае новое лицо будет добавлено в список.</li><li>Добавить в список — лицо всегда добавляется в список начальных лиц.</li><li>Не добавлять в список — игнорировать человека.</li><li>Перезаписать — очистить список начальных лиц и добавить в список только нового человека.</li></ul></p><h4>Отдельная запись</h4>< p>Предоставленный человек определяется веб-деревьями. Если вы выберете GVExport на странице физического лица, это физическое лицо будет предоставлено GVExport. Когда вы переходите с другой страницы, если в дереве есть человек по умолчанию, предоставляется этот человек, в противном случае предоставляется первый человек в дереве."
 
 #. One of the options for what to do with XREF provided from webtrees via URL:  
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/vzqSdDBFSfjBF2bkTbkT1G8Z.png
 #: 
 msgid "Don't add to list"
-msgstr ""
+msgstr "Не добавлять в список"
+
+#. When loading a person from the XREF in the URL (e.g. when coming to GVExport from an individual's page), this message is shown if the person is added to the list of individuals.  https://s3.eu-west-1.amazonaws.com/po-pub/i/Geo7uHM7LtBJeDh5Ae9jXTu3.png
+#: 
+msgid "One new source person added to %s existing persons"
+msgstr "Один новый исходный человек добавлен к %s существующим лицам"
 
