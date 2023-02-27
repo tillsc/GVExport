@@ -553,7 +553,7 @@ msgstr "alleen browser, SVG en PDF"
 #. This help message is displayed when the user clicks the help icon next to "Include anyone related to". https://s3.eu-west-1.amazonaws.com/po-pub/i/4sXDKFJMwoE5PBYZqEPOIV7W.png
 #: 
 msgid "This is our starting point. Choose a person to base the diagram around. You might choose yourself.</p><p>You can choose as many starting individuals as you wish. A tree will be created for each starting individual based on the settings, then the trees are merged to create one tree for the diagram.</p><p>Click the X to remove a record from the list. If two or more records are listed, a \"Clear all\" option will appear to allow you to remove all records.</p><p>You can also click on an individual in this list to have the diagram in the browser scroll to that person.</p><p>When you next come to the page, the default individual or the last individual you were looking at in webtrees will be loaded. If there was just one saved individual then it will be replaced with the individual provided by webtrees on coming to the page. If there were multiple in the list, then the individual provided by webtrees will be added to the list (if not already in it). So be sure to double-check you are only including individuals you are looking for when first loading the page. This default behaviour can be change with the option \"Treatment of source individuals\" in the advanced section."
-msgstr "Dit is ons startpunt. Kies een persoon om het diagram op te baseren. U kunt uzelf kiezen.</p><p>U kunt zoveel startpersonen kiezen als u wilt. Voor elke startpersoon wordt een boom gemaakt op basis van de instellingen, waarna de bomen worden samengevoegd tot één boom voor het diagram.</p><p>Klik op de X om een record uit de lijst te verwijderen. Als er twee of meer records in de lijst staan, verschijnt een optie \"Alles wissen\" waarmee alle records verwijderd kunnen worden.</p><p>U kunt ook op een persoon in deze lijst klikken om het diagram in de browser naar die persoon te laten scrollen.</p><p>Wanneer u de volgende keer op de pagina komt, wordt de standaardpersoon of de laatste persoon die u in webtrees hebt bekeken, geladen. Als er slechts één persoon was opgeslagen, wordt deze vervangen door de persoon die door webtrees is verstrekt wanneer u op de pagina komt. Als er meerdere personen in de lijst stonden, dan zal de persoon die door webtrees is geleverd aan de lijst worden toegevoegd (als die er nog niet in stond). Dus zorg ervoor dat u alleen peronen opneemt die u zoekt als de pagina voor het eerst wordt geladen. Dit standaardgedrag kan worden gewijzigd met de optie \"Behandeling van bronpersonen\" in het geavanceerde gedeelte."
+msgstr "Dit is ons startpunt. Kies een persoon om het diagram op te baseren. U kunt uzelf kiezen.</p><p>U kunt zoveel startpersonen kiezen als u wilt. Voor elke startpersoon wordt een boom gemaakt op basis van de instellingen, waarna de bomen worden samengevoegd tot één boom voor het diagram.</p><p>Klik op de X om een record uit de lijst te verwijderen. Als er twee of meer records in de lijst staan, verschijnt een optie \"Alles wissen\" waarmee alle records verwijderd kunnen worden.</p><p>U kunt ook op een persoon in deze lijst klikken om het diagram in de browser naar die persoon te laten scrollen.</p><p>Wanneer u de volgende keer op de pagina komt, wordt de standaardpersoon of de laatste persoon die u in webtrees hebt bekeken, geladen. Als er slechts één persoon was opgeslagen, wordt deze vervangen door de persoon die door webtrees is verstrekt wanneer u op de pagina komt. Als er meerdere personen in de lijst stonden, dan zal de persoon die door webtrees is geleverd aan de lijst worden toegevoegd (als die er nog niet in stond). Dus zorg ervoor dat u alleen peronen opneemt die u zoekt als de pagina voor het eerst wordt geladen. Dit standaardgedrag kan worden gewijzigd met de optie \"Behandeling van startpersonen\" in het geavanceerde gedeelte."
 
 #. This help message is displayed when the user clicks the help icon next to "Include ancestors".  https://s3.eu-west-1.amazonaws.com/po-pub/i/UoTrlDpngydDdWmJPau99ZV4.png
 #: 
@@ -969,7 +969,7 @@ msgstr "Kleur deze personen:"
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/vzqSdDBFSfjBF2bkTbkT1G8Z.png
 #: 
 msgid "Treatment of source individuals"
-msgstr "Behandeling van bronpersonen"
+msgstr "Behandeling van startpersonen"
 
 #. One of the options for what to do with XREF provided from webtrees via URL:  
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/vzqSdDBFSfjBF2bkTbkT1G8Z.png
@@ -993,4 +993,9 @@ msgstr "Wanneer u GVExport opent, levert webtrees het record van een persoon aan
 #: 
 msgid "Don't add to list"
 msgstr "Niet toevoegen aan de lijst"
+
+#. When loading a person from the XREF in the URL (e.g. when coming to GVExport from an individual's page), this message is shown if the person is added to the list of individuals.  https://s3.eu-west-1.amazonaws.com/po-pub/i/Geo7uHM7LtBJeDh5Ae9jXTu3.png
+#: 
+msgid "One new source person added to %s existing persons"
+msgstr "Eén nieuwe startpersoon toegevoegd aan %s bestaande personen"
 

@@ -517,7 +517,6 @@ msgstr "Auf Standardwerte zurücksetzen"
 #. 
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/eo7ytnyRCth5W2Sq76da71Ph.png
 #: 
-#, fuzzy
 msgid "Show starting individuals in different color"
 msgstr "Startpersonen in unterschiedlicher Farbe zeigen"
 
@@ -526,9 +525,8 @@ msgstr "Startpersonen in unterschiedlicher Farbe zeigen"
 #. 
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/eo7ytnyRCth5W2Sq76da71Ph.png
 #: 
-#, fuzzy
 msgid "Starting individuals background color"
-msgstr "Hintergrundfarbe der Startpersonen"
+msgstr "Hintergrundfarbe für Startpersonen"
 
 #. Option to change font size. This affects (at the time of writing) all diagram text except for names which have their own setting:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/IdWIcmNdrOj4l1yTgxv6MpVW.png
@@ -554,7 +552,6 @@ msgstr "Nur im Browser, bei SVG und PDF"
 
 #. This help message is displayed when the user clicks the help icon next to "Include anyone related to". https://s3.eu-west-1.amazonaws.com/po-pub/i/4sXDKFJMwoE5PBYZqEPOIV7W.png
 #: 
-#, fuzzy
 msgid "This is our starting point. Choose a person to base the diagram around. You might choose yourself.</p><p>You can choose as many starting individuals as you wish. A tree will be created for each starting individual based on the settings, then the trees are merged to create one tree for the diagram.</p><p>Click the X to remove a record from the list. If two or more records are listed, a \"Clear all\" option will appear to allow you to remove all records.</p><p>You can also click on an individual in this list to have the diagram in the browser scroll to that person.</p><p>When you next come to the page, the default individual or the last individual you were looking at in webtrees will be loaded. If there was just one saved individual then it will be replaced with the individual provided by webtrees on coming to the page. If there were multiple in the list, then the individual provided by webtrees will be added to the list (if not already in it). So be sure to double-check you are only including individuals you are looking for when first loading the page. This default behaviour can be change with the option \"Treatment of source individuals\" in the advanced section."
 msgstr "Suchen Sie nach einer Person im Auswahlfeld, um die herum das Diagramm erstellt werden soll. Sie können sich selbst als Startperson auswählen.</p><p>Sie können auch mehrere Startpersonen selektieren. Basierend auf den übrigen Einstellungen wird dann für jede Startperson ein Baum erstellt; diese werden für die Darstellung des Diagramms zusammengeführt.</p><p>Klicken Sie auf das X, um eine Person aus der Liste zu entfernen. Wenn zwei oder mehr Personen aufgelistet sind, erscheint die Option „Alle löschen“, mit der Sie alle Personen in einem Schritt entfernen können.</p><p>Sie können auch auf eine Person in dieser Liste klicken, damit im Diagramm auf diese Person zentriert wird.</p><p>Wenn Sie das nächste Mal auf diese Seite kommen, wird die Standardperson des Stammbaums oder die letzte Person, die Sie sich in webtrees angesehen haben, geladen. Wenn es nur eine gespeicherte Person gab, wird diese beim Aufrufen der Seite durch die von webtrees bereitgestellte Person ersetzt. Wenn es mehrere Personen in der Liste gab, wird die von webtrees bereitgestellte Person zur Liste hinzugefügt (falls sie nicht bereits darin enthalten ist). Vergewissern Sie sich also beim Laden der Seite, dass nur diejenigen Personen einbezogen wurden, die Sie dargestellt haben wollen. Dieses standardmäßige Verhalten kann mit Hilfe der Option \"Behandlung einer neuen Startperson \" geändert werden."
 
@@ -996,4 +993,9 @@ msgstr "Wenn Sie GVExport öffnen, stellt webtrees diesem Diagramm den Datensatz
 #: 
 msgid "Don't add to list"
 msgstr "Nicht zur Liste hinzufügen"
+
+#. When loading a person from the XREF in the URL (e.g. when coming to GVExport from an individual's page), this message is shown if the person is added to the list of individuals.  https://s3.eu-west-1.amazonaws.com/po-pub/i/Geo7uHM7LtBJeDh5Ae9jXTu3.png
+#: 
+msgid "One new source person added to %s existing persons"
+msgstr "Eine neue Startperson wurde zu %s bereits existierenden hinzugefügt"
 

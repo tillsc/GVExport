@@ -1018,3 +1018,8 @@ msgstr ""
 msgid "Don't add to list"
 msgstr ""
 
+#. When loading a person from the XREF in the URL (e.g. when coming to GVExport from an individual's page), this message is shown if the person is added to the list of individuals.  https://s3.eu-west-1.amazonaws.com/po-pub/i/Geo7uHM7LtBJeDh5Ae9jXTu3.png
+#: 
+msgid "One new source person added to %s existing persons"
+msgstr ""
+
