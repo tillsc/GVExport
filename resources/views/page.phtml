@@ -331,6 +331,11 @@ $xref = $individual->xref();
                             <label for="photo_shape"><?= I18N::translate('Photo shape') ?>:</label>
                             <?= view('components/select', ['name' => 'vars[photo_shape]', 'id' => 'photo_shape', 'selected' => e($vars['photo_shape']), 'options' => MainPage::updateTranslations($settings["photo_shape_options"])]) ?>
                         </div>
+                        <div class="col-auto">
+                            <label for="photo_size"><?= I18N::translate('Photo size') ?>:</label>
+                            <input type="text" onclick="togglePercent(this, false)" onblur="togglePercent(this, true)" class="form-control col-sm-6" size="10" name="vars[photo_size]" id="photo_size"
+                                   value="<?= e($vars["photo_size"]) ?>">
+                        </div>
                     </div>
                 </div>
             <?php } ?>

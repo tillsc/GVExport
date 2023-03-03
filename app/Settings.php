@@ -33,7 +33,7 @@ class Settings
         $this->defaultSettings['url_xref_treatment_options']['overwrite'] = "Overwrite";
         $this->defaultSettings['use_abbr_places'] = [0 => "Full place name", 10 => "City and country" ,  20 => "City and 2 letter ISO country code", 30 => "City and 3 letter ISO country code"];
         $this->defaultSettings['use_abbr_names'] = [0 => "Full name", 10 => "Given and surnames", 20 => "Given names" , 30 => "First given name only", 40 => "Surnames", 50 => "Initials only", 60 => "Given name initials and surname", 70 => "Don't show names"];
-        $this->defaultSettings['photo_shape_options'] = [0 => "None", 10 => "Oval", 20 => "Circle" , 30 => "Square", 40 => "Rounded rectangle"];
+        $this->defaultSettings['photo_shape_options'] = [0 => "No change", 10 => "Oval", 20 => "Circle" , 30 => "Square", 40 => "Rounded rectangle"];
         $this->defaultSettings['countries'] = $this->getCountryAbbreviations();
         if (!$this->isGraphvizAvailable($this->defaultSettings['graphviz_bin'])) {
             $this->defaultSettings['graphviz_bin'] = "";
@@ -376,6 +376,7 @@ class Settings
             case 'no_fams':
             case 'stop_proc':
             case 'compress_cookie':
+            case 'photo_shape_options':
                 return false;
             case 'show_debug_panel':
             case 'filename':

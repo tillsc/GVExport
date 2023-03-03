@@ -209,6 +209,16 @@ class FormSubmission
         if (isset($vars['photo_shape'])) {
             $settings['photo_shape'] = I18N::digits($vars['photo_shape']);
         }
+        if (isset($vars['photo_size'])) {
+            $size = $vars['photo_size'];
+            if (!strpos($size, '%')) {
+                $size = $size . "%";
+            }
+            if ($this->isPercent($size)) {
+                $settings['photo_size'] = $size;
+            }
+        }
+
         $settings['no_fams'] = isset($vars['no_fams']);
 
         if (isset($vars['dpi'])) {
