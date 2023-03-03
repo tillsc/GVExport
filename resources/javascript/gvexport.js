@@ -1639,11 +1639,11 @@ function toggleHighlightStartPersons(enable) {
     showHide(document.getElementById('startcol_option'),enable);
 }
 
-function makeSvgPhotosRounded(element, amount) {
+function setSvgImageClipPath(element, clipPath) {
     // Circle photo
     const imageElements = element.getElementsByTagName("image");
     for (let i = 0; i < imageElements.length; i++) {
-        imageElements[i].setAttribute("clip-path", "inset(0% round " + amount + ")");
+        imageElements[i].setAttribute("clip-path", clipPath);
         imageElements[i].removeAttribute("width");
     }
 }
@@ -1656,10 +1656,16 @@ function cleanSVG(element) {
     const SHAPE_ROUNDED_RECT = '40';
     switch(document.getElementById('photo_shape').value) {
         case SHAPE_OVAL:
-            makeSvgPhotosRounded(element, "50%");
+            setSvgImageClipPath(element, "inset(0% round 50%)");
+            break;
+        case SHAPE_CIRCLE:
+            setSvgImageClipPath(element, "circle(50%)");
+            break;
+        case SHAPE_SQUARE:
+            setSvgImageClipPath(element, "inset(5%)");
             break;
         case SHAPE_ROUNDED_RECT:
-            makeSvgPhotosRounded(element, "25%");
+            setSvgImageClipPath(element, "inset(0% round 25%)");
             break;
     }
 

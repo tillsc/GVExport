@@ -1142,7 +1142,17 @@ class Dot {
                 $image = new ImageFile($m, $this->tree, $this->settings["dpi"] * 2);
 				return $image->getImageLocation();
 			} else {
-				return str_replace("&","%26",$m->imageUrl($this->settings["dpi"]*2,$this->settings["dpi"]*2,"contain"));
+                switch ($this->settings['photo_shape']) {
+                    case 0:
+                    case 10:
+                    case 40:
+                        $fit = "contain";
+                        break;
+                    default:
+                        $fit = "crop";
+                }
+
+				return str_replace("&","%26",$m->imageUrl($this->settings["dpi"]*2,$this->settings["dpi"]*2, $fit));
 			}
 		} else {
 			return null;
