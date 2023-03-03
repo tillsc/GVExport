@@ -321,10 +321,16 @@ $xref = $individual->xref();
 
             <?php if ($tree->getPreference('SHOW_HIGHLIGHT_IMAGES') == '1') { ?>
                 <div class="row form-group">
-                    <?= MainPage::addLabel('show_photos', 'Add photos'); ?>
+                    <?= MainPage::addLabel('', 'Photos'); ?>
                     <div class="col-sm-8 wt-page-options-value">
-                        <input type="checkbox" name="vars[show_photos]" id="show_photos" value="show_photos" <?= $vars["show_photos"] ? 'checked' : '' ?>>
-                        <span class="text-muted">(<?= I18N::translate('Only Decorated or Combined') ?>)</span>
+                        <div class="col-auto">
+                            <input type="checkbox" name="vars[show_photos]" id="show_photos" value="show_photos" <?= $vars["show_photos"] ? 'checked' : '' ?>>
+                            <label for="show_photos"><?= I18N::translate('Show photos') ?></label>
+                        </div>
+                        <div class="col-auto">
+                            <label for="photo_shape"><?= I18N::translate('Photo shape') ?>:</label>
+                            <?= view('components/select', ['name' => 'vars[photo_shape]', 'id' => 'photo_shape', 'selected' => e($vars['photo_shape']), 'options' => MainPage::updateTranslations($settings["photo_shape_options"])]) ?>
+                        </div>
                     </div>
                 </div>
             <?php } ?>
@@ -795,19 +801,8 @@ $xref = $individual->xref();
             });
         }).then(function (element) {
             // Now we have to clean up the generated SVG.
+            cleanSVG(element);
 
-            // remove title tags, so we don't get weird data on hover,
-            // instead this defaults to the XREF of the record
-            const a = element.getElementsByTagName("a");
-            for (let i = 0; i < a.length; i++) {
-                a[i].removeAttribute("xlink:title");
-            }
-            //half of bug fix for photos not showing in browser - we change & to %26 in functions_dot.php
-            element.innerHTML = element.innerHTML.replaceAll("%26", "&amp;");
-            // Don't show anything when hovering on blank space
-            element.innerHTML = element.innerHTML.replaceAll("<title>WT_Graph</title>", "");
-            // Set SVG viewBox to height/width so image is not cut off
-            element.setAttribute("viewBox", "0 0 "+element.getAttribute("width").replace("pt","")+" "+element.getAttribute("height").replace("pt",""));
             // Clear current rendering then append new element to the page
             rendering.innerHTML = "";
             rendering.appendChild(element);

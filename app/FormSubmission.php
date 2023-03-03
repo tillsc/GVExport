@@ -206,6 +206,9 @@ class FormSubmission
 
         }
         $settings['show_photos'] = isset($vars['show_photos']);
+        if (isset($vars['photo_shape'])) {
+            $settings['photo_shape'] = I18N::digits($vars['photo_shape']);
+        }
         $settings['no_fams'] = isset($vars['no_fams']);
 
         if (isset($vars['dpi'])) {

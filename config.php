@@ -17,6 +17,7 @@ return array(
 	'mclimit' => '1', // Graphviz MCLIMIT setting - number of times to regenerate graph for reduced crossings
 	'diagram_type' => 'decorated', // Default diagram type setting. 'simple', 'decorated', or 'combined'
 	'show_photos' => true, // Whether to include photos in diagram
+    'photo_shape' => 0, // Default photo shape option
 	'show_birthdate' => true, // Whether to show birthdate for individuals
 	'birthdate_year_only' => false, // Whether to show just the year or the full GEDCOM date of birth
 	'show_birthplace' => true, // Whether to show birthplace for individuals
