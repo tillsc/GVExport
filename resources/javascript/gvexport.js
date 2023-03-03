@@ -1639,11 +1639,11 @@ function toggleHighlightStartPersons(enable) {
     showHide(document.getElementById('startcol_option'),enable);
 }
 
-function makeSvgPhotosOval(element) {
+function makeSvgPhotosRounded(element, amount) {
     // Circle photo
     const imageElements = element.getElementsByTagName("image");
     for (let i = 0; i < imageElements.length; i++) {
-        imageElements[i].setAttribute("clip-path", "inset(0% round 50%)");
+        imageElements[i].setAttribute("clip-path", "inset(0% round " + amount + ")");
         imageElements[i].removeAttribute("width");
     }
 }
@@ -1653,9 +1653,13 @@ function cleanSVG(element) {
     const SHAPE_OVAL = '10';
     const SHAPE_CIRCLE = '20';
     const SHAPE_SQUARE = '30';
+    const SHAPE_ROUNDED_RECT = '40';
     switch(document.getElementById('photo_shape').value) {
         case SHAPE_OVAL:
-            makeSvgPhotosOval(element);
+            makeSvgPhotosRounded(element, "50%");
+            break;
+        case SHAPE_ROUNDED_RECT:
+            makeSvgPhotosRounded(element, "25%");
             break;
     }
 
