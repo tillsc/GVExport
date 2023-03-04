@@ -606,7 +606,7 @@ class Dot {
                 $out .= "color=\"" . $this->settings["border_col"] . "\",fillcolor=\"" . $fill_color . "\", $href shape=point, height=0.2, style=filled";
                 $out .= ", label=" . "< >";
             } else {
-                $out .= "color=\"" . $this->settings["border_col"] . "\",fillcolor=\"" . $fill_color . "\", $href shape=box, style=\"filled, rounded\", margin=0.01";
+                $out .= "color=\"" . $this->settings["border_col"] . "\",fillcolor=\"" . $fill_color . "\", $href shape=oval, style=\"filled\", margin=0.01";
                 $out .= ", label=" . "<<TABLE border=\"0\" CELLPADDING=\"0\" CELLSPACING=\"0\"><TR><TD><FONT COLOR=\"". $this->settings["font_colour_details"] ."\" POINT-SIZE=\"" . ($this->settings["font_size"]) ."\">" . (empty($marriagedate)?"":$marriagedate) . "<BR />" . (empty($marriageplace)?"":"(".$marriageplace.")") . $family . "</FONT></TD></TR></TABLE>>";
             }
         }
