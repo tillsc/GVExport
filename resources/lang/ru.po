@@ -135,8 +135,10 @@ msgstr "Украшен"
 msgid "Combined"
 msgstr "Комбинация"
 
+#. This is the name of the section that photo related settings can be changed: https://s3.eu-west-1.amazonaws.com/po-pub/i/fklNi5Hq6dbxZd3ktRneP8jW.png
 #: 
-msgid "Add photos"
+#, fuzzy
+msgid "Photos"
 msgstr "Добавить фото"
 
 #: 
@@ -640,7 +642,8 @@ msgstr "В этом разделе есть две взаимосвязанны�
 
 #. Help text shown when user clicks the "i" next to "Show photos" in the advanced appearance section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/Xpn8Y8LiWnYphmjJe9eJO6ub.png
 #: 
-msgid "Whether to display the photo from the individual's page in the tree. This is only supported for Decorated and Combined diagram types."
+#, fuzzy
+msgid "This section contains the option to display the photo from the individual's page in the tree. This is only supported for Decorated and Combined diagram types.</p><p>The \"Photo shape\" option allows you to select a shape for the photos. Photos will be cropped to fit this shape.</p><p>The \"Photo size\" option allows you to adjust the scale of the photo. 100&percnt; is the default, and you can increase this to make the photos bigger, or decrease it to make them smaller."
 msgstr "Отображать ли фото со страницы человека в дереве. Это поддерживается только для типов диаграмм с декоративными и комбинированными схемами."
 
 #. Help text shown when user clicks "Add URL to individuals and families" option:  https://s3.eu-west-1.amazonaws.com/po-pub/i/QREJLhm9Besbu8r11RXghPYN.png
@@ -1011,4 +1014,45 @@ msgstr "Не добавлять в список"
 #: 
 msgid "One new source person added to %s existing persons"
 msgstr "Один новый исходный человек добавлен к %s существующим лицам"
+
+#. This is a message that is shown if the user both has Graphviz installed on the server AND has used the photo shape setting (e.g. to make photos circle). The photo shapes are not supported by Graphviz, and are manipulated into the diagram after Graphviz has generated it. This is not possible with server-rendered diagrams, so if this option is used we automatically use the browser generation and show this message.
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/Rq4HsawCjQ0CuWW3I2SoDIJM.png
+#: 
+msgid "Rendered in browser as server doesn't support photo shapes"
+msgstr ""
+
+#. One of the options in the new feature to change the shape of photos:  https://s3.eu-west-1.amazonaws.com/po-pub/i/xt0dCFkQXFZVcva3B9ae0WOL.png
+#: 
+msgid "No change"
+msgstr ""
+
+#. One of the options in the new feature to change the shape of photos:  https://s3.eu-west-1.amazonaws.com/po-pub/i/xt0dCFkQXFZVcva3B9ae0WOL.png
+#: 
+msgid "Oval"
+msgstr ""
+
+#. One of the options in the new feature to change the shape of photos:  https://s3.eu-west-1.amazonaws.com/po-pub/i/xt0dCFkQXFZVcva3B9ae0WOL.png
+#: 
+msgid "Circle"
+msgstr ""
+
+#. One of the options in the new feature to change the shape of photos:  https://s3.eu-west-1.amazonaws.com/po-pub/i/xt0dCFkQXFZVcva3B9ae0WOL.png
+#: 
+msgid "Square"
+msgstr ""
+
+#. One of the options in the new feature to change the shape of photos:  https://s3.eu-west-1.amazonaws.com/po-pub/i/xt0dCFkQXFZVcva3B9ae0WOL.png
+#: 
+msgid "Rounded rectangle"
+msgstr ""
+
+#. New option allowing user to change the shape of the photos of individuals on the diagram:  https://s3.eu-west-1.amazonaws.com/po-pub/i/m1OnWy0suuc9ZfVnzjRGm2fT.png
+#: 
+msgid "Photo shape"
+msgstr ""
+
+#. New option allowing the user to change the size of photos in the diagram relative to the default size:  https://s3.eu-west-1.amazonaws.com/po-pub/i/tJTfdr6obmGkybNdVWvjF1ee.png
+#: 
+msgid "Photo size"
+msgstr ""
 
