@@ -9,19 +9,19 @@ msgstr ""
 
 #: 
 msgid "Update"
-msgstr ""
+msgstr "Aktualizovat"
 
 #: 
 msgid "Render serverside"
-msgstr ""
+msgstr "Vykreslování na straně serveru"
 
 #: 
 msgid "Reset"
-msgstr "Reset"
+msgstr "Resetovat"
 
 #: 
 msgid "Diagram preferences"
-msgstr ""
+msgstr "Předvolby diagramu"
 
 #: 
 msgid "Appearance"
@@ -29,71 +29,71 @@ msgstr "Vzhled"
 
 #: 
 msgid "Output settings"
-msgstr ""
+msgstr "Nastavení výstupu"
 
 #: 
 msgid "Include anyone related to"
-msgstr ""
+msgstr "Zahrnout všechny příbuzné s"
 
 #: 
 msgid "Stop processing on"
-msgstr ""
+msgstr "Ukončit zpracování u"
 
 #: 
 msgid "Include ancestors"
-msgstr ""
+msgstr "Zahrnout předky"
 
 #: 
 msgid "Include"
-msgstr ""
+msgstr "Zahrnout"
 
 #: 
 msgid "Siblings"
-msgstr ""
+msgstr "Sourozence"
 
 #: 
 msgid "Cousins"
-msgstr ""
+msgstr "Bratrance"
 
 #: 
 msgid "Spouses"
-msgstr ""
+msgstr "Partnery"
 
 #: 
 msgid "Include descendants"
-msgstr ""
+msgstr "Zahrnout potomky"
 
 #: 
 msgid "Max levels"
-msgstr ""
+msgstr "Do úrovně"
 
 #: 
 msgid "Mark not blood-related people with different color"
-msgstr ""
+msgstr "Nepokrevní příbuzné označit jinou barvou"
 
 #: 
 msgid "Add URL to individuals and families"
-msgstr ""
+msgstr "K osobám a rodinám přidat URL"
 
 #: 
 msgid "Use abbreviated placenames"
-msgstr ""
+msgstr "Použít zkrácené názvy míst"
 
 #: 
 msgid "Show birth date"
-msgstr "Ukaž datum narození"
+msgstr "Zobrazit datum narození"
 
 #: 
 msgid "Show birth place"
-msgstr "Ukaž místo narození"
+msgstr "Zobrazit místo narození"
 
 #: 
 msgid "Show death date"
-msgstr "Ukaž datum úmrtí"
+msgstr "Zobrazit datum úmrtí"
 
 #: 
 msgid "Full date"
-msgstr ""
+msgstr "Úplné datum"
 
 #: 
 msgid "Year"
@@ -101,19 +101,19 @@ msgstr "Rok"
 
 #: 
 msgid "Show death place"
-msgstr "Ukaž místo úmrtí"
+msgstr "Zobrazit místo úmrtí"
 
 #: 
 msgid "Show family XREF"
-msgstr ""
+msgstr "Zobrazit XREF rodiny"
 
 #: 
 msgid "Show marriage date"
-msgstr "Ukaž datum svatby"
+msgstr "Zobrazit datum sňatku"
 
 #: 
 msgid "Show marriage place"
-msgstr "Ukaž místo svatby"
+msgstr "Zobrazit místo sňatku"
 
 #: 
 msgid "Graph direction"
@@ -135,8 +135,10 @@ msgstr "Ozdobný"
 msgid "Combined"
 msgstr "Kombinovaný"
 
+#. This is the name of the section that photo related settings can be changed: https://s3.eu-west-1.amazonaws.com/po-pub/i/fklNi5Hq6dbxZd3ktRneP8jW.png
 #: 
-msgid "Add photos"
+#, fuzzy
+msgid "Photos"
 msgstr "S fotkami"
 
 #: 
@@ -145,19 +147,19 @@ msgstr "Pouze ozdobný či kombinovaný"
 
 #: 
 msgid "Output file type"
-msgstr ""
+msgstr "Typ výstupního souboru"
 
 #: 
 msgid "Generate a file for download"
-msgstr "Generuj soubor ke stažení"
+msgstr "Generovat soubor ke stažení"
 
 #: 
 msgid "Number of iterations (MCLIMIT)"
-msgstr ""
+msgstr "Počet iterací (MCLIMIT)"
 
 #: 
 msgid "helps to reduce the crossings on the graph. This can be really slow (up to 10..15x compared to the 20 setting)"
-msgstr ""
+msgstr "pomáhá omezit křížení v grafu. To může být opravdu pomalé (až 10..15x ve srovnání s nastavením 20)."
 
 #: 
 msgid "DPI"
@@ -165,27 +167,27 @@ msgstr "DPI"
 
 #: 
 msgid "Show options"
-msgstr "Ukaž možnosti"
+msgstr "Zobrazit možnosti"
 
 #: 
 msgid "Top-to-bottom"
-msgstr "Shora-dolů"
+msgstr "Shora dolů"
 
 #: 
 msgid "Left-to-right"
-msgstr "Zleva-doprava"
+msgstr "Zleva doprava"
 
 #: 
 msgid "Space between generations"
-msgstr ""
+msgstr "Prostor mezi generacemi"
 
 #: 
 msgid "Space between individuals on the same level"
-msgstr ""
+msgstr "Prostor mezi osobami stejné úrovně"
 
 #: 
 msgid "Error running GVExport in browser mode"
-msgstr ""
+msgstr "Chyba při spuštění GVExportu v režimu prohlížeče"
 
 #: 
 msgid "Preview"
@@ -197,7 +199,7 @@ msgstr "Stáhnout"
 
 #: 
 msgid "Full place name"
-msgstr ""
+msgstr "Úplný název místa"
 
 #: 
 msgid "City and country"
@@ -205,59 +207,59 @@ msgstr "Město a země"
 
 #: 
 msgid "City and 2 letter ISO country code"
-msgstr "Město a ISO země - 2 znaky"
+msgstr "Město a 2-místný ISO kód země"
 
 #: 
 msgid "City and 3 letter ISO country code"
-msgstr "Město a ISO země - 3 znaky"
+msgstr "Město a 3-místný ISO kód země"
 
 #: 
 msgid "Space"
-msgstr ""
+msgstr "Prostor"
 
 #: 
 msgid "Between generations"
-msgstr ""
+msgstr "Mezi generacemi"
 
 #: 
 msgid "Between individuals on the same level"
-msgstr ""
+msgstr "Mezi osobami stejné úrovně"
 
 #: 
 msgid "Abbreviated place names"
-msgstr ""
+msgstr "Zkrácené názvy míst"
 
 #: 
 msgid "People to be included"
-msgstr ""
+msgstr "Zahrnout osoby"
 
 #: 
 msgid "Show individual XREF"
-msgstr ""
+msgstr "Zobrazit XREF osoby"
 
 #: 
 msgid "Options limited as Graphviz not installed on server"
-msgstr ""
+msgstr "Možnosti jsou omezené, protože na serveru není instalován Graphviz"
 
 #: 
 msgid "Anyone"
-msgstr "Kdokoliv"
+msgstr "Všechny"
 
 #: 
 msgid "All relatives"
-msgstr "Všichni příbuzní"
+msgstr "Všechny příbuzné"
 
 #: 
 msgid "You have items in the clippings cart, which can be used for the diagram instead of the below options."
-msgstr ""
+msgstr "Ve schránce s výstřižky máte položky, které lze použít pro diagram místo níže uvedených možností."
 
 #: 
 msgid "Use clippings cart"
-msgstr ""
+msgstr "Použít výstřižky"
 
 #: 
 msgid "Ignore clippings cart"
-msgstr ""
+msgstr "Ignorovat výstřižky"
 
 #: 
 msgid "Warning"
@@ -265,31 +267,31 @@ msgstr "Varování"
 
 #: 
 msgid "Individual required"
-msgstr ""
+msgstr "Osoba je vyžadována"
 
 #: 
 msgid "Generated %s individuals and %s family records"
-msgstr ""
+msgstr "Vytvořeno %s záznamů osob a %s záznamů rodin"
 
 #: 
 msgid "Invalid starting individual:"
-msgstr ""
+msgstr "Neplatná výchozí osoba:"
 
 #: 
 msgid "Your browser does not support exporting images this large. Please reduce number of records, reduce DPI setting, or use SVG option."
-msgstr ""
+msgstr "Váš prohlížeč nepodporuje export takto velkých obrázků. Zmenšete prosím počet záznamů, snižte nastavení DPI nebo použijte možnost SVG."
 
 #: 
 msgid "Toggle advanced settings"
-msgstr ""
+msgstr "Přepnout pokročilá nastavení"
 
 #: 
 msgid "Ignore unseen links to speed up relative check"
-msgstr ""
+msgstr "Ignorovat neviditelné odkazy a tím urychlit kontrolu spřízněnosti"
 
 #: 
 msgid "Non-relatives"
-msgstr ""
+msgstr "Nezpříznění"
 
 #: 
 msgid "Font"
@@ -297,7 +299,7 @@ msgstr "Font"
 
 #: 
 msgid "Typeface"
-msgstr ""
+msgstr "Druh písma"
 
 #: 
 msgid "Font color for names"
@@ -325,17 +327,17 @@ msgstr "Barva šipek"
 #. When enabled makes arrows from family to child different colours based on if the child is related to the family by birth or otherwise (e.g. adoption)
 #: 
 msgid "Show blood relationship in different color"
-msgstr ""
+msgstr "Pokrevní příbuzenství zobrazit jinou barvou"
 
 #. Label for colour picker to select colour of arrow for children related by birth
 #: 
 msgid "Related by birth"
-msgstr ""
+msgstr "Spřízněnost narozením"
 
 #. Label for colour picker to select colour of arrow for children not related by birth (e.g. adoption)
 #: 
 msgid "Related other than by birth"
-msgstr ""
+msgstr "Spřízněnost jiná než narozením"
 
 #. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
 #: 
@@ -345,12 +347,12 @@ msgstr "Celé jméno"
 #. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
 #: 
 msgid "Given and surnames"
-msgstr "Jméno a příjmení"
+msgstr "Jména a příjmení"
 
 #. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
 #: 
 msgid "Given names"
-msgstr "Jméno"
+msgstr "Jména"
 
 #. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
 #: 
@@ -375,38 +377,38 @@ msgstr "Pouze iniciály"
 #. Option for abbreviating name, see: https://github.com/Neriderc/GVExport/issues/158
 #: 
 msgid "Given name initials and surname"
-msgstr ""
+msgstr "Iniciály jmen a příjmení"
 
 #. This is to replace "Spouses" in the options of people to include - "Spouses" implies marriage but the couples are not necessarily married.
 #: 
 msgid "Partners"
-msgstr "Partneři"
+msgstr "Partnery"
 
 #. Option section where option to auto-update is presented
 #: 
 msgid "Browser render"
-msgstr ""
+msgstr "Vykreslování na straně prohlížeče"
 
 #. Whether to automatically update the diagram in the browser whenever something is changed. If unselected, user must click "Update" button before browser render is refreshed after a change.
 #: 
 msgid "Auto-update"
-msgstr ""
+msgstr "Automaticky aktualizovat"
 
 #. Button to clear all selected individuals (in new individual selection functionality) https://s3.eu-west-1.amazonaws.com/po-pub/i/EsrRESKU3YALMqSOyVudt0L1.png
 #: 
 msgid "Clear all"
-msgstr "Smazat vše"
+msgstr "Vyčistit vše"
 
 #. With the new way of showing the selected starting individuals, the XREF list is now moved to the advanced section. This is the description of this field that lists the XREFs of the starting individuals that used to be under the person select dropdown.
 #: 
 msgid "XREFs of included individuals"
-msgstr ""
+msgstr "XREFy osob"
 
 #. Option to show given or surnames, initials, or to hide names completely:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/5r0R5U4uGRS1qz8NuOCtuIN1.png
 #: 
 msgid "Abbreviated names"
-msgstr ""
+msgstr "Zkrácená jména"
 
 #. This is shown when hovering over the new "Fullscreen" button. 
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/FNnRXD7QT9BrgV0wMgPIdrY2.png 
@@ -420,97 +422,97 @@ msgstr "Celá obrazovka"
 #. Option allowing user to change colour used for male individuals (default is a light blue)
 #: 
 msgid "Male individuals"
-msgstr ""
+msgstr "Osoby mužské"
 
 #. Option allowing user to change colour of female individuals (default is pink)
 #: 
 msgid "Female individuals"
-msgstr ""
+msgstr "Osoby ženské"
 
 #. Option allowing user to change colour of individuals where gender is "Other"
 #: 
 msgid "Other gender individuals"
-msgstr ""
+msgstr "Osoby jiného pohlaví"
 
 #. Option allowing user to change the colour of individuals where the gender is unknown (default is light green)
 #: 
 msgid "Unknown gender individuals"
-msgstr ""
+msgstr "Osoby neznámého pohlaví"
 
 #. Option allowing user to change colour of non-blood related male individuals (if the option to display in a different colour is selected). Default is a very pale blue.
 #: 
 msgid "Not blood-related male individuals"
-msgstr ""
+msgstr "Osoby mužské nespřízněné pokrevně"
 
 #. Option allowing user to change colour of non-blood related female individuals (if the option to display in a different colour is selected). Default is a very pale pink.
 #: 
 msgid "Not blood-related female individuals"
-msgstr ""
+msgstr "Osoby ženské nespřízněné pokrevně"
 
 #. Option allowing user to change colour of non-blood related other gender individuals (if the option to display in a different colour is selected). Default is a very pale yellow.
 #: 
 msgid "Not blood-related other gender individuals"
-msgstr ""
+msgstr "Osoby jiného pohlaví nespřízněné pokrevně"
 
 #. Option allowing user to change colour of non-blood related unknown gender individuals (if the option to display in a different colour is selected). Default is a very pale green.
 #: 
 msgid "Not blood-related unknown gender individuals"
-msgstr ""
+msgstr "Osoby neznámého pohlaví nespřízněné pokrevně"
 
 #. Option allowing user to change the background colour of individual tiles (decorated and combined modes)
 #: 
 msgid "Individual background color"
-msgstr ""
+msgstr "Barva pozadí osoby"
 
 #. Section where user can change colours related to the tiles showing each individual:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/tCBByut2gnWNyBHlbEjXM4wm.png
 #: 
 msgid "Tile colors"
-msgstr ""
+msgstr "Barvy dlaždic"
 
 #. Section where colours can be changed, where this is unrelated to other sections:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/HkIwBd2gotM7LpP7LA074oOI.png
 #: 
 msgid "Other colours"
-msgstr ""
+msgstr "Jiné barvy"
 
 #. Option where user can change the background colour of the family record (ovals in simple/decorated mode, attached rectangle in combined mode). Default is a light yellow.
 #: 
 msgid "Family background"
-msgstr ""
+msgstr "Pozadí rodiny"
 
 #. Option where user can change the colour of the borders of the tiles and family records.
 #: 
 msgid "Outline colour"
-msgstr ""
+msgstr "Barva obrysu"
 
 #. Option where user can change the colour of the background behind the diagram
 #: 
 msgid "Diagram background color"
-msgstr ""
+msgstr "Barva pozadí diagramu"
 
 #. Shown in tooltip when hovering over close button in fullscreen mode
 #: 
 msgid "Exit fullscreen"
-msgstr ""
+msgstr "Opustit celou obrazovku"
 
 #. This is a section title on the control panel settings page where the default values can be configured by the admin.
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/oc2QJRdngdisManSLq1kEN2g.png
 #: 
 msgid "Default values for GVExport"
-msgstr ""
+msgstr "Výchozí hodnoty pro GVExport"
 
 #. A description at the top of the control panel page where the admin can set default values.
 #. 
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/oc2QJRdngdisManSLq1kEN2g.png
 #: 
 msgid "Values here are used as default values for new users of GVExport, and are used when users choose to reset the settings."
-msgstr ""
+msgstr "Zde uvedené hodnoty se použijí jako výchozí hodnoty pro nové uživatele GVExportu a při resetování nastavení na výchozí nastavení."
 
 #. In the control panel the admin can set default values for GVExport. This button resets these values to the GVExport defaults.  https://s3.eu-west-1.amazonaws.com/po-pub/i/RaXrJonKH38DYcc5TcU1PLSv.png
 #: 
 msgid "reset to defaults"
-msgstr ""
+msgstr "resetovat na výchozí nastavení"
 
 #. Checkbox option to enable a different background colour for starting individuals, to help find them easier on the diagram:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/afEtoto6Qnv1HlJn0zqAiMtP.png 
@@ -518,7 +520,7 @@ msgstr ""
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/eo7ytnyRCth5W2Sq76da71Ph.png
 #: 
 msgid "Show starting individuals in different color"
-msgstr ""
+msgstr "Výchozí osoby zobrazit jinou barvou"
 
 #. Option to change the background colour for starting individuals, to help find them easier on the diagram:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/afEtoto6Qnv1HlJn0zqAiMtP.png 
@@ -526,74 +528,74 @@ msgstr ""
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/eo7ytnyRCth5W2Sq76da71Ph.png
 #: 
 msgid "Starting individuals background color"
-msgstr ""
+msgstr "Barva pozadí výchozích osob"
 
 #. Option to change font size. This affects (at the time of writing) all diagram text except for names which have their own setting:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/IdWIcmNdrOj4l1yTgxv6MpVW.png
 #: 
 msgid "Font size for details"
-msgstr ""
+msgstr "Velikost fontu pro detaily"
 
 #. The font size to use for the names of individuals:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/IdWIcmNdrOj4l1yTgxv6MpVW.png
 #: 
 msgid "Font size for names"
-msgstr ""
+msgstr "Velikost fontu pro jména"
 
 #. Note limitation for adding URLs:  https://s3.eu-west-1.amazonaws.com/po-pub/i/ativPbmheBQQboYLANZmlHYY.png
 #: 
 msgid "browser and SVG only"
-msgstr ""
+msgstr "jen prohlížeč a SVG"
 
 #. Note limitation for adding URLs:  https://s3.eu-west-1.amazonaws.com/po-pub/i/8gzkcNUo2oj43PpU7Dou5ZEr.png
 #: 
 msgid "browser, SVG, and PDF only"
-msgstr ""
+msgstr "jen prohlížeč, SVG a PDF"
 
 #. This help message is displayed when the user clicks the help icon next to "Include anyone related to". https://s3.eu-west-1.amazonaws.com/po-pub/i/4sXDKFJMwoE5PBYZqEPOIV7W.png
 #: 
 msgid "This is our starting point. Choose a person to base the diagram around. You might choose yourself.</p><p>You can choose as many starting individuals as you wish. A tree will be created for each starting individual based on the settings, then the trees are merged to create one tree for the diagram.</p><p>Click the X to remove a record from the list. If two or more records are listed, a \"Clear all\" option will appear to allow you to remove all records.</p><p>You can also click on an individual in this list to have the diagram in the browser scroll to that person.</p><p>When you next come to the page, the default individual or the last individual you were looking at in webtrees will be loaded. If there was just one saved individual then it will be replaced with the individual provided by webtrees on coming to the page. If there were multiple in the list, then the individual provided by webtrees will be added to the list (if not already in it). So be sure to double-check you are only including individuals you are looking for when first loading the page. This default behaviour can be change with the option \"Treatment of source individuals\" in the advanced section."
-msgstr ""
+msgstr "To je náš výchozí bod. Vyberte si osobu, na které bude diagram založen. Můžete si vybrat sami sebe.</p><p>Můžete si vybrat libovolný počet výchozích osob. Pro každou výchozí osobu bude na základě nastavení vytvořen strom, poté budou stromy sloučeny a vytvoří jeden strom pro diagram.</p><p>Klepnutím na X odstraníte záznam ze seznamu. Pokud jsou v seznamu dva nebo více záznamů, zobrazí se možnost \"Vymazat vše\", která vám umožní odstranit všechny záznamy.</p><p>Můžete také kliknout na jednotlivce v tomto seznamu, aby se diagram v prohlížeči posunul na tuto osobu.</p><p>Při další návštěvě stránky se načte výchozí osoba nebo poslední osoba, na kterou jste se dívali ve webtrees. Pokud byla uložena pouze jedna osoba, pak bude při příchodu na stránku nahrazena osobou poskytnutou webtrees. Pokud jich bylo v seznamu více, pak se do seznamu přidá osoba poskytnutá webtrees (pokud v něm již není). Proto se při prvním načtení stránky dvakrát ujistěte, že jsou do ní zahrnuty pouze žádané osoby. Toto výchozí chování lze změnit pomocí volby \"Nakládání s výchozími osobami\" v části Pokročilé nastavení."
 
 #. This help message is displayed when the user clicks the help icon next to "Include ancestors".  https://s3.eu-west-1.amazonaws.com/po-pub/i/UoTrlDpngydDdWmJPau99ZV4.png
 #: 
 msgid "Tick this option to include ancestors of your starting person(s) and anyone in the tree.</p><h4>Max levels</h4><p>The number of generations of ancestors to include. For example, if you chose yourself as your starting person, you may want the diagram to include relatives back to your great-grandparents. In this case, you would type \"3\" in this box, to include your parents' generation, your grandparents' generation, and your great-grandparents' generation."
-msgstr ""
+msgstr "Zaškrtnutím této možnosti zahrnete předky výchozí osoby (výchozích osob) a kohokoli ve stromu.</p><h4>Do úrovně</h4><p>Počet generací předků, které chcete zahrnout. Pokud jste například jako výchozí osobu zvolili sebe, můžete chtít, aby diagram zahrnoval příbuzné až k vašim praprarodičům. V takovém případě do tohoto pole zadáte \"3\", abyste zahrnuli generaci svých rodičů, generaci svých prarodičů a generaci svých praprarodičů."
 
 #. This help message is displayed when the user clicks the help icon next to "Include".  https://s3.eu-west-1.amazonaws.com/po-pub/i/G2LwgKcPjaAwzcCXllEaXa13.png
 #: 
 msgid "This section lets you decide what type of relatives to include when generating the diagram.</p><h4>Siblings</h4><p>Include brothers and sisters of anyone in the tree.</p><h4>All relations</h4><p>Include cousins, nieces, nephews, and their descendants when generating the tree. Requires \"Siblings\" to be selected.</p><h4>Partners</h4><p>Include the husbands, wives, and partners of those in the tree even if they aren't blood-relatives. There is another option \"Mark not blood-related people with different color\" that allows these people to be marked in a different colour.</p><h4>Anyone</h4><p>Follow all links regardless of whether the person is related. In practice, this generally means that the family of non-relatives (i.e. spouses) are included in the tree.</p><p>Use this option to include all records of the selected generations. Note that only records with a link are included, so you may need to include more ancestor generations (or more starting individuals) to get all your records to show."
-msgstr ""
+msgstr "V této části můžete rozhodnout, jaký typ příbuzných chcete při generování diagramu zahrnout.</p><h4>Sourozence</h4><p>Při generování stromu zahrnout sourozence kohokoli.</p><h4>Všechny příbuzné</h4><p>Při generování stromu zahrnout bratrance, neteře, synovce a jejich potomky. Vyžaduje, aby byla vybrána možnost \"Sourozenci\".</p><h4>Partnery</h4><p>Zahrnout manžele, manželky a partnery osob ve stromu, i když nejsou pokrevními příbuznými. Existuje další možnost \"Označit osoby, které nejsou pokrevně spřízněné, jinou barvou\", která umožňuje označit tyto osoby jinou barvou.</p><h4>Všechny</h4><p>Zahrnout všechny odkazy bez ohledu na to, zda je daná osoba příbuzná. V praxi to zpravidla znamená, že do stromu jsou zahrnuty i rodiny nepříbuzných osob (tj. manželů).</p><p>Pomocí této volby zahrnete všechny záznamy vybraných generací. Všimněte si, že jsou zahrnuty pouze záznamy s vazbou, takže možná budete muset zahrnout více generací předků (nebo více výchozích osob), aby se zobrazily všechny záznamy."
 
 #. This help message is displayed when the user clicks the help icon next to "Include descendants".  https://s3.eu-west-1.amazonaws.com/po-pub/i/TNXFdoP4fIHVQnScVvnfvKA1.png
 #: 
 msgid "Whether to include children, grandchildren, etc. of people listed in the tree.</p><h4>Max levels</h4><p>The number of generations of descendants to include. For example, if you chose yourself as your starting person, you may want the diagram to include descendants down to your great-grandchildren. In this case, you would type \"3\" in this box, to include your children and others of their generation, your grandchildren, and your great-grandchildren's generation."
-msgstr ""
+msgstr "Zda se mají zahrnout děti, vnuci atd. osob uvedených ve stromu.</p><h4>Do úrovně</h4><p>Počet generací potomků, které se mají zahrnout. Pokud jste například jako výchozí osobu zvolili sebe, můžete chtít, aby diagram zahrnoval potomky až po vaše pravnoučata. V takovém případě byste do tohoto pole zadali \"3\", abyste zahrnuli své děti a další jejich generace, svá vnoučata a generaci svých pravnoučat."
 
 #. This help message is displayed when the user clicks the help icon next to "Graph direction". https://s3.eu-west-1.amazonaws.com/po-pub/i/MpbVhXyRxeLgMO8FZVXHZhHG.png
 #: 
 msgid "There are two display options here:<ul><li>Left to right - The default option, columns of generations are created with the older generations to the left and younger to the right.<li>Top to bottom - Rows of generations are created, with the older generations at the top and the younger at the bottom."
-msgstr ""
+msgstr "Jsou zde dvě možnosti zobrazení:<ul><li>Zleva doprava - výchozí možnost, sloupce generací jsou vytvořeny tak, že starší generace jsou vlevo a mladší vpravo.<li>Shora dolů - Jsou vytvořeny řádky generací, přičemž starší generace jsou nahoře a mladší dole."
 
 #. This help message is displayed when the user clicks the help icon next to "Diagram type". https://s3.eu-west-1.amazonaws.com/po-pub/i/dt2T4x9RshJsWKWZ7fQ4zFlu.png
 #: 
 msgid "The options here are:<ul><li>Simple - A box per person, coloured based on sex. No photos allowed.<li>Decorated - A more refined box, which also allows photos to be included.<li>Combined - Each couple is one box instead of one per person. Also allows photos.</ul>"
-msgstr ""
+msgstr "Možnosti jsou následující:<ul><li>Jednoduchý - políčko na osobu, barevně odlišené podle pohlaví. Nejsou povoleny žádné fotografie.<li>Ozdobný - Rafinovanější políčko, které rovněž umožňuje přiložit fotografie.<li>Kombinovaný - Každý pár má jedno políčko místo jediného na osobu. Také umožňuje fotografie.</ul>"
 
 #. This help message is displayed when the user clicks the help icon next to "Output file type". https://s3.eu-west-1.amazonaws.com/po-pub/i/apq6Tgv91ZGJTGcUfFH3V1VE.png
 #: 
 msgid "The output file type you want. This is ignored when rendering in the browser, it is only used when you download a file. File types SVG, PNG, JPG, and PDF can be downloaded, in addition to the Graphviz DOT format.</p><p>There are some minor differences if you have Graphviz installed on the server:<ul><li>There are two more file types, GIF and PostScript (PS). Most people would not need these.<li>PDF files may be smaller and can include URLs<li>You may be able to include more records</ul>"
-msgstr ""
+msgstr "Požadovaný typ výstupního souboru. Při vykreslování v prohlížeči se ignoruje, používá se pouze při stahování souboru. Kromě formátu Graphviz DOT lze stahovat i typy souborů SVG, PNG, JPG a PDF.</p><p>Jsou zde některé drobné rozdíly, pokud máte na serveru nainstalovaný Graphviz:<ul><li>Jsou zde další dva typy souborů, GIF a PostScript (PS). Většina lidí by je nepotřebovala.<li>Soubory PDF mohou být menší a mohou obsahovat adresy URL<li>Možná budete moci zahrnout více záznamů</ul>."
 
 #. This help message is displayed when the user clicks the help icon next to "Browser render". https://s3.eu-west-1.amazonaws.com/po-pub/i/obqZqWV3JxLlYqmWek7FPMfW.png
 #: 
 msgid "If the option \"Auto-update\" is selected, the browser rendered diagram will automatically update when any option is changed. This will also hide the \"Update\" button."
-msgstr ""
+msgstr "Pokud je vybrána možnost \"Automatická aktualizace\", prohlížečem vykreslený diagram se automaticky aktualizuje při změně některé z možností. Přitom se také skryje tlačítko \"Aktualizovat\"."
 
 #. Help button that will show a help page when clicked
 #: 
 msgid "Help"
-msgstr ""
+msgstr "Nápověda"
 
 #. This message is shown when clicking a new "Help" button. It links to English pages, so this may need some customising for each language. Link to the German page in the German language (possibly with an additional link to the English one), add some sort of note that the linked pages are in English, feel free to be flexible in what you write to keep it helpful. 
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/bDIbs7uTn254cSfZeqaATIBr.png 
@@ -601,247 +603,248 @@ msgstr ""
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/vyDHWXC9qcax65t9gW4YjvMv.png
 #: 
 msgid "GVExport is a webtrees module that allows you to create complex visual family trees, using a tool called Graphviz to display the tree. Select a starting person, adjust the settings, and see that person's family tree.</p><p>Some fields have an icon <span class=\"info-icon btn btn-primary\">i</span> next to them, clicking this will give you some more information about that field.</p><p>Advanced configurations are possible by toggling advanced settings by clicking the \"Toggle advanced settings\" option at the end of each section. Clicking the ⛶ in the top right corner of the browser rendering will display the browser rendering in full screen. You can also use the webtrees \"Clippings Cart\" feature to select records, which GVExport can then use instead of the \"People to be included\" settings. </p><p>There are several buttons that take action based on the settings that you have chosen:<ul><li>Update: Clicking this updates the browser render (this is hidden if auto-update is enabled).<li>Download: Clicking this will download the diagram in the format chosen in the \"Output file type\" option. <li>Reset: Clicking this will reset the settings to the default values. Default values can be changed by an administrator in the webtrees Control Panel.<li>Help: Shows this help message.</ul></p><p>For more information, see the <a href=\"https://github.com/Neriderc/GVExport/wiki\" class=\"help-link\">GVExport Wiki</a>.</p><p>You can also ask a question, provide feedback, or suggest features on our <a href=\"https://github.com/Neriderc/GVExport\" class=\"help-link\">GitHub page</a>. Just <a href=\"https://github.com/Neriderc/GVExport/issues/new\" class=\"help-link\">open an issue</a>, or <a href=\"https://github.com/Neriderc/GVExport/issues\" class=\"help-link\">browse existing issues</a>."
-msgstr ""
+msgstr "GVExport je modul pro webtrees, který umožňuje vytvářet složité vizuální rodokmeny pomocí nástroje Graphviz. Vyberte výchozí osobu, upravte nastavení a zobrazte rodokmen této osoby.</p><p>Některá pole mají vedle sebe ikonu <span class=\"info-icon btn btn-primary\">i</span>, po jejímž kliknutí se zobrazí další informace o daném poli.</p><p>Pokročilé konfigurace je možné nastavovat pomocí pokročilých nastavení kliknutím na možnost \"Přepnout pokročilá nastavení\" na konci každé sekce. Kliknutím na ⛶ v pravém horním rohu vykreslení prohlížeče se zobrazí vykreslení prohlížeče na celou obrazovku. K výběru záznamů můžete také použít funkci webtrees \"Schránka výstřižků\", kterou pak GVExport může použít místo nastavení \"Zahrnout osoby\". </p><p>Existuje několik tlačítek, která provádějí akce na základě zvolených nastavení:<ul><li>Aktualizovat: Kliknutím na toto tlačítko se aktualizuje vykreslení prohlížeče (toto tlačítko je skryté, pokud je povolena automatická aktualizace).<li>Stáhnout: Kliknutím na toto tlačítko se stáhne diagram ve formátu zvoleném v možnosti \"Typ výstupního souboru\". <li>Resetovat: Kliknutím na tuto položku se nastavení obnoví na výchozí hodnoty. Výchozí hodnoty může změnit správce v ovládacím panelu webtrees.<li>Nápověda: Zobrazí tuto nápovědu.</ul></p><p>Další informace naleznete na <a href=\"https://github.com/Neriderc/GVExport/wiki\" class=\"help-link\">GVExport Wiki</a>.</p><p>Na naší <a href=\"https://github.com/Neriderc/GVExport\" class=\"help-link\">stránce GitHub</a> můžete také položit dotaz, poskytnout zpětnou vazbu nebo navrhnout funkce. Stačí <a href=\"https://github.com/Neriderc/GVExport/issues/new\" class=\"help-link\">otevřít problém</a> nebo <a href=\"https://github.com/Neriderc/GVExport/issues\" class=\"help-link\">procházet existující problémy</a>."
 
 #. This message should never be shown, but it is a backup message for the help messages in the case that the text cannot be found - it's effectively an error message.
 #: 
 msgid "Help information not found"
-msgstr ""
+msgstr "Nápověda nebyla nalezena"
 
 #. This is the help text that the user will see if they click the i next to the Clippings cart message that shows only when there is an item in the clippings cart:  https://s3.eu-west-1.amazonaws.com/po-pub/i/lzypnHfQAPcoljhGbgSsaEVb.png
 #: 
 msgid "Within webtrees, you can add items to the clippings cart. This is usually done by navigating to a record within webtrees then selecting the \"Clippings cart\" option near the top of the screen.</p><p> If you have added individuals and the related family and media records to the clippings cart, these can be used to display the diagram instead of the criteria in the \"People to be included\" section.</p><p>If you have individuals in the clippings cart but don't wish to use these, you have the option to ignore the clippings cart."
-msgstr ""
+msgstr "V rámci webtrees můžete přidávat položky do schránky výstřižků. Obvykle se to provádí tak, že přejdete na záznam v rámci webtrees a poté vyberete možnost \"Výstřižky\" v horní části obrazovky.</p><p> Pokud jste do schránky výstřižků přidali osoby a související rodinné a mediální záznamy, lze je použít k zobrazení diagramu místo kritérií v části \"Zahrnout osoby\".</p><p>Pokud máte osoby ve schránce výstřižků, ale nechcete je použít, máte možnost schránku výstřižků ignorovat."
 
 #. This is help text shown when the user clicks the "i" button next to the "XREFs of included individuals" option:   https://s3.eu-west-1.amazonaws.com/po-pub/i/YVGpSuKpIAjyOMoLTigbrzcU.png
 #: 
 msgid "This is a list of XREFs that represents the records listed in the \"Include anyone related to\" section. You may edit this box and click the refresh button in order to load your list of XREFs into the selection list."
-msgstr ""
+msgstr "Jedná se o seznam XREF, který představuje záznamy uvedené v části \"Zahrnout všechny příbuzné s\". Toto pole můžete upravit a kliknutím na tlačítko obnovit načíst seznam XREF do seznamu vybraných."
 
 #. Help text shown when user clicks "i" next to "Stop processing on":  https://s3.eu-west-1.amazonaws.com/po-pub/i/aVjMepnhrUVmbSJnm5JjsdOp.png
 #: 
 msgid "If the module reaches one of these people, don't grow the tree from here. For example, if you chose yourself as the starting point, you might want to include all of your blood relatives except your mother's side of the family. Add your mother as a person to \"Stop processing on\". The tree will still include your mother, but it won't include her parents, siblings, etc.</p><p>Choose a person in the top box, and they will be added to the list. Their XREF will also be included in the bottom box (which can be edited directly if needed)."
-msgstr ""
+msgstr "Pokud se modul dostane k jedné z těchto osob, strom už dále nerozvíjet. Pokud jste si například jako výchozí bod zvolili sebe, můžete do něj zahrnout všechny své pokrevní příbuzné kromě příbuzných z matčiny strany. Přidejte svou matku jako osobu do pole \"Ukončit zpracování u\". Strom bude stále zahrnovat vaši matku, ale nebude zahrnovat její rodiče, sourozence atd.</p><p>Vyberte osobu v horním poli a ta bude přidána do seznamu. Její XREF bude také zahrnut do spodního pole (které lze v případě potřeby přímo upravit)."
 
 #. Help text shown when user clicks "i" next to option "Non-relatives":  https://s3.eu-west-1.amazonaws.com/po-pub/i/Lq1O4swJShMh36BPEhJiSujt.png
 #: 
 msgid "This section has two related options.<h4>Mark not blood-related people with different color</h4><p>Where spouses are included and are not blood-related to anyone in the \"Include anyone related to\" field, if this option is selected they will be highlighted in a much duller color than the standard blue/pink for relatives.</p><p>Note that when this option is selected, and non-relatives are found in the selected records, then a full tree scan is performed to identify if an individual is related by a more distant link (see next option).</p><h4>Ignore unseen links to speed up relative check</h4><p>This option is only available when the previous option is selected. When the option to display non-relatives in a different colour is selected, normally a scan is performed starting from the starting individuals and branching to all relatives regardless of display settings. This ensures that if a person is related via a link not displayed, they will still show as related.</p><p>Enabling this option prevents the full scan of the tree which can greatly speed up the generation of the diagram on larger trees, but may reduce accuracy of the colouring of non-relatives."
-msgstr ""
+msgstr "Tato sekce má dvě související možnosti.<h4>Označit osoby, které nejsou pokrevně spřízněné, jinou barvou</h4><p>Pokud jsou v poli \"Zahrnout všechny příbuzné\" zahrnuti partneři, kteří nejsou s nikým pokrevně spřízněni, bude tato možnost zvýrazněna mnohem matnější barvou než standardní modrá/růžová pro příbuzné.</p><p>Poznamenejme, že pokud je tato možnost vybrána a ve vybraných záznamech jsou nalezeni nepříbuzní, provede se kontrola celého stromu, aby se zjistilo, zda je osoba příbuzná vzdálenějším spojením (viz další možnost).</p><h4>Ignorovat neviditelné odkazy a tím urychlit kontrolu spřízněnosti</h4><p>Tato možnost je k dispozici pouze tehdy, pokud je vybrána předchozí možnost. Pokud je vybrána možnost zobrazit nepříbuzné osoby jinou barvou, obvykle se kontrola provádí od výchozích osob a větví se na všechny příbuzné bez ohledu na nastavení zobrazení. Tím je zajištěno, že pokud je osoba příbuzná prostřednictvím nezobrazeného odkazu, bude stále zobrazena jako příbuzná.</p><p>Zapnutím této možnosti se zabrání úplnému skenování stromu, což může výrazně urychlit generování diagramu u větších stromů, ale může to snížit přesnost obarvení nepříbuzných."
 
 #. Help text shown when user clicks the "i" next to "Show photos" in the advanced appearance section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/Xpn8Y8LiWnYphmjJe9eJO6ub.png
 #: 
-msgid "Whether to display the photo from the individual's page in the tree. This is only supported for Decorated and Combined diagram types."
-msgstr ""
+#, fuzzy
+msgid "This section contains the option to display the photo from the individual's page in the tree. This is only supported for Decorated and Combined diagram types.</p><p>The \"Photo shape\" option allows you to select a shape for the photos. Photos will be cropped to fit this shape.</p><p>The \"Photo size\" option allows you to adjust the scale of the photo. 100&percnt; is the default, and you can increase this to make the photos bigger, or decrease it to make them smaller."
+msgstr "Zda se má ve stromu zobrazit fotografie ze stránky osoby. Toto je podporováno pouze pro typy diagramů Ozdobný a Kombinovaný."
 
 #. Help text shown when user clicks "Add URL to individuals and families" option:  https://s3.eu-west-1.amazonaws.com/po-pub/i/QREJLhm9Besbu8r11RXghPYN.png
 #: 
 msgid "For SVG (and PDF if GraphViz installed on server) output, links can be included. This way you can click on the person in the diagram to be taken to their webtrees page."
-msgstr ""
+msgstr "Pro výstup SVG (a PDF, pokud je na serveru nainstalována aplikace GraphViz) lze zahrnout odkazy. Takto můžete kliknout na osobu v diagramu a přejít na její stránku ve webtrees."
 
 #. Help text shown when user clicks the "i" next to "Abbreviated names":   https://s3.eu-west-1.amazonaws.com/po-pub/i/rIQKFYaokaQndqxKRMkSoZDA.png
 #: 
 msgid "There are several options to shorten the names of individuals displayed.</p><h4>Full name</h4><p>The default option, this shows the primary name and any nickname. This option currently is the only one where the preferred name is underlined, and is the only one to show nicknames (in \\\"quotes\\\").<h4>Given and surnames</h4><p>Like the full name, but without nicknames.</p><h4>Given names</h4><p>Just the given names are displayed.<h4>First given names only</h4><p>Just the first word of the name in the given names field.</p><h4>Surnames</h4><p>Just the surnames are displayed.</p><h4>Initials only</h4><p>This displays initials only, for example \\\"JFK\\\".</p><h4>Given name initials and Surname</h4><p>This shows initials for the first and second given name, as well as the full surname. For example: \\\"J.F. Kennedy\\\"</p><h4>Don't show names</h4><p>No names are shown. If birth and death details are also disabled then it is possible to show only photos or even just coloured boxes."
-msgstr ""
+msgstr "Existuje několik možností, jak zkrátit zobrazená jména osob.</p><h4>Celé jméno</h4><p>Volba je výchozí, zobrazuje se základní jméno a případná přezdívka. Tato možnost je v současné době jediná, u které je přednostní jméno podtrženo, a jako jediná zobrazuje přezdívky (v \\\"uvozovkách\\\").<h4>Jména a příjmení</h4><p>Stejně jako celé jméno, ale bez přezdívek.</p><h4>Jména</h4><p>Zobrazují se pouze křestní jména.<h4>Pouze první jméno</h4><p>V poli křestních jmen se zobrazuje pouze první slovo jména.</p><h4>Příjmení</h4><p>Zobrazí se pouze příjmení.</p><h4>Pouze iniciály</h4><p>Zobrazí se pouze iniciály, například \\\"JFK\\\".</p><h4>Iniciály jmen a příjmení</h4><p>Tohle zobrazí iniciály křestního jména a druhého křestního jména, stejně jako celé příjmení. Například: \\Kennedy\\\"</p><h4>Nezobrazovat jména</h4><p>Nezobrazují se žádná jména. Pokud jsou vypnuty i údaje o narození a úmrtí, pak je možné zobrazit pouze fotografie nebo dokonce jen barevná pole."
 
 #. Help text shown when user clicks the "i" next to "Abbreviate place names":  https://s3.eu-west-1.amazonaws.com/po-pub/i/Ek3gve1dtOPTm63m5WeKiEjl.png
 #: 
 msgid "There are several options to shorten place names (for place of birth, place of marriage, place of death).</p><h4>Full place name</h4><p>The place name is printed in full.</p><h4>City and Country</h4><p>The first and last section of the place name is used, using commas to split the sections. For example, \\\"London, England, United Kingdom\\\" would be shortened to \\\"London, United Kingdom\\\"</p><h4>City and 2 Letter ISO Country Code</h4><p>The first and last section of the place name is used, using commas to split the sections. The country is then converted to the ISO3166-1-Alpha-2 country code. </p><p>For example, \\\"Calgary, Alberta, Canada\\\" would be shortened to \\\"Calgary, CA\\\"</p><h4>City and 3 Letter ISO Country Code</h4><p>The first and last section of the place name is used, using commas to split the sections. The country is then converted to the ISO3166-1-Alpha-3 country code.</p><p>For example, \\\"Calgary, Alberta, Canada\\\" would be shortened to \\\"Calgary, CAN\\\"<h4>Note</h4><p>The CLDR display name is used for matching. The data comes from <a href=\\\"https://www.datahub.io/core/country-codes\\\" class=\\\"help-link\\\">Datahub</a> but has been modified as for example the original CLDR name for the United Kingdom is \\\"UK\\\", and the original CLDR name for the United States is \\\"US\\\". Matching against these countries for the purposes of abbreviation is therefore pointless. So changes have been made to make this work better. Please <a href=\\\"https://github.com/Neriderc/GVExport/issues/new\\\" class=\\\"help-link\\\">open an issue</a> on GitHub if you find a country is not abbreviating correctly."
-msgstr ""
+msgstr "Existuje několik možností zkrácení názvů míst (pro místo narození, místo sňatku, místo úmrtí).</p><h4>Úplný název místa</h4><p>Název místa se tiskne celý.</p><h4>Město a země</h4><p>Používá se první a poslední část názvu místa, přičemž se pro rozdělení částí používají čárky. Například \\\"Lutín, Olomoucký, Česko\\\" se zkrátí na \\\"Lutín, Česko\\\"</p><h4>Město a 2-místný ISO kód země</h4><p>Používá se první a poslední část názvu místa, přičemž se pro rozdělení částí používají čárky. Země se pak převede na kód země ISO3166-1-Alpha-2. </p><p>Například \\\"Calgary, Alberta, Kanada\\\" se zkrátí na \\\"Calgary, Kalifornie\\\" </p><h4>Město a 3-místný kód země ISO</h4><p>Použije se první a poslední část názvu místa, přičemž se části rozdělí čárkami. Země se pak převede na kód země ISO3166-1-Alpha-3.</p><p>Například \\\"Calgary, Alberta, Kanada\\\" se zkrátí na \\\"Calgary, CAN\\\"<h4>Poznámka</h4><p>Pro porovnání se používá zobrazovací název CLDR. Data pocházejí z <a href=\\\"https://www.datahub.io/core/country-codes\\\" class=\\\"help-link\\\">Datahub</a>, ale byla upravena, například původní název CLDR pro Spojené království je \\\"UK\\\" a původní název CLDR pro Spojené státy je \\\"US\\\". Porovnávání s těmito zeměmi pro účely zkracování je proto zbytečné. Proto byly provedeny změny, aby to fungovalo lépe. Pokud zjistíte, že se některá země nezkracuje správně, otevřete prosím <a href=\\\"https://github.com/Neriderc/GVExport/issues/new\\\" class=\\\"help-link\\\">problém</a> na GitHubu."
 
 #. Help text shown when user clicks the "i" next to "Show individual XREF":   https://s3.eu-west-1.amazonaws.com/po-pub/i/z0ydquyzpwfL2pZbkf4ZsjXv.png
 #: 
 msgid "Whether to include the XREF of individuals in the diagram."
-msgstr ""
+msgstr "Zda se má do diagramu zahrnout XREF osob."
 
 #. Help text shown when user clicks the "i" next to "Show birth date":  https://s3.eu-west-1.amazonaws.com/po-pub/i/K0f3sazuGOU8Bc4k816wfldH.png
 #: 
 msgid "Check the box if you would like to include the birthdate of individuals in the output.</p><p>You can also choose whether to show the full date of birth or just the year."
-msgstr ""
+msgstr "Zaškrtněte toto políčko, pokud chcete do výstupu zahrnout datum narození osob.</p><p>Můžete si také vybrat, zda chcete zobrazit celé datum narození, nebo pouze rok."
 
 #. Help text shown when user clicks the "i" next to "Show birth place":    https://s3.eu-west-1.amazonaws.com/po-pub/i/f0NMn7pmbDd8EmGi9s3Ps4Sm.png
 #: 
 msgid "Whether to show the place of birth in the output. Also see option for abbreviating place names."
-msgstr ""
+msgstr "Zda se má ve výstupu zobrazit místo narození. Viz také možnost pro zkracování názvů míst."
 
 #. Help text shown when user clicks the "i" next to "Show death date":     https://s3.eu-west-1.amazonaws.com/po-pub/i/fNNY3AothlpEk6RVHwu18jBq.png
 #: 
 msgid "Check the box if you would like to include the death date of individuals in the output.</p><p>You can also choose whether to show the full date of death or just the year."
-msgstr ""
+msgstr "Zaškrtněte toto políčko, pokud chcete do výstupu zahrnout datum úmrtí osob.</p><p>Můžete si také vybrat, zda chcete zobrazit celé datum úmrtí, nebo pouze rok."
 
 #. Help text shown when user clicks the "i" next to "Show death place":     https://s3.eu-west-1.amazonaws.com/po-pub/i/zwFpvOQOHvWtGCscz5jgN1LV.png
 #: 
 msgid "Whether to show the place of death in the output. Also see option for abbreviating place names."
-msgstr ""
+msgstr "Zda se má ve výstupu zobrazit místo úmrtí. Viz také možnost pro zkracování názvů míst."
 
 #. Help text shown when user clicks the "i" next to "Show family XREF":     https://s3.eu-west-1.amazonaws.com/po-pub/i/pUSNfbB0jvF2zxYRn8wQCCQ8.png
 #: 
 msgid "Whether to include the XREF of families in the output."
-msgstr ""
+msgstr "Zda se má do výstupu zahrnout XREF rodin."
 
 #. Help text shown when user clicks the "i" next to "Show marriage date":      https://s3.eu-west-1.amazonaws.com/po-pub/i/WcVSfrpda3aaoTR6k8TKg4CC.png
 #: 
 msgid "Check the box if you would like to include the date of marriage in the output.</p><p>You can also choose whether to show the full date of marriage or just the year."
-msgstr ""
+msgstr "Zaškrtněte toto políčko, pokud chcete do výstupu zahrnout datum sňatku.</p><p>Můžete si také vybrat, zda chcete zobrazit celé datum sňatku, nebo pouze rok."
 
 #. Help text shown when user clicks the "i" next to "Show marriage place":      https://s3.eu-west-1.amazonaws.com/po-pub/i/jYVeBKSFMcZhilwfeHgbyWqH.png
 #: 
 msgid "Whether to show the place of marriage in the output. Also see option for abbreviating place names."
-msgstr ""
+msgstr "Zda se má ve výstupu zobrazit místo sňatku. Viz také možnost pro zkracování názvů míst."
 
 #. Help text shown when user clicks the "i" next to "DPI":      https://s3.eu-west-1.amazonaws.com/po-pub/i/40xFZyQ8fdzDhsLDzvifNDAr.png
 #: 
 msgid "For output such as JPG and PNG, this setting will product higher quality output when it is larger, but will also increase the file size. Smaller values will produce smaller files, but the quality will be worse and if the value is too low you may not be able to read text."
-msgstr ""
+msgstr "U výstupů, jako jsou JPG a PNG, toto nastavení zajistí vyšší kvalitu výstupu, pokud je větší, ale také zvýší velikost souboru. Menší hodnoty vytvoří menší soubory, ale kvalita bude horší, a pokud je hodnota příliš nízká, nemusí být možné přečíst text."
 
 #. Help text shown when user clicks the "i" next to "Space":  https://s3.eu-west-1.amazonaws.com/po-pub/i/hEJcjkJ8xvGsTPoHjq5nT8L6.png
 #: 
 msgid "These options affect the distance between nodes on the diagram.</p><h4>Between generations</h4><p>How close you want generations on the output. For example, for left to right output, smaller numbers will bring the columns of individuals closer together, while larger numbers would push them further apart.</p><h4>Between individuals on the same level</h4><p>How close you want the individuals of the same generation on the output. For example, for left to right output, smaller numbers will mean less space vertically between the boxes, while larger numbers would push them further apart."
-msgstr ""
+msgstr "Tyto volby ovlivňují vzdálenost mezi uzly v diagramu.</p><h4>Mezi generacemi</h4><p>Jak blízko chcete mít generace na výstupu. Například pro výstup zleva doprava menší čísla přiblíží sloupce osob k sobě, zatímco větší čísla je od sebe oddálí.</p><h4>Mezi osobami stejné úrovně</h4><p>Jak blízko chcete mít na výstupu osoby stejné generace. Například u výstupu zleva doprava menší čísla znamenají menší vertikální prostor mezi políčky, zatímco větší čísla je posunou dále od sebe."
 
 #. Help text shown when user clicks the "i" next to "Font":  https://s3.eu-west-1.amazonaws.com/po-pub/i/SMqr3gHBplFqJ4C0yRnFBpkp.png
 #: 
 msgid "This section lets you configure the typeface and colour of text.</p><h4>Typeface</h4><p>This list lets you pick from a number of known websafe font typefaces. They must be installed on the system or a fallback typeface will be used. These options are known to be installed on almost all systems and that is why they have been chosen.</p><h4>Font size for names</h4><p>Set the font point size for the names of individuals. In Simple mode this is ignored as all text uses the details font size.</p><h4>Font size for details</h4><p>This changes the font point size for all text except for names. For example, the date and place of marriage, and the date and place of birth and death. In simple mode this is also used for the font size of names.</p><h4>Font colour for names</h4><p>This changes the colour of the font for names. In the simple mode, this sets the font for all text in an individual record's box. Note that the colour picker is provided by your browser, and is handled differently depending on which browser you are using.</p><h4>Font colour for details</h4><p>This changes the colour of the font of all text except for names, for example, the date and place of marriage, and the date and place of birth and death. In the simple mode, this sets the font for the details in the family record (marriage date and place) as the same font is used for the whole individual record (the font colour for names). Note that the colour picker is provided by your browser, and is handled differently depending on which browser you are using."
-msgstr ""
+msgstr "V této části můžete nastavit druh písma a barvu textu.</p><h4>Druh písma</h4><p>Tento seznam umožňuje vybrat z řady známých druhů písma. Musí být v systému nainstalována, jinak bude použito záložní písmo. Je známo, že tyto možnosti jsou nainstalovány téměř ve všech systémech, a proto byly vybrány.</p><h4>Velikost fontu pro jména</h4><p>Nastavení velikosti písma pro jména osob. V jednoduchém typu diagramu je tato možnost ignorována, protože veškerý text používá velikost fontu pro detaily.</p><h4>Velikost fontu pro detaily</h4><p>Tato možnost mění velikost písma pro veškerý text kromě jmen. Například datum a místo sňatku a datum a místo narození a úmrtí. V jednoduchém typu diagramu se používá také pro velikost písma jmen.</p><h4>Barva fontu pro jména</h4><p>Tímto se mění barva písma pro jména. V jednoduchém typu diagramu se tímto nastavuje písmo pro veškerý text v poli jednotlivého záznamu. Všimněte si, že výběr barvy je poskytován vaším prohlížečem a pracuje se s ním odlišně v závislosti na tom, jaký prohlížeč používáte.</p><h4>Barva fontu pro detaily</h4><p>Tímto se mění barva písma veškerého textu kromě jmen, například data a místa sňatku a data a místa narození a úmrtí. V jednoduchém režimu se tímto nastavuje písmo pro podrobnosti v rodinném záznamu (datum a místo sňatku), protože stejné písmo se používá pro celý individuální záznam (barva písma pro jména). Všimněte si, že výběr barvy je poskytován prohlížečem a je zpracováván odlišně v závislosti na tom, který prohlížeč používáte."
 
 #. Help text shown when user clicks the "i" next to "Relationship arrows":  https://s3.eu-west-1.amazonaws.com/po-pub/i/49vIt5p3NoEIm5t9CgmVtYt6.png
 #: 
 msgid "This section lets you customise the arrows that link records together.</p><h4>Arrow colour</h4><p>This is the main colour for arrows. This is used for all arrows if the next option is disabled, otherwise it is used for arrows from a spouse to the family record.</p><h4>Show blood relationship in a different colour</h4><p>If this option is selected, the relationship arrows between a family record and children will use different colours depending on if the relationship is by birth, or a different type of relationship (e.g. adoption). If this is disabled, all relationship arrows use the above default colour.</p><ul><li>Related by birth - If the above option is enabled, this sets the colour of arrows from a family record to a child that is related by birth.<li>Related other than by birth - If the above option is enabled, this sets the colour of arrows from a family record to a child that is not related by birth (e.g. foster or adopted)."
-msgstr ""
+msgstr "Tato část umožňuje přizpůsobit šipky, které spojují záznamy.</p><h4>Barva šipek</h4><p>Tato barva je hlavní barvou šipek. Používá se pro všechny šipky, pokud je další možnost vypnuta, jinak se používá pro šipky od manžela/manželky k záznamu rodiny.</p><h4>Pokrevní příbuzenství zobrazit jinou barvou</h4><p>Pokud je tato možnost vybrána, šipky příbuzenského vztahu mezi záznamem rodiny a dětmi budou používat různé barvy v závislosti na tom, zda se jedná o příbuzenství na základě narození, nebo o jiný typ příbuzenství (např. adopci). Pokud je tato možnost vypnuta, všechny šipky vztahů použijí výše uvedenou výchozí barvu.</p><ul><li>Spřízněnost narozením - Pokud je výše uvedená možnost povolena, nastaví barvu šipek od záznamu rodiny k dítěti, které je příbuzné narozením.<li>Spřízněnost jiná než narozením - Pokud je výše uvedená možnost povolena, nastaví barvu šipek od záznamu rodiny k dítěti, které není příbuzné narozením (např. pěstounské nebo osvojené)."
 
 #. Help text shown when user clicks the "i" next to "Tile colours":  https://s3.eu-west-1.amazonaws.com/po-pub/i/gzXTu0XdLd6V1GhSjjDRbXoj.png
 #: 
 msgid "This section allows you to change the colours of the different parts of the tiles shown for each individual. Click the coloured box to change the colour. This uses your browser's colour picker, so will look different depending on what browser you are using."
-msgstr ""
+msgstr "Tato část umožňuje měnit barvy jednotlivých částí dlaždic zobrazených pro každou osobu. Kliknutím na barevné pole barvu změníte. Používá se k tomu nástroj prohlížeče pro výběr barev, takže barva bude vypadat jinak v závislosti na tom, jaký prohlížeč používáte."
 
 #. Help text shown when user clicks the "i" next to "Other colours":  https://s3.eu-west-1.amazonaws.com/po-pub/i/LrHottxOgQWJC1752fcbOh36.png
 #: 
 msgid "This section allows you to change colours associated with the diagram that are not part of the individual tile above. Click the coloured box to change the colour. This uses your browser's colour picker, so will look different depending on what browser you are using."
-msgstr ""
+msgstr "Tato část umožňuje měnit barvy spojené s diagramem, které nejsou součástí jednotlivých dlaždic. Kliknutím na barevné pole barvu změníte. Používá se přitom nástroj prohlížeče pro výběr barev, takže barva bude vypadat jinak v závislosti na tom, jaký prohlížeč používáte."
 
 #. "Output settings" was renamed to "File settings".
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/zY6fWYDbmG93zn0ODfvgtr3y.png
 #: 
 msgid "File settings"
-msgstr ""
+msgstr "Nastavení souboru"
 
 #. Name of section for saving settings to file and loading again:  https://s3.eu-west-1.amazonaws.com/po-pub/i/YRg7L3jSSfj41FX0tHDSUY4M.png
 #: 
 msgid "Settings file"
-msgstr ""
+msgstr "Soubor s nastavením"
 
 #. Text to explain what happens when you click Download button:  https://s3.eu-west-1.amazonaws.com/po-pub/i/binGwth9kTmNWFiKZra36B1E.png
 #: 
 msgid "Save settings to file"
-msgstr ""
+msgstr "Uložit nastavení do souboru"
 
 #. Text to explain what happens when you choose to upload file. Note that the actual file upload is provided by the browser and will use the browser's (or operating system) language.  https://s3.eu-west-1.amazonaws.com/po-pub/i/2woaCucdJquUy6lUnQYS8k51.png
 #: 
 msgid "Load settings from file"
-msgstr ""
+msgstr "Nahrát nastavení ze souboru"
 
 #. Help text for downloading saved settings to a file, and uploading these settings:  https://s3.eu-west-1.amazonaws.com/po-pub/i/HfxRre2VQe9TVyl8dtX3RhVj.png
 #: 
 msgid "If you have saved settings to a file, using the menu on the above saved settings, you can load the settings from the file here."
-msgstr ""
+msgstr "Pokud jste uložili nastavení do souboru, můžete je pomocí nabídky výše uvedeného uloženého nastavení načíst z tohoto souboru."
 
 #. For development use, you can now enable a debug panel. Needs translation as option will appear on Control Panel page:  https://s3.eu-west-1.amazonaws.com/po-pub/i/UzABfGKv12F3PBzS3wVzoHCm.png 
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/36sF1oj0dbyyJzl0meXi1ixY.png
 #: 
 msgid "Debug mode"
-msgstr ""
+msgstr "Mód ladění"
 
 #. For development use, you can now enable a debug panel. Needs translation as option will appear on Control Panel page:  https://s3.eu-west-1.amazonaws.com/po-pub/i/UzABfGKv12F3PBzS3wVzoHCm.png 
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/36sF1oj0dbyyJzl0meXi1ixY.png
 #: 
 msgid "Show debug panel"
-msgstr ""
+msgstr "Zobrazit panel ladění"
 
 #. For development use, you can now disable debug mode easily. Needs translation as option will appear on Control Panel page:  https://s3.eu-west-1.amazonaws.com/po-pub/i/UzABfGKv12F3PBzS3wVzoHCm.png 
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/36sF1oj0dbyyJzl0meXi1ixY.png
 #: 
 msgid "Enable debug mode"
-msgstr ""
+msgstr "Umožnit mód ladění"
 
 #. For development use, you can now disable Graphviz on server even if you have it installed. Needs translation as option will appear on Control Panel page:  https://s3.eu-west-1.amazonaws.com/po-pub/i/UzABfGKv12F3PBzS3wVzoHCm.png 
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/36sF1oj0dbyyJzl0meXi1ixY.png
 #: 
 msgid "Use Graphviz on server"
-msgstr ""
+msgstr "Použít Graphviz na serveru"
 
 #. Section heading. You can now enable a debug panel for development use. Needs translation as option will appear on Control Panel page:  https://s3.eu-west-1.amazonaws.com/po-pub/i/UzABfGKv12F3PBzS3wVzoHCm.png 
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/36sF1oj0dbyyJzl0meXi1ixY.png
 #: 
 msgid "Debug"
-msgstr ""
+msgstr "Ladění"
 
 #. If browser-renderer can't generate a diagram this large, show an error message. This message is shown when Graphviz is installed on server.  https://s3.eu-west-1.amazonaws.com/po-pub/i/5MKDjkAnfKKolIoTeVqEBaKp.png
 #: 
 msgid "Memory limit reached. Please reduce number of records or use download option."
-msgstr ""
+msgstr "Dosažen limit paměti. Snižte prosím počet záznamů nebo použijte možnost stažení."
 
 #. If browser-renderer can't generate a diagram this large, show an error message. This message is shown when Graphviz is NOT installed on server.   https://s3.eu-west-1.amazonaws.com/po-pub/i/1cmo1QxxPNuy3bjgntERYAOC.png
 #: 
 msgid "Memory limit reached. Please reduce number of records or install Graphviz on server and use download option."
-msgstr ""
+msgstr "Dosažen limit paměti. Snižte prosím počet záznamů nebo nainstalujte Graphviz na server a použijte možnost stažení."
 
 #. This message is shown when loading a settings file and a setting in the file doesn't match up to what we are looking for. The name of the setting is appended on the end:  https://s3.eu-west-1.amazonaws.com/po-pub/i/Mrqls4UxxHPlbZzEE4gz2qgj.png
 #: 
 msgid "Unable to load setting"
-msgstr ""
+msgstr "Nelze nahrát nastavení"
 
 #. Heading for section in Control Panel for settings that are only available to the administrator: https://s3.eu-west-1.amazonaws.com/po-pub/i/6ZCINR8ZbXR3Wpis2IuYp20i.png
 #: 
 msgid "Settings for GVExport"
-msgstr ""
+msgstr "Nastavení pro GVExport"
 
 #. Group heading for settings only available in control panel: https://s3.eu-west-1.amazonaws.com/po-pub/i/4xkAK3jvXYzWAsk3q7faIpbK.png
 #: 
 msgid "Administrator settings"
-msgstr ""
+msgstr "Administrační nastavení"
 
 #. Setting that sets the name of the downloaded file. E.g. when downloading JPG format, if you set the file name to "gvexport" then the file will be called "gvexport.jpg":   https://s3.eu-west-1.amazonaws.com/po-pub/i/jg1noFw1w55jgfEMyLD5oc8f.png
 #: 
 msgid "Download file name"
-msgstr ""
+msgstr "Jméno stahovaného souoru"
 
 #. The MCLIMIT setting that is directly sent to Graphviz. Higher numbers result in fewer arrows crossing on the diagram but take longer to process.  https://s3.eu-west-1.amazonaws.com/po-pub/i/ayvZCoGAoyQIbE8v60cIVcIz.png
 #: 
 msgid "Graphviz MCLIMIT setting"
-msgstr ""
+msgstr "Nastavení MCLIMIT Graphvizu"
 
 #. Birth date setting in Control Panel. By default, birth dates on the diagram start with a * prefix. This setting can change this:  https://s3.eu-west-1.amazonaws.com/po-pub/i/uF5UdfYXLFGLQ4TLZysMUpNd.png
 #: 
 msgid "Birth date prefix"
-msgstr ""
+msgstr "Předpona data narození"
 
 #. Death date setting in Control Panel. By default, death dates on the diagram start with a + prefix. This setting can change this:  
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/uF5UdfYXLFGLQ4TLZysMUpNd.png
 #: 
 msgid "Death date prefix"
-msgstr ""
+msgstr "Předpona data úmrtí"
 
 #. Area name for option to save a version of the settings for future use:  https://s3.eu-west-1.amazonaws.com/po-pub/i/n1salnZcGP6xC187FO1dAjpE.png
 #: 
 msgid "Save settings"
-msgstr ""
+msgstr "Uložit nastavení"
 
 #. Text on save button in option to save a version of the settings for future use:  
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/n1salnZcGP6xC187FO1dAjpE.png
 #: 
 msgid "Save"
-msgstr ""
+msgstr "Uložit"
 
 #. Placeholder text in text field in option to save a version of the settings for future use. Users will type a name here to call this saved version of the settings:  
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/n1salnZcGP6xC187FO1dAjpE.png
 #: 
 msgid "Settings name"
-msgstr ""
+msgstr "Název nastavení"
 
 #. Help text for option to save a version of the settings for future use:  
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/n1salnZcGP6xC187FO1dAjpE.png https://s3.eu-west-1.amazonaws.com/po-pub/i/fBbMFauzn9yAXWlI3do9cwmD.png
 #: 
 msgid "Here you are able to save the chosen settings within GVExport. The settings are only accessible within the same user and tree. Click a settings record to load it.</p><p>For example, you may have many diagrams you create from your tree. You may want to save the settings used for each diagram so that in future you can regenerate the diagram to include any new information.</p><p>If you click the ellipsis on a record, you will see several options. <ul><li>Delete - remove these settings</li><li>Download - download a file holding the settings, which can be loaded at a later date.</li><li>Copy link - if logged in, this allows you to share the settings with others by creating a URL to share with them, which is copied to the clipboard of your device.</li><li>Revoke link - if a sharing link has been created, this will show to allow you to revoke the link, so it can no longer be accessed.</li><li>Add to My favourites - If logged in, this will create a sharing link and add this to the webtrees favourites on your \"My page\" page.</li><li>Add to Tree favourites - If logged in as a tree manager, this will create a sharing link and add this to the webtrees favourites on the tree home page.</li></ul>When logged out, only the Delete and Download options will be available.</p><p>The \"Show saved diagrams panel\" option adds a new section to the settings that makes the saved settings available as a dropdown list. You may wish to use webtree's ability for an administrator to \"Masquerade as user\" to set up some settings for another user, then enable this option, so they can easily choose different prepared diagrams without needed to delve into the advanced settings."
-msgstr ""
+msgstr "Zde můžete uložit zvolené nastavení v rámci GVExportu. Nastavení jsou přístupná pouze v rámci stejného uživatele a stromu. Klepnutím na záznam nastavení jej načtete.</p><p>Můžete mít například mnoho diagramů vytvořených ze svého stromu. Možná budete chtít uložit nastavení použité pro každý diagram, abyste v budoucnu mohli diagram přegenerovat a zahrnout do něj všechny nové informace.</p><p>Klepnete-li na trojtečku u záznamu, zobrazí se několik možností: <ul><li>Smazat - odstranění těchto nastavení</li><li>Stáhnout - stažení souboru s nastaveními, který lze načíst později.</li><li>Kopírovat odkaz - pokud jste přihlášeni, umožní vám to sdílet nastavení s ostatními vytvořením adresy URL, která se zkopíruje do schránky vašeho zařízení.</li><li>Odebrat odkaz - pokud byl vytvořen odkaz pro sdílení, zobrazí se tato možnost, která vám umožní odkaz odebrat, takže již nebude přístupný.</li><li>Přidat k mým oblíbencům - pokud jste přihlášeni, vytvoří se odkaz pro sdílení a přidá se do oblíbených položek webtrees na vaší stránce \"Moje stránka\".</li><li>Přidat k oblíbencům stromu - pokud jste přihlášeni jako správce stromu, vytvoří se odkaz pro sdílení a přidá se do oblíbených položek webtrees na domovské stránce stromu.</li></ul>Pokud jste odhlášeni, budou k dispozici pouze možnosti Smazat a Stáhnout.</p><p>Volba \"Zobrazit panel uložených diagramů\" přidá do nastavení novou sekci, která zpřístupní uložená nastavení jako rozevírací seznam. Možná budete chtít využít možnosti webtrees, kdy se správce \"maskoval jako uživatel\" a nastavil některá nastavení pro jiného uživatele, a pak povolit tuto možnost, aby mohl snadno vybrat různé připravené diagramy, aniž by musel pronikat do pokročilých nastavení."
 
 #. Error message shown when API was not able to assign an ID when saving a version of settings.  https://s3.eu-west-1.amazonaws.com/po-pub/i/SF4w8yDqZ9D7PGWdqvq2cOzq.png 
 #. User may see this when clicking Save button: https://s3.eu-west-1.amazonaws.com/po-pub/i/n1salnZcGP6xC187FO1dAjpE.png
@@ -849,153 +852,194 @@ msgstr ""
 #. Most likely reason for this is that there are too many settings saved.
 #: 
 msgid "Failed to assign new settings ID"
-msgstr ""
+msgstr "Selhalo přiřazení nového ID nastavení"
 
 #. Error message shown to user when an API request to get the settings fails because the settings version ID is invalid.  https://s3.eu-west-1.amazonaws.com/po-pub/i/09WTPGgXqx1UJ4awI72JPxgh.png 
 #. 
 #. Settings IDs are used when saving multiple versions of settings: https://s3.eu-west-1.amazonaws.com/po-pub/i/n1salnZcGP6xC187FO1dAjpE.png
 #: 
 msgid "Invalid settings ID"
-msgstr ""
+msgstr "Neplatný ID nastavení"
 
 #. Error message shown when an invalid API request type is sent (users would never see this unless something broke):  https://s3.eu-west-1.amazonaws.com/po-pub/i/UigW1X1hdrkKdbkztZ5cwXBd.png
 #: 
 msgid "Invalid request"
-msgstr ""
+msgstr "Neplatný požadavek"
 
 #. Error message for if API call has invalid structure. Error message is appended to the end. Users would never see this unless something is broken:  
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/0RAGuKLhRU4gotkMYaeu8RdX.png
 #: 
 msgid "Invalid JSON"
-msgstr ""
+msgstr "Neplatný JSON"
 
 #. If you click to save a version of settings, but haven't entered a name, then the default name is "Settings":  https://s3.eu-west-1.amazonaws.com/po-pub/i/1RrJep5HGIKYDumc26xR9kCo.png
 #: 
 msgid "Settings"
-msgstr ""
+msgstr "Nastavení"
 
 #. This message is shown when clicking the help button in the "Saved diagrams" section (this section is hidden by default): https://s3.eu-west-1.amazonaws.com/po-pub/i/CViHSJI40OkSwCEyVHs79jOh.png  https://s3.eu-west-1.amazonaws.com/po-pub/i/PuoBsz04pts2DU9CAWou7nyc.png
 #: 
 msgid "You can select from the list to load some saved settings. Settings can be added or changed using the options in the advanced section of the \"File settings\" section."
-msgstr ""
+msgstr "Můžete vybrat ze seznamu a načíst některé uložené nastavení. Nastavení lze přidat nebo změnit pomocí možností v rozšířené části sekce \"Nastavení souborů\"."
 
 #. When you have saved a named version of settings using the advanced save settings functionality, this is the option to delete the settings:  https://s3.eu-west-1.amazonaws.com/po-pub/i/QHkbIB7B8ZRpp5IVdKiVu1F6.png
 #: 
 msgid "Delete"
-msgstr ""
+msgstr "Smazat"
 
 #. When you have saved a named version of settings using the advanced save settings functionality, this is the option to copy a link to the settings, where if the user visits this link the settings will be automatically loaded:  
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/QHkbIB7B8ZRpp5IVdKiVu1F6.png
 #: 
 msgid "Copy link"
-msgstr ""
+msgstr "Kopírovat odkaz"
 
 #. After clicking option to copy link to clipboard for sharing saved settings, this message shows on a toast popup:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/QHkbIB7B8ZRpp5IVdKiVu1F6.png
 #: 
 msgid "Copied link to clipboard"
-msgstr ""
+msgstr "Odkaz zkopírován do schránky"
 
 #. If copying shared settings link to clipboard fails (e.g. browser blocks this or not supported), then this message is shown. https://s3.eu-west-1.amazonaws.com/po-pub/i/QHkbIB7B8ZRpp5IVdKiVu1F6.png
 #: 
 msgid "Failed to copy link to clipboard"
-msgstr ""
+msgstr "Selhalo kopírování odkazu do schránky"
 
 #. As well as toast message, if copying shared settings link to clipboard fails (e.g. browser blocks this or not supported), then a popup will allow copying URL. 
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/lhdGkODdwA7aL5isgWiqR726.png
 #: 
 msgid "Copy manually below"
-msgstr ""
+msgstr "Níže kopírovat ručně"
 
 #. If you save a version of the settings using the advanced settings saving option, if you select the same name as existing settings you will be prompted to overwrite the settings with this message:  https://s3.eu-west-1.amazonaws.com/po-pub/i/DTqDJMZW4xZejUnrsbe5H5fE.png
 #: 
 msgid "Overwrite settings '%s'?"
-msgstr ""
+msgstr "Přepsat nastavení '%s'?"
 
 #. Cancel button for modal prompt, for example:  https://s3.eu-west-1.amazonaws.com/po-pub/i/ftZQPpCgap1VOJEArq1KsL66.png
 #: 
 msgid "Cancel"
-msgstr ""
+msgstr "Zrušit"
 
 #. If you save a version of the settings using the advanced settings saving option, if you select the same name as existing settings you will be prompted to overwrite the settings, and this is one of the buttons (confirming you wish to overwrite the settings):  
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/DTqDJMZW4x
 #: 
 msgid "Overwrite"
-msgstr ""
+msgstr "Přepsat"
 
 #. After choosing to create a sharing link by clicking "Copy link", you can then revoke the link, making the link and token invalid so it can no longer be used.  https://s3.eu-west-1.amazonaws.com/po-pub/i/WZzRNgfk3QNg2yHSJNVgcmOJ.png
 #: 
 msgid "Revoke link"
-msgstr ""
+msgstr "Odebrat odkaz"
 
 #. Added option to enable an additional panel that lists the available saved settings records:  https://s3.eu-west-1.amazonaws.com/po-pub/i/T42StJjy5G8xo8TPGst42wuA.png 
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/CViHSJI40OkSwCEyVHs79jOh.png
 #: 
 msgid "Show saved diagrams panel"
-msgstr ""
+msgstr "Zobrazit panel uložených diagramů"
 
 #. Option to share settings to an entry in the webtrees user favourites module (on the 'My page' page):  https://s3.eu-west-1.amazonaws.com/po-pub/i/jBnrBz5yEIe6NdBhAUvjuUTU.png
 #: 
 msgid "Add to My favorites"
-msgstr ""
+msgstr "Přidat k mým oblíbencům"
 
 #. Option to share settings to an entry in the webtrees tree favorites module (on the tree home page):  
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/jBnrBz5yEIe6NdBhAUvjuUTU.png
 #: 
 msgid "Add to Tree favorites"
-msgstr ""
+msgstr "Přidat k oblíbencům stromu"
 
 #. Option where you can add XREFs to override the option to highlight starting individuals. i.e. when you add XREFs to this list, those individuals will not be highlighted even if option to highlight starting individuals is selected.  https://s3.eu-west-1.amazonaws.com/po-pub/i/peZeLRwsxZTG8ZgMRLTKV8ph.png
 #: 
 msgid "Don't colour these XREFs:"
-msgstr ""
+msgstr "Nevybarvovat tyto XREFy:"
 
 #. If option enabled to show the extra diagram panel, this is the name of that panel. https://s3.eu-west-1.amazonaws.com/po-pub/i/CViHSJI40OkSwCEyVHs79jOh.png
 #: 
 msgid "Saved diagrams"
-msgstr ""
+msgstr "Uložené diagramy"
 
 #. If option enabled to show the extra diagram panel, this is the group name for the diagram dropdown list: https://s3.eu-west-1.amazonaws.com/po-pub/i/CViHSJI40OkSwCEyVHs79jOh.png
 #: 
 msgid "List of diagrams"
-msgstr ""
+msgstr "Seznam diagramů"
 
 #. Option that allows only some starting individuals to be highlighted:  https://s3.eu-west-1.amazonaws.com/po-pub/i/rsS48w1rUU4xnkLH4WDmeK3d.png
 #: 
 msgid "Colour these individuals:"
-msgstr ""
+msgstr "Vybarvit tyto osoby:"
 
 #. Option for what to do with XREF provided from webtrees via URL:  
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/vzqSdDBFSfjBF2bkTbkT1G8Z.png
 #: 
 msgid "Treatment of source individuals"
-msgstr ""
+msgstr "Nakládání s výchozími osobami"
 
 #. One of the options for what to do with XREF provided from webtrees via URL:  
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/vzqSdDBFSfjBF2bkTbkT1G8Z.png
 #: 
 msgid "Default"
-msgstr ""
+msgstr "Výchozí"
 
 #. One of the options for what to do with XREF provided from webtrees via URL:  
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/vzqSdDBFSfjBF2bkTbkT1G8Z.png
 #: 
 msgid "Add to list"
-msgstr ""
+msgstr "Přidat do seznamu"
 
 #. Help text for option for what to do with XREF provided by webtrees via URL:  https://s3.eu-west-1.amazonaws.com/po-pub/i/PF663q9RtqlHI4hKopBs8KEa.png
 #: 
 msgid "When you open GVExport, webtrees provides the record of an individual to the chart. This setting dictates what GVExport should do with this individual.</p><p>The options behave as follows:<ul><li>Default - if there is only one record in the starting individuals list, it will be overwritten. Otherwise, the new individual will be added to the list.</li><li>Add to list - The individual is always added to the list of starting individuals.</li><li>Don't add to list - Ignore the individual.</li><li>Overwrite - Clear the list of starting individuals and only add the new individual to the list.</li></ul></p><h4>Individual record</h4><p>The individual provided is decided by webtrees. If you select GVExport while on the page of an individual, this individual is provided to GVExport. When you come from another page, if the tree has a default individual this person is provided, otherwise the first individual in the tree is provided."
-msgstr ""
+msgstr "Po otevření aplikace GVExport webtrees poskytne záznam o osobě do diagramu. Toto nastavení určuje, co má GVExport s touto osobou udělat.</p><p>Možnosti se chovají takto:<ul><li>Výchozí - pokud je v seznamu výchozích osob pouze jeden záznam, bude přepsán. V opačném případě bude nová osoba přidána do seznamu.</li><li>Přidat do seznamu - osoba bude vždy přidána do seznamu výchozích osob.</li><li>Nepřidávat do seznamu - Ignorovat osobu.</li><li>Přepsat - Vymaže seznam výchozích osob a přidá novou osobu do seznamu.</li></ul></p><h4>Záznam osoby</h4><p>O poskytnuté osobě rozhoduje webtrees. Pokud na stránce osoby zvolíte GVExport, bude tato osoba poskytnuta do GVExportu. Pokud přijdete z jiné stránky, pak pokud má strom výchozí osobu, bude poskytnuta tato osoba, jinak bude poskytnuta první osoba ve stromu."
 
 #. One of the options for what to do with XREF provided from webtrees via URL:  
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/vzqSdDBFSfjBF2bkTbkT1G8Z.png
 #: 
 msgid "Don't add to list"
-msgstr ""
+msgstr "Nepřidávat do seznamu"
 
 #. When loading a person from the XREF in the URL (e.g. when coming to GVExport from an individual's page), this message is shown if the person is added to the list of individuals.  https://s3.eu-west-1.amazonaws.com/po-pub/i/Geo7uHM7LtBJeDh5Ae9jXTu3.png
 #: 
 msgid "One new source person added to %s existing persons"
+msgstr "Jedna nová výchozí osoba přidána k %s existujícím osobám"
+
+#. This is a message that is shown if the user both has Graphviz installed on the server AND has used the photo shape setting (e.g. to make photos circle). The photo shapes are not supported by Graphviz, and are manipulated into the diagram after Graphviz has generated it. This is not possible with server-rendered diagrams, so if this option is used we automatically use the browser generation and show this message.
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/Rq4HsawCjQ0CuWW3I2SoDIJM.png
+#: 
+msgid "Rendered in browser as server doesn't support photo shapes"
+msgstr ""
+
+#. One of the options in the new feature to change the shape of photos:  https://s3.eu-west-1.amazonaws.com/po-pub/i/xt0dCFkQXFZVcva3B9ae0WOL.png
+#: 
+msgid "No change"
+msgstr ""
+
+#. One of the options in the new feature to change the shape of photos:  https://s3.eu-west-1.amazonaws.com/po-pub/i/xt0dCFkQXFZVcva3B9ae0WOL.png
+#: 
+msgid "Oval"
+msgstr ""
+
+#. One of the options in the new feature to change the shape of photos:  https://s3.eu-west-1.amazonaws.com/po-pub/i/xt0dCFkQXFZVcva3B9ae0WOL.png
+#: 
+msgid "Circle"
+msgstr ""
+
+#. One of the options in the new feature to change the shape of photos:  https://s3.eu-west-1.amazonaws.com/po-pub/i/xt0dCFkQXFZVcva3B9ae0WOL.png
+#: 
+msgid "Square"
+msgstr ""
+
+#. One of the options in the new feature to change the shape of photos:  https://s3.eu-west-1.amazonaws.com/po-pub/i/xt0dCFkQXFZVcva3B9ae0WOL.png
+#: 
+msgid "Rounded rectangle"
+msgstr ""
+
+#. New option allowing user to change the shape of the photos of individuals on the diagram:  https://s3.eu-west-1.amazonaws.com/po-pub/i/m1OnWy0suuc9ZfVnzjRGm2fT.png
+#: 
+msgid "Photo shape"
+msgstr ""
+
+#. New option allowing the user to change the size of photos in the diagram relative to the default size:  https://s3.eu-west-1.amazonaws.com/po-pub/i/tJTfdr6obmGkybNdVWvjF1ee.png
+#: 
+msgid "Photo size"
 msgstr ""
 

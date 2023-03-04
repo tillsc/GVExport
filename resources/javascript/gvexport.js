@@ -709,31 +709,44 @@ function scrollToRecord(xref) {
                 let minY = null;
                 let maxX = null;
                 let maxY = null;
+                let x = null;
+                let y = null;
                 const group = titles[i].parentElement;
                 // We need to locate the element within the SVG. We use "polygon" here because it is the
                 // only element that will always exist and that also has position information
                 // (other elements like text, image, etc. can be disabled by the user)
-                const points = group.getElementsByTagName('polygon')[0].getAttribute('points').split(" ");
-                // Find largest and smallest X and Y value out of all the points of the polygon
-                for (j = 0; j < points.length; j++) {
-                    const x = parseFloat(points[j].split(',')[0]);
-                    const y = parseFloat(points[j].split(',')[1]);
-                    if (minX === null || x < minX) {
-                        minX = x;
+                const polygonList = group.getElementsByTagName('polygon');
+                let points;
+                if (polygonList.length !== 0) {
+                    points = polygonList[0].getAttribute('points').split(" ");
+                    // Find largest and smallest X and Y value out of all the points of the polygon
+                    for (let k = 0; k < points.length; k++) {
+                        // If path instructions, ignore
+                        if (points[k].replace(/[a-z]/gi, '') !== points[k]) break;
+                        const x = parseFloat(points[k].split(',')[0]);
+                        const y = parseFloat(points[k].split(',')[1]);
+                        if (minX === null || x < minX) {
+                            minX = x;
+                        }
+                        if (minY === null || y < minY) {
+                            minY = y;
+                        }
+                        if (maxX === null || x > maxX) {
+                            maxX = x;
+                        }
+                        if (maxY === null || y > maxY) {
+                            maxY = y;
+                        }
                     }
-                    if (minY === null || y < minY) {
-                        minY = y;
-                    }
-                    if (maxX === null || x > maxX) {
-                        maxX = x;
-                    }
-                    if (maxY === null || y > maxY) {
-                        maxY = y;
-                    }
+
+                    // Get the average of the largest and smallest, so we can position the element in the middle
+                    x = (minX + maxX) / 2;
+                    y = (minY + maxY) / 2;
+                } else {
+                    x = group.getElementsByTagName('text')[0].getAttribute('x');
+                    y = group.getElementsByTagName('text')[0].getAttribute('y')
                 }
-                // Get the average of the largest and smallest, so we can position the element in the middle
-                let x = (minX + maxX) / 2;
-                let y = (minY + maxY) / 2;
+
                 // Why do we multiply the scale by 1 and 1/3?
                 let zoombase = panzoomInst.getTransform().scale * (1 + 1 / 3);
                 let zoom = zoombase * parseFloat(document.getElementById("dpi").value)/72;
@@ -1624,4 +1637,48 @@ function toggleHighlightStartPersons(enable) {
         }
     }
     showHide(document.getElementById('startcol_option'),enable);
+}
+
+function setSvgImageClipPath(element, clipPath) {
+    // Circle photo
+    const imageElements = element.getElementsByTagName("image");
+    for (let i = 0; i < imageElements.length; i++) {
+        imageElements[i].setAttribute("clip-path", clipPath);
+        imageElements[i].removeAttribute("width");
+    }
+}
+
+// Tidies SVG before embedding in page
+function cleanSVG(element) {
+    const SHAPE_OVAL = '10';
+    const SHAPE_CIRCLE = '20';
+    const SHAPE_SQUARE = '30';
+    const SHAPE_ROUNDED_RECT = '40';
+    switch(document.getElementById('photo_shape').value) {
+        case SHAPE_OVAL:
+            setSvgImageClipPath(element, "inset(0% round 50%)");
+            break;
+        case SHAPE_CIRCLE:
+            setSvgImageClipPath(element, "circle(50%)");
+            break;
+        case SHAPE_SQUARE:
+            setSvgImageClipPath(element, "inset(5%)");
+            break;
+        case SHAPE_ROUNDED_RECT:
+            setSvgImageClipPath(element, "inset(0% round 25%)");
+            break;
+    }
+
+    // remove title tags, so we don't get weird data on hover,
+    // instead this defaults to the XREF of the record
+    const a = element.getElementsByTagName("a");
+    for (let i = 0; i < a.length; i++) {
+        a[i].removeAttribute("xlink:title");
+    }
+    //half of bug fix for photos not showing in browser - we change & to %26 in functions_dot.php
+    element.innerHTML = element.innerHTML.replaceAll("%26", "&amp;");
+    // Don't show anything when hovering on blank space
+    element.innerHTML = element.innerHTML.replaceAll("<title>WT_Graph</title>", "");
+    // Set SVG viewBox to height/width so image is not cut off
+    element.setAttribute("viewBox", "0 0 " + element.getAttribute("width").replace("pt", "") + " " + element.getAttribute("height").replace("pt", ""));
 }

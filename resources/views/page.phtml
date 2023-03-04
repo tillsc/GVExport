@@ -86,7 +86,8 @@ $xref = $individual->xref();
         "Added to Tree favourites":"<?= I18N::translate("Added to Tree favourites"); ?>",
         "One new source person added to %s existing persons":"<?= I18N::translate("One new source person added to %s existing persons", '%s'); ?>",
         "Cancel":"<?= I18N::translate("Cancel"); ?>",
-        "Overwrite":"<?= I18N::translate("Overwrite"); ?>"
+        "Overwrite":"<?= I18N::translate("Overwrite"); ?>",
+        "Rendered in browser as server doesn't support photo shapes":"<?= I18N::translate("Rendered in browser as server doesn't support photo shapes"); ?>"
     }
     let autoUpdate = <?= $vars["auto_update"] ? 'true' : 'false' ?>;
     let debug_string = "";
@@ -321,10 +322,21 @@ $xref = $individual->xref();
 
             <?php if ($tree->getPreference('SHOW_HIGHLIGHT_IMAGES') == '1') { ?>
                 <div class="row form-group">
-                    <?= MainPage::addLabel('show_photos', 'Add photos'); ?>
+                    <?= MainPage::addLabel('', 'Photos'); ?>
                     <div class="col-sm-8 wt-page-options-value">
-                        <input type="checkbox" name="vars[show_photos]" id="show_photos" value="show_photos" <?= $vars["show_photos"] ? 'checked' : '' ?>>
-                        <span class="text-muted">(<?= I18N::translate('Only Decorated or Combined') ?>)</span>
+                        <div class="col-auto">
+                            <input type="checkbox" name="vars[show_photos]" id="show_photos" value="show_photos" <?= $vars["show_photos"] ? 'checked' : '' ?>>
+                            <label for="show_photos"><?= I18N::translate('Show photos') ?></label>
+                        </div>
+                        <div class="col-auto">
+                            <label for="photo_shape"><?= I18N::translate('Photo shape') ?>:</label>
+                            <?= view('components/select', ['name' => 'vars[photo_shape]', 'id' => 'photo_shape', 'selected' => e($vars['photo_shape']), 'options' => MainPage::updateTranslations($settings["photo_shape_options"])]) ?>
+                        </div>
+                        <div class="col-auto">
+                            <label for="photo_size"><?= I18N::translate('Photo size') ?>:</label>
+                            <input type="text" onclick="togglePercent(this, false)" onblur="togglePercent(this, true)" class="form-control col-sm-6" size="10" name="vars[photo_size]" id="photo_size"
+                                   value="<?= e($vars["photo_size"]) ?>">
+                        </div>
                     </div>
                 </div>
             <?php } ?>
@@ -685,9 +697,10 @@ $xref = $individual->xref();
             addError("indi-error","<?= I18N::translate("Individual required") ?>");
             e.preventDefault();
         }
-        // Also check if Graphviz installed. If so then let it handle it,
+        // Also check if Graphviz installed. If so then let it handle it (unless unsupported setting used),
         // but if not, trigger client side actions
-        if (!graphvizAvailable) {
+        if (!graphvizAvailable || document.getElementById('photo_shape').value !== '0') {
+            if (graphvizAvailable) showToast(TRANSLATE["Rendered in browser as server doesn't support photo shapes"]);
             const output = document.getElementById('output_type').value;
             switch(output) {
                 case "png":
@@ -795,19 +808,8 @@ $xref = $individual->xref();
             });
         }).then(function (element) {
             // Now we have to clean up the generated SVG.
+            cleanSVG(element);
 
-            // remove title tags, so we don't get weird data on hover,
-            // instead this defaults to the XREF of the record
-            const a = element.getElementsByTagName("a");
-            for (let i = 0; i < a.length; i++) {
-                a[i].removeAttribute("xlink:title");
-            }
-            //half of bug fix for photos not showing in browser - we change & to %26 in functions_dot.php
-            element.innerHTML = element.innerHTML.replaceAll("%26", "&amp;");
-            // Don't show anything when hovering on blank space
-            element.innerHTML = element.innerHTML.replaceAll("<title>WT_Graph</title>", "");
-            // Set SVG viewBox to height/width so image is not cut off
-            element.setAttribute("viewBox", "0 0 "+element.getAttribute("width").replace("pt","")+" "+element.getAttribute("height").replace("pt",""));
             // Clear current rendering then append new element to the page
             rendering.innerHTML = "";
             rendering.appendChild(element);

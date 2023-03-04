@@ -602,11 +602,11 @@ class Dot {
                 $href = "";
             }
             // If names, birth details, and death details are all disabled - show a smaller marriage circle to match the small tiles for individuals.
-            if (!$this->settings["show_birthdate"] && !$this->settings["show_birthplace"] && !$this->settings["show_death_date"] && !$this->settings["show_death_place"] && !$this->settings["show_marriage_date"] && !$this->settings["show_xref_individuals"] && !$this->settings["show_xref_families"] && $this->settings["use_abbr_names"][$this->settings["use_abbr_name"]] == "Don't show names") {
+            if (!$this->settings["show_marriage_date"] && !$this->settings["show_marriage_place"] && !$this->settings["show_xref_families"]) {
                 $out .= "color=\"" . $this->settings["border_col"] . "\",fillcolor=\"" . $fill_color . "\", $href shape=point, height=0.2, style=filled";
                 $out .= ", label=" . "< >";
             } else {
-                $out .= "color=\"" . $this->settings["border_col"] . "\",fillcolor=\"" . $fill_color . "\", $href shape=ellipse, style=filled";
+                $out .= "color=\"" . $this->settings["border_col"] . "\",fillcolor=\"" . $fill_color . "\", $href shape=oval, style=\"filled\", margin=0.01";
                 $out .= ", label=" . "<<TABLE border=\"0\" CELLPADDING=\"0\" CELLSPACING=\"0\"><TR><TD><FONT COLOR=\"". $this->settings["font_colour_details"] ."\" POINT-SIZE=\"" . ($this->settings["font_size"]) ."\">" . (empty($marriagedate)?"":$marriagedate) . "<BR />" . (empty($marriageplace)?"":"(".$marriageplace.")") . $family . "</FONT></TD></TR></TABLE>>";
             }
         }
@@ -1142,7 +1142,17 @@ class Dot {
                 $image = new ImageFile($m, $this->tree, $this->settings["dpi"] * 2);
 				return $image->getImageLocation();
 			} else {
-				return str_replace("&","%26",$m->imageUrl($this->settings["dpi"]*2,$this->settings["dpi"]*2,"contain"));
+                switch ($this->settings['photo_shape']) {
+                    case 0:
+                    case 10:
+                    case 40:
+                        $fit = "contain";
+                        break;
+                    default:
+                        $fit = "crop";
+                }
+
+				return str_replace("&","%26",$m->imageUrl($this->settings["dpi"]*2,$this->settings["dpi"]*2, $fit));
 			}
 		} else {
 			return null;
