@@ -215,7 +215,7 @@ class FormSubmission
                 $size = $size . "%";
             }
             if ($this->isPercent($size)) {
-                $settings['photo_size'] = $size;
+                $settings['photo_size'] = ($size == "%" ? "100%" : $size);
             }
         }
 
