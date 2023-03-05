@@ -317,11 +317,11 @@ function toggleAdvanced(button, id, visible = null) {
     }
     showHide(el, visible);
     if (visible) {
-        button.innerHTML = button.innerHTML.replaceAll("↓','↑");
+        button.innerHTML = button.innerHTML.replaceAll('↓','↑');
         const hidden = document.getElementById(id+"-hidden");
         hidden.value = "show";
     } else {
-        button.innerHTML = button.innerHTML.replaceAll("↑','↓");
+        button.innerHTML = button.innerHTML.replaceAll('↑','↓');
         // Update our hidden field for saving the state
         const hidden = document.getElementById(id+"-hidden");
         hidden.value = "";
@@ -1654,6 +1654,7 @@ function cleanSVG(element) {
     const SHAPE_CIRCLE = '20';
     const SHAPE_SQUARE = '30';
     const SHAPE_ROUNDED_RECT = '40';
+    const SHAPE_ROUNDED_SQUARE = '50';
     switch(document.getElementById('photo_shape').value) {
         case SHAPE_OVAL:
             setSvgImageClipPath(element, "inset(0% round 50%)");
@@ -1665,6 +1666,9 @@ function cleanSVG(element) {
             setSvgImageClipPath(element, "inset(5%)");
             break;
         case SHAPE_ROUNDED_RECT:
+            setSvgImageClipPath(element, "inset(0% round 25%)");
+            break;
+        case SHAPE_ROUNDED_SQUARE:
             setSvgImageClipPath(element, "inset(0% round 25%)");
             break;
     }
