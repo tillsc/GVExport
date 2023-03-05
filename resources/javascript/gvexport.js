@@ -317,11 +317,11 @@ function toggleAdvanced(button, id, visible = null) {
     }
     showHide(el, visible);
     if (visible) {
-        button.innerHTML = button.innerHTML.replaceAll("↓','↑");
+        button.innerHTML = button.innerHTML.replaceAll('↓','↑');
         const hidden = document.getElementById(id+"-hidden");
         hidden.value = "show";
     } else {
-        button.innerHTML = button.innerHTML.replaceAll("↑','↓");
+        button.innerHTML = button.innerHTML.replaceAll('↑','↓');
         // Update our hidden field for saving the state
         const hidden = document.getElementById(id+"-hidden");
         hidden.value = "";
