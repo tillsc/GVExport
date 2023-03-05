@@ -1717,6 +1717,7 @@ function diagramSearchBoxChange(e) {
             showToast(TRANSLATE['Individual not found']);
         }
         clearIndiSelect('diagram_search_box');
+        showHideSearchBox(e, false);
     }
 }
 
