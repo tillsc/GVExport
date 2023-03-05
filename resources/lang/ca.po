@@ -1028,40 +1028,40 @@ msgstr "Una nova persona afegida a %s persones existents"
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/Rq4HsawCjQ0CuWW3I2SoDIJM.png
 #: 
 msgid "Rendered in browser as server doesn't support photo shapes"
-msgstr ""
+msgstr "Representat al navegador com a servidor, no admet formes de fotos"
 
 #. One of the options in the new feature to change the shape of photos:  https://s3.eu-west-1.amazonaws.com/po-pub/i/xt0dCFkQXFZVcva3B9ae0WOL.png
 #: 
 msgid "No change"
-msgstr ""
+msgstr "Sense canvis"
 
 #. One of the options in the new feature to change the shape of photos:  https://s3.eu-west-1.amazonaws.com/po-pub/i/xt0dCFkQXFZVcva3B9ae0WOL.png
 #: 
 msgid "Oval"
-msgstr ""
+msgstr "Oval"
 
 #. One of the options in the new feature to change the shape of photos:  https://s3.eu-west-1.amazonaws.com/po-pub/i/xt0dCFkQXFZVcva3B9ae0WOL.png
 #: 
 msgid "Circle"
-msgstr ""
+msgstr "Cercle"
 
 #. One of the options in the new feature to change the shape of photos:  https://s3.eu-west-1.amazonaws.com/po-pub/i/xt0dCFkQXFZVcva3B9ae0WOL.png
 #: 
 msgid "Square"
-msgstr ""
+msgstr "Quadrat"
 
 #. One of the options in the new feature to change the shape of photos:  https://s3.eu-west-1.amazonaws.com/po-pub/i/xt0dCFkQXFZVcva3B9ae0WOL.png
 #: 
 msgid "Rounded rectangle"
-msgstr ""
+msgstr "Rectangle arrodonit"
 
 #. New option allowing user to change the shape of the photos of individuals on the diagram:  https://s3.eu-west-1.amazonaws.com/po-pub/i/m1OnWy0suuc9ZfVnzjRGm2fT.png
 #: 
 msgid "Photo shape"
-msgstr ""
+msgstr "Forma de foto"
 
 #. New option allowing the user to change the size of photos in the diagram relative to the default size:  https://s3.eu-west-1.amazonaws.com/po-pub/i/tJTfdr6obmGkybNdVWvjF1ee.png
 #: 
 msgid "Photo size"
-msgstr ""
+msgstr "Mida de la foto"
 

@@ -1019,40 +1019,40 @@ msgstr "Один новый исходный человек добавлен к 
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/Rq4HsawCjQ0CuWW3I2SoDIJM.png
 #: 
 msgid "Rendered in browser as server doesn't support photo shapes"
-msgstr ""
+msgstr "Отображается в браузере, так как сервер не поддерживает формы фотографий"
 
 #. One of the options in the new feature to change the shape of photos:  https://s3.eu-west-1.amazonaws.com/po-pub/i/xt0dCFkQXFZVcva3B9ae0WOL.png
 #: 
 msgid "No change"
-msgstr ""
+msgstr "Без изменений"
 
 #. One of the options in the new feature to change the shape of photos:  https://s3.eu-west-1.amazonaws.com/po-pub/i/xt0dCFkQXFZVcva3B9ae0WOL.png
 #: 
 msgid "Oval"
-msgstr ""
+msgstr "Овал"
 
 #. One of the options in the new feature to change the shape of photos:  https://s3.eu-west-1.amazonaws.com/po-pub/i/xt0dCFkQXFZVcva3B9ae0WOL.png
 #: 
 msgid "Circle"
-msgstr ""
+msgstr "Круг"
 
 #. One of the options in the new feature to change the shape of photos:  https://s3.eu-west-1.amazonaws.com/po-pub/i/xt0dCFkQXFZVcva3B9ae0WOL.png
 #: 
 msgid "Square"
-msgstr ""
+msgstr "Квадрат"
 
 #. One of the options in the new feature to change the shape of photos:  https://s3.eu-west-1.amazonaws.com/po-pub/i/xt0dCFkQXFZVcva3B9ae0WOL.png
 #: 
 msgid "Rounded rectangle"
-msgstr ""
+msgstr "Прямоугольник с закругленными углами"
 
 #. New option allowing user to change the shape of the photos of individuals on the diagram:  https://s3.eu-west-1.amazonaws.com/po-pub/i/m1OnWy0suuc9ZfVnzjRGm2fT.png
 #: 
 msgid "Photo shape"
-msgstr ""
+msgstr "Форма фото"
 
 #. New option allowing the user to change the size of photos in the diagram relative to the default size:  https://s3.eu-west-1.amazonaws.com/po-pub/i/tJTfdr6obmGkybNdVWvjF1ee.png
 #: 
 msgid "Photo size"
-msgstr ""
+msgstr "Размер фото"
 
