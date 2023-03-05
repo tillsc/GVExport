@@ -14,6 +14,7 @@ const REQUEST_TYPE_ADD_MY_FAVORITE = "add_my_favorite";
 const REQUEST_TYPE_ADD_TREE_FAVORITE = "add_tree_favorite";
 let treeName = null;
 let loggedIn = null;
+let xrefList = [];
 
 function hideSidebar() {
     document.querySelector(".sidebar").hidden = true;
@@ -562,16 +563,32 @@ function removeItem(e, element, xrefListId) {
 }
 
 // clear options from the dropdown if they are already in our list
-function removeSelectedOptions() {
-    document.getElementById('xref_list').value.split(',').forEach(function (id) {
-        id = id.trim();
-        if (id !== "") {
-            let dropdown = document.getElementById('pid');
-            if (typeof dropdown.tomselect !== 'undefined') {
-                dropdown.tomselect.removeOption(id);
-            }
+function removeSearchOptions() {
+    // Remove option when searching for starting indi if already in list
+    document.getElementById('xref_list').value.split(',').forEach(function (xref) {
+        removeSearchOptionFromList(xref, 'pid')
+    });
+    // Remove option when searching for stopping indi if already in list
+    document.getElementById('stop_xref_list').value.split(',').forEach(function (xref) {
+        removeSearchOptionFromList(xref, 'stop_pid')
+    });
+    // Remove option when searching diagram if indi not in diagram
+    let dropdown = document.getElementById('diagram_search_box');
+    Object.keys(dropdown.tomselect.options).forEach(function (option) {
+        if (!xrefList.includes(option)) {
+            removeSearchOptionFromList(option, 'diagram_search_box');
         }
     });
+}
+// clear options from the dropdown if they are already in our list
+function removeSearchOptionFromList(xref, listId) {
+    xref = xref.trim();
+    if (xref !== "") {
+        let dropdown = document.getElementById(listId);
+        if (typeof dropdown.tomselect !== 'undefined') {
+            dropdown.tomselect.removeOption(xref);
+        }
+    }
 }
 
 // Clear the list of starting individuals
@@ -807,7 +824,7 @@ function pageLoaded() {
     // further resets when page reloaded
     removeURLParameter("reset");
     // Remove options from selection list if already selected
-    setInterval(function () {removeSelectedOptions()}, 100);
+    setInterval(function () {removeSearchOptions()}, 100);
     // Listen for fullscreen change
     handleFullscreen();
     // Load browser render when page has loaded
@@ -844,7 +861,12 @@ function pageLoaded() {
     });
     document.addEventListener("click", function(event) {
         removeSettingsEllipsisMenu(event.target);
+        if (!document.getElementById('searchButton').contains(event.target) && !document.getElementById('diagram_search_box_container').contains(event.target)) {
+            showHideSearchBox(event, false);
+        }
     });
+    document.querySelector("#diagram_search_box_container").addEventListener('change', diagramSearchBoxChange);
+    document.querySelector('#searchButton').addEventListener('click', showHideSearchBox);
 }
 
 // Function to show a help message
@@ -1685,4 +1707,47 @@ function cleanSVG(element) {
     element.innerHTML = element.innerHTML.replaceAll("<title>WT_Graph</title>", "");
     // Set SVG viewBox to height/width so image is not cut off
     element.setAttribute("viewBox", "0 0 " + element.getAttribute("width").replace("pt", "") + " " + element.getAttribute("height").replace("pt", ""));
+}
+
+function diagramSearchBoxChange(e) {
+    let xref = document.getElementById('diagram_search_box').value.trim();
+    // Skip the first trigger, only fire for the follow-up trigger when the XREF is set
+    if (xref !== ""){
+        if (!scrollToRecord(xref)) {
+            showToast(TRANSLATE['Individual not found']);
+        }
+        clearIndiSelect('diagram_search_box');
+    }
+}
+
+function createXrefListFromSvg() {
+    xrefList = [];
+    const rendering = document.getElementById('rendering');
+    const svg = rendering.getElementsByTagName('svg')[0].cloneNode(true);
+    let titles = svg.getElementsByTagName('title');
+    for (let i=0; i<titles.length; i++) {
+        let xrefs = titles[i].innerHTML.split("_");
+        for (let j = 0; j < xrefs.length; j++) {
+            // Ignore the arrows that go between records
+            if (!xrefs[j].includes("&gt;")) {
+                xrefList.push(xrefs[j]);
+            }
+        }
+    }
+}
+
+//
+function showHideSearchBox(event, visible = null) {
+    const el = document.getElementById('diagram_search_box_container');
+    // If toggling, set to the opposite of current state
+    if (visible === null) {
+        visible = el.style.display === "none";
+    }
+    showHide(el, visible);
+    if (visible) {
+        let dropdown = document.getElementById('diagram_search_box');
+        if (typeof dropdown.tomselect !== 'undefined') {
+            dropdown.tomselect.focus();
+        }
+    }
 }
