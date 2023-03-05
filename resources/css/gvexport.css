@@ -197,6 +197,13 @@ span.NAME {
     right: 6px;
 }
 
+#diagram_search_box_container {
+    position: absolute;
+    top: 3em;
+    right: 3em;
+    width: 350px;
+}
+
 /* The modal background */
 .modal {
     display: block;

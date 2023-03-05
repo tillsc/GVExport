@@ -68,7 +68,7 @@ $xref = $individual->xref();
     const cartempty = <?= $cartempty ? "true" : "false" ?>;
     const CLIENT_ERRORS = [
         "<?= I18N::translate('Your browser does not support exporting images this large. Please reduce number of records, reduce DPI setting, or use SVG option.') ?>",
-        "<?= I18N::translate('Unable to load setting ') ?>",
+        "<?= I18N::translate('Unable to load setting') ?>",
         "<?= I18N::translate('Invalid JSON'); ?>"];
     const TRANSLATE = {
         "Delete":"<?= I18N::translate('Delete'); ?>",
@@ -87,6 +87,7 @@ $xref = $individual->xref();
         "One new source person added to %s existing persons":"<?= I18N::translate("One new source person added to %s existing persons", '%s'); ?>",
         "Cancel":"<?= I18N::translate("Cancel"); ?>",
         "Overwrite":"<?= I18N::translate("Overwrite"); ?>",
+        "Individual not found":"<?= I18N::translate('Individual not found') ?>",
         "Rendered in browser as server doesn't support photo shapes":"<?= I18N::translate("Rendered in browser as server doesn't support photo shapes"); ?>"
     }
     let autoUpdate = <?= $vars["auto_update"] ? 'true' : 'false' ?>;
@@ -662,7 +663,8 @@ $xref = $individual->xref();
     <div id="rendering" hidden style="background-color: <?= $vars["background_col"] ?>;"></div>
     <a href="#" title="<?= I18N::translate('Fullscreen') ?>" onclick="toggleFullscreen()" class="fullscreen" id="fullscreenButton">⛶</a>
     <a href="#" title="<?= I18N::translate('Exit fullscreen') ?>" onclick="toggleFullscreen()" class="fullscreen" id="fullscreenClose" style="display: none;">✖</a>
-    <a href="#" title="<?= I18N::translate('Fullscreen') ?>" onclick="" class="search_icon" id="fullscreenButton"><?= view('icons/search'); ?></a>
+    <a href="#" title="<?= I18N::translate('Search diagram') ?>" onclick="" class="search_icon" id="searchButton"><?= view('icons/search'); ?></a>
+    <div id="diagram_search_box_container" style="display: none"><?= view('components/select-individual', ['name' => 'diagram_search_box', 'id' => 'diagram_search_box', 'tree' => $tree, 'individual' => "", 'required'=>false]); ?></div>
 </div>
 
 <script type="text/javascript">
@@ -839,7 +841,7 @@ $xref = $individual->xref();
             }
 
             handleTileClick();
-
+            createXrefListFromSvg();
             return element;
         }).catch(function (error) {
             if (error.message.includes("TOTAL_MEMORY")) {
