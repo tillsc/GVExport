@@ -1146,10 +1146,10 @@ class Dot {
                     case 0:
                     case 10:
                     case 40:
-                        $fit = "contain";
+                        $fit = 'contain';
                         break;
                     default:
-                        $fit = "crop";
+                        $fit = 'crop';
                 }
 
 				return str_replace("&","%26",$m->imageUrl($this->settings["dpi"]*2,$this->settings["dpi"]*2, $fit));
