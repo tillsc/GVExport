@@ -182,11 +182,19 @@ span.NAME {
     position: absolute;
 }
 
-.fullscreen {
+.fullscreen, .search_icon {
     position: absolute;
+}
+.fullscreen {
+    font-size: 2em;
     top: 0;
     right: 10px;
-    font-size: 2em;
+}
+
+.search_icon {
+    font-size: 1.9em;
+    top: 1.5em;
+    right: 6px;
 }
 
 /* The modal background */
