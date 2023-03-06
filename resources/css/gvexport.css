@@ -192,11 +192,11 @@ span.NAME {
 }
 
 .fullscreen {
-    font-size: 32px;
+    font-size: 2em;
 }
 
 .search_icon {
-    font-size: 30px;
+    font-size: 1.8em;
 }
 
 #diagram_search_box {
