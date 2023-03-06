@@ -1717,6 +1717,7 @@ function diagramSearchBoxChange(e) {
             showToast(TRANSLATE['Individual not found']);
         }
         clearIndiSelect('diagram_search_box');
+        showHideSearchBox(e, false);
     }
 }
 
@@ -1745,9 +1746,30 @@ function showHideSearchBox(event, visible = null) {
     }
     showHide(el, visible);
     if (visible) {
+        // Remove blank section from search box
+        tidyTomSelect();
+        // Give search box focus
         let dropdown = document.getElementById('diagram_search_box');
         if (typeof dropdown.tomselect !== 'undefined') {
             dropdown.tomselect.focus();
         }
+    }
+}
+
+// In a tomselect, the option chosen goes into a box that is initially blank. For the search box,
+// this blank space is never used (as the selected option is not filled to the box). This function
+// removes this to give a cleaner search box.
+function tidyTomSelect() {
+    let searchContainer = document.getElementById('diagram_search_box_container');
+    let control = document.getElementById('diagram_search_box-ts-control');
+
+    if (control !== null) {
+        control.remove();
+    }
+    let tomWrappers = searchContainer.getElementsByClassName('ts-wrapper');
+    if (tomWrappers.length > 0) {
+        Array.from(tomWrappers).forEach((wrapper) => {
+            wrapper.className = "";
+        })
     }
 }

@@ -119,7 +119,7 @@ $xref = $individual->xref();
                 <h3><?= I18N::translate('Saved diagrams') ?></h3>
             </div>
 
-            <div class="row form-group">
+            <div class="row no-right-margin form-group">
                 <?= MainPage::addLabel('simple_settings_list', 'List of diagrams'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <select id="simple_settings_list" class="form-select">
@@ -152,7 +152,7 @@ $xref = $individual->xref();
         }
         ?>
 
-            <div class="row form-group">
+            <div class="row no-right-margin form-group">
                 <?= MainPage::addLabel('', 'Clippings cart'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <?= I18N::translate('You have items in the clippings cart, which can be used for the diagram instead of the below options.') ?>
@@ -172,7 +172,7 @@ $xref = $individual->xref();
             </div>
         <?php } ?>
 
-        <div class="row form-group">
+        <div class="row no-right-margin form-group">
             <?= MainPage::addLabel('pid', 'Include anyone related to'); ?>
             <div class="col-sm-8 wt-page-options-value">
                 <div id="indi_list">
@@ -186,7 +186,7 @@ $xref = $individual->xref();
             </div>
         </div>
 
-        <div class="row form-group">
+        <div class="row no-right-margin form-group">
             <?= MainPage::addLabel('include_ancestors', 'Include ancestors'); ?>
             <div class="col-sm-8 wt-page-options-value">
                 <div class="row">
@@ -201,7 +201,7 @@ $xref = $individual->xref();
             </div>
         </div>
 
-        <div class="row form-group">
+        <div class="row no-right-margin form-group">
             <?= MainPage::addLabel('', 'Include'); ?>
             <div class="col-sm-8 wt-page-options-value">
                 <div class="row">
@@ -225,7 +225,7 @@ $xref = $individual->xref();
             </div>
         </div>
 
-        <div class="row form-group">
+        <div class="row no-right-margin form-group">
             <?= MainPage::addLabel('include_descendants', 'Include descendants'); ?>
             <div class="col-sm-8 wt-page-options-value">
                 <div class="row">
@@ -241,7 +241,7 @@ $xref = $individual->xref();
             </div>
         </div>
         <div id="people-advanced" <?= $vars["show_adv_people"] ? '' : 'style="display:none"'; ?>>
-            <div class="row form-group">
+            <div class="row no-right-margin form-group">
                 <?= MainPage::addLabel('xref_list', 'XREFs of included individuals'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="input-group mt-1">
@@ -252,7 +252,7 @@ $xref = $individual->xref();
                     </div>
                 </div>
             </div>
-            <div class="row form-group">
+            <div class="row no-right-margin form-group">
                 <?= MainPage::addLabel('stop_xref_list', 'Stop processing on'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <div id="stop_indi_list">
@@ -272,7 +272,7 @@ $xref = $individual->xref();
                     </div>
                 </div>
             </div>
-            <div class="row form-group">
+            <div class="row no-right-margin form-group">
                 <?= MainPage::addLabel('mark_not_related', 'Non-relatives'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <input class="cart_toggle" onclick="setStateFastRelationCheck();" type="checkbox" name="vars[mark_not_related]" id="mark_not_related" value="mark_not_related" <?= $vars["mark_not_related"] ? 'checked' : '' ?>>
@@ -282,7 +282,7 @@ $xref = $individual->xref();
                     <label class="check-list" for="faster_relation_check"><?= I18N::translate('Ignore unseen links to speed up relative check') ?></label>
                 </div>
             </div>
-            <div class="row form-group">
+            <div class="row no-right-margin form-group">
                 <?= MainPage::addLabel('graph_dir', 'Treatment of source individuals'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <?= view('components/select', ['name' => 'vars[url_xref_treatment]', 'id' => 'url_xref_treatment', 'selected' => e($vars['url_xref_treatment']), 'options' => MainPage::updateTranslations($settings["url_xref_treatment_options"])]) ?>
@@ -292,14 +292,14 @@ $xref = $individual->xref();
         <a href="#" id="people-advanced-button" onclick="toggleAdvanced(this, 'people-advanced')"><div class="wt-page-options-label advanced-settings-btn"><?= ($vars["show_adv_people"] ? '↑ ' : '↓ ') . I18N::translate('Toggle advanced settings') . ($vars["show_adv_people"] ? ' ↑' : ' ↓'); ?></div></a>
 
         <h3><?= I18N::translate('Appearance') ?></h3>
-        <div class="row form-group">
+        <div class="row no-right-margin form-group">
             <?= MainPage::addLabel('graph_dir', 'Graph direction'); ?>
             <div class="col-sm-8 wt-page-options-value">
                 <?= view('components/select', ['name' => 'vars[graph_dir]', 'id' => 'graph_dir', 'selected' => e($vars['graph_dir']), 'options' => MainPage::updateTranslations($settings["directions"])]) ?>
             </div>
         </div>
 
-        <div class="row form-group">
+        <div class="row no-right-margin form-group">
             <?= MainPage::addLabel('', 'Diagram type'); ?>
             <div class="col-sm-8 wt-page-options-value">
                 <div class="row">
@@ -322,7 +322,7 @@ $xref = $individual->xref();
         <div id="appearance-advanced" <?= $vars["show_adv_appear"] ? '' : 'style="display:none"' ?>>
 
             <?php if ($tree->getPreference('SHOW_HIGHLIGHT_IMAGES') == '1') { ?>
-                <div class="row form-group">
+                <div class="row no-right-margin form-group">
                     <?= MainPage::addLabel('', 'Photos'); ?>
                     <div class="col-sm-8 wt-page-options-value">
                         <div class="col-auto">
@@ -342,7 +342,7 @@ $xref = $individual->xref();
                 </div>
             <?php } ?>
 
-            <div class="row form-group">
+            <div class="row no-right-margin form-group">
                 <?= MainPage::addLabel('add_links', 'Add URL to individuals and families'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <input type="checkbox" name="vars[add_links]" id="add_links" value="add_links" <?= $vars["add_links"] ? 'checked' : '' ?>>
@@ -350,28 +350,28 @@ $xref = $individual->xref();
                 </div>
             </div>
 
-            <div class="row form-group">
+            <div class="row no-right-margin form-group">
                 <?= MainPage::addLabel('use_abbr_name', 'Abbreviated names'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <?= view('components/select', ['name' => 'vars[use_abbr_name]', 'id' => 'use_abbr_name', 'selected' => I18N::digits($vars['use_abbr_name']), 'options' => MainPage::updateTranslations($settings["use_abbr_names"])]) ?>
                 </div>
             </div>
 
-            <div class="row form-group">
+            <div class="row no-right-margin form-group">
                 <?= MainPage::addLabel('use_abbr_place', 'Abbreviated place names'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <?= view('components/select', ['name' => 'vars[use_abbr_place]', 'id' => 'use_abbr_place', 'selected' => I18N::digits($vars['use_abbr_place']), 'options' => MainPage::updateTranslations($settings["use_abbr_places"])]) ?>
                 </div>
             </div>
-            
-            <div class="row form-group">
+
+            <div class="row no-right-margin form-group">
                 <?= MainPage::addLabel('show_xref_individuals', 'Show individual XREF'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <input type="checkbox" name="vars[show_xref_individuals]" id="show_xref_individuals" value="show_xref_individuals" <?= $vars["show_xref_individuals"] || $overridePID ? 'checked' : '' ?>>
                 </div>
             </div>
 
-            <div class="row form-group">
+            <div class="row no-right-margin form-group">
                 <?= MainPage::addLabel('show_birthdate', 'Show birth date'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="row">
@@ -390,14 +390,14 @@ $xref = $individual->xref();
                 </div>
             </div>
 
-            <div class="row form-group">
+            <div class="row no-right-margin form-group">
                 <?= MainPage::addLabel('show_birthplace', 'Show birth place'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <input type="checkbox" name="vars[show_birthplace]" id="show_birthplace" value="show_birthplace" <?= $vars["show_birthplace"] ? 'checked' : '' ?>>
                 </div>
             </div>
 
-            <div class="row form-group">
+            <div class="row no-right-margin form-group">
                 <?= MainPage::addLabel('show_death_date', 'Show death date'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="row">
@@ -416,7 +416,7 @@ $xref = $individual->xref();
                 </div>
             </div>
 
-            <div class="row form-group">
+            <div class="row no-right-margin form-group">
                 <?= MainPage::addLabel('show_death_place', 'Show death place'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <input type="checkbox" name="vars[show_death_place]" id="show_death_place" value="show_death_place" <?= $vars["show_death_place"] ? 'checked' : '' ?>>
@@ -424,14 +424,14 @@ $xref = $individual->xref();
             </div>
 
 
-            <div class="row form-group">
+            <div class="row no-right-margin form-group">
                 <?= MainPage::addLabel('show_xref_families', 'Show family XREF'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <input type="checkbox" name="vars[show_xref_families]" id="show_xref_families" value="show_xref_families" <?= $vars["show_xref_families"] ? 'checked' : '' ?>>
                 </div>
             </div>
 
-            <div class="row form-group">
+            <div class="row no-right-margin form-group">
                 <?= MainPage::addLabel('show_marriage_date', 'Show marriage date'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="row">
@@ -450,14 +450,14 @@ $xref = $individual->xref();
                 </div>
             </div>
 
-            <div class="row form-group">
+            <div class="row no-right-margin form-group">
                 <?= MainPage::addLabel('show_marriage_place', 'Show marriage place'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <input type="checkbox" name="vars[show_marriage_place]" id="show_marriage_place" value="show_marriage_place" <?= $vars["show_marriage_place"] ? 'checked' : '' ?>>
                 </div>
             </div>
 
-            <div class="row form-group">
+            <div class="row no-right-margin form-group">
                 <?= MainPage::addLabel('dpi', 'DPI'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="row">
@@ -469,7 +469,7 @@ $xref = $individual->xref();
                 </div>
             </div>
 
-            <div class="row form-group">
+            <div class="row no-right-margin form-group">
                 <?= MainPage::addLabel('', 'Space'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="row">
@@ -486,7 +486,7 @@ $xref = $individual->xref();
                     </div>
                 </div>
             </div>
-            <div class="row form-group">
+            <div class="row no-right-margin form-group">
                 <?= MainPage::addLabel('', 'Font'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="row">
@@ -512,7 +512,7 @@ $xref = $individual->xref();
                     </div>
                 </div>
             </div>
-            <div class="row form-group">
+            <div class="row no-right-margin form-group">
                 <?= MainPage::addLabel('', 'Relationship arrows'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                         <div class="col-auto">
@@ -528,7 +528,7 @@ $xref = $individual->xref();
                         </div>
                 </div>
             </div>
-            <div class="row form-group">
+            <div class="row no-right-margin form-group">
                 <?= MainPage::addLabel('', 'Tile colors'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="col-auto">
@@ -569,7 +569,7 @@ $xref = $individual->xref();
                     </div>
                 </div>
             </div>
-            <div class="row form-group">
+            <div class="row no-right-margin form-group">
                 <?= MainPage::addLabel('', 'Other colours'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="col-auto">
@@ -586,7 +586,7 @@ $xref = $individual->xref();
         </div>
         <a href="#" id="appearance-advanced-button" onclick="toggleAdvanced(this, 'appearance-advanced')"><div class="wt-page-options-label advanced-settings-btn"><?= ($vars["show_adv_appear"] ? '↑ ' : '↓ ') . I18N::translate('Toggle advanced settings') . ($vars["show_adv_appear"] ? ' ↑' : ' ↓'); ?></div></a>
         <h3><?= I18N::translate('File settings') ?></h3>
-        <div class="row form-group">
+        <div class="row no-right-margin form-group">
             <?= MainPage::addLabel('output_type', 'Output file type'); ?>
             <div class="col-sm-8 wt-page-options-value">
                 <?= view('components/select', ['name' => 'vars[output_type]', 'id' => 'output_type', 'selected' => e($vars['output_type']), 'options' => $otypes]) ?>
@@ -594,7 +594,7 @@ $xref = $individual->xref();
             </div>
         </div>
         <div id="files-advanced" <?= $vars["show_adv_files"] ? '' : 'style="display:none"'; ?>>
-            <div class="row form-group">
+            <div class="row no-right-margin form-group">
                 <?= MainPage::addLabel('auto_update', 'Browser render'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <input type="checkbox" onclick="toggleUpdateButton()" name="vars[auto_update]" id="auto_update" value="auto_update" <?= $vars["auto_update"] ? 'checked' : '' ?>>
@@ -626,7 +626,7 @@ $xref = $individual->xref();
         <a href="#" id="files-advanced-button" onclick="toggleAdvanced(this, 'files-advanced')"><div class="wt-page-options-label advanced-settings-btn"><?= ($vars["show_adv_files"] ? '↑ ' : '↓ ') . I18N::translate('Toggle advanced settings') . ($vars["show_adv_files"] ? ' ↑' : ' ↓'); ?></div></a>
         <?php if ($vars["show_debug_panel"]) { ?>
         <h3><?= I18N::translate('Debug') ?></h3>
-        <div class="row form-group">
+        <div class="row no-right-margin form-group">
             <?= MainPage::addLabel('enable_debug_mode', 'Debug mode', FALSE); ?>
             <div class="col-sm-8 wt-page-options-value">
                 <label for="enable_debug_mode"><?= I18N::translate('Enable debug mode') ?></label>
@@ -661,10 +661,16 @@ $xref = $individual->xref();
 
 <div id="render-container">
     <div id="rendering" hidden style="background-color: <?= $vars["background_col"] ?>;"></div>
-    <a href="#" title="<?= I18N::translate('Fullscreen') ?>" onclick="toggleFullscreen()" class="fullscreen" id="fullscreenButton">⛶</a>
-    <a href="#" title="<?= I18N::translate('Exit fullscreen') ?>" onclick="toggleFullscreen()" class="fullscreen" id="fullscreenClose" style="display: none;">✖</a>
-    <a href="#" title="<?= I18N::translate('Search diagram') ?>" onclick="" class="search_icon" id="searchButton"><?= view('icons/search'); ?></a>
-    <div id="diagram_search_box_container" style="display: none"><?= view('components/select-individual', ['name' => 'diagram_search_box', 'id' => 'diagram_search_box', 'tree' => $tree, 'individual' => "", 'required'=>false]); ?></div>
+    <div id="render_button_container">
+        <div>
+            <a href="#" title="<?= I18N::translate('Fullscreen') ?>" onclick="toggleFullscreen()" class="fullscreen" id="fullscreenButton">⛶</a>
+            <a href="#" title="<?= I18N::translate('Exit fullscreen') ?>" onclick="toggleFullscreen()" class="fullscreen" id="fullscreenClose" style="display: none;">✖</a>
+        </div>
+        <div>
+            <a href="#" title="<?= I18N::translate('Search diagram') ?>" onclick="" class="search_icon" id="searchButton"><?= view('icons/search'); ?></a>
+            <div id="diagram_search_box_container" style="display: none"><?= view('components/select-individual', ['name' => 'diagram_search_box', 'id' => 'diagram_search_box', 'tree' => $tree, 'individual' => "", 'required'=>false]); ?></div>
+        </div>
+    </div>
 </div>
 
 <script type="text/javascript">
