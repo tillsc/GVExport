@@ -182,19 +182,21 @@ span.NAME {
     position: absolute;
 }
 
-.fullscreen, .search_icon {
+#render_button_container {
     position: absolute;
 }
-.fullscreen {
-    font-size: 2em;
+
+#render_button_container {
     top: 0;
     right: 10px;
+    text-align: center;
+}
+.fullscreen {
+    font-size: 32px;
 }
 
 .search_icon {
-    font-size: 1.9em;
-    top: 1.5em;
-    right: 6px;
+    font-size: 30px;
 }
 
 #diagram_search_box_container {
