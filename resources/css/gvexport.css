@@ -184,13 +184,11 @@ span.NAME {
 
 #render_button_container {
     position: absolute;
-}
-
-#render_button_container {
     top: 0;
     right: 10px;
     text-align: center;
 }
+
 .fullscreen {
     font-size: 32px;
 }
@@ -199,11 +197,17 @@ span.NAME {
     font-size: 30px;
 }
 
+#diagram_search_box {
+    margin: 0;
+}
+
 #diagram_search_box_container {
     position: absolute;
     top: 3em;
     right: 3em;
-    width: 350px;
+    max-width: 350px;
+    min-width: calc(min(90vw - 100px, 350px));
+    text-align: left;
 }
 
 /* The modal background */
