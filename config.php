@@ -66,6 +66,7 @@ return array(
 	'arrows_related' => '#222266', // Default colour for arrows from family record to child by birth
 	'arrows_not_related' => '#226622',	// Default colour for arrows from family records to child other than birth (adopted, etc)
 	'colour_arrow_related' => false, // If arrows should be coloured based on blood-relationship or not
+    'indi_tile_shape' => 0,
 	'male_col' => '#ADD8E6', // Default color of male individuals (light blue)
 	'female_col' => '#FFB6C1', // Default color of female individuals (light pink)
 	'other_gender_col' => '#FCEAA1', // Default color of Other gender individuals (light yellow)

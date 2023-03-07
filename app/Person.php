@@ -155,7 +155,8 @@ class Person
             if ($this->dot->settings["diagram_type"] == "combined") {
                 $out .= "<TABLE BORDER=\"0\" CELLBORDER=\"0\" CELLPADDING=\"2\" CELLSPACING=\"0\" BGCOLOR=\"" . $indibgcolor . "\" $href>";
             } else {
-                $out .= "<TABLE COLOR=\"" . $bordercolor . "\" BORDER=\"1\" CELLBORDER=\"0\" CELLPADDING=\"2\" CELLSPACING=\"0\" BGCOLOR=\"" . $indibgcolor . "\" $href>";
+                $style = ($this->dot->settings['indi_tile_shape'] == 10 ? 'STYLE="ROUNDED" ' : '');
+                $out .= "<TABLE " . $style . "COLOR=\"" . $bordercolor . "\" BORDER=\"1\" CELLBORDER=\"0\" CELLPADDING=\"2\" CELLSPACING=\"0\" BGCOLOR=\"" . $indibgcolor . "\" $href>";
             }
             $birthData = " $birthdate " . (empty($birthplace) ? "" : "($birthplace)");
             $deathData = " $death_date " . (empty($death_place) ? "" : "($death_place)");
