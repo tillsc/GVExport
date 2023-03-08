@@ -129,9 +129,8 @@ msgstr "Simple"
 
 #. Diagram type is now called "Separated" (previously "Decorated"). Simple option removed.  https://s3.eu-west-1.amazonaws.com/po-pub/i/lO1dVSZE4z0z2WQD3NI7TWPV.png
 #: 
-#, fuzzy
 msgid "Separated"
-msgstr "Decorated"
+msgstr "Separated"
 
 #: 
 msgid "Combined"
@@ -576,9 +575,8 @@ msgstr "There are two display options here:<ul><li>Left to right - The default o
 
 #. This help message is displayed when the user clicks the help icon next to "Diagram type". https://s3.eu-west-1.amazonaws.com/po-pub/i/dt2T4x9RshJsWKWZ7fQ4zFlu.png
 #: 
-#, fuzzy
 msgid "The options here are:<ul><li>Separated - Individuals each have their own tile, connected by arrows. Family records are separate and also connected by arrows.</li><li>Combined - Each couple is one box instead of one per person. Marriage records are connected under the couple. There are no family records if there are no marriage details to show.</li></ul></p><p>There was previously a third option \\\"Simple\\\", but this has been removed. The advanced settings in the appearance section now contain all the settings needed to recreate this. Loading a simple diagram should set the appropriate settings to recreate the same look."
-msgstr "The options here are:<ul><li>Simple - A box per person, coloured based on sex. No photos allowed.<li>Decorated - A more refined box, which also allows photos to be included.<li>Combined - Each couple is one box instead of one per person. Also allows photos.</ul>"
+msgstr "The options here are:<ul><li>Separated - Individuals each have their own tile, connected by arrows. Family records are separate and also connected by arrows.</li><li>Combined - Each couple is one box instead of one per person. Marriage records are connected under the couple. There are no family records if there are no marriage details to show.</li></ul></p><p>There was previously a third option \\\"Simple\\\", but this has been removed. The advanced settings in the appearance section now contain all the settings needed to recreate this. Loading a simple diagram should set the appropriate settings to recreate the same look."
 
 #. This help message is displayed when the user clicks the help icon next to "Output file type". https://s3.eu-west-1.amazonaws.com/po-pub/i/apq6Tgv91ZGJTGcUfFH3V1VE.png
 #: 
@@ -630,9 +628,8 @@ msgstr "This section has two related options.<h4>Mark not blood-related people w
 
 #. Help text shown when user clicks the "i" next to "Show photos" in the advanced appearance section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/Xpn8Y8LiWnYphmjJe9eJO6ub.png
 #: 
-#, fuzzy
 msgid "This section contains the option to display the photo from the individual's page in the tree.</p><p>The \"Photo shape\" option allows you to select a shape for the photos. Photos will be cropped to fit this shape.</p><p>The \"Photo size\" option allows you to adjust the scale of the photo. 100&percnt; is the default, and you can increase this to make the photos bigger, or decrease it to make them smaller."
-msgstr "This section contains the option to display the photo from the individual's page in the tree. This is only supported for Decorated and Combined diagram types.</p><p>The \"Photo shape\" option allows you to select a shape for the photos. Photos will be cropped to fit this shape.</p><p>The \"Photo size\" option allows you to adjust the scale of the photo. 100&percnt; is the default, and you can increase this to make the photos bigger, or decrease it to make them smaller."
+msgstr "This section contains the option to display the photo from the individual's page in the tree.</p><p>The \"Photo shape\" option allows you to select a shape for the photos. Photos will be cropped to fit this shape.</p><p>The \"Photo size\" option allows you to adjust the scale of the photo. 100&percnt; is the default, and you can increase this to make the photos bigger, or decrease it to make them smaller."
 
 #. Help text shown when user clicks "Add URL to individuals and families" option:  https://s3.eu-west-1.amazonaws.com/po-pub/i/QREJLhm9Besbu8r11RXghPYN.png
 #: 
@@ -701,9 +698,8 @@ msgstr "These options affect the distance between nodes on the diagram.</p><h4>B
 
 #. Help text shown when user clicks the "i" next to "Font":  https://s3.eu-west-1.amazonaws.com/po-pub/i/SMqr3gHBplFqJ4C0yRnFBpkp.png
 #: 
-#, fuzzy
 msgid "This section lets you configure the typeface and colour of text.</p><h4>Typeface</h4><p>This list lets you pick from a number of known websafe font typefaces. They must be installed on the system or a fallback typeface will be used. These options are known to be installed on almost all systems and that is why they have been chosen.</p><h4>Font size for names</h4><p>Set the font point size for the names of individuals.</p><h4>Font size for details</h4><p>This changes the font point size for all text except for names. For example, the date and place of marriage, and the date and place of birth and death.</p><h4>Font colour for names</h4><p>This changes the colour of the font for names. Note that the colour picker is provided by your browser, and is handled differently depending on which browser you are using.</p><h4>Font colour for details</h4><p>This changes the colour of the font of all text except for names, for example, the date and place of marriage, and the date and place of birth and death. Note that the colour picker is provided by your browser, and is handled differently depending on which browser you are using."
-msgstr "This section lets you configure the typeface and colour of text.</p><h4>Typeface</h4><p>This list lets you pick from a number of known websafe font typefaces. They must be installed on the system or a fallback typeface will be used. These options are known to be installed on almost all systems and that is why they have been chosen.</p><h4>Font size for names</h4><p>Set the font point size for the names of individuals. In Simple mode this is ignored as all text uses the details font size.</p><h4>Font size for details</h4><p>This changes the font point size for all text except for names. For example, the date and place of marriage, and the date and place of birth and death. In simple mode this is also used for the font size of names.</p><h4>Font colour for names</h4><p>This changes the colour of the font for names. In the simple mode, this sets the font for all text in an individual record's box. Note that the colour picker is provided by your browser, and is handled differently depending on which browser you are using.</p><h4>Font colour for details</h4><p>This changes the colour of the font of all text except for names, for example, the date and place of marriage, and the date and place of birth and death. In the simple mode, this sets the font for the details in the family record (marriage date and place) as the same font is used for the whole individual record (the font colour for names). Note that the colour picker is provided by your browser, and is handled differently depending on which browser you are using."
+msgstr "This section lets you configure the typeface and colour of text.</p><h4>Typeface</h4><p>This list lets you pick from a number of known websafe font typefaces. They must be installed on the system or a fallback typeface will be used. These options are known to be installed on almost all systems and that is why they have been chosen.</p><h4>Font size for names</h4><p>Set the font point size for the names of individuals.</p><h4>Font size for details</h4><p>This changes the font point size for all text except for names. For example, the date and place of marriage, and the date and place of birth and death.</p><h4>Font colour for names</h4><p>This changes the colour of the font for names. Note that the colour picker is provided by your browser, and is handled differently depending on which browser you are using.</p><h4>Font colour for details</h4><p>This changes the colour of the font of all text except for names, for example, the date and place of marriage, and the date and place of birth and death. Note that the colour picker is provided by your browser, and is handled differently depending on which browser you are using."
 
 #. Help text shown when user clicks the "i" next to "Relationship arrows":  https://s3.eu-west-1.amazonaws.com/po-pub/i/49vIt5p3NoEIm5t9CgmVtYt6.png
 #: 
@@ -1091,4 +1087,9 @@ msgstr "Don't display sex"
 #: 
 msgid "This section allows for some changes to the design of tiles. Currently, only the tiles of individuals are affected. There are two options.</p><h4>Individual tile shape</h4><p>This option lets you choose the shape for tiles for individuals. There are two options: <ul><li>Rectangle - The default option, the tile is a rectangle shape.</li><li>Rounded rectangle - The tile has rounded corners</li></ul></p><h4>Display sex of individuals</h4><p>This option lets you choose how the sex of an individual is conveyed. The options are:<ul><li>Coloured stripe - The tile will have a stripe of colour across the top, based on the sex of the individual.</li><li>Coloured border - The outline of the tile will be coloured based on the sex of the individual.</li><li>Text - Some text will be added to specify the sex of the individual. This is added below the name.</li><li>Don't display sex - None of the options will be used, the diagram will not convey the sex of individuals.</li></ul>"
 msgstr "This section allows for some changes to the design of tiles. Currently, only the tiles of individuals are affected. There are two options.</p><h4>Individual tile shape</h4><p>This option lets you choose the shape for tiles for individuals. There are two options: <ul><li>Rectangle - The default option, the tile is a rectangle shape.</li><li>Rounded rectangle - The tile has rounded corners</li></ul></p><h4>Display sex of individuals</h4><p>This option lets you choose how the sex of an individual is conveyed. The options are:<ul><li>Coloured stripe - The tile will have a stripe of colour across the top, based on the sex of the individual.</li><li>Coloured border - The outline of the tile will be coloured based on the sex of the individual.</li><li>Text - Some text will be added to specify the sex of the individual. This is added below the name.</li><li>Don't display sex - None of the options will be used, the diagram will not convey the sex of individuals.</li></ul>"
+
+#. Additional option for colouring based on sex - this is the same idea as selecting Simple diagram type, which will now be removed.  https://s3.eu-west-1.amazonaws.com/po-pub/i/unanqM7u3enenLfGiB1yZGzj.png
+#: 
+msgid "Background colour"
+msgstr "Background colour"
 
