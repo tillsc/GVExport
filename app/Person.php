@@ -90,11 +90,7 @@ class Person
             $name = " ";
         } else {
             $i = $this->dot->getUpdatedPerson($pid);
-            if ($this->dot->settings["diagram_type"] == "simple") {
-                $fill_color = $this->dot->settings['indi_background_col'];
-            } else {
-                $fill_color = $this->dot->getGenderColour($i->sex(), $related);        // Background color is set to specified
-            }
+            $fill_color = $this->dot->getGenderColour($i->sex(), $related);        // Background color is set to specified
             if ($this->dot->settings['indi_display_sex'] == Settings::OPTION_SEX_COLOURED_BORDER) {
                 $bordercolor = $this->dot->getGenderColour($i->sex(), $related);
             }
@@ -140,7 +136,7 @@ class Person
                         $name .= '<BR />' . $add_name;//@@ Meliza Amity
                 }
             }
-            if ($this->dot->settings['indi_display_sex'] == 20) {
+            if ($this->dot->settings['indi_display_sex'] == Settings::OPTION_SEX_TEXT) {
                 $sex = $this->getSexFull($i);
             } else {
                 $sex = '';
@@ -172,8 +168,15 @@ class Person
                 $death_place = Dot::convertToHTMLSC($death_place);
             }
             $href = $this->dot->settings["add_links"] ? "TARGET=\"_blank\" HREF=\"" . Dot::convertToHTMLSC($link) . "\"" : "";
+            // Get background colour
+            if ($this->dot->settings['indi_display_sex'] == Settings::OPTION_SEX_BACKGROUND) {
+                $indibgcolor = $this->dot->getGenderColour($i->sex(), $related);
+            } else if ($this->isStartingIndividual($pid) && $this->dot->settings['highlight_start_indis'] == "true" && !$this->valueInList($this->dot->settings['no_highlight_xref_list'], $pid)) {
+                $indibgcolor = $this->dot->settings["highlight_col"];
+            } else {
+                $indibgcolor = $this->dot->settings["indi_background_col"];
+            }
             // Draw table
-            $indibgcolor = $this->isStartingIndividual($pid) && $this->dot->settings['highlight_start_indis'] == "true" && !$this->valueInList($this->dot->settings['no_highlight_xref_list'], $pid) ? $this->dot->settings["highlight_col"] : $this->dot->settings["indi_background_col"];
             if ($this->dot->settings["diagram_type"] == "combined") {
                 $out .= "<TABLE BORDER=\"0\" CELLBORDER=\"0\" CELLPADDING=\"2\" CELLSPACING=\"0\" BGCOLOR=\"" . $indibgcolor . "\" $href>";
             } else {
