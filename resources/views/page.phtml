@@ -303,16 +303,14 @@ $xref = $individual->xref();
             <?= MainPage::addLabel('', 'Diagram type'); ?>
             <div class="col-sm-8 wt-page-options-value">
                 <div class="row">
+                    <?php // Simple diagram type no longer exists, but we need to handle it if we find the setting in loaded settings
+                        MainPage::handleSimpleSettings($vars['diagram_type']); ?>
                     <div class="col-auto">
-                        <input type="radio" onclick="togglePhotos(false)" name="vars[diagram_type]" id="diagtype_simple" value="simple" <?= $vars["diagram_type"] == "simple" ? 'checked' : '' ?>>
-                        <label for="diagtype_simple"><?= I18N::translate('Simple') ?></label>
-                    </div>
-                    <div class="col-auto">
-                        <input type="radio" onclick="togglePhotos(true)" name="vars[diagram_type]" id="diagtype_decorated" value="decorated" <?= $vars["diagram_type"] == "decorated" ? 'checked' : '' ?>>
+                        <input type="radio" name="vars[diagram_type]" id="diagtype_decorated" value="decorated" <?= $vars["diagram_type"] == "decorated" ? 'checked' : '' ?>>
                         <label for="diagtype_decorated"><?= I18N::translate('Decorated') ?></label>
                     </div>
                     <div class="col-auto">
-                        <input type="radio" onclick="togglePhotos(true)" name="vars[diagram_type]" id="diagtype_combined" value="combined" <?= $vars["diagram_type"] == "combined" ? 'checked' : '' ?>>
+                        <input type="radio" name="vars[diagram_type]" id="diagtype_combined" value="combined" <?= $vars["diagram_type"] == "combined" ? 'checked' : '' ?>>
                         <label for="diagtype_combined"><?= I18N::translate('Combined') ?></label>
                     </div>
                 </div>

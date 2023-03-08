@@ -26,13 +26,6 @@ function showSidebar() {
     document.querySelector(".sidebar").hidden = false;
 }
 
-// Enable or disable the option to add photos.
-// This is used when selecting diagram type, as only
-// some types support photos.
-function togglePhotos(enable) {
-    document.getElementById("show_photos").disabled = !enable;
-}
-
 // Add or remove the % sign from the text input
 function togglePercent(element, add) {
     // Clicked out of input field, add % sign
@@ -827,6 +820,11 @@ function pageLoaded() {
     setInterval(function () {removeSearchOptions()}, 100);
     // Listen for fullscreen change
     handleFullscreen();
+
+    if (document.getElementById("diagtype_simple") != null) {
+        handleSimpleDiagram();
+    }
+
     // Load browser render when page has loaded
     if (autoUpdate) updateRender();
     // Handle sidebar
@@ -954,9 +952,15 @@ function loadSettings(data) {
         if (el == null) {
             switch (key) {
                 case 'diagram_type':
-                    setCheckStatus(document.getElementById('diagtype_simple'), settings[key] === 'simple');
-                    setCheckStatus(document.getElementById('diagtype_decorated'), settings[key] === 'decorated');
-                    setCheckStatus(document.getElementById('diagtype_combined'), settings[key] === 'combined');
+                    if (settings[key] === 'simple') {
+                        setTimeout(() => {
+                            handleSimpleDiagram();
+                            if (autoUpdate) updateRender();
+                            },1);
+                    } else {
+                        setCheckStatus(document.getElementById('diagtype_decorated'), settings[key] === 'decorated');
+                        setCheckStatus(document.getElementById('diagtype_combined'), settings[key] === 'combined');
+                    }
                     break;
                 case 'birthdate_year_only':
                     setCheckStatus(document.getElementById('bd_type_y'), toBool(settings[key]));
@@ -1772,4 +1776,18 @@ function tidyTomSelect() {
             wrapper.className = "";
         })
     }
+}
+// Simple diagram option was removed, but if settings are loaded that use it, we need to handle it.
+// This function sets the display settings to mimic the simple diagram style
+function handleSimpleDiagram() {
+    // Disable photos - these weren't available in simple mode
+    document.getElementById("show_photos").checked = false;
+    // Set "details" font size to the same as the "Name" font size, as this is the only one used in simple mode
+    document.getElementById("font_size").value = document.getElementById("font_size_name").value;
+    // Set "details" font colour to the same as the "Name" font colour, as this is the only one used in simple mode
+    document.getElementById("font_colour_details").value = document.getElementById("font_colour_name").value;
+    // Set "Display sex of individual" to "Background colour", to match style in simple mode
+    document.getElementById("indi_display_sex").value = 30;
+    // Set "Display sex of individual" to "Background colour", to match style in simple mode
+    document.getElementById("diagtype_decorated").checked = true;
 }

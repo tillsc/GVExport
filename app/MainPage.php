@@ -45,4 +45,18 @@ class MainPage
         return '<label class="col-sm-4 col-form-label wt-page-options-label label-group" for="' . $for .'"><span class="label-text">' . I18N::translate($text) . "</span>" . ($help ? MainPage::addInfoButton($text) : "") . '</label>';
     }
 
+    /**
+     * Simple diagram option was removed, but if settings are loaded that use it, we need to handle it.
+     * In this case we sneak the setting back onto the page, and let the javascript handle it.
+     *
+     * @param $diagram_type
+     * @return void
+     */
+    public static function handleSimpleSettings($diagram_type)
+    {
+        if ($diagram_type == "simple") {
+            echo '<input type="radio" id="diagtype_simple" name="vars[diagram_type]" value="simple" checked>';
+        }
+    }
+
 }
