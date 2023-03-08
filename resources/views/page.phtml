@@ -529,6 +529,19 @@ $xref = $individual->xref();
                 </div>
             </div>
             <div class="row no-right-margin form-group">
+                <?= MainPage::addLabel('', 'Tile design'); ?>
+                <div class="col-sm-8 wt-page-options-value">
+                    <div class="col-auto">
+                        <label for="indi_tile_shape"><?= I18N::translate('Individual tile shape') ?>:</label>
+                        <?= view('components/select', ['name' => 'vars[indi_tile_shape]', 'id' => 'indi_tile_shape', 'selected' => e($vars['indi_tile_shape']), 'options' => MainPage::updateTranslations($settings["indi_tile_shape_options"])]) ?>
+                    </div>
+                    <div class="col-auto">
+                        <label for="indi_display_sex"><?= I18N::translate('Display sex of individual') ?>:</label>
+                        <?= view('components/select', ['name' => 'vars[indi_display_sex]', 'id' => 'indi_display_sex', 'selected' => e($vars['indi_display_sex']), 'options' => MainPage::updateTranslations($settings["indi_display_sex_options"])]) ?>
+                    </div>
+                </div>
+            </div>
+            <div class="row no-right-margin form-group">
                 <?= MainPage::addLabel('', 'Tile colors'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="col-auto">
