@@ -55,7 +55,13 @@ class Person
         } else {
             $related = TRUE;
         }
-        $out .= "<TD CELLPADDING=\"0\" PORT=\"" . $pid . "\">";
+        if ($this->dot->settings['indi_display_sex'] == Settings::OPTION_SEX_COLOURED_BORDER) {
+            $i = $this->dot->getUpdatedPerson($pid);
+            $borderColour = $this->dot->getGenderColour($i->sex(), $related);
+        } else {
+            $borderColour = $this->dot->settings["border_col"];
+        }
+        $out .= "<TD COLOR=\"" . $borderColour . "\"  BORDER=\"1\" CELLPADDING=\"0\" PORT=\"" . $pid . "\">";
         $out .= $this->printPersonLabel($pid, $related);
         $out .= "</TD>";
         return $out;
