@@ -18,7 +18,8 @@ class Settings
     public const OPTION_SEX_COLOURED_STRIPE = 0;
     public const OPTION_SEX_COLOURED_BORDER = 10;
     public const OPTION_SEX_TEXT = 20;
-    public const OPTION_SEX_NONE = 30;
+    public const OPTION_SEX_BACKGROUND = 30;
+    public const OPTION_SEX_NONE = 40;
     const TREE_PREFIX = "_t";
     const USER_PREFIX = "_u";
     private array $settings_json_cache = [];
@@ -39,7 +40,7 @@ class Settings
         $this->defaultSettings['use_abbr_names'] = [0 => "Full name", 10 => "Given and surnames", 20 => "Given names" , 30 => "First given name only", 40 => "Surnames", 50 => "Initials only", 60 => "Given name initials and surname", 70 => "Don't show names"];
         $this->defaultSettings['photo_shape_options'] = [0 => "No change", 10 => "Oval", 20 => "Circle" , 30 => "Square", 40 => "Rounded rectangle", 50 => "Rounded square"];
         $this->defaultSettings['indi_tile_shape_options'] = [0 => "Rectangle", 10 => "Rounded rectangle"];
-        $this->defaultSettings['indi_display_sex_options'] = [self::OPTION_SEX_COLOURED_STRIPE => "Coloured stripe", self::OPTION_SEX_COLOURED_BORDER => "Coloured border", self::OPTION_SEX_TEXT => "Text", self::OPTION_SEX_NONE => "Don't display sex"];
+        $this->defaultSettings['indi_display_sex_options'] = [self::OPTION_SEX_COLOURED_STRIPE => "Coloured stripe", self::OPTION_SEX_COLOURED_BORDER => "Coloured border", self::OPTION_SEX_TEXT => "Text", self::OPTION_SEX_BACKGROUND => "Background colour", self::OPTION_SEX_NONE => "Don't display sex"];
         $this->defaultSettings['countries'] = $this->getCountryAbbreviations();
         if (!$this->isGraphvizAvailable($this->defaultSettings['graphviz_bin'])) {
             $this->defaultSettings['graphviz_bin'] = "";

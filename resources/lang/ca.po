@@ -127,8 +127,10 @@ msgstr "Tipus de diagrama"
 msgid "Simple"
 msgstr "Senzill"
 
+#. Diagram type is now called "Separated" (previously "Decorated"). Simple option removed.  https://s3.eu-west-1.amazonaws.com/po-pub/i/lO1dVSZE4z0z2WQD3NI7TWPV.png
 #: 
-msgid "Decorated"
+#, fuzzy
+msgid "Separated"
 msgstr "Decorat"
 
 #: 
@@ -137,13 +139,8 @@ msgstr "Combinat"
 
 #. This is the name of the section that photo related settings can be changed: https://s3.eu-west-1.amazonaws.com/po-pub/i/fklNi5Hq6dbxZd3ktRneP8jW.png
 #: 
-#, fuzzy
 msgid "Photos"
 msgstr "Afegir fotos"
-
-#: 
-msgid "Only Decorated or Combined"
-msgstr "Sols decorat o combinat"
 
 #: 
 msgid "Output file type"
@@ -582,7 +579,8 @@ msgstr "Hi ha dues opcions de visualització ací:<ul><li>D'esquerra a dreta: l'
 
 #. This help message is displayed when the user clicks the help icon next to "Diagram type". https://s3.eu-west-1.amazonaws.com/po-pub/i/dt2T4x9RshJsWKWZ7fQ4zFlu.png
 #: 
-msgid "The options here are:<ul><li>Simple - A box per person, coloured based on sex. No photos allowed.<li>Decorated - A more refined box, which also allows photos to be included.<li>Combined - Each couple is one box instead of one per person. Also allows photos.</ul>"
+#, fuzzy
+msgid "The options here are:<ul><li>Separated - Individuals each have their own tile, connected by arrows. Family records are separate and also connected by arrows.</li><li>Combined - Each couple is one box instead of one per person. Marriage records are connected under the couple. There are no family records if there are no marriage details to show.</li></ul></p><p>There was previously a third option \\\"Simple\\\", but this has been removed. The advanced settings in the appearance section now contain all the settings needed to recreate this. Loading a simple diagram should set the appropriate settings to recreate the same look."
 msgstr "Les opcions ací són:<ul><li>Simple - Una caixa per persona, acolorida segons el sexe. No es permeten fotos.<li>Decorat - Una caixa més refinada, que també permet incloure fotos.<li>Combinat - Cada parella és una caixa en lloc d'una per persona. També permet fotos.</ul>"
 
 #. This help message is displayed when the user clicks the help icon next to "Output file type". https://s3.eu-west-1.amazonaws.com/po-pub/i/apq6Tgv91ZGJTGcUfFH3V1VE.png
@@ -639,7 +637,7 @@ msgstr "Aquesta secció té dues opcions relacionades.<h4>Marcar a les persones 
 #. Help text shown when user clicks the "i" next to "Show photos" in the advanced appearance section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/Xpn8Y8LiWnYphmjJe9eJO6ub.png
 #: 
 #, fuzzy
-msgid "This section contains the option to display the photo from the individual's page in the tree. This is only supported for Decorated and Combined diagram types.</p><p>The \"Photo shape\" option allows you to select a shape for the photos. Photos will be cropped to fit this shape.</p><p>The \"Photo size\" option allows you to adjust the scale of the photo. 100&percnt; is the default, and you can increase this to make the photos bigger, or decrease it to make them smaller."
+msgid "This section contains the option to display the photo from the individual's page in the tree.</p><p>The \"Photo shape\" option allows you to select a shape for the photos. Photos will be cropped to fit this shape.</p><p>The \"Photo size\" option allows you to adjust the scale of the photo. 100&percnt; is the default, and you can increase this to make the photos bigger, or decrease it to make them smaller."
 msgstr "Si es desitja mostrar la foto de la pàgina de l'individu en l'arbre. Això només s'admet per als tipus de diagrama decorats i combinats."
 
 #. Help text shown when user clicks "Add URL to individuals and families" option:  https://s3.eu-west-1.amazonaws.com/po-pub/i/QREJLhm9Besbu8r11RXghPYN.png
@@ -717,7 +715,8 @@ msgstr "Aquestes opcions afecten la distància entre nodes en el diagrama.</p><h
 
 #. Help text shown when user clicks the "i" next to "Font":  https://s3.eu-west-1.amazonaws.com/po-pub/i/SMqr3gHBplFqJ4C0yRnFBpkp.png
 #: 
-msgid "This section lets you configure the typeface and colour of text.</p><h4>Typeface</h4><p>This list lets you pick from a number of known websafe font typefaces. They must be installed on the system or a fallback typeface will be used. These options are known to be installed on almost all systems and that is why they have been chosen.</p><h4>Font size for names</h4><p>Set the font point size for the names of individuals. In Simple mode this is ignored as all text uses the details font size.</p><h4>Font size for details</h4><p>This changes the font point size for all text except for names. For example, the date and place of marriage, and the date and place of birth and death. In simple mode this is also used for the font size of names.</p><h4>Font colour for names</h4><p>This changes the colour of the font for names. In the simple mode, this sets the font for all text in an individual record's box. Note that the colour picker is provided by your browser, and is handled differently depending on which browser you are using.</p><h4>Font colour for details</h4><p>This changes the colour of the font of all text except for names, for example, the date and place of marriage, and the date and place of birth and death. In the simple mode, this sets the font for the details in the family record (marriage date and place) as the same font is used for the whole individual record (the font colour for names). Note that the colour picker is provided by your browser, and is handled differently depending on which browser you are using."
+#, fuzzy
+msgid "This section lets you configure the typeface and colour of text.</p><h4>Typeface</h4><p>This list lets you pick from a number of known websafe font typefaces. They must be installed on the system or a fallback typeface will be used. These options are known to be installed on almost all systems and that is why they have been chosen.</p><h4>Font size for names</h4><p>Set the font point size for the names of individuals.</p><h4>Font size for details</h4><p>This changes the font point size for all text except for names. For example, the date and place of marriage, and the date and place of birth and death.</p><h4>Font colour for names</h4><p>This changes the colour of the font for names. Note that the colour picker is provided by your browser, and is handled differently depending on which browser you are using.</p><h4>Font colour for details</h4><p>This changes the colour of the font of all text except for names, for example, the date and place of marriage, and the date and place of birth and death. Note that the colour picker is provided by your browser, and is handled differently depending on which browser you are using."
 msgstr "Aquesta secció li permet configurar la lletra tipogràfica i el color del text.</p><h4>Tipografia</h4><p>Aquesta llista li permet triar entre una sèrie de lletres tipogràfiques de fonts segures per a la web conegudes. Han d'instal·lar-se en el sistema o s'utilitzarà una família tipogràfica alternativa. Se sap que aquestes opcions estan instal·lades en quasi tots els sistemes i és per això que s'han triat.</p><h4>\n"
 "Grandària de la font per als noms</h4><p>Establisca la grandària del punt de la font per als noms de les persones. En la manera simple, això s'omet perquè tot el text fa servir la grandària de la font de detalls.</p><h4>Grandària de la font per als detalls</h4><p>Això canvia la grandària del punt de la font per a tot el text excepte per als noms. Per exemple, la data i el lloc del matrimoni, i la data i el lloc de naixement i mort. En la manera simple, això també s'usa per a la grandària de la font dels noms.</p><h4>Color de la font per als noms</h4><p>Això canvia el color de la font per als noms. En la manera simple, estableix la font per a tot el text en el quadre d'un registre individual. Tinga en compte que el selector de color és proporcionat pel seu navegador i es maneja de manera diferent segons el navegador que estiga utilitzant.</p><h4>\n"
 "Color de la font per a més detalls</h4><p>Això canvia el color de la font de tot el text excepte els noms, per exemple, la data i el lloc del matrimoni, i la data i el lloc de naixement i mort. En la manera simple, això estableix la font per als detalls en el registre familiar (data i lloc de matrimoni), ja que la mateixa font s'usa per a tot el registre individual (el color de font per als noms). Tinga en compte que el selector de color és proporcionat pel seu navegador i es maneja de manera diferent segons el navegador que estiga fent servir."
@@ -1005,8 +1004,7 @@ msgstr "Omissió"
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/vzqSdDBFSfjBF2bkTbkT1G8Z.png
 #: 
 msgid "Add to list"
-msgstr "\n"
-"Afegir a la llista"
+msgstr "Afegir a la llista"
 
 #. Help text for option for what to do with XREF provided by webtrees via URL:  https://s3.eu-west-1.amazonaws.com/po-pub/i/PF663q9RtqlHI4hKopBs8KEa.png
 #: 
@@ -1064,4 +1062,54 @@ msgstr "Forma de foto"
 #: 
 msgid "Photo size"
 msgstr "Mida de la foto"
+
+#. Tooltip for icon of search button that is used for searching the diagram:  https://s3.eu-west-1.amazonaws.com/po-pub/i/W9UjPX7uP7V9TvL0mRAow0ev.png
+#: 
+msgid "Search diagram"
+msgstr "Diagrama de cerca"
+
+#. Name of a new section allowing you to change some parts of the design of a tile, currently whether an individual tile is a rounded rectangle, and how sex of the individual is conveyed (coloured stripe, coloured border, written as text, or not displayed):  https://s3.eu-west-1.amazonaws.com/po-pub/i/RkX8ulBdesvP93Q43VXjka0f.png
+#: 
+msgid "Tile design"
+msgstr "Disseny de plafons"
+
+#. A setting that lets you choose if the tiles of individuals are rectangle or rounded rectangle (possibly other options at a later date):  https://s3.eu-west-1.amazonaws.com/po-pub/i/RkX8ulBdesvP93Q43VXjka0f.png
+#: 
+msgid "Individual tile shape"
+msgstr "Forma de `lafó individual"
+
+#. An option letting the user choose how sex of individuals are conveyed (coloured stripe, coloured border, written as text, or not displayed):  https://s3.eu-west-1.amazonaws.com/po-pub/i/RkX8ulBdesvP93Q43VXjka0f.png
+#: 
+msgid "Display sex of individual"
+msgstr "Mostra el sexe d'un individu"
+
+#. One of the options for the individual tile shapes. This option specifies a tile will be a rectangle (default):  https://s3.eu-west-1.amazonaws.com/po-pub/i/RkX8ulBdesvP93Q43VXjka0f.png
+#: 
+msgid "Rectangle"
+msgstr "Rectangle"
+
+#. One of the options for how the sex of an individual is conveyed. This is a stripe of colour across the top of the box, currently the default:  https://s3.eu-west-1.amazonaws.com/po-pub/i/coer7wEpXQxPG7szEFPxGA7J.png
+#: 
+msgid "Coloured stripe"
+msgstr "Ratlla de colors"
+
+#. One of the options for how the sex of an individual is conveyed. This is a border that is the colour of the sex (e.g. pink for female, blue for male, etc):  https://s3.eu-west-1.amazonaws.com/po-pub/i/coer7wEpXQxPG7szEFPxGA7J.png
+#: 
+msgid "Coloured border"
+msgstr "Vora de colors"
+
+#. One of the options for how the sex of an individual is conveyed. This is a text option, where it simply says "Male", "Female", "Other", or "Unknown":  https://s3.eu-west-1.amazonaws.com/po-pub/i/coer7wEpXQxPG7szEFPxGA7J.png
+#: 
+msgid "Text"
+msgstr "SMS"
+
+#. One of the options for how the sex of an individual is conveyed. This option does not convey the sex (i.e. all of the other options are disabled):  https://s3.eu-west-1.amazonaws.com/po-pub/i/coer7wEpXQxPG7szEFPxGA7J.png
+#: 
+msgid "Don't display sex"
+msgstr "No mostris sexe"
+
+#. The help text for the new "Tile design" section. https://s3.eu-west-1.amazonaws.com/po-pub/i/RkX8ulBdesvP93Q43VXjka0f.png https://s3.eu-west-1.amazonaws.com/po-pub/i/oV9m8srNfFDTHqbS4HaD53qW.png
+#: 
+msgid "This section allows for some changes to the design of tiles. Currently, only the tiles of individuals are affected. There are two options.</p><h4>Individual tile shape</h4><p>This option lets you choose the shape for tiles for individuals. There are two options: <ul><li>Rectangle - The default option, the tile is a rectangle shape.</li><li>Rounded rectangle - The tile has rounded corners</li></ul></p><h4>Display sex of individuals</h4><p>This option lets you choose how the sex of an individual is conveyed. The options are:<ul><li>Coloured stripe - The tile will have a stripe of colour across the top, based on the sex of the individual.</li><li>Coloured border - The outline of the tile will be coloured based on the sex of the individual.</li><li>Text - Some text will be added to specify the sex of the individual. This is added below the name.</li><li>Don't display sex - None of the options will be used, the diagram will not convey the sex of individuals.</li></ul>"
+msgstr "Aquesta secció permet alguns canvis en el disseny dels plafons. Actualment, només es veuen afectades lels plafons dels particulars. Hi ha dues opcions.</p><h4>Formulari de plafó individual</h4><p>Aquesta opció us permet triar la forma per a plafons per a particulars. Hi ha dues opcions: <ul><li>Rectangle - L'opció per defecte, el plafó és una forma de rectangle.</li><li> Rectangle arrodonit - El plafó té cantonades arrodonides</li></ul></p><h4>Diu sexual dels individus</h4><p>Aquesta opció us permet triar com es transmet el sexe d'un individu. Les opcions són:<ul><li> Ratllada daurada - El plafó tindrà una franja de color a la part superior, en funció del sexe de l'individu.</li><li>La vora acolorida - El contorn del plafó s'acolorirà en funció del sexe de l'individu.</li><li>Text - S'afegirà algun text per especificar el sexe de l'individu. Això s'afegeix a sota del nom.</li><li>No es mostra sexe - No s'utilitzarà cap de les opcions, el diagrama no transmetrà el sexe dels individus.</li></ul>"
 

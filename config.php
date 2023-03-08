@@ -15,7 +15,7 @@ return array(
 	'output_type' => 'svg', // Default output file type
 	'graph_dir' => 'LR', // Direction of graph. 'LR' for Left-to-right, 'TB' for Top-to-bottom
 	'mclimit' => '1', // Graphviz MCLIMIT setting - number of times to regenerate graph for reduced crossings
-	'diagram_type' => 'decorated', // Default diagram type setting. 'simple', 'decorated', or 'combined'
+	'diagram_type' => 'decorated', // Default diagram type setting. 'decorated', or 'combined'
 	'show_photos' => true, // Whether to include photos in diagram
     'photo_shape' => 0, // Default photo shape option
     'photo_size' => "100%", // Default size of photos
@@ -67,7 +67,7 @@ return array(
 	'arrows_not_related' => '#226622',	// Default colour for arrows from family records to child other than birth (adopted, etc)
 	'colour_arrow_related' => false, // If arrows should be coloured based on blood-relationship or not
     'indi_tile_shape' => 0, // Shape of the individual tiles, rectangle (0) or rounded rectangle (10)
-    'indi_display_sex' => 0, // How to show sex of individual - Stripe (0), Border (10), Text (20), or Don't display sex (30)
+    'indi_display_sex' => 0, // How to show sex of individual - Stripe (0), Border (10), Text (20), Background colour (30) or Don't display sex (40)
 	'male_col' => '#ADD8E6', // Default color of male individuals (light blue)
 	'female_col' => '#FFB6C1', // Default color of female individuals (light pink)
 	'other_gender_col' => '#FCEAA1', // Default color of Other gender individuals (light yellow)
@@ -78,7 +78,7 @@ return array(
 	'unkn_gender_unrel_col' => '#D6EED6', // Default color of not blood-related unknown gender individuals
 	'family_col' => '#FFFFEE', // Default color of families (different light yellow)
 	'background_col' => '#EEEEEE', // Background of diagram (light grey)
-	'indi_background_col' => '#FEFEFE', // Background of individual tile (except simple mode)
+	'indi_background_col' => '#FEFEFE', // Background of individual tile
 	'highlight_start_indis' => false, // Whether to use a different colour for starting individuals
     'no_highlight_xref_list' => '', // XREFs in this list are not highlighted
 	'highlight_col' => '#FFFDC3', // Background of starting individuals

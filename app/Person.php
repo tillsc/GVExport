@@ -24,18 +24,9 @@ class Person
     {
         $out = "";
         $out .= Dot::convertID($this->attributes['pid']); // Convert the ID, so linked GEDCOMs are displayed properly
-        $out .= " [ ";
-
-        if ($this->dot->settings["diagram_type"] == "simple") {
-            // Simple output
-            $out .= $this->printPersonLabel($this->attributes['pid'], $this->attributes['rel']);
-        } else {
-            // HTML style output
-            $out .= "label=<";
-            $out .= $this->printPersonLabel($this->attributes['pid'], $this->attributes['rel']);
-            $out .= ">";
-        }
-
+        $out .= " [ label=<";
+        $out .= $this->printPersonLabel($this->attributes['pid'], $this->attributes['rel']);
+        $out .= ">";
         $out .= "];\n";
 
         return $out;
@@ -90,11 +81,7 @@ class Person
             $name = " ";
         } else {
             $i = $this->dot->getUpdatedPerson($pid);
-            if ($this->dot->settings["diagram_type"] == "simple") {
-                $fill_color = $this->dot->settings['indi_background_col'];
-            } else {
-                $fill_color = $this->dot->getGenderColour($i->sex(), $related);        // Background color is set to specified
-            }
+            $fill_color = $this->dot->getGenderColour($i->sex(), $related);        // Background color is set to specified
             if ($this->dot->settings['indi_display_sex'] == Settings::OPTION_SEX_COLOURED_BORDER) {
                 $bordercolor = $this->dot->getGenderColour($i->sex(), $related);
             }
@@ -134,13 +121,10 @@ class Person
                 $altNameArray = $names[$i->getSecondaryName()];
                 $add_name = $this->getFormattedName($altNameArray, "");
                 if (!empty($add_name) && trim($add_name) !== "" && $this->dot->settings["use_abbr_name"] < 50) {
-                    if ($this->dot->settings["diagram_type"] == "simple")
-                        $name .= '\n' . $add_name;//@@ Meliza Amity
-                    else
-                        $name .= '<BR />' . $add_name;//@@ Meliza Amity
+                    $name .= '<BR />' . $add_name;//@@ Meliza Amity
                 }
             }
-            if ($this->dot->settings['indi_display_sex'] == 20) {
+            if ($this->dot->settings['indi_display_sex'] == Settings::OPTION_SEX_TEXT) {
                 $sex = $this->getSexFull($i);
             } else {
                 $sex = '';
@@ -149,104 +133,93 @@ class Person
 
 
         // --- Printing the INDI details ---
-        if ($this->dot->settings["diagram_type"] == "simple") {
-            $style = ($this->dot->settings['indi_tile_shape'] == 10 ? 'shape=box, style="rounded,filled", ' : '');
-            if ($this->dot->settings["add_links"]) {
-                $out .= "$style color=\"" . $bordercolor . "\", fillcolor=\"" . $fill_color . "\", fontcolor=\"" . $this->dot->settings["font_colour_name"] . "\", target=\"_blank\", href=\"" . Dot::convertToHTMLSC($link) . "\" label="; #ESL!!! 20090213 without convertToHTMLSC the dot file has invalid data
-            } else {
-                $out .= "$style color=\"" . $bordercolor . "\", fillcolor=\"" . $fill_color . "\", fontcolor=\"" . $this->dot->settings["font_colour_name"] . "\", label=";
+        // Convert birth & death place to get rid of characters which mess up the HTML output
+        $birthplace = Dot::convertToHTMLSC($birthplace);
+        if ($isdead) {
+            $death_place = Dot::convertToHTMLSC($death_place);
+        }
+        $href = $this->dot->settings["add_links"] ? "TARGET=\"_blank\" HREF=\"" . Dot::convertToHTMLSC($link) . "\"" : "";
+        // Get background colour
+        if ($this->dot->settings['indi_display_sex'] == Settings::OPTION_SEX_BACKGROUND) {
+            $indibgcolor = $this->dot->getGenderColour($i->sex(), $related);
+        } else if ($this->isStartingIndividual($pid) && $this->dot->settings['highlight_start_indis'] == "true" && !$this->valueInList($this->dot->settings['no_highlight_xref_list'], $pid)) {
+            $indibgcolor = $this->dot->settings["highlight_col"];
+        } else {
+            $indibgcolor = $this->dot->settings["indi_background_col"];
+        }
+        // Draw table
+        if ($this->dot->settings["diagram_type"] == "combined") {
+            $out .= "<TABLE BORDER=\"0\" CELLBORDER=\"0\" CELLPADDING=\"2\" CELLSPACING=\"0\" BGCOLOR=\"" . $indibgcolor . "\" $href>";
+        } else {
+            $style = ($this->dot->settings['indi_tile_shape'] == 10 ? 'STYLE="ROUNDED" ' : '');
+            $out .= "<TABLE " . $style . "COLOR=\"" . $bordercolor . "\" BORDER=\"1\" CELLBORDER=\"0\" CELLPADDING=\"2\" CELLSPACING=\"0\" BGCOLOR=\"" . $indibgcolor . "\" $href>";
+        }
+        $birthData = " $birthdate " . (empty($birthplace) ? "" : "($birthplace)");
+        $deathData = " $death_date " . (empty($death_place) ? "" : "($death_place)");
+
+        $detailsExist = trim($name . $birthData . $deathData . $sex) != "";
+
+        if (!$detailsExist && !$this->dot->settings["show_photos"]) {
+            // No information in our tiles so make coloured boxes
+            $size = "WIDTH=\"" . ($this->dot->settings["font_size"] * 3) . "\" HEIGHT=\"" . ($this->dot->settings["font_size"] * 3) . "\"";
+        } else {
+            $size = ""; // Let it sort out size itself
+        }
+
+        if ($this->dot->settings['indi_display_sex'] == Settings::OPTION_SEX_COLOURED_STRIPE) {
+            // Top line of table (colour only)
+            $out .= "<TR><TD COLSPAN=\"2\" CELLPADDING=\"2\" BGCOLOR=\"$fill_color\" PORT=\"nam\" $size></TD></TR>";
+        }
+
+        // Second row (photo, name, birth & death data)
+        if ($detailsExist || $this->dot->settings["show_photos"]) {
+            $out .= "<TR>";
+            // Show photo
+            if ($this->dot->settings["show_photos"]) {
+                if (isset($this->dot->individuals[$pid]["pic"]) && !empty($this->dot->individuals[$pid]["pic"])) {
+                    $photo_size = floatval($this->dot->settings["photo_size"]) / 100;
+                    $out .= "<TD ROWSPAN=\"2\" CELLPADDING=\"1\" PORT=\"pic\" WIDTH=\"" . ($this->dot->settings["font_size"] * 4 * $photo_size)  . "\" HEIGHT=\"" . ($this->dot->settings["font_size"] * 4 * $photo_size) . "\" FIXEDSIZE=\"true\" ALIGN=\"CENTER\"><IMG SCALE=\"true\" SRC=\"" . $this->dot->individuals[$pid]["pic"] . "\" /></TD>";
+                } else {
+                    // Blank cell zero width to keep the height right
+                    $out .= "<TD ROWSPAN=\"2\" CELLPADDING=\"1\" PORT=\"pic\" WIDTH=\"" . ($detailsExist ? "0" : ($this->dot->settings["font_size"] * 3.5)) . "\" HEIGHT=\"" . ($this->dot->settings["font_size"] * 4) . "\" FIXEDSIZE=\"true\"></TD>";
+                }
             }
-            $out .= '"';
-            $out .= str_replace('"', '\"', $name) . '\n' . $this->dot->settings["birth_prefix"] . $birthdate . " " . (empty($birthplace) ? '' : '(' . $birthplace . ')') . '\l';
-            if ($isdead) {
-                $out .= $this->dot->settings["death_prefix"] . $death_date . " " . (empty($death_place) ? '' : '(' . $death_place . ')');
+            if ($detailsExist) {
+                $out .= "<TD ALIGN=\"LEFT\" BALIGN=\"LEFT\"  TARGET=\"_BLANK\" CELLPADDING=\"4\" PORT=\"dat\">";
+            }
+            // Show name
+            if (trim($name) != "") {
+                $out .= "<FONT COLOR=\"" . $this->dot->settings["font_colour_name"] . "\" POINT-SIZE=\"" . ($this->dot->settings["font_size_name"]) . "\">" . $name . "</FONT>";
+                if (trim($birthData . $deathData . $sex) != "") {
+                    $out .= "<BR />";
+                }
+            }
+            // Show sex
+            if (trim($sex) != "") {
+                $out .= "<FONT COLOR=\"" . $this->dot->settings["font_colour_details"] . "\" POINT-SIZE=\"" . ($this->dot->settings["font_size"]) . "\">" . $sex . "</FONT>";
+                if (trim($birthData . $deathData) != "") {
+                    $out .= "<BR />";
+                }
+            }
+            if (trim($birthData) != "") {
+                $out .= "<FONT COLOR=\"" . $this->dot->settings["font_colour_details"] . "\" POINT-SIZE=\"" . ($this->dot->settings["font_size"]) . "\">" . $this->dot->settings["birth_prefix"] . $birthData . "</FONT>";
+                if (trim($deathData) != "") {
+                    $out .= "<BR />";
+                }
+            }
+            if ($isdead && trim($deathData) !== "") {
+                $out .= "<FONT COLOR=\"" . $this->dot->settings["font_colour_details"] . "\" POINT-SIZE=\"" . ($this->dot->settings["font_size"]) . "\">" . $this->dot->settings["death_prefix"] . $deathData . "</FONT>";
             } else {
                 $out .= " ";
             }
-            $out .= '\l';
-            $out .= '"';
-        } else {
-            // Convert birth & death place to get rid of characters which mess up the HTML output
-            $birthplace = Dot::convertToHTMLSC($birthplace);
-            if ($isdead) {
-                $death_place = Dot::convertToHTMLSC($death_place);
-            }
-            $href = $this->dot->settings["add_links"] ? "TARGET=\"_blank\" HREF=\"" . Dot::convertToHTMLSC($link) . "\"" : "";
-            // Draw table
-            $indibgcolor = $this->isStartingIndividual($pid) && $this->dot->settings['highlight_start_indis'] == "true" && !$this->valueInList($this->dot->settings['no_highlight_xref_list'], $pid) ? $this->dot->settings["highlight_col"] : $this->dot->settings["indi_background_col"];
-            if ($this->dot->settings["diagram_type"] == "combined") {
-                $out .= "<TABLE BORDER=\"0\" CELLBORDER=\"0\" CELLPADDING=\"2\" CELLSPACING=\"0\" BGCOLOR=\"" . $indibgcolor . "\" $href>";
-            } else {
-                $style = ($this->dot->settings['indi_tile_shape'] == 10 ? 'STYLE="ROUNDED" ' : '');
-                $out .= "<TABLE " . $style . "COLOR=\"" . $bordercolor . "\" BORDER=\"1\" CELLBORDER=\"0\" CELLPADDING=\"2\" CELLSPACING=\"0\" BGCOLOR=\"" . $indibgcolor . "\" $href>";
-            }
-            $birthData = " $birthdate " . (empty($birthplace) ? "" : "($birthplace)");
-            $deathData = " $death_date " . (empty($death_place) ? "" : "($death_place)");
 
-            $detailsExist = trim($name . $birthData . $deathData . $sex) != "";
-
-            if (!$detailsExist && !$this->dot->settings["show_photos"]) {
-                // No information in our tiles so make coloured boxes
-                $size = "WIDTH=\"" . ($this->dot->settings["font_size"] * 3) . "\" HEIGHT=\"" . ($this->dot->settings["font_size"] * 3) . "\"";
-            } else {
-                $size = ""; // Let it sort out size itself
+            if ($detailsExist) {
+                $out .= "</TD>";
             }
-
-            if ($this->dot->settings['indi_display_sex'] == Settings::OPTION_SEX_COLOURED_STRIPE) {
-                // Top line of table (colour only)
-                $out .= "<TR><TD COLSPAN=\"2\" CELLPADDING=\"2\" BGCOLOR=\"$fill_color\" PORT=\"nam\" $size></TD></TR>";
-            }
-
-            // Second row (photo, name, birth & death data)
-            if ($detailsExist || $this->dot->settings["show_photos"]) {
-                $out .= "<TR>";
-                // Show photo
-                if ($this->dot->settings["show_photos"]) {
-                    if (isset($this->dot->individuals[$pid]["pic"]) && !empty($this->dot->individuals[$pid]["pic"])) {
-                        $photo_size = floatval($this->dot->settings["photo_size"]) / 100;
-                        $out .= "<TD ROWSPAN=\"2\" CELLPADDING=\"1\" PORT=\"pic\" WIDTH=\"" . ($this->dot->settings["font_size"] * 4 * $photo_size)  . "\" HEIGHT=\"" . ($this->dot->settings["font_size"] * 4 * $photo_size) . "\" FIXEDSIZE=\"true\" ALIGN=\"CENTER\"><IMG SCALE=\"true\" SRC=\"" . $this->dot->individuals[$pid]["pic"] . "\" /></TD>";
-                    } else {
-                        // Blank cell zero width to keep the height right
-                        $out .= "<TD ROWSPAN=\"2\" CELLPADDING=\"1\" PORT=\"pic\" WIDTH=\"" . ($detailsExist ? "0" : ($this->dot->settings["font_size"] * 3.5)) . "\" HEIGHT=\"" . ($this->dot->settings["font_size"] * 4) . "\" FIXEDSIZE=\"true\"></TD>";
-                    }
-                }
-                if ($detailsExist) {
-                    $out .= "<TD ALIGN=\"LEFT\" BALIGN=\"LEFT\"  TARGET=\"_BLANK\" CELLPADDING=\"4\" PORT=\"dat\">";
-                }
-                // Show name
-                if (trim($name) != "") {
-                    $out .= "<FONT COLOR=\"" . $this->dot->settings["font_colour_name"] . "\" POINT-SIZE=\"" . ($this->dot->settings["font_size_name"]) . "\">" . $name . "</FONT>";
-                    if (trim($birthData . $deathData . $sex) != "") {
-                        $out .= "<BR />";
-                    }
-                }
-                // Show sex
-                if (trim($sex) != "") {
-                    $out .= "<FONT COLOR=\"" . $this->dot->settings["font_colour_details"] . "\" POINT-SIZE=\"" . ($this->dot->settings["font_size"]) . "\">" . $sex . "</FONT>";
-                    if (trim($birthData . $deathData) != "") {
-                        $out .= "<BR />";
-                    }
-                }
-                if (trim($birthData) != "") {
-                    $out .= "<FONT COLOR=\"" . $this->dot->settings["font_colour_details"] . "\" POINT-SIZE=\"" . ($this->dot->settings["font_size"]) . "\">" . $this->dot->settings["birth_prefix"] . $birthData . "</FONT>";
-                    if (trim($deathData) != "") {
-                        $out .= "<BR />";
-                    }
-                }
-                if ($isdead && trim($deathData) !== "") {
-                    $out .= "<FONT COLOR=\"" . $this->dot->settings["font_colour_details"] . "\" POINT-SIZE=\"" . ($this->dot->settings["font_size"]) . "\">" . $this->dot->settings["death_prefix"] . $deathData . "</FONT>";
-                } else {
-                    $out .= " ";
-                }
-
-                if ($detailsExist) {
-                    $out .= "</TD>";
-                }
-                $out .= "</TR>";
-            }
-            // Close table
-            $out .= "</TABLE>";
+            $out .= "</TR>";
         }
+        // Close table
+        $out .= "</TABLE>";
 
         return $out;
     }
@@ -268,23 +241,21 @@ class Person
         $name = str_replace(array("@N.N.", "@P.N."), "...", $name);
         // Show nickname in quotes
         $name = str_replace(array('<q class="wt-nickname">', '</q>'), array('"', '"'), $name);
-        if ($this->dot->settings["diagram_type"] != "simple") {
-            // Show preferred name as underlined by replacing span with underline tags
-            $pos_start = strpos($name, '<span class="starredname">');
-            while ($pos_start != false) {
-                // Start by replacing the </span>
-                $pos_end = strpos(substr($name, $pos_start), "</span>") + $pos_start;
-                if ($pos_end) {
-                    $name = substr_replace($name, "_/U_", $pos_end, strlen("</span>"));
-                }
-
-                // Next do the starting tags
-                $pos_start = strpos($name, '<span class="starredname">');
-                if ($pos_start !== false) {
-                    $name = substr_replace($name, "_U_", $pos_start, strlen('<span class="starredname">'));
-                }
-                $pos_start = strpos($name, '<span class="starredname">');
+        // Show preferred name as underlined by replacing span with underline tags
+        $pos_start = strpos($name, '<span class="starredname">');
+        while ($pos_start != false) {
+            // Start by replacing the </span>
+            $pos_end = strpos(substr($name, $pos_start), "</span>") + $pos_start;
+            if ($pos_end) {
+                $name = substr_replace($name, "_/U_", $pos_end, strlen("</span>"));
             }
+
+            // Next do the starting tags
+            $pos_start = strpos($name, '<span class="starredname">');
+            if ($pos_start !== false) {
+                $name = substr_replace($name, "_U_", $pos_start, strlen('<span class="starredname">'));
+            }
+            $pos_start = strpos($name, '<span class="starredname">');
         }
         $name = strip_tags($name);
 

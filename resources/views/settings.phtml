@@ -165,10 +165,6 @@ $settings = $settingsObj->getDefaultSettings();
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="row">
                         <div class="col-auto">
-                            <input type="radio" name="vars[diagram_type]" id="diagtype_simple" value="simple" <?= $vars["diagram_type"] == "simple" ? 'checked' : '' ?>>
-                            <label for="diagtype_simple"><?= I18N::translate('Simple') ?></label>
-                        </div>
-                        <div class="col-auto">
                             <input type="radio" name="vars[diagram_type]" id="diagtype_decorated" value="decorated" <?= $vars["diagram_type"] == "decorated" ? 'checked' : '' ?>>
                             <label for="diagtype_decorated"><?= I18N::translate('Decorated') ?></label>
                         </div>
@@ -185,7 +181,6 @@ $settings = $settingsObj->getDefaultSettings();
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="col-auto">
                         <input type="checkbox" name="vars[show_photos]" id="show_photos" value="show_photos" <?= $vars["show_photos"] ? 'checked' : '' ?>>
-                        <span class="text-muted">(<?= I18N::translate('Only Decorated or Combined') ?>)</span>
                     </div>
                     <div class="col-auto">
                         <label for="photo_shape"><?= I18N::translate('Photo shape') ?>:</label>
