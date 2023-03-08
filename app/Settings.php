@@ -383,6 +383,8 @@ class Settings
             case 'stop_proc':
             case 'compress_cookie':
             case 'photo_shape_options':
+            case 'indi_tile_shape_options':
+            case 'indi_display_sex_options':
                 return false;
             case 'show_debug_panel':
             case 'filename':
