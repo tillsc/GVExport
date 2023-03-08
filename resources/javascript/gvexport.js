@@ -823,6 +823,7 @@ function pageLoaded() {
 
     if (document.getElementById("diagtype_simple") != null) {
         handleSimpleDiagram();
+        document.getElementById("diagtype_simple").remove();
     }
 
     // Load browser render when page has loaded
