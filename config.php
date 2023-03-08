@@ -15,7 +15,7 @@ return array(
 	'output_type' => 'svg', // Default output file type
 	'graph_dir' => 'LR', // Direction of graph. 'LR' for Left-to-right, 'TB' for Top-to-bottom
 	'mclimit' => '1', // Graphviz MCLIMIT setting - number of times to regenerate graph for reduced crossings
-	'diagram_type' => 'decorated', // Default diagram type setting. 'simple', 'decorated', or 'combined'
+	'diagram_type' => 'decorated', // Default diagram type setting. 'decorated', or 'combined'
 	'show_photos' => true, // Whether to include photos in diagram
     'photo_shape' => 0, // Default photo shape option
     'photo_size' => "100%", // Default size of photos
@@ -78,7 +78,7 @@ return array(
 	'unkn_gender_unrel_col' => '#D6EED6', // Default color of not blood-related unknown gender individuals
 	'family_col' => '#FFFFEE', // Default color of families (different light yellow)
 	'background_col' => '#EEEEEE', // Background of diagram (light grey)
-	'indi_background_col' => '#FEFEFE', // Background of individual tile (except simple mode)
+	'indi_background_col' => '#FEFEFE', // Background of individual tile
 	'highlight_start_indis' => false, // Whether to use a different colour for starting individuals
     'no_highlight_xref_list' => '', // XREFs in this list are not highlighted
 	'highlight_col' => '#FFFDC3', // Background of starting individuals

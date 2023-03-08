@@ -474,11 +474,7 @@ class Dot {
 		$out .= "pagedir=\"LT\"\n";
 		$out .= "bgcolor=\"" . $this->settings['background_col'] . "\"\n";
 		$out .= "edge [ style=solid, arrowhead=normal arrowtail=none];\n";
-		if ($this->settings["diagram_type"] == "simple") {
-			$out .= "node [ shape=box, style=filled font_size=\"" . $this->settings['font_size'] ."\" fontname=\"" . $this->settings["typeface"] ."\"];\n";
-		} else {
-			$out .= "node [ shape=plaintext font_size=\"" . $this->settings['font_size'] ."\" fontname=\"" . $this->settings["typefaces"][$this->settings["typeface"]] . ", " . $this->settings["typeface_fallback"][$this->settings["typeface"]] .", " . $this->settings["typefaces"][$this->settings["default_typeface"]] . ", Sans\"];\n";
-		}
+        $out .= "node [ shape=plaintext font_size=\"" . $this->settings['font_size'] ."\" fontname=\"" . $this->settings["typefaces"][$this->settings["typeface"]] . ", " . $this->settings["typeface_fallback"][$this->settings["typeface"]] .", " . $this->settings["typefaces"][$this->settings["default_typeface"]] . ", Sans\"];\n";
 		return $out;
 	}
 
