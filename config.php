@@ -66,7 +66,8 @@ return array(
 	'arrows_related' => '#222266', // Default colour for arrows from family record to child by birth
 	'arrows_not_related' => '#226622',	// Default colour for arrows from family records to child other than birth (adopted, etc)
 	'colour_arrow_related' => false, // If arrows should be coloured based on blood-relationship or not
-    'indi_tile_shape' => 0,
+    'indi_tile_shape' => 0, // Shape of the individual tiles, rectangle (0) or rounded rectangle (10)
+    'indi_display_sex' => 0, // How to show sex of individual - Stripe (0), Border (10), Text (20), or Don't display sex (30)
 	'male_col' => '#ADD8E6', // Default color of male individuals (light blue)
 	'female_col' => '#FFB6C1', // Default color of female individuals (light pink)
 	'other_gender_col' => '#FCEAA1', // Default color of Other gender individuals (light yellow)

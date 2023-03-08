@@ -2,6 +2,8 @@
 
 namespace vendor\WebtreesModules\gvexport;
 
+use Fisharebest\Webtrees\I18N;
+
 class Person
 {
 
@@ -82,7 +84,14 @@ class Person
             $name = " ";
         } else {
             $i = $this->dot->getUpdatedPerson($pid);
-            $fill_color = $this->dot->getGenderColour($i->sex(), $related);        // Background color is set to specified
+            if ($this->dot->settings["diagram_type"] == "simple") {
+                $fill_color = $this->dot->settings['indi_background_col'];
+            } else {
+                $fill_color = $this->dot->getGenderColour($i->sex(), $related);        // Background color is set to specified
+            }
+            if ($this->dot->settings['indi_display_sex'] == Settings::OPTION_SEX_COLOURED_BORDER) {
+                $bordercolor = $this->dot->getGenderColour($i->sex(), $related);
+            }
             $isdead = $i->isDead();
             $link = $i->url();
 
@@ -125,14 +134,21 @@ class Person
                         $name .= '<BR />' . $add_name;//@@ Meliza Amity
                 }
             }
+            if ($this->dot->settings['indi_display_sex'] == 20) {
+                $sex = $this->getSexFull($i);
+            } else {
+                $sex = '';
+            }
         }
+
 
         // --- Printing the INDI details ---
         if ($this->dot->settings["diagram_type"] == "simple") {
+            $style = ($this->dot->settings['indi_tile_shape'] == 10 ? 'shape=box, style="rounded,filled", ' : '');
             if ($this->dot->settings["add_links"]) {
-                $out .= "color=\"" . $bordercolor . "\", fillcolor=\"" . $fill_color . "\", fontcolor=\"" . $this->dot->settings["font_colour_name"] . "\", target=\"_blank\", href=\"" . Dot::convertToHTMLSC($link) . "\" label="; #ESL!!! 20090213 without convertToHTMLSC the dot file has invalid data
+                $out .= "$style color=\"" . $bordercolor . "\", fillcolor=\"" . $fill_color . "\", fontcolor=\"" . $this->dot->settings["font_colour_name"] . "\", target=\"_blank\", href=\"" . Dot::convertToHTMLSC($link) . "\" label="; #ESL!!! 20090213 without convertToHTMLSC the dot file has invalid data
             } else {
-                $out .= "color=\"" . $bordercolor . "\", fillcolor=\"" . $fill_color . "\", fontcolor=\"" . $this->dot->settings["font_colour_name"] . "\", label=";
+                $out .= "$style color=\"" . $bordercolor . "\", fillcolor=\"" . $fill_color . "\", fontcolor=\"" . $this->dot->settings["font_colour_name"] . "\", label=";
             }
             $out .= '"';
             $out .= str_replace('"', '\"', $name) . '\n' . $this->dot->settings["birth_prefix"] . $birthdate . " " . (empty($birthplace) ? '' : '(' . $birthplace . ')') . '\l';
@@ -161,7 +177,7 @@ class Person
             $birthData = " $birthdate " . (empty($birthplace) ? "" : "($birthplace)");
             $deathData = " $death_date " . (empty($death_place) ? "" : "($death_place)");
 
-            $detailsExist = trim($name . $birthData . $deathData) != "";
+            $detailsExist = trim($name . $birthData . $deathData . $sex) != "";
 
             if (!$detailsExist && !$this->dot->settings["show_photos"]) {
                 // No information in our tiles so make coloured boxes
@@ -169,8 +185,11 @@ class Person
             } else {
                 $size = ""; // Let it sort out size itself
             }
-            // Top line (colour only)
-            $out .= "<TR><TD COLSPAN=\"2\" CELLPADDING=\"2\" BGCOLOR=\"$fill_color\" PORT=\"nam\" $size></TD></TR>";
+
+            if ($this->dot->settings['indi_display_sex'] == Settings::OPTION_SEX_COLOURED_STRIPE) {
+                // Top line of table (colour only)
+                $out .= "<TR><TD COLSPAN=\"2\" CELLPADDING=\"2\" BGCOLOR=\"$fill_color\" PORT=\"nam\" $size></TD></TR>";
+            }
 
             // Second row (photo, name, birth & death data)
             if ($detailsExist || $this->dot->settings["show_photos"]) {
@@ -191,6 +210,13 @@ class Person
                 // Show name
                 if (trim($name) != "") {
                     $out .= "<FONT COLOR=\"" . $this->dot->settings["font_colour_name"] . "\" POINT-SIZE=\"" . ($this->dot->settings["font_size_name"]) . "\">" . $name . "</FONT>";
+                    if (trim($birthData . $deathData . $sex) != "") {
+                        $out .= "<BR />";
+                    }
+                }
+                // Show sex
+                if (trim($sex) != "") {
+                    $out .= "<FONT COLOR=\"" . $this->dot->settings["font_colour_details"] . "\" POINT-SIZE=\"" . ($this->dot->settings["font_size"]) . "\">" . $sex . "</FONT>";
                     if (trim($birthData . $deathData) != "") {
                         $out .= "<BR />";
                     }
@@ -346,5 +372,27 @@ class Person
     {
         $list = explode(',', $list);
         return in_array($value, $list);
+    }
+
+    /**
+     * Given an individual, return the sex of the individual in full
+     *
+     * @param \Fisharebest\Webtrees\Individual|null $i
+     * @return string
+     */
+    private function getSexFull(?\Fisharebest\Webtrees\Individual $i): string
+    {
+        switch ($i->sex()) {
+            case "F":
+                return I18N::translate("Female");
+            case "M":
+                return I18N::translate("Male");
+            case "X":
+                return I18N::translate("Other");
+            case "U":
+                return I18N::translate("Unknown");
+            default:
+                return "";
+        }
     }
 }
