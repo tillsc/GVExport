@@ -66,10 +66,6 @@ $xref = $individual->xref();
 <?= $usegraphviz ? "" : "<script src=\"" . $module->assetUrl('javascript/jspdf.umd.min.js') . "\"></script>"; ?>
 <script type="text/javascript">
     const cartempty = <?= $cartempty ? "true" : "false" ?>;
-    const CLIENT_ERRORS = [
-        "<?= I18N::translate('Your browser does not support exporting images this large. Please reduce number of records, reduce DPI setting, or use SVG option.') ?>",
-        "<?= I18N::translate('Unable to load setting') ?>",
-        "<?= I18N::translate('Invalid JSON'); ?>"];
     const TRANSLATE = {
         "Delete":"<?= I18N::translate('Delete'); ?>",
         "Download":"<?= I18N::translate('Download'); ?>",
@@ -88,7 +84,11 @@ $xref = $individual->xref();
         "Cancel":"<?= I18N::translate("Cancel"); ?>",
         "Overwrite":"<?= I18N::translate("Overwrite"); ?>",
         "Individual not found":"<?= I18N::translate('Individual not found') ?>",
-        "Rendered in browser as server doesn't support photo shapes":"<?= I18N::translate("Rendered in browser as server doesn't support photo shapes"); ?>"
+        "Rendered in browser as server doesn't support photo shapes":"<?= I18N::translate("Rendered in browser as server doesn't support photo shapes"); ?>",
+        "Message history":"<?= I18N::translate("Message history"); ?>",
+        "Your browser does not support exporting images this large. Please reduce number of records, reduce DPI setting, or use SVG option.":"<?= I18N::translate('Your browser does not support exporting images this large. Please reduce number of records, reduce DPI setting, or use SVG option.') ?>",
+        "Unable to load setting":"<?= I18N::translate('Unable to load setting') ?>",
+        "Invalid JSON":"<?= I18N::translate('Invalid JSON'); ?>"
     }
     let autoUpdate = <?= $vars["auto_update"] ? 'true' : 'false' ?>;
     let debug_string = "";
@@ -596,7 +596,7 @@ $xref = $individual->xref();
             </div>
         </div>
         <a href="#" id="appearance-advanced-button" onclick="toggleAdvanced(this, 'appearance-advanced')"><div class="wt-page-options-label advanced-settings-btn"><?= ($vars["show_adv_appear"] ? '↑ ' : '↓ ') . I18N::translate('Toggle advanced settings') . ($vars["show_adv_appear"] ? ' ↑' : ' ↓'); ?></div></a>
-        <h3><?= I18N::translate('File settings') ?></h3>
+        <h3><?= I18N::translate('General settings') ?></h3>
         <div class="row no-right-margin form-group">
             <?= MainPage::addLabel('output_type', 'Output file type'); ?>
             <div class="col-sm-8 wt-page-options-value">
@@ -631,6 +631,10 @@ $xref = $individual->xref();
                 <div class="col-sm-8 wt-page-options-value">
                     <label for="load_settings"><?= I18N::translate('Load settings from file') ?></label><br>
                     <input id="load_settings" type="file" onchange="uploadSettingsFile(this)">
+                </div>
+                <?= MainPage::addLabel('message_history', 'Message history'); ?>
+                <div class="col-sm-8 wt-page-options-value">
+                    <button class="btn btn-outline-secondary" type="button" name="message_history" onclick="return showHelp('message_history');"><?= I18N::translate('View message history') ?></button>
                 </div>
             </div>
         </div>

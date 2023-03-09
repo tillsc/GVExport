@@ -15,6 +15,7 @@ const REQUEST_TYPE_ADD_TREE_FAVORITE = "add_tree_favorite";
 let treeName = null;
 let loggedIn = null;
 let xrefList = [];
+let messageHistory = [];
 
 function hideSidebar() {
     document.querySelector(".sidebar").hidden = true;
@@ -175,11 +176,16 @@ function showToast(message) {
             message = message.substring(ERROR_CHAR.length);
         }
         toast.innerText = message;
+        let msg = [];
+        msg[0] = new Date();
+        msg[1] = message;
+        messageHistory.push(msg);
         setTimeout(function () {
             toast.remove();
         }, 5500);
         toastParent.appendChild(toast);
         toast.setAttribute("style", " margin-left: -"+toast.clientWidth/2 + "px; width:" + toast.clientWidth + "px");
+        toast.setAttribute("onclick", "return showHelp('message_history');");
         toast.className += " show";
     }
 }
@@ -237,7 +243,7 @@ function downloadSVGAsImage(type) {
         // Download it
         const dataURL = canvas.toDataURL('image/'+type);
         if (dataURL.length < 10) {
-            showToast(ERROR_CHAR+CLIENT_ERRORS[0]); // Canvas too big
+            showToast(ERROR_CHAR+TRANSLATE['Your browser does not support exporting images this large. Please reduce number of records, reduce DPI setting, or use SVG option.']);
         } else if (type === "pdf") {
             createPdfFromImage(dataURL, img.width, img.height);
         } else {
@@ -890,7 +896,15 @@ function showModal(content) {
 // Function to show a help message
 // item - the help item identifier
 function showHelp(item) {
-    let helpText = getHelpText(item);
+    let helpText = '';
+    if (item === 'message_history') {
+        messageHistory.forEach((msg) => {
+           helpText = '<div class="settings_list_item">' + msg[0].toLocaleString() + ": " + msg[1] + '</div>' + helpText; // most recent first
+        });
+        helpText = '<h3>' + TRANSLATE['Message history']+ '</h3>' + helpText;
+    } else {
+        helpText = getHelpText(item);
+    }
     let content = "<p>" + helpText + "</p>";
     showModal(content);
     return false;
@@ -993,7 +1007,7 @@ function loadSettings(data) {
                 case 'token':
                     break;
                 default:
-                    showToast(ERROR_CHAR + CLIENT_ERRORS[1] + " " + key); // Unable to load setting
+                    showToast(ERROR_CHAR + TRANSLATE['Unable to load setting'] + " " + key);
             }
         } else {
             if (el.type === 'checkbox' || el.type === 'radio') {
@@ -1146,7 +1160,7 @@ function loadSettingsDetails() {
         try {
             settingsList = JSON.parse(settings);
         } catch (e) {
-            return CLIENT_ERRORS['2'] + e;
+            return TRANSLATE['Invalid JSON'] + e;
         }
         const listElement = document.getElementById('settings_list');
         const simpleSettingsListEl = document.getElementById('simple_settings_list');
