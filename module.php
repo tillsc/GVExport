@@ -40,7 +40,6 @@ spl_autoload_register(function ($class) {
     }
 });
 
-use Cassandra\Set;
 use Fisharebest\Webtrees\Auth;
 use Fisharebest\Webtrees\Contracts\UserInterface;
 use Fisharebest\Webtrees\Registry;
@@ -209,8 +208,6 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
         $otypes = $this->getOTypes($userDefaultVars);
 
         return $this->viewResponse($this->name() . '::page', [
-            'gvexport_css'  => route('module', ['module' => $this->name(), 'action' => 'Css']),
-            'gvexport_js'  => route('module', ['module' => $this->name(), 'action' => 'JS']),
             'tree'          => $tree,
             'individual'    => $individual,
             'title'         => 'GVExport',
@@ -219,22 +216,6 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
             'cartempty'     => !functionsClippingsCart::isIndividualInCart($tree),
             'module'        => $this
         ]);
-    }
-
-    /**
-     * Where are the CCS specifications for this module stored?
-     *
-     * @return ResponseInterface
-     *
-     * @throws \JsonException
-     */
-    public function getCssAction() : ResponseInterface
-    {
-        return response(
-            file_get_contents($this->resourcesFolder() . 'css' . DIRECTORY_SEPARATOR . 'gvexport.css'),
-            200,
-            ['content-type' => 'text/css']
-        );
     }
 
     /**
@@ -290,8 +271,6 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
         }
 
         $response['title'] = $this->title();
-        $response['gvexport_css']  = route('module', ['module' => $this->name(), 'action' => 'Css']);
-        $response['gvexport_js']  = route('module', ['module' => $this->name(), 'action' => 'JS']);
 
         return $this->viewResponse($this->name() . '::' . 'settings', $response);
     }
