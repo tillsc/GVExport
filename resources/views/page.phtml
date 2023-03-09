@@ -88,7 +88,8 @@ $xref = $individual->xref();
         "Cancel":"<?= I18N::translate("Cancel"); ?>",
         "Overwrite":"<?= I18N::translate("Overwrite"); ?>",
         "Individual not found":"<?= I18N::translate('Individual not found') ?>",
-        "Rendered in browser as server doesn't support photo shapes":"<?= I18N::translate("Rendered in browser as server doesn't support photo shapes"); ?>"
+        "Rendered in browser as server doesn't support photo shapes":"<?= I18N::translate("Rendered in browser as server doesn't support photo shapes"); ?>",
+        "Message history":"<?= I18N::translate("Message history"); ?>"
     }
     let autoUpdate = <?= $vars["auto_update"] ? 'true' : 'false' ?>;
     let debug_string = "";
@@ -596,7 +597,7 @@ $xref = $individual->xref();
             </div>
         </div>
         <a href="#" id="appearance-advanced-button" onclick="toggleAdvanced(this, 'appearance-advanced')"><div class="wt-page-options-label advanced-settings-btn"><?= ($vars["show_adv_appear"] ? '↑ ' : '↓ ') . I18N::translate('Toggle advanced settings') . ($vars["show_adv_appear"] ? ' ↑' : ' ↓'); ?></div></a>
-        <h3><?= I18N::translate('File settings') ?></h3>
+        <h3><?= I18N::translate('General settings') ?></h3>
         <div class="row no-right-margin form-group">
             <?= MainPage::addLabel('output_type', 'Output file type'); ?>
             <div class="col-sm-8 wt-page-options-value">
@@ -631,6 +632,10 @@ $xref = $individual->xref();
                 <div class="col-sm-8 wt-page-options-value">
                     <label for="load_settings"><?= I18N::translate('Load settings from file') ?></label><br>
                     <input id="load_settings" type="file" onchange="uploadSettingsFile(this)">
+                </div>
+                <?= MainPage::addLabel('message_history', 'Message history'); ?>
+                <div class="col-sm-8 wt-page-options-value">
+                    <button class="btn btn-outline-secondary" type="button" name="message_history" onclick="return showHelp('message_history');"><?= I18N::translate('View message history') ?></button>
                 </div>
             </div>
         </div>
