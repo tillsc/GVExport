@@ -332,48 +332,10 @@ function setStateFastRelationCheck() {
     document.getElementById("faster_relation_check").disabled = ((!cartempty && document.getElementById("usecart_yes").checked) || !document.getElementById("mark_not_related").checked);
 }
 
-function removeURLParameter(parameter) {
-    updateURLParameter(parameter, "", "remove");
-}
 
-function changeURLXref(xref) {
-    if (xref !== "") {
-        updateURLParameter("xref",xref,"update");
-    }
-}
-function updateURLParameter(parameter, value, action) {
-    let split = document.location.href.split("?");
-    let url = split[0];
-    if (split.length > 1) {
-        let args = split[1];
-        let params = new URLSearchParams(args);
-        if (params.toString().search(parameter) !== -1) {
-            if (action === "remove") {
-                params.delete(parameter);
-            } else if (action === "update") {
-                params.set(parameter, value);
-            } else {
-                return params.get(parameter);
-            }
-        }
-        history.pushState(null, '', url + "?" + params.toString());
-    } else if (action === "update") {
-        history.pushState(null, '', url + "?" +  parameter + "=" + value);
-    }
-    return "";
-}
 
-function getURLParameter(parameter) {
-    let result = updateURLParameter(parameter, "", "get");
-    if (result !== null && result !== '') {
-        return result.replace("#','");
-    } else {
-        return null;
-    }
-}
-
-function loadURLXref() {
-    const xref = getURLParameter("xref");
+function loadURLXref(Url) {
+    const xref = new Url().getURLParameter("xref");
     if (xref !== null) {
         const el = document.getElementById('xref_list');
         if (el.value.replace(',', "").trim() === "") {
@@ -398,7 +360,7 @@ function indiSelectChanged() {
     let xref = document.getElementById('pid').value.trim();
     if (xref !== "") {
         addIndiToList(xref);
-        changeURLXref(xref);
+        new Url().changeURLXref(xref);
         if (autoUpdate) {
             updateRender();
         }
@@ -552,7 +514,7 @@ function removeItem(e, element, xrefListId) {
         list.value = list.value.substring(0, list.value.length-1);
     }
     element.remove();
-    changeURLXref(list.value.split(',')[0].trim());
+    new Url().changeURLXref(list.value.split(',')[0].trim());
     updateClearAll();
     removeFromXrefList(xref, 'no_highlight_xref_list');
     toggleHighlightStartPersons(document.getElementById('highlight_start_indis').checked);
@@ -812,16 +774,16 @@ function removeSettingsEllipsisMenu(menuElement) {
 }
 
 // This function is run when the page is loaded
-function pageLoaded() {
+function pageLoaded(Url) {
     TOMSELECT_URL = document.getElementById('pid').getAttribute("data-url") + "&query=";
-    loadURLXref();
-    loadUrlToken();
+    loadURLXref(Url);
+    loadUrlToken(Url);
     loadXrefList(TOMSELECT_URL, 'xref_list', 'indi_list');
     loadXrefList(TOMSELECT_URL, 'stop_xref_list', 'stop_indi_list');
     loadSettingsDetails();
     // Remove reset parameter from URL when page loaded, to prevent
     // further resets when page reloaded
-    removeURLParameter("reset");
+    new Url().removeURLParameter("reset");
     // Remove options from selection list if already selected
     setInterval(function () {removeSearchOptions()}, 100);
     // Listen for fullscreen change
@@ -1454,8 +1416,8 @@ function addUrlToTreeFavourites(e) {
     });
 }
 
-function loadUrlToken() {
-    const token = getURLParameter("t");
+function loadUrlToken(Url) {
+    const token = new Url().getURLParameter("t");
     if (token !== null) {
         let request = {
             "type": REQUEST_TYPE_LOAD_SETTINGS_TOKEN,

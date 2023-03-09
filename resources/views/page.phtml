@@ -29,17 +29,20 @@ $usegraphviz = $vars['graphviz_bin'] != "";
 ?>
 
 <script type="text/javascript">
-    function runPageLoaded() {
+    function runPageLoaded(Url) {
         if (typeof pageLoaded === 'function' && typeof jQuery === 'function') {
-            changeURLXref('<?= e($individual->xref()); ?>');
-            pageLoaded();
+            new Url().changeURLXref('<?= e($individual->xref()); ?>');
+            pageLoaded(Url);
         } else {
             // If external script loads before inline script, then wait
             // before trying to run page loaded function.
             setTimeout(runPageLoaded, 100);
         }
     }
-    runPageLoaded();
+    import('<?= $module->assetUrl('javascript/MainPage/Url.js'); ?>').then((module)=>{
+        const Url = module.Url;
+        runPageLoaded(Url);
+    })
 </script>
 <script src="<?= $module->assetUrl('javascript/viz.js'); ?>"></script>
 <script src="<?= $module->assetUrl('javascript/panzoom.min.js'); ?>"></script>
