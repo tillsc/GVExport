@@ -7,7 +7,7 @@ use Fisharebest\Webtrees\Auth;
 use Fisharebest\Webtrees\Services\GedcomImportService;
 use Fisharebest\Webtrees\Services\TreeService;
 
-class settingsLink
+class SettingsLink
 {
     const TOKEN_PREFIX = "&t=";
     const TOKEN_LENGTH = 10;

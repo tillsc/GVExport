@@ -229,7 +229,7 @@ class Settings
                 $new_json = json_encode($all_settings);
                 $module->setPreference(self::PREFERENCE_PREFIX . self::TREE_PREFIX . $tree->id() . self::USER_PREFIX . Auth::user()->id(), $new_json);
                 $this->deleteSettingsId($module, $tree, $id);
-                $settingsLink = new settingsLink($module, $tree, $this, $id);
+                $settingsLink = new SettingsLink($module, $tree, $this, $id);
                 if (!$settingsLink->removeTokenRecord()) {
                     throw new HttpBadRequestException(I18N::translate('Invalid') . " - E1");
                 }
@@ -439,7 +439,7 @@ class Settings
     public function getSettingsLink($module, $tree, $id): array
     {
         if ($this->doSettingsExist($module, $tree)) {
-            $link = new settingsLink($module, $tree, $this, $id);
+            $link = new SettingsLink($module, $tree, $this, $id);
             try {
                 $response['url'] = $link->getUrl();
                 $response['success'] = true;
@@ -461,7 +461,7 @@ class Settings
      */
     public function loadSettingsToken($module, $tree, $token): array
     {
-        $link = new settingsLink($module, $tree, $this);
+        $link = new SettingsLink($module, $tree, $this);
         try {
             $settings = $link->loadToken($token, $this);
         } catch (\Exception $e) {
@@ -577,7 +577,7 @@ class Settings
 
     public function revokeSettingsToken($module, $tree, $token): bool
     {
-        $settingsLink = new settingsLink($module, $tree, $this);
+        $settingsLink = new SettingsLink($module, $tree, $this);
         return $settingsLink->revokeToken($token);
     }
 
