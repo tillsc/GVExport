@@ -243,7 +243,7 @@ function downloadSVGAsImage(type) {
         // Download it
         const dataURL = canvas.toDataURL('image/'+type);
         if (dataURL.length < 10) {
-            showToast(ERROR_CHAR+CLIENT_ERRORS[0]); // Canvas too big
+            showToast(ERROR_CHAR+TRANSLATE['Your browser does not support exporting images this large. Please reduce number of records, reduce DPI setting, or use SVG option.']);
         } else if (type === "pdf") {
             createPdfFromImage(dataURL, img.width, img.height);
         } else {
@@ -1007,7 +1007,7 @@ function loadSettings(data) {
                 case 'token':
                     break;
                 default:
-                    showToast(ERROR_CHAR + CLIENT_ERRORS[1] + " " + key); // Unable to load setting
+                    showToast(ERROR_CHAR + TRANSLATE['Unable to load setting'] + " " + key);
             }
         } else {
             if (el.type === 'checkbox' || el.type === 'radio') {
@@ -1160,7 +1160,7 @@ function loadSettingsDetails() {
         try {
             settingsList = JSON.parse(settings);
         } catch (e) {
-            return CLIENT_ERRORS['2'] + e;
+            return TRANSLATE['Invalid JSON'] + e;
         }
         const listElement = document.getElementById('settings_list');
         const simpleSettingsListEl = document.getElementById('simple_settings_list');

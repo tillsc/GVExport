@@ -66,10 +66,6 @@ $xref = $individual->xref();
 <?= $usegraphviz ? "" : "<script src=\"" . $module->assetUrl('javascript/jspdf.umd.min.js') . "\"></script>"; ?>
 <script type="text/javascript">
     const cartempty = <?= $cartempty ? "true" : "false" ?>;
-    const CLIENT_ERRORS = [
-        "<?= I18N::translate('Your browser does not support exporting images this large. Please reduce number of records, reduce DPI setting, or use SVG option.') ?>",
-        "<?= I18N::translate('Unable to load setting') ?>",
-        "<?= I18N::translate('Invalid JSON'); ?>"];
     const TRANSLATE = {
         "Delete":"<?= I18N::translate('Delete'); ?>",
         "Download":"<?= I18N::translate('Download'); ?>",
@@ -89,7 +85,10 @@ $xref = $individual->xref();
         "Overwrite":"<?= I18N::translate("Overwrite"); ?>",
         "Individual not found":"<?= I18N::translate('Individual not found') ?>",
         "Rendered in browser as server doesn't support photo shapes":"<?= I18N::translate("Rendered in browser as server doesn't support photo shapes"); ?>",
-        "Message history":"<?= I18N::translate("Message history"); ?>"
+        "Message history":"<?= I18N::translate("Message history"); ?>",
+        "Your browser does not support exporting images this large. Please reduce number of records, reduce DPI setting, or use SVG option.":"<?= I18N::translate('Your browser does not support exporting images this large. Please reduce number of records, reduce DPI setting, or use SVG option.') ?>",
+        "Unable to load setting":"<?= I18N::translate('Unable to load setting') ?>",
+        "Invalid JSON":"<?= I18N::translate('Invalid JSON'); ?>"
     }
     let autoUpdate = <?= $vars["auto_update"] ? 'true' : 'false' ?>;
     let debug_string = "";
