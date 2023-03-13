@@ -141,7 +141,10 @@ class FormSubmission
             $settings['use_abbr_name'] = I18N::digits($vars['use_abbr_name']);
         }
 
-        $settings['use_cart'] = isset($vars['use_cart']);
+        if (isset($vars['use_cart'])) {
+            $settings['use_cart'] = ($vars['use_cart'] !== "ignorecart");
+        }
+
         if (isset($vars['show_adv_people'])) {
             $settings['show_adv_people'] = ($vars['show_adv_people'] == "show");
         }
