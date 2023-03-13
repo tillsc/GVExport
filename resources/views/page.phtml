@@ -36,7 +36,7 @@ $usegraphviz = $vars['graphviz_bin'] != "";
         } else {
             // If external script loads before inline script, then wait
             // before trying to run page loaded function.
-            setTimeout(runPageLoaded, 100);
+            setTimeout(()=>{runPageLoaded(Url)}, 100);
         }
     }
     import('<?= $module->assetUrl('javascript/MainPage/Url.js'); ?>').then((module)=>{
