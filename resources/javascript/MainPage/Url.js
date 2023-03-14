@@ -34,7 +34,11 @@ export class Url {
      * @returns {string}
      */
     updateURLParameter(parameter, value, action) {
-        let split = document.location.href.split("?");
+        let href = document.location.href;
+        if (href.indexOf('#') !== -1) {
+            href = href.split('#')[0];
+        }
+        let split = href.split("?");
         let url = split[0];
         if (split.length > 1) {
             let args = split[1];

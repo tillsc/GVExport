@@ -88,7 +88,7 @@ $usegraphviz = $vars['graphviz_bin'] != "";
 
 <form action="<?= $module->chartUrl($individual) ?>" method="post" class="wt-page-options sidebar d-print-none" id="gvexport">
     <div class="pull-right btn-hover">
-        <a href="#" class="hide-form btn btn-secondary">X</a>
+        <a class="hide-form btn btn-secondary pointer">X</a>
     </div>
 
     <div class="sidebar__formfields col">
@@ -159,7 +159,7 @@ $usegraphviz = $vars['graphviz_bin'] != "";
                 <div id="indi_list">
 
                 </div>
-                <div id="clear_list"><a href="#" onclick="clearIndiList()"><?= I18N::translate('Clear all') ?></a></div>
+                <div id="clear_list"><a class="pointer" onclick="clearIndiList()"><?= I18N::translate('Clear all') ?></a></div>
                 <div class="cart_toggle_hide" <?php if ($greypeople) { echo 'style="display: none"'; } ?>>
                     <?= view('components/select-individual', ['name' => 'pid', 'id' => 'pid', 'tree' => $tree, 'individual' => "", 'required'=>false]); ?>
                     <div class="red-text" id="indi-error"></div>
@@ -239,7 +239,7 @@ $usegraphviz = $vars['graphviz_bin'] != "";
                     <div id="stop_indi_list">
 
                     </div>
-                    <div id="clear_stop_list"><a href="#" onclick="clearStopIndiList()"><?= I18N::translate('Clear all') ?></a></div>
+                    <div id="clear_stop_list"><a class="pointer" onclick="clearStopIndiList()"><?= I18N::translate('Clear all') ?></a></div>
                     <div class="cart_toggle_hide" <?php if ($greypeople) { echo 'style="display: none"'; } ?>>
                         <?php
                         echo view('components/select-individual', ['name' => 'vars[stop_pid]', 'id' => 'stop_pid', 'tree' => $tree, 'xref' => '']);
@@ -270,7 +270,7 @@ $usegraphviz = $vars['graphviz_bin'] != "";
                 </div>
             </div>
         </div>
-        <a href="#" id="people-advanced-button" onclick="toggleAdvanced(this, 'people-advanced')"><div class="wt-page-options-label advanced-settings-btn"><?= ($vars["show_adv_people"] ? '↑ ' : '↓ ') . I18N::translate('Toggle advanced settings') . ($vars["show_adv_people"] ? ' ↑' : ' ↓'); ?></div></a>
+        <a id="people-advanced-button" onclick="toggleAdvanced(this, 'people-advanced')"><div class="wt-page-options-label advanced-settings-btn"><?= ($vars["show_adv_people"] ? '↑ ' : '↓ ') . I18N::translate('Toggle advanced settings') . ($vars["show_adv_people"] ? ' ↑' : ' ↓'); ?></div></a>
 
         <h3><?= I18N::translate('Appearance') ?></h3>
         <div class="row no-right-margin form-group">
@@ -576,7 +576,7 @@ $usegraphviz = $vars['graphviz_bin'] != "";
                 </div>
             </div>
         </div>
-        <a href="#" id="appearance-advanced-button" onclick="toggleAdvanced(this, 'appearance-advanced')"><div class="wt-page-options-label advanced-settings-btn"><?= ($vars["show_adv_appear"] ? '↑ ' : '↓ ') . I18N::translate('Toggle advanced settings') . ($vars["show_adv_appear"] ? ' ↑' : ' ↓'); ?></div></a>
+        <a id="appearance-advanced-button" onclick="toggleAdvanced(this, 'appearance-advanced')"><div class="wt-page-options-label advanced-settings-btn"><?= ($vars["show_adv_appear"] ? '↑ ' : '↓ ') . I18N::translate('Toggle advanced settings') . ($vars["show_adv_appear"] ? ' ↑' : ' ↓'); ?></div></a>
         <h3><?= I18N::translate('General settings') ?></h3>
         <div class="row no-right-margin form-group">
             <?= MainPage::addLabel('output_type', 'Output file type'); ?>
@@ -619,7 +619,7 @@ $usegraphviz = $vars['graphviz_bin'] != "";
                 </div>
             </div>
         </div>
-        <a href="#" id="files-advanced-button" onclick="toggleAdvanced(this, 'files-advanced')"><div class="wt-page-options-label advanced-settings-btn"><?= ($vars["show_adv_files"] ? '↑ ' : '↓ ') . I18N::translate('Toggle advanced settings') . ($vars["show_adv_files"] ? ' ↑' : ' ↓'); ?></div></a>
+        <a id="files-advanced-button" onclick="toggleAdvanced(this, 'files-advanced')"><div class="wt-page-options-label advanced-settings-btn"><?= ($vars["show_adv_files"] ? '↑ ' : '↓ ') . I18N::translate('Toggle advanced settings') . ($vars["show_adv_files"] ? ' ↑' : ' ↓'); ?></div></a>
         <?php if ($vars["show_debug_panel"]) { ?>
         <h3><?= I18N::translate('Debug') ?></h3>
         <div class="row no-right-margin form-group">
@@ -652,18 +652,18 @@ $usegraphviz = $vars['graphviz_bin'] != "";
 </form>
 
 <div class="sidebar__toggler" hidden>
-    <a href="#" class="btn btn-outline-secondary"><?= I18N::translate('Show options') ?></a>
+    <a class="btn btn-outline-secondary pointer"><?= I18N::translate('Show options') ?></a>
 </div>
 
 <div id="render-container">
     <div id="rendering" hidden style="background-color: <?= $vars["background_col"] ?>;"></div>
     <div id="render_button_container">
         <div>
-            <a href="#" title="<?= I18N::translate('Fullscreen') ?>" onclick="toggleFullscreen()" class="fullscreen" id="fullscreenButton">⛶</a>
-            <a href="#" title="<?= I18N::translate('Exit fullscreen') ?>" onclick="toggleFullscreen()" class="fullscreen" id="fullscreenClose" style="display: none;">✖</a>
+            <a title="<?= I18N::translate('Fullscreen') ?>" onclick="toggleFullscreen()" class="fullscreen pointer" id="fullscreenButton">⛶</a>
+            <a title="<?= I18N::translate('Exit fullscreen') ?>" onclick="toggleFullscreen()" class="fullscreen pointer" id="fullscreenClose" style="display: none;">✖</a>
         </div>
         <div>
-            <a href="#" title="<?= I18N::translate('Search diagram') ?>" onclick="" class="search_icon" id="searchButton"><?= view('icons/search'); ?></a>
+            <a title="<?= I18N::translate('Search diagram') ?>" onclick="" class="search_icon pointer" id="searchButton"><?= view('icons/search'); ?></a>
             <div id="diagram_search_box_container" style="display: none"><?= view('components/select-individual', ['name' => 'diagram_search_box', 'id' => 'diagram_search_box', 'tree' => $tree, 'individual' => "", 'required'=>false]); ?></div>
         </div>
     </div>

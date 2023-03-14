@@ -437,7 +437,7 @@ function loadIndividualDetails(url, xref, list) {
             newListItem.className = "indi_list_item";
             newListItem.setAttribute("data-xref", xref);
             newListItem.setAttribute("onclick", "scrollToRecord('"+xref+"')");
-            newListItem.innerHTML = contents + "<div class=\"saved-settings-ellipsis\" onclick=\"removeItem(event, this.parentElement, '" + otherXrefId + "')\"><a href='#'>×</a></div>";
+            newListItem.innerHTML = contents + "<div class=\"saved-settings-ellipsis\" onclick=\"removeItem(event, this.parentElement, '" + otherXrefId + "')\"><a class='pointer'>×</a></div>";
             // Multiple promises can be for the same xref - don't add if a duplicate
             let item = listElement.querySelector(`[data-xref="${xref}"]`);
             if (item == null) {
@@ -1134,7 +1134,7 @@ function loadSettingsDetails() {
         listElement.innerHTML = "";
         Object.keys(settingsList).forEach (function(key) {
             const newLinkWrapper = document.createElement("a");
-            newLinkWrapper.setAttribute("href", "#");
+            newLinkWrapper.setAttribute("class", "pointer");
             const newListItem = document.createElement("div");
             newListItem.className = "settings_list_item";
             newListItem.setAttribute("data-settings", settingsList[key]['settings']);
@@ -1142,7 +1142,7 @@ function loadSettingsDetails() {
             newListItem.setAttribute("data-token", settingsList[key]['token'] || "");
             newListItem.setAttribute("data-name", settingsList[key]['name']);
             newListItem.setAttribute("onclick", "loadSettings(this.getAttribute('data-settings'))");
-            newListItem.innerHTML = "<a href=\"#\">" + settingsList[key]['name'] + "<div class=\"saved-settings-ellipsis\" onclick='showSavedSettingsItemMenu(event)'><a href='#'>…</a></div></a>";
+            newListItem.innerHTML = "<a class='pointer'>" + settingsList[key]['name'] + "<div class=\"saved-settings-ellipsis pointer\" onclick='showSavedSettingsItemMenu(event)'><a class='pointer'>…</a></div></a>";
             newLinkWrapper.appendChild(newListItem);
             listElement.appendChild(newLinkWrapper);
 
@@ -1161,7 +1161,6 @@ function loadSettingsDetails() {
 function addSettingsMenuOption(id, div, emoji, text, callback, token = '') {
     let el = document.createElement('a');
     el.setAttribute('class', 'settings_ellipsis_menu_item');
-    el.setAttribute('href', '#');
     el.innerHTML = '<span class="settings_ellipsis_menu_icon">' + emoji + '</span><span>' + TRANSLATE[text] + '</span>';
     el.id = id;
     el.token = token;
