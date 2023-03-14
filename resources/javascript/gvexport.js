@@ -348,8 +348,10 @@ function loadURLXref(Url) {
             if (url_xref_treatment !== 'nothing') {
                 let startValue = el.value;
                 addIndiToList(xref);
-                if (startValue !== el.value && (url_xref_treatment === 'default' || url_xref_treatment === 'add')) {
-                    setTimeout(function () {showToast(TRANSLATE['One new source person added to %s existing persons'].replace('%s', xrefs.length.toString()))}, 100);
+                if (url_xref_treatment === 'default' && xrefs.length === 1 ) {
+                    setTimeout(function () {showToast(TRANSLATE['Source individual has replaced existing individual'].replace('%s', xrefs.length.toString()))}, 100);
+                } else if (startValue !== el.value && (url_xref_treatment === 'default' || url_xref_treatment === 'add')) {
+                    setTimeout(function () {showToast(TRANSLATE['One new source individual added to %s existing individuals'].replace('%s', xrefs.length.toString()))}, 100);
                 }
             }
         }
