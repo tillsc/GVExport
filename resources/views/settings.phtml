@@ -19,7 +19,7 @@ $settings = $settingsObj->getDefaultSettings();
 
 <h1><?= $title ?></h1>
 <p><?= I18N::translate('Values here are used as default values for new users of GVExport, and are used when users choose to reset the settings.'); ?></p>
-<script src="<?= $module->assetUrl('javascript/gvexport.js'); ?>" onload="new Url().removeURLParameter('reset');"></script>
+<script src="<?= $module->assetUrl('javascript/gvexport.js'); ?>" onload="Url.removeURLParameter('reset');"></script>
 <link href="<?= $module->assetUrl('css/gvexport.css'); ?>" rel="stylesheet">
 
 <div class="mb-5">

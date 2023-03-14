@@ -24,9 +24,10 @@ $usegraphviz = $vars['graphviz_bin'] != "";
 ?>
 
 <script type="text/javascript">
+    const mainPage = {};
     function runPageLoaded(Url) {
         if (typeof pageLoaded === 'function' && typeof jQuery === 'function') {
-            new Url().changeURLXref('<?= e($individual->xref()); ?>');
+            Url.changeURLXref('<?= e($individual->xref()); ?>');
             pageLoaded(Url);
         } else {
             // If external script loads before inline script, then wait
@@ -35,8 +36,8 @@ $usegraphviz = $vars['graphviz_bin'] != "";
         }
     }
     import('<?= $module->assetUrl('javascript/MainPage/Url.js'); ?>').then((module)=>{
-        const Url = module.Url;
-        runPageLoaded(Url);
+        mainPage.Url = new module.Url();
+        runPageLoaded(mainPage.Url);
     })
 </script>
 <script src="<?= $module->assetUrl('javascript/viz.js'); ?>"></script>

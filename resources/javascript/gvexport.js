@@ -335,7 +335,7 @@ function setStateFastRelationCheck() {
 
 
 function loadURLXref(Url) {
-    const xref = new Url().getURLParameter("xref");
+    const xref = Url.getURLParameter("xref");
     if (xref !== '') {
         const el = document.getElementById('xref_list');
         if (el.value.replace(',', "").trim() === "") {
@@ -360,7 +360,7 @@ function indiSelectChanged() {
     let xref = document.getElementById('pid').value.trim();
     if (xref !== "") {
         addIndiToList(xref);
-        new Url().changeURLXref(xref);
+        mainPage.Url.changeURLXref(xref);
         if (autoUpdate) {
             updateRender();
         }
@@ -514,7 +514,7 @@ function removeItem(e, element, xrefListId) {
         list.value = list.value.substring(0, list.value.length-1);
     }
     element.remove();
-    new Url().changeURLXref(list.value.split(',')[0].trim());
+    mainPage.Url.changeURLXref(list.value.split(',')[0].trim());
     updateClearAll();
     removeFromXrefList(xref, 'no_highlight_xref_list');
     toggleHighlightStartPersons(document.getElementById('highlight_start_indis').checked);
@@ -783,7 +783,7 @@ function pageLoaded(Url) {
     loadSettingsDetails();
     // Remove reset parameter from URL when page loaded, to prevent
     // further resets when page reloaded
-    new Url().removeURLParameter("reset");
+    Url.removeURLParameter("reset");
     // Remove options from selection list if already selected
     setInterval(function () {removeSearchOptions()}, 100);
     // Listen for fullscreen change
@@ -1417,7 +1417,7 @@ function addUrlToTreeFavourites(e) {
 }
 
 function loadUrlToken(Url) {
-    const token = new Url().getURLParameter("t");
+    const token = Url.getURLParameter("t");
     if (token !== '') {
         let request = {
             "type": REQUEST_TYPE_LOAD_SETTINGS_TOKEN,
