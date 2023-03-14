@@ -336,7 +336,7 @@ function setStateFastRelationCheck() {
 
 function loadURLXref(Url) {
     const xref = new Url().getURLParameter("xref");
-    if (xref !== null) {
+    if (xref !== '') {
         const el = document.getElementById('xref_list');
         if (el.value.replace(',', "").trim() === "") {
             el.value = xref;
@@ -1418,7 +1418,7 @@ function addUrlToTreeFavourites(e) {
 
 function loadUrlToken(Url) {
     const token = new Url().getURLParameter("t");
-    if (token !== null) {
+    if (token !== '') {
         let request = {
             "type": REQUEST_TYPE_LOAD_SETTINGS_TOKEN,
             "token": token
