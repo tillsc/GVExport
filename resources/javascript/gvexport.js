@@ -341,7 +341,7 @@ function loadURLXref(Url) {
         const el = document.getElementById('xref_list');
         if (el.value.replace(',', "").trim() === "") {
             el.value = xref;
-        } else {
+        } else if (!el.value.split(',').includes(xref)) {
             const xrefs = el.value.split(',');
             if (url_xref_treatment === 'default' && xrefs.length === 1 || url_xref_treatment === 'overwrite') {
                 el.value = "";
