@@ -199,8 +199,20 @@ span.NAME {
     font-size: 2em;
 }
 
+.close-fullscreen {
+    font-size: 2em;
+}
+
 .search_icon {
     font-size: 1.8em;
+}
+@media screen and (max-device-width:480px) {
+    .search_icon {
+        font-size: 1.5em;
+    }
+    .close-fullscreen {
+        font-size: 1.2em;
+    }
 }
 
 #diagram_search_box {
