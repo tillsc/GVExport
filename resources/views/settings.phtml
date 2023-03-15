@@ -6,8 +6,6 @@ use Fisharebest\Webtrees\I18N;
 use Fisharebest\Webtrees\Http\RequestHandlers\ControlPanel;
 
 /**
- * @var string      $gvexport_css           used in javascript code as a link to the css file
- * @var string      $gvexport_js            used in javascript code as a link to the external script file
  * @var string      $title                  title of this page
  * @var array       $vars                   array of saved settings
  * @var array       $otypes                 output file type options
@@ -21,24 +19,16 @@ $settings = $settingsObj->getDefaultSettings();
 
 <h1><?= $title ?></h1>
 <p><?= I18N::translate('Values here are used as default values for new users of GVExport, and are used when users choose to reset the settings.'); ?></p>
+<script src="<?= $module->assetUrl('javascript/gvexport.js'); ?>"</script>
 <script type="text/javascript">
-    // stylesheet
-    const newSheet = document.createElement("link");
-    newSheet.setAttribute("rel","stylesheet");
-    newSheet.setAttribute("type","text/css");
-    newSheet.setAttribute("href","<?= $gvexport_css ?>");
-    document.head.appendChild(newSheet);
-
-    // Javascript functions
-    const newScript = document.createElement("script");
-    newScript.onload = function() {
-        removeURLParameter("reset");
-    };
-    newScript.setAttribute("type","text/javascript");
-    newScript.setAttribute("src","<?= $gvexport_js ?>");
-    document.head.appendChild(newScript);
-
+    let Url;
+    import('<?= $module->assetUrl('javascript/MainPage/Url.js'); ?>').then((module)=>{
+        Url = new module.Url();
+        Url.removeURLParameter('reset');
+    })
 </script>
+<link href="<?= $module->assetUrl('css/gvexport.css'); ?>" rel="stylesheet">
+
 <div class="mb-5">
     <form method="post">
         <?= csrf_field() ?>

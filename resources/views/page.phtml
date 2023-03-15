@@ -9,61 +9,42 @@ use Fisharebest\Webtrees\Module\FamilyTreeFavoritesModule;
 use Fisharebest\Webtrees\Module\UserFavoritesModule;
 use Fisharebest\Webtrees\Tree;
 
-
-/*
- * tbd: better documentation of all transferred variables
- */
-
 /**
- * @var string      $gvexport_css           used in javascript code as a link to the css file
- * @var string      $gvexport_js            used in javascript code as a link to the external script file
- * @var Tree        $tree                   used tree
- * @var Individual  $individual             The webtrees individual object of the XREF in the URL
+ * @var Tree        $tree                   the webtrees tree instance of the current tree
+ * @var Individual  $individual             the webtrees individual object instance of the XREF in the URL
  * @var string      $title                  title of this page
  * @var array       $vars                   array of saved settings
  * @var array       $otypes                 output file type options
  * @var bool        $cartempty              are there any individuals (INDI records) in the clippings cart?
- * @var ?           $module                 this module
+ * @var GVExport    $module                 instance of this module
  */
 
 $settings = (new Settings())->getDefaultSettings();
 $usegraphviz = $vars['graphviz_bin'] != "";
-$xref = $individual->xref();
 ?>
 
 <script type="text/javascript">
-
-    // stylesheet
-    const newSheet = document.createElement("link");
-    newSheet.setAttribute("rel","stylesheet");
-    newSheet.setAttribute("type","text/css");
-    newSheet.setAttribute("href","<?= $gvexport_css ?>");
-    document.head.appendChild(newSheet);
-    function runPageLoaded() {
+    const mainPage = {};
+    function runPageLoaded(Url) {
         if (typeof pageLoaded === 'function' && typeof jQuery === 'function') {
-            changeURLXref('<?= e($xref); ?>');
-            pageLoaded();
+            Url.changeURLXref('<?= e($individual->xref()); ?>');
+            pageLoaded(Url);
         } else {
             // If external script loads before inline script, then wait
             // before trying to run page loaded function.
-            setTimeout(runPageLoaded, 100);
+            setTimeout(()=>{runPageLoaded(Url)}, 100);
         }
     }
-    
-    // Javascript functions
-    const newScript = document.createElement("script");
-    newScript.onload = function() {
-        // Check that a) our function that runs on page load has been loaded, and
-        // b), jQuery exists (as this comes via webtrees)
-        runPageLoaded();
-    };
-    newScript.setAttribute("type","text/javascript");
-    newScript.setAttribute("src","<?= $gvexport_js ?>");
-    document.head.appendChild(newScript);
+    import('<?= $module->assetUrl('javascript/MainPage/Url.js'); ?>').then((module)=>{
+        mainPage.Url = new module.Url();
+        runPageLoaded(mainPage.Url);
+    })
 </script>
 <script src="<?= $module->assetUrl('javascript/viz.js'); ?>"></script>
 <script src="<?= $module->assetUrl('javascript/panzoom.min.js'); ?>"></script>
+<script src="<?= $module->assetUrl('javascript/gvexport.js'); ?>"></script>
 <?= $usegraphviz ? "" : "<script src=\"" . $module->assetUrl('javascript/jspdf.umd.min.js') . "\"></script>"; ?>
+<link href="<?= $module->assetUrl('css/gvexport.css'); ?>" rel="stylesheet">
 <script type="text/javascript">
     const cartempty = <?= $cartempty ? "true" : "false" ?>;
     const TRANSLATE = {
@@ -80,7 +61,8 @@ $xref = $individual->xref();
         "Add to Tree favorites":"<?= I18N::translate("Add to Tree favorites"); ?>",
         "Added to My favourites":"<?= I18N::translate("Added to My favourites"); ?>",
         "Added to Tree favourites":"<?= I18N::translate("Added to Tree favourites"); ?>",
-        "One new source person added to %s existing persons":"<?= I18N::translate("One new source person added to %s existing persons", '%s'); ?>",
+        "Source individual has replaced existing individual":"<?= I18N::translate("Source individual has replaced existing individual"); ?>",
+        "One new source individual added to %s existing individuals":"<?= I18N::translate("One new source individual added to %s existing individuals", '%s'); ?>",
         "Cancel":"<?= I18N::translate("Cancel"); ?>",
         "Overwrite":"<?= I18N::translate("Overwrite"); ?>",
         "Individual not found":"<?= I18N::translate('Individual not found') ?>",
@@ -105,9 +87,8 @@ $xref = $individual->xref();
 </h2>
 
 <form action="<?= $module->chartUrl($individual) ?>" method="post" class="wt-page-options sidebar d-print-none" id="gvexport">
-
     <div class="pull-right btn-hover">
-        <a href="#" class="hide-form btn btn-secondary">X</a>
+        <a class="hide-form btn btn-secondary pointer">X</a>
     </div>
 
     <div class="sidebar__formfields col">
@@ -137,7 +118,7 @@ $xref = $individual->xref();
            the name. If so, we want to enable the XREF option for individuals
            unless we already have a saved setting */
         $startName = $individual->fullName();
-        $name = str_replace(" (" . $xref . ")", "", $startName);
+        $name = str_replace(" (" . $individual->xref() . ")", "", $startName);
         if ($startName != $name && isset($vars["first_run_xref_check"])) {
             $overridePID = true;
         } else {
@@ -178,7 +159,7 @@ $xref = $individual->xref();
                 <div id="indi_list">
 
                 </div>
-                <div id="clear_list"><a href="#" onclick="clearIndiList()"><?= I18N::translate('Clear all') ?></a></div>
+                <div id="clear_list"><a class="pointer" onclick="clearIndiList()"><?= I18N::translate('Clear all') ?></a></div>
                 <div class="cart_toggle_hide" <?php if ($greypeople) { echo 'style="display: none"'; } ?>>
                     <?= view('components/select-individual', ['name' => 'pid', 'id' => 'pid', 'tree' => $tree, 'individual' => "", 'required'=>false]); ?>
                     <div class="red-text" id="indi-error"></div>
@@ -258,7 +239,7 @@ $xref = $individual->xref();
                     <div id="stop_indi_list">
 
                     </div>
-                    <div id="clear_stop_list"><a href="#" onclick="clearStopIndiList()"><?= I18N::translate('Clear all') ?></a></div>
+                    <div id="clear_stop_list"><a class="pointer" onclick="clearStopIndiList()"><?= I18N::translate('Clear all') ?></a></div>
                     <div class="cart_toggle_hide" <?php if ($greypeople) { echo 'style="display: none"'; } ?>>
                         <?php
                         echo view('components/select-individual', ['name' => 'vars[stop_pid]', 'id' => 'stop_pid', 'tree' => $tree, 'xref' => '']);
@@ -289,7 +270,7 @@ $xref = $individual->xref();
                 </div>
             </div>
         </div>
-        <a href="#" id="people-advanced-button" onclick="toggleAdvanced(this, 'people-advanced')"><div class="wt-page-options-label advanced-settings-btn"><?= ($vars["show_adv_people"] ? '↑ ' : '↓ ') . I18N::translate('Toggle advanced settings') . ($vars["show_adv_people"] ? ' ↑' : ' ↓'); ?></div></a>
+        <a id="people-advanced-button" onclick="toggleAdvanced(this, 'people-advanced')"><div class="wt-page-options-label advanced-settings-btn"><?= ($vars["show_adv_people"] ? '↑ ' : '↓ ') . I18N::translate('Toggle advanced settings') . ($vars["show_adv_people"] ? ' ↑' : ' ↓'); ?></div></a>
 
         <h3><?= I18N::translate('Appearance') ?></h3>
         <div class="row no-right-margin form-group">
@@ -595,7 +576,7 @@ $xref = $individual->xref();
                 </div>
             </div>
         </div>
-        <a href="#" id="appearance-advanced-button" onclick="toggleAdvanced(this, 'appearance-advanced')"><div class="wt-page-options-label advanced-settings-btn"><?= ($vars["show_adv_appear"] ? '↑ ' : '↓ ') . I18N::translate('Toggle advanced settings') . ($vars["show_adv_appear"] ? ' ↑' : ' ↓'); ?></div></a>
+        <a id="appearance-advanced-button" onclick="toggleAdvanced(this, 'appearance-advanced')"><div class="wt-page-options-label advanced-settings-btn"><?= ($vars["show_adv_appear"] ? '↑ ' : '↓ ') . I18N::translate('Toggle advanced settings') . ($vars["show_adv_appear"] ? ' ↑' : ' ↓'); ?></div></a>
         <h3><?= I18N::translate('General settings') ?></h3>
         <div class="row no-right-margin form-group">
             <?= MainPage::addLabel('output_type', 'Output file type'); ?>
@@ -638,7 +619,7 @@ $xref = $individual->xref();
                 </div>
             </div>
         </div>
-        <a href="#" id="files-advanced-button" onclick="toggleAdvanced(this, 'files-advanced')"><div class="wt-page-options-label advanced-settings-btn"><?= ($vars["show_adv_files"] ? '↑ ' : '↓ ') . I18N::translate('Toggle advanced settings') . ($vars["show_adv_files"] ? ' ↑' : ' ↓'); ?></div></a>
+        <a id="files-advanced-button" onclick="toggleAdvanced(this, 'files-advanced')"><div class="wt-page-options-label advanced-settings-btn"><?= ($vars["show_adv_files"] ? '↑ ' : '↓ ') . I18N::translate('Toggle advanced settings') . ($vars["show_adv_files"] ? ' ↑' : ' ↓'); ?></div></a>
         <?php if ($vars["show_debug_panel"]) { ?>
         <h3><?= I18N::translate('Debug') ?></h3>
         <div class="row no-right-margin form-group">
@@ -671,18 +652,18 @@ $xref = $individual->xref();
 </form>
 
 <div class="sidebar__toggler" hidden>
-    <a href="#" class="btn btn-outline-secondary"><?= I18N::translate('Show options') ?></a>
+    <a class="btn btn-outline-secondary pointer"><?= I18N::translate('Show options') ?></a>
 </div>
 
 <div id="render-container">
     <div id="rendering" hidden style="background-color: <?= $vars["background_col"] ?>;"></div>
     <div id="render_button_container">
         <div>
-            <a href="#" title="<?= I18N::translate('Fullscreen') ?>" onclick="toggleFullscreen()" class="fullscreen" id="fullscreenButton">⛶</a>
-            <a href="#" title="<?= I18N::translate('Exit fullscreen') ?>" onclick="toggleFullscreen()" class="fullscreen" id="fullscreenClose" style="display: none;">✖</a>
+            <a title="<?= I18N::translate('Fullscreen') ?>" onclick="toggleFullscreen()" class="fullscreen pointer" id="fullscreenButton">⛶</a>
+            <a title="<?= I18N::translate('Exit fullscreen') ?>" onclick="toggleFullscreen()" class="fullscreen pointer" id="fullscreenClose" style="display: none;">✖</a>
         </div>
         <div>
-            <a href="#" title="<?= I18N::translate('Search diagram') ?>" onclick="" class="search_icon" id="searchButton"><?= view('icons/search'); ?></a>
+            <a title="<?= I18N::translate('Search diagram') ?>" onclick="" class="search_icon pointer" id="searchButton"><?= view('icons/search'); ?></a>
             <div id="diagram_search_box_container" style="display: none"><?= view('components/select-individual', ['name' => 'diagram_search_box', 'id' => 'diagram_search_box', 'tree' => $tree, 'individual' => "", 'required'=>false]); ?></div>
         </div>
     </div>
@@ -879,7 +860,6 @@ $xref = $individual->xref();
                     document.getElementById('dot-text').appendChild(document.createTextNode(lastDotStr));
                 }
             }
-
 
             // Create a new Viz instance (@see Caveats page for more info)
             viz = new Viz({
