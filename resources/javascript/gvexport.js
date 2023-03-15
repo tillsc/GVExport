@@ -171,6 +171,7 @@ function showToast(message) {
     if (toastParent !== null) {
         const toast = document.createElement("div");
         toast.setAttribute("id", "toast");
+        toast.setAttribute("class", "pointer");
         if (message.substring(0, ERROR_CHAR.length) === ERROR_CHAR) {
             toast.className += "error";
             message = message.substring(ERROR_CHAR.length);
