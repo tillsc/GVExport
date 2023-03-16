@@ -776,6 +776,10 @@ function removeSettingsEllipsisMenu(menuElement) {
     });
 }
 
+function showGraphvizUnsupportedMessage() {
+    if (graphvizAvailable && document.getElementById('photo_shape').value !== '0') showToast(TRANSLATE["Diagram will be rendered in browser as server doesn't support photo shapes"]);
+}
+
 // This function is run when the page is loaded
 function pageLoaded(Url) {
     TOMSELECT_URL = document.getElementById('pid').getAttribute("data-url") + "&query=";
@@ -837,6 +841,7 @@ function pageLoaded(Url) {
     });
     document.querySelector("#diagram_search_box_container").addEventListener('change', diagramSearchBoxChange);
     document.querySelector('#searchButton').addEventListener('click', showHideSearchBox);
+    document.querySelector('#photo_shape').addEventListener('change', showGraphvizUnsupportedMessage);
 }
 
 // Function to show a help message
