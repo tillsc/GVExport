@@ -320,7 +320,19 @@ $usegraphviz = $vars['graphviz_bin'] != "";
                     </div>
                 </div>
             <?php } ?>
-
+            <div class="row no-right-margin form-group">
+                <?= MainPage::addLabel('', 'Tile design'); ?>
+                <div class="col-sm-8 wt-page-options-value">
+                    <div class="col-auto">
+                        <label for="indi_tile_shape"><?= I18N::translate('Individual tile shape') ?>:</label>
+                        <?= view('components/select', ['name' => 'vars[indi_tile_shape]', 'id' => 'indi_tile_shape', 'selected' => e($vars['indi_tile_shape']), 'options' => MainPage::updateTranslations($settings["indi_tile_shape_options"])]) ?>
+                    </div>
+                    <div class="col-auto">
+                        <label for="indi_display_sex"><?= I18N::translate('Display sex of individual') ?>:</label>
+                        <?= view('components/select', ['name' => 'vars[indi_display_sex]', 'id' => 'indi_display_sex', 'selected' => e($vars['indi_display_sex']), 'options' => MainPage::updateTranslations($settings["indi_display_sex_options"])]) ?>
+                    </div>
+                </div>
+            </div>
             <div class="row no-right-margin form-group">
                 <?= MainPage::addLabel('add_links', 'Add URL to individuals and families'); ?>
                 <div class="col-sm-8 wt-page-options-value">
@@ -505,19 +517,6 @@ $usegraphviz = $vars['graphviz_bin'] != "";
                                 <input type="color" class="picker" name="vars[arrows_not_related]" id="arrows_not_related" value="<?= e($vars["arrows_not_related"]); ?>" /><label for="arrows_not_related" class="picker-label"><?= I18N::translate('Related other than by birth') ?></label>
                             </div>
                         </div>
-                </div>
-            </div>
-            <div class="row no-right-margin form-group">
-                <?= MainPage::addLabel('', 'Tile design'); ?>
-                <div class="col-sm-8 wt-page-options-value">
-                    <div class="col-auto">
-                        <label for="indi_tile_shape"><?= I18N::translate('Individual tile shape') ?>:</label>
-                        <?= view('components/select', ['name' => 'vars[indi_tile_shape]', 'id' => 'indi_tile_shape', 'selected' => e($vars['indi_tile_shape']), 'options' => MainPage::updateTranslations($settings["indi_tile_shape_options"])]) ?>
-                    </div>
-                    <div class="col-auto">
-                        <label for="indi_display_sex"><?= I18N::translate('Display sex of individual') ?>:</label>
-                        <?= view('components/select', ['name' => 'vars[indi_display_sex]', 'id' => 'indi_display_sex', 'selected' => e($vars['indi_display_sex']), 'options' => MainPage::updateTranslations($settings["indi_display_sex_options"])]) ?>
-                    </div>
                 </div>
             </div>
             <div class="row no-right-margin form-group">
