@@ -55,7 +55,7 @@ return array(
 	'use_cart' => true, // When true, if there are clippings in the clippings cart then use them
 	'show_adv_people' => false, // Whether to show advanced settings by default for People to be included section
 	'show_adv_appear' => false, // Whether to show advanced settings by default for Appearance section
-	'show_adv_files' => false, // Whether to show advanced settings by default for File settings section
+	'show_adv_files' => false, // Whether to show advanced settings by default for General settings section
 	'typeface' => 0, // Default font value, based on list of font 'typefaces'
 	'default_typeface' => 0, // Fallback font value, if above typeface not available
 	'font_colour_name' => '#333333',	// Default font colour for name
