@@ -66,7 +66,7 @@ $usegraphviz = $vars['graphviz_bin'] != "";
         "Cancel":"<?= I18N::translate("Cancel"); ?>",
         "Overwrite":"<?= I18N::translate("Overwrite"); ?>",
         "Individual not found":"<?= I18N::translate('Individual not found') ?>",
-        "Rendered in browser as server doesn't support photo shapes":"<?= I18N::translate("Rendered in browser as server doesn't support photo shapes"); ?>",
+        "Diagram will be rendered in browser as server doesn't support photo shapes":"<?= I18N::translate("Diagram will be rendered in browser as server doesn't support photo shapes"); ?>",
         "Message history":"<?= I18N::translate("Message history"); ?>",
         "Your browser does not support exporting images this large. Please reduce number of records, reduce DPI setting, or use SVG option.":"<?= I18N::translate('Your browser does not support exporting images this large. Please reduce number of records, reduce DPI setting, or use SVG option.') ?>",
         "Unable to load setting":"<?= I18N::translate('Unable to load setting') ?>",
@@ -320,7 +320,19 @@ $usegraphviz = $vars['graphviz_bin'] != "";
                     </div>
                 </div>
             <?php } ?>
-
+            <div class="row no-right-margin form-group">
+                <?= MainPage::addLabel('', 'Tile design'); ?>
+                <div class="col-sm-8 wt-page-options-value">
+                    <div class="col-auto">
+                        <label for="indi_tile_shape"><?= I18N::translate('Individual tile shape') ?>:</label>
+                        <?= view('components/select', ['name' => 'vars[indi_tile_shape]', 'id' => 'indi_tile_shape', 'selected' => e($vars['indi_tile_shape']), 'options' => MainPage::updateTranslations($settings["indi_tile_shape_options"])]) ?>
+                    </div>
+                    <div class="col-auto">
+                        <label for="indi_display_sex"><?= I18N::translate('Display sex of individual') ?>:</label>
+                        <?= view('components/select', ['name' => 'vars[indi_display_sex]', 'id' => 'indi_display_sex', 'selected' => e($vars['indi_display_sex']), 'options' => MainPage::updateTranslations($settings["indi_display_sex_options"])]) ?>
+                    </div>
+                </div>
+            </div>
             <div class="row no-right-margin form-group">
                 <?= MainPage::addLabel('add_links', 'Add URL to individuals and families'); ?>
                 <div class="col-sm-8 wt-page-options-value">
@@ -508,19 +520,6 @@ $usegraphviz = $vars['graphviz_bin'] != "";
                 </div>
             </div>
             <div class="row no-right-margin form-group">
-                <?= MainPage::addLabel('', 'Tile design'); ?>
-                <div class="col-sm-8 wt-page-options-value">
-                    <div class="col-auto">
-                        <label for="indi_tile_shape"><?= I18N::translate('Individual tile shape') ?>:</label>
-                        <?= view('components/select', ['name' => 'vars[indi_tile_shape]', 'id' => 'indi_tile_shape', 'selected' => e($vars['indi_tile_shape']), 'options' => MainPage::updateTranslations($settings["indi_tile_shape_options"])]) ?>
-                    </div>
-                    <div class="col-auto">
-                        <label for="indi_display_sex"><?= I18N::translate('Display sex of individual') ?>:</label>
-                        <?= view('components/select', ['name' => 'vars[indi_display_sex]', 'id' => 'indi_display_sex', 'selected' => e($vars['indi_display_sex']), 'options' => MainPage::updateTranslations($settings["indi_display_sex_options"])]) ?>
-                    </div>
-                </div>
-            </div>
-            <div class="row no-right-margin form-group">
                 <?= MainPage::addLabel('', 'Tile colors'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="col-auto">
@@ -705,7 +704,6 @@ $usegraphviz = $vars['graphviz_bin'] != "";
         // Also check if Graphviz installed. If so then let it handle it (unless unsupported setting used),
         // but if not, trigger client side actions
         if (!graphvizAvailable || document.getElementById('photo_shape').value !== '0') {
-            if (graphvizAvailable) showToast(TRANSLATE["Rendered in browser as server doesn't support photo shapes"]);
             const output = document.getElementById('output_type').value;
             switch(output) {
                 case "png":

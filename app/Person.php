@@ -6,7 +6,13 @@ use Fisharebest\Webtrees\I18N;
 
 class Person
 {
-
+    const SHAPE_NONE = '0';
+    const SHAPE_OVAL = '10';
+    const SHAPE_CIRCLE = '20';
+    const SHAPE_SQUARE = '30';
+    const SHAPE_ROUNDED_RECT = '40';
+    const SHAPE_ROUNDED_SQUARE = '50';
+    const TILE_SHAPE_ROUNDED = 10;
     public array $attributes;
     private Dot $dot;
 
@@ -178,7 +184,8 @@ class Person
             if ($this->dot->settings["show_photos"]) {
                 if (isset($this->dot->individuals[$pid]["pic"]) && !empty($this->dot->individuals[$pid]["pic"])) {
                     $photo_size = floatval($this->dot->settings["photo_size"]) / 100;
-                    $out .= "<TD ROWSPAN=\"2\" CELLPADDING=\"1\" PORT=\"pic\" WIDTH=\"" . ($this->dot->settings["font_size"] * 4 * $photo_size)  . "\" HEIGHT=\"" . ($this->dot->settings["font_size"] * 4 * $photo_size) . "\" FIXEDSIZE=\"true\" ALIGN=\"CENTER\"><IMG SCALE=\"true\" SRC=\"" . $this->dot->individuals[$pid]["pic"] . "\" /></TD>";
+                    $padding = $this->getPhotoPaddingSize();
+                    $out .= "<TD ROWSPAN=\"2\" CELLPADDING=\"$padding\" PORT=\"pic\" WIDTH=\"" . ($this->dot->settings["font_size"] * 4 * $photo_size)  . "\" HEIGHT=\"" . ($this->dot->settings["font_size"] * 4 * $photo_size) . "\" FIXEDSIZE=\"true\" ALIGN=\"CENTER\"><IMG SCALE=\"true\" SRC=\"" . $this->dot->individuals[$pid]["pic"] . "\" /></TD>";
                 } else {
                     // Blank cell zero width to keep the height right
                     $out .= "<TD ROWSPAN=\"2\" CELLPADDING=\"1\" PORT=\"pic\" WIDTH=\"" . ($detailsExist ? "0" : ($this->dot->settings["font_size"] * 3.5)) . "\" HEIGHT=\"" . ($this->dot->settings["font_size"] * 4) . "\" FIXEDSIZE=\"true\"></TD>";
@@ -371,5 +378,25 @@ class Person
             default:
                 return "";
         }
+    }
+
+    /**
+     * Returns the cell margin needed for the different photo shapes, so
+     * they don't overlap rounded rectangle borders
+     *
+     * @return int
+     */
+    private function getPhotoPaddingSize(): int
+    {
+        if ($this->dot->settings['indi_tile_shape'] == self::TILE_SHAPE_ROUNDED) {
+            switch ($this->dot->settings['photo_shape']) {
+                case self::SHAPE_NONE:
+                    return 4;
+                case self::SHAPE_SQUARE:
+                    return 2;
+                default:
+            }
+        }
+        return 1;
     }
 }
