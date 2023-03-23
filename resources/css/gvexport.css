@@ -376,3 +376,8 @@ span.NAME {
 .highlight_check_label {
     margin-left: 10px;
 }
+
+.max-level-box {
+    width: unset;
+    display: inline;
+}

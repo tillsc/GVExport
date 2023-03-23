@@ -168,59 +168,9 @@ $usegraphviz = $vars['graphviz_bin'] != "";
         </div>
 
         <div class="row no-right-margin form-group">
-            <?= MainPage::addLabel('include_ancestors', 'Include ancestors'); ?>
-            <div class="col-sm-8 wt-page-options-value">
-                <div class="row">
-                    <div class="col-auto mx-3">
-                        <input class="cart_toggle" type="checkbox" name="vars[include_ancestors]" id="include_ancestors" value="ance" <?= $vars["include_ancestors"] ? 'checked' : '' ?>>
-                    </div>
-                    <div class="col-auto row">
-                        <label for="ancestor_levels" class="col-sm-6"><?= I18N::translate('Max levels') ?>:</label>
-                        <input onblur="defaultValueWhenBlank(this, 0)" type="text" class="cart_toggle form-control col-sm-6" size="10" name="vars[ancestor_levels]" id="ancestor_levels" value="<?= I18N::digits($vars["ancestor_levels"]); ?>">
-                    </div>
-                </div>
-            </div>
+            <?= view($module->name() . '::MainPage/ConnectionsToInclude',['vars' => $vars, 'cartempty' => $cartempty]); ?>
         </div>
 
-        <div class="row no-right-margin form-group">
-            <?= MainPage::addLabel('', 'Include'); ?>
-            <div class="col-sm-8 wt-page-options-value">
-                <div class="row">
-                    <div class="col-auto mx-3">
-                        <input class="cart_toggle" type="checkbox" onclick="updateRelationOption('include_siblings')" name="vars[include_siblings]" id="include_siblings" value="sibl" <?= $vars["include_siblings"] ? 'checked' : '' ?>>
-                        <label for="include_siblings"><?= I18N::translate('Siblings') ?></label>
-                    </div>
-                    <div class="col-auto mx-3">
-                        <input class="cart_toggle" onclick="updateRelationOption('include_all_relatives')" type="checkbox" name="vars[include_all_relatives]" id="include_all_relatives" value="rels" <?= $vars["include_all_relatives"] ? 'checked' : '' ?>>
-                        <label for="include_all_relatives"><?= I18N::translate('All relatives') ?></label>
-                    </div>
-                    <div class="col-auto mx-3">
-                        <input class="cart_toggle" type="checkbox" onclick="updateRelationOption('include_spouses')" name="vars[include_spouses]" id="include_spouses" value="spou" <?= $vars["include_spouses"] ? 'checked' : '' ?>>
-                        <label for="include_spouses"><?= I18N::translate('Partners') ?></label>
-                    </div>
-                    <div class="col-auto mx-3">
-                        <input class="cart_toggle" type="checkbox" onclick="updateRelationOption('include_all')" name="vars[include_all]" id="include_all" value="any" <?= $vars["include_all"] ? 'checked' : '' ?> <?= !$cartempty ? "disabled" : ""; ?>>
-                        <label for="include_all"><?= I18N::translate('Anyone') ?></label>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row no-right-margin form-group">
-            <?= MainPage::addLabel('include_descendants', 'Include descendants'); ?>
-            <div class="col-sm-8 wt-page-options-value">
-                <div class="row">
-                    <div class="col-auto mx-3">
-                        <input class="cart_toggle" type="checkbox" name="vars[include_descendants]" id="include_descendants" value="desc" <?= $vars["include_descendants"] ? 'checked' : '' ?>>
-                    </div>
-                    <div class="col-auto row">
-                        <label for="descendant_levels" class="col-sm-6"><?= I18N::translate('Max levels') ?>:</label>
-                        <input onblur="defaultValueWhenBlank(this, 0)" type="text" class="cart_toggle form-control col-sm-6" size="10" name="vars[descendant_levels]" id="descendant_levels"
-                               value="<?= I18N::digits($vars["descendant_levels"]); ?>">
-                    </div>
-                </div>
-            </div>
-        </div>
         <div id="people-advanced" <?= $vars["show_adv_people"] ? '' : 'style="display:none"'; ?>>
             <div class="row no-right-margin form-group">
                 <?= MainPage::addLabel('xref_list', 'XREFs of included individuals'); ?>
