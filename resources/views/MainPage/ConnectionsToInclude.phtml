@@ -4,11 +4,11 @@ use Fisharebest\Webtrees\I18N;
 use vendor\WebtreesModules\gvexport\MainPage;
 /**
  * @var array       $vars                   array of saved settings
- * @var bool        $cartempty              whether the clippings cart is empty
- * @var bool        $showhelp               whether to show help icons
+ * @var bool        $cart_empty              whether the clippings cart is empty
+ * @var bool        $show_help               whether to show help icons
  */
 ?>
-<?= MainPage::addLabel('', 'Connections to include', $showhelp); ?>
+<?= MainPage::addLabel('', 'Connections to include', $show_help); ?>
 <div class="col-sm-8 wt-page-options-value">
     <div class="row">
         <div class="col-sm-6">
@@ -41,7 +41,7 @@ use vendor\WebtreesModules\gvexport\MainPage;
             <label for="include_spouses"><?= I18N::translate('Partners') ?></label>
         </div>
         <div class="col-auto mx-3">
-            <input class="cart_toggle" type="checkbox" onclick="updateRelationOption('include_all')" name="vars[include_all]" id="include_all" value="any" <?= $vars["include_all"] ? 'checked' : '' ?> <?= !$cartempty ? "disabled" : ""; ?>>
+            <input class="cart_toggle" type="checkbox" onclick="updateRelationOption('include_all')" name="vars[include_all]" id="include_all" value="any" <?= $vars["include_all"] ? 'checked' : '' ?> <?= !$cart_empty ? "disabled" : ""; ?>>
             <label for="include_all"><?= I18N::translate('Anyone') ?></label>
         </div>
     </div>

@@ -72,7 +72,7 @@ $settings = $settingsObj->getDefaultSettings();
             </div>
 
             <div class="row">
-                <?= view($module->name() . '::MainPage/ConnectionsToInclude',['vars' => $vars, 'cartempty' => false, 'showhelp' => false]); ?>
+                <?= view($module->name() . '::MainPage/ConnectionsToInclude',['vars' => $vars, 'cart_empty' => false, 'show_help' => false]); ?>
             </div>
             <div class="row">
                 <label class="col-sm-4 col-form-label" for="mark_not_related"><?= I18N::translate('Non-relatives') ?></label>

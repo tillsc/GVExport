@@ -168,7 +168,7 @@ $usegraphviz = $vars['graphviz_bin'] != "";
         </div>
 
         <div class="row no-right-margin form-group">
-            <?= view($module->name() . '::MainPage/ConnectionsToInclude',['vars' => $vars, 'cartempty' => $cartempty, 'showhelp' => true]); ?>
+            <?= view($module->name() . '::MainPage/ConnectionsToInclude',['vars' => $vars, 'cart_empty' => $cartempty, 'show_help' => true]); ?>
         </div>
 
         <div id="people-advanced" <?= $vars["show_adv_people"] ? '' : 'style="display:none"'; ?>>
