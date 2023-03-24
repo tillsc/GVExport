@@ -330,7 +330,7 @@ function toggleAdvanced(button, id, visible = null) {
 }
 
 function setStateFastRelationCheck() {
-    document.getElementById("faster_relation_check").disabled = ((!cartempty && document.getElementById("usecart_yes").checked) || !document.getElementById("mark_not_related").checked);
+    showHide(document.getElementById("mark_related_subgroup"), document.getElementById("mark_not_related").checked);
 }
 
 
