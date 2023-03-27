@@ -40,24 +40,7 @@ use vendor\WebtreesModules\gvexport\MainPage;
         <?= view($module->name() . '::MainPage/PeopleToInclude/XrefOfIncludedIndividuals',['vars' => $vars, 'show_help' => true]); ?>
     </div>
     <div class="row no-right-margin form-group">
-        <?= MainPage::addLabel('stop_xref_list', 'Stop processing on'); ?>
-        <div class="col-sm-8 wt-page-options-value">
-            <div id="stop_indi_list">
-
-            </div>
-            <div id="clear_stop_list"><a class="pointer" onclick="clearStopIndiList()"><?= I18N::translate('Clear all') ?></a></div>
-            <div class="cart_toggle_hide" <?php if ($grey_people) { echo 'style="display: none"'; } ?>>
-                <?php
-                echo view('components/select-individual', ['name' => 'vars[stop_pid]', 'id' => 'stop_pid', 'tree' => $tree, 'xref' => '']);
-                ?>
-            </div>
-            <div class="input-group mt-1">
-                <input type="text" class="cart_toggle form-control" name="vars[stop_xref_list]" id="stop_xref_list" value="<?= e($vars['stop_xref_list']); ?>" onchange="refreshIndisFromXREFS(true)">
-                <div class="input-group-append">
-                    <button type="button" class="btn btn-outline-secondary" onclick="refreshIndisFromXREFS(false)">⟳</button>
-                </div>
-            </div>
-        </div>
+        <?= view($module->name() . '::MainPage/PeopleToInclude/StopProcessingOn',['vars' => $vars, 'tree' => $tree, 'grey_people' => $grey_people, 'show_help' => true]); ?>
     </div>
     <div class="row no-right-margin form-group">
         <?= MainPage::addLabel('mark_not_related', 'Non-relatives'); ?>
