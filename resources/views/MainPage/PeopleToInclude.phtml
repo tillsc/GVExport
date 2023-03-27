@@ -1,0 +1,88 @@
+<?php
+
+use Fisharebest\Webtrees\I18N;
+use Fisharebest\Webtrees\Tree;
+use vendor\WebtreesModules\gvexport\GVExport;
+use vendor\WebtreesModules\gvexport\MainPage;
+
+/**
+ * @var array       $vars           array of saved settings
+ * @var Tree        $tree           webtrees tree object of current tree
+ * @var bool        $cartempty      whether the clippings cart is empty
+ * @var GVExport    $module         this module
+ * @var array       $settings       wider array of settings and options
+ * @var bool        $show_help      whether to show help icons
+ */
+
+    $grey_people = false;
+    // Check if there are INDI records in the clippings cart, to decide what options to allow
+    if (!$cartempty) {
+    if ($vars["use_cart"]) {
+    $grey_people = true;
+    }
+    ?>
+
+    <div class="row no-right-margin form-group">
+        <?= view($module->name() . '::MainPage/PeopleToInclude/ItemsInClippingsCart',['vars' => $vars, 'show_help' => true]); ?>
+    </div>
+<?php } ?>
+
+<div class="row no-right-margin form-group">
+    <?= view($module->name() . '::MainPage/PeopleToInclude/IncludeAnyoneRelatedTo',['vars' => $vars, 'tree' => $tree, 'greypeople' => $grey_people, 'show_help' => true]); ?>
+</div>
+
+<div class="row no-right-margin form-group">
+    <?= view($module->name() . '::MainPage/PeopleToInclude/ConnectionsToInclude',['vars' => $vars, 'cart_empty' => $cartempty, 'show_help' => true]); ?>
+</div>
+
+<div id="people-advanced" <?= $vars["show_adv_people"] ? '' : 'style="display:none"'; ?>>
+    <div class="row no-right-margin form-group">
+        <?= MainPage::addLabel('xref_list', 'XREFs of included individuals'); ?>
+        <div class="col-sm-8 wt-page-options-value">
+            <div class="input-group mt-1">
+                <input type="text" class="form-control" name="vars[xref_list]" id="xref_list" value="<?= e($vars['xref_list']) ?>" onchange="refreshIndisFromXREFS(true)">
+                <div class="input-group-append">
+                    <button type="button" class="btn btn-outline-secondary" onclick="refreshIndisFromXREFS(false)">⟳</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row no-right-margin form-group">
+        <?= MainPage::addLabel('stop_xref_list', 'Stop processing on'); ?>
+        <div class="col-sm-8 wt-page-options-value">
+            <div id="stop_indi_list">
+
+            </div>
+            <div id="clear_stop_list"><a class="pointer" onclick="clearStopIndiList()"><?= I18N::translate('Clear all') ?></a></div>
+            <div class="cart_toggle_hide" <?php if ($grey_people) { echo 'style="display: none"'; } ?>>
+                <?php
+                echo view('components/select-individual', ['name' => 'vars[stop_pid]', 'id' => 'stop_pid', 'tree' => $tree, 'xref' => '']);
+                ?>
+            </div>
+            <div class="input-group mt-1">
+                <input type="text" class="cart_toggle form-control" name="vars[stop_xref_list]" id="stop_xref_list" value="<?= e($vars['stop_xref_list']); ?>" onchange="refreshIndisFromXREFS(true)">
+                <div class="input-group-append">
+                    <button type="button" class="btn btn-outline-secondary" onclick="refreshIndisFromXREFS(false)">⟳</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row no-right-margin form-group">
+        <?= MainPage::addLabel('mark_not_related', 'Non-relatives'); ?>
+        <div class="col-sm-8 wt-page-options-value">
+            <input class="cart_toggle" onclick="setStateFastRelationCheck();" type="checkbox" name="vars[mark_not_related]" id="mark_not_related" value="mark_not_related" <?= $vars["mark_not_related"] ? 'checked' : '' ?>>
+            <label class="check-list" for="mark_not_related"><?= I18N::translate('Mark not blood-related people with different color') ?></label>
+            <div id="mark_related_subgroup" class="color_subgroup col-auto wt-page-options-value">
+                <input class="cart_toggle" type="checkbox" name="vars[faster_relation_check]" id="faster_relation_check" value="faster_relation_check" <?= $vars["faster_relation_check"] ? 'checked' : '' ?>>
+                <label class="check-list" for="faster_relation_check"><?= I18N::translate('Ignore unseen links to speed up relative check') ?></label>
+            </div>
+        </div>
+    </div>
+    <div class="row no-right-margin form-group">
+        <?= MainPage::addLabel('graph_dir', 'Treatment of source individuals'); ?>
+        <div class="col-sm-8 wt-page-options-value">
+            <?= view('components/select', ['name' => 'vars[url_xref_treatment]', 'id' => 'url_xref_treatment', 'selected' => e($vars['url_xref_treatment']), 'options' => MainPage::updateTranslations($settings["url_xref_treatment_options"])]) ?>
+        </div>
+    </div>
+</div>
+<a id="people-advanced-button" onclick="toggleAdvanced(this, 'people-advanced')"><div class="wt-page-options-label advanced-settings-btn"><?= ($vars["show_adv_people"] ? '↑ ' : '↓ ') . I18N::translate('Toggle advanced settings') . ($vars["show_adv_people"] ? ' ↑' : ' ↓'); ?></div></a>
