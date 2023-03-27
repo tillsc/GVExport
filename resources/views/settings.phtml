@@ -56,11 +56,11 @@ $settings = $settingsObj->getDefaultSettings();
             </div>
 
             <div class="row no-right-margin form-group">
-                <?= view($module->name() . '::MainPage/ItemsInClippingsCart',['vars' => $vars, 'show_help' => false]); ?>
+                <?= view($module->name() . '::MainPage/PeopleToInclude/ItemsInClippingsCart',['vars' => $vars, 'show_help' => false]); ?>
             </div>
             <hr>
             <div class="row">
-                <?= view($module->name() . '::MainPage/ConnectionsToInclude',['vars' => $vars, 'cart_empty' => false, 'show_help' => false]); ?>
+                <?= view($module->name() . '::MainPage/PeopleToInclude/ConnectionsToInclude',['vars' => $vars, 'cart_empty' => false, 'show_help' => false]); ?>
             </div>
             <hr>
             <div class="row">

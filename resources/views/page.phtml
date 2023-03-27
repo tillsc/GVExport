@@ -45,7 +45,7 @@ $usegraphviz = $vars['graphviz_bin'] != "";
 <script src="<?= $module->assetUrl('javascript/gvexport.js'); ?>"></script>
 <?= $usegraphviz ? "" : "<script src=\"" . $module->assetUrl('javascript/jspdf.umd.min.js') . "\"></script>"; ?>
 <link href="<?= $module->assetUrl('css/gvexport.css'); ?>" rel="stylesheet">
-<?= view($module->name() . '::MainPage/Translations'); ?>
+<?= view($module->name() . '::MainPage/PeopleToInclude/Translations'); ?>
 <script type="text/javascript">
     const cartempty = <?= $cartempty ? "true" : "false" ?>;
     let autoUpdate = <?= $vars["auto_update"] ? 'true' : 'false' ?>;
@@ -89,47 +89,37 @@ $usegraphviz = $vars['graphviz_bin'] != "";
             <h3><?= I18N::translate('People to be included') ?></h3>
         </div>
 
-        <?php
-        /* Check if another module (e.g. vesta classic) is adding the XREF to
-           the name. If so, we want to enable the XREF option for individuals
-           unless we already have a saved setting */
-        $startName = $individual->fullName();
-        $name = str_replace(" (" . $individual->xref() . ")", "", $startName);
-        if ($startName != $name && isset($vars["first_run_xref_check"])) {
-            $overridePID = true;
-        } else {
-            $overridePID = false;
-        }
+    <?php
+    /* Check if another module (e.g. vesta classic) is adding the XREF to
+       the name. If so, we want to enable the XREF option for individuals
+       unless we already have a saved setting */
+    $startName = $individual->fullName();
+    $name = str_replace(" (" . $individual->xref() . ")", "", $startName);
+    if ($startName != $name && isset($vars["first_run_xref_check"])) {
+        $overridePID = true;
+    } else {
+        $overridePID = false;
+    }
 
-        $greypeople = false;
-        // Check if there are INDI records in the clippings cart, to decide what options to allow
-        if (!$cartempty) {
+    $greypeople = false;
+    // Check if there are INDI records in the clippings cart, to decide what options to allow
+    if (!$cartempty) {
         if ($vars["use_cart"]) {
             $greypeople = true;
         }
         ?>
 
-            <div class="row no-right-margin form-group">
-                <?= view($module->name() . '::MainPage/ItemsInClippingsCart',['vars' => $vars, 'show_help' => true]); ?>
-            </div>
-        <?php } ?>
+        <div class="row no-right-margin form-group">
+            <?= view($module->name() . '::MainPage/PeopleToInclude/ItemsInClippingsCart',['vars' => $vars, 'show_help' => true]); ?>
+        </div>
+    <?php } ?>
 
         <div class="row no-right-margin form-group">
-            <?= MainPage::addLabel('pid', 'Include anyone related to'); ?>
-            <div class="col-sm-8 wt-page-options-value">
-                <div id="indi_list">
-
-                </div>
-                <div id="clear_list"><a class="pointer" onclick="clearIndiList()"><?= I18N::translate('Clear all') ?></a></div>
-                <div class="cart_toggle_hide" <?php if ($greypeople) { echo 'style="display: none"'; } ?>>
-                    <?= view('components/select-individual', ['name' => 'pid', 'id' => 'pid', 'tree' => $tree, 'individual' => "", 'required'=>false]); ?>
-                    <div class="red-text" id="indi-error"></div>
-                </div>
-            </div>
+            <?= view($module->name() . '::MainPage/PeopleToInclude/IncludeAnyoneRelatedTo',['vars' => $vars, 'tree' => $tree, 'greypeople' => $greypeople, 'show_help' => true]); ?>
         </div>
 
         <div class="row no-right-margin form-group">
-            <?= view($module->name() . '::MainPage/ConnectionsToInclude',['vars' => $vars, 'cart_empty' => $cartempty, 'show_help' => true]); ?>
+            <?= view($module->name() . '::MainPage/PeopleToInclude/ConnectionsToInclude',['vars' => $vars, 'cart_empty' => $cartempty, 'show_help' => true]); ?>
         </div>
 
         <div id="people-advanced" <?= $vars["show_adv_people"] ? '' : 'style="display:none"'; ?>>

@@ -1,0 +1,24 @@
+<?php
+
+use Fisharebest\Webtrees\I18N;
+use vendor\WebtreesModules\gvexport\MainPage;
+
+/**
+ * @var array       $vars                   array of saved settings
+ * @var array       $tree                   webtrees tree object of current tree
+ * @var array       $greypeople             whether to disable option due to clippings cart being enabled
+ * @var bool        $show_help              whether to show help icons
+ */
+
+?>
+<?= MainPage::addLabel('pid', 'Include anyone related to', $show_help); ?>
+<div class="col-sm-8 wt-page-options-value">
+    <div id="indi_list">
+
+    </div>
+    <div id="clear_list"><a class="pointer" onclick="clearIndiList()"><?= I18N::translate('Clear all') ?></a></div>
+    <div class="cart_toggle_hide" <?php if ($greypeople) { echo 'style="display: none"'; } ?>>
+        <?= view('components/select-individual', ['name' => 'pid', 'id' => 'pid', 'tree' => $tree, 'individual' => "", 'required'=>false]); ?>
+        <div class="red-text" id="indi-error"></div>
+    </div>
+</div>
