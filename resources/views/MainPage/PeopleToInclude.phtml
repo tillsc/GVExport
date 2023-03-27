@@ -43,15 +43,7 @@ use vendor\WebtreesModules\gvexport\MainPage;
         <?= view($module->name() . '::MainPage/PeopleToInclude/StopProcessingOn',['vars' => $vars, 'tree' => $tree, 'grey_people' => $grey_people, 'show_help' => true]); ?>
     </div>
     <div class="row no-right-margin form-group">
-        <?= MainPage::addLabel('mark_not_related', 'Non-relatives'); ?>
-        <div class="col-sm-8 wt-page-options-value">
-            <input class="cart_toggle" onclick="setStateFastRelationCheck();" type="checkbox" name="vars[mark_not_related]" id="mark_not_related" value="mark_not_related" <?= $vars["mark_not_related"] ? 'checked' : '' ?>>
-            <label class="check-list" for="mark_not_related"><?= I18N::translate('Mark not blood-related people with different color') ?></label>
-            <div id="mark_related_subgroup" class="color_subgroup col-auto wt-page-options-value">
-                <input class="cart_toggle" type="checkbox" name="vars[faster_relation_check]" id="faster_relation_check" value="faster_relation_check" <?= $vars["faster_relation_check"] ? 'checked' : '' ?>>
-                <label class="check-list" for="faster_relation_check"><?= I18N::translate('Ignore unseen links to speed up relative check') ?></label>
-            </div>
-        </div>
+        <?= view($module->name() . '::MainPage/PeopleToInclude/NonRelatives',['vars' => $vars, 'show_help' => true]); ?>
     </div>
     <div class="row no-right-margin form-group">
         <?= MainPage::addLabel('graph_dir', 'Treatment of source individuals'); ?>
