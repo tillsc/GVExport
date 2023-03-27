@@ -260,11 +260,11 @@ $usegraphviz = $vars['graphviz_bin'] != "";
                             <label for="show_photos"><?= I18N::translate('Show photos') ?></label>
                         </div>
                         <div class="col-auto">
-                            <label for="photo_shape"><?= I18N::translate('Photo shape') ?>:</label>
+                            <label for="photo_shape"><?= I18N::translate('Photo shape') ?></label>
                             <?= view('components/select', ['name' => 'vars[photo_shape]', 'id' => 'photo_shape', 'selected' => e($vars['photo_shape']), 'options' => MainPage::updateTranslations($settings["photo_shape_options"])]) ?>
                         </div>
                         <div class="col-auto">
-                            <label for="photo_size"><?= I18N::translate('Photo size') ?>:</label>
+                            <label for="photo_size"><?= I18N::translate('Photo size') ?></label>
                             <input type="text" onclick="togglePercent(this, false)" onblur="togglePercent(this, true)" class="form-control col-sm-6" size="10" name="vars[photo_size]" id="photo_size"
                                    value="<?= e($vars["photo_size"]) ?>">
                         </div>
@@ -275,11 +275,11 @@ $usegraphviz = $vars['graphviz_bin'] != "";
                 <?= MainPage::addLabel('', 'Tile design'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="col-auto">
-                        <label for="indi_tile_shape"><?= I18N::translate('Individual tile shape') ?>:</label>
+                        <label for="indi_tile_shape"><?= I18N::translate('Individual tile shape') ?></label>
                         <?= view('components/select', ['name' => 'vars[indi_tile_shape]', 'id' => 'indi_tile_shape', 'selected' => e($vars['indi_tile_shape']), 'options' => MainPage::updateTranslations($settings["indi_tile_shape_options"])]) ?>
                     </div>
                     <div class="col-auto">
-                        <label for="indi_display_sex"><?= I18N::translate('Display sex of individual') ?>:</label>
+                        <label for="indi_display_sex"><?= I18N::translate('Display sex of individual') ?></label>
                         <?= view('components/select', ['name' => 'vars[indi_display_sex]', 'id' => 'indi_display_sex', 'selected' => e($vars['indi_display_sex']), 'options' => MainPage::updateTranslations($settings["indi_display_sex_options"])]) ?>
                     </div>
                 </div>
@@ -415,12 +415,12 @@ $usegraphviz = $vars['graphviz_bin'] != "";
                 <?= MainPage::addLabel('', 'Space'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="row">
-                        <label for="ranksep"><?= I18N::translate('Between generations') ?>:</label>
+                        <label for="ranksep"><?= I18N::translate('Between generations') ?></label>
                         <div class="col-auto">
                             <input type="text" onclick="togglePercent(this, false)" onblur="togglePercent(this, true)" class="form-control col-sm-6" size="10" name="vars[ranksep]" id="ranksep"
                                    value="<?= e($vars["ranksep"]) ?>">
                         </div>
-                        <label for="nodesep"><?= I18N::translate('Between individuals on the same level') ?>:</label>
+                        <label for="nodesep"><?= I18N::translate('Between individuals on the same level') ?></label>
                         <div class="col-auto">
                             <input type="text" onclick="togglePercent(this, false)" onblur="togglePercent(this, true)" class="form-control col-sm-6" size="10" name="vars[nodesep]" id="nodesep"
                                    value="<?= e($vars["nodesep"]) ?>">
@@ -432,15 +432,15 @@ $usegraphviz = $vars['graphviz_bin'] != "";
                 <?= MainPage::addLabel('', 'Font'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="row">
-                        <label for="typeface"><?= I18N::translate('Typeface') ?>:</label>
+                        <label for="typeface"><?= I18N::translate('Typeface') ?></label>
                         <div class="col-auto">
                             <?= view('components/select', ['name' => 'vars[typeface]', 'id' => 'typeface', 'selected' => I18N::digits($vars['typeface']), 'options' => MainPage::updateTranslations($settings["typefaces"])]) ?>
                         </div>
-                        <label for="font_size_name"><?= I18N::translate('Font size for names') ?>:</label>
+                        <label for="font_size_name"><?= I18N::translate('Font size for names') ?></label>
                         <div class="col-auto">
                             <input type="text" class="form-control col-sm-6" size="10" name="vars[font_size_name]" id="font_size_name" value="<?= I18N::digits($vars["font_size_name"]); ?>">
                         </div>
-                        <label for="font_size"><?= I18N::translate('Font size for details') ?>:</label>
+                        <label for="font_size"><?= I18N::translate('Font size for details') ?></label>
                         <div class="col-auto">
                             <input type="text" class="form-control col-sm-6" size="10" name="vars[font_size]" id="font_size" value="<?= I18N::digits($vars["font_size"]); ?>">
                         </div>

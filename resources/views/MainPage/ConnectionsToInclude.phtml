@@ -14,20 +14,20 @@ use vendor\WebtreesModules\gvexport\MainPage;
         <div class="col-sm-6">
             <input class="cart_toggle" type="checkbox" name="vars[include_ancestors]" id="include_ancestors" value="ance" <?= $vars["include_ancestors"] ? 'checked' : '' ?>>
             <label for="include_ancestors"><?= I18N::translate('Include ancestors') ?></label><br>
-            <label for="ancestor_levels" class="col-sm-6"><?= I18N::translate('Max levels') ?>:</label>
+            <label for="ancestor_levels" class="col-sm-6"><?= I18N::translate('Max levels') ?></label>
             <input type="number" min="0" max="99" class="cart_toggle form-control max-level-box" size="3" name="vars[ancestor_levels]" id="ancestor_levels" value="<?= I18N::digits($vars["ancestor_levels"]); ?>">
         </div>
         <div class="col-sm-6">
             <input class="cart_toggle" type="checkbox" name="vars[include_descendants]" id="include_descendants" value="desc" <?= $vars["include_descendants"] ? 'checked' : '' ?>>
             <label for="include_ancestors"><?= I18N::translate('Include descendants') ?></label><br>
-            <label for="descendant_levels" class="col-sm-6"><?= I18N::translate('Max levels') ?>:</label>
+            <label for="descendant_levels" class="col-sm-6"><?= I18N::translate('Max levels') ?></label>
             <input type="number" min="0" max="99" class="cart_toggle form-control max-level-box" size="3" name="vars[descendant_levels]" id="descendant_levels"
                    value="<?= I18N::digits($vars["descendant_levels"]); ?>">
         </div>
     </div>
     <hr>
     <div class="row">
-        <div><?= I18N::translate('Relation types to include') ?>:</div>
+        <div><?= I18N::translate('Relation types to include') ?></div>
         <div class="col-auto mx-3">
             <input class="cart_toggle" type="checkbox" onclick="updateRelationOption('include_siblings')" name="vars[include_siblings]" id="include_siblings" value="sibl" <?= $vars["include_siblings"] ? 'checked' : '' ?>>
             <label for="include_siblings"><?= I18N::translate('Siblings') ?></label>
