@@ -45,33 +45,9 @@ $usegraphviz = $vars['graphviz_bin'] != "";
 <script src="<?= $module->assetUrl('javascript/gvexport.js'); ?>"></script>
 <?= $usegraphviz ? "" : "<script src=\"" . $module->assetUrl('javascript/jspdf.umd.min.js') . "\"></script>"; ?>
 <link href="<?= $module->assetUrl('css/gvexport.css'); ?>" rel="stylesheet">
+<?= view($module->name() . '::MainPage/Translations'); ?>
 <script type="text/javascript">
     const cartempty = <?= $cartempty ? "true" : "false" ?>;
-    const TRANSLATE = {
-        "Delete":"<?= I18N::translate('Delete'); ?>",
-        "Download":"<?= I18N::translate('Download'); ?>",
-        "Copy link":"<?= I18N::translate('Copy link'); ?>",
-        "Revoke link":"<?= I18N::translate('Revoke link'); ?>",
-        "Revoked access to shared link":"<?= I18N::translate('Revoked access to shared link'); ?>",
-        "Copied link to clipboard":"<?= I18N::translate('Copied link to clipboard'); ?>",
-        "Failed to copy link to clipboard":"<?= I18N::translate('Failed to copy link to clipboard'); ?>",
-        "Copy manually below":"<?= I18N::translate('Copy manually below'); ?>",
-        "Overwrite settings '%s'?":"<?= I18N::translate("Overwrite settings '%s'?", '%s'); ?>",
-        "Add to My favorites":"<?= I18N::translate("Add to My favorites"); ?>",
-        "Add to Tree favorites":"<?= I18N::translate("Add to Tree favorites"); ?>",
-        "Added to My favourites":"<?= I18N::translate("Added to My favourites"); ?>",
-        "Added to Tree favourites":"<?= I18N::translate("Added to Tree favourites"); ?>",
-        "Source individual has replaced existing individual":"<?= I18N::translate("Source individual has replaced existing individual"); ?>",
-        "One new source individual added to %s existing individuals":"<?= I18N::translate("One new source individual added to %s existing individuals", '%s'); ?>",
-        "Cancel":"<?= I18N::translate("Cancel"); ?>",
-        "Overwrite":"<?= I18N::translate("Overwrite"); ?>",
-        "Individual not found":"<?= I18N::translate('Individual not found') ?>",
-        "Diagram will be rendered in browser as server doesn't support photo shapes":"<?= I18N::translate("Diagram will be rendered in browser as server doesn't support photo shapes"); ?>",
-        "Message history":"<?= I18N::translate("Message history"); ?>",
-        "Your browser does not support exporting images this large. Please reduce number of records, reduce DPI setting, or use SVG option.":"<?= I18N::translate('Your browser does not support exporting images this large. Please reduce number of records, reduce DPI setting, or use SVG option.') ?>",
-        "Unable to load setting":"<?= I18N::translate('Unable to load setting') ?>",
-        "Invalid JSON":"<?= I18N::translate('Invalid JSON'); ?>"
-    }
     let autoUpdate = <?= $vars["auto_update"] ? 'true' : 'false' ?>;
     let debug_string = "";
     let TOMSELECT_URL = "";
@@ -134,22 +110,7 @@ $usegraphviz = $vars['graphviz_bin'] != "";
         ?>
 
             <div class="row no-right-margin form-group">
-                <?= MainPage::addLabel('', 'Clippings cart'); ?>
-                <div class="col-sm-8 wt-page-options-value">
-                    <?= I18N::translate('You have items in the clippings cart, which can be used for the diagram instead of the below options.') ?>
-                    <div class="col-sm-8 wt-page-options-value">
-                        <div class="row">
-                            <div class="col-auto mx-3">
-                                <input type="radio" onclick="toggleCart(true)" name="vars[use_cart]" id="usecart_yes" value="use_cart" <?= $vars["use_cart"] ? 'checked' : '' ?>>
-                                <label for="usecart_yes"><?= I18N::translate('Use clippings cart') ?></label>
-                            </div>
-                            <div class="col-auto mx-3">
-                                <input type="radio" onclick="toggleCart(false)" name="vars[use_cart]" id="usecart_no" value="ignorecart" <?= !$vars["use_cart"] ? 'checked' : '' ?>>
-                                <label for="usecart_no"><?= I18N::translate('Ignore clippings cart') ?></label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <?= view($module->name() . '::MainPage/ItemsInClippingsCart',['vars' => $vars, 'show_help' => true]); ?>
             </div>
         <?php } ?>
 

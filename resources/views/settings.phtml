@@ -55,25 +55,14 @@ $settings = $settingsObj->getDefaultSettings();
                 <h3><?= I18N::translate('People to be included') ?></h3>
             </div>
 
-            <div class="row">
-                <label class="col-sm-4 col-form-label" for="include_ancestors"><?= I18N::translate('Use clippings cart') ?></label>
-                <div class="col-sm-8 wt-page-options-value">
-                    <div class="row">
-                        <div class="col-auto mx-3">
-                            <input type="radio" name="vars[use_cart]" id="usecart_yes" value="use_cart" <?= $vars["use_cart"] ? 'checked' : '' ?>>
-                            <label for="usecart_yes"><?= I18N::translate('Use clippings cart') ?></label>
-                        </div>
-                        <div class="col-auto mx-3">
-                            <input type="radio" name="vars[use_cart]" id="usecart_no" value="ignorecart" <?= !$vars["use_cart"] ? 'checked' : '' ?>>
-                            <label for="usecart_no"><?= I18N::translate('Ignore clippings cart') ?></label>
-                        </div>
-                    </div>
-                </div>
+            <div class="row no-right-margin form-group">
+                <?= view($module->name() . '::MainPage/ItemsInClippingsCart',['vars' => $vars, 'show_help' => false]); ?>
             </div>
-
+            <hr>
             <div class="row">
                 <?= view($module->name() . '::MainPage/ConnectionsToInclude',['vars' => $vars, 'cart_empty' => false, 'show_help' => false]); ?>
             </div>
+            <hr>
             <div class="row">
                 <label class="col-sm-4 col-form-label" for="mark_not_related"><?= I18N::translate('Non-relatives') ?></label>
                 <div class="col-sm-8 wt-page-options-value">
