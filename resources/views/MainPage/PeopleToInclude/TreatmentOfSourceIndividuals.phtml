@@ -9,7 +9,7 @@ use vendor\WebtreesModules\gvexport\MainPage;
  */
 ?>
 
-<?= MainPage::addLabel('graph_dir', 'Treatment of source individuals'); ?>
+<?= MainPage::addLabel('graph_dir', 'Treatment of source individuals', $show_help); ?>
 <div class="col-sm-8 wt-page-options-value">
     <?= view('components/select', ['name' => 'vars[url_xref_treatment]', 'id' => 'url_xref_treatment', 'selected' => e($vars['url_xref_treatment']), 'options' => MainPage::updateTranslations($settings["url_xref_treatment_options"])]) ?>
 </div>

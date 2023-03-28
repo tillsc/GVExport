@@ -56,30 +56,16 @@ $settings = $settingsObj->getDefaultSettings();
             </div>
 
             <div class="row no-right-margin form-group">
-                <?= view($module->name() . '::MainPage/PeopleToInclude/ItemsInClippingsCart',['vars' => $vars, 'show_help' => false]); ?>
+                <?php
+                // Include the "People to be included" section of the settings
+                echo view($module->name() . '::ControlPanel/PeopleToInclude',
+                    [
+                        'vars' => $vars,
+                        'module' => $module,
+                        'settings' => $settings
+                    ]); ?>
             </div>
             <hr>
-            <div class="row">
-                <?= view($module->name() . '::MainPage/PeopleToInclude/ConnectionsToInclude',['vars' => $vars, 'cart_empty' => false, 'show_help' => false]); ?>
-            </div>
-            <hr>
-            <div class="row">
-                <label class="col-sm-4 col-form-label" for="mark_not_related"><?= I18N::translate('Non-relatives') ?></label>
-                <div class="col-sm-8 wt-page-options-value">
-                    <input class="cart_toggle" type="checkbox" name="vars[mark_not_related]" id="mark_not_related" value="mark_not_related" <?= $vars["mark_not_related"] ? 'checked' : '' ?>>
-                    <label class="check-list" for="mark_not_related"><?= I18N::translate('Mark not blood-related people with different color') ?></label>
-                    <br/>
-                    <input class="cart_toggle" type="checkbox" name="vars[faster_relation_check]" id="faster_relation_check" value="faster_relation_check" <?= $vars["faster_relation_check"] ? 'checked' : '' ?>>
-                    <label class="check-list" for="faster_relation_check"><?= I18N::translate('Ignore unseen links to speed up relative check') ?></label>
-                </div>
-                <div class="row form-group">
-                    <label class="col-sm-4 col-form-label" for="graph_dir"><?= I18N::translate('Treatment of source individuals') ?></label>
-                    <div class="col-sm-8 wt-page-options-value">
-                        <?= view('components/select', ['name' => 'vars[url_xref_treatment]', 'id' => 'url_xref_treatment', 'selected' => e($vars['url_xref_treatment']), 'options' => MainPage::updateTranslations($settings["url_xref_treatment_options"])]) ?>
-                    </div>
-                </div>
-            </div>
-
             <h3><?= /* I18N: Appearance heading */ I18N::translate('Appearance') ?></h3>
 
             <div class="row">

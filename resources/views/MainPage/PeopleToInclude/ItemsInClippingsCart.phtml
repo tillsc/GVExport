@@ -11,7 +11,10 @@ use vendor\WebtreesModules\gvexport\MainPage;
 ?>
 <?= MainPage::addLabel('', 'Clippings cart', $show_help); ?>
 <div class="col-sm-8 wt-page-options-value">
-    <?= I18N::translate('You have items in the clippings cart, which can be used for the diagram instead of the below options.') ?>
+    <?php
+        if ($show_help) {
+            I18N::translate('You have items in the clippings cart, which can be used for the diagram instead of the below options.');
+        } ?>
     <div class="col-sm-8 wt-page-options-value">
         <div class="row">
             <div class="col-auto mx-3">
