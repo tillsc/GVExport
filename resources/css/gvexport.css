@@ -380,4 +380,6 @@ span.NAME {
 .max-level-box {
     width: unset;
     display: inline;
+    height: 2em;
+    margin-top: 5px !important;
 }

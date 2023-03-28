@@ -101,7 +101,10 @@ $usegraphviz = $vars['graphviz_bin'] != "";
         $overridePID = false;
     }
 ?>
-        <?= view($module->name() . '::MainPage/PeopleToInclude',
+
+        <?php
+        // Include the "People to be included" section of the settings
+        echo view($module->name() . '::MainPage/PeopleToInclude',
             [
                 'vars' => $vars,
                 'tree' => $tree,
