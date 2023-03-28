@@ -55,92 +55,17 @@ $settings = $settingsObj->getDefaultSettings();
                 <h3><?= I18N::translate('People to be included') ?></h3>
             </div>
 
-            <div class="row">
-                <label class="col-sm-4 col-form-label" for="include_ancestors"><?= I18N::translate('Use clippings cart') ?></label>
-                <div class="col-sm-8 wt-page-options-value">
-                    <div class="row">
-                        <div class="col-auto mx-3">
-                            <input type="radio" name="vars[use_cart]" id="usecart_yes" value="use_cart" <?= $vars["use_cart"] ? 'checked' : '' ?>>
-                            <label for="usecart_yes"><?= I18N::translate('Use clippings cart') ?></label>
-                        </div>
-                        <div class="col-auto mx-3">
-                            <input type="radio" name="vars[use_cart]" id="usecart_no" value="ignorecart" <?= !$vars["use_cart"] ? 'checked' : '' ?>>
-                            <label for="usecart_no"><?= I18N::translate('Ignore clippings cart') ?></label>
-                        </div>
-                    </div>
-                </div>
+            <div class="row no-right-margin form-group">
+                <?php
+                // Include the "People to be included" section of the settings
+                echo view($module->name() . '::ControlPanel/PeopleToInclude',
+                    [
+                        'vars' => $vars,
+                        'module' => $module,
+                        'settings' => $settings
+                    ]); ?>
             </div>
-
-            <div class="row">
-                <label class="col-sm-4 col-form-label" for="include_ancestors"><?= I18N::translate('Include ancestors') ?></label>
-                <div class="col-sm-8 wt-page-options-value">
-                    <div class="row">
-                        <div class="col-auto mx-3">
-                            <input class="cart_toggle" type="checkbox" name="vars[include_ancestors]" id="include_ancestors" value="ance" <?= $vars["include_ancestors"] ? 'checked' : '' ?>>
-                        </div>
-                        <div class="col-auto row">
-                            <label for="ancestor_levels" class="col-sm-6"><?= I18N::translate('Max levels') ?>:</label>
-                            <input onblur="defaultValueWhenBlank(this, 0)" type="text" class="cart_toggle form-control col-sm-6" size="10" name="vars[ancestor_levels]" id="ancestor_levels" value="<?= I18N::digits($vars["ancestor_levels"]); ?>">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <label class="col-sm-4 col-form-label"><?= I18N::translate('Include') ?></label>
-                <div class="col-sm-8 wt-page-options-value">
-                    <div class="row">
-                        <div class="col-auto mx-3">
-                            <input class="cart_toggle" type="checkbox" onclick="updateRelationOption('include_siblings')" name="vars[include_siblings]" id="include_siblings" value="sibl" <?= $vars["include_siblings"] ? 'checked' : '' ?>>
-                            <label for="include_siblings"><?= I18N::translate('Siblings') ?></label>
-                        </div>
-                        <div class="col-auto mx-3">
-                            <input class="cart_toggle" onclick="updateRelationOption('include_all_relatives')" type="checkbox" name="vars[include_all_relatives]" id="include_all_relatives" value="rels" <?= $vars["include_all_relatives"] ? 'checked' : '' ?>>
-                            <label for="include_all_relatives"><?= I18N::translate('All relatives') ?></label>
-                        </div>
-                        <div class="col-auto mx-3">
-                            <input class="cart_toggle" type="checkbox" onclick="updateRelationOption('include_spouses')" name="vars[include_spouses]" id="include_spouses" value="spou" <?= $vars["include_spouses"] ? 'checked' : '' ?>>
-                            <label for="include_spouses"><?= I18N::translate('Partners') ?></label>
-                        </div>
-                        <div class="col-auto mx-3">
-                            <input class="cart_toggle" type="checkbox" onclick="updateRelationOption('include_all')" name="vars[include_all]" id="include_all" value="any" <?= $vars["include_all"] ? 'checked' : '' ?> >
-                            <label for="include_all"><?= I18N::translate('Anyone') ?></label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <label class="col-sm-4 col-form-label" for="include_descendants"><?= I18N::translate('Include descendants') ?></label>
-                <div class="col-sm-8 wt-page-options-value">
-                    <div class="row">
-                        <div class="col-auto mx-3">
-                            <input class="cart_toggle" type="checkbox" name="vars[include_descendants]" id="include_descendants" value="desc" <?= $vars["include_descendants"] ? 'checked' : '' ?>>
-                        </div>
-                        <div class="col-auto row">
-                            <label for="descendant_levels" class="col-sm-6"><?= I18N::translate('Max levels') ?>:</label>
-                            <input onblur="defaultValueWhenBlank(this, 0)" type="text" class="form-control col-sm-6 cart_toggle" size="10" name="vars[descendant_levels]" id="descendant_levels" value="<?= I18N::digits($vars["descendant_levels"]); ?>">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <label class="col-sm-4 col-form-label" for="mark_not_related"><?= I18N::translate('Non-relatives') ?></label>
-                <div class="col-sm-8 wt-page-options-value">
-                    <input class="cart_toggle" type="checkbox" name="vars[mark_not_related]" id="mark_not_related" value="mark_not_related" <?= $vars["mark_not_related"] ? 'checked' : '' ?>>
-                    <label class="check-list" for="mark_not_related"><?= I18N::translate('Mark not blood-related people with different color') ?></label>
-                    <br/>
-                    <input class="cart_toggle" type="checkbox" name="vars[faster_relation_check]" id="faster_relation_check" value="faster_relation_check" <?= $vars["faster_relation_check"] ? 'checked' : '' ?>>
-                    <label class="check-list" for="faster_relation_check"><?= I18N::translate('Ignore unseen links to speed up relative check') ?></label>
-                </div>
-                <div class="row form-group">
-                    <label class="col-sm-4 col-form-label" for="graph_dir"><?= I18N::translate('Treatment of source individuals') ?></label>
-                    <div class="col-sm-8 wt-page-options-value">
-                        <?= view('components/select', ['name' => 'vars[url_xref_treatment]', 'id' => 'url_xref_treatment', 'selected' => e($vars['url_xref_treatment']), 'options' => MainPage::updateTranslations($settings["url_xref_treatment_options"])]) ?>
-                    </div>
-                </div>
-            </div>
-
+            <hr>
             <h3><?= /* I18N: Appearance heading */ I18N::translate('Appearance') ?></h3>
 
             <div class="row">

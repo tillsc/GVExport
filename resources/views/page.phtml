@@ -45,33 +45,9 @@ $usegraphviz = $vars['graphviz_bin'] != "";
 <script src="<?= $module->assetUrl('javascript/gvexport.js'); ?>"></script>
 <?= $usegraphviz ? "" : "<script src=\"" . $module->assetUrl('javascript/jspdf.umd.min.js') . "\"></script>"; ?>
 <link href="<?= $module->assetUrl('css/gvexport.css'); ?>" rel="stylesheet">
+<?= view($module->name() . '::MainPage/Translations'); ?>
 <script type="text/javascript">
     const cartempty = <?= $cartempty ? "true" : "false" ?>;
-    const TRANSLATE = {
-        "Delete":"<?= I18N::translate('Delete'); ?>",
-        "Download":"<?= I18N::translate('Download'); ?>",
-        "Copy link":"<?= I18N::translate('Copy link'); ?>",
-        "Revoke link":"<?= I18N::translate('Revoke link'); ?>",
-        "Revoked access to shared link":"<?= I18N::translate('Revoked access to shared link'); ?>",
-        "Copied link to clipboard":"<?= I18N::translate('Copied link to clipboard'); ?>",
-        "Failed to copy link to clipboard":"<?= I18N::translate('Failed to copy link to clipboard'); ?>",
-        "Copy manually below":"<?= I18N::translate('Copy manually below'); ?>",
-        "Overwrite settings '%s'?":"<?= I18N::translate("Overwrite settings '%s'?", '%s'); ?>",
-        "Add to My favorites":"<?= I18N::translate("Add to My favorites"); ?>",
-        "Add to Tree favorites":"<?= I18N::translate("Add to Tree favorites"); ?>",
-        "Added to My favourites":"<?= I18N::translate("Added to My favourites"); ?>",
-        "Added to Tree favourites":"<?= I18N::translate("Added to Tree favourites"); ?>",
-        "Source individual has replaced existing individual":"<?= I18N::translate("Source individual has replaced existing individual"); ?>",
-        "One new source individual added to %s existing individuals":"<?= I18N::translate("One new source individual added to %s existing individuals", '%s'); ?>",
-        "Cancel":"<?= I18N::translate("Cancel"); ?>",
-        "Overwrite":"<?= I18N::translate("Overwrite"); ?>",
-        "Individual not found":"<?= I18N::translate('Individual not found') ?>",
-        "Diagram will be rendered in browser as server doesn't support photo shapes":"<?= I18N::translate("Diagram will be rendered in browser as server doesn't support photo shapes"); ?>",
-        "Message history":"<?= I18N::translate("Message history"); ?>",
-        "Your browser does not support exporting images this large. Please reduce number of records, reduce DPI setting, or use SVG option.":"<?= I18N::translate('Your browser does not support exporting images this large. Please reduce number of records, reduce DPI setting, or use SVG option.') ?>",
-        "Unable to load setting":"<?= I18N::translate('Unable to load setting') ?>",
-        "Invalid JSON":"<?= I18N::translate('Invalid JSON'); ?>"
-    }
     let autoUpdate = <?= $vars["auto_update"] ? 'true' : 'false' ?>;
     let debug_string = "";
     let TOMSELECT_URL = "";
@@ -113,164 +89,29 @@ $usegraphviz = $vars['graphviz_bin'] != "";
             <h3><?= I18N::translate('People to be included') ?></h3>
         </div>
 
+    <?php
+    /* Check if another module (e.g. vesta classic) is adding the XREF to
+       the name. If so, we want to enable the XREF option for individuals
+       unless we already have a saved setting */
+    $startName = $individual->fullName();
+    $name = str_replace(" (" . $individual->xref() . ")", "", $startName);
+    if ($startName != $name && isset($vars["first_run_xref_check"])) {
+        $overridePID = true;
+    } else {
+        $overridePID = false;
+    }
+?>
+
         <?php
-        /* Check if another module (e.g. vesta classic) is adding the XREF to
-           the name. If so, we want to enable the XREF option for individuals
-           unless we already have a saved setting */
-        $startName = $individual->fullName();
-        $name = str_replace(" (" . $individual->xref() . ")", "", $startName);
-        if ($startName != $name && isset($vars["first_run_xref_check"])) {
-            $overridePID = true;
-        } else {
-            $overridePID = false;
-        }
-
-        $greypeople = false;
-        // Check if there are INDI records in the clippings cart, to decide what options to allow
-        if (!$cartempty) {
-        if ($vars["use_cart"]) {
-            $greypeople = true;
-        }
-        ?>
-
-            <div class="row no-right-margin form-group">
-                <?= MainPage::addLabel('', 'Clippings cart'); ?>
-                <div class="col-sm-8 wt-page-options-value">
-                    <?= I18N::translate('You have items in the clippings cart, which can be used for the diagram instead of the below options.') ?>
-                    <div class="col-sm-8 wt-page-options-value">
-                        <div class="row">
-                            <div class="col-auto mx-3">
-                                <input type="radio" onclick="toggleCart(true)" name="vars[use_cart]" id="usecart_yes" value="use_cart" <?= $vars["use_cart"] ? 'checked' : '' ?>>
-                                <label for="usecart_yes"><?= I18N::translate('Use clippings cart') ?></label>
-                            </div>
-                            <div class="col-auto mx-3">
-                                <input type="radio" onclick="toggleCart(false)" name="vars[use_cart]" id="usecart_no" value="ignorecart" <?= !$vars["use_cart"] ? 'checked' : '' ?>>
-                                <label for="usecart_no"><?= I18N::translate('Ignore clippings cart') ?></label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        <?php } ?>
-
-        <div class="row no-right-margin form-group">
-            <?= MainPage::addLabel('pid', 'Include anyone related to'); ?>
-            <div class="col-sm-8 wt-page-options-value">
-                <div id="indi_list">
-
-                </div>
-                <div id="clear_list"><a class="pointer" onclick="clearIndiList()"><?= I18N::translate('Clear all') ?></a></div>
-                <div class="cart_toggle_hide" <?php if ($greypeople) { echo 'style="display: none"'; } ?>>
-                    <?= view('components/select-individual', ['name' => 'pid', 'id' => 'pid', 'tree' => $tree, 'individual' => "", 'required'=>false]); ?>
-                    <div class="red-text" id="indi-error"></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row no-right-margin form-group">
-            <?= MainPage::addLabel('include_ancestors', 'Include ancestors'); ?>
-            <div class="col-sm-8 wt-page-options-value">
-                <div class="row">
-                    <div class="col-auto mx-3">
-                        <input class="cart_toggle" type="checkbox" name="vars[include_ancestors]" id="include_ancestors" value="ance" <?= $vars["include_ancestors"] ? 'checked' : '' ?>>
-                    </div>
-                    <div class="col-auto row">
-                        <label for="ancestor_levels" class="col-sm-6"><?= I18N::translate('Max levels') ?>:</label>
-                        <input onblur="defaultValueWhenBlank(this, 0)" type="text" class="cart_toggle form-control col-sm-6" size="10" name="vars[ancestor_levels]" id="ancestor_levels" value="<?= I18N::digits($vars["ancestor_levels"]); ?>">
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row no-right-margin form-group">
-            <?= MainPage::addLabel('', 'Include'); ?>
-            <div class="col-sm-8 wt-page-options-value">
-                <div class="row">
-                    <div class="col-auto mx-3">
-                        <input class="cart_toggle" type="checkbox" onclick="updateRelationOption('include_siblings')" name="vars[include_siblings]" id="include_siblings" value="sibl" <?= $vars["include_siblings"] ? 'checked' : '' ?>>
-                        <label for="include_siblings"><?= I18N::translate('Siblings') ?></label>
-                    </div>
-                    <div class="col-auto mx-3">
-                        <input class="cart_toggle" onclick="updateRelationOption('include_all_relatives')" type="checkbox" name="vars[include_all_relatives]" id="include_all_relatives" value="rels" <?= $vars["include_all_relatives"] ? 'checked' : '' ?>>
-                        <label for="include_all_relatives"><?= I18N::translate('All relatives') ?></label>
-                    </div>
-                    <div class="col-auto mx-3">
-                        <input class="cart_toggle" type="checkbox" onclick="updateRelationOption('include_spouses')" name="vars[include_spouses]" id="include_spouses" value="spou" <?= $vars["include_spouses"] ? 'checked' : '' ?>>
-                        <label for="include_spouses"><?= I18N::translate('Partners') ?></label>
-                    </div>
-                    <div class="col-auto mx-3">
-                        <input class="cart_toggle" type="checkbox" onclick="updateRelationOption('include_all')" name="vars[include_all]" id="include_all" value="any" <?= $vars["include_all"] ? 'checked' : '' ?> <?= !$cartempty ? "disabled" : ""; ?>>
-                        <label for="include_all"><?= I18N::translate('Anyone') ?></label>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row no-right-margin form-group">
-            <?= MainPage::addLabel('include_descendants', 'Include descendants'); ?>
-            <div class="col-sm-8 wt-page-options-value">
-                <div class="row">
-                    <div class="col-auto mx-3">
-                        <input class="cart_toggle" type="checkbox" name="vars[include_descendants]" id="include_descendants" value="desc" <?= $vars["include_descendants"] ? 'checked' : '' ?>>
-                    </div>
-                    <div class="col-auto row">
-                        <label for="descendant_levels" class="col-sm-6"><?= I18N::translate('Max levels') ?>:</label>
-                        <input onblur="defaultValueWhenBlank(this, 0)" type="text" class="cart_toggle form-control col-sm-6" size="10" name="vars[descendant_levels]" id="descendant_levels"
-                               value="<?= I18N::digits($vars["descendant_levels"]); ?>">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="people-advanced" <?= $vars["show_adv_people"] ? '' : 'style="display:none"'; ?>>
-            <div class="row no-right-margin form-group">
-                <?= MainPage::addLabel('xref_list', 'XREFs of included individuals'); ?>
-                <div class="col-sm-8 wt-page-options-value">
-                    <div class="input-group mt-1">
-                        <input type="text" class="form-control" name="vars[xref_list]" id="xref_list" value="<?= e($vars['xref_list']) ?>" onchange="refreshIndisFromXREFS(true)">
-                        <div class="input-group-append">
-                            <button type="button" class="btn btn-outline-secondary" onclick="refreshIndisFromXREFS(false)">⟳</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row no-right-margin form-group">
-                <?= MainPage::addLabel('stop_xref_list', 'Stop processing on'); ?>
-                <div class="col-sm-8 wt-page-options-value">
-                    <div id="stop_indi_list">
-
-                    </div>
-                    <div id="clear_stop_list"><a class="pointer" onclick="clearStopIndiList()"><?= I18N::translate('Clear all') ?></a></div>
-                    <div class="cart_toggle_hide" <?php if ($greypeople) { echo 'style="display: none"'; } ?>>
-                        <?php
-                        echo view('components/select-individual', ['name' => 'vars[stop_pid]', 'id' => 'stop_pid', 'tree' => $tree, 'xref' => '']);
-                        ?>
-                    </div>
-                    <div class="input-group mt-1">
-                        <input type="text" class="cart_toggle form-control" name="vars[stop_xref_list]" id="stop_xref_list" value="<?= e($vars['stop_xref_list']); ?>" onchange="refreshIndisFromXREFS(true)">
-                        <div class="input-group-append">
-                            <button type="button" class="btn btn-outline-secondary" onclick="refreshIndisFromXREFS(false)">⟳</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row no-right-margin form-group">
-                <?= MainPage::addLabel('mark_not_related', 'Non-relatives'); ?>
-                <div class="col-sm-8 wt-page-options-value">
-                    <input class="cart_toggle" onclick="setStateFastRelationCheck();" type="checkbox" name="vars[mark_not_related]" id="mark_not_related" value="mark_not_related" <?= $vars["mark_not_related"] ? 'checked' : '' ?>>
-                    <label class="check-list" for="mark_not_related"><?= I18N::translate('Mark not blood-related people with different color') ?></label>
-                    <br/>
-                    <input class="cart_toggle" type="checkbox" name="vars[faster_relation_check]" id="faster_relation_check" value="faster_relation_check" <?= $vars["faster_relation_check"] ? 'checked' : '' ?>>
-                    <label class="check-list" for="faster_relation_check"><?= I18N::translate('Ignore unseen links to speed up relative check') ?></label>
-                </div>
-            </div>
-            <div class="row no-right-margin form-group">
-                <?= MainPage::addLabel('graph_dir', 'Treatment of source individuals'); ?>
-                <div class="col-sm-8 wt-page-options-value">
-                    <?= view('components/select', ['name' => 'vars[url_xref_treatment]', 'id' => 'url_xref_treatment', 'selected' => e($vars['url_xref_treatment']), 'options' => MainPage::updateTranslations($settings["url_xref_treatment_options"])]) ?>
-                </div>
-            </div>
-        </div>
-        <a id="people-advanced-button" onclick="toggleAdvanced(this, 'people-advanced')"><div class="wt-page-options-label advanced-settings-btn"><?= ($vars["show_adv_people"] ? '↑ ' : '↓ ') . I18N::translate('Toggle advanced settings') . ($vars["show_adv_people"] ? ' ↑' : ' ↓'); ?></div></a>
+        // Include the "People to be included" section of the settings
+        echo view($module->name() . '::MainPage/PeopleToInclude',
+            [
+                'vars' => $vars,
+                'tree' => $tree,
+                'cartempty' => $cartempty,
+                'module' => $module,
+                'settings' => $settings
+            ]); ?>
 
         <h3><?= I18N::translate('Appearance') ?></h3>
         <div class="row no-right-margin form-group">
@@ -309,11 +150,11 @@ $usegraphviz = $vars['graphviz_bin'] != "";
                             <label for="show_photos"><?= I18N::translate('Show photos') ?></label>
                         </div>
                         <div class="col-auto">
-                            <label for="photo_shape"><?= I18N::translate('Photo shape') ?>:</label>
+                            <label for="photo_shape"><?= I18N::translate('Photo shape') ?></label>
                             <?= view('components/select', ['name' => 'vars[photo_shape]', 'id' => 'photo_shape', 'selected' => e($vars['photo_shape']), 'options' => MainPage::updateTranslations($settings["photo_shape_options"])]) ?>
                         </div>
                         <div class="col-auto">
-                            <label for="photo_size"><?= I18N::translate('Photo size') ?>:</label>
+                            <label for="photo_size"><?= I18N::translate('Photo size') ?></label>
                             <input type="text" onclick="togglePercent(this, false)" onblur="togglePercent(this, true)" class="form-control col-sm-6" size="10" name="vars[photo_size]" id="photo_size"
                                    value="<?= e($vars["photo_size"]) ?>">
                         </div>
@@ -324,11 +165,11 @@ $usegraphviz = $vars['graphviz_bin'] != "";
                 <?= MainPage::addLabel('', 'Tile design'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="col-auto">
-                        <label for="indi_tile_shape"><?= I18N::translate('Individual tile shape') ?>:</label>
+                        <label for="indi_tile_shape"><?= I18N::translate('Individual tile shape') ?></label>
                         <?= view('components/select', ['name' => 'vars[indi_tile_shape]', 'id' => 'indi_tile_shape', 'selected' => e($vars['indi_tile_shape']), 'options' => MainPage::updateTranslations($settings["indi_tile_shape_options"])]) ?>
                     </div>
                     <div class="col-auto">
-                        <label for="indi_display_sex"><?= I18N::translate('Display sex of individual') ?>:</label>
+                        <label for="indi_display_sex"><?= I18N::translate('Display sex of individual') ?></label>
                         <?= view('components/select', ['name' => 'vars[indi_display_sex]', 'id' => 'indi_display_sex', 'selected' => e($vars['indi_display_sex']), 'options' => MainPage::updateTranslations($settings["indi_display_sex_options"])]) ?>
                     </div>
                 </div>
@@ -464,12 +305,12 @@ $usegraphviz = $vars['graphviz_bin'] != "";
                 <?= MainPage::addLabel('', 'Space'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="row">
-                        <label for="ranksep"><?= I18N::translate('Between generations') ?>:</label>
+                        <label for="ranksep"><?= I18N::translate('Between generations') ?></label>
                         <div class="col-auto">
                             <input type="text" onclick="togglePercent(this, false)" onblur="togglePercent(this, true)" class="form-control col-sm-6" size="10" name="vars[ranksep]" id="ranksep"
                                    value="<?= e($vars["ranksep"]) ?>">
                         </div>
-                        <label for="nodesep"><?= I18N::translate('Between individuals on the same level') ?>:</label>
+                        <label for="nodesep"><?= I18N::translate('Between individuals on the same level') ?></label>
                         <div class="col-auto">
                             <input type="text" onclick="togglePercent(this, false)" onblur="togglePercent(this, true)" class="form-control col-sm-6" size="10" name="vars[nodesep]" id="nodesep"
                                    value="<?= e($vars["nodesep"]) ?>">
@@ -481,15 +322,15 @@ $usegraphviz = $vars['graphviz_bin'] != "";
                 <?= MainPage::addLabel('', 'Font'); ?>
                 <div class="col-sm-8 wt-page-options-value">
                     <div class="row">
-                        <label for="typeface"><?= I18N::translate('Typeface') ?>:</label>
+                        <label for="typeface"><?= I18N::translate('Typeface') ?></label>
                         <div class="col-auto">
                             <?= view('components/select', ['name' => 'vars[typeface]', 'id' => 'typeface', 'selected' => I18N::digits($vars['typeface']), 'options' => MainPage::updateTranslations($settings["typefaces"])]) ?>
                         </div>
-                        <label for="font_size_name"><?= I18N::translate('Font size for names') ?>:</label>
+                        <label for="font_size_name"><?= I18N::translate('Font size for names') ?></label>
                         <div class="col-auto">
                             <input type="text" class="form-control col-sm-6" size="10" name="vars[font_size_name]" id="font_size_name" value="<?= I18N::digits($vars["font_size_name"]); ?>">
                         </div>
-                        <label for="font_size"><?= I18N::translate('Font size for details') ?>:</label>
+                        <label for="font_size"><?= I18N::translate('Font size for details') ?></label>
                         <div class="col-auto">
                             <input type="text" class="form-control col-sm-6" size="10" name="vars[font_size]" id="font_size" value="<?= I18N::digits($vars["font_size"]); ?>">
                         </div>

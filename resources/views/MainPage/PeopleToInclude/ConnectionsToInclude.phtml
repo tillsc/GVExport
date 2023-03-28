@@ -1,0 +1,60 @@
+<?php
+
+use Fisharebest\Webtrees\I18N;
+use vendor\WebtreesModules\gvexport\MainPage;
+/**
+ * @var array       $vars                   array of saved settings
+ * @var bool        $cart_empty              whether the clippings cart is empty
+ * @var bool        $show_help               whether to show help icons
+ */
+?>
+<?= MainPage::addLabel('', 'Connections to include', $show_help); ?>
+<div class="col-sm-8 wt-page-options-value">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="align-middle-container">
+                <input class="cart_toggle" type="checkbox" name="vars[include_ancestors]" id="include_ancestors" value="ance" <?= $vars["include_ancestors"] ? 'checked' : '' ?>>
+                <label for="include_ancestors" class="col-2-width-checkbox"><?= I18N::translate('Include ancestors') ?></label>
+            </div>
+            <div class="align-middle-container">
+                <label for="ancestor_levels" class="col-sm-6"><?= I18N::translate('Max levels') ?></label>
+                <input type="number" min="0" max="99" class="cart_toggle form-control max-level-box" size="3" name="vars[ancestor_levels]" id="ancestor_levels" value="<?= I18N::digits($vars["ancestor_levels"]); ?>">
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="align-middle-container">
+                <input class="cart_toggle" type="checkbox" name="vars[include_descendants]" id="include_descendants" value="desc" <?= $vars["include_descendants"] ? 'checked' : '' ?>>
+                <label for="include_descendants" class="col-2-width-checkbox"><?= I18N::translate('Include descendants') ?></label>
+            </div>
+            <div class="align-middle-container">
+                <label for="descendant_levels" class="col-sm-6"><?= I18N::translate('Max levels') ?></label>
+                <input type="number" min="0" max="99" class="cart_toggle form-control max-level-box" size="3" name="vars[descendant_levels]" id="descendant_levels"
+                       value="<?= I18N::digits($vars["descendant_levels"]); ?>">
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div><?= I18N::translate('Relation types to include') ?></div>
+        <div class="col-auto mx-3">
+            <div class="col-auto mx-3">
+                <input class="cart_toggle" type="checkbox" onclick="updateRelationOption('include_siblings')" name="vars[include_siblings]" id="include_siblings" value="sibl" <?= $vars["include_siblings"] ? 'checked' : '' ?>>
+                <label for="include_siblings"><?= I18N::translate('Siblings') ?></label>
+            </div>
+            <div class="col-auto mx-3">
+                <input class="cart_toggle" onclick="updateRelationOption('include_all_relatives')" type="checkbox" name="vars[include_all_relatives]" id="include_all_relatives" value="rels" <?= $vars["include_all_relatives"] ? 'checked' : '' ?>>
+                <label for="include_all_relatives"><?= I18N::translate('All relatives') ?></label>
+            </div>
+        </div>
+        <div class="col-auto mx-3">
+            <div class="col-auto mx-3">
+                <input class="cart_toggle" type="checkbox" onclick="updateRelationOption('include_spouses')" name="vars[include_spouses]" id="include_spouses" value="spou" <?= $vars["include_spouses"] ? 'checked' : '' ?>>
+                <label for="include_spouses"><?= I18N::translate('Partners') ?></label>
+            </div>
+            <div class="col-auto mx-3">
+                <input class="cart_toggle" type="checkbox" onclick="updateRelationOption('include_all')" name="vars[include_all]" id="include_all" value="any" <?= $vars["include_all"] ? 'checked' : '' ?> <?= !$cart_empty ? "disabled" : ""; ?>>
+                <label for="include_all"><?= I18N::translate('Anyone') ?></label>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+<?php
+
+use Fisharebest\Webtrees\Tree;
+use vendor\WebtreesModules\gvexport\MainPage;
+use Fisharebest\Webtrees\I18N;
+
+/**
+ * @var array       $vars                   array of saved settings
+ * @var Tree        $tree                   webtrees tree object
+ * @var bool        $grey_people             whether to disable settings when clipping cart used
+ * @var bool        $show_help              whether to show help icons
+ */
+?>
+
+<?= MainPage::addLabel('stop_xref_list', 'Stop processing on', $show_help); ?>
+<div class="col-sm-8 wt-page-options-value">
+    <div id="stop_indi_list">
+
+    </div>
+    <div id="clear_stop_list"><a class="pointer" onclick="clearStopIndiList()"><?= I18N::translate('Clear all') ?></a></div>
+    <div class="cart_toggle_hide" <?php if ($grey_people) { echo 'style="display: none"'; } ?>>
+        <?php
+        echo view('components/select-individual', ['name' => 'vars[stop_pid]', 'tree' => $tree, 'id' => 'stop_pid', 'xref' => '']);
+        ?>
+    </div>
+    <div class="input-group mt-1">
+        <input type="text" class="cart_toggle form-control" name="vars[stop_xref_list]" id="stop_xref_list" value="<?= e($vars['stop_xref_list']); ?>" onchange="refreshIndisFromXREFS(true)">
+        <div class="input-group-append">
+            <button type="button" class="btn btn-outline-secondary" onclick="refreshIndisFromXREFS(false)">⟳</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+<?php
+
+use vendor\WebtreesModules\gvexport\GVExport;
+
+/**
+ * @var array       $vars           array of saved settings
+ * @var GVExport    $module         this module
+ * @var array       $settings       wider array of settings and options
+ */
+
+?>
+
+<div class="row no-right-margin form-group">
+    <?= view($module->name() . '::MainPage/PeopleToInclude/ItemsInClippingsCart',['vars' => $vars, 'show_help' => false]); ?>
+</div>
+<hr>
+<div class="row no-right-margin form-group">
+    <?= view($module->name() . '::MainPage/PeopleToInclude/ConnectionsToInclude',['vars' => $vars, 'cart_empty' => true, 'show_help' => false]); ?>
+</div>
+<hr>
+<div class="row no-right-margin form-group">
+    <?= view($module->name() . '::MainPage/PeopleToInclude/NonRelatives',['vars' => $vars, 'show_help' => false]); ?>
+</div>
+<hr>
+<div class="row no-right-margin form-group">
+    <?= view($module->name() . '::MainPage/PeopleToInclude/TreatmentOfSourceIndividuals',['vars' => $vars, 'settings' => $settings, 'show_help' => false]); ?>
+</div>

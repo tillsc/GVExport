@@ -1,0 +1,30 @@
+<?php
+
+use Fisharebest\Webtrees\I18N;
+use vendor\WebtreesModules\gvexport\MainPage;
+
+/**
+ * @var array       $vars                   array of saved settings
+ * @var bool        $show_help              whether to show help icons
+ */
+
+?>
+<?= MainPage::addLabel('', 'Clippings cart', $show_help); ?>
+<div class="col-sm-8 wt-page-options-value">
+    <?php
+        if ($show_help) {
+            I18N::translate('You have items in the clippings cart, which can be used for the diagram instead of the below options.');
+        } ?>
+    <div class="col-sm-8 wt-page-options-value">
+        <div class="row">
+            <div class="col-auto mx-3">
+                <input type="radio" onclick="toggleCart(true)" name="vars[use_cart]" id="usecart_yes" value="use_cart" <?= $vars["use_cart"] ? 'checked' : '' ?>>
+                <label for="usecart_yes"><?= I18N::translate('Use clippings cart') ?></label>
+            </div>
+            <div class="col-auto mx-3">
+                <input type="radio" onclick="toggleCart(false)" name="vars[use_cart]" id="usecart_no" value="ignorecart" <?= !$vars["use_cart"] ? 'checked' : '' ?>>
+                <label for="usecart_no"><?= I18N::translate('Ignore clippings cart') ?></label>
+            </div>
+        </div>
+    </div>
+</div>

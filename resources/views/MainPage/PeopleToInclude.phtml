@@ -1,0 +1,50 @@
+<?php
+
+use Fisharebest\Webtrees\I18N;
+use Fisharebest\Webtrees\Tree;
+use vendor\WebtreesModules\gvexport\GVExport;
+
+/**
+ * @var array       $vars           array of saved settings
+ * @var Tree        $tree           webtrees tree object of current tree
+ * @var bool        $cartempty      whether the clippings cart is empty
+ * @var GVExport    $module         this module
+ * @var array       $settings       wider array of settings and options
+ */
+
+    $grey_people = false;
+    // Check if there are INDI records in the clippings cart, to decide what options to allow
+    if (!$cartempty) {
+    if ($vars["use_cart"]) {
+    $grey_people = true;
+    }
+    ?>
+
+    <div class="row no-right-margin form-group">
+        <?= view($module->name() . '::MainPage/PeopleToInclude/ItemsInClippingsCart',['vars' => $vars, 'show_help' => true]); ?>
+    </div>
+<?php } ?>
+
+<div class="row no-right-margin form-group">
+    <?= view($module->name() . '::MainPage/PeopleToInclude/IncludeAnyoneRelatedTo',['vars' => $vars, 'tree' => $tree, 'greypeople' => $grey_people, 'show_help' => true]); ?>
+</div>
+
+<div class="row no-right-margin form-group">
+    <?= view($module->name() . '::MainPage/PeopleToInclude/ConnectionsToInclude',['vars' => $vars, 'cart_empty' => $cartempty, 'show_help' => true]); ?>
+</div>
+
+<div id="people-advanced" <?= $vars["show_adv_people"] ? '' : 'style="display:none"'; ?>>
+    <div class="row no-right-margin form-group">
+        <?= view($module->name() . '::MainPage/PeopleToInclude/XrefOfIncludedIndividuals',['vars' => $vars, 'show_help' => true]); ?>
+    </div>
+    <div class="row no-right-margin form-group">
+        <?= view($module->name() . '::MainPage/PeopleToInclude/StopProcessingOn',['vars' => $vars, 'tree' => $tree, 'grey_people' => $grey_people, 'show_help' => true]); ?>
+    </div>
+    <div class="row no-right-margin form-group">
+        <?= view($module->name() . '::MainPage/PeopleToInclude/NonRelatives',['vars' => $vars, 'show_help' => true]); ?>
+    </div>
+    <div class="row no-right-margin form-group">
+        <?= view($module->name() . '::MainPage/PeopleToInclude/TreatmentOfSourceIndividuals',['vars' => $vars, 'settings' => $settings, 'show_help' => true]); ?>
+    </div>
+</div>
+<a id="people-advanced-button" onclick="toggleAdvanced(this, 'people-advanced')"><div class="wt-page-options-label advanced-settings-btn"><?= ($vars["show_adv_people"] ? '↑ ' : '↓ ') . I18N::translate('Toggle advanced settings') . ($vars["show_adv_people"] ? ' ↑' : ' ↓'); ?></div></a>
