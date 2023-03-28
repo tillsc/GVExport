@@ -377,9 +377,19 @@ span.NAME {
     margin-left: 10px;
 }
 
+.align-middle-container {
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+}
 .max-level-box {
     width: unset;
     display: inline;
     height: 2em;
     margin-top: 5px !important;
+    padding: 5px !important;
+}
+
+.col-2-width-checkbox {
+    width: 88%;
 }
