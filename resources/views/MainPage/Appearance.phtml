@@ -191,8 +191,11 @@ use vendor\WebtreesModules\gvexport\GVExport;use vendor\WebtreesModules\gvexport
         </div>
     </div>
     <div class="row no-right-margin form-group">
-        <?= MainPage::addLabel('', 'Relationship arrows'); ?>
+        <?= MainPage::addLabel('', 'Other colours'); ?>
         <div class="col-sm-8 wt-page-options-value">
+            <div class="col-auto">
+                <input type="color" class="picker" name="vars[background_col]" id="background_col" value="<?= e($vars["background_col"]); ?>" /><label for="background_col" class="picker-label"><?= I18N::translate('Diagram background color') ?></label>
+            </div>
             <div class="col-auto">
                 <input type="color" class="picker" name="vars[arrows_default]" id="arrows_default" value="<?= e($vars["arrows_default"]); ?>" /><label for="arrows_default" class="picker-label"><?= I18N::translate('Arrow color') ?></label>
             </div>
@@ -203,20 +206,6 @@ use vendor\WebtreesModules\gvexport\GVExport;use vendor\WebtreesModules\gvexport
                     <input type="color" class="picker" name="vars[arrows_related]" id="arrows_related" value="<?= e($vars["arrows_related"]); ?>" /><label for="arrows_related" class="picker-label"><?= I18N::translate('Related by birth') ?></label>
                     <input type="color" class="picker" name="vars[arrows_not_related]" id="arrows_not_related" value="<?= e($vars["arrows_not_related"]); ?>" /><label for="arrows_not_related" class="picker-label"><?= I18N::translate('Related other than by birth') ?></label>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="row no-right-margin form-group">
-        <?= MainPage::addLabel('', 'Other colours'); ?>
-        <div class="col-sm-8 wt-page-options-value">
-            <div class="col-auto">
-                <input type="color" class="picker" name="vars[family_col]" id="family_col" value="<?= e($vars["family_col"]); ?>" /><label for="family_col" class="picker-label"><?= I18N::translate('Family background') ?></label>
-            </div>
-            <div class="col-auto">
-                <input type="color" class="picker" name="vars[border_col]" id="border_col" value="<?= e($vars["border_col"]); ?>" /><label for="border_col" class="picker-label"><?= I18N::translate('Outline colour') ?></label>
-            </div>
-            <div class="col-auto">
-                <input type="color" class="picker" name="vars[background_col]" id="background_col" value="<?= e($vars["background_col"]); ?>" /><label for="background_col" class="picker-label"><?= I18N::translate('Diagram background color') ?></label>
             </div>
         </div>
     </div>

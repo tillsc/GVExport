@@ -393,3 +393,7 @@ span.NAME {
 .col-2-width-checkbox {
     width: 88%;
 }
+
+.padding-left-10 {
+    padding-left: 10px;
+}
