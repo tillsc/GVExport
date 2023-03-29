@@ -233,47 +233,6 @@ use vendor\WebtreesModules\gvexport\GVExport;use vendor\WebtreesModules\gvexport
         </div>
     </div>
     <div class="row no-right-margin form-group">
-        <?= MainPage::addLabel('', 'Tile colors'); ?>
-        <div class="col-sm-8 wt-page-options-value">
-            <div class="col-auto">
-                <input type="color" class="picker" name="vars[male_col]" id="male_col" value="<?= e($vars["male_col"]); ?>" /><label for="male_col" class="picker-label"><?= I18N::translate('Male individuals') ?></label>
-            </div>
-            <div class="col-auto">
-                <input type="color" class="picker" name="vars[female_col]" id="female_col" value="<?= e($vars["female_col"]); ?>" /><label for="female_col" class="picker-label"><?= I18N::translate('Female individuals') ?></label>
-            </div>
-            <div class="col-auto">
-                <input type="color" class="picker" name="vars[other_gender_col]" id="other_gender_col" value="<?= e($vars["other_gender_col"]); ?>" /><label for="other_gender_col" class="picker-label"><?= I18N::translate('Other gender individuals') ?></label>
-            </div>
-            <div class="col-auto">
-                <input type="color" class="picker" name="vars[unknown_gender_col]" id="unknown_gender_col" value="<?= e($vars["unknown_gender_col"]); ?>" /><label for="unknown_gender_col" class="picker-label"><?= I18N::translate('Unknown gender individuals') ?></label>
-            </div>
-            <div class="col-auto">
-                <input type="color" class="picker" name="vars[male_unrelated_col]" id="male_unrelated_col" value="<?= e($vars["male_unrelated_col"]); ?>" /><label for="male_unrelated_col" class="picker-label"><?= I18N::translate('Not blood-related male individuals') ?></label>
-            </div>
-            <div class="col-auto">
-                <input type="color" class="picker" name="vars[female_unrelated_col]" id="female_unrelated_col" value="<?= e($vars["female_unrelated_col"]); ?>" /><label for="female_unrelated_col" class="picker-label"><?= I18N::translate('Not blood-related female individuals') ?></label>
-            </div>
-            <div class="col-auto">
-                <input type="color" class="picker" name="vars[oth_gender_unrel_col]" id="oth_gender_unrel_col" value="<?= e($vars["oth_gender_unrel_col"]); ?>" /><label for="oth_gender_unrel_col" class="picker-label"><?= I18N::translate('Not blood-related other gender individuals') ?></label>
-            </div>
-            <div class="col-auto">
-                <input type="color" class="picker" name="vars[unkn_gender_unrel_col]" id="unkn_gender_unrel_col" value="<?= e($vars["unkn_gender_unrel_col"]); ?>" /><label for="unkn_gender_unrel_col" class="picker-label"><?= I18N::translate('Not blood-related unknown gender individuals') ?></label>
-            </div>
-            <div class="col-auto">
-                <input type="color" class="picker" name="vars[indi_background_col]" id="indi_background_col" value="<?= e($vars["indi_background_col"]); ?>" /><label for="indi_background_col" class="picker-label"><?= I18N::translate('Individual background color') ?></label>
-            </div>
-            <input type="checkbox" name="vars[highlight_start_indis]" onclick="toggleHighlightStartPersons( this.checked)" id="highlight_start_indis" value="true" <?= $vars["highlight_start_indis"] ? 'checked' : '' ?>><label for="highlight_start_indis" class="check-list"><?= I18N::translate('Show starting individuals in different color') ?></label>
-            <div class="color_subgroup col-auto wt-page-options-value" id="startcol_option"  <?= $vars["highlight_start_indis"] != "true" ? 'style="display:none;"' : '' ?>>
-                <input type="color" class="picker" name="vars[highlight_col]" id="highlight_col" value="<?= e($vars["highlight_col"]); ?>" /><label for="highlight_col" class="picker-label"><?= I18N::translate('Starting individuals background color') ?></label>
-                <label for="no_highlight_xref_list"><?= I18N::translate("Colour these individuals:"); ?></label><br>
-                <div id="highlight_list">
-
-                </div>
-                <input type="hidden" class="form-control" name="vars[no_highlight_xref_list]" id="no_highlight_xref_list" value="<?= e($vars['no_highlight_xref_list']); ?>">
-            </div>
-        </div>
-    </div>
-    <div class="row no-right-margin form-group">
         <?= MainPage::addLabel('', 'Other colours'); ?>
         <div class="col-sm-8 wt-page-options-value">
             <div class="col-auto">

@@ -329,8 +329,19 @@ function toggleAdvanced(button, id, visible = null) {
     }
 }
 
-function setStateFastRelationCheck() {
-    showHide(document.getElementById("mark_related_subgroup"), document.getElementById("mark_not_related").checked);
+function showHideMatchCheckbox(checkboxId, elementId) {
+    showHide(document.getElementById(elementId), document.getElementById(checkboxId).checked);
+}
+function showHideColours(elementId, callingEl) {
+    let callerText = callingEl.innerText;
+    let visible = callerText.includes('↓');
+    showHide(document.getElementById(elementId), !visible);
+    if (visible) {
+        callingEl.innerText = callerText.replace('↓', '→');
+    } else {
+        callingEl.innerText = callerText.replace('→', '↓');
+    }
+
 }
 
 
@@ -987,7 +998,7 @@ function loadSettings(data) {
             }
         }
     });
-    setStateFastRelationCheck();
+    showHideMatchCheckbox('mark_not_related', 'mark_related_subgroup');
     setSavedDiagramsPanel();
     showHide(document.getElementById('arrow_group'),document.getElementById('colour_arrow_related').checked)
     showHide(document.getElementById('startcol_option'),document.getElementById('highlight_start_indis').checked)

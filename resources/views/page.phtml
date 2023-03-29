@@ -283,7 +283,7 @@ $usegraphviz = $vars['graphviz_bin'] != "";
         if (!cartempty && document.getElementById("usecart_yes").checked) {
             toggleCart(true);
         }
-        setStateFastRelationCheck();
+        showHideMatchCheckbox('mark_not_related', 'mark_related_subgroup');
         document.getElementById("browser").value = "false";
         let lastDotStr, indiNum, famNum, messages;
 
