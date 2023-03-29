@@ -21,7 +21,7 @@ use Fisharebest\Webtrees\I18N;
         <?= view('components/select', ['name' => 'vars[indi_display_sex]', 'id' => 'indi_display_sex', 'selected' => e($vars['indi_display_sex']), 'options' => MainPage::updateTranslations($settings["indi_display_sex_options"])]) ?>
     </div>
     <div class="col-auto">
-        <div onclick="showHideColours('colours_subgroup', this)" class="pointer">→ Edit colours</div>
+        <div onclick="showHideColours('colours_subgroup', this)" class="pointer">→ <?= I18N::translate('Edit colours'); ?></div>
         <div id="colours_subgroup" class="color_subgroup col-auto wt-page-options-value" style="display: none">
             <div class="col-auto">
                 <input type="color" class="picker" name="vars[male_col]" id="male_col" value="<?= e($vars["male_col"]); ?>" /><label for="male_col" class="picker-label"><?= I18N::translate('Male individuals') ?></label>
@@ -58,6 +58,30 @@ use Fisharebest\Webtrees\I18N;
 
                 </div>
                 <input type="hidden" class="form-control" name="vars[no_highlight_xref_list]" id="no_highlight_xref_list" value="<?= e($vars['no_highlight_xref_list']); ?>">
+            </div>
+        </div>
+    </div>
+    <div onclick="showHideColours('font_subgroup', this)" class="pointer">→ <?= I18N::translate('Edit font'); ?></div>
+    <div id="font_subgroup" class="color_subgroup col-auto wt-page-options-value" style="display: none">
+        <div class="col-auto">
+            <label for="typeface"><?= I18N::translate('Typeface') ?></label>
+            <div class="col-auto">
+                <?= view('components/select', ['name' => 'vars[typeface]', 'id' => 'typeface', 'selected' => I18N::digits($vars['typeface']), 'options' => MainPage::updateTranslations($settings["typefaces"])]) ?>
+            </div>
+            <label for="font_size_name"><?= I18N::translate('Font size for names') ?></label>
+            <div class="col-auto">
+                <input type="text" class="form-control col-sm-6" size="10" name="vars[font_size_name]" id="font_size_name" value="<?= I18N::digits($vars["font_size_name"]); ?>">
+            </div>
+            <label for="font_size"><?= I18N::translate('Font size for details') ?></label>
+            <div class="col-auto">
+                <input type="text" class="form-control col-sm-6" size="10" name="vars[font_size]" id="font_size" value="<?= I18N::digits($vars["font_size"]); ?>">
+            </div>
+            <div>
+                <input type="color" class="picker" name="vars[font_colour_name]" id="font_colour_name" value="<?= e($vars["font_colour_name"]); ?>" /><label for="font_colour_name" class="picker-label"><?= I18N::translate('Font color for names') ?></label>
+            </div>
+
+            <div>
+                <input type="color" class="picker" name="vars[font_colour_details]" id="font_colour_details" value="<?= e($vars["font_colour_details"]); ?>" /><label for="font_colour_details" class="picker-label"><?= I18N::translate('Font color for details') ?></label>
             </div>
         </div>
     </div>

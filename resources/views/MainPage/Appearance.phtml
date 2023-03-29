@@ -191,32 +191,6 @@ use vendor\WebtreesModules\gvexport\GVExport;use vendor\WebtreesModules\gvexport
         </div>
     </div>
     <div class="row no-right-margin form-group">
-        <?= MainPage::addLabel('', 'Font'); ?>
-        <div class="col-sm-8 wt-page-options-value">
-            <div class="row">
-                <label for="typeface"><?= I18N::translate('Typeface') ?></label>
-                <div class="col-auto">
-                    <?= view('components/select', ['name' => 'vars[typeface]', 'id' => 'typeface', 'selected' => I18N::digits($vars['typeface']), 'options' => MainPage::updateTranslations($settings["typefaces"])]) ?>
-                </div>
-                <label for="font_size_name"><?= I18N::translate('Font size for names') ?></label>
-                <div class="col-auto">
-                    <input type="text" class="form-control col-sm-6" size="10" name="vars[font_size_name]" id="font_size_name" value="<?= I18N::digits($vars["font_size_name"]); ?>">
-                </div>
-                <label for="font_size"><?= I18N::translate('Font size for details') ?></label>
-                <div class="col-auto">
-                    <input type="text" class="form-control col-sm-6" size="10" name="vars[font_size]" id="font_size" value="<?= I18N::digits($vars["font_size"]); ?>">
-                </div>
-                <div>
-                    <input type="color" class="picker" name="vars[font_colour_name]" id="font_colour_name" value="<?= e($vars["font_colour_name"]); ?>" /><label for="font_colour_name" class="picker-label"><?= I18N::translate('Font color for names') ?></label>
-                </div>
-
-                <div>
-                    <input type="color" class="picker" name="vars[font_colour_details]" id="font_colour_details" value="<?= e($vars["font_colour_details"]); ?>" /><label for="font_colour_details" class="picker-label"><?= I18N::translate('Font color for details') ?></label>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row no-right-margin form-group">
         <?= MainPage::addLabel('', 'Relationship arrows'); ?>
         <div class="col-sm-8 wt-page-options-value">
             <div class="col-auto">
