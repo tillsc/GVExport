@@ -15,3 +15,7 @@ use vendor\WebtreesModules\gvexport\GVExport;use vendor\WebtreesModules\gvexport
 <div class="row no-right-margin form-group">
     <?= view($module->name() . '::MainPage/Appearance/GraphDirection',['vars' => $vars, 'settings' => $settings, 'show_help' => true]); ?>
 </div>
+
+<div class="row no-right-margin form-group">
+    <?= view($module->name() . '::MainPage/Appearance/DiagramType',['vars' => $vars, 'show_help' => true]); ?>
+</div>
