@@ -1,0 +1,23 @@
+<?php
+use vendor\WebtreesModules\gvexport\MainPage;
+use Fisharebest\Webtrees\I18N;
+
+/**
+ * @var array       $vars                   array of saved settings
+ * @var array       $settings               wider array of settings and options
+ * @var bool        $show_help              whether to show help icons
+ */
+
+?>
+
+<?= MainPage::addLabel('', 'Tile design', $show_help); ?>
+<div class="col-sm-8 wt-page-options-value">
+    <div class="col-auto">
+        <label for="indi_tile_shape"><?= I18N::translate('Individual tile shape') ?></label>
+        <?= view('components/select', ['name' => 'vars[indi_tile_shape]', 'id' => 'indi_tile_shape', 'selected' => e($vars['indi_tile_shape']), 'options' => MainPage::updateTranslations($settings["indi_tile_shape_options"])]) ?>
+    </div>
+    <div class="col-auto">
+        <label for="indi_display_sex"><?= I18N::translate('Display sex of individual') ?></label>
+        <?= view('components/select', ['name' => 'vars[indi_display_sex]', 'id' => 'indi_display_sex', 'selected' => e($vars['indi_display_sex']), 'options' => MainPage::updateTranslations($settings["indi_display_sex_options"])]) ?>
+    </div>
+</div>

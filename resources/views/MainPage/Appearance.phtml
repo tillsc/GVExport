@@ -1,5 +1,6 @@
 <?php
 use Fisharebest\Webtrees\I18N;
+use Fisharebest\Webtrees\Individual;
 use Fisharebest\Webtrees\Tree;
 use vendor\WebtreesModules\gvexport\GVExport;use vendor\WebtreesModules\gvexport\MainPage;
 
@@ -8,6 +9,7 @@ use vendor\WebtreesModules\gvexport\GVExport;use vendor\WebtreesModules\gvexport
  * @var Tree        $tree           webtrees tree object of current tree
  * @var GVExport    $module         this module
  * @var array       $settings       wider array of settings and options
+ * @var Individual  $individual     Individual object from webtrees
  */
 
 ?>
@@ -24,37 +26,14 @@ use vendor\WebtreesModules\gvexport\GVExport;use vendor\WebtreesModules\gvexport
 
     <?php if ($tree->getPreference('SHOW_HIGHLIGHT_IMAGES') == '1') { ?>
         <div class="row no-right-margin form-group">
-            <?= MainPage::addLabel('', 'Photos'); ?>
-            <div class="col-sm-8 wt-page-options-value">
-                <div class="col-auto">
-                    <input type="checkbox" name="vars[show_photos]" id="show_photos" value="show_photos" <?= $vars["show_photos"] ? 'checked' : '' ?>>
-                    <label for="show_photos"><?= I18N::translate('Show photos') ?></label>
-                </div>
-                <div class="col-auto">
-                    <label for="photo_shape"><?= I18N::translate('Photo shape') ?></label>
-                    <?= view('components/select', ['name' => 'vars[photo_shape]', 'id' => 'photo_shape', 'selected' => e($vars['photo_shape']), 'options' => MainPage::updateTranslations($settings["photo_shape_options"])]) ?>
-                </div>
-                <div class="col-auto">
-                    <label for="photo_size"><?= I18N::translate('Photo size') ?></label>
-                    <input type="text" onclick="togglePercent(this, false)" onblur="togglePercent(this, true)" class="form-control col-sm-6" size="10" name="vars[photo_size]" id="photo_size"
-                           value="<?= e($vars["photo_size"]) ?>">
-                </div>
-            </div>
+            <?= view($module->name() . '::MainPage/Appearance/Photos',['vars' => $vars, 'settings' => $settings, 'show_help' => true]); ?>
         </div>
     <?php } ?>
+
     <div class="row no-right-margin form-group">
-        <?= MainPage::addLabel('', 'Tile design'); ?>
-        <div class="col-sm-8 wt-page-options-value">
-            <div class="col-auto">
-                <label for="indi_tile_shape"><?= I18N::translate('Individual tile shape') ?></label>
-                <?= view('components/select', ['name' => 'vars[indi_tile_shape]', 'id' => 'indi_tile_shape', 'selected' => e($vars['indi_tile_shape']), 'options' => MainPage::updateTranslations($settings["indi_tile_shape_options"])]) ?>
-            </div>
-            <div class="col-auto">
-                <label for="indi_display_sex"><?= I18N::translate('Display sex of individual') ?></label>
-                <?= view('components/select', ['name' => 'vars[indi_display_sex]', 'id' => 'indi_display_sex', 'selected' => e($vars['indi_display_sex']), 'options' => MainPage::updateTranslations($settings["indi_display_sex_options"])]) ?>
-            </div>
-        </div>
+        <?= view($module->name() . '::MainPage/Appearance/TileDesign',['vars' => $vars, 'settings' => $settings, 'show_help' => true]); ?>
     </div>
+
     <div class="row no-right-margin form-group">
         <?= MainPage::addLabel('add_links', 'Add URL to individuals and families'); ?>
         <div class="col-sm-8 wt-page-options-value">

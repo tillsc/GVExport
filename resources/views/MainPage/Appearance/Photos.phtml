@@ -1,0 +1,28 @@
+<?php
+use vendor\WebtreesModules\gvexport\MainPage;
+use Fisharebest\Webtrees\I18N;
+
+/**
+ * @var array       $vars                   array of saved settings
+ * @var array       $settings               wider array of settings and options
+ * @var bool        $show_help              whether to show help icons
+ */
+
+?>
+
+<?= MainPage::addLabel('', 'Photos', $show_help); ?>
+<div class="col-sm-8 wt-page-options-value">
+    <div class="col-auto">
+        <input type="checkbox" name="vars[show_photos]" id="show_photos" value="show_photos" <?= $vars["show_photos"] ? 'checked' : '' ?>>
+        <label for="show_photos"><?= I18N::translate('Show photos') ?></label>
+    </div>
+    <div class="col-auto">
+        <label for="photo_shape"><?= I18N::translate('Photo shape') ?></label>
+        <?= view('components/select', ['name' => 'vars[photo_shape]', 'id' => 'photo_shape', 'selected' => e($vars['photo_shape']), 'options' => MainPage::updateTranslations($settings["photo_shape_options"])]) ?>
+    </div>
+    <div class="col-auto">
+        <label for="photo_size"><?= I18N::translate('Photo size') ?></label>
+        <input type="text" onclick="togglePercent(this, false)" onblur="togglePercent(this, true)" class="form-control col-sm-6" size="10" name="vars[photo_size]" id="photo_size"
+               value="<?= e($vars["photo_size"]) ?>">
+    </div>
+</div>
