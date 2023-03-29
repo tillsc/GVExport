@@ -113,13 +113,17 @@ $usegraphviz = $vars['graphviz_bin'] != "";
                 'settings' => $settings
             ]); ?>
 
-        <h3><?= I18N::translate('Appearance') ?></h3>
-        <div class="row no-right-margin form-group">
-            <?= MainPage::addLabel('graph_dir', 'Graph direction'); ?>
-            <div class="col-sm-8 wt-page-options-value">
-                <?= view('components/select', ['name' => 'vars[graph_dir]', 'id' => 'graph_dir', 'selected' => e($vars['graph_dir']), 'options' => MainPage::updateTranslations($settings["directions"])]) ?>
-            </div>
-        </div>
+<h3><?= I18N::translate('Appearance') ?></h3>
+
+        <?php
+        // Include the "Appearance" section of the settings
+        echo view($module->name() . '::MainPage/Appearance',
+            [
+                'vars' => $vars,
+                'tree' => $tree,
+                'module' => $module,
+                'settings' => $settings
+            ]); ?>
 
         <div class="row no-right-margin form-group">
             <?= MainPage::addLabel('', 'Diagram type'); ?>

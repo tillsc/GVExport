@@ -1,0 +1,17 @@
+<?php
+use Fisharebest\Webtrees\I18N;
+use Fisharebest\Webtrees\Tree;
+use vendor\WebtreesModules\gvexport\GVExport;use vendor\WebtreesModules\gvexport\MainPage;
+
+/**
+ * @var array       $vars           array of saved settings
+ * @var Tree        $tree           webtrees tree object of current tree
+ * @var GVExport    $module         this module
+ * @var array       $settings       wider array of settings and options
+ */
+
+?>
+
+<div class="row no-right-margin form-group">
+    <?= view($module->name() . '::MainPage/Appearance/GraphDirection',['vars' => $vars, 'settings' => $settings, 'show_help' => true]); ?>
+</div>
