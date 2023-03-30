@@ -1,10 +1,13 @@
 <?php
+
+use Fisharebest\Webtrees\Tree;
 use vendor\WebtreesModules\gvexport\MainPage;
 use Fisharebest\Webtrees\I18N;
 
 /**
  * @var array       $vars                   array of saved settings
  * @var array       $settings               wider array of settings and options
+ * @var Tree        $tree                   webtrees Tree object of current tree
  * @var bool        $show_help              whether to show help icons
  */
 
@@ -21,7 +24,25 @@ use Fisharebest\Webtrees\I18N;
         <?= view('components/select', ['name' => 'vars[indi_display_sex]', 'id' => 'indi_display_sex', 'selected' => e($vars['indi_display_sex']), 'options' => MainPage::updateTranslations($settings["indi_display_sex_options"])]) ?>
     </div>
     <div class="col-auto">
-        <div onclick="showHideColours('colours_subgroup', this)" class="pointer">→ <?= I18N::translate('Edit colours'); ?></div>
+        <?php if ($tree->getPreference('SHOW_HIGHLIGHT_IMAGES') == '1') { ?>
+        <div onclick="showHideColours('photos_subgroup', this)" class="pointer">→ <?= I18N::translate('Photos'); ?></div>
+        <div id="photos_subgroup" class="color_subgroup col-auto wt-page-options-value" style="display: none">
+            <div class="col-auto">
+                <input type="checkbox" name="vars[show_photos]" id="show_photos" value="show_photos" <?= $vars["show_photos"] ? 'checked' : '' ?>>
+                <label for="show_photos"><?= I18N::translate('Show photos') ?></label>
+            </div>
+            <div class="col-auto">
+                <label for="photo_shape"><?= I18N::translate('Photo shape') ?></label>
+                <?= view('components/select', ['name' => 'vars[photo_shape]', 'id' => 'photo_shape', 'selected' => e($vars['photo_shape']), 'options' => MainPage::updateTranslations($settings["photo_shape_options"])]) ?>
+            </div>
+            <div class="col-auto">
+                <label for="photo_size"><?= I18N::translate('Photo size') ?></label>
+                <input type="text" onclick="togglePercent(this, false)" onblur="togglePercent(this, true)" class="form-control col-sm-6" size="10" name="vars[photo_size]" id="photo_size"
+                       value="<?= e($vars["photo_size"]) ?>">
+            </div>
+        </div>
+        <?php } ?>
+        <div onclick="showHideColours('colours_subgroup', this)" class="pointer">→ <?= I18N::translate('Colours'); ?></div>
         <div id="colours_subgroup" class="color_subgroup col-auto wt-page-options-value" style="display: none">
             <div class="col-auto">
                 <input type="color" class="picker" name="vars[male_col]" id="male_col" value="<?= e($vars["male_col"]); ?>" /><label for="male_col" class="picker-label"><?= I18N::translate('Male individuals') ?></label>
@@ -70,7 +91,7 @@ use Fisharebest\Webtrees\I18N;
 
         </div>
     </div>
-    <div onclick="showHideColours('font_subgroup', this)" class="pointer">→ <?= I18N::translate('Edit font'); ?></div>
+    <div onclick="showHideColours('font_subgroup', this)" class="pointer">→ <?= I18N::translate('Font'); ?></div>
     <div id="font_subgroup" class="color_subgroup col-auto wt-page-options-value" style="display: none">
         <div class="col-auto">
             <label for="typeface"><?= I18N::translate('Typeface') ?></label>

@@ -25,14 +25,8 @@ use vendor\WebtreesModules\gvexport\GVExport;use vendor\WebtreesModules\gvexport
 
 <div id="appearance-advanced" <?= $vars["show_adv_appear"] ? '' : 'style="display:none"' ?>>
 
-    <?php if ($tree->getPreference('SHOW_HIGHLIGHT_IMAGES') == '1') { ?>
-        <div class="row no-right-margin form-group">
-            <?= view($module->name() . '::MainPage/Appearance/Photos',['vars' => $vars, 'settings' => $settings, 'show_help' => true]); ?>
-        </div>
-    <?php } ?>
-
     <div class="row no-right-margin form-group">
-        <?= view($module->name() . '::MainPage/Appearance/TileDesign',['vars' => $vars, 'settings' => $settings, 'show_help' => true]); ?>
+        <?= view($module->name() . '::MainPage/Appearance/TileDesign',['vars' => $vars, 'settings' => $settings, 'tree' => $tree, 'show_help' => true]); ?>
     </div>
 
     <div class="row no-right-margin form-group">
