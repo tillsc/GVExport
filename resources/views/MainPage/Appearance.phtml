@@ -40,14 +40,6 @@ use vendor\WebtreesModules\gvexport\GVExport;use vendor\WebtreesModules\gvexport
     </div>
 
     <div class="row no-right-margin form-group">
-        <?= MainPage::addLabel('show_death_place', 'Show death place'); ?>
-        <div class="col-sm-8 wt-page-options-value">
-            <input type="checkbox" name="vars[show_death_place]" id="show_death_place" value="show_death_place" <?= $vars["show_death_place"] ? 'checked' : '' ?>>
-        </div>
-    </div>
-
-
-    <div class="row no-right-margin form-group">
         <?= MainPage::addLabel('show_xref_families', 'Show family XREF'); ?>
         <div class="col-sm-8 wt-page-options-value">
             <input type="checkbox" name="vars[show_xref_families]" id="show_xref_families" value="show_xref_families" <?= $vars["show_xref_families"] ? 'checked' : '' ?>>
