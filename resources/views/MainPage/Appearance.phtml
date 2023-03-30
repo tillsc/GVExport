@@ -38,14 +38,7 @@ use vendor\WebtreesModules\gvexport\GVExport;use vendor\WebtreesModules\gvexport
     <div class="row no-right-margin form-group">
         <?= view($module->name() . '::MainPage/Appearance/TileContents',['vars' => $vars, 'settings' => $settings, 'usegraphviz' => $usegraphviz, 'individual' => $individual, 'show_help' => true]); ?>
     </div>
-
-    <div class="row no-right-margin form-group">
-        <?= MainPage::addLabel('show_xref_families', 'Show family XREF'); ?>
-        <div class="col-sm-8 wt-page-options-value">
-            <input type="checkbox" name="vars[show_xref_families]" id="show_xref_families" value="show_xref_families" <?= $vars["show_xref_families"] ? 'checked' : '' ?>>
-        </div>
-    </div>
-
+    
     <div class="row no-right-margin form-group">
         <?= MainPage::addLabel('show_marriage_date', 'Show marriage date'); ?>
         <div class="col-sm-8 wt-page-options-value">
