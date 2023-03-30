@@ -9,6 +9,7 @@ use vendor\WebtreesModules\gvexport\GVExport;use vendor\WebtreesModules\gvexport
  * @var Tree        $tree           webtrees tree object of current tree
  * @var GVExport    $module         this module
  * @var array       $settings       wider array of settings and options
+ * @var bool        $usegraphviz     Whether Graphviz is installed on the server and enabled
  * @var Individual  $individual     Individual object from webtrees
  */
 
@@ -35,25 +36,7 @@ use vendor\WebtreesModules\gvexport\GVExport;use vendor\WebtreesModules\gvexport
     </div>
 
     <div class="row no-right-margin form-group">
-        <?= MainPage::addLabel('add_links', 'Add URL to individuals and families'); ?>
-        <div class="col-sm-8 wt-page-options-value">
-            <input type="checkbox" name="vars[add_links]" id="add_links" value="add_links" <?= $vars["add_links"] ? 'checked' : '' ?>>
-            <span class="text-muted">(<?= $usegraphviz ? I18N::translate('browser, SVG, and PDF only') : I18N::translate('browser and SVG only'); ?>)</span>
-        </div>
-    </div>
-
-    <div class="row no-right-margin form-group">
-        <?= MainPage::addLabel('use_abbr_name', 'Abbreviated names'); ?>
-        <div class="col-sm-8 wt-page-options-value">
-            <?= view('components/select', ['name' => 'vars[use_abbr_name]', 'id' => 'use_abbr_name', 'selected' => I18N::digits($vars['use_abbr_name']), 'options' => MainPage::updateTranslations($settings["use_abbr_names"])]) ?>
-        </div>
-    </div>
-
-    <div class="row no-right-margin form-group">
-        <?= MainPage::addLabel('use_abbr_place', 'Abbreviated place names'); ?>
-        <div class="col-sm-8 wt-page-options-value">
-            <?= view('components/select', ['name' => 'vars[use_abbr_place]', 'id' => 'use_abbr_place', 'selected' => I18N::digits($vars['use_abbr_place']), 'options' => MainPage::updateTranslations($settings["use_abbr_places"])]) ?>
-        </div>
+        <?= view($module->name() . '::MainPage/Appearance/TileContents',['vars' => $vars, 'settings' => $settings, 'usegraphviz' => $usegraphviz, 'show_help' => true]); ?>
     </div>
 
     <div class="row no-right-margin form-group">

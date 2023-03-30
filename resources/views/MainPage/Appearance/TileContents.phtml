@@ -1,0 +1,39 @@
+<?php
+use vendor\WebtreesModules\gvexport\MainPage;
+use Fisharebest\Webtrees\I18N;
+
+/**
+ * @var array       $vars                   array of saved settings
+ * @var array       $settings               wider array of settings and options
+ * @var bool        $usegraphviz            whether Graphviz is installed on the server and enabled
+ * @var bool        $show_help              whether to show help icons
+ */
+
+?>
+
+<?= MainPage::addLabel('', 'Tile contents', $show_help); ?>
+<div class="col-sm-8 wt-page-options-value">
+    <div class="col-auto">
+        <input type="checkbox" name="vars[add_links]" id="add_links" value="add_links" <?= $vars["add_links"] ? 'checked' : '' ?>>
+        <label for="add_links"><?= I18N::translate('Add URL to individuals and families') ?></label>
+        <br>
+        <span class="text-muted">(<?= $usegraphviz ? I18N::translate('browser, SVG, and PDF only') : I18N::translate('browser and SVG only'); ?>)</span>
+    </div>
+    <div class="col-auto">
+        <div onclick="showHideColours('abbreviations_subgroup', this)" class="pointer">→ <?= I18N::translate('Abbreviations'); ?></div>
+        <div id="abbreviations_subgroup" class="color_subgroup col-auto wt-page-options-value" style="display: none">
+            <div class="col-auto">
+                <label for="use_abbr_name"><?= I18N::translate('Abbreviated names'); ?></label>
+                <?= view('components/select', ['name' => 'vars[use_abbr_name]', 'id' => 'use_abbr_name', 'selected' => I18N::digits($vars['use_abbr_name']), 'options' => MainPage::updateTranslations($settings["use_abbr_names"])]) ?>
+            </div>
+            <div class="col-auto">
+                <label for="use_abbr_name"><?= I18N::translate('Abbreviated place names'); ?></label>
+                <?= view('components/select', ['name' => 'vars[use_abbr_place]', 'id' => 'use_abbr_place', 'selected' => I18N::digits($vars['use_abbr_place']), 'options' => MainPage::updateTranslations($settings["use_abbr_places"])]) ?>
+            </div>
+        </div>
+    </div>
+    <div class="col-auto">
+    </div>
+    <div class="col-auto">
+    </div>
+</div>
