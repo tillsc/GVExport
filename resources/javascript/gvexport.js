@@ -1000,6 +1000,7 @@ function loadSettings(data) {
     });
     showHideMatchCheckbox('mark_not_related', 'mark_related_subgroup');
     showHideMatchCheckbox('show_birthdate', 'birth_date_subgroup');
+    showHideMatchCheckbox('show_death_date', 'death_date_subgroup');
     setSavedDiagramsPanel();
     showHide(document.getElementById('arrow_group'),document.getElementById('colour_arrow_related').checked)
     showHide(document.getElementById('startcol_option'),document.getElementById('highlight_start_indis').checked)

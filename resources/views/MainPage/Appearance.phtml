@@ -39,26 +39,6 @@ use vendor\WebtreesModules\gvexport\GVExport;use vendor\WebtreesModules\gvexport
         <?= view($module->name() . '::MainPage/Appearance/TileContents',['vars' => $vars, 'settings' => $settings, 'usegraphviz' => $usegraphviz, 'individual' => $individual, 'show_help' => true]); ?>
     </div>
 
-
-    <div class="row no-right-margin form-group">
-        <?= MainPage::addLabel('show_death_date', 'Show death date'); ?>
-        <div class="col-sm-8 wt-page-options-value">
-            <div class="row">
-                <div class="col-auto mx-3">
-                    <input type="checkbox" name="vars[show_death_date]" id="show_death_date" value="show_death_date" <?= $vars["show_death_date"] ? 'checked' : '' ?>>
-                </div>
-                <div class="col-auto mx-3">
-                    <input type="radio" name="vars[death_date_year_only]" id="dd_type_y" value="true" <?= $vars["death_date_year_only"] ? 'checked' : '' ?>>
-                    <label for="dd_type_y"><?= I18N::translate('Year') ?></label>
-                </div>
-                <div class="col-auto mx-3">
-                    <input type="radio" name="vars[death_date_year_only]" id="dd_type_gedcom" value="false" <?= !$vars["death_date_year_only"] ? 'checked' : '' ?>>
-                    <label for="dd_type_gedcom"><?= I18N::translate('Full date') ?></label>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="row no-right-margin form-group">
         <?= MainPage::addLabel('show_death_place', 'Show death place'); ?>
         <div class="col-sm-8 wt-page-options-value">
