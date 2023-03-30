@@ -1,4 +1,6 @@
 <?php
+
+use Fisharebest\Webtrees\Individual;
 use vendor\WebtreesModules\gvexport\MainPage;
 use Fisharebest\Webtrees\I18N;
 
@@ -6,6 +8,7 @@ use Fisharebest\Webtrees\I18N;
  * @var array       $vars                   array of saved settings
  * @var array       $settings               wider array of settings and options
  * @var bool        $usegraphviz            whether Graphviz is installed on the server and enabled
+ * @var Individual  $individual             webtrees Individual object
  * @var bool        $show_help              whether to show help icons
  */
 
@@ -33,6 +36,25 @@ use Fisharebest\Webtrees\I18N;
         </div>
     </div>
     <div class="col-auto">
+        <div onclick="showHideColours('indi_details_subgroup', this)" class="pointer">→ <?= I18N::translate('Information on individuals'); ?></div>
+        <div id="indi_details_subgroup" class="color_subgroup col-auto wt-page-options-value" style="display: none">
+            <div class="col-sm-8">
+                <?php
+                /* Check if another module (e.g. vesta classic) is adding the XREF to
+                   the name. If so, we want to enable the XREF option for individuals
+                   unless we already have a saved setting */
+                $startName = $individual->fullName();
+                $name = str_replace(" (" . $individual->xref() . ")", "", $startName);
+                if ($startName != $name && isset($vars["first_run_xref_check"])) {
+                    $overridePID = true;
+                } else {
+                    $overridePID = false;
+                }
+                ?>
+                <input type="checkbox" name="vars[show_xref_individuals]" id="show_xref_individuals" value="show_xref_individuals" <?= $vars["show_xref_individuals"] || $overridePID ? 'checked' : '' ?>>
+                <label for='show_xref_individuals'><?= I18N::translate('Show individual XREF'); ?></label>
+            </div>
+        </div>
     </div>
     <div class="col-auto">
     </div>

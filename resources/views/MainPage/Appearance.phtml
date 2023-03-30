@@ -36,26 +36,7 @@ use vendor\WebtreesModules\gvexport\GVExport;use vendor\WebtreesModules\gvexport
     </div>
 
     <div class="row no-right-margin form-group">
-        <?= view($module->name() . '::MainPage/Appearance/TileContents',['vars' => $vars, 'settings' => $settings, 'usegraphviz' => $usegraphviz, 'show_help' => true]); ?>
-    </div>
-
-    <div class="row no-right-margin form-group">
-        <?= MainPage::addLabel('show_xref_individuals', 'Show individual XREF'); ?>
-        <div class="col-sm-8 wt-page-options-value">
-            <?php
-            /* Check if another module (e.g. vesta classic) is adding the XREF to
-               the name. If so, we want to enable the XREF option for individuals
-               unless we already have a saved setting */
-            $startName = $individual->fullName();
-            $name = str_replace(" (" . $individual->xref() . ")", "", $startName);
-            if ($startName != $name && isset($vars["first_run_xref_check"])) {
-                $overridePID = true;
-            } else {
-                $overridePID = false;
-            }
-            ?>
-            <input type="checkbox" name="vars[show_xref_individuals]" id="show_xref_individuals" value="show_xref_individuals" <?= $vars["show_xref_individuals"] || $overridePID ? 'checked' : '' ?>>
-        </div>
+        <?= view($module->name() . '::MainPage/Appearance/TileContents',['vars' => $vars, 'settings' => $settings, 'usegraphviz' => $usegraphviz, 'individual' => $individual, 'show_help' => true]); ?>
     </div>
 
     <div class="row no-right-margin form-group">
