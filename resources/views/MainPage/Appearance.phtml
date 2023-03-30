@@ -38,32 +38,6 @@ use vendor\WebtreesModules\gvexport\GVExport;use vendor\WebtreesModules\gvexport
     <div class="row no-right-margin form-group">
         <?= view($module->name() . '::MainPage/Appearance/TileContents',['vars' => $vars, 'settings' => $settings, 'usegraphviz' => $usegraphviz, 'individual' => $individual, 'show_help' => true]); ?>
     </div>
-    
-    <div class="row no-right-margin form-group">
-        <?= MainPage::addLabel('show_marriage_date', 'Show marriage date'); ?>
-        <div class="col-sm-8 wt-page-options-value">
-            <div class="row">
-                <div class="col-auto mx-3">
-                    <input type="checkbox" name="vars[show_marriage_date]" id="show_marriage_date" value="show_marriage_date" <?= $vars["show_marriage_date"] ? 'checked' : '' ?>>
-                </div>
-                <div class="col-auto mx-3">
-                    <input type="radio" name="vars[marr_date_year_only]" id="md_type_y" value="true" <?= $vars["marr_date_year_only"] ? 'checked' : '' ?>>
-                    <label for="md_type_y"><?= I18N::translate('Year') ?></label>
-                </div>
-                <div class="col-auto mx-3">
-                    <input type="radio" name="vars[marr_date_year_only]" id="md_type_gedcom" value="false" <?= !$vars["marr_date_year_only"] ? 'checked' : '' ?>>
-                    <label for="md_type_gedcom"><?= I18N::translate('Full date') ?></label>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row no-right-margin form-group">
-        <?= MainPage::addLabel('show_marriage_place', 'Show marriage place'); ?>
-        <div class="col-sm-8 wt-page-options-value">
-            <input type="checkbox" name="vars[show_marriage_place]" id="show_marriage_place" value="show_marriage_place" <?= $vars["show_marriage_place"] ? 'checked' : '' ?>>
-        </div>
-    </div>
 
     <div class="row no-right-margin form-group">
         <?= MainPage::addLabel('dpi', 'DPI'); ?>
