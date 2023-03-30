@@ -40,25 +40,6 @@ use vendor\WebtreesModules\gvexport\GVExport;use vendor\WebtreesModules\gvexport
     </div>
 
     <div class="row no-right-margin form-group">
-        <?= MainPage::addLabel('show_birthdate', 'Show birth date'); ?>
-        <div class="col-sm-8 wt-page-options-value">
-            <div class="row">
-                <div class="col-auto mx-3">
-                    <input type="checkbox" name="vars[show_birthdate]" id="show_birthdate" value="show_birthdate" <?= $vars["show_birthdate"] ? 'checked' : '' ?>>
-                </div>
-                <div class="col-auto mx-3">
-                    <input type="radio" name="vars[birthdate_year_only]" id="bd_type_y" value="true" <?= $vars["birthdate_year_only"] ? 'checked' : '' ?>>
-                    <label for="bd_type_y"><?= I18N::translate('Year') ?></label>
-                </div>
-                <div class="col-auto mx-3">
-                    <input type="radio" name="vars[birthdate_year_only]" id="bd_type_gedcom" value="false" <?= !$vars["birthdate_year_only"] ? 'checked' : '' ?>>
-                    <label for="bd_type_gedcom"><?= I18N::translate('Full date') ?></label>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row no-right-margin form-group">
         <?= MainPage::addLabel('show_birthplace', 'Show birth place'); ?>
         <div class="col-sm-8 wt-page-options-value">
             <input type="checkbox" name="vars[show_birthplace]" id="show_birthplace" value="show_birthplace" <?= $vars["show_birthplace"] ? 'checked' : '' ?>>
