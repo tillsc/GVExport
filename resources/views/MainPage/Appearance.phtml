@@ -39,12 +39,6 @@ use vendor\WebtreesModules\gvexport\GVExport;use vendor\WebtreesModules\gvexport
         <?= view($module->name() . '::MainPage/Appearance/TileContents',['vars' => $vars, 'settings' => $settings, 'usegraphviz' => $usegraphviz, 'individual' => $individual, 'show_help' => true]); ?>
     </div>
 
-    <div class="row no-right-margin form-group">
-        <?= MainPage::addLabel('show_birthplace', 'Show birth place'); ?>
-        <div class="col-sm-8 wt-page-options-value">
-            <input type="checkbox" name="vars[show_birthplace]" id="show_birthplace" value="show_birthplace" <?= $vars["show_birthplace"] ? 'checked' : '' ?>>
-        </div>
-    </div>
 
     <div class="row no-right-margin form-group">
         <?= MainPage::addLabel('show_death_date', 'Show death date'); ?>
