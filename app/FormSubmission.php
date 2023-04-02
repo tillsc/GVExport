@@ -196,6 +196,9 @@ class FormSubmission
         if (isset($vars["stripe_colour_type"])) {
             $settings['stripe_colour_type'] = I18N::digits($vars["stripe_colour_type"]);
         }
+        if (isset($vars["border_colour_type"])) {
+            $settings['border_colour_type'] = I18N::digits($vars["border_colour_type"]);
+        }
         if (isset($vars["indi_background_col"]) && $this->isValidColourHex($vars["indi_background_col"])) {
             $settings['indi_background_col'] = $vars["indi_background_col"];
         }

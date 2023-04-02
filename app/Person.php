@@ -52,9 +52,11 @@ class Person
         } else {
             $related = TRUE;
         }
-        if ($this->dot->settings['indi_display_sex'] == Settings::OPTION_SEX_COLOURED_BORDER) {
+        if ($this->dot->settings['border_colour_type'] == Settings::OPTION_BORDER_SEX_COLOUR) {
             $i = $this->dot->getUpdatedPerson($pid);
             $borderColour = $this->dot->getGenderColour($i->sex(), $related);
+        } else if ($this->dot->settings['border_colour_type'] == Settings::OPTION_BORDER_CUSTOM_COLOUR) {
+            $borderColour = $this->dot->settings["indi_border_col"];
         } else {
             $borderColour = $this->dot->settings["border_col"];
         }
@@ -88,8 +90,10 @@ class Person
         } else {
             $i = $this->dot->getUpdatedPerson($pid);
             $fill_color = $this->dot->getGenderColour($i->sex(), $related);        // Background color is set to specified
-            if ($this->dot->settings['indi_display_sex'] == Settings::OPTION_SEX_COLOURED_BORDER) {
+            if ($this->dot->settings['border_colour_type'] == Settings::OPTION_BORDER_SEX_COLOUR) {
                 $bordercolor = $this->dot->getGenderColour($i->sex(), $related);
+            } else if ($this->dot->settings['border_colour_type'] == Settings::OPTION_BORDER_CUSTOM_COLOUR) {
+                $bordercolor = $this->dot->settings["indi_border_col"];
             }
             $isdead = $i->isDead();
             $link = $i->url();
