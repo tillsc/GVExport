@@ -146,7 +146,7 @@ class Person
         }
         $href = $this->dot->settings["add_links"] ? "TARGET=\"_blank\" HREF=\"" . Dot::convertToHTMLSC($link) . "\"" : "";
         // Get background colour
-        if ($this->dot->settings['bg_colour_type'] == 10) {
+        if ($this->dot->settings['bg_colour_type'] == Settings::OPTION_BACKGROUND_SEX_COLOUR) {
             $indibgcolor = $this->dot->getGenderColour($i->sex(), $related);
         } else if ($this->isStartingIndividual($pid) && $this->dot->settings['highlight_start_indis'] == "true" && !$this->valueInList($this->dot->settings['no_highlight_xref_list'], $pid)) {
             $indibgcolor = $this->dot->settings["highlight_col"];
@@ -172,7 +172,7 @@ class Person
             $size = ""; // Let it sort out size itself
         }
 
-        if ($this->dot->settings['indi_display_sex'] == Settings::OPTION_SEX_COLOURED_STRIPE) {
+        if ($this->dot->settings['stripe_colour_type'] == Settings::OPTION_STRIPE_SEX_COLOUR) {
             // Top line of table (colour only)
             $out .= "<TR><TD COLSPAN=\"2\" CELLPADDING=\"2\" BGCOLOR=\"$fill_color\" PORT=\"nam\" $size></TD></TR>";
         }
