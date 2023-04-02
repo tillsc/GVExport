@@ -224,9 +224,6 @@ class FormSubmission
         if (isset($vars['indi_tile_shape'])) {
             $settings['indi_tile_shape'] = I18N::digits($vars['indi_tile_shape']);
         }
-        if (isset($vars['indi_display_sex'])) {
-            $settings['indi_display_sex'] = I18N::digits($vars['indi_display_sex']);
-        }
         if (isset($vars['photo_size'])) {
             $size = $vars['photo_size'];
             if (!strpos($size, '%')) {
