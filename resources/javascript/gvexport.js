@@ -332,7 +332,10 @@ function toggleAdvanced(button, id, visible = null) {
 function showHideMatchCheckbox(checkboxId, elementId) {
     showHide(document.getElementById(elementId), document.getElementById(checkboxId).checked);
 }
-function showHideColours(elementId, callingEl) {
+function showHideMatchDropdown(dropdownId, elementId, value) {
+    showHide(document.getElementById(elementId), document.getElementById(dropdownId).value === value);
+}
+function showHideSubgroup(elementId, callingEl) {
     let callerText = callingEl.innerText;
     let visible = callerText.includes('↓');
     showHide(document.getElementById(elementId), !visible);
@@ -853,6 +856,7 @@ function pageLoaded(Url) {
     document.querySelector("#diagram_search_box_container").addEventListener('change', diagramSearchBoxChange);
     document.querySelector('#searchButton').addEventListener('click', showHideSearchBox);
     document.querySelector('#photo_shape').addEventListener('change', showGraphvizUnsupportedMessage);
+    document.querySelector('#bg_colour_type').addEventListener('change', () => {showHideMatchDropdown('bg_colour_type', 'custom_bg_subgroup', '0');});
 }
 
 // Function to show a help message
@@ -1001,6 +1005,7 @@ function loadSettings(data) {
     showHideMatchCheckbox('mark_not_related', 'mark_related_subgroup');
     showHideMatchCheckbox('show_birthdate', 'birth_date_subgroup');
     showHideMatchCheckbox('show_death_date', 'death_date_subgroup');
+    showHideMatchCheckbox('bg_colour_type', 'custom_bg_subgroup');
     setSavedDiagramsPanel();
     showHide(document.getElementById('arrow_group'),document.getElementById('colour_arrow_related').checked)
     showHide(document.getElementById('startcol_option'),document.getElementById('highlight_start_indis').checked)

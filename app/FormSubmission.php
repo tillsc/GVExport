@@ -190,6 +190,9 @@ class FormSubmission
         if (isset($vars["background_col"]) && $this->isValidColourHex($vars["background_col"])) {
             $settings['background_col'] = $vars["background_col"];
         }
+        if (isset($vars["bg_colour_type"])) {
+            $settings['bg_colour_type'] = I18N::digits($vars["bg_colour_type"]);
+        }
         if (isset($vars["indi_background_col"]) && $this->isValidColourHex($vars["indi_background_col"])) {
             $settings['indi_background_col'] = $vars["indi_background_col"];
         }

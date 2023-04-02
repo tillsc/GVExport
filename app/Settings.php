@@ -41,6 +41,7 @@ class Settings
         $this->defaultSettings['photo_shape_options'] = [0 => "No change", 10 => "Oval", 20 => "Circle" , 30 => "Square", 40 => "Rounded rectangle", 50 => "Rounded square"];
         $this->defaultSettings['indi_tile_shape_options'] = [0 => "Rectangle", 10 => "Rounded rectangle"];
         $this->defaultSettings['indi_display_sex_options'] = [self::OPTION_SEX_COLOURED_STRIPE => "Coloured stripe", self::OPTION_SEX_COLOURED_BORDER => "Coloured border", self::OPTION_SEX_TEXT => "Text", self::OPTION_SEX_BACKGROUND => "Background colour", self::OPTION_SEX_NONE => "Don't display sex"];
+        $this->defaultSettings['bg_colour_type_options'] = [0 => "Custom", 10 => "Based on individual's sex"];
         $this->defaultSettings['countries'] = $this->getCountryAbbreviations();
         if (!$this->isGraphvizAvailable($this->defaultSettings['graphviz_bin'])) {
             $this->defaultSettings['graphviz_bin'] = "";

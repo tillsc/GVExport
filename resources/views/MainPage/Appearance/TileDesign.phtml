@@ -25,12 +25,12 @@ use Fisharebest\Webtrees\I18N;
     </div>
     <div class="col-auto">
         <?php if ($tree->getPreference('SHOW_HIGHLIGHT_IMAGES') == '1') { ?>
-        <div onclick="showHideColours('photos_subgroup', this)" class="pointer">→ <?= I18N::translate('Photos'); ?></div>
-        <div id="photos_subgroup" class="color_subgroup col-auto wt-page-options-value" style="display: none">
+        <div onclick="showHideSubgroup('photos_subgroup', this)" class="pointer">→ <?= I18N::translate('Photos'); ?></div>
+        <div id="photos_subgroup" class="col-auto wt-page-options-value" style="display: none">
             <div class="col-sm-8">
                 <input type="checkbox" onclick="showHideMatchCheckbox('show_photos', 'photos_enabled_subgroup');" name="vars[show_photos]" id="show_photos" value="show_photos" <?= $vars["show_photos"] ? 'checked' : '' ?>>
                 <label for="show_photos"><?= I18N::translate('Show photos') ?></label>
-                <div id="photos_enabled_subgroup" class="color_subgroup col-auto wt-page-options-value" <?= !$vars["show_photos"] ? 'style="display:none;"' : '' ?>>
+                <div id="photos_enabled_subgroup" class="col-auto wt-page-options-value" <?= !$vars["show_photos"] ? 'style="display:none;"' : '' ?>>
                     <div class="col-auto">
                         <label for="photo_shape"><?= I18N::translate('Photo shape') ?></label>
                         <?= view('components/select', ['name' => 'vars[photo_shape]', 'id' => 'photo_shape', 'selected' => e($vars['photo_shape']), 'options' => MainPage::updateTranslations($settings["photo_shape_options"])]) ?>
@@ -44,8 +44,15 @@ use Fisharebest\Webtrees\I18N;
             </div>
         </div>
         <?php } ?>
-        <div onclick="showHideColours('colours_subgroup', this)" class="pointer">→ <?= I18N::translate('Colours'); ?></div>
+        <div onclick="showHideSubgroup('colours_subgroup', this)" class="pointer">→ <?= I18N::translate('Colours'); ?></div>
         <div id="colours_subgroup" class="color_subgroup col-auto wt-page-options-value" style="display: none">
+            <div class="col-auto margin-bottom">
+                <label for="bg_colour_type"><?= I18N::translate('Individual background color') ?></label>
+                <?= view('components/select', ['name' => 'vars[bg_colour_type]', 'id' => 'bg_colour_type', 'selected' => e($vars['bg_colour_type']), 'options' => MainPage::updateTranslations($settings["bg_colour_type_options"])]) ?>
+                <div id="custom_bg_subgroup" class="color_subgroup col-auto wt-page-options-value fit-content margin-top" <?= !$vars["bg_colour_type"] == 0 ? 'style="display:none;"' : '' ?>>
+                    <input type="color" class="picker" name="vars[indi_background_col]" id="indi_background_col" value="<?= e($vars["indi_background_col"]); ?>" /><label for="indi_background_col" class="picker-label"><?= I18N::translate('Custom background colour') ?></label>
+                </div>
+            </div>
             <div class="col-auto">
                 <input type="color" class="picker" name="vars[male_col]" id="male_col" value="<?= e($vars["male_col"]); ?>" /><label for="male_col" class="picker-label"><?= I18N::translate('Male individuals') ?></label>
             </div>
@@ -70,9 +77,6 @@ use Fisharebest\Webtrees\I18N;
             <div class="col-auto">
                 <input type="color" class="picker" name="vars[unkn_gender_unrel_col]" id="unkn_gender_unrel_col" value="<?= e($vars["unkn_gender_unrel_col"]); ?>" /><label for="unkn_gender_unrel_col" class="picker-label"><?= I18N::translate('Not blood-related unknown gender individuals') ?></label>
             </div>
-            <div class="col-auto">
-                <input type="color" class="picker" name="vars[indi_background_col]" id="indi_background_col" value="<?= e($vars["indi_background_col"]); ?>" /><label for="indi_background_col" class="picker-label"><?= I18N::translate('Individual background color') ?></label>
-            </div>
             <div class="col-auto padding-left-10">
                 <input type="checkbox" name="vars[highlight_start_indis]" onclick="toggleHighlightStartPersons( this.checked)" id="highlight_start_indis" value="true" <?= $vars["highlight_start_indis"] ? 'checked' : '' ?>><label for="highlight_start_indis" class="check-list"><?= I18N::translate('Show starting individuals in different color') ?></label>
                 <div class="color_subgroup col-auto wt-page-options-value" id="startcol_option"  <?= $vars["highlight_start_indis"] != "true" ? 'style="display:none;"' : '' ?>>
@@ -93,7 +97,7 @@ use Fisharebest\Webtrees\I18N;
 
         </div>
     </div>
-    <div onclick="showHideColours('font_subgroup', this)" class="pointer">→ <?= I18N::translate('Font'); ?></div>
+    <div onclick="showHideSubgroup('font_subgroup', this)" class="pointer">→ <?= I18N::translate('Font'); ?></div>
     <div id="font_subgroup" class="color_subgroup col-auto wt-page-options-value" style="display: none">
         <div class="col-auto">
             <label for="typeface"><?= I18N::translate('Typeface') ?></label>
