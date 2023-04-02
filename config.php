@@ -77,13 +77,16 @@ return array(
 	'oth_gender_unrel_col' => '#FCF7E3', // Default color of not blood-related Other gender individuals
 	'unkn_gender_unrel_col' => '#D6EED6', // Default color of not blood-related unknown gender individuals
 	'family_col' => '#FFFFEE', // Default color of families (different light yellow)
-	'bg_colour_type' => 10, // 10 -> Custom (set in background_col), 20 => Sex colour
+	'bg_colour_type' => 0, // 0 -> Custom (set in background_col), 10 -> Sex colour
+	'stripe_colour_type' => 10, // 0 -> No stripe, 10 -> based on sex of individual
+	'border_colour_type' => 20, // 0 -> Custom, 10 -> based on sex of individual, 20 -> Same as Family border
 	'background_col' => '#EEEEEE', // Background of diagram (light grey)
 	'indi_background_col' => '#FEFEFE', // Background of individual tile
 	'highlight_start_indis' => false, // Whether to use a different colour for starting individuals
     'no_highlight_xref_list' => '', // XREFs in this list are not highlighted
 	'highlight_col' => '#FFFDC3', // Background of starting individuals
-	'border_col' => '#606060', // Outline colour
+	'border_col' => '#606060', // Outline colour (in UI this is Family outline colour, but by default the individual outline is the same as family)
+	'indi_border_col' => '#606060', // Outline colour of individuals
 	'birth_prefix' => '*', // Text shown on chart before the birthdate
 	'death_prefix' => '†', // Text shown on chart before the death date
     'save_settings_name' => '', // Default value for text field where name of settings can be entered

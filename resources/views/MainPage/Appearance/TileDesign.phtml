@@ -53,6 +53,17 @@ use Fisharebest\Webtrees\I18N;
                     <input type="color" class="picker" name="vars[indi_background_col]" id="indi_background_col" value="<?= e($vars["indi_background_col"]); ?>" /><label for="indi_background_col" class="picker-label"><?= I18N::translate('Custom background colour') ?></label>
                 </div>
             </div>
+            <div class="col-auto margin-bottom">
+                <label for="stripe_colour_type"><?= I18N::translate('Individual stripe color') ?></label>
+                <?= view('components/select', ['name' => 'vars[stripe_colour_type]', 'id' => 'stripe_colour_type', 'selected' => e($vars['stripe_colour_type']), 'options' => MainPage::updateTranslations($settings["stripe_colour_type_options"])]) ?>
+            </div>
+            <div class="col-auto margin-bottom">
+                <label for="border_colour_type"><?= I18N::translate('Individual border color') ?></label>
+                <?= view('components/select', ['name' => 'vars[border_colour_type]', 'id' => 'border_colour_type', 'selected' => e($vars['border_colour_type']), 'options' => MainPage::updateTranslations($settings["border_colour_type_options"])]) ?>
+                <div id="custom_border_subgroup" class="color_subgroup col-auto wt-page-options-value fit-content margin-top" <?= !$vars["border_colour_type"] == 0 ? 'style="display:none;"' : '' ?>>
+                    <input type="color" class="picker" name="vars[indi_border_col]" id="indi_border_col" value="<?= e($vars["indi_border_col"]); ?>" /><label for="indi_border_col" class="picker-label"><?= I18N::translate('Custom border colour') ?></label>
+                </div>
+            </div>
             <div class="col-auto">
                 <input type="color" class="picker" name="vars[male_col]" id="male_col" value="<?= e($vars["male_col"]); ?>" /><label for="male_col" class="picker-label"><?= I18N::translate('Male individuals') ?></label>
             </div>
@@ -92,7 +103,7 @@ use Fisharebest\Webtrees\I18N;
                 <input type="color" class="picker" name="vars[family_col]" id="family_col" value="<?= e($vars["family_col"]); ?>" /><label for="family_col" class="picker-label"><?= I18N::translate('Family background') ?></label>
             </div>
             <div class="col-auto">
-                <input type="color" class="picker" name="vars[border_col]" id="border_col" value="<?= e($vars["border_col"]); ?>" /><label for="border_col" class="picker-label"><?= I18N::translate('Outline colour') ?></label>
+                <input type="color" class="picker" name="vars[border_col]" id="border_col" value="<?= e($vars["border_col"]); ?>" /><label for="border_col" class="picker-label"><?= I18N::translate('Family outline colour') ?></label>
             </div>
 
         </div>

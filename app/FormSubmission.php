@@ -193,6 +193,9 @@ class FormSubmission
         if (isset($vars["bg_colour_type"])) {
             $settings['bg_colour_type'] = I18N::digits($vars["bg_colour_type"]);
         }
+        if (isset($vars["stripe_colour_type"])) {
+            $settings['stripe_colour_type'] = I18N::digits($vars["stripe_colour_type"]);
+        }
         if (isset($vars["indi_background_col"]) && $this->isValidColourHex($vars["indi_background_col"])) {
             $settings['indi_background_col'] = $vars["indi_background_col"];
         }
@@ -205,6 +208,9 @@ class FormSubmission
         }
         if (isset($vars["border_col"]) && $this->isValidColourHex($vars["border_col"])) {
             $settings['border_col'] = $vars["border_col"];
+        }
+        if (isset($vars["indi_border_col"]) && $this->isValidColourHex($vars["indi_border_col"])) {
+            $settings['indi_border_col'] = $vars["indi_border_col"];
         }
         // Settings
         if (!empty($vars['diagram_type']) && ctype_alpha($vars['diagram_type'])) {

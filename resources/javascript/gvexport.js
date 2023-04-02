@@ -857,6 +857,7 @@ function pageLoaded(Url) {
     document.querySelector('#searchButton').addEventListener('click', showHideSearchBox);
     document.querySelector('#photo_shape').addEventListener('change', showGraphvizUnsupportedMessage);
     document.querySelector('#bg_colour_type').addEventListener('change', () => {showHideMatchDropdown('bg_colour_type', 'custom_bg_subgroup', '0');});
+    document.querySelector('#border_colour_type').addEventListener('change', () => {showHideMatchDropdown('border_colour_type', 'custom_border_subgroup', '0');});
 }
 
 // Function to show a help message
