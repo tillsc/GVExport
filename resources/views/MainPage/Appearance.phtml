@@ -34,53 +34,7 @@ use vendor\WebtreesModules\gvexport\GVExport;use vendor\WebtreesModules\gvexport
     </div>
 
     <div class="row no-right-margin form-group">
-        <?= MainPage::addLabel('dpi', 'DPI'); ?>
-        <div class="col-sm-8 wt-page-options-value">
-            <div class="row">
-                <div class="col-auto">
-                    <input type="text" onblur="defaultValueWhenBlank(this, 72)" class="form-control" size="10" name="vars[dpi]" id="dpi"
-                           value="<?= I18N::digits($vars["dpi"]); ?>">
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row no-right-margin form-group">
-        <?= MainPage::addLabel('', 'Space'); ?>
-        <div class="col-sm-8 wt-page-options-value">
-            <div class="row">
-                <label for="ranksep"><?= I18N::translate('Between generations') ?></label>
-                <div class="col-auto">
-                    <input type="text" onclick="togglePercent(this, false)" onblur="togglePercent(this, true)" class="form-control col-sm-6" size="10" name="vars[ranksep]" id="ranksep"
-                           value="<?= e($vars["ranksep"]) ?>">
-                </div>
-                <label for="nodesep"><?= I18N::translate('Between individuals on the same level') ?></label>
-                <div class="col-auto">
-                    <input type="text" onclick="togglePercent(this, false)" onblur="togglePercent(this, true)" class="form-control col-sm-6" size="10" name="vars[nodesep]" id="nodesep"
-                           value="<?= e($vars["nodesep"]) ?>">
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row no-right-margin form-group">
-        <?= MainPage::addLabel('', 'Other colours'); ?>
-        <div class="col-sm-8 wt-page-options-value">
-            <div class="col-auto">
-                <input type="color" class="picker" name="vars[background_col]" id="background_col" value="<?= e($vars["background_col"]); ?>" /><label for="background_col" class="picker-label"><?= I18N::translate('Diagram background color') ?></label>
-            </div>
-            <div class="col-auto">
-                <input type="color" class="picker" name="vars[arrows_default]" id="arrows_default" value="<?= e($vars["arrows_default"]); ?>" /><label for="arrows_default" class="picker-label"><?= I18N::translate('Relationship arrow colour') ?></label>
-            </div>
-            <div class="padding-left-10">
-                <input type="checkbox" name="vars[colour_arrow_related]" onclick="showHide(document.getElementById('arrow_group'),this.checked)" id="colour_arrow_related" value="colour_arrow_related" <?= $vars["colour_arrow_related"] ? 'checked' : '' ?>><label for="colour_arrow_related" class="check-list"><?= I18N::translate('Show blood relationship in different color') ?></label>
-                <div id="arrow_group" class="color_subgroup col-auto wt-page-options-value" <?= !$vars["colour_arrow_related"] ? 'style="display:none;"' : '' ?>>
-                    <div class="sub-group">
-                        <input type="color" class="picker" name="vars[arrows_related]" id="arrows_related" value="<?= e($vars["arrows_related"]); ?>" /><label for="arrows_related" class="picker-label"><?= I18N::translate('Related by birth') ?></label>
-                        <input type="color" class="picker" name="vars[arrows_not_related]" id="arrows_not_related" value="<?= e($vars["arrows_not_related"]); ?>" /><label for="arrows_not_related" class="picker-label"><?= I18N::translate('Related other than by birth') ?></label>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <?= view($module->name() . '::MainPage/Appearance/DiagramAdvanced',['vars' => $vars, 'settings' => $settings, 'usegraphviz' => $usegraphviz, 'individual' => $individual, 'show_help' => true]); ?>
     </div>
 </div>
 <a id="appearance-advanced-button" onclick="toggleAdvanced(this, 'appearance-advanced')"><div class="wt-page-options-label advanced-settings-btn"><?= ($vars["show_adv_appear"] ? '↑ ' : '↓ ') . I18N::translate('Toggle advanced settings') . ($vars["show_adv_appear"] ? ' ↑' : ' ↓'); ?></div></a>
