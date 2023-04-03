@@ -1630,8 +1630,8 @@ function removeFromXrefList(value, listElName) {
 }
 
 
-function toggleHighlightStartPersons(enable) {
-    if (enable) {
+function toggleHighlightStartPersons(enable, adminPage) {
+    if (enable && !adminPage) {
         let list = document.getElementById('highlight_list');
         let xrefList = document.getElementById('xref_list');
         let xrefExcludeArray = document.getElementById('no_highlight_xref_list').value.split(',');
