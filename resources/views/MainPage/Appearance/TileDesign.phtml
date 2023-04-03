@@ -15,9 +15,12 @@ use Fisharebest\Webtrees\I18N;
 
 <?= MainPage::addLabel('', 'Tile design', $show_help); ?>
 <div class="col-sm-8 wt-page-options-value">
-    <div class="col-auto">
-        <label for="indi_tile_shape"><?= I18N::translate('Individual tile shape') ?></label>
-        <?= view('components/select', ['name' => 'vars[indi_tile_shape]', 'id' => 'indi_tile_shape', 'selected' => e($vars['indi_tile_shape']), 'options' => MainPage::updateTranslations($settings["indi_tile_shape_options"])]) ?>
+    <div onclick="showHideSubgroup('shape_subgroup', this)" class="pointer">→ <?= I18N::translate('Shape'); ?></div>
+    <div id="shape_subgroup" class="color_subgroup col-auto wt-page-options-value" style="display: none">
+        <div class="col-auto">
+            <label for="indi_tile_shape"><?= I18N::translate('Individual tile shape') ?></label>
+            <?= view('components/select', ['name' => 'vars[indi_tile_shape]', 'id' => 'indi_tile_shape', 'selected' => e($vars['indi_tile_shape']), 'options' => MainPage::updateTranslations($settings["indi_tile_shape_options"])]) ?>
+        </div>
     </div>
     <div class="col-auto">
         <?php if ($tree->getPreference('SHOW_HIGHLIGHT_IMAGES') == '1') { ?>
