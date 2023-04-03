@@ -129,6 +129,7 @@ class FormSubmission
         }
 
         $settings['show_marriage_place'] = isset($vars['show_marriage_place']);
+        $settings['show_indi_sex'] = isset($vars['show_indi_sex']);
         $settings['show_xref_individuals'] = isset($vars['show_xref_individuals']);
         $settings['show_xref_families'] = isset($vars['show_xref_families']);
         $settings['add_links'] = isset($vars['add_links']);

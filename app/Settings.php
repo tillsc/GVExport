@@ -40,10 +40,9 @@ class Settings
         $this->defaultSettings['use_abbr_names'] = [0 => "Full name", 10 => "Given and surnames", 20 => "Given names" , 30 => "First given name only", 40 => "Surnames", 50 => "Initials only", 60 => "Given name initials and surname", 70 => "Don't show names"];
         $this->defaultSettings['photo_shape_options'] = [0 => "No change", 10 => "Oval", 20 => "Circle" , 30 => "Square", 40 => "Rounded rectangle", 50 => "Rounded square"];
         $this->defaultSettings['indi_tile_shape_options'] = [0 => "Rectangle", 10 => "Rounded rectangle"];
-        $this->defaultSettings['indi_display_sex_options'] = [self::OPTION_SEX_TEXT => "Text"];
-        $this->defaultSettings['bg_colour_type_options'] = [0 => "Custom", 10 => "Based on individual's sex"];
-        $this->defaultSettings['stripe_colour_type_options'] = [0 => "No stripe", 10 => "Based on individual's sex"];
-        $this->defaultSettings['border_colour_type_options'] = [0 => "Custom", 10 => "Based on individual's sex", 20 => "Same as family border"];
+        $this->defaultSettings['bg_colour_type_options'] = [0 => "Custom", self::OPTION_BACKGROUND_SEX_COLOUR => "Based on individual's sex"];
+        $this->defaultSettings['stripe_colour_type_options'] = [0 => "No stripe", self::OPTION_STRIPE_SEX_COLOUR => "Based on individual's sex"];
+        $this->defaultSettings['border_colour_type_options'] = [self::OPTION_BORDER_CUSTOM_COLOUR => "Custom", self::OPTION_BORDER_SEX_COLOUR => "Based on individual's sex", 20 => "Same as family border"];
         $this->defaultSettings['countries'] = $this->getCountryAbbreviations();
         if (!$this->isGraphvizAvailable($this->defaultSettings['graphviz_bin'])) {
             $this->defaultSettings['graphviz_bin'] = "";

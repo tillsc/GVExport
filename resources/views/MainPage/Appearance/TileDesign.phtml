@@ -20,10 +20,6 @@ use Fisharebest\Webtrees\I18N;
         <?= view('components/select', ['name' => 'vars[indi_tile_shape]', 'id' => 'indi_tile_shape', 'selected' => e($vars['indi_tile_shape']), 'options' => MainPage::updateTranslations($settings["indi_tile_shape_options"])]) ?>
     </div>
     <div class="col-auto">
-        <label for="indi_display_sex"><?= I18N::translate('Display sex of individual') ?></label>
-        <?= view('components/select', ['name' => 'vars[indi_display_sex]', 'id' => 'indi_display_sex', 'selected' => e($vars['indi_display_sex']), 'options' => MainPage::updateTranslations($settings["indi_display_sex_options"])]) ?>
-    </div>
-    <div class="col-auto">
         <?php if ($tree->getPreference('SHOW_HIGHLIGHT_IMAGES') == '1') { ?>
         <div onclick="showHideSubgroup('photos_subgroup', this)" class="pointer">→ <?= I18N::translate('Photos'); ?></div>
         <div id="photos_subgroup" class="col-auto wt-page-options-value" style="display: none">

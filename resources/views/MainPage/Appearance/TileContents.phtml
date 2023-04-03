@@ -95,6 +95,10 @@ use Fisharebest\Webtrees\I18N;
                 <input type="checkbox" name="vars[show_death_place]" id="show_death_place" value="show_death_place" <?= $vars["show_death_place"] ? 'checked' : '' ?>>
                 <label for='show_death_place'><?= I18N::translate('Show death place'); ?></label>
             </div>
+            <div class="col-sm-8">
+                <input type="checkbox" name="vars[show_indi_sex]" id="show_indi_sex" value="show_indi_sex" <?= $vars["show_indi_sex"] ? 'checked' : '' ?>>
+                <label for='show_indi_sex'><?= I18N::translate('Show sex of individuals'); ?></label>
+            </div>
         </div>
     </div>
     <div class="col-auto">

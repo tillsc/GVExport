@@ -134,7 +134,7 @@ class Person
                     $name .= '<BR />' . $add_name;//@@ Meliza Amity
                 }
             }
-            if ($this->dot->settings['indi_display_sex'] == Settings::OPTION_SEX_TEXT) {
+            if ($this->dot->settings['show_indi_sex']) {
                 $sex = $this->getSexFull($i);
             } else {
                 $sex = '';

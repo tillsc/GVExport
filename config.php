@@ -28,6 +28,7 @@ return array(
 	'show_marriage_date' => true, // Whether to show marriage date on the family record
 	'marr_date_year_only' => false, // Whether to show just the year or the full GEDCOM date of marriage
 	'show_marriage_place' => true, // Whether to show the place of marriage on the family record
+	'show_indi_sex' => false, // Show the sex of the individual in text on the tile
 	'include_ancestors' => true, // If ancestors should be included when calculating who to show in the diagram
 	'ancestor_levels' => 2, // Default setting for number of ancestor generations to include
 	'include_siblings' => true, // Whether to include siblings when calculating who to include in the diagram
@@ -67,7 +68,6 @@ return array(
 	'arrows_not_related' => '#226622',	// Default colour for arrows from family records to child other than birth (adopted, etc)
 	'colour_arrow_related' => false, // If arrows should be coloured based on blood-relationship or not
     'indi_tile_shape' => 0, // Shape of the individual tiles, rectangle (0) or rounded rectangle (10)
-    'indi_display_sex' => 0, // How to show sex of individual - Stripe (0), Border (10), Text (20), Background colour (30) or Don't display sex (40)
 	'male_col' => '#ADD8E6', // Default color of male individuals (light blue)
 	'female_col' => '#FFB6C1', // Default color of female individuals (light pink)
 	'other_gender_col' => '#FCEAA1', // Default color of Other gender individuals (light yellow)
