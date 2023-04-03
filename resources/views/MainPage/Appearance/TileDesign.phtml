@@ -23,7 +23,13 @@ use Fisharebest\Webtrees\I18N;
         </div>
     </div>
     <div class="col-auto">
-        <?php if ($tree->getPreference('SHOW_HIGHLIGHT_IMAGES') == '1') { ?>
+        <?php
+        if (isset($tree)) {
+            $images_enabled = ($tree->getPreference('SHOW_HIGHLIGHT_IMAGES') == '1');
+        } else {
+            $images_enabled = true;
+        }
+        if ($images_enabled) { ?>
         <div onclick="showHideSubgroup('photos_subgroup', this)" class="pointer">→ <?= I18N::translate('Photos'); ?></div>
         <div id="photos_subgroup" class="col-auto wt-page-options-value" style="display: none">
             <div class="col-sm-8">

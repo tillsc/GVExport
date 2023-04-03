@@ -46,9 +46,11 @@ use Fisharebest\Webtrees\I18N;
                 /* Check if another module (e.g. vesta classic) is adding the XREF to
                    the name. If so, we want to enable the XREF option for individuals
                    unless we already have a saved setting */
-                $startName = $individual->fullName();
-                $name = str_replace(" (" . $individual->xref() . ")", "", $startName);
-                if ($startName != $name && isset($vars["first_run_xref_check"])) {
+                if (isset($individual)) {
+                    $startName = $individual->fullName();
+                    $name = str_replace(" (" . $individual->xref() . ")", "", $startName);
+                }
+                if (isset($startName) && isset($name) && $startName != $name && isset($vars["first_run_xref_check"])) {
                     $overridePID = true;
                 } else {
                     $overridePID = false;

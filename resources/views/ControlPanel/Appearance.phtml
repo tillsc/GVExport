@@ -1,0 +1,34 @@
+<?php
+
+use Fisharebest\Webtrees\Individual;
+use Fisharebest\Webtrees\Tree;
+use vendor\WebtreesModules\gvexport\GVExport;
+
+/**
+ * @var array       $vars           array of saved settings
+ * @var GVExport    $module         this module
+ * @var array       $settings       wider array of settings and options
+ * @var bool        $usegraphviz     Whether Graphviz is installed on the server and enabled
+ */
+
+?>
+
+<div class="row no-right-margin form-group">
+    <?= view($module->name() . '::MainPage/Appearance/GraphDirection',['vars' => $vars, 'settings' => $settings, 'show_help' => false]); ?>
+</div>
+<hr>
+<div class="row no-right-margin form-group">
+    <?= view($module->name() . '::MainPage/Appearance/DiagramType',['vars' => $vars, 'show_help' => false]); ?>
+</div>
+<hr>
+<div class="row no-right-margin form-group">
+    <?= view($module->name() . '::MainPage/Appearance/TileDesign',['vars' => $vars, 'settings' => $settings, 'show_help' => false]); ?>
+</div>
+<hr>
+<div class="row no-right-margin form-group">
+    <?= view($module->name() . '::MainPage/Appearance/TileContents',['vars' => $vars, 'settings' => $settings, 'usegraphviz' => $usegraphviz, 'show_help' => false]); ?>
+</div>
+<hr>
+<div class="row no-right-margin form-group">
+    <?= view($module->name() . '::MainPage/Appearance/DiagramAdvanced',['vars' => $vars, 'show_help' => false]); ?>
+</div>
