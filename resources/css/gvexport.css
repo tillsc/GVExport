@@ -197,7 +197,7 @@ span.NAME {
 }
 
 .fullscreen {
-    font-size: 2em;
+    font-size: 2.8em;
 }
 
 .close-fullscreen {
@@ -208,6 +208,9 @@ span.NAME {
     font-size: 1.8em;
 }
 @media screen and (max-device-width:480px) {
+    .fullscreen {
+        font-size: 2em;
+    }
     .search_icon {
         font-size: 1.5em;
     }
