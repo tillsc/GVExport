@@ -329,8 +329,22 @@ function toggleAdvanced(button, id, visible = null) {
     }
 }
 
-function setStateFastRelationCheck() {
-    showHide(document.getElementById("mark_related_subgroup"), document.getElementById("mark_not_related").checked);
+function showHideMatchCheckbox(checkboxId, elementId) {
+    showHide(document.getElementById(elementId), document.getElementById(checkboxId).checked);
+}
+function showHideMatchDropdown(dropdownId, elementId, value) {
+    showHide(document.getElementById(elementId), document.getElementById(dropdownId).value === value);
+}
+function showHideSubgroup(elementId, callingEl) {
+    let callerText = callingEl.innerText;
+    let visible = callerText.includes('↓');
+    showHide(document.getElementById(elementId), !visible);
+    if (visible) {
+        callingEl.innerText = callerText.replace('↓', '→');
+    } else {
+        callingEl.innerText = callerText.replace('→', '↓');
+    }
+
 }
 
 
@@ -842,6 +856,8 @@ function pageLoaded(Url) {
     document.querySelector("#diagram_search_box_container").addEventListener('change', diagramSearchBoxChange);
     document.querySelector('#searchButton').addEventListener('click', showHideSearchBox);
     document.querySelector('#photo_shape').addEventListener('change', showGraphvizUnsupportedMessage);
+    document.querySelector('#bg_colour_type').addEventListener('change', () => {showHideMatchDropdown('bg_colour_type', 'custom_bg_subgroup', '0');});
+    document.querySelector('#border_colour_type').addEventListener('change', () => {showHideMatchDropdown('border_colour_type', 'custom_border_subgroup', '0');});
 }
 
 // Function to show a help message
@@ -987,7 +1003,10 @@ function loadSettings(data) {
             }
         }
     });
-    setStateFastRelationCheck();
+    showHideMatchCheckbox('mark_not_related', 'mark_related_subgroup');
+    showHideMatchCheckbox('show_birthdate', 'birth_date_subgroup');
+    showHideMatchCheckbox('show_death_date', 'death_date_subgroup');
+    showHideMatchCheckbox('bg_colour_type', 'custom_bg_subgroup');
     setSavedDiagramsPanel();
     showHide(document.getElementById('arrow_group'),document.getElementById('colour_arrow_related').checked)
     showHide(document.getElementById('startcol_option'),document.getElementById('highlight_start_indis').checked)
@@ -1611,8 +1630,8 @@ function removeFromXrefList(value, listElName) {
 }
 
 
-function toggleHighlightStartPersons(enable) {
-    if (enable) {
+function toggleHighlightStartPersons(enable, adminPage) {
+    if (enable && !adminPage) {
         let list = document.getElementById('highlight_list');
         let xrefList = document.getElementById('xref_list');
         let xrefExcludeArray = document.getElementById('no_highlight_xref_list').value.split(',');
@@ -1770,8 +1789,8 @@ function handleSimpleDiagram() {
     document.getElementById("font_size").value = document.getElementById("font_size_name").value;
     // Set "details" font colour to the same as the "Name" font colour, as this is the only one used in simple mode
     document.getElementById("font_colour_details").value = document.getElementById("font_colour_name").value;
-    // Set "Display sex of individual" to "Background colour", to match style in simple mode
-    document.getElementById("indi_display_sex").value = 30;
-    // Set "Display sex of individual" to "Background colour", to match style in simple mode
+    // Set "Individual background colour" to "Based on individual's sex", to match style in simple mode
+    document.getElementById("bg_colour_type").value = 10;
+    // Set diagram type to separated (refered to as decorated in code) as simple doesn't exist anymore
     document.getElementById("diagtype_decorated").checked = true;
 }

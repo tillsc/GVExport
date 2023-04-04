@@ -28,6 +28,7 @@ return array(
 	'show_marriage_date' => true, // Whether to show marriage date on the family record
 	'marr_date_year_only' => false, // Whether to show just the year or the full GEDCOM date of marriage
 	'show_marriage_place' => true, // Whether to show the place of marriage on the family record
+	'show_indi_sex' => false, // Show the sex of the individual in text on the tile
 	'include_ancestors' => true, // If ancestors should be included when calculating who to show in the diagram
 	'ancestor_levels' => 2, // Default setting for number of ancestor generations to include
 	'include_siblings' => true, // Whether to include siblings when calculating who to include in the diagram
@@ -67,7 +68,6 @@ return array(
 	'arrows_not_related' => '#226622',	// Default colour for arrows from family records to child other than birth (adopted, etc)
 	'colour_arrow_related' => false, // If arrows should be coloured based on blood-relationship or not
     'indi_tile_shape' => 0, // Shape of the individual tiles, rectangle (0) or rounded rectangle (10)
-    'indi_display_sex' => 0, // How to show sex of individual - Stripe (0), Border (10), Text (20), Background colour (30) or Don't display sex (40)
 	'male_col' => '#ADD8E6', // Default color of male individuals (light blue)
 	'female_col' => '#FFB6C1', // Default color of female individuals (light pink)
 	'other_gender_col' => '#FCEAA1', // Default color of Other gender individuals (light yellow)
@@ -77,12 +77,16 @@ return array(
 	'oth_gender_unrel_col' => '#FCF7E3', // Default color of not blood-related Other gender individuals
 	'unkn_gender_unrel_col' => '#D6EED6', // Default color of not blood-related unknown gender individuals
 	'family_col' => '#FFFFEE', // Default color of families (different light yellow)
+	'bg_colour_type' => 0, // 0 -> Custom (set in background_col), 10 -> Sex colour
+	'stripe_colour_type' => 10, // 0 -> No stripe, 10 -> based on sex of individual
+	'border_colour_type' => 20, // 0 -> Custom, 10 -> based on sex of individual, 20 -> Same as Family border
 	'background_col' => '#EEEEEE', // Background of diagram (light grey)
 	'indi_background_col' => '#FEFEFE', // Background of individual tile
 	'highlight_start_indis' => false, // Whether to use a different colour for starting individuals
     'no_highlight_xref_list' => '', // XREFs in this list are not highlighted
 	'highlight_col' => '#FFFDC3', // Background of starting individuals
-	'border_col' => '#606060', // Outline colour
+	'border_col' => '#606060', // Outline colour (in UI this is Family outline colour, but by default the individual outline is the same as family)
+	'indi_border_col' => '#606060', // Outline colour of individuals
 	'birth_prefix' => '*', // Text shown on chart before the birthdate
 	'death_prefix' => '†', // Text shown on chart before the death date
     'save_settings_name' => '', // Default value for text field where name of settings can be entered

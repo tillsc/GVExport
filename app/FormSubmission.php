@@ -129,6 +129,7 @@ class FormSubmission
         }
 
         $settings['show_marriage_place'] = isset($vars['show_marriage_place']);
+        $settings['show_indi_sex'] = isset($vars['show_indi_sex']);
         $settings['show_xref_individuals'] = isset($vars['show_xref_individuals']);
         $settings['show_xref_families'] = isset($vars['show_xref_families']);
         $settings['add_links'] = isset($vars['add_links']);
@@ -190,6 +191,15 @@ class FormSubmission
         if (isset($vars["background_col"]) && $this->isValidColourHex($vars["background_col"])) {
             $settings['background_col'] = $vars["background_col"];
         }
+        if (isset($vars["bg_colour_type"])) {
+            $settings['bg_colour_type'] = I18N::digits($vars["bg_colour_type"]);
+        }
+        if (isset($vars["stripe_colour_type"])) {
+            $settings['stripe_colour_type'] = I18N::digits($vars["stripe_colour_type"]);
+        }
+        if (isset($vars["border_colour_type"])) {
+            $settings['border_colour_type'] = I18N::digits($vars["border_colour_type"]);
+        }
         if (isset($vars["indi_background_col"]) && $this->isValidColourHex($vars["indi_background_col"])) {
             $settings['indi_background_col'] = $vars["indi_background_col"];
         }
@@ -203,6 +213,9 @@ class FormSubmission
         if (isset($vars["border_col"]) && $this->isValidColourHex($vars["border_col"])) {
             $settings['border_col'] = $vars["border_col"];
         }
+        if (isset($vars["indi_border_col"]) && $this->isValidColourHex($vars["indi_border_col"])) {
+            $settings['indi_border_col'] = $vars["indi_border_col"];
+        }
         // Settings
         if (!empty($vars['diagram_type']) && ctype_alpha($vars['diagram_type'])) {
             $settings['diagram_type'] = $vars['diagram_type'];
@@ -214,9 +227,6 @@ class FormSubmission
         }
         if (isset($vars['indi_tile_shape'])) {
             $settings['indi_tile_shape'] = I18N::digits($vars['indi_tile_shape']);
-        }
-        if (isset($vars['indi_display_sex'])) {
-            $settings['indi_display_sex'] = I18N::digits($vars['indi_display_sex']);
         }
         if (isset($vars['photo_size'])) {
             $size = $vars['photo_size'];
