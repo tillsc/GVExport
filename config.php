@@ -85,8 +85,8 @@ return array(
 	'highlight_start_indis' => false, // Whether to use a different colour for starting individuals
     'no_highlight_xref_list' => '', // XREFs in this list are not highlighted
 	'highlight_col' => '#FFFDC3', // Background of starting individuals
-	'border_col' => '#606060', // Outline colour (in UI this is Family outline colour, but by default the individual outline is the same as family)
-	'indi_border_col' => '#606060', // Outline colour of individuals
+	'border_col' => '#606060', // Border colour (in UI this is Family border colour, but by default the individual border is the same as family)
+	'indi_border_col' => '#606060', // Border colour of individuals
 	'birth_prefix' => '*', // Text shown on chart before the birthdate
 	'death_prefix' => '†', // Text shown on chart before the death date
     'save_settings_name' => '', // Default value for text field where name of settings can be entered
