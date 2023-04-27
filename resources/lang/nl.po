@@ -12,16 +12,8 @@ msgid "Update"
 msgstr "Bijwerken"
 
 #: 
-msgid "Render serverside"
-msgstr "Genereren aan serverkant"
-
-#: 
 msgid "Reset"
 msgstr "Opnieuw instellen"
-
-#: 
-msgid "Diagram preferences"
-msgstr "Diagramvoorkeuren"
 
 #: 
 msgid "Appearance"
@@ -43,9 +35,10 @@ msgstr "Stop verwerking op"
 msgid "Include ancestors"
 msgstr "Inclusief voorouders"
 
+#. Section that allows setting various options around how the diagram is expanded from the starting individuals. This section now merges some previous settings into one:  https://s3.eu-west-1.amazonaws.com/po-pub/i/Z1PzXOjHnmuiy8DMV4tSWRPn.png
 #: 
-msgid "Include"
-msgstr "Inclusief"
+msgid "Connections to include"
+msgstr "Op te nemen koppelingen"
 
 #: 
 msgid "Siblings"
@@ -54,10 +47,6 @@ msgstr "Broers en zussen"
 #: 
 msgid "Cousins"
 msgstr "Neven en nichten"
-
-#: 
-msgid "Spouses"
-msgstr "Partners"
 
 #: 
 msgid "Include descendants"
@@ -69,15 +58,11 @@ msgstr "Max. niveaus"
 
 #: 
 msgid "Mark not blood-related people with different color"
-msgstr "Markeer niet-bloedverwante mensen met een andere kleur"
+msgstr "Markeer niet-bloedverwante personen met andere kleur"
 
 #: 
 msgid "Add URL to individuals and families"
 msgstr "URL toevoegen naar personen en gezinnen"
-
-#: 
-msgid "Use abbreviated placenames"
-msgstr "Gebruik verkorte plaatsnamen"
 
 #: 
 msgid "Show birth date"
@@ -123,10 +108,6 @@ msgstr "Grafiekrichting"
 msgid "Diagram type"
 msgstr "Diagramtype"
 
-#: 
-msgid "Simple"
-msgstr "Eenvoudig"
-
 #. Diagram type is now called "Separated" (previously "Decorated"). Simple option removed.  https://s3.eu-west-1.amazonaws.com/po-pub/i/lO1dVSZE4z0z2WQD3NI7TWPV.png
 #: 
 msgid "Separated"
@@ -146,16 +127,8 @@ msgid "Output file type"
 msgstr "Type uitvoerbestand"
 
 #: 
-msgid "Generate a file for download"
-msgstr "Genereer een bestand om te downloaden"
-
-#: 
 msgid "Number of iterations (MCLIMIT)"
 msgstr "Aantal iteraties (MCLIMIT)"
-
-#: 
-msgid "helps to reduce the crossings on the graph. This can be really slow (up to 10..15x compared to the 20 setting)"
-msgstr "helpt om de kruisingen op de grafiek te verminderen. Dit kan erg traag zijn (tot 10..15x vergeleken met de 20-instelling)"
 
 #: 
 msgid "DPI"
@@ -184,10 +157,6 @@ msgstr "Ruimte tussen personen op hetzelfde niveau"
 #: 
 msgid "Error running GVExport in browser mode"
 msgstr "Fout bij het uitvoeren van GVExport in browsermodus"
-
-#: 
-msgid "Preview"
-msgstr "Voorbeeld"
 
 #: 
 msgid "Download"
@@ -550,7 +519,7 @@ msgstr "alleen browser, SVG en PDF"
 
 #. This help message is displayed when the user clicks the help icon next to "Include anyone related to". https://s3.eu-west-1.amazonaws.com/po-pub/i/4sXDKFJMwoE5PBYZqEPOIV7W.png
 #: 
-msgid "This is our starting point. Choose a person to base the diagram around. You might choose yourself.</p><p>You can choose as many starting individuals as you wish. A tree will be created for each starting individual based on the settings, then the trees are merged to create one tree for the diagram.</p><p>Click the X to remove a record from the list. If two or more records are listed, a \"Clear all\" option will appear to allow you to remove all records.</p><p>You can also click on an individual in this list to have the diagram in the browser scroll to that person.</p><p>When you next come to the page, the default individual or the last individual you were looking at in webtrees will be loaded. If there was just one saved individual then it will be replaced with the individual provided by webtrees on coming to the page. If there were multiple in the list, then the individual provided by webtrees will be added to the list (if not already in it). So be sure to double-check you are only including individuals you are looking for when first loading the page. This default behaviour can be change with the option \"Treatment of source individuals\" in the advanced section."
+msgid "This is our starting point. Choose a person to base the diagram around. You might choose yourself.</p><p>You can choose as many starting individuals as you wish. A tree will be created for each starting individual based on the settings, then the trees are merged to create one tree for the diagram.</p><p>Click the X to remove a record from the list. If two or more records are listed, a &quot;Clear all&quot; option will appear to allow you to remove all records.</p><p>You can also click on an individual in this list to have the diagram in the browser scroll to that person.</p><p>When you next come to the page, the default individual or the last individual you were looking at in webtrees will be loaded. If there was just one saved individual then it will be replaced with the individual provided by webtrees on coming to the page. If there were multiple in the list, then the individual provided by webtrees will be added to the list (if not already in it). So be sure to double-check you are only including individuals you are looking for when first loading the page. This default behaviour can be changed with the option &quot;Treatment of source individuals&quot; in the advanced section."
 msgstr "Dit is ons startpunt. Kies een persoon om het diagram op te baseren. U kunt uzelf kiezen.</p><p>U kunt zoveel startpersonen kiezen als u wilt. Voor elke startpersoon wordt een boom gemaakt op basis van de instellingen, waarna de bomen worden samengevoegd tot één boom voor het diagram.</p><p>Klik op de X om een record uit de lijst te verwijderen. Als er twee of meer records in de lijst staan, verschijnt een optie \"Alles wissen\" waarmee alle records verwijderd kunnen worden.</p><p>U kunt ook op een persoon in deze lijst klikken om het diagram in de browser naar die persoon te laten scrollen.</p><p>Wanneer u de volgende keer op de pagina komt, wordt de standaardpersoon of de laatste persoon die u in webtrees hebt bekeken, geladen. Als er slechts één persoon was opgeslagen, wordt deze vervangen door de persoon die door webtrees is verstrekt wanneer u op de pagina komt. Als er meerdere personen in de lijst stonden, dan zal de persoon die door webtrees is geleverd aan de lijst worden toegevoegd (als die er nog niet in stond). Dus zorg ervoor dat u alleen peronen opneemt die u zoekt als de pagina voor het eerst wordt geladen. Dit standaardgedrag kan worden gewijzigd met de optie \"Behandeling van startpersonen\" in het geavanceerde gedeelte."
 
 #. This help message is displayed when the user clicks the help icon next to "Include ancestors".  https://s3.eu-west-1.amazonaws.com/po-pub/i/UoTrlDpngydDdWmJPau99ZV4.png
@@ -560,8 +529,8 @@ msgstr "Vink deze optie aan om voorouders op te nemen van de startperso(o)n(en) 
 
 #. This help message is displayed when the user clicks the help icon next to "Include".  https://s3.eu-west-1.amazonaws.com/po-pub/i/G2LwgKcPjaAwzcCXllEaXa13.png
 #: 
-msgid "This section lets you decide what type of relatives to include when generating the diagram.</p><h4>Siblings</h4><p>Include brothers and sisters of anyone in the tree.</p><h4>All relations</h4><p>Include cousins, nieces, nephews, and their descendants when generating the tree. Requires \"Siblings\" to be selected.</p><h4>Partners</h4><p>Include the husbands, wives, and partners of those in the tree even if they aren't blood-relatives. There is another option \"Mark not blood-related people with different color\" that allows these people to be marked in a different colour.</p><h4>Anyone</h4><p>Follow all links regardless of whether the person is related. In practice, this generally means that the family of non-relatives (i.e. spouses) are included in the tree.</p><p>Use this option to include all records of the selected generations. Note that only records with a link are included, so you may need to include more ancestor generations (or more starting individuals) to get all your records to show."
-msgstr "Hier kunt u bepalen welk type familieleden u wilt opnemen bij het genereren van het diagram.</p><h4>Broers en zussen</h4><p>Broers en zussen van iedereen in de boom opnemen.</p><h4>Alle relaties</h4><p>Neven en nichten en hun nakomelingen opnemen bij het genereren van de boom. Vereist dat \"Broers en zussen\" is geselecteerd.</p><h4>Partners</h4><p>Omvat de echtgenoten, echtgenotes en partners van degenen in de stamboom, zelfs als zij geen bloedverwanten zijn. Er is een andere optie \"Niet-bloedverwanten met andere kleur markeren\" waarmee deze personen met een andere kleur kunnen worden gemarkeerd.</p><h4>Iedereen</h4><p>Volg alle koppelingen, ongeacht of de persoon verwant is. In de praktijk betekent dit meestal dat de familie van niet-verwanten (zoals echtgenoten) in de boom wordt opgenomen.</p><p>Gebruik deze optie om alle records van de geselecteerde generaties op te nemen. Merk op dat alleen records met een koppeling worden opgenomen, dus het is mogelijk dat u meer vooroudergeneraties (of meer startpersonen) moet opnemen om alle records te tonen."
+msgid "This section includes options that let you decide how to build the tree from your starting individual(s).</p><b>Include ancestors</b><p>Tick this option to include ancestors of your starting individual(s) and anyone in the tree.</p><b>Include descendants</b><p>Whether to include children, grandchildren, etc. of people listed in the tree.</p><b>Max levels</b><p>The number of generations of ancestors to include. For example, if you chose yourself as your starting person, you may want the diagram to include relatives back to your great-grandparents. In this case, you would type &quot;3&quot; in the Max levels box under Include ancestors, to include your parents' generation, your grandparents' generation, and your great-grandparents' generation.</p><h5>Relation types to include</h5><p>The type of relatives to include when generating the diagram.</p><b>Siblings</b><p>Include brothers and sisters of anyone in the tree.</p><b>All relations</b><p>Include cousins, nieces, nephews, and their descendants when generating the tree. Requires &quot;Siblings&quot; to be selected.</p><b>Partners</b><p>Include the husbands, wives, and partners of those in the tree even if they aren't blood-relatives. There is another option &quot;Mark not blood-related people with different color&quot; that allows these people to be marked in a different colour.</p><b>Anyone</b><p>Follow all links regardless of whether the person is related. In practice, this generally means that the family of non-relatives (i.e. spouses) are included in the tree.</p><p>Use this option to include all records of the selected generations. Note that only records with a link are included, so you may need to include more ancestor or descendant generations (or more starting individuals) to get all your records to show."
+msgstr "Dit deel bevat opties waarmee u kunt beslissen hoe de boom moet worden opgebouwd vanuit uw startpersoon/personen).</p><b>Inclusief voorouders</b><p>Vink deze optie aan om de voorouders van uw starpersoon/personen en iedereen in de boom op te nemen.</p><b>Inclusief afstammelingen</b><p>Of u kinderen, kleinkinderen, enz. van personen in de boom wilt opnemen.</p><b>Max. niveaus</b><p>Het aantal generaties voorouders dat moet worden opgenomen. Als U bijvoorbeeld uzelf als startpersoon kiest, kan het zijn dat u wilt dat het diagram ook familieleden bevat die teruggaan tot uw overgrootouders. In dat geval typt u \"3\" in het vak Max. niveaus onder Inclusief voorouders, om de generatie van uw ouders, uw grootouders en uw overgrootouders op te nemen.</p><h5>Op te nemen relatietypes</h5><p>Het type verwanten dat moet worden opgenomen bij het genereren van het diagram</p><b>Broers en zussen</b><p>Inclusief broers en zussen van iedereen in de boom.</p><b>Alle relaties</b><p>Inclusief neven en nichten en hun nakomelingen bij het genereren van de boom. Vereist dat \"Broers en zussen\" is geselecteerd.</p><b>Partners</b><p>Inclusief de echtgenoten, echtgenotes en partners van degenen in de boom, zelfs als ze geen bloedverwanten zijn. Er is een andere optie \"Markeer niet-bloedverwante personen met andere kleur\" waarmee deze personen in een andere kleur kunnen worden gemarkeerd.</p><b>Iedereen</b><p>Volg alle koppelingen, ongeacht of de persoon verwant is. In de praktijk betekent dit meestal dat de familie van niet-verwanten (zoals echtgenoten) in de boom wordt opgenomen.</p><p>Gebruik deze optie om alle records van de geselecteerde generaties op te nemen. Merk op dat alleen records met een koppeling worden opgenomen, dus het is mogelijk dat u meer voorouder- of nakomelingengeneraties (of meer startpersonen) moet opnemen om alle records te tonen."
 
 #. This help message is displayed when the user clicks the help icon next to "Include descendants".  https://s3.eu-west-1.amazonaws.com/po-pub/i/TNXFdoP4fIHVQnScVvnfvKA1.png
 #: 
@@ -575,8 +544,8 @@ msgstr "Er zijn hier twee weergaveopties:<ul><li>Links naar rechts - De standaar
 
 #. This help message is displayed when the user clicks the help icon next to "Diagram type". https://s3.eu-west-1.amazonaws.com/po-pub/i/dt2T4x9RshJsWKWZ7fQ4zFlu.png
 #: 
-msgid "The options here are:<ul><li>Separated - Individuals each have their own tile, connected by arrows. Family records are separate and also connected by arrows.</li><li>Combined - Each couple is one box instead of one per person. Marriage records are connected under the couple. There are no family records if there are no marriage details to show.</li></ul></p><p>There was previously a third option \\\"Simple\\\", but this has been removed. The advanced settings in the appearance section now contain all the settings needed to recreate this. Loading a simple diagram should set the appropriate settings to recreate the same look."
-msgstr "De opties hier zijn:<ul><li>Gescheiden - Personen hebben elk hun eigen tegel, verbonden door pijlen. Gezinsrecords zijn apart en ook verbonden door pijlen.</li><li>Gecombineerd - Elk gezin is één vak in plaats van één per persoon. Gezinsrecords zijn verbonden onder het gezin. Er zijn geen gezinsrecords als er geen huwelijksgegevens te tonen zijn.</li></ul></p><p>Er was een derde optie \"Eenvoudig\", maar die is verwijderd. De geavanceerde instellingen in het weergavegedeelte bevatten nu alle instellingen die nodig zijn om dit na te maken. Het laden van een eenvoudig diagram zou de juiste instellingen moeten geven om hetzelfde uiterlijk te krijgen."
+msgid "The options here are:<ul><li>Separated - Individuals each have their own tile, connected by arrows. Family records are separate and also connected by arrows.</li><li>Combined - Each couple is one box instead of one per person. Marriage records are connected under the couple. There are no family records if there are no marriage details to show.</li></ul></p><p>There was previously a third option &quot;Simple&quot;, but this has been removed. The advanced settings in the appearance section now contain all the settings needed to recreate this. Loading a simple diagram should set the appropriate settings to recreate the same look."
+msgstr "De opties hier zijn:<ul><li>Gescheiden - Personen hebben elk hun eigen tegel, verbonden door pijlen. Gezinsrecords zijn apart en ook verbonden door pijlen.</li><li>Gecombineerd - Elk koppel is één vak in plaats van één per persoon. Huwelijksrecords zijn verbonden onder het koppel. Er zijn geen gezinsrecords als er geen huwelijksgegevens te tonen zijn.</li></ul></p><p>Er was ook een derde optie &quot;Eenvoudig&quot;, maar die is verwijderd. De geavanceerde instellingen in het weergavegedeelte bevatten nu alle instellingen die nodig zijn om dit na te maken. Het laden van een eenvoudig diagram zou de juiste instellingen moeten geven om hetzelfde uiterlijk te krijgen."
 
 #. This help message is displayed when the user clicks the help icon next to "Output file type". https://s3.eu-west-1.amazonaws.com/po-pub/i/apq6Tgv91ZGJTGcUfFH3V1VE.png
 #: 
@@ -585,7 +554,7 @@ msgstr "Het gewenste uitvoerbestandstype. Dit wordt genegeerd bij het opbouwen i
 
 #. This help message is displayed when the user clicks the help icon next to "Browser render". https://s3.eu-west-1.amazonaws.com/po-pub/i/obqZqWV3JxLlYqmWek7FPMfW.png
 #: 
-msgid "If the option \"Auto-update\" is selected, the browser rendered diagram will automatically update when any option is changed. This will also hide the \"Update\" button."
+msgid "If the option &quot;Auto-update&quot; is selected, the browser rendered diagram will automatically update when any option is changed. This will also hide the &quot;Update&quot; button."
 msgstr "Indien de optie \"Automatisch bijwerken\" is geselecteerd, wordt het door de browser weergegeven diagram automatisch bijgewerkt wanneer een optie wordt gewijzigd. Hierdoor wordt ook de knop \"Bijwerken\" verborgen."
 
 #. Help button that will show a help page when clicked
@@ -598,7 +567,7 @@ msgstr "Help"
 #. 
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/vyDHWXC9qcax65t9gW4YjvMv.png
 #: 
-msgid "GVExport is a webtrees module that allows you to create complex visual family trees, using a tool called Graphviz to display the tree. Select a starting person, adjust the settings, and see that person's family tree.</p><p>Some fields have an icon <span class=\"info-icon btn btn-primary\">i</span> next to them, clicking this will give you some more information about that field.</p><p>Advanced configurations are possible by toggling advanced settings by clicking the \"Toggle advanced settings\" option at the end of each section. Clicking the ⛶ in the top right corner of the browser rendering will display the browser rendering in full screen. You can also use the webtrees \"Clippings Cart\" feature to select records, which GVExport can then use instead of the \"People to be included\" settings. </p><p>There are several buttons that take action based on the settings that you have chosen:<ul><li>Update: Clicking this updates the browser render (this is hidden if auto-update is enabled).<li>Download: Clicking this will download the diagram in the format chosen in the \"Output file type\" option. <li>Reset: Clicking this will reset the settings to the default values. Default values can be changed by an administrator in the webtrees Control Panel.<li>Help: Shows this help message.</ul></p><p>For more information, see the <a href=\"https://github.com/Neriderc/GVExport/wiki\" class=\"help-link\">GVExport Wiki</a>.</p><p>You can also ask a question, provide feedback, or suggest features on our <a href=\"https://github.com/Neriderc/GVExport\" class=\"help-link\">GitHub page</a>. Just <a href=\"https://github.com/Neriderc/GVExport/issues/new\" class=\"help-link\">open an issue</a>, or <a href=\"https://github.com/Neriderc/GVExport/issues\" class=\"help-link\">browse existing issues</a>."
+msgid "GVExport is a webtrees module that allows you to create complex visual family trees, using a tool called Graphviz to display the tree. Select a starting person, adjust the settings, and see that person's family tree.</p><p>Some fields have an icon <span class=\"info-icon btn btn-primary\">i</span> next to them, clicking this will give you some more information about that field.</p><p>Advanced configurations are possible by toggling advanced settings by clicking the &quot;Toggle advanced settings&quot; option at the end of each section. Clicking the ⛶ in the top right corner of the browser rendering will display the browser rendering in full screen. You can also use the webtrees &quot;Clippings Cart&quot; feature to select records, which GVExport can then use instead of the &quot;People to be included&quot; settings. </p><p>There are several buttons that take action based on the settings that you have chosen:<ul><li>Update: Clicking this updates the browser render (this is hidden if auto-update is enabled).<li>Download: Clicking this will download the diagram in the format chosen in the &quot;Output file type&quot; option. <li>Reset: Clicking this will reset the settings to the default values. Default values can be changed by an administrator in the webtrees Control Panel.<li>Help: Shows this help message.</ul></p><p>For more information, see the <a href=\"https://github.com/Neriderc/GVExport/wiki\" class=\"help-link\">GVExport Wiki</a>.</p><p>You can also ask a question, provide feedback, or suggest features on our <a href=\"https://github.com/Neriderc/GVExport\" class=\"help-link\">GitHub page</a>. Just <a href=\"https://github.com/Neriderc/GVExport/issues/new\" class=\"help-link\">open an issue</a>, or <a href=\"https://github.com/Neriderc/GVExport/issues\" class=\"help-link\">browse existing issues</a>."
 msgstr "GVExport is een webtreesmodule waarmee u complexe visuele stambomen kunt maken, met behulp van het programma Graphviz om de boom weer te geven. Selecteer een startpersoon, pas de instellingen aan en bekijk de stamboom van die persoon.</p><p>Sommige velden hebben een pictogram <span class=\"info-icon btn btn-primary\">i</span> ernaast. Als u hierop klikt, krijgt u wat meer informatie over dat veld.<p><p>Geavanceerde configuraties zijn mogelijk door te klikken op de optie \"Toon/verberg geavanceerde instellingen\" aan het einde van elke sectie. Als u op de ⛶ in de rechterbovenhoek van de browserweergave klikt, wordt de browserweergave op volledig scherm weergegeven. U kunt ook de webtreesfunctie \"Stamboomknipsels\" gebruiken om records te selecteren, die GVExport dan kan gebruiken in plaats van de instellingen bij \"Op te nemen personen\".</p><p>Er zijn verschillende knoppen die actie ondernemen op basis van de door u gekozen instellingen:<ul><li>Bijwerken: Door hierop te klikken wordt de browserweergave bijgewerkt (dit is verborgen als automatisch bijwerken is ingeschakeld).<li>Downloaden: Als u hierop klikt, wordt het diagram gedownload in het formaat dat is gekozen in de optie \"Type uitvoerbestand\".<li>Opnieuw instellen: Als u hierop klikt, worden de instellingen teruggezet naar de standaardwaarden. Standaardwaarden kunnen worden gewijzigd door een beheerder in het webtrees Controlepaneel.<li>Help: Toont dit helpbericht.</ul></p><p>Zie voor meer informatie de <a href=\"https://github.com/Neriderc/GVExport/wiki\" class=\"help-link\">GVExport-wiki</a >.</p><p>U kunt ook een vraag stellen, feedback geven of functies voorstellen op onze <a href=\"https://github.com/Neriderc/GVExport\" class=\"help-link\">GitHub-pagina</a>. <a href=\"https://github.com/Neriderc/GVExport/issues/new\" class=\"help-link\">Voeg een probleem toe</a> of <a href=\"https://github. com/Neriderc/GVExport/issues\" class=\"help-link\">blader door bestaande problemen</a>."
 
 #. This message should never be shown, but it is a backup message for the help messages in the case that the text cannot be found - it's effectively an error message.
@@ -608,33 +577,28 @@ msgstr "Help-informatie niet gevonden"
 
 #. This is the help text that the user will see if they click the i next to the Clippings cart message that shows only when there is an item in the clippings cart:  https://s3.eu-west-1.amazonaws.com/po-pub/i/lzypnHfQAPcoljhGbgSsaEVb.png
 #: 
-msgid "Within webtrees, you can add items to the clippings cart. This is usually done by navigating to a record within webtrees then selecting the \"Clippings cart\" option near the top of the screen.</p><p> If you have added individuals and the related family and media records to the clippings cart, these can be used to display the diagram instead of the criteria in the \"People to be included\" section.</p><p>If you have individuals in the clippings cart but don't wish to use these, you have the option to ignore the clippings cart."
-msgstr "Binnen webtrees kunt u items toevoegen aan de knipselverzameling. Dit doet u meestal door naar een record in webtrees te navigeren en vervolgens de optie \"Stamboomknipsels\" bovenaan het scherm te selecteren.</p><p>Als u personen en de bijbehorende gezins- en mediarecords aan de knipselverzameling hebt toegevoegd, kunnen deze worden gebruikt om het diagram weer te geven in plaats van de criteria in de sectie \"Inclusief de volgende personen\".</p><p>Als u personen in de knipselverzameling hebt maar deze niet wilt gebruiken, hebt u de optie om de knipselverzameling te negeren."
+msgid "Within webtrees, you can add items to the clippings cart. This is usually done by navigating to a record within webtrees then selecting the &quot;Clippings cart&quot; option near the top of the screen.</p><p> If you have added individuals and the related family and media records to the clippings cart, these can be used to display the diagram instead of the criteria in the &quot;People to be included&quot; section.</p><p>If you have individuals in the clippings cart but don't wish to use these, you have the option to ignore the clippings cart."
+msgstr "Binnen webtrees kunt u items toevoegen aan de knipselverzameling. Dit doet u meestal door naar een record in webtrees te navigeren en vervolgens de optie &quot;Stamboomknipsels&quot; bovenaan het scherm te selecteren.</p><p>Als u personen en de bijbehorende gezins- en mediarecords aan de knipselverzameling hebt toegevoegd, kunnen deze worden gebruikt om het diagram weer te geven in plaats van de criteria in de sectie &quot;Inclusief de volgende personen&quot;.</p><p>Als u personen in de knipselverzameling hebt maar deze niet wilt gebruiken, hebt u de optie om de knipselverzameling te negeren."
 
 #. This is help text shown when the user clicks the "i" button next to the "XREFs of included individuals" option:   https://s3.eu-west-1.amazonaws.com/po-pub/i/YVGpSuKpIAjyOMoLTigbrzcU.png
 #: 
-msgid "This is a list of XREFs that represents the records listed in the \"Include anyone related to\" section. You may edit this box and click the refresh button in order to load your list of XREFs into the selection list."
-msgstr "Dit is een lijst van XREF's die de records vertegenwoordigt die in het onderdeel \"Inclusief iedereen die gerelateerd is aan\" staan. U kunt dit vak bewerken en op de knop Vernieuwen klikken om uw lijst met XREF's in de selectielijst te laden."
+msgid "This is a list of XREFs that represents the records listed in the &quot;Include anyone related to&quot; section. You may edit this box and click the refresh button in order to load your list of XREFs into the selection list."
+msgstr "Dit is een lijst van XREF's die de records vertegenwoordigt die in het onderdeel &quot;Inclusief iedereen die gerelateerd is aan&quot; staan. U kunt dit vak bewerken en op de knop Vernieuwen klikken om uw lijst met XREF's in de selectielijst te laden."
 
 #. Help text shown when user clicks "i" next to "Stop processing on":  https://s3.eu-west-1.amazonaws.com/po-pub/i/aVjMepnhrUVmbSJnm5JjsdOp.png
 #: 
-msgid "If the module reaches one of these people, don't grow the tree from here. For example, if you chose yourself as the starting point, you might want to include all of your blood relatives except your mother's side of the family. Add your mother as a person to \"Stop processing on\". The tree will still include your mother, but it won't include her parents, siblings, etc.</p><p>Choose a person in the top box, and they will be added to the list. Their XREF will also be included in the bottom box (which can be edited directly if needed)."
+msgid "If the module reaches one of these people, don't grow the tree from here. For example, if you chose yourself as the starting point, you might want to include all of your blood relatives except your mother's side of the family. Add your mother as a person to &quot;Stop processing on&quot;. The tree will still include your mother, but it won't include her parents, siblings, etc.</p><p>Choose a person in the top box, and they will be added to the list. Their XREF will also be included in the bottom box (which can be edited directly if needed)."
 msgstr "Als de module één van deze personen bereikt, laat de boom vanaf daar dan niet verder groeien. Als u bijvoorbeeld uzelf als uitgangspunt kiest, wilt u misschien al uw bloedverwanten opnemen, behalve de kant van uw moeder. Voeg uw moeder toe als een persoon aan \"Stop verwerking op\". De boom zal nog steeds je moeder bevatten, maar niet haar ouders, broers en zussen, etc.</p><p>Kies een persoon in het bovenste vak, en deze wordt toegevoegd aan de lijst. Hun XREF wordt ook opgenomen in het onderste vak (dat indien nodig direct kan worden bewerkt)."
 
 #. Help text shown when user clicks "i" next to option "Non-relatives":  https://s3.eu-west-1.amazonaws.com/po-pub/i/Lq1O4swJShMh36BPEhJiSujt.png
 #: 
-msgid "This section has two related options.<h4>Mark not blood-related people with different color</h4><p>Where spouses are included and are not blood-related to anyone in the \"Include anyone related to\" field, if this option is selected they will be highlighted in a much duller color than the standard blue/pink for relatives.</p><p>Note that when this option is selected, and non-relatives are found in the selected records, then a full tree scan is performed to identify if an individual is related by a more distant link (see next option).</p><h4>Ignore unseen links to speed up relative check</h4><p>This option is only available when the previous option is selected. When the option to display non-relatives in a different colour is selected, normally a scan is performed starting from the starting individuals and branching to all relatives regardless of display settings. This ensures that if a person is related via a link not displayed, they will still show as related.</p><p>Enabling this option prevents the full scan of the tree which can greatly speed up the generation of the diagram on larger trees, but may reduce accuracy of the colouring of non-relatives."
+msgid "This section has two related options.<h4>Mark not blood-related people with different color</h4><p>Where spouses are included and are not blood-related to anyone in the &quot;Include anyone related to&quot; field, if this option is selected they will be highlighted in a much duller color than the standard blue/pink for relatives.</p><p>Note that when this option is selected, and non-relatives are found in the selected records, then a full tree scan is performed to identify if an individual is related by a more distant link (see next option).</p><h4>Ignore unseen links to speed up relative check</h4><p>This option is only available when the previous option is selected. When the option to display non-relatives in a different colour is selected, normally a scan is performed starting from the starting individuals and branching to all relatives regardless of display settings. This ensures that if a person is related via a link not displayed, they will still show as related.</p><p>Enabling this option prevents the full scan of the tree which can greatly speed up the generation of the diagram on larger trees, but may reduce accuracy of the colouring of non-relatives."
 msgstr "Deze sectie heeft twee gerelateerde opties.<h4>Markeer niet-bloedverwanten met een andere kleur</h4><p>Wanneer partners worden opgenomen die geen bloedverwant zijn van iemand in het veld \"Inclusief iedereen die verwant is met\", worden zij, als deze optie is geselecteerd, gemarkeerd in een veel saaiere kleur dan de standaardkleur blauw/roze voor verwanten.</p><p>Wanneer deze optie is geselecteerd en in de geselecteerde records niet-verwanten worden gevonden, wordt een volledige boomscan uitgevoerd om na te gaan of een persoon verwant is via een verder verwijderde koppeling (zie de volgende optie).</p><h4>Negeer niet-zichtbare koppelingen om de verwantschapscontrole te versnellen</h4><p>Deze optie is alleen beschikbaar wanneer de vorige optie is geselecteerd. Als de optie om niet-verwanten in een andere kleur weer te geven is geselecteerd, wordt normaal gesproken een scan uitgevoerd beginnend bij de startpersonen en vertakkend naar alle verwanten, ongeacht de weergave-instellingen. Dit zorgt ervoor dat als een persoon verwant is via een koppeling die niet wordt weergegeven, deze toch als verwant wordt weergegeven.</p><p>Inschakelen van deze optie voorkomt het volledig scannen van de boom, wat het genereren van het diagram bij grotere stambomen aanzienlijk kan versnellen, maar de nauwkeurigheid van de kleuring van niet-verwanten kan verminderen."
 
 #. Help text shown when user clicks the "i" next to "Show photos" in the advanced appearance section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/Xpn8Y8LiWnYphmjJe9eJO6ub.png
 #: 
 msgid "This section contains the option to display the photo from the individual's page in the tree.</p><p>The \"Photo shape\" option allows you to select a shape for the photos. Photos will be cropped to fit this shape.</p><p>The \"Photo size\" option allows you to adjust the scale of the photo. 100&percnt; is the default, and you can increase this to make the photos bigger, or decrease it to make them smaller."
-msgstr "Deze sectie bevat de optie om de foto van de persoonspagina in de stamboom te tonen.</p><p>Met de optie \"Fotovorm\" kunt u een vorm voor de foto's kiezen. De foto's worden bijgesneden om in deze vorm te passen.</p><p>Met de optie \"Fotogrootte\" kunt u de schaal van de foto aanpassen. 100&percnt; is de standaardinstelling, en u kunt deze verhogen om de foto's groter te maken, of verlagen om ze kleiner te maken."
-
-#. Help text shown when user clicks "Add URL to individuals and families" option:  https://s3.eu-west-1.amazonaws.com/po-pub/i/QREJLhm9Besbu8r11RXghPYN.png
-#: 
-msgid "For SVG (and PDF if GraphViz installed on server) output, links can be included. This way you can click on the person in the diagram to be taken to their webtrees page."
-msgstr "Voor uitvoer van SVG (en PDF als GraphViz op de server is geïnstalleerd) kunnen koppelingen worden opgenomen. Zo kunt u op de persoon in het diagram klikken om naar hun webtreepagina te gaan."
+msgstr "Deze sectie bevat de optie om de foto van de persoonspagina in de boom te tonen.</p><p>Met de optie \"Fotovorm\" kunt u een vorm voor de foto's kiezen. De foto's worden bijgesneden om in deze vorm te passen.</p><p>Met de optie \"Fotogrootte\" kunt u de schaal van de foto aanpassen. 100&percnt; is de standaardinstelling, en u kunt deze verhogen om de foto's groter te maken, of verlagen om ze kleiner te maken."
 
 #. Help text shown when user clicks the "i" next to "Abbreviated names":   https://s3.eu-west-1.amazonaws.com/po-pub/i/rIQKFYaokaQndqxKRMkSoZDA.png
 #: 
@@ -719,8 +683,8 @@ msgstr "In dit gedeelte kunt u kleuren veranderen die bij het diagram horen maar
 #. "Output settings" was renamed to "File settings".
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/zY6fWYDbmG93zn0ODfvgtr3y.png
 #: 
-msgid "File settings"
-msgstr "Bestandsinstellingen"
+msgid "General settings"
+msgstr "Algemene instellingen"
 
 #. Name of section for saving settings to file and loading again:  https://s3.eu-west-1.amazonaws.com/po-pub/i/YRg7L3jSSfj41FX0tHDSUY4M.png
 #: 
@@ -838,8 +802,8 @@ msgstr "Naam instellingen"
 #. Help text for option to save a version of the settings for future use:  
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/n1salnZcGP6xC187FO1dAjpE.png https://s3.eu-west-1.amazonaws.com/po-pub/i/fBbMFauzn9yAXWlI3do9cwmD.png
 #: 
-msgid "Here you are able to save the chosen settings within GVExport. The settings are only accessible within the same user and tree. Click a settings record to load it.</p><p>For example, you may have many diagrams you create from your tree. You may want to save the settings used for each diagram so that in future you can regenerate the diagram to include any new information.</p><p>If you click the ellipsis on a record, you will see several options. <ul><li>Delete - remove these settings</li><li>Download - download a file holding the settings, which can be loaded at a later date.</li><li>Copy link - if logged in, this allows you to share the settings with others by creating a URL to share with them, which is copied to the clipboard of your device.</li><li>Revoke link - if a sharing link has been created, this will show to allow you to revoke the link, so it can no longer be accessed.</li><li>Add to My favourites - If logged in, this will create a sharing link and add this to the webtrees favourites on your \"My page\" page.</li><li>Add to Tree favourites - If logged in as a tree manager, this will create a sharing link and add this to the webtrees favourites on the tree home page.</li></ul>When logged out, only the Delete and Download options will be available.</p><p>The \"Show saved diagrams panel\" option adds a new section to the settings that makes the saved settings available as a dropdown list. You may wish to use webtree's ability for an administrator to \"Masquerade as user\" to set up some settings for another user, then enable this option, so they can easily choose different prepared diagrams without needed to delve into the advanced settings."
-msgstr "Hier kunt u de gekozen instellingen opslaan binnen GVExport. De instellingen zijn alleen toegankelijk binnen dezelfde gebruiker en stamboom. Klik op een instellingenrecord om deze te laden.</p><p>U heeft bijvoorbeeld veel diagrammen die u vanuit uw stamboom maakt. U kunt de instellingen voor elk diagram opslaan, zodat u in de toekomst het diagram opnieuw kunt genereren om er nieuwe informatie in op te nemen.</p><p>Als u op de ellips op een record klikt, ziet u verschillende opties. <ul><li>Verwijderen - deze instellingen verwijderen</li><li>Download - download een bestand met de instellingen, dat op een later tijdstip kan worden geladen.</li><li>Koppeling kopiëren - als u bent ingelogd, kunt u hiermee de instellingen met anderen delen door een URL te maken die u met hen kunt delen en die naar het klembord van uw apparaat wordt gekopieerd.</li><li>Koppeling intrekken - als een koppeling voor delen is gemaakt, wordt deze weergegeven zodat u de koppeling kunt intrekken, zodat deze niet langer toegankelijk is.</li><li>Toevoegen aan Mijn favorieten - als u bent ingelogd, maakt u een koppeling om te delen en voegt u deze toe aan de webtrees-favorieten op uw pagina \"Mijn favorieten\".</li><li>Toevoegen aan Stamboomfavorieten - als u bent ingelogd als stamboombeheerder, wordt een koppeling voor delen gemaakt en toegevoegd aan de webtreesfavorieten op de startpagina van de stamboom.</li></ul>Als u bent uitgelogd, zijn alleen de opties Verwijderen en Downloaden beschikbaar.</p><p>De optie \"Toon paneel met opgeslagen diagrammen\" voegt een nieuwe sectie toe aan de instellingen die de opgeslagen instellingen beschikbaar maakt als een vervolgkeuzelijst. U wilt misschien in webtrees de beheerdersmogelijkheid \"Vermom uzelf als deze gebruiker\" gebruiken om sommige instellingen voor een andere gebruiker in te stellen, en dan deze optie inschakelen, zodat zij gemakkelijk verschillende voorbereide diagrammen kunnen kiezen zonder in de geavanceerde instellingen te hoeven duiken."
+msgid "Here you are able to save the chosen settings within GVExport. The settings are only accessible within the same user and tree. Click a settings record to load it.</p><p>For example, you may have many diagrams you create from your tree. You may want to save the settings used for each diagram so that in future you can regenerate the diagram to include any new information.</p><p>If you click the ellipsis on a record, you will see several options. <ul><li>Delete - remove these settings</li><li>Download - download a file holding the settings, which can be loaded at a later date.</li><li>Copy link - if logged in, this allows you to share the settings with others by creating a URL to share with them, which is copied to the clipboard of your device.</li><li>Revoke link - if a sharing link has been created, this will show to allow you to revoke the link, so it can no longer be accessed.</li><li>Add to My favourites - If logged in, this will create a sharing link and add this to the webtrees favourites on your &quot;My page&quot; page.</li><li>Add to Tree favourites - If logged in as a tree manager, this will create a sharing link and add this to the webtrees favourites on the tree home page.</li></ul>When logged out, only the Delete and Download options will be available.</p><p>The &quot;Show saved diagrams panel&quot; option adds a new section to the settings that makes the saved settings available as a dropdown list. You may wish to use webtrees' ability for an administrator to &quot;Masquerade as user&quot; to set up some settings for another user, then enable this option, so they can easily choose different prepared diagrams without needed to delve into the advanced settings."
+msgstr "Hier kunt u de gekozen instellingen opslaan binnen GVExport. De instellingen zijn alleen toegankelijk binnen dezelfde gebruiker en stamboom. Klik op een instellingenrecord om deze te laden.</p><p>U heeft bijvoorbeeld veel diagrammen die u vanuit uw stamboom maakt. U kunt de instellingen voor elk diagram opslaan, zodat u in de toekomst het diagram opnieuw kunt genereren om er nieuwe informatie in op te nemen.</p><p>Als u op de ellips op een record klikt, ziet u verschillende opties. <ul><li>Verwijderen - deze instellingen verwijderen</li><li>Download - download een bestand met de instellingen, dat op een later tijdstip kan worden geladen.</li><li>Koppeling kopiëren - als u bent ingelogd, kunt u hiermee de instellingen met anderen delen door een URL te maken die u met hen kunt delen en die naar het klembord van uw apparaat wordt gekopieerd.</li><li>Koppeling intrekken - als een koppeling voor delen is gemaakt, wordt deze weergegeven zodat u de koppeling kunt intrekken, zodat deze niet langer toegankelijk is.</li><li>Toevoegen aan Mijn favorieten - als u bent ingelogd, maakt u een koppeling om te delen en voegt u deze toe aan de webtrees-favorieten op uw pagina &quot;Mijn favorieten&quot;.</li><li>Toevoegen aan Stamboomfavorieten - als u bent ingelogd als stamboombeheerder, wordt een koppeling voor delen gemaakt en toegevoegd aan de webtreesfavorieten op de startpagina van de stamboom.</li></ul>Als u bent uitgelogd, zijn alleen de opties Verwijderen en Downloaden beschikbaar.</p><p>De optie &quot;Toon paneel met opgeslagen diagrammen&quot; voegt een nieuwe sectie toe aan de instellingen die de opgeslagen instellingen beschikbaar maakt als een vervolgkeuzelijst. U wilt misschien in webtrees de beheerdersmogelijkheid &quot;Vermom uzelf als deze gebruiker&quot; gebruiken om sommige instellingen voor een andere gebruiker in te stellen, en dan deze optie inschakelen, zodat zij gemakkelijk verschillende voorbereide diagrammen kunnen kiezen zonder in de geavanceerde instellingen te hoeven duiken."
 
 #. Error message shown when API was not able to assign an ID when saving a version of settings.  https://s3.eu-west-1.amazonaws.com/po-pub/i/SF4w8yDqZ9D7PGWdqvq2cOzq.png 
 #. User may see this when clicking Save button: https://s3.eu-west-1.amazonaws.com/po-pub/i/n1salnZcGP6xC187FO1dAjpE.png
@@ -874,8 +838,8 @@ msgstr "Instellingen"
 
 #. This message is shown when clicking the help button in the "Saved diagrams" section (this section is hidden by default): https://s3.eu-west-1.amazonaws.com/po-pub/i/CViHSJI40OkSwCEyVHs79jOh.png  https://s3.eu-west-1.amazonaws.com/po-pub/i/PuoBsz04pts2DU9CAWou7nyc.png
 #: 
-msgid "You can select from the list to load some saved settings. Settings can be added or changed using the options in the advanced section of the \"File settings\" section."
-msgstr "U kunt uit de lijst kiezen om opgeslagen instellingen te laden. Instellingen kunnen worden toegevoegd of gewijzigd met behulp van de opties in het geavanceerde gedeelte van het onderdeel \"Bestandsinstellingen\"."
+msgid "You can select from the list to load some saved settings. Settings can be added or changed using the options in the advanced section of the &quot;General settings&quot; section."
+msgstr "U kunt uit de lijst kiezen om opgeslagen instellingen te laden. Instellingen kunnen worden toegevoegd of gewijzigd met behulp van de opties in het geavanceerde gedeelte van het onderdeel &quot;Algemene instellingen&quot;."
 
 #. When you have saved a named version of settings using the advanced save settings functionality, this is the option to delete the settings:  https://s3.eu-west-1.amazonaws.com/po-pub/i/QHkbIB7B8ZRpp5IVdKiVu1F6.png
 #: 
@@ -994,14 +958,14 @@ msgstr "Niet toevoegen aan de lijst"
 
 #. When loading a person from the XREF in the URL (e.g. when coming to GVExport from an individual's page), this message is shown if the person is added to the list of individuals.  https://s3.eu-west-1.amazonaws.com/po-pub/i/Geo7uHM7LtBJeDh5Ae9jXTu3.png
 #: 
-msgid "One new source person added to %s existing persons"
+msgid "One new source individual added to %s existing individuals"
 msgstr "Eén nieuwe startpersoon toegevoegd aan %s bestaande personen"
 
 #. This is a message that is shown if the user both has Graphviz installed on the server AND has used the photo shape setting (e.g. to make photos circle). The photo shapes are not supported by Graphviz, and are manipulated into the diagram after Graphviz has generated it. This is not possible with server-rendered diagrams, so if this option is used we automatically use the browser generation and show this message.
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/Rq4HsawCjQ0CuWW3I2SoDIJM.png
 #: 
-msgid "Rendered in browser as server doesn't support photo shapes"
-msgstr "Weergegeven in de browser omdat de server geen fotovormen ondersteunt"
+msgid "Diagram will be rendered in browser as server doesn't support photo shapes"
+msgstr "Het diagram wordt weergegeven in de browser omdat de server geen fotovormen ondersteunt."
 
 #. One of the options in the new feature to change the shape of photos:  https://s3.eu-west-1.amazonaws.com/po-pub/i/xt0dCFkQXFZVcva3B9ae0WOL.png
 #: 
@@ -1085,6 +1049,155 @@ msgstr "Toon geen geslacht"
 
 #. The help text for the new "Tile design" section. https://s3.eu-west-1.amazonaws.com/po-pub/i/RkX8ulBdesvP93Q43VXjka0f.png https://s3.eu-west-1.amazonaws.com/po-pub/i/oV9m8srNfFDTHqbS4HaD53qW.png
 #: 
-msgid "This section allows for some changes to the design of tiles. Currently, only the tiles of individuals are affected. There are two options.</p><h4>Individual tile shape</h4><p>This option lets you choose the shape for tiles for individuals. There are two options: <ul><li>Rectangle - The default option, the tile is a rectangle shape.</li><li>Rounded rectangle - The tile has rounded corners</li></ul></p><h4>Display sex of individuals</h4><p>This option lets you choose how the sex of an individual is conveyed. The options are:<ul><li>Coloured stripe - The tile will have a stripe of colour across the top, based on the sex of the individual.</li><li>Coloured border - The outline of the tile will be coloured based on the sex of the individual.</li><li>Text - Some text will be added to specify the sex of the individual. This is added below the name.</li><li>Don't display sex - None of the options will be used, the diagram will not convey the sex of individuals.</li></ul>"
-msgstr "Dit onderdeel maakt enkele wijzigingen in het tegelontwerp mogelijk. Momenteel worden alleen de tegels van personen beïnvloed. Er zijn twee opties.</p><h4>Tegelvorm van personen</h4><p>Met deze optie kunt u de vorm kiezen voor tegels voor personen. Er zijn twee opties: <ul><li>Rechthoek - De standaardoptie, de tegel is een rechthoek.</li><li>Afgeronde rechthoek - De tegel heeft afgeronde hoeken</li></ul></p><h4>Toon geslacht van persoon</h4><p>Met deze optie kunt u kiezen hoe het geslacht van een persoon wordt getoond. De opties zijn:<ul><li>Gekleurde streep - De tegel heeft een gekleurde streep over de bovenkant, gebaseerd op het geslacht van de persoon.</li><li>Gekleurde rand - De omtrek van de tegel wordt gekleurd op basis van het geslacht van de persoon.</li><li>Tekst - Er wordt tekst toegevoegd om het geslacht van de persoon aan te geven. Dit wordt toegevoegd onder de naam.</li><li>Toon geen geslacht - Geen van de opties zal worden gebruikt, het diagram zal het geslacht van de personen niet weergeven.</li></ul>"
+msgid "This section allows for some changes to the design of tiles, including the shape, photos, colours, and fonts. </p><h4>Shape</h4><h5>Individual tile shape</h5><p>This option lets you choose the shape for tiles for individuals. There are two options: <ul><li>Rectangle - The default option, the tile is a rectangle shape.</li><li>Rounded rectangle - The tile has rounded corners</li></ul></p><h4>Photos</h4><h5>Show photos</h5><p>This option lets you enable or disable showing photos on the tiles of individuals. If enabled, there are further options.</p><h5>Photo shape</h5><p>This option lets you choose the shape of photos. Note that if you have GraphViz installed on the server, using these options will disable generating the diagram on the server, which may prevent large diagrams from being created.</p><h5>Photo size</h5><p>This option lets you change the size of photos, which is done as a percentage of the default size. 100&percnt; is the default size, 50&percnt; is half sized and 200&percnt; is double sized.</p><h4>Colours</h4><h5>Individual background colour</h5><p>This option lets you set the background colour of an individual's tile. The options are:<ul><li>Custom - the background will be set to the chosen colour</li><li>Based on individual's sex - the background will be coloured based on the sex of the individual.</li></ul></p><h5>Individual stripe colour</h5><p>This option lets you set the colour of the stripe across the top of an individual's tile. The options are:<ul><li>No stripe - no stripe is shown</li><li>Based on individual's sex - the stripe will be coloured based on the sex of the individual.</li></ul><h5>Individual border colour</h5><p>This option lets you set the border colour of an individual's tile. The options are:<ul><li>Custom - the border will be set to the chosen colour</li><li>Based on individual's sex - the border will be coloured based on the sex of the individual.</li><li>Same as family border - the family border colour will be used for the border of individuals.</li></ul></p><h5>Male individuals</h5><p>Set the colour for Male individuals, used in above settings for background, stripe, border if selected.</p><h5>Female individuals</h5><p>Set the colour for Female individuals, used in above settings for background, stripe, border if selected.</p><h5>Other gender individuals</h5><p>Set the colour for Other gender individuals, used in above settings for background, stripe, border if selected.</p><h5>Unknown gender individuals</h5><p>Set the colour for Unknown gender individuals, used in above settings for background, stripe, border if selected.</p><h5>Non-blood related individuals</h5><p>There are four options here for non-blood related individuals, if the &quot;Mark not blood-related people with different color&quot; option is enabled in the &quot;People to be included&quot; section</p><h5>Show starting individuals in different color</h5><p>Whether starting individuals should be highlighted on the diagram. If enabled, you can choose a background colour to highlight the individual with, and can choose to enable this only for some starting individuals.</p><h5>Family background</h5><p>The background colour of family records.</p><h5>Family border colour</h5><p>The border colour of family records.</p><h4>Font</h4><h5>Typeface</h5><p>This list lets you pick from a number of known websafe font typefaces. They must be installed on the system or a fallback typeface will be used. These options are known to be installed on almost all desktop systems and that is why they have been chosen. Mobile browsers will likely use a fallback font.</p><h5>Font size for names</h5><p>Set the font point size for the names of individuals.</p><h5>Font size for details</h5><p>This changes the font point size for all text except for names. For example, the date and place of marriage, and the date and place of birth and death.</p><h5>Font colour for names</h5><p>This changes the colour of the font for names. Note that the colour picker is provided by your browser, and is handled differently depending on which browser you are using.</p><h5>Font colour for details</h5><p>This changes the colour of the font of all text except for names, for example, the date and place of marriage, and the date and place of birth and death. Note that the colour picker is provided by your browser, and is handled differently depending on which browser you are using."
+msgstr "In dit onderdeel kan het ontwerp van de tegels worden aangepast, inclusief de vorm, foto's, kleuren en lettertypen.</p><h4>Vorm</h4><h5>Tegelvorm van personen</h5><p>Met deze optie kunt u de vorm kiezen voor tegels voor personen. Er zijn twee opties:<ul><li>Rechthoek - De standaardoptie, de tegel is een rechthoekige vorm.</li><li>Afgeronde rechthoek - De tegel heeft afgeronde hoeken</li></ul></p>Foto's</h4><h5>Toon foto's</h5><p>Met deze optie kunt u het tonen van foto's op de tegels van personen in- of uitschakelen. Indien ingeschakeld, zijn er verdere opties.</p><h5>Fotovorm</h5><p>Met deze optie kunt u de vorm van foto's kiezen. Merk op dat als u GraphViz op de server hebt geïnstalleerd, het gebruik van deze opties het genereren van het diagram op de server uitschakelt, wat het maken van grote diagrammen kan voorkomen.</p><h5>Fotogrootte</h5><p>Met deze optie kunt u de grootte van foto's wijzigen, wat gebeurt als een percentage van de standaardgrootte. 100&percnt; is de standaardgrootte, 50&percnt; is halve grootte en 200&percnt; is dubbele grootte.</p><h4>Kleuren</h4><h5>Achtergrondkleur van personen</h5><p>Met deze optie kun je de achtergrondkleur van een persoonstegel instellen. De opties zijn:<ul><li>Aangepast - de achtergrond wordt ingesteld op de gekozen kleur</li><li>Gebaseerd op het geslacht van de persoon - de achtergrond wordt gekleurd op basis van het geslacht van de persoon.</li></ul></p><h5>Streepkleur personen</h5><p>Met deze optie kunt u de kleur van de streep over de bovenkant van de tegel van een persoon instellen. De opties zijn:<ul><li>Geen streep - er wordt geen streep getoond</li><li>Gebaseerd op het geslacht van de persoon - de streep wordt gekleurd op basis van het geslacht van de persoon.</li></ul><h5>Randkleur personen</h5><p>Met deze optie kun je de randkleur van een persoonstegel instellen. De opties zijn:<ul><li>Aangepast - de rand wordt ingesteld op de gekozen kleur</li><li>Gebaseerd op het geslacht van de persoon - de rand wordt gekleurd op basis van het geslacht van de persoon.</li><li>Zelfde als gezinsrand - de kleur van de gezinsrand wordt gebruikt voor de persoonsrand.</li></ul></p><h5>Mannelijke personen</h5><p>Stel de kleur in voor Mannelijke personen, die in bovenstaande instellingen wordt gebruikt voor achtergrond, streep, rand indien geselecteerd.</p><h5>Vrouwelijke personen</h5><p>Stel de kleur in voor Vrouwelijke personen, die in bovenstaande instellingen wordt gebruikt voor achtergrond, streep, rand indien geselecteerd.</p><h5>Ander geslacht personen</h5><p>Stel de kleur in voor personen van Ander geslacht, die in bovenstaande instellingen wordt gebruikt voor achtergrond, streep, rand indien geselecteerd.</p><h5>Personen van onbekend geslacht</h5><p>Stel de kleur in voor personen van onbekend geslacht, die in bovenstaande instellingen wordt gebruikt voor achtergrond, streep, rand indien geselecteerd.</p><h5>Niet-bloedverwante personen</h5><p>Er zijn hier vier opties voor niet-bloedverwante personen, als de &quot;Markeer niet-bloedverwante personen met andere kleur&quot; optie is ingeschakeld in de &quot;Op te nemen personen&quot; sectie</p><h5>Toon startpersonen in verschillende kleuren</h5><p>Of startpersonen gemarkeerd moeten worden in het diagram. Indien ingeschakeld, kunt u een achtergrondkleur kiezen om de persoon mee te markeren, en kunt u ervoor kiezen dit alleen voor sommige startpersonen in te schakelen.</p><h5>Gezinsachtergrond</h5><p>De achtergrondkleur van gezinsrecords.</p><h5>Randkleur gezinnen</h5><p>De randkleur van gezinsrecords.</p><h4>Lettertype</h4><h5>Lettertypegroep</h5><p>In deze lijst kunt u kiezen uit een aantal bekende webveilige lettertypegroepen. Ze moeten geïnstalleerd zijn op het systeem of er wordt een terugvallettertypegroep gebruikt. Het is bekend dat deze opties op bijna alle systemen zijn geïnstalleerd en daarom zijn ze gekozen. Mobiele browsers zullen waarschijnlijk een terugvallettertype gebruiken.</p><h5>Lettergrootte voor namen</h5><p>Stel de puntgrootte van het lettertype in voor de namen van personen.</p><h5>Lettergrootte voor details</h5><p>Dit verandert de puntgrootte van het lettertype voor alle tekst, behalve voor namen. Bijvoorbeeld de datum en plaats van het huwelijk, en de datum en plaats van geboorte en overlijden.</p><h5>Letterkleur voor namen</h5><p>Dit verandert de kleur van het lettertype voor namen. Merk op dat de kleurenkiezer wordt geleverd door uw browser, en anders wordt behandeld, afhankelijk van welke browser u gebruikt.</p><h5>Letterkleur voor details</h5><p>Dit verandert de kleur van het lettertype van alle tekst behalve namen, bijvoorbeeld de datum en plaats van het huwelijk, en de datum en plaats van geboorte en overlijden. Merk op dat de kleurenkiezer wordt geleverd door uw browser, en anders wordt behandeld, afhankelijk van welke browser u gebruikt."
+
+#. Additional option for colouring based on sex - this is the same idea as selecting Simple diagram type, which will now be removed.  https://s3.eu-west-1.amazonaws.com/po-pub/i/unanqM7u3enenLfGiB1yZGzj.png
+#: 
+msgid "Background colour"
+msgstr "Achtergrondkleur"
+
+#. Help text for new option to show message history:  https://s3.eu-west-1.amazonaws.com/po-pub/i/Sb4Ds5YwWa1nQ7XJLUmn6gXg.png  https://s3.eu-west-1.amazonaws.com/po-pub/i/pnsTCwNXDSkjZiJOxfWkHbnq.png  https://s3.eu-west-1.amazonaws.com/po-pub/i/m4IM4qfa16y5Ij82V2VdrsF0.png
+#: 
+msgid "This button shows the history of the pop up notifications. Note that this history is not saved, so it is lost if you leave the page or the page is reloaded."
+msgstr "Deze knop toont de geschiedenis van de pop-upmeldingen. Deze geschiedenis wordt niet opgeslagen, en gaat dus verloren als u de pagina verlaat of als de pagina opnieuw wordt geladen."
+
+#. Name of section that has button for showing message history (list of pop-up messages shown since page loaded): https://s3.eu-west-1.amazonaws.com/po-pub/i/Sb4Ds5YwWa1nQ7XJLUmn6gXg.png
+#. 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/pnsTCwNXDSkjZiJOxfWkHbnq.png
+#: 
+msgid "Message history"
+msgstr "Berichtgeschiedenis"
+
+#. Words on button that shows message history (list of pop-up messages shown since page loaded): https://s3.eu-west-1.amazonaws.com/po-pub/i/Sb4Ds5YwWa1nQ7XJLUmn6gXg.png
+#. 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/pnsTCwNXDSkjZiJOxfWkHbnq.png
+#: 
+msgid "View message history"
+msgstr "Berichtgeschiedenis bekijken"
+
+#. New message for when individual loaded from URL replaces the existing individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/ZGop7iFU7ZJIudUNJFmyfGWl.png
+#: 
+msgid "Source individual has replaced existing individual"
+msgstr "Startpersoon heeft bestaand persoon vervangen"
+
+#. This is the name of the options that allow you to choose to include Siblings, Partners, etc. The section has been updated and merged with the option to include ancestors and the option to include descendants: https://s3.eu-west-1.amazonaws.com/po-pub/i/Z1PzXOjHnmuiy8DMV4tSWRPn.png
+#: 
+msgid "Relation types to include"
+msgstr "Op te nemen relatietypes"
+
+#. New section that has subgroups, where many settings have been moved (e.g. whether to include date of birth, date of death, XREFs, URLs, etc):  https://s3.eu-west-1.amazonaws.com/po-pub/i/RGFYcUVaqmUTE8qEMq42VQkZ.png
+#: 
+msgid "Tile contents"
+msgstr "Tegelinhoud"
+
+#. New help text for new section "Tile contents". The help text is quite long, but much of it is previous help text from the settings that have been combined into this section. You may want to copy translations from previous terms, so I have left these for now. I will eventually delete the original terms.  https://s3.eu-west-1.amazonaws.com/po-pub/i/opPq1bb4NbrBXGFAiRsVxXi1.png  https://s3.eu-west-1.amazonaws.com/po-pub/i/W4qegkcMMWTFs3sXIihOQskA.png
+#: 
+msgid "This section allows for some changes to the content of tiles, including links, abbreviations, and the details included on individuals and families. </p><h4>Page links</h4><h5>Add URL to individuals and families</h5><p>For SVG (and PDF if GraphViz installed on server) output, links can be included. This way you can click on the person in the diagram to be taken to their webtrees page.</p><h4>Abbreviations</h4><h5>Abbreviated names</h5><p>There are several options to shorten the names of individuals displayed.</p><ul><li>Full name - the default option, this shows the primary name and any nickname. This option currently is the only one where the preferred name is underlined, and is the only one to show nicknames (in &quot;quotes&quot;).</li><li>Given and surnames - like the full name, but without nicknames.</li><li>Given names - just the given names are displayed.</li><li>First given names only - just the first word of the name in the given names field.</li><li>Surnames - just the surnames are displayed.</li><li>Initials only - this displays initials only, for example &quot;JFK&quot;.</li><li>Given name initials and surname - this shows initials for the first and second given name, as well as the full surname. For example: &quot;J.F. Kennedy&quot;</li><li>Don't show names - no names are shown. If birth and death details are also disabled then it is possible to show only photos or even just coloured boxes.</li></ul><h5>Abbreviated place names</h5><p>There are several options to shorten place names (for place of birth, place of marriage, place of death).</p><ul><li>Full place name - the place name is printed in full.</li><li>City and Country - the first and last section of the place name is used, using commas to split the sections. For example, &quot;London, England, United Kingdom&quot; would be shortened to &quot;London, United Kingdom&quot;</li><li>City and 2-Letter ISO Country Code - the first and last section of the place name is used, using commas to split the sections. The country is then converted to the ISO3166-1-Alpha-2 country code. <br>For example, &quot;Calgary, Alberta, Canada&quot; would be shortened to &quot;Calgary, CA&quot;</li><li>City and 3-Letter ISO Country Code - the first and last section of the place name is used, using commas to split the sections. The country is then converted to the ISO3166-1-Alpha-3 country code.<br>For example, &quot;Calgary, Alberta, Canada&quot; would be shortened to &quot;Calgary, CAN&quot;</li></ul><p>Note - The CLDR display name is used for matching. The data comes from <a href=\"https://www.datahub.io/core/country-codes\" class=\"help-link\">Datahub</a> but has been modified as for example the original CLDR name for the United Kingdom is &quot;UK&quot;, and the original CLDR name for the United States is &quot;US&quot;. Matching against these countries for the purposes of abbreviation is therefore pointless. So changes have been made to make this work better. Please <a href=\"https://github.com/Neriderc/GVExport/issues/new\" class=\"help-link\">open an issue</a> on GitHub if you find a country is not abbreviating correctly.</p><h4>Information on individuals</h4><h5>Show individual XREF</h5><p>Whether to include the XREF of individuals in the diagram.</p><h5>Show birthdate</h5><p>Check the box if you would like to include the birthdate of individuals in the output.</p><p>You can also choose whether to show the full date of birth or just the year.</p><h5>Show birthplace</h5><p>Whether to show the place of birth in the output. Also see option for abbreviating place names.</p><h5>Show death date</h5><p>Check the box if you would like to include the death date of individuals in the output.</p><p>You can also choose whether to show the full date of death or just the year.</p><h5>Show death place</h5><p>Whether to show the place of death in the output. Also see option for abbreviating place names.</p><h5>Show sex of individuals</h5><p>Whether to print the sex of the individual on the individual's tile, e.g. &quot;Male&quot;</p><h4>Information on families</h4><h5>Show family XREF</h5><p>Whether to include the XREF of families in the output.</p><h5>Show marriage date</h5><p>Check the box if you would like to include the date of marriage in the output.</p><p>You can also choose whether to show the full date of marriage or just the year.</p><h5>Show marriage place</h5><p>Whether to show the place of marriage in the output. Also see option for abbreviating place names."
+msgstr "In dit onderdeel kunnen enkele wijzigingen worden aangebracht in de inhoud van de tegels, zoals koppelingen, afkortingen en de details die over personen en families zijn opgenomen.</p><h4>Paginakoppelingen</h4><h5>URL toevoegen aan personen en gezinnen</h5><p>Voor SVG (en PDF als GraphViz op de server is geïnstalleerd) uitvoer kunnen koppelingen worden opgenomen. Zo kunt u op de persoon in het diagram klikken om naar de bijbehorende webtreespagina te gaan.</p><h4>Afkortingen</h4><h5>Afgekorte namen</h5><p>Er zijn verschillende opties om de namen van weergegeven personen in te korten.</p><ul><li>Volledige naam - de standaardoptie, deze toont de primaire naam en eventuele roepnamen. Deze optie is momenteel de enige waarbij de voorkeursnaam wordt onderstreept, en is de enige die roepnamen toont (in &quot;citaten&quot;).</li><li>Voor- en achternamen - zoals de volledige naam, maar zonder roepnamen.</li><li>Voornamen - alleen de voornamen worden getoond.</li><li>Alleen eerste voornamen - alleen het eerste woord van de naam in het veld voornamen.</li><li>Achternamen - alleen de achternamen worden getoond.</li><li>Alleen initialen - dit toont alleen initialen, bijvoorbeeld &quot;JFK&quot;.</li><li>Voorletters en achternaam - dit toont de voorletters van de eerste en tweede voornaam en de volledige achternaam. Bijvoorbeeld: &quot;J.F. Kennedy&quot;</li><li>Geen namen tonen - er worden geen namen getoond. Als ook geboorte- en overlijdensgegevens zijn uitgeschakeld, kunnen alleen foto's of zelfs alleen gekleurde vakjes worden getoond.</li></ul><h5>Afgekorte plaatsnamen</h5><p>Er zijn verschillende mogelijkheden om plaatsnamen af te korten (voor geboorteplaats, huwelijksplaats, overlijdensplaats).</p><ul><li>Volledige plaatsnaam - de plaatsnaam is volledig getoond.</li><li>Plaats en land - het eerste en laatste deel van de plaatsnaam wordt gebruikt, met komma's om de delen te splitsen. Bijvoorbeeld, &quot;Londen, Engeland, Verenigd Koninkrijk&quot; wordt afgekort tot &quot;Londen, Verenigd Koninkrijk&quot;</li><li>Plaats en 2-letterige ISO-landencode - het eerste en laatste deel van de plaatsnaam wordt gebruikt, met komma's om de delen te splitsen. Het land wordt vervolgens omgezet in de ISO3166-1-Alpha-2-landcode.<br>Bijvoorbeeld, &quot;Calgary, Alberta, Canada&quot; wordt afgekort tot &quot;Calgary, CA&quot;</li><li>Plaats en drieletterige ISO-landcode - het eerste en laatste deel van de plaatsnaam worden gebruikt, met komma's om de delen te splitsen. Het land wordt dan omgezet in de ISO3166-1-Alpha-3-landcode.<br>Bijvoorbeeld, &quot;Calgary, Alberta, Canada&quot; wordt afgekort tot &quot;Calgary, CAN&quot;</li></ul><p>Note - De CLDR-weergavenaam wordt gebruikt voor het vergelijken van namen. De gegevens zijn afkomstig van <a href=\"https://www.datahub.io/core/country-codes\" class=\"help-link\">Datahub</a> maar zijn gewijzigd, omdat bijvoorbeeld de oorspronkelijke CLDR-naam voor het Verenigd Koninkrijk &quot;UK&quot; is, en de oorspronkelijke CLDR-naam voor de Verenigde Staten &quot;US&quot;. Vergelijken met deze landen voor het afkorten is daarom zinloos. Er zijn daarom wijzigingen aangebracht om dit beter te laten werken. <a href=\"https://github.com/Neriderc/GVExport/issues/new\" class=\"help-link\">Open een probleem</a> op GitHub als je vindt dat een land niet correct wordt afgekort.</p><h4>Informatie over personen</h4><h5>Toon persoons-XREF</h5><p>Of de XREF van personen in het diagram moet worden opgenomen.</p><h5>Toon geboortedatum</h5><p>Vink het vakje aan als u de geboortedatum van personen in de uitvoer wilt opnemen.</p><p>U kunt ook kiezen of u de volledige geboortedatum of alleen het jaartal wilt tonen.</p><h5>Toon geboorteplaats</h5><p>Of de geboorteplaats in de uitvoer moet worden getoond. Zie ook de optie voor het afkorten van plaatsnamen.</p><h5>Toon overlijdensdatum</h5><p>Vink het vakje aan als u de overlijdensdatum van personen in de uitvoer wilt opnemen.</p><p>U kunt ook kiezen of u de volledige overlijdensdatum of alleen het jaartal wilt tonen.</p><h5>Toon overlijdensplaats</h5><p>Of de overlijdensplaats in de uitvoer moet worden getoond. Zie ook de optie voor het afkorten van plaatsnamen.</p><h5>Toon geslacht van personen</h5><p>Of het geslacht van de persoon op de tegel van het de persoon moet worden getoond, bijv. &quot;Man&quot;</p><h4>Informatie over gezinnen</h4><h5>Toon gezins-XREF</h5><p>Of de XREF van gezinnen in de uitvoer moet worden opgenomen.</p><h5>Toon huwelijksdatum</h5><p>Vink het vakje aan als u de huwelijksdatum in de uitvoer wilt opnemen.</p><p>U kunt ook kiezen of u de volledige huwelijksdatum of alleen het jaartal wilt weergeven.</p><h5>Toon huwelijksplaats</h5><p>Of de huwelijksplaats in de uitvoer moet worden getoond. Zie ook de optie voor het afkorten van plaatsnamen."
+
+#. New section to combine some general diagram settings:  https://s3.eu-west-1.amazonaws.com/po-pub/i/fXJwOPFeNExfAPrBjyabVej9.png   https://s3.eu-west-1.amazonaws.com/po-pub/i/OVcGk9fXLCrNYmgGTI25lMpH.png
+#: 
+msgid "Diagram"
+msgstr "Diagram"
+
+#. Help text for diagram section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/JIUMIXeCh3Tj0SJ01nLxVMjm.png  https://s3.eu-west-1.amazonaws.com/po-pub/i/Q7S9ciYCqo9HL9J5sCMUpQhU.png
+#: 
+msgid "<h4>Diagram DPI</h4><p>For output such as JPG and PNG, the DPI setting will produce higher quality output when it is larger, but will also increase the file size. Smaller values will produce smaller files, but the quality will be worse and if the value is too low you may not be able to read text.</p><h4>Spacing</h4><p>These options affect the distance between nodes on the diagram.</p><h5>Between generations</h5><p>How close you want generations on the output. For example, for left to right output, smaller numbers will bring the columns of individuals closer together, while larger numbers would push them further apart.</p><h5>Between individuals on the same level</h5><p>How close you want the individuals of the same generation on the output. For example, for left to right output, smaller numbers will mean less space vertically between the boxes, while larger numbers would push them further apart.</p><h4>Diagram colours</h4><p>This section allows you to change colours associated with the diagram that are not directly related to the individual or family tiles. Click the coloured box to change the colour. This uses your browser's colour picker, so will look different depending on what browser you are using. <h5>Diagram background colour<h5><p>This is the colour of the area behind the family tree.</p><h5>Relationship arrow colour</h5><p>The colour of the arrows that show relationships between individuals and families.</p><h5>Show blood relationship in a different colour</h5><p>This shows blood relationships in a different colour than other relationships (e.g. adoption). Selecting this option will provide two colours that can be customised:<ul><li>Related by birth - the arrow colour to use for children related by birth</li><li>Related other than by birth - the arrow colour to use for children not related by birth</li></ul>"
+msgstr "<h4>Diagram-DPI</h4><p>Voor uitvoer zoals JPG en PNG zal de DPI-instelling een hogere kwaliteit uitvoer opleveren wanneer deze groter is, maar ook de bestandsgrootte vergroten. Kleinere waarden leveren kleinere bestanden op, maar de kwaliteit is slechter en als de waarde te laag is, is het mogelijk dat u geen tekst kunt lezen.</p><h4>Afstand</h4><p>Deze opties beïnvloeden de afstand tussen knooppunten in het diagram.</p><h5>Tussen generaties</h5><p>De afstand tussen generaties op de uitvoer. Bijvoorbeeld, voor uitvoer van links naar rechts, brengen kleinere getallen de kolommen van personen dichter bij elkaar, terwijl grotere getallen ze verder uit elkaar duwen.</p><h5>Tussen personen op hetzelfde niveau</h5><p>De afstand tussen personen van dezelfde generatie op de uitvoer. Bijvoorbeeld, voor uitvoer van links naar rechts betekenen kleinere getallen minder ruimte verticaal tussen de vakjes, terwijl grotere getallen ze verder uit elkaar duwen.</p><h4>Diagramkleuren</h4><p>In dit gedeelte kunt u kleuren veranderen die bij het diagram horen en die niet direct verband houden met de persoons- of gezinstegels. Klik op het gekleurde vakje om de kleur te veranderen. Dit gebruikt de kleurenkiezer van uw browser, dus zal het er anders uitzien, afhankelijk van welke browser u gebruikt.<h5>Achtergrondkleur diagram<h5><p>Dit is de kleur van het gebied achter de stamboom.</p><h5>Verwantschapspijlkleur</h5><p>De kleur van de pijlen die verwantschappen tussen personen en gezinnen aangeven.</p><h5>Toon bloedverwantschap in een andere kleur</h5><p>Dit toont bloedverwantschappen in een andere kleur dan andere relaties (bv. adoptie). Als u deze optie selecteert, krijgt u twee kleuren die u kunt aanpassen:<ul><li>Verwant door geboorte - de pijlkleur te gebruiken voor kinderen die verwant zijn door geboorte</li><li>Verwant anders dan door geboorte - de pijlkleur te gebruiken voor kinderen die niet verwant zijn door geboorte</li></ul>"
+
+#. One of the names of a new settings group under the Tile design section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/BIVXgbgOvNma3KB1dlsuu2oX.png
+#: 
+msgid "Shapes"
+msgstr "Vormen"
+
+#. One of the names of a new settings group under the Tile design section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/BIVXgbgOvNma3KB1dlsuu2oX.png
+#: 
+msgid "Colours"
+msgstr "Kleuren"
+
+#. New term referring to existing setting that allows you to change the background of individuals:  https://s3.eu-west-1.amazonaws.com/po-pub/i/pA1VCZGWJqInDUP5UrRq7oMQ.png
+#: 
+msgid "Custom background colour"
+msgstr "Aangepaste achtergrondkleur"
+
+#. New option for setting the colour of the stripe on individual tiles:  https://s3.eu-west-1.amazonaws.com/po-pub/i/foB5NxsPsztrvQxIxo0R7HvG.png
+#: 
+msgid "Individual stripe color"
+msgstr "Streepkleur voor personen"
+
+#. Option to set the border colour of individuals:  https://s3.eu-west-1.amazonaws.com/po-pub/i/U91BOGzE90DmKPN8uGvur5k9.png
+#: 
+msgid "Individual border color"
+msgstr "Randkleur voor personen"
+
+#. New name for existing option to set the border colour of tiles:  https://s3.eu-west-1.amazonaws.com/po-pub/i/JBcfI43E8P0ZCxLo51Bhpa8U.png
+#: 
+msgid "Family border colour"
+msgstr "Randkleur voor gezinnen"
+
+#. Option in dropdown box for stripe, border, and background colour option: https://s3.eu-west-1.amazonaws.com/po-pub/i/foB5NxsPsztrvQxIxo0R7HvG.png
+#: 
+msgid "Based on individual's sex"
+msgstr "Gebaseerd op het geslacht van de persoon"
+
+#. Option in dropdown menu that disables the stripe on individuals:  https://s3.eu-west-1.amazonaws.com/po-pub/i/ml179UE7h6IKDNGsex2uUMwm.png
+#: 
+msgid "No stripe"
+msgstr "Geen streep"
+
+#. Option to set individuals border colour to the same as families (this is the default): https://s3.eu-west-1.amazonaws.com/po-pub/i/U91BOGzE90DmKPN8uGvur5k9.png
+#: 
+msgid "Same as family border"
+msgstr "Zelfde als gezinsrand"
+
+#. New grouping of settings within new Tile contents section:   https://s3.eu-west-1.amazonaws.com/po-pub/i/vjxGtnJth5ODT2NSpQ8tm7WB.png
+#: 
+msgid "Page links"
+msgstr "Paginakoppelingen"
+
+#. New grouping of settings within new Tile contents section:   https://s3.eu-west-1.amazonaws.com/po-pub/i/vjxGtnJth5ODT2NSpQ8tm7WB.png
+#: 
+msgid "Abbreviations"
+msgstr "Afkortingen"
+
+#. New grouping of settings within new Tile contents section:   https://s3.eu-west-1.amazonaws.com/po-pub/i/vjxGtnJth5ODT2NSpQ8tm7WB.png
+#: 
+msgid "Information on individuals"
+msgstr "Informatie over personen"
+
+#. New grouping of settings within new Tile contents section:   https://s3.eu-west-1.amazonaws.com/po-pub/i/vjxGtnJth5ODT2NSpQ8tm7WB.png
+#: 
+msgid "Information on families"
+msgstr "Informatie over gezinnen"
+
+#. New settings group within new Diagram settings section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/wzNlOBmhEznFGDQbErllBaRt.png
+#: 
+msgid "Diagram DPI"
+msgstr "Diagram-DPI"
+
+#. New settings group within new Diagram settings section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/wzNlOBmhEznFGDQbErllBaRt.png
+#: 
+msgid "Spacing"
+msgstr "Afstand"
+
+#. New settings group within new Diagram settings section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/wzNlOBmhEznFGDQbErllBaRt.png
+#: 
+msgid "Diagram colours"
+msgstr "Diagramkleuren"
+
+#. New name for existing setting in new grouping:  https://s3.eu-west-1.amazonaws.com/po-pub/i/xjpt3QnjvhJDgamsBl7l7w5J.png
+#: 
+msgid "Relationship arrow colour"
+msgstr "Verwantschapspijlkleur"
+
+#. One of the options for the shape of photos:  https://s3.eu-west-1.amazonaws.com/po-pub/i/KboDUiZZMpjNBYmj0b8Bz0bC.png
+#: 
+msgid "Rounded square"
+msgstr ""
+
+#. Option that if enabled will display the gender as part of the text on an individual's tile:  https://s3.eu-west-1.amazonaws.com/po-pub/i/MPjAdVB2RY2cCNFfRSxK3oOP.png  https://s3.eu-west-1.amazonaws.com/po-pub/i/1S1f2VAUdQBg1UkhCmrqzkV4.png
+#: 
+msgid "Show sex of individuals"
+msgstr ""
 
