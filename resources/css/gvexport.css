@@ -257,6 +257,21 @@ span.NAME {
     max-width: 600px;
 }
 
+.modal h3 {
+    margin-left: 0;
+}
+
+.modal h4 {
+    margin-left: 5px;
+}
+
+.modal h5 {
+    margin-left: 10px;
+}
+.modal p {
+    margin-left: 15px;
+}
+
 /* The Close Button */
 .close {
     color: #aaa;

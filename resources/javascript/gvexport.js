@@ -552,11 +552,13 @@ function removeSearchOptions() {
     });
     // Remove option when searching diagram if indi not in diagram
     let dropdown = document.getElementById('diagram_search_box');
-    Object.keys(dropdown.tomselect.options).forEach(function (option) {
-        if (!xrefList.includes(option)) {
-            removeSearchOptionFromList(option, 'diagram_search_box');
-        }
-    });
+    if (dropdown.tomselect != null) {
+        Object.keys(dropdown.tomselect.options).forEach(function (option) {
+            if (!xrefList.includes(option)) {
+                removeSearchOptionFromList(option, 'diagram_search_box');
+            }
+        });
+    }
 }
 // clear options from the dropdown if they are already in our list
 function removeSearchOptionFromList(xref, listId) {
