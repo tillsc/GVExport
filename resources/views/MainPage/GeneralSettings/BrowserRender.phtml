@@ -11,6 +11,6 @@ use Fisharebest\Webtrees\I18N;
 
 <?= MainPage::addLabel('auto_update', 'Browser render', !$admin); ?>
 <div class="col-sm-8 wt-page-options-value">
-    <input type="checkbox" onclick="toggleUpdateButton()" name="vars[auto_update]" id="auto_update" value="auto_update" <?= $vars["auto_update"] ? 'checked' : '' ?>>
+    <input type="checkbox" <?php if (!$admin) echo 'onclick="toggleUpdateButton()"'; ?> name="vars[auto_update]" id="auto_update" value="auto_update" <?= $vars["auto_update"] ? 'checked' : '' ?>>
     <label for="auto_update"><?= I18N::translate('Auto-update') ?></label>
 </div>

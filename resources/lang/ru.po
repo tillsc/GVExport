@@ -1111,120 +1111,160 @@ msgstr "Исходное лицо заменило существующее ли
 #. This is the name of the options that allow you to choose to include Siblings, Partners, etc. The section has been updated and merged with the option to include ancestors and the option to include descendants: https://s3.eu-west-1.amazonaws.com/po-pub/i/Z1PzXOjHnmuiy8DMV4tSWRPn.png
 #: 
 msgid "Relation types to include"
-msgstr ""
+msgstr "Типы отношений для включения"
 
 #. New section that has subgroups, where many settings have been moved (e.g. whether to include date of birth, date of death, XREFs, URLs, etc):  https://s3.eu-west-1.amazonaws.com/po-pub/i/RGFYcUVaqmUTE8qEMq42VQkZ.png
 #: 
 msgid "Tile contents"
-msgstr ""
+msgstr "Содержимое плитки"
 
 #. New help text for new section "Tile contents". The help text is quite long, but much of it is previous help text from the settings that have been combined into this section. You may want to copy translations from previous terms, so I have left these for now. I will eventually delete the original terms.  https://s3.eu-west-1.amazonaws.com/po-pub/i/opPq1bb4NbrBXGFAiRsVxXi1.png  https://s3.eu-west-1.amazonaws.com/po-pub/i/W4qegkcMMWTFs3sXIihOQskA.png
 #: 
 msgid "This section allows for some changes to the content of tiles, including links, abbreviations, and the details included on individuals and families. </p><h4>Page links</h4><h5>Add URL to individuals and families</h5><p>For SVG (and PDF if GraphViz installed on server) output, links can be included. This way you can click on the person in the diagram to be taken to their webtrees page.</p><h4>Abbreviations</h4><h5>Abbreviated names</h5><p>There are several options to shorten the names of individuals displayed.</p><ul><li>Full name - the default option, this shows the primary name and any nickname. This option currently is the only one where the preferred name is underlined, and is the only one to show nicknames (in &quot;quotes&quot;).</li><li>Given and surnames - like the full name, but without nicknames.</li><li>Given names - just the given names are displayed.</li><li>First given names only - just the first word of the name in the given names field.</li><li>Surnames - just the surnames are displayed.</li><li>Initials only - this displays initials only, for example &quot;JFK&quot;.</li><li>Given name initials and surname - this shows initials for the first and second given name, as well as the full surname. For example: &quot;J.F. Kennedy&quot;</li><li>Don't show names - no names are shown. If birth and death details are also disabled then it is possible to show only photos or even just coloured boxes.</li></ul><h5>Abbreviated place names</h5><p>There are several options to shorten place names (for place of birth, place of marriage, place of death).</p><ul><li>Full place name - the place name is printed in full.</li><li>City and Country - the first and last section of the place name is used, using commas to split the sections. For example, &quot;London, England, United Kingdom&quot; would be shortened to &quot;London, United Kingdom&quot;</li><li>City and 2-Letter ISO Country Code - the first and last section of the place name is used, using commas to split the sections. The country is then converted to the ISO3166-1-Alpha-2 country code. <br>For example, &quot;Calgary, Alberta, Canada&quot; would be shortened to &quot;Calgary, CA&quot;</li><li>City and 3-Letter ISO Country Code - the first and last section of the place name is used, using commas to split the sections. The country is then converted to the ISO3166-1-Alpha-3 country code.<br>For example, &quot;Calgary, Alberta, Canada&quot; would be shortened to &quot;Calgary, CAN&quot;</li></ul><p>Note - The CLDR display name is used for matching. The data comes from <a href=\"https://www.datahub.io/core/country-codes\" class=\"help-link\">Datahub</a> but has been modified as for example the original CLDR name for the United Kingdom is &quot;UK&quot;, and the original CLDR name for the United States is &quot;US&quot;. Matching against these countries for the purposes of abbreviation is therefore pointless. So changes have been made to make this work better. Please <a href=\"https://github.com/Neriderc/GVExport/issues/new\" class=\"help-link\">open an issue</a> on GitHub if you find a country is not abbreviating correctly.</p><h4>Information on individuals</h4><h5>Show individual XREF</h5><p>Whether to include the XREF of individuals in the diagram.</p><h5>Show birthdate</h5><p>Check the box if you would like to include the birthdate of individuals in the output.</p><p>You can also choose whether to show the full date of birth or just the year.</p><h5>Show birthplace</h5><p>Whether to show the place of birth in the output. Also see option for abbreviating place names.</p><h5>Show death date</h5><p>Check the box if you would like to include the death date of individuals in the output.</p><p>You can also choose whether to show the full date of death or just the year.</p><h5>Show death place</h5><p>Whether to show the place of death in the output. Also see option for abbreviating place names.</p><h5>Show sex of individuals</h5><p>Whether to print the sex of the individual on the individual's tile, e.g. &quot;Male&quot;</p><h4>Information on families</h4><h5>Show family XREF</h5><p>Whether to include the XREF of families in the output.</p><h5>Show marriage date</h5><p>Check the box if you would like to include the date of marriage in the output.</p><p>You can also choose whether to show the full date of marriage or just the year.</p><h5>Show marriage place</h5><p>Whether to show the place of marriage in the output. Also see option for abbreviating place names."
-msgstr ""
+msgstr "Этот раздел позволяет вносить некоторые изменения в содержимое плиток, включая ссылки, сокращения и сведения об отдельных лицах и семьях. </p><h4>Ссылки на страницы</h4><h5>Добавить URL для отдельных лиц и семей</h5><p>Для вывода SVG (и PDF, если GraphViz установлен на сервере) можно включить ссылки. Таким образом, вы можете щелкнуть человека на диаграмме, чтобы перейти на страницу его веб-дерева.</p><h4>Сокращения</h4><h5>Сокращенные имена</h5><p>Есть несколько вариантов сокращения имени. отображаются имена отдельных лиц.</p><ul><li>Полное имя – параметр по умолчанию, при этом отображается основное имя и любой псевдоним. В настоящее время эта опция является единственной, где предпочтительное имя подчеркнуто, и только она показывает псевдонимы (в кавычках).</li><li>Имена и фамилии - как полное имя, но без псевдонимов. </li><li>Имена — отображаются только имена.</li><li>Только первые имена — только первое слово имени в поле имен.</li><li>Фамилии - отображаются только фамилии.</li><li>Только инициалы – отображаются только инициалы, например &quot;JFK&quot;.</li><li>Инициалы имени и фамилия – отображаются инициалы первого и второго имя, а также полную фамилию. Например: &quot;Дж.Ф. Кеннеди&quot;</li><li>Не показывать имена — имена не отображаются. Если сведения о рождении и смерти также отключены, можно показывать только фотографии или даже цветные рамки.</li></ul><h5>Сокращенные названия мест</h5><p>Есть несколько вариантов сокращения мест имена (по месту рождения, месту брака, месту смерти).</p><ul><li>Полное название места - название места печатается полностью.</li><li>Город и страна - используются первая и последняя части названия места, разделяемые запятыми. Например, &quot;Лондон, Англия, Соединенное Королевство&quot; будет сокращен до «Лондон, Великобритания»</li><li>Город и двухбуквенный код страны ISO — используются первая и последняя части названия места, разделяемые запятыми. Затем страна преобразуется в код страны ISO3166-1-Alpha-2. <br>Например, &quot;Калгари, Альберта, Канада&quot; будет сокращено до «Калгари, Калифорния»</li><li>Город и трехбуквенный код страны ISO — используются первая и последняя части названия места, разделяемые запятыми. Затем страна преобразуется в код страны ISO3166-1-Alpha-3.<br>Например, &quot;Калгари, Альберта, Канада&quot; будет сокращено до \"Calgary, CAN\"</li></ul><p>Примечание. Для сопоставления используется отображаемое имя CLDR. Данные поступают из <a href=\"https://www.datahub.io/core/country-codes\" class=\"help-link\">Datahub</a>, но были изменены, например, как исходное имя CLDR для Соединенное Королевство - \"Великобритания\", а первоначальное название CLDR для Соединенных Штатов - \"США\". Поэтому сопоставление с этими странами для целей сокращения бессмысленно. Поэтому были внесены изменения, чтобы сделать эту работу лучше. Пожалуйста, <a href=\"https://github.com/Neriderc/GVExport/issues/new\" class=\"help-link\">откройте вопрос</a> на GitHub, если вы обнаружите, что аббревиатура страны указана неправильно.< /p><h4>Информация о физических лицах</h4><h5>Показать внешние ссылки</h5><p>Включить ли внешние ссылки отдельных лиц на диаграмму.</p><h5>Показать дату рождения</h5> <p>Установите флажок, если хотите включить в выходные данные дату рождения отдельных лиц.</p><p>Вы также можете выбрать, показывать ли полную дату рождения или только год.</p><h5 >Показать место рождения</h5><p>Показывать ли место рождения в выводе. Также см. вариант сокращения названий мест.</p><h5>Показать дату смерти</h5><p>Отметьте флажок, если хотите включить в выходные данные дату смерти отдельных лиц.</p><p> Вы также можете выбрать, показывать ли полную дату смерти или только год.</p><h5>Показывать место смерти</h5><p>Показывать ли место смерти в выводе. Также см. параметр для сокращения названий мест.</p><h5>Показать пол людей</h5><p>Печать ли пола человека на плитке человека, например. &quot;Мужской&quot;</p><h4>Информация о семьях</h4><h5>Показать внешнюю ссылку на семью</h5><p>Включить ли внешнюю ссылку на семью в выходные данные.</p><h5>Показать дата вступления в брак</h5><p>Отметьте поле, если вы хотите включить в выходные данные дату вступления в брак.</p><p>Вы также можете выбрать, показывать ли полную дату вступления в брак или только год. </p><h5>Показать место брака</h5><p>Показывать ли место брака в выводе. Также см. вариант сокращения названий мест."
 
 #. New section to combine some general diagram settings:  https://s3.eu-west-1.amazonaws.com/po-pub/i/fXJwOPFeNExfAPrBjyabVej9.png   https://s3.eu-west-1.amazonaws.com/po-pub/i/OVcGk9fXLCrNYmgGTI25lMpH.png
 #: 
 msgid "Diagram"
-msgstr ""
+msgstr "Диаграмма"
 
 #. Help text for diagram section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/JIUMIXeCh3Tj0SJ01nLxVMjm.png  https://s3.eu-west-1.amazonaws.com/po-pub/i/Q7S9ciYCqo9HL9J5sCMUpQhU.png
 #: 
 msgid "<h4>Diagram DPI</h4><p>For output such as JPG and PNG, the DPI setting will produce higher quality output when it is larger, but will also increase the file size. Smaller values will produce smaller files, but the quality will be worse and if the value is too low you may not be able to read text.</p><h4>Spacing</h4><p>These options affect the distance between nodes on the diagram.</p><h5>Between generations</h5><p>How close you want generations on the output. For example, for left to right output, smaller numbers will bring the columns of individuals closer together, while larger numbers would push them further apart.</p><h5>Between individuals on the same level</h5><p>How close you want the individuals of the same generation on the output. For example, for left to right output, smaller numbers will mean less space vertically between the boxes, while larger numbers would push them further apart.</p><h4>Diagram colours</h4><p>This section allows you to change colours associated with the diagram that are not directly related to the individual or family tiles. Click the coloured box to change the colour. This uses your browser's colour picker, so will look different depending on what browser you are using. <h5>Diagram background colour<h5><p>This is the colour of the area behind the family tree.</p><h5>Relationship arrow colour</h5><p>The colour of the arrows that show relationships between individuals and families.</p><h5>Show blood relationship in a different colour</h5><p>This shows blood relationships in a different colour than other relationships (e.g. adoption). Selecting this option will provide two colours that can be customised:<ul><li>Related by birth - the arrow colour to use for children related by birth</li><li>Related other than by birth - the arrow colour to use for children not related by birth</li></ul>"
-msgstr ""
+msgstr "<h4>Диаграмма DPI</h4><p>Для вывода, такого как JPG и PNG, параметр DPI будет обеспечивать более высокое качество вывода, когда он больше, но также увеличит размер файла. Меньшие значения будут создавать файлы меньшего размера, но качество будет хуже, и если значение слишком низкое, вы не сможете прочитать текст.</p><h4>Интервал</h4><p>Эти параметры влияют на расстояние между узлов на диаграмме.</p><h5>Между поколениями</h5><p>Насколько близко вы хотите, чтобы поколения были на выходе. Например, для вывода слева направо меньшие числа сблизят столбцы отдельных лиц, а большие числа раздвинут их дальше друг от друга.</p><h5>Между людьми на одном уровне</h5><p>Как закрыть вы хотите, чтобы люди одного поколения на выходе. Например, для вывода слева направо меньшие числа будут означать меньшее расстояние по вертикали между прямоугольниками, а большие числа раздвинут их дальше друг от друга.</p><h4>Цвета диаграммы</h4><p>Этот раздел позволяет вам изменить цвета, связанные с диаграммой, которые не связаны напрямую с отдельными плитками или плитками семейства. Щелкните цветное поле, чтобы изменить цвет. Это использует палитру цветов вашего браузера, поэтому будет выглядеть по-разному в зависимости от того, какой браузер вы используете. <h5>Цвет фона диаграммы<h5><p>Это цвет области позади генеалогического древа.</p><h5>Цвет стрелки взаимосвязи</h5><p>Цвет стрелок, показывающих взаимосвязь между отдельные лица и семьи.</p><h5>Отображать кровное родство другим цветом</h5><p>Это показывает кровное родство другим цветом, чем другие родственные связи (например, усыновление). При выборе этого параметра будут доступны два цвета, которые можно настроить:<ul><li>Родственники по рождению – цвет стрелки, который будет использоваться для детей, связанных родством по рождению.</li><li>Родственны не по рождению – используемый цвет стрелки. для детей, не связанных кровным родством</li></ul>"
 
 #. One of the names of a new settings group under the Tile design section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/BIVXgbgOvNma3KB1dlsuu2oX.png
 #: 
 msgid "Shapes"
-msgstr ""
+msgstr "Формы"
 
 #. One of the names of a new settings group under the Tile design section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/BIVXgbgOvNma3KB1dlsuu2oX.png
 #: 
 msgid "Colours"
-msgstr ""
+msgstr "Цвета"
 
 #. New term referring to existing setting that allows you to change the background of individuals:  https://s3.eu-west-1.amazonaws.com/po-pub/i/pA1VCZGWJqInDUP5UrRq7oMQ.png
 #: 
 msgid "Custom background colour"
-msgstr ""
+msgstr "Пользовательский цвет фона"
 
 #. New option for setting the colour of the stripe on individual tiles:  https://s3.eu-west-1.amazonaws.com/po-pub/i/foB5NxsPsztrvQxIxo0R7HvG.png
 #: 
 msgid "Individual stripe color"
-msgstr ""
+msgstr "Индивидуальный цвет полос"
 
 #. Option to set the border colour of individuals:  https://s3.eu-west-1.amazonaws.com/po-pub/i/U91BOGzE90DmKPN8uGvur5k9.png
 #: 
 msgid "Individual border color"
-msgstr ""
+msgstr "Индивидуальный цвет границы"
 
 #. New name for existing option to set the border colour of tiles:  https://s3.eu-west-1.amazonaws.com/po-pub/i/JBcfI43E8P0ZCxLo51Bhpa8U.png
 #: 
 msgid "Family border colour"
-msgstr ""
+msgstr "Цвет семейной границы"
 
 #. Option in dropdown box for stripe, border, and background colour option: https://s3.eu-west-1.amazonaws.com/po-pub/i/foB5NxsPsztrvQxIxo0R7HvG.png
 #: 
 msgid "Based on individual's sex"
-msgstr ""
+msgstr "В зависимости от пола человека"
 
 #. Option in dropdown menu that disables the stripe on individuals:  https://s3.eu-west-1.amazonaws.com/po-pub/i/ml179UE7h6IKDNGsex2uUMwm.png
 #: 
 msgid "No stripe"
-msgstr ""
+msgstr "Без полосы"
 
 #. Option to set individuals border colour to the same as families (this is the default): https://s3.eu-west-1.amazonaws.com/po-pub/i/U91BOGzE90DmKPN8uGvur5k9.png
 #: 
 msgid "Same as family border"
-msgstr ""
+msgstr "То же, что семейная граница"
 
 #. New grouping of settings within new Tile contents section:   https://s3.eu-west-1.amazonaws.com/po-pub/i/vjxGtnJth5ODT2NSpQ8tm7WB.png
 #: 
 msgid "Page links"
-msgstr ""
+msgstr "Ссылки на страницы"
 
 #. New grouping of settings within new Tile contents section:   https://s3.eu-west-1.amazonaws.com/po-pub/i/vjxGtnJth5ODT2NSpQ8tm7WB.png
 #: 
 msgid "Abbreviations"
-msgstr ""
+msgstr "Сокращения"
 
 #. New grouping of settings within new Tile contents section:   https://s3.eu-west-1.amazonaws.com/po-pub/i/vjxGtnJth5ODT2NSpQ8tm7WB.png
 #: 
 msgid "Information on individuals"
-msgstr ""
+msgstr "Информация о физических лицах"
 
 #. New grouping of settings within new Tile contents section:   https://s3.eu-west-1.amazonaws.com/po-pub/i/vjxGtnJth5ODT2NSpQ8tm7WB.png
 #: 
 msgid "Information on families"
-msgstr ""
+msgstr "Информация о семьях"
 
 #. New settings group within new Diagram settings section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/wzNlOBmhEznFGDQbErllBaRt.png
 #: 
 msgid "Diagram DPI"
-msgstr ""
+msgstr "Диаграмма DPI"
 
 #. New settings group within new Diagram settings section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/wzNlOBmhEznFGDQbErllBaRt.png
 #: 
 msgid "Spacing"
-msgstr ""
+msgstr "Расстояние"
 
 #. New settings group within new Diagram settings section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/wzNlOBmhEznFGDQbErllBaRt.png
 #: 
 msgid "Diagram colours"
-msgstr ""
+msgstr "Цвета диаграммы"
 
 #. New name for existing setting in new grouping:  https://s3.eu-west-1.amazonaws.com/po-pub/i/xjpt3QnjvhJDgamsBl7l7w5J.png
 #: 
 msgid "Relationship arrow colour"
-msgstr ""
+msgstr "Цвет стрелки отношения"
 
 #. One of the options for the shape of photos:  https://s3.eu-west-1.amazonaws.com/po-pub/i/KboDUiZZMpjNBYmj0b8Bz0bC.png
 #: 
 msgid "Rounded square"
-msgstr ""
+msgstr "Закругленный квадрат"
 
 #. Option that if enabled will display the gender as part of the text on an individual's tile:  https://s3.eu-west-1.amazonaws.com/po-pub/i/MPjAdVB2RY2cCNFfRSxK3oOP.png  https://s3.eu-west-1.amazonaws.com/po-pub/i/1S1f2VAUdQBg1UkhCmrqzkV4.png
 #: 
 msgid "Show sex of individuals"
-msgstr ""
+msgstr "Показать пол особей"
+
+#. Slightly changed section name to differ from setting name, as new options in this section are sometimes shown in specific circumstances:  https://s3.eu-west-1.amazonaws.com/po-pub/i/h0TLndD3SONc4XkscpLP7tvE.png
+#: 
+msgid "Output file"
+msgstr "Выходной файл"
+
+#. New options in Output file section are sometimes shown in specific circumstances:  https://s3.eu-west-1.amazonaws.com/po-pub/i/h0TLndD3SONc4XkscpLP7tvE.png
+#: 
+msgid "Quality of JPG photos"
+msgstr "Качество JPG-фотографий"
+
+#. New options in Output file section are sometimes shown in specific circumstances:  https://s3.eu-west-1.amazonaws.com/po-pub/i/h0TLndD3SONc4XkscpLP7tvE.png
+#: 
+msgid "Convert photos to JPG where possible"
+msgstr "Конвертируйте фотографии в JPG, где это возможно"
+
+#. One of the quality settings for JPG shown only when Graphviz installed on server and SVG or PDF option chosen:  https://s3.eu-west-1.amazonaws.com/po-pub/i/h0TLndD3SONc4XkscpLP7tvE.png
+#: 
+msgid "Lowest"
+msgstr "Самый низкий"
+
+#. One of the quality settings for JPG shown only when Graphviz installed on server and SVG or PDF option chosen:  https://s3.eu-west-1.amazonaws.com/po-pub/i/h0TLndD3SONc4XkscpLP7tvE.png
+#: 
+msgid "Low"
+msgstr "Низкий"
+
+#. One of the quality settings for JPG shown only when Graphviz installed on server and SVG or PDF option chosen:  https://s3.eu-west-1.amazonaws.com/po-pub/i/h0TLndD3SONc4XkscpLP7tvE.png
+#: 
+msgid "Medium"
+msgstr "Середина"
+
+#. One of the quality settings for JPG shown only when Graphviz installed on server and SVG or PDF option chosen:  https://s3.eu-west-1.amazonaws.com/po-pub/i/h0TLndD3SONc4XkscpLP7tvE.png
+#: 
+msgid "High"
+msgstr "Высокий"
+
+#. One of the quality settings for JPG shown only when Graphviz installed on server and SVG or PDF option chosen:  https://s3.eu-west-1.amazonaws.com/po-pub/i/h0TLndD3SONc4XkscpLP7tvE.png
+#: 
+msgid "Highest"
+msgstr "Наибольший"
 

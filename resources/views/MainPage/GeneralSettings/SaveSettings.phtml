@@ -23,7 +23,7 @@ use Fisharebest\Webtrees\I18N;
     </div>
     <?php } ?>
     <div class="col-auto">
-        <input type="checkbox" onclick="setSavedDiagramsPanel()" name="vars[show_diagram_panel]" id="show_diagram_panel" value="show_diagram_panel" <?= $vars["show_diagram_panel"] ? 'checked' : '' ?>>
+        <input type="checkbox" <?php if (!$admin) echo 'onclick="setSavedDiagramsPanel()"'; ?> name="vars[show_diagram_panel]" id="show_diagram_panel" value="show_diagram_panel" <?= $vars["show_diagram_panel"] ? 'checked' : '' ?>>
         <label for="show_diagram_panel"><?= I18N::translate('Show saved diagrams panel') ?></label>
     </div>
 </div>
