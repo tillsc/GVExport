@@ -11,6 +11,7 @@ use Fisharebest\Webtrees\I18N;
 
 <?= MainPage::addLabel('save_settings_name', 'Save settings', $show_help); ?>
 <div class="col-sm-8 wt-page-options-value">
+    <?php if ($show_help) { ?>
     <div id="settings_list">
 
     </div>
@@ -20,6 +21,7 @@ use Fisharebest\Webtrees\I18N;
             <button id="save_settings_button" type="button" class="btn btn-outline-secondary" onclick="saveSettingsAdvanced()"><?= I18N::translate('Save') ?></button>
         </div>
     </div>
+    <?php } ?>
     <div class="col-auto">
         <input type="checkbox" onclick="setSavedDiagramsPanel()" name="vars[show_diagram_panel]" id="show_diagram_panel" value="show_diagram_panel" <?= $vars["show_diagram_panel"] ? 'checked' : '' ?>>
         <label for="show_diagram_panel"><?= I18N::translate('Show saved diagrams panel') ?></label>

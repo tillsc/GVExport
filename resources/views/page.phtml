@@ -120,11 +120,9 @@ $usegraphviz = $vars['graphviz_bin'] != "";
         echo view($module->name() . '::MainPage/GeneralSettings',
             [
                 'vars' => $vars,
-                'tree' => $tree,
                 'module' => $module,
                 'settings' => $settings,
                 'usegraphviz' => $usegraphviz,
-                'individual' => $individual,
                 'otypes' => $otypes
             ]); ?>
         <?php if ($vars["show_debug_panel"]) { ?>
