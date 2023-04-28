@@ -61,7 +61,8 @@ $usegraphviz = $vars['graphviz_bin'] != "";
                     [
                         'vars' => $vars,
                         'module' => $module,
-                        'settings' => $settings
+                        'settings' => $settings,
+                        'admin' => true
                     ]); ?>
             </div>
             <hr>
@@ -75,6 +76,7 @@ $usegraphviz = $vars['graphviz_bin'] != "";
                         'module' => $module,
                         'settings' => $settings,
                         'usegraphviz' => $usegraphviz,
+                        'admin' => true
                     ]); ?>
             </div>
             <h3><?= I18N::translate('General Settings') ?></h3>
@@ -87,25 +89,19 @@ $usegraphviz = $vars['graphviz_bin'] != "";
                         'module' => $module,
                         'settings' => $settings,
                         'usegraphviz' => $usegraphviz,
-                        'otypes' => $otypes
+                        'otypes' => $otypes,
+                        'admin' => true
                     ]); ?>
             </div>
             <h3><?= I18N::translate('Debug') ?></h3>
-            <div class="row form-group">
-                <label class="col-sm-4 col-form-label"><?= I18N::translate('Debug mode') ?></label>
-                <div class="col-sm-8 wt-page-options-value">
-                    <label for="enable_debug_mode"><?= I18N::translate('Show debug panel') ?></label>
-                    <input type="checkbox" name="vars[show_debug_panel]" id="show_debug_panel" value="show_debug_panel" <?= $vars["show_debug_panel"] ? 'checked' : '' ?>><br>
-                </div>
-                <label class="col-sm-4 col-form-label" for="enable_debug_mode"><?= I18N::translate('Debug mode') ?></label>
-                <div class="col-sm-8 wt-page-options-value">
-                    <label for="enable_debug_mode"><?= I18N::translate('Enable debug mode') ?></label>
-                    <input type="checkbox" name="vars[enable_debug_mode]" id="enable_debug_mode" value="enable_debug_mode" <?= $vars["enable_debug_mode"] ? 'checked' : '' ?>><br>
-                </div>
-                <label class="col-sm-4 col-form-label" for="enable_graphviz"><?= I18N::translate('Graphviz') ?></label>
-                <div class="col-sm-8 wt-page-options-value">
-                    <label for="enable_graphviz"><?= I18N::translate('Use Graphviz on server') ?></label>
-                    <input type="checkbox" name="vars[enable_graphviz]" id="enable_graphviz" value="enable_graphviz" onclick="setGraphvizAvailable(this.value==='enable_graphviz');" <?= $vars["enable_graphviz"] ? 'checked' : '' ?> <?= (new Settings())->getDefaultSettings()['graphviz_bin'] == "" ? "disabled" : ""; ?>><br></div>
+            <div class="row no-right-margin form-group">
+                <?php
+                // Include the "People to be included" section of the settings
+                echo view($module->name() . '::ControlPanel/DebugPanel',
+                    [
+                        'vars' => $vars,
+                        'admin' => true
+                    ]); ?>
             </div>
         </div>
 

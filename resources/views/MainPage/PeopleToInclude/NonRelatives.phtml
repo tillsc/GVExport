@@ -5,11 +5,11 @@ use Fisharebest\Webtrees\I18N;
 
 /**
  * @var array       $vars                   array of saved settings
- * @var bool        $show_help              whether to show help icons
+ * @var bool        $admin          whether this is for the admin page (remove functions that aren't settings)
  */
 ?>
 
-<?= MainPage::addLabel('mark_not_related', 'Non-relatives', $show_help); ?>
+<?= MainPage::addLabel('mark_not_related', 'Non-relatives', !$admin); ?>
 <div class="col-sm-8 wt-page-options-value">
     <input class="cart_toggle" onclick="showHideMatchCheckbox('mark_not_related', 'mark_related_subgroup');" type="checkbox" name="vars[mark_not_related]" id="mark_not_related" value="mark_not_related" <?= $vars["mark_not_related"] ? 'checked' : '' ?>>
     <label class="check-list width-90pc" for="mark_not_related"><?= I18N::translate('Mark not blood-related people with different color') ?></label>

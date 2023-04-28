@@ -11,30 +11,31 @@ use vendor\WebtreesModules\gvexport\GVExport;use vendor\WebtreesModules\gvexport
  * @var array       $settings       wider array of settings and options
  * @var bool        $usegraphviz     Whether Graphviz is installed on the server and enabled
  * @var Individual  $individual     Individual object from webtrees
+ * @var bool        $admin          whether this is for the admin page (remove functions that aren't settings)
  */
 
 ?>
 
 <div class="row no-right-margin form-group">
-    <?= view($module->name() . '::MainPage/Appearance/GraphDirection',['vars' => $vars, 'settings' => $settings, 'show_help' => true]); ?>
+    <?= view($module->name() . '::MainPage/Appearance/GraphDirection',['vars' => $vars, 'settings' => $settings, 'admin' => $admin]); ?>
 </div>
 
 <div class="row no-right-margin form-group">
-    <?= view($module->name() . '::MainPage/Appearance/DiagramType',['vars' => $vars, 'show_help' => true]); ?>
+    <?= view($module->name() . '::MainPage/Appearance/DiagramType',['vars' => $vars, 'admin' => $admin]); ?>
 </div>
 
 <div id="appearance-advanced" <?= $vars["show_adv_appear"] ? '' : 'style="display:none"' ?>>
 
     <div class="row no-right-margin form-group">
-        <?= view($module->name() . '::MainPage/Appearance/TileDesign',['vars' => $vars, 'settings' => $settings, 'tree' => $tree, 'show_help' => true]); ?>
+        <?= view($module->name() . '::MainPage/Appearance/TileDesign',['vars' => $vars, 'settings' => $settings, 'tree' => $tree, 'admin' => $admin]); ?>
     </div>
 
     <div class="row no-right-margin form-group">
-        <?= view($module->name() . '::MainPage/Appearance/TileContents',['vars' => $vars, 'settings' => $settings, 'usegraphviz' => $usegraphviz, 'individual' => $individual, 'show_help' => true]); ?>
+        <?= view($module->name() . '::MainPage/Appearance/TileContents',['vars' => $vars, 'settings' => $settings, 'usegraphviz' => $usegraphviz, 'individual' => $individual, 'admin' => $admin]); ?>
     </div>
 
     <div class="row no-right-margin form-group">
-        <?= view($module->name() . '::MainPage/Appearance/DiagramAdvanced',['vars' => $vars, 'settings' => $settings, 'usegraphviz' => $usegraphviz, 'individual' => $individual, 'show_help' => true]); ?>
+        <?= view($module->name() . '::MainPage/Appearance/DiagramAdvanced',['vars' => $vars, 'settings' => $settings, 'usegraphviz' => $usegraphviz, 'individual' => $individual, 'admin' => $admin]); ?>
     </div>
 </div>
 <a id="appearance-advanced-button" onclick="toggleAdvanced(this, 'appearance-advanced')"><div class="wt-page-options-label advanced-settings-btn"><?= ($vars["show_adv_appear"] ? '↑ ' : '↓ ') . I18N::translate('Toggle advanced settings') . ($vars["show_adv_appear"] ? ' ↑' : ' ↓'); ?></div></a>

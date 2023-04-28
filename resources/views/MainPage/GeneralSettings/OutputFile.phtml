@@ -8,11 +8,11 @@ use Fisharebest\Webtrees\I18N;
  * @var bool        $usegraphviz            whether Graphviz is installed on the server and enabled
  * @var array       $settings               array of saved settings
  * @var array       $otypes                 output file type options
- * @var bool        $show_help              whether to show help icons
+ * @var bool        $admin          whether this is for the admin page (remove functions that aren't settings)
  */
 ?>
 
-<?= MainPage::addLabel('', 'Output file', $show_help); ?>
+<?= MainPage::addLabel('', 'Output file', !$admin); ?>
 <div class="col-sm-8 wt-page-options-value">
     <label for="output_type"><?= I18N::translate('Output file type') ?></label>
     <?= view('components/select', ['name' => 'vars[output_type]', 'id' => 'output_type', 'selected' => e($vars['output_type']), 'options' => $otypes]) ?>

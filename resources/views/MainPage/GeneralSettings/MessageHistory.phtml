@@ -3,12 +3,12 @@ use Fisharebest\Webtrees\I18N;
 use vendor\WebtreesModules\gvexport\MainPage;
 
 /**
- * @var bool        $show_help              whether to show help icons
+ * @var bool        $admin          whether this is for the admin page (remove functions that aren't settings)
  */
 
 ?>
 
-<?= MainPage::addLabel('message_history', 'Message history', $show_help); ?>
+<?= MainPage::addLabel('message_history', 'Message history', !$admin); ?>
 <div class="col-sm-8 wt-page-options-value">
     <button class="btn btn-outline-secondary" type="button" name="message_history" onclick="return showHelp('message_history');"><?= I18N::translate('View message history') ?></button>
 </div>

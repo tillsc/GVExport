@@ -1,0 +1,22 @@
+<?php
+use Fisharebest\Webtrees\I18N;
+use vendor\WebtreesModules\gvexport\MainPage;
+use vendor\WebtreesModules\gvexport\Settings;
+
+/**
+ * @var array       $vars           array of saved settings
+ * @var bool        $admin          whether this is for the admin page (remove functions that aren't settings)
+ */
+?>
+
+<div class="row no-right-margin form-group">
+    <?= MainPage::addLabel('enable_debug_mode', 'Debug mode', FALSE); ?>
+    <div class="col-sm-8 wt-page-options-value">
+        <label for="enable_debug_mode"><?= I18N::translate('Enable debug mode') ?></label>
+        <input type="checkbox" name="vars[enable_debug_mode]" id="enable_debug_mode" value="enable_debug_mode" <?= $vars["enable_debug_mode"] ? 'checked' : '' ?>><br>
+    </div>
+    <?= MainPage::addLabel('enable_graphviz', 'Graphviz', FALSE); ?>
+    <div class="col-sm-8 wt-page-options-value">
+        <label for="enable_graphviz"><?= I18N::translate('Use Graphviz on server') ?></label>
+        <input type="checkbox" name="vars[enable_graphviz]" id="enable_graphviz" value="enable_graphviz" onclick="setGraphvizAvailable(this.value==='enable_graphviz');" <?= $vars["enable_graphviz"] ? 'checked' : '' ?> <?= (new Settings())->getDefaultSettings()['graphviz_bin'] == "" ? "disabled" : ""; ?>><br></div>
+</div>

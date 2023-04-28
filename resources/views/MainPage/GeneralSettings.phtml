@@ -13,20 +13,20 @@ use vendor\WebtreesModules\gvexport\GVExport;
 ?>
 
     <div class="row no-right-margin form-group">
-        <?= view($module->name() . '::MainPage/GeneralSettings/OutputFile',['vars' => $vars, 'settings' => $settings, 'usegraphviz' => $usegraphviz, 'otypes' => $otypes, 'show_help' => true]); ?>
+        <?= view($module->name() . '::MainPage/GeneralSettings/OutputFile',['vars' => $vars, 'settings' => $settings, 'usegraphviz' => $usegraphviz, 'otypes' => $otypes, 'admin' => $admin]); ?>
     </div>
     <div id="files-advanced" <?= $vars["show_adv_files"] ? '' : 'style="display:none"'; ?>>
         <div class="row no-right-margin form-group">
-            <?= view($module->name() . '::MainPage/GeneralSettings/BrowserRender', ['vars' => $vars, 'show_help' => true]); ?>
+            <?= view($module->name() . '::MainPage/GeneralSettings/BrowserRender', ['vars' => $vars, 'admin' => $admin]); ?>
         </div>
         <div class="row no-right-margin form-group">
-            <?= view($module->name() . '::MainPage/GeneralSettings/SaveSettings', ['vars' => $vars, 'show_help' => true]); ?>
+            <?= view($module->name() . '::MainPage/GeneralSettings/SaveSettings', ['vars' => $vars, 'admin' => $admin]); ?>
         </div>
         <div class="row no-right-margin form-group">
-            <?= view($module->name() . '::MainPage/GeneralSettings/SettingsFile', ['show_help' => true]); ?>
+            <?= view($module->name() . '::MainPage/GeneralSettings/SettingsFile', ['admin' => $admin]); ?>
         </div>
         <div class="row no-right-margin form-group">
-            <?= view($module->name() . '::MainPage/GeneralSettings/MessageHistory', ['show_help' => true]); ?>
+            <?= view($module->name() . '::MainPage/GeneralSettings/MessageHistory', ['admin' => $admin]); ?>
         </div>
     </div>
     <a id="files-advanced-button" onclick="toggleAdvanced(this, 'files-advanced')"><div class="wt-page-options-label advanced-settings-btn"><?= ($vars["show_adv_files"] ? '↑ ' : '↓ ') . I18N::translate('Toggle advanced settings') . ($vars["show_adv_files"] ? ' ↑' : ' ↓'); ?></div></a>

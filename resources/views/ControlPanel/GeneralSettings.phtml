@@ -9,16 +9,16 @@ use vendor\WebtreesModules\gvexport\GVExport;
  * @var array $settings wider array of settings and options
  * @var bool $usegraphviz Whether Graphviz is installed on the server and enabled
  * @var array $otypes List of output file types
+ * @var bool        $admin          whether this is for the admin page (remove functions that aren't settings)
  */
-
 ?>
 
 <div class="row no-right-margin form-group">
-    <?= view($module->name() . '::MainPage/GeneralSettings/OutputFile', ['vars' => $vars, 'settings' => $settings, 'usegraphviz' => $usegraphviz, 'otypes' => $otypes, 'show_help' => false]); ?>
+    <?= view($module->name() . '::MainPage/GeneralSettings/OutputFile', ['vars' => $vars, 'settings' => $settings, 'usegraphviz' => $usegraphviz, 'otypes' => $otypes, 'admin' => $admin]); ?>
 </div>
 <div class="row no-right-margin form-group">
-    <?= view($module->name() . '::MainPage/GeneralSettings/BrowserRender', ['vars' => $vars, 'show_help' => false]); ?>
+    <?= view($module->name() . '::MainPage/GeneralSettings/BrowserRender', ['vars' => $vars, 'admin' => $admin]); ?>
 </div>
 <div class="row no-right-margin form-group">
-    <?= view($module->name() . '::MainPage/GeneralSettings/SaveSettings', ['vars' => $vars, 'show_help' => false]); ?>
+    <?= view($module->name() . '::MainPage/GeneralSettings/SaveSettings', ['vars' => $vars, 'admin' => $admin]); ?>
 </div>

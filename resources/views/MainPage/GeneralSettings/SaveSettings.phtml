@@ -5,13 +5,13 @@ use Fisharebest\Webtrees\I18N;
 
 /**
  * @var array       $vars                   array of saved settings
- * @var bool        $show_help              whether to show help icons
+ * @var bool        $admin          whether this is for the admin page (remove functions that aren't settings)
  */
 ?>
 
-<?= MainPage::addLabel('save_settings_name', 'Save settings', $show_help); ?>
+<?= MainPage::addLabel('save_settings_name', 'Save settings', !$admin); ?>
 <div class="col-sm-8 wt-page-options-value">
-    <?php if ($show_help) { ?>
+    <?php if (!$admin) { ?>
     <div id="settings_list">
 
     </div>

@@ -97,7 +97,8 @@ $usegraphviz = $vars['graphviz_bin'] != "";
                 'tree' => $tree,
                 'cartempty' => $cartempty,
                 'module' => $module,
-                'settings' => $settings
+                'settings' => $settings,
+                'admin' => false
             ]); ?>
 
 <h3><?= I18N::translate('Appearance') ?></h3>
@@ -111,7 +112,8 @@ $usegraphviz = $vars['graphviz_bin'] != "";
                 'module' => $module,
                 'settings' => $settings,
                 'usegraphviz' => $usegraphviz,
-                'individual' => $individual
+                'individual' => $individual,
+                'admin' => false
             ]); ?>
 
         <h3><?= I18N::translate('General settings') ?></h3>
@@ -123,7 +125,8 @@ $usegraphviz = $vars['graphviz_bin'] != "";
                 'module' => $module,
                 'settings' => $settings,
                 'usegraphviz' => $usegraphviz,
-                'otypes' => $otypes
+                'otypes' => $otypes,
+                'admin' => false
             ]); ?>
         <?php if ($vars["show_debug_panel"]) { ?>
             <h3><?= I18N::translate('Debug') ?></h3>
@@ -131,7 +134,8 @@ $usegraphviz = $vars['graphviz_bin'] != "";
             // Include the "General Settings" section of the settings
             echo view($module->name() . '::MainPage/DebugPanel',
                 [
-                    'vars' => $vars
+                    'vars' => $vars,
+                    'admin' => false
                 ]); ?>
         <?php } ?>
     </div>

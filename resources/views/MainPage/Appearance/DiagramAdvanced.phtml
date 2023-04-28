@@ -4,13 +4,13 @@ use vendor\WebtreesModules\gvexport\MainPage;
 use Fisharebest\Webtrees\I18N;
 
 /**
- * @var array       $vars                   array of saved settings
- * @var bool        $show_help              whether to show help icons
+ * @var array       $vars           array of saved settings
+ * @var bool        $admin          whether this is for the admin page (remove functions that aren't settings)
  */
 
 ?>
 
-<?= MainPage::addLabel('', 'Diagram', $show_help); ?>
+<?= MainPage::addLabel('', 'Diagram', !$admin); ?>
 <div class="col-sm-8 wt-page-options-value">
     <div onclick="showHideSubgroup('dpi_subgroup', this)" class="pointer subgroup">→ <?= I18N::translate('Diagram DPI'); ?></div>
     <div id="dpi_subgroup" class="color_subgroup col-auto wt-page-options-value" style="display: none">

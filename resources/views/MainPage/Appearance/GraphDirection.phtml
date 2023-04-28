@@ -2,14 +2,14 @@
 use vendor\WebtreesModules\gvexport\MainPage;
 
 /**
- * @var array       $vars                   array of saved settings
- * @var array       $settings               wider array of settings and options
- * @var bool        $show_help              whether to show help icons
+ * @var array       $vars           array of saved settings
+ * @var array       $settings       wider array of settings and options
+ * @var bool        $admin          whether this is for the admin page (remove functions that aren't settings)
  */
 
 ?>
 
-<?= MainPage::addLabel('graph_dir', 'Graph direction', $show_help); ?>
+<?= MainPage::addLabel('graph_dir', 'Graph direction', !$admin); ?>
 <div class="col-sm-8 wt-page-options-value">
     <?= view('components/select', ['name' => 'vars[graph_dir]', 'id' => 'graph_dir', 'selected' => e($vars['graph_dir']), 'options' => MainPage::updateTranslations($settings["directions"])]) ?>
 </div>
