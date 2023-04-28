@@ -111,7 +111,6 @@
 }
 
 .check-list {
-    width: 90%;
     vertical-align: top;
     margin-left: 10px;
     margin-bottom: 5px;
@@ -427,4 +426,11 @@ span.NAME {
 
 .margin-top {
     margin-top: 10px;
+}
+
+.width-90pc {
+    width: 90%;
+}
+.width-80pc {
+    width: 80%;
 }

@@ -26,7 +26,7 @@ class ImageFile
      *
      * @return string
      */
-    public function getImageLocation(): string
+    public function getImageLocation($quality, $convert): string
     {
         $filename = $this->mediaFile->filename();
         $full_media_path = Site::getPreference('INDEX_DIRECTORY') . $this->tree->getPreference('MEDIA_DIRECTORY') . $filename;
@@ -38,7 +38,7 @@ class ImageFile
             $image = $this->loadImage($full_media_path);
             if ($image) {
                 $img_resized = imagescale($image, $this->dpi, -1);
-                if ($this->saveImage($img_resized, $temp_image_file, $full_media_path)) {
+                if ($this->saveImage($img_resized, $temp_image_file, $full_media_path, $quality, $convert)) {
                     return $temp_dir . "/" . $filename;
                 } else {
                     // Resize failed for some reason, despite being supported format
@@ -93,7 +93,7 @@ class ImageFile
      * @param $full_media_path
      * @return bool
      */
-    private function saveImage($image, $temp_image_file_path, $full_media_path): bool
+    private function saveImage($image, $temp_image_file_path, $full_media_path, $quality, $convert): bool
     {
         $dir = dirname($temp_image_file_path);
 
@@ -111,13 +111,15 @@ class ImageFile
         if (!is_dir($dir)) {
             mkdir($dir);
         }
-
+        if ($convert) {
+            $this->type = IMAGETYPE_JPEG;
+        }
         switch ($this->type) {
             case IMAGETYPE_GIF:
                 imagegif($image, $temp_image_file_path);
                 break;
             case IMAGETYPE_JPEG:
-                imagejpeg($image, $temp_image_file_path);
+                imagejpeg($image, $temp_image_file_path, $quality);
                 break;
             case IMAGETYPE_PNG:
                 imagepng($image, $temp_image_file_path);

@@ -333,7 +333,15 @@ function showHideMatchCheckbox(checkboxId, elementId) {
     showHide(document.getElementById(elementId), document.getElementById(checkboxId).checked);
 }
 function showHideMatchDropdown(dropdownId, elementId, value) {
-    showHide(document.getElementById(elementId), document.getElementById(dropdownId).value === value);
+    let values = value.split("|");
+    let show = false;
+    let elValue = document.getElementById(dropdownId).value;
+    values.forEach((value) => {
+        if (value === elValue) {
+            show = true;
+        }
+    });
+    showHide(document.getElementById(elementId),  show);
 }
 function showHideSubgroup(elementId, callingEl) {
     let callerText = callingEl.innerText;
@@ -860,6 +868,7 @@ function pageLoaded(Url) {
     document.querySelector('#photo_shape').addEventListener('change', showGraphvizUnsupportedMessage);
     document.querySelector('#bg_colour_type').addEventListener('change', () => {showHideMatchDropdown('bg_colour_type', 'custom_bg_subgroup', '0');});
     document.querySelector('#border_colour_type').addEventListener('change', () => {showHideMatchDropdown('border_colour_type', 'custom_border_subgroup', '0');});
+    document.querySelector('#output_type').addEventListener('change', () => {if (graphvizAvailable) {showHideMatchDropdown('output_type', 'server_pdf_subgroup', 'pdf|svg');}});
 }
 
 // Function to show a help message

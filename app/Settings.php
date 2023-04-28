@@ -39,6 +39,7 @@ class Settings
         $this->defaultSettings['use_abbr_places'] = [0 => "Full place name", 10 => "City and country" ,  20 => "City and 2 letter ISO country code", 30 => "City and 3 letter ISO country code"];
         $this->defaultSettings['use_abbr_names'] = [0 => "Full name", 10 => "Given and surnames", 20 => "Given names" , 30 => "First given name only", 40 => "Surnames", 50 => "Initials only", 60 => "Given name initials and surname", 70 => "Don't show names"];
         $this->defaultSettings['photo_shape_options'] = [0 => "No change", 10 => "Oval", 20 => "Circle" , 30 => "Square", 40 => "Rounded rectangle", 50 => "Rounded square"];
+        $this->defaultSettings['photo_quality_options'] = [0 => "Lowest", 20 => "Low", 50 => "Medium" , 75 => "High", 100 => "Highest"];
         $this->defaultSettings['indi_tile_shape_options'] = [0 => "Rectangle", 10 => "Rounded rectangle"];
         $this->defaultSettings['bg_colour_type_options'] = [0 => "Custom", self::OPTION_BACKGROUND_SEX_COLOUR => "Based on individual's sex"];
         $this->defaultSettings['stripe_colour_type_options'] = [0 => "No stripe", self::OPTION_STRIPE_SEX_COLOUR => "Based on individual's sex"];

@@ -116,11 +116,22 @@ $usegraphviz = $vars['graphviz_bin'] != "";
 
         <h3><?= I18N::translate('General settings') ?></h3>
         <div class="row no-right-margin form-group">
-            <?= MainPage::addLabel('output_type', 'Output file type'); ?>
+            <?= MainPage::addLabel('', 'Output file'); ?>
             <div class="col-sm-8 wt-page-options-value">
+                <label for="output_type"><?= I18N::translate('Output file type') ?></label>
                 <?= view('components/select', ['name' => 'vars[output_type]', 'id' => 'output_type', 'selected' => e($vars['output_type']), 'options' => $otypes]) ?>
                 <small id="emailHelp" class="form-text text-muted"><?= $usegraphviz ? "" : I18N::translate("Options limited as Graphviz not installed on server") ?></small>
+                <div id="server_pdf_subgroup" class="color_subgroup col-auto wt-page-options-value" <?= !($vars["output_type"] == 'pdf' || $vars["output_type"] == 'svg') || !$usegraphviz ? 'style="display:none;"' : '' ?>>
+                    <div class="col-auto">
+                        <label for="photo_quality"><?= I18N::translate('Quality of JPG photos') ?></label>
+                        <?= view('components/select', ['name' => 'vars[photo_quality]', 'id' => 'photo_quality', 'selected' => e($vars['photo_quality']), 'options' => MainPage::updateTranslations($settings["photo_quality_options"])]) ?>
+                    </div>
+
+                    <input type="checkbox" name="vars[convert_photos_jpeg]" id="convert_photos_jpeg" value="convert_photos_jpeg" <?= $vars["show_photos"] ? 'checked' : '' ?>>
+                    <label for="convert_photos_jpeg" class="check-list width-80pc"><?= I18N::translate('Convert photos to JPG where possible') ?></label>
+                </div>
             </div>
+
         </div>
         <div id="files-advanced" <?= $vars["show_adv_files"] ? '' : 'style="display:none"'; ?>>
             <div class="row no-right-margin form-group">

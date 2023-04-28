@@ -222,8 +222,12 @@ class FormSubmission
 
         }
         $settings['show_photos'] = isset($vars['show_photos']);
+        $settings['convert_photos_jpeg'] = isset($vars['convert_photos_jpeg']);
         if (isset($vars['photo_shape'])) {
             $settings['photo_shape'] = I18N::digits($vars['photo_shape']);
+        }
+        if (isset($vars['photo_quality'])) {
+            $settings['photo_quality'] = I18N::digits($vars['photo_quality']);
         }
         if (isset($vars['indi_tile_shape'])) {
             $settings['indi_tile_shape'] = I18N::digits($vars['indi_tile_shape']);

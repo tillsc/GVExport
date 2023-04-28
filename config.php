@@ -19,6 +19,8 @@ return array(
 	'show_photos' => true, // Whether to include photos in diagram
     'photo_shape' => 0, // Default photo shape option
     'photo_size' => "100%", // Default size of photos
+    'photo_quality' => 50, // Quality of JPEG photos - this should be 0, 20, 50, 75, or 100 to match with dropdown list settings
+    'convert_photos_jpeg' => false, // Whether to convert all images to JPEG
 	'show_birthdate' => true, // Whether to show birthdate for individuals
 	'birthdate_year_only' => false, // Whether to show just the year or the full GEDCOM date of birth
 	'show_birthplace' => true, // Whether to show birthplace for individuals
