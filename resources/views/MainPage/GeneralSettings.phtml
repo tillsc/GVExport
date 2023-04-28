@@ -1,0 +1,32 @@
+<?php
+use Fisharebest\Webtrees\I18N;
+use vendor\WebtreesModules\gvexport\GVExport;
+
+/**
+ * @var array       $vars           array of saved settings
+ * @var GVExport    $module         this module
+ * @var array       $settings       wider array of settings and options
+ * @var bool        $usegraphviz    Whether Graphviz is installed on the server and enabled
+ * @var array       $otypes         List of output file types
+ */
+
+?>
+
+    <div class="row no-right-margin form-group">
+        <?= view($module->name() . '::MainPage/GeneralSettings/OutputFile',['vars' => $vars, 'settings' => $settings, 'usegraphviz' => $usegraphviz, 'otypes' => $otypes, 'admin' => $admin]); ?>
+    </div>
+    <div id="files-advanced" <?= $vars["show_adv_files"] ? '' : 'style="display:none"'; ?>>
+        <div class="row no-right-margin form-group">
+            <?= view($module->name() . '::MainPage/GeneralSettings/BrowserRender', ['vars' => $vars, 'admin' => $admin]); ?>
+        </div>
+        <div class="row no-right-margin form-group">
+            <?= view($module->name() . '::MainPage/GeneralSettings/SaveSettings', ['vars' => $vars, 'admin' => $admin]); ?>
+        </div>
+        <div class="row no-right-margin form-group">
+            <?= view($module->name() . '::MainPage/GeneralSettings/SettingsFile', ['admin' => $admin]); ?>
+        </div>
+        <div class="row no-right-margin form-group">
+            <?= view($module->name() . '::MainPage/GeneralSettings/MessageHistory', ['admin' => $admin]); ?>
+        </div>
+    </div>
+    <a id="files-advanced-button" onclick="toggleAdvanced(this, 'files-advanced')"><div class="wt-page-options-label advanced-settings-btn"><?= ($vars["show_adv_files"] ? '↑ ' : '↓ ') . I18N::translate('Toggle advanced settings') . ($vars["show_adv_files"] ? ' ↑' : ' ↓'); ?></div></a>

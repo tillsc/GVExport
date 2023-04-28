@@ -5,10 +5,10 @@ use vendor\WebtreesModules\gvexport\MainPage;
 /**
  * @var array       $vars                   array of saved settings
  * @var bool        $cart_empty              whether the clippings cart is empty
- * @var bool        $show_help               whether to show help icons
+ * @var bool        $admin          whether this is for the admin page (remove functions that aren't settings)
  */
 ?>
-<?= MainPage::addLabel('', 'Connections to include', $show_help); ?>
+<?= MainPage::addLabel('', 'Connections to include', !$admin); ?>
 <div class="col-sm-8 wt-page-options-value">
     <div class="row">
         <div class="col-sm-6">

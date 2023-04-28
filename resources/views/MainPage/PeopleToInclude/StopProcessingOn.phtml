@@ -8,11 +8,11 @@ use Fisharebest\Webtrees\I18N;
  * @var array       $vars                   array of saved settings
  * @var Tree        $tree                   webtrees tree object
  * @var bool        $grey_people             whether to disable settings when clipping cart used
- * @var bool        $show_help              whether to show help icons
+ * @var bool        $admin          whether this is for the admin page (remove functions that aren't settings)
  */
 ?>
 
-<?= MainPage::addLabel('stop_xref_list', 'Stop processing on', $show_help); ?>
+<?= MainPage::addLabel('stop_xref_list', 'Stop processing on', !$admin); ?>
 <div class="col-sm-8 wt-page-options-value">
     <div id="stop_indi_list">
 

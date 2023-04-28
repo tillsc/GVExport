@@ -1136,7 +1136,7 @@ class Dot {
 			// If we are rendering in the browser, provide the URL, otherwise provide the server side file location
 			if (isset($_REQUEST["download"])) {
                 $image = new ImageFile($m, $this->tree, $this->settings["dpi"] * 2);
-				return $image->getImageLocation();
+				return $image->getImageLocation($this->settings["photo_quality"], $this->settings["convert_photos_jpeg"]);
 			} else {
                 switch ($this->settings['photo_shape']) {
                     case 0:

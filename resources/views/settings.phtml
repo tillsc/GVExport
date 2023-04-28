@@ -49,15 +49,11 @@ $usegraphviz = $vars['graphviz_bin'] != "";
                 <input class="form-control col-sm-6" type="text" name="vars[death_prefix]" id="death_prefix" pattern="^[A-Za-z0-9_ .*+()^%$#@!†-]*$" title="<?= I18N::translate("Letters, numbers, spaces, or the following symbols: ") . "_.*+()^%$#@!†-"; ?>" value="<?= e($vars["death_prefix"]); ?>">
             </div>
         </div>
-        <div>
-        </div>
+
         <h2><?= I18N::translate('Default values for GVExport'); ?></h2>
 
         <div>
-            <div>
-                <h3><?= I18N::translate('People to be included') ?></h3>
-            </div>
-
+            <h3><?= I18N::translate('People to be included') ?></h3>
             <div class="row no-right-margin form-group">
                 <?php
                 // Include the "People to be included" section of the settings
@@ -65,13 +61,12 @@ $usegraphviz = $vars['graphviz_bin'] != "";
                     [
                         'vars' => $vars,
                         'module' => $module,
-                        'settings' => $settings
+                        'settings' => $settings,
+                        'admin' => true
                     ]); ?>
             </div>
             <hr>
-            <div>
-                <h3><?= /* I18N: Appearance heading */ I18N::translate('Appearance') ?></h3>
-            </div>
+            <h3><?= I18N::translate('Appearance') ?></h3>
             <div class="row no-right-margin form-group">
                 <?php
                 // Include the "People to be included" section of the settings
@@ -81,43 +76,32 @@ $usegraphviz = $vars['graphviz_bin'] != "";
                         'module' => $module,
                         'settings' => $settings,
                         'usegraphviz' => $usegraphviz,
+                        'admin' => true
                     ]); ?>
             </div>
-            <h3><?= /* I18N: Appearance heading */ I18N::translate('General Settings') ?></h3>
-            <div class="row">
-                <label class="col-sm-4 col-form-label" for="output_type"><?= I18N::translate('Output File Type') ?></label>
-                <div class="col-sm-8 wt-page-options-value">
-                    <?= view('components/select', ['name' => 'vars[output_type]', 'id' => 'output_type', 'selected' => e($vars['output_type']), 'options' => $otypes]) ?>
-                </div>
-                <label class="col-sm-4 col-form-label"><?= I18N::translate('Browser render') ?></label>
-                <div class="col-sm-8 wt-page-options-value">
-                    <label for="auto_update"><?= I18N::translate('Auto-update') ?></label>
-                    <input type="checkbox" name="vars[auto_update]" id="auto_update" value="auto_update" <?= $vars["auto_update"] ? 'checked' : '' ?>>
-                </div>
-                <label class="col-sm-4 col-form-label" for="save_settings"><?= I18N::translate('Save settings') ?></label>
-                <div class="col-sm-8 wt-page-options-value">
-                    <div class="col-auto">
-                        <input type="checkbox" name="vars[show_diagram_panel]" id="show_diagram_panel" value="show_diagram_panel" <?= $vars["show_diagram_panel"] ? 'checked' : '' ?>>
-                        <label for="show_diagram_panel"><?= I18N::translate('Show saved diagrams panel') ?></label>
-                    </div>
-                </div>
+            <h3><?= I18N::translate('General Settings') ?></h3>
+            <div class="row no-right-margin form-group">
+                <?php
+                // Include the "People to be included" section of the settings
+                echo view($module->name() . '::ControlPanel/GeneralSettings',
+                    [
+                        'vars' => $vars,
+                        'module' => $module,
+                        'settings' => $settings,
+                        'usegraphviz' => $usegraphviz,
+                        'otypes' => $otypes,
+                        'admin' => true
+                    ]); ?>
             </div>
             <h3><?= I18N::translate('Debug') ?></h3>
-            <div class="row form-group">
-                <label class="col-sm-4 col-form-label"><?= I18N::translate('Debug mode') ?></label>
-                <div class="col-sm-8 wt-page-options-value">
-                    <label for="enable_debug_mode"><?= I18N::translate('Show debug panel') ?></label>
-                    <input type="checkbox" name="vars[show_debug_panel]" id="show_debug_panel" value="show_debug_panel" <?= $vars["show_debug_panel"] ? 'checked' : '' ?>><br>
-                </div>
-                <label class="col-sm-4 col-form-label" for="enable_debug_mode"><?= I18N::translate('Debug mode') ?></label>
-                <div class="col-sm-8 wt-page-options-value">
-                    <label for="enable_debug_mode"><?= I18N::translate('Enable debug mode') ?></label>
-                    <input type="checkbox" name="vars[enable_debug_mode]" id="enable_debug_mode" value="enable_debug_mode" <?= $vars["enable_debug_mode"] ? 'checked' : '' ?>><br>
-                </div>
-                <label class="col-sm-4 col-form-label" for="enable_graphviz"><?= I18N::translate('Graphviz') ?></label>
-                <div class="col-sm-8 wt-page-options-value">
-                    <label for="enable_graphviz"><?= I18N::translate('Use Graphviz on server') ?></label>
-                    <input type="checkbox" name="vars[enable_graphviz]" id="enable_graphviz" value="enable_graphviz" onclick="setGraphvizAvailable(this.value==='enable_graphviz');" <?= $vars["enable_graphviz"] ? 'checked' : '' ?> <?= (new Settings())->getDefaultSettings()['graphviz_bin'] == "" ? "disabled" : ""; ?>><br></div>
+            <div class="row no-right-margin form-group">
+                <?php
+                // Include the "People to be included" section of the settings
+                echo view($module->name() . '::ControlPanel/DebugPanel',
+                    [
+                        'vars' => $vars,
+                        'admin' => true
+                    ]); ?>
             </div>
         </div>
 

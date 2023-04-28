@@ -9,12 +9,12 @@ use Fisharebest\Webtrees\I18N;
  * @var array       $settings               wider array of settings and options
  * @var bool        $usegraphviz            whether Graphviz is installed on the server and enabled
  * @var Individual  $individual             webtrees Individual object
- * @var bool        $show_help              whether to show help icons
+ * @var bool        $admin                  whether this is for the admin page (remove functions that aren't settings)
  */
 
 ?>
 
-<?= MainPage::addLabel('', 'Tile contents', $show_help); ?>
+<?= MainPage::addLabel('', 'Tile contents', !$admin); ?>
 <div class="col-sm-8 wt-page-options-value">
     <div class="col-auto">
         <div onclick="showHideSubgroup('url_subgroup', this)" class="pointer subgroup">→ <?= I18N::translate('Page links'); ?></div>

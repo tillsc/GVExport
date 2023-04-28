@@ -8,12 +8,12 @@ use Fisharebest\Webtrees\I18N;
  * @var array       $vars                   array of saved settings
  * @var array       $settings               wider array of settings and options
  * @var Tree        $tree                   webtrees Tree object of current tree
- * @var bool        $show_help              whether to show help icons
+ * @var bool        $admin                  whether this is for the admin page (remove functions that aren't settings)
  */
 
 ?>
 
-<?= MainPage::addLabel('', 'Tile design', $show_help); ?>
+<?= MainPage::addLabel('', 'Tile design', !$admin); ?>
 <div class="col-sm-8 wt-page-options-value">
     <div onclick="showHideSubgroup('shape_subgroup', this)" class="pointer subgroup">→ <?= I18N::translate('Shape'); ?></div>
     <div id="shape_subgroup" class="color_subgroup col-auto wt-page-options-value" style="display: none">
@@ -31,11 +31,11 @@ use Fisharebest\Webtrees\I18N;
         }
         if ($images_enabled) { ?>
         <div onclick="showHideSubgroup('photos_subgroup', this)" class="pointer subgroup">→ <?= I18N::translate('Photos'); ?></div>
-        <div id="photos_subgroup" class="col-auto wt-page-options-value" style="display: none">
+        <div id="photos_subgroup" class="color_subgroup col-auto wt-page-options-value" style="display: none">
             <div class="col-sm-8">
                 <input type="checkbox" onclick="showHideMatchCheckbox('show_photos', 'photos_enabled_subgroup');" name="vars[show_photos]" id="show_photos" value="show_photos" <?= $vars["show_photos"] ? 'checked' : '' ?>>
                 <label for="show_photos"><?= I18N::translate('Show photos') ?></label>
-                <div id="photos_enabled_subgroup" class="col-auto wt-page-options-value" <?= !$vars["show_photos"] ? 'style="display:none;"' : '' ?>>
+                <div id="photos_enabled_subgroup" class="color_subgroup col-auto wt-page-options-value" <?= !$vars["show_photos"] ? 'style="display:none;"' : '' ?>>
                     <div class="col-auto">
                         <label for="photo_shape"><?= I18N::translate('Photo shape') ?></label>
                         <?= view('components/select', ['name' => 'vars[photo_shape]', 'id' => 'photo_shape', 'selected' => e($vars['photo_shape']), 'options' => MainPage::updateTranslations($settings["photo_shape_options"])]) ?>
@@ -94,10 +94,10 @@ use Fisharebest\Webtrees\I18N;
                 <input type="color" class="picker" name="vars[unkn_gender_unrel_col]" id="unkn_gender_unrel_col" value="<?= e($vars["unkn_gender_unrel_col"]); ?>" /><label for="unkn_gender_unrel_col" class="picker-label"><?= I18N::translate('Not blood-related unknown gender individuals') ?></label>
             </div>
             <div class="col-auto padding-left-10">
-                <input type="checkbox" name="vars[highlight_start_indis]" onclick="toggleHighlightStartPersons(this.checked, <?= $show_help ? 'false' : 'true'; ?>)" id="highlight_start_indis" value="true" <?= $vars["highlight_start_indis"] ? 'checked' : '' ?>><label for="highlight_start_indis" class="check-list"><?= I18N::translate('Show starting individuals in different color') ?></label>
+                <input type="checkbox" name="vars[highlight_start_indis]" onclick="toggleHighlightStartPersons(this.checked, <?= !$admin ? 'false' : 'true'; ?>)" id="highlight_start_indis" value="true" <?= $vars["highlight_start_indis"] ? 'checked' : '' ?>><label for="highlight_start_indis" class="check-list width-90pc"><?= I18N::translate('Show starting individuals in different color') ?></label>
                 <div class="color_subgroup col-auto wt-page-options-value" id="startcol_option"  <?= $vars["highlight_start_indis"] != "true" ? 'style="display:none;"' : '' ?>>
                     <input type="color" class="picker" name="vars[highlight_col]" id="highlight_col" value="<?= e($vars["highlight_col"]); ?>" /><label for="highlight_col" class="picker-label"><?= I18N::translate('Starting individuals background color') ?></label>
-                    <?php if ($show_help) { ?>
+                    <?php if (!$admin) { ?>
                         <label for="no_highlight_xref_list"><?= I18N::translate("Colour these individuals:"); ?></label><br>
                         <div id="highlight_list">
 

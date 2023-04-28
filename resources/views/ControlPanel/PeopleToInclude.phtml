@@ -6,22 +6,23 @@ use vendor\WebtreesModules\gvexport\GVExport;
  * @var array       $vars           array of saved settings
  * @var GVExport    $module         this module
  * @var array       $settings       wider array of settings and options
+ * @var bool        $admin          whether this is for the admin page (remove functions that aren't settings)
  */
 
 ?>
 
 <div class="row no-right-margin form-group">
-    <?= view($module->name() . '::MainPage/PeopleToInclude/ItemsInClippingsCart',['vars' => $vars, 'show_help' => false]); ?>
+    <?= view($module->name() . '::MainPage/PeopleToInclude/ItemsInClippingsCart',['vars' => $vars, 'admin' => $admin]); ?>
 </div>
 <hr>
 <div class="row no-right-margin form-group">
-    <?= view($module->name() . '::MainPage/PeopleToInclude/ConnectionsToInclude',['vars' => $vars, 'cart_empty' => true, 'show_help' => false]); ?>
+    <?= view($module->name() . '::MainPage/PeopleToInclude/ConnectionsToInclude',['vars' => $vars, 'cart_empty' => true, 'admin' => $admin]); ?>
 </div>
 <hr>
 <div class="row no-right-margin form-group">
-    <?= view($module->name() . '::MainPage/PeopleToInclude/NonRelatives',['vars' => $vars, 'show_help' => false]); ?>
+    <?= view($module->name() . '::MainPage/PeopleToInclude/NonRelatives',['vars' => $vars, 'admin' => $admin]); ?>
 </div>
 <hr>
 <div class="row no-right-margin form-group">
-    <?= view($module->name() . '::MainPage/PeopleToInclude/TreatmentOfSourceIndividuals',['vars' => $vars, 'settings' => $settings, 'show_help' => false]); ?>
+    <?= view($module->name() . '::MainPage/PeopleToInclude/TreatmentOfSourceIndividuals',['vars' => $vars, 'settings' => $settings, 'admin' => $admin]); ?>
 </div>

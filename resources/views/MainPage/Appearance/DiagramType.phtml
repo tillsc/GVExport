@@ -3,13 +3,13 @@ use vendor\WebtreesModules\gvexport\MainPage;
 use Fisharebest\Webtrees\I18N;
 
 /**
- * @var array       $vars                   array of saved settings
- * @var bool        $show_help              whether to show help icons
+ * @var array       $vars           array of saved settings
+ * @var bool        $admin          whether this is for the admin page (remove functions that aren't settings)
  */
 
 ?>
 
-<?= MainPage::addLabel('', 'Diagram type', $show_help); ?>
+<?= MainPage::addLabel('', 'Diagram type', !$admin); ?>
 <div class="col-sm-8 wt-page-options-value">
     <div class="row">
         <?php // Simple diagram type no longer exists, but we need to handle it if we find the setting in loaded settings
