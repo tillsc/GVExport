@@ -1,0 +1,16 @@
+<?php
+
+use vendor\WebtreesModules\gvexport\MainPage;
+use Fisharebest\Webtrees\I18N;
+
+/**
+ * @var array       $vars                   array of saved settings
+ * @var bool        $show_help              whether to show help icons
+ */
+?>
+
+<?= MainPage::addLabel('auto_update', 'Browser render', $show_help); ?>
+<div class="col-sm-8 wt-page-options-value">
+    <input type="checkbox" onclick="toggleUpdateButton()" name="vars[auto_update]" id="auto_update" value="auto_update" <?= $vars["auto_update"] ? 'checked' : '' ?>>
+    <label for="auto_update"><?= I18N::translate('Auto-update') ?></label>
+</div>

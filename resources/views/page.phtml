@@ -127,6 +127,15 @@ $usegraphviz = $vars['graphviz_bin'] != "";
                 'individual' => $individual,
                 'otypes' => $otypes
             ]); ?>
+        <?php if ($vars["show_debug_panel"]) { ?>
+            <h3><?= I18N::translate('Debug') ?></h3>
+            <?php
+            // Include the "General Settings" section of the settings
+            echo view($module->name() . '::MainPage/DebugPanel',
+                [
+                    'vars' => $vars
+                ]); ?>
+        <?php } ?>
     </div>
 
     <div class="sidebar__buttons">

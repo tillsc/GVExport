@@ -1,86 +1,26 @@
 <?php
 use Fisharebest\Webtrees\I18N;
-use Fisharebest\Webtrees\Individual;
-use Fisharebest\Webtrees\Tree;
-use vendor\WebtreesModules\gvexport\GVExport;use vendor\WebtreesModules\gvexport\MainPage;
-use vendor\WebtreesModules\gvexport\Settings;
+use vendor\WebtreesModules\gvexport\GVExport;
 
 /**
  * @var array       $vars           array of saved settings
- * @var Tree        $tree           webtrees tree object of current tree
  * @var GVExport    $module         this module
  * @var array       $settings       wider array of settings and options
- * @var bool        $usegraphviz     Whether Graphviz is installed on the server and enabled
- * @var Individual  $individual     Individual object from webtrees
+ * @var bool        $usegraphviz    Whether Graphviz is installed on the server and enabled
+ * @var array       $otypes         List of output file types
  */
 
 ?>
 
     <div class="row no-right-margin form-group">
-        <?= MainPage::addLabel('', 'Output file'); ?>
-        <div class="col-sm-8 wt-page-options-value">
-            <label for="output_type"><?= I18N::translate('Output file type') ?></label>
-            <?= view('components/select', ['name' => 'vars[output_type]', 'id' => 'output_type', 'selected' => e($vars['output_type']), 'options' => $otypes]) ?>
-            <small id="emailHelp" class="form-text text-muted"><?= $usegraphviz ? "" : I18N::translate("Options limited as Graphviz not installed on server") ?></small>
-            <div id="server_pdf_subgroup" class="color_subgroup col-auto wt-page-options-value" <?= !($vars["output_type"] == 'pdf' || $vars["output_type"] == 'svg') || !$usegraphviz ? 'style="display:none;"' : '' ?>>
-                <div class="col-auto">
-                    <label for="photo_quality"><?= I18N::translate('Quality of JPG photos') ?></label>
-                    <?= view('components/select', ['name' => 'vars[photo_quality]', 'id' => 'photo_quality', 'selected' => e($vars['photo_quality']), 'options' => MainPage::updateTranslations($settings["photo_quality_options"])]) ?>
-                </div>
-
-                <input type="checkbox" name="vars[convert_photos_jpeg]" id="convert_photos_jpeg" value="convert_photos_jpeg" <?= $vars["show_photos"] ? 'checked' : '' ?>>
-                <label for="convert_photos_jpeg" class="check-list width-80pc"><?= I18N::translate('Convert photos to JPG where possible') ?></label>
-            </div>
-        </div>
-
+        <?= view($module->name() . '::MainPage/GeneralSettings/OutputFile',['vars' => $vars, 'settings' => $settings, 'usegraphviz' => $usegraphviz, 'otypes' => $otypes, 'show_help' => true]); ?>
     </div>
     <div id="files-advanced" <?= $vars["show_adv_files"] ? '' : 'style="display:none"'; ?>>
         <div class="row no-right-margin form-group">
-            <?= MainPage::addLabel('auto_update', 'Browser render'); ?>
-            <div class="col-sm-8 wt-page-options-value">
-                <input type="checkbox" onclick="toggleUpdateButton()" name="vars[auto_update]" id="auto_update" value="auto_update" <?= $vars["auto_update"] ? 'checked' : '' ?>>
-                <label for="auto_update"><?= I18N::translate('Auto-update') ?></label>
-            </div>
-            <?= MainPage::addLabel('save_settings', 'Save settings'); ?>
-            <div class="col-sm-8 wt-page-options-value">
-                <div id="settings_list">
-
-                </div>
-                <div class="input-group mt-1">
-                    <input type="text" class="form-control" name="vars[save_settings_name]" id="save_settings_name" placeholder="<?= I18N::translate('Settings name'); ?>">
-                    <div class="input-group-append">
-                        <button id="save_settings_button" type="button" class="btn btn-outline-secondary" onclick="saveSettingsAdvanced()"><?= I18N::translate('Save') ?></button>
-                    </div>
-                </div>
-                <div class="col-auto">
-                    <input type="checkbox" onclick="setSavedDiagramsPanel()" name="vars[show_diagram_panel]" id="show_diagram_panel" value="show_diagram_panel" <?= $vars["show_diagram_panel"] ? 'checked' : '' ?>>
-                    <label for="show_diagram_panel"><?= I18N::translate('Show saved diagrams panel') ?></label>
-                </div>
-            </div>
-            <?= MainPage::addLabel('', 'Settings file'); ?>
-            <div class="col-sm-8 wt-page-options-value">
-                <label for="load_settings"><?= I18N::translate('Load settings from file') ?></label><br>
-                <input id="load_settings" type="file" onchange="uploadSettingsFile(this)">
-            </div>
-            <?= MainPage::addLabel('message_history', 'Message history'); ?>
-            <div class="col-sm-8 wt-page-options-value">
-                <button class="btn btn-outline-secondary" type="button" name="message_history" onclick="return showHelp('message_history');"><?= I18N::translate('View message history') ?></button>
-            </div>
+            <?= view($module->name() . '::MainPage/GeneralSettings/BrowserRender',['vars' => $vars, 'show_help' => true]); ?>
+            <?= view($module->name() . '::MainPage/GeneralSettings/SaveSettings',['vars' => $vars, 'show_help' => true]); ?>
+            <?= view($module->name() . '::MainPage/GeneralSettings/SettingsFile',['show_help' => true]); ?>
+            <?= view($module->name() . '::MainPage/GeneralSettings/MessageHistory',['show_help' => true]); ?>
         </div>
     </div>
     <a id="files-advanced-button" onclick="toggleAdvanced(this, 'files-advanced')"><div class="wt-page-options-label advanced-settings-btn"><?= ($vars["show_adv_files"] ? '↑ ' : '↓ ') . I18N::translate('Toggle advanced settings') . ($vars["show_adv_files"] ? ' ↑' : ' ↓'); ?></div></a>
-<?php if ($vars["show_debug_panel"]) { ?>
-    <h3><?= I18N::translate('Debug') ?></h3>
-    <div class="row no-right-margin form-group">
-        <?= MainPage::addLabel('enable_debug_mode', 'Debug mode', FALSE); ?>
-        <div class="col-sm-8 wt-page-options-value">
-            <label for="enable_debug_mode"><?= I18N::translate('Enable debug mode') ?></label>
-            <input type="checkbox" name="vars[enable_debug_mode]" id="enable_debug_mode" value="enable_debug_mode" <?= $vars["enable_debug_mode"] ? 'checked' : '' ?>><br>
-            <button class="btn btn-outline-secondary" type="button" name="debug_view" onclick="return showHelp('enable_debug_mode');"><?= I18N::translate('View debug log') ?></button>
-        </div>
-        <?= MainPage::addLabel('enable_graphviz', 'Graphviz', FALSE); ?>
-        <div class="col-sm-8 wt-page-options-value">
-            <label for="enable_graphviz"><?= I18N::translate('Use Graphviz on server') ?></label>
-            <input type="checkbox" name="vars[enable_graphviz]" id="enable_graphviz" value="enable_graphviz" onclick="setGraphvizAvailable(this.value==='enable_graphviz');" <?= $vars["enable_graphviz"] ? 'checked' : '' ?> <?= (new Settings())->getDefaultSettings()['graphviz_bin'] == "" ? "disabled" : ""; ?>><br></div>
-    </div>
-<?php } ?>

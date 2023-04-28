@@ -1,0 +1,27 @@
+<?php
+
+use vendor\WebtreesModules\gvexport\MainPage;
+use Fisharebest\Webtrees\I18N;
+
+/**
+ * @var array       $vars                   array of saved settings
+ * @var bool        $show_help              whether to show help icons
+ */
+?>
+
+<?= MainPage::addLabel('save_settings_name', 'Save settings', $show_help); ?>
+<div class="col-sm-8 wt-page-options-value">
+    <div id="settings_list">
+
+    </div>
+    <div class="input-group mt-1">
+        <input type="text" class="form-control" name="vars[save_settings_name]" id="save_settings_name" placeholder="<?= I18N::translate('Settings name'); ?>">
+        <div class="input-group-append">
+            <button id="save_settings_button" type="button" class="btn btn-outline-secondary" onclick="saveSettingsAdvanced()"><?= I18N::translate('Save') ?></button>
+        </div>
+    </div>
+    <div class="col-auto">
+        <input type="checkbox" onclick="setSavedDiagramsPanel()" name="vars[show_diagram_panel]" id="show_diagram_panel" value="show_diagram_panel" <?= $vars["show_diagram_panel"] ? 'checked' : '' ?>>
+        <label for="show_diagram_panel"><?= I18N::translate('Show saved diagrams panel') ?></label>
+    </div>
+</div>

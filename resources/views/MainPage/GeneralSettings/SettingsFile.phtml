@@ -1,0 +1,15 @@
+<?php
+
+use vendor\WebtreesModules\gvexport\MainPage;
+use Fisharebest\Webtrees\I18N;
+
+/**
+ * @var bool        $show_help              whether to show help icons
+ */
+?>
+
+<?= MainPage::addLabel('', 'Settings file', $show_help); ?>
+<div class="col-sm-8 wt-page-options-value">
+    <label for="load_settings"><?= I18N::translate('Load settings from file') ?></label><br>
+    <input id="load_settings" type="file" onchange="uploadSettingsFile(this)">
+</div>
