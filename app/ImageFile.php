@@ -24,11 +24,11 @@ class ImageFile
     /**
      *  Return the image path for including in diagram
      *
-     * @param numeric $quality      JPEG quality setting
+     * @param int $quality      JPEG quality setting
      * @param boolean $convert      whether to convert non-JPEGs to JPEG
      * @return string
      */
-    public function getImageLocation($quality, bool $convert): string
+    public function getImageLocation(int $quality, bool $convert): string
     {
         $filename = $this->mediaFile->filename();
         $full_media_path = Site::getPreference('INDEX_DIRECTORY') . $this->tree->getPreference('MEDIA_DIRECTORY') . $filename;
