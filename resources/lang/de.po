@@ -1110,7 +1110,7 @@ msgstr "<h4>Diagramm DPI</h4><p>Für Ausgaben in Formaten wie JPG und PNG erzeug
 
 #. One of the names of a new settings group under the Tile design section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/BIVXgbgOvNma3KB1dlsuu2oX.png
 #: 
-msgid "Shapes"
+msgid "Shape"
 msgstr "Formen"
 
 #. One of the names of a new settings group under the Tile design section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/BIVXgbgOvNma3KB1dlsuu2oX.png
