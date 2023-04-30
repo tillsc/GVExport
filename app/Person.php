@@ -150,10 +150,10 @@ class Person
         }
         $href = $this->dot->settings["add_links"] ? "TARGET=\"_blank\" HREF=\"" . Dot::convertToHTMLSC($link) . "\"" : "";
         // Get background colour
-        if ($this->dot->settings['bg_colour_type'] == Settings::OPTION_BACKGROUND_SEX_COLOUR) {
-            $indibgcolor = $this->dot->getGenderColour($i->sex(), $related);
-        } else if ($this->isStartingIndividual($pid) && $this->dot->settings['highlight_start_indis'] == "true" && !$this->valueInList($this->dot->settings['no_highlight_xref_list'], $pid)) {
+        if ($this->isStartingIndividual($pid) && $this->dot->settings['highlight_start_indis'] == "true" && !$this->valueInList($this->dot->settings['no_highlight_xref_list'], $pid)) {
             $indibgcolor = $this->dot->settings["highlight_col"];
+        } else if ($this->dot->settings['bg_colour_type'] == Settings::OPTION_BACKGROUND_SEX_COLOUR) {
+            $indibgcolor = $this->dot->getGenderColour($i->sex(), $related);
         } else {
             $indibgcolor = $this->dot->settings["indi_background_col"];
         }
