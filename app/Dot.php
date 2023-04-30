@@ -1,6 +1,6 @@
 <?php
 /**
- * DOT file generating functions for GraphViz module
+ * DOT file generating functions for Graphviz module
  *
  * Based on script made by Nick J <nickpj At The Host Called gmail.com> - http://nickj.org/
  *
