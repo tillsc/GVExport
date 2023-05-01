@@ -12,6 +12,9 @@ class Settings
     public const ID_ALL_SETTINGS = "_ALL_";
     public const GUEST_USER_ID = 0;
     private const ADMIN_PREFERENCE_NAME = "_admin_settings";
+    private const CONTEXT_USER = 0;
+    private const CONTEXT_ADMIN = 1;
+    private const CONTEXT_NAMED_SETTING = 10;
     public const PREFERENCE_PREFIX = "GVE";
     public const SETTINGS_LIST_PREFERENCE_NAME = "_id_list";
     public const SAVED_SETTINGS_LIST_PREFERENCE_NAME = "_shared_settings_list";
@@ -75,7 +78,7 @@ class Settings
             $loaded_settings = json_decode($loaded, true);
             if (json_last_error() === JSON_ERROR_NONE) {
                 foreach ($settings as $preference => $value) {
-                    if (self::shouldLoadSetting($preference, true)) {
+                    if (self::shouldLoadSetting($preference, self::CONTEXT_ADMIN)) {
                         if (isset($loaded_settings[$preference])) {
                             $pref = $loaded_settings[$preference];
                             if ($pref == 'true' || $pref == 'false') {
@@ -126,7 +129,8 @@ class Settings
                         $loaded_settings = json_decode($all_settings[$id]['settings'], true);
                         if (json_last_error() === JSON_ERROR_NONE) {
                             foreach ($settings as $preference => $value) {
-                                if (self::shouldLoadSetting($preference)) {
+                                $context = ($id == self::ID_MAIN_SETTINGS) ? self::CONTEXT_USER : self::CONTEXT_NAMED_SETTING;
+                                if (self::shouldLoadSetting($preference, $context)) {
                                     if (isset($loaded_settings[$preference])) {
                                         $pref = $loaded_settings[$preference];
                                         if ($pref == 'true' || $pref == 'false') {
@@ -167,7 +171,7 @@ class Settings
         $saveSettings = $this->defaultSettings;
         $s = [];
         foreach ($saveSettings as $preference=>$value) {
-            if (self::shouldSaveSetting($preference, true)) {
+            if (self::shouldSaveSetting($preference, Settings::CONTEXT_ADMIN)) {
                 if (isset($settings[$preference])) {
                     if (gettype($value) == 'boolean') {
                         $s[$preference] = ($settings[$preference] ? 'true' : 'false');
@@ -205,7 +209,8 @@ class Settings
         } else {
             $s = [];
             foreach ($settings as $preference => $value) {
-                if (self::shouldSaveSetting($preference)) {
+                $context = ($id == self::ID_MAIN_SETTINGS) ? self::CONTEXT_USER : self::CONTEXT_NAMED_SETTING;
+                if (self::shouldSaveSetting($preference, $context)) {
                     if (gettype($value) == 'boolean') {
                         $s[$preference] = ($value ? 'true' : 'false');
                     } else {
@@ -365,10 +370,10 @@ class Settings
      * Returns whether a setting shouldn't be saved to cookies/preferences
      *
      * @param string $preference
-     * @param bool $admin
+     * @param bool $context
      * @return bool
      */
-    public static function shouldSaveSetting(string $preference, bool $admin = false): bool
+    public static function shouldSaveSetting(string $preference, bool $context = self::CONTEXT_USER): bool
     {
         switch ($preference) {
             case 'graphviz_bin':
@@ -397,7 +402,9 @@ class Settings
             case 'mclimit':
             case 'birth_prefix':
             case 'death_prefix':
-                return $admin;
+                return $context == self::CONTEXT_ADMIN;
+            case 'show_diagram_panel':
+                return false; //$context != self::CONTEXT_NAMED_SETTING;
             default:
                 return true;
         }
@@ -407,12 +414,12 @@ class Settings
      * Currently an alias for shouldLoadSetting as the criteria are the same
      *
      * @param $setting
-     * @param bool $admin
+     * @param int $context
      * @return bool
      */
-    public static function shouldLoadSetting($setting, bool $admin = false): bool
+    public static function shouldLoadSetting($setting, int $context = self::CONTEXT_USER): bool
     {
-        return self::shouldSaveSetting($setting, $admin);
+        return self::shouldSaveSetting($setting, $context);
     }
 
     /**
