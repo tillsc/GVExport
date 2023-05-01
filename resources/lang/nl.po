@@ -1241,3 +1241,8 @@ msgstr "Hoog"
 msgid "Highest"
 msgstr "Hoogste"
 
+#. Label for colour picker, shown when you choose "Custom" in the border colour option:  https://s3.eu-west-1.amazonaws.com/po-pub/i/hSuaDbMqsm6pmK47oJ5B6o88.png
+#: 
+msgid "Custom border colour"
+msgstr "Aangepaste randkleur"
+
