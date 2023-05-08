@@ -3,6 +3,7 @@
 namespace vendor\WebtreesModules\gvexport;
 
 use Fisharebest\Webtrees\I18N;
+use Fisharebest\Webtrees\Individual;
 
 class Person
 {
@@ -75,12 +76,12 @@ class Person
     function printPersonLabel(string $pid, $related = TRUE): string
     {
         $out = "";
-        $bordercolor = $this->dot->settings["border_col"];    // Border color of the INDI's box
+        $border_colour = $this->dot->settings["border_col"];    // Border colour of the INDI's box
         $death_place = "";
         // Get the personal data
         if ($this->dot->settings["diagram_type"] == "combined" && (substr($pid, 0, 3) == "I_H" || substr($pid, 0, 3) == "I_W")) {
             // In case of dummy individual
-            $fill_color = $this->dot->getGenderColour('U', false);
+            $fill_colour = $this->dot->getGenderColour('U', false);
             $isdead = false;
             $death_date = "";
             $birthdate = "";
@@ -89,11 +90,11 @@ class Person
             $name = " ";
         } else {
             $i = $this->dot->getUpdatedPerson($pid);
-            $fill_color = $this->dot->getGenderColour($i->sex(), $related);        // Background color is set to specified
+            $fill_colour = $this->dot->getGenderColour($i->sex(), $related);        // Background colour is set to specified
             if ($this->dot->settings['border_colour_type'] == Settings::OPTION_BORDER_SEX_COLOUR) {
-                $bordercolor = $this->dot->getGenderColour($i->sex(), $related);
+                $border_colour = $this->dot->getGenderColour($i->sex(), $related);
             } else if ($this->dot->settings['border_colour_type'] == Settings::OPTION_BORDER_CUSTOM_COLOUR) {
-                $bordercolor = $this->dot->settings["indi_border_col"];
+                $border_colour = $this->dot->settings["indi_border_col"];
             }
             $isdead = $i->isDead();
             $link = $i->url();
@@ -151,18 +152,18 @@ class Person
         $href = $this->dot->settings["add_links"] ? "TARGET=\"_blank\" HREF=\"" . Dot::convertToHTMLSC($link) . "\"" : "";
         // Get background colour
         if ($this->isStartingIndividual($pid) && $this->dot->settings['highlight_start_indis'] == "true" && !$this->valueInList($this->dot->settings['no_highlight_xref_list'], $pid)) {
-            $indibgcolor = $this->dot->settings["highlight_col"];
+            $indi_bg_colour = $this->dot->settings["highlight_col"];
         } else if ($this->dot->settings['bg_colour_type'] == Settings::OPTION_BACKGROUND_SEX_COLOUR) {
-            $indibgcolor = $this->dot->getGenderColour($i->sex(), $related);
+            $indi_bg_colour = $this->dot->getGenderColour($i->sex(), $related);
         } else {
-            $indibgcolor = $this->dot->settings["indi_background_col"];
+            $indi_bg_colour = $this->dot->settings["indi_background_col"];
         }
         // Draw table
         if ($this->dot->settings["diagram_type"] == "combined") {
-            $out .= "<TABLE BORDER=\"0\" CELLBORDER=\"0\" CELLPADDING=\"2\" CELLSPACING=\"0\" BGCOLOR=\"" . $indibgcolor . "\" $href>";
+            $out .= "<TABLE BORDER=\"0\" CELLBORDER=\"0\" CELLPADDING=\"2\" CELLSPACING=\"0\" BGCOLOR=\"" . $indi_bg_colour . "\" $href>";
         } else {
             $style = ($this->dot->settings['indi_tile_shape'] == 10 ? 'STYLE="ROUNDED" ' : '');
-            $out .= "<TABLE " . $style . "COLOR=\"" . $bordercolor . "\" BORDER=\"1\" CELLBORDER=\"0\" CELLPADDING=\"2\" CELLSPACING=\"0\" BGCOLOR=\"" . $indibgcolor . "\" $href>";
+            $out .= "<TABLE " . $style . "COLOR=\"" . $border_colour . "\" BORDER=\"1\" CELLBORDER=\"0\" CELLPADDING=\"2\" CELLSPACING=\"0\" BGCOLOR=\"" . $indi_bg_colour . "\" $href>";
         }
         $birthData = " $birthdate " . (empty($birthplace) ? "" : "($birthplace)");
         $deathData = " $death_date " . (empty($death_place) ? "" : "($death_place)");
@@ -178,7 +179,7 @@ class Person
 
         if ($this->dot->settings['stripe_colour_type'] == Settings::OPTION_STRIPE_SEX_COLOUR) {
             // Top line of table (colour only)
-            $out .= "<TR><TD COLSPAN=\"2\" CELLPADDING=\"2\" BGCOLOR=\"$fill_color\" PORT=\"nam\" $size></TD></TR>";
+            $out .= "<TR><TD COLSPAN=\"2\" CELLPADDING=\"2\" BGCOLOR=\"$fill_colour\" PORT=\"nam\" $size></TD></TR>";
         }
 
         // Second row (photo, name, birth & death data)
@@ -365,20 +366,20 @@ class Person
     /**
      * Given an individual, return the sex of the individual in full
      *
-     * @param \Fisharebest\Webtrees\Individual|null $i
+     * @param Individual|null $i
      * @return string
      */
-    private function getSexFull(?\Fisharebest\Webtrees\Individual $i): string
+    private function getSexFull(?Individual $i): string
     {
         switch ($i->sex()) {
-            case "F":
-                return I18N::translate("Female");
-            case "M":
-                return I18N::translate("Male");
-            case "X":
-                return I18N::translate("Other");
-            case "U":
-                return I18N::translate("Unknown");
+            case 'F':
+                return I18N::translate('Female');
+            case 'M':
+                return I18N::translate('Male');
+            case 'X':
+                return I18N::translate('Other');
+            case 'U':
+                return I18N::translate('Unknown');
             default:
                 return "";
         }

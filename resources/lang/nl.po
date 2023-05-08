@@ -45,10 +45,6 @@ msgid "Siblings"
 msgstr "Broers en zussen"
 
 #: 
-msgid "Cousins"
-msgstr "Neven en nichten"
-
-#: 
 msgid "Include descendants"
 msgstr "Inclusief afstammelingen"
 
@@ -57,7 +53,7 @@ msgid "Max levels"
 msgstr "Max. niveaus"
 
 #: 
-msgid "Mark not blood-related people with different color"
+msgid "Mark not blood-related people with different colour"
 msgstr "Markeer niet-bloedverwante personen met andere kleur"
 
 #: 
@@ -65,11 +61,11 @@ msgid "Add URL to individuals and families"
 msgstr "URL toevoegen naar personen en gezinnen"
 
 #: 
-msgid "Show birth date"
+msgid "Show birthdate"
 msgstr "Toon geboortedatum"
 
 #: 
-msgid "Show birth place"
+msgid "Show birthplace"
 msgstr "Toon geboorteplaats"
 
 #: 
@@ -267,11 +263,11 @@ msgid "Typeface"
 msgstr "Lettertypegroep"
 
 #: 
-msgid "Font color for names"
+msgid "Font colour for names"
 msgstr "Tekstkleur voor namen"
 
 #: 
-msgid "Font color for details"
+msgid "Font colour for details"
 msgstr "Tekstkleur voor details"
 
 #. When you are no longer logged in, GVExport can't load the browser render until the page is refreshed. This message is shown before automatically reloading the page.
@@ -284,14 +280,9 @@ msgstr "Aanmelding is verlopen. De pagina wordt opnieuw geladen..."
 msgid "Relationship arrows"
 msgstr "Verwantschapspijlen"
 
-#. Label for setting the main arrow colour
-#: 
-msgid "Arrow color"
-msgstr "Pijlkleur"
-
 #. When enabled makes arrows from family to child different colours based on if the child is related to the family by birth or otherwise (e.g. adoption)
 #: 
-msgid "Show blood relationship in different color"
+msgid "Show blood relationship in different colour"
 msgstr "Toon bloedverwantschap in een andere kleur"
 
 #. Label for colour picker to select colour of arrow for children related by birth
@@ -426,20 +417,8 @@ msgstr "Niet-bloedverwante personen van onbekend geslacht"
 
 #. Option allowing user to change the background colour of individual tiles (decorated and combined modes)
 #: 
-msgid "Individual background color"
+msgid "Individual background colour"
 msgstr "Achtergrondkleur van personen"
-
-#. Section where user can change colours related to the tiles showing each individual:
-#. https://s3.eu-west-1.amazonaws.com/po-pub/i/tCBByut2gnWNyBHlbEjXM4wm.png
-#: 
-msgid "Tile colors"
-msgstr "Tegelkleur"
-
-#. Section where colours can be changed, where this is unrelated to other sections:
-#. https://s3.eu-west-1.amazonaws.com/po-pub/i/HkIwBd2gotM7LpP7LA074oOI.png
-#: 
-msgid "Other colours"
-msgstr "Andere kleuren"
 
 #. Option where user can change the background colour of the family record (ovals in simple/decorated mode, attached rectangle in combined mode). Default is a light yellow.
 #: 
@@ -484,7 +463,7 @@ msgstr "Standaardwaarden herstellen"
 #. 
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/eo7ytnyRCth5W2Sq76da71Ph.png
 #: 
-msgid "Show starting individuals in different color"
+msgid "Show starting individuals in different colour"
 msgstr "Toon startpersonen in andere kleur"
 
 #. Option to change the background colour for starting individuals, to help find them easier on the diagram:
@@ -492,7 +471,7 @@ msgstr "Toon startpersonen in andere kleur"
 #. 
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/eo7ytnyRCth5W2Sq76da71Ph.png
 #: 
-msgid "Starting individuals background color"
+msgid "Starting individuals background colour"
 msgstr "Achtergrondkleur startpersonen"
 
 #. Option to change font size. This affects (at the time of writing) all diagram text except for names which have their own setting:
@@ -522,20 +501,11 @@ msgstr "alleen browser, SVG en PDF"
 msgid "This is our starting point. Choose a person to base the diagram around. You might choose yourself.</p><p>You can choose as many starting individuals as you wish. A tree will be created for each starting individual based on the settings, then the trees are merged to create one tree for the diagram.</p><p>Click the X to remove a record from the list. If two or more records are listed, a &quot;Clear all&quot; option will appear to allow you to remove all records.</p><p>You can also click on an individual in this list to have the diagram in the browser scroll to that person.</p><p>When you next come to the page, the default individual or the last individual you were looking at in webtrees will be loaded. If there was just one saved individual then it will be replaced with the individual provided by webtrees on coming to the page. If there were multiple in the list, then the individual provided by webtrees will be added to the list (if not already in it). So be sure to double-check you are only including individuals you are looking for when first loading the page. This default behaviour can be changed with the option &quot;Treatment of source individuals&quot; in the advanced section."
 msgstr "Dit is ons startpunt. Kies een persoon om het diagram op te baseren. U kunt uzelf kiezen.</p><p>U kunt zoveel startpersonen kiezen als u wilt. Voor elke startpersoon wordt een boom gemaakt op basis van de instellingen, waarna de bomen worden samengevoegd tot één boom voor het diagram.</p><p>Klik op de X om een record uit de lijst te verwijderen. Als er twee of meer records in de lijst staan, verschijnt een optie \"Alles wissen\" waarmee alle records verwijderd kunnen worden.</p><p>U kunt ook op een persoon in deze lijst klikken om het diagram in de browser naar die persoon te laten scrollen.</p><p>Wanneer u de volgende keer op de pagina komt, wordt de standaardpersoon of de laatste persoon die u in webtrees hebt bekeken, geladen. Als er slechts één persoon was opgeslagen, wordt deze vervangen door de persoon die door webtrees is verstrekt wanneer u op de pagina komt. Als er meerdere personen in de lijst stonden, dan zal de persoon die door webtrees is geleverd aan de lijst worden toegevoegd (als die er nog niet in stond). Dus zorg ervoor dat u alleen peronen opneemt die u zoekt als de pagina voor het eerst wordt geladen. Dit standaardgedrag kan worden gewijzigd met de optie \"Behandeling van startpersonen\" in het geavanceerde gedeelte."
 
-#. This help message is displayed when the user clicks the help icon next to "Include ancestors".  https://s3.eu-west-1.amazonaws.com/po-pub/i/UoTrlDpngydDdWmJPau99ZV4.png
-#: 
-msgid "Tick this option to include ancestors of your starting person(s) and anyone in the tree.</p><h4>Max levels</h4><p>The number of generations of ancestors to include. For example, if you chose yourself as your starting person, you may want the diagram to include relatives back to your great-grandparents. In this case, you would type \"3\" in this box, to include your parents' generation, your grandparents' generation, and your great-grandparents' generation."
-msgstr "Vink deze optie aan om voorouders op te nemen van de startperso(o)n(en) en iedereen in de boom.</p><h4>Max niveaus</h4><p>Het aantal generaties voorouders dat moet worden opgenomen. Als u bijvoorbeeld uzelf als startpersoon hebt gekozen, wilt u misschien dat het diagram ook familieleden bevat die teruggaan tot uw overgrootouders. In dat geval typt u \"3\" in dit vak, om de generatie van uw ouders, uw grootouders en uw overgrootouders op te nemen."
-
 #. This help message is displayed when the user clicks the help icon next to "Include".  https://s3.eu-west-1.amazonaws.com/po-pub/i/G2LwgKcPjaAwzcCXllEaXa13.png
 #: 
-msgid "This section includes options that let you decide how to build the tree from your starting individual(s).</p><b>Include ancestors</b><p>Tick this option to include ancestors of your starting individual(s) and anyone in the tree.</p><b>Include descendants</b><p>Whether to include children, grandchildren, etc. of people listed in the tree.</p><b>Max levels</b><p>The number of generations of ancestors to include. For example, if you chose yourself as your starting person, you may want the diagram to include relatives back to your great-grandparents. In this case, you would type &quot;3&quot; in the Max levels box under Include ancestors, to include your parents' generation, your grandparents' generation, and your great-grandparents' generation.</p><h5>Relation types to include</h5><p>The type of relatives to include when generating the diagram.</p><b>Siblings</b><p>Include brothers and sisters of anyone in the tree.</p><b>All relations</b><p>Include cousins, nieces, nephews, and their descendants when generating the tree. Requires &quot;Siblings&quot; to be selected.</p><b>Partners</b><p>Include the husbands, wives, and partners of those in the tree even if they aren't blood-relatives. There is another option &quot;Mark not blood-related people with different color&quot; that allows these people to be marked in a different colour.</p><b>Anyone</b><p>Follow all links regardless of whether the person is related. In practice, this generally means that the family of non-relatives (i.e. spouses) are included in the tree.</p><p>Use this option to include all records of the selected generations. Note that only records with a link are included, so you may need to include more ancestor or descendant generations (or more starting individuals) to get all your records to show."
+#, fuzzy
+msgid "This section includes options that let you decide how to build the tree from your starting individual(s).</p><b>Include ancestors</b><p>Tick this option to include ancestors of your starting individual(s) and anyone in the tree.</p><b>Max levels</b><p>The number of generations of ancestors to include. For example, if you chose yourself as your starting person, you may want the diagram to include relatives back to your great-grandparents. In this case, you would type &quot;3&quot; in the Max levels box under Include ancestors, to include your parents' generation, your grandparents' generation, and your great-grandparents' generation.</p><b>Include descendants</b><p>Whether to include children, grandchildren, etc. of people listed in the tree.</p><h4>Relation types to include</h4><p>The type of relatives to include when generating the diagram.</p><b>Siblings</b><p>Include brothers and sisters of anyone in the tree.</p><b>All relations</b><p>Include cousins, nieces, nephews, and their descendants when generating the tree. Requires &quot;Siblings&quot; to be selected.</p><b>Partners</b><p>Include the husbands, wives, and partners of those in the tree even if they aren't blood-relatives. There is another option &quot;Mark not blood-related people with different color&quot; that allows these people to be marked in a different colour.</p><b>Anyone</b><p>Follow all links regardless of whether the person is related. In practice, this generally means that the family of non-relatives (i.e. spouses) are included in the tree.</p><p>Use this option to include all records of the selected generations. Note that only records with a link are included, so you may need to include more ancestor or descendant generations (or more starting individuals) to get all your records to show."
 msgstr "Dit deel bevat opties waarmee u kunt beslissen hoe de boom moet worden opgebouwd vanuit uw startpersoon/personen).</p><b>Inclusief voorouders</b><p>Vink deze optie aan om de voorouders van uw starpersoon/personen en iedereen in de boom op te nemen.</p><b>Inclusief afstammelingen</b><p>Of u kinderen, kleinkinderen, enz. van personen in de boom wilt opnemen.</p><b>Max. niveaus</b><p>Het aantal generaties voorouders dat moet worden opgenomen. Als U bijvoorbeeld uzelf als startpersoon kiest, kan het zijn dat u wilt dat het diagram ook familieleden bevat die teruggaan tot uw overgrootouders. In dat geval typt u \"3\" in het vak Max. niveaus onder Inclusief voorouders, om de generatie van uw ouders, uw grootouders en uw overgrootouders op te nemen.</p><h5>Op te nemen relatietypes</h5><p>Het type verwanten dat moet worden opgenomen bij het genereren van het diagram</p><b>Broers en zussen</b><p>Inclusief broers en zussen van iedereen in de boom.</p><b>Alle relaties</b><p>Inclusief neven en nichten en hun nakomelingen bij het genereren van de boom. Vereist dat \"Broers en zussen\" is geselecteerd.</p><b>Partners</b><p>Inclusief de echtgenoten, echtgenotes en partners van degenen in de boom, zelfs als ze geen bloedverwanten zijn. Er is een andere optie \"Markeer niet-bloedverwante personen met andere kleur\" waarmee deze personen in een andere kleur kunnen worden gemarkeerd.</p><b>Iedereen</b><p>Volg alle koppelingen, ongeacht of de persoon verwant is. In de praktijk betekent dit meestal dat de familie van niet-verwanten (zoals echtgenoten) in de boom wordt opgenomen.</p><p>Gebruik deze optie om alle records van de geselecteerde generaties op te nemen. Merk op dat alleen records met een koppeling worden opgenomen, dus het is mogelijk dat u meer voorouder- of nakomelingengeneraties (of meer startpersonen) moet opnemen om alle records te tonen."
-
-#. This help message is displayed when the user clicks the help icon next to "Include descendants".  https://s3.eu-west-1.amazonaws.com/po-pub/i/TNXFdoP4fIHVQnScVvnfvKA1.png
-#: 
-msgid "Whether to include children, grandchildren, etc. of people listed in the tree.</p><h4>Max levels</h4><p>The number of generations of descendants to include. For example, if you chose yourself as your starting person, you may want the diagram to include descendants down to your great-grandchildren. In this case, you would type \"3\" in this box, to include your children and others of their generation, your grandchildren, and your great-grandchildren's generation."
-msgstr "Of kinderen, kleinkinderen, enz. van personen in de boom moeten worden opgenomen.</p><h4>Max niveaus</h4><p>Het aantal generaties nakomelingen dat moet worden opgenomen. Als u bijvoorbeeld uzelf als startpersoon hebt gekozen, wilt u misschien dat het diagram ook de nakomelingen tot aan uw achterkleinkinderen bevat. In dat geval typt u \"3\" in dit vak, om uw kinderen en anderen van hun generatie, uw kleinkinderen en de generatie van uw achterkleinkinderen op te nemen."
 
 #. This help message is displayed when the user clicks the help icon next to "Graph direction". https://s3.eu-west-1.amazonaws.com/po-pub/i/MpbVhXyRxeLgMO8FZVXHZhHG.png
 #: 
@@ -594,91 +564,6 @@ msgstr "Als de module één van deze personen bereikt, laat de boom vanaf daar d
 #: 
 msgid "This section has two related options.<h4>Mark not blood-related people with different color</h4><p>Where spouses are included and are not blood-related to anyone in the &quot;Include anyone related to&quot; field, if this option is selected they will be highlighted in a much duller color than the standard blue/pink for relatives.</p><p>Note that when this option is selected, and non-relatives are found in the selected records, then a full tree scan is performed to identify if an individual is related by a more distant link (see next option).</p><h4>Ignore unseen links to speed up relative check</h4><p>This option is only available when the previous option is selected. When the option to display non-relatives in a different colour is selected, normally a scan is performed starting from the starting individuals and branching to all relatives regardless of display settings. This ensures that if a person is related via a link not displayed, they will still show as related.</p><p>Enabling this option prevents the full scan of the tree which can greatly speed up the generation of the diagram on larger trees, but may reduce accuracy of the colouring of non-relatives."
 msgstr "Deze sectie heeft twee gerelateerde opties.<h4>Markeer niet-bloedverwanten met een andere kleur</h4><p>Wanneer partners worden opgenomen die geen bloedverwant zijn van iemand in het veld \"Inclusief iedereen die verwant is met\", worden zij, als deze optie is geselecteerd, gemarkeerd in een veel saaiere kleur dan de standaardkleur blauw/roze voor verwanten.</p><p>Wanneer deze optie is geselecteerd en in de geselecteerde records niet-verwanten worden gevonden, wordt een volledige boomscan uitgevoerd om na te gaan of een persoon verwant is via een verder verwijderde koppeling (zie de volgende optie).</p><h4>Negeer niet-zichtbare koppelingen om de verwantschapscontrole te versnellen</h4><p>Deze optie is alleen beschikbaar wanneer de vorige optie is geselecteerd. Als de optie om niet-verwanten in een andere kleur weer te geven is geselecteerd, wordt normaal gesproken een scan uitgevoerd beginnend bij de startpersonen en vertakkend naar alle verwanten, ongeacht de weergave-instellingen. Dit zorgt ervoor dat als een persoon verwant is via een koppeling die niet wordt weergegeven, deze toch als verwant wordt weergegeven.</p><p>Inschakelen van deze optie voorkomt het volledig scannen van de boom, wat het genereren van het diagram bij grotere stambomen aanzienlijk kan versnellen, maar de nauwkeurigheid van de kleuring van niet-verwanten kan verminderen."
-
-#. Help text shown when user clicks the "i" next to "Show photos" in the advanced appearance section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/Xpn8Y8LiWnYphmjJe9eJO6ub.png
-#: 
-msgid "This section contains the option to display the photo from the individual's page in the tree.</p><p>The \"Photo shape\" option allows you to select a shape for the photos. Photos will be cropped to fit this shape.</p><p>The \"Photo size\" option allows you to adjust the scale of the photo. 100&percnt; is the default, and you can increase this to make the photos bigger, or decrease it to make them smaller."
-msgstr "Deze sectie bevat de optie om de foto van de persoonspagina in de boom te tonen.</p><p>Met de optie \"Fotovorm\" kunt u een vorm voor de foto's kiezen. De foto's worden bijgesneden om in deze vorm te passen.</p><p>Met de optie \"Fotogrootte\" kunt u de schaal van de foto aanpassen. 100&percnt; is de standaardinstelling, en u kunt deze verhogen om de foto's groter te maken, of verlagen om ze kleiner te maken."
-
-#. Help text shown when user clicks the "i" next to "Abbreviated names":   https://s3.eu-west-1.amazonaws.com/po-pub/i/rIQKFYaokaQndqxKRMkSoZDA.png
-#: 
-msgid "There are several options to shorten the names of individuals displayed.</p><h4>Full name</h4><p>The default option, this shows the primary name and any nickname. This option currently is the only one where the preferred name is underlined, and is the only one to show nicknames (in \\\"quotes\\\").<h4>Given and surnames</h4><p>Like the full name, but without nicknames.</p><h4>Given names</h4><p>Just the given names are displayed.<h4>First given names only</h4><p>Just the first word of the name in the given names field.</p><h4>Surnames</h4><p>Just the surnames are displayed.</p><h4>Initials only</h4><p>This displays initials only, for example \\\"JFK\\\".</p><h4>Given name initials and Surname</h4><p>This shows initials for the first and second given name, as well as the full surname. For example: \\\"J.F. Kennedy\\\"</p><h4>Don't show names</h4><p>No names are shown. If birth and death details are also disabled then it is possible to show only photos or even just coloured boxes."
-msgstr "Er zijn verschillende opties om de namen van personen in te korten.</p><h4>Volledige naam</h4><p>De standaardoptie, deze toont de voornaam en een eventuele roepnaam. Deze optie is momenteel de enige waarbij de voorkeursnaam wordt onderstreept, en de enige waarbij roepnamen worden getoond (in \"citaten\").<h4>Voor- en achternamen</h4><p>Net als de volledige naam, maar zonder roepnamen.</p><h4>Voornamen</h4><p>Alleen de voornamen worden getoond. <h4>Alleen de eerste voornaam</h4><p>Alleen het eerste woord van de naam in het veld voornamen.</p><h4>Voornamen</h4><p>Alleen de achternamen worden weergegeven.</p><h4>Alleen initialen</h4><p>Hiermee worden alleen de initialen weergegeven, bijvoorbeeld \\\"JFK\\\".</p><h4>Initialen voor de voornaam en achternaam</h4><p>Hiermee worden de initialen voor de eerste en tweede voornaam weergegeven, evenals de volledige achternaam. Bijvoorbeeld: \\\"J.F. Kennedy\\\"</p><h4>Namen niet tonen</h4><p>Er worden geen namen getoond. Als ook geboorte- en overlijdensgegevens worden uitgeschakeld, is het mogelijk om alleen foto's of zelfs alleen gekleurde vakjes te tonen."
-
-#. Help text shown when user clicks the "i" next to "Abbreviate place names":  https://s3.eu-west-1.amazonaws.com/po-pub/i/Ek3gve1dtOPTm63m5WeKiEjl.png
-#: 
-msgid "There are several options to shorten place names (for place of birth, place of marriage, place of death).</p><h4>Full place name</h4><p>The place name is printed in full.</p><h4>City and Country</h4><p>The first and last section of the place name is used, using commas to split the sections. For example, \\\"London, England, United Kingdom\\\" would be shortened to \\\"London, United Kingdom\\\"</p><h4>City and 2 Letter ISO Country Code</h4><p>The first and last section of the place name is used, using commas to split the sections. The country is then converted to the ISO3166-1-Alpha-2 country code.</p><p>For example, \\\"Calgary, Alberta, Canada\\\" would be shortened to \\\"Calgary, CA\\\"</p><h4>City and 3 Letter ISO Country Code</h4><p>The first and last section of the place name is used, using commas to split the sections. The country is then converted to the ISO3166-1-Alpha-3 country code.</p><p>For example, \\\"Calgary, Alberta, Canada\\\" would be shortened to \\\"Calgary, CAN\\\"<h4>Note</h4><p>The CLDR display name is used for matching. The data comes from <a href=\\\"https://www.datahub.io/core/country-codes\\\" class=\\\"help-link\\\">Datahub</a> but has been modified as for example the original CLDR name for the United Kingdom is \\\"UK\\\", and the original CLDR name for the United States is \\\"US\\\". Matching against these countries for the purposes of abbreviation is therefore pointless. So changes have been made to make this work better. Please <a href=\\\"https://github.com/Neriderc/GVExport/issues/new\\\" class=\\\"help-link\\\">open an issue</a> on GitHub if you find a country is not abbreviating correctly."
-msgstr "Er zijn verschillende mogelijkheden om plaatsnamen in te korten (voor geboorteplaats, huwelijksplaats, overlijdensplaats).</p><h4>Volledige plaatsnaam</h4><p>De plaatsnaam wordt volledig afgedrukt.</p><h4>Plaats en land</h4><p>Het eerste en laatste deel van de plaatsnaam wordt gebruikt, met komma's om de delen te splitsen. Bijvoorbeeld: \\\"Londen, Engeland, Verenigd Koninkrijk\\\" wordt afgekort tot \\\"Londen, Verenigd Koninkrijk\\\" </p><h4>Plaats en tweeletterige ISO-landcode</h4><p>Het eerste en laatste deel van de plaatsnaam worden gebruikt, met komma's als scheiding tussen de delen. Het land wordt dan omgezet in de ISO3166-1-Alpha-2-landcode.</p><p>Voorbeeld: \\\"Calgary, Alberta, Canada\\\" wordt afgekort tot \\\"Calgary, CA\\\"</p><h4>Plaats en 3-letterige ISO-landcode</h4><p>Het eerste en laatste deel van de plaatsnaam word gebruikt, waarbij de delen worden gescheiden door komma's. Het land wordt vervolgens omgezet in de ISO3166-1-Alpha-3-landcode.</p><p>Voorbeeld: \\\"Calgary, Alberta, Canada\\\" wordt afgekort tot \\\"Calgary, CAN\\\"<h4>Noot</h4><p>De CLDR-weergavenaam wordt gebruikt voor het vergelijken van namen. De gegevens zijn afkomstig van <a href=\\\"https://www.datahub.io/core/country-codes\\\" class=\\\"help-link\\\">Datahub</a> maar zijn gewijzigd, omdat bijvoorbeeld de oorspronkelijke CLDR-naam voor het Verenigd Koninkrijk \\\"UK\\\" is, en de oorspronkelijke CLDR-naam voor de Verenigde Staten \\\"US\\\". Vergelijken met deze landen voor het afkorten is daarom zinloos. Er zijn daarom wijzigingen aangebracht om dit beter te laten werken. <a href=\\\"https://github.com/Neriderc/GVExport/issues/new\\\" class=\\\"help-link\\\">Open een probleem</a> op GitHub als je vindt dat een land niet correct wordt afgekort."
-
-#. Help text shown when user clicks the "i" next to "Show individual XREF":   https://s3.eu-west-1.amazonaws.com/po-pub/i/z0ydquyzpwfL2pZbkf4ZsjXv.png
-#: 
-msgid "Whether to include the XREF of individuals in the diagram."
-msgstr "Of de XREF van personen in het diagram moet worden opgenomen."
-
-#. Help text shown when user clicks the "i" next to "Show birth date":  https://s3.eu-west-1.amazonaws.com/po-pub/i/K0f3sazuGOU8Bc4k816wfldH.png
-#: 
-msgid "Check the box if you would like to include the birthdate of individuals in the output.</p><p>You can also choose whether to show the full date of birth or just the year."
-msgstr "Vink het vakje aan als u de geboortedatum van personen in de uitvoer wilt opnemen.</p><p>U kunt ook kiezen of u de volledige geboortedatum of alleen het jaartal wilt weergeven."
-
-#. Help text shown when user clicks the "i" next to "Show birth place":    https://s3.eu-west-1.amazonaws.com/po-pub/i/f0NMn7pmbDd8EmGi9s3Ps4Sm.png
-#: 
-msgid "Whether to show the place of birth in the output. Also see option for abbreviating place names."
-msgstr "Of de geboorteplaats in de uitvoer moet worden getoond. Zie ook de optie voor het afkorten van plaatsnamen."
-
-#. Help text shown when user clicks the "i" next to "Show death date":     https://s3.eu-west-1.amazonaws.com/po-pub/i/fNNY3AothlpEk6RVHwu18jBq.png
-#: 
-msgid "Check the box if you would like to include the death date of individuals in the output.</p><p>You can also choose whether to show the full date of death or just the year."
-msgstr "Vink het vakje aan als u de overlijdensdatum van personen in de uitvoer wilt opnemen.</p><p>U kunt ook kiezen of u de volledige overlijdensdatum of alleen het jaartal wilt weergeven."
-
-#. Help text shown when user clicks the "i" next to "Show death place":     https://s3.eu-west-1.amazonaws.com/po-pub/i/zwFpvOQOHvWtGCscz5jgN1LV.png
-#: 
-msgid "Whether to show the place of death in the output. Also see option for abbreviating place names."
-msgstr "Of de overlijdensplaats in de uitvoer moet worden getoond. Zie ook de optie voor het afkorten van plaatsnamen."
-
-#. Help text shown when user clicks the "i" next to "Show family XREF":     https://s3.eu-west-1.amazonaws.com/po-pub/i/pUSNfbB0jvF2zxYRn8wQCCQ8.png
-#: 
-msgid "Whether to include the XREF of families in the output."
-msgstr "Of de XREF van gezinnen in de uitvoer moet worden opgenomen."
-
-#. Help text shown when user clicks the "i" next to "Show marriage date":      https://s3.eu-west-1.amazonaws.com/po-pub/i/WcVSfrpda3aaoTR6k8TKg4CC.png
-#: 
-msgid "Check the box if you would like to include the date of marriage in the output.</p><p>You can also choose whether to show the full date of marriage or just the year."
-msgstr "Vink het vakje aan als u de huwelijksdatum in de uitvoer wilt opnemen.</p><p>U kunt ook kiezen of u de volledige huwelijksdatum of alleen het jaartal wilt weergeven."
-
-#. Help text shown when user clicks the "i" next to "Show marriage place":      https://s3.eu-west-1.amazonaws.com/po-pub/i/jYVeBKSFMcZhilwfeHgbyWqH.png
-#: 
-msgid "Whether to show the place of marriage in the output. Also see option for abbreviating place names."
-msgstr "Of de huwelijksplaats in de uitvoer moet worden getoond. Zie ook de optie voor het afkorten van plaatsnamen."
-
-#. Help text shown when user clicks the "i" next to "DPI":      https://s3.eu-west-1.amazonaws.com/po-pub/i/40xFZyQ8fdzDhsLDzvifNDAr.png
-#: 
-msgid "For output such as JPG and PNG, this setting will product higher quality output when it is larger, but will also increase the file size. Smaller values will produce smaller files, but the quality will be worse and if the value is too low you may not be able to read text."
-msgstr "Voor uitvoer zoals JPG en PNG zal deze instelling uitvoer van hogere kwaliteit opleveren wanneer deze groter is, maar ook de bestandsgrootte vergroten. Kleinere waarden zullen kleinere bestanden opleveren, maar de kwaliteit zal slechter zijn en als de waarde te laag is, is het mogelijk dat u geen tekst kunt lezen."
-
-#. Help text shown when user clicks the "i" next to "Space":  https://s3.eu-west-1.amazonaws.com/po-pub/i/hEJcjkJ8xvGsTPoHjq5nT8L6.png
-#: 
-msgid "These options affect the distance between nodes on the diagram.</p><h4>Between generations</h4><p>How close you want generations on the output. For example, for left to right output, smaller numbers will bring the columns of individuals closer together, while larger numbers would push them further apart.</p><h4>Between individuals on the same level</h4><p>How close you want the individuals of the same generation on the output. For example, for left to right output, smaller numbers will mean less space vertically between the boxes, while larger numbers would push them further apart."
-msgstr "Deze opties beïnvloeden de afstand tussen knooppunten in het diagram.</p><h4>Tussen generaties</h4><p>Hoe dicht u de generaties bij elkaar wilt hebben in de uitvoer. Bijvoorbeeld, voor uitvoer van links naar rechts brengen kleinere getallen de kolommen met personen dichter bij elkaar, terwijl grotere getallen ze verder uit elkaar duwen.</p><h4>Tussen personen op hetzelfde niveau</h4><p>Hoe dicht u de personen van dezelfde generatie bij elkaar wilt hebben op de uitvoer. Voor uitvoer van links naar rechts betekenen kleinere getallen bijvoorbeeld dat er verticaal minder ruimte is tussen de vakken, terwijl grotere getallen ze verder uit elkaar duwen."
-
-#. Help text shown when user clicks the "i" next to "Font":  https://s3.eu-west-1.amazonaws.com/po-pub/i/SMqr3gHBplFqJ4C0yRnFBpkp.png
-#: 
-msgid "This section lets you configure the typeface and colour of text.</p><h4>Typeface</h4><p>This list lets you pick from a number of known websafe font typefaces. They must be installed on the system or a fallback typeface will be used. These options are known to be installed on almost all systems and that is why they have been chosen.</p><h4>Font size for names</h4><p>Set the font point size for the names of individuals.</p><h4>Font size for details</h4><p>This changes the font point size for all text except for names. For example, the date and place of marriage, and the date and place of birth and death.</p><h4>Font colour for names</h4><p>This changes the colour of the font for names. Note that the colour picker is provided by your browser, and is handled differently depending on which browser you are using.</p><h4>Font colour for details</h4><p>This changes the colour of the font of all text except for names, for example, the date and place of marriage, and the date and place of birth and death. Note that the colour picker is provided by your browser, and is handled differently depending on which browser you are using."
-msgstr "In dit gedeelte kunt u het lettertype en de kleur van de tekst configureren.</p><h4>Lettertypegroep</h4><p>In deze lijst kunt u kiezen uit een aantal bekende webveilige lettertypegroepen. Ze moeten geïnstalleerd zijn op het systeem of er wordt een terugvallettertypegroep gebruikt. Het is bekend dat deze opties op bijna alle systemen zijn geïnstalleerd en daarom zijn ze gekozen.</p><h4>Lettergrootte voor namen</h4><p>Stel de lettergrootte in voor de namen van personen.</p><h4>Lettergrootte voor details</h4><p>Hiermee wordt de lettergrootte voor alle tekst gewijzigd, behalve voor namen. Bijvoorbeeld de datum en plaats van het huwelijk en de datum en plaats van geboorte en overlijden.</p><h4>Letterkleur voor namen</h4><p>Hiermee wordt de kleur van het lettertype voor namen gewijzigd. Houd er rekening mee dat de kleurkiezer wordt geleverd door uw browser en anders wordt behandeld, afhankelijk van de browser die u gebruikt.</p><h4>Letterkleur voor details</h4><p>Hiermee wordt de kleur van het lettertype gewijzigd voor alle tekst behalve namen, bijvoorbeeld de datum en plaats van geboorte, huwelijk en overlijden. Houd er rekening mee dat de kleurkiezer wordt geleverd door uw browser en anders wordt behandeld, afhankelijk van de browser die u gebruikt."
-
-#. Help text shown when user clicks the "i" next to "Relationship arrows":  https://s3.eu-west-1.amazonaws.com/po-pub/i/49vIt5p3NoEIm5t9CgmVtYt6.png
-#: 
-msgid "This section lets you customise the arrows that link records together.</p><h4>Arrow colour</h4><p>This is the main colour for arrows. This is used for all arrows if the next option is disabled, otherwise it is used for arrows from a spouse to the family record.</p><h4>Show blood relationship in a different colour</h4><p>If this option is selected, the relationship arrows between a family record and children will use different colours depending on if the relationship is by birth, or a different type of relationship (e.g. adoption). If this is disabled, all relationship arrows use the above default colour.</p><ul><li>Related by birth - If the above option is enabled, this sets the colour of arrows from a family record to a child that is related by birth.<li>Related other than by birth - If the above option is enabled, this sets the colour of arrows from a family record to a child that is not related by birth (e.g. foster or adopted)."
-msgstr "In dit gedeelte kunt u de pijlen aanpassen die records met elkaar verbinden.</p><h4>Pijlkleur</h4><p>Dit is de hoofdkleur voor pijlen. Dit wordt gebruikt voor alle pijlen als de volgende optie is uitgeschakeld, anders wordt het gebruikt voor pijlen van een partner naar het gezinsrecord.</p><h4>Toon bloedverwantschap in een andere kleur</h4><p>Als deze optie is geselecteerd, zullen de verwantschapspijlen tussen een gezinsrecord en kinderen verschillende kleuren gebruiken, afhankelijk van of de relatie door geboorte is, of een ander type relatie (bijvoorbeeld adoptie). Als dit is uitgeschakeld, gebruiken alle verwantschapspijlen de bovenstaande standaardkleur.</p><ul><li>Verwant door geboorte - Als de bovenstaande optie is ingeschakeld, stelt dit de kleur in van de pijlen van een gezinsrecord naar een kind dat verwant is door geboorte.<li>Verwant anders dan door geboorte - Als de bovenstaande optie is ingeschakeld, stelt dit de kleur in van de pijlen van een gezinsrecord naar een kind dat geen verwant is door geboorte (bijvoorbeeld pleegkind of adoptiekind)."
-
-#. Help text shown when user clicks the "i" next to "Tile colours":  https://s3.eu-west-1.amazonaws.com/po-pub/i/gzXTu0XdLd6V1GhSjjDRbXoj.png
-#: 
-msgid "This section allows you to change the colours of the different parts of the tiles shown for each individual. Click the coloured box to change the colour. This uses your browser's colour picker, so will look different depending on what browser you are using."
-msgstr "In dit gedeelte kunt u de kleuren van de verschillende onderdelen van de tegels die voor elke persoon worden getoond, wijzigen. Klik op het gekleurde vakje om de kleur te veranderen. Dit gebruikt de kleurenkiezer van uw browser, dus zal het er anders uitzien afhankelijk van de browser die u gebruikt."
-
-#. Help text shown when user clicks the "i" next to "Other colours":  https://s3.eu-west-1.amazonaws.com/po-pub/i/LrHottxOgQWJC1752fcbOh36.png
-#: 
-msgid "This section allows you to change colours associated with the diagram that are not part of the individual tile above. Click the coloured box to change the colour. This uses your browser's colour picker, so will look different depending on what browser you are using."
-msgstr "In dit gedeelte kunt u kleuren veranderen die bij het diagram horen maar die geen deel uitmaken van de persoonstegel hierboven. Klik op het gekleurde vakje om de kleur te veranderen. Dit gebruikt de kleurenkiezer van uw browser, dus zal het er anders uitzien afhankelijk van de browser die u gebruikt."
 
 #. "Output settings" was renamed to "File settings".
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/zY6fWYDbmG93zn0ODfvgtr3y.png

@@ -48,10 +48,6 @@ msgid "Siblings"
 msgstr "Søsken"
 
 #: 
-msgid "Cousins"
-msgstr "Søskenbarn"
-
-#: 
 #, fuzzy
 msgid "Include descendants"
 msgstr "Inkluder etterkommere"
@@ -62,7 +58,7 @@ msgid "Max levels"
 msgstr "Maks nivåer"
 
 #: 
-msgid "Mark not blood-related people with different color"
+msgid "Mark not blood-related people with different colour"
 msgstr "Merk ikke blodrelaterte personer med ulik farge"
 
 #: 
@@ -71,12 +67,12 @@ msgstr "Legg til URL til enkeltpersoner og familier"
 
 #: 
 #, fuzzy
-msgid "Show birth date"
+msgid "Show birthdate"
 msgstr "Vis fødselsdato"
 
 #: 
 #, fuzzy
-msgid "Show birth place"
+msgid "Show birthplace"
 msgstr "Vis fødested"
 
 #: 
@@ -231,7 +227,7 @@ msgstr "Vis individuell ID"
 #: 
 #, fuzzy
 msgid "Options limited as Graphviz not installed on server"
-msgstr "Alternativer begrenset da GraphViz ikke er installert på serveren"
+msgstr "Alternativer begrenset da Graphviz ikke er installert på serveren"
 
 #: 
 msgid "Anyone"
@@ -294,11 +290,11 @@ msgid "Typeface"
 msgstr ""
 
 #: 
-msgid "Font color for names"
+msgid "Font colour for names"
 msgstr ""
 
 #: 
-msgid "Font color for details"
+msgid "Font colour for details"
 msgstr ""
 
 #. When you are no longer logged in, GVExport can't load the browser render until the page is refreshed. This message is shown before automatically reloading the page.
@@ -311,14 +307,9 @@ msgstr ""
 msgid "Relationship arrows"
 msgstr ""
 
-#. Label for setting the main arrow colour
-#: 
-msgid "Arrow color"
-msgstr ""
-
 #. When enabled makes arrows from family to child different colours based on if the child is related to the family by birth or otherwise (e.g. adoption)
 #: 
-msgid "Show blood relationship in different color"
+msgid "Show blood relationship in different colour"
 msgstr ""
 
 #. Label for colour picker to select colour of arrow for children related by birth
@@ -453,19 +444,7 @@ msgstr ""
 
 #. Option allowing user to change the background colour of individual tiles (decorated and combined modes)
 #: 
-msgid "Individual background color"
-msgstr ""
-
-#. Section where user can change colours related to the tiles showing each individual:
-#. https://s3.eu-west-1.amazonaws.com/po-pub/i/tCBByut2gnWNyBHlbEjXM4wm.png
-#: 
-msgid "Tile colors"
-msgstr ""
-
-#. Section where colours can be changed, where this is unrelated to other sections:
-#. https://s3.eu-west-1.amazonaws.com/po-pub/i/HkIwBd2gotM7LpP7LA074oOI.png
-#: 
-msgid "Other colours"
+msgid "Individual background colour"
 msgstr ""
 
 #. Option where user can change the background colour of the family record (ovals in simple/decorated mode, attached rectangle in combined mode). Default is a light yellow.
@@ -511,7 +490,7 @@ msgstr ""
 #. 
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/eo7ytnyRCth5W2Sq76da71Ph.png
 #: 
-msgid "Show starting individuals in different color"
+msgid "Show starting individuals in different colour"
 msgstr ""
 
 #. Option to change the background colour for starting individuals, to help find them easier on the diagram:
@@ -519,7 +498,7 @@ msgstr ""
 #. 
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/eo7ytnyRCth5W2Sq76da71Ph.png
 #: 
-msgid "Starting individuals background color"
+msgid "Starting individuals background colour"
 msgstr ""
 
 #. Option to change font size. This affects (at the time of writing) all diagram text except for names which have their own setting:
@@ -549,19 +528,9 @@ msgstr ""
 msgid "This is our starting point. Choose a person to base the diagram around. You might choose yourself.</p><p>You can choose as many starting individuals as you wish. A tree will be created for each starting individual based on the settings, then the trees are merged to create one tree for the diagram.</p><p>Click the X to remove a record from the list. If two or more records are listed, a &quot;Clear all&quot; option will appear to allow you to remove all records.</p><p>You can also click on an individual in this list to have the diagram in the browser scroll to that person.</p><p>When you next come to the page, the default individual or the last individual you were looking at in webtrees will be loaded. If there was just one saved individual then it will be replaced with the individual provided by webtrees on coming to the page. If there were multiple in the list, then the individual provided by webtrees will be added to the list (if not already in it). So be sure to double-check you are only including individuals you are looking for when first loading the page. This default behaviour can be changed with the option &quot;Treatment of source individuals&quot; in the advanced section."
 msgstr ""
 
-#. This help message is displayed when the user clicks the help icon next to "Include ancestors".  https://s3.eu-west-1.amazonaws.com/po-pub/i/UoTrlDpngydDdWmJPau99ZV4.png
-#: 
-msgid "Tick this option to include ancestors of your starting person(s) and anyone in the tree.</p><h4>Max levels</h4><p>The number of generations of ancestors to include. For example, if you chose yourself as your starting person, you may want the diagram to include relatives back to your great-grandparents. In this case, you would type \"3\" in this box, to include your parents' generation, your grandparents' generation, and your great-grandparents' generation."
-msgstr ""
-
 #. This help message is displayed when the user clicks the help icon next to "Include".  https://s3.eu-west-1.amazonaws.com/po-pub/i/G2LwgKcPjaAwzcCXllEaXa13.png
 #: 
-msgid "This section includes options that let you decide how to build the tree from your starting individual(s).</p><b>Include ancestors</b><p>Tick this option to include ancestors of your starting individual(s) and anyone in the tree.</p><b>Include descendants</b><p>Whether to include children, grandchildren, etc. of people listed in the tree.</p><b>Max levels</b><p>The number of generations of ancestors to include. For example, if you chose yourself as your starting person, you may want the diagram to include relatives back to your great-grandparents. In this case, you would type &quot;3&quot; in the Max levels box under Include ancestors, to include your parents' generation, your grandparents' generation, and your great-grandparents' generation.</p><h5>Relation types to include</h5><p>The type of relatives to include when generating the diagram.</p><b>Siblings</b><p>Include brothers and sisters of anyone in the tree.</p><b>All relations</b><p>Include cousins, nieces, nephews, and their descendants when generating the tree. Requires &quot;Siblings&quot; to be selected.</p><b>Partners</b><p>Include the husbands, wives, and partners of those in the tree even if they aren't blood-relatives. There is another option &quot;Mark not blood-related people with different color&quot; that allows these people to be marked in a different colour.</p><b>Anyone</b><p>Follow all links regardless of whether the person is related. In practice, this generally means that the family of non-relatives (i.e. spouses) are included in the tree.</p><p>Use this option to include all records of the selected generations. Note that only records with a link are included, so you may need to include more ancestor or descendant generations (or more starting individuals) to get all your records to show."
-msgstr ""
-
-#. This help message is displayed when the user clicks the help icon next to "Include descendants".  https://s3.eu-west-1.amazonaws.com/po-pub/i/TNXFdoP4fIHVQnScVvnfvKA1.png
-#: 
-msgid "Whether to include children, grandchildren, etc. of people listed in the tree.</p><h4>Max levels</h4><p>The number of generations of descendants to include. For example, if you chose yourself as your starting person, you may want the diagram to include descendants down to your great-grandchildren. In this case, you would type \"3\" in this box, to include your children and others of their generation, your grandchildren, and your great-grandchildren's generation."
+msgid "This section includes options that let you decide how to build the tree from your starting individual(s).</p><b>Include ancestors</b><p>Tick this option to include ancestors of your starting individual(s) and anyone in the tree.</p><b>Max levels</b><p>The number of generations of ancestors to include. For example, if you chose yourself as your starting person, you may want the diagram to include relatives back to your great-grandparents. In this case, you would type &quot;3&quot; in the Max levels box under Include ancestors, to include your parents' generation, your grandparents' generation, and your great-grandparents' generation.</p><b>Include descendants</b><p>Whether to include children, grandchildren, etc. of people listed in the tree.</p><h4>Relation types to include</h4><p>The type of relatives to include when generating the diagram.</p><b>Siblings</b><p>Include brothers and sisters of anyone in the tree.</p><b>All relations</b><p>Include cousins, nieces, nephews, and their descendants when generating the tree. Requires &quot;Siblings&quot; to be selected.</p><b>Partners</b><p>Include the husbands, wives, and partners of those in the tree even if they aren't blood-relatives. There is another option &quot;Mark not blood-related people with different color&quot; that allows these people to be marked in a different colour.</p><b>Anyone</b><p>Follow all links regardless of whether the person is related. In practice, this generally means that the family of non-relatives (i.e. spouses) are included in the tree.</p><p>Use this option to include all records of the selected generations. Note that only records with a link are included, so you may need to include more ancestor or descendant generations (or more starting individuals) to get all your records to show."
 msgstr ""
 
 #. This help message is displayed when the user clicks the help icon next to "Graph direction". https://s3.eu-west-1.amazonaws.com/po-pub/i/MpbVhXyRxeLgMO8FZVXHZhHG.png
@@ -576,7 +545,7 @@ msgstr ""
 
 #. This help message is displayed when the user clicks the help icon next to "Output file type". https://s3.eu-west-1.amazonaws.com/po-pub/i/apq6Tgv91ZGJTGcUfFH3V1VE.png
 #: 
-msgid "The output file type you want. This is ignored when rendering in the browser, it is only used when you download a file. File types SVG, PNG, JPG, and PDF can be downloaded, in addition to the Graphviz DOT format.</p><p>There are some minor differences if you have Graphviz installed on the server:<ul><li>There are two more file types, GIF and PostScript (PS). Most people would not need these.<li>PDF files may be smaller and can include URLs<li>You may be able to include more records</ul>"
+msgid "This section lets you choose the output file type when downloading the diagram. Some additional settings are available under some circumstances.<h4>Output file type</h4>The output file type you want. This is ignored when rendering in the browser, it is only used when you download a file. File types SVG, PNG, JPG, and PDF can be downloaded, in addition to the Graphviz DOT format.</p><p>There are some minor differences if you have Graphviz installed on the server:<ul><li>There are two more file types, GIF and PostScript (PS). Most people would not need these.</li><li>PDF and SVG files may be smaller and can include URLs</li><li>You may be able to include more records</li></ul><p>In addition, if you have Graphviz installed on the server there are additional quality settings that are available. The following settings are only available when Graphviz is installed on the server, and the output type is set to SVG or PDF:</p><h4>Quality of JPG photos</h4><p>This setting lets you change the quality of embedded JPG photos. This uses the quality setting that is part of the JPG standard. Reducing this can reduce the file size of the output, while increasing it may increase the quality. Also see the DPI setting to change the resolution of the diagram including photos.</p><h4>Convert photos to JPG where possible</h4><p>If enabled, GVExport will attempt to convert PNG, BMP, and GIF files to JPG and will apply the above quality setting."
 msgstr ""
 
 #. This help message is displayed when the user clicks the help icon next to "Browser render". https://s3.eu-west-1.amazonaws.com/po-pub/i/obqZqWV3JxLlYqmWek7FPMfW.png
@@ -594,7 +563,7 @@ msgstr ""
 #. 
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/vyDHWXC9qcax65t9gW4YjvMv.png
 #: 
-msgid "GVExport is a webtrees module that allows you to create complex visual family trees, using a tool called Graphviz to display the tree. Select a starting person, adjust the settings, and see that person's family tree.</p><p>Some fields have an icon <span class=\"info-icon btn btn-primary\">i</span> next to them, clicking this will give you some more information about that field.</p><p>Advanced configurations are possible by toggling advanced settings by clicking the &quot;Toggle advanced settings&quot; option at the end of each section. Clicking the ⛶ in the top right corner of the browser rendering will display the browser rendering in full screen. You can also use the webtrees &quot;Clippings Cart&quot; feature to select records, which GVExport can then use instead of the &quot;People to be included&quot; settings. </p><p>There are several buttons that take action based on the settings that you have chosen:<ul><li>Update: Clicking this updates the browser render (this is hidden if auto-update is enabled).<li>Download: Clicking this will download the diagram in the format chosen in the &quot;Output file type&quot; option. <li>Reset: Clicking this will reset the settings to the default values. Default values can be changed by an administrator in the webtrees Control Panel.<li>Help: Shows this help message.</ul></p><p>For more information, see the <a href=\"https://github.com/Neriderc/GVExport/wiki\" class=\"help-link\">GVExport Wiki</a>.</p><p>You can also ask a question, provide feedback, or suggest features on our <a href=\"https://github.com/Neriderc/GVExport\" class=\"help-link\">GitHub page</a>. Just <a href=\"https://github.com/Neriderc/GVExport/issues/new\" class=\"help-link\">open an issue</a>, or <a href=\"https://github.com/Neriderc/GVExport/issues\" class=\"help-link\">browse existing issues</a>."
+msgid "GVExport is a webtrees module that allows you to create complex visual family trees, using a tool called Graphviz to display the tree. Select a starting person, adjust the settings, and see that person's family tree.</p><p>Some fields have an icon <span class=\"info-icon btn btn-primary\">i</span> next to them, clicking this will give you some more information about that field.</p><p>Advanced configurations are possible by toggling advanced settings by clicking the &quot;Toggle advanced settings&quot; option at the end of each section. Clicking the ⛶ in the top right corner of the browser rendering will display the browser rendering in full screen. You can also use the webtrees &quot;Clippings Cart&quot; feature to select records, which GVExport can then use instead of the &quot;People to be included&quot; settings.</p><p>There are several buttons that take action based on the settings that you have chosen:<ul><li>Update: Clicking this updates the browser render (this is hidden if auto-update is enabled).<li>Download: Clicking this will download the diagram in the format chosen in the &quot;Output file type&quot; option. <li>Reset: Clicking this will reset the settings to the default values. Default values can be changed by an administrator in the webtrees Control Panel.<li>Help: Shows this help message.</ul></p><p>For more information, see the <a href=\"https://github.com/Neriderc/GVExport/wiki\" class=\"help-link\">GVExport Wiki</a>.</p><p>You can also ask a question, provide feedback, or suggest features on our <a href=\"https://github.com/Neriderc/GVExport\" class=\"help-link\">GitHub page</a>. Just <a href=\"https://github.com/Neriderc/GVExport/issues/new\" class=\"help-link\">open an issue</a>, or <a href=\"https://github.com/Neriderc/GVExport/issues\" class=\"help-link\">browse existing issues</a>."
 msgstr ""
 
 #. This message should never be shown, but it is a backup message for the help messages in the case that the text cannot be found - it's effectively an error message.
@@ -620,91 +589,6 @@ msgstr ""
 #. Help text shown when user clicks "i" next to option "Non-relatives":  https://s3.eu-west-1.amazonaws.com/po-pub/i/Lq1O4swJShMh36BPEhJiSujt.png
 #: 
 msgid "This section has two related options.<h4>Mark not blood-related people with different color</h4><p>Where spouses are included and are not blood-related to anyone in the &quot;Include anyone related to&quot; field, if this option is selected they will be highlighted in a much duller color than the standard blue/pink for relatives.</p><p>Note that when this option is selected, and non-relatives are found in the selected records, then a full tree scan is performed to identify if an individual is related by a more distant link (see next option).</p><h4>Ignore unseen links to speed up relative check</h4><p>This option is only available when the previous option is selected. When the option to display non-relatives in a different colour is selected, normally a scan is performed starting from the starting individuals and branching to all relatives regardless of display settings. This ensures that if a person is related via a link not displayed, they will still show as related.</p><p>Enabling this option prevents the full scan of the tree which can greatly speed up the generation of the diagram on larger trees, but may reduce accuracy of the colouring of non-relatives."
-msgstr ""
-
-#. Help text shown when user clicks the "i" next to "Show photos" in the advanced appearance section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/Xpn8Y8LiWnYphmjJe9eJO6ub.png
-#: 
-msgid "This section contains the option to display the photo from the individual's page in the tree.</p><p>The \"Photo shape\" option allows you to select a shape for the photos. Photos will be cropped to fit this shape.</p><p>The \"Photo size\" option allows you to adjust the scale of the photo. 100&percnt; is the default, and you can increase this to make the photos bigger, or decrease it to make them smaller."
-msgstr ""
-
-#. Help text shown when user clicks the "i" next to "Abbreviated names":   https://s3.eu-west-1.amazonaws.com/po-pub/i/rIQKFYaokaQndqxKRMkSoZDA.png
-#: 
-msgid "There are several options to shorten the names of individuals displayed.</p><h4>Full name</h4><p>The default option, this shows the primary name and any nickname. This option currently is the only one where the preferred name is underlined, and is the only one to show nicknames (in \\\"quotes\\\").<h4>Given and surnames</h4><p>Like the full name, but without nicknames.</p><h4>Given names</h4><p>Just the given names are displayed.<h4>First given names only</h4><p>Just the first word of the name in the given names field.</p><h4>Surnames</h4><p>Just the surnames are displayed.</p><h4>Initials only</h4><p>This displays initials only, for example \\\"JFK\\\".</p><h4>Given name initials and Surname</h4><p>This shows initials for the first and second given name, as well as the full surname. For example: \\\"J.F. Kennedy\\\"</p><h4>Don't show names</h4><p>No names are shown. If birth and death details are also disabled then it is possible to show only photos or even just coloured boxes."
-msgstr ""
-
-#. Help text shown when user clicks the "i" next to "Abbreviate place names":  https://s3.eu-west-1.amazonaws.com/po-pub/i/Ek3gve1dtOPTm63m5WeKiEjl.png
-#: 
-msgid "There are several options to shorten place names (for place of birth, place of marriage, place of death).</p><h4>Full place name</h4><p>The place name is printed in full.</p><h4>City and Country</h4><p>The first and last section of the place name is used, using commas to split the sections. For example, \\\"London, England, United Kingdom\\\" would be shortened to \\\"London, United Kingdom\\\"</p><h4>City and 2 Letter ISO Country Code</h4><p>The first and last section of the place name is used, using commas to split the sections. The country is then converted to the ISO3166-1-Alpha-2 country code. </p><p>For example, \\\"Calgary, Alberta, Canada\\\" would be shortened to \\\"Calgary, CA\\\"</p><h4>City and 3 Letter ISO Country Code</h4><p>The first and last section of the place name is used, using commas to split the sections. The country is then converted to the ISO3166-1-Alpha-3 country code.</p><p>For example, \\\"Calgary, Alberta, Canada\\\" would be shortened to \\\"Calgary, CAN\\\"<h4>Note</h4><p>The CLDR display name is used for matching. The data comes from <a href=\\\"https://www.datahub.io/core/country-codes\\\" class=\\\"help-link\\\">Datahub</a> but has been modified as for example the original CLDR name for the United Kingdom is \\\"UK\\\", and the original CLDR name for the United States is \\\"US\\\". Matching against these countries for the purposes of abbreviation is therefore pointless. So changes have been made to make this work better. Please <a href=\\\"https://github.com/Neriderc/GVExport/issues/new\\\" class=\\\"help-link\\\">open an issue</a> on GitHub if you find a country is not abbreviating correctly."
-msgstr ""
-
-#. Help text shown when user clicks the "i" next to "Show individual XREF":   https://s3.eu-west-1.amazonaws.com/po-pub/i/z0ydquyzpwfL2pZbkf4ZsjXv.png
-#: 
-msgid "Whether to include the XREF of individuals in the diagram."
-msgstr ""
-
-#. Help text shown when user clicks the "i" next to "Show birth date":  https://s3.eu-west-1.amazonaws.com/po-pub/i/K0f3sazuGOU8Bc4k816wfldH.png
-#: 
-msgid "Check the box if you would like to include the birthdate of individuals in the output.</p><p>You can also choose whether to show the full date of birth or just the year."
-msgstr ""
-
-#. Help text shown when user clicks the "i" next to "Show birth place":    https://s3.eu-west-1.amazonaws.com/po-pub/i/f0NMn7pmbDd8EmGi9s3Ps4Sm.png
-#: 
-msgid "Whether to show the place of birth in the output. Also see option for abbreviating place names."
-msgstr ""
-
-#. Help text shown when user clicks the "i" next to "Show death date":     https://s3.eu-west-1.amazonaws.com/po-pub/i/fNNY3AothlpEk6RVHwu18jBq.png
-#: 
-msgid "Check the box if you would like to include the death date of individuals in the output.</p><p>You can also choose whether to show the full date of death or just the year."
-msgstr ""
-
-#. Help text shown when user clicks the "i" next to "Show death place":     https://s3.eu-west-1.amazonaws.com/po-pub/i/zwFpvOQOHvWtGCscz5jgN1LV.png
-#: 
-msgid "Whether to show the place of death in the output. Also see option for abbreviating place names."
-msgstr ""
-
-#. Help text shown when user clicks the "i" next to "Show family XREF":     https://s3.eu-west-1.amazonaws.com/po-pub/i/pUSNfbB0jvF2zxYRn8wQCCQ8.png
-#: 
-msgid "Whether to include the XREF of families in the output."
-msgstr ""
-
-#. Help text shown when user clicks the "i" next to "Show marriage date":      https://s3.eu-west-1.amazonaws.com/po-pub/i/WcVSfrpda3aaoTR6k8TKg4CC.png
-#: 
-msgid "Check the box if you would like to include the date of marriage in the output.</p><p>You can also choose whether to show the full date of marriage or just the year."
-msgstr ""
-
-#. Help text shown when user clicks the "i" next to "Show marriage place":      https://s3.eu-west-1.amazonaws.com/po-pub/i/jYVeBKSFMcZhilwfeHgbyWqH.png
-#: 
-msgid "Whether to show the place of marriage in the output. Also see option for abbreviating place names."
-msgstr ""
-
-#. Help text shown when user clicks the "i" next to "DPI":      https://s3.eu-west-1.amazonaws.com/po-pub/i/40xFZyQ8fdzDhsLDzvifNDAr.png
-#: 
-msgid "For output such as JPG and PNG, this setting will product higher quality output when it is larger, but will also increase the file size. Smaller values will produce smaller files, but the quality will be worse and if the value is too low you may not be able to read text."
-msgstr ""
-
-#. Help text shown when user clicks the "i" next to "Space":  https://s3.eu-west-1.amazonaws.com/po-pub/i/hEJcjkJ8xvGsTPoHjq5nT8L6.png
-#: 
-msgid "These options affect the distance between nodes on the diagram.</p><h4>Between generations</h4><p>How close you want generations on the output. For example, for left to right output, smaller numbers will bring the columns of individuals closer together, while larger numbers would push them further apart.</p><h4>Between individuals on the same level</h4><p>How close you want the individuals of the same generation on the output. For example, for left to right output, smaller numbers will mean less space vertically between the boxes, while larger numbers would push them further apart."
-msgstr ""
-
-#. Help text shown when user clicks the "i" next to "Font":  https://s3.eu-west-1.amazonaws.com/po-pub/i/SMqr3gHBplFqJ4C0yRnFBpkp.png
-#: 
-msgid "This section lets you configure the typeface and colour of text.</p><h4>Typeface</h4><p>This list lets you pick from a number of known websafe font typefaces. They must be installed on the system or a fallback typeface will be used. These options are known to be installed on almost all systems and that is why they have been chosen.</p><h4>Font size for names</h4><p>Set the font point size for the names of individuals.</p><h4>Font size for details</h4><p>This changes the font point size for all text except for names. For example, the date and place of marriage, and the date and place of birth and death.</p><h4>Font colour for names</h4><p>This changes the colour of the font for names. Note that the colour picker is provided by your browser, and is handled differently depending on which browser you are using.</p><h4>Font colour for details</h4><p>This changes the colour of the font of all text except for names, for example, the date and place of marriage, and the date and place of birth and death. Note that the colour picker is provided by your browser, and is handled differently depending on which browser you are using."
-msgstr ""
-
-#. Help text shown when user clicks the "i" next to "Relationship arrows":  https://s3.eu-west-1.amazonaws.com/po-pub/i/49vIt5p3NoEIm5t9CgmVtYt6.png
-#: 
-msgid "This section lets you customise the arrows that link records together.</p><h4>Arrow colour</h4><p>This is the main colour for arrows. This is used for all arrows if the next option is disabled, otherwise it is used for arrows from a spouse to the family record.</p><h4>Show blood relationship in a different colour</h4><p>If this option is selected, the relationship arrows between a family record and children will use different colours depending on if the relationship is by birth, or a different type of relationship (e.g. adoption). If this is disabled, all relationship arrows use the above default colour.</p><ul><li>Related by birth - If the above option is enabled, this sets the colour of arrows from a family record to a child that is related by birth.<li>Related other than by birth - If the above option is enabled, this sets the colour of arrows from a family record to a child that is not related by birth (e.g. foster or adopted)."
-msgstr ""
-
-#. Help text shown when user clicks the "i" next to "Tile colours":  https://s3.eu-west-1.amazonaws.com/po-pub/i/gzXTu0XdLd6V1GhSjjDRbXoj.png
-#: 
-msgid "This section allows you to change the colours of the different parts of the tiles shown for each individual. Click the coloured box to change the colour. This uses your browser's colour picker, so will look different depending on what browser you are using."
-msgstr ""
-
-#. Help text shown when user clicks the "i" next to "Other colours":  https://s3.eu-west-1.amazonaws.com/po-pub/i/LrHottxOgQWJC1752fcbOh36.png
-#: 
-msgid "This section allows you to change colours associated with the diagram that are not part of the individual tile above. Click the coloured box to change the colour. This uses your browser's colour picker, so will look different depending on what browser you are using."
 msgstr ""
 
 #. "Output settings" was renamed to "File settings".
@@ -1076,7 +960,7 @@ msgstr ""
 
 #. The help text for the new "Tile design" section. https://s3.eu-west-1.amazonaws.com/po-pub/i/RkX8ulBdesvP93Q43VXjka0f.png https://s3.eu-west-1.amazonaws.com/po-pub/i/oV9m8srNfFDTHqbS4HaD53qW.png
 #: 
-msgid "This section allows for some changes to the design of tiles, including the shape, photos, colours, and fonts. </p><h4>Shape</h4><h5>Individual tile shape</h5><p>This option lets you choose the shape for tiles for individuals. There are two options: <ul><li>Rectangle - The default option, the tile is a rectangle shape.</li><li>Rounded rectangle - The tile has rounded corners</li></ul></p><h4>Photos</h4><h5>Show photos</h5><p>This option lets you enable or disable showing photos on the tiles of individuals. If enabled, there are further options.</p><h5>Photo shape</h5><p>This option lets you choose the shape of photos. Note that if you have GraphViz installed on the server, using these options will disable generating the diagram on the server, which may prevent large diagrams from being created.</p><h5>Photo size</h5><p>This option lets you change the size of photos, which is done as a percentage of the default size. 100&percnt; is the default size, 50&percnt; is half sized and 200&percnt; is double sized.</p><h4>Colours</h4><h5>Individual background colour</h5><p>This option lets you set the background colour of an individual's tile. The options are:<ul><li>Custom - the background will be set to the chosen colour</li><li>Based on individual's sex - the background will be coloured based on the sex of the individual.</li></ul></p><h5>Individual stripe colour</h5><p>This option lets you set the colour of the stripe across the top of an individual's tile. The options are:<ul><li>No stripe - no stripe is shown</li><li>Based on individual's sex - the stripe will be coloured based on the sex of the individual.</li></ul><h5>Individual border colour</h5><p>This option lets you set the border colour of an individual's tile. The options are:<ul><li>Custom - the border will be set to the chosen colour</li><li>Based on individual's sex - the border will be coloured based on the sex of the individual.</li><li>Same as family border - the family border colour will be used for the border of individuals.</li></ul></p><h5>Male individuals</h5><p>Set the colour for Male individuals, used in above settings for background, stripe, border if selected.</p><h5>Female individuals</h5><p>Set the colour for Female individuals, used in above settings for background, stripe, border if selected.</p><h5>Other gender individuals</h5><p>Set the colour for Other gender individuals, used in above settings for background, stripe, border if selected.</p><h5>Unknown gender individuals</h5><p>Set the colour for Unknown gender individuals, used in above settings for background, stripe, border if selected.</p><h5>Non-blood related individuals</h5><p>There are four options here for non-blood related individuals, if the &quot;Mark not blood-related people with different color&quot; option is enabled in the &quot;People to be included&quot; section</p><h5>Show starting individuals in different color</h5><p>Whether starting individuals should be highlighted on the diagram. If enabled, you can choose a background colour to highlight the individual with, and can choose to enable this only for some starting individuals.</p><h5>Family background</h5><p>The background colour of family records.</p><h5>Family border colour</h5><p>The border colour of family records.</p><h4>Font</h4><h5>Typeface</h5><p>This list lets you pick from a number of known websafe font typefaces. They must be installed on the system or a fallback typeface will be used. These options are known to be installed on almost all desktop systems and that is why they have been chosen. Mobile browsers will likely use a fallback font.</p><h5>Font size for names</h5><p>Set the font point size for the names of individuals.</p><h5>Font size for details</h5><p>This changes the font point size for all text except for names. For example, the date and place of marriage, and the date and place of birth and death.</p><h5>Font colour for names</h5><p>This changes the colour of the font for names. Note that the colour picker is provided by your browser, and is handled differently depending on which browser you are using.</p><h5>Font colour for details</h5><p>This changes the colour of the font of all text except for names, for example, the date and place of marriage, and the date and place of birth and death. Note that the colour picker is provided by your browser, and is handled differently depending on which browser you are using."
+msgid "This section allows for some changes to the design of tiles, including the shape, photos, colours, and fonts.</p><h4>Shape</h4><h5>Individual tile shape</h5><p>This option lets you choose the shape for tiles for individuals. There are two options: <ul><li>Rectangle - The default option, the tile is a rectangle shape.</li><li>Rounded rectangle - The tile has rounded corners</li></ul></p><h4>Photos</h4><h5>Show photos</h5><p>This option lets you enable or disable showing photos on the tiles of individuals. If enabled, there are further options.</p><h5>Photo shape</h5><p>This option lets you choose the shape of photos. Note that if you have Graphviz installed on the server, using these options will disable generating the diagram on the server, which may prevent large diagrams from being created.</p><h5>Photo size</h5><p>This option lets you change the size of photos, which is done as a percentage of the default size. 100&percnt; is the default size, 50&percnt; is half sized and 200&percnt; is double sized.</p><h4>Colours</h4><h5>Individual background colour</h5><p>This option lets you set the background colour of an individual's tile. The options are:<ul><li>Custom - the background will be set to the chosen colour</li><li>Based on individual's sex - the background will be coloured based on the sex of the individual.</li></ul></p><h5>Individual stripe colour</h5><p>This option lets you set the colour of the stripe across the top of an individual's tile. The options are:<ul><li>No stripe - no stripe is shown</li><li>Based on individual's sex - the stripe will be coloured based on the sex of the individual.</li></ul><h5>Individual border colour</h5><p>This option lets you set the border colour of an individual's tile. The options are:<ul><li>Custom - the border will be set to the chosen colour</li><li>Based on individual's sex - the border will be coloured based on the sex of the individual.</li><li>Same as family border - the family border colour will be used for the border of individuals.</li></ul></p><h5>Male individuals</h5><p>Set the colour for Male individuals, used in above settings for background, stripe, border if selected.</p><h5>Female individuals</h5><p>Set the colour for Female individuals, used in above settings for background, stripe, border if selected.</p><h5>Other gender individuals</h5><p>Set the colour for Other gender individuals, used in above settings for background, stripe, border if selected.</p><h5>Unknown gender individuals</h5><p>Set the colour for Unknown gender individuals, used in above settings for background, stripe, border if selected.</p><h5>Non-blood related individuals</h5><p>There are four options here for non-blood related individuals, if the &quot;Mark not blood-related people with different color&quot; option is enabled in the &quot;People to be included&quot; section</p><h5>Show starting individuals in different color</h5><p>Whether starting individuals should be highlighted on the diagram. If enabled, you can choose a background colour to highlight the individual with, and can choose to enable this only for some starting individuals.</p><h5>Family background</h5><p>The background colour of family records.</p><h5>Family border colour</h5><p>The border colour of family records.</p><h4>Font</h4><h5>Typeface</h5><p>This list lets you pick from a number of known websafe font typefaces. They must be installed on the system or a fallback typeface will be used. These options are known to be installed on almost all desktop systems and that is why they have been chosen. Mobile browsers will likely use a fallback font.</p><h5>Font size for names</h5><p>Set the font point size for the names of individuals.</p><h5>Font size for details</h5><p>This changes the font point size for all text except for names. For example, the date and place of marriage, and the date and place of birth and death.</p><h5>Font colour for names</h5><p>This changes the colour of the font for names. Note that the colour picker is provided by your browser, and is handled differently depending on which browser you are using.</p><h5>Font colour for details</h5><p>This changes the colour of the font of all text except for names, for example, the date and place of marriage, and the date and place of birth and death. Note that the colour picker is provided by your browser, and is handled differently depending on which browser you are using."
 msgstr ""
 
 #. Additional option for colouring based on sex - this is the same idea as selecting Simple diagram type, which will now be removed.  https://s3.eu-west-1.amazonaws.com/po-pub/i/unanqM7u3enenLfGiB1yZGzj.png
@@ -1120,7 +1004,7 @@ msgstr ""
 
 #. New help text for new section "Tile contents". The help text is quite long, but much of it is previous help text from the settings that have been combined into this section. You may want to copy translations from previous terms, so I have left these for now. I will eventually delete the original terms.  https://s3.eu-west-1.amazonaws.com/po-pub/i/opPq1bb4NbrBXGFAiRsVxXi1.png  https://s3.eu-west-1.amazonaws.com/po-pub/i/W4qegkcMMWTFs3sXIihOQskA.png
 #: 
-msgid "This section allows for some changes to the content of tiles, including links, abbreviations, and the details included on individuals and families. </p><h4>Page links</h4><h5>Add URL to individuals and families</h5><p>For SVG (and PDF if GraphViz installed on server) output, links can be included. This way you can click on the person in the diagram to be taken to their webtrees page.</p><h4>Abbreviations</h4><h5>Abbreviated names</h5><p>There are several options to shorten the names of individuals displayed.</p><ul><li>Full name - the default option, this shows the primary name and any nickname. This option currently is the only one where the preferred name is underlined, and is the only one to show nicknames (in &quot;quotes&quot;).</li><li>Given and surnames - like the full name, but without nicknames.</li><li>Given names - just the given names are displayed.</li><li>First given names only - just the first word of the name in the given names field.</li><li>Surnames - just the surnames are displayed.</li><li>Initials only - this displays initials only, for example &quot;JFK&quot;.</li><li>Given name initials and surname - this shows initials for the first and second given name, as well as the full surname. For example: &quot;J.F. Kennedy&quot;</li><li>Don't show names - no names are shown. If birth and death details are also disabled then it is possible to show only photos or even just coloured boxes.</li></ul><h5>Abbreviated place names</h5><p>There are several options to shorten place names (for place of birth, place of marriage, place of death).</p><ul><li>Full place name - the place name is printed in full.</li><li>City and Country - the first and last section of the place name is used, using commas to split the sections. For example, &quot;London, England, United Kingdom&quot; would be shortened to &quot;London, United Kingdom&quot;</li><li>City and 2-Letter ISO Country Code - the first and last section of the place name is used, using commas to split the sections. The country is then converted to the ISO3166-1-Alpha-2 country code. <br>For example, &quot;Calgary, Alberta, Canada&quot; would be shortened to &quot;Calgary, CA&quot;</li><li>City and 3-Letter ISO Country Code - the first and last section of the place name is used, using commas to split the sections. The country is then converted to the ISO3166-1-Alpha-3 country code.<br>For example, &quot;Calgary, Alberta, Canada&quot; would be shortened to &quot;Calgary, CAN&quot;</li></ul><p>Note - The CLDR display name is used for matching. The data comes from <a href=\"https://www.datahub.io/core/country-codes\" class=\"help-link\">Datahub</a> but has been modified as for example the original CLDR name for the United Kingdom is &quot;UK&quot;, and the original CLDR name for the United States is &quot;US&quot;. Matching against these countries for the purposes of abbreviation is therefore pointless. So changes have been made to make this work better. Please <a href=\"https://github.com/Neriderc/GVExport/issues/new\" class=\"help-link\">open an issue</a> on GitHub if you find a country is not abbreviating correctly.</p><h4>Information on individuals</h4><h5>Show individual XREF</h5><p>Whether to include the XREF of individuals in the diagram.</p><h5>Show birthdate</h5><p>Check the box if you would like to include the birthdate of individuals in the output.</p><p>You can also choose whether to show the full date of birth or just the year.</p><h5>Show birthplace</h5><p>Whether to show the place of birth in the output. Also see option for abbreviating place names.</p><h5>Show death date</h5><p>Check the box if you would like to include the death date of individuals in the output.</p><p>You can also choose whether to show the full date of death or just the year.</p><h5>Show death place</h5><p>Whether to show the place of death in the output. Also see option for abbreviating place names.</p><h5>Show sex of individuals</h5><p>Whether to print the sex of the individual on the individual's tile, e.g. &quot;Male&quot;</p><h4>Information on families</h4><h5>Show family XREF</h5><p>Whether to include the XREF of families in the output.</p><h5>Show marriage date</h5><p>Check the box if you would like to include the date of marriage in the output.</p><p>You can also choose whether to show the full date of marriage or just the year.</p><h5>Show marriage place</h5><p>Whether to show the place of marriage in the output. Also see option for abbreviating place names."
+msgid "This section allows for some changes to the content of tiles, including links, abbreviations, and the details included on individuals and families.</p><h4>Page links</h4><h5>Add URL to individuals and families</h5><p>For SVG (and PDF if Graphviz installed on server) output, links can be included. This way you can click on the person in the diagram to be taken to their webtrees page.</p><h4>Abbreviations</h4><h5>Abbreviated names</h5><p>There are several options to shorten the names of individuals displayed.</p><ul><li>Full name - the default option, this shows the primary name and any nickname. This option currently is the only one where the preferred name is underlined, and is the only one to show nicknames (in &quot;quotes&quot;).</li><li>Given and surnames - like the full name, but without nicknames.</li><li>Given names - just the given names are displayed.</li><li>First given names only - just the first word of the name in the given names field.</li><li>Surnames - just the surnames are displayed.</li><li>Initials only - this displays initials only, for example &quot;JFK&quot;.</li><li>Given name initials and surname - this shows initials for the first and second given name, as well as the full surname. For example: &quot;J.F. Kennedy&quot;</li><li>Don't show names - no names are shown. If birth and death details are also disabled then it is possible to show only photos or even just coloured boxes.</li></ul><h5>Abbreviated place names</h5><p>There are several options to shorten place names (for place of birth, place of marriage, place of death).</p><ul><li>Full place name - the place name is printed in full.</li><li>City and Country - the first and last section of the place name is used, using commas to split the sections. For example, &quot;London, England, United Kingdom&quot; would be shortened to &quot;London, United Kingdom&quot;</li><li>City and 2-Letter ISO Country Code - the first and last section of the place name is used, using commas to split the sections. The country is then converted to the ISO3166-1-Alpha-2 country code. <br>For example, &quot;Calgary, Alberta, Canada&quot; would be shortened to &quot;Calgary, CA&quot;</li><li>City and 3-Letter ISO Country Code - the first and last section of the place name is used, using commas to split the sections. The country is then converted to the ISO3166-1-Alpha-3 country code.<br>For example, &quot;Calgary, Alberta, Canada&quot; would be shortened to &quot;Calgary, CAN&quot;</li></ul><p>Note - The CLDR display name is used for matching. The data comes from <a href=\"https://www.datahub.io/core/country-codes\" class=\"help-link\">Datahub</a> but has been modified as for example the original CLDR name for the United Kingdom is &quot;UK&quot;, and the original CLDR name for the United States is &quot;US&quot;. Matching against these countries for the purposes of abbreviation is therefore pointless. So changes have been made to make this work better. Please <a href=\"https://github.com/Neriderc/GVExport/issues/new\" class=\"help-link\">open an issue</a> on GitHub if you find a country is not abbreviating correctly.</p><h4>Information on individuals</h4><h5>Show individual XREF</h5><p>Whether to include the XREF of individuals in the diagram.</p><h5>Show birthdate</h5><p>Check the box if you would like to include the birthdate of individuals in the output.</p><p>You can also choose whether to show the full date of birth or just the year.</p><h5>Show birthplace</h5><p>Whether to show the place of birth in the output. Also see option for abbreviating place names.</p><h5>Show death date</h5><p>Check the box if you would like to include the death date of individuals in the output.</p><p>You can also choose whether to show the full date of death or just the year.</p><h5>Show death place</h5><p>Whether to show the place of death in the output. Also see option for abbreviating place names.</p><h5>Show sex of individuals</h5><p>Whether to print the sex of the individual on the individual's tile, e.g. &quot;Male&quot;</p><h4>Information on families</h4><h5>Show family XREF</h5><p>Whether to include the XREF of families in the output.</p><h5>Show marriage date</h5><p>Check the box if you would like to include the date of marriage in the output.</p><p>You can also choose whether to show the full date of marriage or just the year.</p><h5>Show marriage place</h5><p>Whether to show the place of marriage in the output. Also see option for abbreviating place names."
 msgstr ""
 
 #. New section to combine some general diagram settings:  https://s3.eu-west-1.amazonaws.com/po-pub/i/fXJwOPFeNExfAPrBjyabVej9.png   https://s3.eu-west-1.amazonaws.com/po-pub/i/OVcGk9fXLCrNYmgGTI25lMpH.png
@@ -1135,7 +1019,7 @@ msgstr ""
 
 #. One of the names of a new settings group under the Tile design section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/BIVXgbgOvNma3KB1dlsuu2oX.png
 #: 
-msgid "Shapes"
+msgid "Shape"
 msgstr ""
 
 #. One of the names of a new settings group under the Tile design section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/BIVXgbgOvNma3KB1dlsuu2oX.png
@@ -1226,5 +1110,50 @@ msgstr ""
 #. Option that if enabled will display the gender as part of the text on an individual's tile:  https://s3.eu-west-1.amazonaws.com/po-pub/i/MPjAdVB2RY2cCNFfRSxK3oOP.png  https://s3.eu-west-1.amazonaws.com/po-pub/i/1S1f2VAUdQBg1UkhCmrqzkV4.png
 #: 
 msgid "Show sex of individuals"
+msgstr ""
+
+#. Slightly changed section name to differ from setting name, as new options in this section are sometimes shown in specific circumstances:  https://s3.eu-west-1.amazonaws.com/po-pub/i/h0TLndD3SONc4XkscpLP7tvE.png
+#: 
+msgid "Output file"
+msgstr ""
+
+#. New options in Output file section are sometimes shown in specific circumstances:  https://s3.eu-west-1.amazonaws.com/po-pub/i/h0TLndD3SONc4XkscpLP7tvE.png
+#: 
+msgid "Quality of JPG photos"
+msgstr ""
+
+#. New options in Output file section are sometimes shown in specific circumstances:  https://s3.eu-west-1.amazonaws.com/po-pub/i/h0TLndD3SONc4XkscpLP7tvE.png
+#: 
+msgid "Convert photos to JPG where possible"
+msgstr ""
+
+#. One of the quality settings for JPG shown only when Graphviz installed on server and SVG or PDF option chosen:  https://s3.eu-west-1.amazonaws.com/po-pub/i/h0TLndD3SONc4XkscpLP7tvE.png
+#: 
+msgid "Lowest"
+msgstr ""
+
+#. One of the quality settings for JPG shown only when Graphviz installed on server and SVG or PDF option chosen:  https://s3.eu-west-1.amazonaws.com/po-pub/i/h0TLndD3SONc4XkscpLP7tvE.png
+#: 
+msgid "Low"
+msgstr ""
+
+#. One of the quality settings for JPG shown only when Graphviz installed on server and SVG or PDF option chosen:  https://s3.eu-west-1.amazonaws.com/po-pub/i/h0TLndD3SONc4XkscpLP7tvE.png
+#: 
+msgid "Medium"
+msgstr ""
+
+#. One of the quality settings for JPG shown only when Graphviz installed on server and SVG or PDF option chosen:  https://s3.eu-west-1.amazonaws.com/po-pub/i/h0TLndD3SONc4XkscpLP7tvE.png
+#: 
+msgid "High"
+msgstr ""
+
+#. One of the quality settings for JPG shown only when Graphviz installed on server and SVG or PDF option chosen:  https://s3.eu-west-1.amazonaws.com/po-pub/i/h0TLndD3SONc4XkscpLP7tvE.png
+#: 
+msgid "Highest"
+msgstr ""
+
+#. Label for colour picker, shown when you choose "Custom" in the border colour option:  https://s3.eu-west-1.amazonaws.com/po-pub/i/hSuaDbMqsm6pmK47oJ5B6o88.png
+#: 
+msgid "Custom border colour"
 msgstr ""
 

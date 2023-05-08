@@ -334,9 +334,9 @@ class Dot {
 							if (!empty($child) && (isset($this->individuals[$child->xref()]))) {
 								$fams = isset($this->individuals[$child->xref()]["fams"]) ? $this->individuals[$child->xref()]["fams"] : [];
 								foreach ($fams as $fam) {
-                                    $famName = $this->generateFamilyNodeName($fam);
-                                    $arrowColor = $this->getArrowColor($child, $fid);
-                                    $out .= $nodeName . " -> " . $famName . ":" . $this->convertID($child->xref()) . " [color=\"$arrowColor\", arrowsize=0.3] \n";
+                                    $family_name = $this->generateFamilyNodeName($fam);
+                                    $arrow_colour = $this->getArrowColour($child, $fid);
+                                    $out .= $nodeName . " -> " . $family_name . ":" . $this->convertID($child->xref()) . " [color=\"$arrow_colour\", arrowsize=0.3] \n";
                                 }
 							}
 						}
@@ -368,8 +368,8 @@ class Dot {
 					// Draw an arrow from FAM to each CHIL
 					foreach ($f->children() as $child) {
 						if (!empty($child) && (isset($this->individuals[$child->xref()]))) {
-                            $arrowColor = $this->getArrowColor($child, $fid);
-							$out .= $this->convertID($fid) . " -> " . $this->convertID($child->xref()) . " [color=\"$arrowColor\", arrowsize=0.3]\n";
+                            $arrow_colour = $this->getArrowColour($child, $fid);
+							$out .= $this->convertID($fid) . " -> " . $this->convertID($child->xref()) . " [color=\"$arrow_colour\", arrowsize=0.3]\n";
 						}
 					}
 				}
@@ -415,33 +415,33 @@ class Dot {
  	 */
 	function getGenderColour(string $gender, bool $related = TRUE): string
     {
-		// Determine the fill color
+		// Determine the fill colour
 		if ($gender == 'F') {
 			if ($related || !$this->settings["mark_not_related"]) {
-				$fill_color = $this->settings["female_col"];
+				$fill_colour = $this->settings["female_col"];
 			} else  {
-				$fill_color = $this->settings["female_unrelated_col"];
+				$fill_colour = $this->settings["female_unrelated_col"];
 			}
 		} elseif ($gender == 'M'){
 			if ($related || !$this->settings["mark_not_related"]) {
-				$fill_color = $this->settings["male_col"];
+				$fill_colour = $this->settings["male_col"];
 			} else  {
-				$fill_color = $this->settings["male_unrelated_col"];
+				$fill_colour = $this->settings["male_unrelated_col"];
 			}
 		} elseif ($gender == 'X'){
 			if ($related || !$this->settings["mark_not_related"]) {
-				$fill_color = $this->settings["other_gender_col"];
+				$fill_colour = $this->settings["other_gender_col"];
 			} else  {
-				$fill_color = $this->settings["oth_gender_unrel_col"];
+				$fill_colour = $this->settings["oth_gender_unrel_col"];
 			}
 		} else {
 			if ($related || !$this->settings["mark_not_related"]) {
-				$fill_color = $this->settings["unknown_gender_col"];
+				$fill_colour = $this->settings["unknown_gender_col"];
 			} else  {
-				$fill_color = $this->settings["unkn_gender_unrel_col"];
+				$fill_colour = $this->settings["unkn_gender_unrel_col"];
 			}
 		}
-		return $fill_color;
+		return $fill_colour;
 	}
 
 	/**
@@ -454,7 +454,7 @@ class Dot {
  	 */
 	function getFamilyColour(): string
     {
-		// Determine the fill color
+		// Determine the fill colour
         return $this->settings["family_col"];
 	}
 
@@ -510,7 +510,7 @@ class Dot {
 		// --- Data collection ---
 		// If a "dummy" family is set (begins with "F_"), then there is no marriage & family data, so no need for querying webtrees...
 		if (substr($fid, 0, 2) == "F_") {
-			$fill_color = $this->getFamilyColour();
+			$fill_colour = $this->getFamilyColour();
 			$marriageplace = "";
 			$husb_id = $this->families[$fid]["husb_id"];
 			$wife_id = $this->families[$fid]["wife_id"];
@@ -521,7 +521,7 @@ class Dot {
 		// Querying webtrees for the data of a FAM object
 		} else {
 			$f = $this->getUpdatedFamily($fid);
-			$fill_color = $this->getFamilyColour();
+			$fill_colour = $this->getFamilyColour();
 			$link = $f->url();
 
 			// Show marriage year
@@ -577,9 +577,9 @@ class Dot {
 			if (substr($fid, 0, 2) !== "F_" && !(empty($marriagedate) && empty($marriageplace) && $family == "") && ($this->settings["show_marriage_date"] || $this->settings["show_marriage_place"] || $this->settings["show_xref_families"])) {
 				$out .= "<TR>";
 				if ($this->settings["add_links"]) {
-					$out .= "<TD COLSPAN=\"2\" CELLPADDING=\"0\" CELLBORDER=\"1\" PORT=\"marr\" TARGET=\"_BLANK\" HREF=\"" . $this->convertToHTMLSC($link) . "\" BGCOLOR=\"" . $fill_color . "\">"; #ESL!!! 20090213 without convertToHTMLSC the dot file has invalid data
+					$out .= "<TD COLSPAN=\"2\" CELLPADDING=\"0\" CELLBORDER=\"1\" PORT=\"marr\" TARGET=\"_BLANK\" HREF=\"" . $this->convertToHTMLSC($link) . "\" BGCOLOR=\"" . $fill_colour . "\">"; #ESL!!! 20090213 without convertToHTMLSC the dot file has invalid data
 				} else {
-					$out .= "<TD COLSPAN=\"2\" CELLPADDING=\"0\" CELLBORDER=\"1\" PORT=\"marr\" BGCOLOR=\"" . $fill_color . "\">";
+					$out .= "<TD COLSPAN=\"2\" CELLPADDING=\"0\" CELLBORDER=\"1\" PORT=\"marr\" BGCOLOR=\"" . $fill_colour . "\">";
 				}
 
 				$out .= "<FONT COLOR=\"". $this->settings["font_colour_details"] ."\" POINT-SIZE=\"" . ($this->settings["font_size"]) ."\">" . (empty($marriagedate)?"":$marriagedate) . "<BR />" . (empty($marriageplace)?"":"(".$marriageplace.")") . $family . "</FONT>";
@@ -599,10 +599,10 @@ class Dot {
             }
             // If names, birth details, and death details are all disabled - show a smaller marriage circle to match the small tiles for individuals.
             if (!$this->settings["show_marriage_date"] && !$this->settings["show_marriage_place"] && !$this->settings["show_xref_families"]) {
-                $out .= "color=\"" . $this->settings["border_col"] . "\",fillcolor=\"" . $fill_color . "\", $href shape=point, height=0.2, style=filled";
+                $out .= "color=\"" . $this->settings["border_col"] . "\",fillcolor=\"" . $fill_colour . "\", $href shape=point, height=0.2, style=filled";
                 $out .= ", label=" . "< >";
             } else {
-                $out .= "color=\"" . $this->settings["border_col"] . "\",fillcolor=\"" . $fill_color . "\", $href shape=oval, style=\"filled\", margin=0.01";
+                $out .= "color=\"" . $this->settings["border_col"] . "\",fillcolor=\"" . $fill_colour . "\", $href shape=oval, style=\"filled\", margin=0.01";
                 $out .= ", label=" . "<<TABLE border=\"0\" CELLPADDING=\"0\" CELLSPACING=\"0\"><TR><TD><FONT COLOR=\"". $this->settings["font_colour_details"] ."\" POINT-SIZE=\"" . ($this->settings["font_size"]) ."\">" . (empty($marriagedate)?"":$marriagedate) . "<BR />" . (empty($marriageplace)?"":"(".$marriageplace.")") . $family . "</FONT></TD></TR></TABLE>>";
             }
         }
@@ -645,7 +645,7 @@ class Dot {
 
 		// If PID invalid, skip this person
 		if ($i == null) {
-			$this->messages[] = self::ERROR_CHAR . I18N::translate("Invalid starting individual:") . " " . $pid;
+			$this->messages[] = self::ERROR_CHAR . I18N::translate('Invalid starting individual:') . " " . $pid;
 			$this->skipList[$pid] = TRUE;
 			return false;
 		}
@@ -1170,7 +1170,7 @@ class Dot {
 	}
 
 
-    public function getArrowColor($i, $fid)
+    public function getArrowColour($i, $fid)
     {
         $relationshipType = "";
         if (substr($fid, 0, 2) != "F_") {
@@ -1179,11 +1179,11 @@ class Dot {
         }
 
         if ($relationshipType != "") {
-            $arrowColor = $this->settings["colour_arrow_related"] == "colour_arrow_related" ? $this->settings["arrows_not_related"] : $this->settings["arrows_default"];
+            $arrow_colour = $this->settings["colour_arrow_related"] == "colour_arrow_related" ? $this->settings["arrows_not_related"] : $this->settings["arrows_default"];
         } else {
-            $arrowColor = $this->settings["colour_arrow_related"] == "colour_arrow_related" ? $this->settings["arrows_related"] : $this->settings["arrows_default"];
+            $arrow_colour = $this->settings["colour_arrow_related"] == "colour_arrow_related" ? $this->settings["arrows_related"] : $this->settings["arrows_default"];
         }
-        return $arrowColor;
+        return $arrow_colour;
     }
 
     /**

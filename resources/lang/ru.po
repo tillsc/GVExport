@@ -46,10 +46,6 @@ msgid "Siblings"
 msgstr "Братья и сестры"
 
 #: 
-msgid "Cousins"
-msgstr "Кузены"
-
-#: 
 msgid "Include descendants"
 msgstr "Включить потомков"
 
@@ -58,7 +54,7 @@ msgid "Max levels"
 msgstr "Максимальные уровни"
 
 #: 
-msgid "Mark not blood-related people with different color"
+msgid "Mark not blood-related people with different colour"
 msgstr "Отметить не кровнородственных людей с разным цветом кожи"
 
 #: 
@@ -66,11 +62,11 @@ msgid "Add URL to individuals and families"
 msgstr "Добавить URL для отдельных лиц и семей"
 
 #: 
-msgid "Show birth date"
+msgid "Show birthdate"
 msgstr "Показать дату рождения"
 
 #: 
-msgid "Show birth place"
+msgid "Show birthplace"
 msgstr "Показать место рождения"
 
 #: 
@@ -271,11 +267,11 @@ msgid "Typeface"
 msgstr "Шрифт"
 
 #: 
-msgid "Font color for names"
+msgid "Font colour for names"
 msgstr "Цвет шрифта для имен"
 
 #: 
-msgid "Font color for details"
+msgid "Font colour for details"
 msgstr "Цвет шрифта для деталей"
 
 #. When you are no longer logged in, GVExport can't load the browser render until the page is refreshed. This message is shown before automatically reloading the page.
@@ -288,14 +284,9 @@ msgstr "Срок действия логина истек. Перезагруз�
 msgid "Relationship arrows"
 msgstr "Стрелки отношений"
 
-#. Label for setting the main arrow colour
-#: 
-msgid "Arrow color"
-msgstr "Цвет стрелки"
-
 #. When enabled makes arrows from family to child different colours based on if the child is related to the family by birth or otherwise (e.g. adoption)
 #: 
-msgid "Show blood relationship in different color"
+msgid "Show blood relationship in different colour"
 msgstr "Покажите кровные отношения другим цветом"
 
 #. Label for colour picker to select colour of arrow for children related by birth
@@ -430,20 +421,8 @@ msgstr "Неродственные по крови лица неизвестно
 
 #. Option allowing user to change the background colour of individual tiles (decorated and combined modes)
 #: 
-msgid "Individual background color"
+msgid "Individual background colour"
 msgstr "Индивидуальный цвет фона"
-
-#. Section where user can change colours related to the tiles showing each individual:
-#. https://s3.eu-west-1.amazonaws.com/po-pub/i/tCBByut2gnWNyBHlbEjXM4wm.png
-#: 
-msgid "Tile colors"
-msgstr "Цвета плитки"
-
-#. Section where colours can be changed, where this is unrelated to other sections:
-#. https://s3.eu-west-1.amazonaws.com/po-pub/i/HkIwBd2gotM7LpP7LA074oOI.png
-#: 
-msgid "Other colours"
-msgstr "Другие цвета"
 
 #. Option where user can change the background colour of the family record (ovals in simple/decorated mode, attached rectangle in combined mode). Default is a light yellow.
 #: 
@@ -489,7 +468,7 @@ msgstr "сбросить настройки по умолчанию"
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/eo7ytnyRCth5W2Sq76da71Ph.png
 #: 
 #, fuzzy
-msgid "Show starting individuals in different color"
+msgid "Show starting individuals in different colour"
 msgstr "Показывать начинающих людей другим цветом"
 
 #. Option to change the background colour for starting individuals, to help find them easier on the diagram:
@@ -498,7 +477,7 @@ msgstr "Показывать начинающих людей другим цве
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/eo7ytnyRCth5W2Sq76da71Ph.png
 #: 
 #, fuzzy
-msgid "Starting individuals background color"
+msgid "Starting individuals background colour"
 msgstr "Цвет фона начальных лиц"
 
 #. Option to change font size. This affects (at the time of writing) all diagram text except for names which have their own setting:
@@ -529,23 +508,11 @@ msgstr "только браузер, SVG и PDF"
 msgid "This is our starting point. Choose a person to base the diagram around. You might choose yourself.</p><p>You can choose as many starting individuals as you wish. A tree will be created for each starting individual based on the settings, then the trees are merged to create one tree for the diagram.</p><p>Click the X to remove a record from the list. If two or more records are listed, a &quot;Clear all&quot; option will appear to allow you to remove all records.</p><p>You can also click on an individual in this list to have the diagram in the browser scroll to that person.</p><p>When you next come to the page, the default individual or the last individual you were looking at in webtrees will be loaded. If there was just one saved individual then it will be replaced with the individual provided by webtrees on coming to the page. If there were multiple in the list, then the individual provided by webtrees will be added to the list (if not already in it). So be sure to double-check you are only including individuals you are looking for when first loading the page. This default behaviour can be changed with the option &quot;Treatment of source individuals&quot; in the advanced section."
 msgstr "Это наша отправная точка. Выберите человека, на основе которого будет построена диаграмма. Вы можете выбрать сами.</p><p>Вы можете выбрать столько стартовых персонажей, сколько пожелаете. Дерево будет создано для каждого начального человека на основе настроек, затем деревья будут объединены, чтобы создать одно дерево для диаграммы.</p><p>Нажмите X, чтобы удалить запись из списка. Если в списке две или более записей, появится опция \\\"Очистить все\\\", позволяющая удалить все записи.</p><p>Вы также можете щелкнуть человека в этом списке, чтобы открыть диаграмму в браузере. прокрутите до этого человека.</p><p>Когда вы в следующий раз зайдете на страницу, будет загружен человек по умолчанию или последний человек, которого вы просматривали в веб-деревьях. Если был только один сохраненный человек, то он будет заменен на человека, предоставленного веб-деревьями при переходе на страницу. Если в списке их несколько, то человек, предоставленный веб-деревьями, будет добавлен в список (если еще не в нем). Поэтому не забудьте дважды проверить, что вы включаете только тех, кого ищете, при первой загрузке страницы."
 
-#. This help message is displayed when the user clicks the help icon next to "Include ancestors".  https://s3.eu-west-1.amazonaws.com/po-pub/i/UoTrlDpngydDdWmJPau99ZV4.png
-#: 
-#, fuzzy
-msgid "Tick this option to include ancestors of your starting person(s) and anyone in the tree.</p><h4>Max levels</h4><p>The number of generations of ancestors to include. For example, if you chose yourself as your starting person, you may want the diagram to include relatives back to your great-grandparents. In this case, you would type \"3\" in this box, to include your parents' generation, your grandparents' generation, and your great-grandparents' generation."
-msgstr "Отметьте эту опцию, чтобы включить предков ваших начальных людей и всех в дереве.</p><h4>Максимальное количество уровней</h4><p>Количество поколений предков, которые нужно включить. Например, если вы выбрали себя в качестве исходного человека, вы можете захотеть, чтобы на диаграмме были указаны родственники ваших прабабушек и дедушек. В этом случае вы должны ввести 3 в это поле, чтобы включить поколение ваших родителей, поколение ваших бабушек и дедушек и поколение ваших прабабушек и дедушек."
-
 #. This help message is displayed when the user clicks the help icon next to "Include".  https://s3.eu-west-1.amazonaws.com/po-pub/i/G2LwgKcPjaAwzcCXllEaXa13.png
 #: 
 #, fuzzy
-msgid "This section includes options that let you decide how to build the tree from your starting individual(s).</p><b>Include ancestors</b><p>Tick this option to include ancestors of your starting individual(s) and anyone in the tree.</p><b>Include descendants</b><p>Whether to include children, grandchildren, etc. of people listed in the tree.</p><b>Max levels</b><p>The number of generations of ancestors to include. For example, if you chose yourself as your starting person, you may want the diagram to include relatives back to your great-grandparents. In this case, you would type &quot;3&quot; in the Max levels box under Include ancestors, to include your parents' generation, your grandparents' generation, and your great-grandparents' generation.</p><h5>Relation types to include</h5><p>The type of relatives to include when generating the diagram.</p><b>Siblings</b><p>Include brothers and sisters of anyone in the tree.</p><b>All relations</b><p>Include cousins, nieces, nephews, and their descendants when generating the tree. Requires &quot;Siblings&quot; to be selected.</p><b>Partners</b><p>Include the husbands, wives, and partners of those in the tree even if they aren't blood-relatives. There is another option &quot;Mark not blood-related people with different color&quot; that allows these people to be marked in a different colour.</p><b>Anyone</b><p>Follow all links regardless of whether the person is related. In practice, this generally means that the family of non-relatives (i.e. spouses) are included in the tree.</p><p>Use this option to include all records of the selected generations. Note that only records with a link are included, so you may need to include more ancestor or descendant generations (or more starting individuals) to get all your records to show."
+msgid "This section includes options that let you decide how to build the tree from your starting individual(s).</p><b>Include ancestors</b><p>Tick this option to include ancestors of your starting individual(s) and anyone in the tree.</p><b>Max levels</b><p>The number of generations of ancestors to include. For example, if you chose yourself as your starting person, you may want the diagram to include relatives back to your great-grandparents. In this case, you would type &quot;3&quot; in the Max levels box under Include ancestors, to include your parents' generation, your grandparents' generation, and your great-grandparents' generation.</p><b>Include descendants</b><p>Whether to include children, grandchildren, etc. of people listed in the tree.</p><h4>Relation types to include</h4><p>The type of relatives to include when generating the diagram.</p><b>Siblings</b><p>Include brothers and sisters of anyone in the tree.</p><b>All relations</b><p>Include cousins, nieces, nephews, and their descendants when generating the tree. Requires &quot;Siblings&quot; to be selected.</p><b>Partners</b><p>Include the husbands, wives, and partners of those in the tree even if they aren't blood-relatives. There is another option &quot;Mark not blood-related people with different color&quot; that allows these people to be marked in a different colour.</p><b>Anyone</b><p>Follow all links regardless of whether the person is related. In practice, this generally means that the family of non-relatives (i.e. spouses) are included in the tree.</p><p>Use this option to include all records of the selected generations. Note that only records with a link are included, so you may need to include more ancestor or descendant generations (or more starting individuals) to get all your records to show."
 msgstr "В этом разделе вы можете решить, какой тип родственников включить в диаграмму.</p><h4>Родственные братья и сестры</h4><p>Включить братьев и сестер любого человека в дереве.</p><h4>Все отношения </h4><p>Включить двоюродных братьев, племянниц, племянников и их потомков при создании дерева. Требуется выбрать \"Братья и сестры\".</p><h4>Партнеры</h4><p>Включите мужей, жен и партнеров тех, кто указан в дереве, даже если они не являются кровными родственниками. Существует еще одна опция \"Отметить людей, не связанных с кровью, другим цветом\", которая позволяет помечать этих людей другим цветом.</p><h4>Все</h4><p>Перейти по всем ссылкам независимо от того, является ли человек относится. На практике это обычно означает, что в дерево включаются семьи, не являющиеся родственниками (т. е. супруги).</p><p>Используйте этот параметр, чтобы включить все записи выбранных поколений. Обратите внимание, что включены только записи со ссылкой, поэтому вам может потребоваться включить больше поколений предков (или больше начальных особей), чтобы отобразить все ваши записи."
-
-#. This help message is displayed when the user clicks the help icon next to "Include descendants".  https://s3.eu-west-1.amazonaws.com/po-pub/i/TNXFdoP4fIHVQnScVvnfvKA1.png
-#: 
-#, fuzzy
-msgid "Whether to include children, grandchildren, etc. of people listed in the tree.</p><h4>Max levels</h4><p>The number of generations of descendants to include. For example, if you chose yourself as your starting person, you may want the diagram to include descendants down to your great-grandchildren. In this case, you would type \"3\" in this box, to include your children and others of their generation, your grandchildren, and your great-grandchildren's generation."
-msgstr "Следует ли включать детей, внуков и т. д. людей, перечисленных в дереве.</p><h4>Максимальное количество уровней</h4><p>Количество поколений потомков, которые необходимо включить. Например, если вы выбрали себя в качестве отправной точки, вы можете захотеть, чтобы диаграмма включала потомков вплоть до ваших правнуков. В этом случае вы должны ввести 3 в это поле, чтобы включить ваших детей и других людей их поколения, ваших внуков и ваших правнуков."
 
 #. This help message is displayed when the user clicks the help icon next to "Graph direction". https://s3.eu-west-1.amazonaws.com/po-pub/i/MpbVhXyRxeLgMO8FZVXHZhHG.png
 #: 
@@ -610,95 +577,6 @@ msgstr "Если модуль дойдет до одного из этих лю�
 #: 
 msgid "This section has two related options.<h4>Mark not blood-related people with different color</h4><p>Where spouses are included and are not blood-related to anyone in the &quot;Include anyone related to&quot; field, if this option is selected they will be highlighted in a much duller color than the standard blue/pink for relatives.</p><p>Note that when this option is selected, and non-relatives are found in the selected records, then a full tree scan is performed to identify if an individual is related by a more distant link (see next option).</p><h4>Ignore unseen links to speed up relative check</h4><p>This option is only available when the previous option is selected. When the option to display non-relatives in a different colour is selected, normally a scan is performed starting from the starting individuals and branching to all relatives regardless of display settings. This ensures that if a person is related via a link not displayed, they will still show as related.</p><p>Enabling this option prevents the full scan of the tree which can greatly speed up the generation of the diagram on larger trees, but may reduce accuracy of the colouring of non-relatives."
 msgstr "В этом разделе есть две взаимосвязанные опции.<h4>Отметить людей, не связанных кровным родством, другим цветом</h4><p>Там, где включены супруги, не связанные кровным родством с кем-либо, в поле «Включить кого-либо, связанного с», если это выбрана опция, они будут выделены гораздо более тусклым цветом, чем стандартный синий/розовый цвет для родственников.</p><p>Обратите внимание, что если эта опция выбрана и в выбранных записях обнаружены неродственники, то полный сканирование дерева выполняется, чтобы определить, связано ли лицо более отдаленной связью (см. следующий параметр).</p><h4>Игнорировать невидимые связи, чтобы ускорить относительную проверку</h4><p>Этот параметр доступен только в том случае, если выбран предыдущий вариант. Когда выбрана опция отображения не родственников другим цветом, обычно сканирование выполняется, начиная с начальных особей и переходя ко всем родственникам независимо от настроек отображения. Это гарантирует, что если человек связан через ссылку, которая не отображается, он все равно будет отображаться как связанный.</p><p>Включение этой опции предотвращает полное сканирование дерева, что может значительно ускорить создание диаграммы на больших деревья, но может снизить точность окраски неродственных видов."
-
-#. Help text shown when user clicks the "i" next to "Show photos" in the advanced appearance section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/Xpn8Y8LiWnYphmjJe9eJO6ub.png
-#: 
-#, fuzzy
-msgid "This section contains the option to display the photo from the individual's page in the tree.</p><p>The \"Photo shape\" option allows you to select a shape for the photos. Photos will be cropped to fit this shape.</p><p>The \"Photo size\" option allows you to adjust the scale of the photo. 100&percnt; is the default, and you can increase this to make the photos bigger, or decrease it to make them smaller."
-msgstr "Отображать ли фото со страницы человека в дереве. Это поддерживается только для типов диаграмм с декоративными и комбинированными схемами."
-
-#. Help text shown when user clicks the "i" next to "Abbreviated names":   https://s3.eu-west-1.amazonaws.com/po-pub/i/rIQKFYaokaQndqxKRMkSoZDA.png
-#: 
-msgid "There are several options to shorten the names of individuals displayed.</p><h4>Full name</h4><p>The default option, this shows the primary name and any nickname. This option currently is the only one where the preferred name is underlined, and is the only one to show nicknames (in \\\"quotes\\\").<h4>Given and surnames</h4><p>Like the full name, but without nicknames.</p><h4>Given names</h4><p>Just the given names are displayed.<h4>First given names only</h4><p>Just the first word of the name in the given names field.</p><h4>Surnames</h4><p>Just the surnames are displayed.</p><h4>Initials only</h4><p>This displays initials only, for example \\\"JFK\\\".</p><h4>Given name initials and Surname</h4><p>This shows initials for the first and second given name, as well as the full surname. For example: \\\"J.F. Kennedy\\\"</p><h4>Don't show names</h4><p>No names are shown. If birth and death details are also disabled then it is possible to show only photos or even just coloured boxes."
-msgstr "Существует несколько вариантов сокращения имен отображаемых лиц.</p><h4>Полное имя</h4><p>По умолчанию отображается основное имя и любой псевдоним. Эта опция в настоящее время является единственной, где предпочтительное имя подчеркнуто, и только она показывает псевдонимы (в \\\"кавычках\\\").<h4>Имя и фамилия</h4><p>Подобно полному имени, но без псевдонимов.</p><h4>Имена</h4><p>Отображаются только указанные имена.<h4>Только первые имена</h4><p>Только первое слово имени в данном поле имен.</p><h4>Фамилии</h4><p>Отображаются только фамилии.</p><h4>Только инициалы</h4><p>Отображает только инициалы, например \\\"JFK \\\".</p><h4>Инициалы имени и фамилия</h4><p>Показывает инициалы первого и второго имени, а также полную фамилию. Например: \\\"Дж. Ф. Кеннеди\\\"</p><h4>Не показывать имена</h4><p>Имена не отображаются. Если сведения о рождении и смерти также отключены, то можно показывать только фотографии или даже просто цветные прямоугольники."
-
-#. Help text shown when user clicks the "i" next to "Abbreviate place names":  https://s3.eu-west-1.amazonaws.com/po-pub/i/Ek3gve1dtOPTm63m5WeKiEjl.png
-#: 
-msgid "There are several options to shorten place names (for place of birth, place of marriage, place of death).</p><h4>Full place name</h4><p>The place name is printed in full.</p><h4>City and Country</h4><p>The first and last section of the place name is used, using commas to split the sections. For example, \\\"London, England, United Kingdom\\\" would be shortened to \\\"London, United Kingdom\\\"</p><h4>City and 2 Letter ISO Country Code</h4><p>The first and last section of the place name is used, using commas to split the sections. The country is then converted to the ISO3166-1-Alpha-2 country code.</p><p>For example, \\\"Calgary, Alberta, Canada\\\" would be shortened to \\\"Calgary, CA\\\"</p><h4>City and 3 Letter ISO Country Code</h4><p>The first and last section of the place name is used, using commas to split the sections. The country is then converted to the ISO3166-1-Alpha-3 country code.</p><p>For example, \\\"Calgary, Alberta, Canada\\\" would be shortened to \\\"Calgary, CAN\\\"<h4>Note</h4><p>The CLDR display name is used for matching. The data comes from <a href=\\\"https://www.datahub.io/core/country-codes\\\" class=\\\"help-link\\\">Datahub</a> but has been modified as for example the original CLDR name for the United Kingdom is \\\"UK\\\", and the original CLDR name for the United States is \\\"US\\\". Matching against these countries for the purposes of abbreviation is therefore pointless. So changes have been made to make this work better. Please <a href=\\\"https://github.com/Neriderc/GVExport/issues/new\\\" class=\\\"help-link\\\">open an issue</a> on GitHub if you find a country is not abbreviating correctly."
-msgstr "Существует несколько вариантов сокращения географических названий (место рождения, место брака, место смерти).</p><h4>Полное название места</h4><p>Название места печатается полностью.</ p><h4>Город и страна</h4><p>Используются первая и последняя части названия места, разделяемые запятыми. Например, \\\"Лондон, Англия, Соединенное Королевство\\\" будет сокращено до \\\"Лондон, Соединенное Королевство\\\"</p><h4>Город и двухбуквенный код страны ISO</h4><p>Первая и последняя используется часть названия места, разделяемая запятыми. Затем страна преобразуется в код страны ISO3166-1-Alpha-2.</p><p>Например, \\\"Калгари, Альберта, Канада\\\" будет сокращено до \\\"Калгари, Калифорния\\\"</p><h4>Город и трехбуквенный код страны ISO</h4><p >Используются первая и последняя части названия места, разделяемые запятыми. Затем страна преобразуется в код страны ISO3166-1-Alpha-3.</p><p>Например, \\\"Калгари, Альберта, Канада\\\" будет сокращено до \\\"Калгари, Канада\\\"<h4> Примечание</h4><p>Для сопоставления используется отображаемое имя CLDR. Данные поступают из <a href=\\\"https://www.datahub.io/core/country-codes\\\" class=\\\"help-link\\\">Datahub</a>, но были изменены, например, исходное имя CLDR для Соединенного Королевства — «Великобритания», а исходное имя CLDR для Соединенных Штатов — «США». Поэтому сопоставление с этими странами для целей сокращения бессмысленно. Поэтому были внесены изменения, чтобы сделать эту работу лучше. Если вы обнаружите, что страна не правильно сокращая."
-
-#. Help text shown when user clicks the "i" next to "Show individual XREF":   https://s3.eu-west-1.amazonaws.com/po-pub/i/z0ydquyzpwfL2pZbkf4ZsjXv.png
-#: 
-#, fuzzy
-msgid "Whether to include the XREF of individuals in the diagram."
-msgstr "Включать ли идентификатор человека веб-деревьев в выходные данные."
-
-#. Help text shown when user clicks the "i" next to "Show birth date":  https://s3.eu-west-1.amazonaws.com/po-pub/i/K0f3sazuGOU8Bc4k816wfldH.png
-#: 
-msgid "Check the box if you would like to include the birthdate of individuals in the output.</p><p>You can also choose whether to show the full date of birth or just the year."
-msgstr "Установите флажок, если вы хотите включить в выходные данные дату рождения отдельных лиц.</p><p>Вы также можете выбрать, показывать ли полную дату рождения или только год."
-
-#. Help text shown when user clicks the "i" next to "Show birth place":    https://s3.eu-west-1.amazonaws.com/po-pub/i/f0NMn7pmbDd8EmGi9s3Ps4Sm.png
-#: 
-msgid "Whether to show the place of birth in the output. Also see option for abbreviating place names."
-msgstr "Показывать ли место рождения в выводе. Также см. вариант сокращения названий мест."
-
-#. Help text shown when user clicks the "i" next to "Show death date":     https://s3.eu-west-1.amazonaws.com/po-pub/i/fNNY3AothlpEk6RVHwu18jBq.png
-#: 
-msgid "Check the box if you would like to include the death date of individuals in the output.</p><p>You can also choose whether to show the full date of death or just the year."
-msgstr "Установите флажок, если вы хотите включить в выходные данные дату смерти отдельных лиц.</p><p>Вы также можете выбрать, показывать ли полную дату смерти или только год."
-
-#. Help text shown when user clicks the "i" next to "Show death place":     https://s3.eu-west-1.amazonaws.com/po-pub/i/zwFpvOQOHvWtGCscz5jgN1LV.png
-#: 
-msgid "Whether to show the place of death in the output. Also see option for abbreviating place names."
-msgstr "Показывать ли место смерти в выводе. Также см. вариант сокращения названий мест."
-
-#. Help text shown when user clicks the "i" next to "Show family XREF":     https://s3.eu-west-1.amazonaws.com/po-pub/i/pUSNfbB0jvF2zxYRn8wQCCQ8.png
-#: 
-#, fuzzy
-msgid "Whether to include the XREF of families in the output."
-msgstr "Следует ли включать идентификатор семейства веб-деревьев в выходные данные."
-
-#. Help text shown when user clicks the "i" next to "Show marriage date":      https://s3.eu-west-1.amazonaws.com/po-pub/i/WcVSfrpda3aaoTR6k8TKg4CC.png
-#: 
-msgid "Check the box if you would like to include the date of marriage in the output.</p><p>You can also choose whether to show the full date of marriage or just the year."
-msgstr "Установите флажок, если вы хотите включить в выходные данные дату вступления в брак.</p><p>Вы также можете выбрать, следует ли отображать полную дату вступления в брак или только год."
-
-#. Help text shown when user clicks the "i" next to "Show marriage place":      https://s3.eu-west-1.amazonaws.com/po-pub/i/jYVeBKSFMcZhilwfeHgbyWqH.png
-#: 
-msgid "Whether to show the place of marriage in the output. Also see option for abbreviating place names."
-msgstr "Показывать ли место брака в выводе. Также см. вариант сокращения названий мест."
-
-#. Help text shown when user clicks the "i" next to "DPI":      https://s3.eu-west-1.amazonaws.com/po-pub/i/40xFZyQ8fdzDhsLDzvifNDAr.png
-#: 
-msgid "For output such as JPG and PNG, this setting will product higher quality output when it is larger, but will also increase the file size. Smaller values will produce smaller files, but the quality will be worse and if the value is too low you may not be able to read text."
-msgstr "Для таких выходных файлов, как JPG и PNG, этот параметр обеспечивает более высокое качество вывода, когда он больше, но также увеличивает размер файла. Меньшие значения будут создавать файлы меньшего размера, но качество будет хуже, и если значение слишком низкое, вы не сможете прочитать текст."
-
-#. Help text shown when user clicks the "i" next to "Space":  https://s3.eu-west-1.amazonaws.com/po-pub/i/hEJcjkJ8xvGsTPoHjq5nT8L6.png
-#: 
-msgid "These options affect the distance between nodes on the diagram.</p><h4>Between generations</h4><p>How close you want generations on the output. For example, for left to right output, smaller numbers will bring the columns of individuals closer together, while larger numbers would push them further apart.</p><h4>Between individuals on the same level</h4><p>How close you want the individuals of the same generation on the output. For example, for left to right output, smaller numbers will mean less space vertically between the boxes, while larger numbers would push them further apart."
-msgstr "Эти параметры влияют на расстояние между узлами на диаграмме.</p><h4>Между поколениями</h4><p>Насколько близко вы хотите, чтобы поколения отображались на выходе. Например, для вывода слева направо меньшие числа сблизят столбцы отдельных лиц, а большие числа раздвинут их дальше друг от друга.</p><h4>Между людьми на одном уровне</h4><p>Как закрыть вы хотите, чтобы люди одного поколения на выходе. Например, для вывода слева направо меньшие числа будут означать меньшее расстояние по вертикали между прямоугольниками, а большие числа раздвинут их дальше друг от друга."
-
-#. Help text shown when user clicks the "i" next to "Font":  https://s3.eu-west-1.amazonaws.com/po-pub/i/SMqr3gHBplFqJ4C0yRnFBpkp.png
-#: 
-#, fuzzy
-msgid "This section lets you configure the typeface and colour of text.</p><h4>Typeface</h4><p>This list lets you pick from a number of known websafe font typefaces. They must be installed on the system or a fallback typeface will be used. These options are known to be installed on almost all systems and that is why they have been chosen.</p><h4>Font size for names</h4><p>Set the font point size for the names of individuals.</p><h4>Font size for details</h4><p>This changes the font point size for all text except for names. For example, the date and place of marriage, and the date and place of birth and death.</p><h4>Font colour for names</h4><p>This changes the colour of the font for names. Note that the colour picker is provided by your browser, and is handled differently depending on which browser you are using.</p><h4>Font colour for details</h4><p>This changes the colour of the font of all text except for names, for example, the date and place of marriage, and the date and place of birth and death. Note that the colour picker is provided by your browser, and is handled differently depending on which browser you are using."
-msgstr "В этом разделе можно настроить шрифт и цвет текста.</p><h4>Набор шрифтов</h4><p>В этом списке можно выбрать один из нескольких известных шрифтов веб-безопасности. Они должны быть установлены в системе, иначе будет использоваться запасной шрифт. Известно, что эти опции установлены почти во всех системах, и именно поэтому они были выбраны.</p><h4>Размер шрифта для имен</h4><p>Установите размер шрифта в пунктах для имен людей. В простом режиме это игнорируется, так как для всего текста используется размер шрифта деталей.</p><h4>Размер шрифта для деталей</h4><p>Это изменяет размер шрифта в пунктах для всего текста, кроме имен. Например, дата и место заключения брака, а также дата и место рождения и смерти. В простом режиме это также используется для размера шрифта имен.</p><h4>Цвет шрифта для имен</h4><p>Изменяет цвет шрифта для имен. В простом режиме это устанавливает шрифт для всего текста в отдельной ячейке записи. Обратите внимание, что палитра цветов предоставляется вашим браузером и обрабатывается по-разному в зависимости от того, какой браузер вы используете.</p><h4>Цвет шрифта для подробностей</h4><p>Это меняет цвет шрифта всех текст, кроме имен, например, дата и место заключения брака, а также дата и место рождения и смерти. В простом режиме это устанавливает шрифт для деталей в семейной записи (дата и место бракосочетания), так как один и тот же шрифт используется для всей отдельной записи (цвет шрифта для имен). Обратите внимание, что палитра цветов предоставляется вашим браузером и обрабатывается по-разному в зависимости от того, какой браузер вы используете."
-
-#. Help text shown when user clicks the "i" next to "Relationship arrows":  https://s3.eu-west-1.amazonaws.com/po-pub/i/49vIt5p3NoEIm5t9CgmVtYt6.png
-#: 
-msgid "This section lets you customise the arrows that link records together.</p><h4>Arrow colour</h4><p>This is the main colour for arrows. This is used for all arrows if the next option is disabled, otherwise it is used for arrows from a spouse to the family record.</p><h4>Show blood relationship in a different colour</h4><p>If this option is selected, the relationship arrows between a family record and children will use different colours depending on if the relationship is by birth, or a different type of relationship (e.g. adoption). If this is disabled, all relationship arrows use the above default colour.</p><ul><li>Related by birth - If the above option is enabled, this sets the colour of arrows from a family record to a child that is related by birth.<li>Related other than by birth - If the above option is enabled, this sets the colour of arrows from a family record to a child that is not related by birth (e.g. foster or adopted)."
-msgstr "В этом разделе можно настроить стрелки, связывающие записи.</p><h4>Цвет стрелки</h4><p>Это основной цвет стрелок. Это используется для всех стрелок, если следующий параметр отключен, в противном случае он используется для стрелок от супруга к семейной записи.</p><h4>Показать кровное родство другим цветом</h4><p>Если это выбрана опция, стрелки отношений между семейной записью и детьми будут использовать разные цвета в зависимости от того, связаны ли отношения по рождению или другой тип отношений (например, усыновление). Если этот параметр отключен, все стрелки отношений используют указанный выше цвет по умолчанию.</p><ul><li>Родство по рождению — если указанный выше параметр включен, это устанавливает цвет стрелок из семейной записи для ребенка, который связаны по рождению.<li>Родственны не по рождению. Если указанная выше опция включена, это задает цвет стрелок от семейной записи к ребенку, который не связан по рождению (например, приемный или усыновленный)."
-
-#. Help text shown when user clicks the "i" next to "Tile colours":  https://s3.eu-west-1.amazonaws.com/po-pub/i/gzXTu0XdLd6V1GhSjjDRbXoj.png
-#: 
-msgid "This section allows you to change the colours of the different parts of the tiles shown for each individual. Click the coloured box to change the colour. This uses your browser's colour picker, so will look different depending on what browser you are using."
-msgstr "Этот раздел позволяет вам изменять цвета различных частей плиток, показанных для каждого человека. Щелкните цветное поле, чтобы изменить цвет. Это использует палитру цветов вашего браузера, поэтому будет выглядеть по-разному в зависимости от того, какой браузер вы используете."
-
-#. Help text shown when user clicks the "i" next to "Other colours":  https://s3.eu-west-1.amazonaws.com/po-pub/i/LrHottxOgQWJC1752fcbOh36.png
-#: 
-msgid "This section allows you to change colours associated with the diagram that are not part of the individual tile above. Click the coloured box to change the colour. This uses your browser's colour picker, so will look different depending on what browser you are using."
-msgstr "В этом разделе можно изменить цвета, связанные с диаграммой, которые не являются частью отдельной плитки выше. Щелкните цветное поле, чтобы изменить цвет. Это использует палитру цветов вашего браузера, поэтому будет выглядеть по-разному в зависимости от того, какой браузер вы используете."
 
 #. "Output settings" was renamed to "File settings".
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/zY6fWYDbmG93zn0ODfvgtr3y.png
@@ -1267,4 +1145,9 @@ msgstr "Высокий"
 #: 
 msgid "Highest"
 msgstr "Наибольший"
+
+#. Label for colour picker, shown when you choose "Custom" in the border colour option:  https://s3.eu-west-1.amazonaws.com/po-pub/i/hSuaDbMqsm6pmK47oJ5B6o88.png
+#: 
+msgid "Custom border colour"
+msgstr ""
 
