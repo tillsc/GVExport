@@ -191,7 +191,7 @@ $usegraphviz = $vars['graphviz_bin'] != "";
             refreshIndisFromXREFS(false);
             removeError("indi-error");
         } else {
-            addError("indi-error","<?= I18N::translate("Individual required") ?>");
+            addError("indi-error","<?= I18N::translate('Individual required') ?>");
         }
         e.preventDefault();
     });
@@ -202,7 +202,7 @@ $usegraphviz = $vars['graphviz_bin'] != "";
         if (checkIndiBlank() === false) {
             removeError("indi-error");
         } else {
-            addError("indi-error","<?= I18N::translate("Individual required") ?>");
+            addError("indi-error","<?= I18N::translate('Individual required') ?>");
             e.preventDefault();
         }
         // Also check if Graphviz installed. If so then let it handle it (unless unsupported setting used),

@@ -274,7 +274,7 @@ Version 0.4.5 (2007-11-27)
 
 Version 0.4.4 (2007-11-25)
 	- New		: New diagram type - Decorated with photos (could be slow!)
-	- New		: Not blood related people could be marked with different color (on partial tree)
+	- New		: Not blood related people could be marked with different colour (on partial tree)
 	- New		: Siblings can be included in partial tree
 	- Changed	: Some UI changes
 
@@ -294,7 +294,7 @@ Version 0.4 (2007-11-23)
 	- New		: Added SVG output format, but seems to be buggy
 	- Changed	: Some speed-up on full tree generation
 	- Changed	: Code cleanup (require files)
-	- Changed	: Default colors in config.php
+	- Changed	: Default colours in config.php
 
 Version 0.3.2 (2007-11-22)
 	- Fixed		: If localized language file is missing, then "en" is used
@@ -306,7 +306,7 @@ Version 0.3.1 (2007-11-22)
 
 Version 0.3 (2007-11-22)
 	- New		: Simple / Decorated (HTML) diagram
-	- New		: Custom colors for diagram
+	- New		: Custom colours for diagram
 	- Fixed		: PHP bug (Pasquale Ceres <pasquale_ceres at yahoo it>)
 
 Version 0.2 (2007-11-21)

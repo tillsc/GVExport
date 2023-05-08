@@ -160,7 +160,7 @@ class FormSubmission
         $settings['show_debug_panel'] = isset($vars['show_debug_panel']);
         $settings['enable_graphviz'] = isset($vars['enable_graphviz']);
 
-        // Set custom colors
+        // Set custom colours
         if (isset($vars["male_col"]) && $this->isValidColourHex($vars["male_col"])) {
             $settings['male_col'] = $vars["male_col"];
         }
