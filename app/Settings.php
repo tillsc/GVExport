@@ -129,6 +129,9 @@ class Settings
                         $loaded_settings = json_decode($all_settings[$id]['settings'], true);
                         if (json_last_error() === JSON_ERROR_NONE) {
                             foreach ($settings as $preference => $value) {
+                                if (($preference == 'enable_graphviz' || $preference == 'enable_debug_mode') && !$settings['show_debug_panel']) {
+                                    continue;
+                                }
                                 $context = ($id == self::ID_MAIN_SETTINGS) ? self::CONTEXT_USER : self::CONTEXT_NAMED_SETTING;
                                 if (self::shouldLoadSetting($preference, $context)) {
                                     if (isset($loaded_settings[$preference])) {
