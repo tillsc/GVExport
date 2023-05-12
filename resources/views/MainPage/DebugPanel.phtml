@@ -19,5 +19,5 @@ use vendor\WebtreesModules\gvexport\Settings;
     <?= MainPage::addLabel('enable_graphviz', 'Graphviz', FALSE); ?>
     <div class="col-sm-8 wt-page-options-value">
         <label for="enable_graphviz"><?= I18N::translate('Use Graphviz on server') ?></label>
-        <input type="checkbox" name="vars[enable_graphviz]" id="enable_graphviz" value="enable_graphviz" onclick="setGraphvizAvailable(this.value==='enable_graphviz');" <?= $vars["enable_graphviz"] && (new Settings())->getDefaultSettings()['graphviz_bin'] != "" ? 'checked' : '' ?> <?= (new Settings())->getDefaultSettings()['graphviz_bin'] == "" ? "disabled" : ""; ?>><br></div>
+        <input type="checkbox" name="vars[enable_graphviz]" id="enable_graphviz" value="enable_graphviz" onclick="setGraphvizAvailable(this.value==='enable_graphviz');" <?= $vars["enable_graphviz"] ? 'checked' : '' ?> <?= (new Settings())->getDefaultSettings()['graphviz_bin'] == "" ? "disabled" : ""; ?>><br></div>
 </div>
