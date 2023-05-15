@@ -13,7 +13,7 @@ use Fisharebest\Webtrees\I18N;
 <?= MainPage::addLabel('', 'Diagram', !$admin); ?>
 <div class="col-sm-8 wt-page-options-value">
     <div onclick="showHideSubgroup('dpi_subgroup', this)" class="pointer subgroup">→ <?= I18N::translate('Diagram DPI'); ?></div>
-    <div id="dpi_subgroup" class="colour_subgroup col-auto wt-page-options-value" style="display: none">
+    <div id="dpi_subgroup" class="setting_subgroup col-auto wt-page-options-value" style="display: none">
         <div class="row">
             <label for="dpi"><?= I18N::translate('DPI') ?></label>
             <div class="col-auto">
@@ -24,7 +24,7 @@ use Fisharebest\Webtrees\I18N;
     </div>
 
     <div onclick="showHideSubgroup('spacing_subgroup', this)" class="pointer subgroup">→ <?= I18N::translate('Spacing'); ?></div>
-    <div id="spacing_subgroup" class="colour_subgroup col-auto wt-page-options-value" style="display: none">
+    <div id="spacing_subgroup" class="setting_subgroup col-auto wt-page-options-value" style="display: none">
         <div class="row">
             <label for="ranksep"><?= I18N::translate('Between generations') ?></label>
             <div class="col-auto">
@@ -40,7 +40,7 @@ use Fisharebest\Webtrees\I18N;
     </div>
 
     <div onclick="showHideSubgroup('diagram_colours_subgroup', this)" class="pointer subgroup">→ <?= I18N::translate('Diagram colours'); ?></div>
-    <div id="diagram_colours_subgroup" class="colour_subgroup col-auto wt-page-options-value" style="display: none">
+    <div id="diagram_colours_subgroup" class="setting_subgroup col-auto wt-page-options-value" style="display: none">
         <div class="row">
             <div class="col-sm-12 col-auto">
                 <input type="color" class="picker" name="vars[background_col]" id="background_col" value="<?= e($vars["background_col"]); ?>" /><label for="background_col" class="picker-label"><?= I18N::translate('Diagram background color') ?></label>
@@ -50,7 +50,7 @@ use Fisharebest\Webtrees\I18N;
             </div>
             <div class="padding-left-10">
                 <input type="checkbox" name="vars[colour_arrow_related]" onclick="showHide(document.getElementById('arrow_group'),this.checked)" id="colour_arrow_related" value="colour_arrow_related" <?= $vars["colour_arrow_related"] ? 'checked' : '' ?>><label for="colour_arrow_related" class="check-list width-90pc"><?= I18N::translate('Show blood relationship in different colour') ?></label>
-                <div id="arrow_group" class="colour_subgroup col-auto wt-page-options-value" <?= !$vars["colour_arrow_related"] ? 'style="display:none;"' : '' ?>>
+                <div id="arrow_group" class="setting_subgroup col-auto wt-page-options-value" <?= !$vars["colour_arrow_related"] ? 'style="display:none;"' : '' ?>>
                     <div class="sub-group">
                         <input type="color" class="picker" name="vars[arrows_related]" id="arrows_related" value="<?= e($vars["arrows_related"]); ?>" /><label for="arrows_related" class="picker-label"><?= I18N::translate('Related by birth') ?></label>
                         <input type="color" class="picker" name="vars[arrows_not_related]" id="arrows_not_related" value="<?= e($vars["arrows_not_related"]); ?>" /><label for="arrows_not_related" class="picker-label"><?= I18N::translate('Related other than by birth') ?></label>
