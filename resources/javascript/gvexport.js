@@ -869,6 +869,7 @@ function pageLoaded(Url) {
     document.querySelector('#bg_col_type').addEventListener('change', () => {showHideMatchDropdown('bg_col_type', 'custom_bg_subgroup', '0');});
     document.querySelector('#border_col_type').addEventListener('change', () => {showHideMatchDropdown('border_col_type', 'custom_border_subgroup', '0');});
     document.querySelector('#output_type').addEventListener('change', () => {if (graphvizAvailable) {showHideMatchDropdown('output_type', 'server_pdf_subgroup', 'pdf|svg');}});
+    document.querySelector('#indi_tile_shape').addEventListener('change', () => {showHideMatchDropdown('indi_tile_shape', 'shape_sex_subgroup', '20');});
 }
 
 // Function to show a help message

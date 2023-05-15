@@ -78,6 +78,7 @@ class Person
         $out = "";
         $border_colour = $this->dot->settings["border_col"];    // Border colour of the INDI's box
         $death_place = "";
+        $i = $this->dot->getUpdatedPerson($pid);
         // Get the personal data
         if ($this->dot->settings["diagram_type"] == "combined" && (substr($pid, 0, 3) == "I_H" || substr($pid, 0, 3) == "I_W")) {
             // In case of dummy individual
@@ -89,7 +90,6 @@ class Person
             $link = "";
             $name = " ";
         } else {
-            $i = $this->dot->getUpdatedPerson($pid);
             $fill_colour = $this->dot->getGenderColour($i->sex(), $related);        // Background colour is set to specified
             if ($this->dot->settings['border_col_type'] == Settings::OPTION_BORDER_SEX_COLOUR) {
                 $border_colour = $this->dot->getGenderColour($i->sex(), $related);
@@ -162,7 +162,7 @@ class Person
         if ($this->dot->settings["diagram_type"] == "combined") {
             $out .= "<TABLE BORDER=\"0\" CELLBORDER=\"0\" CELLPADDING=\"2\" CELLSPACING=\"0\" BGCOLOR=\"" . $indi_bg_colour . "\" $href>";
         } else {
-            $style = ($this->dot->settings['indi_tile_shape'] == 10 ? 'STYLE="ROUNDED" ' : '');
+            $style = ($this->shouldBeRounded($i, $this->dot->settings['indi_tile_shape']) ? 'STYLE="ROUNDED" ' : '');
             $out .= "<TABLE " . $style . "COLOR=\"" . $border_colour . "\" BORDER=\"1\" CELLBORDER=\"0\" CELLPADDING=\"2\" CELLSPACING=\"0\" BGCOLOR=\"" . $indi_bg_colour . "\" $href>";
         }
         $birthData = " $birthdate " . (empty($birthplace) ? "" : "($birthplace)");
@@ -403,5 +403,33 @@ class Person
             }
         }
         return 1;
+    }
+
+    /**
+     * @param Individual $i
+     * @param int $option
+     * @return bool
+     */
+    private function shouldBeRounded(Individual $i, int $option): bool
+    {
+        switch ($option) {
+            case 0:
+            default;
+                return false;
+            case 10:
+                return true;
+            case 20:
+                switch ($i->sex()) {
+                    case 'M':
+                        return $this->shouldBeRounded($i, $this->dot->settings['shape_sex_male']);
+                    case 'F':
+                        return $this->shouldBeRounded($i, $this->dot->settings['shape_sex_female']);
+                    case 'X':
+                        return $this->shouldBeRounded($i, $this->dot->settings['shape_sex_other']);
+                    case 'U':
+                        return $this->shouldBeRounded($i, $this->dot->settings['shape_sex_unknown']);
+                    default: return false;
+                }
+        }
     }
 }

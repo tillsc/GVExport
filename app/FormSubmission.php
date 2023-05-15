@@ -232,6 +232,18 @@ class FormSubmission
         if (isset($vars['indi_tile_shape'])) {
             $settings['indi_tile_shape'] = I18N::digits($vars['indi_tile_shape']);
         }
+        if (isset($vars['shape_sex_male'])) {
+            $settings['shape_sex_male'] = I18N::digits($vars['shape_sex_male']);
+        }
+        if (isset($vars['shape_sex_female'])) {
+            $settings['shape_sex_female'] = I18N::digits($vars['shape_sex_female']);
+        }
+        if (isset($vars['shape_sex_other'])) {
+            $settings['shape_sex_other'] = I18N::digits($vars['shape_sex_other']);
+        }
+        if (isset($vars['shape_sex_unknown'])) {
+            $settings['shape_sex_unknown'] = I18N::digits($vars['shape_sex_unknown']);
+        }
         if (isset($vars['photo_size'])) {
             $size = $vars['photo_size'];
             if (!strpos($size, '%')) {
