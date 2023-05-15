@@ -191,14 +191,14 @@ class FormSubmission
         if (isset($vars["background_col"]) && $this->isValidColourHex($vars["background_col"])) {
             $settings['background_col'] = $vars["background_col"];
         }
-        if (isset($vars["bg_colour_type"])) {
-            $settings['bg_colour_type'] = I18N::digits($vars["bg_colour_type"]);
+        if (isset($vars["bg_col_type"])) {
+            $settings['bg_col_type'] = I18N::digits($vars["bg_col_type"]);
         }
-        if (isset($vars["stripe_colour_type"])) {
-            $settings['stripe_colour_type'] = I18N::digits($vars["stripe_colour_type"]);
+        if (isset($vars["stripe_col_type"])) {
+            $settings['stripe_col_type'] = I18N::digits($vars["stripe_col_type"]);
         }
-        if (isset($vars["border_colour_type"])) {
-            $settings['border_colour_type'] = I18N::digits($vars["border_colour_type"]);
+        if (isset($vars["border_col_type"])) {
+            $settings['border_col_type'] = I18N::digits($vars["border_col_type"]);
         }
         if (isset($vars["indi_background_col"]) && $this->isValidColourHex($vars["indi_background_col"])) {
             $settings['indi_background_col'] = $vars["indi_background_col"];

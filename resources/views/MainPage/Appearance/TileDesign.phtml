@@ -52,20 +52,20 @@ use Fisharebest\Webtrees\I18N;
         <div onclick="showHideSubgroup('colours_subgroup', this)" class="pointer subgroup">→ <?= I18N::translate('Colours'); ?></div>
         <div id="colours_subgroup" class="colour_subgroup col-auto wt-page-options-value" style="display: none">
             <div class="col-auto margin-bottom">
-                <label for="bg_colour_type"><?= I18N::translate('Individual background colour') ?></label>
-                <?= view('components/select', ['name' => 'vars[bg_colour_type]', 'id' => 'bg_colour_type', 'selected' => e($vars['bg_colour_type']), 'options' => MainPage::updateTranslations($settings["bg_colour_type_options"])]) ?>
-                <div id="custom_bg_subgroup" class="colour_subgroup col-auto wt-page-options-value fit-content margin-top" <?= !$vars["bg_colour_type"] == 0 ? 'style="display:none;"' : '' ?>>
+                <label for="bg_col_type"><?= I18N::translate('Individual background colour') ?></label>
+                <?= view('components/select', ['name' => 'vars[bg_col_type]', 'id' => 'bg_col_type', 'selected' => e($vars['bg_col_type']), 'options' => MainPage::updateTranslations($settings["bg_col_type_options"])]) ?>
+                <div id="custom_bg_subgroup" class="colour_subgroup col-auto wt-page-options-value fit-content margin-top" <?= !$vars["bg_col_type"] == 0 ? 'style="display:none;"' : '' ?>>
                     <input type="color" class="picker" name="vars[indi_background_col]" id="indi_background_col" value="<?= e($vars["indi_background_col"]); ?>" /><label for="indi_background_col" class="picker-label"><?= I18N::translate('Custom background colour') ?></label>
                 </div>
             </div>
             <div class="col-auto margin-bottom">
-                <label for="stripe_colour_type"><?= I18N::translate('Individual stripe color') ?></label>
-                <?= view('components/select', ['name' => 'vars[stripe_colour_type]', 'id' => 'stripe_colour_type', 'selected' => e($vars['stripe_colour_type']), 'options' => MainPage::updateTranslations($settings["stripe_colour_type_options"])]) ?>
+                <label for="stripe_col_type"><?= I18N::translate('Individual stripe color') ?></label>
+                <?= view('components/select', ['name' => 'vars[stripe_col_type]', 'id' => 'stripe_col_type', 'selected' => e($vars['stripe_col_type']), 'options' => MainPage::updateTranslations($settings["stripe_col_type_options"])]) ?>
             </div>
             <div class="col-auto margin-bottom">
-                <label for="border_colour_type"><?= I18N::translate('Individual border color') ?></label>
-                <?= view('components/select', ['name' => 'vars[border_colour_type]', 'id' => 'border_colour_type', 'selected' => e($vars['border_colour_type']), 'options' => MainPage::updateTranslations($settings["border_colour_type_options"])]) ?>
-                <div id="custom_border_subgroup" class="colour_subgroup col-auto wt-page-options-value fit-content margin-top" <?= !$vars["border_colour_type"] == 0 ? 'style="display:none;"' : '' ?>>
+                <label for="border_col_type"><?= I18N::translate('Individual border color') ?></label>
+                <?= view('components/select', ['name' => 'vars[border_col_type]', 'id' => 'border_col_type', 'selected' => e($vars['border_col_type']), 'options' => MainPage::updateTranslations($settings["border_col_type_options"])]) ?>
+                <div id="custom_border_subgroup" class="colour_subgroup col-auto wt-page-options-value fit-content margin-top" <?= !$vars["border_col_type"] == 0 ? 'style="display:none;"' : '' ?>>
                     <input type="color" class="picker" name="vars[indi_border_col]" id="indi_border_col" value="<?= e($vars["indi_border_col"]); ?>" /><label for="indi_border_col" class="picker-label"><?= I18N::translate('Custom border colour') ?></label>
                 </div>
             </div>

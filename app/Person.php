@@ -53,10 +53,10 @@ class Person
         } else {
             $related = TRUE;
         }
-        if ($this->dot->settings['border_colour_type'] == Settings::OPTION_BORDER_SEX_COLOUR) {
+        if ($this->dot->settings['border_col_type'] == Settings::OPTION_BORDER_SEX_COLOUR) {
             $i = $this->dot->getUpdatedPerson($pid);
             $borderColour = $this->dot->getGenderColour($i->sex(), $related);
-        } else if ($this->dot->settings['border_colour_type'] == Settings::OPTION_BORDER_CUSTOM_COLOUR) {
+        } else if ($this->dot->settings['border_col_type'] == Settings::OPTION_BORDER_CUSTOM_COLOUR) {
             $borderColour = $this->dot->settings["indi_border_col"];
         } else {
             $borderColour = $this->dot->settings["border_col"];
@@ -91,9 +91,9 @@ class Person
         } else {
             $i = $this->dot->getUpdatedPerson($pid);
             $fill_colour = $this->dot->getGenderColour($i->sex(), $related);        // Background colour is set to specified
-            if ($this->dot->settings['border_colour_type'] == Settings::OPTION_BORDER_SEX_COLOUR) {
+            if ($this->dot->settings['border_col_type'] == Settings::OPTION_BORDER_SEX_COLOUR) {
                 $border_colour = $this->dot->getGenderColour($i->sex(), $related);
-            } else if ($this->dot->settings['border_colour_type'] == Settings::OPTION_BORDER_CUSTOM_COLOUR) {
+            } else if ($this->dot->settings['border_col_type'] == Settings::OPTION_BORDER_CUSTOM_COLOUR) {
                 $border_colour = $this->dot->settings["indi_border_col"];
             }
             $isdead = $i->isDead();
@@ -153,7 +153,7 @@ class Person
         // Get background colour
         if ($this->isStartingIndividual($pid) && $this->dot->settings['highlight_start_indis'] == "true" && !$this->valueInList($this->dot->settings['no_highlight_xref_list'], $pid)) {
             $indi_bg_colour = $this->dot->settings["highlight_col"];
-        } else if ($this->dot->settings['bg_colour_type'] == Settings::OPTION_BACKGROUND_SEX_COLOUR) {
+        } else if ($this->dot->settings['bg_col_type'] == Settings::OPTION_BACKGROUND_SEX_COLOUR) {
             $indi_bg_colour = $this->dot->getGenderColour($i->sex(), $related);
         } else {
             $indi_bg_colour = $this->dot->settings["indi_background_col"];
@@ -177,7 +177,7 @@ class Person
             $size = ""; // Let it sort out size itself
         }
 
-        if ($this->dot->settings['stripe_colour_type'] == Settings::OPTION_STRIPE_SEX_COLOUR) {
+        if ($this->dot->settings['stripe_col_type'] == Settings::OPTION_STRIPE_SEX_COLOUR) {
             // Top line of table (colour only)
             $out .= "<TR><TD COLSPAN=\"2\" CELLPADDING=\"2\" BGCOLOR=\"$fill_colour\" PORT=\"nam\" $size></TD></TR>";
         }

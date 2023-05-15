@@ -44,9 +44,9 @@ class Settings
         $this->defaultSettings['photo_shape_options'] = [0 => "No change", 10 => "Oval", 20 => "Circle" , 30 => "Square", 40 => "Rounded rectangle", 50 => "Rounded square"];
         $this->defaultSettings['photo_quality_options'] = [0 => "Lowest", 20 => "Low", 50 => "Medium" , 75 => "High", 100 => "Highest"];
         $this->defaultSettings['indi_tile_shape_options'] = [0 => "Rectangle", 10 => "Rounded rectangle"];
-        $this->defaultSettings['bg_colour_type_options'] = [0 => "Custom", self::OPTION_BACKGROUND_SEX_COLOUR => "Based on individual's sex"];
-        $this->defaultSettings['stripe_colour_type_options'] = [0 => "No stripe", self::OPTION_STRIPE_SEX_COLOUR => "Based on individual's sex"];
-        $this->defaultSettings['border_colour_type_options'] = [self::OPTION_BORDER_CUSTOM_COLOUR => "Custom", self::OPTION_BORDER_SEX_COLOUR => "Based on individual's sex", 20 => "Same as family border"];
+        $this->defaultSettings['bg_col_type_options'] = [0 => "Custom", self::OPTION_BACKGROUND_SEX_COLOUR => "Based on individual's sex"];
+        $this->defaultSettings['stripe_col_type_options'] = [0 => "No stripe", self::OPTION_STRIPE_SEX_COLOUR => "Based on individual's sex"];
+        $this->defaultSettings['border_col_type_options'] = [self::OPTION_BORDER_CUSTOM_COLOUR => "Custom", self::OPTION_BORDER_SEX_COLOUR => "Based on individual's sex", 20 => "Same as family border"];
         $this->defaultSettings['countries'] = $this->getCountryAbbreviations();
         if (!$this->isGraphvizAvailable($this->defaultSettings['graphviz_bin'])) {
             $this->defaultSettings['graphviz_bin'] = "";
@@ -396,9 +396,9 @@ class Settings
             case 'compress_cookie':
             case 'photo_shape_options':
             case 'indi_tile_shape_options':
-            case 'bg_colour_type_options':
-            case 'stripe_colour_type_options':
-            case 'border_colour_type_options':
+            case 'bg_col_type_options':
+            case 'stripe_col_type_options':
+            case 'border_col_type_options':
                 return false;
             case 'show_debug_panel':
             case 'filename':

@@ -866,8 +866,8 @@ function pageLoaded(Url) {
     document.querySelector("#diagram_search_box_container").addEventListener('change', diagramSearchBoxChange);
     document.querySelector('#searchButton').addEventListener('click', showHideSearchBox);
     document.querySelector('#photo_shape').addEventListener('change', showGraphvizUnsupportedMessage);
-    document.querySelector('#bg_colour_type').addEventListener('change', () => {showHideMatchDropdown('bg_colour_type', 'custom_bg_subgroup', '0');});
-    document.querySelector('#border_colour_type').addEventListener('change', () => {showHideMatchDropdown('border_colour_type', 'custom_border_subgroup', '0');});
+    document.querySelector('#bg_col_type').addEventListener('change', () => {showHideMatchDropdown('bg_col_type', 'custom_bg_subgroup', '0');});
+    document.querySelector('#border_col_type').addEventListener('change', () => {showHideMatchDropdown('border_col_type', 'custom_border_subgroup', '0');});
     document.querySelector('#output_type').addEventListener('change', () => {if (graphvizAvailable) {showHideMatchDropdown('output_type', 'server_pdf_subgroup', 'pdf|svg');}});
 }
 
@@ -1017,7 +1017,7 @@ function loadSettings(data) {
     showHideMatchCheckbox('mark_not_related', 'mark_related_subgroup');
     showHideMatchCheckbox('show_birthdate', 'birth_date_subgroup');
     showHideMatchCheckbox('show_death_date', 'death_date_subgroup');
-    showHideMatchCheckbox('bg_colour_type', 'custom_bg_subgroup');
+    showHideMatchCheckbox('bg_col_type', 'custom_bg_subgroup');
     setSavedDiagramsPanel();
     showHide(document.getElementById('arrow_group'),document.getElementById('colour_arrow_related').checked)
     showHide(document.getElementById('startcol_option'),document.getElementById('highlight_start_indis').checked)
@@ -1801,7 +1801,7 @@ function handleSimpleDiagram() {
     // Set "details" font colour to the same as the "Name" font colour, as this is the only one used in simple mode
     document.getElementById("font_colour_details").value = document.getElementById("font_colour_name").value;
     // Set "Individual background colour" to "Based on individual's sex", to match style in simple mode
-    document.getElementById("bg_colour_type").value = 10;
+    document.getElementById("bg_col_type").value = 10;
     // Set diagram type to separated (refered to as decorated in code) as simple doesn't exist anymore
     document.getElementById("diagtype_decorated").checked = true;
 }
