@@ -396,7 +396,9 @@ class Settings
             case 'stop_proc':
             case 'compress_cookie':
             case 'photo_shape_options':
+            case 'photo_quality_options':
             case 'indi_tile_shape_options':
+            case 'indi_tile_shape_sex_options':
             case 'bg_col_type_options':
             case 'stripe_col_type_options':
             case 'border_col_type_options':
