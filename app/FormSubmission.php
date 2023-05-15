@@ -158,7 +158,7 @@ class FormSubmission
         $settings['auto_update'] = isset($vars['auto_update']);
         $settings['enable_debug_mode'] = isset($vars['enable_debug_mode']);
         $settings['show_debug_panel'] = isset($vars['show_debug_panel']);
-        $settings['enable_graphviz'] = isset($vars['enable_graphviz']);
+        $settings['enable_graphviz'] = !$settings['show_debug_panel'] || isset($vars['enable_graphviz']);
 
         // Set custom colours
         if (isset($vars["male_col"]) && $this->isValidColourHex($vars["male_col"])) {
