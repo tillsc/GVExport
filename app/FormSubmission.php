@@ -191,14 +191,14 @@ class FormSubmission
         if (isset($vars["background_col"]) && $this->isValidColourHex($vars["background_col"])) {
             $settings['background_col'] = $vars["background_col"];
         }
-        if (isset($vars["bg_colour_type"])) {
-            $settings['bg_colour_type'] = I18N::digits($vars["bg_colour_type"]);
+        if (isset($vars["bg_col_type"])) {
+            $settings['bg_col_type'] = I18N::digits($vars["bg_col_type"]);
         }
-        if (isset($vars["stripe_colour_type"])) {
-            $settings['stripe_colour_type'] = I18N::digits($vars["stripe_colour_type"]);
+        if (isset($vars["stripe_col_type"])) {
+            $settings['stripe_col_type'] = I18N::digits($vars["stripe_col_type"]);
         }
-        if (isset($vars["border_colour_type"])) {
-            $settings['border_colour_type'] = I18N::digits($vars["border_colour_type"]);
+        if (isset($vars["border_col_type"])) {
+            $settings['border_col_type'] = I18N::digits($vars["border_col_type"]);
         }
         if (isset($vars["indi_background_col"]) && $this->isValidColourHex($vars["indi_background_col"])) {
             $settings['indi_background_col'] = $vars["indi_background_col"];
@@ -231,6 +231,18 @@ class FormSubmission
         }
         if (isset($vars['indi_tile_shape'])) {
             $settings['indi_tile_shape'] = I18N::digits($vars['indi_tile_shape']);
+        }
+        if (isset($vars['shape_sex_male'])) {
+            $settings['shape_sex_male'] = I18N::digits($vars['shape_sex_male']);
+        }
+        if (isset($vars['shape_sex_female'])) {
+            $settings['shape_sex_female'] = I18N::digits($vars['shape_sex_female']);
+        }
+        if (isset($vars['shape_sex_other'])) {
+            $settings['shape_sex_other'] = I18N::digits($vars['shape_sex_other']);
+        }
+        if (isset($vars['shape_sex_unknown'])) {
+            $settings['shape_sex_unknown'] = I18N::digits($vars['shape_sex_unknown']);
         }
         if (isset($vars['photo_size'])) {
             $size = $vars['photo_size'];

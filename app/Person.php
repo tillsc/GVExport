@@ -53,10 +53,10 @@ class Person
         } else {
             $related = TRUE;
         }
-        if ($this->dot->settings['border_colour_type'] == Settings::OPTION_BORDER_SEX_COLOUR) {
+        if ($this->dot->settings['border_col_type'] == Settings::OPTION_BORDER_SEX_COLOUR) {
             $i = $this->dot->getUpdatedPerson($pid);
             $borderColour = $this->dot->getGenderColour($i->sex(), $related);
-        } else if ($this->dot->settings['border_colour_type'] == Settings::OPTION_BORDER_CUSTOM_COLOUR) {
+        } else if ($this->dot->settings['border_col_type'] == Settings::OPTION_BORDER_CUSTOM_COLOUR) {
             $borderColour = $this->dot->settings["indi_border_col"];
         } else {
             $borderColour = $this->dot->settings["border_col"];
@@ -78,6 +78,7 @@ class Person
         $out = "";
         $border_colour = $this->dot->settings["border_col"];    // Border colour of the INDI's box
         $death_place = "";
+        $i = $this->dot->getUpdatedPerson($pid);
         // Get the personal data
         if ($this->dot->settings["diagram_type"] == "combined" && (substr($pid, 0, 3) == "I_H" || substr($pid, 0, 3) == "I_W")) {
             // In case of dummy individual
@@ -89,11 +90,10 @@ class Person
             $link = "";
             $name = " ";
         } else {
-            $i = $this->dot->getUpdatedPerson($pid);
             $fill_colour = $this->dot->getGenderColour($i->sex(), $related);        // Background colour is set to specified
-            if ($this->dot->settings['border_colour_type'] == Settings::OPTION_BORDER_SEX_COLOUR) {
+            if ($this->dot->settings['border_col_type'] == Settings::OPTION_BORDER_SEX_COLOUR) {
                 $border_colour = $this->dot->getGenderColour($i->sex(), $related);
-            } else if ($this->dot->settings['border_colour_type'] == Settings::OPTION_BORDER_CUSTOM_COLOUR) {
+            } else if ($this->dot->settings['border_col_type'] == Settings::OPTION_BORDER_CUSTOM_COLOUR) {
                 $border_colour = $this->dot->settings["indi_border_col"];
             }
             $isdead = $i->isDead();
@@ -153,7 +153,7 @@ class Person
         // Get background colour
         if ($this->isStartingIndividual($pid) && $this->dot->settings['highlight_start_indis'] == "true" && !$this->valueInList($this->dot->settings['no_highlight_xref_list'], $pid)) {
             $indi_bg_colour = $this->dot->settings["highlight_col"];
-        } else if ($this->dot->settings['bg_colour_type'] == Settings::OPTION_BACKGROUND_SEX_COLOUR) {
+        } else if ($this->dot->settings['bg_col_type'] == Settings::OPTION_BACKGROUND_SEX_COLOUR) {
             $indi_bg_colour = $this->dot->getGenderColour($i->sex(), $related);
         } else {
             $indi_bg_colour = $this->dot->settings["indi_background_col"];
@@ -162,7 +162,7 @@ class Person
         if ($this->dot->settings["diagram_type"] == "combined") {
             $out .= "<TABLE BORDER=\"0\" CELLBORDER=\"0\" CELLPADDING=\"2\" CELLSPACING=\"0\" BGCOLOR=\"" . $indi_bg_colour . "\" $href>";
         } else {
-            $style = ($this->dot->settings['indi_tile_shape'] == 10 ? 'STYLE="ROUNDED" ' : '');
+            $style = ($this->shouldBeRounded($i, $this->dot->settings['indi_tile_shape']) ? 'STYLE="ROUNDED" ' : '');
             $out .= "<TABLE " . $style . "COLOR=\"" . $border_colour . "\" BORDER=\"1\" CELLBORDER=\"0\" CELLPADDING=\"2\" CELLSPACING=\"0\" BGCOLOR=\"" . $indi_bg_colour . "\" $href>";
         }
         $birthData = " $birthdate " . (empty($birthplace) ? "" : "($birthplace)");
@@ -177,7 +177,7 @@ class Person
             $size = ""; // Let it sort out size itself
         }
 
-        if ($this->dot->settings['stripe_colour_type'] == Settings::OPTION_STRIPE_SEX_COLOUR) {
+        if ($this->dot->settings['stripe_col_type'] == Settings::OPTION_STRIPE_SEX_COLOUR) {
             // Top line of table (colour only)
             $out .= "<TR><TD COLSPAN=\"2\" CELLPADDING=\"2\" BGCOLOR=\"$fill_colour\" PORT=\"nam\" $size></TD></TR>";
         }
@@ -403,5 +403,33 @@ class Person
             }
         }
         return 1;
+    }
+
+    /**
+     * @param Individual $i
+     * @param int $option
+     * @return bool
+     */
+    private function shouldBeRounded(Individual $i, int $option): bool
+    {
+        switch ($option) {
+            case 0:
+            default;
+                return false;
+            case 10:
+                return true;
+            case 20:
+                switch ($i->sex()) {
+                    case 'M':
+                        return $this->shouldBeRounded($i, $this->dot->settings['shape_sex_male']);
+                    case 'F':
+                        return $this->shouldBeRounded($i, $this->dot->settings['shape_sex_female']);
+                    case 'X':
+                        return $this->shouldBeRounded($i, $this->dot->settings['shape_sex_other']);
+                    case 'U':
+                        return $this->shouldBeRounded($i, $this->dot->settings['shape_sex_unknown']);
+                    default: return false;
+                }
+        }
     }
 }

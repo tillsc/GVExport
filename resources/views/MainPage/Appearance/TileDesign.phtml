@@ -16,10 +16,28 @@ use Fisharebest\Webtrees\I18N;
 <?= MainPage::addLabel('', 'Tile design', !$admin); ?>
 <div class="col-sm-8 wt-page-options-value">
     <div onclick="showHideSubgroup('shape_subgroup', this)" class="pointer subgroup">→ <?= I18N::translate('Shape'); ?></div>
-    <div id="shape_subgroup" class="colour_subgroup col-auto wt-page-options-value" style="display: none">
+    <div id="shape_subgroup" class="setting_subgroup col-auto wt-page-options-value" style="display: none">
         <div class="col-auto">
             <label for="indi_tile_shape"><?= I18N::translate('Individual tile shape') ?></label>
             <?= view('components/select', ['name' => 'vars[indi_tile_shape]', 'id' => 'indi_tile_shape', 'selected' => e($vars['indi_tile_shape']), 'options' => MainPage::updateTranslations($settings["indi_tile_shape_options"])]) ?>
+            <div id="shape_sex_subgroup" class="setting_subgroup col-auto wt-page-options-value fit-content margin-top" <?= $vars["indi_tile_shape"] != 20 ? 'style="display:none;"' : '' ?>>
+                <div>
+                    <label for="shape_sex_male"><?= I18N::translate('Male') ?></label>
+                    <?= view('components/select', ['name' => 'vars[shape_sex_male]', 'id' => 'shape_sex_male', 'selected' => e($vars['shape_sex_male']), 'options' => MainPage::updateTranslations($settings["indi_tile_shape_sex_options"])]) ?>
+                </div>
+                <div>
+                    <label for="shape_sex_female"><?= I18N::translate('Female') ?></label>
+                    <?= view('components/select', ['name' => 'vars[shape_sex_female]', 'id' => 'shape_sex_female', 'selected' => e($vars['shape_sex_female']), 'options' => MainPage::updateTranslations($settings["indi_tile_shape_sex_options"])]) ?>
+                </div>
+                <div>
+                    <label for="shape_sex_other"><?= I18N::translate('Other') ?></label>
+                    <?= view('components/select', ['name' => 'vars[shape_sex_other]', 'id' => 'shape_sex_other', 'selected' => e($vars['shape_sex_other']), 'options' => MainPage::updateTranslations($settings["indi_tile_shape_sex_options"])]) ?>
+                </div>
+                <div>
+                    <label for="shape_sex_unknown"><?= I18N::translate('Unknown') ?></label>
+                    <?= view('components/select', ['name' => 'vars[shape_sex_unknown]', 'id' => 'shape_sex_unknown', 'selected' => e($vars['shape_sex_unknown']), 'options' => MainPage::updateTranslations($settings["indi_tile_shape_sex_options"])]) ?>
+                </div>
+            </div>
         </div>
     </div>
     <div class="col-auto">
@@ -31,11 +49,11 @@ use Fisharebest\Webtrees\I18N;
         }
         if ($images_enabled) { ?>
         <div onclick="showHideSubgroup('photos_subgroup', this)" class="pointer subgroup">→ <?= I18N::translate('Photos'); ?></div>
-        <div id="photos_subgroup" class="colour_subgroup col-auto wt-page-options-value" style="display: none">
+        <div id="photos_subgroup" class="setting_subgroup col-auto wt-page-options-value" style="display: none">
             <div class="col-sm-8">
                 <input type="checkbox" onclick="showHideMatchCheckbox('show_photos', 'photos_enabled_subgroup');" name="vars[show_photos]" id="show_photos" value="show_photos" <?= $vars["show_photos"] ? 'checked' : '' ?>>
                 <label for="show_photos"><?= I18N::translate('Show photos') ?></label>
-                <div id="photos_enabled_subgroup" class="colour_subgroup col-auto wt-page-options-value" <?= !$vars["show_photos"] ? 'style="display:none;"' : '' ?>>
+                <div id="photos_enabled_subgroup" class="setting_subgroup col-auto wt-page-options-value" <?= !$vars["show_photos"] ? 'style="display:none;"' : '' ?>>
                     <div class="col-auto">
                         <label for="photo_shape"><?= I18N::translate('Photo shape') ?></label>
                         <?= view('components/select', ['name' => 'vars[photo_shape]', 'id' => 'photo_shape', 'selected' => e($vars['photo_shape']), 'options' => MainPage::updateTranslations($settings["photo_shape_options"])]) ?>
@@ -50,22 +68,22 @@ use Fisharebest\Webtrees\I18N;
         </div>
         <?php } ?>
         <div onclick="showHideSubgroup('colours_subgroup', this)" class="pointer subgroup">→ <?= I18N::translate('Colours'); ?></div>
-        <div id="colours_subgroup" class="colour_subgroup col-auto wt-page-options-value" style="display: none">
+        <div id="colours_subgroup" class="setting_subgroup col-auto wt-page-options-value" style="display: none">
             <div class="col-auto margin-bottom">
-                <label for="bg_colour_type"><?= I18N::translate('Individual background colour') ?></label>
-                <?= view('components/select', ['name' => 'vars[bg_colour_type]', 'id' => 'bg_colour_type', 'selected' => e($vars['bg_colour_type']), 'options' => MainPage::updateTranslations($settings["bg_colour_type_options"])]) ?>
-                <div id="custom_bg_subgroup" class="colour_subgroup col-auto wt-page-options-value fit-content margin-top" <?= !$vars["bg_colour_type"] == 0 ? 'style="display:none;"' : '' ?>>
+                <label for="bg_col_type"><?= I18N::translate('Individual background colour') ?></label>
+                <?= view('components/select', ['name' => 'vars[bg_col_type]', 'id' => 'bg_col_type', 'selected' => e($vars['bg_col_type']), 'options' => MainPage::updateTranslations($settings["bg_col_type_options"])]) ?>
+                <div id="custom_bg_subgroup" class="setting_subgroup col-auto wt-page-options-value fit-content margin-top" <?= !$vars["bg_col_type"] == 0 ? 'style="display:none;"' : '' ?>>
                     <input type="color" class="picker" name="vars[indi_background_col]" id="indi_background_col" value="<?= e($vars["indi_background_col"]); ?>" /><label for="indi_background_col" class="picker-label"><?= I18N::translate('Custom background colour') ?></label>
                 </div>
             </div>
             <div class="col-auto margin-bottom">
-                <label for="stripe_colour_type"><?= I18N::translate('Individual stripe color') ?></label>
-                <?= view('components/select', ['name' => 'vars[stripe_colour_type]', 'id' => 'stripe_colour_type', 'selected' => e($vars['stripe_colour_type']), 'options' => MainPage::updateTranslations($settings["stripe_colour_type_options"])]) ?>
+                <label for="stripe_col_type"><?= I18N::translate('Individual stripe color') ?></label>
+                <?= view('components/select', ['name' => 'vars[stripe_col_type]', 'id' => 'stripe_col_type', 'selected' => e($vars['stripe_col_type']), 'options' => MainPage::updateTranslations($settings["stripe_col_type_options"])]) ?>
             </div>
             <div class="col-auto margin-bottom">
-                <label for="border_colour_type"><?= I18N::translate('Individual border color') ?></label>
-                <?= view('components/select', ['name' => 'vars[border_colour_type]', 'id' => 'border_colour_type', 'selected' => e($vars['border_colour_type']), 'options' => MainPage::updateTranslations($settings["border_colour_type_options"])]) ?>
-                <div id="custom_border_subgroup" class="colour_subgroup col-auto wt-page-options-value fit-content margin-top" <?= !$vars["border_colour_type"] == 0 ? 'style="display:none;"' : '' ?>>
+                <label for="border_col_type"><?= I18N::translate('Individual border color') ?></label>
+                <?= view('components/select', ['name' => 'vars[border_col_type]', 'id' => 'border_col_type', 'selected' => e($vars['border_col_type']), 'options' => MainPage::updateTranslations($settings["border_col_type_options"])]) ?>
+                <div id="custom_border_subgroup" class="setting_subgroup col-auto wt-page-options-value fit-content margin-top" <?= !$vars["border_col_type"] == 0 ? 'style="display:none;"' : '' ?>>
                     <input type="color" class="picker" name="vars[indi_border_col]" id="indi_border_col" value="<?= e($vars["indi_border_col"]); ?>" /><label for="indi_border_col" class="picker-label"><?= I18N::translate('Custom border colour') ?></label>
                 </div>
             </div>
@@ -95,7 +113,7 @@ use Fisharebest\Webtrees\I18N;
             </div>
             <div class="col-auto padding-left-10">
                 <input type="checkbox" name="vars[highlight_start_indis]" onclick="toggleHighlightStartPersons(this.checked, <?= !$admin ? 'false' : 'true'; ?>)" id="highlight_start_indis" value="true" <?= $vars["highlight_start_indis"] ? 'checked' : '' ?>><label for="highlight_start_indis" class="check-list width-90pc"><?= I18N::translate('Show starting individuals in different colour') ?></label>
-                <div class="colour_subgroup col-auto wt-page-options-value" id="startcol_option"  <?= $vars["highlight_start_indis"] != "true" ? 'style="display:none;"' : '' ?>>
+                <div class="setting_subgroup col-auto wt-page-options-value" id="startcol_option"  <?= $vars["highlight_start_indis"] != "true" ? 'style="display:none;"' : '' ?>>
                     <input type="color" class="picker" name="vars[highlight_col]" id="highlight_col" value="<?= e($vars["highlight_col"]); ?>" /><label for="highlight_col" class="picker-label"><?= I18N::translate('Starting individuals background colour') ?></label>
                     <?php if (!$admin) { ?>
                         <label for="no_highlight_xref_list"><?= I18N::translate('Colour these individuals:'); ?></label><br>
@@ -115,7 +133,7 @@ use Fisharebest\Webtrees\I18N;
         </div>
     </div>
     <div onclick="showHideSubgroup('font_subgroup', this)" class="pointer subgroup">→ <?= I18N::translate('Font'); ?></div>
-    <div id="font_subgroup" class="colour_subgroup col-auto wt-page-options-value" style="display: none">
+    <div id="font_subgroup" class="setting_subgroup col-auto wt-page-options-value" style="display: none">
         <div class="col-auto">
             <label for="typeface"><?= I18N::translate('Typeface') ?></label>
             <div class="col-auto">

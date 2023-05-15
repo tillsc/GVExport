@@ -69,7 +69,11 @@ return array(
 	'arrows_related' => '#222266', // Default colour for arrows from family record to child by birth
 	'arrows_not_related' => '#226622',	// Default colour for arrows from family records to child other than birth (adopted, etc)
 	'colour_arrow_related' => false, // If arrows should be coloured based on blood-relationship or not
-    'indi_tile_shape' => 0, // Shape of the individual tiles, rectangle (0) or rounded rectangle (10)
+    'indi_tile_shape' => 0, // Shape of the individual tiles, rectangle (0), rounded rectangle (10), or based on sex (20)
+    'shape_sex_male' => 0, // Shape option for male when based on sex option chosen for indi_tile_shape above
+    'shape_sex_female' => 10, // Shape option for female when based on sex option chosen for indi_tile_shape above
+    'shape_sex_other' => 0, // Shape option for other when based on sex option chosen for indi_tile_shape above
+    'shape_sex_unknown' => 0, // Shape option for unknown when based on sex option chosen for indi_tile_shape above
 	'male_col' => '#ADD8E6', // Default colour of male individuals (light blue)
 	'female_col' => '#FFB6C1', // Default colour of female individuals (light pink)
 	'other_gender_col' => '#FCEAA1', // Default colour of Other gender individuals (light yellow)
@@ -79,9 +83,9 @@ return array(
 	'oth_gender_unrel_col' => '#FCF7E3', // Default colour of not blood-related Other gender individuals
 	'unkn_gender_unrel_col' => '#D6EED6', // Default colour of not blood-related unknown gender individuals
 	'family_col' => '#FFFFEE', // Default colour of families (different light yellow)
-	'bg_colour_type' => 0, // 0 -> Custom (set in background_col), 10 -> Sex colour
-	'stripe_colour_type' => 10, // 0 -> No stripe, 10 -> based on sex of individual
-	'border_colour_type' => 20, // 0 -> Custom, 10 -> based on sex of individual, 20 -> Same as Family border
+	'bg_col_type' => 0, // 0 -> Custom (set in background_col), 10 -> Sex colour
+	'stripe_col_type' => 10, // 0 -> No stripe, 10 -> based on sex of individual
+	'border_col_type' => 20, // 0 -> Custom, 10 -> based on sex of individual, 20 -> Same as Family border
 	'background_col' => '#EEEEEE', // Background of diagram (light grey)
 	'indi_background_col' => '#FEFEFE', // Background of individual tile
 	'highlight_start_indis' => false, // Whether to use a different colour for starting individuals

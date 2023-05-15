@@ -141,11 +141,11 @@
     float: right;
 }
 
-.colour_subgroup .picker {
+.setting_subgroup .picker {
     margin-right: 2px !important;
 }
 
-.colour_subgroup {
+.setting_subgroup {
     margin-left: 20px;
     margin-right: 3px;
     padding: 2px !important;
