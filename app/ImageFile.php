@@ -9,15 +9,15 @@ use Fisharebest\Webtrees\Site;
 
 class ImageFile
 {
-    public int $dpi;
+    public int $resolution;
     private object $mediaFile;
     private object $tree;
     private int $type;
 
-    function __construct($media_file, $tree, $dpi) {
+    function __construct($media_file, $tree, $resolution) {
         $this->mediaFile = $media_file;
         $this->tree = $tree;
-        $this->dpi = $dpi;
+        $this->resolution = $resolution;
     }
 
 
@@ -39,7 +39,7 @@ class ImageFile
 
             $image = $this->loadImage($full_media_path);
             if ($image) {
-                $img_resized = imagescale($image, $this->dpi, -1);
+                $img_resized = imagescale($image, $this->resolution, -1);
                 if ($this->saveImage($img_resized, $temp_image_file, $full_media_path, $quality, $convert)) {
                     return $temp_dir . "/" . $filename;
                 } else {

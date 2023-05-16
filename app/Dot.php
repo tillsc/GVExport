@@ -283,7 +283,7 @@ class Dot {
 			}
 		} else {
 		// If individuals in clipping cart and option chosen to use them, then proceed
-			$functionsCC = new functionsClippingsCart($this->tree, $this->isPhotoRequired(), ($this->settings["diagram_type"] == "combined"), $this->settings["dpi"]);
+			$functionsCC = new functionsClippingsCart($this->tree, $this->isPhotoRequired(), ($this->settings["diagram_type"] == "combined"), $this->settings['dpi']);
 			$this->individuals = $functionsCC->getIndividuals();
 			$this->families = $functionsCC->getFamilies();
 		}
@@ -468,7 +468,7 @@ class Dot {
         $out = "digraph WT_Graph {\n";
 		$out .= "ranksep=\"" . str_replace("%","",$this->settings["ranksep"])*$this->settings["space_base"]/100 . " equally\"\n";
 		$out .= "nodesep=\"" . str_replace("%","",$this->settings["nodesep"])*$this->settings["space_base"]/100	 . "\"\n";
-		$out .= "dpi=\"" . $this->settings["dpi"] . "\"\n";
+		$out .= "dpi=\"" . $this->settings['dpi'] . "\"\n";
 		$out .= "mclimit=\"" . $this->settings["mclimit"] . "\"\n";
 		$out .= "rankdir=\"" . $this->settings["graph_dir"] . "\"\n";
 		$out .= "pagedir=\"LT\"\n";
@@ -1130,12 +1130,13 @@ class Dot {
 	function addPhotoToIndi(string $pid) {
 		$i = Registry::individualFactory()->make($pid, $this->tree);
 		$m = $i->findHighlightedMediaFile();
+        $resolution = floatval($this->settings["photo_resolution"]) / 100;
 		if (empty($m)) {
 			return null;
 		} else if (!$m->isExternal() && $m->fileExists()) {
 			// If we are rendering in the browser, provide the URL, otherwise provide the server side file location
 			if (isset($_REQUEST["download"])) {
-                $image = new ImageFile($m, $this->tree, $this->settings["dpi"] * 2);
+                $image = new ImageFile($m, $this->tree, $this->settings['dpi']*$resolution);
 				return $image->getImageLocation($this->settings["photo_quality"], $this->settings["convert_photos_jpeg"]);
 			} else {
                 switch ($this->settings['photo_shape']) {
@@ -1148,7 +1149,7 @@ class Dot {
                         $fit = 'crop';
                 }
 
-				return str_replace("&","%26",$m->imageUrl($this->settings["dpi"]*2,$this->settings["dpi"]*2, $fit));
+				return str_replace("&","%26",$m->imageUrl($this->settings['dpi']*$resolution,$this->settings['dpi']*$resolution, $fit));
 			}
 		} else {
 			return null;
