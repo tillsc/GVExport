@@ -1358,4 +1358,13 @@ class Dot {
         }
         return $tmp;
     }
+
+    public function getVitalColour(string $is_dead)
+    {
+        if ($is_dead) {
+            return $this->settings['indi_background_dead_col'];
+        } else {
+            return $this->settings['indi_background_living_col'];
+        }
+    }
 }

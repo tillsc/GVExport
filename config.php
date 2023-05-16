@@ -89,6 +89,8 @@ return array(
 	'border_col_type' => 20, // 0 -> Custom, 10 -> based on sex of individual, 20 -> Same as Family border
 	'background_col' => '#EEEEEE', // Background of diagram (light grey)
 	'indi_background_col' => '#FEFEFE', // Background of individual tile
+	'indi_background_dead_col' => '#FEFEFE', // Background of individual tile for deceased individuals, when this option chosen
+	'indi_background_living_col' => '#FEFEFE', // Background of individual tile for living individuals, when this option chosen
 	'highlight_start_indis' => false, // Whether to use a different colour for starting individuals
     'no_highlight_xref_list' => '', // XREFs in this list are not highlighted
 	'highlight_col' => '#FFFDC3', // Background of starting individuals

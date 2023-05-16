@@ -153,10 +153,19 @@ class Person
         // Get background colour
         if ($this->isStartingIndividual($pid) && $this->dot->settings['highlight_start_indis'] == "true" && !$this->valueInList($this->dot->settings['no_highlight_xref_list'], $pid)) {
             $indi_bg_colour = $this->dot->settings["highlight_col"];
-        } else if ($this->dot->settings['bg_col_type'] == Settings::OPTION_BACKGROUND_SEX_COLOUR) {
-            $indi_bg_colour = $this->dot->getGenderColour($i->sex(), $related);
         } else {
-            $indi_bg_colour = $this->dot->settings["indi_background_col"];
+            switch ($this->dot->settings['bg_col_type']) {
+                case Settings::OPTION_BACKGROUND_CUSTOM_COLOUR:
+                default:
+                    $indi_bg_colour = $this->dot->settings["indi_background_col"];
+                    break;
+                case Settings::OPTION_BACKGROUND_SEX_COLOUR:
+                    $indi_bg_colour = $this->dot->getGenderColour($i->sex(), $related);
+                    break;
+                case Settings::OPTION_BACKGROUND_VITAL_COLOUR:
+                    $indi_bg_colour = $this->dot->getVitalColour($i->isDead());
+                    break;
+            }
         }
         // Draw table
         if ($this->dot->settings["diagram_type"] == "combined") {

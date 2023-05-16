@@ -3,6 +3,7 @@
 use Fisharebest\Webtrees\Tree;
 use vendor\WebtreesModules\gvexport\MainPage;
 use Fisharebest\Webtrees\I18N;
+use vendor\WebtreesModules\gvexport\Settings;
 
 /**
  * @var array       $vars                   array of saved settings
@@ -77,8 +78,12 @@ use Fisharebest\Webtrees\I18N;
             <div class="col-auto margin-bottom">
                 <label for="bg_col_type"><?= I18N::translate('Individual background colour') ?></label>
                 <?= view('components/select', ['name' => 'vars[bg_col_type]', 'id' => 'bg_col_type', 'selected' => e($vars['bg_col_type']), 'options' => MainPage::updateTranslations($settings["bg_col_type_options"])]) ?>
-                <div id="custom_bg_subgroup" class="setting_subgroup col-auto wt-page-options-value fit-content margin-top" <?= !$vars["bg_col_type"] == 0 ? 'style="display:none;"' : '' ?>>
+                <div id="custom_bg_subgroup" class="setting_subgroup col-auto wt-page-options-value fit-content margin-top" <?= !$vars["bg_col_type"] == Settings::OPTION_BACKGROUND_CUSTOM_COLOUR ? 'style="display:none;"' : '' ?>>
                     <input type="color" class="picker" name="vars[indi_background_col]" id="indi_background_col" value="<?= e($vars["indi_background_col"]); ?>" /><label for="indi_background_col" class="picker-label"><?= I18N::translate('Custom background colour') ?></label>
+                </div>
+                <div id="vitals_bg_subgroup" class="setting_subgroup col-auto wt-page-options-value fit-content margin-top" <?= !$vars["bg_col_type"] == Settings::OPTION_BACKGROUND_VITAL_COLOUR ? 'style="display:none;"' : '' ?>>
+                    <input type="color" class="picker" name="vars[indi_background_dead_col]" id="indi_background_dead_col" value="<?= e($vars["indi_background_dead_col"]); ?>" /><label for="indi_background_dead_col" class="picker-label"><?= I18N::translate('Deceased') ?></label>
+                    <input type="color" class="picker" name="vars[indi_background_living_col]" id="indi_background_living_col" value="<?= e($vars["indi_background_living_col"]); ?>" /><label for="indi_background_living_col" class="picker-label"><?= I18N::translate('Living') ?></label>
                 </div>
             </div>
             <div class="col-auto margin-bottom">

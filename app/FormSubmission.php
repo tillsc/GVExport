@@ -192,16 +192,22 @@ class FormSubmission
         if (isset($vars["family_col"]) && $this->isValidColourHex($vars["family_col"])) {
             $settings['family_col'] = $vars["family_col"];
         }
-        if (isset($vars["background_col"]) && $this->isValidColourHex($vars["background_col"])) {
+        if (isset($vars['background_col']) && $this->isValidColourHex($vars['background_col'])) {
             $settings['background_col'] = $vars["background_col"];
         }
-        if (isset($vars["bg_col_type"])) {
+        if (isset($vars['indi_background_dead_col']) && $this->isValidColourHex($vars['indi_background_dead_col'])) {
+            $settings['indi_background_dead_col'] = $vars["indi_background_dead_col"];
+        }
+        if (isset($vars['indi_background_living_col']) && $this->isValidColourHex($vars['indi_background_living_col'])) {
+            $settings['indi_background_living_col'] = $vars["indi_background_living_col"];
+        }
+        if (isset($vars['bg_col_type'])) {
             $settings['bg_col_type'] = I18N::digits($vars["bg_col_type"]);
         }
-        if (isset($vars["stripe_col_type"])) {
+        if (isset($vars['stripe_col_type'])) {
             $settings['stripe_col_type'] = I18N::digits($vars["stripe_col_type"]);
         }
-        if (isset($vars["border_col_type"])) {
+        if (isset($vars['border_col_type'])) {
             $settings['border_col_type'] = I18N::digits($vars["border_col_type"]);
         }
         if (isset($vars["indi_background_col"]) && $this->isValidColourHex($vars["indi_background_col"])) {
