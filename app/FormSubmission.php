@@ -158,8 +158,12 @@ class FormSubmission
         $settings['auto_update'] = isset($vars['auto_update']);
         $settings['enable_debug_mode'] = isset($vars['enable_debug_mode']);
         $settings['show_debug_panel'] = isset($vars['show_debug_panel']);
-        $settings['enable_graphviz'] = !$settings['show_debug_panel'] || isset($vars['enable_graphviz']);
 
+        if (isset($vars['admin_page'])) {
+            $settings['enable_graphviz'] = isset($vars['enable_graphviz']);
+        } else {
+            $settings['enable_graphviz'] = isset($vars['enable_graphviz']) || !$settings['show_debug_panel'];
+        }
         // Set custom colours
         if (isset($vars["male_col"]) && $this->isValidColourHex($vars["male_col"])) {
             $settings['male_col'] = $vars["male_col"];
@@ -245,13 +249,10 @@ class FormSubmission
             $settings['shape_sex_unknown'] = I18N::digits($vars['shape_sex_unknown']);
         }
         if (isset($vars['photo_size'])) {
-            $size = $vars['photo_size'];
-            if (!strpos($size, '%')) {
-                $size = $size . "%";
-            }
-            if ($this->isPercent($size)) {
-                $settings['photo_size'] = ($size == "%" ? "100%" : $size);
-            }
+            $settings['photo_size'] = $this->cleanPercent($vars['photo_size']);
+        }
+        if (isset($vars['photo_resolution'])) {
+            $settings['photo_resolution'] = $this->cleanPercent($vars['photo_resolution']);
         }
 
         $settings['no_fams'] = isset($vars['no_fams']);
@@ -259,11 +260,11 @@ class FormSubmission
         if (isset($vars['dpi'])) {
             $settings['dpi'] = I18N::digits($vars['dpi']);
         }
-        if (isset($vars['ranksep']) && $this->isPercent($vars['ranksep'])) {
-            $settings['ranksep'] = $vars['ranksep'];
+        if (isset($vars['ranksep'])) {
+            $settings['ranksep'] = $this->cleanPercent($vars['ranksep']);
         }
-        if (isset($vars['nodesep']) && $this->isPercent($vars['nodesep'])) {
-            $settings['nodesep'] = $vars['nodesep'];
+        if (isset($vars['nodesep'])) {
+            $settings['nodesep'] = $this->cleanPercent($vars['nodesep']);
         }
         if (isset($vars['output_type']) && ctype_alpha($vars['output_type'])) {
             $settings['output_type'] = $vars['output_type'];
@@ -323,6 +324,17 @@ class FormSubmission
 
     private function cleanSettingsName($name)
     {
-        return preg_replace("/[^A-ZÀ-úa-z0-9_ .*+()&^%$#@!'-]+/", "", $name);
+        return preg_replace("/[^A-ZÀ-úa-z0-9_ .*+()&^%$#@!'-]+/", '', $name);
+    }
+
+    private function cleanPercent($percent)
+    {
+        if (!strpos($percent, '%')) {
+            $percent = $percent . '%';
+        }
+        if ($this->isPercent($percent) && $percent != '%') {
+            return $percent;
+        }
+        return '100%';
     }
 }

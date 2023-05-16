@@ -35,6 +35,7 @@ $usegraphviz = $vars['graphviz_bin'] != "";
 <div class="mb-5">
     <form method="post">
         <?= csrf_field() ?>
+        <input type="hidden" name="vars[admin_page]" value="true"/>
         <h2><?= I18N::translate('Settings for GVExport'); ?></h2>
         <div class="row form-group">
             <label class="col-sm-4 col-form-label"><?= I18N::translate('Administrator settings') ?></label>

@@ -1130,12 +1130,13 @@ class Dot {
 	function addPhotoToIndi(string $pid) {
 		$i = Registry::individualFactory()->make($pid, $this->tree);
 		$m = $i->findHighlightedMediaFile();
+        $resolution = floatval($this->settings["photo_resolution"]) / 100;
 		if (empty($m)) {
 			return null;
 		} else if (!$m->isExternal() && $m->fileExists()) {
 			// If we are rendering in the browser, provide the URL, otherwise provide the server side file location
 			if (isset($_REQUEST["download"])) {
-                $image = new ImageFile($m, $this->tree, $this->settings['dpi']);
+                $image = new ImageFile($m, $this->tree, $this->settings['dpi']*$resolution);
 				return $image->getImageLocation($this->settings["photo_quality"], $this->settings["convert_photos_jpeg"]);
 			} else {
                 switch ($this->settings['photo_shape']) {
@@ -1148,7 +1149,7 @@ class Dot {
                         $fit = 'crop';
                 }
 
-				return str_replace("&","%26",$m->imageUrl($this->settings['dpi'],$this->settings['dpi'], $fit));
+				return str_replace("&","%26",$m->imageUrl($this->settings['dpi']*$resolution,$this->settings['dpi']*$resolution, $fit));
 			}
 		} else {
 			return null;

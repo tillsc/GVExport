@@ -63,6 +63,11 @@ use Fisharebest\Webtrees\I18N;
                         <input type="text" onclick="togglePercent(this, false)" onblur="togglePercent(this, true)" class="form-control col-sm-6" size="10" name="vars[photo_size]" id="photo_size"
                                value="<?= e($vars["photo_size"]) ?>">
                     </div>
+                    <div class="col-auto">
+                        <label for="photo_resolution"><?= I18N::translate('Photo resolution') ?></label>
+                        <input type="text" onclick="togglePercent(this, false)" onblur="togglePercent(this, true)" class="form-control col-sm-6" size="10" name="vars[photo_resolution]" id="photo_resolution"
+                               value="<?= e($vars["photo_resolution"]) ?>">
+                    </div>
                 </div>
             </div>
         </div>
