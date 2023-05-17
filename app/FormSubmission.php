@@ -10,7 +10,7 @@ class FormSubmission
      * @param $vars
      * @return array
      */
-    public function load($vars): array
+    public function load($vars, $module = null): array
     {
         $settings = [];
         // INDI id
@@ -158,11 +158,11 @@ class FormSubmission
         $settings['auto_update'] = isset($vars['auto_update']);
         $settings['enable_debug_mode'] = isset($vars['enable_debug_mode']);
         $settings['show_debug_panel'] = isset($vars['show_debug_panel']);
-
         if (isset($vars['admin_page'])) {
             $settings['enable_graphviz'] = isset($vars['enable_graphviz']);
         } else {
-            $settings['enable_graphviz'] = isset($vars['enable_graphviz']) || !$settings['show_debug_panel'];
+            $admin_settings = (new Settings())->getAdminSettings($module);
+            $settings['enable_graphviz'] = isset($vars['enable_graphviz']) || !$admin_settings['show_debug_panel'];
         }
         // Set custom colours
         if (isset($vars["male_col"]) && $this->isValidColourHex($vars["male_col"])) {

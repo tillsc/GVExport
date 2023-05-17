@@ -328,7 +328,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
 
 
         $formSubmission = new FormSubmission();
-        $vars = $formSubmission->load($vars_data);
+        $vars = $formSubmission->load($vars_data, $this);
         if (isset($temp_dir)) {
             $vars['temp_dir'] = $temp_dir;
         }
