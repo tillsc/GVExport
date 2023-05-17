@@ -2,6 +2,7 @@
 
 namespace vendor\WebtreesModules\gvexport;
 
+use Exception;
 use Fisharebest\Webtrees\Auth;
 use Fisharebest\Webtrees\Http\Exceptions\HttpBadRequestException;
 use Fisharebest\Webtrees\I18N;
@@ -106,8 +107,8 @@ class Settings
      *
      * @param $module
      * @param $tree
-     * @param bool $reset
      * @param string $id
+     * @param null $user_id
      * @return array
      */
     public function loadUserSettings($module, $tree, string $id = self::ID_MAIN_SETTINGS, $user_id = null): array
@@ -376,10 +377,10 @@ class Settings
      * Returns whether a setting shouldn't be saved to cookies/preferences
      *
      * @param string $preference
-     * @param bool $context
+     * @param int $context
      * @return bool
      */
-    public static function shouldSaveSetting(string $preference, bool $context = self::CONTEXT_USER): bool
+    public static function shouldSaveSetting(string $preference, int $context = self::CONTEXT_USER): bool
     {
         switch ($preference) {
             case 'graphviz_bin':
@@ -403,6 +404,7 @@ class Settings
             case 'indi_tile_shape_sex_options':
             case 'bg_col_type_options':
             case 'stripe_col_type_options':
+            case 'show_diagram_panel':
             case 'border_col_type_options':
                 return false;
             case 'show_debug_panel':
@@ -411,15 +413,13 @@ class Settings
             case 'birth_prefix':
             case 'death_prefix':
                 return $context == self::CONTEXT_ADMIN;
-            case 'show_diagram_panel':
-                return false; //$context != self::CONTEXT_NAMED_SETTING;
             default:
                 return true;
         }
     }
 
     /**
-     * Currently an alias for shouldLoadSetting as the criteria are the same
+     * Currently an alias for shouldSaveSetting as the criteria are the same
      *
      * @param $setting
      * @param int $context
@@ -431,7 +431,7 @@ class Settings
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function getSettingsJson($module, $tree, $id)
     {
@@ -444,8 +444,8 @@ class Settings
                     $settings[$preference] = $userSettings[$preference];
                 }
             }
-        } catch (\Exception $e) {
-            throw new \Exception($e);
+        } catch (Exception $e) {
+            throw new Exception($e);
         }
         return json_encode($settings);
     }
@@ -463,7 +463,7 @@ class Settings
             try {
                 $response['url'] = $link->getUrl();
                 $response['success'] = true;
-            } catch (\Exception $error) {
+            } catch (Exception $error) {
                 $response['success'] = false;
                 $response['error'] = $error;
             }
@@ -477,15 +477,15 @@ class Settings
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function loadSettingsToken($module, $tree, $token): array
     {
         $link = new SettingsLink($module, $tree, $this);
         try {
             $settings = $link->loadToken($token, $this);
-        } catch (\Exception $e) {
-            throw new \Exception($e);
+        } catch (Exception $e) {
+            throw new Exception($e);
         }
         return $settings;
     }

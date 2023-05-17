@@ -10,7 +10,7 @@ class FormSubmission
      * @param $vars
      * @return array
      */
-    public function load($vars, $module = null): array
+    public function load($vars, $module): array
     {
         $settings = [];
         // INDI id

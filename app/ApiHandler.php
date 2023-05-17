@@ -79,7 +79,7 @@ class ApiHandler
     {
         $vars = Validator::parsedBody($request)->array('vars');
         $formSubmission = new FormSubmission();
-        $vars = $formSubmission->load($vars);
+        $vars = $formSubmission->load($vars, $module);
         if (isset($json['settings_id']) && ctype_alnum($json['settings_id']) && !in_array($json['settings_id'], [Settings::ID_ALL_SETTINGS, Settings::ID_MAIN_SETTINGS])) {
             if ($this->checkIdBelongsToUser($module, $tree, $json['settings_id'])) {
                 $id = $json['settings_id'];
