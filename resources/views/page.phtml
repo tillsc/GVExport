@@ -39,6 +39,13 @@ $usegraphviz = $vars['graphviz_bin'] != "";
         mainPage.Url = new module.Url();
         runPageLoaded(mainPage.Url);
     })
+    import('<?= $module->assetUrl('javascript/MainPage/SettingsGroup.js'); ?>').then((module)=>{
+        new module.SettingsGroup('vitals_bg_subgroup', 'bg_col_type', '20');
+        new module.SettingsGroup('shape_sex_subgroup', 'indi_tile_shape', '20');
+        new module.SettingsGroup('custom_bg_subgroup', 'bg_col_type', '0');
+        new module.SettingsGroup('custom_border_subgroup', 'border_col_type', '0');
+        new module.SettingsGroup('server_pdf_subgroup', 'output_type', 'pdf|svg', () => {return graphvizAvailable});
+    })
 </script>
 <script src="<?= $module->assetUrl('javascript/viz.js'); ?>"></script>
 <script src="<?= $module->assetUrl('javascript/panzoom.min.js'); ?>"></script>
