@@ -23,30 +23,6 @@ $settings = (new Settings())->getDefaultSettings();
 $usegraphviz = $vars['graphviz_bin'] != "";
 ?>
 
-<script type="text/javascript">
-    const mainPage = {};
-    function runPageLoaded(Url) {
-        if (typeof pageLoaded === 'function' && typeof jQuery === 'function') {
-            Url.changeURLXref('<?= e($individual->xref()); ?>');
-            pageLoaded(Url);
-        } else {
-            // If external script loads before inline script, then wait
-            // before trying to run page loaded function.
-            setTimeout(()=>{runPageLoaded(Url)}, 100);
-        }
-    }
-    import('<?= $module->assetUrl('javascript/MainPage/Url.js'); ?>').then((module)=>{
-        mainPage.Url = new module.Url();
-        runPageLoaded(mainPage.Url);
-    })
-    import('<?= $module->assetUrl('javascript/MainPage/SettingsGroup.js'); ?>').then((module)=>{
-        new module.SettingsGroup('vitals_bg_subgroup', 'bg_col_type', '20');
-        new module.SettingsGroup('shape_sex_subgroup', 'indi_tile_shape', '20');
-        new module.SettingsGroup('custom_bg_subgroup', 'bg_col_type', '0');
-        new module.SettingsGroup('custom_border_subgroup', 'border_col_type', '0');
-        new module.SettingsGroup('server_pdf_subgroup', 'output_type', 'pdf|svg', () => {return graphvizAvailable});
-    })
-</script>
 <script src="<?= $module->assetUrl('javascript/viz.js'); ?>"></script>
 <script src="<?= $module->assetUrl('javascript/panzoom.min.js'); ?>"></script>
 <script src="<?= $module->assetUrl('javascript/gvexport.js'); ?>"></script>
@@ -399,3 +375,27 @@ $usegraphviz = $vars['graphviz_bin'] != "";
     <?php echo (new Help())->addHelpMessageJavaScript(); ?>
 </script>
 
+<script type="text/javascript">
+    const mainPage = {};
+    function runPageLoaded(Url) {
+        if (typeof pageLoaded === 'function' && typeof jQuery === 'function') {
+            Url.changeURLXref('<?= e($individual->xref()); ?>');
+            pageLoaded(Url);
+        } else {
+            // If external script loads before inline script, then wait
+            // before trying to run page loaded function.
+            setTimeout(()=>{runPageLoaded(Url)}, 100);
+        }
+    }
+    import('<?= $module->assetUrl('javascript/MainPage/Url.js'); ?>').then((module)=>{
+        mainPage.Url = new module.Url();
+        runPageLoaded(mainPage.Url);
+    })
+    import('<?= $module->assetUrl('javascript/MainPage/SettingsGroup.js'); ?>').then((module)=>{
+        new module.SettingsGroup('vitals_bg_subgroup', 'bg_col_type', '20');
+        new module.SettingsGroup('shape_sex_subgroup', 'indi_tile_shape', '20');
+        new module.SettingsGroup('custom_bg_subgroup', 'bg_col_type', '0');
+        new module.SettingsGroup('custom_border_subgroup', 'border_col_type', '0');
+        new module.SettingsGroup('server_pdf_subgroup', 'output_type', 'pdf|svg', () => {return graphvizAvailable});
+    })
+</script>
