@@ -86,10 +86,12 @@ return array(
 	'family_col' => '#FFFFEE', // Default colour of families (different light yellow)
 	'bg_col_type' => 0, // 0 -> Custom (set in background_col), 10 -> Sex colour
 	'stripe_col_type' => 10, // 0 -> No stripe, 10 -> based on sex of individual
+	'indi_stripe_dead_col' => '#CCCCCC', // Colour of stripe on individual tile for deceased individuals, when this option chosen
+	'indi_stripe_living_col' => '#FEFEFE', // Colour of stripe on individual tile for living individuals, when this option chosen
 	'border_col_type' => 20, // 0 -> Custom, 10 -> based on sex of individual, 20 -> Same as Family border
 	'background_col' => '#EEEEEE', // Background of diagram (light grey)
 	'indi_background_col' => '#FEFEFE', // Background of individual tile
-	'indi_background_dead_col' => '#FEFEFE', // Background of individual tile for deceased individuals, when this option chosen
+	'indi_background_dead_col' => '#CCCCCC', // Background of individual tile for deceased individuals, when this option chosen
 	'indi_background_living_col' => '#FEFEFE', // Background of individual tile for living individuals, when this option chosen
 	'highlight_start_indis' => false, // Whether to use a different colour for starting individuals
     'no_highlight_xref_list' => '', // XREFs in this list are not highlighted
