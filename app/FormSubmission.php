@@ -260,6 +260,12 @@ class FormSubmission
         if (isset($vars['shape_sex_unknown'])) {
             $settings['shape_sex_unknown'] = I18N::digits($vars['shape_sex_unknown']);
         }
+        if (isset($vars['shape_vital_dead'])) {
+            $settings['shape_vital_dead'] = I18N::digits($vars['shape_vital_dead']);
+        }
+        if (isset($vars['shape_vital_living'])) {
+            $settings['shape_vital_living'] = I18N::digits($vars['shape_vital_living']);
+        }
         if (isset($vars['photo_size'])) {
             $settings['photo_size'] = $this->cleanPercent($vars['photo_size']);
         }

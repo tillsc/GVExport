@@ -15,6 +15,7 @@ class Person
     const SHAPE_ROUNDED_SQUARE = '50';
     const TILE_SHAPE_ROUNDED = 10;
     const TILE_SHAPE_SEX = 20;
+    const TILE_SHAPE_VITAL = 30;
     public array $attributes;
     private Dot $dot;
 

@@ -393,7 +393,8 @@ $usegraphviz = $vars['graphviz_bin'] != "";
     })
     import('<?= $module->assetUrl('javascript/MainPage/SettingsGroup.js'); ?>').then((module)=>{
         new module.SettingsGroup('vitals_bg_subgroup', 'bg_col_type', '<?= Settings::OPTION_BACKGROUND_VITAL_COLOUR;?>');
-        new module.SettingsGroup('shape_sex_subgroup', 'indi_tile_shape', '20');
+        new module.SettingsGroup('shape_sex_subgroup', 'indi_tile_shape', '<?= Person::TILE_SHAPE_SEX;?>');
+        new module.SettingsGroup('vitals_shape_subgroup', 'indi_tile_shape', '<?= Person::TILE_SHAPE_VITAL;?>');
         new module.SettingsGroup('custom_bg_subgroup', 'bg_col_type', '<?= Settings::OPTION_BACKGROUND_CUSTOM_COLOUR;?>');
         new module.SettingsGroup('custom_border_subgroup', 'border_col_type', '<?= Settings::OPTION_BORDER_CUSTOM_COLOUR;?>');
         new module.SettingsGroup('server_pdf_subgroup', 'output_type', 'pdf|svg', () => {return graphvizAvailable});

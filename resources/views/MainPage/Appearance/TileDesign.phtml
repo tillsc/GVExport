@@ -25,20 +25,26 @@ use vendor\WebtreesModules\gvexport\Settings;
             <div id="shape_sex_subgroup" class="setting_subgroup col-auto wt-page-options-value fit-content margin-top" <?= !$admin && $vars["indi_tile_shape"] != Person::TILE_SHAPE_SEX ? 'style="display:none;"' : '' ?>>
                 <div>
                     <label for="shape_sex_male"><?= I18N::translate('Male') ?></label>
-                    <?= view('components/select', ['name' => 'vars[shape_sex_male]', 'id' => 'shape_sex_male', 'selected' => e($vars['shape_sex_male']), 'options' => MainPage::updateTranslations($settings["indi_tile_shape_sex_options"])]) ?>
+                    <?= view('components/select', ['name' => 'vars[shape_sex_male]', 'id' => 'shape_sex_male', 'selected' => e($vars['shape_sex_male']), 'options' => MainPage::updateTranslations($settings["indi_tile_shape_custom_options"])]) ?>
                 </div>
                 <div>
                     <label for="shape_sex_female"><?= I18N::translate('Female') ?></label>
-                    <?= view('components/select', ['name' => 'vars[shape_sex_female]', 'id' => 'shape_sex_female', 'selected' => e($vars['shape_sex_female']), 'options' => MainPage::updateTranslations($settings["indi_tile_shape_sex_options"])]) ?>
+                    <?= view('components/select', ['name' => 'vars[shape_sex_female]', 'id' => 'shape_sex_female', 'selected' => e($vars['shape_sex_female']), 'options' => MainPage::updateTranslations($settings["indi_tile_shape_custom_options"])]) ?>
                 </div>
                 <div>
                     <label for="shape_sex_other"><?= I18N::translate('Other') ?></label>
-                    <?= view('components/select', ['name' => 'vars[shape_sex_other]', 'id' => 'shape_sex_other', 'selected' => e($vars['shape_sex_other']), 'options' => MainPage::updateTranslations($settings["indi_tile_shape_sex_options"])]) ?>
+                    <?= view('components/select', ['name' => 'vars[shape_sex_other]', 'id' => 'shape_sex_other', 'selected' => e($vars['shape_sex_other']), 'options' => MainPage::updateTranslations($settings["indi_tile_shape_custom_options"])]) ?>
                 </div>
                 <div>
                     <label for="shape_sex_unknown"><?= I18N::translate('Unknown') ?></label>
-                    <?= view('components/select', ['name' => 'vars[shape_sex_unknown]', 'id' => 'shape_sex_unknown', 'selected' => e($vars['shape_sex_unknown']), 'options' => MainPage::updateTranslations($settings["indi_tile_shape_sex_options"])]) ?>
+                    <?= view('components/select', ['name' => 'vars[shape_sex_unknown]', 'id' => 'shape_sex_unknown', 'selected' => e($vars['shape_sex_unknown']), 'options' => MainPage::updateTranslations($settings["indi_tile_shape_custom_options"])]) ?>
                 </div>
+            </div>
+            <div id="vitals_shape_subgroup" class="setting_subgroup col-auto wt-page-options-value fit-content margin-top" <?= !$admin && $vars["indi_tile_shape"] != Person::TILE_SHAPE_VITAL ? 'style="display:none;"' : '' ?>>
+                <label for="shape_vital_dead"><?= I18N::translate('Deceased') ?></label>
+                <?= view('components/select', ['name' => 'vars[shape_vital_dead]', 'id' => 'shape_vital_dead', 'selected' => e($vars['shape_vital_dead']), 'options' => MainPage::updateTranslations($settings["indi_tile_shape_custom_options"])]) ?>
+                <label for="shape_vital_living"><?= I18N::translate('Living') ?></label>
+                <?= view('components/select', ['name' => 'vars[shape_vital_living]', 'id' => 'shape_vital_living', 'selected' => e($vars['shape_vital_living']), 'options' => MainPage::updateTranslations($settings["indi_tile_shape_custom_options"])]) ?>
             </div>
         </div>
     </div>
