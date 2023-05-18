@@ -14,6 +14,8 @@ class Person
     const SHAPE_ROUNDED_RECT = '40';
     const SHAPE_ROUNDED_SQUARE = '50';
     const TILE_SHAPE_ROUNDED = 10;
+    const TILE_SHAPE_SEX = 20;
+    const TILE_SHAPE_VITAL = 30;
     public array $attributes;
     private Dot $dot;
 
@@ -48,20 +50,26 @@ class Person
      */
     public function addPersonLabel(string $pid, string $out): string
     {
+        $i = $this->dot->getUpdatedPerson($pid);
         if (isset($this->dot->individuals[$pid]['rel']) && !$this->dot->individuals[$pid]['rel']) {
             $related = FALSE;
         } else {
             $related = TRUE;
         }
-        if ($this->dot->settings['border_col_type'] == Settings::OPTION_BORDER_SEX_COLOUR) {
-            $i = $this->dot->getUpdatedPerson($pid);
-            $borderColour = $this->dot->getGenderColour($i->sex(), $related);
-        } else if ($this->dot->settings['border_col_type'] == Settings::OPTION_BORDER_CUSTOM_COLOUR) {
-            $borderColour = $this->dot->settings["indi_border_col"];
-        } else {
-            $borderColour = $this->dot->settings["border_col"];
+        switch ($this->dot->settings['border_col_type']) {
+            case Settings::OPTION_BORDER_SEX_COLOUR:
+                $border_colour = $this->dot->getGenderColour($i->sex(), $related);
+                break;
+            case Settings::OPTION_BORDER_CUSTOM_COLOUR:
+                $border_colour = $this->dot->settings["indi_border_col"];
+                break;
+            case Settings::OPTION_BORDER_VITAL_COLOUR:
+                $border_colour = $this->getVitalColour($i->isDead(), Settings::OPTION_BORDER_VITAL_COLOUR);
+                break;
+            default:
+                $border_colour = $this->dot->settings["border_col"];
         }
-        $out .= "<TD COLOR=\"" . $borderColour . "\"  BORDER=\"1\" CELLPADDING=\"0\" PORT=\"" . $pid . "\">";
+        $out .= "<TD COLOR=\"" . $border_colour . "\"  BORDER=\"1\" CELLPADDING=\"0\" PORT=\"" . $pid . "\">";
         $out .= $this->printPersonLabel($pid, $related);
         $out .= "</TD>";
         return $out;
@@ -82,21 +90,27 @@ class Person
         // Get the personal data
         if ($this->dot->settings["diagram_type"] == "combined" && (substr($pid, 0, 3) == "I_H" || substr($pid, 0, 3) == "I_W")) {
             // In case of dummy individual
-            $fill_colour = $this->dot->getGenderColour('U', false);
-            $isdead = false;
+            $sex_colour = $this->dot->getGenderColour('U', false);
+            $is_dead = false;
             $death_date = "";
             $birthdate = "";
             $birthplace = "";
             $link = "";
             $name = " ";
         } else {
-            $fill_colour = $this->dot->getGenderColour($i->sex(), $related);        // Background colour is set to specified
-            if ($this->dot->settings['border_col_type'] == Settings::OPTION_BORDER_SEX_COLOUR) {
-                $border_colour = $this->dot->getGenderColour($i->sex(), $related);
-            } else if ($this->dot->settings['border_col_type'] == Settings::OPTION_BORDER_CUSTOM_COLOUR) {
-                $border_colour = $this->dot->settings["indi_border_col"];
+            $sex_colour = $this->dot->getGenderColour($i->sex(), $related);
+            switch ($this->dot->settings['border_col_type']) {
+                case Settings::OPTION_BORDER_SEX_COLOUR:
+                    $border_colour = $this->dot->getGenderColour($i->sex(), $related);
+                    break;
+                case Settings::OPTION_BORDER_CUSTOM_COLOUR:
+                    $border_colour = $this->dot->settings["indi_border_col"];
+                    break;
+                case Settings::OPTION_BORDER_VITAL_COLOUR:
+                    $border_colour = $this->getVitalColour($i->isDead(), Settings::OPTION_BORDER_VITAL_COLOUR);
+                    break;
             }
-            $isdead = $i->isDead();
+            $is_dead = $i->isDead();
             $link = $i->url();
 
             // --- Birth data ---
@@ -146,17 +160,26 @@ class Person
         // --- Printing the INDI details ---
         // Convert birth & death place to get rid of characters which mess up the HTML output
         $birthplace = Dot::convertToHTMLSC($birthplace);
-        if ($isdead) {
+        if ($is_dead) {
             $death_place = Dot::convertToHTMLSC($death_place);
         }
         $href = $this->dot->settings["add_links"] ? "TARGET=\"_blank\" HREF=\"" . Dot::convertToHTMLSC($link) . "\"" : "";
         // Get background colour
         if ($this->isStartingIndividual($pid) && $this->dot->settings['highlight_start_indis'] == "true" && !$this->valueInList($this->dot->settings['no_highlight_xref_list'], $pid)) {
             $indi_bg_colour = $this->dot->settings["highlight_col"];
-        } else if ($this->dot->settings['bg_col_type'] == Settings::OPTION_BACKGROUND_SEX_COLOUR) {
-            $indi_bg_colour = $this->dot->getGenderColour($i->sex(), $related);
         } else {
-            $indi_bg_colour = $this->dot->settings["indi_background_col"];
+            switch ($this->dot->settings['bg_col_type']) {
+                case Settings::OPTION_BACKGROUND_CUSTOM_COLOUR:
+                default:
+                    $indi_bg_colour = $this->dot->settings["indi_background_col"];
+                    break;
+                case Settings::OPTION_BACKGROUND_SEX_COLOUR:
+                    $indi_bg_colour = $this->dot->getGenderColour($i->sex(), $related);
+                    break;
+                case Settings::OPTION_BACKGROUND_VITAL_COLOUR:
+                    $indi_bg_colour = $this->getVitalColour($i->isDead(), Settings::OPTION_BACKGROUND_VITAL_COLOUR);
+                    break;
+            }
         }
         // Draw table
         if ($this->dot->settings["diagram_type"] == "combined") {
@@ -176,12 +199,15 @@ class Person
         } else {
             $size = ""; // Let it sort out size itself
         }
-
+        $stripe_colour = '';
         if ($this->dot->settings['stripe_col_type'] == Settings::OPTION_STRIPE_SEX_COLOUR) {
-            // Top line of table (colour only)
-            $out .= "<TR><TD COLSPAN=\"2\" CELLPADDING=\"2\" BGCOLOR=\"$fill_colour\" PORT=\"nam\" $size></TD></TR>";
+            $stripe_colour = $sex_colour;
+        } else if ($this->dot->settings['stripe_col_type'] == Settings::OPTION_STRIPE_VITAL_COLOUR) {
+            $stripe_colour = $this->getVitalColour($i->isDead(),Settings::OPTION_STRIPE_VITAL_COLOUR);
         }
-
+        if ($stripe_colour !== '') {
+            $out .= "<TR><TD COLSPAN=\"2\" CELLPADDING=\"2\" BGCOLOR=\"$stripe_colour\" PORT=\"nam\" $size></TD></TR>";
+        }
         // Second row (photo, name, birth & death data)
         if ($detailsExist || $this->dot->settings["show_photos"]) {
             $out .= "<TR>";
@@ -219,7 +245,7 @@ class Person
                     $out .= "<BR />";
                 }
             }
-            if ($isdead && trim($deathData) !== "") {
+            if ($is_dead && trim($deathData) !== "") {
                 $out .= "<FONT COLOR=\"" . $this->dot->settings["font_colour_details"] . "\" POINT-SIZE=\"" . ($this->dot->settings["font_size"]) . "\">" . $this->dot->settings["death_prefix"] . $deathData . "</FONT>";
             } else {
                 $out .= " ";
@@ -418,7 +444,7 @@ class Person
                 return false;
             case 10:
                 return true;
-            case 20:
+            case Person::TILE_SHAPE_SEX:
                 switch ($i->sex()) {
                     case 'M':
                         return $this->shouldBeRounded($i, $this->dot->settings['shape_sex_male']);
@@ -430,6 +456,35 @@ class Person
                         return $this->shouldBeRounded($i, $this->dot->settings['shape_sex_unknown']);
                     default: return false;
                 }
+            case Person::TILE_SHAPE_VITAL:
+                if ($i->isDead()) {
+                    return $this->dot->settings['shape_vital_dead'];
+                } else {
+                    return $this->dot->settings['shape_vital_living'];
+                }
+        }
+    }
+
+    private function getVitalColour(string $is_dead, $context)
+    {
+        if ($is_dead) {
+            switch($context) {
+                case Settings::OPTION_BACKGROUND_VITAL_COLOUR:
+                    return $this->dot->settings['indi_background_dead_col'];
+                case Settings::OPTION_STRIPE_VITAL_COLOUR:
+                    return $this->dot->settings['indi_stripe_dead_col'];
+                case Settings::OPTION_BORDER_VITAL_COLOUR:
+                    return $this->dot->settings['indi_border_dead_col'];
+            }
+        } else {
+            switch($context) {
+                case Settings::OPTION_BACKGROUND_VITAL_COLOUR:
+                    return $this->dot->settings['indi_background_living_col'];
+                case Settings::OPTION_STRIPE_VITAL_COLOUR:
+                    return $this->dot->settings['indi_stripe_living_col'];
+                case Settings::OPTION_BORDER_VITAL_COLOUR:
+                    return $this->dot->settings['indi_border_living_col'];
+            }
         }
     }
 }

@@ -2,6 +2,7 @@
 
 namespace vendor\WebtreesModules\gvexport;
 
+use Exception;
 use Fisharebest\Webtrees\Auth;
 use Fisharebest\Webtrees\Http\Exceptions\HttpBadRequestException;
 use Fisharebest\Webtrees\I18N;
@@ -18,11 +19,16 @@ class Settings
     public const PREFERENCE_PREFIX = "GVE";
     public const SETTINGS_LIST_PREFERENCE_NAME = "_id_list";
     public const SAVED_SETTINGS_LIST_PREFERENCE_NAME = "_shared_settings_list";
-    public const OPTION_STRIPE_SEX_COLOUR = 10;
-    public const OPTION_BACKGROUND_SEX_COLOUR = 10;
-    public const OPTION_BORDER_SEX_COLOUR = 10;
-    public const OPTION_BORDER_CUSTOM_COLOUR = 0;
-    public const OPTION_SEX_TEXT = 20;
+    public const OPTION_STRIPE_NONE = 100;
+    public const OPTION_STRIPE_SEX_COLOUR = 110;
+    public const OPTION_STRIPE_VITAL_COLOUR = 120;
+    public const OPTION_BACKGROUND_CUSTOM_COLOUR = 200;
+    public const OPTION_BACKGROUND_SEX_COLOUR = 210;
+    public const OPTION_BACKGROUND_VITAL_COLOUR = 220;
+    public const OPTION_BORDER_CUSTOM_COLOUR = 300;
+    public const OPTION_BORDER_SEX_COLOUR = 310;
+    public const OPTION_BORDER_FAMILY = 320;
+    public const OPTION_BORDER_VITAL_COLOUR = 330;
     const TREE_PREFIX = "_t";
     const USER_PREFIX = "_u";
     private array $settings_json_cache = [];
@@ -43,11 +49,11 @@ class Settings
         $this->defaultSettings['use_abbr_names'] = [0 => "Full name", 10 => "Given and surnames", 20 => "Given names" , 30 => "First given name only", 40 => "Surnames", 50 => "Initials only", 60 => "Given name initials and surname", 70 => "Don't show names"];
         $this->defaultSettings['photo_shape_options'] = [0 => "No change", 10 => "Oval", 20 => "Circle" , 30 => "Square", 40 => "Rounded rectangle", 50 => "Rounded square"];
         $this->defaultSettings['photo_quality_options'] = [0 => "Lowest", 20 => "Low", 50 => "Medium" , 75 => "High", 100 => "Highest"];
-        $this->defaultSettings['indi_tile_shape_sex_options'] = [0 => "Rectangle", 10 => "Rounded rectangle"];
-        $this->defaultSettings['indi_tile_shape_options'] = $this->defaultSettings['indi_tile_shape_sex_options'] + [20 => "Based on individual's sex"];
-        $this->defaultSettings['bg_col_type_options'] = [0 => "Custom", self::OPTION_BACKGROUND_SEX_COLOUR => "Based on individual's sex"];
-        $this->defaultSettings['stripe_col_type_options'] = [0 => "No stripe", self::OPTION_STRIPE_SEX_COLOUR => "Based on individual's sex"];
-        $this->defaultSettings['border_col_type_options'] = [self::OPTION_BORDER_CUSTOM_COLOUR => "Custom", self::OPTION_BORDER_SEX_COLOUR => "Based on individual's sex", 20 => "Same as family border"];
+        $this->defaultSettings['indi_tile_shape_custom_options'] = [0 => "Rectangle", 10 => "Rounded rectangle"];
+        $this->defaultSettings['indi_tile_shape_options'] = $this->defaultSettings['indi_tile_shape_custom_options'] + [Person::TILE_SHAPE_SEX => 'Based on individual\'s sex', Person::TILE_SHAPE_VITAL => 'Based on vital status'];
+        $this->defaultSettings['bg_col_type_options'] = [self::OPTION_BACKGROUND_CUSTOM_COLOUR => 'Custom', self::OPTION_BACKGROUND_SEX_COLOUR => 'Based on individual\'s sex', self::OPTION_BACKGROUND_VITAL_COLOUR => 'Based on vital status'];
+        $this->defaultSettings['stripe_col_type_options'] = [self::OPTION_STRIPE_NONE => 'No stripe', self::OPTION_STRIPE_SEX_COLOUR => 'Based on individual\'s sex', self::OPTION_STRIPE_VITAL_COLOUR => 'Based on vital status'];
+        $this->defaultSettings['border_col_type_options'] = [self::OPTION_BORDER_CUSTOM_COLOUR => 'Custom', self::OPTION_BORDER_SEX_COLOUR => 'Based on individual\'s sex', self::OPTION_BORDER_FAMILY => 'Same as family border', self::OPTION_BORDER_VITAL_COLOUR => 'Based on vital status'];
         $this->defaultSettings['countries'] = $this->getCountryAbbreviations();
         if (!$this->isGraphvizAvailable($this->defaultSettings['graphviz_bin'])) {
             $this->defaultSettings['graphviz_bin'] = "";
@@ -104,8 +110,8 @@ class Settings
      *
      * @param $module
      * @param $tree
-     * @param bool $reset
      * @param string $id
+     * @param null $user_id
      * @return array
      */
     public function loadUserSettings($module, $tree, string $id = self::ID_MAIN_SETTINGS, $user_id = null): array
@@ -374,10 +380,10 @@ class Settings
      * Returns whether a setting shouldn't be saved to cookies/preferences
      *
      * @param string $preference
-     * @param bool $context
+     * @param int $context
      * @return bool
      */
-    public static function shouldSaveSetting(string $preference, bool $context = self::CONTEXT_USER): bool
+    public static function shouldSaveSetting(string $preference, int $context = self::CONTEXT_USER): bool
     {
         switch ($preference) {
             case 'graphviz_bin':
@@ -398,9 +404,10 @@ class Settings
             case 'photo_shape_options':
             case 'photo_quality_options':
             case 'indi_tile_shape_options':
-            case 'indi_tile_shape_sex_options':
+            case 'indi_tile_shape_custom_options':
             case 'bg_col_type_options':
             case 'stripe_col_type_options':
+            case 'show_diagram_panel':
             case 'border_col_type_options':
                 return false;
             case 'show_debug_panel':
@@ -409,15 +416,13 @@ class Settings
             case 'birth_prefix':
             case 'death_prefix':
                 return $context == self::CONTEXT_ADMIN;
-            case 'show_diagram_panel':
-                return false; //$context != self::CONTEXT_NAMED_SETTING;
             default:
                 return true;
         }
     }
 
     /**
-     * Currently an alias for shouldLoadSetting as the criteria are the same
+     * Currently an alias for shouldSaveSetting as the criteria are the same
      *
      * @param $setting
      * @param int $context
@@ -429,7 +434,7 @@ class Settings
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function getSettingsJson($module, $tree, $id)
     {
@@ -442,8 +447,8 @@ class Settings
                     $settings[$preference] = $userSettings[$preference];
                 }
             }
-        } catch (\Exception $e) {
-            throw new \Exception($e);
+        } catch (Exception $e) {
+            throw new Exception($e);
         }
         return json_encode($settings);
     }
@@ -461,7 +466,7 @@ class Settings
             try {
                 $response['url'] = $link->getUrl();
                 $response['success'] = true;
-            } catch (\Exception $error) {
+            } catch (Exception $error) {
                 $response['success'] = false;
                 $response['error'] = $error;
             }
@@ -475,15 +480,15 @@ class Settings
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function loadSettingsToken($module, $tree, $token): array
     {
         $link = new SettingsLink($module, $tree, $this);
         try {
             $settings = $link->loadToken($token, $this);
-        } catch (\Exception $e) {
-            throw new \Exception($e);
+        } catch (Exception $e) {
+            throw new Exception($e);
         }
         return $settings;
     }

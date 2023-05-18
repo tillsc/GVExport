@@ -10,7 +10,7 @@ class FormSubmission
      * @param $vars
      * @return array
      */
-    public function load($vars): array
+    public function load($vars, $module): array
     {
         $settings = [];
         // INDI id
@@ -158,11 +158,11 @@ class FormSubmission
         $settings['auto_update'] = isset($vars['auto_update']);
         $settings['enable_debug_mode'] = isset($vars['enable_debug_mode']);
         $settings['show_debug_panel'] = isset($vars['show_debug_panel']);
-
         if (isset($vars['admin_page'])) {
             $settings['enable_graphviz'] = isset($vars['enable_graphviz']);
         } else {
-            $settings['enable_graphviz'] = isset($vars['enable_graphviz']) || !$settings['show_debug_panel'];
+            $admin_settings = (new Settings())->getAdminSettings($module);
+            $settings['enable_graphviz'] = isset($vars['enable_graphviz']) || !$admin_settings['show_debug_panel'];
         }
         // Set custom colours
         if (isset($vars["male_col"]) && $this->isValidColourHex($vars["male_col"])) {
@@ -192,16 +192,28 @@ class FormSubmission
         if (isset($vars["family_col"]) && $this->isValidColourHex($vars["family_col"])) {
             $settings['family_col'] = $vars["family_col"];
         }
-        if (isset($vars["background_col"]) && $this->isValidColourHex($vars["background_col"])) {
+        if (isset($vars['background_col']) && $this->isValidColourHex($vars['background_col'])) {
             $settings['background_col'] = $vars["background_col"];
         }
-        if (isset($vars["bg_col_type"])) {
+        if (isset($vars['indi_background_dead_col']) && $this->isValidColourHex($vars['indi_background_dead_col'])) {
+            $settings['indi_background_dead_col'] = $vars["indi_background_dead_col"];
+        }
+        if (isset($vars['indi_background_living_col']) && $this->isValidColourHex($vars['indi_background_living_col'])) {
+            $settings['indi_background_living_col'] = $vars["indi_background_living_col"];
+        }
+        if (isset($vars['bg_col_type'])) {
             $settings['bg_col_type'] = I18N::digits($vars["bg_col_type"]);
         }
-        if (isset($vars["stripe_col_type"])) {
+        if (isset($vars['stripe_col_type'])) {
             $settings['stripe_col_type'] = I18N::digits($vars["stripe_col_type"]);
         }
-        if (isset($vars["border_col_type"])) {
+        if (isset($vars['indi_stripe_dead_col']) && $this->isValidColourHex($vars['indi_stripe_dead_col'])) {
+            $settings['indi_stripe_dead_col'] = $vars["indi_stripe_dead_col"];
+        }
+        if (isset($vars['indi_stripe_living_col']) && $this->isValidColourHex($vars['indi_stripe_living_col'])) {
+            $settings['indi_stripe_living_col'] = $vars["indi_stripe_living_col"];
+        }
+        if (isset($vars['border_col_type'])) {
             $settings['border_col_type'] = I18N::digits($vars["border_col_type"]);
         }
         if (isset($vars["indi_background_col"]) && $this->isValidColourHex($vars["indi_background_col"])) {
@@ -219,6 +231,12 @@ class FormSubmission
         }
         if (isset($vars["indi_border_col"]) && $this->isValidColourHex($vars["indi_border_col"])) {
             $settings['indi_border_col'] = $vars["indi_border_col"];
+        }
+        if (isset($vars["indi_border_dead_col"]) && $this->isValidColourHex($vars["indi_border_dead_col"])) {
+            $settings['indi_border_dead_col'] = $vars["indi_border_dead_col"];
+        }
+        if (isset($vars["indi_border_living_col"]) && $this->isValidColourHex($vars["indi_border_living_col"])) {
+            $settings['indi_border_living_col'] = $vars["indi_border_living_col"];
         }
         // Settings
         if (!empty($vars['diagram_type']) && ctype_alpha($vars['diagram_type'])) {
@@ -247,6 +265,12 @@ class FormSubmission
         }
         if (isset($vars['shape_sex_unknown'])) {
             $settings['shape_sex_unknown'] = I18N::digits($vars['shape_sex_unknown']);
+        }
+        if (isset($vars['shape_vital_dead'])) {
+            $settings['shape_vital_dead'] = I18N::digits($vars['shape_vital_dead']);
+        }
+        if (isset($vars['shape_vital_living'])) {
+            $settings['shape_vital_living'] = I18N::digits($vars['shape_vital_living']);
         }
         if (isset($vars['photo_size'])) {
             $settings['photo_size'] = $this->cleanPercent($vars['photo_size']);

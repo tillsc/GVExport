@@ -286,7 +286,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
         $params = (array) $request->getParsedBody();
         $formSubmission = new FormSubmission();
         $vars_data = Validator::parsedBody($request)->array('vars');
-        $vars = $formSubmission->load($vars_data);
+        $vars = $formSubmission->load($vars_data, $this);
         if ($params['save'] === '1') {
             (new Settings())->saveAdminSettings($this, $vars);
             FlashMessages::addMessage(I18N::translate('The preferences for the module “%s” have been updated.',
@@ -328,7 +328,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
 
 
         $formSubmission = new FormSubmission();
-        $vars = $formSubmission->load($vars_data);
+        $vars = $formSubmission->load($vars_data, $this);
         if (isset($temp_dir)) {
             $vars['temp_dir'] = $temp_dir;
         }
