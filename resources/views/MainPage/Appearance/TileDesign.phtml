@@ -107,6 +107,10 @@ use vendor\WebtreesModules\gvexport\Settings;
                 <div id="custom_border_subgroup" class="setting_subgroup col-auto wt-page-options-value fit-content margin-top" <?= !$admin && $vars["border_col_type"] != Settings::OPTION_BORDER_CUSTOM_COLOUR ? 'style="display:none;"' : '' ?>>
                     <input type="color" class="picker" name="vars[indi_border_col]" id="indi_border_col" value="<?= e($vars["indi_border_col"]); ?>" /><label for="indi_border_col" class="picker-label"><?= I18N::translate('Custom border colour') ?></label>
                 </div>
+                <div id="vitals_border_subgroup" class="setting_subgroup col-auto wt-page-options-value fit-content margin-top" <?= !$admin && $vars["border_col_type"] != Settings::OPTION_BORDER_VITAL_COLOUR ? 'style="display:none;"' : '' ?>>
+                    <input type="color" class="picker" name="vars[indi_border_dead_col]" id="indi_border_dead_col" value="<?= e($vars["indi_border_dead_col"]); ?>" /><label for="indi_border_dead_col" class="picker-label"><?= I18N::translate('Deceased') ?></label>
+                    <input type="color" class="picker" name="vars[indi_border_living_col]" id="indi_border_living_col" value="<?= e($vars["indi_border_living_col"]); ?>" /><label for="indi_border_living_col" class="picker-label"><?= I18N::translate('Living') ?></label>
+                </div>
             </div>
             <div class="col-auto">
                 <input type="color" class="picker" name="vars[male_col]" id="male_col" value="<?= e($vars["male_col"]); ?>" /><label for="male_col" class="picker-label"><?= I18N::translate('Male individuals') ?></label>

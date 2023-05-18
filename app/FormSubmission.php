@@ -232,6 +232,12 @@ class FormSubmission
         if (isset($vars["indi_border_col"]) && $this->isValidColourHex($vars["indi_border_col"])) {
             $settings['indi_border_col'] = $vars["indi_border_col"];
         }
+        if (isset($vars["indi_border_dead_col"]) && $this->isValidColourHex($vars["indi_border_dead_col"])) {
+            $settings['indi_border_dead_col'] = $vars["indi_border_dead_col"];
+        }
+        if (isset($vars["indi_border_living_col"]) && $this->isValidColourHex($vars["indi_border_living_col"])) {
+            $settings['indi_border_living_col'] = $vars["indi_border_living_col"];
+        }
         // Settings
         if (!empty($vars['diagram_type']) && ctype_alpha($vars['diagram_type'])) {
             $settings['diagram_type'] = $vars['diagram_type'];

@@ -70,7 +70,7 @@ return array(
 	'arrows_related' => '#222266', // Default colour for arrows from family record to child by birth
 	'arrows_not_related' => '#226622',	// Default colour for arrows from family records to child other than birth (adopted, etc)
 	'colour_arrow_related' => false, // If arrows should be coloured based on blood-relationship or not
-    'indi_tile_shape' => 0, // Shape of the individual tiles, rectangle (0), rounded rectangle (10), or based on sex (20)
+    'indi_tile_shape' => 0, // Shape of the individual tiles, rectangle (0), rounded rectangle (10), based on sex (20), or based on living/deceased (30)
     'shape_sex_male' => 0, // Shape option for male when based on sex option chosen for indi_tile_shape above
     'shape_sex_female' => 10, // Shape option for female when based on sex option chosen for indi_tile_shape above
     'shape_sex_other' => 0, // Shape option for other when based on sex option chosen for indi_tile_shape above
@@ -86,11 +86,13 @@ return array(
 	'oth_gender_unrel_col' => '#FCF7E3', // Default colour of not blood-related Other gender individuals
 	'unkn_gender_unrel_col' => '#D6EED6', // Default colour of not blood-related unknown gender individuals
 	'family_col' => '#FFFFEE', // Default colour of families (different light yellow)
-	'bg_col_type' => 200, // 0 -> Custom (set in background_col), 10 -> Sex colour
-	'stripe_col_type' => 10, // 0 -> No stripe, 10 -> based on sex of individual
+	'bg_col_type' => 200, // Custom (200), sex colour (210), or based on living/deceased (220)
+	'stripe_col_type' => 110, // No stripe (100), based on sex of individual (110), or based on living/deceased (120)
 	'indi_stripe_dead_col' => '#CCCCCC', // Colour of stripe on individual tile for deceased individuals, when this option chosen
 	'indi_stripe_living_col' => '#6C8567', // Colour of stripe on individual tile for living individuals, when this option chosen
-	'border_col_type' => 20, // 0 -> Custom, 10 -> based on sex of individual, 20 -> Same as Family border
+	'border_col_type' => 320, // Custom (300), based on sex of individual (310), Same as Family border (320), or based on living/deceased (330)
+	'indi_border_dead_col' => "#CCCCCC", // Border of individual tile for deceased individuals, when this option chosen
+	'indi_border_living_col' => "#FEFEFE", // Border of individual tile for living individuals, when this option chosen
 	'background_col' => '#EEEEEE', // Background of diagram (light grey)
 	'indi_background_col' => '#FEFEFE', // Background of individual tile
 	'indi_background_dead_col' => '#CCCCCC', // Background of individual tile for deceased individuals, when this option chosen

@@ -19,15 +19,16 @@ class Settings
     public const PREFERENCE_PREFIX = "GVE";
     public const SETTINGS_LIST_PREFERENCE_NAME = "_id_list";
     public const SAVED_SETTINGS_LIST_PREFERENCE_NAME = "_shared_settings_list";
-    public const OPTION_STRIPE_NONE = 0;
+    public const OPTION_STRIPE_NONE = 100;
     public const OPTION_STRIPE_SEX_COLOUR = 110;
     public const OPTION_STRIPE_VITAL_COLOUR = 120;
     public const OPTION_BACKGROUND_CUSTOM_COLOUR = 200;
     public const OPTION_BACKGROUND_SEX_COLOUR = 210;
     public const OPTION_BACKGROUND_VITAL_COLOUR = 220;
-    public const OPTION_BORDER_SEX_COLOUR = 310;
     public const OPTION_BORDER_CUSTOM_COLOUR = 300;
-    public const OPTION_SEX_TEXT = 20;
+    public const OPTION_BORDER_SEX_COLOUR = 310;
+    public const OPTION_BORDER_FAMILY = 320;
+    public const OPTION_BORDER_VITAL_COLOUR = 330;
     const TREE_PREFIX = "_t";
     const USER_PREFIX = "_u";
     private array $settings_json_cache = [];
@@ -51,8 +52,8 @@ class Settings
         $this->defaultSettings['indi_tile_shape_custom_options'] = [0 => "Rectangle", 10 => "Rounded rectangle"];
         $this->defaultSettings['indi_tile_shape_options'] = $this->defaultSettings['indi_tile_shape_custom_options'] + [Person::TILE_SHAPE_SEX => 'Based on individual\'s sex', Person::TILE_SHAPE_VITAL => 'Based on vital status'];
         $this->defaultSettings['bg_col_type_options'] = [self::OPTION_BACKGROUND_CUSTOM_COLOUR => 'Custom', self::OPTION_BACKGROUND_SEX_COLOUR => 'Based on individual\'s sex', self::OPTION_BACKGROUND_VITAL_COLOUR => 'Based on vital status'];
-        $this->defaultSettings['stripe_col_type_options'] = [self::OPTION_STRIPE_NONE => "No stripe", self::OPTION_STRIPE_SEX_COLOUR => "Based on individual's sex", self::OPTION_STRIPE_VITAL_COLOUR => 'Based on vital status'];
-        $this->defaultSettings['border_col_type_options'] = [self::OPTION_BORDER_CUSTOM_COLOUR => "Custom", self::OPTION_BORDER_SEX_COLOUR => "Based on individual's sex", 20 => "Same as family border"];
+        $this->defaultSettings['stripe_col_type_options'] = [self::OPTION_STRIPE_NONE => 'No stripe', self::OPTION_STRIPE_SEX_COLOUR => 'Based on individual\'s sex', self::OPTION_STRIPE_VITAL_COLOUR => 'Based on vital status'];
+        $this->defaultSettings['border_col_type_options'] = [self::OPTION_BORDER_CUSTOM_COLOUR => 'Custom', self::OPTION_BORDER_SEX_COLOUR => 'Based on individual\'s sex', self::OPTION_BORDER_FAMILY => 'Same as family border', self::OPTION_BORDER_VITAL_COLOUR => 'Based on vital status'];
         $this->defaultSettings['countries'] = $this->getCountryAbbreviations();
         if (!$this->isGraphvizAvailable($this->defaultSettings['graphviz_bin'])) {
             $this->defaultSettings['graphviz_bin'] = "";
