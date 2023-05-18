@@ -432,7 +432,7 @@ class Person
                 return false;
             case 10:
                 return true;
-            case 20:
+            case Person::TILE_SHAPE_SEX:
                 switch ($i->sex()) {
                     case 'M':
                         return $this->shouldBeRounded($i, $this->dot->settings['shape_sex_male']);
@@ -443,6 +443,12 @@ class Person
                     case 'U':
                         return $this->shouldBeRounded($i, $this->dot->settings['shape_sex_unknown']);
                     default: return false;
+                }
+            case Person::TILE_SHAPE_VITAL:
+                if ($i->isDead()) {
+                    return $this->dot->settings['shape_vital_dead'];
+                } else {
+                    return $this->dot->settings['shape_vital_living'];
                 }
         }
     }
