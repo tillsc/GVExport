@@ -83,7 +83,7 @@ class Person
         // Get the personal data
         if ($this->dot->settings["diagram_type"] == "combined" && (substr($pid, 0, 3) == "I_H" || substr($pid, 0, 3) == "I_W")) {
             // In case of dummy individual
-            $fill_colour = $this->dot->getGenderColour('U', false);
+            $sex_colour = $this->dot->getGenderColour('U', false);
             $isdead = false;
             $death_date = "";
             $birthdate = "";
@@ -91,7 +91,7 @@ class Person
             $link = "";
             $name = " ";
         } else {
-            $fill_colour = $this->dot->getGenderColour($i->sex(), $related);        // Background colour is set to specified
+            $sex_colour = $this->dot->getGenderColour($i->sex(), $related);        // Background colour is set to specified
             if ($this->dot->settings['border_col_type'] == Settings::OPTION_BORDER_SEX_COLOUR) {
                 $border_colour = $this->dot->getGenderColour($i->sex(), $related);
             } else if ($this->dot->settings['border_col_type'] == Settings::OPTION_BORDER_CUSTOM_COLOUR) {
@@ -164,7 +164,7 @@ class Person
                     $indi_bg_colour = $this->dot->getGenderColour($i->sex(), $related);
                     break;
                 case Settings::OPTION_BACKGROUND_VITAL_COLOUR:
-                    $indi_bg_colour = $this->dot->getVitalColour($i->isDead());
+                    $indi_bg_colour = $this->getVitalColour($i->isDead(), Settings::OPTION_BACKGROUND_VITAL_COLOUR);
                     break;
             }
         }
@@ -186,12 +186,15 @@ class Person
         } else {
             $size = ""; // Let it sort out size itself
         }
-
+        $stripe_colour = '';
         if ($this->dot->settings['stripe_col_type'] == Settings::OPTION_STRIPE_SEX_COLOUR) {
-            // Top line of table (colour only)
-            $out .= "<TR><TD COLSPAN=\"2\" CELLPADDING=\"2\" BGCOLOR=\"$fill_colour\" PORT=\"nam\" $size></TD></TR>";
+            $stripe_colour = $sex_colour;
+        } else if ($this->dot->settings['stripe_col_type'] == Settings::OPTION_STRIPE_VITAL_COLOUR) {
+            $stripe_colour = $this->getVitalColour($i->isDead(),Settings::OPTION_STRIPE_VITAL_COLOUR);
         }
-
+        if ($stripe_colour !== '') {
+            $out .= "<TR><TD COLSPAN=\"2\" CELLPADDING=\"2\" BGCOLOR=\"$stripe_colour\" PORT=\"nam\" $size></TD></TR>";
+        }
         // Second row (photo, name, birth & death data)
         if ($detailsExist || $this->dot->settings["show_photos"]) {
             $out .= "<TR>";
@@ -440,6 +443,25 @@ class Person
                         return $this->shouldBeRounded($i, $this->dot->settings['shape_sex_unknown']);
                     default: return false;
                 }
+        }
+    }
+
+    private function getVitalColour(string $is_dead, $context)
+    {
+        if ($is_dead) {
+            switch($context) {
+                case Settings::OPTION_BACKGROUND_VITAL_COLOUR:
+                    return $this->dot->settings['indi_background_dead_col'];
+                case Settings::OPTION_STRIPE_VITAL_COLOUR:
+                    return $this->dot->settings['indi_stripe_dead_col'];
+            }
+        } else {
+            switch($context) {
+                case Settings::OPTION_BACKGROUND_VITAL_COLOUR:
+                    return $this->dot->settings['indi_background_living_col'];
+                case Settings::OPTION_STRIPE_VITAL_COLOUR:
+                    return $this->dot->settings['indi_stripe_living_col'];
+            }
         }
     }
 }

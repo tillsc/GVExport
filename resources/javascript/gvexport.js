@@ -1798,7 +1798,7 @@ function handleSimpleDiagram() {
     // Set "details" font colour to the same as the "Name" font colour, as this is the only one used in simple mode
     document.getElementById("font_colour_details").value = document.getElementById("font_colour_name").value;
     // Set "Individual background colour" to "Based on individual's sex", to match style in simple mode
-    document.getElementById("bg_col_type").value = 10;
+    document.getElementById("bg_col_type").value = 210;
     // Set diagram type to separated (refered to as decorated in code) as simple doesn't exist anymore
     document.getElementById("diagtype_decorated").checked = true;
 }

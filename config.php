@@ -84,10 +84,10 @@ return array(
 	'oth_gender_unrel_col' => '#FCF7E3', // Default colour of not blood-related Other gender individuals
 	'unkn_gender_unrel_col' => '#D6EED6', // Default colour of not blood-related unknown gender individuals
 	'family_col' => '#FFFFEE', // Default colour of families (different light yellow)
-	'bg_col_type' => 0, // 0 -> Custom (set in background_col), 10 -> Sex colour
+	'bg_col_type' => 200, // 0 -> Custom (set in background_col), 10 -> Sex colour
 	'stripe_col_type' => 10, // 0 -> No stripe, 10 -> based on sex of individual
 	'indi_stripe_dead_col' => '#CCCCCC', // Colour of stripe on individual tile for deceased individuals, when this option chosen
-	'indi_stripe_living_col' => '#FEFEFE', // Colour of stripe on individual tile for living individuals, when this option chosen
+	'indi_stripe_living_col' => '#6C8567', // Colour of stripe on individual tile for living individuals, when this option chosen
 	'border_col_type' => 20, // 0 -> Custom, 10 -> based on sex of individual, 20 -> Same as Family border
 	'background_col' => '#EEEEEE', // Background of diagram (light grey)
 	'indi_background_col' => '#FEFEFE', // Background of individual tile
