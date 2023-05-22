@@ -66,6 +66,9 @@ class Person
             case Settings::OPTION_BORDER_VITAL_COLOUR:
                 $border_colour = $this->getVitalColour($i->isDead(), Settings::OPTION_BORDER_VITAL_COLOUR);
                 break;
+            case Settings::OPTION_BORDER_AGE_COLOUR:
+                $border_colour = $this->getAgeColour();
+                break;
             default:
                 $border_colour = $this->dot->settings["border_col"];
         }
@@ -108,6 +111,9 @@ class Person
                     break;
                 case Settings::OPTION_BORDER_VITAL_COLOUR:
                     $border_colour = $this->getVitalColour($i->isDead(), Settings::OPTION_BORDER_VITAL_COLOUR);
+                    break;
+                case Settings::OPTION_BORDER_AGE_COLOUR:
+                    $border_colour = $this->getAgeColour();
                     break;
             }
             $is_dead = $i->isDead();
@@ -486,5 +492,13 @@ class Person
                     return $this->dot->settings['indi_border_living_col'];
             }
         }
+    }
+
+    private function getAgeColour()
+    {
+        $low_col = $this->dot->settings['indi_border_age_low_col'];
+        $high_col = $this->dot->settings['indi_border_age_high_col'];
+
+        return "#FF0000";
     }
 }
