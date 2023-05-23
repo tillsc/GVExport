@@ -244,6 +244,9 @@ class FormSubmission
         if (isset($vars["indi_border_age_high_col"]) && $this->isValidColourHex($vars["indi_border_age_high_col"])) {
             $settings['indi_border_age_high_col'] = $vars["indi_border_age_high_col"];
         }
+        if (isset($vars["indi_border_age_unknown_col"]) && $this->isValidColourHex($vars["indi_border_age_unknown_col"])) {
+            $settings['indi_border_age_unknown_col'] = $vars["indi_border_age_unknown_col"];
+        }
         // Settings
         if (!empty($vars['diagram_type']) && ctype_alpha($vars['diagram_type'])) {
             $settings['diagram_type'] = $vars['diagram_type'];

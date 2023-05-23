@@ -93,8 +93,9 @@ return array(
 	'border_col_type' => 320, // Custom (300), based on sex of individual (310), Same as Family border (320), or based on living/deceased (330)
 	'indi_border_dead_col' => "#CCCCCC", // Border of individual tile for deceased individuals, when this option chosen
 	'indi_border_living_col' => "#FEFEFE", // Border of individual tile for living individuals, when this option chosen
-	'indi_border_age_low_col' => "#FFFFFF", // For border colour option for age, this is the colour for low-aged individuals
-	'indi_border_age_high_col' => "#000000", // For border colour option for age, this is the colour for high-aged individuals
+	'indi_border_age_low_col' => "#CC5555", // For border colour option for age, this is the colour for low-aged individuals
+	'indi_border_age_high_col' => "#55CC55", // For border colour option for age, this is the colour for high-aged individuals
+	'indi_border_age_unknown_col' => "#FFFFFF", // For border colour option for age, this is the colour for high-aged individuals
 	'background_col' => '#EEEEEE', // Background of diagram (light grey)
 	'indi_background_col' => '#FEFEFE', // Background of individual tile
 	'indi_background_dead_col' => '#CCCCCC', // Background of individual tile for deceased individuals, when this option chosen

@@ -114,6 +114,7 @@ use vendor\WebtreesModules\gvexport\Settings;
                 <div id="age_border_subgroup" class="setting_subgroup col-auto wt-page-options-value fit-content margin-top" <?= !$admin && $vars["border_col_type"] != Settings::OPTION_BORDER_AGE_COLOUR ? 'style="display:none;"' : '' ?>>
                     <input type="color" class="picker" name="vars[indi_border_age_low_col]" id="indi_border_age_low_col" value="<?= e($vars["indi_border_age_low_col"]); ?>" /><label for="indi_border_age_low_col" class="picker-label"><?= I18N::translate('Low age colour') ?></label>
                     <input type="color" class="picker" name="vars[indi_border_age_high_col]" id="indi_border_age_high_col" value="<?= e($vars["indi_border_age_high_col"]); ?>" /><label for="indi_border_age_high_col" class="picker-label"><?= I18N::translate('High age colour') ?></label>
+                    <input type="color" class="picker" name="vars[indi_border_age_unknown_col]" id="indi_border_age_unknown_col" value="<?= e($vars["indi_border_age_unknown_col"]); ?>" /><label for="indi_border_age_unknown_col" class="picker-label"><?= I18N::translate('Unknown age colour') ?></label>
                 </div>
             </div>
             <div class="col-auto">

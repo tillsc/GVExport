@@ -2,6 +2,9 @@
 
 namespace vendor\WebtreesModules\gvexport;
 
+use Fisharebest\Webtrees\Age;
+use Fisharebest\Webtrees\Date;
+use Fisharebest\Webtrees\Elements\PafUid;
 use Fisharebest\Webtrees\I18N;
 use Fisharebest\Webtrees\Individual;
 
@@ -67,7 +70,7 @@ class Person
                 $border_colour = $this->getVitalColour($i->isDead(), Settings::OPTION_BORDER_VITAL_COLOUR);
                 break;
             case Settings::OPTION_BORDER_AGE_COLOUR:
-                $border_colour = $this->getAgeColour();
+                $border_colour = $this->getAgeColour($i);
                 break;
             default:
                 $border_colour = $this->dot->settings["border_col"];
@@ -113,7 +116,7 @@ class Person
                     $border_colour = $this->getVitalColour($i->isDead(), Settings::OPTION_BORDER_VITAL_COLOUR);
                     break;
                 case Settings::OPTION_BORDER_AGE_COLOUR:
-                    $border_colour = $this->getAgeColour();
+                    $border_colour = $this->getAgeColour($i);
                     break;
             }
             $is_dead = $i->isDead();
@@ -494,11 +497,22 @@ class Person
         }
     }
 
-    private function getAgeColour()
+    private function getAgeColour($individual): string
     {
+        if ($individual->isDead()) {
+            $age = (string) new Age($individual->getBirthDate(), $individual->getDeathDate());
+        } else {
+            $today = new Date(strtoupper(date('d M Y')));
+            $age   = (string) new Age($individual->getBirthDate(), $today);
+        }
+        if ($age === '') {
+            return $this->dot->settings['indi_border_age_unknown_col'];
+        } else {
+            $age = (int) $age;
+        }
         $low_col = $this->dot->settings['indi_border_age_low_col'];
         $high_col = $this->dot->settings['indi_border_age_high_col'];
-
-        return "#FF0000";
+        $colour = new Colour($low_col);
+        return $colour->mergeWithColour($high_col, $age/100);
     }
 }
