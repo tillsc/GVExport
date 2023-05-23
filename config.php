@@ -100,6 +100,9 @@ return array(
 	'indi_background_col' => '#FEFEFE', // Background of individual tile
 	'indi_background_dead_col' => '#CCCCCC', // Background of individual tile for deceased individuals, when this option chosen
 	'indi_background_living_col' => '#FEFEFE', // Background of individual tile for living individuals, when this option chosen
+    'indi_bg_age_low_col' => "#CC5555", // For background colour option for age, this is the colour for low-aged individuals
+    'indi_bg_age_high_col' => "#55CC55", // For background colour option for age, this is the colour for high-aged individuals
+    'indi_bg_age_unknown_col' => "#FFFFFF", // For background colour option for age, this is the colour for high-aged individuals
 	'highlight_start_indis' => false, // Whether to use a different colour for starting individuals
     'no_highlight_xref_list' => '', // XREFs in this list are not highlighted
 	'highlight_col' => '#FFFDC3', // Background of starting individuals

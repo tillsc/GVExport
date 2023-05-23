@@ -201,6 +201,15 @@ class FormSubmission
         if (isset($vars['indi_background_living_col']) && $this->isValidColourHex($vars['indi_background_living_col'])) {
             $settings['indi_background_living_col'] = $vars["indi_background_living_col"];
         }
+        if (isset($vars['indi_bg_age_low_col']) && $this->isValidColourHex($vars['indi_bg_age_low_col'])) {
+            $settings['indi_bg_age_low_col'] = $vars["indi_bg_age_low_col"];
+        }
+        if (isset($vars['indi_bg_age_high_col']) && $this->isValidColourHex($vars['indi_bg_age_high_col'])) {
+            $settings['indi_bg_age_high_col'] = $vars["indi_bg_age_high_col"];
+        }
+        if (isset($vars['indi_bg_age_unknown_col']) && $this->isValidColourHex($vars['indi_bg_age_unknown_col'])) {
+            $settings['indi_bg_age_unknown_col'] = $vars["indi_bg_age_unknown_col"];
+        }
         if (isset($vars['bg_col_type'])) {
             $settings['bg_col_type'] = I18N::digits($vars["bg_col_type"]);
         }

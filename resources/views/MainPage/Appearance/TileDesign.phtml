@@ -92,6 +92,11 @@ use vendor\WebtreesModules\gvexport\Settings;
                     <input type="color" class="picker" name="vars[indi_background_dead_col]" id="indi_background_dead_col" value="<?= e($vars["indi_background_dead_col"]); ?>" /><label for="indi_background_dead_col" class="picker-label"><?= I18N::translate('Deceased') ?></label>
                     <input type="color" class="picker" name="vars[indi_background_living_col]" id="indi_background_living_col" value="<?= e($vars["indi_background_living_col"]); ?>" /><label for="indi_background_living_col" class="picker-label"><?= I18N::translate('Living') ?></label>
                 </div>
+                <div id="age_bg_subgroup" class="setting_subgroup col-auto wt-page-options-value fit-content margin-top" <?= !$admin && $vars["bg_col_type"] != Settings::OPTION_BACKGROUND_AGE_COLOUR ? 'style="display:none;"' : '' ?>>
+                    <input type="color" class="picker" name="vars[indi_bg_age_low_col]" id="indi_bg_age_low_col" value="<?= e($vars["indi_bg_age_low_col"]); ?>" /><label for="indi_bg_age_low_col" class="picker-label"><?= I18N::translate('Low age colour') ?></label>
+                    <input type="color" class="picker" name="vars[indi_bg_age_high_col]" id="indi_bg_age_high_col" value="<?= e($vars["indi_bg_age_high_col"]); ?>" /><label for="indi_bg_age_high_col" class="picker-label"><?= I18N::translate('High age colour') ?></label>
+                    <input type="color" class="picker" name="vars[indi_bg_age_unknown_col]" id="indi_bg_age_unknown_col" value="<?= e($vars["indi_bg_age_unknown_col"]); ?>" /><label for="indi_bg_age_unknown_col" class="picker-label"><?= I18N::translate('Unknown age colour') ?></label>
+                </div>
             </div>
             <div class="col-auto margin-bottom">
                 <label for="stripe_col_type"><?= I18N::translate('Individual stripe color') ?></label>

@@ -70,7 +70,7 @@ class Person
                 $border_colour = $this->getVitalColour($i->isDead(), Settings::OPTION_BORDER_VITAL_COLOUR);
                 break;
             case Settings::OPTION_BORDER_AGE_COLOUR:
-                $border_colour = $this->getAgeColour($i);
+                $border_colour = $this->getAgeColour($i, Settings::OPTION_BORDER_AGE_COLOUR);
                 break;
             default:
                 $border_colour = $this->dot->settings["border_col"];
@@ -116,7 +116,7 @@ class Person
                     $border_colour = $this->getVitalColour($i->isDead(), Settings::OPTION_BORDER_VITAL_COLOUR);
                     break;
                 case Settings::OPTION_BORDER_AGE_COLOUR:
-                    $border_colour = $this->getAgeColour($i);
+                    $border_colour = $this->getAgeColour($i, Settings::OPTION_BORDER_AGE_COLOUR);
                     break;
             }
             $is_dead = $i->isDead();
@@ -187,6 +187,9 @@ class Person
                     break;
                 case Settings::OPTION_BACKGROUND_VITAL_COLOUR:
                     $indi_bg_colour = $this->getVitalColour($i->isDead(), Settings::OPTION_BACKGROUND_VITAL_COLOUR);
+                    break;
+                case Settings::OPTION_BACKGROUND_AGE_COLOUR:
+                    $indi_bg_colour = $this->getAgeColour($i, Settings::OPTION_BACKGROUND_AGE_COLOUR);;
                     break;
             }
         }
@@ -497,7 +500,7 @@ class Person
         }
     }
 
-    private function getAgeColour($individual): string
+    private function getAgeColour($individual, $context): string
     {
         if ($individual->isDead()) {
             $age = (string) new Age($individual->getBirthDate(), $individual->getDeathDate());
@@ -506,12 +509,28 @@ class Person
             $age   = (string) new Age($individual->getBirthDate(), $today);
         }
         if ($age === '') {
-            return $this->dot->settings['indi_border_age_unknown_col'];
+            switch ($context) {
+                case Settings::OPTION_BACKGROUND_AGE_COLOUR:
+                    return $this->dot->settings['indi_bg_age_unknown_col'];
+                case Settings::OPTION_BORDER_AGE_COLOUR:
+                    return $this->dot->settings['indi_border_age_unknown_col'];
+            }
+
         } else {
             $age = (int) $age;
         }
-        $low_col = $this->dot->settings['indi_border_age_low_col'];
-        $high_col = $this->dot->settings['indi_border_age_high_col'];
+        switch ($context) {
+            case Settings::OPTION_BACKGROUND_AGE_COLOUR:
+            default:
+                $low_col = $this->dot->settings['indi_bg_age_low_col'];
+                $high_col = $this->dot->settings['indi_bg_age_high_col'];
+                break;
+            case Settings::OPTION_BORDER_AGE_COLOUR:
+                $low_col = $this->dot->settings['indi_border_age_low_col'];
+                $high_col = $this->dot->settings['indi_border_age_high_col'];
+                break;
+        }
+
         $colour = new Colour($low_col);
         return $colour->mergeWithColour($high_col, $age/100);
     }
