@@ -222,6 +222,15 @@ class FormSubmission
         if (isset($vars['indi_stripe_living_col']) && $this->isValidColourHex($vars['indi_stripe_living_col'])) {
             $settings['indi_stripe_living_col'] = $vars["indi_stripe_living_col"];
         }
+        if (isset($vars['indi_stripe_age_low_col']) && $this->isValidColourHex($vars['indi_stripe_age_low_col'])) {
+            $settings['indi_stripe_age_low_col'] = $vars["indi_stripe_age_low_col"];
+        }
+        if (isset($vars['indi_stripe_age_high_col']) && $this->isValidColourHex($vars['indi_stripe_age_high_col'])) {
+            $settings['indi_stripe_age_high_col'] = $vars["indi_stripe_age_high_col"];
+        }
+        if (isset($vars['indi_stripe_age_unknown_col']) && $this->isValidColourHex($vars['indi_stripe_age_unknown_col'])) {
+            $settings['indi_stripe_age_unknown_col'] = $vars["indi_stripe_age_unknown_col"];
+        }
         if (isset($vars['border_col_type'])) {
             $settings['border_col_type'] = I18N::digits($vars["border_col_type"]);
         }

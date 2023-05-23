@@ -90,6 +90,9 @@ return array(
 	'stripe_col_type' => 110, // No stripe (100), based on sex of individual (110), or based on living/deceased (120)
 	'indi_stripe_dead_col' => '#CCCCCC', // Colour of stripe on individual tile for deceased individuals, when this option chosen
 	'indi_stripe_living_col' => '#6C8567', // Colour of stripe on individual tile for living individuals, when this option chosen
+    'indi_stripe_age_low_col' => "#CC5555", // For background colour option for age, this is the colour for low-aged individuals
+    'indi_stripe_age_high_col' => "#55CC55", // For background colour option for age, this is the colour for high-aged individuals
+    'indi_stripe_age_unknown_col' => "#FFFFFF", // For background colour option for age, this is the colour for high-aged individuals
 	'border_col_type' => 320, // Custom (300), based on sex of individual (310), Same as Family border (320), or based on living/deceased (330)
 	'indi_border_dead_col' => "#CCCCCC", // Border of individual tile for deceased individuals, when this option chosen
 	'indi_border_living_col' => "#FEFEFE", // Border of individual tile for living individuals, when this option chosen

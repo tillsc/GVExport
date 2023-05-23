@@ -22,6 +22,7 @@ class Settings
     public const OPTION_STRIPE_NONE = 100;
     public const OPTION_STRIPE_SEX_COLOUR = 110;
     public const OPTION_STRIPE_VITAL_COLOUR = 120;
+    public const OPTION_STRIPE_AGE_COLOUR = 130;
     public const OPTION_BACKGROUND_CUSTOM_COLOUR = 200;
     public const OPTION_BACKGROUND_SEX_COLOUR = 210;
     public const OPTION_BACKGROUND_VITAL_COLOUR = 220;
@@ -54,7 +55,7 @@ class Settings
         $this->defaultSettings['indi_tile_shape_custom_options'] = [0 => "Rectangle", 10 => "Rounded rectangle"];
         $this->defaultSettings['indi_tile_shape_options'] = $this->defaultSettings['indi_tile_shape_custom_options'] + [Person::TILE_SHAPE_SEX => 'Based on individual\'s sex', Person::TILE_SHAPE_VITAL => 'Based on vital status'];
         $this->defaultSettings['bg_col_type_options'] = [self::OPTION_BACKGROUND_CUSTOM_COLOUR => 'Custom', self::OPTION_BACKGROUND_SEX_COLOUR => 'Based on individual\'s sex', self::OPTION_BACKGROUND_VITAL_COLOUR => 'Based on vital status', self::OPTION_BACKGROUND_AGE_COLOUR => 'Based on age'];
-        $this->defaultSettings['stripe_col_type_options'] = [self::OPTION_STRIPE_NONE => 'No stripe', self::OPTION_STRIPE_SEX_COLOUR => 'Based on individual\'s sex', self::OPTION_STRIPE_VITAL_COLOUR => 'Based on vital status'];
+        $this->defaultSettings['stripe_col_type_options'] = [self::OPTION_STRIPE_NONE => 'No stripe', self::OPTION_STRIPE_SEX_COLOUR => 'Based on individual\'s sex', self::OPTION_STRIPE_VITAL_COLOUR => 'Based on vital status', self::OPTION_STRIPE_AGE_COLOUR => 'Based on age'];
         $this->defaultSettings['border_col_type_options'] = [self::OPTION_BORDER_CUSTOM_COLOUR => 'Custom', self::OPTION_BORDER_SEX_COLOUR => 'Based on individual\'s sex', self::OPTION_BORDER_FAMILY => 'Same as family border', self::OPTION_BORDER_VITAL_COLOUR => 'Based on vital status', self::OPTION_BORDER_AGE_COLOUR => 'Based on age'];
         $this->defaultSettings['countries'] = $this->getCountryAbbreviations();
         if (!$this->isGraphvizAvailable($this->defaultSettings['graphviz_bin'])) {

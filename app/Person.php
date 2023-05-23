@@ -211,11 +211,19 @@ class Person
         } else {
             $size = ""; // Let it sort out size itself
         }
-        $stripe_colour = '';
-        if ($this->dot->settings['stripe_col_type'] == Settings::OPTION_STRIPE_SEX_COLOUR) {
-            $stripe_colour = $sex_colour;
-        } else if ($this->dot->settings['stripe_col_type'] == Settings::OPTION_STRIPE_VITAL_COLOUR) {
-            $stripe_colour = $this->getVitalColour($i->isDead(),Settings::OPTION_STRIPE_VITAL_COLOUR);
+
+        switch ($this->dot->settings['stripe_col_type']) {
+            case Settings::OPTION_STRIPE_SEX_COLOUR:
+                $stripe_colour = $sex_colour;
+                break;
+            case Settings::OPTION_STRIPE_VITAL_COLOUR:
+                $stripe_colour = $this->getVitalColour($i->isDead(),Settings::OPTION_STRIPE_VITAL_COLOUR);
+                break;
+            case Settings::OPTION_STRIPE_AGE_COLOUR:
+                $stripe_colour = $this->getAgeColour($i,Settings::OPTION_STRIPE_AGE_COLOUR);
+                break;
+            default:
+                $stripe_colour = '';
         }
         if ($stripe_colour !== '') {
             $out .= "<TR><TD COLSPAN=\"2\" CELLPADDING=\"2\" BGCOLOR=\"$stripe_colour\" PORT=\"nam\" $size></TD></TR>";
@@ -514,6 +522,8 @@ class Person
                     return $this->dot->settings['indi_bg_age_unknown_col'];
                 case Settings::OPTION_BORDER_AGE_COLOUR:
                     return $this->dot->settings['indi_border_age_unknown_col'];
+                case Settings::OPTION_STRIPE_AGE_COLOUR:
+                    return $this->dot->settings['indi_stripe_age_unknown_col'];
             }
 
         } else {
@@ -528,6 +538,10 @@ class Person
             case Settings::OPTION_BORDER_AGE_COLOUR:
                 $low_col = $this->dot->settings['indi_border_age_low_col'];
                 $high_col = $this->dot->settings['indi_border_age_high_col'];
+                break;
+            case Settings::OPTION_STRIPE_AGE_COLOUR:
+                $low_col = $this->dot->settings['indi_stripe_age_low_col'];
+                $high_col = $this->dot->settings['indi_stripe_age_high_col'];
                 break;
         }
 

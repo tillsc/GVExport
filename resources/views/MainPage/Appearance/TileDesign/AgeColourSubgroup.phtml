@@ -1,0 +1,23 @@
+<?php
+use vendor\WebtreesModules\gvexport\MainPage;
+use Fisharebest\Webtrees\I18N;
+use vendor\WebtreesModules\gvexport\Settings;
+
+/**
+ * @var array       $vars           array of saved settings
+ * @var bool        $admin          whether this is for the admin page (remove functions that aren't settings)
+ * @var string      $id             the ID of the subgroup div
+ * @var string      $select_id      the ID of the dropdown list that shows this section
+ * @var string      $option_id      the ID of the option that means this should be shown
+ * @var string      $name_low       the name of the setting for the low age colour
+ * @var string      $name_high      the name of the setting for the high age colour
+ * @var string      $name_unknown   the name of the setting for the unknown age colour
+ */
+
+?>
+
+<div id="<?= $id; ?>" class="setting_subgroup col-auto wt-page-options-value fit-content margin-top" <?= !$admin && $vars[$select_id] != $option_id ? 'style="display:none;"' : '' ?>>
+    <input type="color" class="picker" name="vars[<?= $name_low; ?>]" id="<?= $name_low; ?>" value="<?= e($vars[$name_low]); ?>" /><label for="<?= $name_low; ?>" class="picker-label"><?= I18N::translate('Low age colour') ?></label>
+    <input type="color" class="picker" name="vars[<?= $name_high; ?>]" id="<?= $name_high; ?>" value="<?= e($vars[$name_high]); ?>" /><label for="<?= $name_high; ?>" class="picker-label"><?= I18N::translate('High age colour') ?></label>
+    <input type="color" class="picker" name="vars[<?= $name_unknown; ?>]" id="<?= $name_unknown; ?>" value="<?= e($vars[$name_unknown]); ?>" /><label for="<?= $name_unknown; ?>" class="picker-label"><?= I18N::translate('Unknown age colour') ?></label>
+</div>
