@@ -2,6 +2,9 @@
 
 namespace vendor\WebtreesModules\gvexport;
 
+use Fisharebest\Webtrees\Age;
+use Fisharebest\Webtrees\Date;
+use Fisharebest\Webtrees\Elements\PafUid;
 use Fisharebest\Webtrees\I18N;
 use Fisharebest\Webtrees\Individual;
 
@@ -66,6 +69,9 @@ class Person
             case Settings::OPTION_BORDER_VITAL_COLOUR:
                 $border_colour = $this->getVitalColour($i->isDead(), Settings::OPTION_BORDER_VITAL_COLOUR);
                 break;
+            case Settings::OPTION_BORDER_AGE_COLOUR:
+                $border_colour = $this->getAgeColour($i, Settings::OPTION_BORDER_AGE_COLOUR);
+                break;
             default:
                 $border_colour = $this->dot->settings["border_col"];
         }
@@ -108,6 +114,9 @@ class Person
                     break;
                 case Settings::OPTION_BORDER_VITAL_COLOUR:
                     $border_colour = $this->getVitalColour($i->isDead(), Settings::OPTION_BORDER_VITAL_COLOUR);
+                    break;
+                case Settings::OPTION_BORDER_AGE_COLOUR:
+                    $border_colour = $this->getAgeColour($i, Settings::OPTION_BORDER_AGE_COLOUR);
                     break;
             }
             $is_dead = $i->isDead();
@@ -179,6 +188,9 @@ class Person
                 case Settings::OPTION_BACKGROUND_VITAL_COLOUR:
                     $indi_bg_colour = $this->getVitalColour($i->isDead(), Settings::OPTION_BACKGROUND_VITAL_COLOUR);
                     break;
+                case Settings::OPTION_BACKGROUND_AGE_COLOUR:
+                    $indi_bg_colour = $this->getAgeColour($i, Settings::OPTION_BACKGROUND_AGE_COLOUR);;
+                    break;
             }
         }
         // Draw table
@@ -199,11 +211,19 @@ class Person
         } else {
             $size = ""; // Let it sort out size itself
         }
-        $stripe_colour = '';
-        if ($this->dot->settings['stripe_col_type'] == Settings::OPTION_STRIPE_SEX_COLOUR) {
-            $stripe_colour = $sex_colour;
-        } else if ($this->dot->settings['stripe_col_type'] == Settings::OPTION_STRIPE_VITAL_COLOUR) {
-            $stripe_colour = $this->getVitalColour($i->isDead(),Settings::OPTION_STRIPE_VITAL_COLOUR);
+
+        switch ($this->dot->settings['stripe_col_type']) {
+            case Settings::OPTION_STRIPE_SEX_COLOUR:
+                $stripe_colour = $sex_colour;
+                break;
+            case Settings::OPTION_STRIPE_VITAL_COLOUR:
+                $stripe_colour = $this->getVitalColour($i->isDead(),Settings::OPTION_STRIPE_VITAL_COLOUR);
+                break;
+            case Settings::OPTION_STRIPE_AGE_COLOUR:
+                $stripe_colour = $this->getAgeColour($i,Settings::OPTION_STRIPE_AGE_COLOUR);
+                break;
+            default:
+                $stripe_colour = '';
         }
         if ($stripe_colour !== '') {
             $out .= "<TR><TD COLSPAN=\"2\" CELLPADDING=\"2\" BGCOLOR=\"$stripe_colour\" PORT=\"nam\" $size></TD></TR>";
@@ -486,5 +506,54 @@ class Person
                     return $this->dot->settings['indi_border_living_col'];
             }
         }
+    }
+
+    private function getAgeColour($individual, $context): string
+    {
+        if ($individual->isDead()) {
+            $age = (string) new Age($individual->getBirthDate(), $individual->getDeathDate());
+        } else {
+            $today = new Date(strtoupper(date('d M Y')));
+            $age   = (string) new Age($individual->getBirthDate(), $today);
+        }
+        if ($age === '') {
+            switch ($context) {
+                case Settings::OPTION_BACKGROUND_AGE_COLOUR:
+                    return $this->dot->settings['indi_background_age_unknown_col'];
+                case Settings::OPTION_BORDER_AGE_COLOUR:
+                    return $this->dot->settings['indi_border_age_unknown_col'];
+                case Settings::OPTION_STRIPE_AGE_COLOUR:
+                    return $this->dot->settings['indi_stripe_age_unknown_col'];
+            }
+
+        } else {
+            $age = (int) $age;
+        }
+        switch ($context) {
+            case Settings::OPTION_BACKGROUND_AGE_COLOUR:
+            default:
+                $low_col = $this->dot->settings['indi_background_age_low_col'];
+                $high_col = $this->dot->settings['indi_background_age_high_col'];
+                $low_age = $this->dot->settings['indi_background_age_low'];
+                $high_age = $this->dot->settings['indi_background_age_high'];
+                break;
+            case Settings::OPTION_BORDER_AGE_COLOUR:
+                $low_col = $this->dot->settings['indi_border_age_low_col'];
+                $high_col = $this->dot->settings['indi_border_age_high_col'];
+                $low_age = $this->dot->settings['indi_border_age_low'];
+                $high_age = $this->dot->settings['indi_border_age_high'];
+                break;
+            case Settings::OPTION_STRIPE_AGE_COLOUR:
+                $low_col = $this->dot->settings['indi_stripe_age_low_col'];
+                $high_col = $this->dot->settings['indi_stripe_age_high_col'];
+                $low_age = $this->dot->settings['indi_stripe_age_low'];
+                $high_age = $this->dot->settings['indi_stripe_age_high'];
+                break;
+        }
+        $range = $high_age - $low_age;
+        if ($range == 0) $range = 0.01;
+        $ratio = min(max($age-$low_age, 0), $range)/$range;
+        $colour = new Colour($low_col);
+        return $colour->mergeWithColour($high_col, $ratio);
     }
 }

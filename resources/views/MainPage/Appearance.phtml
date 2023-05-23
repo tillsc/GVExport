@@ -27,7 +27,7 @@ use vendor\WebtreesModules\gvexport\GVExport;use vendor\WebtreesModules\gvexport
 <div id="appearance-advanced" <?= $vars["show_adv_appear"] ? '' : 'style="display:none"' ?>>
 
     <div class="row no-right-margin form-group">
-        <?= view($module->name() . '::MainPage/Appearance/TileDesign',['vars' => $vars, 'settings' => $settings, 'tree' => $tree, 'admin' => $admin]); ?>
+        <?= view($module->name() . '::MainPage/Appearance/TileDesign',['module' => $module, 'vars' => $vars, 'settings' => $settings, 'tree' => $tree, 'admin' => $admin]); ?>
     </div>
 
     <div class="row no-right-margin form-group">

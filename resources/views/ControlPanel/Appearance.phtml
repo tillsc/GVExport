@@ -21,7 +21,7 @@ use vendor\WebtreesModules\gvexport\GVExport;
 </div>
 <hr>
 <div class="row no-right-margin form-group">
-    <?= view($module->name() . '::MainPage/Appearance/TileDesign',['vars' => $vars, 'settings' => $settings, 'admin' => $admin]); ?>
+    <?= view($module->name() . '::MainPage/Appearance/TileDesign',['module' => $module, 'vars' => $vars, 'settings' => $settings, 'admin' => $admin]); ?>
 </div>
 <hr>
 <div class="row no-right-margin form-group">

@@ -1,12 +1,14 @@
 <?php
 
 use Fisharebest\Webtrees\Tree;
+use vendor\WebtreesModules\gvexport\GVExport;
 use vendor\WebtreesModules\gvexport\MainPage;
 use Fisharebest\Webtrees\I18N;
 use vendor\WebtreesModules\gvexport\Person;
 use vendor\WebtreesModules\gvexport\Settings;
 
 /**
+ * @var GVExport    $module                 this module
  * @var array       $vars                   array of saved settings
  * @var array       $settings               wider array of settings and options
  * @var Tree        $tree                   webtrees Tree object of current tree
@@ -85,32 +87,22 @@ use vendor\WebtreesModules\gvexport\Settings;
             <div class="col-auto margin-bottom">
                 <label for="bg_col_type"><?= I18N::translate('Individual background colour') ?></label>
                 <?= view('components/select', ['name' => 'vars[bg_col_type]', 'id' => 'bg_col_type', 'selected' => e($vars['bg_col_type']), 'options' => MainPage::updateTranslations($settings["bg_col_type_options"])]) ?>
-                <div id="custom_bg_subgroup" class="setting_subgroup col-auto wt-page-options-value fit-content margin-top"<?= !$admin && $vars["bg_col_type"] != Settings::OPTION_BACKGROUND_CUSTOM_COLOUR ? 'style="display:none;"' : '' ?>>
-                    <input type="color" class="picker" name="vars[indi_background_col]" id="indi_background_col" value="<?= e($vars["indi_background_col"]); ?>" /><label for="indi_background_col" class="picker-label"><?= I18N::translate('Custom background colour') ?></label>
-                </div>
-                <div id="vitals_bg_subgroup" class="setting_subgroup col-auto wt-page-options-value fit-content margin-top" <?= !$admin && $vars["bg_col_type"] != Settings::OPTION_BACKGROUND_VITAL_COLOUR ? 'style="display:none;"' : '' ?>>
-                    <input type="color" class="picker" name="vars[indi_background_dead_col]" id="indi_background_dead_col" value="<?= e($vars["indi_background_dead_col"]); ?>" /><label for="indi_background_dead_col" class="picker-label"><?= I18N::translate('Deceased') ?></label>
-                    <input type="color" class="picker" name="vars[indi_background_living_col]" id="indi_background_living_col" value="<?= e($vars["indi_background_living_col"]); ?>" /><label for="indi_background_living_col" class="picker-label"><?= I18N::translate('Living') ?></label>
-                </div>
+                <?= view($module->name() . '::MainPage/Appearance/TileDesign/Subgroup',['view' => $module->name() . '::MainPage/Appearance/TileDesign/ColourPickerList', 'view_options' => ['vars' => $vars, 'admin' => $admin, 'group' => 'background', 'field' => 'custom', 'select_id' => 'bg_col_type', 'option_id' => Settings::OPTION_BACKGROUND_CUSTOM_COLOUR, 'picker_list' => ['indi_background_col' => 'Custom background colour']]]); ?>
+                <?= view($module->name() . '::MainPage/Appearance/TileDesign/Subgroup',['view' => $module->name() . '::MainPage/Appearance/TileDesign/ColourPickerList', 'view_options' => ['vars' => $vars, 'admin' => $admin, 'group' => 'background', 'field' => 'vitals', 'select_id' => 'bg_col_type', 'option_id' => Settings::OPTION_BACKGROUND_VITAL_COLOUR, 'picker_list' => ['indi_background_dead_col' => 'Deceased', 'indi_background_living_col' => 'Living']]]); ?>
+                <?= view($module->name() . '::MainPage/Appearance/TileDesign/Subgroup',['view' => $module->name() . '::MainPage/Appearance/TileDesign/AgeColourSubgroup', 'view_options' => ['module' => $module, 'vars' => $vars, 'admin' => $admin, 'group' => 'background', 'field' => 'age', 'select_id' => 'bg_col_type', 'option_id' => Settings::OPTION_BACKGROUND_AGE_COLOUR, 'picker_list' => ['indi_background_age_low_col' => 'Low age colour', 'indi_background_age_high_col' => 'High age colour', 'indi_background_age_unknown_col' => 'Unknown age colour']]]); ?>
             </div>
             <div class="col-auto margin-bottom">
                 <label for="stripe_col_type"><?= I18N::translate('Individual stripe color') ?></label>
                 <?= view('components/select', ['name' => 'vars[stripe_col_type]', 'id' => 'stripe_col_type', 'selected' => e($vars['stripe_col_type']), 'options' => MainPage::updateTranslations($settings["stripe_col_type_options"])]) ?>
-                <div id="vitals_stripe_subgroup" class="setting_subgroup col-auto wt-page-options-value fit-content margin-top" <?= !$admin && $vars["stripe_col_type"] != Settings::OPTION_STRIPE_VITAL_COLOUR ? 'style="display:none;"' : '' ?>>
-                    <input type="color" class="picker" name="vars[indi_stripe_dead_col]" id="indi_stripe_dead_col" value="<?= e($vars["indi_stripe_dead_col"]); ?>" /><label for="indi_stripe_dead_col" class="picker-label"><?= I18N::translate('Deceased') ?></label>
-                    <input type="color" class="picker" name="vars[indi_stripe_living_col]" id="indi_stripe_living_col" value="<?= e($vars["indi_stripe_living_col"]); ?>" /><label for="indi_stripe_living_col" class="picker-label"><?= I18N::translate('Living') ?></label>
-                </div>
+                <?= view($module->name() . '::MainPage/Appearance/TileDesign/Subgroup',['view' => $module->name() . '::MainPage/Appearance/TileDesign/ColourPickerList', 'view_options' => ['vars' => $vars, 'admin' => $admin, 'group' => 'stripe', 'field' => 'vitals', 'select_id' => 'stripe_col_type', 'option_id' => Settings::OPTION_STRIPE_VITAL_COLOUR, 'picker_list' => ['indi_stripe_dead_col' => 'Deceased', 'indi_stripe_living_col' => 'Living']]]); ?>
+                <?= view($module->name() . '::MainPage/Appearance/TileDesign/Subgroup',['view' => $module->name() . '::MainPage/Appearance/TileDesign/AgeColourSubgroup', 'view_options' => ['module' => $module, 'vars' => $vars, 'admin' => $admin, 'group' => 'stripe', 'field' => 'age', 'select_id' => 'stripe_col_type', 'option_id' => Settings::OPTION_STRIPE_AGE_COLOUR, 'picker_list' => ['indi_stripe_age_low_col' => 'Low age colour', 'indi_stripe_age_high_col' => 'High age colour', 'indi_stripe_age_unknown_col' => 'Unknown age colour']]]); ?>
             </div>
             <div class="col-auto margin-bottom">
                 <label for="border_col_type"><?= I18N::translate('Individual border color') ?></label>
                 <?= view('components/select', ['name' => 'vars[border_col_type]', 'id' => 'border_col_type', 'selected' => e($vars['border_col_type']), 'options' => MainPage::updateTranslations($settings["border_col_type_options"])]) ?>
-                <div id="custom_border_subgroup" class="setting_subgroup col-auto wt-page-options-value fit-content margin-top" <?= !$admin && $vars["border_col_type"] != Settings::OPTION_BORDER_CUSTOM_COLOUR ? 'style="display:none;"' : '' ?>>
-                    <input type="color" class="picker" name="vars[indi_border_col]" id="indi_border_col" value="<?= e($vars["indi_border_col"]); ?>" /><label for="indi_border_col" class="picker-label"><?= I18N::translate('Custom border colour') ?></label>
-                </div>
-                <div id="vitals_border_subgroup" class="setting_subgroup col-auto wt-page-options-value fit-content margin-top" <?= !$admin && $vars["border_col_type"] != Settings::OPTION_BORDER_VITAL_COLOUR ? 'style="display:none;"' : '' ?>>
-                    <input type="color" class="picker" name="vars[indi_border_dead_col]" id="indi_border_dead_col" value="<?= e($vars["indi_border_dead_col"]); ?>" /><label for="indi_border_dead_col" class="picker-label"><?= I18N::translate('Deceased') ?></label>
-                    <input type="color" class="picker" name="vars[indi_border_living_col]" id="indi_border_living_col" value="<?= e($vars["indi_border_living_col"]); ?>" /><label for="indi_border_living_col" class="picker-label"><?= I18N::translate('Living') ?></label>
-                </div>
+                <?= view($module->name() . '::MainPage/Appearance/TileDesign/Subgroup',['view' => $module->name() . '::MainPage/Appearance/TileDesign/ColourPickerList', 'view_options' => ['vars' => $vars, 'admin' => $admin, 'group' => 'border', 'field' => 'custom', 'select_id' => 'bg_col_type', 'option_id' => Settings::OPTION_BORDER_CUSTOM_COLOUR, 'picker_list' => ['indi_border_col' => 'Custom background colour']]]); ?>
+                <?= view($module->name() . '::MainPage/Appearance/TileDesign/Subgroup',['view' => $module->name() . '::MainPage/Appearance/TileDesign/ColourPickerList', 'view_options' => ['vars' => $vars, 'admin' => $admin, 'group' => 'border', 'field' => 'vitals', 'select_id' => 'stripe_col_type', 'option_id' => Settings::OPTION_BORDER_VITAL_COLOUR, 'picker_list' => ['indi_border_dead_col' => 'Deceased', 'indi_border_living_col' => 'Living']]]); ?>
+                <?= view($module->name() . '::MainPage/Appearance/TileDesign/Subgroup',['view' => $module->name() . '::MainPage/Appearance/TileDesign/AgeColourSubgroup', 'view_options' => ['module' => $module, 'vars' => $vars, 'admin' => $admin, 'group' => 'border', 'field' => 'age', 'select_id' => 'border_col_type', 'option_id' => Settings::OPTION_BORDER_AGE_COLOUR, 'picker_list' => ['indi_border_age_low_col' => 'Low age colour', 'indi_border_age_high_col' => 'High age colour', 'indi_border_age_unknown_col' => 'Unknown age colour']]]); ?>
             </div>
             <div class="col-auto">
                 <input type="color" class="picker" name="vars[male_col]" id="male_col" value="<?= e($vars["male_col"]); ?>" /><label for="male_col" class="picker-label"><?= I18N::translate('Male individuals') ?></label>
