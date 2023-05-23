@@ -14,12 +14,10 @@ use vendor\WebtreesModules\gvexport\Settings;
 
 ?>
 
-<div id="<?= $id; ?>" class="setting_subgroup col-auto wt-page-options-value fit-content margin-top" <?= !$admin && $vars[$select_id] != $option_id ? 'style="display:none;"' : '' ?>>
-    <?php
-        foreach ($picker_list as $picker_id => $label) {
-    ?>
-                <input type="color" class="picker" name="vars[<?= $picker_id; ?>]" id="<?= $picker_id; ?>" value="<?= e($vars[$picker_id]); ?>" /><label for="<?= $picker_id; ?>" class="picker-label"><?= I18N::translate($label) ?></label>
-    <?php
-        }
-    ?>
-</div>
+<?php
+    foreach ($picker_list as $picker_id => $label) {
+?>
+        <input type="color" class="picker" name="vars[<?= $picker_id; ?>]" id="<?= $picker_id; ?>" value="<?= e($vars[$picker_id]); ?>" /><label for="<?= $picker_id; ?>" class="picker-label"><?= I18N::translate($label) ?></label>
+<?php
+    }
+?>

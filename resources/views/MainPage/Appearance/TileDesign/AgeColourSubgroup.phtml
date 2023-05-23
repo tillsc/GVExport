@@ -1,0 +1,26 @@
+<?php
+use vendor\WebtreesModules\gvexport\MainPage;
+use Fisharebest\Webtrees\I18N;
+use vendor\WebtreesModules\gvexport\Settings;
+
+/**
+ * @var array       $vars           array of saved settings
+ * @var bool        $admin          whether this is for the admin page (remove functions that aren't settings)
+ * @var string      $id             the ID of the subgroup div
+ * @var string      $select_id      the ID of the dropdown list that shows this section
+ * @var string      $option_id      the ID of the option that means this should be shown
+ * @var array       $picker_list    list of colour pickers to create as key pairs (id => label)
+ */
+
+?>
+<?= view($module->name() . '::MainPage/Appearance/TileDesign/ColourSubgroup',['vars' => $vars, 'admin' => $admin, 'id' => 'age_bg_subgroup', 'select_id' => 'bg_col_type', 'option_id' => Settings::OPTION_BACKGROUND_AGE_COLOUR, 'picker_list' => ['indi_bg_age_low_col' => 'Low age colour', 'indi_bg_age_high_col' => 'High age colour', 'indi_bg_age_unknown_col' => 'Unknown age colour']]); ?>
+
+<div id="<?= $id; ?>" class="setting_subgroup col-auto wt-page-options-value fit-content margin-top" <?= !$admin && $vars[$select_id] != $option_id ? 'style="display:none;"' : '' ?>>
+    <?php
+        foreach ($picker_list as $picker_id => $label) {
+    ?>
+                <input type="color" class="picker" name="vars[<?= $picker_id; ?>]" id="<?= $picker_id; ?>" value="<?= e($vars[$picker_id]); ?>" /><label for="<?= $picker_id; ?>" class="picker-label"><?= I18N::translate($label) ?></label>
+    <?php
+        }
+    ?>
+</div>
