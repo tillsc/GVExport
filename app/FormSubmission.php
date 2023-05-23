@@ -201,14 +201,20 @@ class FormSubmission
         if (isset($vars['indi_background_living_col']) && $this->isValidColourHex($vars['indi_background_living_col'])) {
             $settings['indi_background_living_col'] = $vars["indi_background_living_col"];
         }
-        if (isset($vars['indi_bg_age_low_col']) && $this->isValidColourHex($vars['indi_bg_age_low_col'])) {
-            $settings['indi_bg_age_low_col'] = $vars["indi_bg_age_low_col"];
+        if (isset($vars['indi_background_age_low_col']) && $this->isValidColourHex($vars['indi_background_age_low_col'])) {
+            $settings['indi_background_age_low_col'] = $vars["indi_background_age_low_col"];
         }
-        if (isset($vars['indi_bg_age_high_col']) && $this->isValidColourHex($vars['indi_bg_age_high_col'])) {
-            $settings['indi_bg_age_high_col'] = $vars["indi_bg_age_high_col"];
+        if (isset($vars['indi_background_age_high_col']) && $this->isValidColourHex($vars['indi_background_age_high_col'])) {
+            $settings['indi_background_age_high_col'] = $vars["indi_background_age_high_col"];
         }
-        if (isset($vars['indi_bg_age_unknown_col']) && $this->isValidColourHex($vars['indi_bg_age_unknown_col'])) {
-            $settings['indi_bg_age_unknown_col'] = $vars["indi_bg_age_unknown_col"];
+        if (isset($vars['indi_background_age_unknown_col']) && $this->isValidColourHex($vars['indi_background_age_unknown_col'])) {
+            $settings['indi_background_age_unknown_col'] = $vars["indi_background_age_unknown_col"];
+        }
+        if (isset($vars['indi_background_age_low'])) {
+            $settings['indi_background_age_low'] = I18N::digits($vars["indi_background_age_low"]);
+        }
+        if (isset($vars['indi_background_age_high'])) {
+            $settings['indi_background_age_high'] = I18N::digits($vars["indi_background_age_high"]);
         }
         if (isset($vars['bg_col_type'])) {
             $settings['bg_col_type'] = I18N::digits($vars["bg_col_type"]);
@@ -230,6 +236,12 @@ class FormSubmission
         }
         if (isset($vars['indi_stripe_age_unknown_col']) && $this->isValidColourHex($vars['indi_stripe_age_unknown_col'])) {
             $settings['indi_stripe_age_unknown_col'] = $vars["indi_stripe_age_unknown_col"];
+        }
+        if (isset($vars['indi_stripe_age_low'])) {
+            $settings['indi_stripe_age_low'] = I18N::digits($vars["indi_stripe_age_low"]);
+        }
+        if (isset($vars['indi_stripe_age_high'])) {
+            $settings['indi_stripe_age_high'] = I18N::digits($vars["indi_stripe_age_high"]);
         }
         if (isset($vars['border_col_type'])) {
             $settings['border_col_type'] = I18N::digits($vars["border_col_type"]);
@@ -264,6 +276,12 @@ class FormSubmission
         }
         if (isset($vars["indi_border_age_unknown_col"]) && $this->isValidColourHex($vars["indi_border_age_unknown_col"])) {
             $settings['indi_border_age_unknown_col'] = $vars["indi_border_age_unknown_col"];
+        }
+        if (isset($vars['indi_border_age_low'])) {
+            $settings['indi_border_age_low'] = I18N::digits($vars["indi_border_age_low"]);
+        }
+        if (isset($vars['indi_border_age_high'])) {
+            $settings['indi_border_age_high'] = I18N::digits($vars["indi_border_age_high"]);
         }
         // Settings
         if (!empty($vars['diagram_type']) && ctype_alpha($vars['diagram_type'])) {

@@ -1,8 +1,5 @@
 <?php
 
-use vendor\WebtreesModules\gvexport\GVExport;
-use vendor\WebtreesModules\gvexport\Settings;
-
 /**
  * @var string      $view           string of view location to insert into subgroup
  * @var array       $view_options   options to pass to view. We also reuse some parts of this.
@@ -10,6 +7,6 @@ use vendor\WebtreesModules\gvexport\Settings;
 
 ?>
 
-<div id="<?= $view_options['id']; ?>" class="setting_subgroup col-auto wt-page-options-value fit-content margin-top" <?= !$view_options['admin'] && $view_options['vars'][$view_options['select_id']] != $view_options['option_id'] ? 'style="display:none;"' : '' ?>>
-    <?= view($view, $view_options); ?>
+<div id="subgroup_<?= $view_options['group'] . '_' . $view_options['field']; ?>" class="setting_subgroup col-auto wt-page-options-value fit-content margin-top" <?= !$view_options['admin'] && $view_options['vars'][$view_options['select_id']] != $view_options['option_id'] ? 'style="display:none;"' : '' ?>>
+    <?= view($view, $view_options + ['view_options' => $view_options]); ?>
 </div>

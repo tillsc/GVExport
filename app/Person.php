@@ -519,7 +519,7 @@ class Person
         if ($age === '') {
             switch ($context) {
                 case Settings::OPTION_BACKGROUND_AGE_COLOUR:
-                    return $this->dot->settings['indi_bg_age_unknown_col'];
+                    return $this->dot->settings['indi_background_age_unknown_col'];
                 case Settings::OPTION_BORDER_AGE_COLOUR:
                     return $this->dot->settings['indi_border_age_unknown_col'];
                 case Settings::OPTION_STRIPE_AGE_COLOUR:
@@ -532,20 +532,28 @@ class Person
         switch ($context) {
             case Settings::OPTION_BACKGROUND_AGE_COLOUR:
             default:
-                $low_col = $this->dot->settings['indi_bg_age_low_col'];
-                $high_col = $this->dot->settings['indi_bg_age_high_col'];
+                $low_col = $this->dot->settings['indi_background_age_low_col'];
+                $high_col = $this->dot->settings['indi_background_age_high_col'];
+                $low_age = $this->dot->settings['indi_background_age_low'];
+                $high_age = $this->dot->settings['indi_background_age_high'];
                 break;
             case Settings::OPTION_BORDER_AGE_COLOUR:
                 $low_col = $this->dot->settings['indi_border_age_low_col'];
                 $high_col = $this->dot->settings['indi_border_age_high_col'];
+                $low_age = $this->dot->settings['indi_border_age_low'];
+                $high_age = $this->dot->settings['indi_border_age_high'];
                 break;
             case Settings::OPTION_STRIPE_AGE_COLOUR:
                 $low_col = $this->dot->settings['indi_stripe_age_low_col'];
                 $high_col = $this->dot->settings['indi_stripe_age_high_col'];
+                $low_age = $this->dot->settings['indi_stripe_age_low'];
+                $high_age = $this->dot->settings['indi_stripe_age_high'];
                 break;
         }
-
+        $range = $high_age - $low_age;
+        if ($range == 0) $range = 0.01;
+        $ratio = min(max($age-$low_age, 0), $range)/$range;
         $colour = new Colour($low_col);
-        return $colour->mergeWithColour($high_col, $age/100);
+        return $colour->mergeWithColour($high_col, $ratio);
     }
 }
