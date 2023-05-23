@@ -275,9 +275,14 @@ $usegraphviz = $vars['graphviz_bin'] != "";
             try {
                 jsonResponse = JSON.parse(response);
             } catch(e) {
-                showToast(ERROR_CHAR + "<?= I18N::translate('Login expired. Reloading page...'); ?>");
-                showToast(ERROR_CHAR + e);
-                setTimeout(function(){location.reload();}, 3000);
+                let errorpos = response.indexOf('Fatal error');
+                if (errorpos === 0) {
+                    setTimeout(function(){location.reload();}, 3000);
+                    showToast(ERROR_CHAR + "<?= I18N::translate('Login expired. Reloading page...'); ?>");
+                } else {
+                    showToast(ERROR_CHAR + e);
+                    showToast(ERROR_CHAR + response.substring(0,errorpos));
+                }
                 return false;
             }
             lastDotStr = jsonResponse.dot;
