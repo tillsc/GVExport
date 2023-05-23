@@ -35,6 +35,28 @@
     transform-origin: left bottom;
     transform: rotate(90deg);
 }
+.help-toggler {
+    position: fixed;
+    right: 0;
+    top: 400px;
+    transform-origin: right bottom;
+    transform: rotate(-90deg);
+}
+
+.help-sidebar {
+    height: calc(100% - 200px);
+    max-width: calc(min(98vw, 500px));
+    position: fixed;
+    z-index: 1050;
+    top: 200px;
+    right: 0;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    padding: 0.5rem;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+}
 
 .btn-hover {
     float: right;

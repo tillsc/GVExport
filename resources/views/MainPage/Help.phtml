@@ -1,0 +1,22 @@
+<?php
+
+/**
+ * This is the help sidebar
+ */
+
+use Fisharebest\Webtrees\I18N;
+
+?>
+
+<div class="help-toggler">
+    <a class="btn btn-outline-secondary pointer"><?= I18N::translate('Show help') ?></a>
+</div>
+
+<div class="help-sidebar wt-page-options d-print-none" hidden>
+    <div class="pull-right btn-hover">
+        <a class="hide-form btn btn-secondary pointer">X</a>
+    </div>
+    <div id="help-content">
+
+    </div>
+</div>

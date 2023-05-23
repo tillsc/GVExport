@@ -27,6 +27,16 @@ function showSidebar() {
     document.querySelector(".sidebar").hidden = false;
 }
 
+document.querySelector(".help-toggler a").addEventListener("click", showHelpSidebar);
+function showHelpSidebar(help = 'Help') {
+    document.querySelector(".help-toggler").hidden = true;
+    document.querySelector(".help-sidebar").hidden = false;
+    if (help !== '') {
+        let content = getHelpText('Help');
+        document.getElementById('help-content').innerHTML = content;
+    }
+}
+
 // Add or remove the % sign from the text input
 function togglePercent(element, add) {
     // Clicked out of input field, add % sign

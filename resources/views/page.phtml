@@ -23,10 +23,6 @@ $settings = (new Settings())->getDefaultSettings();
 $usegraphviz = $vars['graphviz_bin'] != "";
 ?>
 
-<script src="<?= $module->assetUrl('javascript/viz.js'); ?>"></script>
-<script src="<?= $module->assetUrl('javascript/panzoom.min.js'); ?>"></script>
-<script src="<?= $module->assetUrl('javascript/gvexport.js'); ?>"></script>
-<?= $usegraphviz ? "" : "<script src=\"" . $module->assetUrl('javascript/jspdf.umd.min.js') . "\"></script>"; ?>
 <link href="<?= $module->assetUrl('css/gvexport.css'); ?>" rel="stylesheet">
 <?= view($module->name() . '::MainPage/Translations'); ?>
 <script type="text/javascript">
@@ -141,6 +137,8 @@ $usegraphviz = $vars['graphviz_bin'] != "";
     <a class="btn btn-outline-secondary pointer"><?= I18N::translate('Show options') ?></a>
 </div>
 
+<?= view($module->name() . '::MainPage/Help', []); ?>
+
 <div id="render-container">
     <div id="rendering" hidden style="background-color: <?= $vars["background_col"] ?>;"></div>
     <div id="render_button_container">
@@ -154,7 +152,10 @@ $usegraphviz = $vars['graphviz_bin'] != "";
         </div>
     </div>
 </div>
-
+<script src="<?= $module->assetUrl('javascript/viz.js'); ?>"></script>
+<script src="<?= $module->assetUrl('javascript/panzoom.min.js'); ?>"></script>
+<script src="<?= $module->assetUrl('javascript/gvexport.js'); ?>"></script>
+<?= $usegraphviz ? "" : "<script src=\"" . $module->assetUrl('javascript/jspdf.umd.min.js') . "\"></script>"; ?>
 <script type="text/javascript">
     let graphvizAvailable = <?= $usegraphviz ? "true" : "false" ?>;
     let panzoomInst = null;
