@@ -487,10 +487,10 @@ function pageLoaded(Url) {
 
     // Load browser render when page has loaded
     if (autoUpdate) updateRender();
-    // Handle sidebar
+    // Handle sidebars
     document.querySelector(".hide-form").addEventListener("click", UI.hideSidebar);
     document.querySelector(".sidebar_toggle a").addEventListener("click", UI.showSidebar);
-    document.querySelector(".help-toggle a").addEventListener("click", UI.helpPanel.showHelpSidebar);
+    UI.helpPanel.init();
 
     // Form change events
     const form = document.getElementById('gvexport');
@@ -516,6 +516,7 @@ function pageLoaded(Url) {
     document.addEventListener("keydown", function(e) {
         if (e.key === "Esc" || e.key === "Escape") {
             document.querySelector(".sidebar").hidden ? UI.showSidebar(e) : UI.hideSidebar(e);
+            UI.helpPanel.hideHelpSidebar(e);
         }
     });
     document.addEventListener("click", function(event) {

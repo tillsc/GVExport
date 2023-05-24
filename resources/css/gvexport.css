@@ -423,7 +423,7 @@ span.NAME {
     justify-content: space-between;
 }
 .max-level-box {
-    width: unset;
+    width: 60px;
     display: inline;
     height: 2em;
     margin-top: 5px !important;

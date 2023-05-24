@@ -50,6 +50,10 @@ const UI = {
      * Code for side panel that shows help information
      */
     helpPanel: {
+        init: function () {
+            document.querySelector(".hide-help").addEventListener("click", UI.helpPanel.hideHelpSidebar);
+            document.querySelector(".help-toggle a").addEventListener("click", UI.helpPanel.showHelpSidebar);
+        },
 
         showHelpSidebar: function(help = 'Help') {
             document.querySelector(".help-toggle").hidden = true;
