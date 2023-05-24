@@ -14,6 +14,6 @@ export class SettingsGroup {
         if (typeof customCondition === 'function') {
             if (!customCondition()) return;
         }
-        showHideMatchDropdown(modifierId, this.id, value)
+        Form.showHideMatchDropdown(modifierId, this.id, value)
     }
 }

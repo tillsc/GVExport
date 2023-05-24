@@ -17,162 +17,10 @@ let loggedIn = null;
 let xrefList = [];
 let messageHistory = [];
 
-function hideSidebar() {
-    document.querySelector(".sidebar").hidden = true;
-    document.querySelector(".sidebar__toggler").hidden = false;
-    }
-
-function showSidebar() {
-    document.querySelector(".sidebar__toggler").hidden = true;
-    document.querySelector(".sidebar").hidden = false;
-}
-
-document.querySelector(".help-toggler a").addEventListener("click", showHelpSidebar);
-function showHelpSidebar(help = 'Help') {
-    document.querySelector(".help-toggler").hidden = true;
-    document.querySelector(".help-sidebar").hidden = false;
-    if (help !== '') {
-        let content = getHelpText('Help');
-        document.getElementById('help-content').innerHTML = content;
-    }
-}
-
-// Add or remove the % sign from the text input
-function togglePercent(element, add) {
-    // Clicked out of input field, add % sign
-    let startval;
-    if (add) {
-        // Keep just numbers
-        let boxVal = element.value.replace(/\D/g, "");
-        // If result is blank, set to default
-        if (boxVal === "") {
-            boxVal = "100";
-        }
-        element.value =  boxVal + "%";
-    } else {
-        // Clicked in input box, remove % and select text,
-        // but only select text the first time, let user move cursor if they want
-        startval = element.value;
-        element.value = element.value.replace("%", "");
-        if (startval !== element.value) {
-            element.select();
-        }
-    }
-}
-
-// Update provided element with provided value when element blank
-function defaultValueWhenBlank(element, value) {
-    if (element.value === "") {
-        element.value = value;
-    }
-}
-
-function checkIndiBlank() {
-    let el = document.getElementsByClassName("item");
-    let list = document.getElementById('xref_list');
-    return el.length === 0 && list.value.toString().length === 0;
-}
-
-// This function ensures that if certain options are checked in regard to which relations to include,
-// then other required options are selected. e.g. if "Anyone" is selected, all other options must
-// all be selected
-function updateRelationOption(field) {
-    // If user clicked "All relatives"
-    if (field === "include_all_relatives") {
-        // If function triggered by checking "All relatives" field, ensure "Siblings" is checked
-        if (document.getElementById("include_all_relatives").checked) {
-            document.getElementById("include_siblings").checked = true;
-        }
-        // If "All relatives" unchecked, uncheck "Anyone"
-        if (!document.getElementById("include_all_relatives").checked) {
-            document.getElementById("include_all").checked = false;
-        }
-    }
-    // If user clicked "Siblings"
-    if (field === "include_siblings") {
-        // If function triggered by unchecking "Siblings" field, ensure "All relatives" is unchecked
-        if (!document.getElementById("include_siblings").checked) {
-            document.getElementById("include_all_relatives").checked = false;
-        }
-        // If "Siblings" unchecked, uncheck "Anyone"
-        if (!document.getElementById("include_siblings").checked) {
-            document.getElementById("include_all").checked = false;
-        }
-    }
-    // If user clicked "Spouses"
-    if (field === "include_spouses") {
-        // If function triggered by checking "All relatives" field, ensure "Siblings" is checked
-        if (!document.getElementById("include_siblings").checked) {
-            document.getElementById("include_all_relatives").checked = false;
-        }
-        // If "Spouses" unchecked, uncheck "Anyone"
-        if (!document.getElementById("include_spouses").checked) {
-            document.getElementById("include_all").checked = false;
-        }
-    }
-    // If function triggered by checking "All relatives" field, ensure everything else is checked
-    if (field === "include_all") {
-        if (document.getElementById("include_all").checked) {
-            document.getElementById("include_all_relatives").checked = true;
-            document.getElementById("include_siblings").checked = true;
-            document.getElementById("include_spouses").checked = true;
-
-        }
-    }
-
-}
 
 
 
 
-// Gets position of element relative to another
-// From https://stackoverflow.com/questions/1769584/get-position-of-element-by-javascript
-function getPos(el, rel)
-{
-    let x = 0, y = 0;
-
-    do {
-        x += el.offsetLeft;
-        y += el.offsetTop;
-        el = el.offsetParent;
-    }
-    while (el !== rel)
-    return {x:x, y:y};
-}
-
-
-// Toggle items based on if the items in the cart should be used or not
-// enable - if set to true, use cart. Update form to disable options. Set to "false" to reverse.
-function toggleCart(enable) {
-    const el = document.getElementsByClassName("cart_toggle");
-    for (let i = 0; i < el.length; i++) {
-        el.item(i).disabled = enable;
-    }
-    showHideClass("cart_toggle_hide", !enable);
-    showHideClass("cart_toggle_show", enable);
-}
-
-// This function is used in toggleCart to show or hide all elements with a certain class,
-// by adding or removing "display: none"
-// css_class - the class to search for
-// show - true to show the elements and false to hide them
-function showHideClass(css_class, show) {
-    let el = document.getElementsByClassName(css_class);
-    for (let i = 0; i < el.length; i++) {
-        showHide(el.item(i), show)
-    }
-}
-
-// Show or hide an element on the page
-// element - the element to affect
-// show - whether to show (true) or hide (false) the element
-function showHide(element, show) {
-    if (show) {
-        element.style.removeProperty("display");
-    } else {
-        element.style.display = "none";
-    }
-}
 
 // Show a toast message
 // message - the message to show
@@ -326,7 +174,7 @@ function toggleAdvanced(button, id, visible = null) {
     if (visible === null) {
         visible = el.style.display === "none";
     }
-    showHide(el, visible);
+    Form.showHide(el, visible);
     if (visible) {
         button.innerHTML = button.innerHTML.replaceAll('↓','↑');
         const hidden = document.getElementById(id+"-hidden");
@@ -339,31 +187,6 @@ function toggleAdvanced(button, id, visible = null) {
     }
 }
 
-function showHideMatchCheckbox(checkboxId, elementId) {
-    showHide(document.getElementById(elementId), document.getElementById(checkboxId).checked);
-}
-function showHideMatchDropdown(dropdownId, elementId, value) {
-    let values = value.split("|");
-    let show = false;
-    let elValue = document.getElementById(dropdownId).value;
-    values.forEach((value) => {
-        if (value === elValue) {
-            show = true;
-        }
-    });
-    showHide(document.getElementById(elementId),  show);
-}
-function showHideSubgroup(elementId, callingEl) {
-    let callerText = callingEl.innerText;
-    let visible = callerText.includes('↓');
-    showHide(document.getElementById(elementId), !visible);
-    if (visible) {
-        callingEl.innerText = callerText.replace('↓', '→');
-    } else {
-        callingEl.innerText = callerText.replace('→', '↓');
-    }
-
-}
 
 
 
@@ -530,7 +353,7 @@ function toggleUpdateButton() {
     const autoSettingBox = document.getElementById('auto_update');
 
     const visible = autoSettingBox.checked;
-    showHide(updateBtn, !visible);
+    Form.showHide(updateBtn, !visible);
     autoUpdate = visible;
     if (autoUpdate) updateRender();
 }
@@ -627,9 +450,9 @@ function updateClearAllElements(clearElementId, listItemElementId) {
     let listItemElement = document.getElementById(listItemElementId);
     let listItems = listItemElement.getElementsByClassName('indi_list_item');
     if (listItems.length > 1) {
-        showHide(clearElement, true);
+        Form.showHide(clearElement, true);
     } else {
-        showHide(clearElement, false);
+        Form.showHide(clearElement, false);
     }
 }
 
@@ -682,11 +505,11 @@ function handleFullscreenExit()
 {
     if (!document.webkitIsFullScreen && !document.mozFullScreen && !document.msFullscreenElement)
     {
-        showHide(document.getElementById("fullscreenButton"), true);
-        showHide(document.getElementById("fullscreenClose"), false);
+        Form.showHide(document.getElementById("fullscreenButton"), true);
+        Form.showHide(document.getElementById("fullscreenClose"), false);
     } else {
-        showHide(document.getElementById("fullscreenButton"), false);
-        showHide(document.getElementById("fullscreenClose"), true);
+        Form.showHide(document.getElementById("fullscreenButton"), false);
+        Form.showHide(document.getElementById("fullscreenClose"), true);
     }
 }
 
@@ -838,8 +661,9 @@ function pageLoaded(Url) {
     // Load browser render when page has loaded
     if (autoUpdate) updateRender();
     // Handle sidebar
-    document.querySelector(".hide-form").addEventListener("click", hideSidebar);
-    document.querySelector(".sidebar__toggler a").addEventListener("click", showSidebar);
+    document.querySelector(".hide-form").addEventListener("click", UI.hideSidebar);
+    document.querySelector(".sidebar__toggler a").addEventListener("click", UI.showSidebar);
+    document.querySelector(".help-toggler a").addEventListener("click", UI.showHelpSidebar);
 
     // Form change events
     const form = document.getElementById('gvexport');
@@ -864,17 +688,17 @@ function pageLoaded(Url) {
     })
     document.addEventListener("keydown", function(e) {
         if (e.key === "Esc" || e.key === "Escape") {
-            document.querySelector(".sidebar").hidden ? showSidebar(e) : hideSidebar(e);
+            document.querySelector(".sidebar").hidden ? UI.showSidebar(e) : UI.hideSidebar(e);
         }
     });
     document.addEventListener("click", function(event) {
         removeSettingsEllipsisMenu(event.target);
         if (!document.getElementById('searchButton').contains(event.target) && !document.getElementById('diagram_search_box_container').contains(event.target)) {
-            showHideSearchBox(event, false);
+            Form.showHideSearchBox(event, false);
         }
     });
     document.querySelector("#diagram_search_box_container").addEventListener('change', diagramSearchBoxChange);
-    document.querySelector('#searchButton').addEventListener('click', showHideSearchBox);
+    document.querySelector('#searchButton').addEventListener('click', Form.showHideSearchBox);
     document.querySelector('#photo_shape').addEventListener('change', showGraphvizUnsupportedMessage);
 }
 
@@ -1021,12 +845,12 @@ function loadSettings(data) {
             }
         }
     });
-    showHideMatchCheckbox('mark_not_related', 'mark_related_subgroup');
-    showHideMatchCheckbox('show_birthdate', 'birth_date_subgroup');
-    showHideMatchCheckbox('show_death_date', 'death_date_subgroup');
+    Form.showHideMatchCheckbox('mark_not_related', 'mark_related_subgroup');
+    Form.showHideMatchCheckbox('show_birthdate', 'birth_date_subgroup');
+    Form.showHideMatchCheckbox('show_death_date', 'death_date_subgroup');
     setSavedDiagramsPanel();
-    showHide(document.getElementById('arrow_group'),document.getElementById('colour_arrow_related').checked)
-    showHide(document.getElementById('startcol_option'),document.getElementById('highlight_start_indis').checked)
+    Form.showHide(document.getElementById('arrow_group'),document.getElementById('colour_arrow_related').checked)
+    Form.showHide(document.getElementById('startcol_option'),document.getElementById('highlight_start_indis').checked)
 
     if (autoUpdate) {
         updateRender();
@@ -1474,7 +1298,7 @@ function loadUrlToken(Url) {
                     let settingsString = JSON.stringify(json.settings);
                     loadSettings(settingsString);
                     if(json.settings['auto_update']) {
-                        hideSidebar();
+                        UI.hideSidebar();
                     }
                 } else {
                     showToast(ERROR_CHAR + json.errorMessage);
@@ -1585,7 +1409,7 @@ function deleteIdLocal(id) {
 function setSavedDiagramsPanel() {
     const checkbox = document.getElementById('show_diagram_panel');
     const el = document.getElementById('saved_diagrams_panel');
-    showHide(el, checkbox.checked);
+    Form.showHide(el, checkbox.checked);
 }
 
 // From https://stackoverflow.com/questions/51805395/navigator-clipboard-is-undefined
@@ -1682,7 +1506,7 @@ function toggleHighlightStartPersons(enable, adminPage) {
             }
         }
     }
-    showHide(document.getElementById('startcol_option'),enable);
+    Form.showHide(document.getElementById('startcol_option'),enable);
 }
 
 function setSvgImageClipPath(element, clipPath) {
@@ -1741,7 +1565,7 @@ function diagramSearchBoxChange(e) {
             showToast(TRANSLATE['Individual not found']);
         }
         clearIndiSelect('diagram_search_box');
-        showHideSearchBox(e, false);
+        Form.showHideSearchBox(e, false);
     }
 }
 
@@ -1757,25 +1581,6 @@ function createXrefListFromSvg() {
             if (!xrefs[j].includes("&gt;")) {
                 xrefList.push(xrefs[j]);
             }
-        }
-    }
-}
-
-//
-function showHideSearchBox(event, visible = null) {
-    const el = document.getElementById('diagram_search_box_container');
-    // If toggling, set to the opposite of current state
-    if (visible === null) {
-        visible = el.style.display === "none";
-    }
-    showHide(el, visible);
-    if (visible) {
-        // Remove blank section from search box
-        tidyTomSelect();
-        // Give search box focus
-        let dropdown = document.getElementById('diagram_search_box');
-        if (typeof dropdown.tomselect !== 'undefined') {
-            dropdown.tomselect.focus();
         }
     }
 }

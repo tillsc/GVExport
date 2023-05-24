@@ -155,6 +155,9 @@ $usegraphviz = $vars['graphviz_bin'] != "";
 <script src="<?= $module->assetUrl('javascript/viz.js'); ?>"></script>
 <script src="<?= $module->assetUrl('javascript/panzoom.min.js'); ?>"></script>
 <script src="<?= $module->assetUrl('javascript/gvexport.js'); ?>"></script>
+<script src="<?= $module->assetUrl('javascript/MainPage/UI.js'); ?>"></script>
+<script src="<?= $module->assetUrl('javascript/MainPage/Form.js'); ?>"></script>
+<script src="<?= $module->assetUrl('javascript/MainPage/Data.js'); ?>"></script>
 <?= $usegraphviz ? "" : "<script src=\"" . $module->assetUrl('javascript/jspdf.umd.min.js') . "\"></script>"; ?>
 <script type="text/javascript">
     let graphvizAvailable = <?= $usegraphviz ? "true" : "false" ?>;
@@ -170,7 +173,7 @@ $usegraphviz = $vars['graphviz_bin'] != "";
 
     // Trigger action when "Update" button clicked
     document.querySelector('.update-browser-rendering').addEventListener('click', function(e) {
-        if (checkIndiBlank() === false) {
+        if (Form.checkIndiBlank() === false) {
             updateRender();
             refreshIndisFromXREFS(false);
             removeError("indi-error");
@@ -183,7 +186,7 @@ $usegraphviz = $vars['graphviz_bin'] != "";
     // If "Download" button clicked
     document.querySelector('.main-action').addEventListener('click', function(e) {
         // first check that individual has been selected
-        if (checkIndiBlank() === false) {
+        if (Form.checkIndiBlank() === false) {
             removeError("indi-error");
         } else {
             addError("indi-error","<?= I18N::translate('Individual required') ?>");
@@ -231,9 +234,9 @@ $usegraphviz = $vars['graphviz_bin'] != "";
         const data = jQuery(form).serialize();
         // Disable our fields again by indicating cart is enabled (only if items in cart)
         if (!cartempty && document.getElementById("usecart_yes").checked) {
-            toggleCart(true);
+            Form.toggleCart(true);
         }
-        showHideMatchCheckbox('mark_not_related', 'mark_related_subgroup');
+        Form.showHideMatchCheckbox('mark_not_related', 'mark_related_subgroup');
         document.getElementById("browser").value = "false";
         let lastDotStr, indiNum, famNum, messages;
 
@@ -368,7 +371,7 @@ $usegraphviz = $vars['graphviz_bin'] != "";
         er.innerText=message;
         let el = document.getElementsByClassName("sidebar__formfields");
         let form = document.getElementsByTagName("FORM");
-        let pos = getPos(er,form.item(1));
+        let pos = Form.getPos(er,form.item(1));
         el.item(0).scrollTo(0,pos["y"]-70);
     }
 

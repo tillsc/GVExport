@@ -17,7 +17,7 @@ use Fisharebest\Webtrees\I18N;
 <?= MainPage::addLabel('', 'Tile contents', !$admin); ?>
 <div class="col-sm-8 wt-page-options-value">
     <div class="col-auto">
-        <div onclick="showHideSubgroup('url_subgroup', this)" class="pointer subgroup">→ <?= I18N::translate('Page links'); ?></div>
+        <div onclick="Form.showHideSubgroup('url_subgroup', this)" class="pointer subgroup">→ <?= I18N::translate('Page links'); ?></div>
         <div id="url_subgroup" class="setting_subgroup col-auto wt-page-options-value" style="display: none">
             <input type="checkbox" name="vars[add_links]" id="add_links" value="add_links" <?= $vars["add_links"] ? 'checked' : '' ?>>
             <label for="add_links"><?= I18N::translate('Add URL to individuals and families') ?></label>
@@ -26,7 +26,7 @@ use Fisharebest\Webtrees\I18N;
         </div>
     </div>
     <div class="col-auto">
-        <div onclick="showHideSubgroup('abbreviations_subgroup', this)" class="pointer subgroup">→ <?= I18N::translate('Abbreviations'); ?></div>
+        <div onclick="Form.showHideSubgroup('abbreviations_subgroup', this)" class="pointer subgroup">→ <?= I18N::translate('Abbreviations'); ?></div>
         <div id="abbreviations_subgroup" class="setting_subgroup col-auto wt-page-options-value" style="display: none">
             <div class="col-auto">
                 <label for="use_abbr_name"><?= I18N::translate('Abbreviated names'); ?></label>
@@ -39,7 +39,7 @@ use Fisharebest\Webtrees\I18N;
         </div>
     </div>
     <div class="col-auto">
-        <div onclick="showHideSubgroup('indi_details_subgroup', this)" class="pointer subgroup">→ <?= I18N::translate('Information on individuals'); ?></div>
+        <div onclick="Form.showHideSubgroup('indi_details_subgroup', this)" class="pointer subgroup">→ <?= I18N::translate('Information on individuals'); ?></div>
         <div id="indi_details_subgroup" class="setting_subgroup col-auto wt-page-options-value" style="display: none">
             <div class="col-sm-8">
                 <?php
@@ -60,7 +60,7 @@ use Fisharebest\Webtrees\I18N;
                 <label for='show_xref_individuals'><?= I18N::translate('Show individual XREF'); ?></label>
             </div>
             <div class="col-sm-8">
-                <input type="checkbox" onclick="showHideMatchCheckbox('show_birthdate', 'birth_date_subgroup');" name="vars[show_birthdate]" id="show_birthdate" value="show_birthdate" <?= $vars["show_birthdate"] ? 'checked' : '' ?>>
+                <input type="checkbox" onclick="Form.showHideMatchCheckbox('show_birthdate', 'birth_date_subgroup');" name="vars[show_birthdate]" id="show_birthdate" value="show_birthdate" <?= $vars["show_birthdate"] ? 'checked' : '' ?>>
                 <label for='show_birthdate'><?= I18N::translate('Show birthdate'); ?></label>
                 <div id="birth_date_subgroup" class="setting_subgroup col-auto wt-page-options-value" <?= !$vars["show_birthdate"] ? 'style="display:none;"' : '' ?>>
                     <div class="col-auto mx-3">
@@ -79,7 +79,7 @@ use Fisharebest\Webtrees\I18N;
             </div>
 
             <div class="col-sm-8">
-                <input type="checkbox" onclick="showHideMatchCheckbox('show_death_date', 'death_date_subgroup');" name="vars[show_death_date]" id="show_death_date" value="show_death_date" <?= $vars["show_death_date"] ? 'checked' : '' ?>>
+                <input type="checkbox" onclick="Form.showHideMatchCheckbox('show_death_date', 'death_date_subgroup');" name="vars[show_death_date]" id="show_death_date" value="show_death_date" <?= $vars["show_death_date"] ? 'checked' : '' ?>>
                 <label for='show_death_date'><?= I18N::translate('Show death date'); ?></label>
                 <div id="death_date_subgroup" class="setting_subgroup col-auto wt-page-options-value" <?= !$vars["show_death_date"] ? 'style="display:none;"' : '' ?>>
                     <div class="col-auto mx-3">
@@ -104,14 +104,14 @@ use Fisharebest\Webtrees\I18N;
         </div>
     </div>
     <div class="col-auto">
-        <div onclick="showHideSubgroup('fam_details_subgroup', this)" class="pointer subgroup">→ <?= I18N::translate('Information on families'); ?></div>
+        <div onclick="Form.showHideSubgroup('fam_details_subgroup', this)" class="pointer subgroup">→ <?= I18N::translate('Information on families'); ?></div>
         <div id="fam_details_subgroup" class="setting_subgroup col-auto wt-page-options-value" style="display: none">
             <div class="col-sm-8">
                 <input type="checkbox" name="vars[show_xref_families]" id="show_xref_families" value="show_xref_families" <?= $vars["show_xref_families"] ? 'checked' : '' ?>>
                 <label for='show_xref_families'><?= I18N::translate('Show family XREF'); ?></label>
             </div>
             <div class="col-sm-8">
-                <input type="checkbox" onclick="showHideMatchCheckbox('show_marriage_date', 'marriage_date_subgroup');" name="vars[show_marriage_date]" id="show_marriage_date" value="show_marriage_date" <?= $vars["show_marriage_date"] ? 'checked' : '' ?>>
+                <input type="checkbox" onclick="Form.showHideMatchCheckbox('show_marriage_date', 'marriage_date_subgroup');" name="vars[show_marriage_date]" id="show_marriage_date" value="show_marriage_date" <?= $vars["show_marriage_date"] ? 'checked' : '' ?>>
                 <label for='show_marriage_date'><?= I18N::translate('Show marriage date'); ?></label>
                 <div id="marriage_date_subgroup" class="setting_subgroup col-auto wt-page-options-value" <?= !$vars["show_marriage_date"] ? 'style="display:none;"' : '' ?>>
                     <div class="col-auto mx-3">

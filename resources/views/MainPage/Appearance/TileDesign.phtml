@@ -19,7 +19,7 @@ use vendor\WebtreesModules\gvexport\Settings;
 
 <?= MainPage::addLabel('', 'Tile design', !$admin); ?>
 <div class="col-sm-8 wt-page-options-value">
-    <div onclick="showHideSubgroup('shape_subgroup', this)" class="pointer subgroup">→ <?= I18N::translate('Shape'); ?></div>
+    <div onclick="Form.showHideSubgroup('shape_subgroup', this)" class="pointer subgroup">→ <?= I18N::translate('Shape'); ?></div>
     <div id="shape_subgroup" class="setting_subgroup col-auto wt-page-options-value" style="display: none">
         <div class="col-auto">
             <label for="indi_tile_shape"><?= I18N::translate('Individual tile shape') ?></label>
@@ -58,10 +58,10 @@ use vendor\WebtreesModules\gvexport\Settings;
             $images_enabled = true;
         }
         if ($images_enabled) { ?>
-        <div onclick="showHideSubgroup('photos_subgroup', this)" class="pointer subgroup">→ <?= I18N::translate('Photos'); ?></div>
+        <div onclick="Form.showHideSubgroup('photos_subgroup', this)" class="pointer subgroup">→ <?= I18N::translate('Photos'); ?></div>
         <div id="photos_subgroup" class="setting_subgroup col-auto wt-page-options-value" style="display: none">
             <div class="col-sm-8">
-                <input type="checkbox" onclick="showHideMatchCheckbox('show_photos', 'photos_enabled_subgroup');" name="vars[show_photos]" id="show_photos" value="show_photos" <?= $vars["show_photos"] ? 'checked' : '' ?>>
+                <input type="checkbox" onclick="Form.showHideMatchCheckbox('show_photos', 'photos_enabled_subgroup');" name="vars[show_photos]" id="show_photos" value="show_photos" <?= $vars["show_photos"] ? 'checked' : '' ?>>
                 <label for="show_photos"><?= I18N::translate('Show photos') ?></label>
                 <div id="photos_enabled_subgroup" class="setting_subgroup col-auto wt-page-options-value" <?= !$admin && !$vars["show_photos"] ? 'style="display:none;"' : '' ?>>
                     <div class="col-auto">
@@ -70,19 +70,19 @@ use vendor\WebtreesModules\gvexport\Settings;
                     </div>
                     <div class="col-auto">
                         <label for="photo_size"><?= I18N::translate('Photo size') ?></label>
-                        <input type="text" onclick="togglePercent(this, false)" onblur="togglePercent(this, true)" class="form-control col-sm-6" size="10" name="vars[photo_size]" id="photo_size"
+                        <input type="text" onclick="Form.togglePercent(this, false)" onblur="Form.togglePercent(this, true)" class="form-control col-sm-6" size="10" name="vars[photo_size]" id="photo_size"
                                value="<?= e($vars["photo_size"]) ?>">
                     </div>
                     <div class="col-auto">
                         <label for="photo_resolution"><?= I18N::translate('Photo resolution') ?></label>
-                        <input type="text" onclick="togglePercent(this, false)" onblur="togglePercent(this, true)" class="form-control col-sm-6" size="10" name="vars[photo_resolution]" id="photo_resolution"
+                        <input type="text" onclick="Form.togglePercent(this, false)" onblur="Form.togglePercent(this, true)" class="form-control col-sm-6" size="10" name="vars[photo_resolution]" id="photo_resolution"
                                value="<?= e($vars["photo_resolution"]) ?>">
                     </div>
                 </div>
             </div>
         </div>
         <?php } ?>
-        <div onclick="showHideSubgroup('colours_subgroup', this)" class="pointer subgroup">→ <?= I18N::translate('Colours'); ?></div>
+        <div onclick="Form.showHideSubgroup('colours_subgroup', this)" class="pointer subgroup">→ <?= I18N::translate('Colours'); ?></div>
         <div id="colours_subgroup" class="setting_subgroup col-auto wt-page-options-value" style="display: none">
             <div class="col-auto margin-bottom">
                 <label for="bg_col_type"><?= I18N::translate('Individual background colour') ?></label>
@@ -149,7 +149,7 @@ use vendor\WebtreesModules\gvexport\Settings;
             </div>
         </div>
     </div>
-    <div onclick="showHideSubgroup('font_subgroup', this)" class="pointer subgroup">→ <?= I18N::translate('Font'); ?></div>
+    <div onclick="Form.showHideSubgroup('font_subgroup', this)" class="pointer subgroup">→ <?= I18N::translate('Font'); ?></div>
     <div id="font_subgroup" class="setting_subgroup col-auto wt-page-options-value" style="display: none">
         <div class="col-auto">
             <label for="typeface"><?= I18N::translate('Typeface') ?></label>
