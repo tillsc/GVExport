@@ -241,7 +241,7 @@ const Form = {
             } else if (type === "pdf") {
                 createPdfFromImage(dataURL, img.width, img.height);
             } else {
-                Data.downloadLink(dataURL, download_file_name + "." + type);
+                Form.downloadLink(dataURL, download_file_name + "." + type);
             }
         }
     },

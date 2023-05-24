@@ -35,7 +35,7 @@ const Data = {
             if (type === "svg") {
                 const svgBlob = new Blob([svg], {type: "image/svg+xml;charset=utf-8"});
                 const svgUrl = URL.createObjectURL(svgBlob);
-                Data.downloadLink(svgUrl, download_file_name + "."+type);
+                Form.downloadLink(svgUrl, download_file_name + "."+type);
             } else {
                 img.src = "data:image/svg+xml;utf8," + svg;
             }
