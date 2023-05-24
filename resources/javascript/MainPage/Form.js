@@ -237,7 +237,7 @@ const Form = {
             // Download it
             const dataURL = canvas.toDataURL('image/'+type);
             if (dataURL.length < 10) {
-                Form.showToast(ERROR_CHAR+TRANSLATE['Your browser does not support exporting images this large. Please reduce number of records, reduce DPI setting, or use SVG option.']);
+                UI.showToast(ERROR_CHAR+TRANSLATE['Your browser does not support exporting images this large. Please reduce number of records, reduce DPI setting, or use SVG option.']);
             } else if (type === "pdf") {
                 createPdfFromImage(dataURL, img.width, img.height);
             } else {

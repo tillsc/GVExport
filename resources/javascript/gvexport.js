@@ -32,9 +32,9 @@ function loadURLXref(Url) {
                 let startValue = el.value;
                 addIndiToList(xref);
                 if (url_xref_treatment === 'default' && xrefs.length === 1 ) {
-                    setTimeout(function () {Form.showToast(TRANSLATE['Source individual has replaced existing individual'].replace('%s', xrefs.length.toString()))}, 100);
+                    setTimeout(function () {UI.showToast(TRANSLATE['Source individual has replaced existing individual'].replace('%s', xrefs.length.toString()))}, 100);
                 } else if (startValue !== el.value && (url_xref_treatment === 'default' || url_xref_treatment === 'add')) {
-                    setTimeout(function () {Form.showToast(TRANSLATE['One new source individual added to %s existing individuals'].replace('%s', xrefs.length.toString()))}, 100);
+                    setTimeout(function () {UI.showToast(TRANSLATE['One new source individual added to %s existing individuals'].replace('%s', xrefs.length.toString()))}, 100);
                 }
             }
         }
@@ -77,7 +77,7 @@ function loadXrefList(url, xrefListId, indiListId) {
         updateClearAll();
         toggleHighlightStartPersons(document.getElementById('highlight_start_indis').checked);
     }).catch(function(error) {
-        Form.showToast("Error");
+        UI.showToast("Error");
         console.log(error);
     });
 }
@@ -461,7 +461,7 @@ function removeSettingsEllipsisMenu(menuElement) {
 }
 
 function showGraphvizUnsupportedMessage() {
-    if (graphvizAvailable && document.getElementById('photo_shape').value !== '0') Form.showToast(TRANSLATE["Diagram will be rendered in browser as server doesn't support photo shapes"]);
+    if (graphvizAvailable && document.getElementById('photo_shape').value !== '0') UI.showToast(TRANSLATE["Diagram will be rendered in browser as server doesn't support photo shapes"]);
 }
 
 // This function is run when the page is loaded
@@ -490,7 +490,7 @@ function pageLoaded(Url) {
     // Handle sidebar
     document.querySelector(".hide-form").addEventListener("click", UI.hideSidebar);
     document.querySelector(".sidebar_toggle a").addEventListener("click", UI.showSidebar);
-    document.querySelector(".help-toggle a").addEventListener("click", UI.showHelpSidebar);
+    document.querySelector(".help-toggle a").addEventListener("click", UI.helpPanel.showHelpSidebar);
 
     // Form change events
     const form = document.getElementById('gvexport');
@@ -510,7 +510,7 @@ function pageLoaded(Url) {
         if (element !== null) {
             loadSettings(element.getAttribute('data-settings'));
         } else if (e.target.value !== '-') {
-            Form.showToast(ERROR_CHAR + 'Settings not found')
+            UI.showToast(ERROR_CHAR + 'Settings not found')
         }
     })
     document.addEventListener("keydown", function(e) {
@@ -578,7 +578,7 @@ function downloadSettingsFileMenuAction(event) {
     try {
         settings = JSON.parse(settings_json_string);
     } catch (e) {
-        Form.showToast("Failed to load settings: " + e);
+        UI.showToast("Failed to load settings: " + e);
         return false;
     }
     let file = new Blob([settings_json_string], {type: "text/plain"});
@@ -598,7 +598,7 @@ function uploadSettingsFile(input) {
     reader.onload = (e) => {
         loadSettings(e.target.result);
     };
-    reader.onerror = (e) => Form.showToast(e.target.error.name);
+    reader.onerror = (e) => UI.showToast(e.target.error.name);
     reader.readAsText(file);
 }
 
@@ -614,7 +614,7 @@ function loadSettings(data) {
     try {
         settings = JSON.parse(data);
     } catch (e) {
-        Form.showToast("Failed to load settings: " + e);
+        UI.showToast("Failed to load settings: " + e);
         return false;
     }
     Object.keys(settings).forEach(function(key){
@@ -645,13 +645,13 @@ function loadSettings(data) {
                     setCheckStatus(document.getElementById('md_type_gedcom'), !toBool(settings[key]));
                     break;
                 case 'show_adv_people':
-                    Data.toggleAdvanced(document.getElementById('people-advanced-button'), 'people-advanced', toBool(settings[key]));
+                    Form.toggleAdvanced(document.getElementById('people-advanced-button'), 'people-advanced', toBool(settings[key]));
                     break;
                 case 'show_adv_appear':
-                    Data.toggleAdvanced(document.getElementById('appearance-advanced-button'), 'appearance-advanced', toBool(settings[key]));
+                    Form.toggleAdvanced(document.getElementById('appearance-advanced-button'), 'appearance-advanced', toBool(settings[key]));
                     break;
                 case 'show_adv_files':
-                    Data.toggleAdvanced(document.getElementById('files-advanced-button'), 'files-advanced', toBool(settings[key]));
+                    Form.toggleAdvanced(document.getElementById('files-advanced-button'), 'files-advanced', toBool(settings[key]));
                     break;
                 // If option to use cart is not showing, don't load, but also don't show error
                 case 'use_cart':
@@ -662,7 +662,7 @@ function loadSettings(data) {
                 case 'token':
                     break;
                 default:
-                    Form.showToast(ERROR_CHAR + TRANSLATE['Unable to load setting'] + " " + key);
+                    UI.showToast(ERROR_CHAR + TRANSLATE['Unable to load setting'] + " " + key);
             }
         } else {
             if (el.type === 'checkbox' || el.type === 'radio') {
@@ -718,7 +718,7 @@ function getSettingsServer(id = ID_ALL_SETTINGS) {
                 return ERROR_CHAR + json.errorMessage;
             }
         } catch(e) {
-            Form.showToast(ERROR_CHAR + e);
+            UI.showToast(ERROR_CHAR + e);
         }
         return false;
     });
@@ -763,7 +763,7 @@ function getSettingsClient(id = ID_ALL_SETTINGS) {
             return Promise.reject(e);
         }
     }).catch((e) => {
-        Form.showToast(ERROR_CHAR + e);
+        UI.showToast(ERROR_CHAR + e);
     });
 }
 
@@ -777,7 +777,7 @@ function getSettings(id = ID_ALL_SETTINGS) {
             });
         }
     }).catch((error) => {
-        Form.showToast(ERROR_CHAR + error);
+        UI.showToast(ERROR_CHAR + error);
     });
 }
 function sendRequest(json) {
@@ -847,7 +847,7 @@ function loadSettingsDetails() {
             }
         });
     }).catch(
-        error => Form.showToast(error)
+        error => UI.showToast(error)
     );
 }
 
@@ -940,7 +940,7 @@ function saveSettingsAdvanced(userPrompted = false) {
         loadSettingsDetails();
         document.getElementById('save_settings_name').value = "";
     }).catch(
-        error => Form.showToast(error)
+        error => UI.showToast(error)
     );
 
 }
@@ -951,7 +951,7 @@ function deleteSettingsClient(id) {
             localStorage.removeItem("GVE_Settings_" + treeName + "_" + id);
             deleteIdLocal(id);
         } catch (e) {
-            Form.showToast(e);
+            UI.showToast(e);
         }
     });
 }
@@ -972,10 +972,10 @@ function deleteSettingsMenuAction(e) {
                     if (json.success) {
                         loadSettingsDetails();
                     } else {
-                        Form.showToast(ERROR_CHAR + json.errorMessage);
+                        UI.showToast(ERROR_CHAR + json.errorMessage);
                     }
                 } catch (e) {
-                    Form.showToast("Failed to load response: " + e);
+                    UI.showToast("Failed to load response: " + e);
                     return false;
                 }
             });
@@ -992,10 +992,10 @@ function copySavedSettingsLinkMenuAction(e) {
     getSavedSettingsLink(id).then((url)=>{
         copyToClipboard(url)
             .then(() => {
-                Form.showToast(TRANSLATE['Copied link to clipboard']);
+                UI.showToast(TRANSLATE['Copied link to clipboard']);
             })
             .catch(() => {
-                Form.showToast(TRANSLATE['Failed to copy link to clipboard']);
+                UI.showToast(TRANSLATE['Failed to copy link to clipboard']);
                 showModal('<p>' + TRANSLATE['Failed to copy link to clipboard'] + '. ' + TRANSLATE['Copy manually below'] + ':</p><textarea style="width: 100%">' + json.url + "</textarea>")
             });
     })
@@ -1015,10 +1015,10 @@ function getSavedSettingsLink(id) {
                     if (json.success) {
                         return json.url;
                     } else {
-                        Form.showToast(ERROR_CHAR + json.errorMessage);
+                        UI.showToast(ERROR_CHAR + json.errorMessage);
                     }
                 } catch (e) {
-                    Form.showToast("Failed to load response: " + e);
+                    UI.showToast("Failed to load response: " + e);
                     return false;
                 }
             });
@@ -1041,12 +1041,12 @@ function revokeSavedSettingsLinkMenuAction(e) {
                 try {
                     let json = JSON.parse(response);
                     if (json.success) {
-                        Form.showToast(TRANSLATE['Revoked access to shared link']);
+                        UI.showToast(TRANSLATE['Revoked access to shared link']);
                     } else {
-                        Form.showToast(ERROR_CHAR + json.errorMessage);
+                        UI.showToast(ERROR_CHAR + json.errorMessage);
                     }
                 } catch (e) {
-                    Form.showToast("Failed to load response: " + e);
+                    UI.showToast("Failed to load response: " + e);
                     return false;
                 }
             });
@@ -1067,12 +1067,12 @@ function addUrlToMyFavouritesMenuAction(e) {
                 try {
                     let json = JSON.parse(response);
                     if (json.success) {
-                        Form.showToast(TRANSLATE['Added to My favourites']);
+                        UI.showToast(TRANSLATE['Added to My favourites']);
                     } else {
-                        Form.showToast(ERROR_CHAR + json.errorMessage);
+                        UI.showToast(ERROR_CHAR + json.errorMessage);
                     }
                 } catch (e) {
-                    Form.showToast("Failed to load response: " + e);
+                    UI.showToast("Failed to load response: " + e);
                     return false;
                 }
             });
@@ -1097,12 +1097,12 @@ function addUrlToTreeFavourites(e) {
                 try {
                     let json = JSON.parse(response);
                     if (json.success) {
-                        Form.showToast(TRANSLATE['Added to Tree favourites']);
+                        UI.showToast(TRANSLATE['Added to Tree favourites']);
                     } else {
-                        Form.showToast(ERROR_CHAR + json.errorMessage);
+                        UI.showToast(ERROR_CHAR + json.errorMessage);
                     }
                 } catch (e) {
-                    Form.showToast("Failed to load response: " + e);
+                    UI.showToast("Failed to load response: " + e);
                     return false;
                 }
             });
@@ -1128,10 +1128,10 @@ function loadUrlToken(Url) {
                         UI.hideSidebar();
                     }
                 } else {
-                    Form.showToast(ERROR_CHAR + json.errorMessage);
+                    UI.showToast(ERROR_CHAR + json.errorMessage);
                 }
             } catch (e) {
-                Form.showToast("Failed to load response: " + e);
+                UI.showToast("Failed to load response: " + e);
                 return false;
             }
         });
@@ -1389,7 +1389,7 @@ function diagramSearchBoxChange(e) {
     // Skip the first trigger, only fire for the follow-up trigger when the XREF is set
     if (xref !== ""){
         if (!scrollToRecord(xref)) {
-            Form.showToast(TRANSLATE['Individual not found']);
+            UI.showToast(TRANSLATE['Individual not found']);
         }
         clearIndiSelect('diagram_search_box');
         Form.showHideSearchBox(e, false);

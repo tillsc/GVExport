@@ -282,10 +282,10 @@ $usegraphviz = $vars['graphviz_bin'] != "";
                 let errorpos = response.substring(0,1000).indexOf('Fatal error');
                 if (errorpos === -1) {
                     setTimeout(function(){location.reload();}, 3000);
-                    Form.showToast(ERROR_CHAR + "<?= I18N::translate('Login expired. Reloading page...'); ?>");
+                    UI.showToast(ERROR_CHAR + "<?= I18N::translate('Login expired. Reloading page...'); ?>");
                 } else {
-                    Form.showToast(ERROR_CHAR + e);
-                    Form.showToast(ERROR_CHAR + response.substring(0,Math.min(1000, errorpos)));
+                    UI.showToast(ERROR_CHAR + e);
+                    UI.showToast(ERROR_CHAR + response.substring(0,Math.min(1000, errorpos)));
                 }
                 return false;
             }
@@ -324,7 +324,7 @@ $usegraphviz = $vars['graphviz_bin'] != "";
             });
             if (messages !== "") {
                 for (let i = 0; i < messages.length; i++) {
-                    Form.showToast(messages[i]);
+                    //UI.showToast(messages[i]);
                 }
             }
             // Scroll render to last starting individual
@@ -342,9 +342,9 @@ $usegraphviz = $vars['graphviz_bin'] != "";
         }).catch(function (error) {
             if (error.message.includes("TOTAL_MEMORY")) {
                 if (graphvizAvailable) {
-                    Form.showToast(ERROR_CHAR + "<?= I18N::translate('Memory limit reached. Please reduce number of records or use download option.'); ?>");
+                    UI.showToast(ERROR_CHAR + "<?= I18N::translate('Memory limit reached. Please reduce number of records or use download option.'); ?>");
                 } else {
-                        Form.showToast(ERROR_CHAR + "<?= I18N::translate('Memory limit reached. Please reduce number of records or install Graphviz on server and use download option.'); ?>");
+                        UI.showToast(ERROR_CHAR + "<?= I18N::translate('Memory limit reached. Please reduce number of records or install Graphviz on server and use download option.'); ?>");
                 }
                 rendering.innerHTML = "";
             } else {

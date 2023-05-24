@@ -15,16 +15,12 @@ const UI = {
         document.querySelector(".sidebar").hidden = false;
     },
 
-    showHelpSidebar: function(help = 'Help') {
-        document.querySelector(".help-toggle").hidden = true;
-        document.querySelector(".help-sidebar").hidden = false;
-        if (help !== '') {
-            document.getElementById('help-content').innerHTML = getHelpText('Help');
-        }
-    },
 
-    // Show a toast message
-    // message - the message to show
+    /**
+     * Shows a pop-up message
+     *
+     * @param message
+     */
     showToast: function(message) {
         const toastParent = document.getElementById("toast-container");
         if (toastParent !== null) {
@@ -48,5 +44,23 @@ const UI = {
             toast.setAttribute("onclick", "return showHelp('message_history');");
             toast.className += " show";
         }
-}
+    },
+
+    /**
+     * Code for side panel that shows help information
+     */
+    helpPanel: {
+
+        showHelpSidebar: function(help = 'Help') {
+            document.querySelector(".help-toggle").hidden = true;
+            document.querySelector(".help-sidebar").hidden = false;
+            if (help !== '') {
+                document.getElementById('help-content').innerHTML = getHelpText('Help');
+            }
+        },
+        hideHelpSidebar: function() {
+            document.querySelector(".help-sidebar").hidden = true;
+            document.querySelector(".help-toggle").hidden = false;
+        },
+    }
 };
