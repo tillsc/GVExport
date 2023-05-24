@@ -133,7 +133,7 @@ $usegraphviz = $vars['graphviz_bin'] != "";
     <div id="toast-container"></div>
 </form>
 
-<div class="sidebar__toggler" hidden>
+<div class="sidebar_toggle" hidden>
     <a class="btn btn-outline-secondary pointer"><?= I18N::translate('Show options') ?></a>
 </div>
 
@@ -198,16 +198,16 @@ $usegraphviz = $vars['graphviz_bin'] != "";
             const output = document.getElementById('output_type').value;
             switch(output) {
                 case "png":
-                    downloadSVGAsPNG();
+                    Form.downloadSVGAsPNG();
                     break;
                 case "svg":
-                    downloadSVGAsText();
+                    Form.downloadSVGAsText();
                     break;
                 case "jpg":
-                    downloadSVGAsJPEG();
+                    Form.downloadSVGAsJPEG();
                     break;
                 case "pdf":
-                    downloadSVGAsPDF();
+                    Form.downloadSVGAsPDF();
                     break;
                 default:
             }
@@ -282,10 +282,10 @@ $usegraphviz = $vars['graphviz_bin'] != "";
                 let errorpos = response.substring(0,1000).indexOf('Fatal error');
                 if (errorpos === -1) {
                     setTimeout(function(){location.reload();}, 3000);
-                    showToast(ERROR_CHAR + "<?= I18N::translate('Login expired. Reloading page...'); ?>");
+                    Form.showToast(ERROR_CHAR + "<?= I18N::translate('Login expired. Reloading page...'); ?>");
                 } else {
-                    showToast(ERROR_CHAR + e);
-                    showToast(ERROR_CHAR + response.substring(0,Math.min(1000, errorpos)));
+                    Form.showToast(ERROR_CHAR + e);
+                    Form.showToast(ERROR_CHAR + response.substring(0,Math.min(1000, errorpos)));
                 }
                 return false;
             }
@@ -324,7 +324,7 @@ $usegraphviz = $vars['graphviz_bin'] != "";
             });
             if (messages !== "") {
                 for (let i = 0; i < messages.length; i++) {
-                    showToast(messages[i]);
+                    Form.showToast(messages[i]);
                 }
             }
             // Scroll render to last starting individual
@@ -342,9 +342,9 @@ $usegraphviz = $vars['graphviz_bin'] != "";
         }).catch(function (error) {
             if (error.message.includes("TOTAL_MEMORY")) {
                 if (graphvizAvailable) {
-                    showToast(ERROR_CHAR + "<?= I18N::translate('Memory limit reached. Please reduce number of records or use download option.'); ?>");
+                    Form.showToast(ERROR_CHAR + "<?= I18N::translate('Memory limit reached. Please reduce number of records or use download option.'); ?>");
                 } else {
-                        showToast(ERROR_CHAR + "<?= I18N::translate('Memory limit reached. Please reduce number of records or install Graphviz on server and use download option.'); ?>");
+                        Form.showToast(ERROR_CHAR + "<?= I18N::translate('Memory limit reached. Please reduce number of records or install Graphviz on server and use download option.'); ?>");
                 }
                 rendering.innerHTML = "";
             } else {

@@ -17,179 +17,6 @@ let loggedIn = null;
 let xrefList = [];
 let messageHistory = [];
 
-
-
-
-
-
-// Show a toast message
-// message - the message to show
-function showToast(message) {
-    const toastParent = document.getElementById("toast-container");
-    if (toastParent !== null) {
-        const toast = document.createElement("div");
-        toast.setAttribute("id", "toast");
-        toast.setAttribute("class", "pointer");
-        if (message.substring(0, ERROR_CHAR.length) === ERROR_CHAR) {
-            toast.className += "error";
-            message = message.substring(ERROR_CHAR.length);
-        }
-        toast.innerText = message;
-        let msg = [];
-        msg[0] = new Date();
-        msg[1] = message;
-        messageHistory.push(msg);
-        setTimeout(function () {
-            toast.remove();
-        }, 5500);
-        toastParent.appendChild(toast);
-        toast.setAttribute("style", " margin-left: -"+toast.clientWidth/2 + "px; width:" + toast.clientWidth + "px");
-        toast.setAttribute("onclick", "return showHelp('message_history');");
-        toast.className += " show";
-    }
-}
-
-// Download SVG file
-function downloadSVGAsText() {
-    const svg = document.getElementById('rendering').getElementsByTagName('svg')[0].cloneNode(true);
-    svg.removeAttribute("style");
-    let svgData = svg.outerHTML.replace(/&nbsp;/g, '');
-    // Replace image URLs with embedded data  for SVG also triggers download
-    replaceImageURLs(svgData, "svg", null);
-}
-
-function downloadSVGAsPDF() {
-    downloadSVGAsImage("pdf");
-}
-
-function downloadSVGAsPNG() {
-    downloadSVGAsImage("png");
-}
-
-function downloadSVGAsJPEG() {
-    downloadSVGAsImage("jpeg");
-}
-
-// Download PNG from SVG file
-function downloadSVGAsImage(type) {
-    const svg = document.getElementById('rendering').getElementsByTagName('svg')[0].cloneNode(true);
-    // Style attribute used for the draggable browser view, remove this to reset to standard SVG
-    svg.removeAttribute("style");
-
-    const canvas = document.createElement("canvas");
-    const img = document.createElement("img");
-    // get svg data and remove line breaks
-    let xml = new XMLSerializer().serializeToString(svg);
-    // Fix the + symbol (any # breaks everything)
-    xml = xml.replace(/&#45;/g,"+");
-    // Replace # colours with rgb equivalent
-    // From https://stackoverflow.com/questions/13875974/search-and-replace-hexadecimal-color-codes-with-rgb-values-in-a-string
-    const rgbHex = /#([0-9A-F][0-9A-F])([0-9A-F][0-9A-F])([0-9A-F][0-9A-F])/gi;
-    xml = xml.replace(rgbHex, function (m, r, g, b) {
-        return 'rgb(' + parseInt(r,16) + ','
-            + parseInt(g,16) + ','
-            + parseInt(b,16) + ')';
-    });
-    // Replace image URLs with embedded images
-    replaceImageURLs(xml, type, img);
-    // Once image loaded, draw to canvas then download it
-    img.onload = function() {
-        canvas.setAttribute('width', img.width.toString());
-        canvas.setAttribute('height', img.height.toString());
-        // draw the image onto the canvas
-        let context = canvas.getContext('2d');
-        context.drawImage(img, 0, 0, img.width, img.height);
-        // Download it
-        const dataURL = canvas.toDataURL('image/'+type);
-        if (dataURL.length < 10) {
-            showToast(ERROR_CHAR+TRANSLATE['Your browser does not support exporting images this large. Please reduce number of records, reduce DPI setting, or use SVG option.']);
-        } else if (type === "pdf") {
-            createPdfFromImage(dataURL, img.width, img.height);
-        } else {
-            downloadLink(dataURL, download_file_name + "." + type);
-        }
-    }
-
-}
-
-// Convert image URL to base64 data - we use for embedding images in SVG
-// From https://stackoverflow.com/questions/22172604/convert-image-from-url-to-base64
-function getBase64Image(img) {
-    const canvas = document.createElement("canvas");
-    canvas.width = img.width;
-    canvas.height = img.height;
-    const ctx = canvas.getContext("2d");
-    ctx.drawImage(img, 0, 0);
-    return canvas.toDataURL("image/png");
-}
-
-// Find image URLs and replace with embedded versions
-function replaceImageURLs(svg, type, img) {
-    let startPos, len, url;
-    let match = /<image.*xlink:href="http/.exec(svg);
-    if (match != null) {
-        startPos = match.index+match[0].length-4;
-        len = svg.substring(startPos).indexOf("\"");
-        url = svg.substring(startPos,startPos+len);
-        const img2 = document.createElement("img");
-        img2.onload = function() {
-            let base64 = getBase64Image(img2);
-            svg = svg.replace(url,base64);
-            replaceImageURLs(svg, type, img);
-            img2.remove();
-        }
-        img2.src = url.replace(/&amp;/g,"&");
-    } else {
-        if (type === "svg") {
-            const svgBlob = new Blob([svg], {type: "image/svg+xml;charset=utf-8"});
-            const svgUrl = URL.createObjectURL(svgBlob);
-            downloadLink(svgUrl, download_file_name + "."+type);
-        } else {
-            img.src = "data:image/svg+xml;utf8," + svg;
-        }
-    }
-}
-
-// Trigger a download via javascript
-function downloadLink(URL, filename) {
-    const downloadLink = document.createElement("a");
-    downloadLink.href = URL;
-    downloadLink.download = filename;
-    document.body.appendChild(downloadLink);
-    // If running test suite, don't actually trigger download of data
-    // We have generated it so know it works
-    if (!window.Cypress) {
-        downloadLink.click();
-    }
-    document.body.removeChild(downloadLink);
-}
-
-// Toggle the showing of an advanced settings section
-// button - the button element calling the script
-// id - the id of the element we are toggling
-// visible - whether to make element visible or hidden. Null to toggle current state.
-function toggleAdvanced(button, id, visible = null) {
-    const el = document.getElementById(id);
-    // If toggling, set to the opposite of current state
-    if (visible === null) {
-        visible = el.style.display === "none";
-    }
-    Form.showHide(el, visible);
-    if (visible) {
-        button.innerHTML = button.innerHTML.replaceAll('↓','↑');
-        const hidden = document.getElementById(id+"-hidden");
-        hidden.value = "show";
-    } else {
-        button.innerHTML = button.innerHTML.replaceAll('↑','↓');
-        // Update our hidden field for saving the state
-        const hidden = document.getElementById(id+"-hidden");
-        hidden.value = "";
-    }
-}
-
-
-
-
 function loadURLXref(Url) {
     const xref = Url.getURLParameter("xref");
     if (xref !== '') {
@@ -205,9 +32,9 @@ function loadURLXref(Url) {
                 let startValue = el.value;
                 addIndiToList(xref);
                 if (url_xref_treatment === 'default' && xrefs.length === 1 ) {
-                    setTimeout(function () {showToast(TRANSLATE['Source individual has replaced existing individual'].replace('%s', xrefs.length.toString()))}, 100);
+                    setTimeout(function () {Form.showToast(TRANSLATE['Source individual has replaced existing individual'].replace('%s', xrefs.length.toString()))}, 100);
                 } else if (startValue !== el.value && (url_xref_treatment === 'default' || url_xref_treatment === 'add')) {
-                    setTimeout(function () {showToast(TRANSLATE['One new source individual added to %s existing individuals'].replace('%s', xrefs.length.toString()))}, 100);
+                    setTimeout(function () {Form.showToast(TRANSLATE['One new source individual added to %s existing individuals'].replace('%s', xrefs.length.toString()))}, 100);
                 }
             }
         }
@@ -250,7 +77,7 @@ function loadXrefList(url, xrefListId, indiListId) {
         updateClearAll();
         toggleHighlightStartPersons(document.getElementById('highlight_start_indis').checked);
     }).catch(function(error) {
-        showToast("Error");
+        Form.showToast("Error");
         console.log(error);
     });
 }
@@ -634,7 +461,7 @@ function removeSettingsEllipsisMenu(menuElement) {
 }
 
 function showGraphvizUnsupportedMessage() {
-    if (graphvizAvailable && document.getElementById('photo_shape').value !== '0') showToast(TRANSLATE["Diagram will be rendered in browser as server doesn't support photo shapes"]);
+    if (graphvizAvailable && document.getElementById('photo_shape').value !== '0') Form.showToast(TRANSLATE["Diagram will be rendered in browser as server doesn't support photo shapes"]);
 }
 
 // This function is run when the page is loaded
@@ -662,8 +489,8 @@ function pageLoaded(Url) {
     if (autoUpdate) updateRender();
     // Handle sidebar
     document.querySelector(".hide-form").addEventListener("click", UI.hideSidebar);
-    document.querySelector(".sidebar__toggler a").addEventListener("click", UI.showSidebar);
-    document.querySelector(".help-toggler a").addEventListener("click", UI.showHelpSidebar);
+    document.querySelector(".sidebar_toggle a").addEventListener("click", UI.showSidebar);
+    document.querySelector(".help-toggle a").addEventListener("click", UI.showHelpSidebar);
 
     // Form change events
     const form = document.getElementById('gvexport');
@@ -683,7 +510,7 @@ function pageLoaded(Url) {
         if (element !== null) {
             loadSettings(element.getAttribute('data-settings'));
         } else if (e.target.value !== '-') {
-            showToast(ERROR_CHAR + 'Settings not found')
+            Form.showToast(ERROR_CHAR + 'Settings not found')
         }
     })
     document.addEventListener("keydown", function(e) {
@@ -751,12 +578,12 @@ function downloadSettingsFileMenuAction(event) {
     try {
         settings = JSON.parse(settings_json_string);
     } catch (e) {
-        showToast("Failed to load settings: " + e);
+        Form.showToast("Failed to load settings: " + e);
         return false;
     }
     let file = new Blob([settings_json_string], {type: "text/plain"});
     let url = URL.createObjectURL(file);
-    downloadLink(url, TREE_NAME + " - " + settings['save_settings_name'] + ".json")
+    Data.downloadLink(url, TREE_NAME + " - " + settings['save_settings_name'] + ".json")
 }
 
 /**
@@ -771,7 +598,7 @@ function uploadSettingsFile(input) {
     reader.onload = (e) => {
         loadSettings(e.target.result);
     };
-    reader.onerror = (e) => showToast(e.target.error.name);
+    reader.onerror = (e) => Form.showToast(e.target.error.name);
     reader.readAsText(file);
 }
 
@@ -787,7 +614,7 @@ function loadSettings(data) {
     try {
         settings = JSON.parse(data);
     } catch (e) {
-        showToast("Failed to load settings: " + e);
+        Form.showToast("Failed to load settings: " + e);
         return false;
     }
     Object.keys(settings).forEach(function(key){
@@ -818,13 +645,13 @@ function loadSettings(data) {
                     setCheckStatus(document.getElementById('md_type_gedcom'), !toBool(settings[key]));
                     break;
                 case 'show_adv_people':
-                    toggleAdvanced(document.getElementById('people-advanced-button'), 'people-advanced', toBool(settings[key]));
+                    Data.toggleAdvanced(document.getElementById('people-advanced-button'), 'people-advanced', toBool(settings[key]));
                     break;
                 case 'show_adv_appear':
-                    toggleAdvanced(document.getElementById('appearance-advanced-button'), 'appearance-advanced', toBool(settings[key]));
+                    Data.toggleAdvanced(document.getElementById('appearance-advanced-button'), 'appearance-advanced', toBool(settings[key]));
                     break;
                 case 'show_adv_files':
-                    toggleAdvanced(document.getElementById('files-advanced-button'), 'files-advanced', toBool(settings[key]));
+                    Data.toggleAdvanced(document.getElementById('files-advanced-button'), 'files-advanced', toBool(settings[key]));
                     break;
                 // If option to use cart is not showing, don't load, but also don't show error
                 case 'use_cart':
@@ -835,7 +662,7 @@ function loadSettings(data) {
                 case 'token':
                     break;
                 default:
-                    showToast(ERROR_CHAR + TRANSLATE['Unable to load setting'] + " " + key);
+                    Form.showToast(ERROR_CHAR + TRANSLATE['Unable to load setting'] + " " + key);
             }
         } else {
             if (el.type === 'checkbox' || el.type === 'radio') {
@@ -891,7 +718,7 @@ function getSettingsServer(id = ID_ALL_SETTINGS) {
                 return ERROR_CHAR + json.errorMessage;
             }
         } catch(e) {
-            showToast(ERROR_CHAR + e);
+            Form.showToast(ERROR_CHAR + e);
         }
         return false;
     });
@@ -936,7 +763,7 @@ function getSettingsClient(id = ID_ALL_SETTINGS) {
             return Promise.reject(e);
         }
     }).catch((e) => {
-        showToast(ERROR_CHAR + e);
+        Form.showToast(ERROR_CHAR + e);
     });
 }
 
@@ -950,7 +777,7 @@ function getSettings(id = ID_ALL_SETTINGS) {
             });
         }
     }).catch((error) => {
-        showToast(ERROR_CHAR + error);
+        Form.showToast(ERROR_CHAR + error);
     });
 }
 function sendRequest(json) {
@@ -1020,7 +847,7 @@ function loadSettingsDetails() {
             }
         });
     }).catch(
-        error => showToast(error)
+        error => Form.showToast(error)
     );
 }
 
@@ -1113,7 +940,7 @@ function saveSettingsAdvanced(userPrompted = false) {
         loadSettingsDetails();
         document.getElementById('save_settings_name').value = "";
     }).catch(
-        error => showToast(error)
+        error => Form.showToast(error)
     );
 
 }
@@ -1124,7 +951,7 @@ function deleteSettingsClient(id) {
             localStorage.removeItem("GVE_Settings_" + treeName + "_" + id);
             deleteIdLocal(id);
         } catch (e) {
-            showToast(e);
+            Form.showToast(e);
         }
     });
 }
@@ -1145,10 +972,10 @@ function deleteSettingsMenuAction(e) {
                     if (json.success) {
                         loadSettingsDetails();
                     } else {
-                        showToast(ERROR_CHAR + json.errorMessage);
+                        Form.showToast(ERROR_CHAR + json.errorMessage);
                     }
                 } catch (e) {
-                    showToast("Failed to load response: " + e);
+                    Form.showToast("Failed to load response: " + e);
                     return false;
                 }
             });
@@ -1165,10 +992,10 @@ function copySavedSettingsLinkMenuAction(e) {
     getSavedSettingsLink(id).then((url)=>{
         copyToClipboard(url)
             .then(() => {
-                showToast(TRANSLATE['Copied link to clipboard']);
+                Form.showToast(TRANSLATE['Copied link to clipboard']);
             })
             .catch(() => {
-                showToast(TRANSLATE['Failed to copy link to clipboard']);
+                Form.showToast(TRANSLATE['Failed to copy link to clipboard']);
                 showModal('<p>' + TRANSLATE['Failed to copy link to clipboard'] + '. ' + TRANSLATE['Copy manually below'] + ':</p><textarea style="width: 100%">' + json.url + "</textarea>")
             });
     })
@@ -1188,10 +1015,10 @@ function getSavedSettingsLink(id) {
                     if (json.success) {
                         return json.url;
                     } else {
-                        showToast(ERROR_CHAR + json.errorMessage);
+                        Form.showToast(ERROR_CHAR + json.errorMessage);
                     }
                 } catch (e) {
-                    showToast("Failed to load response: " + e);
+                    Form.showToast("Failed to load response: " + e);
                     return false;
                 }
             });
@@ -1214,12 +1041,12 @@ function revokeSavedSettingsLinkMenuAction(e) {
                 try {
                     let json = JSON.parse(response);
                     if (json.success) {
-                        showToast(TRANSLATE['Revoked access to shared link']);
+                        Form.showToast(TRANSLATE['Revoked access to shared link']);
                     } else {
-                        showToast(ERROR_CHAR + json.errorMessage);
+                        Form.showToast(ERROR_CHAR + json.errorMessage);
                     }
                 } catch (e) {
-                    showToast("Failed to load response: " + e);
+                    Form.showToast("Failed to load response: " + e);
                     return false;
                 }
             });
@@ -1240,12 +1067,12 @@ function addUrlToMyFavouritesMenuAction(e) {
                 try {
                     let json = JSON.parse(response);
                     if (json.success) {
-                        showToast(TRANSLATE['Added to My favourites']);
+                        Form.showToast(TRANSLATE['Added to My favourites']);
                     } else {
-                        showToast(ERROR_CHAR + json.errorMessage);
+                        Form.showToast(ERROR_CHAR + json.errorMessage);
                     }
                 } catch (e) {
-                    showToast("Failed to load response: " + e);
+                    Form.showToast("Failed to load response: " + e);
                     return false;
                 }
             });
@@ -1270,12 +1097,12 @@ function addUrlToTreeFavourites(e) {
                 try {
                     let json = JSON.parse(response);
                     if (json.success) {
-                        showToast(TRANSLATE['Added to Tree favourites']);
+                        Form.showToast(TRANSLATE['Added to Tree favourites']);
                     } else {
-                        showToast(ERROR_CHAR + json.errorMessage);
+                        Form.showToast(ERROR_CHAR + json.errorMessage);
                     }
                 } catch (e) {
-                    showToast("Failed to load response: " + e);
+                    Form.showToast("Failed to load response: " + e);
                     return false;
                 }
             });
@@ -1301,10 +1128,10 @@ function loadUrlToken(Url) {
                         UI.hideSidebar();
                     }
                 } else {
-                    showToast(ERROR_CHAR + json.errorMessage);
+                    Form.showToast(ERROR_CHAR + json.errorMessage);
                 }
             } catch (e) {
-                showToast("Failed to load response: " + e);
+                Form.showToast("Failed to load response: " + e);
                 return false;
             }
         });
@@ -1562,7 +1389,7 @@ function diagramSearchBoxChange(e) {
     // Skip the first trigger, only fire for the follow-up trigger when the XREF is set
     if (xref !== ""){
         if (!scrollToRecord(xref)) {
-            showToast(TRANSLATE['Individual not found']);
+            Form.showToast(TRANSLATE['Individual not found']);
         }
         clearIndiSelect('diagram_search_box');
         Form.showHideSearchBox(e, false);
@@ -1613,6 +1440,6 @@ function handleSimpleDiagram() {
     document.getElementById("font_colour_details").value = document.getElementById("font_colour_name").value;
     // Set "Individual background colour" to "Based on individual's sex", to match style in simple mode
     document.getElementById("bg_col_type").value = 210;
-    // Set diagram type to separated (refered to as decorated in code) as simple doesn't exist anymore
+    // Set diagram type to separated (referred to as decorated in code) as simple doesn't exist anymore
     document.getElementById("diagtype_decorated").checked = true;
 }

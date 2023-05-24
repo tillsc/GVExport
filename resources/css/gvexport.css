@@ -28,14 +28,14 @@
     padding: 0.5rem;
 }
 
-.sidebar__toggler {
+.sidebar_toggle {
     position: fixed;
     left: 0;
     top: 400px;
     transform-origin: left bottom;
     transform: rotate(90deg);
 }
-.help-toggler {
+.help-toggle {
     position: fixed;
     right: 0;
     top: 400px;
