@@ -18,13 +18,13 @@ class Help
     public const NAME_ABOUT = 'About GVExport';
     public const NAME_INCLUDE_RELATED_TO = 'Include anyone related to';
 
-    private array $help_views = [
-            self::NAME_HOME,
-            self::NAME_NOT_FOUND,
-            'Getting started',
-            self::NAME_ABOUT,
-            self::NAME_PEOPLE_TO_INCLUDE,
-            self::NAME_INCLUDE_RELATED_TO
+    private array $help_location = [
+            self::NAME_HOME => '',
+            self::NAME_NOT_FOUND => '',
+            'Getting started' => '',
+            self::NAME_ABOUT => '',
+            self::NAME_PEOPLE_TO_INCLUDE => '',
+            self::NAME_INCLUDE_RELATED_TO => 'People to be included/'
         ];
 
     public function __construct()
@@ -127,11 +127,28 @@ function getHelpText(item) {
         return str_replace(array("\r", "\n"), '',str_replace("'","&apos;",I18N::translate($msg)));
     }
 
-    public function helpExists($help) {
-        if (in_array($help, $this->help_views)) {
+    /**
+     * Checks if $help is a valid name of a help view
+     *
+     * @param $help
+     * @return bool
+     */
+    public function helpExists($help): bool
+    {
+        if (array_key_exists($help, $this->help_location)) {
             return true;
         } else {
             return false;
         }
+    }
+
+    /**
+     * Returns the location of the requested help view relative to the Help directory
+     *
+     * @param $help
+     * @return mixed|string
+     */
+    public function getHelpLocation($help) {
+            return $this->help_location[$help];
     }
 }
