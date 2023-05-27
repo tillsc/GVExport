@@ -5,11 +5,17 @@
  */
 const UI = {
 
+    /**
+     * Hides the settings panel
+     */
     hideSidebar: function() {
         document.querySelector(".sidebar").hidden = true;
         document.querySelector(".sidebar_toggle").hidden = false;
     },
 
+    /**
+     * Displays the settings panel
+     */
     showSidebar: function() {
         document.querySelector(".sidebar_toggle").hidden = true;
         document.querySelector(".sidebar").hidden = false;
@@ -47,24 +53,85 @@ const UI = {
     },
 
     /**
-     * Code for side panel that shows help information
+     * Additional side panel that shows help information
      */
     helpPanel: {
-        init: function () {
-            document.querySelector(".hide-help").addEventListener("click", UI.helpPanel.hideHelpSidebar);
-            document.querySelector(".help-toggle a").addEventListener("click", UI.helpPanel.showHelpSidebar);
+
+        /**
+         * Run startup code when help panel created
+         */
+        init() {
+            document.querySelector('.hide-help').addEventListener('click', UI.helpPanel.hideHelpSidebar);
+            document.querySelector('.help-toggle a').addEventListener('click', UI.helpPanel.clickHelpSidebarButton);
+            document.querySelector('.btn-help-home').addEventListener('click', UI.helpPanel.loadHelpHome);
+            let helpContentElement = document.querySelector('#help-content');
+            helpContentElement.addEventListener('click', UI.helpPanel.handleHelpContentClick);
+            UI.helpPanel.loadHelp('Home');
         },
 
-        showHelpSidebar: function(help = 'Help') {
+        /**
+         * Handle event when button to show sidebar is clicked
+         */
+        clickHelpSidebarButton() {
+            UI.helpPanel.showHelpSidebar();
+        },
+
+        /**
+         * Displays the help side panel
+         *
+         * @param help
+         */
+        showHelpSidebar(help = '') {
             document.querySelector(".help-toggle").hidden = true;
             document.querySelector(".help-sidebar").hidden = false;
-            if (help !== '') {
-                document.getElementById('help-content').innerHTML = getHelpText('Help');
-            }
+            UI.helpPanel.loadHelp(help);
         },
-        hideHelpSidebar: function() {
+
+        /**
+         * Hides the help sidebar
+         */
+        hideHelpSidebar() {
             document.querySelector(".help-sidebar").hidden = true;
             document.querySelector(".help-toggle").hidden = false;
         },
+
+        /**
+         * Handle click on help content form
+         *
+         * @param event
+         */
+        handleHelpContentClick(event) {
+            if (event.target.tagName === 'A') {
+                UI.helpPanel.showHelpSidebar(event.target.getAttribute('data-name'));
+            }
+        },
+
+        /**
+         * Reverts the help panel back to the hom page
+         */
+        loadHelpHome() {
+            UI.helpPanel.loadHelp('Home');
+        },
+
+        /**
+         * Send request to server to retrieve help information then
+         * adds response into page
+         *
+         * @param help The name of the help we want to load
+         */
+        loadHelp(help) {
+            if (help !== '') {
+                Data.getHelp(help).then(function (response) {
+                    if (response) {
+                        document.getElementById('help-content').innerHTML = response;
+                    }
+                });
+            }
+        },
+
+        clickInfoIcon(event) {
+            event.stopPropagation();
+            UI.helpPanel.showHelpSidebar(event.target.getAttribute('data-help'));
+        }
     }
 };

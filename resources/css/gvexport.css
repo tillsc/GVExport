@@ -45,6 +45,7 @@
 
 .help-sidebar {
     height: calc(100% - 200px);
+    width: 500px;
     max-width: calc(min(98vw, 500px));
     position: fixed;
     z-index: 1050;
@@ -59,11 +60,49 @@
 }
 
 .btn-hover {
-    float: right;
     position: absolute;
     right: 5px;
     top: 5px;
     z-index: 1100;
+}
+.btn-help-home {
+    position: absolute;
+    right: 45px;
+    top: 5px;
+    z-index: 1100;
+}
+
+.help-home {
+    padding-left: 8px !important;
+    width: 36px;
+    height: 36px;
+}
+.btn-help-search {
+    position: absolute;
+    right: 85px;
+    top: 5px;
+    z-index: 1100;
+}
+
+.help-search {
+    padding-left: 8px !important;
+    width: 36px;
+    height: 36px;
+}
+
+.hide-help {
+    width: 36px;
+    height: 36px;
+}
+
+.help-title {
+    padding-left: 0px;
+    max-width: calc(min(90vw - 100px, 370px));
+}
+
+#help-content {
+    overflow: scroll;
+    padding: 0 5px 5px 5px;
 }
 
 .red-text {

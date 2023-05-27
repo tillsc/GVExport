@@ -1,0 +1,22 @@
+<?php
+
+/**
+ * This is part of the help sidebar content
+ * Shown when the help requested can't be found (should not happen)
+ */
+
+use Fisharebest\Webtrees\I18N;
+use vendor\WebtreesModules\gvexport\Help;
+
+?>
+
+<h2 class="help-title"><?= I18N::translate('Help information not found'); ?></h2>
+<p>
+    <?= I18N::translate('The requested information couldn\'t be found'); ?>
+</p>
+<p>
+    <?= I18N::translate('Related links'); ?>:
+</p>
+<ul>
+    <li><a class="pointer help-item" data-name="<?= Help::NAME_HOME; ?>"><?= I18N::translate(Help::NAME_HOME); ?></a></li>
+</ul>

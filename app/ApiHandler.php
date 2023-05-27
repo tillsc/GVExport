@@ -58,6 +58,9 @@ class ApiHandler
                 case "add_tree_favorite":
                     $this->addTreeFavourite($json, $module, $tree);
                     break;
+                case "get_help":
+                    $this->getHelp($module, $json);
+                    break;
                 default:
                     $this->response_data['success'] = false;
                     $this->response_data['json'] = $json_data;
@@ -230,6 +233,27 @@ class ApiHandler
             }
         } else {
             $this->addFailResponse('Invalid settings ID', 'E14');
+        }
+    }
+
+    /**
+     * Retrieve the help information from appropriate view file
+     *
+     * @param $module
+     * @param $json
+     * @return void
+     */
+    private function getHelp($module, $json)
+    {
+        $help = new Help();
+        if ($help->helpExists($json['help_name'])) {
+            $this->response_data['success'] = true;
+            $this->response_data['help'] = view($module->name() . '::MainPage/Help/' . $json['help_name'],[]);
+;
+        } else {
+            // API call successful, even though help information not found
+            $this->response_data['success'] = true;
+            $this->response_data['help'] = view($module->name() . '::MainPage/Help/' . Help::NAME_NOT_FOUND,[]);
         }
     }
 

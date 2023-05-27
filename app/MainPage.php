@@ -30,7 +30,7 @@ class MainPage
      */
     public static function addInfoButton(string $helpType): string
     {
-        return "<span class=\"info-icon btn btn-primary\" onclick=\"return showHelp('$helpType')\">i</span>";
+        return "<span class=\"info-icon btn btn-primary\" data-help=\"$helpType\" onclick='UI.helpPanel.clickInfoIcon(event)'>i</span>";
     }
 
     /**

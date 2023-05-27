@@ -43,7 +43,7 @@ $usegraphviz = $vars['graphviz_bin'] != "";
 
 <form action="<?= $module->chartUrl($individual) ?>" method="post" class="wt-page-options sidebar d-print-none" id="gvexport">
     <div class="pull-right btn-hover">
-        <a class="hide-form btn btn-secondary pointer">X</a>
+        <a class="hide-form btn btn-secondary pointer"><i class="fa-solid fa-xmark"></i></a>
     </div>
 
     <div class="sidebar__formfields col">
@@ -144,7 +144,7 @@ $usegraphviz = $vars['graphviz_bin'] != "";
     <div id="render_button_container">
         <div>
             <a title="<?= I18N::translate('Fullscreen') ?>" onclick="toggleFullscreen()" class="fullscreen pointer" id="fullscreenButton">⛶</a>
-            <a title="<?= I18N::translate('Exit fullscreen') ?>" onclick="toggleFullscreen()" class="close-fullscreen pointer" id="fullscreenClose" style="display: none;">✖</a>
+            <a title="<?= I18N::translate('Exit fullscreen') ?>" onclick="toggleFullscreen()" class="close-fullscreen pointer" id="fullscreenClose" style="display: none;"><i class="fa-solid fa-xmark"></i></a>
         </div>
         <div>
             <a title="<?= I18N::translate('Search diagram') ?>" onclick="" class="search_icon pointer" id="searchButton"><?= view('icons/search'); ?></a>
@@ -324,7 +324,7 @@ $usegraphviz = $vars['graphviz_bin'] != "";
             });
             if (messages !== "") {
                 for (let i = 0; i < messages.length; i++) {
-                    //UI.showToast(messages[i]);
+                    UI.showToast(messages[i]);
                 }
             }
             // Scroll render to last starting individual

@@ -40,5 +40,35 @@ const Data = {
                 img.src = "data:image/svg+xml;utf8," + svg;
             }
         }
+    },
+
+    getHelp(help) {
+        let request = {
+            "type": REQUEST_TYPE_GET_HELP,
+            "help_name": help
+        };
+        let json = JSON.stringify(request);
+        return sendRequest(json).then((response) => {
+            let responseJson = Data.parseResponse(response);
+            if (responseJson) {
+                return responseJson.help;
+            } else {
+                return false;
+            }
+        });
+    },
+
+    parseResponse(response) {
+        try {
+            let json = JSON.parse(response);
+            if (json.success) {
+                return json;
+            } else {
+                return ERROR_CHAR + json.errorMessage;
+            }
+        } catch(e) {
+            UI.showToast(ERROR_CHAR + e);
+        }
+        return false;
     }
 }

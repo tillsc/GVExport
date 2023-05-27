@@ -12,9 +12,15 @@ use Fisharebest\Webtrees\I18N;
     <a class="btn btn-outline-secondary pointer"><?= I18N::translate('Show help') ?></a>
 </div>
 
-<div class="help-sidebar wt-page-options d-print-none" hidden>
-    <div class="pull-right btn-hover">
-        <a class="hide-help btn btn-secondary pointer">X</a>
+<div class="help-sidebar" hidden>
+    <div class="btn-hover">
+        <a class="hide-help btn btn-secondary pointer"><i class="fa-solid fa-xmark"></i></a>
+    </div>
+    <div class="btn-help-home">
+        <a class="help-home btn btn-secondary pointer"><i class="fa-solid fa-house"></i></a>
+    </div>
+    <div class="btn-help-search">
+        <a class="help-search btn btn-secondary pointer"><?= view('icons/search'); ?></a>
     </div>
     <div id="help-content">
 
