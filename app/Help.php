@@ -9,22 +9,23 @@ use Fisharebest\Webtrees\I18N;
 class Help
 {
     private array $help;
-    public const NAME_NOT_FOUND = 'Help not found';
-    public const NAME_HOME = 'Home';
-    public const NAME_PEOPLE_TO_INCLUDE = 'People to be included';
-    public const NAME_APPEARANCE = 'Appearance';
-    public const NAME_GENERAL_SETTINGS = 'General settings';
-    public const NAME_GETTING_STARTED = 'Getting started';
-    public const NAME_ABOUT = 'About GVExport';
-    public const NAME_INCLUDE_RELATED_TO = 'Include anyone related to';
+    public const NOT_FOUND = 'Help not found';
+    public const HOME = 'Home';
+    public const PEOPLE_TO_INCLUDE = 'People to be included';
+    public const APPEARANCE = 'Appearance';
+    public const GENERAL_SETTINGS = 'General settings';
+    public const GETTING_STARTED = 'Getting started';
+    public const ABOUT = 'About GVExport';
+    public const INCLUDE_RELATED_TO = 'Include anyone related to';
+    public const CONNECTIONS_TO_INCLUDE = 'Connections to include';
 
     private array $help_location = [
-            self::NAME_HOME => '',
-            self::NAME_NOT_FOUND => '',
+            self::HOME => '',
+            self::NOT_FOUND => '',
             'Getting started' => '',
-            self::NAME_ABOUT => '',
-            self::NAME_PEOPLE_TO_INCLUDE => '',
-            self::NAME_INCLUDE_RELATED_TO => 'People to be included/'
+            self::ABOUT => '',
+            self::PEOPLE_TO_INCLUDE => '',
+            self::INCLUDE_RELATED_TO => 'People to be included/'
         ];
 
     public function __construct()
