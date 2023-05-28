@@ -16,5 +16,10 @@ $page_name = Help::DETAILED_INFORMATION;
 <?= view($module->name() . '::MainPage/Help/HelpHeader',['name' => $page_name]); ?>
 
 <p>
-    <?= I18N::translate(''); ?>
+    <?= I18N::translate('This section has detailed information on each of the options in GVExport.'); ?>
+    <ul>
+        <li><a class="pointer help-item" data-name="<?= Help::PEOPLE_TO_INCLUDE; ?>"><?= I18N::translate(HELP::PEOPLE_TO_INCLUDE); ?></a> </li>
+        <li><a class="pointer help-item" data-name="<?= Help::APPEARANCE; ?>"><?= I18N::translate(Help::APPEARANCE); ?></a> </li>
+        <li><a class="pointer help-item" data-name="<?= Help::GENERAL_SETTINGS; ?>"><?= I18N::translate(Help::GENERAL_SETTINGS); ?></a> </li>
+    </ul>
 </p>
