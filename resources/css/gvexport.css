@@ -100,10 +100,15 @@
     max-width: calc(min(90vw - 100px, 370px));
 }
 
+.help-breadcrumb {
+    font-style: italic;
+}
+
 #help-content {
     overflow: scroll;
     padding: 0 5px 5px 5px;
 }
+
 
 .red-text {
     color: red;

@@ -1,0 +1,28 @@
+<?php
+
+/**
+ * This is part of the help sidebar content
+ *
+ * @var GVExport $module   The instance of this module from webtrees
+ */
+
+use Fisharebest\Webtrees\I18N;
+use vendor\WebtreesModules\gvexport\GVExport;
+use vendor\WebtreesModules\gvexport\Help;
+
+$name = Help::PEOPLE_TO_INCLUDE;
+?>
+
+<?= view($module->name() . '::MainPage/Help/HelpHeader',['name' => $name]); ?>
+
+<p>
+    <?= I18N::translate('The "People to include" section lets you choose criteria for who to include in the diagram. Within this section, there are several setting groups'); ?>:
+</p>
+<ul>
+    <li><a class="pointer help-item" data-name="<?= Help::INCLUDE_RELATED_TO; ?>"><?= I18N::translate(Help::INCLUDE_RELATED_TO); ?></a></li>
+    <li><a class="pointer help-item" data-name="<?= Help::CONNECTIONS_TO_INCLUDE; ?>"><?= I18N::translate(Help::CONNECTIONS_TO_INCLUDE); ?></a></li>
+    <li><a class="pointer help-item" data-name="<?= Help::XREFs_OF_INDIVIDUALS; ?>"><?= I18N::translate(Help::XREFs_OF_INDIVIDUALS); ?></a></li>
+    <li><a class="pointer help-item" data-name="<?= Help::STOP_PROCESSING_ON; ?>"><?= I18N::translate(Help::STOP_PROCESSING_ON); ?></a></li>
+    <li><a class="pointer help-item" data-name="<?= Help::NON_RELATIVES; ?>"><?= I18N::translate(Help::NON_RELATIVES); ?></a></li>
+    <li><a class="pointer help-item" data-name="<?= Help::TREATMENT_OF_SOURCE_INDIVIDUALS; ?>"><?= I18N::translate(Help::TREATMENT_OF_SOURCE_INDIVIDUALS); ?></a></li>
+</ul>

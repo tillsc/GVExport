@@ -131,6 +131,7 @@ const UI = {
 
         clickInfoIcon(event) {
             event.stopPropagation();
+            event.preventDefault();
             UI.helpPanel.showHelpSidebar(event.target.getAttribute('data-help'));
         }
     }

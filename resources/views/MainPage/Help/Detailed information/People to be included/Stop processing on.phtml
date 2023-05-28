@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * This is part of the help sidebar content
+ *
+ * @var GVExport $module   The instance of this module from webtrees
+ */
+
+use Fisharebest\Webtrees\I18N;
+use vendor\WebtreesModules\gvexport\GVExport;
+use vendor\WebtreesModules\gvexport\Help;
+
+$page_name = Help::STOP_PROCESSING_ON;
+?>
+
+<?= view($module->name() . '::MainPage/Help/HelpHeader',['name' => $page_name]); ?>
+
+<p>
+    <?= I18N::translate('If the module reaches one of these people, don&apos;t grow the tree from here. For example, if you chose yourself as the starting point, you might want to include all of your blood relatives except your mother&apos;s side of the family. Add your mother as a person to &quot;Stop processing on&quot;. The tree will still include your mother, but it won&apos;t include her parents, siblings, etc.</p><p>Choose a person in the top box, and they will be added to the list. Their XREF will also be included in the bottom box (which can be edited directly if needed).'); ?>
+</p>

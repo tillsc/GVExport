@@ -248,12 +248,11 @@ class ApiHandler
         $help = new Help();
         if ($help->helpExists($json['help_name'])) {
             $this->response_data['success'] = true;
-            $this->response_data['help'] = view($module->name() . '::MainPage/Help/' . $help->getHelpLocation($json['help_name']) . $json['help_name'],[]);
-;
+            $this->response_data['help'] = view($module->name() . '::MainPage/Help/' . $help->getHelpLocation($json['help_name']) . $json['help_name'],['module' => $module]);
         } else {
             // API call successful, even though help information not found
             $this->response_data['success'] = true;
-            $this->response_data['help'] = view($module->name() . '::MainPage/Help/' . $help->getHelpLocation($json[Help::NOT_FOUND]) . Help::NOT_FOUND,[]);
+            $this->response_data['help'] = view($module->name() . '::MainPage/Help/' . $help->getHelpLocation(Help::NOT_FOUND) . Help::NOT_FOUND,[]);
         }
     }
 

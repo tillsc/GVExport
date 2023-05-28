@@ -2,14 +2,19 @@
 
 /**
  * This is part of the help sidebar content
+ *
+ * @var GVExport $module   The instance of this module from webtrees
  */
 
 use Fisharebest\Webtrees\I18N;
+use vendor\WebtreesModules\gvexport\GVExport;
 use vendor\WebtreesModules\gvexport\Help;
 
+$page_name = Help::INCLUDE_RELATED_TO;
 ?>
 
-<h2 class="help-title"><?= Help::INCLUDE_RELATED_TO ?></h2>
+<?= view($module->name() . '::MainPage/Help/HelpHeader',['name' => $page_name]); ?>
+
 <p>
     <?= I18N::translate('This is our starting point. Choose a person to base the diagram around. You might choose yourself.</p><p>You can choose as many starting individuals as you wish. A tree will be created for each starting individual based on the settings, then the trees are merged to create one tree for the diagram.</p><p>Click the X to remove a record from the list. If two or more records are listed, a &quot;Clear all&quot; option will appear to allow you to remove all records.</p><p>You can also click on an individual in this list to have the diagram in the browser scroll to that person.</p><p>When you next come to the page, the default individual or the last individual you were looking at in webtrees will be loaded. If there was just one saved individual then it will be replaced with the individual provided by webtrees on coming to the page. If there were multiple in the list, then the individual provided by webtrees will be added to the list (if not already in it). So be sure to double-check you are only including individuals you are looking for when first loading the page. This default behaviour can be changed with the option &quot;Treatment of source individuals&quot; in the advanced section.'); ?>
 </p>

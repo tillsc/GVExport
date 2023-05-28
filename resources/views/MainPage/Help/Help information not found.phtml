@@ -3,14 +3,19 @@
 /**
  * This is part of the help sidebar content
  * Shown when the help requested can't be found (should not happen)
+ *
+ * @var GVExport $module   The instance of this module from webtrees
  */
 
 use Fisharebest\Webtrees\I18N;
+use vendor\WebtreesModules\gvexport\GVExport;
 use vendor\WebtreesModules\gvexport\Help;
 
+$page_name = Help::NOT_FOUND;
 ?>
 
-<h2 class="help-title"><?= I18N::translate('Help information not found'); ?></h2>
+<?= view($module->name() . '::MainPage/Help/HelpHeader',['name' => $page_name]); ?>
+
 <p>
     <?= I18N::translate('The requested information couldn\'t be found'); ?>
 </p>
