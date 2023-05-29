@@ -123,7 +123,7 @@ $usegraphviz = $vars['graphviz_bin'] != "";
         <button type="submit" class="btn btn-primary update-browser-rendering" id="update-browser" <?php if ($vars["auto_update"]) { echo 'style="display: none"'; } ?>><?= I18N::translate('Update') ?></button>
         <button type="submit" class="btn btn-secondary main-action" name="download"><?= I18N::translate('Download') ?></button>
         <a href="<?= $module->chartUrl($individual, ['reset' => '1']) ?>" class="btn btn-outline-secondary"><?= I18N::translate('Reset') ?></a>
-        <button class="btn btn-outline-secondary" name="help" onclick="return showHelp('Help')"><?= I18N::translate('Help') ?></button>
+        <button id="help-about" class="btn btn-outline-secondary" name="help"><?= I18N::translate('Help') ?></button>
     </div>
 
     <input type="hidden" id="browser" name="browser" value="false">

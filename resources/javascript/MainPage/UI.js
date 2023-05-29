@@ -64,6 +64,7 @@ const UI = {
             document.querySelector('.hide-help').addEventListener('click', UI.helpPanel.hideHelpSidebar);
             document.querySelector('.help-toggle a').addEventListener('click', UI.helpPanel.clickHelpSidebarButton);
             document.querySelector('.btn-help-home').addEventListener('click', UI.helpPanel.loadHelpHome);
+            document.querySelector('#help-about').addEventListener('click', UI.helpPanel.loadHelpAbout);
             let helpContentElement = document.querySelector('#help-content');
             helpContentElement.addEventListener('click', UI.helpPanel.handleHelpContentClick);
             UI.helpPanel.loadHelp('Home');
@@ -82,9 +83,9 @@ const UI = {
          * @param help
          */
         showHelpSidebar(help = '') {
+            UI.helpPanel.loadHelp(help);
             document.querySelector(".help-toggle").hidden = true;
             document.querySelector(".help-sidebar").hidden = false;
-            UI.helpPanel.loadHelp(help);
         },
 
         /**
@@ -107,10 +108,18 @@ const UI = {
         },
 
         /**
-         * Reverts the help panel back to the hom page
+         * Reverts the help panel back to the home page
          */
         loadHelpHome() {
             UI.helpPanel.loadHelp('Home');
+        },
+
+        /**
+         * Shows the About GVExport page
+         */
+        loadHelpAbout() {
+            event.preventDefault();
+            UI.helpPanel.showHelpSidebar('About GVExport');
         },
 
         /**
