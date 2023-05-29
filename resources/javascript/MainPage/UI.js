@@ -11,6 +11,7 @@ const UI = {
     hideSidebar: function() {
         document.querySelector(".sidebar").hidden = true;
         document.querySelector(".sidebar_toggle").hidden = false;
+        document.getElementById('help-content').innerHTML = '';
     },
 
     /**
@@ -83,9 +84,10 @@ const UI = {
          * @param help
          */
         showHelpSidebar(help = '') {
-            UI.helpPanel.loadHelp(help);
-            document.querySelector(".help-toggle").hidden = true;
-            document.querySelector(".help-sidebar").hidden = false;
+            UI.helpPanel.loadHelp(help).then(() => {
+                document.querySelector(".help-toggle").hidden = true;
+                document.querySelector(".help-sidebar").hidden = false;
+            })
         },
 
         /**
@@ -115,9 +117,9 @@ const UI = {
         },
 
         /**
-         * Shows the About GVExport page
+         * Shows the About GVExport page when Help button clicked
          */
-        loadHelpAbout() {
+        loadHelpAbout(event) {
             event.preventDefault();
             UI.helpPanel.showHelpSidebar('About GVExport');
         },
@@ -130,7 +132,7 @@ const UI = {
          */
         loadHelp(help) {
             if (help !== '') {
-                Data.getHelp(help).then(function (response) {
+                return Data.getHelp(help).then(function (response) {
                     if (response) {
                         document.getElementById('help-content').innerHTML = response;
                     }
@@ -138,6 +140,11 @@ const UI = {
             }
         },
 
+        /**
+         * Triggered when help icon is clicked
+         *
+         * @param event
+         */
         clickInfoIcon(event) {
             event.stopPropagation();
             event.preventDefault();
