@@ -14,6 +14,7 @@ class Help
     public const PEOPLE_TO_INCLUDE = 'People to be included';
     public const APPEARANCE = 'Appearance';
     public const GENERAL_SETTINGS = 'General settings';
+    public const SAVED_DIAGRAMS = 'Saved diagrams';
     public const GETTING_STARTED = 'Getting started';
     public const ABOUT = 'About GVExport';
     public const DETAILED_INFORMATION = 'Detailed information';
@@ -33,6 +34,7 @@ class Help
     public const SAVE_SETTINGS = 'Save settings';
     public const SETTINGS_FILE = 'Settings file';
     public const MESSAGE_HISTORY = 'Message history';
+    public const LIST_OF_DIAGRAMS = 'List of diagrams';
 
     private array $help_location = [
             self::HOME => '',
@@ -58,6 +60,8 @@ class Help
             self::SAVE_SETTINGS => 'Detailed information/General settings/',
             self::SETTINGS_FILE => 'Detailed information/General settings/',
             self::MESSAGE_HISTORY => 'Detailed information/General settings/',
+            self::SAVED_DIAGRAMS => 'Detailed information/',
+            self::LIST_OF_DIAGRAMS => 'Detailed information/Saved diagrams/',
         ];
 
     public function __construct()
@@ -83,18 +87,6 @@ class Help
         $this->help[8][1] = "";
         $this->help[9][0] = "Clippings cart";
         $this->help[9][1] = "Within webtrees, you can add items to the clippings cart. This is usually done by navigating to a record within webtrees then selecting the &quot;Clippings cart&quot; option near the top of the screen.</p><p> If you have added individuals and the related family and media records to the clippings cart, these can be used to display the diagram instead of the criteria in the &quot;People to be included&quot; section.</p><p>If you have individuals in the clippings cart but don't wish to use these, you have the option to ignore the clippings cart.";
-        $this->help[10][0] = "";
-        $this->help[10][1] = "";
-        $this->help[11][0] = "";
-        $this->help[11][1] = "";
-        $this->help[12][0] = "";
-        $this->help[12][1] = "";
-        $this->help[13][0] = "";
-        $this->help[13][1] = "";
-        $this->help[14][0] = "";
-        $this->help[14][1] = "";
-        $this->help[15][0] = "List of diagrams";
-        $this->help[15][1] = "You can select from the list to load some saved settings. Settings can be added or changed using the options in the advanced section of the &quot;General settings&quot; section.";
     }
 
     /**
