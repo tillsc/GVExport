@@ -6,7 +6,7 @@
 
 use Fisharebest\Webtrees\I18N;
 use vendor\WebtreesModules\gvexport\Help;
-
+$help = new Help();
 ?>
 
 <h2 class="help-title"><?= I18N::translate('Help'); ?></h2>
@@ -14,15 +14,15 @@ use vendor\WebtreesModules\gvexport\Help;
     <?= I18N::translate('This help contains detailed information on the options available in GVExport. You can navigate by clicking the options below, searching using the magnifying glass icon above, or by clicking on a setting to show the information for that setting.'); ?>
 </p>
 <ul>
-    <li><a class="pointer help-item" data-name="<?= HELP::GETTING_STARTED; ?>"><?= I18N::translate(HELP::GETTING_STARTED); ?></a></li>
-    <li><a class="pointer help-item" data-name="<?= HELP::ABOUT; ?>"><?= Help::ABOUT; ?></a></li>
+    <li><?= $help->getHelpLinkHtml(HELP::GETTING_STARTED);?></li>
+    <li><?= $help->getHelpLinkHtml(HELP::ABOUT);?></li>
     <li>
-        <a class="pointer help-item" data-name="<?= HELP::DETAILED_INFORMATION; ?>"><?= Help::DETAILED_INFORMATION; ?></a>
+        <?= $help->getHelpLinkHtml(HELP::DETAILED_INFORMATION);?>
         <ul>
-            <li><a class="pointer help-item" data-name="<?= Help::PEOPLE_TO_INCLUDE; ?>"><?= I18N::translate(HELP::PEOPLE_TO_INCLUDE); ?></a> </li>
-            <li><a class="pointer help-item" data-name="<?= Help::APPEARANCE; ?>"><?= I18N::translate(Help::APPEARANCE); ?></a> </li>
-            <li><a class="pointer help-item" data-name="<?= Help::GENERAL_SETTINGS; ?>"><?= I18N::translate(Help::GENERAL_SETTINGS); ?></a> </li>
-            <li><a class="pointer help-item" data-name="<?= Help::SAVED_DIAGRAMS; ?>"><?= I18N::translate(Help::SAVED_DIAGRAMS); ?></a> </li>
+            <li><?= $help->getHelpLinkHtml(HELP::SAVED_DIAGRAMS);?></li>
+            <li><?= $help->getHelpLinkHtml(HELP::PEOPLE_TO_INCLUDE);?></li>
+            <li><?= $help->getHelpLinkHtml(HELP::APPEARANCE);?></li>
+            <li><?= $help->getHelpLinkHtml(HELP::GENERAL_SETTINGS);?></li>
         </ul>
     </li>
 </ul>

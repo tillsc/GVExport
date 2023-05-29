@@ -11,6 +11,7 @@ use vendor\WebtreesModules\gvexport\GVExport;
 use vendor\WebtreesModules\gvexport\Help;
 
 $name = Help::APPEARANCE;
+$help = new Help();
 ?>
 
 <?= view($module->name() . '::MainPage/Help/HelpHeader',['name' => $name]); ?>
@@ -19,9 +20,9 @@ $name = Help::APPEARANCE;
     <?= I18N::translate('The "Appearance" section lets you customise the look of the diagram. Within this section, there are several setting groups'); ?>:
 </p>
 <ul>
-    <li><a class="pointer help-item" data-name="<?= Help::GRAPH_DIRECTION; ?>"><?= I18N::translate(Help::GRAPH_DIRECTION); ?></a></li>
-    <li><a class="pointer help-item" data-name="<?= Help::DIAGRAM_TYPE; ?>"><?= I18N::translate(Help::DIAGRAM_TYPE); ?></a></li>
-    <li><a class="pointer help-item" data-name="<?= Help::TILE_DESIGN; ?>"><?= I18N::translate(Help::TILE_DESIGN); ?></a></li>
-    <li><a class="pointer help-item" data-name="<?= Help::TILE_CONTENTS; ?>"><?= I18N::translate(Help::TILE_CONTENTS); ?></a></li>
-    <li><a class="pointer help-item" data-name="<?= Help::DIAGRAM_APPEARANCE; ?>"><?= I18N::translate(Help::DIAGRAM_APPEARANCE); ?></a></li>
+    <li><?= $help->getHelpLinkHtml(HELP::GRAPH_DIRECTION);?></li>
+    <li><?= $help->getHelpLinkHtml(HELP::DIAGRAM_TYPE);?></li>
+    <li><?= $help->getHelpLinkHtml(HELP::TILE_DESIGN);?></li>
+    <li><?= $help->getHelpLinkHtml(HELP::TILE_CONTENTS);?></li>
+    <li><?= $help->getHelpLinkHtml(HELP::DIAGRAM_APPEARANCE);?></li>
 </ul>

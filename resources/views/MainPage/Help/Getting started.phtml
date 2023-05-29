@@ -11,6 +11,7 @@ use vendor\WebtreesModules\gvexport\GVExport;
 use vendor\WebtreesModules\gvexport\Help;
 
 $page_name = Help::GETTING_STARTED;
+$help = new Help();
 ?>
 
 <?= view($module->name() . '::MainPage/Help/HelpHeader',['name' => $page_name]); ?>

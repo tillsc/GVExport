@@ -11,16 +11,17 @@ use vendor\WebtreesModules\gvexport\GVExport;
 use vendor\WebtreesModules\gvexport\Help;
 
 $page_name = Help::DETAILED_INFORMATION;
+$help = new Help();
 ?>
 
 <?= view($module->name() . '::MainPage/Help/HelpHeader',['name' => $page_name]); ?>
 
 <p>
     <?= I18N::translate('This section has detailed information on each of the options in GVExport.'); ?>
-    <ul>
-        <li><a class="pointer help-item" data-name="<?= Help::PEOPLE_TO_INCLUDE; ?>"><?= I18N::translate(HELP::PEOPLE_TO_INCLUDE); ?></a> </li>
-        <li><a class="pointer help-item" data-name="<?= Help::APPEARANCE; ?>"><?= I18N::translate(Help::APPEARANCE); ?></a> </li>
-        <li><a class="pointer help-item" data-name="<?= Help::GENERAL_SETTINGS; ?>"><?= I18N::translate(Help::GENERAL_SETTINGS); ?></a> </li>
-        <li><a class="pointer help-item" data-name="<?= Help::SAVED_DIAGRAMS; ?>"><?= I18N::translate(Help::SAVED_DIAGRAMS); ?></a> </li>
-    </ul>
 </p>
+<ul>
+    <li><?= $help->getHelpLinkHtml(HELP::SAVED_DIAGRAMS);?></li>
+    <li><?= $help->getHelpLinkHtml(HELP::PEOPLE_TO_INCLUDE);?></li>
+    <li><?= $help->getHelpLinkHtml(HELP::APPEARANCE);?></li>
+    <li><?= $help->getHelpLinkHtml(HELP::GENERAL_SETTINGS);?></li>
+</ul>

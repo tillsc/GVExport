@@ -12,6 +12,7 @@ use vendor\WebtreesModules\gvexport\GVExport;
 use vendor\WebtreesModules\gvexport\Help;
 
 $page_name = Help::NOT_FOUND;
+$help = new Help();
 ?>
 
 <?= view($module->name() . '::MainPage/Help/HelpHeader',['name' => $page_name]); ?>
@@ -23,5 +24,5 @@ $page_name = Help::NOT_FOUND;
     <?= I18N::translate('Related links'); ?>:
 </p>
 <ul>
-    <li><a class="pointer help-item" data-name="<?= Help::HOME; ?>"><?= I18N::translate(Help::HOME); ?></a></li>
+    <li><?= $help->getHelpLinkHtml(HELP::HOME);?></li>
 </ul>

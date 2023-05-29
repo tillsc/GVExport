@@ -55,6 +55,7 @@ class Help
             self::TILE_DESIGN => 'Detailed information/Appearance/',
             self::TILE_CONTENTS => 'Detailed information/Appearance/',
             self::DIAGRAM_APPEARANCE => 'Detailed information/Appearance/',
+            self::GENERAL_SETTINGS => 'Detailed information/',
             self::OUTPUT_FILE => 'Detailed information/General settings/',
             self::BROWSER_RENDER => 'Detailed information/General settings/',
             self::SAVE_SETTINGS => 'Detailed information/General settings/',
@@ -147,5 +148,18 @@ function getHelpText(item) {
      */
     public function getHelpLocation($help) {
             return $this->help_location[$help];
+    }
+    /**
+     * Returns the location of the requested help view relative to the Help directory
+     *
+     * @param string $page
+     * @return string
+     */
+    public function getHelpLinkHtml(string $page): string
+    {
+        $html = '<a class="pointer help-item" data-name="' . $page . '">';
+        $html .= I18N::translate($page);
+        $html .= '</a> </li>';
+        return $html;
     }
 }
