@@ -137,6 +137,8 @@ const UI = {
                         document.getElementById('help-content').innerHTML = response;
                     }
                 });
+            } else {
+                return Promise.resolve();
             }
         },
 
