@@ -17,7 +17,7 @@ $help = new Help();
 <?= view($module->name() . '::MainPage/Help/HelpHeader',['name' => $name]); ?>
 
 <p>
-    <?= I18N::translate('The "Appearance" section lets you customise the look of the diagram. Within this section, there are several setting groups'); ?>:
+    <?= I18N::translate('The "Appearance" section lets you customise the look of the diagram. Within this section, there are several setting groups:'); ?>
 </p>
 <ul>
     <li><?= $help->getHelpLinkHtml(HELP::GRAPH_DIRECTION);?></li>

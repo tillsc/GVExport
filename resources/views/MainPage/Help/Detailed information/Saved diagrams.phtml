@@ -17,7 +17,7 @@ $help = new Help();
 <?= view($module->name() . '::MainPage/Help/HelpHeader',['name' => $name]); ?>
 
 <p>
-    <?= I18N::translate('This panel is only shown when the "Show saved diagrams" option is enabled in the "Save settings" section. It has just the following option'); ?>:
+    <?= I18N::translate('This panel is only shown when the "Show saved diagrams" option is enabled in the "Save settings" section. It has just the following option:'); ?>
 </p>
 <ul>
     <li><?= $help->getHelpLinkHtml(HELP::LIST_OF_DIAGRAMS);?></li>

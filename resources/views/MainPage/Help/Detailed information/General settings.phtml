@@ -17,7 +17,7 @@ $help = new Help();
 <?= view($module->name() . '::MainPage/Help/HelpHeader',['name' => $name]); ?>
 
 <p>
-    <?= I18N::translate('The "General settings" section has options that don\'t fit in the other sections'); ?>:
+    <?= I18N::translate('The "General settings" section has options that don&apos;t fit in the other sections. Within this section, there are several settings groups:'); ?>:
 </p>
 <ul>
     <li><?= $help->getHelpLinkHtml(HELP::OUTPUT_FILE);?></li>
