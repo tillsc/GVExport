@@ -18,6 +18,7 @@ class Help
     public const GETTING_STARTED = 'Getting started';
     public const ABOUT = 'About GVExport';
     public const DETAILED_INFORMATION = 'Detailed information';
+    public const CLIPPINGS_CART = 'Clippings cart';
     public const INCLUDE_RELATED_TO = 'Include anyone related to';
     public const CONNECTIONS_TO_INCLUDE = 'Connections to include';
     public const XREFs_OF_INDIVIDUALS = 'XREFs of included individuals';
@@ -43,6 +44,7 @@ class Help
             self::ABOUT => '',
             self::DETAILED_INFORMATION => '',
             self::PEOPLE_TO_INCLUDE => 'Detailed information/',
+            self::CLIPPINGS_CART => 'Detailed information/People to be included/',
             self::INCLUDE_RELATED_TO => 'Detailed information/People to be included/',
             self::CONNECTIONS_TO_INCLUDE => 'Detailed information/People to be included/',
             self::XREFs_OF_INDIVIDUALS => 'Detailed information/People to be included/',
@@ -87,7 +89,7 @@ class Help
         $this->help[8][0] = "";
         $this->help[8][1] = "";
         $this->help[9][0] = "Clippings cart";
-        $this->help[9][1] = "Within webtrees, you can add items to the clippings cart. This is usually done by navigating to a record within webtrees then selecting the &quot;Clippings cart&quot; option near the top of the screen.</p><p> If you have added individuals and the related family and media records to the clippings cart, these can be used to display the diagram instead of the criteria in the &quot;People to be included&quot; section.</p><p>If you have individuals in the clippings cart but don't wish to use these, you have the option to ignore the clippings cart.";
+        $this->help[9][1] = "";
     }
 
     /**

@@ -10,14 +10,14 @@ use vendor\WebtreesModules\gvexport\Help;
 
 $help = new Help();
 ?>
-<h2 class="help-title"><?= $name ?></h2>
+<h2 class="help-title"><?= I18N::translate($name); ?></h2>
 <p>
     <?php
     $location_array = array_merge([Help::HOME], explode('/', $help->getHelpLocation($name)));
     $breadcrumbs = array_filter($location_array);
     foreach ($breadcrumbs as $key => $breadcrumb) {
         echo '<a class="pointer help-item help-breadcrumb" data-name="' . $breadcrumb . '">' . I18N::translate($breadcrumb) . '</a>';
-        if (array_key_last($breadcrumbs) != $key) echo ' > ';
+        if (array_key_last($breadcrumbs) != $key) echo ' › ';
     }
     ?>
 </p>
