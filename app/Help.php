@@ -8,7 +8,6 @@ use Fisharebest\Webtrees\I18N;
  */
 class Help
 {
-    private array $help;
     public const NOT_FOUND = 'Help information not found';
     public const HOME = 'Home';
     public const PEOPLE_TO_INCLUDE = 'People to be included';
@@ -69,62 +68,6 @@ class Help
 
     public function __construct()
     {
-        // Array of help items and the content of each - TODO to be removed when new help system complete
-        $this->help[0][0] = "";
-        $this->help[0][1] = "";
-        $this->help[1][0] = "";
-        $this->help[1][1] = "";
-        $this->help[2][0] = "";
-        $this->help[2][1] = "";
-        $this->help[3][0] = "";
-        $this->help[3][1] = "";
-        $this->help[4][0] = "";
-        $this->help[4][1] = "";
-        $this->help[5][0] = "";
-        $this->help[5][1] = "";
-        $this->help[6][0] = "";
-        $this->help[6][1] = "";
-        $this->help[7][0] = "";
-        $this->help[7][1] = "";
-        $this->help[8][0] = "";
-        $this->help[8][1] = "";
-        $this->help[9][0] = "Clippings cart";
-        $this->help[9][1] = "";
-    }
-
-    /**
-     * Adds JavaScript code for function that provides the help text
-     * @return string
-     */
-    public function addHelpMessageJavaScript(): string
-    {
-        $msg = "
-// Function to get help text based on identifier
-// item - the help item identifier
-function getHelpText(item) {
-    switch (item) {";
-
-            for ($i=0; $i<sizeof($this->help); $i++) {
-                $msg .= "case \"" . $this->help[$i][0] . "\":\n";
-                $msg .= "    return '<h2 class=\"help-title\">" . $this->translateClean($this->help[$i][0]) . "</h2>";
-                $msg .= "<p>" . $this->translateClean($this->help[$i][1]) . "</p>';\n";
-            }
-        $msg .= "case \"enable_debug_mode\":
-            return '<textarea cols=50 rows=20 onclick=\"this.select()\">' + debug_string + '</textarea>';
-        default:
-            return  '" . $this->translateClean("Help information not found") . ": ' + item;
-        }
-    }";
-        return $msg;
-    }
-
-    /** Take provided translation and remove any line break, replace ' with &apos; to prevent issue with javascript
-     * @param $msg
-     * @return string
-     */
-    private function translateClean($msg): string
-    {
-        return str_replace(array("\r", "\n"), '',str_replace("'","&apos;",I18N::translate($msg)));
     }
 
     /**
