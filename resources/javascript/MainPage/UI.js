@@ -134,7 +134,9 @@ const UI = {
             if (help !== '') {
                 return Data.getHelp(help).then(function (response) {
                     if (response) {
-                        document.getElementById('help-content').innerHTML = response;
+                        let contentEl = document.getElementById('help-content');
+                        contentEl.innerHTML = response;
+                        contentEl.scrollTop = 0;
                     }
                 });
             } else {
