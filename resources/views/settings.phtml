@@ -44,7 +44,7 @@ $usegraphviz = $vars['graphviz_bin'] != "";
                 <input class="form-control col-sm-6" type="text" name="vars[filename]" id="filename" value="<?= e($vars["filename"]) ?>">
                 <label for="mclimit"><?= I18N::translate('Graphviz MCLIMIT setting') ?>:</label>
                 <input class="form-control col-sm-6" type="text" name="vars[mclimit]" id="mclimit" value="<?= I18N::digits($vars["mclimit"]); ?>">
-                <label for="birth_prefix"><?= I18N::translate('Birth date prefix') ?>:</label>
+                <label for="birth_prefix"><?= I18N::translate('Birthdate prefix') ?>:</label>
                 <input class="form-control col-sm-6" type="text" name="vars[birth_prefix]" id="birth_prefix" pattern="^[A-Za-z0-9_ .*+()^%$#@!†-]*$" title="<?= I18N::translate('Letters, numbers, spaces, or the following symbols: ') . "_.*+()^%$#@!†-"; ?>" value="<?= e($vars["birth_prefix"]); ?>">
                 <label for="death_prefix"><?= I18N::translate('Death date prefix') ?>:</label>
                 <input class="form-control col-sm-6" type="text" name="vars[death_prefix]" id="death_prefix" pattern="^[A-Za-z0-9_ .*+()^%$#@!†-]*$" title="<?= I18N::translate('Letters, numbers, spaces, or the following symbols: ') . "_.*+()^%$#@!†-"; ?>" value="<?= e($vars["death_prefix"]); ?>">
