@@ -171,7 +171,14 @@ const UI = {
         }
         for (let i=0; i<elements.length; i++) {
             if (getComputedStyle(elements[i]).backgroundColor === baseColour) {
-                elements[i].style.backgroundColor = replaceColour;
+                if (replaceColour === 'rgba(0, 0, 0, 0)') {
+                    let searchButton = document.querySelector('.wt-header-search-button');
+                    if (searchButton !== null) {
+                        elements[i].style.background = getComputedStyle(searchButton).background;
+                    }
+                } else {
+                    elements[i].style.backgroundColor = replaceColour;
+                }
                 if (primaryButton !== null) {
                     elements[i].style.color = replaceTextColour;
                 }

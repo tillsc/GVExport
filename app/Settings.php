@@ -410,7 +410,6 @@ class Settings
             case 'indi_tile_shape_custom_options':
             case 'bg_col_type_options':
             case 'stripe_col_type_options':
-            case 'show_diagram_panel':
             case 'border_col_type_options':
                 return false;
             case 'show_debug_panel':
@@ -419,6 +418,8 @@ class Settings
             case 'birth_prefix':
             case 'death_prefix':
                 return $context == self::CONTEXT_ADMIN;
+            case 'show_diagram_panel':
+                return $context != self::CONTEXT_NAMED_SETTING;
             default:
                 return true;
         }
