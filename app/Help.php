@@ -107,4 +107,17 @@ class Help
         $html .= '</a> </li>';
         return $html;
     }
+
+    /** Take provided translation and clean to prevent errors
+     *
+     * @param $msg
+     * @return string
+     */
+    static function translateClean($msg): string
+    {
+        $no_apostrophe = str_replace("'","&apos;",$msg);
+        $no_percent = str_replace("&","&percnt;",$no_apostrophe);
+        $no_newline = str_replace(array("\r", "\n"), '', $no_percent);
+        return I18N::translate($no_newline);
+    }
 }
