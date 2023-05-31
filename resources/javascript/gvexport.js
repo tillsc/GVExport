@@ -492,6 +492,7 @@ function pageLoaded(Url) {
     document.querySelector(".hide-form").addEventListener("click", UI.hideSidebar);
     document.querySelector(".sidebar_toggle a").addEventListener("click", UI.showSidebar);
     UI.helpPanel.init();
+    UI.fixTheme();
 
     // Form change events
     const form = document.getElementById('gvexport');
