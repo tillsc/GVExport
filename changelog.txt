@@ -3,6 +3,27 @@
 	GVExport module for Webtrees
 =====================================================================
 
+Version 2.1.18 (2023-06-?)
+  - New         : Change shape of photos
+  - New         : Change size of photos
+  - New         : Change resolution of photos
+  - New         : Rounded rectangle tile shape available for individuals - can also be set based on sex or vital status
+  - New         : Border colour can now be set based on sex, vital status, age
+  - New         : Background colour can now be set based on sex, vital status, age
+  - New         : Stripe colour can now be set based on sex, vital status, age
+  - New         : Added ability to search diagram
+  - New         : If Graphviz installed on server and PDF or SVG output chosen, options added to convert images to JPG and change JPG quality setting
+  - New         : Can now see history of messages shown (lost upon page refresh)
+  - Change      : Redesigned settings to make it easier to find what you need
+  - Change      : Redesigned help system to use panel on right side of page
+  - Change      : Adjusted default quality of images embedded in SVG/PDF
+  - Change      : If theme makes advanced settings buttons the same colour as surrounding area, use different reference colour to make them stand out
+  - Change      : "Decorated" diagram type now called "Separated"
+  - Removed     : Simple diagram type - all settings needed to create this are now available with the "Decorated" type
+  - Fixed       : Option to ignore clippings cart not working
+  - Fixed       : Graphviz on server not recognised after GVExport update until settings reset
+  - Fixed       : GVExport doesn't work when webtrees language set to français/French
+
 Version 2.1.17.2 (2023-02-27)
   - Fixed       : Missing translation for message indicating individual added to list from URL
   - Fixed       : GVExport does not work when language set to Catalan (pretty sure it's fixed this time)
