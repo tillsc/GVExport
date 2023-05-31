@@ -154,5 +154,28 @@ const UI = {
             event.preventDefault();
             UI.helpPanel.showHelpSidebar(event.target.getAttribute('data-help'));
         }
+    },
+
+    /**
+     * When page loaded, make changes if theme chosen doesn't work nicely
+     *
+     */
+    fixTheme() {
+        let elements = document.querySelectorAll('.advanced-settings-btn');
+        let baseColour = getComputedStyle(document.querySelector('.wt-page-options-value')).backgroundColor;
+        let replaceColour = getComputedStyle(document.querySelector('.btn-primary')).backgroundColor;
+        let primaryButton = document.querySelector('.btn-primary');
+        let replaceTextColour;
+        if (primaryButton !== null) {
+            replaceTextColour = getComputedStyle(primaryButton).color;
+        }
+        for (let i=0; i<elements.length; i++) {
+            if (getComputedStyle(elements[i]).backgroundColor === baseColour) {
+                elements[i].style.backgroundColor = replaceColour;
+                if (primaryButton !== null) {
+                    elements[i].style.color = replaceTextColour;
+                }
+            }
+        }
     }
 };
