@@ -1215,7 +1215,7 @@ msgstr "In dit onderdeel kan het ontwerp van de tegels worden aangepast, inclusi
 #. Part of the help text for the "Individual tile shape" option:  https://s3.eu-west-1.amazonaws.com/po-pub/i/7f9BFZbMmpL5IUEFjtkmDgN6.png
 #: 
 msgid "This option lets you choose the shape for tiles for individuals. There are two options:"
-msgstr "Met deze optie kunt u de vorm kiezen voor tegels voor personen. Er zijn drie opties:"
+msgstr "Met deze optie kunt u de vorm kiezen voor tegels voor personen. Er zijn twee opties:"
 
 #. Part of the help text for the "Individual tile shape" option:  https://s3.eu-west-1.amazonaws.com/po-pub/i/7f9BFZbMmpL5IUEFjtkmDgN6.png
 #: 
@@ -1230,7 +1230,7 @@ msgstr "De tegel heeft afgeronde hoeken"
 #. Part of the help text for the "Individual tile shape" option:  https://s3.eu-west-1.amazonaws.com/po-pub/i/7f9BFZbMmpL5IUEFjtkmDgN6.png
 #: 
 msgid "This lets you assign a shape based on the sex of individuals. For example, you can set male individuals to have rectangle tiles and female individuals to have rounded rectangle tiles."
-msgstr "Op basis van het geslacht van de persoon - hiermee kunt u een vorm toekennen op basis van het geslacht van personen. U kunt bijvoorbeeld instellen dat mannelijke personen rechthoekige tegels krijgen en vrouwelijke personen afgeronde rechthoekige tegels."
+msgstr "Hiermee kunt u een vorm toewijzen op basis van het geslacht van personen. U kunt bijvoorbeeld instellen dat mannelijke personen rechthoekige tegels krijgen en vrouwelijke personen afgeronde rechthoekige tegels."
 
 #. Part of the Photos help text:  https://s3.eu-west-1.amazonaws.com/po-pub/i/LnybW6GMtDH0UDez4Z0flfpW.png
 #: 
@@ -1245,7 +1245,7 @@ msgstr "Met deze optie kunt u de vorm van foto's kiezen. Merk op dat als u Graph
 #. Part of the Photos help text:  https://s3.eu-west-1.amazonaws.com/po-pub/i/LnybW6GMtDH0UDez4Z0flfpW.png
 #: 
 msgid "This option lets you change the size of photos as they are displayed, which is done as a percentage of the default size. 100&percnt; is the default size, 50&percnt; is half sized and 200&percnt; is double sized."
-msgstr "Met deze optie kunt u de grootte van foto's wijzigen, wat gebeurt als een percentage van de standaardgrootte. 100&percnt; is de standaardgrootte, 50&percnt; is halve grootte en 200&percnt; is dubbele grootte."
+msgstr "Met deze optie kunt u de grootte van foto's wijzigen wanneer ze worden weergegeven, wat gebeurt als een percentage van de standaardgrootte. 100&percnt; is de standaardgrootte, 50&percnt; is halve grootte en 200&percnt; is dubbele grootte."
 
 #. Part of the Photos help text:  https://s3.eu-west-1.amazonaws.com/po-pub/i/LnybW6GMtDH0UDez4Z0flfpW.png
 #: 
@@ -1265,17 +1265,17 @@ msgstr "de achtergrond wordt ingesteld op de gekozen kleur."
 #. Part of the "Individual background colour" help text:  https://s3.eu-west-1.amazonaws.com/po-pub/i/eDQV6JV3JvDtByvCWafKETjD.png
 #: 
 msgid "The background will be coloured based on the sex of the individual."
-msgstr "de achtergrond wordt gekleurd op basis van het geslacht van de persoon."
+msgstr "De achtergrond wordt gekleurd op basis van het geslacht van de persoon."
 
 #. Part of the "Individual background colour" help text:  https://s3.eu-west-1.amazonaws.com/po-pub/i/eDQV6JV3JvDtByvCWafKETjD.png
 #: 
 msgid "The background will be coloured based on whether the individual is living or deceased."
-msgstr ""
+msgstr "De achtergrond wordt gekleurd op basis van het feit of de persoon leeft of overleden is."
 
 #. Part of the "Individual background colour" help text:  https://s3.eu-west-1.amazonaws.com/po-pub/i/eDQV6JV3JvDtByvCWafKETjD.png
 #: 
 msgid "The background will be coloured using a scale between two chosen colours, based on the age of the individual."
-msgstr ""
+msgstr "De achtergrond wordt gekleurd met behulp van een schaal tussen twee gekozen kleuren, op basis van de leeftijd van de persoon."
 
 #. Part of the "Individual stripe colour" help text:  https://s3.eu-west-1.amazonaws.com/po-pub/i/tFOIYjO4UCOK7GNOe5XPiLvS.png
 #: 
@@ -1285,22 +1285,22 @@ msgstr "Met deze optie kunt u de kleur van de streep over de bovenkant van de te
 #. Part of the "Individual stripe colour" help text:  https://s3.eu-west-1.amazonaws.com/po-pub/i/tFOIYjO4UCOK7GNOe5XPiLvS.png
 #: 
 msgid "No stripe is shown."
-msgstr "er wordt geen streep getoond."
+msgstr "Er wordt geen streep getoond."
 
 #. Part of the "Individual stripe colour" help text:  https://s3.eu-west-1.amazonaws.com/po-pub/i/tFOIYjO4UCOK7GNOe5XPiLvS.png
 #: 
 msgid "The stripe will be coloured based on the sex of the individual."
-msgstr "de streep wordt gekleurd op basis van het geslacht van de persoon."
+msgstr "De streep wordt gekleurd op basis van het geslacht van de persoon."
 
 #. Part of the "Individual stripe colour" help text:  https://s3.eu-west-1.amazonaws.com/po-pub/i/tFOIYjO4UCOK7GNOe5XPiLvS.png
 #: 
 msgid "The stripe will be coloured based on whether the individual is living or deceased."
-msgstr ""
+msgstr "De streep wordt gekleurd op basis van het feit of de persoon leeft of is overleden."
 
 #. Part of the "Individual stripe colour" help text:  https://s3.eu-west-1.amazonaws.com/po-pub/i/tFOIYjO4UCOK7GNOe5XPiLvS.png
 #: 
 msgid "The stripe will be coloured using a scale between two chosen colours, based on the age of the individual."
-msgstr ""
+msgstr "De streep wordt gekleurd met een schaal tussen twee gekozen kleuren, op basis van de leeftijd van de persoon."
 
 #. Part of the help text for "Individual border colour": https://s3.eu-west-1.amazonaws.com/po-pub/i/h5HCQt6yIARSk0971BK0vAaq.png
 #: 
@@ -1310,27 +1310,27 @@ msgstr "Met deze optie kunt u de randkleur van een persoonstegel instellen. De o
 #. Part of the help text for "Individual border colour": https://s3.eu-west-1.amazonaws.com/po-pub/i/h5HCQt6yIARSk0971BK0vAaq.png
 #: 
 msgid "The border will be set to the chosen colour."
-msgstr "de rand wordt ingesteld op de gekozen kleur."
+msgstr "De rand wordt ingesteld op de gekozen kleur."
 
 #. Part of the help text for "Individual border colour": https://s3.eu-west-1.amazonaws.com/po-pub/i/h5HCQt6yIARSk0971BK0vAaq.png
 #: 
 msgid "The border will be coloured based on the sex of the individual."
-msgstr "de rand wordt gekleurd op basis van het geslacht van de persoon."
+msgstr "De rand wordt gekleurd op basis van het geslacht van de persoon."
 
 #. Part of the help text for "Individual border colour": https://s3.eu-west-1.amazonaws.com/po-pub/i/h5HCQt6yIARSk0971BK0vAaq.png
 #: 
 msgid "The family border colour will be used for the border of individuals."
-msgstr "de kleur van gezinsrand wordt gebruikt voor het rand van personen."
+msgstr "De kleur van de gezinsrand wordt gebruikt voor de rand van personen."
 
 #. Part of the help text for "Individual border colour": https://s3.eu-west-1.amazonaws.com/po-pub/i/h5HCQt6yIARSk0971BK0vAaq.png
 #: 
 msgid "The border will be coloured based on whether the individual is living or deceased."
-msgstr ""
+msgstr "De rand wordt gekleurd op basis van het feit of de persoon leeft of is overleden."
 
 #. Part of the help text for "Individual border colour": https://s3.eu-west-1.amazonaws.com/po-pub/i/h5HCQt6yIARSk0971BK0vAaq.png
 #: 
 msgid "The border will be coloured using a scale between two chosen colours, based on the age of the individual."
-msgstr ""
+msgstr "De rand wordt gekleurd met behulp van een schaal tussen twee gekozen kleuren, op basis van de leeftijd van de persoon."
 
 #. Part of the help information around the colours used for each sex:  https://s3.eu-west-1.amazonaws.com/po-pub/i/zFeY1IbEuF4U8dILeiQUuV99.png
 #: 
@@ -1375,7 +1375,7 @@ msgstr "De randkleur voor gezinsrecords."
 #. Part of the help text for the Font settings:  https://s3.eu-west-1.amazonaws.com/po-pub/i/qUGC7vhTTAbXfKTFjzeZHy4x.png
 #: 
 msgid "This list lets you pick from a number of known web-safe font typefaces. They must be installed on the system or a fallback typeface will be used. These options are known to be installed on almost all desktop systems and that is why they have been chosen. Mobile browsers will likely use a fallback font."
-msgstr "Deze lijst laat u kiezen uit een aantal bekende webveilige lettertypegroepen. Ze moeten geïnstalleerd zijn op het systeem of er wordt een terugvallettertype gebruikt. Het is bekend dat deze opties geïnstalleerd zijn op bijna alle desktopsystemen en daarom zijn ze gekozen. Mobiele browsers zullen waarschijnlijk een terugvallettertype gebruiken."
+msgstr "In deze lijst kunt u kiezen uit een aantal bekende webveilige lettertypegroepen. Ze moeten geïnstalleerd zijn op het systeem, anders wordt een terugvallettertype gebruikt. Deze opties zijn gekozen omdat het bekend is dat deze geïnstalleerd zijn op bijna alle desktopsystemen. Mobiele browsers zullen waarschijnlijk een terugvallettertype gebruiken."
 
 #. Part of the help text for the Font settings:  https://s3.eu-west-1.amazonaws.com/po-pub/i/qUGC7vhTTAbXfKTFjzeZHy4x.png
 #: 
@@ -1401,5 +1401,5 @@ msgstr "Dit verandert de kleur van het lettertype van alle tekst behalve namen, 
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/aX1DPFZeEFtV4VGaEqUB05mY.png
 #: 
 msgid "Non-blood related individuals"
-msgstr ""
+msgstr "Niet-bloedverwante personen"
 
