@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * This is part of the help sidebar content
+ *
+ * @var GVExport $module   The instance of this module from webtrees
+ */
+
+use Fisharebest\Webtrees\I18N;
+use vendor\WebtreesModules\gvexport\GVExport;
+use vendor\WebtreesModules\gvexport\Help;
+
+$page_name = Help::CONNECTIONS_TO_INCLUDE;
+?>
+
+<?= view($module->name() . '::MainPage/Help/HelpHeader',['name' => $page_name]); ?>
+
+<p>
+    <?= I18N::translate('This section includes options that let you decide how to build the tree from your starting individual(s).</p><b>Include ancestors</b><p>Tick this option to include ancestors of your starting individual(s) and anyone in the tree.</p><b>Max levels</b><p>The number of generations of ancestors to include. For example, if you chose yourself as your starting person, you may want the diagram to include relatives back to your great-grandparents. In this case, you would type &quot;3&quot; in the Max levels box under Include ancestors, to include your parents&apos; generation, your grandparents&apos; generation, and your great-grandparents&apos; generation.</p><b>Include descendants</b><p>Whether to include children, grandchildren, etc. of people listed in the tree.</p><b>Max levels</b><p>Similar to the same option for &quot;Include ancestors&quot;, this option indicates how many descendant generations should be included.<h4>Relation types to include</h4><p>The type of relatives to include when generating the diagram.</p><b>Siblings</b><p>Include brothers and sisters of anyone in the tree.</p><b>All relations</b><p>Include cousins, nieces, nephews, and their descendants when generating the tree. Requires &quot;Siblings&quot; to be selected.</p><b>Partners</b><p>Include the husbands, wives, and partners of those in the tree even if they aren&apos;t blood-relatives. There is another option &quot;Mark not blood-related people with different color&quot; that allows these people to be marked in a different colour.</p><b>Anyone</b><p>Follow all links regardless of whether the person is related. In practice, this generally means that the family of non-relatives (i.e. spouses) are included in the tree.</p><p>Use this option to include all records of the selected generations. Note that only records with a link are included, so you may need to include more ancestor or descendant generations (or more starting individuals) to get all your records to show.'); ?>
+</p>

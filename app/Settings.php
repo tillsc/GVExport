@@ -53,10 +53,10 @@ class Settings
         $this->defaultSettings['photo_shape_options'] = [0 => "No change", 10 => "Oval", 20 => "Circle" , 30 => "Square", 40 => "Rounded rectangle", 50 => "Rounded square"];
         $this->defaultSettings['photo_quality_options'] = [0 => "Lowest", 20 => "Low", 50 => "Medium" , 75 => "High", 100 => "Highest"];
         $this->defaultSettings['indi_tile_shape_custom_options'] = [0 => "Rectangle", 10 => "Rounded rectangle"];
-        $this->defaultSettings['indi_tile_shape_options'] = $this->defaultSettings['indi_tile_shape_custom_options'] + [Person::TILE_SHAPE_SEX => 'Based on individual\'s sex', Person::TILE_SHAPE_VITAL => 'Based on vital status'];
-        $this->defaultSettings['bg_col_type_options'] = [self::OPTION_BACKGROUND_CUSTOM_COLOUR => 'Custom', self::OPTION_BACKGROUND_SEX_COLOUR => 'Based on individual\'s sex', self::OPTION_BACKGROUND_VITAL_COLOUR => 'Based on vital status', self::OPTION_BACKGROUND_AGE_COLOUR => 'Based on age'];
-        $this->defaultSettings['stripe_col_type_options'] = [self::OPTION_STRIPE_NONE => 'No stripe', self::OPTION_STRIPE_SEX_COLOUR => 'Based on individual\'s sex', self::OPTION_STRIPE_VITAL_COLOUR => 'Based on vital status', self::OPTION_STRIPE_AGE_COLOUR => 'Based on age'];
-        $this->defaultSettings['border_col_type_options'] = [self::OPTION_BORDER_CUSTOM_COLOUR => 'Custom', self::OPTION_BORDER_SEX_COLOUR => 'Based on individual\'s sex', self::OPTION_BORDER_FAMILY => 'Same as family border', self::OPTION_BORDER_VITAL_COLOUR => 'Based on vital status', self::OPTION_BORDER_AGE_COLOUR => 'Based on age'];
+        $this->defaultSettings['indi_tile_shape_options'] = $this->defaultSettings['indi_tile_shape_custom_options'] + [Person::TILE_SHAPE_SEX => 'Based on individual&apos;s sex', Person::TILE_SHAPE_VITAL => 'Based on vital status'];
+        $this->defaultSettings['bg_col_type_options'] = [self::OPTION_BACKGROUND_CUSTOM_COLOUR => 'Custom', self::OPTION_BACKGROUND_SEX_COLOUR => 'Based on individual&apos;s sex', self::OPTION_BACKGROUND_VITAL_COLOUR => 'Based on vital status', self::OPTION_BACKGROUND_AGE_COLOUR => 'Based on age'];
+        $this->defaultSettings['stripe_col_type_options'] = [self::OPTION_STRIPE_NONE => 'No stripe', self::OPTION_STRIPE_SEX_COLOUR => 'Based on individual&apos;s sex', self::OPTION_STRIPE_VITAL_COLOUR => 'Based on vital status', self::OPTION_STRIPE_AGE_COLOUR => 'Based on age'];
+        $this->defaultSettings['border_col_type_options'] = [self::OPTION_BORDER_CUSTOM_COLOUR => 'Custom', self::OPTION_BORDER_SEX_COLOUR => 'Based on individual&apos;s sex', self::OPTION_BORDER_FAMILY => 'Same as family border', self::OPTION_BORDER_VITAL_COLOUR => 'Based on vital status', self::OPTION_BORDER_AGE_COLOUR => 'Based on age'];
         $this->defaultSettings['countries'] = $this->getCountryAbbreviations();
         if (!$this->isGraphvizAvailable($this->defaultSettings['graphviz_bin'])) {
             $this->defaultSettings['graphviz_bin'] = "";

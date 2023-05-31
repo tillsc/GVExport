@@ -48,4 +48,4 @@ use vendor\WebtreesModules\gvexport\GVExport;
         <?= view($module->name() . '::MainPage/PeopleToInclude/TreatmentOfSourceIndividuals',['vars' => $vars, 'settings' => $settings, 'admin' => $admin]); ?>
     </div>
 </div>
-<a id="people-advanced-button" onclick="toggleAdvanced(this, 'people-advanced')"><div class="wt-page-options-label advanced-settings-btn"><?= ($vars["show_adv_people"] ? '↑ ' : '↓ ') . I18N::translate('Toggle advanced settings') . ($vars["show_adv_people"] ? ' ↑' : ' ↓'); ?></div></a>
+<a id="people-advanced-button" onclick="Form.toggleAdvanced(this, 'people-advanced')"><div class="wt-page-options-label advanced-settings-btn"><?= ($vars["show_adv_people"] ? '↑ ' : '↓ ') . I18N::translate('Toggle advanced settings') . ($vars["show_adv_people"] ? ' ↑' : ' ↓'); ?></div></a>

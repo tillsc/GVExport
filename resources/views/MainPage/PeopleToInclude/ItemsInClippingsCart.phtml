@@ -18,11 +18,11 @@ use vendor\WebtreesModules\gvexport\MainPage;
     <div class="col-sm-8 wt-page-options-value">
         <div class="row">
             <div class="col-auto mx-3">
-                <input type="radio" onclick="toggleCart(true)" name="vars[use_cart]" id="usecart_yes" value="use_cart" <?= $vars["use_cart"] ? 'checked' : '' ?>>
+                <input type="radio" onclick="Form.toggleCart(true)" name="vars[use_cart]" id="usecart_yes" value="use_cart" <?= $vars["use_cart"] ? 'checked' : '' ?>>
                 <label for="usecart_yes"><?= I18N::translate('Use clippings cart') ?></label>
             </div>
             <div class="col-auto mx-3">
-                <input type="radio" onclick="toggleCart(false)" name="vars[use_cart]" id="usecart_no" value="ignorecart" <?= !$vars["use_cart"] ? 'checked' : '' ?>>
+                <input type="radio" onclick="Form.toggleCart(false)" name="vars[use_cart]" id="usecart_no" value="ignorecart" <?= !$vars["use_cart"] ? 'checked' : '' ?>>
                 <label for="usecart_no"><?= I18N::translate('Ignore clippings cart') ?></label>
             </div>
         </div>

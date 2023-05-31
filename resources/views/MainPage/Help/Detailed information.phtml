@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * This is part of the help sidebar content
+ *
+ * @var GVExport $module   The instance of this module from webtrees
+ */
+
+use Fisharebest\Webtrees\I18N;
+use vendor\WebtreesModules\gvexport\GVExport;
+use vendor\WebtreesModules\gvexport\Help;
+
+$page_name = Help::DETAILED_INFORMATION;
+$help = new Help();
+?>
+
+<?= view($module->name() . '::MainPage/Help/HelpHeader',['name' => $page_name]); ?>
+
+<p>
+    <?= I18N::translate('This section has detailed information on each of the options in GVExport.'); ?>
+</p>
+<ul>
+    <li><?= $help->getHelpLinkHtml(HELP::SAVED_DIAGRAMS);?></li>
+    <li><?= $help->getHelpLinkHtml(HELP::PEOPLE_TO_INCLUDE);?></li>
+    <li><?= $help->getHelpLinkHtml(HELP::APPEARANCE);?></li>
+    <li><?= $help->getHelpLinkHtml(HELP::GENERAL_SETTINGS);?></li>
+</ul>

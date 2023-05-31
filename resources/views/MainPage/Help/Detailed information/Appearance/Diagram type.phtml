@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * This is part of the help sidebar content
+ *
+ * @var GVExport $module   The instance of this module from webtrees
+ */
+
+use Fisharebest\Webtrees\I18N;
+use vendor\WebtreesModules\gvexport\GVExport;
+use vendor\WebtreesModules\gvexport\Help;
+
+$page_name = Help::DIAGRAM_TYPE;
+?>
+
+<?= view($module->name() . '::MainPage/Help/HelpHeader',['name' => $page_name]); ?>
+
+<p>
+    <?= I18N::translate('The options here are:<ul><li>Separated - Individuals each have their own tile, connected by arrows. Family records are separate and also connected by arrows.</li><li>Combined - Each couple is one box instead of one per person. Marriage records are connected under the couple. There are no family records if there are no marriage details to show.</li></ul></p><p>There was previously a third option &quot;Simple&quot;, but this has been removed. The advanced settings in the appearance section now contain all the settings needed to recreate this. Loading a simple diagram should set the appropriate settings to recreate the same look.'); ?>
+</p>

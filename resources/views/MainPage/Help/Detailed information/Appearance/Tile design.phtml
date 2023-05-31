@@ -1,0 +1,87 @@
+<?php
+
+/**
+ * This is part of the help sidebar content
+ *
+ * @var GVExport $module   The instance of this module from webtrees
+ */
+
+use Fisharebest\Webtrees\I18N;
+use vendor\WebtreesModules\gvexport\GVExport;
+use vendor\WebtreesModules\gvexport\Help;
+
+$page_name = Help::TILE_DESIGN;
+?>
+
+<?= view($module->name() . '::MainPage/Help/HelpHeader',['name' => $page_name]); ?>
+
+<p><?= Help::translateClean('This section allows for some changes to the design of tiles, including the shape, photos, colours, and fonts.'); ?></p>
+<h4><?= Help::translateClean('Shape'); ?> </h4>
+<h5><?= Help::translateClean('Individual tile shape'); ?></h5>
+<p><?= Help::translateClean('This option lets you choose the shape for tiles for individuals. There are two options:'); ?></p>
+<ul>
+    <li><?= Help::translateClean('Rectangle'); ?> - <?= Help::translateClean('The default option, the tile is a rectangle shape.'); ?></li>
+    <li><?= Help::translateClean('Rounded rectangle'); ?> - <?= Help::translateClean('The tile has rounded corners'); ?></li>
+    <li><?= Help::translateClean('Based on individual&apos;s sex'); ?> - <?= Help::translateClean('This lets you assign a shape based on the sex of individuals. For example, you can set male individuals to have rectangle tiles and female individuals to have rounded rectangle tiles.'); ?></li>
+</ul>
+<h4><?= Help::translateClean('Photos'); ?></h4>
+<h5><?= Help::translateClean('Show photos'); ?></h5>
+<p><?= Help::translateClean('This option lets you enable or disable showing photos on the tiles of individuals. If enabled, there are further options as follows:'); ?></p>
+<h5><?= Help::translateClean('Photo shape'); ?></h5>
+<p><?= Help::translateClean('This option lets you choose the shape of photos. Note that if you have Graphviz installed on the server, using these options will disable generating the diagram on the server, which may prevent large diagrams from being created.'); ?></p>
+<h5><?= Help::translateClean('Photo size'); ?></h5>
+<p><?= Help::translateClean('This option lets you change the size of photos as they are displayed, which is done as a percentage of the default size. 100&percnt; is the default size, 50&percnt; is half sized and 200&percnt; is double sized.'); ?></p>
+<h5><?= Help::translateClean('Photo resolution'); ?></h5>
+<p><?= Help::translateClean('This option lets you change the resolution of photos, which is done by adjusting the width as a percentage of the default width. 100&percnt; is the default resolution, 50&percnt; is half the pixels wide and 200&percnt; is double the pixels wide. Because the aspect ratio is maintained, doubling the resolution will increase the size of the file to around 4 times larger (depending on the exact shape of the photo).'); ?></p>
+<h4><?= Help::translateClean('Colours'); ?></h4>
+<h5><?= Help::translateClean('Individual background colour'); ?></h5>
+<ul>
+    <li><?= Help::translateClean('Custom'); ?> - <?= Help::translateClean('The background will be set to the chosen colour.'); ?></li>
+    <li><?= Help::translateClean('Based on individual&apos;s sex'); ?> - <?= Help::translateClean('The background will be coloured based on the sex of the individual.'); ?></li>
+    <li><?= Help::translateClean('Based on vital status'); ?> - <?= Help::translateClean('The background will be coloured based on whether the individual is living or deceased.'); ?></li>
+    <li><?= Help::translateClean('Based on age'); ?> - <?= Help::translateClean('The background will be coloured using a scale between two chosen colours, based on the age of the individual.'); ?></li>
+</ul>
+<h5><?= Help::translateClean('Individual stripe colour'); ?></h5>
+<p><?= Help::translateClean('This option lets you set the colour of the stripe across the top of an individual&apos;s tile. The options are:'); ?></p>
+<ul>
+    <li><?= Help::translateClean('No stripe'); ?> - <?= Help::translateClean('No stripe is shown.'); ?></li>
+    <li><?= Help::translateClean('Based on individual&apos;s sex'); ?> - <?= Help::translateClean('The stripe will be coloured based on the sex of the individual.'); ?></li>
+    <li><?= Help::translateClean('Based on vital status'); ?> - <?= Help::translateClean('The stripe will be coloured based on whether the individual is living or deceased.'); ?></li>
+    <li><?= Help::translateClean('Based on age'); ?> - <?= Help::translateClean('The stripe will be coloured using a scale between two chosen colours, based on the age of the individual.'); ?></li>
+</ul>
+<h5><?= Help::translateClean('Individual border colour'); ?></h5>
+<p><?= Help::translateClean('This option lets you set the border colour of an individual&apos;s tile. The options are:'); ?></p>
+<ul>
+    <li><?= Help::translateClean('Custom'); ?> - <?= Help::translateClean('The border will be set to the chosen colour.'); ?></li>
+    <li><?= Help::translateClean('Based on individual&apos;s sex'); ?> - <?= Help::translateClean('The border will be coloured based on the sex of the individual.'); ?></li>
+    <li><?= Help::translateClean('Same as family border'); ?> - <?= Help::translateClean('The family border colour will be used for the border of individuals.'); ?></li>
+    <li><?= Help::translateClean('Based on vital status'); ?> - <?= Help::translateClean('The border will be coloured based on whether the individual is living or deceased.'); ?></li>
+    <li><?= Help::translateClean('Based on age'); ?> - <?= Help::translateClean('The border will be coloured using a scale between two chosen colours, based on the age of the individual.'); ?></li>
+</ul>
+<h5><?= Help::translateClean('Male individuals'); ?></h5>
+<p><?= Help::translateClean('Set the colour for Male individuals, used in above settings for background, stripe, border if selected.'); ?></p>
+<h5><?= Help::translateClean('Female individuals'); ?></h5>
+<p><?= Help::translateClean('Set the colour for Female individuals, used in above settings for background, stripe, border if selected.'); ?></p>
+<h5><?= Help::translateClean('Other gender individuals'); ?></h5>
+<p><?= Help::translateClean('Set the colour for Other gender individuals, used in above settings for background, stripe, border if selected.'); ?></p>
+<h5><?= Help::translateClean('Unknown gender individuals'); ?></h5>
+<p><?= Help::translateClean('Set the colour for Unknown gender individuals, used in above settings for background, stripe, border if selected.'); ?></p>
+<h5><?= Help::translateClean('Non-blood related individuals'); ?></h5>
+<p><?= Help::translateClean('There are four options here for non-blood related individuals, if the &quot;Mark not blood-related people with different colour&quot; option is enabled in the &quot;People to be included&quot; section.'); ?></p>
+<h5><?= Help::translateClean('Show starting individuals in different colour'); ?></h5>
+<p><?= Help::translateClean('Whether starting individuals should be highlighted on the diagram. If enabled, you can choose a background colour to highlight the individual with, and can choose to enable this only for some starting individuals.'); ?></p>
+<h5><?= Help::translateClean('Family background'); ?></h5>
+<p><?= Help::translateClean('The background colour of family records.'); ?></p>
+<h5><?= Help::translateClean('Family border colour'); ?></h5>
+<p><?= Help::translateClean('The border colour of family records.'); ?></p>
+<h4><?= Help::translateClean('Font'); ?></h4>
+<h5><?= Help::translateClean('Typeface'); ?></h5>
+<p><?= Help::translateClean('This list lets you pick from a number of known web-safe font typefaces. They must be installed on the system or a fallback typeface will be used. These options are known to be installed on almost all desktop systems and that is why they have been chosen. Mobile browsers will likely use a fallback font.'); ?></p>
+<h5><?= Help::translateClean('Font size for names'); ?></h5>
+<p><?= Help::translateClean('Set the font point size for the names of individuals.'); ?></p>
+<h5><?= Help::translateClean('Font size for details'); ?></h5>
+<p><?= Help::translateClean('This changes the font point size for all text except for names. For example, the date and place of marriage, and the date and place of birth and death.'); ?></p>
+<h5><?= Help::translateClean('Font colour for names'); ?></h5>
+<p><?= Help::translateClean('This changes the colour of the font for names. Note that the colour picker is provided by your browser, and is handled differently depending on which browser you are using.'); ?></p>
+<h5><?= Help::translateClean('Font colour for details'); ?></h5>
+<p><?= Help::translateClean('This changes the colour of the font of all text except for names, for example, the date and place of marriage, and the date and place of birth and death. Note that the colour picker is provided by your browser, and is handled differently depending on which browser you are using.'); ?></p>

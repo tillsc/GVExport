@@ -12,350 +12,11 @@ const REQUEST_TYPE_REVOKE_SAVED_SETTINGS_LINK = "revoke_saved_settings_link";
 const REQUEST_TYPE_LOAD_SETTINGS_TOKEN = "load_settings_token";
 const REQUEST_TYPE_ADD_MY_FAVORITE = "add_my_favorite";
 const REQUEST_TYPE_ADD_TREE_FAVORITE = "add_tree_favorite";
+const REQUEST_TYPE_GET_HELP = "get_help";
 let treeName = null;
 let loggedIn = null;
 let xrefList = [];
 let messageHistory = [];
-
-function hideSidebar() {
-    document.querySelector(".sidebar").hidden = true;
-    document.querySelector(".sidebar__toggler").hidden = false;
-    }
-
-function showSidebar() {
-    document.querySelector(".sidebar__toggler").hidden = true;
-    document.querySelector(".sidebar").hidden = false;
-}
-
-// Add or remove the % sign from the text input
-function togglePercent(element, add) {
-    // Clicked out of input field, add % sign
-    let startval;
-    if (add) {
-        // Keep just numbers
-        let boxVal = element.value.replace(/\D/g, "");
-        // If result is blank, set to default
-        if (boxVal === "") {
-            boxVal = "100";
-        }
-        element.value =  boxVal + "%";
-    } else {
-        // Clicked in input box, remove % and select text,
-        // but only select text the first time, let user move cursor if they want
-        startval = element.value;
-        element.value = element.value.replace("%", "");
-        if (startval !== element.value) {
-            element.select();
-        }
-    }
-}
-
-// Update provided element with provided value when element blank
-function defaultValueWhenBlank(element, value) {
-    if (element.value === "") {
-        element.value = value;
-    }
-}
-
-function checkIndiBlank() {
-    let el = document.getElementsByClassName("item");
-    let list = document.getElementById('xref_list');
-    return el.length === 0 && list.value.toString().length === 0;
-}
-
-// This function ensures that if certain options are checked in regard to which relations to include,
-// then other required options are selected. e.g. if "Anyone" is selected, all other options must
-// all be selected
-function updateRelationOption(field) {
-    // If user clicked "All relatives"
-    if (field === "include_all_relatives") {
-        // If function triggered by checking "All relatives" field, ensure "Siblings" is checked
-        if (document.getElementById("include_all_relatives").checked) {
-            document.getElementById("include_siblings").checked = true;
-        }
-        // If "All relatives" unchecked, uncheck "Anyone"
-        if (!document.getElementById("include_all_relatives").checked) {
-            document.getElementById("include_all").checked = false;
-        }
-    }
-    // If user clicked "Siblings"
-    if (field === "include_siblings") {
-        // If function triggered by unchecking "Siblings" field, ensure "All relatives" is unchecked
-        if (!document.getElementById("include_siblings").checked) {
-            document.getElementById("include_all_relatives").checked = false;
-        }
-        // If "Siblings" unchecked, uncheck "Anyone"
-        if (!document.getElementById("include_siblings").checked) {
-            document.getElementById("include_all").checked = false;
-        }
-    }
-    // If user clicked "Spouses"
-    if (field === "include_spouses") {
-        // If function triggered by checking "All relatives" field, ensure "Siblings" is checked
-        if (!document.getElementById("include_siblings").checked) {
-            document.getElementById("include_all_relatives").checked = false;
-        }
-        // If "Spouses" unchecked, uncheck "Anyone"
-        if (!document.getElementById("include_spouses").checked) {
-            document.getElementById("include_all").checked = false;
-        }
-    }
-    // If function triggered by checking "All relatives" field, ensure everything else is checked
-    if (field === "include_all") {
-        if (document.getElementById("include_all").checked) {
-            document.getElementById("include_all_relatives").checked = true;
-            document.getElementById("include_siblings").checked = true;
-            document.getElementById("include_spouses").checked = true;
-
-        }
-    }
-
-}
-
-
-
-
-// Gets position of element relative to another
-// From https://stackoverflow.com/questions/1769584/get-position-of-element-by-javascript
-function getPos(el, rel)
-{
-    let x = 0, y = 0;
-
-    do {
-        x += el.offsetLeft;
-        y += el.offsetTop;
-        el = el.offsetParent;
-    }
-    while (el !== rel)
-    return {x:x, y:y};
-}
-
-
-// Toggle items based on if the items in the cart should be used or not
-// enable - if set to true, use cart. Update form to disable options. Set to "false" to reverse.
-function toggleCart(enable) {
-    const el = document.getElementsByClassName("cart_toggle");
-    for (let i = 0; i < el.length; i++) {
-        el.item(i).disabled = enable;
-    }
-    showHideClass("cart_toggle_hide", !enable);
-    showHideClass("cart_toggle_show", enable);
-}
-
-// This function is used in toggleCart to show or hide all elements with a certain class,
-// by adding or removing "display: none"
-// css_class - the class to search for
-// show - true to show the elements and false to hide them
-function showHideClass(css_class, show) {
-    let el = document.getElementsByClassName(css_class);
-    for (let i = 0; i < el.length; i++) {
-        showHide(el.item(i), show)
-    }
-}
-
-// Show or hide an element on the page
-// element - the element to affect
-// show - whether to show (true) or hide (false) the element
-function showHide(element, show) {
-    if (show) {
-        element.style.removeProperty("display");
-    } else {
-        element.style.display = "none";
-    }
-}
-
-// Show a toast message
-// message - the message to show
-function showToast(message) {
-    const toastParent = document.getElementById("toast-container");
-    if (toastParent !== null) {
-        const toast = document.createElement("div");
-        toast.setAttribute("id", "toast");
-        toast.setAttribute("class", "pointer");
-        if (message.substring(0, ERROR_CHAR.length) === ERROR_CHAR) {
-            toast.className += "error";
-            message = message.substring(ERROR_CHAR.length);
-        }
-        toast.innerText = message;
-        let msg = [];
-        msg[0] = new Date();
-        msg[1] = message;
-        messageHistory.push(msg);
-        setTimeout(function () {
-            toast.remove();
-        }, 5500);
-        toastParent.appendChild(toast);
-        toast.setAttribute("style", " margin-left: -"+toast.clientWidth/2 + "px; width:" + toast.clientWidth + "px");
-        toast.setAttribute("onclick", "return showHelp('message_history');");
-        toast.className += " show";
-    }
-}
-
-// Download SVG file
-function downloadSVGAsText() {
-    const svg = document.getElementById('rendering').getElementsByTagName('svg')[0].cloneNode(true);
-    svg.removeAttribute("style");
-    let svgData = svg.outerHTML.replace(/&nbsp;/g, '');
-    // Replace image URLs with embedded data  for SVG also triggers download
-    replaceImageURLs(svgData, "svg", null);
-}
-
-function downloadSVGAsPDF() {
-    downloadSVGAsImage("pdf");
-}
-
-function downloadSVGAsPNG() {
-    downloadSVGAsImage("png");
-}
-
-function downloadSVGAsJPEG() {
-    downloadSVGAsImage("jpeg");
-}
-
-// Download PNG from SVG file
-function downloadSVGAsImage(type) {
-    const svg = document.getElementById('rendering').getElementsByTagName('svg')[0].cloneNode(true);
-    // Style attribute used for the draggable browser view, remove this to reset to standard SVG
-    svg.removeAttribute("style");
-
-    const canvas = document.createElement("canvas");
-    const img = document.createElement("img");
-    // get svg data and remove line breaks
-    let xml = new XMLSerializer().serializeToString(svg);
-    // Fix the + symbol (any # breaks everything)
-    xml = xml.replace(/&#45;/g,"+");
-    // Replace # colours with rgb equivalent
-    // From https://stackoverflow.com/questions/13875974/search-and-replace-hexadecimal-color-codes-with-rgb-values-in-a-string
-    const rgbHex = /#([0-9A-F][0-9A-F])([0-9A-F][0-9A-F])([0-9A-F][0-9A-F])/gi;
-    xml = xml.replace(rgbHex, function (m, r, g, b) {
-        return 'rgb(' + parseInt(r,16) + ','
-            + parseInt(g,16) + ','
-            + parseInt(b,16) + ')';
-    });
-    // Replace image URLs with embedded images
-    replaceImageURLs(xml, type, img);
-    // Once image loaded, draw to canvas then download it
-    img.onload = function() {
-        canvas.setAttribute('width', img.width.toString());
-        canvas.setAttribute('height', img.height.toString());
-        // draw the image onto the canvas
-        let context = canvas.getContext('2d');
-        context.drawImage(img, 0, 0, img.width, img.height);
-        // Download it
-        const dataURL = canvas.toDataURL('image/'+type);
-        if (dataURL.length < 10) {
-            showToast(ERROR_CHAR+TRANSLATE['Your browser does not support exporting images this large. Please reduce number of records, reduce DPI setting, or use SVG option.']);
-        } else if (type === "pdf") {
-            createPdfFromImage(dataURL, img.width, img.height);
-        } else {
-            downloadLink(dataURL, download_file_name + "." + type);
-        }
-    }
-
-}
-
-// Convert image URL to base64 data - we use for embedding images in SVG
-// From https://stackoverflow.com/questions/22172604/convert-image-from-url-to-base64
-function getBase64Image(img) {
-    const canvas = document.createElement("canvas");
-    canvas.width = img.width;
-    canvas.height = img.height;
-    const ctx = canvas.getContext("2d");
-    ctx.drawImage(img, 0, 0);
-    return canvas.toDataURL("image/png");
-}
-
-// Find image URLs and replace with embedded versions
-function replaceImageURLs(svg, type, img) {
-    let startPos, len, url;
-    let match = /<image.*xlink:href="http/.exec(svg);
-    if (match != null) {
-        startPos = match.index+match[0].length-4;
-        len = svg.substring(startPos).indexOf("\"");
-        url = svg.substring(startPos,startPos+len);
-        const img2 = document.createElement("img");
-        img2.onload = function() {
-            let base64 = getBase64Image(img2);
-            svg = svg.replace(url,base64);
-            replaceImageURLs(svg, type, img);
-            img2.remove();
-        }
-        img2.src = url.replace(/&amp;/g,"&");
-    } else {
-        if (type === "svg") {
-            const svgBlob = new Blob([svg], {type: "image/svg+xml;charset=utf-8"});
-            const svgUrl = URL.createObjectURL(svgBlob);
-            downloadLink(svgUrl, download_file_name + "."+type);
-        } else {
-            img.src = "data:image/svg+xml;utf8," + svg;
-        }
-    }
-}
-
-// Trigger a download via javascript
-function downloadLink(URL, filename) {
-    const downloadLink = document.createElement("a");
-    downloadLink.href = URL;
-    downloadLink.download = filename;
-    document.body.appendChild(downloadLink);
-    // If running test suite, don't actually trigger download of data
-    // We have generated it so know it works
-    if (!window.Cypress) {
-        downloadLink.click();
-    }
-    document.body.removeChild(downloadLink);
-}
-
-// Toggle the showing of an advanced settings section
-// button - the button element calling the script
-// id - the id of the element we are toggling
-// visible - whether to make element visible or hidden. Null to toggle current state.
-function toggleAdvanced(button, id, visible = null) {
-    const el = document.getElementById(id);
-    // If toggling, set to the opposite of current state
-    if (visible === null) {
-        visible = el.style.display === "none";
-    }
-    showHide(el, visible);
-    if (visible) {
-        button.innerHTML = button.innerHTML.replaceAll('↓','↑');
-        const hidden = document.getElementById(id+"-hidden");
-        hidden.value = "show";
-    } else {
-        button.innerHTML = button.innerHTML.replaceAll('↑','↓');
-        // Update our hidden field for saving the state
-        const hidden = document.getElementById(id+"-hidden");
-        hidden.value = "";
-    }
-}
-
-function showHideMatchCheckbox(checkboxId, elementId) {
-    showHide(document.getElementById(elementId), document.getElementById(checkboxId).checked);
-}
-function showHideMatchDropdown(dropdownId, elementId, value) {
-    let values = value.split("|");
-    let show = false;
-    let elValue = document.getElementById(dropdownId).value;
-    values.forEach((value) => {
-        if (value === elValue) {
-            show = true;
-        }
-    });
-    showHide(document.getElementById(elementId),  show);
-}
-function showHideSubgroup(elementId, callingEl) {
-    let callerText = callingEl.innerText;
-    let visible = callerText.includes('↓');
-    showHide(document.getElementById(elementId), !visible);
-    if (visible) {
-        callingEl.innerText = callerText.replace('↓', '→');
-    } else {
-        callingEl.innerText = callerText.replace('→', '↓');
-    }
-
-}
-
-
 
 function loadURLXref(Url) {
     const xref = Url.getURLParameter("xref");
@@ -372,9 +33,9 @@ function loadURLXref(Url) {
                 let startValue = el.value;
                 addIndiToList(xref);
                 if (url_xref_treatment === 'default' && xrefs.length === 1 ) {
-                    setTimeout(function () {showToast(TRANSLATE['Source individual has replaced existing individual'].replace('%s', xrefs.length.toString()))}, 100);
+                    setTimeout(function () {UI.showToast(TRANSLATE['Source individual has replaced existing individual'].replace('%s', xrefs.length.toString()))}, 100);
                 } else if (startValue !== el.value && (url_xref_treatment === 'default' || url_xref_treatment === 'add')) {
-                    setTimeout(function () {showToast(TRANSLATE['One new source individual added to %s existing individuals'].replace('%s', xrefs.length.toString()))}, 100);
+                    setTimeout(function () {UI.showToast(TRANSLATE['One new source individual added to %s existing individuals'].replace('%s', xrefs.length.toString()))}, 100);
                 }
             }
         }
@@ -417,7 +78,7 @@ function loadXrefList(url, xrefListId, indiListId) {
         updateClearAll();
         toggleHighlightStartPersons(document.getElementById('highlight_start_indis').checked);
     }).catch(function(error) {
-        showToast("Error");
+        UI.showToast("Error");
         console.log(error);
     });
 }
@@ -520,7 +181,7 @@ function toggleUpdateButton() {
     const autoSettingBox = document.getElementById('auto_update');
 
     const visible = autoSettingBox.checked;
-    showHide(updateBtn, !visible);
+    Form.showHide(updateBtn, !visible);
     autoUpdate = visible;
     if (autoUpdate) updateRender();
 }
@@ -617,9 +278,9 @@ function updateClearAllElements(clearElementId, listItemElementId) {
     let listItemElement = document.getElementById(listItemElementId);
     let listItems = listItemElement.getElementsByClassName('indi_list_item');
     if (listItems.length > 1) {
-        showHide(clearElement, true);
+        Form.showHide(clearElement, true);
     } else {
-        showHide(clearElement, false);
+        Form.showHide(clearElement, false);
     }
 }
 
@@ -672,11 +333,11 @@ function handleFullscreenExit()
 {
     if (!document.webkitIsFullScreen && !document.mozFullScreen && !document.msFullscreenElement)
     {
-        showHide(document.getElementById("fullscreenButton"), true);
-        showHide(document.getElementById("fullscreenClose"), false);
+        Form.showHide(document.getElementById("fullscreenButton"), true);
+        Form.showHide(document.getElementById("fullscreenClose"), false);
     } else {
-        showHide(document.getElementById("fullscreenButton"), false);
-        showHide(document.getElementById("fullscreenClose"), true);
+        Form.showHide(document.getElementById("fullscreenButton"), false);
+        Form.showHide(document.getElementById("fullscreenClose"), true);
     }
 }
 
@@ -801,7 +462,7 @@ function removeSettingsEllipsisMenu(menuElement) {
 }
 
 function showGraphvizUnsupportedMessage() {
-    if (graphvizAvailable && document.getElementById('photo_shape').value !== '0') showToast(TRANSLATE["Diagram will be rendered in browser as server doesn't support photo shapes"]);
+    if (graphvizAvailable && document.getElementById('photo_shape').value !== '0') UI.showToast(TRANSLATE["Diagram will be rendered in browser as server doesn't support photo shapes"]);
 }
 
 // This function is run when the page is loaded
@@ -827,9 +488,10 @@ function pageLoaded(Url) {
 
     // Load browser render when page has loaded
     if (autoUpdate) updateRender();
-    // Handle sidebar
-    document.querySelector(".hide-form").addEventListener("click", hideSidebar);
-    document.querySelector(".sidebar__toggler a").addEventListener("click", showSidebar);
+    // Handle sidebars
+    document.querySelector(".hide-form").addEventListener("click", UI.hideSidebar);
+    document.querySelector(".sidebar_toggle a").addEventListener("click", UI.showSidebar);
+    UI.helpPanel.init();
 
     // Form change events
     const form = document.getElementById('gvexport');
@@ -849,22 +511,23 @@ function pageLoaded(Url) {
         if (element !== null) {
             loadSettings(element.getAttribute('data-settings'));
         } else if (e.target.value !== '-') {
-            showToast(ERROR_CHAR + 'Settings not found')
+            UI.showToast(ERROR_CHAR + 'Settings not found')
         }
     })
     document.addEventListener("keydown", function(e) {
         if (e.key === "Esc" || e.key === "Escape") {
-            document.querySelector(".sidebar").hidden ? showSidebar(e) : hideSidebar(e);
+            document.querySelector(".sidebar").hidden ? UI.showSidebar(e) : UI.hideSidebar(e);
+            UI.helpPanel.hideHelpSidebar(e);
         }
     });
     document.addEventListener("click", function(event) {
         removeSettingsEllipsisMenu(event.target);
         if (!document.getElementById('searchButton').contains(event.target) && !document.getElementById('diagram_search_box_container').contains(event.target)) {
-            showHideSearchBox(event, false);
+            Form.showHideSearchBox(event, false);
         }
     });
     document.querySelector("#diagram_search_box_container").addEventListener('change', diagramSearchBoxChange);
-    document.querySelector('#searchButton').addEventListener('click', showHideSearchBox);
+    document.querySelector('#searchButton').addEventListener('click', Form.showHideSearchBox);
     document.querySelector('#photo_shape').addEventListener('change', showGraphvizUnsupportedMessage);
 }
 
@@ -917,12 +580,12 @@ function downloadSettingsFileMenuAction(event) {
     try {
         settings = JSON.parse(settings_json_string);
     } catch (e) {
-        showToast("Failed to load settings: " + e);
+        UI.showToast("Failed to load settings: " + e);
         return false;
     }
     let file = new Blob([settings_json_string], {type: "text/plain"});
     let url = URL.createObjectURL(file);
-    downloadLink(url, TREE_NAME + " - " + settings['save_settings_name'] + ".json")
+    Form.downloadLink(url, TREE_NAME + " - " + settings['save_settings_name'] + ".json")
 }
 
 /**
@@ -937,7 +600,7 @@ function uploadSettingsFile(input) {
     reader.onload = (e) => {
         loadSettings(e.target.result);
     };
-    reader.onerror = (e) => showToast(e.target.error.name);
+    reader.onerror = (e) => UI.showToast(e.target.error.name);
     reader.readAsText(file);
 }
 
@@ -953,7 +616,7 @@ function loadSettings(data) {
     try {
         settings = JSON.parse(data);
     } catch (e) {
-        showToast("Failed to load settings: " + e);
+        UI.showToast("Failed to load settings: " + e);
         return false;
     }
     Object.keys(settings).forEach(function(key){
@@ -984,13 +647,13 @@ function loadSettings(data) {
                     setCheckStatus(document.getElementById('md_type_gedcom'), !toBool(settings[key]));
                     break;
                 case 'show_adv_people':
-                    toggleAdvanced(document.getElementById('people-advanced-button'), 'people-advanced', toBool(settings[key]));
+                    Form.toggleAdvanced(document.getElementById('people-advanced-button'), 'people-advanced', toBool(settings[key]));
                     break;
                 case 'show_adv_appear':
-                    toggleAdvanced(document.getElementById('appearance-advanced-button'), 'appearance-advanced', toBool(settings[key]));
+                    Form.toggleAdvanced(document.getElementById('appearance-advanced-button'), 'appearance-advanced', toBool(settings[key]));
                     break;
                 case 'show_adv_files':
-                    toggleAdvanced(document.getElementById('files-advanced-button'), 'files-advanced', toBool(settings[key]));
+                    Form.toggleAdvanced(document.getElementById('files-advanced-button'), 'files-advanced', toBool(settings[key]));
                     break;
                 // If option to use cart is not showing, don't load, but also don't show error
                 case 'use_cart':
@@ -1001,7 +664,7 @@ function loadSettings(data) {
                 case 'token':
                     break;
                 default:
-                    showToast(ERROR_CHAR + TRANSLATE['Unable to load setting'] + " " + key);
+                    UI.showToast(ERROR_CHAR + TRANSLATE['Unable to load setting'] + " " + key);
             }
         } else {
             if (el.type === 'checkbox' || el.type === 'radio') {
@@ -1011,12 +674,12 @@ function loadSettings(data) {
             }
         }
     });
-    showHideMatchCheckbox('mark_not_related', 'mark_related_subgroup');
-    showHideMatchCheckbox('show_birthdate', 'birth_date_subgroup');
-    showHideMatchCheckbox('show_death_date', 'death_date_subgroup');
+    Form.showHideMatchCheckbox('mark_not_related', 'mark_related_subgroup');
+    Form.showHideMatchCheckbox('show_birthdate', 'birth_date_subgroup');
+    Form.showHideMatchCheckbox('show_death_date', 'death_date_subgroup');
     setSavedDiagramsPanel();
-    showHide(document.getElementById('arrow_group'),document.getElementById('colour_arrow_related').checked)
-    showHide(document.getElementById('startcol_option'),document.getElementById('highlight_start_indis').checked)
+    Form.showHide(document.getElementById('arrow_group'),document.getElementById('colour_arrow_related').checked)
+    Form.showHide(document.getElementById('startcol_option'),document.getElementById('highlight_start_indis').checked)
 
     if (autoUpdate) {
         updateRender();
@@ -1057,7 +720,7 @@ function getSettingsServer(id = ID_ALL_SETTINGS) {
                 return ERROR_CHAR + json.errorMessage;
             }
         } catch(e) {
-            showToast(ERROR_CHAR + e);
+            UI.showToast(ERROR_CHAR + e);
         }
         return false;
     });
@@ -1102,7 +765,7 @@ function getSettingsClient(id = ID_ALL_SETTINGS) {
             return Promise.reject(e);
         }
     }).catch((e) => {
-        showToast(ERROR_CHAR + e);
+        UI.showToast(ERROR_CHAR + e);
     });
 }
 
@@ -1116,7 +779,7 @@ function getSettings(id = ID_ALL_SETTINGS) {
             });
         }
     }).catch((error) => {
-        showToast(ERROR_CHAR + error);
+        UI.showToast(ERROR_CHAR + error);
     });
 }
 function sendRequest(json) {
@@ -1186,7 +849,7 @@ function loadSettingsDetails() {
             }
         });
     }).catch(
-        error => showToast(error)
+        error => UI.showToast(error)
     );
 }
 
@@ -1279,7 +942,7 @@ function saveSettingsAdvanced(userPrompted = false) {
         loadSettingsDetails();
         document.getElementById('save_settings_name').value = "";
     }).catch(
-        error => showToast(error)
+        error => UI.showToast(error)
     );
 
 }
@@ -1290,7 +953,7 @@ function deleteSettingsClient(id) {
             localStorage.removeItem("GVE_Settings_" + treeName + "_" + id);
             deleteIdLocal(id);
         } catch (e) {
-            showToast(e);
+            UI.showToast(e);
         }
     });
 }
@@ -1311,10 +974,10 @@ function deleteSettingsMenuAction(e) {
                     if (json.success) {
                         loadSettingsDetails();
                     } else {
-                        showToast(ERROR_CHAR + json.errorMessage);
+                        UI.showToast(ERROR_CHAR + json.errorMessage);
                     }
                 } catch (e) {
-                    showToast("Failed to load response: " + e);
+                    UI.showToast("Failed to load response: " + e);
                     return false;
                 }
             });
@@ -1331,10 +994,10 @@ function copySavedSettingsLinkMenuAction(e) {
     getSavedSettingsLink(id).then((url)=>{
         copyToClipboard(url)
             .then(() => {
-                showToast(TRANSLATE['Copied link to clipboard']);
+                UI.showToast(TRANSLATE['Copied link to clipboard']);
             })
             .catch(() => {
-                showToast(TRANSLATE['Failed to copy link to clipboard']);
+                UI.showToast(TRANSLATE['Failed to copy link to clipboard']);
                 showModal('<p>' + TRANSLATE['Failed to copy link to clipboard'] + '. ' + TRANSLATE['Copy manually below'] + ':</p><textarea style="width: 100%">' + json.url + "</textarea>")
             });
     })
@@ -1354,10 +1017,10 @@ function getSavedSettingsLink(id) {
                     if (json.success) {
                         return json.url;
                     } else {
-                        showToast(ERROR_CHAR + json.errorMessage);
+                        UI.showToast(ERROR_CHAR + json.errorMessage);
                     }
                 } catch (e) {
-                    showToast("Failed to load response: " + e);
+                    UI.showToast("Failed to load response: " + e);
                     return false;
                 }
             });
@@ -1380,12 +1043,12 @@ function revokeSavedSettingsLinkMenuAction(e) {
                 try {
                     let json = JSON.parse(response);
                     if (json.success) {
-                        showToast(TRANSLATE['Revoked access to shared link']);
+                        UI.showToast(TRANSLATE['Revoked access to shared link']);
                     } else {
-                        showToast(ERROR_CHAR + json.errorMessage);
+                        UI.showToast(ERROR_CHAR + json.errorMessage);
                     }
                 } catch (e) {
-                    showToast("Failed to load response: " + e);
+                    UI.showToast("Failed to load response: " + e);
                     return false;
                 }
             });
@@ -1406,12 +1069,12 @@ function addUrlToMyFavouritesMenuAction(e) {
                 try {
                     let json = JSON.parse(response);
                     if (json.success) {
-                        showToast(TRANSLATE['Added to My favourites']);
+                        UI.showToast(TRANSLATE['Added to My favourites']);
                     } else {
-                        showToast(ERROR_CHAR + json.errorMessage);
+                        UI.showToast(ERROR_CHAR + json.errorMessage);
                     }
                 } catch (e) {
-                    showToast("Failed to load response: " + e);
+                    UI.showToast("Failed to load response: " + e);
                     return false;
                 }
             });
@@ -1436,12 +1099,12 @@ function addUrlToTreeFavourites(e) {
                 try {
                     let json = JSON.parse(response);
                     if (json.success) {
-                        showToast(TRANSLATE['Added to Tree favourites']);
+                        UI.showToast(TRANSLATE['Added to Tree favourites']);
                     } else {
-                        showToast(ERROR_CHAR + json.errorMessage);
+                        UI.showToast(ERROR_CHAR + json.errorMessage);
                     }
                 } catch (e) {
-                    showToast("Failed to load response: " + e);
+                    UI.showToast("Failed to load response: " + e);
                     return false;
                 }
             });
@@ -1464,13 +1127,13 @@ function loadUrlToken(Url) {
                     let settingsString = JSON.stringify(json.settings);
                     loadSettings(settingsString);
                     if(json.settings['auto_update']) {
-                        hideSidebar();
+                        UI.hideSidebar();
                     }
                 } else {
-                    showToast(ERROR_CHAR + json.errorMessage);
+                    UI.showToast(ERROR_CHAR + json.errorMessage);
                 }
             } catch (e) {
-                showToast("Failed to load response: " + e);
+                UI.showToast("Failed to load response: " + e);
                 return false;
             }
         });
@@ -1575,7 +1238,7 @@ function deleteIdLocal(id) {
 function setSavedDiagramsPanel() {
     const checkbox = document.getElementById('show_diagram_panel');
     const el = document.getElementById('saved_diagrams_panel');
-    showHide(el, checkbox.checked);
+    Form.showHide(el, checkbox.checked);
 }
 
 // From https://stackoverflow.com/questions/51805395/navigator-clipboard-is-undefined
@@ -1672,7 +1335,7 @@ function toggleHighlightStartPersons(enable, adminPage) {
             }
         }
     }
-    showHide(document.getElementById('startcol_option'),enable);
+    Form.showHide(document.getElementById('startcol_option'),enable);
 }
 
 function setSvgImageClipPath(element, clipPath) {
@@ -1728,10 +1391,10 @@ function diagramSearchBoxChange(e) {
     // Skip the first trigger, only fire for the follow-up trigger when the XREF is set
     if (xref !== ""){
         if (!scrollToRecord(xref)) {
-            showToast(TRANSLATE['Individual not found']);
+            UI.showToast(TRANSLATE['Individual not found']);
         }
         clearIndiSelect('diagram_search_box');
-        showHideSearchBox(e, false);
+        Form.showHideSearchBox(e, false);
     }
 }
 
@@ -1747,25 +1410,6 @@ function createXrefListFromSvg() {
             if (!xrefs[j].includes("&gt;")) {
                 xrefList.push(xrefs[j]);
             }
-        }
-    }
-}
-
-//
-function showHideSearchBox(event, visible = null) {
-    const el = document.getElementById('diagram_search_box_container');
-    // If toggling, set to the opposite of current state
-    if (visible === null) {
-        visible = el.style.display === "none";
-    }
-    showHide(el, visible);
-    if (visible) {
-        // Remove blank section from search box
-        tidyTomSelect();
-        // Give search box focus
-        let dropdown = document.getElementById('diagram_search_box');
-        if (typeof dropdown.tomselect !== 'undefined') {
-            dropdown.tomselect.focus();
         }
     }
 }
@@ -1798,6 +1442,6 @@ function handleSimpleDiagram() {
     document.getElementById("font_colour_details").value = document.getElementById("font_colour_name").value;
     // Set "Individual background colour" to "Based on individual's sex", to match style in simple mode
     document.getElementById("bg_col_type").value = 210;
-    // Set diagram type to separated (refered to as decorated in code) as simple doesn't exist anymore
+    // Set diagram type to separated (referred to as decorated in code) as simple doesn't exist anymore
     document.getElementById("diagtype_decorated").checked = true;
 }

@@ -38,21 +38,21 @@ use vendor\WebtreesModules\gvexport\MainPage;
         <div><?= I18N::translate('Relation types to include') ?></div>
         <div class="col-auto mx-3">
             <div class="col-auto mx-3">
-                <input class="cart_toggle" type="checkbox" onclick="updateRelationOption('include_siblings')" name="vars[include_siblings]" id="include_siblings" value="sibl" <?= $vars["include_siblings"] ? 'checked' : '' ?>>
+                <input class="cart_toggle" type="checkbox" onclick="Form.updateRelationOption('include_siblings')" name="vars[include_siblings]" id="include_siblings" value="sibl" <?= $vars["include_siblings"] ? 'checked' : '' ?>>
                 <label for="include_siblings"><?= I18N::translate('Siblings') ?></label>
             </div>
             <div class="col-auto mx-3">
-                <input class="cart_toggle" onclick="updateRelationOption('include_all_relatives')" type="checkbox" name="vars[include_all_relatives]" id="include_all_relatives" value="rels" <?= $vars["include_all_relatives"] ? 'checked' : '' ?>>
+                <input class="cart_toggle" onclick="Form.updateRelationOption('include_all_relatives')" type="checkbox" name="vars[include_all_relatives]" id="include_all_relatives" value="rels" <?= $vars["include_all_relatives"] ? 'checked' : '' ?>>
                 <label for="include_all_relatives"><?= I18N::translate('All relatives') ?></label>
             </div>
         </div>
         <div class="col-auto mx-3">
             <div class="col-auto mx-3">
-                <input class="cart_toggle" type="checkbox" onclick="updateRelationOption('include_spouses')" name="vars[include_spouses]" id="include_spouses" value="spou" <?= $vars["include_spouses"] ? 'checked' : '' ?>>
+                <input class="cart_toggle" type="checkbox" onclick="Form.updateRelationOption('include_spouses')" name="vars[include_spouses]" id="include_spouses" value="spou" <?= $vars["include_spouses"] ? 'checked' : '' ?>>
                 <label for="include_spouses"><?= I18N::translate('Partners') ?></label>
             </div>
             <div class="col-auto mx-3">
-                <input class="cart_toggle" type="checkbox" onclick="updateRelationOption('include_all')" name="vars[include_all]" id="include_all" value="any" <?= $vars["include_all"] ? 'checked' : '' ?> <?= !$cart_empty ? "disabled" : ""; ?>>
+                <input class="cart_toggle" type="checkbox" onclick="Form.updateRelationOption('include_all')" name="vars[include_all]" id="include_all" value="any" <?= $vars["include_all"] ? 'checked' : '' ?> <?= !$cart_empty ? "disabled" : ""; ?>>
                 <label for="include_all"><?= I18N::translate('Anyone') ?></label>
             </div>
         </div>

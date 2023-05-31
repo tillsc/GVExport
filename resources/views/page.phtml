@@ -23,10 +23,6 @@ $settings = (new Settings())->getDefaultSettings();
 $usegraphviz = $vars['graphviz_bin'] != "";
 ?>
 
-<script src="<?= $module->assetUrl('javascript/viz.js'); ?>"></script>
-<script src="<?= $module->assetUrl('javascript/panzoom.min.js'); ?>"></script>
-<script src="<?= $module->assetUrl('javascript/gvexport.js'); ?>"></script>
-<?= $usegraphviz ? "" : "<script src=\"" . $module->assetUrl('javascript/jspdf.umd.min.js') . "\"></script>"; ?>
 <link href="<?= $module->assetUrl('css/gvexport.css'); ?>" rel="stylesheet">
 <?= view($module->name() . '::MainPage/Translations'); ?>
 <script type="text/javascript">
@@ -47,7 +43,7 @@ $usegraphviz = $vars['graphviz_bin'] != "";
 
 <form action="<?= $module->chartUrl($individual) ?>" method="post" class="wt-page-options sidebar d-print-none" id="gvexport">
     <div class="pull-right btn-hover">
-        <a class="hide-form btn btn-secondary pointer">X</a>
+        <a class="hide-form btn btn-secondary pointer"><i class="fa-solid fa-xmark"></i></a>
     </div>
 
     <div class="sidebar__formfields col">
@@ -127,7 +123,7 @@ $usegraphviz = $vars['graphviz_bin'] != "";
         <button type="submit" class="btn btn-primary update-browser-rendering" id="update-browser" <?php if ($vars["auto_update"]) { echo 'style="display: none"'; } ?>><?= I18N::translate('Update') ?></button>
         <button type="submit" class="btn btn-secondary main-action" name="download"><?= I18N::translate('Download') ?></button>
         <a href="<?= $module->chartUrl($individual, ['reset' => '1']) ?>" class="btn btn-outline-secondary"><?= I18N::translate('Reset') ?></a>
-        <button class="btn btn-outline-secondary" name="help" onclick="return showHelp('Help')"><?= I18N::translate('Help') ?></button>
+        <button id="help-about" class="btn btn-outline-secondary" name="help"><?= I18N::translate('Help') ?></button>
     </div>
 
     <input type="hidden" id="browser" name="browser" value="false">
@@ -137,16 +133,18 @@ $usegraphviz = $vars['graphviz_bin'] != "";
     <div id="toast-container"></div>
 </form>
 
-<div class="sidebar__toggler" hidden>
+<div class="sidebar_toggle" hidden>
     <a class="btn btn-outline-secondary pointer"><?= I18N::translate('Show options') ?></a>
 </div>
+
+<?= view($module->name() . '::MainPage/Help', []); ?>
 
 <div id="render-container">
     <div id="rendering" hidden style="background-color: <?= $vars["background_col"] ?>;"></div>
     <div id="render_button_container">
         <div>
             <a title="<?= I18N::translate('Fullscreen') ?>" onclick="toggleFullscreen()" class="fullscreen pointer" id="fullscreenButton">⛶</a>
-            <a title="<?= I18N::translate('Exit fullscreen') ?>" onclick="toggleFullscreen()" class="close-fullscreen pointer" id="fullscreenClose" style="display: none;">✖</a>
+            <a title="<?= I18N::translate('Exit fullscreen') ?>" onclick="toggleFullscreen()" class="close-fullscreen pointer" id="fullscreenClose" style="display: none;"><i class="fa-solid fa-xmark"></i></a>
         </div>
         <div>
             <a title="<?= I18N::translate('Search diagram') ?>" onclick="" class="search_icon pointer" id="searchButton"><?= view('icons/search'); ?></a>
@@ -154,7 +152,13 @@ $usegraphviz = $vars['graphviz_bin'] != "";
         </div>
     </div>
 </div>
-
+<script src="<?= $module->assetUrl('javascript/viz.js'); ?>"></script>
+<script src="<?= $module->assetUrl('javascript/panzoom.min.js'); ?>"></script>
+<script src="<?= $module->assetUrl('javascript/gvexport.js'); ?>"></script>
+<script src="<?= $module->assetUrl('javascript/MainPage/UI.js'); ?>"></script>
+<script src="<?= $module->assetUrl('javascript/MainPage/Form.js'); ?>"></script>
+<script src="<?= $module->assetUrl('javascript/MainPage/Data.js'); ?>"></script>
+<?= $usegraphviz ? "" : "<script src=\"" . $module->assetUrl('javascript/jspdf.umd.min.js') . "\"></script>"; ?>
 <script type="text/javascript">
     let graphvizAvailable = <?= $usegraphviz ? "true" : "false" ?>;
     let panzoomInst = null;
@@ -169,7 +173,7 @@ $usegraphviz = $vars['graphviz_bin'] != "";
 
     // Trigger action when "Update" button clicked
     document.querySelector('.update-browser-rendering').addEventListener('click', function(e) {
-        if (checkIndiBlank() === false) {
+        if (Form.checkIndiBlank() === false) {
             updateRender();
             refreshIndisFromXREFS(false);
             removeError("indi-error");
@@ -182,7 +186,7 @@ $usegraphviz = $vars['graphviz_bin'] != "";
     // If "Download" button clicked
     document.querySelector('.main-action').addEventListener('click', function(e) {
         // first check that individual has been selected
-        if (checkIndiBlank() === false) {
+        if (Form.checkIndiBlank() === false) {
             removeError("indi-error");
         } else {
             addError("indi-error","<?= I18N::translate('Individual required') ?>");
@@ -194,16 +198,16 @@ $usegraphviz = $vars['graphviz_bin'] != "";
             const output = document.getElementById('output_type').value;
             switch(output) {
                 case "png":
-                    downloadSVGAsPNG();
+                    Form.downloadSVGAsPNG();
                     break;
                 case "svg":
-                    downloadSVGAsText();
+                    Form.downloadSVGAsText();
                     break;
                 case "jpg":
-                    downloadSVGAsJPEG();
+                    Form.downloadSVGAsJPEG();
                     break;
                 case "pdf":
-                    downloadSVGAsPDF();
+                    Form.downloadSVGAsPDF();
                     break;
                 default:
             }
@@ -230,9 +234,9 @@ $usegraphviz = $vars['graphviz_bin'] != "";
         const data = jQuery(form).serialize();
         // Disable our fields again by indicating cart is enabled (only if items in cart)
         if (!cartempty && document.getElementById("usecart_yes").checked) {
-            toggleCart(true);
+            Form.toggleCart(true);
         }
-        showHideMatchCheckbox('mark_not_related', 'mark_related_subgroup');
+        Form.showHideMatchCheckbox('mark_not_related', 'mark_related_subgroup');
         document.getElementById("browser").value = "false";
         let lastDotStr, indiNum, famNum, messages;
 
@@ -278,10 +282,10 @@ $usegraphviz = $vars['graphviz_bin'] != "";
                 let errorpos = response.substring(0,1000).indexOf('Fatal error');
                 if (errorpos === -1) {
                     setTimeout(function(){location.reload();}, 3000);
-                    showToast(ERROR_CHAR + "<?= I18N::translate('Login expired. Reloading page...'); ?>");
+                    UI.showToast(ERROR_CHAR + "<?= I18N::translate('Login expired. Reloading page...'); ?>");
                 } else {
-                    showToast(ERROR_CHAR + e);
-                    showToast(ERROR_CHAR + response.substring(0,Math.min(1000, errorpos)));
+                    UI.showToast(ERROR_CHAR + e);
+                    UI.showToast(ERROR_CHAR + response.substring(0,Math.min(1000, errorpos)));
                 }
                 return false;
             }
@@ -320,7 +324,7 @@ $usegraphviz = $vars['graphviz_bin'] != "";
             });
             if (messages !== "") {
                 for (let i = 0; i < messages.length; i++) {
-                    showToast(messages[i]);
+                    UI.showToast(messages[i]);
                 }
             }
             // Scroll render to last starting individual
@@ -338,9 +342,9 @@ $usegraphviz = $vars['graphviz_bin'] != "";
         }).catch(function (error) {
             if (error.message.includes("TOTAL_MEMORY")) {
                 if (graphvizAvailable) {
-                    showToast(ERROR_CHAR + "<?= I18N::translate('Memory limit reached. Please reduce number of records or use download option.'); ?>");
+                    UI.showToast(ERROR_CHAR + "<?= I18N::translate('Memory limit reached. Please reduce number of records or use download option.'); ?>");
                 } else {
-                        showToast(ERROR_CHAR + "<?= I18N::translate('Memory limit reached. Please reduce number of records or install Graphviz on server and use download option.'); ?>");
+                        UI.showToast(ERROR_CHAR + "<?= I18N::translate('Memory limit reached. Please reduce number of records or install Graphviz on server and use download option.'); ?>");
                 }
                 rendering.innerHTML = "";
             } else {
@@ -367,7 +371,7 @@ $usegraphviz = $vars['graphviz_bin'] != "";
         er.innerText=message;
         let el = document.getElementsByClassName("sidebar__formfields");
         let form = document.getElementsByTagName("FORM");
-        let pos = getPos(er,form.item(1));
+        let pos = Form.getPos(er,form.item(1));
         el.item(0).scrollTo(0,pos["y"]-70);
     }
 
@@ -377,7 +381,6 @@ $usegraphviz = $vars['graphviz_bin'] != "";
         er.innerText="";
     }
 
-    <?php echo (new Help())->addHelpMessageJavaScript(); ?>
 </script>
 
 <script type="text/javascript">

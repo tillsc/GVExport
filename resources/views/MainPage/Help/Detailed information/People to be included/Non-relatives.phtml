@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * This is part of the help sidebar content
+ *
+ * @var GVExport $module   The instance of this module from webtrees
+ */
+
+use Fisharebest\Webtrees\I18N;
+use vendor\WebtreesModules\gvexport\GVExport;
+use vendor\WebtreesModules\gvexport\Help;
+
+$page_name = Help::NON_RELATIVES;
+?>
+
+<?= view($module->name() . '::MainPage/Help/HelpHeader',['name' => $page_name]); ?>
+
+<p>
+    <?= I18N::translate('This section has two related options.<h4>Mark not blood-related people with different color</h4><p>Where spouses are included and are not blood-related to anyone in the &quot;Include anyone related to&quot; field, if this option is selected they will be highlighted in a much duller color than the standard blue/pink for relatives.</p><p>Note that when this option is selected, and non-relatives are found in the selected records, then a full tree scan is performed to identify if an individual is related by a more distant link (see next option).</p><h4>Ignore unseen links to speed up relative check</h4><p>This option is only available when the previous option is selected. When the option to display non-relatives in a different colour is selected, normally a scan is performed starting from the starting individuals and branching to all relatives regardless of display settings. This ensures that if a person is related via a link not displayed, they will still show as related.</p><p>Enabling this option prevents the full scan of the tree which can greatly speed up the generation of the diagram on larger trees, but may reduce accuracy of the colouring of non-relatives.'); ?>
+</p>

@@ -1,0 +1,30 @@
+<?php
+
+/**
+ * This is part of the help sidebar content
+ *
+ * @var GVExport $module   The instance of this module from webtrees
+ */
+
+use Fisharebest\Webtrees\I18N;
+use vendor\WebtreesModules\gvexport\GVExport;
+use vendor\WebtreesModules\gvexport\Help;
+
+$name = Help::SAVED_DIAGRAMS;
+$help = new Help();
+?>
+
+<?= view($module->name() . '::MainPage/Help/HelpHeader',['name' => $name]); ?>
+
+<p>
+    <?= I18N::translate('This panel is only shown when the "Show saved diagrams" option is enabled in the "Save settings" section. It has just the following option:'); ?>
+</p>
+<ul>
+    <li><?= $help->getHelpLinkHtml(HELP::LIST_OF_DIAGRAMS);?></li>
+</ul>
+<p>
+    <?= I18N::translate('Related links'); ?>:
+</p>
+<ul>
+    <li><?= $help->getHelpLinkHtml(HELP::SAVE_SETTINGS);?></li>
+</ul>

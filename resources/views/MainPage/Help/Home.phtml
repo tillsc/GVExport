@@ -1,0 +1,28 @@
+<?php
+
+/**
+ * This is the help sidebar home content
+ */
+
+use Fisharebest\Webtrees\I18N;
+use vendor\WebtreesModules\gvexport\Help;
+$help = new Help();
+?>
+
+<h2 class="help-title"><?= I18N::translate('Help'); ?></h2>
+<p>
+    <?= I18N::translate('This help contains detailed information on the options available in GVExport. You can navigate by clicking the options below, searching using the magnifying glass icon above, or by clicking on a setting to show the information for that setting.'); ?>
+</p>
+<ul>
+<!--    <li>--><?php //= $help->getHelpLinkHtml(HELP::GETTING_STARTED);?><!--</li>-->
+    <li><?= $help->getHelpLinkHtml(HELP::ABOUT);?></li>
+    <li>
+        <?= $help->getHelpLinkHtml(HELP::DETAILED_INFORMATION);?>
+        <ul>
+            <li><?= $help->getHelpLinkHtml(HELP::SAVED_DIAGRAMS);?></li>
+            <li><?= $help->getHelpLinkHtml(HELP::PEOPLE_TO_INCLUDE);?></li>
+            <li><?= $help->getHelpLinkHtml(HELP::APPEARANCE);?></li>
+            <li><?= $help->getHelpLinkHtml(HELP::GENERAL_SETTINGS);?></li>
+        </ul>
+    </li>
+</ul>

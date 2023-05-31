@@ -16,7 +16,7 @@ use vendor\WebtreesModules\gvexport\Settings;
 $age_low_id = 'indi_' . $group . '_age_low';
 $age_high_id = 'indi_' . $group . '_age_high';
 ?>
-<?= view($module->name() . '::MainPage/Appearance/TileDesign/ColourPickerList',['vars' => $vars, 'admin' => $admin, 'id' => 'subgroup_background_age', 'select_id' => 'bg_col_type', 'option_id' => Settings::OPTION_BACKGROUND_AGE_COLOUR, 'picker_list' => ['indi_background_age_low_col' => 'Low age colour', 'indi_background_age_high_col' => 'High age colour', 'indi_background_age_unknown_col' => 'Unknown age colour']]); ?>
+<?= view($module->name() . '::MainPage/Appearance/TileDesign/ColourPickerList',['vars' => $vars, 'admin' => $admin, 'id' => 'subgroup_' . $group . '_age', 'select_id' => 'bg_col_type', 'option_id' => Settings::OPTION_BACKGROUND_AGE_COLOUR, 'picker_list' => [$age_low_id . '_col' => 'Low age colour', $age_high_id . '_col' => 'High age colour', 'indi_' . $group . '_age_unknown_col' => 'Unknown age colour']]); ?>
 
 <div class="align-middle-container">
     <label for="<?= $age_low_id; ?>" class="col-sm-6"><?= I18N::translate('Age for low colour') ?></label>

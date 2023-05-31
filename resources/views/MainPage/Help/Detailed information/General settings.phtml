@@ -1,0 +1,28 @@
+<?php
+
+/**
+ * This is part of the help sidebar content
+ *
+ * @var GVExport $module   The instance of this module from webtrees
+ */
+
+use Fisharebest\Webtrees\I18N;
+use vendor\WebtreesModules\gvexport\GVExport;
+use vendor\WebtreesModules\gvexport\Help;
+
+$name = Help::GENERAL_SETTINGS;
+$help = new Help();
+?>
+
+<?= view($module->name() . '::MainPage/Help/HelpHeader',['name' => $name]); ?>
+
+<p>
+    <?= I18N::translate('The "General settings" section has options that don&apos;t fit in the other sections. Within this section, there are several settings groups:'); ?>:
+</p>
+<ul>
+    <li><?= $help->getHelpLinkHtml(HELP::OUTPUT_FILE);?></li>
+    <li><?= $help->getHelpLinkHtml(HELP::BROWSER_RENDER);?></li>
+    <li><?= $help->getHelpLinkHtml(HELP::SAVE_SETTINGS);?></li>
+    <li><?= $help->getHelpLinkHtml(HELP::SETTINGS_FILE);?></li>
+    <li><?= $help->getHelpLinkHtml(HELP::MESSAGE_HISTORY);?></li>
+</ul>

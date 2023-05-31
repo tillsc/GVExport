@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * This is part of the help sidebar content
+ *
+ * @var GVExport $module   The instance of this module from webtrees
+ */
+
+use Fisharebest\Webtrees\I18N;
+use vendor\WebtreesModules\gvexport\GVExport;
+use vendor\WebtreesModules\gvexport\Help;
+
+$page_name = Help::OUTPUT_FILE;
+?>
+
+<?= view($module->name() . '::MainPage/Help/HelpHeader',['name' => $page_name]); ?>
+
+<p>
+    <?= I18N::translate('This section lets you choose the output file type when downloading the diagram. Some additional settings are available under some circumstances.<h4>Output file type</h4>The output file type you want. This is ignored when rendering in the browser, it is only used when you download a file. File types SVG, PNG, JPG, and PDF can be downloaded, in addition to the Graphviz DOT format.</p><p>There are some minor differences if you have Graphviz installed on the server:<ul><li>There are two more file types, GIF and PostScript (PS). Most people would not need these.</li><li>PDF and SVG files may be smaller and can include URLs</li><li>You may be able to include more records</li></ul><p>In addition, if you have Graphviz installed on the server there are additional quality settings that are available. The following settings are only available when Graphviz is installed on the server, and the output type is set to SVG or PDF:</p><h4>Quality of JPG photos</h4><p>This setting lets you change the quality of embedded JPG photos. This uses the quality setting that is part of the JPG standard. Reducing this can reduce the file size of the output, while increasing it may increase the quality. Also see the DPI setting to change the resolution of the diagram including photos.</p><h4>Convert photos to JPG where possible</h4><p>If enabled, GVExport will attempt to convert PNG, BMP, and GIF files to JPG and will apply the above quality setting.'); ?>
+</p>

@@ -29,4 +29,4 @@ use vendor\WebtreesModules\gvexport\GVExport;
             <?= view($module->name() . '::MainPage/GeneralSettings/MessageHistory', ['admin' => $admin]); ?>
         </div>
     </div>
-    <a id="files-advanced-button" onclick="toggleAdvanced(this, 'files-advanced')"><div class="wt-page-options-label advanced-settings-btn"><?= ($vars["show_adv_files"] ? '↑ ' : '↓ ') . I18N::translate('Toggle advanced settings') . ($vars["show_adv_files"] ? ' ↑' : ' ↓'); ?></div></a>
+    <a id="files-advanced-button" onclick="Form.toggleAdvanced(this, 'files-advanced')"><div class="wt-page-options-label advanced-settings-btn"><?= ($vars["show_adv_files"] ? '↑ ' : '↓ ') . I18N::translate('Toggle advanced settings') . ($vars["show_adv_files"] ? ' ↑' : ' ↓'); ?></div></a>
