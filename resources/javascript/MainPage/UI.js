@@ -135,13 +135,19 @@ const UI = {
                 return Data.getHelp(help).then(function (response) {
                     if (response) {
                         let contentEl = document.getElementById('help-content');
-                        contentEl.innerHTML = response;
+                        contentEl.innerHTML = UI.helpPanel.decodeHTML(response);
                         contentEl.scrollTop = 0;
                     }
                 });
             } else {
                 return Promise.resolve();
             }
+        },
+
+        decodeHTML(html) {
+            const textarea = document.createElement('textarea');
+            textarea.innerHTML = html;
+            return textarea.value;
         },
 
         /**
@@ -171,6 +177,8 @@ const UI = {
         }
         for (let i=0; i<elements.length; i++) {
             if (getComputedStyle(elements[i]).backgroundColor === baseColour) {
+                // If no background-color because background is used instead, then use this.
+                // Resolves issue where background-color is transparent because background gradient being used
                 if (replaceColour === 'rgba(0, 0, 0, 0)') {
                     let searchButton = document.querySelector('.wt-header-search-button');
                     if (searchButton !== null) {
