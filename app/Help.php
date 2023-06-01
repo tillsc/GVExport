@@ -115,9 +115,10 @@ class Help
      */
     static function translateClean($msg): string
     {
-        $no_apostrophe = str_replace("'","&apos;",$msg);
-        $no_percent = str_replace("&","&percnt;",$no_apostrophe);
+        $translation = I18N::translate($msg);
+        $no_apostrophe = str_replace("'","&apos;",$translation);
+        $no_percent = str_replace("&","&amp;",$no_apostrophe);
         $no_newline = str_replace(array("\r", "\n"), '', $no_percent);
-        return I18N::translate($no_newline);
+        return $no_newline;
     }
 }

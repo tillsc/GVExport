@@ -315,7 +315,7 @@ $usegraphviz = $vars['graphviz_bin'] != "";
             const fullZoom = Math.min(4, rendering.getBoundingClientRect().width / element.getBBox().width);
             panzoomInst = panzoom(element, {
                 maxZoom: 4,
-                minZoom: fullZoom / 4,
+                minZoom: fullZoom / 10,
                 initialZoom: fullZoom,
                 onTouch: function() {
                     // Fix links not working on mobile
