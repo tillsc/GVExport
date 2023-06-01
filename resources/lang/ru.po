@@ -1022,12 +1022,12 @@ msgstr "Пользовательский цвет фона"
 
 #. New option for setting the colour of the stripe on individual tiles:  https://s3.eu-west-1.amazonaws.com/po-pub/i/foB5NxsPsztrvQxIxo0R7HvG.png
 #: 
-msgid "Individual stripe color"
+msgid "Individual stripe colour"
 msgstr "Индивидуальный цвет полос"
 
 #. Option to set the border colour of individuals:  https://s3.eu-west-1.amazonaws.com/po-pub/i/U91BOGzE90DmKPN8uGvur5k9.png
 #: 
-msgid "Individual border color"
+msgid "Individual border colour"
 msgstr "Индивидуальный цвет границы"
 
 #. New name for existing option to set the border colour of tiles:  https://s3.eu-west-1.amazonaws.com/po-pub/i/JBcfI43E8P0ZCxLo51Bhpa8U.png
