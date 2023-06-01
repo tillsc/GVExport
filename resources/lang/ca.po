@@ -1001,7 +1001,7 @@ msgstr "Diagrama"
 
 #. Help text for diagram section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/JIUMIXeCh3Tj0SJ01nLxVMjm.png  https://s3.eu-west-1.amazonaws.com/po-pub/i/Q7S9ciYCqo9HL9J5sCMUpQhU.png
 #: 
-msgid "<h4>Diagram DPI</h4><p>For output such as JPG and PNG, the DPI setting will produce higher quality output when it is larger, but will also increase the file size. Smaller values will produce smaller files, but the quality will be worse and if the value is too low you may not be able to read text.</p><h4>Spacing</h4><p>These options affect the distance between nodes on the diagram.</p><h5>Between generations</h5><p>How close you want generations on the output. For example, for left to right output, smaller numbers will bring the columns of individuals closer together, while larger numbers would push them further apart.</p><h5>Between individuals on the same level</h5><p>How close you want the individuals of the same generation on the output. For example, for left to right output, smaller numbers will mean less space vertically between the boxes, while larger numbers would push them further apart.</p><h4>Diagram colours</h4><p>This section allows you to change colours associated with the diagram that are not directly related to the individual or family tiles. Click the coloured box to change the colour. This uses your browser&apos;s colour picker, so will look different depending on what browser you are using. <h5>Diagram background colour<h5><p>This is the colour of the area behind the family tree.</p><h5>Relationship arrow colour</h5><p>The colour of the arrows that show relationships between individuals and families.</p><h5>Show blood relationship in a different colour</h5><p>This shows blood relationships in a different colour than other relationships (e.g. adoption). Selecting this option will provide two colours that can be customised:<ul><li>Related by birth - the arrow colour to use for children related by birth</li><li>Related other than by birth - the arrow colour to use for children not related by birth</li></ul>"
+msgid "<h4>Diagram DPI</h4><p>For output such as JPG and PNG, the DPI setting will produce higher quality output when it is larger, but will also increase the file size. Smaller values will produce smaller files, but the quality will be worse and if the value is too low you may not be able to read text.</p><h4>Spacing</h4><p>These options affect the distance between nodes on the diagram.</p><h5>Between generations</h5><p>How close you want generations on the output. For example, for left to right output, smaller numbers will bring the columns of individuals closer together, while larger numbers would push them further apart.</p><h5>Between individuals on the same level</h5><p>How close you want the individuals of the same generation on the output. For example, for left to right output, smaller numbers will mean less space vertically between the boxes, while larger numbers would push them further apart.</p><h4>Diagram colours</h4><p>This section allows you to change colours associated with the diagram that are not directly related to the individual or family tiles. Click the coloured box to change the colour. This uses your browser&apos;s colour picker, so will look different depending on what browser you are using. <h5>Diagram background colour</h5><p>This is the colour of the area behind the family tree.</p><h5>Relationship arrow colour</h5><p>The colour of the arrows that show relationships between individuals and families.</p><h5>Show blood relationship in a different colour</h5><p>This shows blood relationships in a different colour than other relationships (e.g. adoption). Selecting this option will provide two colours that can be customised:<ul><li>Related by birth - the arrow colour to use for children related by birth</li><li>Related other than by birth - the arrow colour to use for children not related by birth</li></ul>"
 msgstr "<h4>Diagrama DPI</h4><p>Per a sortides com JPG i PNG, la configuració DPI produirà una sortida de més qualitat quan sigui més gran, però també augmentarà la mida del fitxer. Els valors més petits produiran fitxers més petits, però la qualitat serà pitjor i si el valor és massa baix és possible que no pugueu llegir text.</p><h4>Espaiament</h4><p>Les opcions afecten la distància entre nodes del diagrama.</p><h5>Generacions entre setmana</h5><p>Com a prop vulgueu generacions a la sortida. Per exemple, per a la sortida d'esquerra a dreta, els nombres més petits aproparan les columnes dels individus, mentre que els nombres més grans els separarien encara més.</p><h5>Els individus del mateix nivell</h5><p>Com a prop voleu els individus de la mateixa generació a la sortida. Per exemple, per a la sortida d'esquerra a dreta, els nombres més petits significaran menys espai verticalment entre les caselles, mentre que els nombres més grans els separarien encara més.</p><h4>Colors del diagrama</h4><p>Aquesta secció permet canviar els colors associats al diagrama que no estan directament relacionats amb les fitxes individuals o familiars. Feu clic al quadre de colors per canviar el color. Això utilitza el selector de color del vostre navegador, de manera que es veurà diferent en funció del navegador que utilitzeu. <h5>Color de fons del diagrama<h5><p>Aquest és el color de la zona que hi ha darrere de l'arbre genealògic.</p><h5>Color de la fletxa de la relació</h5><p>El color de les fletxes que mostren les relacions entre individus i famílies.</p><h5>Com mostra la relació de sang en un color diferent</h5><p>Aquesta mostra les relacions sanguínies en un color diferent que altres relacions (p. ex., adopció). Seleccionant aquesta opció es proporcionaran dos colors que es poden personalitzar:<ul><li>Relat per naixement - el color de la fletxa a utilitzar per als nens relacionats per naixement</li><li>Relat diferent del naixement - el color de la fletxa a utilitzar per a nens no relacionats per naixement</li></ul>"
 
 #. One of the names of a new settings group under the Tile design section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/BIVXgbgOvNma3KB1dlsuu2oX.png
@@ -1189,7 +1189,8 @@ msgstr "Edat límit per a majoria d'edat"
 
 #. This is the main text of the home page of the new help sysetm.  https://s3.eu-west-1.amazonaws.com/po-pub/i/uau23Gj30erKyyuZ4ZbKj39j.png
 #: 
-msgid "This help contains detailed information on the options available in GVExport. You can navigate by clicking the options below, searching using the magnifying glass icon above, or by clicking on a setting to show the information for that setting."
+#, fuzzy
+msgid "This help contains detailed information on the options available in GVExport. You can navigate by clicking the options below."
 msgstr "Aquesta ajuda conté informació detallada sobre les opcions disponibles en GVExport. Podeu navegar fent clic a les opcions següents, cercant amb la icona de la lupa de dalt o fent clic en un paràmetre per mostrar la informació d'aquest paràmetre."
 
 #. Title of new page in help, that shows the content you get clicking the "Help" button at the bottom of the screen. Page looks like this:  https://s3.eu-west-1.amazonaws.com/po-pub/i/Sv6raxfmlt8hZJKIpMurNhXt.png
@@ -1292,12 +1293,12 @@ msgstr "el fons s'acolorirà en funció del sexe de l'individu."
 #. Part of the "Individual background colour" help text:  https://s3.eu-west-1.amazonaws.com/po-pub/i/eDQV6JV3JvDtByvCWafKETjD.png
 #: 
 msgid "The background will be coloured based on whether the individual is living or deceased."
-msgstr ""
+msgstr "El fons s'acolorirà en funció de si la persona és viva o morta."
 
 #. Part of the "Individual background colour" help text:  https://s3.eu-west-1.amazonaws.com/po-pub/i/eDQV6JV3JvDtByvCWafKETjD.png
 #: 
 msgid "The background will be coloured using a scale between two chosen colours, based on the age of the individual."
-msgstr ""
+msgstr "El fons s'acolorirà mitjançant una escala entre dos colors escollits, en funció de l'edat de l'individu."
 
 #. Part of the "Individual stripe colour" help text:  https://s3.eu-west-1.amazonaws.com/po-pub/i/tFOIYjO4UCOK7GNOe5XPiLvS.png
 #: 
@@ -1317,12 +1318,13 @@ msgstr "la ratlla es pintarà en funció del sexe de l'individu."
 #. Part of the "Individual stripe colour" help text:  https://s3.eu-west-1.amazonaws.com/po-pub/i/tFOIYjO4UCOK7GNOe5XPiLvS.png
 #: 
 msgid "The stripe will be coloured based on whether the individual is living or deceased."
-msgstr ""
+msgstr "La ratlla s'acolorirà en funció de si l'individu és viu o mort."
 
 #. Part of the "Individual stripe colour" help text:  https://s3.eu-west-1.amazonaws.com/po-pub/i/tFOIYjO4UCOK7GNOe5XPiLvS.png
 #: 
 msgid "The stripe will be coloured using a scale between two chosen colours, based on the age of the individual."
-msgstr ""
+msgstr "\n"
+"La franja s'acolorirà mitjançant una escala entre dos colors escollits, en funció de l'edat de l'individu."
 
 #. Part of the help text for "Individual border colour": https://s3.eu-west-1.amazonaws.com/po-pub/i/h5HCQt6yIARSk0971BK0vAaq.png
 #: 
@@ -1347,12 +1349,12 @@ msgstr "el color de la vora familiar s'utilitzarà per a la frontera dels indivi
 #. Part of the help text for "Individual border colour": https://s3.eu-west-1.amazonaws.com/po-pub/i/h5HCQt6yIARSk0971BK0vAaq.png
 #: 
 msgid "The border will be coloured based on whether the individual is living or deceased."
-msgstr ""
+msgstr "La vora s'acolorirà en funció de si l'individu és viu o mort."
 
 #. Part of the help text for "Individual border colour": https://s3.eu-west-1.amazonaws.com/po-pub/i/h5HCQt6yIARSk0971BK0vAaq.png
 #: 
 msgid "The border will be coloured using a scale between two chosen colours, based on the age of the individual."
-msgstr ""
+msgstr "La vora s'acolorirà mitjançant una escala entre dos colors escollits, en funció de l'edat de l'individu."
 
 #. Part of the help information around the colours used for each sex:  https://s3.eu-west-1.amazonaws.com/po-pub/i/zFeY1IbEuF4U8dILeiQUuV99.png
 #: 
@@ -1423,5 +1425,15 @@ msgstr "Això canvia el color de la font de tot el text excepte els noms, per ex
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/aX1DPFZeEFtV4VGaEqUB05mY.png
 #: 
 msgid "Non-blood related individuals"
-msgstr ""
+msgstr "Persones no relacionades amb la consanguinitat"
+
+#. This is used in the help, at the bottom of some pages there are links to other related pages:  https://s3.eu-west-1.amazonaws.com/po-pub/i/0wOhL0YsV7g80be9ferU1VAT.png
+#: 
+msgid "Related links"
+msgstr "Enllaços relacionats"
+
+#. In the help, there are "bread crumbs" that show the location of the current help page with respect to the rest of the help pages. The first item in this page is "Home", which is the main starting page.  https://s3.eu-west-1.amazonaws.com/po-pub/i/RRYo6DWRWtrAiE1hRscAxY7W.png
+#: 
+msgid "Home"
+msgstr "Inici"
 
