@@ -1268,12 +1268,12 @@ msgstr "Aquesta opció us permet triar la forma de les fotos. Tingueu en compte 
 #. Part of the Photos help text:  https://s3.eu-west-1.amazonaws.com/po-pub/i/LnybW6GMtDH0UDez4Z0flfpW.png
 #: 
 msgid "This option lets you change the size of photos as they are displayed, which is done as a percentage of the default size. 100&percnt; is the default size, 50&percnt; is half sized and 200&percnt; is double sized."
-msgstr "Aquesta opció us permet canviar la mida de les fotos a mesura que es mostren, que es fa com a percentatge de la mida per defecte. 100%; és la mida per defecte, 50%; és de mida mitjana i 200%; és de doble mida."
+msgstr "Aquesta opció us permet canviar la mida de les fotos a mesura que es mostren, que es fa com a percentatge de la mida per defecte. 100&percnt; és la mida per defecte, 50&percnt; és de mida mitjana i 200&percnt; és de doble mida."
 
 #. Part of the Photos help text:  https://s3.eu-west-1.amazonaws.com/po-pub/i/LnybW6GMtDH0UDez4Z0flfpW.png
 #: 
 msgid "This option lets you change the resolution of photos, which is done by adjusting the width as a percentage of the default width. 100&percnt; is the default resolution, 50&percnt; is half the pixels wide and 200&percnt; is double the pixels wide. Because the aspect ratio is maintained, doubling the resolution will increase the size of the file to around 4 times larger (depending on the exact shape of the photo)."
-msgstr "Aquesta opció us permet canviar la resolució de les fotos, cosa que es fa ajustant l'amplada com a percentatge de l'amplada predeterminada. 100%; és la resolució per defecte, 50%; té la meitat dels píxels d'amplada i 200%; és el doble dels píxels d'amplada. Com que la relació d'aspecte es manté, duplicar la resolució crearà la mida del fitxer a unes 4 vegades més gran (depenent de la forma exacta de la foto)."
+msgstr "Aquesta opció us permet canviar la resolució de les fotos, cosa que es fa ajustant l'amplada com a percentatge de l'amplada predeterminada. 100&percnt; és la resolució per defecte, 50&percnt; té la meitat dels píxels d'amplada i 200&percnt; és el doble dels píxels d'amplada. Com que la relació d'aspecte es manté, duplicar la resolució crearà la mida del fitxer a unes 4 vegades més gran (depenent de la forma exacta de la foto)."
 
 #. Part of the "Individual background colour" help text:  https://s3.eu-west-1.amazonaws.com/po-pub/i/eDQV6JV3JvDtByvCWafKETjD.png
 #: 
