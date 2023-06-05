@@ -73,4 +73,4 @@ Past Authors:
  - https://github.com/pceres
  - Till Schulte-Coerne (https://github.com/tillsc)
 
-![image](https://img.shields.io/github/downloads/Neriderc/GVExport/total) (since v2.1.18)
+![image](https://img.shields.io/github/downloads/Neriderc/GVExport/total) (since v2.1.18, 5 June 2023)
