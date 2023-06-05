@@ -68,7 +68,9 @@ const UI = {
             document.querySelector('#help-about').addEventListener('click', UI.helpPanel.loadHelpAbout);
             let helpContentElement = document.querySelector('#help-content');
             helpContentElement.addEventListener('click', UI.helpPanel.handleHelpContentClick);
-            UI.helpPanel.loadHelp('Home');
+            UI.helpPanel.loadHelp('Home').catch(function (error){
+                UI.showToast(ERROR_CHAR + error);
+            });
         },
 
         /**
@@ -137,6 +139,9 @@ const UI = {
                         let contentEl = document.getElementById('help-content');
                         contentEl.innerHTML = UI.helpPanel.decodeHTML(response);
                         contentEl.scrollTop = 0;
+                    } else {
+                        setTimeout(function(){location.reload();}, 3000);
+                        UI.showToast(ERROR_CHAR + TRANSLATE['Login expired. Reloading page...']);
                     }
                 });
             } else {

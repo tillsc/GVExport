@@ -510,7 +510,7 @@ function pageLoaded(Url) {
     simpleSettingsEl.addEventListener('change', function(e) {
         let element = document.querySelector('.settings_list_item[data-id="' + e.target.value + '"]');
         if (element !== null) {
-            loadSettings(element.getAttribute('data-settings'));
+            loadSettings(element.getAttribute('data-settings'), true);
         } else if (e.target.value !== '-') {
             UI.showToast(ERROR_CHAR + 'Settings not found')
         }
@@ -612,7 +612,7 @@ function toBool(value) {
         return value;
     }
 }
-function loadSettings(data) {
+function loadSettings(data, isNamedSetting = false) {
     let settings;
     try {
         settings = JSON.parse(data);
@@ -669,7 +669,9 @@ function loadSettings(data) {
             }
         } else {
             if (el.type === 'checkbox' || el.type === 'radio') {
-                setCheckStatus(el, toBool(settings[key]));
+                if (!isNamedSetting || key !== 'show_diagram_panel') {
+                    setCheckStatus(el, toBool(settings[key]));
+                }
             } else {
                 el.value = settings[key];
             }
@@ -837,7 +839,7 @@ function loadSettingsDetails() {
             newListItem.setAttribute("data-id", settingsList[key]['id']);
             newListItem.setAttribute("data-token", settingsList[key]['token'] || "");
             newListItem.setAttribute("data-name", settingsList[key]['name']);
-            newListItem.setAttribute("onclick", "loadSettings(this.getAttribute('data-settings'))");
+            newListItem.setAttribute("onclick", "loadSettings(this.getAttribute('data-settings'), true)");
             newListItem.innerHTML = "<a class='pointer'>" + settingsList[key]['name'] + "<div class=\"saved-settings-ellipsis pointer\" onclick='showSavedSettingsItemMenu(event)'><a class='pointer'>…</a></div></a>";
             newLinkWrapper.appendChild(newListItem);
             listElement.appendChild(newLinkWrapper);

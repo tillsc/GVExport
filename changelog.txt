@@ -19,6 +19,7 @@ Version 2.1.18 (2023-06-?)
   - Change      : Adjusted default quality of images embedded in SVG/PDF
   - Change      : If theme makes advanced settings buttons the same colour as surrounding area, use different reference colour to make them stand out
   - Change      : "Decorated" diagram type now called "Separated"
+  - Change      : Allow zooming out further
   - Removed     : Simple diagram type - all settings needed to create this are now available with the "Decorated" type
   - Fixed       : Option to ignore clippings cart not working
   - Fixed       : Graphviz on server not recognised after GVExport update until settings reset

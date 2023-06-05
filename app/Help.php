@@ -117,8 +117,7 @@ class Help
     {
         $translation = I18N::translate($msg);
         $no_apostrophe = str_replace("'","&apos;",$translation);
-        $no_percent = str_replace("&","&amp;",$no_apostrophe);
-        $no_newline = str_replace(array("\r", "\n"), '', $no_percent);
-        return $no_newline;
+        $no_ampersand = str_replace("&","&amp;",$no_apostrophe);
+        return str_replace(array("\r", "\n"), '', $no_ampersand);
     }
 }

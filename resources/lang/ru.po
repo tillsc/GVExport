@@ -1143,89 +1143,89 @@ msgstr "Наибольший"
 #. Label for colour picker, shown when you choose "Custom" in the border colour option:  https://s3.eu-west-1.amazonaws.com/po-pub/i/hSuaDbMqsm6pmK47oJ5B6o88.png
 #: 
 msgid "Custom border colour"
-msgstr ""
+msgstr "Пользовательский цвет границы"
 
 #. Option to adjust the resolution of the photos:  https://s3.eu-west-1.amazonaws.com/po-pub/i/7up12u4AeoKs4iMyZFo5VLD3.png
 #: 
 msgid "Photo resolution"
-msgstr ""
+msgstr "Разрешение фото"
 
 #. This option exists in multiple places, allowing setting the shape or colours based on whether a person is living or deceased:  https://s3.eu-west-1.amazonaws.com/po-pub/i/58WaEOwngUvsVIpkiAhZS9a0.png
 #: 
 msgid "Based on vital status"
-msgstr ""
+msgstr "По жизненному статусу"
 
 #. Option to set colour based on the individual's age. This option is available for background, stripe, and border colours.  https://s3.eu-west-1.amazonaws.com/po-pub/i/BUaDKtuIq1mVp37UrEPwDs5c.png
 #: 
 msgid "Based on age"
-msgstr ""
+msgstr "В зависимости от возраста"
 
 #. There is an option to set colour based on the individual's age, this term is the colour used for young individuals. This option is available for background, stripe, and border colours.  https://s3.eu-west-1.amazonaws.com/po-pub/i/BUaDKtuIq1mVp37UrEPwDs5c.png
 #: 
 msgid "Low age colour"
-msgstr ""
+msgstr "Низкий возрастной цвет"
 
 #. There is an option to set colour based on the individual's age, this term is the colour used for old individuals. This option is available for background, stripe, and border colours.  https://s3.eu-west-1.amazonaws.com/po-pub/i/BUaDKtuIq1mVp37UrEPwDs5c.png
 #: 
 msgid "High age colour"
-msgstr ""
+msgstr "Возрастной цвет"
 
 #. There is an option to set colour based on the individual's age, this term is the colour used for individuals with an unknown age. This option is available for background, stripe, and border colours.  https://s3.eu-west-1.amazonaws.com/po-pub/i/BUaDKtuIq1mVp37UrEPwDs5c.png
 #: 
 msgid "Unknown age colour"
-msgstr ""
+msgstr "Неизвестный возрастной цвет"
 
 #. There is an option to set colour based on the individual's age, this term is the setting for the age at the young end of the spectrum (i.e. individuals this age and younger will have the low age colour. individuals older than the high age colour will have the high age colour, and those inbetween will be on a gradient between these two, depending on their age within the range). This option is available for background, stripe, and border colours.  https://s3.eu-west-1.amazonaws.com/po-pub/i/BUaDKtuIq1mVp37UrEPwDs5c.png
 #: 
 msgid "Age for low colour"
-msgstr ""
+msgstr "Возраст для низкого цвета"
 
 #. There is an option to set colour based on the individual's age, this term is the setting for the age at the old end of the spectrum (i.e. individuals older than this age will have the high age colour, individuals younger than the low age with have the low age colour, and those in between will be on a gradient between these two, depending on their age within the range). This option is available for background, stripe, and border colours.  https://s3.eu-west-1.amazonaws.com/po-pub/i/BUaDKtuIq1mVp37UrEPwDs5c.png
 #: 
 msgid "Age for high colour"
-msgstr ""
+msgstr "Возраст для яркого цвета"
 
 #. This is the main text of the home page of the new help sysetm.  https://s3.eu-west-1.amazonaws.com/po-pub/i/uau23Gj30erKyyuZ4ZbKj39j.png
 #: 
 msgid "This help contains detailed information on the options available in GVExport. You can navigate by clicking the options below."
-msgstr ""
+msgstr "Эта справка содержит подробную информацию о параметрах, доступных в GVExport. Вы можете перемещаться, нажимая параметры ниже."
 
 #. Title of new page in help, that shows the content you get clicking the "Help" button at the bottom of the screen. Page looks like this:  https://s3.eu-west-1.amazonaws.com/po-pub/i/Sv6raxfmlt8hZJKIpMurNhXt.png
 #: 
 msgid "About GVExport"
-msgstr ""
+msgstr "О GVExport"
 
 #. A new page in the new help system. This is a starting page for getting detailed information about different functions. It links to other pages that are separated based on section in the menu:  https://s3.eu-west-1.amazonaws.com/po-pub/i/oNhAAp94FCBeaFoafJoSEocg.png
 #: 
 msgid "Detailed information"
-msgstr ""
+msgstr "Подробная информация"
 
 #. This is the main text for a new page "Detailed information" in the new help system. This is a starting page for getting detailed information about different functions. It links to other pages that are separated based on section in the menu:  
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/oNhAAp94FCBeaFoafJoSEocg.png
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/oNhAAp94FCBeaFoafJoSEocg.png
 #: 
 msgid "This section has detailed information on each of the options in GVExport."
-msgstr ""
+msgstr "В этом разделе содержится подробная информация о каждой опции в GVExport."
 
 #. A new page that the new help system has, as there is one page for each of the settings panel sections.  https://s3.eu-west-1.amazonaws.com/po-pub/i/ytEK3zg5EZjWw4yiEobnE0MO.png
 #: 
 msgid "This panel is only shown when the \"Show saved diagrams\" option is enabled in the \"Save settings\" section. It has just the following option:"
-msgstr ""
+msgstr "Эта панель отображается только при включенной опции «Показывать сохраненные диаграммы» в разделе «Сохранить настройки». Он имеет только следующий вариант:"
 
 #. A help page for the "People to be included" section, that links to other pages for the detail of each setting:  https://s3.eu-west-1.amazonaws.com/po-pub/i/A4F0GU78Aw3zlN1iod5acwCm.png
 #: 
 msgid "The \"People to be included\" section lets you choose criteria for who to include in the diagram. Within this section, there are several setting groups:"
-msgstr ""
+msgstr "В разделе «Люди, которых нужно включить» можно выбрать критерии для включения в диаграмму. В этом разделе есть несколько групп настроек:"
 
 #. A help page for the "Appearance" section, that links to other pages for the detail of each setting:   https://s3.eu-west-1.amazonaws.com/po-pub/i/nAJVK6eZ4ZM15ghaKTURbImI.png
 #: 
 msgid "The \"Appearance\" section lets you customise the look of the diagram. Within this section, there are several setting groups:"
-msgstr ""
+msgstr "Раздел «Внешний вид» позволяет настроить внешний вид диаграммы. В этом разделе есть несколько групп настроек:"
 
 #. A help page for the "General settings" section, that links to other pages for the detail of each setting:    https://s3.eu-west-1.amazonaws.com/po-pub/i/RyexFlprm5V3QI35jRlNyJGA.png
 #: 
 msgid "The \"General settings\" section has options that don&apos;t fit in the other sections. Within this section, there are several settings groups:"
-msgstr ""
+msgstr "В разделе «Общие настройки» есть параметры, которых нет в других разделах. В этом разделе есть несколько групп настроек:"
 
 #. Description of the "Tile design" settings section, as listed in the help:  https://s3.eu-west-1.amazonaws.com/po-pub/i/fATQDj3Cuq0pdLquOOt0Bvan.png
 #: 
@@ -1251,72 +1251,72 @@ msgstr "плитка имеет закругленные углы"
 #. Part of the help text for the "Individual tile shape" option:  https://s3.eu-west-1.amazonaws.com/po-pub/i/7f9BFZbMmpL5IUEFjtkmDgN6.png
 #: 
 msgid "This lets you assign a shape based on the sex of individuals. For example, you can set male individuals to have rectangle tiles and female individuals to have rounded rectangle tiles."
-msgstr ""
+msgstr "Это позволяет назначать форму в зависимости от пола людей. Например, вы можете установить для мужчин прямоугольные плитки, а для женщин — скругленные прямоугольные плитки."
 
 #. Part of the Photos help text:  https://s3.eu-west-1.amazonaws.com/po-pub/i/LnybW6GMtDH0UDez4Z0flfpW.png
 #: 
 msgid "This option lets you enable or disable showing photos on the tiles of individuals. If enabled, there are further options as follows:"
-msgstr ""
+msgstr "Эта опция позволяет включить или отключить отображение фотографий на плитках отдельных лиц. Если включено, есть дополнительные параметры, как показано ниже:"
 
 #. Part of the Photos help text:  https://s3.eu-west-1.amazonaws.com/po-pub/i/LnybW6GMtDH0UDez4Z0flfpW.png
 #: 
 msgid "This option lets you choose the shape of photos. Note that if you have Graphviz installed on the server, using these options will disable generating the diagram on the server, which may prevent large diagrams from being created."
-msgstr ""
+msgstr "Эта опция позволяет выбрать форму фотографий. Обратите внимание, что если на сервере установлен Graphviz, использование этих параметров отключит создание диаграммы на сервере, что может помешать созданию больших диаграмм."
 
 #. Part of the Photos help text:  https://s3.eu-west-1.amazonaws.com/po-pub/i/LnybW6GMtDH0UDez4Z0flfpW.png
 #: 
 msgid "This option lets you change the size of photos as they are displayed, which is done as a percentage of the default size. 100&percnt; is the default size, 50&percnt; is half sized and 200&percnt; is double sized."
-msgstr ""
+msgstr "Эта опция позволяет изменять размер фотографий по мере их отображения, что делается в процентах от размера по умолчанию. 100&percent; - это размер по умолчанию, 50&percent; - половинный размер, а 200&percent; - двойной размер."
 
 #. Part of the Photos help text:  https://s3.eu-west-1.amazonaws.com/po-pub/i/LnybW6GMtDH0UDez4Z0flfpW.png
 #: 
 msgid "This option lets you change the resolution of photos, which is done by adjusting the width as a percentage of the default width. 100&percnt; is the default resolution, 50&percnt; is half the pixels wide and 200&percnt; is double the pixels wide. Because the aspect ratio is maintained, doubling the resolution will increase the size of the file to around 4 times larger (depending on the exact shape of the photo)."
-msgstr ""
+msgstr "Эта опция позволяет изменять разрешение фотографий, что делается путем регулировки ширины в процентах от ширины по умолчанию. 100&percent; - это разрешение по умолчанию, 50&percent; - это половина ширины пикселя, а 200&percent; - вдвое больше ширины пикселя. Поскольку соотношение сторон сохраняется, удвоение разрешения увеличит размер файла примерно в 4 раза (в зависимости от точной формы фотографии)."
 
 #. Part of the "Individual background colour" help text:  https://s3.eu-west-1.amazonaws.com/po-pub/i/eDQV6JV3JvDtByvCWafKETjD.png
 #: 
 msgid "This option lets you set the background colour of an individual&apos;s tile. The options are:"
-msgstr ""
+msgstr "Эта опция позволяет вам установить цвет фона отдельной плитки. Возможны следующие варианты:"
 
 #. Part of the "Individual background colour" help text:  https://s3.eu-west-1.amazonaws.com/po-pub/i/eDQV6JV3JvDtByvCWafKETjD.png
 #: 
 msgid "The background will be set to the chosen colour."
-msgstr ""
+msgstr "Фон будет окрашен в выбранный цвет."
 
 #. Part of the "Individual background colour" help text:  https://s3.eu-west-1.amazonaws.com/po-pub/i/eDQV6JV3JvDtByvCWafKETjD.png
 #: 
 msgid "The background will be coloured based on the sex of the individual."
-msgstr ""
+msgstr "Фон будет окрашен в зависимости от пола человека."
 
 #. Part of the "Individual background colour" help text:  https://s3.eu-west-1.amazonaws.com/po-pub/i/eDQV6JV3JvDtByvCWafKETjD.png
 #: 
 msgid "The background will be coloured based on whether the individual is living or deceased."
-msgstr ""
+msgstr "Фон будет окрашен в зависимости от того, жив человек или умер."
 
 #. Part of the "Individual background colour" help text:  https://s3.eu-west-1.amazonaws.com/po-pub/i/eDQV6JV3JvDtByvCWafKETjD.png
 #: 
 msgid "The background will be coloured using a scale between two chosen colours, based on the age of the individual."
-msgstr ""
+msgstr "Фон будет окрашен с использованием шкалы между двумя выбранными цветами в зависимости от возраста человека."
 
 #. Part of the "Individual stripe colour" help text:  https://s3.eu-west-1.amazonaws.com/po-pub/i/tFOIYjO4UCOK7GNOe5XPiLvS.png
 #: 
 msgid "This option lets you set the colour of the stripe across the top of an individual&apos;s tile. The options are:"
-msgstr ""
+msgstr "Этот параметр позволяет установить цвет полосы в верхней части индивидуальной плитки. Варианты:"
 
 #. Part of the "Individual stripe colour" help text:  https://s3.eu-west-1.amazonaws.com/po-pub/i/tFOIYjO4UCOK7GNOe5XPiLvS.png
 #: 
 msgid "No stripe is shown."
-msgstr ""
+msgstr "Полоса не отображается."
 
 #. Part of the "Individual stripe colour" help text:  https://s3.eu-west-1.amazonaws.com/po-pub/i/tFOIYjO4UCOK7GNOe5XPiLvS.png
 #: 
 msgid "The stripe will be coloured based on the sex of the individual."
-msgstr ""
+msgstr "Полоса будет окрашена в зависимости от пола человека."
 
 #. Part of the "Individual stripe colour" help text:  https://s3.eu-west-1.amazonaws.com/po-pub/i/tFOIYjO4UCOK7GNOe5XPiLvS.png
 #: 
 msgid "The stripe will be coloured based on whether the individual is living or deceased."
-msgstr ""
+msgstr "Полоса будет окрашена в зависимости от того, жив человек или умер."
 
 #. Part of the "Individual stripe colour" help text:  https://s3.eu-west-1.amazonaws.com/po-pub/i/tFOIYjO4UCOK7GNOe5XPiLvS.png
 #: 
