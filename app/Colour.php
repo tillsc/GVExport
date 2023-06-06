@@ -17,13 +17,28 @@ class Colour
      * @param $hex_col string the colour hex code for this colour
      */
     function __construct(string $hex_col) {
-        $this->hex = $hex_col;
         list($this->red, $this->green, $this->blue) = $this->hexToRgb($hex_col);
     }
 
-    function hexToRgb($hex_col) {
+    /**
+     * Converts an HTML hex colour to an array of RGB
+     *
+     * @param $hex_col
+     * @return array
+     */
+    function hexToRgb($hex_col): array
+    {
         return sscanf($hex_col, '#%02x%02x%02x');
     }
+
+    /**
+     * Take object's colour and merge with new HTML hex colour
+     * using a ratio between the two (0 - 1)
+     *
+     * @param $colour
+     * @param $ratio
+     * @return string
+     */
     function mergeWithColour($colour, $ratio): string
     {
         list($red, $green, $blue) = $this->hexToRgb($colour);
