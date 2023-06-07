@@ -5,7 +5,7 @@ namespace vendor\WebtreesModules\gvexport;
 use Fisharebest\Webtrees\Tree;
 
 /**
- * A cookie object for saving settings
+ * A cookie object for saving settings when user logged out
  */
 class Cookie
 {
@@ -14,6 +14,7 @@ class Cookie
 
     /**
      * Name for the cookie is generated based on tree name
+     *
      * @param $tree
      */
     function __construct($tree) {
@@ -61,7 +62,7 @@ class Cookie
     }
 
     /**
-     * Load settings from cookie over the default settings
+     * Load settings from cookie over the provided settings (e.g. the default ones)
      *
      * @param $userDefaultVars
      * @return array
