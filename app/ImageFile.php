@@ -7,6 +7,9 @@ namespace vendor\WebtreesModules\gvexport;
 use Fisharebest\Webtrees\Auth;
 use Fisharebest\Webtrees\Site;
 
+/**
+ * An image file, representing a hard drive image file
+ */
 class ImageFile
 {
     public int $resolution;
@@ -93,6 +96,8 @@ class ImageFile
      * @param $image
      * @param $temp_image_file_path
      * @param $full_media_path
+     * @param $quality
+     * @param $convert
      * @return bool
      */
     private function saveImage($image, $temp_image_file_path, $full_media_path, $quality, $convert): bool

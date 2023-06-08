@@ -7,6 +7,9 @@ use Fisharebest\Webtrees\Module\FamilyTreeFavoritesModule;
 use Fisharebest\Webtrees\Module\UserFavoritesModule;
 use Fisharebest\Webtrees\Tree;
 
+/**
+ * GVExport representation of a webtrees Favourite
+ */
 class Favourite
 {
     public const TYPE_USER_FAVOURITE = 'USER_FAVOURITE';

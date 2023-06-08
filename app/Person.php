@@ -4,10 +4,12 @@ namespace vendor\WebtreesModules\gvexport;
 
 use Fisharebest\Webtrees\Age;
 use Fisharebest\Webtrees\Date;
-use Fisharebest\Webtrees\Elements\PafUid;
 use Fisharebest\Webtrees\I18N;
 use Fisharebest\Webtrees\Individual;
 
+/**
+ * Represents an individual in the diagram or DOT file
+ */
 class Person
 {
     const SHAPE_NONE = '0';
@@ -45,7 +47,8 @@ class Person
     }
 
 
-    /** Add the DOT code to include this individual in the diagram.
+    /**
+     * Add the DOT code to include this individual in the diagram.
      *
      * @param string $pid
      * @param string $out
@@ -174,7 +177,7 @@ class Person
         }
         $href = $this->dot->settings["add_links"] ? "TARGET=\"_blank\" HREF=\"" . Dot::convertToHTMLSC($link) . "\"" : "";
         // Get background colour
-        if ($this->isStartingIndividual($pid) && $this->dot->settings['highlight_start_indis'] == "true" && !$this->valueInList($this->dot->settings['no_highlight_xref_list'], $pid)) {
+        if ($this->isStartingIndividual($pid) && $this->dot->settings['highlight_start_indis'] == "true" && !$this->isValueInList($this->dot->settings['no_highlight_xref_list'], $pid)) {
             $indi_bg_colour = $this->dot->settings["highlight_col"];
         } else {
             switch ($this->dot->settings['bg_col_type']) {
@@ -189,7 +192,7 @@ class Person
                     $indi_bg_colour = $this->getVitalColour($i->isDead(), Settings::OPTION_BACKGROUND_VITAL_COLOUR);
                     break;
                 case Settings::OPTION_BACKGROUND_AGE_COLOUR:
-                    $indi_bg_colour = $this->getAgeColour($i, Settings::OPTION_BACKGROUND_AGE_COLOUR);;
+                    $indi_bg_colour = $this->getAgeColour($i, Settings::OPTION_BACKGROUND_AGE_COLOUR);
                     break;
             }
         }
@@ -282,7 +285,9 @@ class Person
         return $out;
     }
 
-    /** Add formatting to name before adding to DOT
+    /**
+     * Add formatting to name before adding to DOT
+     *
      * @param array $nameArray webtrees name array for the person
      * @param string $pid XREF of the person, for adding to name if enabled
      * @return string Returns formatted name
@@ -333,12 +338,13 @@ class Person
     }
 
 
-    /** Abbreviate name based on settings
+    /**
+     * Abbreviate name based on settings
      *
-     * @param $nameArray array of names from webtrees
-     * @return false|mixed|string
+     * @param array $nameArray array of names from webtrees
+     * @return string
      */
-    private function getAbbreviatedName(array $nameArray)
+    private function getAbbreviatedName(array $nameArray): string
     {
         switch ($this->dot->settings["use_abbr_name"]) {
             case 0: /* Full name */
@@ -389,6 +395,7 @@ class Person
 
     /**
      *  Check if XREF in list of starting individuals
+     *
      * @param string $pid Xref to check
      * @return bool
      */
@@ -403,7 +410,14 @@ class Person
         return false;
     }
 
-    private function valueInList($list, string $value): bool
+    /**
+     * Check if string is found in full in comma separated list
+     *
+     * @param $list
+     * @param string $value
+     * @return bool
+     */
+    private function isValueInList($list, string $value): bool
     {
         $list = explode(',', $list);
         return in_array($value, $list);
@@ -452,6 +466,9 @@ class Person
     }
 
     /**
+     * Calculate whether this individual's tile should have
+     * rounded corners based on the settings
+     *
      * @param Individual $i
      * @param int $option
      * @return bool
@@ -485,6 +502,13 @@ class Person
         }
     }
 
+    /**
+     * Retrieve colour to represent the status of living or deceased, based on $context
+     *
+     * @param string $is_dead
+     * @param $context
+     * @return mixed|string
+     */
     private function getVitalColour(string $is_dead, $context)
     {
         if ($is_dead) {
@@ -506,8 +530,16 @@ class Person
                     return $this->dot->settings['indi_border_living_col'];
             }
         }
+        return '#000000';
     }
 
+    /**
+     * Calculate colour to represent the age of the individual
+     *
+     * @param $individual
+     * @param $context
+     * @return string
+     */
     private function getAgeColour($individual, $context): string
     {
         if ($individual->isDead()) {

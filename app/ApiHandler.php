@@ -7,6 +7,10 @@ use Fisharebest\Webtrees\I18N;
 use Fisharebest\Webtrees\Validator;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
+
+/**
+ * Handles GVExport custom API calls from front end
+ */
 class ApiHandler
 {
     /**
@@ -39,7 +43,7 @@ class ApiHandler
         $json_data = Validator::parsedBody($request)->string('json_data');
         $json = json_decode($json_data, true);
         if (json_last_error() === JSON_ERROR_NONE) {
-            $type = FormSubmission::nameStringValid($json['type']) ? $json['type'] : "";
+            $type = FormSubmission::isNameStringValid($json['type']) ? $json['type'] : "";
             switch ($type) {
                 case "save_settings":
                     $this->saveSettings($module, $request, $json, $tree);

@@ -5,8 +5,13 @@ namespace vendor\WebtreesModules\gvexport;
 use Exception;
 use Fisharebest\Webtrees\Auth;
 use Fisharebest\Webtrees\Http\Exceptions\HttpBadRequestException;
+use Fisharebest\Webtrees\Http\RequestHandlers\ModuleAction;
 use Fisharebest\Webtrees\I18N;
+use Fisharebest\Webtrees\Tree;
 
+/**
+ * Represents the diagram settings, regardless of context (user, admin, default)
+ */
 class Settings
 {
     public const ID_MAIN_SETTINGS = "_MAIN_";
@@ -36,6 +41,10 @@ class Settings
     const USER_PREFIX = "_u";
     private array $settings_json_cache = [];
     private array $defaultSettings;
+
+    /**
+     * Settings instance always starts with default settings
+     */
     public function __construct(){
         // Load settings from config file
         $this->defaultSettings = include dirname(__FILE__) . "/../config.php";
@@ -50,7 +59,7 @@ class Settings
         $this->defaultSettings['url_xref_treatment_options']['overwrite'] = "Overwrite";
         $this->defaultSettings['use_abbr_places'] = [0 => "Full place name", 10 => "City and country" ,  20 => "City and 2 letter ISO country code", 30 => "City and 3 letter ISO country code"];
         $this->defaultSettings['use_abbr_names'] = [0 => "Full name", 10 => "Given and surnames", 20 => "Given names" , 30 => "First given name only", 40 => "Surnames", 50 => "Initials only", 60 => "Given name initials and surname", 70 => "Don't show names"];
-        $this->defaultSettings['photo_shape_options'] = [0 => "No change", 10 => "Oval", 20 => "Circle" , 30 => "Square", 40 => "Rounded rectangle", 50 => "Rounded square"];
+        $this->defaultSettings['photo_shape_options'] = [Person::SHAPE_NONE => "No change", Person::SHAPE_OVAL => "Oval", Person::SHAPE_CIRCLE => "Circle" , Person::SHAPE_SQUARE => "Square", Person::SHAPE_ROUNDED_RECT => "Rounded rectangle", Person::SHAPE_ROUNDED_SQUARE => "Rounded square"];
         $this->defaultSettings['photo_quality_options'] = [0 => "Lowest", 20 => "Low", 50 => "Medium" , 75 => "High", 100 => "Highest"];
         $this->defaultSettings['indi_tile_shape_custom_options'] = [0 => "Rectangle", 10 => "Rounded rectangle"];
         $this->defaultSettings['indi_tile_shape_options'] = $this->defaultSettings['indi_tile_shape_custom_options'] + [Person::TILE_SHAPE_SEX => 'Based on individual&apos;s sex', Person::TILE_SHAPE_VITAL => 'Based on vital status'];
@@ -77,10 +86,10 @@ class Settings
     /**
      * Retrieve the currently set default settings from the admin page
      *
-     * @param $module
+     * @param GVExport $module
      * @return array
      */
-    public function getAdminSettings($module): array
+    public function getAdminSettings(GVExport $module): array
     {
         $settings = $this->defaultSettings;
         $loaded = $module->getPreference(self::PREFERENCE_PREFIX . self::ADMIN_PREFERENCE_NAME, "preference not set");
@@ -111,13 +120,13 @@ class Settings
     /**
      * Retrieve the user settings from webtrees storage
      *
-     * @param $module
-     * @param $tree
+     * @param GVExport $module
+     * @param Tree $tree
      * @param string $id
-     * @param null $user_id
+     * @param int|null $user_id
      * @return array
      */
-    public function loadUserSettings($module, $tree, string $id = self::ID_MAIN_SETTINGS, $user_id = null): array
+    public function loadUserSettings(GVExport $module, Tree $tree, string $id = self::ID_MAIN_SETTINGS, int $user_id = null): array
     {
         if ($user_id === null) {
             $user_id = Auth::user()->id();
@@ -176,11 +185,11 @@ class Settings
     /**
      *  Save the provided settings to webtrees admin storage
      *
-     * @param $module
-     * @param $settings
+     * @param GVExport $module
+     * @param array $settings
      * @return void
      */
-    public function saveAdminSettings($module, $settings) {
+    public function saveAdminSettings(GVExport $module, array $settings) {
         $saveSettings = $this->defaultSettings;
         $s = [];
         foreach ($saveSettings as $preference=>$value) {
@@ -203,13 +212,13 @@ class Settings
     /**
      *  Save the provided settings to webtrees user per-tree storage
      *
-     * @param $module
-     * @param $tree
-     * @param $settings
+     * @param GVExport $module
+     * @param Tree $tree
+     * @param array $settings
      * @param string $id
      * @return bool
      */
-    public function saveUserSettings($module, $tree, $settings, string $id = self::ID_MAIN_SETTINGS): bool
+    public function saveUserSettings(GVExport $module, Tree $tree, array $settings, string $id = self::ID_MAIN_SETTINGS): bool
     {
         if (Auth::user()->id() == self::GUEST_USER_ID) {
             if ($id == self::ID_MAIN_SETTINGS) {
@@ -237,7 +246,15 @@ class Settings
         }
     }
 
-    public function deleteUserSettings($module, $tree, $id) {
+    /**
+     * Delete the indicated user settings from webtrees storage
+     *
+     * @param GVExport $module
+     * @param Tree $tree
+     * @param string $id
+     * @return void
+     */
+    public function deleteUserSettings(GVExport $module, Tree $tree, string $id) {
         if (Settings::isUserLoggedIn()) {
             $loaded = $module->getPreference(self::PREFERENCE_PREFIX . self::TREE_PREFIX . $tree->id() . self::USER_PREFIX . Auth::user()->id(), "preference not set");
             if ($loaded != "preference not set") {
@@ -380,7 +397,7 @@ class Settings
     }
 
     /**
-     * Returns whether a setting shouldn't be saved to cookies/preferences
+     * Returns whether a setting should or shouldn't be saved to cookies/preferences
      *
      * @param string $preference
      * @param int $context
@@ -437,10 +454,17 @@ class Settings
         return self::shouldSaveSetting($setting, $context);
     }
 
+
     /**
+     * Retrieve the JSON of the requested setting ID
+     *
+     * @param GVExport $module
+     * @param Tree $tree
+     * @param string $id
+     * @return false|string
      * @throws Exception
      */
-    public function getSettingsJson($module, $tree, $id)
+    public function getSettingsJson(GVExport $module, Tree $tree, string $id)
     {
         try {
             $userSettings = $this->loadUserSettings($module, $tree, $id);
@@ -457,13 +481,28 @@ class Settings
         return json_encode($settings);
     }
 
+    /**
+     * Retrieve all settings for the user as JSON
+     *
+     * @param $module
+     * @param $tree
+     * @return false|string
+     */
     public function getAllSettingsJson($module, $tree)
     {
         $settings = $this->loadUserSettings($module, $tree, Settings::ID_ALL_SETTINGS);
         return json_encode($settings);
     }
 
-    public function getSettingsLink($module, $tree, $id): array
+    /**
+     * Return a link for sharing settings
+     *
+     * @param GVExport $module
+     * @param Tree $tree
+     * @param string $id
+     * @return array
+     */
+    public function getSettingsLink(GVExport $module, Tree $tree, string $id): array
     {
         if ($this->doSettingsExist($module, $tree)) {
             $link = new SettingsLink($module, $tree, $this, $id);
@@ -483,7 +522,14 @@ class Settings
         return $response;
     }
 
+
     /**
+     * Retrieve settings based on settings token from shared link
+     *
+     * @param GVExport $module
+     * @param Tree $tree
+     * @param string $token
+     * @return array
      * @throws Exception
      */
     public function loadSettingsToken($module, $tree, $token): array
@@ -497,7 +543,14 @@ class Settings
         return $settings;
     }
 
-    public function newSettingsId($module, $tree): string
+    /**
+     * Create a new settings ID
+     *
+     * @param GVExport $module
+     * @param Tree $tree
+     * @return string
+     */
+    public function newSettingsId(GVExport $module, Tree $tree): string
     {
         $id_list = $this->getSettingsIdList($module, $tree);
 
@@ -519,7 +572,15 @@ class Settings
         return $new_id;
     }
 
-    public function deleteSettingsId($module, $tree, $id): string
+    /**
+     * Remove settings ID from list of IDs
+     *
+     * @param GVExport $module
+     * @param Tree $tree
+     * @param string $id
+     * @return string
+     */
+    public function deleteSettingsId(GVExport $module, Tree $tree, string $id): string
     {
         $id_list = $this->getSettingsIdList($module, $tree);
         if ($id_list == "") {

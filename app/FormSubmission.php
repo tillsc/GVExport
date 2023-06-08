@@ -4,23 +4,30 @@ namespace vendor\WebtreesModules\gvexport;
 
 use Fisharebest\Webtrees\I18N;
 
+/**
+ * Form handling functionality
+ */
 class FormSubmission
 {
     /**
+     * Takes list of values from form submission and returns structures and
+     * validated settings list
+     *
      * @param $vars
+     * @param $module
      * @return array
      */
     public function load($vars, $module): array
     {
         $settings = [];
         // INDI id
-        if (!empty($vars["xref_list"]) && $this->xrefListValid($vars["xref_list"])) {
+        if (!empty($vars["xref_list"]) && $this->isXrefListValid($vars["xref_list"])) {
             $settings['xref_list'] = $vars["xref_list"];
         } else {
             $settings['xref_list'] = "";
         }
         // Stop PIDs
-        if (!empty($vars["stop_xref_list"]) && $this->xrefListValid($vars["stop_xref_list"])) {
+        if (!empty($vars["stop_xref_list"]) && $this->isXrefListValid($vars["stop_xref_list"])) {
             $settings['stop_xref_list'] = $vars["stop_xref_list"];
             $settings['stop_proc'] = true;
         } else {
@@ -51,15 +58,15 @@ class FormSubmission
             $settings['mclimit'] = I18N::digits($vars["mclimit"]);
         }
 
-        if (isset($vars["filename"]) && $this->nameStringValid($vars["filename"])) {
+        if (isset($vars["filename"]) && $this->isNameStringValid($vars["filename"])) {
             $settings['filename'] = $vars["filename"];
         }
 
-        if (isset($vars["birth_prefix"]) && $this->prefixStringValid($vars["birth_prefix"])) {
+        if (isset($vars["birth_prefix"]) && $this->isPrefixStringValid($vars["birth_prefix"])) {
             $settings['birth_prefix'] = $vars["birth_prefix"];
         }
 
-        if (isset($vars["death_prefix"]) && $this->prefixStringValid($vars["death_prefix"])) {
+        if (isset($vars["death_prefix"]) && $this->isPrefixStringValid($vars["death_prefix"])) {
             $settings['death_prefix'] = $vars["death_prefix"];
         }
 
@@ -253,7 +260,7 @@ class FormSubmission
         if (isset($vars["highlight_col"]) && $this->isValidColourHex($vars["highlight_col"])) {
             $settings['highlight_col'] = $vars["highlight_col"];
         }
-        if (isset($vars["no_highlight_xref_list"]) && $this->xrefListValid($vars["no_highlight_xref_list"])) {
+        if (isset($vars["no_highlight_xref_list"]) && $this->isXrefListValid($vars["no_highlight_xref_list"])) {
             $settings['no_highlight_xref_list'] = $vars["no_highlight_xref_list"];
         }
         if (isset($vars["border_col"]) && $this->isValidColourHex($vars["border_col"])) {
@@ -348,16 +355,20 @@ class FormSubmission
     }
 
     /**
-     * @param $list
+     * Check if an XREF list string is properly structured
+     *
+     * @param string $list
      * @return false
      */
-    private function xrefListValid($list): bool
+    private function isXrefListValid(string $list): bool
     {
         return preg_match('/^[A-Za-z0-9:,_.-]*$/',$list);
     }
 
     /**
-     * @param $colour
+     * Check if a provided colour hex is valid
+     *
+     * @param string $colour
      * @return false
      */
     private function isValidColourHex($colour): bool
@@ -366,23 +377,30 @@ class FormSubmission
     }
 
     /**
+     * Check if a chosen name string meets validation criteria
+     *
      * @param $name
      * @return false
      */
-    public static function nameStringValid($name): bool
+    public static function isNameStringValid($name): bool
     {
         return preg_match('/^[A-Za-z0-9 _.-]*$/',$name);
     }
+
     /**
+     * Check if a string makes a valid prefix for birth/death/etc prefix icon
+     *
      * @param $name
      * @return false
      */
-    private function prefixStringValid($name): bool
+    private function isPrefixStringValid($name): bool
     {
         return preg_match('/^[A-Za-z0-9_ .*+()^%$#@!†-]*$/',$name);
     }
 
     /**
+     * Check if a string is a correctly formatted percentage
+     *
      * @param $string
      * @return false
      */
@@ -391,11 +409,23 @@ class FormSubmission
         return preg_match('/^[0-9]*%$/',$string);
     }
 
-    private function cleanSettingsName($name)
+    /**
+     * Removes all characters not in the regex
+     *
+     * @param string $name
+     * @return string
+     */
+    private function cleanSettingsName(string $name): string
     {
         return preg_replace("/[^A-ZÀ-úa-z0-9_ .*+()&^%$#@!'-]+/", '', $name);
     }
 
+    /**
+     * Attempts to normalise percentage string
+     *
+     * @param $percent
+     * @return mixed|string
+     */
     private function cleanPercent($percent)
     {
         if (!strpos($percent, '%')) {
@@ -404,6 +434,7 @@ class FormSubmission
         if ($this->isPercent($percent) && $percent != '%') {
             return $percent;
         }
+        // Failed to normalise
         return '100%';
     }
 }
