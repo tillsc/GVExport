@@ -2,6 +2,7 @@
 
 namespace vendor\WebtreesModules\gvexport;
 
+use Exception;
 use Fisharebest\Webtrees\Tree;
 
 /**
@@ -72,7 +73,7 @@ class Cookie
         if (isset($_COOKIE[$this->name]) and $_COOKIE[$this->name] != "") {
             try {
                 $decompressed = gzinflate($_COOKIE[$this->name]);
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $decompressed = $_COOKIE[$this->name];
             }
             $json_cookie = json_decode($decompressed);

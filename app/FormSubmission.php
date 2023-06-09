@@ -371,7 +371,7 @@ class FormSubmission
      * @param string $colour
      * @return false
      */
-    private function isValidColourHex($colour): bool
+    private function isValidColourHex(string $colour): bool
     {
         return preg_match('/^#[0-9a-f]{6}$/',$colour);
     }

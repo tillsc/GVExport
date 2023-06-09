@@ -92,7 +92,8 @@ class Person
      */
     function printPersonLabel(string $pid, $related = TRUE): string
     {
-        $out = "";
+        $sex = '';
+        $out = '';
         $border_colour = $this->dot->settings["border_col"];    // Border colour of the INDI's box
         $death_place = "";
         $i = $this->dot->getUpdatedPerson($pid);
@@ -163,8 +164,6 @@ class Person
             }
             if ($this->dot->settings['show_indi_sex']) {
                 $sex = $this->getSexFull($i);
-            } else {
-                $sex = '';
             }
         }
 

@@ -5,7 +5,6 @@ namespace vendor\WebtreesModules\gvexport;
 use Exception;
 use Fisharebest\Webtrees\Auth;
 use Fisharebest\Webtrees\Http\Exceptions\HttpBadRequestException;
-use Fisharebest\Webtrees\Http\RequestHandlers\ModuleAction;
 use Fisharebest\Webtrees\I18N;
 use Fisharebest\Webtrees\Tree;
 
@@ -532,7 +531,7 @@ class Settings
      * @return array
      * @throws Exception
      */
-    public function loadSettingsToken($module, $tree, $token): array
+    public function loadSettingsToken(GVExport $module, Tree $tree, string $token): array
     {
         $link = new SettingsLink($module, $tree, $this);
         try {
@@ -597,7 +596,15 @@ class Settings
         }
     }
 
-    private function getSettingsIdList($module, $tree) {
+    /**
+     * Retrieve the list of settings IDs used to keep track of valid IDs
+     *
+     * @param GVExport $module
+     * @param Tree $tree
+     * @return string
+     */
+    private function getSettingsIdList(GVExport $module, Tree $tree): string
+    {
         $user = Auth::user()->id();
         $use_cookie = $user == self::GUEST_USER_ID;
         if ($use_cookie) {
@@ -611,6 +618,11 @@ class Settings
         return $pref_list;
     }
 
+    /**
+     * Check if current user is logged in
+     *
+     * @return bool
+     */
     public static function isUserLoggedIn(): bool
     {
         if (Auth::user()->id() == self::GUEST_USER_ID) {
@@ -620,7 +632,16 @@ class Settings
         }
     }
 
-    private function addUserSettings($module, $tree, $id, array $s)
+    /**
+     * Saves the provided settings into the webtrees preferences
+     *
+     * @param GVExport $module
+     * @param Tree $tree
+     * @param string $id
+     * @param array $s
+     * @return void
+     */
+    private function addUserSettings(GVExport $module, Tree $tree, string $id, array $s)
     {
         $prefs_json = $module->getPreference(self::PREFERENCE_PREFIX . self::TREE_PREFIX . $tree->id() . self::USER_PREFIX . Auth::user()->id(), "preference not set");
         if ($prefs_json == "preference not set") {
@@ -637,7 +658,15 @@ class Settings
         $module->setPreference(self::PREFERENCE_PREFIX . self::TREE_PREFIX . $tree->id() . self::USER_PREFIX . Auth::user()->id(), $new_json);
     }
 
-    private function setSettingsIdList($module, $tree, string $id_list): bool
+    /**
+     * Saves the provided settings ID list into the webtrees preferences
+     *
+     * @param GVExport $module
+     * @param Tree $tree
+     * @param string $id_list
+     * @return bool
+     */
+    private function setSettingsIdList(GVExport $module, Tree $tree, string $id_list): bool
     {
         $use_cookie = Auth::user()->id() == self::GUEST_USER_ID;
         if ($use_cookie) {
@@ -648,6 +677,15 @@ class Settings
         }
     }
 
+    /**
+     * Each tree/user combination has its own settings file that holds all
+     * the different settings for that user/tree combination. This checks
+     * if such a file already exists.
+     *
+     * @param $module
+     * @param $tree
+     * @return bool
+     */
     private function doSettingsExist($module, $tree): bool
     {
         if (Auth::user()->id() == self::GUEST_USER_ID) {
@@ -663,12 +701,29 @@ class Settings
         }
     }
 
+    /**
+     * Trigger the removal of a settings token
+     * (e.g. when a shared settings link is revoked)
+     *
+     * @param $module
+     * @param $tree
+     * @param $token
+     * @return bool
+     */
     public function revokeSettingsToken($module, $tree, $token): bool
     {
         $settingsLink = new SettingsLink($module, $tree, $this);
         return $settingsLink->revokeToken($token);
     }
 
+    /**
+     * Get the name of a saved settings entry based on it's ID/tree
+     *
+     * @param $module
+     * @param $tree
+     * @param $settings_id
+     * @return mixed
+     */
     public function getSettingsName($module, $tree, $settings_id)
     {
         $userSettings = $this->loadUserSettings($module, $tree, $settings_id);
