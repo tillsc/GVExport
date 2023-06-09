@@ -347,20 +347,6 @@ function getComputedProperty(element, property) {
     return (parseFloat(style.getPropertyValue(property)));
 }
 
-// Create and download a PDF version of the provided image
-function createPdfFromImage(imgData, width, height) {
-    const orientation = width >= height ? 'landscape' : 'portrait';
-    const dpi = document.getElementById('dpi').value;
-    const widthInches = width / dpi;
-    const heightInches = height / dpi;
-    const doc = new window.jspdf.jsPDF({orientation: orientation, format: [widthInches, heightInches], unit: 'in'});
-    doc.addImage(imgData, "PNG", 0, 0, widthInches, heightInches);
-    // If running test suite, don't actually trigger download of data
-    // We have generated it so know it works
-    if (!window.Cypress) {
-        doc.save(download_file_name + ".pdf");
-    }
-}
 
 // If the browser render is available, scroll to the xref provided (if it exists)
 function scrollToRecord(xref) {
@@ -586,7 +572,7 @@ function downloadSettingsFileMenuAction(event) {
     }
     let file = new Blob([settings_json_string], {type: "text/plain"});
     let url = URL.createObjectURL(file);
-    Form.downloadLink(url, TREE_NAME + " - " + settings['save_settings_name'] + ".json")
+    Data.download.downloadLink(url, TREE_NAME + " - " + settings['save_settings_name'] + ".json")
 }
 
 /**

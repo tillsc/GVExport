@@ -198,16 +198,16 @@ $usegraphviz = $vars['graphviz_bin'] != "";
             const output = document.getElementById('output_type').value;
             switch(output) {
                 case "png":
-                    Form.downloadSVGAsPNG();
+                    Data.download.downloadSVGAsPNG();
                     break;
                 case "svg":
-                    Form.downloadSVGAsText();
+                    Data.download.downloadSVGAsText();
                     break;
                 case "jpg":
-                    Form.downloadSVGAsJPEG();
+                    Data.download.downloadSVGAsJPEG();
                     break;
                 case "pdf":
-                    Form.downloadSVGAsPDF();
+                    Data.download.downloadSVGAsPDF();
                     break;
                 default:
             }
