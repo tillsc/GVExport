@@ -4,7 +4,12 @@
  * @type {{}}
  */
 const Form = {
-    // Add or remove the % sign from the text input
+    /**
+     * Add or remove the % sign from the text input
+     *
+     * @param element
+     * @param add
+     */
     togglePercent: function(element, add) {
         // Clicked out of input field, add % sign
         let startValue;
@@ -27,22 +32,35 @@ const Form = {
         }
     },
 
-    // Update provided element with provided value when element blank
-    defaultValueWhenBlank: function(element, value) {
+    /**
+     * Update provided element with provided value when element blank
+     *
+     * @param element
+     * @param value
+     */
+    setDefaultValueIfBlank: function(element, value) {
         if (element.value === "") {
             element.value = value;
         }
     },
 
-    checkIndiBlank: function() {
+    /**
+     * Checks if a starting individual is selected or the list is blank
+     *
+     * @returns {boolean}
+     */
+    isIndiBlank: function() {
         let el = document.getElementsByClassName("item");
         let list = document.getElementById('xref_list');
         return el.length === 0 && list.value.toString().length === 0;
     },
-
-    // This function ensures that if certain options are checked in regard to which relations to include,
-    // then other required options are selected. e.g. if "Anyone" is selected, all other options must
-    // all be selected
+    /**
+     * This function ensures that if certain options are checked in regard to which relations to include,
+     * then other required options are selected. e.g. if "Anyone" is selected, all other options are
+     * set to selected.
+     *
+     * @param field
+     */
     updateRelationOption: function(field) {
         // If user clicked "All relatives"
         if (field === "include_all_relatives") {
@@ -86,9 +104,14 @@ const Form = {
             }
         }
     },
-
-    // Gets position of element relative to another
-    // From https://stackoverflow.com/questions/1769584/get-position-of-element-by-javascript
+    /**
+     * Gets position of element relative to another
+     * From https://stackoverflow.com/questions/1769584/get-position-of-element-by-javascript
+     *
+     * @param el
+     * @param rel
+     * @returns {{x: number, y: number}}
+     */
     getPos: function(el, rel)
     {
         let x = 0, y = 0;
@@ -102,9 +125,12 @@ const Form = {
         return {x:x, y:y};
     },
 
-
-    // Toggle items based on if the items in the cart should be used or not
-    // enable - if set to true, use cart. Update form to disable options. Set to "false" to reverse.
+    /**
+     * Toggle items based on if the items in the cart should be used or not
+     * enable - if set to true, use cart. Update form to disable options. Set to "false" to reverse.
+     *
+     * @param enable
+     */
     toggleCart: function(enable) {
             const el = document.getElementsByClassName("cart_toggle");
             for (let i = 0; i < el.length; i++) {
@@ -114,20 +140,25 @@ const Form = {
             Form.showHideClass("cart_toggle_show", enable);
         },
 
-        // This function is used in Form.toggleCart to show or hide all elements with a certain class,
-        // by adding or removing "display: none"
-        // css_class - the class to search for
-        // show - true to show the elements and false to hide them
-        showHideClass: function(css_class, show) {
-            let el = document.getElementsByClassName(css_class);
-            for (let i = 0; i < el.length; i++) {
-                Form.showHide(el.item(i), show)
-            }
+    /**
+     * This function is used in Form.toggleCart to show or hide all elements with a certain class,
+     * by adding or removing "display: none"
+     *
+     * @param css_class the class to search for
+     * @param show true to show the elements and false to hide them
+     */
+    showHideClass: function(css_class, show) {
+        let el = document.getElementsByClassName(css_class);
+        for (let i = 0; i < el.length; i++) {
+            Form.showHide(el.item(i), show)
+        }
     },
-
-    // Show or hide an element on the page
-    // element - the element to affect
-    // show - whether to show (true) or hide (false) the element
+    /**
+     * Show or hide an element on the page
+     *
+     * @param element
+     * @param show whether to show (true) or hide (false) the element
+     */
     showHide: function(element, show) {
         if (show) {
             element.style.removeProperty("display");
@@ -136,11 +167,23 @@ const Form = {
         }
     },
 
-
+    /**
+     * Show or hide an element based on whether a checkbox is checked
+     *
+     * @param checkboxId
+     * @param elementId
+     */
     showHideMatchCheckbox: function(checkboxId, elementId) {
         Form.showHide(document.getElementById(elementId), document.getElementById(checkboxId).checked);
     },
 
+    /**
+     * Show or hide an element based on whether a select field is a certain value
+     *
+     * @param dropdownId
+     * @param elementId element to show/hide
+     * @param value
+     */
     showHideMatchDropdown: function(dropdownId, elementId, value) {
         let values = value.split("|");
         let show = false;
@@ -153,6 +196,12 @@ const Form = {
         Form.showHide(document.getElementById(elementId),  show);
     },
 
+    /**
+     * Show or hide a settings group based on toggle arrow
+     *
+     * @param elementId
+     * @param callingEl
+     */
     showHideSubgroup: function(elementId, callingEl) {
         let callerText = callingEl.innerText;
         let visible = callerText.includes('↓');
@@ -165,6 +214,12 @@ const Form = {
 
     },
 
+    /**
+     * Shows or hides the diagram search box
+     *
+     * @param event
+     * @param visible (optional) whether to show (true) or hide, leave blank to toggle
+     */
     showHideSearchBox: function(event, visible = null) {
         const el = document.getElementById('diagram_search_box_container');
         // If toggling, set to the opposite of current state
@@ -183,87 +238,13 @@ const Form = {
         }
     },
 
-
-    // Download SVG file
-    downloadSVGAsText: function() {
-        const svg = document.getElementById('rendering').getElementsByTagName('svg')[0].cloneNode(true);
-        svg.removeAttribute("style");
-        let svgData = svg.outerHTML.replace(/&nbsp;/g, '');
-        // Replace image URLs with embedded data  for SVG also triggers download
-        Data.replaceImageURLs(svgData, "svg", null);
-    },
-
-    downloadSVGAsPDF: function() {
-        Form.downloadSVGAsImage("pdf");
-    },
-
-    downloadSVGAsPNG: function() {
-        Form.downloadSVGAsImage("png");
-    },
-
-    downloadSVGAsJPEG: function() {
-        Form.downloadSVGAsImage("jpeg");
-    },
-
-    // Download PNG from SVG file
-    downloadSVGAsImage: function(type) {
-        const svg = document.getElementById('rendering').getElementsByTagName('svg')[0].cloneNode(true);
-        // Style attribute used for the draggable browser view, remove this to reset to standard SVG
-        svg.removeAttribute("style");
-
-        const canvas = document.createElement("canvas");
-        const img = document.createElement("img");
-        // get svg data and remove line breaks
-        let xml = new XMLSerializer().serializeToString(svg);
-        // Fix the + symbol (any # breaks everything)
-        xml = xml.replace(/&#45;/g,"+");
-        // Replace # colours with rgb equivalent
-        // From https://stackoverflow.com/questions/13875974/search-and-replace-hexadecimal-color-codes-with-rgb-values-in-a-string
-        const rgbHex = /#([0-9A-F][0-9A-F])([0-9A-F][0-9A-F])([0-9A-F][0-9A-F])/gi;
-        xml = xml.replace(rgbHex, function (m, r, g, b) {
-            return 'rgb(' + parseInt(r,16) + ','
-                + parseInt(g,16) + ','
-                + parseInt(b,16) + ')';
-        });
-        // Replace image URLs with embedded images
-        Data.replaceImageURLs(xml, type, img);
-        // Once image loaded, draw to canvas then download it
-        img.onload = function() {
-            canvas.setAttribute('width', img.width.toString());
-            canvas.setAttribute('height', img.height.toString());
-            // draw the image onto the canvas
-            let context = canvas.getContext('2d');
-            context.drawImage(img, 0, 0, img.width, img.height);
-            // Download it
-            const dataURL = canvas.toDataURL('image/'+type);
-            if (dataURL.length < 10) {
-                UI.showToast(ERROR_CHAR+TRANSLATE['Your browser does not support exporting images this large. Please reduce number of records, reduce DPI setting, or use SVG option.']);
-            } else if (type === "pdf") {
-                createPdfFromImage(dataURL, img.width, img.height);
-            } else {
-                Form.downloadLink(dataURL, download_file_name + "." + type);
-            }
-        }
-    },
-
-    // Trigger a download via javascript
-    downloadLink: function(URL, filename) {
-        const downloadLinkElement = document.createElement("a");
-        downloadLinkElement.href = URL;
-        downloadLinkElement.download = filename;
-        document.body.appendChild(downloadLinkElement);
-        // If running test suite, don't actually trigger download of data
-        // We have generated it so know it works
-        if (!window.Cypress) {
-            downloadLinkElement.click();
-        }
-        document.body.removeChild(downloadLinkElement);
-    },
-
-    // Toggle the showing of an advanced settings section
-    // button - the button element calling the script
-    // id - the id of the element we are toggling
-    // visible - whether to make element visible or hidden. Null to toggle current state.
+    /**
+     * Toggle the showing of an advanced settings section
+     *
+     * @param button the button element calling the script
+     * @param id the id of the element we are toggling
+     * @param visible whether to make element visible or hidden. Null to toggle current state.
+     */
     toggleAdvanced: function(button, id, visible = null) {
         const el = document.getElementById(id);
         // If toggling, set to the opposite of current state

@@ -17,7 +17,7 @@ use Fisharebest\Webtrees\I18N;
         <div class="row">
             <label for="dpi"><?= I18N::translate('DPI') ?></label>
             <div class="col-auto">
-                <input type="text" onblur="Form.defaultValueWhenBlank(this, 72)" class="form-control col-sm-6" size="5" name="vars[dpi]" id="dpi"
+                <input type="text" onblur="Form.setDefaultValueIfBlank(this, 72)" class="form-control col-sm-6" size="5" name="vars[dpi]" id="dpi"
                        value="<?= I18N::digits($vars['dpi']); ?>">
             </div>
         </div>

@@ -173,7 +173,7 @@ $usegraphviz = $vars['graphviz_bin'] != "";
 
     // Trigger action when "Update" button clicked
     document.querySelector('.update-browser-rendering').addEventListener('click', function(e) {
-        if (Form.checkIndiBlank() === false) {
+        if (Form.isIndiBlank() === false) {
             updateRender();
             refreshIndisFromXREFS(false);
             removeError("indi-error");
@@ -186,7 +186,7 @@ $usegraphviz = $vars['graphviz_bin'] != "";
     // If "Download" button clicked
     document.querySelector('.main-action').addEventListener('click', function(e) {
         // first check that individual has been selected
-        if (Form.checkIndiBlank() === false) {
+        if (Form.isIndiBlank() === false) {
             removeError("indi-error");
         } else {
             addError("indi-error","<?= I18N::translate('Individual required') ?>");
