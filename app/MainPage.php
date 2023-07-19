@@ -25,6 +25,7 @@ class MainPage
 
     /**
      * Returns HTML code for the help button
+     *
      * @param string $helpType A string representing the label we are requesting help about. Normally the same as the text on the label.
      * @return string
      */
@@ -35,6 +36,7 @@ class MainPage
 
     /**
      * Returns the HTML code for the label, the option grouping on the left hand side of the settings
+     *
      * @param string $for the id of the input element this label is for
      * @param string $text the text to put on the label
      * @param bool $help

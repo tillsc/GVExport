@@ -36,6 +36,11 @@ class Help
     public const MESSAGE_HISTORY = 'Message history';
     public const LIST_OF_DIAGRAMS = 'List of diagrams';
 
+    /**
+     * Array of all valid help view relative locations
+     *
+     * @var array|string[]
+     */
     private array $help_location = [
             self::HOME => '',
             self::NOT_FOUND => '',
@@ -66,17 +71,13 @@ class Help
             self::LIST_OF_DIAGRAMS => 'Detailed information/Saved diagrams/',
         ];
 
-    public function __construct()
-    {
-    }
-
     /**
      * Checks if $help is a valid name of a help view
      *
-     * @param $help
+     * @param string $help
      * @return bool
      */
-    public function helpExists($help): bool
+    public function helpExists(string $help): bool
     {
         if (array_key_exists($help, $this->help_location)) {
             return true;
@@ -94,6 +95,7 @@ class Help
     public function getHelpLocation($help) {
             return $this->help_location[$help];
     }
+
     /**
      * Returns the location of the requested help view relative to the Help directory
      *

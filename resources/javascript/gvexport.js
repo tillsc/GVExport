@@ -347,20 +347,6 @@ function getComputedProperty(element, property) {
     return (parseFloat(style.getPropertyValue(property)));
 }
 
-// Create and download a PDF version of the provided image
-function createPdfFromImage(imgData, width, height) {
-    const orientation = width >= height ? 'landscape' : 'portrait';
-    const dpi = document.getElementById('dpi').value;
-    const widthInches = width / dpi;
-    const heightInches = height / dpi;
-    const doc = new window.jspdf.jsPDF({orientation: orientation, format: [widthInches, heightInches], unit: 'in'});
-    doc.addImage(imgData, "PNG", 0, 0, widthInches, heightInches);
-    // If running test suite, don't actually trigger download of data
-    // We have generated it so know it works
-    if (!window.Cypress) {
-        doc.save(download_file_name + ".pdf");
-    }
-}
 
 // If the browser render is available, scroll to the xref provided (if it exists)
 function scrollToRecord(xref) {
@@ -462,7 +448,7 @@ function removeSettingsEllipsisMenu(menuElement) {
 }
 
 function showGraphvizUnsupportedMessage() {
-    if (graphvizAvailable && document.getElementById('photo_shape').value !== '0') UI.showToast(TRANSLATE["Diagram will be rendered in browser as server doesn't support photo shapes"]);
+    if (graphvizAvailable && document.getElementById('photo_shape')?.value !== '0') UI.showToast(TRANSLATE["Diagram will be rendered in browser as server doesn't support photo shapes"]);
 }
 
 // This function is run when the page is loaded
@@ -529,7 +515,7 @@ function pageLoaded(Url) {
     });
     document.querySelector("#diagram_search_box_container").addEventListener('change', diagramSearchBoxChange);
     document.querySelector('#searchButton').addEventListener('click', Form.showHideSearchBox);
-    document.querySelector('#photo_shape').addEventListener('change', showGraphvizUnsupportedMessage);
+    document.querySelector('#photo_shape')?.addEventListener('change', showGraphvizUnsupportedMessage);
 }
 
 // Function to show a help message
@@ -586,7 +572,7 @@ function downloadSettingsFileMenuAction(event) {
     }
     let file = new Blob([settings_json_string], {type: "text/plain"});
     let url = URL.createObjectURL(file);
-    Form.downloadLink(url, TREE_NAME + " - " + settings['save_settings_name'] + ".json")
+    Data.download.downloadLink(url, TREE_NAME + " - " + settings['save_settings_name'] + ".json")
 }
 
 /**
@@ -1357,7 +1343,7 @@ function cleanSVG(element) {
     const SHAPE_SQUARE = '30';
     const SHAPE_ROUNDED_RECT = '40';
     const SHAPE_ROUNDED_SQUARE = '50';
-    switch(document.getElementById('photo_shape').value) {
+    switch(document.getElementById('photo_shape')?.value) {
         case SHAPE_OVAL:
             setSvgImageClipPath(element, "inset(0% round 50%)");
             break;

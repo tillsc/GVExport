@@ -173,7 +173,7 @@ $usegraphviz = $vars['graphviz_bin'] != "";
 
     // Trigger action when "Update" button clicked
     document.querySelector('.update-browser-rendering').addEventListener('click', function(e) {
-        if (Form.checkIndiBlank() === false) {
+        if (Form.isIndiBlank() === false) {
             updateRender();
             refreshIndisFromXREFS(false);
             removeError("indi-error");
@@ -186,7 +186,7 @@ $usegraphviz = $vars['graphviz_bin'] != "";
     // If "Download" button clicked
     document.querySelector('.main-action').addEventListener('click', function(e) {
         // first check that individual has been selected
-        if (Form.checkIndiBlank() === false) {
+        if (Form.isIndiBlank() === false) {
             removeError("indi-error");
         } else {
             addError("indi-error","<?= I18N::translate('Individual required') ?>");
@@ -194,20 +194,20 @@ $usegraphviz = $vars['graphviz_bin'] != "";
         }
         // Also check if Graphviz installed. If so then let it handle it (unless unsupported setting used),
         // but if not, trigger client side actions
-        if (!graphvizAvailable || document.getElementById('photo_shape').value !== '0') {
+        if (!graphvizAvailable || document.getElementById('photo_shape')?.value !== '0') {
             const output = document.getElementById('output_type').value;
             switch(output) {
                 case "png":
-                    Form.downloadSVGAsPNG();
+                    Data.download.downloadSVGAsPNG();
                     break;
                 case "svg":
-                    Form.downloadSVGAsText();
+                    Data.download.downloadSVGAsText();
                     break;
                 case "jpg":
-                    Form.downloadSVGAsJPEG();
+                    Data.download.downloadSVGAsJPEG();
                     break;
                 case "pdf":
-                    Form.downloadSVGAsPDF();
+                    Data.download.downloadSVGAsPDF();
                     break;
                 default:
             }

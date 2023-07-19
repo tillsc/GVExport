@@ -2,18 +2,24 @@
 
 namespace vendor\WebtreesModules\gvexport;
 
-use Cassandra\Set;
+use Exception;
 use Fisharebest\Webtrees\Auth;
 use Fisharebest\Webtrees\Services\GedcomImportService;
 use Fisharebest\Webtrees\Services\TreeService;
+use Fisharebest\Webtrees\Tree;
 
+/**
+ * Represents a shared settings link, created by having a logged-in user
+ * save a named version of settings, then have them choose to create a
+ * link to share those settings
+ */
 class SettingsLink
 {
     const TOKEN_PREFIX = "&t=";
     const TOKEN_LENGTH = 10;
     private string $base_url;
-    private $module;
-    private $tree;
+    private GVExport $module;
+    private Tree $tree;
     private int $userId;
     private string $id;
     private Settings $settings_obj;
@@ -31,14 +37,17 @@ class SettingsLink
     }
 
     /**
-     * @throws \Exception
+     * Retrieve URL for shared setting, creating it if it does not exist
+     *
+     * @return string
+     * @throws Exception
      */
     public function getUrl(): string
     {
         try {
             $record = $this->getSharedSettingsList();
-        } catch (\Exception $error) {
-            throw new \Exception($error);
+        } catch (Exception $error) {
+            throw new Exception($error);
         }
 
         foreach ($record as $key => $value) {
@@ -63,9 +72,12 @@ class SettingsLink
     }
 
     /**
-     * @throws \Exception
+     * Retrieve the list of shared settings
+     *
+     * @return array
+     * @throws Exception
      */
-    private function getSharedSettingsList()
+    private function getSharedSettingsList(): array
     {
         $pref = $this->module->getPreference(Settings::PREFERENCE_PREFIX . Settings::SAVED_SETTINGS_LIST_PREFERENCE_NAME, "preference not set");
         if ($pref == "preference not set") {
@@ -73,20 +85,31 @@ class SettingsLink
         } else {
             $shared_settings = json_decode($pref, true);
             if (json_last_error() !== JSON_ERROR_NONE) {
-                throw new \Exception(json_last_error());
+                throw new Exception(json_last_error());
             }
             return $shared_settings;
         }
     }
 
-    private function setSharedSettingsList($record)
+    /**
+     * Save the list of shared settings into the webtrees preferences
+     *
+     * @param array $record
+     * @return void
+     */
+    private function setSharedSettingsList(array $record)
     {
         $json = json_encode($record);
         $this->module->setPreference(Settings::PREFERENCE_PREFIX . Settings::SAVED_SETTINGS_LIST_PREFERENCE_NAME, $json);
     }
 
     /**
-     * @throws \Exception
+     * Retrieve settings array based on shared settings token
+     *
+     * @param string $token
+     * @param Settings $settings
+     * @return array
+     * @throws Exception
      */
     public function loadToken(string $token, Settings $settings): array
     {
@@ -105,11 +128,18 @@ class SettingsLink
             }
             return $preferences;
         } else {
-            throw new \Exception("Invalid token");
+            throw new Exception("Invalid token");
         }
     }
 
-    public function removeTokenRecord($token = ''): bool
+    /**
+     * Update the shared settings list of tokens to remove a
+     * shared settings token
+     *
+     * @param string $token
+     * @return bool
+     */
+    public function removeTokenRecord(string $token = ''): bool
     {
         try {
             $sharedSettingsList = $this->getSharedSettingsList();
@@ -126,11 +156,17 @@ class SettingsLink
             }
             $this->setSharedSettingsList($sharedSettingsList);
             return true;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return false;
         }
     }
 
+    /**
+     * Adds a shared settings token into the settings record saved in webtrees
+     *
+     * @param $token
+     * @return bool
+     */
     public function updateSettingsWithToken($token): bool
     {
         if (Auth::user()->id() == Settings::GUEST_USER_ID) {
@@ -143,6 +179,12 @@ class SettingsLink
         }
     }
 
+    /**
+     * Removes a shared settings token, so it can't be used anymore
+     *
+     * @param $token
+     * @return bool
+     */
     public function revokeToken($token): bool
     {
         try {
@@ -152,7 +194,7 @@ class SettingsLink
             } else {
                 return false;
             }
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return false;
         }
         $clearTokenFromSettings = $this->updateSettingsWithToken('');

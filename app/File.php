@@ -2,6 +2,9 @@
 
 namespace vendor\WebtreesModules\gvexport;
 
+/**
+ * File handling functionality
+ */
 class File
 {
     /**
