@@ -5,7 +5,6 @@ export class SettingsGroup {
     }
 
     linkModifierElement(modifierId, value, customCondition) {
-        let el = document.getElementById(modifierId);
         let element = document.querySelector('#' + modifierId);
         element.addEventListener('change', () => {this.runEventListener(modifierId, value, customCondition)});
     }

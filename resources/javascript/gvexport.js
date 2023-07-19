@@ -662,6 +662,9 @@ function loadSettings(data, isNamedSetting = false) {
                 el.value = settings[key];
             }
         }
+
+        // Update show/hide of JPG quality option
+        Form.showHideMatchDropdown('output_type', 'server_pdf_subgroup', 'pdf|svg|jpg')
     });
     Form.showHideMatchCheckbox('mark_not_related', 'mark_related_subgroup');
     Form.showHideMatchCheckbox('show_birthdate', 'birth_date_subgroup');

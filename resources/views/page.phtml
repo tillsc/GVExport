@@ -408,7 +408,7 @@ $usegraphviz = $vars['graphviz_bin'] != "";
         new module.SettingsGroup('subgroup_border_custom', 'border_col_type', '<?= Settings::OPTION_BORDER_CUSTOM_COLOUR;?>');
         new module.SettingsGroup('subgroup_border_vitals', 'border_col_type', '<?= Settings::OPTION_BORDER_VITAL_COLOUR;?>');
         new module.SettingsGroup('subgroup_border_age', 'border_col_type', '<?= Settings::OPTION_BORDER_AGE_COLOUR;?>');
-        new module.SettingsGroup('server_pdf_subgroup', 'output_type', 'pdf|svg', () => {return graphvizAvailable});
+        new module.SettingsGroup('server_pdf_subgroup', 'output_type', 'pdf|svg|jpg', () => {return graphvizAvailable});
         new module.SettingsGroup('subgroup_stripe_vitals', 'stripe_col_type', '<?= Settings::OPTION_STRIPE_VITAL_COLOUR;?>');
         new module.SettingsGroup('subgroup_stripe_age', 'stripe_col_type', '<?= Settings::OPTION_STRIPE_AGE_COLOUR;?>');
     })
