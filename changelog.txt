@@ -3,7 +3,15 @@
 	GVExport module for Webtrees
 =====================================================================
 
-Version 2.1.18 (2023-06-?)
+Version 2.1.18.2 (2023-07-19)
+  - Fixed       : Error when webtrees thumbnail option for tree is set to hide thumbnails
+  - Fixed       : JPG quality option not correctly shown or hidden when setting loaded from saved setting
+  - Fixed       : JPG quality option not shown when output type set to JPG
+
+Version 2.1.18.1 (2023-06-05)
+  - Fixed       : Some help translations were not translating
+
+Version 2.1.18 (2023-06-05)
   - New         : Change shape of photos
   - New         : Change size of photos
   - New         : Change resolution of photos
