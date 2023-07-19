@@ -39,7 +39,7 @@ msgstr "Включить предков"
 #: 
 #, fuzzy
 msgid "Connections to include"
-msgstr "Включить"
+msgstr "Соединения, которые нужно включить"
 
 #: 
 msgid "Siblings"
@@ -109,7 +109,7 @@ msgstr "Тип диаграммы"
 #: 
 #, fuzzy
 msgid "Separated"
-msgstr "Украшен"
+msgstr "Раздельный"
 
 #: 
 msgid "Combined"
@@ -119,7 +119,7 @@ msgstr "Комбинация"
 #: 
 #, fuzzy
 msgid "Photos"
-msgstr "Добавить фото"
+msgstr "Фото"
 
 #: 
 msgid "Output file type"
@@ -236,7 +236,7 @@ msgstr "Индивидуальный требуется"
 
 #: 
 msgid "Generated %s individuals and %s family records"
-msgstr "Сгенерировано %s отдельных лиц и %s семейных записей."
+msgstr "Сгенерировано %s отдельных лиц и %s семейных записей"
 
 #: 
 msgid "Invalid starting individual:"
@@ -1241,12 +1241,12 @@ msgstr "Этот параметр позволяет выбрать форму �
 #. Part of the help text for the "Individual tile shape" option:  https://s3.eu-west-1.amazonaws.com/po-pub/i/7f9BFZbMmpL5IUEFjtkmDgN6.png
 #: 
 msgid "The default option, the tile is a rectangle shape."
-msgstr "вариант по умолчанию, плитка имеет прямоугольную форму."
+msgstr "Вариант по умолчанию, плитка имеет прямоугольную форму."
 
 #. Part of the help text for the "Individual tile shape" option:  https://s3.eu-west-1.amazonaws.com/po-pub/i/7f9BFZbMmpL5IUEFjtkmDgN6.png
 #: 
 msgid "The tile has rounded corners"
-msgstr "плитка имеет закругленные углы"
+msgstr "Плитка имеет закругленные углы"
 
 #. Part of the help text for the "Individual tile shape" option:  https://s3.eu-west-1.amazonaws.com/po-pub/i/7f9BFZbMmpL5IUEFjtkmDgN6.png
 #: 
@@ -1433,4 +1433,9 @@ msgstr "Ссылки по теме"
 #: 
 msgid "Home"
 msgstr "Дом"
+
+#. Text on button that shows the help panel:  https://s3.eu-west-1.amazonaws.com/po-pub/i/l1Z2zKsAgMx4VL6XVNJGrCWz.png
+#: 
+msgid "Show help"
+msgstr "Показать справку"
 

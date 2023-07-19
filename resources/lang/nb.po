@@ -1440,3 +1440,8 @@ msgstr ""
 msgid "Home"
 msgstr ""
 
+#. Text on button that shows the help panel:  https://s3.eu-west-1.amazonaws.com/po-pub/i/l1Z2zKsAgMx4VL6XVNJGrCWz.png
+#: 
+msgid "Show help"
+msgstr ""
+
