@@ -448,7 +448,7 @@ function removeSettingsEllipsisMenu(menuElement) {
 }
 
 function showGraphvizUnsupportedMessage() {
-    if (graphvizAvailable && document.getElementById('photo_shape').value !== '0') UI.showToast(TRANSLATE["Diagram will be rendered in browser as server doesn't support photo shapes"]);
+    if (graphvizAvailable && document.getElementById('photo_shape')?.value !== '0') UI.showToast(TRANSLATE["Diagram will be rendered in browser as server doesn't support photo shapes"]);
 }
 
 // This function is run when the page is loaded
@@ -515,7 +515,7 @@ function pageLoaded(Url) {
     });
     document.querySelector("#diagram_search_box_container").addEventListener('change', diagramSearchBoxChange);
     document.querySelector('#searchButton').addEventListener('click', Form.showHideSearchBox);
-    document.querySelector('#photo_shape').addEventListener('change', showGraphvizUnsupportedMessage);
+    document.querySelector('#photo_shape')?.addEventListener('change', showGraphvizUnsupportedMessage);
 }
 
 // Function to show a help message
@@ -1343,7 +1343,7 @@ function cleanSVG(element) {
     const SHAPE_SQUARE = '30';
     const SHAPE_ROUNDED_RECT = '40';
     const SHAPE_ROUNDED_SQUARE = '50';
-    switch(document.getElementById('photo_shape').value) {
+    switch(document.getElementById('photo_shape')?.value) {
         case SHAPE_OVAL:
             setSvgImageClipPath(element, "inset(0% round 50%)");
             break;
