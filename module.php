@@ -240,8 +240,8 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
         if (isset($_POST['json_data'])) {
             $individual = $this->getIndividual($tree, $tree->significantIndividual(Auth::user(), '')->xref());
             $this->base_url = $this->strip_param_from_url($this->chartUrl($individual), 'xref');
-            $api = new ApiHandler();
-            return $api->handle($request, $this, $tree);
+            $api = new ApiHandler($request, $this, $tree);
+            return $api->handle();
         } else {
             $vars_data = Validator::parsedBody($request)->array('vars');
             $temp_dir = $this->saveDOTFile($tree, $vars_data);
