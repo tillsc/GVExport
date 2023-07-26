@@ -279,7 +279,25 @@ class ApiHandler
      */
     public function renameSettings(): void
     {
-
+        if (isset($this->json['settings_id']) && (ctype_alnum($this->json['settings_id']))) {
+            $id = $this->json['settings_id'];
+            $new_name = $this->json['name'];
+            $settings_obj = new Settings();
+            try {
+                if (Auth::user()->id() == Settings::GUEST_USER_ID) {
+                    $this->setFailResponse('Not logged in', 'E15');
+                } else {
+                    $settings = $settings_obj->loadUserSettings($this->module, $this->tree, $id);
+                    $settings['name'] = $new_name;
+                    $settings_obj->saveUserSettings($this->module, $this->tree, $settings, $id);
+                }
+                $this->response_data['success'] = true;
+            } catch (Exception $e) {
+                $this->setFailResponse('Invalid JSON', 'E9');
+            }
+        } else {
+            $this->setFailResponse('Invalid settings ID', 'E6');
+        }
     }
 
     /**
