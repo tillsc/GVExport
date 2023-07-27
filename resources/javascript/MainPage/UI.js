@@ -197,5 +197,68 @@ const UI = {
                 }
             }
         }
+    },
+
+    /**
+     * UI functionality for Saved Settings options
+     */
+    savedSettings: {
+
+        /**
+         * Display context menu for item in saved settings list
+         *
+         * @param event
+         */
+        showSavedSettingsItemMenu(event) {
+            event.stopImmediatePropagation();
+            let id = event.target.parentElement.parentElement.getAttribute('data-id');
+            let token = event.target.parentElement.parentElement.getAttribute('data-token');
+            removeSettingsEllipsisMenu(event.target);
+            isUserLoggedIn().then((loggedIn) => {
+                if (id != null) {
+                    id = id.trim();
+                    let div = document.createElement('div');
+                    div.setAttribute('class', 'settings_ellipsis_menu');
+                    UI.savedSettings.addSettingsMenuOption(id, div, '❌', 'Delete', deleteSettingsMenuAction);
+                    UI.savedSettings.addSettingsMenuOption(id, div, '💻', 'Download', downloadSettingsFileMenuAction);
+                    UI.savedSettings.addSettingsMenuOption(id, div, '🏷️', 'Rename', Form.savedSettings.renameSettingsMenuAction);
+                    if (loggedIn) {
+                        UI.savedSettings.addSettingsMenuOption(id, div, '🔗', 'Copy link', copySavedSettingsLinkMenuAction);
+                        if (token !== '') {
+                            UI.savedSettings.addSettingsMenuOption(id, div, '🚫', 'Revoke link', revokeSavedSettingsLinkMenuAction, token);
+                        }
+                        if (MY_FAVORITES_MODULE_ACTIVE) {
+                            UI.savedSettings.addSettingsMenuOption(id, div, '🌟', 'Add to My favorites', addUrlToMyFavouritesMenuAction);
+                        }
+                        if (TREE_FAVORITES_MODULE_ACTIVE) {
+                            UI.savedSettings.addSettingsMenuOption(id, div, '🌲', 'Add to Tree favorites', addUrlToTreeFavourites);
+                        }
+                    }
+                    event.target.appendChild(div);
+                }
+            });
+        },
+
+        /**
+         * Add an item to the saved settings item context menu
+         *
+         * @param id
+         * @param div
+         * @param emoji
+         * @param text
+         * @param callback
+         * @param token
+         */
+        addSettingsMenuOption(id, div, emoji, text, callback, token = '') {
+            let el = document.createElement('a');
+            el.setAttribute('class', 'settings_ellipsis_menu_item');
+            el.innerHTML = '<span class="settings_ellipsis_menu_icon">' + emoji + '</span><span>' + TRANSLATE[text] + '</span>';
+            el.id = id;
+            el.token = token;
+            el.addEventListener("click", (e) => {
+                callback(e);
+            });
+            div.appendChild(el);
+        }
     }
 };

@@ -262,5 +262,70 @@ const Form = {
             const hidden = document.getElementById(id+"-hidden");
             hidden.value = "";
         }
+    },
+
+    /**
+     * Section of form that handles saving and loading settings from a list
+     */
+    savedSettings: {
+        renameSettingsMenuAction(e) {
+            e.stopPropagation();
+            let id = e.currentTarget.id;
+            Form.savedSettings.renameSetting(id);
+        },
+
+        /**
+         * Updates a setting in the saved settings list to have a new name
+         *
+         * @param id
+         * @param userPrompted
+         * @returns {boolean}
+         */
+        renameSetting(id, userPrompted = false) {
+            let name = "";
+            if (userPrompted) {
+                name = document.getElementById('rename_text').value;
+                document.getElementById('modal').remove();
+                if (name === '') return false;
+            } else {
+                let message = TRANSLATE["Enter new setting name"] + ': <input type="text" id="rename_text" autofocus="autofocus">';
+                let buttons = '<div class="modal-button-container"><button class="btn btn-secondary modal-button" onclick="document.getElementById(' + "'modal'" + ').remove()">' + TRANSLATE['Cancel'] + '</button><button class="btn btn-primary modal-button" onclick="Form.savedSettings.renameSetting(' + id + ', true)">' + TRANSLATE['Rename'] + '</button></div>';
+                showModal('<div class="modal-container">' + message + '<br>' + buttons + '</div>');
+                return false;
+            }
+            isUserLoggedIn().then((loggedIn) => {
+                if (loggedIn) {
+                    let request = {
+                        "type": REQUEST_TYPE_RENAME_SETTINGS,
+                        "settings_id": id,
+                        "name": name
+                    };
+                    let json = JSON.stringify(request);
+                    sendRequest(json).then((response) => {
+                        try {
+                            let json = JSON.parse(response);
+                            if (json.success) {
+                                loadSettingsDetails();
+                                UI.showToast(TRANSLATE['Updated settings']);
+                            } else {
+                                UI.showToast(ERROR_CHAR + json.errorMessage);
+                            }
+                        } catch (e) {
+                            UI.showToast("Failed to load response: " + e);
+                            return false;
+                        }
+                    });
+                } else {
+                    // Logged out so save in browser
+                    let settings_field = document.getElementById('save_settings_name');
+                    let settings_text = settings_field.value;
+                    settings_field.value = name;
+                    saveSettingsClient(id).then(() => {
+                        settings_field.value = settings_text;
+                        loadSettingsDetails();
+                    }).catch(error => UI.showToast(error));
+                }
+            });
+        }
     }
 }
