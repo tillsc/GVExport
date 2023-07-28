@@ -4,6 +4,7 @@ const ID_ALL_SETTINGS = "_ALL_";
 const SETTINGS_ID_LIST_NAME = 'GVE_settings_id_list';
 const REQUEST_TYPE_GET_TREE_NAME = "get_tree_name";
 const REQUEST_TYPE_DELETE_SETTINGS = "delete_settings";
+const REQUEST_TYPE_RENAME_SETTINGS = "rename_settings";
 const REQUEST_TYPE_SAVE_SETTINGS = "save_settings";
 const REQUEST_TYPE_GET_SETTINGS = "get_settings";
 const REQUEST_TYPE_IS_LOGGED_IN = "is_logged_in";
@@ -555,27 +556,6 @@ function showHelp(item) {
 }
 
 /**
- * Downloads settings as JSON file
- */
-function downloadSettingsFileMenuAction(event) {
-    let parent = event.target.parentElement;
-    while (!parent.dataset.settings) {
-        parent = parent.parentElement;
-    }
-    let settings_json_string = parent.dataset.settings;
-    let settings;
-    try {
-        settings = JSON.parse(settings_json_string);
-    } catch (e) {
-        UI.showToast("Failed to load settings: " + e);
-        return false;
-    }
-    let file = new Blob([settings_json_string], {type: "text/plain"});
-    let url = URL.createObjectURL(file);
-    Data.download.downloadLink(url, TREE_NAME + " - " + settings['save_settings_name'] + ".json")
-}
-
-/**
  * Loads settings from uploaded file
  */
 function uploadSettingsFile(input) {
@@ -829,7 +809,7 @@ function loadSettingsDetails() {
             newListItem.setAttribute("data-token", settingsList[key]['token'] || "");
             newListItem.setAttribute("data-name", settingsList[key]['name']);
             newListItem.setAttribute("onclick", "loadSettings(this.getAttribute('data-settings'), true)");
-            newListItem.innerHTML = "<a class='pointer'>" + settingsList[key]['name'] + "<div class=\"saved-settings-ellipsis pointer\" onclick='showSavedSettingsItemMenu(event)'><a class='pointer'>…</a></div></a>";
+            newListItem.innerHTML = "<a class='pointer'>" + settingsList[key]['name'] + "<div class=\"saved-settings-ellipsis pointer\" onclick='UI.savedSettings.showSavedSettingsItemMenu(event)'><a class='pointer'>…</a></div></a>";
             newLinkWrapper.appendChild(newListItem);
             listElement.appendChild(newLinkWrapper);
 
@@ -843,47 +823,6 @@ function loadSettingsDetails() {
     }).catch(
         error => UI.showToast(error)
     );
-}
-
-function addSettingsMenuOption(id, div, emoji, text, callback, token = '') {
-    let el = document.createElement('a');
-    el.setAttribute('class', 'settings_ellipsis_menu_item');
-    el.innerHTML = '<span class="settings_ellipsis_menu_icon">' + emoji + '</span><span>' + TRANSLATE[text] + '</span>';
-    el.id = id;
-    el.token = token;
-    el.addEventListener("click", (e) => {
-        callback(e);
-    });
-    div.appendChild(el);
-}
-
-function showSavedSettingsItemMenu(event) {
-    event.stopImmediatePropagation();
-    let id = event.target.parentElement.parentElement.getAttribute('data-id');
-    let token = event.target.parentElement.parentElement.getAttribute('data-token');
-    removeSettingsEllipsisMenu(event.target);
-    isUserLoggedIn().then((loggedIn) => {
-        if (id != null) {
-            id = id.trim();
-            let div = document.createElement('div');
-            div.setAttribute('class', 'settings_ellipsis_menu');
-            addSettingsMenuOption(id, div, '❌', 'Delete', deleteSettingsMenuAction);
-            addSettingsMenuOption(id, div, '💻', 'Download', downloadSettingsFileMenuAction);
-            if (loggedIn) {
-                addSettingsMenuOption(id, div, '🔗', 'Copy link', copySavedSettingsLinkMenuAction);
-                if (token !== '') {
-                    addSettingsMenuOption(id, div, '🚫', 'Revoke link', revokeSavedSettingsLinkMenuAction, token);
-                }
-                if (MY_FAVORITES_MODULE_ACTIVE) {
-                    addSettingsMenuOption(id, div, '🌟', 'Add to My favorites', addUrlToMyFavouritesMenuAction);
-                }
-                if (TREE_FAVORITES_MODULE_ACTIVE) {
-                    addSettingsMenuOption(id, div, '🌲', 'Add to Tree favorites', addUrlToTreeFavourites);
-                }
-            }
-            event.target.appendChild(div);
-        }
-    });
 }
 
 function saveSettingsAdvanced(userPrompted = false) {
@@ -937,171 +876,6 @@ function saveSettingsAdvanced(userPrompted = false) {
         error => UI.showToast(error)
     );
 
-}
-
-function deleteSettingsClient(id) {
-    getTreeName().then((treeName) => {
-        try {
-            localStorage.removeItem("GVE_Settings_" + treeName + "_" + id);
-            deleteIdLocal(id);
-        } catch (e) {
-            UI.showToast(e);
-        }
-    });
-}
-
-function deleteSettingsMenuAction(e) {
-    e.stopPropagation();
-    let id = e.currentTarget.id;
-    isUserLoggedIn().then((loggedIn) => {
-        if (loggedIn) {
-            let request = {
-                "type": REQUEST_TYPE_DELETE_SETTINGS,
-                "settings_id": id
-            };
-            let json = JSON.stringify(request);
-            sendRequest(json).then((response) => {
-                try {
-                    let json = JSON.parse(response);
-                    if (json.success) {
-                        loadSettingsDetails();
-                    } else {
-                        UI.showToast(ERROR_CHAR + json.errorMessage);
-                    }
-                } catch (e) {
-                    UI.showToast("Failed to load response: " + e);
-                    return false;
-                }
-            });
-        } else {
-            deleteSettingsClient(id);
-            loadSettingsDetails();
-        }
-    });
-}
-
-function copySavedSettingsLinkMenuAction(e) {
-    let id = e.currentTarget.id;
-    e.stopPropagation();
-    getSavedSettingsLink(id).then((url)=>{
-        copyToClipboard(url)
-            .then(() => {
-                UI.showToast(TRANSLATE['Copied link to clipboard']);
-            })
-            .catch(() => {
-                UI.showToast(TRANSLATE['Failed to copy link to clipboard']);
-                showModal('<p>' + TRANSLATE['Failed to copy link to clipboard'] + '. ' + TRANSLATE['Copy manually below'] + ':</p><textarea style="width: 100%">' + json.url + "</textarea>")
-            });
-    })
-}
-function getSavedSettingsLink(id) {
-    return isUserLoggedIn().then((loggedIn) => {
-        if (loggedIn) {
-            let request = {
-                "type": REQUEST_TYPE_GET_SAVED_SETTINGS_LINK,
-                "settings_id": id
-            };
-            let json = JSON.stringify(request);
-            return sendRequest(json).then((response) => {
-                loadSettingsDetails();
-                try {
-                    let json = JSON.parse(response);
-                    if (json.success) {
-                        return json.url;
-                    } else {
-                        UI.showToast(ERROR_CHAR + json.errorMessage);
-                    }
-                } catch (e) {
-                    UI.showToast("Failed to load response: " + e);
-                    return false;
-                }
-            });
-        }
-    });
-}
-
-function revokeSavedSettingsLinkMenuAction(e) {
-    e.stopPropagation();
-    let token = e.currentTarget.token;
-    isUserLoggedIn().then((loggedIn) => {
-        if (loggedIn) {
-            let request = {
-                "type": REQUEST_TYPE_REVOKE_SAVED_SETTINGS_LINK,
-                "token": token
-            };
-            let json = JSON.stringify(request);
-            sendRequest(json).then((response) => {
-                loadSettingsDetails();
-                try {
-                    let json = JSON.parse(response);
-                    if (json.success) {
-                        UI.showToast(TRANSLATE['Revoked access to shared link']);
-                    } else {
-                        UI.showToast(ERROR_CHAR + json.errorMessage);
-                    }
-                } catch (e) {
-                    UI.showToast("Failed to load response: " + e);
-                    return false;
-                }
-            });
-        }
-    });
-}
-function addUrlToMyFavouritesMenuAction(e) {
-    e.stopPropagation();
-    let id = e.currentTarget.id;
-    isUserLoggedIn().then((loggedIn) => {
-        if (loggedIn) {
-            let request = {
-                "type": REQUEST_TYPE_ADD_MY_FAVORITE,
-                "settings_id": id
-            };
-            let json = JSON.stringify(request);
-            sendRequest(json).then((response) => {
-                try {
-                    let json = JSON.parse(response);
-                    if (json.success) {
-                        UI.showToast(TRANSLATE['Added to My favourites']);
-                    } else {
-                        UI.showToast(ERROR_CHAR + json.errorMessage);
-                    }
-                } catch (e) {
-                    UI.showToast("Failed to load response: " + e);
-                    return false;
-                }
-            });
-        }
-    });
-}
-function addUrlToTreeFavourites(e) {
-    e.stopPropagation();
-    let parent = event.target.parentElement;
-    while (!parent.dataset.id) {
-        parent = parent.parentElement;
-    }
-    let id = parent.getAttribute('data-id');
-    isUserLoggedIn().then((loggedIn) => {
-        if (loggedIn) {
-            let request = {
-                "type": REQUEST_TYPE_ADD_TREE_FAVORITE,
-                "settings_id": id
-            };
-            let json = JSON.stringify(request);
-            sendRequest(json).then((response) => {
-                try {
-                    let json = JSON.parse(response);
-                    if (json.success) {
-                        UI.showToast(TRANSLATE['Added to Tree favourites']);
-                    } else {
-                        UI.showToast(ERROR_CHAR + json.errorMessage);
-                    }
-                } catch (e) {
-                    UI.showToast("Failed to load response: " + e);
-                    return false;
-                }
-            });
-        }
-    });
 }
 
 function loadUrlToken(Url) {

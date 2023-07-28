@@ -7,16 +7,35 @@ use Fisharebest\Webtrees\I18N;
 use Fisharebest\Webtrees\Validator;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Fisharebest\Webtrees\Tree;
+
 
 /**
  * Handles GVExport custom API calls from front end
  */
 class ApiHandler
 {
-    /**
-     * @var array
-     */
     var array $response_data = array();
+    private ServerRequestInterface $request;
+    private GVExport $module;
+    private Tree $tree;
+    private string $json_data;
+    private $json;
+
+    /**
+     * @param ServerRequestInterface $request
+     * @param GVExport $module
+     * @param Tree $tree
+     */
+    public function __construct(ServerRequestInterface $request, GVExport $module, Tree $tree)
+    {
+        $this->request = $request;
+        $this->module = $module;
+        $this->tree = $tree;
+        $this->json_data = Validator::parsedBody($this->request)->string('json_data');
+        $this->json = json_decode($this->json_data, true);
+    }
 
     /**
      * Convert response data into a data stream for returning response
@@ -34,58 +53,56 @@ class ApiHandler
     /**
      * Process the $request data and return data stream of result
      *
-     * @param $request
-     * @param $module
-     * @param $tree
      * @return mixed
      */
-    public function handle($request, $module, $tree) {
-        $json_data = Validator::parsedBody($request)->string('json_data');
-        $json = json_decode($json_data, true);
+    public function handle() {
         if (json_last_error() === JSON_ERROR_NONE) {
-            $type = FormSubmission::isNameStringValid($json['type']) ? $json['type'] : "";
+            $type = FormSubmission::isNameStringValid($this->json['type']) ? $this->json['type'] : "";
             switch ($type) {
                 case "save_settings":
-                    $this->saveSettings($module, $request, $json, $tree);
+                    $this->saveSettings();
                     break;
                 case "get_settings":
-                    $this->getSettings($json, $module, $tree);
+                    $this->getSettings();
                     break;
                 case "delete_settings":
-                    $this->deleteSettings($module, $json, $tree);
+                    $this->deleteSettings();
+                    break;
+                case "rename_settings":
+                    $this->renameSettings();
                     break;
                 case "is_logged_in":
                     $this->isLoggedIn();
                     break;
                 case "get_tree_name":
-                    $this->getTreeName($tree);
+                    $this->getTreeName();
                     break;
                 case "get_saved_settings_link":
-                    $this->getSavedSettingsLink($json, $module, $tree);
+                    $this->getSavedSettingsLink();
                     break;
                 case "load_settings_token":
-                    $this->loadSettingsToken($json, $module, $tree);
+                    $this->loadSettingsToken();
                     break;
                 case "revoke_saved_settings_link":
-                    $this->revokeSettingsToken($json, $module, $tree);
+                    $this->revokeSettingsToken();
                     break;
                 case "add_my_favorite":
-                    $this->addUserFavourite($json, $module, $tree);
+                    $this->addUserFavourite();
                     break;
                 case "add_tree_favorite":
-                    $this->addTreeFavourite($json, $module, $tree);
+                    $this->addTreeFavourite();
                     break;
                 case "get_help":
-                    $this->getHelp($module, $json);
+                    $this->getHelp();
                     break;
                 default:
                     $this->response_data['success'] = false;
-                    $this->response_data['json'] = $json_data;
+                    $this->response_data['json'] = $this->json_data;
                     $this->response_data['errorMessage'] = I18N::translate('Invalid request') . ": " . $type;
             }
         } else {
             $this->response_data['success'] = false;
-            $this->response_data['json'] = $json_data;
+            $this->response_data['json'] = $this->json_data;
             $this->response_data['errorMessage'] = I18N::translate('Invalid JSON') . ": " . json_last_error_msg();
         }
 
@@ -107,32 +124,28 @@ class ApiHandler
     /**
      * One of the API functions, this one is to save the provided settings
      *
-     * @param $module
-     * @param $request
-     * @param $json
-     * @param $tree
      * @return void
      */
-    public function saveSettings($module, $request, $json, $tree): void
+    public function saveSettings(): void
     {
-        $vars = Validator::parsedBody($request)->array('vars');
+        $vars = Validator::parsedBody($this->request)->array('vars');
         $formSubmission = new FormSubmission();
-        $vars = $formSubmission->load($vars, $module);
-        if (isset($json['settings_id']) && ctype_alnum($json['settings_id']) && !in_array($json['settings_id'], [Settings::ID_ALL_SETTINGS, Settings::ID_MAIN_SETTINGS])) {
-            if ($this->doesSettingsIdBelongsToUser($module, $tree, $json['settings_id'])) {
-                $id = $json['settings_id'];
+        $vars = $formSubmission->load($vars, $this->module);
+        if (isset($this->json['settings_id']) && ctype_alnum((string) $this->json['settings_id']) && !in_array($this->json['settings_id'], [Settings::ID_ALL_SETTINGS, Settings::ID_MAIN_SETTINGS])) {
+            if ($this->doesSettingsIdBelongsToUser()) {
+                $id = $this->json['settings_id'];
             }
         }
         $settings = new Settings();
-        if (!isset($json['main']) || $json['main']) {
+        if (!isset($this->json['main']) || $this->json['main']) {
             $id = Settings::ID_MAIN_SETTINGS;
         } else if (!isset($id) || $id == '') {
-            $id = $settings->newSettingsId($module, $tree);
+            $id = $settings->newSettingsId($this->module, $this->tree);
         }
 
         if ($id != "") {
             $this->response_data['settings_id'] = $id;
-            $this->response_data['success'] = $settings->saveUserSettings($module, $tree, $vars, $id);
+            $this->response_data['success'] = $settings->saveUserSettings($this->module, $this->tree, $vars, $id);
         } else {
             $this->setFailResponse('Failed to assign new settings ID', 'E10');
         }
@@ -142,16 +155,13 @@ class ApiHandler
     /**
      * Return whether the settings ID belongs to the current user
      *
-     * @param $module
-     * @param $tree
-     * @param $settings_id
      * @return bool
      */
-    private function doesSettingsIdBelongsToUser($module, $tree, $settings_id): bool
+    private function doesSettingsIdBelongsToUser(): bool
     {
         $settings = new Settings();
         try {
-            $settings->getSettingsJson($module, $tree, $settings_id);
+            $settings->getSettingsJson($this->module, $this->tree, $this->json['settings_id']);
         } catch (Exception $e) {
             return false;
         }
@@ -161,17 +171,14 @@ class ApiHandler
     /**
      * One of the API functions, this one is to load the requested settings
      *
-     * @param $json
-     * @param $module
-     * @param $tree
      * @return void
      */
-    public function getSettings($json, $module, $tree): void
+    public function getSettings(): void
     {
-        if (isset($json['settings_id']) && (ctype_alnum($json['settings_id']) || in_array($json['settings_id'], [Settings::ID_ALL_SETTINGS, Settings::ID_MAIN_SETTINGS]))) {
+        if (isset($this->json['settings_id']) && (ctype_alnum((string) $this->json['settings_id']) || in_array($this->json['settings_id'], [Settings::ID_ALL_SETTINGS, Settings::ID_MAIN_SETTINGS]))) {
             $settings = new Settings();
             try {
-                $this->response_data['settings'] = ($json['settings_id'] == Settings::ID_ALL_SETTINGS ? $settings->getAllSettingsJson($module, $tree) : $settings->getSettingsJson($module, $tree, $json['settings_id']));
+                $this->response_data['settings'] = ($this->json['settings_id'] == Settings::ID_ALL_SETTINGS ? $settings->getAllSettingsJson($this->module, $this->tree) : $settings->getSettingsJson($this->module, $this->tree, $this->json['settings_id']));
                 $this->response_data['success'] = true;
             } catch (Exception $e) {
                 $this->setFailResponse('Invalid JSON', 'E9');
@@ -184,16 +191,13 @@ class ApiHandler
     /**
      * One of the API functions, this one is to generate a settings link for sharing
      *
-     * @param $json
-     * @param $module
-     * @param $tree
      * @return void
      */
-    public function getSavedSettingsLink($json, $module, $tree): void
+    public function getSavedSettingsLink(): void
     {
-        if (isset($json['settings_id']) && (ctype_alnum($json['settings_id']))) {
+        if (isset($this->json['settings_id']) && (ctype_alnum((string) $this->json['settings_id']))) {
             $settings = new Settings();
-            $link = $settings->getSettingsLink($module, $tree, $json['settings_id']);
+            $link = $settings->getSettingsLink($this->module, $this->tree, $this->json['settings_id']);
             if ($link['success']) {
                 $this->response_data['url'] = $link['url'];
                 $this->response_data['success'] = true;
@@ -208,17 +212,14 @@ class ApiHandler
     /**
      * One of the API functions, this one is to load settings from a token provided by a shared setting link
      *
-     * @param $json
-     * @param $module
-     * @param $tree
      * @return void
      */
-    public function loadSettingsToken($json, $module, $tree): void
+    public function loadSettingsToken(): void
     {
-        if (isset($json['token']) && (ctype_alnum($json['token']))) {
+        if (isset($this->json['token']) && (ctype_alnum($this->json['token']))) {
             $settings = new Settings();
             try {
-                $this->response_data['settings'] = $settings->loadSettingsToken($module, $tree, $json['token']);
+                $this->response_data['settings'] = $settings->loadSettingsToken($this->module, $this->tree, $this->json['token']);
                 $this->response_data['success'] = true;
             } catch (Exception $e) {
                 $this->setFailResponse('Invalid settings ID', 'E7');
@@ -232,16 +233,13 @@ class ApiHandler
      * One of the API functions, this one is to revoke a settings token, in the
      * case that a shared settings link has been deleted by the user
      *
-     * @param $json
-     * @param $module
-     * @param $tree
      * @return void
      */
-    private function revokeSettingsToken($json, $module, $tree)
+    private function revokeSettingsToken()
     {
-        if (isset($json['token']) && (ctype_alnum($json['token']))) {
+        if (isset($this->json['token']) && (ctype_alnum($this->json['token']))) {
             $settings = new Settings();
-            $link = $settings->revokeSettingsToken($module, $tree, $json['token']);
+            $link = $settings->revokeSettingsToken($this->module, $this->tree, $this->json['token']);
             if ($link) {
                 $this->response_data['success'] = true;
             } else {
@@ -256,17 +254,14 @@ class ApiHandler
      * One of the API functions, this one is to delete one of the named settings
      * records saved by a user
      *
-     * @param $module
-     * @param $json
-     * @param $tree
      * @return void
      */
-    public function deleteSettings($module, $json, $tree): void
+    public function deleteSettings(): void
     {
-        if (isset($json['settings_id']) && ctype_alnum($json['settings_id']) && !in_array($json['settings_id'], [Settings::ID_ALL_SETTINGS, Settings::ID_MAIN_SETTINGS])) {
+        if (isset($this->json['settings_id']) && ctype_alnum((string) $this->json['settings_id']) && !in_array($this->json['settings_id'], [Settings::ID_ALL_SETTINGS, Settings::ID_MAIN_SETTINGS])) {
             if (Settings::isUserLoggedIn()) {
                 $settings = new Settings();
-                $settings->deleteUserSettings($module, $tree, $json['settings_id']);
+                $settings->deleteUserSettings($this->module, $this->tree, $this->json['settings_id']);
                 $this->response_data['success'] = true;
             } else {
                 // Is user is not logged in, we should never have got this far
@@ -274,6 +269,34 @@ class ApiHandler
             }
         } else {
             $this->setFailResponse('Invalid settings ID', 'E8');
+        }
+    }
+    /**
+     * One of the API functions, this one is to rename one of the named settings
+     * records saved by a user
+     *
+     * @return void
+     */
+    public function renameSettings(): void
+    {
+        if (isset($this->json['settings_id']) && ctype_alnum((string) $this->json['settings_id'])) {
+            $id = $this->json['settings_id'];
+            $new_name = $this->json['name'];
+            $settings_obj = new Settings();
+            try {
+                if (Auth::user()->id() == Settings::GUEST_USER_ID) {
+                    $this->setFailResponse('Not logged in', 'E15');
+                } else {
+                    $settings = $settings_obj->loadUserSettings($this->module, $this->tree, $id);
+                    $settings['save_settings_name'] = $new_name;
+                    $settings_obj->saveUserSettings($this->module, $this->tree, $settings, $id);
+                }
+                $this->response_data['success'] = true;
+            } catch (Exception $e) {
+                $this->setFailResponse('Invalid JSON', 'E16');
+            }
+        } else {
+            $this->setFailResponse('Invalid settings ID', 'E17');
         }
     }
 
@@ -294,61 +317,51 @@ class ApiHandler
 
     /**
      * One of the API functions, this provides the name of the tree
-     * @param $tree
      * @return void
      */
-    private function getTreeName($tree)
+    private function getTreeName()
     {
-        $this->response_data['treeName'] = e($tree->name());
+        $this->response_data['treeName'] = e($this->tree->name());
         $this->response_data['success'] = true;
     }
 
     /**
      * One of the API functions, it adds a User favourite to webtrees
      *
-     * @param $json
-     * @param $module
-     * @param $tree
      * @return void
      */
-    private function addUserFavourite($json, $module, $tree)
+    private function addUserFavourite()
     {
-        $this->addFavourite($json, $module, $tree, Favourite::TYPE_USER_FAVOURITE);
+        $this->addFavourite(Favourite::TYPE_USER_FAVOURITE);
     }
 
     /**
      * One of the API functions, it adds a Tree favourite to webtrees
      *
-     * @param $json
-     * @param $module
-     * @param $tree
      * @return void
      */
-    private function addTreeFavourite($json, $module, $tree)
+    private function addTreeFavourite()
     {
-        if (Auth::isManager($tree)) {
-            $this->addFavourite($json, $module, $tree, Favourite::TYPE_TREE_FAVOURITE);
+        if (Auth::isManager($this->tree)) {
+            $this->addFavourite(Favourite::TYPE_TREE_FAVOURITE);
         }
     }
 
     /**
      * Does the heavy lifting of adding a favourite of the provided type
      *
-     * @param $json
-     * @param $module
-     * @param $tree
      * @param $type
      * @return void
      */
-    private function addFavourite($json, $module, $tree, $type): void
+    private function addFavourite($type): void
     {
-        if (isset($json['settings_id']) && (ctype_alnum($json['settings_id']))) {
+        if (isset($this->json['settings_id']) && (ctype_alnum((string) $this->json['settings_id']))) {
             $settings = new Settings();
-            $link = $settings->getSettingsLink($module, $tree, $json['settings_id']);
-            $name = $settings->getSettingsName($module, $tree, $json['settings_id']);
+            $link = $settings->getSettingsLink($this->module, $this->tree, $this->json['settings_id']);
+            $name = $settings->getSettingsName($this->module, $this->tree, $this->json['settings_id']);
             if ($link['success']) {
                 $favourite = new Favourite($type);
-                if ($favourite->addFavourite($tree, $link['url'], $name)) {
+                if ($favourite->addFavourite($this->tree, $link['url'], $name)) {
                     $this->response_data['success'] = true;
                 } else {
                     $this->setFailResponse('Invalid', 'E13');
@@ -364,19 +377,17 @@ class ApiHandler
     /**
      * Retrieve the help information from appropriate view file
      *
-     * @param $module
-     * @param $json
      * @return void
      */
-    private function getHelp($module, $json)
+    private function getHelp()
     {
         $help = new Help();
         $this->response_data['success'] = true;
-        if ($help->helpExists($json['help_name'])) {
-            $this->response_data['help'] = view($module->name() . '::MainPage/Help/' . $help->getHelpLocation($json['help_name']) . $json['help_name'],['module' => $module]);
+        if ($help->helpExists($this->json['help_name'])) {
+            $this->response_data['help'] = view($this->module->name() . '::MainPage/Help/' . $help->getHelpLocation($this->json['help_name']) . $this->json['help_name'],['module' => $this->module]);
         } else {
             // API call successful, even though help information not found
-            $this->response_data['help'] = view($module->name() . '::MainPage/Help/' . $help->getHelpLocation(Help::NOT_FOUND) . Help::NOT_FOUND);
+            $this->response_data['help'] = view($this->module->name() . '::MainPage/Help/' . $help->getHelpLocation(Help::NOT_FOUND) . Help::NOT_FOUND);
         }
     }
 }

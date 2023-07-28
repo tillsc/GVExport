@@ -262,5 +262,5 @@ const Form = {
             const hidden = document.getElementById(id+"-hidden");
             hidden.value = "";
         }
-    }
+    },
 }
