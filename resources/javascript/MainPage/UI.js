@@ -219,19 +219,19 @@ const UI = {
                     id = id.trim();
                     let div = document.createElement('div');
                     div.setAttribute('class', 'settings_ellipsis_menu');
-                    UI.savedSettings.addSettingsMenuOption(id, div, '❌', 'Delete', deleteSettingsMenuAction);
-                    UI.savedSettings.addSettingsMenuOption(id, div, '💻', 'Download', downloadSettingsFileMenuAction);
-                    UI.savedSettings.addSettingsMenuOption(id, div, '🏷️', 'Rename', Form.savedSettings.renameSettingsMenuAction);
+                    UI.savedSettings.addSettingsMenuOption(id, div, '❌', 'Delete', UI.savedSettings.deleteSettingsMenuAction);
+                    UI.savedSettings.addSettingsMenuOption(id, div, '💻', 'Download', UI.savedSettings.downloadSettingsFileMenuAction);
+                    UI.savedSettings.addSettingsMenuOption(id, div, '🏷️', 'Rename', UI.savedSettings.renameSettingsMenuAction);
                     if (loggedIn) {
-                        UI.savedSettings.addSettingsMenuOption(id, div, '🔗', 'Copy link', copySavedSettingsLinkMenuAction);
+                        UI.savedSettings.addSettingsMenuOption(id, div, '🔗', 'Copy link', UI.savedSettings.copySavedSettingsLinkMenuAction);
                         if (token !== '') {
-                            UI.savedSettings.addSettingsMenuOption(id, div, '🚫', 'Revoke link', revokeSavedSettingsLinkMenuAction, token);
+                            UI.savedSettings.addSettingsMenuOption(id, div, '🚫', 'Revoke link', UI.savedSettings.revokeSavedSettingsLinkMenuAction, token);
                         }
                         if (MY_FAVORITES_MODULE_ACTIVE) {
-                            UI.savedSettings.addSettingsMenuOption(id, div, '🌟', 'Add to My favorites', addUrlToMyFavouritesMenuAction);
+                            UI.savedSettings.addSettingsMenuOption(id, div, '🌟', 'Add to My favorites', UI.savedSettings.addUrlToMyFavouritesMenuAction);
                         }
                         if (TREE_FAVORITES_MODULE_ACTIVE) {
-                            UI.savedSettings.addSettingsMenuOption(id, div, '🌲', 'Add to Tree favorites', addUrlToTreeFavourites);
+                            UI.savedSettings.addSettingsMenuOption(id, div, '🌲', 'Add to Tree favorites', UI.savedSettings.addUrlToTreeFavourites);
                         }
                     }
                     event.target.appendChild(div);
@@ -259,6 +259,181 @@ const UI = {
                 callback(e);
             });
             div.appendChild(el);
+        },
+
+        /**
+         * Trigger rename option from saved setting context menu
+         *
+         * @param e
+         */
+        renameSettingsMenuAction(e) {
+            e.stopPropagation();
+            let id = e.currentTarget.id;
+            Data.savedSettings.renameSetting(id);
+        },
+
+        /**
+         * Downloads settings as JSON file
+         */
+        downloadSettingsFileMenuAction(event) {
+            let parent = event.target.parentElement;
+            while (!parent.dataset.settings) {
+                parent = parent.parentElement;
+            }
+            let settings_json_string = parent.dataset.settings;
+            let settings;
+            try {
+                settings = JSON.parse(settings_json_string);
+            } catch (e) {
+                UI.showToast("Failed to load settings: " + e);
+                return false;
+            }
+            let file = new Blob([settings_json_string], {type: "text/plain"});
+            let url = URL.createObjectURL(file);
+            Data.download.downloadLink(url, TREE_NAME + " - " + settings['save_settings_name'] + ".json")
+        },
+
+        /**
+         * Trigger delete option from saved setting context menu
+         *
+         * @param e
+         */
+        async deleteSettingsMenuAction(e) {
+            e.stopPropagation();
+            try {
+                const id = e.currentTarget.id;
+                const loggedIn = await isUserLoggedIn();
+
+                if (loggedIn) {
+                    await Data.savedSettings.deleteSettingsServer(id);
+                    loadSettingsDetails();
+                } else {
+                    Data.savedSettings.deleteSettingsClient(id);
+                    loadSettingsDetails();
+                }
+            } catch (error) {
+                UI.showToast("Failed to delete settings: " + error);
+            }
+        },
+
+        /**
+         * Trigger "copy link" option from saved setting context menu
+         *
+         * @param e
+         */
+        async copySavedSettingsLinkMenuAction(e) {
+            e.stopPropagation();
+            const id = e.currentTarget.id;
+            try {
+                const url = await Data.savedSettings.getSavedSettingsLink(id);
+                await copyToClipboard(url);
+                UI.showToast(TRANSLATE['Copied link to clipboard']);
+            } catch (error) {
+                console.error('Error copying saved settings link:', error);
+                UI.showToast(TRANSLATE['Failed to copy link to clipboard']);
+                showModal(`<p>${TRANSLATE['Failed to copy link to clipboard']}. ${TRANSLATE['Copy manually below']}:</p><textarea style="width: 100%">${url}</textarea>`);
+            }
+        },
+
+        /**
+         * Trigger option to revoke a shared link from saved setting context menu (after sharing)
+         *
+         * @param e
+         */
+        revokeSavedSettingsLinkMenuAction(e) {
+            e.stopPropagation();
+            let token = e.currentTarget.token;
+            isUserLoggedIn().then((loggedIn) => {
+                if (loggedIn) {
+                    let request = {
+                        "type": REQUEST_TYPE_REVOKE_SAVED_SETTINGS_LINK,
+                        "token": token
+                    };
+                    let json = JSON.stringify(request);
+                    sendRequest(json).then((response) => {
+                        loadSettingsDetails();
+                        try {
+                            let json = JSON.parse(response);
+                            if (json.success) {
+                                UI.showToast(TRANSLATE['Revoked access to shared link']);
+                            } else {
+                                UI.showToast(ERROR_CHAR + json.errorMessage);
+                            }
+                        } catch (e) {
+                            UI.showToast("Failed to load response: " + e);
+                            return false;
+                        }
+                    });
+                }
+            });
+        },
+
+        /**
+         * Trigger option to add link to My Favourites webtrees page, from saved setting context menu
+         *
+         * @param e
+         */
+        addUrlToMyFavouritesMenuAction(e) {
+            e.stopPropagation();
+            let id = e.currentTarget.id;
+            isUserLoggedIn().then((loggedIn) => {
+                if (loggedIn) {
+                    let request = {
+                        "type": REQUEST_TYPE_ADD_MY_FAVORITE,
+                        "settings_id": id
+                    };
+                    let json = JSON.stringify(request);
+                    sendRequest(json).then((response) => {
+                        try {
+                            let json = JSON.parse(response);
+                            if (json.success) {
+                                UI.showToast(TRANSLATE['Added to My favourites']);
+                            } else {
+                                UI.showToast(ERROR_CHAR + json.errorMessage);
+                            }
+                        } catch (e) {
+                            UI.showToast("Failed to load response: " + e);
+                            return false;
+                        }
+                    });
+                }
+            });
+        },
+
+        /**
+         * Trigger option to add link to webtrees Tree Favourites page, from saved setting context menu
+         *
+         * @param e
+         */
+        addUrlToTreeFavourites(e) {
+            e.stopPropagation();
+            let parent = event.target.parentElement;
+            while (!parent.dataset.id) {
+                parent = parent.parentElement;
+            }
+            let id = parent.getAttribute('data-id');
+            isUserLoggedIn().then((loggedIn) => {
+                if (loggedIn) {
+                    let request = {
+                        "type": REQUEST_TYPE_ADD_TREE_FAVORITE,
+                        "settings_id": id
+                    };
+                    let json = JSON.stringify(request);
+                    sendRequest(json).then((response) => {
+                        try {
+                            let json = JSON.parse(response);
+                            if (json.success) {
+                                UI.showToast(TRANSLATE['Added to Tree favourites']);
+                            } else {
+                                UI.showToast(ERROR_CHAR + json.errorMessage);
+                            }
+                        } catch (e) {
+                            UI.showToast("Failed to load response: " + e);
+                            return false;
+                        }
+                    });
+                }
+            });
         }
     }
 };
