@@ -229,7 +229,8 @@ const Data = {
                 document.getElementById('modal').remove();
                 if (name === '') return false;
             } else {
-                let message = TRANSLATE["Enter new setting name"] + ': <input type="text" id="rename_text" autofocus="autofocus">';
+                let originalName = document.querySelector('[data-id="' + id + '"]').getAttribute('data-name');
+                let message = TRANSLATE["Enter new setting name"] + ': <input type="text" onfocus="this.selectionStart = this.selectionEnd = this.value.length;" id="rename_text" value="' + originalName + '" autofocus="autofocus">';
                 let buttons = '<div class="modal-button-container"><button class="btn btn-secondary modal-button" onclick="document.getElementById(' + "'modal'" + ').remove()">' + TRANSLATE['Cancel'] + '</button><button class="btn btn-primary modal-button" onclick="Data.savedSettings.renameSetting(\'' + id + '\', true)">' + TRANSLATE['Rename'] + '</button></div>';
                 showModal('<div class="modal-container">' + message + '<br>' + buttons + '</div>');
                 return false;
@@ -247,7 +248,7 @@ const Data = {
                             let json = JSON.parse(response);
                             if (json.success) {
                                 loadSettingsDetails();
-                                UI.showToast(TRANSLATE['Updated settings']);
+                                UI.showToast(TRANSLATE['Update successful']);
                             } else {
                                 UI.showToast(ERROR_CHAR + json.errorMessage);
                             }
