@@ -716,15 +716,6 @@ msgstr "Zapisz"
 msgid "Settings name"
 msgstr "Nazwa ustawień"
 
-#. Help text for option to save a version of the settings for future use:  
-#. https://s3.eu-west-1.amazonaws.com/po-pub/i/n1salnZcGP6xC187FO1dAjpE.png https://s3.eu-west-1.amazonaws.com/po-pub/i/fBbMFauzn9yAXWlI3do9cwmD.png
-#: 
-#, fuzzy
-msgid "Here you are able to save the chosen settings within GVExport. The settings are only accessible within the same user and tree. Click a settings record to load it.</p><p>For example, you may have many diagrams you create from your tree. You may want to save the settings used for each diagram so that in future you can regenerate the diagram to include any new information.</p><p>If you click the ellipsis on a record, you will see several options. <ul><li>Delete - remove these settings</li><li>Download - download a file holding the settings, which can be loaded at a later date.</li><li>Copy link - if logged in, this allows you to share the settings with others by creating a URL to share with them, which is copied to the clipboard of your device.</li><li>Revoke link - if a sharing link has been created, this will show to allow you to revoke the link, so it can no longer be accessed.</li><li>Add to My favourites - If logged in, this will create a sharing link and add this to the webtrees favourites on your &quot;My page&quot; page.</li><li>Add to Tree favourites - If logged in as a tree manager, this will create a sharing link and add this to the webtrees favourites on the tree home page.</li></ul>When logged out, only the Delete and Download options will be available.</p><p>The &quot;Show saved diagrams panel&quot; option adds a new section to the settings that makes the saved settings available as a dropdown list. You may wish to use webtrees&apos; ability for an administrator to &quot;Masquerade as user&quot; to set up some settings for another user, then enable this option, so they can easily choose different prepared diagrams without needed to delve into the advanced settings."
-msgstr "Tutaj możesz zapisać wybrane ustawienia w GVExport. Ustawienia są dostępne tylko w obrębie tego samego użytkownika i drzewa. Kliknij rekord ustawień, aby go załadować.</p><p>Możesz na przykład utworzyć wiele diagramów ze swojego drzewa. Możesz zapisać ustawienia używane dla każdego diagramu, aby w przyszłości móc ponownie wygenerować diagram w celu uwzględnienia nowych informacji.</p><p>Kliknij wielokropek na rekordzie, zobaczysz kilka opcji. <ul><li>Usuń — usuń te ustawienia</li><li>Pobierz — pobierz plik z ustawieniami, który można później wczytać.</li><li>Kopiuj link — jeśli jesteś zalogowany, umożliwia to udostępnienie ustawień innym osobom poprzez utworzenie adresu URL do udostępnienia , link jest kopiowany do schowka.</li><li>Unieważnij link — jeśli został utworzony link do udostępniania, opcja umożliwia odwołanie linku, aby nie można było już uzyskać do niego dostępu.</li><li>Dodaj do moich ulubionych — jeśli jesteś zalogowany, utworzy to link do udostępniania i doda go do ulubionych drzew na stronie „Moja strona”.</li><li>Dodaj do ulubionych drzewa — jeśli jesteś zalogowany jako menedżer drzewa, spowoduje to utworzenie linku do udostępniania i dodanie go do ulubionych drzew na stronie głównej drzewa.</li></ul>Po wylogowaniu dostępne będą tylko opcje Usuń i Pobierz.</p><p>Opcja \"Pokaż panel zapisanych diagramów\" dodaje nową sekcję do ustawień, która udostępnia zapisane ustawienia jako listę rozwijaną. Możesz użyć możliwości administratora Webtree do \"Maskarady jako użytkownik\", aby ustawić niektóre ustawienia dla innego użytkownika, a następnie włączyć tę opcję, aby mógł on łatwo wybrać różne przygotowane diagramy bez konieczności zagłębiania się w zaawansowane ustawienia.\n"
-"\n"
-""
-
 #. Error message shown when API was not able to assign an ID when saving a version of settings.  https://s3.eu-west-1.amazonaws.com/po-pub/i/SF4w8yDqZ9D7PGWdqvq2cOzq.png 
 #. User may see this when clicking Save button: https://s3.eu-west-1.amazonaws.com/po-pub/i/n1salnZcGP6xC187FO1dAjpE.png
 #. 
@@ -819,13 +810,15 @@ msgstr "Pokaż panel zapisanych diagramów"
 
 #. Option to share settings to an entry in the webtrees user favourites module (on the 'My page' page):  https://s3.eu-west-1.amazonaws.com/po-pub/i/jBnrBz5yEIe6NdBhAUvjuUTU.png
 #: 
-msgid "Add to My favorites"
+#, fuzzy
+msgid "Add to My favourites"
 msgstr "Dodaj do ulubionych"
 
 #. Option to share settings to an entry in the webtrees tree favorites module (on the tree home page):  
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/jBnrBz5yEIe6NdBhAUvjuUTU.png
 #: 
-msgid "Add to Tree favorites"
+#, fuzzy
+msgid "Add to Tree favourites"
 msgstr "Dodaj do ulubionych drzew"
 
 #. Option where you can add XREFs to override the option to highlight starting individuals. i.e. when you add XREFs to this list, those individuals will not be highlighted even if option to highlight starting individuals is selected.  https://s3.eu-west-1.amazonaws.com/po-pub/i/peZeLRwsxZTG8ZgMRLTKV8ph.png
@@ -1455,5 +1448,106 @@ msgstr ""
 #. Text on button that shows the help panel:  https://s3.eu-west-1.amazonaws.com/po-pub/i/l1Z2zKsAgMx4VL6XVNJGrCWz.png
 #: 
 msgid "Show help"
+msgstr ""
+
+#. Success message after change made:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/gb2OPlL3T6lhv55iNvD3V1AZ.png
+#: 
+msgid "Update successful"
+msgstr ""
+
+#. Message asking for new setting name after user chooses option to rename a saved setting item:  https://s3.eu-west-1.amazonaws.com/po-pub/i/ASjGVATs1oZVmZ0ev2LTYXhY.png
+#: 
+msgid "Enter new setting name"
+msgstr ""
+
+#. Option to rename a saved settings item. Used in both the option and the button that triggers renaming:
+#. 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/5FITlle641isw1Cgwa3HOlXs.png  https://s3.eu-west-1.amazonaws.com/po-pub/i/bTWnf8PzS5sPeG5D1FWGI0aG.png
+#: 
+msgid "Rename"
+msgstr ""
+
+#. Part of the help text:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/Oemo1QWV9iDy7QJ1ue3YJ26u.png
+#: 
+msgid "Here you are able to save the chosen settings within GVExport. The settings are only accessible within the same user and tree. Click a settings record to load it."
+msgstr "Tutaj możesz zapisać wybrane ustawienia w GVExport. Ustawienia są dostępne tylko w obrębie tego samego użytkownika i drzewa. Kliknij rekord ustawień, aby go załadować."
+
+#. Part of the help text:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/Oemo1QWV9iDy7QJ1ue3YJ26u.png
+#: 
+msgid "For example, you may have many diagrams you create from your tree. You may want to save the settings used for each diagram so that in future you can regenerate the diagram to include any new information."
+msgstr "Możesz na przykład utworzyć wiele diagramów ze swojego drzewa. Możesz zapisać ustawienia używane dla każdego diagramu, aby w przyszłości móc ponownie wygenerować diagram w celu uwzględnienia nowych informacji."
+
+#. Part of the help text:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/Oemo1QWV9iDy7QJ1ue3YJ26u.png
+#: 
+msgid "If you click the ellipsis on a record, you will see several options."
+msgstr "Kliknij wielokropek na rekordzie, zobaczysz kilka opcji."
+
+#. Part of the help text:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/Oemo1QWV9iDy7QJ1ue3YJ26u.png
+#: 
+msgid "remove these settings"
+msgstr "usuń te ustawienia"
+
+#. Part of the help text:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/Oemo1QWV9iDy7QJ1ue3YJ26u.png
+#: 
+msgid "download a file holding the settings, which can be loaded at a later date"
+msgstr "pobierz plik z ustawieniami, który można później wczytać"
+
+#. Part of the help text:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/Oemo1QWV9iDy7QJ1ue3YJ26u.png
+#: 
+msgid "if logged in, this allows you to share the settings with others by creating a URL to share with them, which is copied to the clipboard of your device"
+msgstr "jeśli jesteś zalogowany, umożliwia to udostępnienie ustawień innym osobom poprzez utworzenie adresu URL do udostępnienia , link jest kopiowany do schowka"
+
+#. Part of the help text:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/Oemo1QWV9iDy7QJ1ue3YJ26u.png
+#: 
+msgid "if a sharing link has been created, this will show to allow you to revoke the link, so it can no longer be accessed"
+msgstr "jeśli został utworzony link do udostępniania, opcja umożliwia odwołanie linku, aby nie można było już uzyskać do niego dostępu"
+
+#. Part of the help text:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/Oemo1QWV9iDy7QJ1ue3YJ26u.png
+#: 
+msgid "if logged in, this will create a sharing link and add this to the webtrees favourites on your &quot;My page&quot; page"
+msgstr "jeśli jesteś zalogowany, utworzy to link do udostępniania i doda go do ulubionych drzew na stronie „Moja strona”"
+
+#. Part of the help text:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/Oemo1QWV9iDy7QJ1ue3YJ26u.png
+#: 
+msgid "if logged in as a tree manager, this will create a sharing link and add this to the webtrees favourites on the tree home page"
+msgstr "jeśli jesteś zalogowany jako menedżer drzewa, spowoduje to utworzenie linku do udostępniania i dodanie go do ulubionych drzew na stronie głównej drzewa"
+
+#. Part of the help text:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/Oemo1QWV9iDy7QJ1ue3YJ26u.png
+#: 
+msgid "When logged out, only the Delete and Download options will be available"
+msgstr "Po wylogowaniu dostępne będą tylko opcje Usuń i Pobierz"
+
+#. Part of the help text:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/Oemo1QWV9iDy7QJ1ue3YJ26u.png
+#: 
+msgid "The &quot;Show saved diagrams panel&quot; option adds a new section to the settings that makes the saved settings available as a dropdown list. You may wish to use webtrees&apos; ability for an administrator to &quot;Masquerade as user&quot; to set up some settings for another user, then enable this option, so they can easily choose different prepared diagrams without needed to delve into the advanced settings."
+msgstr "Opcja \"Pokaż panel zapisanych diagramów\" dodaje nową sekcję do ustawień, która udostępnia zapisane ustawienia jako listę rozwijaną. Możesz użyć możliwości administratora Webtree do \"Maskarady jako użytkownik\", aby ustawić niektóre ustawienia dla innego użytkownika, a następnie włączyć tę opcję, aby mógł on łatwo wybrać różne przygotowane diagramy bez konieczności zagłębiania się w zaawansowane ustawienia."
+
+#. Part of the help text:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/Oemo1QWV9iDy7QJ1ue3YJ26u.png
+#: 
+msgid "change the name of a saved setting"
+msgstr ""
+
+#. Message shown in popup after successfully adding settings link to favourites section webtrees My Page:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/WqaE1p5myQ7yL5g1ANXCKNrd.png
+#: 
+msgid "Added to My favourites"
+msgstr ""
+
+#. Message shown in notification after link to saved setting is successfully added to the favourites widget on the webtrees tree home page:  https://s3.eu-west-1.amazonaws.com/po-pub/i/3qVoAL2efzJQ5RkKZlo0kIHZ.png
+#: 
+msgid "Added to Tree favourites"
 msgstr ""
 

@@ -228,10 +228,10 @@ const UI = {
                             UI.savedSettings.addSettingsMenuOption(id, div, '🚫', 'Revoke link', UI.savedSettings.revokeSavedSettingsLinkMenuAction, token);
                         }
                         if (MY_FAVORITES_MODULE_ACTIVE) {
-                            UI.savedSettings.addSettingsMenuOption(id, div, '🌟', 'Add to My favorites', UI.savedSettings.addUrlToMyFavouritesMenuAction);
+                            UI.savedSettings.addSettingsMenuOption(id, div, '🌟', 'Add to My favourites', UI.savedSettings.addUrlToMyFavouritesMenuAction);
                         }
                         if (TREE_FAVORITES_MODULE_ACTIVE) {
-                            UI.savedSettings.addSettingsMenuOption(id, div, '🌲', 'Add to Tree favorites', UI.savedSettings.addUrlToTreeFavourites);
+                            UI.savedSettings.addSettingsMenuOption(id, div, '🌲', 'Add to Tree favourites', UI.savedSettings.addUrlToTreeFavourites);
                         }
                     }
                     event.target.appendChild(div);
