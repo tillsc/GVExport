@@ -253,6 +253,9 @@ class FormSubmission
         if (isset($vars['border_col_type'])) {
             $settings['border_col_type'] = I18N::digits($vars["border_col_type"]);
         }
+        if (isset($vars['sharednote_col_type']) && $this->isXrefListValid(trim($vars["sharednote_col_type"], '@'))) {
+            $settings['sharednote_col_type'] = trim($vars["sharednote_col_type"], '@');
+        }
         if (isset($vars["indi_background_col"]) && $this->isValidColourHex($vars["indi_background_col"])) {
             $settings['indi_background_col'] = $vars["indi_background_col"];
         }
