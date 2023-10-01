@@ -108,7 +108,9 @@ use vendor\WebtreesModules\gvexport\Settings;
             <div class="col-auto margin-bottom">
                 <label for="sharednote_col_type"><?= I18N::translate('Shared note colour') ?></label>
                 <?= view('components/select-note', ['name' => 'vars[sharednote_col_type]', 'id' => 'sharednote_col_type', 'tree' => $tree, 'note' => Registry::noteFactory()->make(trim($vars['sharednote_col_type'], '@'), $tree), 'at' => '@']) ?>
-                <?= view($module->name() . '::MainPage/Appearance/TileDesign/Subgroup',['view' => $module->name() . '::MainPage/Appearance/TileDesign/ColourPickerList', 'view_options' => ['vars' => $vars, 'admin' => $admin, 'group' => 'border', 'field' => 'custom', 'select_id' => 'bg_col_type', 'option_id' => Settings::OPTION_BORDER_CUSTOM_COLOUR, 'picker_list' => ['indi_border_col' => 'Custom background colour']]]); ?>
+                <div id="subgroup_note_enabled" class="setting_subgroup col-auto wt-page-options-value fit-content margin-top" <?= !$admin && $vars['sharednote_col_type'] == '' ? 'style="display:none;"' : '' ?>>
+                    // TODO add colour picker here
+                </div>
             </div>
             <div class="col-auto">
                 <input type="color" class="picker" name="vars[male_col]" id="male_col" value="<?= e($vars["male_col"]); ?>" /><label for="male_col" class="picker-label"><?= I18N::translate('Male individuals') ?></label>

@@ -263,4 +263,11 @@ const Form = {
             hidden.value = "";
         }
     },
+    /**
+     * Runs when user changes shared note selection
+     */
+    noteSelectChanged: function() {
+        let xref = document.getElementById('sharednote_col_type').value.trim();
+        Form.showHide(document.getElementById('subgroup_note_enabled'),  xref !== '');
+    },
 }

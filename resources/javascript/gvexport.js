@@ -489,7 +489,8 @@ function pageLoaded(Url) {
     }
     let indiSelectEl = form.querySelector("#pid");
     indiSelectEl.addEventListener('change', indiSelectChanged);
-
+    let noteSelectEl = form.querySelector("#sharednote_col_type");
+    noteSelectEl.addEventListener('change', Form.noteSelectChanged);
     let stopIndiSelectEl = form.querySelector("#stop_pid");
     stopIndiSelectEl.addEventListener('change', stopIndiSelectChanged);
 
