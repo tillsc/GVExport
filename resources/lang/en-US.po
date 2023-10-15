@@ -1012,7 +1012,7 @@ msgstr "Family border color"
 #. Option in dropdown box for stripe, border, and background colour option: https://s3.eu-west-1.amazonaws.com/po-pub/i/foB5NxsPsztrvQxIxo0R7HvG.png
 #: 
 msgid "Based on individual&apos;s sex"
-msgstr "Based on individual&apos;s sex"
+msgstr "Based on individual's sex"
 
 #. Option in dropdown menu that disables the stripe on individuals:  https://s3.eu-west-1.amazonaws.com/po-pub/i/ml179UE7h6IKDNGsex2uUMwm.png
 #: 
