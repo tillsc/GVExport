@@ -59,4 +59,21 @@ use Fisharebest\Webtrees\I18N;
             </div>
         </div>
     </div>
+
+    <div onclick="Form.showHideSubgroup('diagtype_combined_subgroup', this)" class="pointer subgroup">→ <?= I18N::translate('Layout settings'); ?></div>
+    <div id="diagtype_combined_subgroup" class="setting_subgroup col-auto wt-page-options-value" style="display: none">
+        <div class="row">
+            <div>Display type:</div>
+            <div style="left: 10px; position: relative;">
+                <div>
+                    <input type="radio" name="vars[combined_layout_type]" id="cl_type_ss" value="SS" <?= $vars["combined_layout_type"] == 'SS' ? 'checked' : '' ?>>
+                    <label for="cl_type_ss"><?= I18N::translate('Side by side') ?></label>
+                </div>
+                <div>
+                    <input type="radio" name="vars[combined_layout_type]" id="cl_type_ou" value="OU" <?= $vars["combined_layout_type"] == 'OU' ? 'checked' : '' ?>>
+                    <label for="cl_type_ou"><?= I18N::translate('Over / Under') ?></label>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

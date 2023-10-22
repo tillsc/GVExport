@@ -555,20 +555,19 @@ class Dot {
 			$out .= "<TR>";
 
 			if (!empty($unkn_id)) {
-			   // Print unknown gender INDI
-                	   $person = new Person([], $this);
-                	   $out = $person->addPersonLabel($unkn_id, $out);
-            		} else {
+                // Print unknown gender INDI
+                $person = new Person([], $this);
+                $out = $person->addPersonLabel($unkn_id, $out);
+            } else {
 			  // Print husband
 			  if (!empty($husb_id)) {
-                	     $person = new Person([], $this);
-                    	     $out = $person->addPersonLabel($husb_id, $out);
+                  $person = new Person([], $this);
+                  $out = $person->addPersonLabel($husb_id, $out);
 			  }
 
 			  // Print wife
 			  if (!empty($wife_id)) {
-		
-			     if ($this->settings["graph_dir"] != "LR" && !empty($husb_id)) {
+			     if ($this->settings["combined_layout_type"] == 'OU' && !empty($husb_id)) {
 			       $out .= "</TR>";
    			       $out .= "<TR>";
                              }
