@@ -500,3 +500,11 @@ span.NAME {
 .width-80pc {
     width: 80%;
 }
+
+.font-small {
+    font-size: 0.8em;
+}
+
+h4 {
+    text-indent: -5px;
+}

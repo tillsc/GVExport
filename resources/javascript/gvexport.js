@@ -601,6 +601,10 @@ function loadSettings(data, isNamedSetting = false) {
                         setCheckStatus(document.getElementById('diagtype_combined'), settings[key] === 'combined');
                     }
                     break;
+                case 'combined_layout_type':
+                    setCheckStatus(document.getElementById('cl_type_ss'), settings[key] === 'SS');
+                    setCheckStatus(document.getElementById('cl_type_ou'), settings[key] === 'OU');
+                    break;
                 case 'birthdate_year_only':
                     setCheckStatus(document.getElementById('bd_type_y'), toBool(settings[key]));
                     setCheckStatus(document.getElementById('bd_type_gedcom'), !toBool(settings[key]));
