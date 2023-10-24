@@ -432,7 +432,7 @@ msgstr "Outline colour"
 
 #. Option where user can change the colour of the background behind the diagram
 #: 
-msgid "Diagram background color"
+msgid "Diagram background colour"
 msgstr "Diagram background colour"
 
 #. Shown in tooltip when hovering over close button in fullscreen mode
@@ -974,11 +974,6 @@ msgstr "This section allows for some changes to the content of tiles, including 
 msgid "Diagram"
 msgstr "Diagram"
 
-#. Help text for diagram section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/JIUMIXeCh3Tj0SJ01nLxVMjm.png  https://s3.eu-west-1.amazonaws.com/po-pub/i/Q7S9ciYCqo9HL9J5sCMUpQhU.png
-#: 
-msgid "<h4>Diagram DPI</h4><p>For output such as JPG and PNG, the DPI setting will produce higher quality output when it is larger, but will also increase the file size. Smaller values will produce smaller files, but the quality will be worse and if the value is too low you may not be able to read text.</p><h4>Spacing</h4><p>These options affect the distance between nodes on the diagram.</p><h5>Between generations</h5><p>How close you want generations on the output. For example, for left to right output, smaller numbers will bring the columns of individuals closer together, while larger numbers would push them further apart.</p><h5>Between individuals on the same level</h5><p>How close you want the individuals of the same generation on the output. For example, for left to right output, smaller numbers will mean less space vertically between the boxes, while larger numbers would push them further apart.</p><h4>Diagram colours</h4><p>This section allows you to change colours associated with the diagram that are not directly related to the individual or family tiles. Click the coloured box to change the colour. This uses your browser&apos;s colour picker, so will look different depending on what browser you are using. <h5>Diagram background colour</h5><p>This is the colour of the area behind the family tree.</p><h5>Relationship arrow colour</h5><p>The colour of the arrows that show relationships between individuals and families.</p><h5>Show blood relationship in a different colour</h5><p>This shows blood relationships in a different colour than other relationships (e.g. adoption). Selecting this option will provide two colours that can be customised:<ul><li>Related by birth - the arrow colour to use for children related by birth</li><li>Related other than by birth - the arrow colour to use for children not related by birth</li></ul>"
-msgstr "<h4>Diagram DPI</h4><p>For output such as JPG and PNG, the DPI setting will produce higher quality output when it is larger, but will also increase the file size. Smaller values will produce smaller files, but the quality will be worse and if the value is too low you may not be able to read text.</p><h4>Spacing</h4><p>These options affect the distance between nodes on the diagram.</p><h5>Between generations</h5><p>How close you want generations on the output. For example, for left to right output, smaller numbers will bring the columns of individuals closer together, while larger numbers would push them further apart.</p><h5>Between individuals on the same level</h5><p>How close you want the individuals of the same generation on the output. For example, for left to right output, smaller numbers will mean less space vertically between the boxes, while larger numbers would push them further apart.</p><h4>Diagram colours</h4><p>This section allows you to change colours associated with the diagram that are not directly related to the individual or family tiles. Click the coloured box to change the colour. This uses your browser's colour picker, so will look different depending on what browser you are using. <h5>Diagram background colour</h5><p>This is the colour of the area behind the family tree.</p><h5>Relationship arrow colour</h5><p>The colour of the arrows that show relationships between individuals and families.</p><h5>Show blood relationship in a different colour</h5><p>This shows blood relationships in a different colour than other relationships (e.g. adoption). Selecting this option will provide two colours that can be customised:<ul><li>Related by birth - the arrow colour to use for children related by birth</li><li>Related other than by birth - the arrow colour to use for children not related by birth</li></ul>"
-
 #. One of the names of a new settings group under the Tile design section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/BIVXgbgOvNma3KB1dlsuu2oX.png
 #: 
 msgid "Shape"
@@ -1512,4 +1507,91 @@ msgstr "Added to My favourites"
 #: 
 msgid "Added to Tree favourites"
 msgstr "Added to Tree favourites"
+
+#. Part of the help text for the Diagram appearance settings:  https://s3.eu-west-1.amazonaws.com/po-pub/i/Vbjoek76Ojvq1rcmEumPnmgJ.png
+#: 
+msgid "For output such as JPG and PNG, the DPI setting will produce higher quality output when it is larger, but will also increase the file size. Smaller values will produce smaller files, but the quality will be worse and if the value is too low you may not be able to read text."
+msgstr "For output such as JPG and PNG, the DPI setting will produce higher quality output when it is larger, but will also increase the file size. Smaller values will produce smaller files, but the quality will be worse and if the value is too low you may not be able to read text."
+
+#. Part of the help text for the Diagram appearance settings:  https://s3.eu-west-1.amazonaws.com/po-pub/i/Vbjoek76Ojvq1rcmEumPnmgJ.png
+#: 
+msgid "These options affect the distance between nodes on the diagram."
+msgstr "These options affect the distance between nodes on the diagram."
+
+#. Part of the help text for the Diagram appearance settings:  https://s3.eu-west-1.amazonaws.com/po-pub/i/Vbjoek76Ojvq1rcmEumPnmgJ.png
+#: 
+msgid "How close you want generations on the output. For example, for left to right output, smaller numbers will bring the columns of individuals closer together, while larger numbers would push them further apart."
+msgstr "How close you want generations on the output. For example, for left to right output, smaller numbers will bring the columns of individuals closer together, while larger numbers would push them further apart."
+
+#. Part of the help text for the Diagram appearance settings:  https://s3.eu-west-1.amazonaws.com/po-pub/i/Vbjoek76Ojvq1rcmEumPnmgJ.png
+#: 
+msgid "How close you want the individuals of the same generation on the output. For example, for left to right output, smaller numbers will mean less space vertically between the boxes, while larger numbers would push them further apart."
+msgstr "How close you want the individuals of the same generation on the output. For example, for left to right output, smaller numbers will mean less space vertically between the boxes, while larger numbers would push them further apart."
+
+#. Part of the help text for the Diagram appearance settings:  https://s3.eu-west-1.amazonaws.com/po-pub/i/Vbjoek76Ojvq1rcmEumPnmgJ.png
+#: 
+msgid "This section lets you change settings related to the layout of the diagram."
+msgstr "This section lets you change settings related to the layout of the diagram."
+
+#. Part of the help text for the Diagram appearance settings:  https://s3.eu-west-1.amazonaws.com/po-pub/i/Vbjoek76Ojvq1rcmEumPnmgJ.png
+#: 
+msgid "When you have selected the \"Combined\" layout option, this option lets you choose whether the partners should be shown size by side (default), or in Stacked mode, which places them on top of each other. Stacked mode reduces the width of the diagram, which can be helpful in some situations."
+msgstr "When you have selected the \"Combined\" layout option, this option lets you choose whether the partners should be shown size by side (default), or in Stacked mode, which places them on top of each other. Stacked mode reduces the width of the diagram, which can be helpful in some situations."
+
+#. Part of the help text for the Diagram appearance settings:  https://s3.eu-west-1.amazonaws.com/po-pub/i/Vbjoek76Ojvq1rcmEumPnmgJ.png
+#: 
+msgid "This section allows you to change colours associated with the diagram that are not directly related to the individual or family tiles. Click the coloured box to change the colour. This uses your browser&apos;s colour picker, so will look different depending on what browser you are using."
+msgstr "This section allows you to change colours associated with the diagram that are not directly related to the individual or family tiles. Click the coloured box to change the colour. This uses your browser&apos;s colour picker, so will look different depending on what browser you are using."
+
+#. Part of the help text for the Diagram appearance settings:  https://s3.eu-west-1.amazonaws.com/po-pub/i/Vbjoek76Ojvq1rcmEumPnmgJ.png
+#: 
+msgid "This is the colour of the area behind the family tree."
+msgstr "This is the colour of the area behind the family tree."
+
+#. Part of the help text for the Diagram appearance settings:  https://s3.eu-west-1.amazonaws.com/po-pub/i/Vbjoek76Ojvq1rcmEumPnmgJ.png
+#: 
+msgid "The colour of the arrows that show relationships between individuals and families."
+msgstr "The colour of the arrows that show relationships between individuals and families."
+
+#. Part of the help text for the Diagram appearance settings:  https://s3.eu-west-1.amazonaws.com/po-pub/i/Vbjoek76Ojvq1rcmEumPnmgJ.png
+#: 
+msgid "This shows blood relationships in a different colour than other relationships (e.g. adoption). Selecting this option will provide two colours that can be customised"
+msgstr "This shows blood relationships in a different colour than other relationships (e.g. adoption). Selecting this option will provide two colours that can be customised"
+
+#. Part of the help text for the Diagram appearance settings:  https://s3.eu-west-1.amazonaws.com/po-pub/i/Vbjoek76Ojvq1rcmEumPnmgJ.png
+#: 
+msgid "The arrow colour to use for children related by birth"
+msgstr "The arrow colour to use for children related by birth"
+
+#. Part of the help text for the Diagram appearance settings:  https://s3.eu-west-1.amazonaws.com/po-pub/i/Vbjoek76Ojvq1rcmEumPnmgJ.png
+#: 
+msgid "The arrow colour to use for children not related by birth"
+msgstr "The arrow colour to use for children not related by birth"
+
+#. Name of settings group in appearance section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/nM6gmf4vpCnqLFguqMJgW87Z.png
+#: 
+msgid "Layout"
+msgstr "Layout"
+
+#. Name of setting in appearance section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/nM6gmf4vpCnqLFguqMJgW87Z.png
+#: 
+msgid "Partner position"
+msgstr "Partner position"
+
+#. Specifies this setting only works for the Combined diagram type:  https://s3.eu-west-1.amazonaws.com/po-pub/i/nM6gmf4vpCnqLFguqMJgW87Z.png
+#: 
+msgid "Combined diagram type only"
+msgstr "Combined diagram type only"
+
+#. One of the options for "Partner position" layout option. Indicates that husband and wife are side by side (default)  https://s3.eu-west-1.amazonaws.com/po-pub/i/nM6gmf4vpCnqLFguqMJgW87Z.png 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/tqlYF2RCUpH3CtrsFC4pFdHI.png
+#: 
+msgid "Side by side"
+msgstr "Side by side"
+
+#. One of the options for "Partner position" layout option. Indicates that husband and wife are on top of each other  https://s3.eu-west-1.amazonaws.com/po-pub/i/nM6gmf4vpCnqLFguqMJgW87Z.png 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/5INseuMeLcdcqQiImjA3CAkS.png
+#: 
+msgid "Stacked"
+msgstr "Stacked"
 

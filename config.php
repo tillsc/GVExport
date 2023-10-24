@@ -14,6 +14,7 @@ return array(
 	'compress_cookie' => true, // Whether cookie data should be compressed - particularly important if users can access multiple trees while logged out
 	'output_type' => 'svg', // Default output file type
 	'graph_dir' => 'LR', // Direction of graph. 'LR' for Left-to-right, 'TB' for Top-to-bottom
+    'combined_layout_type' => 'SS', // Layout type for combined diagram type - 'SS' to place couple side-by-side, 'OU' for over/under
 	'mclimit' => '1', // Graphviz MCLIMIT setting - number of times to regenerate graph for reduced crossings
 	'diagram_type' => 'decorated', // Default diagram type setting. 'decorated', or 'combined'
 	'show_photos' => true, // Whether to include photos in diagram

@@ -39,11 +39,29 @@ use Fisharebest\Webtrees\I18N;
         </div>
     </div>
 
+    <div onclick="Form.showHideSubgroup('diagtype_combined_subgroup', this)" class="pointer subgroup">→ <?= I18N::translate('Layout'); ?></div>
+    <div id="diagtype_combined_subgroup" class="setting_subgroup col-auto wt-page-options-value" style="display: none">
+        <div class="row">
+            <div><?= I18N::translate('Partner position') ?>:</div>
+            <div class="font-small">(<?= I18N::translate('Combined diagram type only') ?>)</div>
+            <div>
+                <div class="padding-left-10">
+                    <input type="radio" name="vars[combined_layout_type]" id="cl_type_ss" value="SS" <?= $vars["combined_layout_type"] == 'SS' ? 'checked' : '' ?>>
+                    <label for="cl_type_ss"><?= I18N::translate('Side by side') ?></label>
+                </div>
+                <div class="padding-left-10">
+                    <input type="radio" name="vars[combined_layout_type]" id="cl_type_ou" value="OU" <?= $vars["combined_layout_type"] == 'OU' ? 'checked' : '' ?>>
+                    <label for="cl_type_ou"><?= I18N::translate('Stacked') ?></label>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div onclick="Form.showHideSubgroup('diagram_colours_subgroup', this)" class="pointer subgroup">→ <?= I18N::translate('Diagram colours'); ?></div>
     <div id="diagram_colours_subgroup" class="setting_subgroup col-auto wt-page-options-value" style="display: none">
         <div class="row">
             <div class="col-sm-12 col-auto">
-                <input type="color" class="picker" name="vars[background_col]" id="background_col" value="<?= e($vars["background_col"]); ?>" /><label for="background_col" class="picker-label"><?= I18N::translate('Diagram background color') ?></label>
+                <input type="color" class="picker" name="vars[background_col]" id="background_col" value="<?= e($vars["background_col"]); ?>" /><label for="background_col" class="picker-label"><?= I18N::translate('Diagram background colour') ?></label>
             </div>
             <div class="col-sm-12 col-auto">
                 <input type="color" class="picker" name="vars[arrows_default]" id="arrows_default" value="<?= e($vars["arrows_default"]); ?>" /><label for="arrows_default" class="picker-label"><?= I18N::translate('Relationship arrow colour') ?></label>

@@ -115,6 +115,10 @@ class FormSubmission
             $settings['graph_dir'] = $vars['graph_dir'];
         }
 
+        if (isset($vars['combined_layout_type']) && ctype_alpha($vars['combined_layout_type'])) {
+            $settings['combined_layout_type'] = $vars['combined_layout_type'];
+        }
+
         $settings['show_birthdate'] = isset($vars['show_birthdate']);
 
         if (isset($vars['birthdate_year_only'])) {
