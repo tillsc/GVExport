@@ -78,6 +78,7 @@ return array(
     'shape_sex_unknown' => 0, // Shape option for unknown when based on sex option chosen for indi_tile_shape above
     'shape_vital_dead' => 0, // Shape option for deceased when based on vitals option chosen for indi_tile_shape above
     'shape_vital_living' => 10, // Shape option for living when based on vitals option chosen for indi_tile_shape above
+	'sharednote_col' => '#ADD8E6', // Default colour to show shared note
 	'male_col' => '#ADD8E6', // Default colour of male individuals (light blue)
 	'female_col' => '#FFB6C1', // Default colour of female individuals (light pink)
 	'other_gender_col' => '#FCEAA1', // Default colour of Other gender individuals (light yellow)
@@ -97,7 +98,7 @@ return array(
     'indi_stripe_age_low' => 0, // For stripe colour option for age, this is the age for the low colour - this age and anything younger gets this colour
     'indi_stripe_age_high' => 100, // For stripe colour option for age, this is the age for the high colour - this age and anything older gets this colour
     'border_col_type' => 320, // Custom (300), based on sex of individual (310), Same as Family border (320), or based on living/deceased (330)
-    'sharednote_col_type' => '', // No default shared note as this is contextual
+    'sharednote_col_enable' => false, // Whether to enable colouring based on shared notes
 	'indi_border_dead_col' => "#CCCCCC", // Border of individual tile for deceased individuals, when this option chosen
 	'indi_border_living_col' => "#FEFEFE", // Border of individual tile for living individuals, when this option chosen
 	'indi_border_age_low_col' => "#CC5555", // For border colour option for age, this is the colour for low-aged individuals
