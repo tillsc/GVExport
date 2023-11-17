@@ -270,4 +270,25 @@ const Form = {
         let xref = document.getElementById('sharednote_col_type').value.trim();
         Form.showHide(document.getElementById('subgroup_note_enabled'),  xref !== '');
     },
+
+    /**
+     * Shared note panel - form displaying options that allow styling individuals based on their linked shared notes
+     */
+    sharedNotePanel: {
+
+        /**
+         * Run startup code
+         */
+        init() {
+            document.querySelector('#shared_note_button').addEventListener('click', Form.sharedNotePanel.clickHelpSidebarButton);
+        },
+
+        /**
+         * Handle event when button to show shared note panel is clicked
+         */
+        clickHelpSidebarButton() {
+            showModal('');
+        },
+
+    },
 }

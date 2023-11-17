@@ -480,6 +480,7 @@ function pageLoaded(Url) {
     document.querySelector(".sidebar_toggle a").addEventListener("click", UI.showSidebar);
     UI.helpPanel.init();
     UI.fixTheme();
+    Form.sharedNotePanel.init();
 
     // Form change events
     const form = document.getElementById('gvexport');
@@ -489,8 +490,6 @@ function pageLoaded(Url) {
     }
     let indiSelectEl = form.querySelector("#pid");
     indiSelectEl.addEventListener('change', indiSelectChanged);
-    let noteSelectEl = form.querySelector("#sharednote_col_type");
-    noteSelectEl.addEventListener('change', Form.noteSelectChanged);
     let stopIndiSelectEl = form.querySelector("#stop_pid");
     stopIndiSelectEl.addEventListener('change', stopIndiSelectChanged);
 
