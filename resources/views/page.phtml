@@ -316,7 +316,7 @@ $usegraphviz = $vars['graphviz_bin'] != "";
             panzoomInst = panzoom(element, {
                 maxZoom: 4,
                 minZoom: fullZoom / 10,
-                initialZoom: fullZoom,
+                initialZoom: 1,
                 onTouch: function() {
                     // Fix links not working on mobile
                     return false; // tells the library to not preventDefault.
