@@ -137,7 +137,7 @@ const UI = {
                 return Data.getHelp(help).then(function (response) {
                     if (response) {
                         let contentEl = document.getElementById('help-content');
-                        contentEl.innerHTML = UI.helpPanel.decodeHTML(response);
+                        contentEl.innerHTML = Data.decodeHTML(response);
                         contentEl.scrollTop = 0;
                     } else {
                         setTimeout(function(){location.reload();}, 3000);
@@ -147,12 +147,6 @@ const UI = {
             } else {
                 return Promise.resolve();
             }
-        },
-
-        decodeHTML(html) {
-            const textarea = document.createElement('textarea');
-            textarea.innerHTML = html;
-            return textarea.value;
         },
 
         /**

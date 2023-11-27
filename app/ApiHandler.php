@@ -95,6 +95,9 @@ class ApiHandler
                 case "get_help":
                     $this->getHelp();
                     break;
+                case "get_shared_note_form":
+                    $this->getSharedNoteForm();
+                    break;
                 default:
                     $this->response_data['success'] = false;
                     $this->response_data['json'] = $this->json_data;
@@ -384,10 +387,22 @@ class ApiHandler
         $help = new Help();
         $this->response_data['success'] = true;
         if ($help->helpExists($this->json['help_name'])) {
-            $this->response_data['help'] = view($this->module->name() . '::MainPage/Help/' . $help->getHelpLocation($this->json['help_name']) . $this->json['help_name'],['module' => $this->module]);
+            $this->response_data['response'] = view($this->module->name() . '::MainPage/Help/' . $help->getHelpLocation($this->json['help_name']) . $this->json['help_name'],['module' => $this->module]);
         } else {
             // API call successful, even though help information not found
-            $this->response_data['help'] = view($this->module->name() . '::MainPage/Help/' . $help->getHelpLocation(Help::NOT_FOUND) . Help::NOT_FOUND);
+            $this->response_data['response'] = view($this->module->name() . '::MainPage/Help/' . $help->getHelpLocation(Help::NOT_FOUND) . Help::NOT_FOUND);
         }
+    }
+
+    /**
+     * Retrieve the help information from appropriate view file
+     *
+     * @return void
+     */
+    private function getSharedNoteForm()
+    {
+        $vars = Validator::parsedBody($this->request)->array('vars');
+        $this->response_data['success'] = true;
+        $this->response_data['response'] = view($this->module->name() . '::MainPage/Appearance/TileDesign/SharedNote', ['vars' => $vars, 'tree' => $this->tree]);
     }
 }

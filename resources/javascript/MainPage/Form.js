@@ -267,6 +267,7 @@ const Form = {
      * Runs when user changes shared note selection
      */
     noteSelectChanged: function() {
+        alert('test');
         let xref = document.getElementById('sharednote_col_type').value.trim();
         Form.showHide(document.getElementById('subgroup_note_enabled'),  xref !== '');
     },
@@ -280,15 +281,21 @@ const Form = {
          * Run startup code
          */
         init() {
-            document.querySelector('#shared_note_button').addEventListener('click', Form.sharedNotePanel.clickHelpSidebarButton);
+            document.querySelector('#shared_note_button').addEventListener('click', Form.sharedNotePanel.clickSharedNoteButton);
         },
 
         /**
          * Handle event when button to show shared note panel is clicked
          */
-        clickHelpSidebarButton() {
-            showModal('');
+        clickSharedNoteButton() {
+            return Data.getSharedNoteForm().then(function (response) {
+                if (response) {
+                    showModal(Data.decodeHTML(response));
+                } else {
+                    setTimeout(function(){location.reload();}, 3000);
+                    UI.showToast(ERROR_CHAR + TRANSLATE['Login expired. Reloading page...']);
+                }
+            });
         },
-
     },
 }

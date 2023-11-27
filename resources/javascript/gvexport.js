@@ -14,6 +14,7 @@ const REQUEST_TYPE_LOAD_SETTINGS_TOKEN = "load_settings_token";
 const REQUEST_TYPE_ADD_MY_FAVORITE = "add_my_favorite";
 const REQUEST_TYPE_ADD_TREE_FAVORITE = "add_tree_favorite";
 const REQUEST_TYPE_GET_HELP = "get_help";
+const REQUEST_TYPE_GET_SHARED_NOTE_FORM = "get_shared_note_form";
 let treeName = null;
 let loggedIn = null;
 let xrefList = [];
