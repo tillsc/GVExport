@@ -125,6 +125,17 @@ const Form = {
         return {x:x, y:y};
     },
 
+    clearSelect: function(selectId) {
+        let dropdown = document.getElementById(selectId);
+        if (typeof dropdown.tomselect !== 'undefined') {
+            dropdown.tomselect.clear();
+        } else {
+            setTimeout(function () {
+                Form.clearSelect(selectId);
+            }, 100);
+        }
+    },
+
     /**
      * Toggle items based on if the items in the cart should be used or not
      * enable - if set to true, use cart. Update form to disable options. Set to "false" to reverse.
@@ -263,14 +274,6 @@ const Form = {
             hidden.value = "";
         }
     },
-    /**
-     * Runs when user changes shared note selection
-     */
-    noteSelectChanged: function() {
-        alert('test');
-        let xref = document.getElementById('sharednote_col_type').value.trim();
-        Form.showHide(document.getElementById('subgroup_note_enabled'),  xref !== '');
-    },
 
     /**
      * Shared note panel - form displaying options that allow styling individuals based on their linked shared notes
@@ -281,7 +284,8 @@ const Form = {
          * Run startup code
          */
         init() {
-            document.querySelector('#shared_note_button').addEventListener('click', Form.sharedNotePanel.clickSharedNoteButton);
+            document.getElementById('shared_note_button').addEventListener('click', Form.sharedNotePanel.clickSharedNoteButton);
+            document.getElementById('sharednote_col_add').addEventListener('change', Form.sharedNotePanel.noteSelectChanged);
         },
 
         /**
@@ -297,5 +301,26 @@ const Form = {
                 }
             });
         },
+
+        /**
+         * Runs when user changes shared note selection box (i.e. chooses shared note to add)
+         */
+        noteSelectChanged: function() {
+            let xref = document.getElementById('sharednote_col_add').value.trim();
+            if (xref !== "") {
+                Form.sharedNotePanel.addNoteToList(xref);
+            }
+        },
+
+        /**
+         * Adds the provided note XREF to the list of shared notes
+         * 
+         * @param xref
+         */
+        addNoteToList: function(xref) {
+            let list = document.getElementById('sharednote_col_data');
+            list.value += xref;
+            Form.clearSelect('sharednote_col_add');
+        }
     },
 }

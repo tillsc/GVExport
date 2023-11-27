@@ -145,7 +145,7 @@ function addIndiToList(xref) {
         })
 
     }
-    clearIndiSelect('pid');
+    Form.clearSelect('pid');
 }
 
 function addIndiToStopList(xref) {
@@ -155,7 +155,7 @@ function addIndiToStopList(xref) {
         appendXrefToList(xref, 'stop_xref_list');
         loadIndividualDetails(TOMSELECT_URL, xref, 'stop_indi_list');
     }
-    clearIndiSelect('stop_pid');
+    Form.clearSelect('stop_pid');
 }
 
 function appendXrefToList(xref, elementId) {
@@ -165,17 +165,6 @@ function appendXrefToList(xref, elementId) {
     } else {
         list.value += ',' + xref;
         list.value = list.value.replaceAll(",,',',");
-    }
-}
-
-function clearIndiSelect(selectId) {
-    let dropdown = document.getElementById(selectId);
-    if (typeof dropdown.tomselect !== 'undefined') {
-        dropdown.tomselect.clear();
-    } else {
-        setTimeout(function () {
-            clearIndiSelect(selectId);
-        }, 100);
     }
 }
 function toggleUpdateButton() {
@@ -493,7 +482,6 @@ function pageLoaded(Url) {
     indiSelectEl.addEventListener('change', indiSelectChanged);
     let stopIndiSelectEl = form.querySelector("#stop_pid");
     stopIndiSelectEl.addEventListener('change', stopIndiSelectChanged);
-
     let simpleSettingsEl = form.querySelector("#simple_settings_list");
     simpleSettingsEl.addEventListener('change', function(e) {
         let element = document.querySelector('.settings_list_item[data-id="' + e.target.value + '"]');
@@ -1164,7 +1152,7 @@ function diagramSearchBoxChange(e) {
         if (!scrollToRecord(xref)) {
             UI.showToast(TRANSLATE['Individual not found']);
         }
-        clearIndiSelect('diagram_search_box');
+        Form.clearSelect('diagram_search_box');
         Form.showHideSearchBox(e, false);
     }
 }
