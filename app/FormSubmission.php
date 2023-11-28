@@ -258,8 +258,8 @@ class FormSubmission
             $settings['border_col_type'] = I18N::digits($vars["border_col_type"]);
         }
         $settings['sharednote_col_enable'] = isset($vars["sharednote_col_enable"]);
-        if (isset($vars['sharednote_col_add']) && $this->isXrefListValid(trim($vars["sharednote_col_add"], '@'))) { // TODO not currently used
-            $settings['sharednote_col_add'] = trim($vars["sharednote_col_add"], '@');
+        if (isset($vars['sharednote_col_data']) && $this->isValidJSON($vars["sharednote_col_data"])) {
+            $settings['sharednote_col_data'] = $vars["sharednote_col_data"];
         }
         if (isset($vars["indi_background_col"]) && $this->isValidColourHex($vars["indi_background_col"])) {
             $settings['indi_background_col'] = $vars["indi_background_col"];
@@ -366,7 +366,7 @@ class FormSubmission
      * Check if an XREF list string is properly structured
      *
      * @param string $list
-     * @return false
+     * @return bool
      */
     private function isXrefListValid(string $list): bool
     {
@@ -377,7 +377,7 @@ class FormSubmission
      * Check if a provided colour hex is valid
      *
      * @param string $colour
-     * @return false
+     * @return bool
      */
     private function isValidColourHex(string $colour): bool
     {
@@ -385,10 +385,22 @@ class FormSubmission
     }
 
     /**
+     * Check if a provided string is valid JSON
+     *
+     * @param string $json
+     * @return bool
+     */
+    private function isValidJSON(string $json): bool
+    {
+        json_decode($json);
+        return (json_last_error() === JSON_ERROR_NONE);
+    }
+
+    /**
      * Check if a chosen name string meets validation criteria
      *
      * @param $name
-     * @return false
+     * @return bool
      */
     public static function isNameStringValid($name): bool
     {
@@ -399,7 +411,7 @@ class FormSubmission
      * Check if a string makes a valid prefix for birth/death/etc prefix icon
      *
      * @param $name
-     * @return false
+     * @return bool
      */
     private function isPrefixStringValid($name): bool
     {
@@ -410,7 +422,7 @@ class FormSubmission
      * Check if a string is a correctly formatted percentage
      *
      * @param $string
-     * @return false
+     * @return bool
      */
     private function isPercent($string): bool
     {
@@ -432,9 +444,9 @@ class FormSubmission
      * Attempts to normalise percentage string
      *
      * @param $percent
-     * @return mixed|string
+     * @return string
      */
-    private function cleanPercent($percent)
+    private function cleanPercent($percent): string
     {
         if (!strpos($percent, '%')) {
             $percent = $percent . '%';

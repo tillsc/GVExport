@@ -292,14 +292,7 @@ const Form = {
          * Handle event when button to show shared note panel is clicked
          */
         clickSharedNoteButton() {
-            return Data.getSharedNoteForm().then(function (response) {
-                if (response) {
-                    showModal(Data.decodeHTML(response));
-                } else {
-                    setTimeout(function(){location.reload();}, 3000);
-                    UI.showToast(ERROR_CHAR + TRANSLATE['Login expired. Reloading page...']);
-                }
-            });
+            Form.sharedNotePanel.showNoteModal();
         },
 
         /**
@@ -314,13 +307,38 @@ const Form = {
 
         /**
          * Adds the provided note XREF to the list of shared notes
-         * 
+         *
          * @param xref
          */
         addNoteToList: function(xref) {
             let list = document.getElementById('sharednote_col_data');
-            list.value += xref;
+            const obj = JSON.parse(list.value || '[]');
+            if (!obj.find(item => item.xref === xref)) {
+                const newNote = {
+                    xref: xref,
+                    corners: 'square',
+                };
+                obj.push(newNote);
+            }
+            list.value = JSON.stringify(obj);
             Form.clearSelect('sharednote_col_add');
+            Form.sharedNotePanel.showNoteModal();
+        },
+
+        /**
+         * Displays the modal for managing shared note settings
+         *
+         * @returns {Promise<*>}
+         */
+        showNoteModal() {
+            return Data.getSharedNoteForm().then(function (response) {
+                if (response) {
+                    showModal(Data.decodeHTML(response));
+                } else {
+                    setTimeout(function(){location.reload();}, 3000);
+                    UI.showToast(ERROR_CHAR + TRANSLATE['Login expired. Reloading page...']);
+                }
+            });
         }
     },
 }
