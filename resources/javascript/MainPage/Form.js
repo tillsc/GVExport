@@ -10,7 +10,7 @@ const Form = {
      * @param element
      * @param add
      */
-    togglePercent: function(element, add) {
+    togglePercent(element, add) {
         // Clicked out of input field, add % sign
         let startValue;
         if (add) {
@@ -38,7 +38,7 @@ const Form = {
      * @param element
      * @param value
      */
-    setDefaultValueIfBlank: function(element, value) {
+    setDefaultValueIfBlank(element, value) {
         if (element.value === "") {
             element.value = value;
         }
@@ -49,7 +49,7 @@ const Form = {
      *
      * @returns {boolean}
      */
-    isIndiBlank: function() {
+    isIndiBlank() {
         let el = document.getElementsByClassName("item");
         let list = document.getElementById('xref_list');
         return el.length === 0 && list.value.toString().length === 0;
@@ -61,7 +61,7 @@ const Form = {
      *
      * @param field
      */
-    updateRelationOption: function(field) {
+    updateRelationOption(field) {
         // If user clicked "All relatives"
         if (field === "include_all_relatives") {
             // If function triggered by checking "All relatives" field, ensure "Siblings" is checked
@@ -112,7 +112,7 @@ const Form = {
      * @param rel
      * @returns {{x: number, y: number}}
      */
-    getPos: function(el, rel)
+    getPos(el, rel)
     {
         let x = 0, y = 0;
 
@@ -125,7 +125,7 @@ const Form = {
         return {x:x, y:y};
     },
 
-    clearSelect: function(selectId) {
+    clearSelect(selectId) {
         let dropdown = document.getElementById(selectId);
         if (typeof dropdown.tomselect !== 'undefined') {
             dropdown.tomselect.clear();
@@ -142,7 +142,7 @@ const Form = {
      *
      * @param enable
      */
-    toggleCart: function(enable) {
+    toggleCart(enable) {
             const el = document.getElementsByClassName("cart_toggle");
             for (let i = 0; i < el.length; i++) {
                 el.item(i).disabled = enable;
@@ -158,7 +158,7 @@ const Form = {
      * @param css_class the class to search for
      * @param show true to show the elements and false to hide them
      */
-    showHideClass: function(css_class, show) {
+    showHideClass(css_class, show) {
         let el = document.getElementsByClassName(css_class);
         for (let i = 0; i < el.length; i++) {
             Form.showHide(el.item(i), show)
@@ -170,7 +170,7 @@ const Form = {
      * @param element
      * @param show whether to show (true) or hide (false) the element
      */
-    showHide: function(element, show) {
+    showHide(element, show) {
         if (show) {
             element.style.removeProperty("display");
         } else {
@@ -184,7 +184,7 @@ const Form = {
      * @param checkboxId
      * @param elementId
      */
-    showHideMatchCheckbox: function(checkboxId, elementId) {
+    showHideMatchCheckbox(checkboxId, elementId) {
         Form.showHide(document.getElementById(elementId), document.getElementById(checkboxId).checked);
     },
 
@@ -195,7 +195,7 @@ const Form = {
      * @param elementId element to show/hide
      * @param value
      */
-    showHideMatchDropdown: function(dropdownId, elementId, value) {
+    showHideMatchDropdown(dropdownId, elementId, value) {
         let values = value.split("|");
         let show = false;
         let elValue = document.getElementById(dropdownId).value;
@@ -213,7 +213,7 @@ const Form = {
      * @param elementId
      * @param callingEl
      */
-    showHideSubgroup: function(elementId, callingEl) {
+    showHideSubgroup(elementId, callingEl) {
         let callerText = callingEl.innerText;
         let visible = callerText.includes('↓');
         Form.showHide(document.getElementById(elementId), !visible);
@@ -231,7 +231,7 @@ const Form = {
      * @param event
      * @param visible (optional) whether to show (true) or hide, leave blank to toggle
      */
-    showHideSearchBox: function(event, visible = null) {
+    showHideSearchBox(event, visible = null) {
         const el = document.getElementById('diagram_search_box_container');
         // If toggling, set to the opposite of current state
         if (visible === null) {
@@ -256,7 +256,7 @@ const Form = {
      * @param id the id of the element we are toggling
      * @param visible whether to make element visible or hidden. Null to toggle current state.
      */
-    toggleAdvanced: function(button, id, visible = null) {
+    toggleAdvanced(button, id, visible = null) {
         const el = document.getElementById(id);
         // If toggling, set to the opposite of current state
         if (visible === null) {
@@ -298,7 +298,7 @@ const Form = {
         /**
          * Runs when user changes shared note selection box (i.e. chooses shared note to add)
          */
-        noteSelectChanged: function() {
+        noteSelectChanged() {
             let xref = document.getElementById('sharednote_col_add').value.trim();
             if (xref !== "") {
                 Form.sharedNotePanel.addNoteToList(xref);
@@ -310,17 +310,16 @@ const Form = {
          *
          * @param xref
          */
-        addNoteToList: function(xref) {
-            let list = document.getElementById('sharednote_col_data');
-            const obj = JSON.parse(list.value || '[]');
+        addNoteToList(xref) {
+            const obj = Form.sharedNotePanel.getNoteListJSON();
             if (!obj.find(item => item.xref === xref)) {
                 const newNote = {
-                    xref: xref,
+                    xref: xref.replaceAll('@',''),
                     corners: 'square',
                 };
                 obj.push(newNote);
             }
-            list.value = JSON.stringify(obj);
+            document.getElementById('sharednote_col_data').value = JSON.stringify(obj);
             Form.clearSelect('sharednote_col_add');
             Form.sharedNotePanel.showNoteModal();
         },
@@ -334,11 +333,37 @@ const Form = {
             return Data.getSharedNoteForm().then(function (response) {
                 if (response) {
                     showModal(Data.decodeHTML(response));
+                    Form.sharedNotePanel.updateNoteList();
                 } else {
                     setTimeout(function(){location.reload();}, 3000);
                     UI.showToast(ERROR_CHAR + TRANSLATE['Login expired. Reloading page...']);
                 }
             });
+        },
+
+        /**
+         * Generates list of notes
+         */
+        updateNoteList() {
+            let obj = Form.sharedNotePanel.getNoteListJSON();
+            const container = document.getElementById('shared_note_list');
+            container.innerHTML = '';
+            obj.forEach(element => {
+                const div = document.createElement('div');
+                div.innerHTML = '<span>' + element.xref + '</span>';
+                div.innerHTML += '<span>' + element.corners + '</span>';
+                container.appendChild(div);
+            });
+        },
+
+        /**
+         * Returns the JSON object stored for the shared note list
+         *
+         * @returns {any}
+         */
+        getNoteListJSON() {
+            let list = document.getElementById('sharednote_col_data');
+            return JSON.parse(list.value || '[]');
         }
     },
 }
