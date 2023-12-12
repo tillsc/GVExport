@@ -100,6 +100,7 @@ return array(
     'border_col_type' => 320, // Custom (300), based on sex of individual (310), Same as Family border (320), or based on living/deceased (330)
     'sharednote_col_enable' => false, // Whether to enable colouring based on shared notes
     'sharednote_col_data' => '', // JSON of shared note
+    'sharednote_col_default' => '#ED333B', // Default shared note colour
 	'indi_border_dead_col' => "#CCCCCC", // Border of individual tile for deceased individuals, when this option chosen
 	'indi_border_living_col' => "#FEFEFE", // Border of individual tile for living individuals, when this option chosen
 	'indi_border_age_low_col' => "#CC5555", // For border colour option for age, this is the colour for low-aged individuals

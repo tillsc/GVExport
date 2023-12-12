@@ -317,7 +317,7 @@ const Form = {
                 const newNote = {
                     xref: xrefTrim,
                     corners: 'square',
-                    border_col: '330'
+                    border_col: SHARED_NOTE_DEFAULT
                 };
                 obj.push(newNote);
             }

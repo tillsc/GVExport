@@ -33,7 +33,7 @@ $settings = (new Settings())->getDefaultSettings();
                 <div class="sharednote-heading"><?= $name; ?></div>
                 <span class="sharednote-delete" onclick="return this.parentNode.remove();">&times;</span>
                 <div class="sharednote-item-group">
-                    <label for="sharednote_col<?= $index; ?>" class="sharednote-label"><?= I18N::translate('Shared note colour') ?></label><input type="color" class="picker" name="vars[sharednote_col]" id="sharednote_col<?= $index; ?>" value="" />
+                    <label for="sharednote_col<?= $index; ?>" class="sharednote-label"><?= I18N::translate('Shared note colour') ?></label><input type="color" class="picker" id="sharednote_col<?= $index; ?>" value="<?= $border_col; ?>" />
                 </div>
             </div>
             <?php
