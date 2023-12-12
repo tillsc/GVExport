@@ -164,7 +164,7 @@ function appendXrefToList(xref, elementId) {
         list.value = xref;
     } else {
         list.value += ',' + xref;
-        list.value = list.value.replaceAll(",,',',");
+        list.value = list.value.replaceAll(',,',',');
     }
 }
 function toggleUpdateButton() {

@@ -540,3 +540,7 @@ h4 {
     font-weight: bold;
     line-height: 10px;
 }
+
+.sharednote-list-item.over {
+    border-top: 2px solid #000000;
+}

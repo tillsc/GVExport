@@ -429,5 +429,88 @@ const UI = {
                 }
             });
         }
+    },
+
+    /**
+     * Make a list draggable - to use, run the addDragHandlers() function on each item in the list
+     */
+    draggableList: {
+        dragEl: null,
+
+        /**
+         * Adds event listeners to list item element - run this on each <li> element in the list to initiate dragging functionality
+         *
+         * @param el
+         */
+        addDragHandlers(el) {
+            el.addEventListener('dragstart', UI.draggableList.handleDragStart, false);
+            el.addEventListener('dragover', UI.draggableList.handleDragOver, false);
+            el.addEventListener('dragleave', UI.draggableList.handleDragLeave, false);
+            el.addEventListener('drop', UI.draggableList.handleDrop, false);
+            el.addEventListener('dragend', UI.draggableList.handleDragEnd, false);
+        },
+
+        /**
+         * When you start dragging
+         *
+         * @param e
+         */
+        handleDragStart(e) {
+            UI.draggableList.dragEl = this;
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/html', this.outerHTML);
+        },
+
+        /**
+         * When you drag over a list item
+         *
+         * @param e
+         * @returns {boolean}
+         */
+        handleDragOver(e) {
+            if (e.preventDefault) {
+                e.preventDefault();
+            }
+            this.classList.add('over');
+            e.dataTransfer.dropEffect = 'move';
+            return false;
+        },
+
+        /**
+         * Remove highlighting when dragging goes away from this list item
+         */
+        handleDragLeave() {
+            this.classList.remove('over');
+        },
+
+        /**
+         * Remove highlighting when dragging stops
+         */
+        handleDragEnd(e) {
+            this.classList.remove('over');
+        },
+
+        /**
+         * When you drop item you've been dragging
+         *
+         * @param e
+         * @returns {boolean}
+         */
+        handleDrop(e) {
+            if (e.stopPropagation) {
+                e.stopPropagation(); // May help stop browser redirect
+            }
+
+            if (UI.draggableList.dragEl !== this) { // If you didn't just drop back where it was
+                this.parentNode.removeChild(UI.draggableList.dragEl);
+                const dropHTML = e.dataTransfer.getData('text/html');
+                this.insertAdjacentHTML('beforebegin',dropHTML);
+                const dropElem = this.previousSibling;
+                UI.draggableList.addDragHandlers(dropElem);
+
+            }
+            this.classList.remove('over');
+            return false;
+        }
     }
 };

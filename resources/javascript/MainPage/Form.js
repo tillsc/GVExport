@@ -335,6 +335,10 @@ const Form = {
             return Data.getSharedNoteForm().then(function (response) {
                 if (response) {
                     showModal(Data.decodeHTML(response));
+                    const items = document.querySelectorAll('#shared_note_list .sharednote-list-item');
+                    [].forEach.call(items, UI.draggableList.addDragHandlers);
+                    let replaceColour = getComputedStyle(document.querySelector('.wt-page-options-label')).backgroundColor;
+
                 } else {
                     setTimeout(function(){location.reload();}, 3000);
                     UI.showToast(ERROR_CHAR + TRANSLATE['Login expired. Reloading page...']);

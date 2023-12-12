@@ -15,7 +15,7 @@ use vendor\WebtreesModules\gvexport\Settings;
 $settings = (new Settings())->getDefaultSettings();
 ?>
 <h1>Edit shared notes</h1>
-<div id="shared_note_list">
+<ul id="shared_note_list">
     <?php
     $data = json_decode($vars['sharednote_col_data'], true);
     if ($data !== null) {
@@ -29,13 +29,13 @@ $settings = (new Settings())->getDefaultSettings();
             $note = $note_object->getNote();
             $name = $note_object->firstLineOfTextFromHtml($note);
             ?>
-            <div class="indi_list_item sharednote-list-item" data-xref="<?= $xref; ?>">
+            <li draggable="true" class="indi_list_item sharednote-list-item" data-xref="<?= $xref; ?>">
                 <div class="sharednote-heading"><?= $name; ?></div>
                 <span class="sharednote-delete" onclick="return this.parentNode.remove();">&times;</span>
                 <div class="sharednote-item-group">
                     <label for="sharednote_col<?= $index; ?>" class="sharednote-label"><?= I18N::translate('Shared note colour') ?></label><input type="color" class="picker" id="sharednote_col<?= $index; ?>" value="<?= $border_col; ?>" />
                 </div>
-            </div>
+            </li>
             <?php
             $index ++;
         }
@@ -43,4 +43,4 @@ $settings = (new Settings())->getDefaultSettings();
             echo 'Invalid JSON format';
         }
         ?>
-</div>
+</ul>
