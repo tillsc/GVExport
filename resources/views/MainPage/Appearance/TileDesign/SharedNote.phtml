@@ -2,14 +2,45 @@
 
 use Fisharebest\Webtrees\Registry;
 use Fisharebest\Webtrees\I18N;
+use vendor\WebtreesModules\gvexport\GVExport;
+use vendor\WebtreesModules\gvexport\MainPage;
+use vendor\WebtreesModules\gvexport\Settings;
 
 
 /**
- * @var string      $vars           string of view location to insert into subgroup* @var array       $view_options   options to pass to view. We also reuse some parts of this.
- * @var string      $tree           string of view location to insert into subgroup* @var array       $view_options   options to pass to view. We also reuse some parts of this.
+ * @var array      $vars           string of view location to insert into subgroup* @var array       $view_options   options to pass to view. We also reuse some parts of this.
+ * @var Tree      $tree           string of view location to insert into subgroup* @var array       $view_options   options to pass to view. We also reuse some parts of this.
+ * @var GVExport      $module           string of view location to insert into subgroup* @var array       $view_options   options to pass to view. We also reuse some parts of this.
  */
-
+$settings = (new Settings())->getDefaultSettings();
 ?>
 <h1>Edit shared notes</h1>
-<div id="shared_note_list"></div>
-<input type="color" class="picker" name="vars[sharednote_col]" id="sharednote_col" value="" /><label for="sharednote_col" class="picker-label"><?= I18N::translate('Shared note colour') ?></label>
+<div id="shared_note_list">
+    <?php
+    $data = json_decode($vars['sharednote_col_data'], true);
+    if ($data !== null) {
+        $index = 0;
+        foreach ($data as $element) {
+            $xref = $element['xref'];
+            $corners = $element['corners'];
+            $border_col = $element['border_col'];
+
+            $note_object = Registry::noteFactory()->make($xref, $tree);
+            $note = $note_object->getNote();
+            $name = $note_object->firstLineOfTextFromHtml($note);
+            ?>
+            <div class="indi_list_item sharednote-list-item" data-xref="<?= $xref; ?>">
+                <div class="sharednote-heading"><?= $name; ?></div>
+                <span class="sharednote-delete" onclick="return this.parentNode.remove();">&times;</span>
+                <div class="sharednote-item-group">
+                    <label for="sharednote_col<?= $index; ?>" class="sharednote-label"><?= I18N::translate('Shared note colour') ?></label><input type="color" class="picker" name="vars[sharednote_col]" id="sharednote_col<?= $index; ?>" value="" />
+                </div>
+            </div>
+            <?php
+            $index ++;
+        }
+        } else {
+            echo 'Invalid JSON format';
+        }
+        ?>
+</div>

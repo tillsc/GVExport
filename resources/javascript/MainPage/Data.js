@@ -73,8 +73,8 @@ const Data = {
     },
 
     /**
+     * Retrieved the shared note view
      *
-     * @param help
      * @returns {Promise<unknown>}
      */
     getSharedNoteForm() {
@@ -102,7 +102,7 @@ const Data = {
             if (json.success) {
                 return json;
             } else {
-                return ERROR_CHAR + json.errorMessage;
+                return ERROR_CHAR + json['errorMessage'];
             }
         } catch(e) {
             UI.showToast(ERROR_CHAR + e);
@@ -272,7 +272,7 @@ const Data = {
                                 loadSettingsDetails();
                                 UI.showToast(TRANSLATE['Update successful']);
                             } else {
-                                UI.showToast(ERROR_CHAR + json.errorMessage);
+                                UI.showToast(ERROR_CHAR + json['errorMessage']);
                             }
                         } catch (e) {
                             UI.showToast("Failed to load response: " + e);
@@ -308,7 +308,7 @@ const Data = {
             const parsedResponse = JSON.parse(response);
 
             if (!parsedResponse.success) {
-                throw new Error(parsedResponse.errorMessage);
+                throw new Error(parsedResponse['errorMessage']);
             }
         },
 
@@ -349,7 +349,7 @@ const Data = {
                             if (json.success) {
                                 return json.url;
                             } else {
-                                UI.showToast(ERROR_CHAR + json.errorMessage);
+                                UI.showToast(ERROR_CHAR + json['errorMessage']);
                             }
                         } catch (e) {
                             UI.showToast("Failed to load response: " + e);

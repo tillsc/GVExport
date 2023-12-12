@@ -508,3 +508,33 @@ span.NAME {
 h4 {
     text-indent: -5px;
 }
+
+.sharednote-heading {
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.sharednote-label {
+    margin-right: 8px;
+}
+
+.sharednote-list-item {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    padding: 5px;
+}
+.sharednote-item-group {
+    align-self: flex-end;
+    margin-top: 5px;
+}
+
+.sharednote-delete {
+    color: #aaa;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    font-size: 28px;
+    font-weight: bold;
+    line-height: 10px;
+}

@@ -403,6 +403,6 @@ class ApiHandler
     {
         $vars = Validator::parsedBody($this->request)->array('vars');
         $this->response_data['success'] = true;
-        $this->response_data['response'] = view($this->module->name() . '::MainPage/Appearance/TileDesign/SharedNote', ['vars' => $vars, 'tree' => $this->tree]);
+        $this->response_data['response'] = view($this->module->name() . '::MainPage/Appearance/TileDesign/SharedNote', ['vars' => $vars, 'tree' => $this->tree, 'module' => $this->module]);
     }
 }

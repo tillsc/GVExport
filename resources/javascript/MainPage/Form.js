@@ -312,10 +312,12 @@ const Form = {
          */
         addNoteToList(xref) {
             const obj = Form.sharedNotePanel.getNoteListJSON();
-            if (!obj.find(item => item.xref === xref)) {
+            const xrefTrim = xref.replaceAll('@','');
+            if (!obj.find(item => item.xref === xrefTrim)) {
                 const newNote = {
-                    xref: xref.replaceAll('@',''),
+                    xref: xrefTrim,
                     corners: 'square',
+                    border_col: '330'
                 };
                 obj.push(newNote);
             }
@@ -333,26 +335,10 @@ const Form = {
             return Data.getSharedNoteForm().then(function (response) {
                 if (response) {
                     showModal(Data.decodeHTML(response));
-                    Form.sharedNotePanel.updateNoteList();
                 } else {
                     setTimeout(function(){location.reload();}, 3000);
                     UI.showToast(ERROR_CHAR + TRANSLATE['Login expired. Reloading page...']);
                 }
-            });
-        },
-
-        /**
-         * Generates list of notes
-         */
-        updateNoteList() {
-            let obj = Form.sharedNotePanel.getNoteListJSON();
-            const container = document.getElementById('shared_note_list');
-            container.innerHTML = '';
-            obj.forEach(element => {
-                const div = document.createElement('div');
-                div.innerHTML = '<span>' + element.xref + '</span>';
-                div.innerHTML += '<span>' + element.corners + '</span>';
-                container.appendChild(div);
             });
         },
 

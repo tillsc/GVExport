@@ -747,6 +747,12 @@ function getSettings(id = ID_ALL_SETTINGS) {
         UI.showToast(ERROR_CHAR + error);
     });
 }
+
+/**
+ *
+ * @param json
+ * @returns {Promise<unknown>}
+ */
 function sendRequest(json) {
     return new Promise((resolve, reject) => {
         const form = document.getElementById('gvexport');
