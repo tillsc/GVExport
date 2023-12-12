@@ -316,7 +316,6 @@ const Form = {
             if (!obj.find(item => item.xref === xrefTrim)) {
                 const newNote = {
                     xref: xrefTrim,
-                    corners: 'square',
                     border_col: SHARED_NOTE_DEFAULT
                 };
                 obj.push(newNote);
@@ -354,6 +353,11 @@ const Form = {
         getNoteListJSON() {
             let list = document.getElementById('sharednote_col_data');
             return JSON.parse(list.value || '[]');
+        },
+
+        saveButtonClick() {
+            alert('Saved');
+            document.getElementById('modal').remove();
         }
     },
 }

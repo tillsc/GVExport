@@ -544,3 +544,13 @@ h4 {
 .sharednote-list-item.over {
     border-top: 2px solid #000000;
 }
+
+.sharednote-group {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.sharednotes-save {
+    align-self: flex-end;
+    margin-bottom: 15px !important;
+}

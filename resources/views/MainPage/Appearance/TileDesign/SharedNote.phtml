@@ -14,33 +14,35 @@ use vendor\WebtreesModules\gvexport\Settings;
  */
 $settings = (new Settings())->getDefaultSettings();
 ?>
-<h1>Edit shared notes</h1>
-<ul id="shared_note_list">
-    <?php
-    $data = json_decode($vars['sharednote_col_data'], true);
-    if ($data !== null) {
-        $index = 0;
-        foreach ($data as $element) {
-            $xref = $element['xref'];
-            $corners = $element['corners'];
-            $border_col = $element['border_col'];
+<div class="sharednote-group">
+    <h1>Edit shared notes</h1>
+    <ul id="shared_note_list">
+        <?php
+        $data = json_decode($vars['sharednote_col_data'], true);
+        if ($data !== null) {
+            $index = 0;
+            foreach ($data as $element) {
+                $xref = $element['xref'];
+                $border_col = $element['border_col'];
 
-            $note_object = Registry::noteFactory()->make($xref, $tree);
-            $note = $note_object->getNote();
-            $name = $note_object->firstLineOfTextFromHtml($note);
+                $note_object = Registry::noteFactory()->make($xref, $tree);
+                $note = $note_object->getNote();
+                $name = $note_object->firstLineOfTextFromHtml($note);
+                ?>
+                <li draggable="true" class="indi_list_item sharednote-list-item" data-xref="<?= $xref; ?>">
+                    <div class="sharednote-heading"><?= $name; ?></div>
+                    <span class="sharednote-delete" onclick="return this.parentNode.remove();">&times;</span>
+                    <div class="sharednote-item-group">
+                        <label for="sharednote_col<?= $index; ?>" class="sharednote-label"><?= I18N::translate('Shared note colour') ?></label><input type="color" class="picker" id="sharednote_col<?= $index; ?>" value="<?= $border_col; ?>" />
+                    </div>
+                </li>
+                <?php
+                $index ++;
+            }
+            } else {
+                echo 'Invalid JSON format';
+            }
             ?>
-            <li draggable="true" class="indi_list_item sharednote-list-item" data-xref="<?= $xref; ?>">
-                <div class="sharednote-heading"><?= $name; ?></div>
-                <span class="sharednote-delete" onclick="return this.parentNode.remove();">&times;</span>
-                <div class="sharednote-item-group">
-                    <label for="sharednote_col<?= $index; ?>" class="sharednote-label"><?= I18N::translate('Shared note colour') ?></label><input type="color" class="picker" id="sharednote_col<?= $index; ?>" value="<?= $border_col; ?>" />
-                </div>
-            </li>
-            <?php
-            $index ++;
-        }
-        } else {
-            echo 'Invalid JSON format';
-        }
-        ?>
-</ul>
+    </ul>
+    <button class="btn btn-primary sharednotes-save" onclick="Form.sharedNotePanel.saveButtonClick();"><?= I18N::translate('Save'); ?></button>
+</div>
