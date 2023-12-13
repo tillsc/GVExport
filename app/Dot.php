@@ -288,15 +288,20 @@ class Dot {
 			$this->families = $functionsCC->getFamilies();
 		}
 
+        // Create shared notes data
+        $sharednotes = new SharedNoteList($this->settings['sharednote_col_data']);
+
         $out = $this->printDOTHeader();
 
 		// ### Print the individuals list ###
 		if ($this->settings["diagram_type"] != "combined") {
 			foreach ($this->individuals as $person_attributes) {
                 $person = new Person($person_attributes, $this);
-				$out .= $person->printPerson();
+				$out .= $person->printPerson($sharednotes);
 			}
 		}
+
+
 
 		// ### Print the families list ###
 		// If no_fams option is not checked then we print the families
@@ -309,10 +314,10 @@ class Dot {
                         || (isset($this->families[$fid]["has_parents"]) && $this->families[$fid]["has_parents"])
                         || ((isset($this->families[$fid]["husb_id"]) && $this->families[$fid]["husb_id"]) && (isset($this->families[$fid]["wife_id"]) && $this->families[$fid]["wife_id"]))
                     ) {
-                        $out .= $this->printFamily($fid, $nodeName);
+                        $out .= $this->printFamily($fid, $nodeName, $sharednotes);
                     }
 				} elseif ($this->settings["diagram_type"] != "combined") {
-					$out .= $this->printFamily($fid, $fid);
+					$out .= $this->printFamily($fid, $fid, $sharednotes);
 				}
 			}
 		}
@@ -494,7 +499,7 @@ class Dot {
 	 * @param string $fid Family ID
 	 * @param string $nodeName Name of DOT file node we are creating
 	 */
-	function printFamily(string $fid, string $nodeName): string
+	function printFamily(string $fid, string $nodeName, $sharednotes): string
     {
 
         $out = $nodeName;
@@ -557,12 +562,12 @@ class Dot {
 			if (!empty($unkn_id)) {
                 // Print unknown gender INDI
                 $person = new Person([], $this);
-                $out = $person->addPersonLabel($unkn_id, $out);
+                $out = $person->addPersonLabel($unkn_id, $out, $sharednotes);
             } else {
 			  // Print husband
 			  if (!empty($husb_id)) {
                   $person = new Person([], $this);
-                  $out = $person->addPersonLabel($husb_id, $out);
+                  $out = $person->addPersonLabel($husb_id, $out, $sharednotes);
 			  }
 
 			  // Print wife
@@ -572,7 +577,7 @@ class Dot {
    			       $out .= "<TR>";
                              }
                    	     $person = new Person([], $this);
-                   	     $out = $person->addPersonLabel($wife_id, $out);
+                   	     $out = $person->addPersonLabel($wife_id, $out, $sharednotes);
 			  }
 			}
 

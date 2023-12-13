@@ -316,7 +316,7 @@ const Form = {
             if (!obj.find(item => item.xref === xrefTrim)) {
                 const newNote = {
                     xref: xrefTrim,
-                    border_col: SHARED_NOTE_DEFAULT
+                    bg_col: SHARED_NOTE_DEFAULT
                 };
                 obj.push(newNote);
             }
@@ -373,10 +373,10 @@ const Form = {
             const outputJSON = [];
             listItems.forEach(item => {
                 const xref = item.getAttribute('data-xref');
-                const borderCol = item.querySelector('.picker').value;
+                const bgColour = item.querySelector('.picker').value;
                 const itemObject = {
                     "xref": xref,
-                    "border_col": borderCol
+                    "bg_col": bgColour
                 };
                 outputJSON.push(itemObject);
             });

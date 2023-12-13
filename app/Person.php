@@ -34,12 +34,12 @@ class Person
      * Prints the line in the DOT for a person.
      *
      */
-    function printPerson(): string
+    function printPerson($sharednotes): string
     {
         $out = "";
         $out .= Dot::convertID($this->attributes['pid']); // Convert the ID, so linked GEDCOMs are displayed properly
         $out .= " [ label=<";
-        $out .= $this->printPersonLabel($this->attributes['pid'], $this->attributes['rel']);
+        $out .= $this->printPersonLabel($this->attributes['pid'], $sharednotes, $this->attributes['rel']);
         $out .= ">";
         $out .= "];\n";
 
@@ -54,7 +54,7 @@ class Person
      * @param string $out
      * @return string
      */
-    public function addPersonLabel(string $pid, string $out): string
+    public function addPersonLabel(string $pid, string $out, $sharednotes): string
     {
         $i = $this->dot->getUpdatedPerson($pid);
         if (isset($this->dot->individuals[$pid]['rel']) && !$this->dot->individuals[$pid]['rel']) {
@@ -79,7 +79,7 @@ class Person
                 $border_colour = $this->dot->settings["border_col"];
         }
         $out .= "<TD COLOR=\"" . $border_colour . "\"  BORDER=\"1\" CELLPADDING=\"0\" PORT=\"" . $pid . "\">";
-        $out .= $this->printPersonLabel($pid, $related);
+        $out .= $this->printPersonLabel($pid, $sharednotes, $related);
         $out .= "</TD>";
         return $out;
     }
@@ -90,7 +90,7 @@ class Person
      *
      * @param string $pid Person ID
      */
-    function printPersonLabel(string $pid, $related = TRUE): string
+    function printPersonLabel(string $pid, $sharednotes, $related = TRUE): string
     {
         $sex = '';
         $out = '';
@@ -178,6 +178,8 @@ class Person
         // Get background colour
         if ($this->isStartingIndividual($pid) && $this->dot->settings['highlight_start_indis'] == "true" && !$this->isValueInList($this->dot->settings['no_highlight_xref_list'], $pid)) {
             $indi_bg_colour = $this->dot->settings["highlight_col"];
+        } else if ($this->dot->settings["sharednote_col_enable"] && $sharednotes->indiHasSharedNote($pid)) {
+            $indi_bg_colour = $sharednotes->getSharedNoteColour($pid);
         } else {
             switch ($this->dot->settings['bg_col_type']) {
                 case Settings::OPTION_BACKGROUND_CUSTOM_COLOUR:
@@ -195,6 +197,7 @@ class Person
                     break;
             }
         }
+
         // Draw table
         if ($this->dot->settings["diagram_type"] == "combined") {
             $out .= "<TABLE BORDER=\"0\" CELLBORDER=\"0\" CELLPADDING=\"2\" CELLSPACING=\"0\" BGCOLOR=\"" . $indi_bg_colour . "\" $href>";
