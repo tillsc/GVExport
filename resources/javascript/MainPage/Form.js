@@ -337,7 +337,7 @@ const Form = {
                     const items = document.querySelectorAll('#shared_note_list .sharednote-list-item');
                     [].forEach.call(items, UI.draggableList.addDragHandlers);
                     // save to update count in case user backs out without saving as note is already added
-                    Form.sharedNotePanel.saveSharedNotesData();
+                    Form.sharedNotePanel.saveSharedNotesData(false);
                 } else {
                     setTimeout(function(){location.reload();}, 3000);
                     UI.showToast(ERROR_CHAR + TRANSLATE['Login expired. Reloading page...']);
@@ -359,14 +359,16 @@ const Form = {
          * Triggered when user clicks on the save button of the shared notes modal
          */
         saveButtonClick() {
-            Form.sharedNotePanel.saveSharedNotesData();
+            Form.sharedNotePanel.saveSharedNotesData(true);
             document.getElementById('modal').remove();
         },
 
         /**
          * Saves the data from the shared notes modal into JSON and stored in hidden field
+         *
+         * @param update {boolean} Whether to update the diagram (only if auto-update enabled)
          */
-        saveSharedNotesData() {
+        saveSharedNotesData(update) {
             const listItems = document.querySelectorAll('.sharednote-list-item');
             const outputJSON = [];
             listItems.forEach(item => {
@@ -389,7 +391,7 @@ const Form = {
                 el.innerHTML = TRANSLATE['%s shared note styles saved.'].replace('%s', itemCount);
             }
             // If auto-update of diagram is enabled, trigger it
-            if (autoUpdate) updateRender();
-        }
+            if (autoUpdate && update) updateRender();
+        },
     },
 }

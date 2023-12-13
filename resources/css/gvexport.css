@@ -554,3 +554,7 @@ h4 {
     align-self: flex-end;
     margin-bottom: 15px !important;
 }
+
+#sharednote-count {
+    margin: 5px;
+}
