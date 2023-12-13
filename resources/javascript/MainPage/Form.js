@@ -355,9 +355,32 @@ const Form = {
             return JSON.parse(list.value || '[]');
         },
 
+        /**
+         * Triggered when user clicks on the save button of the shared notes modal
+         */
         saveButtonClick() {
-            alert('Saved');
+            Form.sharedNotePanel.saveSharedNotesData();
             document.getElementById('modal').remove();
+        },
+
+        /**
+         * Saves the data from the shared notes modal into JSON and stored in hidden field
+         */
+        saveSharedNotesData() {
+            const listItems = document.querySelectorAll('.sharednote-list-item');
+            const outputJSON = [];
+            listItems.forEach(item => {
+                const xref = item.getAttribute('data-xref');
+                const borderCol = item.querySelector('.picker').value;
+                const itemObject = {
+                    "xref": xref,
+                    "border_col": borderCol
+                };
+                outputJSON.push(itemObject);
+            });
+            document.getElementById('sharednote_col_data').value = JSON.stringify(outputJSON);
+            // If auto-update of diagram is enabled, trigger it
+            if (autoUpdate) updateRender();
         }
     },
 }
