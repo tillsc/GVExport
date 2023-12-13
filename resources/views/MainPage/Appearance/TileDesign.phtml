@@ -110,8 +110,18 @@ use vendor\WebtreesModules\gvexport\Settings;
                 <div id="subgroup_note_colour" class="setting_subgroup col-auto wt-page-options-value fit-content margin-top" <?= !$admin && $vars["sharednote_col_enable"] != "true" ? 'style="display:none;"' : '' ?>>
                     <label for="sharednote_col_add"><?= I18N::translate('Add shared note style:') ?></label>
                     <?= view('components/select-note', ['name' => 'vars[sharednote_col_add]', 'id' => 'sharednote_col_add', 'tree' => $tree, 'note' => Registry::noteFactory()->make('', $tree), 'at' => '@']) ?>
-                    <div><?= I18N::translate('No style set based on shared notes') ?></div>
-                    <label for="sharednote_col_data" class="check-list width-90pc"><?= I18N::translate('Style individuals based on shared note') ?></label><input type="text" name="vars[sharednote_col_data]" id="sharednote_col_data" value = <?= $vars["sharednote_col_data"] ? e($vars["sharednote_col_data"]) : '' ?>>
+                    <input type="hidden" name="vars[sharednote_col_data]" id="sharednote_col_data" value = <?= $vars["sharednote_col_data"] ? e($vars["sharednote_col_data"]) : '' ?>>
+                    <div id="sharednote-count">
+                        <?php
+                            $data = json_decode($vars["sharednote_col_data"], true);
+                            $count = count($data);
+                            if ($count == 0) {
+                                echo I18N::translate('No styles set based on shared notes.');
+                            } else {
+                                echo I18N::translate('%s shared note styles saved.', $count);
+                            }
+                        ?>
+                    </div>
                     <button id="shared_note_button" class="btn btn-outline-secondary" type="button" name="shared_notes" onclick="return false;"><?= I18N::translate('Edit shared notes') ?></button>
                 </div>
             </div>

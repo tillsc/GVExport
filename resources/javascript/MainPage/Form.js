@@ -336,8 +336,8 @@ const Form = {
                     showModal(Data.decodeHTML(response));
                     const items = document.querySelectorAll('#shared_note_list .sharednote-list-item');
                     [].forEach.call(items, UI.draggableList.addDragHandlers);
-                    let replaceColour = getComputedStyle(document.querySelector('.wt-page-options-label')).backgroundColor;
-
+                    // save to update count in case user backs out without saving as note is already added
+                    Form.sharedNotePanel.saveSharedNotesData();
                 } else {
                     setTimeout(function(){location.reload();}, 3000);
                     UI.showToast(ERROR_CHAR + TRANSLATE['Login expired. Reloading page...']);
@@ -379,6 +379,15 @@ const Form = {
                 outputJSON.push(itemObject);
             });
             document.getElementById('sharednote_col_data').value = JSON.stringify(outputJSON);
+
+            // Update count on form
+            const el = document.getElementById('sharednote-count');
+            let itemCount = outputJSON.length;
+            if (itemCount === 0) {
+                el.innerHTML = TRANSLATE['No styles set based on shared notes.'];
+            } else {
+                el.innerHTML = TRANSLATE['%s shared note styles saved.'].replace('%s', itemCount);
+            }
             // If auto-update of diagram is enabled, trigger it
             if (autoUpdate) updateRender();
         }
