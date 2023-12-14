@@ -33,8 +33,10 @@ class Person
     /**
      * Prints the line in the DOT for a person.
      *
+     * @param SharedNoteList $sharednotes
+     * @return string
      */
-    function printPerson($sharednotes): string
+    function printPerson(SharedNoteList $sharednotes): string
     {
         $out = "";
         $out .= Dot::convertID($this->attributes['pid']); // Convert the ID, so linked GEDCOMs are displayed properly
@@ -52,9 +54,10 @@ class Person
      *
      * @param string $pid
      * @param string $out
+     * @param SharedNoteList $sharednotes
      * @return string
      */
-    public function addPersonLabel(string $pid, string $out, $sharednotes): string
+    public function addPersonLabel(string $pid, string $out, SharedNoteList $sharednotes): string
     {
         $i = $this->dot->getUpdatedPerson($pid);
         if (isset($this->dot->individuals[$pid]['rel']) && !$this->dot->individuals[$pid]['rel']) {
@@ -89,8 +92,11 @@ class Person
      * Prints the data for a single person.
      *
      * @param string $pid Person ID
+     * @param SharedNoteList $sharednotes
+     * @param bool $related
+     * @return string
      */
-    function printPersonLabel(string $pid, $sharednotes, $related = TRUE): string
+    function printPersonLabel(string $pid, SharedNoteList $sharednotes, bool $related = TRUE): string
     {
         $sex = '';
         $out = '';

@@ -493,13 +493,15 @@ class Dot {
         return "}\n";
 	}
 
-	/**
-	 * Prints the line for drawing a box for a family.
-	 *
-	 * @param string $fid Family ID
-	 * @param string $nodeName Name of DOT file node we are creating
-	 */
-	function printFamily(string $fid, string $nodeName, $sharednotes): string
+    /**
+     * Prints the line for drawing a box for a family.
+     *
+     * @param string $fid Family ID
+     * @param string $nodeName Name of DOT file node we are creating
+     * @param SharedNoteList $sharednotes
+     * @return string
+     */
+	function printFamily(string $fid, string $nodeName, SharedNoteList $sharednotes): string
     {
 
         $out = $nodeName;
