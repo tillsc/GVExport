@@ -289,7 +289,7 @@ class Dot {
 		}
 
         // Create shared notes data
-        $sharednotes = new SharedNoteList($this->settings['sharednote_col_data']);
+        $sharednotes = new SharedNoteList($this->settings['sharednote_col_data'], $this->tree, $this->settings['sharednote_col_default']);
 
         $out = $this->printDOTHeader();
 

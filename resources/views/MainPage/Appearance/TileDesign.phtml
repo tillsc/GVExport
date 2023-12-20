@@ -114,7 +114,11 @@ use vendor\WebtreesModules\gvexport\Settings;
                     <div id="sharednote-count">
                         <?php
                             $data = json_decode($vars["sharednote_col_data"], true);
-                            $count = count($data);
+                            if (!empty($data)) {
+                                $count = count($data);
+                            } else {
+                                $count = 0;
+                            }
                             if ($count == 0) {
                                 echo I18N::translate('No styles set based on shared notes.');
                             } else {
