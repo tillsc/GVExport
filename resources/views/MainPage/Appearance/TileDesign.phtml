@@ -107,9 +107,11 @@ use vendor\WebtreesModules\gvexport\Settings;
             </div>
             <div class="col-auto margin-bottom">
                 <input type="checkbox" name="vars[sharednote_col_enable]" onclick="Form.showHide(document.getElementById('subgroup_note_colour'),this.checked)" id="sharednote_col_enable" value="sharednote_col_enable" <?= $vars["sharednote_col_enable"] ? 'checked' : '' ?>><label for="sharednote_col_enable" class="check-list width-90pc"><?= I18N::translate('Style individuals based on shared note') ?></label>
+
                 <div id="subgroup_note_colour" class="setting_subgroup col-auto wt-page-options-value fit-content margin-top" <?= !$admin && $vars["sharednote_col_enable"] != "true" ? 'style="display:none;"' : '' ?>>
+                    <?php if (!$admin) { ?>
                     <label for="sharednote_col_add"><?= I18N::translate('Add shared note style:') ?></label>
-                    <?= view('components/select-note', ['name' => 'vars[sharednote_col_add]', 'id' => 'sharednote_col_add', 'tree' => $tree, 'note' => Registry::noteFactory()->make('', $tree), 'at' => '@']) ?>
+                    <?= view('components/select-note', ['name' => 'vars[sharednote_col_add]', 'id' => 'sharednote_col_add', 'tree' => $tree, 'note' => Registry::noteFactory()->make('', $tree), 'at' => '@']); ?>
                     <input type="hidden" name="vars[sharednote_col_data]" id="sharednote_col_data" value = <?= $vars["sharednote_col_data"] ? e($vars["sharednote_col_data"]) : '' ?>>
                     <div id="sharednote-count">
                         <?php
@@ -127,6 +129,7 @@ use vendor\WebtreesModules\gvexport\Settings;
                         ?>
                     </div>
                     <button id="shared_note_button" class="btn btn-outline-secondary" type="button" name="shared_notes" onclick="return false;"><?= I18N::translate('Edit shared notes') ?></button>
+                    <?php } ?>
                 </div>
             </div>
             <div class="col-auto">
