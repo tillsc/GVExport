@@ -63,11 +63,33 @@ const Data = {
             "type": REQUEST_TYPE_GET_HELP,
             "help_name": help
         };
+        return Data.callAPI(request);
+    },
+
+    decodeHTML(html) {
+        const textarea = document.createElement('textarea');
+        textarea.innerHTML = html;
+        return textarea.value;
+    },
+
+    /**
+     * Retrieved the shared note view
+     *
+     * @returns {Promise<unknown>}
+     */
+    getSharedNoteForm() {
+        let request = {
+            "type": REQUEST_TYPE_GET_SHARED_NOTE_FORM,
+        };
+        return Data.callAPI(request);
+    },
+
+    callAPI(request) {
         let json = JSON.stringify(request);
         return sendRequest(json).then((response) => {
             let responseJson = Data.parseResponse(response);
             if (responseJson) {
-                return responseJson.help;
+                return responseJson['response'];
             } else {
                 return false;
             }
@@ -80,7 +102,7 @@ const Data = {
             if (json.success) {
                 return json;
             } else {
-                return ERROR_CHAR + json.errorMessage;
+                return ERROR_CHAR + json['errorMessage'];
             }
         } catch(e) {
             UI.showToast(ERROR_CHAR + e);
@@ -250,7 +272,7 @@ const Data = {
                                 loadSettingsDetails();
                                 UI.showToast(TRANSLATE['Update successful']);
                             } else {
-                                UI.showToast(ERROR_CHAR + json.errorMessage);
+                                UI.showToast(ERROR_CHAR + json['errorMessage']);
                             }
                         } catch (e) {
                             UI.showToast("Failed to load response: " + e);
@@ -286,7 +308,7 @@ const Data = {
             const parsedResponse = JSON.parse(response);
 
             if (!parsedResponse.success) {
-                throw new Error(parsedResponse.errorMessage);
+                throw new Error(parsedResponse['errorMessage']);
             }
         },
 
@@ -327,7 +349,7 @@ const Data = {
                             if (json.success) {
                                 return json.url;
                             } else {
-                                UI.showToast(ERROR_CHAR + json.errorMessage);
+                                UI.showToast(ERROR_CHAR + json['errorMessage']);
                             }
                         } catch (e) {
                             UI.showToast("Failed to load response: " + e);
@@ -338,5 +360,5 @@ const Data = {
             });
         },
 
-    }
+    },
 }

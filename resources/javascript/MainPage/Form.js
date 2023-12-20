@@ -10,7 +10,7 @@ const Form = {
      * @param element
      * @param add
      */
-    togglePercent: function(element, add) {
+    togglePercent(element, add) {
         // Clicked out of input field, add % sign
         let startValue;
         if (add) {
@@ -38,7 +38,7 @@ const Form = {
      * @param element
      * @param value
      */
-    setDefaultValueIfBlank: function(element, value) {
+    setDefaultValueIfBlank(element, value) {
         if (element.value === "") {
             element.value = value;
         }
@@ -49,7 +49,7 @@ const Form = {
      *
      * @returns {boolean}
      */
-    isIndiBlank: function() {
+    isIndiBlank() {
         let el = document.getElementsByClassName("item");
         let list = document.getElementById('xref_list');
         return el.length === 0 && list.value.toString().length === 0;
@@ -61,7 +61,7 @@ const Form = {
      *
      * @param field
      */
-    updateRelationOption: function(field) {
+    updateRelationOption(field) {
         // If user clicked "All relatives"
         if (field === "include_all_relatives") {
             // If function triggered by checking "All relatives" field, ensure "Siblings" is checked
@@ -112,7 +112,7 @@ const Form = {
      * @param rel
      * @returns {{x: number, y: number}}
      */
-    getPos: function(el, rel)
+    getPos(el, rel)
     {
         let x = 0, y = 0;
 
@@ -125,13 +125,24 @@ const Form = {
         return {x:x, y:y};
     },
 
+    clearSelect(selectId) {
+        let dropdown = document.getElementById(selectId);
+        if (typeof dropdown.tomselect !== 'undefined') {
+            dropdown.tomselect.clear();
+        } else {
+            setTimeout(function () {
+                Form.clearSelect(selectId);
+            }, 100);
+        }
+    },
+
     /**
      * Toggle items based on if the items in the cart should be used or not
      * enable - if set to true, use cart. Update form to disable options. Set to "false" to reverse.
      *
      * @param enable
      */
-    toggleCart: function(enable) {
+    toggleCart(enable) {
             const el = document.getElementsByClassName("cart_toggle");
             for (let i = 0; i < el.length; i++) {
                 el.item(i).disabled = enable;
@@ -147,7 +158,7 @@ const Form = {
      * @param css_class the class to search for
      * @param show true to show the elements and false to hide them
      */
-    showHideClass: function(css_class, show) {
+    showHideClass(css_class, show) {
         let el = document.getElementsByClassName(css_class);
         for (let i = 0; i < el.length; i++) {
             Form.showHide(el.item(i), show)
@@ -159,7 +170,7 @@ const Form = {
      * @param element
      * @param show whether to show (true) or hide (false) the element
      */
-    showHide: function(element, show) {
+    showHide(element, show) {
         if (show) {
             element.style.removeProperty("display");
         } else {
@@ -173,7 +184,7 @@ const Form = {
      * @param checkboxId
      * @param elementId
      */
-    showHideMatchCheckbox: function(checkboxId, elementId) {
+    showHideMatchCheckbox(checkboxId, elementId) {
         Form.showHide(document.getElementById(elementId), document.getElementById(checkboxId).checked);
     },
 
@@ -184,7 +195,7 @@ const Form = {
      * @param elementId element to show/hide
      * @param value
      */
-    showHideMatchDropdown: function(dropdownId, elementId, value) {
+    showHideMatchDropdown(dropdownId, elementId, value) {
         let values = value.split("|");
         let show = false;
         let elValue = document.getElementById(dropdownId).value;
@@ -202,7 +213,7 @@ const Form = {
      * @param elementId
      * @param callingEl
      */
-    showHideSubgroup: function(elementId, callingEl) {
+    showHideSubgroup(elementId, callingEl) {
         let callerText = callingEl.innerText;
         let visible = callerText.includes('↓');
         Form.showHide(document.getElementById(elementId), !visible);
@@ -220,7 +231,7 @@ const Form = {
      * @param event
      * @param visible (optional) whether to show (true) or hide, leave blank to toggle
      */
-    showHideSearchBox: function(event, visible = null) {
+    showHideSearchBox(event, visible = null) {
         const el = document.getElementById('diagram_search_box_container');
         // If toggling, set to the opposite of current state
         if (visible === null) {
@@ -245,7 +256,7 @@ const Form = {
      * @param id the id of the element we are toggling
      * @param visible whether to make element visible or hidden. Null to toggle current state.
      */
-    toggleAdvanced: function(button, id, visible = null) {
+    toggleAdvanced(button, id, visible = null) {
         const el = document.getElementById(id);
         // If toggling, set to the opposite of current state
         if (visible === null) {
@@ -262,5 +273,125 @@ const Form = {
             const hidden = document.getElementById(id+"-hidden");
             hidden.value = "";
         }
+    },
+
+    /**
+     * Shared note panel - form displaying options that allow styling individuals based on their linked shared notes
+     */
+    sharedNotePanel: {
+
+        /**
+         * Run startup code
+         */
+        init() {
+            document.getElementById('shared_note_button').addEventListener('click', Form.sharedNotePanel.clickSharedNoteButton);
+            document.getElementById('sharednote_col_add').addEventListener('change', Form.sharedNotePanel.noteSelectChanged);
+        },
+
+        /**
+         * Handle event when button to show shared note panel is clicked
+         */
+        clickSharedNoteButton() {
+            Form.sharedNotePanel.showNoteModal();
+        },
+
+        /**
+         * Runs when user changes shared note selection box (i.e. chooses shared note to add)
+         */
+        noteSelectChanged() {
+            let xref = document.getElementById('sharednote_col_add').value.trim();
+            if (xref !== "") {
+                Form.sharedNotePanel.addNoteToList(xref);
+            }
+        },
+
+        /**
+         * Adds the provided note XREF to the list of shared notes
+         *
+         * @param xref
+         */
+        addNoteToList(xref) {
+            const obj = Form.sharedNotePanel.getNoteListJSON();
+            const xrefTrim = xref.replaceAll('@','');
+            if (!obj.find(item => item.xref === xrefTrim)) {
+                const newNote = {
+                    xref: xrefTrim,
+                    bg_col: SHARED_NOTE_DEFAULT
+                };
+                obj.push(newNote);
+            }
+            document.getElementById('sharednote_col_data').value = JSON.stringify(obj);
+            Form.clearSelect('sharednote_col_add');
+            Form.sharedNotePanel.showNoteModal();
+        },
+
+        /**
+         * Displays the modal for managing shared note settings
+         *
+         * @returns {Promise<*>}
+         */
+        showNoteModal() {
+            return Data.getSharedNoteForm().then(function (response) {
+                if (response) {
+                    showModal(Data.decodeHTML(response));
+                    const items = document.querySelectorAll('#shared_note_list .sharednote-list-item');
+                    [].forEach.call(items, UI.draggableList.addDragHandlers);
+                    // save to update count in case user backs out without saving as note is already added
+                    Form.sharedNotePanel.saveSharedNotesData(false);
+                } else {
+                    setTimeout(function(){location.reload();}, 3000);
+                    UI.showToast(ERROR_CHAR + TRANSLATE['Login expired. Reloading page...']);
+                }
+            });
+        },
+
+        /**
+         * Returns the JSON object stored for the shared note list
+         *
+         * @returns {any}
+         */
+        getNoteListJSON() {
+            let list = document.getElementById('sharednote_col_data');
+            return JSON.parse(list.value || '[]');
+        },
+
+        /**
+         * Triggered when user clicks on the save button of the shared notes modal
+         */
+        saveButtonClick() {
+            Form.sharedNotePanel.saveSharedNotesData(true);
+            document.getElementById('modal').remove();
+        },
+
+        /**
+         * Saves the data from the shared notes modal into JSON and stored in hidden field
+         *
+         * @param update {boolean} Whether to update the diagram (only if auto-update enabled)
+         */
+        saveSharedNotesData(update) {
+            const listItems = document.querySelectorAll('.sharednote-list-item');
+            const outputJSON = [];
+            listItems.forEach(item => {
+                const xref = item.getAttribute('data-xref');
+                const bgColour = item.querySelector('.picker').value;
+                const itemObject = {
+                    "xref": xref,
+                    "bg_col": bgColour
+                };
+                outputJSON.push(itemObject);
+            });
+            document.getElementById('sharednote_col_data').value = JSON.stringify(outputJSON);
+
+            // Update count on form
+            const el = document.getElementById('sharednote-count');
+            let itemCount = outputJSON.length;
+            if (itemCount === 0) {
+                el.innerHTML = TRANSLATE['No styles set based on shared notes.'];
+            } else {
+                el.innerHTML = TRANSLATE['%s shared note styles saved.'].replace('%s', itemCount);
+            }
+            // If auto-update of diagram is enabled, trigger it
+            if (autoUpdate && update) updateRender();
+        },
     },
 }

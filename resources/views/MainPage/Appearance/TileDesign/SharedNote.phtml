@@ -1,0 +1,48 @@
+<?php
+
+use Fisharebest\Webtrees\Registry;
+use Fisharebest\Webtrees\I18N;
+use vendor\WebtreesModules\gvexport\GVExport;
+use vendor\WebtreesModules\gvexport\MainPage;
+use vendor\WebtreesModules\gvexport\Settings;
+
+
+/**
+ * @var array      $vars           string of view location to insert into subgroup* @var array       $view_options   options to pass to view. We also reuse some parts of this.
+ * @var Tree      $tree           string of view location to insert into subgroup* @var array       $view_options   options to pass to view. We also reuse some parts of this.
+ * @var GVExport      $module           string of view location to insert into subgroup* @var array       $view_options   options to pass to view. We also reuse some parts of this.
+ */
+$settings = (new Settings())->getDefaultSettings();
+?>
+<div class="sharednote-group">
+    <h1>Edit shared notes</h1>
+    <ul id="shared_note_list">
+        <?php
+        $data = json_decode($vars['sharednote_col_data'], true);
+        if ($data !== null) {
+            $index = 0;
+            foreach ($data as $element) {
+                $xref = $element['xref'];
+                $bg_col = $element['bg_col'];
+
+                $note_object = Registry::noteFactory()->make($xref, $tree);
+                $note = $note_object->getNote();
+                $name = $note_object->firstLineOfTextFromHtml($note);
+                ?>
+                <li draggable="true" class="indi_list_item sharednote-list-item" data-xref="<?= $xref; ?>">
+                    <div class="sharednote-heading"><?= $name; ?></div>
+                    <span class="sharednote-delete" onclick="return this.parentNode.remove();">&times;</span>
+                    <div class="sharednote-item-group">
+                        <label for="sharednote_col<?= $index; ?>" class="sharednote-label"><?= I18N::translate('Shared note colour') ?></label><input type="color" class="picker" id="sharednote_col<?= $index; ?>" value="<?= $bg_col; ?>" />
+                    </div>
+                </li>
+                <?php
+                $index ++;
+            }
+            } else {
+                echo 'No shared notes';
+            }
+            ?>
+    </ul>
+    <button class="btn btn-primary sharednotes-save" onclick="Form.sharedNotePanel.saveButtonClick();"><?= I18N::translate('Save'); ?></button>
+</div>

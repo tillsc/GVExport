@@ -14,6 +14,7 @@ const REQUEST_TYPE_LOAD_SETTINGS_TOKEN = "load_settings_token";
 const REQUEST_TYPE_ADD_MY_FAVORITE = "add_my_favorite";
 const REQUEST_TYPE_ADD_TREE_FAVORITE = "add_tree_favorite";
 const REQUEST_TYPE_GET_HELP = "get_help";
+const REQUEST_TYPE_GET_SHARED_NOTE_FORM = "get_shared_note_form";
 let treeName = null;
 let loggedIn = null;
 let xrefList = [];
@@ -144,7 +145,7 @@ function addIndiToList(xref) {
         })
 
     }
-    clearIndiSelect('pid');
+    Form.clearSelect('pid');
 }
 
 function addIndiToStopList(xref) {
@@ -154,7 +155,7 @@ function addIndiToStopList(xref) {
         appendXrefToList(xref, 'stop_xref_list');
         loadIndividualDetails(TOMSELECT_URL, xref, 'stop_indi_list');
     }
-    clearIndiSelect('stop_pid');
+    Form.clearSelect('stop_pid');
 }
 
 function appendXrefToList(xref, elementId) {
@@ -163,18 +164,7 @@ function appendXrefToList(xref, elementId) {
         list.value = xref;
     } else {
         list.value += ',' + xref;
-        list.value = list.value.replaceAll(",,',',");
-    }
-}
-
-function clearIndiSelect(selectId) {
-    let dropdown = document.getElementById(selectId);
-    if (typeof dropdown.tomselect !== 'undefined') {
-        dropdown.tomselect.clear();
-    } else {
-        setTimeout(function () {
-            clearIndiSelect(selectId);
-        }, 100);
+        list.value = list.value.replaceAll(',,',',');
     }
 }
 function toggleUpdateButton() {
@@ -220,6 +210,14 @@ function removeSearchOptions() {
     document.getElementById('stop_xref_list').value.split(',').forEach(function (xref) {
         removeSearchOptionFromList(xref, 'stop_pid')
     });
+    // Remove option for shared note if already in list
+    let notes = document.getElementById('sharednote_col_data').value;
+    if (notes !== '') {
+        let json = JSON.parse(notes);
+        json.forEach(item => {
+            removeSearchOptionFromList('@' + item.xref + '@', 'sharednote_col_add');
+        });
+    }
     // Remove option when searching diagram if indi not in diagram
     let dropdown = document.getElementById('diagram_search_box');
     if (dropdown.tomselect != null) {
@@ -480,19 +478,18 @@ function pageLoaded(Url) {
     document.querySelector(".sidebar_toggle a").addEventListener("click", UI.showSidebar);
     UI.helpPanel.init();
     UI.fixTheme();
+    Form.sharedNotePanel.init();
 
     // Form change events
     const form = document.getElementById('gvexport');
-    let checkboxElems = form.querySelectorAll("input:not([type='file']):not(#save_settings_name):not(#stop_pid):not(.highlight_check), select:not(#simple_settings_list):not(#pid)");
-    for (let i = 0; i < checkboxElems.length; i++) {
-        checkboxElems[i].addEventListener("change", handleFormChange);
+    let changeElems = form.querySelectorAll("input:not([type='file']):not(#save_settings_name):not(#stop_pid):not(.highlight_check):not(#sharednote_col_add), select:not(#simple_settings_list):not(#pid):not(#sharednote_col_add)");
+    for (let i = 0; i < changeElems.length; i++) {
+        changeElems[i].addEventListener("change", handleFormChange);
     }
     let indiSelectEl = form.querySelector("#pid");
     indiSelectEl.addEventListener('change', indiSelectChanged);
-
     let stopIndiSelectEl = form.querySelector("#stop_pid");
     stopIndiSelectEl.addEventListener('change', stopIndiSelectChanged);
-
     let simpleSettingsEl = form.querySelector("#simple_settings_list");
     simpleSettingsEl.addEventListener('change', function(e) {
         let element = document.querySelector('.settings_list_item[data-id="' + e.target.value + '"]');
@@ -758,6 +755,12 @@ function getSettings(id = ID_ALL_SETTINGS) {
         UI.showToast(ERROR_CHAR + error);
     });
 }
+
+/**
+ *
+ * @param json
+ * @returns {Promise<unknown>}
+ */
 function sendRequest(json) {
     return new Promise((resolve, reject) => {
         const form = document.getElementById('gvexport');
@@ -1163,7 +1166,7 @@ function diagramSearchBoxChange(e) {
         if (!scrollToRecord(xref)) {
             UI.showToast(TRANSLATE['Individual not found']);
         }
-        clearIndiSelect('diagram_search_box');
+        Form.clearSelect('diagram_search_box');
         Form.showHideSearchBox(e, false);
     }
 }
