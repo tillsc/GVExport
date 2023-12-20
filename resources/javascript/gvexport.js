@@ -211,10 +211,13 @@ function removeSearchOptions() {
         removeSearchOptionFromList(xref, 'stop_pid')
     });
     // Remove option for shared note if already in list
-    let notes = JSON.parse(document.getElementById('sharednote_col_data').value);
-    notes.forEach(item => {
-        removeSearchOptionFromList('@' + item.xref + '@', 'sharednote_col_add');
-    });
+    let notes = document.getElementById('sharednote_col_data').value;
+    if (notes !== '') {
+        let json = JSON.parse(notes);
+        json.forEach(item => {
+            removeSearchOptionFromList('@' + item.xref + '@', 'sharednote_col_add');
+        });
+    }
     // Remove option when searching diagram if indi not in diagram
     let dropdown = document.getElementById('diagram_search_box');
     if (dropdown.tomselect != null) {
