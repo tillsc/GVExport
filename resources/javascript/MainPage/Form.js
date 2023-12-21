@@ -372,13 +372,17 @@ const Form = {
             const listItems = document.querySelectorAll('.sharednote-list-item');
             const outputJSON = [];
             listItems.forEach(item => {
-                const xref = item.getAttribute('data-xref');
-                const bgColour = item.querySelector('.picker').value;
-                const itemObject = {
-                    "xref": xref,
-                    "bg_col": bgColour
-                };
-                outputJSON.push(itemObject);
+                const picker = item.querySelector('.picker');
+                // Only add items that have settings in them - not the blank end one
+                if (picker !== null) {
+                    const xref = item.getAttribute('data-xref');
+                    const bgColour = item.querySelector('.picker').value;
+                    const itemObject = {
+                        "xref": xref,
+                        "bg_col": bgColour
+                    };
+                    outputJSON.push(itemObject);
+                }
             });
             document.getElementById('sharednote_col_data').value = JSON.stringify(outputJSON);
 
