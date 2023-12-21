@@ -258,6 +258,9 @@ class FormSubmission
             $settings['border_col_type'] = I18N::digits($vars["border_col_type"]);
         }
         $settings['sharednote_col_enable'] = isset($vars["sharednote_col_enable"]);
+        if (isset($vars["sharednote_col_default"]) && $this->isValidColourHex($vars["sharednote_col_default"])) {
+            $settings['sharednote_col_default'] = $vars["sharednote_col_default"];
+        }
         if (isset($vars['sharednote_col_data']) && $this->isValidJSON($vars["sharednote_col_data"])) {
             $settings['sharednote_col_data'] = $vars["sharednote_col_data"];
         }

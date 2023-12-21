@@ -33,7 +33,7 @@ $usegraphviz = $vars['graphviz_bin'] != "";
     let settings_json = "";
     let download_file_name = "<?= e($settings['filename']); ?>";
     let url_xref_treatment = "<?= e($vars['url_xref_treatment']); ?>";
-    const SHARED_NOTE_DEFAULT = "<?= $settings['sharednote_col_default']; ?>";
+    let shared_note_default = "<?= $vars['sharednote_col_default']; ?>";
     const TREE_NAME = "<?= e($tree->name()); ?>";
     const TREE_FAVORITES_MODULE_ACTIVE = <?= $module->module_service->findByInterface(FamilyTreeFavoritesModule::class)->first() === null || !Auth::isManager($tree) ? "false" : "true" ?>;
     const MY_FAVORITES_MODULE_ACTIVE = <?= $module->module_service->findByInterface(UserFavoritesModule::class)->first() === null ? "false" : "true" ?>;
