@@ -43,6 +43,9 @@ $settings = (new Settings())->getDefaultSettings();
                 echo 'No shared notes';
             }
             ?>
+        <!-- Allow drag to end -->
+        <li class="sharednote-list-item shared-note-list-end">
+        </li>
     </ul>
     <button class="btn btn-primary sharednotes-save" onclick="Form.sharedNotePanel.saveButtonClick();"><?= I18N::translate('Save'); ?></button>
 </div>
