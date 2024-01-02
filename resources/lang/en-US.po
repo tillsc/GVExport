@@ -1595,3 +1595,101 @@ msgstr "Side by side"
 msgid "Stacked"
 msgstr "Stacked"
 
+#. New option that allows user to set a background colour (and eventually other styles) based on the existence of a shared note - effectively a way of tagging and identifying.
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/bExD5UTsqFfyvdXMbWYkkens.png
+#: 
+msgid "Style individuals based on shared note"
+msgstr "Style individuals based on shared note"
+
+#. Sets the default background colour when adding a new shared note for styling.
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/bExD5UTsqFfyvdXMbWYkkens.png
+#: 
+msgid "Default background colour for new items:"
+msgstr "Default background color for new items:"
+
+#. Label for the option to add a new shared note to the list: https://s3.eu-west-1.amazonaws.com/po-pub/i/bExD5UTsqFfyvdXMbWYkkens.png
+#: 
+msgid "Add shared note style:"
+msgstr "Add shared note style:"
+
+#. Option to open modal that shows list of shared notes and lets the user edit the settings or reorder them:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/bExD5UTsqFfyvdXMbWYkkens.png  https://s3.eu-west-1.amazonaws.com/po-pub/i/3d1NliVq7MD5ZlllAht2A5XW.png
+#: 
+msgid "Edit shared notes"
+msgstr "Edit shared notes"
+
+#. Indicates the number of shared notes added to the settings: https://s3.eu-west-1.amazonaws.com/po-pub/i/bExD5UTsqFfyvdXMbWYkkens.png
+#: 
+msgid "%s shared note styles saved."
+msgstr "%s shared note styles saved."
+
+#. Text for when there are no shared note styles added to the list:  https://s3.eu-west-1.amazonaws.com/po-pub/i/yW3YdeiCwkyxAFyfMY4sdB2p.png
+#: 
+msgid "No styles set based on shared notes."
+msgstr "No styles set based on shared notes."
+
+#. Label for the colour picker that lets the user choose the background colour for the shared note style: https://s3.eu-west-1.amazonaws.com/po-pub/i/3d1NliVq7MD5ZlllAht2A5XW.png
+#: 
+msgid "Shared note colour"
+msgstr "Shared note color"
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "This option lets you set styles for the tiles of individuals based on the shared notes linked to those individuals. Currently only the background colour can be set."
+msgstr "This option lets you set styles for the tiles of individuals based on the shared notes linked to those individuals. Currently only the background color can be set."
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "The options in this section are:"
+msgstr "The options in this section are:"
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "Enable option to use this functionality. If this is disabled, the settings are not used."
+msgstr "Enable option to use this functionality. If this is disabled, the settings are not used."
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "When adding a new item, this is the default colour used."
+msgstr "When adding a new item, this is the default color used."
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "Choose a shared note from this list and it will be added to the list of shared notes."
+msgstr "Choose a shared note from this list and it will be added to the list of shared notes."
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "Click this to view the list of shared notes, where you can remove them, rearrange the order, or change the style associated with them."
+msgstr "Click this to view the list of shared notes, where you can remove them, rearrange the order, or change the style associated with them."
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "This option is shown on the list item in the edit screen, where you can choose the background colour for individuals linked to this shared note."
+msgstr "This option is shown on the list item in the edit screen, where you can choose the background color for individuals linked to this shared note."
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "To use this option, first select a shared note. A new screen will appear allowing you to set the style to use for that shared note. You may add multiple items, and you can drag the items in the list to rearrange them."
+msgstr "To use this option, first select a shared note. A new screen will appear allowing you to set the style to use for that shared note. You may add multiple items, and you can drag the items in the list to rearrange them."
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "If the same style is set by multiple settings, the following order is used:"
+msgstr "If the same style is set by multiple settings, the following order is used:"
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "If the option to show the background of starting individuals in a different colour is selected, then this option takes priority over all others."
+msgstr "If the option to show the background of starting individuals in a different color is selected, then this option takes priority over all others."
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "The style set based on shared notes is then used, if relevant. If an individual is linked to multiple shared notes in the list, the style from the highest note in the list is used."
+msgstr "The style set based on shared notes is then used, if relevant. If an individual is linked to multiple shared notes in the list, the style from the highest note in the list is used."
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "If the above options do not apply, then the Individual Background Colour is used."
+msgstr "If the above options do not apply, then the Individual Background Color is used."
+

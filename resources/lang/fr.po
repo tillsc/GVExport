@@ -1495,18 +1495,18 @@ msgstr "L'option &quot;Show saved diagrams panel&quot ; ajoute une nouvelle sect
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/Oemo1QWV9iDy7QJ1ue3YJ26u.png
 #: 
 msgid "change the name of a saved setting"
-msgstr ""
+msgstr "changer le nom d'un fichier de paramètres"
 
 #. Message shown in popup after successfully adding settings link to favourites section webtrees My Page:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/WqaE1p5myQ7yL5g1ANXCKNrd.png
 #: 
 msgid "Added to My favourites"
-msgstr ""
+msgstr "Ajouté à Mes Favoris"
 
 #. Message shown in notification after link to saved setting is successfully added to the favourites widget on the webtrees tree home page:  https://s3.eu-west-1.amazonaws.com/po-pub/i/3qVoAL2efzJQ5RkKZlo0kIHZ.png
 #: 
 msgid "Added to Tree favourites"
-msgstr ""
+msgstr "Ajouté aux favoris de l'Arbre"
 
 #. Part of the help text for the Diagram appearance settings:  https://s3.eu-west-1.amazonaws.com/po-pub/i/Vbjoek76Ojvq1rcmEumPnmgJ.png
 #: 
@@ -1531,12 +1531,12 @@ msgstr "À quel point vous voulez que les individus d'une même génération soi
 #. Part of the help text for the Diagram appearance settings:  https://s3.eu-west-1.amazonaws.com/po-pub/i/Vbjoek76Ojvq1rcmEumPnmgJ.png
 #: 
 msgid "This section lets you change settings related to the layout of the diagram."
-msgstr ""
+msgstr "Cette section permet de changer les réglages de la mise en page du diagramme"
 
 #. Part of the help text for the Diagram appearance settings:  https://s3.eu-west-1.amazonaws.com/po-pub/i/Vbjoek76Ojvq1rcmEumPnmgJ.png
 #: 
 msgid "When you have selected the \"Combined\" layout option, this option lets you choose whether the partners should be shown size by side (default), or in Stacked mode, which places them on top of each other. Stacked mode reduces the width of the diagram, which can be helpful in some situations."
-msgstr ""
+msgstr "Lorsque vous avez sélectionné l'option de mise en page \"Combiné\", cette option vous permet de choisir si les partenaires doivent être affichés côte à côte (par défaut) ou en mode Empilé, ce qui les place l'un au-dessus de l'autre. Le mode empilé réduit la largeur du diagramme, ce qui peut être utile dans certaines situations."
 
 #. Part of the help text for the Diagram appearance settings:  https://s3.eu-west-1.amazonaws.com/po-pub/i/Vbjoek76Ojvq1rcmEumPnmgJ.png
 #: 
@@ -1571,27 +1571,126 @@ msgstr "la couleur de la flèche à utiliser pour les enfants qui ne sont pas li
 #. Name of settings group in appearance section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/nM6gmf4vpCnqLFguqMJgW87Z.png
 #: 
 msgid "Layout"
-msgstr ""
+msgstr "Disposition"
 
 #. Name of setting in appearance section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/nM6gmf4vpCnqLFguqMJgW87Z.png
 #: 
 msgid "Partner position"
-msgstr ""
+msgstr "Position des partenaires"
 
 #. Specifies this setting only works for the Combined diagram type:  https://s3.eu-west-1.amazonaws.com/po-pub/i/nM6gmf4vpCnqLFguqMJgW87Z.png
 #: 
 msgid "Combined diagram type only"
-msgstr ""
+msgstr "Seulement les diagrammes de type Combiné"
 
 #. One of the options for "Partner position" layout option. Indicates that husband and wife are side by side (default)  https://s3.eu-west-1.amazonaws.com/po-pub/i/nM6gmf4vpCnqLFguqMJgW87Z.png 
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/tqlYF2RCUpH3CtrsFC4pFdHI.png
 #: 
 msgid "Side by side"
-msgstr ""
+msgstr "Côte à côte\n"
+""
 
 #. One of the options for "Partner position" layout option. Indicates that husband and wife are on top of each other  https://s3.eu-west-1.amazonaws.com/po-pub/i/nM6gmf4vpCnqLFguqMJgW87Z.png 
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/5INseuMeLcdcqQiImjA3CAkS.png
 #: 
 msgid "Stacked"
-msgstr ""
+msgstr "Empilé"
+
+#. New option that allows user to set a background colour (and eventually other styles) based on the existence of a shared note - effectively a way of tagging and identifying.
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/bExD5UTsqFfyvdXMbWYkkens.png
+#: 
+msgid "Style individuals based on shared note"
+msgstr "Style des personnes basés sur une note partagée"
+
+#. Sets the default background colour when adding a new shared note for styling.
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/bExD5UTsqFfyvdXMbWYkkens.png
+#: 
+msgid "Default background colour for new items:"
+msgstr "Couleur par défaut pour les nouveaux éléments"
+
+#. Label for the option to add a new shared note to the list: https://s3.eu-west-1.amazonaws.com/po-pub/i/bExD5UTsqFfyvdXMbWYkkens.png
+#: 
+msgid "Add shared note style:"
+msgstr "Ajouter un style de note partagée"
+
+#. Option to open modal that shows list of shared notes and lets the user edit the settings or reorder them:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/bExD5UTsqFfyvdXMbWYkkens.png  https://s3.eu-west-1.amazonaws.com/po-pub/i/3d1NliVq7MD5ZlllAht2A5XW.png
+#: 
+msgid "Edit shared notes"
+msgstr "Editer les notes partagées"
+
+#. Indicates the number of shared notes added to the settings: https://s3.eu-west-1.amazonaws.com/po-pub/i/bExD5UTsqFfyvdXMbWYkkens.png
+#: 
+msgid "%s shared note styles saved."
+msgstr "Pourcentage de styles de notes partagées sauvegardés"
+
+#. Text for when there are no shared note styles added to the list:  https://s3.eu-west-1.amazonaws.com/po-pub/i/yW3YdeiCwkyxAFyfMY4sdB2p.png
+#: 
+msgid "No styles set based on shared notes."
+msgstr "Aucun style n'a été défini sur la base de notes partagées"
+
+#. Label for the colour picker that lets the user choose the background colour for the shared note style: https://s3.eu-west-1.amazonaws.com/po-pub/i/3d1NliVq7MD5ZlllAht2A5XW.png
+#: 
+msgid "Shared note colour"
+msgstr "Couleur des notes partagées"
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "This option lets you set styles for the tiles of individuals based on the shared notes linked to those individuals. Currently only the background colour can be set."
+msgstr "Cette option vous permet de définir des styles pour les tuiles des personnes en fonction des notes partagées liées à ces personnes. Actuellement, seule la couleur d'arrière-plan peut être définie."
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "The options in this section are:"
+msgstr "Les options de cette section sont :"
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "Enable option to use this functionality. If this is disabled, the settings are not used."
+msgstr "Activer l'option pour utiliser cette fonctionnalité. Si cette option est désactivée, les paramètres ne sont pas utilisés."
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "When adding a new item, this is the default colour used."
+msgstr "Lors de l'ajout d'un nouvel élément, c'est la couleur par défaut qui est utilisée."
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "Choose a shared note from this list and it will be added to the list of shared notes."
+msgstr "Choisissez une note partagée dans cette liste et elle sera ajoutée à la liste des notes partagées."
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "Click this to view the list of shared notes, where you can remove them, rearrange the order, or change the style associated with them."
+msgstr "Cliquez sur ce bouton pour afficher la liste des notes partagées, où vous pouvez les supprimer, en réorganiser l'ordre ou modifier le style qui leur est associé."
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "This option is shown on the list item in the edit screen, where you can choose the background colour for individuals linked to this shared note."
+msgstr "Cette option s'affiche sur l'élément de la liste dans l'écran d'édition, où vous pouvez choisir la couleur d'arrière-plan des personnes liées à cette note partagée."
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "To use this option, first select a shared note. A new screen will appear allowing you to set the style to use for that shared note. You may add multiple items, and you can drag the items in the list to rearrange them."
+msgstr "Pour utiliser cette option, sélectionnez d'abord une note partagée. Un nouvel écran s'affiche pour vous permettre de définir le style à utiliser pour cette note partagée. Vous pouvez ajouter plusieurs éléments et les faire glisser dans la liste pour les réorganiser."
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "If the same style is set by multiple settings, the following order is used:"
+msgstr "Si le même style est défini par plusieurs paramètres, l'ordre suivant est utilisé :"
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "If the option to show the background of starting individuals in a different colour is selected, then this option takes priority over all others."
+msgstr "Si l'option permettant d'afficher l'arrière-plan des personnes racines dans une couleur différente est sélectionnée, elle est prioritaire sur toutes les autres."
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "The style set based on shared notes is then used, if relevant. If an individual is linked to multiple shared notes in the list, the style from the highest note in the list is used."
+msgstr "Le style défini en fonction des notes partagées est ensuite utilisé, le cas échéant. Si une personne est liée à plusieurs notes partagées dans la liste, le style de la note la plus élevée de la liste est utilisé."
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "If the above options do not apply, then the Individual Background Colour is used."
+msgstr "Si les options ci-dessus ne s'appliquent pas, la couleur d'arrière-plan de la personne est utilisée."
 
