@@ -583,6 +583,9 @@ function loadSettings(data, isNamedSetting = false) {
         UI.showToast("Failed to load settings: " + e);
         return false;
     }
+    if (!settings.hasOwnProperty("sharednote_col_data")) {
+        settings["sharednote_col_data"] = "[]";
+    }
     Object.keys(settings).forEach(function(key){
         let el = document.getElementById(key);
         if (el == null) {
