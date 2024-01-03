@@ -1627,13 +1627,13 @@ msgstr "Estilitzar els individus basant-se en una nota compartida"
 #. Sets the default background colour when adding a new shared note for styling.
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/bExD5UTsqFfyvdXMbWYkkens.png
 #: 
-msgid "Default background colour for new items:"
-msgstr "Color de fons predeterminat per als elements nous:"
+msgid "Default background colour for new items"
+msgstr "Color de fons predeterminat per als elements nous"
 
 #. Label for the option to add a new shared note to the list: https://s3.eu-west-1.amazonaws.com/po-pub/i/bExD5UTsqFfyvdXMbWYkkens.png
 #: 
-msgid "Add shared note style:"
-msgstr "Afegir un estil de nota compartida:"
+msgid "Add shared note style"
+msgstr "Afegir un estil de nota compartida"
 
 #. Option to open modal that shows list of shared notes and lets the user edit the settings or reorder them:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/bExD5UTsqFfyvdXMbWYkkens.png  https://s3.eu-west-1.amazonaws.com/po-pub/i/3d1NliVq7MD5ZlllAht2A5XW.png
