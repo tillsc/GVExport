@@ -117,7 +117,7 @@ class Settings
     }
 
     /**
-     * Retrieve the user settings from webtrees storage
+     * Retrieve the user settings
      *
      * @param GVExport $module
      * @param Tree $tree
