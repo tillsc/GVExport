@@ -557,7 +557,7 @@ msgstr "Dit is een lijst van XREF's die de records vertegenwoordigt die in het o
 #. Help text shown when user clicks "i" next to "Stop processing on":  https://s3.eu-west-1.amazonaws.com/po-pub/i/aVjMepnhrUVmbSJnm5JjsdOp.png
 #: 
 msgid "If the module reaches one of these people, don&apos;t grow the tree from here. For example, if you chose yourself as the starting point, you might want to include all of your blood relatives except your mother&apos;s side of the family. Add your mother as a person to &quot;Stop processing on&quot;. The tree will still include your mother, but it won&apos;t include her parents, siblings, etc.</p><p>Choose a person in the top box, and they will be added to the list. Their XREF will also be included in the bottom box (which can be edited directly if needed)."
-msgstr "Als de module één van deze personen bereikt, laat de boom vanaf daar dan niet verder groeien. Als u bijvoorbeeld uzelf als uitgangspunt kiest, wilt u misschien al uw bloedverwanten opnemen, behalve de kant van uw moeder. Voeg uw moeder toe als een persoon aan \"Stop verwerking op\". De boom zal nog steeds je moeder bevatten, maar niet haar ouders, broers en zussen, etc.</p><p>Kies een persoon in het bovenste vak, en deze wordt toegevoegd aan de lijst. Hun XREF wordt ook opgenomen in het onderste vak (dat indien nodig direct kan worden bewerkt)."
+msgstr "Als de module één van deze personen bereikt, laat de boom vanaf daar dan niet verder groeien. Als u bijvoorbeeld uzelf als uitgangspunt kiest, wilt u misschien al uw bloedverwanten opnemen, behalve de kant van uw moeder. Voeg uw moeder toe als een persoon aan \"Stop verwerking op\". De boom zal nog steeds uw moeder bevatten, maar niet haar ouders, broers en zussen, etc.</p><p>Kies een persoon in het bovenste vak, en deze wordt toegevoegd aan de lijst. Hun XREF wordt ook opgenomen in het onderste vak (dat indien nodig direct kan worden bewerkt)."
 
 #. Help text shown when user clicks "i" next to option "Non-relatives":  https://s3.eu-west-1.amazonaws.com/po-pub/i/Lq1O4swJShMh36BPEhJiSujt.png
 #: 
@@ -967,7 +967,7 @@ msgstr "Tegelinhoud"
 #. New help text for new section "Tile contents". The help text is quite long, but much of it is previous help text from the settings that have been combined into this section. You may want to copy translations from previous terms, so I have left these for now. I will eventually delete the original terms.  https://s3.eu-west-1.amazonaws.com/po-pub/i/opPq1bb4NbrBXGFAiRsVxXi1.png  https://s3.eu-west-1.amazonaws.com/po-pub/i/W4qegkcMMWTFs3sXIihOQskA.png
 #: 
 msgid "This section allows for some changes to the content of tiles, including links, abbreviations, and the details included on individuals and families.</p><h4>Page links</h4><h5>Add URL to individuals and families</h5><p>For SVG (and PDF if Graphviz installed on server) output, links can be included. This way you can click on the person in the diagram to be taken to their webtrees page.</p><h4>Abbreviations</h4><h5>Abbreviated names</h5><p>There are several options to shorten the names of individuals displayed.</p><ul><li>Full name - the default option, this shows the primary name and any nickname. This option currently is the only one where the preferred name is underlined, and is the only one to show nicknames (in &quot;quotes&quot;).</li><li>Given and surnames - like the full name, but without nicknames.</li><li>Given names - just the given names are displayed.</li><li>First given names only - just the first word of the name in the given names field.</li><li>Surnames - just the surnames are displayed.</li><li>Initials only - this displays initials only, for example &quot;JFK&quot;.</li><li>Given name initials and surname - this shows initials for the first and second given name, as well as the full surname. For example: &quot;J.F. Kennedy&quot;</li><li>Don&apos;t show names - no names are shown. If birth and death details are also disabled then it is possible to show only photos or even just coloured boxes.</li></ul><h5>Abbreviated place names</h5><p>There are several options to shorten place names (for place of birth, place of marriage, place of death).</p><ul><li>Full place name - the place name is printed in full.</li><li>City and Country - the first and last section of the place name is used, using commas to split the sections. For example, &quot;London, England, United Kingdom&quot; would be shortened to &quot;London, United Kingdom&quot;</li><li>City and 2-Letter ISO Country Code - the first and last section of the place name is used, using commas to split the sections. The country is then converted to the ISO3166-1-Alpha-2 country code. <br>For example, &quot;Calgary, Alberta, Canada&quot; would be shortened to &quot;Calgary, CA&quot;</li><li>City and 3-Letter ISO Country Code - the first and last section of the place name is used, using commas to split the sections. The country is then converted to the ISO3166-1-Alpha-3 country code.<br>For example, &quot;Calgary, Alberta, Canada&quot; would be shortened to &quot;Calgary, CAN&quot;</li></ul><p>Note - The CLDR display name is used for matching. The data comes from <a href=\\\"https://www.datahub.io/core/country-codes\\\" class=\\\"help-link\\\">Datahub</a> but has been modified as for example the original CLDR name for the United Kingdom is &quot;UK&quot;, and the original CLDR name for the United States is &quot;US&quot;. Matching against these countries for the purposes of abbreviation is therefore pointless. So changes have been made to make this work better. Please <a href=\\\"https://github.com/Neriderc/GVExport/issues/new\\\" class=\\\"help-link\\\">open an issue</a> on GitHub if you find a country is not abbreviating correctly.</p><h4>Information on individuals</h4><h5>Show individual XREF</h5><p>Whether to include the XREF of individuals in the diagram.</p><h5>Show birthdate</h5><p>Check the box if you would like to include the birthdate of individuals in the output.</p><p>You can also choose whether to show the full date of birth or just the year.</p><h5>Show birthplace</h5><p>Whether to show the place of birth in the output. Also see option for abbreviating place names.</p><h5>Show death date</h5><p>Check the box if you would like to include the death date of individuals in the output.</p><p>You can also choose whether to show the full date of death or just the year.</p><h5>Show death place</h5><p>Whether to show the place of death in the output. Also see option for abbreviating place names.</p><h5>Show sex of individuals</h5><p>Whether to print the sex of the individual on the individual&apos;s tile, e.g. &quot;Male&quot;</p><h4>Information on families</h4><h5>Show family XREF</h5><p>Whether to include the XREF of families in the output.</p><h5>Show marriage date</h5><p>Check the box if you would like to include the date of marriage in the output.</p><p>You can also choose whether to show the full date of marriage or just the year.</p><h5>Show marriage place</h5><p>Whether to show the place of marriage in the output. Also see option for abbreviating place names."
-msgstr "In dit onderdeel kunnen enkele wijzigingen worden aangebracht in de inhoud van de tegels, zoals koppelingen, afkortingen en de details die over personen en families zijn opgenomen.</p><h4>Paginakoppelingen</h4><h5>URL toevoegen aan personen en gezinnen</h5><p>Voor SVG (en PDF als Graphviz op de server is geïnstalleerd) uitvoer kunnen koppelingen worden opgenomen. Zo kunt u op de persoon in het diagram klikken om naar de bijbehorende webtreespagina te gaan.</p><h4>Afkortingen</h4><h5>Afgekorte namen</h5><p>Er zijn verschillende opties om de namen van weergegeven personen in te korten.</p><ul><li>Volledige naam - de standaardoptie, deze toont de primaire naam en eventuele roepnamen. Deze optie is momenteel de enige waarbij de voorkeursnaam wordt onderstreept, en is de enige die roepnamen toont (in &quot;citaten&quot;).</li><li>Voor- en achternamen - zoals de volledige naam, maar zonder roepnamen.</li><li>Voornamen - alleen de voornamen worden getoond.</li><li>Alleen eerste voornamen - alleen het eerste woord van de naam in het veld voornamen.</li><li>Achternamen - alleen de achternamen worden getoond.</li><li>Alleen initialen - dit toont alleen initialen, bijvoorbeeld &quot;JFK&quot;.</li><li>Voorletters en achternaam - dit toont de voorletters van de eerste en tweede voornaam en de volledige achternaam. Bijvoorbeeld: &quot;J.F. Kennedy&quot;</li><li>Geen namen tonen - er worden geen namen getoond. Als ook geboorte- en overlijdensgegevens zijn uitgeschakeld, kunnen alleen foto's of zelfs alleen gekleurde vakjes worden getoond.</li></ul><h5>Afgekorte plaatsnamen</h5><p>Er zijn verschillende mogelijkheden om plaatsnamen af te korten (voor geboorteplaats, huwelijksplaats, overlijdensplaats).</p><ul><li>Volledige plaatsnaam - de plaatsnaam is volledig getoond.</li><li>Plaats en land - het eerste en laatste deel van de plaatsnaam wordt gebruikt, met komma's om de delen te splitsen. Bijvoorbeeld, &quot;Londen, Engeland, Verenigd Koninkrijk&quot; wordt afgekort tot &quot;Londen, Verenigd Koninkrijk&quot;</li><li>Plaats en 2-letterige ISO-landencode - het eerste en laatste deel van de plaatsnaam wordt gebruikt, met komma's om de delen te splitsen. Het land wordt vervolgens omgezet in de ISO3166-1-Alpha-2-landcode.<br>Bijvoorbeeld, &quot;Calgary, Alberta, Canada&quot; wordt afgekort tot &quot;Calgary, CA&quot;</li><li>Plaats en drieletterige ISO-landcode - het eerste en laatste deel van de plaatsnaam worden gebruikt, met komma's om de delen te splitsen. Het land wordt dan omgezet in de ISO3166-1-Alpha-3-landcode.<br>Bijvoorbeeld, &quot;Calgary, Alberta, Canada&quot; wordt afgekort tot &quot;Calgary, CAN&quot;</li></ul><p>Note - De CLDR-weergavenaam wordt gebruikt voor het vergelijken van namen. De gegevens zijn afkomstig van <a href=\"https://www.datahub.io/core/country-codes\" class=\"help-link\">Datahub</a> maar zijn gewijzigd, omdat bijvoorbeeld de oorspronkelijke CLDR-naam voor het Verenigd Koninkrijk &quot;UK&quot; is, en de oorspronkelijke CLDR-naam voor de Verenigde Staten &quot;US&quot;. Vergelijken met deze landen voor het afkorten is daarom zinloos. Er zijn daarom wijzigingen aangebracht om dit beter te laten werken. <a href=\"https://github.com/Neriderc/GVExport/issues/new\" class=\"help-link\">Open een probleem</a> op GitHub als je vindt dat een land niet correct wordt afgekort.</p><h4>Informatie over personen</h4><h5>Toon persoons-XREF</h5><p>Of de XREF van personen in het diagram moet worden opgenomen.</p><h5>Toon geboortedatum</h5><p>Vink het vakje aan als u de geboortedatum van personen in de uitvoer wilt opnemen.</p><p>U kunt ook kiezen of u de volledige geboortedatum of alleen het jaartal wilt tonen.</p><h5>Toon geboorteplaats</h5><p>Of de geboorteplaats in de uitvoer moet worden getoond. Zie ook de optie voor het afkorten van plaatsnamen.</p><h5>Toon overlijdensdatum</h5><p>Vink het vakje aan als u de overlijdensdatum van personen in de uitvoer wilt opnemen.</p><p>U kunt ook kiezen of u de volledige overlijdensdatum of alleen het jaartal wilt tonen.</p><h5>Toon overlijdensplaats</h5><p>Of de overlijdensplaats in de uitvoer moet worden getoond. Zie ook de optie voor het afkorten van plaatsnamen.</p><h5>Toon geslacht van personen</h5><p>Of het geslacht van de persoon op de tegel van het de persoon moet worden getoond, bijvoorbeeld &quot;Man&quot;</p><h4>Informatie over gezinnen</h4><h5>Toon gezins-XREF</h5><p>Of de XREF van gezinnen in de uitvoer moet worden opgenomen.</p><h5>Toon huwelijksdatum</h5><p>Vink het vakje aan als u de huwelijksdatum in de uitvoer wilt opnemen.</p><p>U kunt ook kiezen of u de volledige huwelijksdatum of alleen het jaartal wilt weergeven.</p><h5>Toon huwelijksplaats</h5><p>Of de huwelijksplaats in de uitvoer moet worden getoond. Zie ook de optie voor het afkorten van plaatsnamen."
+msgstr "In dit onderdeel kunnen enkele wijzigingen worden aangebracht in de inhoud van de tegels, zoals koppelingen, afkortingen en de details die over personen en families zijn opgenomen.</p><h4>Paginakoppelingen</h4><h5>URL toevoegen aan personen en gezinnen</h5><p>Voor SVG (en PDF als Graphviz op de server is geïnstalleerd) uitvoer kunnen koppelingen worden opgenomen. Zo kunt u op de persoon in het diagram klikken om naar de bijbehorende webtreespagina te gaan.</p><h4>Afkortingen</h4><h5>Afgekorte namen</h5><p>Er zijn verschillende opties om de namen van weergegeven personen in te korten.</p><ul><li>Volledige naam - de standaardoptie, deze toont de primaire naam en eventuele roepnamen. Deze optie is momenteel de enige waarbij de voorkeursnaam wordt onderstreept, en is de enige die roepnamen toont (in &quot;citaten&quot;).</li><li>Voor- en achternamen - zoals de volledige naam, maar zonder roepnamen.</li><li>Voornamen - alleen de voornamen worden getoond.</li><li>Alleen eerste voornamen - alleen het eerste woord van de naam in het veld voornamen.</li><li>Achternamen - alleen de achternamen worden getoond.</li><li>Alleen initialen - dit toont alleen initialen, bijvoorbeeld &quot;JFK&quot;.</li><li>Voorletters en achternaam - dit toont de voorletters van de eerste en tweede voornaam en de volledige achternaam. Bijvoorbeeld: &quot;J.F. Kennedy&quot;</li><li>Geen namen tonen - er worden geen namen getoond. Als ook geboorte- en overlijdensgegevens zijn uitgeschakeld, kunnen alleen foto's of zelfs alleen gekleurde vakjes worden getoond.</li></ul><h5>Afgekorte plaatsnamen</h5><p>Er zijn verschillende mogelijkheden om plaatsnamen af te korten (voor geboorteplaats, huwelijksplaats, overlijdensplaats).</p><ul><li>Volledige plaatsnaam - de plaatsnaam is volledig getoond.</li><li>Plaats en land - het eerste en laatste deel van de plaatsnaam wordt gebruikt, met komma's om de delen te splitsen. Bijvoorbeeld, &quot;Londen, Engeland, Verenigd Koninkrijk&quot; wordt afgekort tot &quot;Londen, Verenigd Koninkrijk&quot;</li><li>Plaats en 2-letterige ISO-landencode - het eerste en laatste deel van de plaatsnaam wordt gebruikt, met komma's om de delen te splitsen. Het land wordt vervolgens omgezet in de ISO3166-1-Alpha-2-landcode.<br>Bijvoorbeeld, &quot;Calgary, Alberta, Canada&quot; wordt afgekort tot &quot;Calgary, CA&quot;</li><li>Plaats en drieletterige ISO-landcode - het eerste en laatste deel van de plaatsnaam worden gebruikt, met komma's om de delen te splitsen. Het land wordt dan omgezet in de ISO3166-1-Alpha-3-landcode.<br>Bijvoorbeeld, &quot;Calgary, Alberta, Canada&quot; wordt afgekort tot &quot;Calgary, CAN&quot;</li></ul><p>Note - De CLDR-weergavenaam wordt gebruikt voor het vergelijken van namen. De gegevens zijn afkomstig van <a href=\"https://www.datahub.io/core/country-codes\" class=\"help-link\">Datahub</a> maar zijn gewijzigd, omdat bijvoorbeeld de oorspronkelijke CLDR-naam voor het Verenigd Koninkrijk &quot;UK&quot; is, en de oorspronkelijke CLDR-naam voor de Verenigde Staten &quot;US&quot;. Vergelijken met deze landen voor het afkorten is daarom zinloos. Er zijn daarom wijzigingen aangebracht om dit beter te laten werken. <a href=\"https://github.com/Neriderc/GVExport/issues/new\" class=\"help-link\">Open een probleem</a> op GitHub als u vindt dat een land niet correct wordt afgekort.</p><h4>Informatie over personen</h4><h5>Toon persoons-XREF</h5><p>Of de XREF van personen in het diagram moet worden opgenomen.</p><h5>Toon geboortedatum</h5><p>Vink het vakje aan als u de geboortedatum van personen in de uitvoer wilt opnemen.</p><p>U kunt ook kiezen of u de volledige geboortedatum of alleen het jaartal wilt tonen.</p><h5>Toon geboorteplaats</h5><p>Of de geboorteplaats in de uitvoer moet worden getoond. Zie ook de optie voor het afkorten van plaatsnamen.</p><h5>Toon overlijdensdatum</h5><p>Vink het vakje aan als u de overlijdensdatum van personen in de uitvoer wilt opnemen.</p><p>U kunt ook kiezen of u de volledige overlijdensdatum of alleen het jaartal wilt tonen.</p><h5>Toon overlijdensplaats</h5><p>Of de overlijdensplaats in de uitvoer moet worden getoond. Zie ook de optie voor het afkorten van plaatsnamen.</p><h5>Toon geslacht van personen</h5><p>Of het geslacht van de persoon op de tegel van het de persoon moet worden getoond, bijvoorbeeld &quot;Man&quot;</p><h4>Informatie over gezinnen</h4><h5>Toon gezins-XREF</h5><p>Of de XREF van gezinnen in de uitvoer moet worden opgenomen.</p><h5>Toon huwelijksdatum</h5><p>Vink het vakje aan als u de huwelijksdatum in de uitvoer wilt opnemen.</p><p>U kunt ook kiezen of u de volledige huwelijksdatum of alleen het jaartal wilt weergeven.</p><h5>Toon huwelijksplaats</h5><p>Of de huwelijksplaats in de uitvoer moet worden getoond. Zie ook de optie voor het afkorten van plaatsnamen."
 
 #. New section to combine some general diagram settings:  https://s3.eu-west-1.amazonaws.com/po-pub/i/fXJwOPFeNExfAPrBjyabVej9.png   https://s3.eu-west-1.amazonaws.com/po-pub/i/OVcGk9fXLCrNYmgGTI25lMpH.png
 #: 
@@ -1535,9 +1535,8 @@ msgstr "In dit gedeelte kunt u instellingen wijzigen die te maken hebben met de 
 
 #. Part of the help text for the Diagram appearance settings:  https://s3.eu-west-1.amazonaws.com/po-pub/i/Vbjoek76Ojvq1rcmEumPnmgJ.png
 #: 
-#, fuzzy
 msgid "When you have selected the \"Combined\" layout option, this option lets you choose whether the partners should be shown size by side (default), or in Stacked mode, which places them on top of each other. Stacked mode reduces the width of the diagram, which can be helpful in some situations."
-msgstr "Als je de indelingstoptie \"Gecombineerd\" hebt geselecteerd, kunt u met deze optie kiezen of de partners naast elkaar moeten worden weergegeven (standaard), of in de modus Gestapeld, waarbij ze op elkaar worden geplaatst. De modus Gestapeld verkleint de breedte van het diagram, wat in sommige situaties handig kan zijn."
+msgstr "Als u de indelingstoptie \"Gecombineerd\" hebt geselecteerd, kunt u met deze optie kiezen of de partners naast elkaar moeten worden weergegeven (standaard), of in de modus Gestapeld, waarbij ze op elkaar worden geplaatst. De modus Gestapeld verkleint de breedte van het diagram, wat in sommige situaties handig kan zijn."
 
 #. Part of the help text for the Diagram appearance settings:  https://s3.eu-west-1.amazonaws.com/po-pub/i/Vbjoek76Ojvq1rcmEumPnmgJ.png
 #: 
@@ -1595,4 +1594,102 @@ msgstr "Naast elkaar"
 #: 
 msgid "Stacked"
 msgstr "Gestapeld"
+
+#. New option that allows user to set a background colour (and eventually other styles) based on the existence of a shared note - effectively a way of tagging and identifying.
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/bExD5UTsqFfyvdXMbWYkkens.png
+#: 
+msgid "Style individuals based on shared note"
+msgstr "Personen vormgeven op basis van gedeelde notitie"
+
+#. Sets the default background colour when adding a new shared note for styling.
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/bExD5UTsqFfyvdXMbWYkkens.png
+#: 
+msgid "Default background colour for new items"
+msgstr "Standaardachtergrondkleur voor nieuwe items"
+
+#. Label for the option to add a new shared note to the list: https://s3.eu-west-1.amazonaws.com/po-pub/i/bExD5UTsqFfyvdXMbWYkkens.png
+#: 
+msgid "Add shared note style"
+msgstr "Stijl voor gedeelde notities toevoegen"
+
+#. Option to open modal that shows list of shared notes and lets the user edit the settings or reorder them:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/bExD5UTsqFfyvdXMbWYkkens.png  https://s3.eu-west-1.amazonaws.com/po-pub/i/3d1NliVq7MD5ZlllAht2A5XW.png
+#: 
+msgid "Edit shared notes"
+msgstr "Gedeelde notities bewerken"
+
+#. Indicates the number of shared notes added to the settings: https://s3.eu-west-1.amazonaws.com/po-pub/i/bExD5UTsqFfyvdXMbWYkkens.png
+#: 
+msgid "%s shared note styles saved."
+msgstr "%s gedeeldenotitiestijlen opgeslagen."
+
+#. Text for when there are no shared note styles added to the list:  https://s3.eu-west-1.amazonaws.com/po-pub/i/yW3YdeiCwkyxAFyfMY4sdB2p.png
+#: 
+msgid "No styles set based on shared notes."
+msgstr "Geen stijlen ingesteld op basis van gedeelde notities."
+
+#. Label for the colour picker that lets the user choose the background colour for the shared note style: https://s3.eu-west-1.amazonaws.com/po-pub/i/3d1NliVq7MD5ZlllAht2A5XW.png
+#: 
+msgid "Shared note colour"
+msgstr "Kleur van gedeelde notitie"
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "This option lets you set styles for the tiles of individuals based on the shared notes linked to those individuals. Currently only the background colour can be set."
+msgstr "Met deze optie kunt u stijlen instellen voor de tegels van personen op basis van de gedeelde notities die aan die personen zijn gekoppeld. Momenteel kan alleen de achtergrondkleur worden ingesteld."
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "The options in this section are:"
+msgstr "De opties in dit gedeelte zijn:"
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "Enable option to use this functionality. If this is disabled, the settings are not used."
+msgstr "Schakel de optie in om deze functionaliteit te gebruiken. Als deze optie is uitgeschakeld, worden de instellingen niet gebruikt."
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "When adding a new item, this is the default colour used."
+msgstr "Bij het toevoegen van een nieuw item is dit de standaardkleur."
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "Choose a shared note from this list and it will be added to the list of shared notes."
+msgstr "Kies een gedeelde notitie uit deze lijst en deze wordt toegevoegd aan de lijst met gedeelde notities."
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "Click this to view the list of shared notes, where you can remove them, rearrange the order, or change the style associated with them."
+msgstr "Klik hierop om de lijst met gedeelde notities weer te geven, waar u ze kunt verwijderen, de volgorde kunt wijzigen of de stijl die bij de notities hoort kunt aanpassen."
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "This option is shown on the list item in the edit screen, where you can choose the background colour for individuals linked to this shared note."
+msgstr "Deze optie wordt weergegeven op het lijstitem in het bewerkingsscherm, waar je de achtergrondkleur kunt kiezen voor personen die gekoppeld zijn aan deze gedeelde notitie."
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "To use this option, first select a shared note. A new screen will appear allowing you to set the style to use for that shared note. You may add multiple items, and you can drag the items in the list to rearrange them."
+msgstr "Om deze optie te gebruiken, selecteert u eerst een gedeelde notitie. Er verschijnt een nieuw scherm waarin u de stijl kunt instellen die u wilt gebruiken voor die gedeelde notitie. U kunt meerdere items toevoegen en u kunt de items in de lijst verslepen om ze opnieuw te rangschikken."
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "If the same style is set by multiple settings, the following order is used:"
+msgstr "Als dezelfde stijl wordt ingesteld door meerdere instellingen, wordt de volgende volgorde gebruikt:"
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "If the option to show the background of starting individuals in a different colour is selected, then this option takes priority over all others."
+msgstr "Als de optie om de achtergrond van startpersonen in een andere kleur weer te geven is geselecteerd, dan heeft deze optie voorrang op alle andere."
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "The style set based on shared notes is then used, if relevant. If an individual is linked to multiple shared notes in the list, the style from the highest note in the list is used."
+msgstr "De stijlset gebaseerd op gedeelde notities wordt dan gebruikt, indien relevant. Als een persoon gekoppeld is aan meerdere gedeelde notities in de lijst, dan wordt de stijl van de hoogste notitie in de lijst gebruikt."
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "If the above options do not apply, then the Individual Background Colour is used."
+msgstr "Als de bovenstaande opties niet van toepassing zijn, wordt de &quot;Achtergrondkleur van personen&quot; gebruikt."
 

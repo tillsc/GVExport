@@ -286,6 +286,7 @@ const Form = {
         init() {
             document.getElementById('shared_note_button').addEventListener('click', Form.sharedNotePanel.clickSharedNoteButton);
             document.getElementById('sharednote_col_add').addEventListener('change', Form.sharedNotePanel.noteSelectChanged);
+            document.getElementById('sharednote_col_default').addEventListener('change', Form.sharedNotePanel.defaultChanged);
         },
 
         /**
@@ -316,7 +317,7 @@ const Form = {
             if (!obj.find(item => item.xref === xrefTrim)) {
                 const newNote = {
                     xref: xrefTrim,
-                    bg_col: SHARED_NOTE_DEFAULT
+                    bg_col: shared_note_default
                 };
                 obj.push(newNote);
             }
@@ -372,13 +373,17 @@ const Form = {
             const listItems = document.querySelectorAll('.sharednote-list-item');
             const outputJSON = [];
             listItems.forEach(item => {
-                const xref = item.getAttribute('data-xref');
-                const bgColour = item.querySelector('.picker').value;
-                const itemObject = {
-                    "xref": xref,
-                    "bg_col": bgColour
-                };
-                outputJSON.push(itemObject);
+                const picker = item.querySelector('.picker');
+                // Only add items that have settings in them - not the blank end one
+                if (picker !== null) {
+                    const xref = item.getAttribute('data-xref');
+                    const bgColour = item.querySelector('.picker').value;
+                    const itemObject = {
+                        "xref": xref,
+                        "bg_col": bgColour
+                    };
+                    outputJSON.push(itemObject);
+                }
             });
             document.getElementById('sharednote_col_data').value = JSON.stringify(outputJSON);
 
@@ -393,5 +398,8 @@ const Form = {
             // If auto-update of diagram is enabled, trigger it
             if (autoUpdate && update) updateRender();
         },
+        defaultChanged() {
+            shared_note_default = this.value;
+        }
     },
 }

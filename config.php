@@ -78,7 +78,6 @@ return array(
     'shape_sex_unknown' => 0, // Shape option for unknown when based on sex option chosen for indi_tile_shape above
     'shape_vital_dead' => 0, // Shape option for deceased when based on vitals option chosen for indi_tile_shape above
     'shape_vital_living' => 10, // Shape option for living when based on vitals option chosen for indi_tile_shape above
-	'sharednote_col' => '#ADD8E6', // Default colour to show shared note
 	'male_col' => '#ADD8E6', // Default colour of male individuals (light blue)
 	'female_col' => '#FFB6C1', // Default colour of female individuals (light pink)
 	'other_gender_col' => '#FCEAA1', // Default colour of Other gender individuals (light yellow)

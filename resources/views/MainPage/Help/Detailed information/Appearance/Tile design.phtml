@@ -58,6 +58,24 @@ $page_name = Help::TILE_DESIGN;
     <li><?= Help::translateClean('Based on vital status'); ?> - <?= Help::translateClean('The border will be coloured based on whether the individual is living or deceased.'); ?></li>
     <li><?= Help::translateClean('Based on age'); ?> - <?= Help::translateClean('The border will be coloured using a scale between two chosen colours, based on the age of the individual.'); ?></li>
 </ul>
+<h5><?= Help::translateClean('Style individuals based on shared note'); ?></h5>
+<p><?= Help::translateClean('This option lets you set styles for the tiles of individuals based on the shared notes linked to those individuals. Currently only the background colour can be set.'); ?></p>
+<p><?= Help::translateClean('The options in this section are:'); ?></p>
+<ul>
+    <li><?= Help::translateClean('Style individuals based on shared note'); ?> - <?= Help::translateClean('Enable option to use this functionality. If this is disabled, the settings are not used.'); ?></li>
+    <li><?= Help::translateClean('Default background colour for new items'); ?> - <?= Help::translateClean('When adding a new item, this is the default colour used.'); ?></li>
+    <li><?= Help::translateClean('Add shared note style'); ?> - <?= Help::translateClean('Choose a shared note from this list and it will be added to the list of shared notes.'); ?></li>
+    <li><?= Help::translateClean('Edit shared notes'); ?> - <?= Help::translateClean('Click this to view the list of shared notes, where you can remove them, rearrange the order, or change the style associated with them.'); ?></li>
+    <li><?= Help::translateClean('Shared note colour'); ?> - <?= Help::translateClean('This option is shown on the list item in the edit screen, where you can choose the background colour for individuals linked to this shared note.'); ?></li>
+</ul>
+<p><?= Help::translateClean('To use this option, first select a shared note. A new screen will appear allowing you to set the style to use for that shared note. You may add multiple items, and you can drag the items in the list to rearrange them.'); ?></p>
+<p><?= Help::translateClean('If the same style is set by multiple settings, the following order is used:'); ?></p>
+<ul>
+    <li><?= Help::translateClean('If the option to show the background of starting individuals in a different colour is selected, then this option takes priority over all others.'); ?></li>
+    <li><?= Help::translateClean('The style set based on shared notes is then used, if relevant. If an individual is linked to multiple shared notes in the list, the style from the highest note in the list is used.'); ?></li>
+    <li><?= Help::translateClean('If the above options do not apply, then the Individual Background Colour is used.'); ?></li>
+</ul>
+
 <h5><?= Help::translateClean('Male individuals'); ?></h5>
 <p><?= Help::translateClean('Set the colour for Male individuals, used in above settings for background, stripe, border if selected.'); ?></p>
 <h5><?= Help::translateClean('Female individuals'); ?></h5>
