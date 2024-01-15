@@ -1,4 +1,4 @@
-![image](https://img.shields.io/github/downloads/Neriderc/GVExport/total) (since 5 June 2023)
+![image](https://img.shields.io/github/downloads/Neriderc/GVExport/total) ![image](https://img.shields.io/github/downloads/Neriderc/GVExport/latest/total)
 
 GVExport
 ========
