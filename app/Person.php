@@ -237,7 +237,7 @@ class Person
                 $stripe_colour = '';
         }
         if ($stripe_colour !== '') {
-            $out .= "<TR><TD COLSPAN=\"2\" CELLPADDING=\"2\" BGCOLOR=\"$stripe_colour\" PORT=\"nam\" $size></TD></TR>";
+            $out .= "<TR><TD COLSPAN=\"3\" CELLPADDING=\"2\" BGCOLOR=\"$stripe_colour\" PORT=\"nam\" $size></TD></TR>";
         }
         // Second row (photo, name, birth & death data)
         if ($detailsExist || $this->dot->settings["show_photos"]) {
@@ -285,7 +285,7 @@ class Person
             if ($detailsExist) {
                 $out .= "</TD>";
             }
-            $out .= "</TR>";
+            $out .= "<TD CELLPADDING=\"10\"></TD></TR>";
         }
         // Close table
         $out .= "</TABLE>";

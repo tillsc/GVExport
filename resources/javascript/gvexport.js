@@ -1157,12 +1157,6 @@ function cleanSVG(element) {
             break;
     }
 
-    // remove title tags, so we don't get weird data on hover,
-    // instead this defaults to the XREF of the record
-    const a = element.getElementsByTagName("a");
-    for (let i = 0; i < a.length; i++) {
-        a[i].removeAttribute("xlink:title");
-    }
     //half of bug fix for photos not showing in browser - we change & to %26 in functions_dot.php
     element.innerHTML = element.innerHTML.replaceAll("%26", "&amp;");
     // Don't show anything when hovering on blank space

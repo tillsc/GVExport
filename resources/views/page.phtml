@@ -153,7 +153,7 @@ $usegraphviz = $vars['graphviz_bin'] != "";
         </div>
     </div>
 </div>
-<script src="<?= $module->assetUrl('javascript/viz.js'); ?>"></script>
+<script src="<?= $module->assetUrl('javascript/viz-standalone.js'); ?>"></script>
 <script src="<?= $module->assetUrl('javascript/panzoom.min.js'); ?>"></script>
 <script src="<?= $module->assetUrl('javascript/gvexport.js'); ?>"></script>
 <script src="<?= $module->assetUrl('javascript/MainPage/UI.js'); ?>"></script>
@@ -163,11 +163,6 @@ $usegraphviz = $vars['graphviz_bin'] != "";
 <script type="text/javascript">
     let graphvizAvailable = <?= $usegraphviz ? "true" : "false" ?>;
     let panzoomInst = null;
-    const workerURL = '<?= $module->assetUrl('javascript/full.renderer.js'); ?>';
-    let viz = new Viz({
-        workerURL: workerURL
-    });
-
     const form = document.getElementById('gvexport');
     const rendering = document.getElementById('rendering');
 
@@ -295,17 +290,19 @@ $usegraphviz = $vars['graphviz_bin'] != "";
                 messages = jsonResponse.messages;
                 debug_string = jsonResponse.enable_debug_mode;
             }
-
             const images = [...lastDotStr.matchAll(/<IMG[^>]+SRC="([^"]*)/gmi)].map(function (matches) {
                 return {
-                    path: matches[1],
+                    name: matches[1],
                     width: '150px',
                     height: '150px'
                 };
             });
-            return viz.renderSVGElement(lastDotStr, {
-                images: images
+            return Viz.instance().then(function(viz) {
+                return viz.renderSVGElement(lastDotStr, {
+                    images: images
+                });
             });
+
         }).then(function (element) {
             // Now we have to clean up the generated SVG.
             cleanSVG(element);
@@ -341,6 +338,7 @@ $usegraphviz = $vars['graphviz_bin'] != "";
             createXrefListFromSvg();
             return element;
         }).catch(function (error) {
+            console.log(error);
             if (error.message.includes("TOTAL_MEMORY")) {
                 if (graphvizAvailable) {
                     UI.showToast(ERROR_CHAR + "<?= I18N::translate('Memory limit reached. Please reduce number of records or use download option.'); ?>");
@@ -355,11 +353,6 @@ $usegraphviz = $vars['graphviz_bin'] != "";
                     document.getElementById('dot-text').appendChild(document.createTextNode(lastDotStr));
                 }
             }
-
-            // Create a new Viz instance (@see Caveats page for more info)
-            viz = new Viz({
-                workerURL: workerURL
-            });
         });
         return false;
     }
