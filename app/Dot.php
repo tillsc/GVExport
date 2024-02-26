@@ -478,7 +478,7 @@ class Dot {
 		$out .= "rankdir=\"" . $this->settings["graph_dir"] . "\"\n";
 		$out .= "pagedir=\"LT\"\n";
 		$out .= "bgcolor=\"" . $this->settings['background_col'] . "\"\n";
-		$out .= "edge [ style=solid, arrowhead=normal arrowtail=none];\n";
+		$out .= "edge [ style=solid, arrowhead=normal, arrowtail=none];\n";
         $out .= "node [ shape=plaintext font_size=\"" . $this->settings['font_size'] ."\" fontname=\"" . $this->settings["typefaces"][$this->settings["typeface"]] . ", " . $this->settings["typeface_fallback"][$this->settings["typeface"]] .", " . $this->settings["typefaces"][$this->settings["default_typeface"]] . ", Sans\"];\n";
 		return $out;
 	}
@@ -614,7 +614,7 @@ class Dot {
                 $out .= ", label=" . "< >";
             } else {
                 $out .= "color=\"" . $this->settings["border_col"] . "\",fillcolor=\"" . $fill_colour . "\", $href shape=oval, style=\"filled\", margin=0.01";
-                $out .= ", label=" . "<<TABLE border=\"0\" CELLPADDING=\"0\" CELLSPACING=\"0\"><TR><TD><FONT COLOR=\"". $this->settings["font_colour_details"] ."\" POINT-SIZE=\"" . ($this->settings["font_size"]) ."\">" . (empty($marriagedate)?"":$marriagedate) . "<BR />" . (empty($marriageplace)?"":"(".$marriageplace.")") . $family . "</FONT></TD></TR></TABLE>>";
+                $out .= ", label=" . "<<TABLE border=\"0\" CELLPADDING=\"5\" CELLSPACING=\"0\"><TR><TD><FONT COLOR=\"". $this->settings["font_colour_details"] ."\" POINT-SIZE=\"" . ($this->settings["font_size"]) ."\">" . (empty($marriagedate)?"":$marriagedate) . "<BR />" . (empty($marriageplace)?"":"(".$marriageplace.")") . $family . "</FONT></TD></TR></TABLE>>";
             }
         }
 
