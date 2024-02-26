@@ -600,7 +600,7 @@ class Dot {
 
 			$out .= "</TABLE>";
 
-			$out .= ">";
+			$out .= "> tooltip=\" \"";
 		} else {
 		// Non-combined type
 			if ($this->settings["add_links"]) {

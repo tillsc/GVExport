@@ -298,7 +298,6 @@ $usegraphviz = $vars['graphviz_bin'] != "";
                 };
             });
             return Viz.instance().then(function(viz) {
-                console.log(images);
                 return viz.renderSVGElement(lastDotStr, {
                     images: images
                 });
