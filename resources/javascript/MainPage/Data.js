@@ -204,7 +204,7 @@ const Data = {
             const dpi = document.getElementById('dpi').value;
             const widthInches = width / dpi;
             const heightInches = height / dpi;
-            const doc = new window.jspdf.jsPDF({orientation: orientation, format: [widthInches, heightInches], unit: 'in', compress: true});
+            const doc = new window.jspdf.jsPDF({orientation: orientation, format: [widthInches, heightInches], unit: 'in'});
             doc.addImage(imgData, "PNG", 0, 0, widthInches, heightInches);
             // If running test suite, don't actually trigger download of data
             // We have generated it so know it works
