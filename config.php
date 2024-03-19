@@ -62,7 +62,6 @@ return array(
 	'show_adv_appear' => false, // Whether to show advanced settings by default for Appearance section
 	'show_adv_files' => false, // Whether to show advanced settings by default for General settings section
 	'typeface' => 0, // Default font value, based on list of font 'typefaces'
-	'default_typeface' => 0, // Fallback font value, if above typeface not available
 	'font_colour_name' => '#333333',	// Default font colour for name
 	'font_colour_details' => '#555555',	// Default font colour for date/place of birth/death etc.
 	'font_size' => '10',	// Default font size for everything except name

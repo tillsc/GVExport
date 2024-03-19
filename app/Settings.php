@@ -49,7 +49,6 @@ class Settings
         $this->defaultSettings = include dirname(__FILE__) . "/../config.php";
         // Add options lists
         $this->defaultSettings['typefaces'] = [0 => "Arial", 10 => "Brush Script MT", 20 => "Courier New", 30 => "Garamond", 40 => "Georgia", 50 => "Tahoma", 60 => "Times New Roman", 70 => "Trebuchet MS", 80 => "Verdana"];
-        $this->defaultSettings['typeface_fallback'] = [0 => "Sans",  10 => "Cursive", 20 => "Monospace", 30 => "Serif", 40 => "Serif", 50 => "Sans", 60 => "Serif", 70 => "Sans", 80 => "Sans"];
         $this->defaultSettings['directions']['TB'] = "Top-to-bottom";
         $this->defaultSettings['directions']['LR'] = "Left-to-right";
         $this->defaultSettings['url_xref_treatment_options']['default'] = "Default";
@@ -409,7 +408,6 @@ class Settings
             case 'graphviz_config':
             case 'typefaces':
             case 'typeface_fallback':
-            case 'default_typeface':
             case 'directions':
             case 'url_xref_treatment_options':
             case 'use_abbr_places':

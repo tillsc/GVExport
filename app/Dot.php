@@ -479,7 +479,7 @@ class Dot {
 		$out .= "pagedir=\"LT\"\n";
 		$out .= "bgcolor=\"" . $this->settings['background_col'] . "\"\n";
 		$out .= "edge [ style=solid, arrowhead=normal, arrowtail=none];\n";
-        $out .= "node [ shape=plaintext font_size=\"" . $this->settings['font_size'] ."\" fontname=\"" . $this->settings["typefaces"][$this->settings["typeface"]] . ", " . $this->settings["typeface_fallback"][$this->settings["typeface"]] .", " . $this->settings["typefaces"][$this->settings["default_typeface"]] . ", Sans\"];\n";
+        $out .= "node [ shape=plaintext font_size=\"" . $this->settings['font_size'] ."\" fontname=\"" . $this->settings["typefaces"][$this->settings["typeface"]] . "\"];\n";
 		return $out;
 	}
 
