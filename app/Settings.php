@@ -431,6 +431,7 @@ class Settings
             case 'mclimit':
             case 'birth_prefix':
             case 'death_prefix':
+            case 'marriage_prefix':
                 return $context == self::CONTEXT_ADMIN;
             case 'show_diagram_panel':
                 return $context != self::CONTEXT_NAMED_SETTING;

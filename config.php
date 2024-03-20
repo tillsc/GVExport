@@ -122,6 +122,7 @@ return array(
 	'indi_border_col' => '#606060', // Border colour of individuals
 	'birth_prefix' => '*', // Text shown on chart before the birthdate
 	'death_prefix' => '†', // Text shown on chart before the death date
+	'marriage_prefix' => '∞', // Text shown on chart before the marriage date
     'save_settings_name' => '', // Default value for text field where name of settings can be entered
     'show_diagram_panel' => false, // If set to true, a "Saved diagrams" section is shown at the top, that lists settings saved using the feature to save multiple versions of settings
     'auto_update' => true, // If auto-updating browser render on change is enabled or not
