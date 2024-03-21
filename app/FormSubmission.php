@@ -69,6 +69,9 @@ class FormSubmission
         if (isset($vars["death_prefix"]) && $this->isPrefixStringValid($vars["death_prefix"])) {
             $settings['death_prefix'] = $vars["death_prefix"];
         }
+        if (isset($vars["marriage_prefix"]) && $this->isPrefixStringValid($vars["marriage_prefix"])) {
+            $settings['marriage_prefix'] = $vars["marriage_prefix"];
+        }
 
         $settings['mark_not_related'] = isset($vars['mark_not_related']);
         $settings['faster_relation_check'] = isset($vars['faster_relation_check']);
@@ -418,7 +421,7 @@ class FormSubmission
      */
     private function isPrefixStringValid($name): bool
     {
-        return preg_match('/^[A-Za-z0-9_ .*+()^%$#@!†-]*$/',$name);
+        return preg_match('/^[A-Za-z0-9_ .*+()^∞%$#@!†-]*$/',$name);
     }
 
     /**

@@ -30,6 +30,7 @@
 
 namespace vendor\WebtreesModules\gvexport;
 
+use Fisharebest\Webtrees\Date;
 use Fisharebest\Webtrees\Family;
 use Fisharebest\Webtrees\I18n;
 use Fisharebest\Webtrees\Individual;
@@ -528,6 +529,14 @@ class Dot {
 		// Querying webtrees for the data of a FAM object
 		} else {
 			$f = $this->getUpdatedFamily($fid);
+
+            // Set marriage prefix only if marriage exists
+            $married = !(empty($f->getMarriage()) && Date::compare($f->getMarriageDate(), new Date('')) == 0);
+            if ($married) {
+                $prefix = $this->settings["marriage_prefix"] . ' ';
+            } else {
+                $prefix = '';
+            }
 			$fill_colour = $this->getFamilyColour();
 			$link = $f->url();
 
@@ -585,7 +594,7 @@ class Dot {
 
 			$out .= "</TR>";
             // --- Print marriage ---
-			if (substr($fid, 0, 2) !== "F_" && !(empty($marriagedate) && empty($marriageplace) && $family == "") && ($this->settings["show_marriage_date"] || $this->settings["show_marriage_place"] || $this->settings["show_xref_families"])) {
+			if (substr($fid, 0, 2) !== "F_" && !(empty($marriagedate) && empty($marriageplace) && empty($family) && empty($prefix)) && ($this->settings["show_marriage_date"] || $this->settings["show_marriage_place"] || $this->settings["show_xref_families"])) {
 				$out .= "<TR>";
 				if ($this->settings["add_links"]) {
 					$out .= "<TD COLSPAN=\"2\" CELLPADDING=\"0\" CELLBORDER=\"1\" PORT=\"marr\" TARGET=\"_BLANK\" HREF=\"" . $this->convertToHTMLSC($link) . "\" BGCOLOR=\"" . $fill_colour . "\">"; #ESL!!! 20090213 without convertToHTMLSC the dot file has invalid data
@@ -593,7 +602,7 @@ class Dot {
 					$out .= "<TD COLSPAN=\"2\" CELLPADDING=\"0\" CELLBORDER=\"1\" PORT=\"marr\" BGCOLOR=\"" . $fill_colour . "\">";
 				}
 
-				$out .= "<FONT COLOR=\"". $this->settings["font_colour_details"] ."\" POINT-SIZE=\"" . ($this->settings["font_size"]) ."\">" . (empty($marriagedate)?"":$marriagedate) . "<BR />" . (empty($marriageplace)?"":"(".$marriageplace.")") . $family . "</FONT>";
+				$out .= "<FONT COLOR=\"". $this->settings["font_colour_details"] ."\" POINT-SIZE=\"" . ($this->settings["font_size"]) ."\">" . $prefix . (empty($marriagedate)?"":$marriagedate) . "<BR />" . (empty($marriageplace)?"":"(".$marriageplace.")") . $family . "</FONT>";
 				$out .= "</TD>";
 				$out .= "</TR>";
 			}
@@ -614,7 +623,7 @@ class Dot {
                 $out .= ", label=" . "< >";
             } else {
                 $out .= "color=\"" . $this->settings["border_col"] . "\",fillcolor=\"" . $fill_colour . "\", $href shape=oval, style=\"filled\", margin=0.01";
-                $out .= ", label=" . "<<TABLE border=\"0\" CELLPADDING=\"5\" CELLSPACING=\"0\"><TR><TD><FONT COLOR=\"". $this->settings["font_colour_details"] ."\" POINT-SIZE=\"" . ($this->settings["font_size"]) ."\">" . (empty($marriagedate)?"":$marriagedate) . "<BR />" . (empty($marriageplace)?"":"(".$marriageplace.")") . $family . "</FONT></TD></TR></TABLE>>";
+                $out .= ", label=" . "<<TABLE border=\"0\" CELLPADDING=\"5\" CELLSPACING=\"0\"><TR><TD><FONT COLOR=\"". $this->settings["font_colour_details"] ."\" POINT-SIZE=\"" . ($this->settings["font_size"]) ."\">" . $prefix . (empty($marriagedate)?"":$marriagedate) . "<BR />" . (empty($marriageplace)?"":"(".$marriageplace.")") . $family . "</FONT></TD></TR></TABLE>>";
             }
         }
 
