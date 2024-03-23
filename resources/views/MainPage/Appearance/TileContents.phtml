@@ -28,13 +28,17 @@ use Fisharebest\Webtrees\I18N;
     <div class="col-auto">
         <div onclick="Form.showHideSubgroup('abbreviations_subgroup', this)" class="pointer subgroup">→ <?= I18N::translate('Abbreviations'); ?></div>
         <div id="abbreviations_subgroup" class="setting_subgroup col-auto wt-page-options-value" style="display: none">
-            <div class="col-auto">
+            <div class="col-auto vspace-10">
                 <label for="use_abbr_name"><?= I18N::translate('Abbreviated names'); ?></label>
                 <?= view('components/select', ['name' => 'vars[use_abbr_name]', 'id' => 'use_abbr_name', 'selected' => I18N::digits($vars['use_abbr_name']), 'options' => MainPage::updateTranslations($settings["use_abbr_names"])]) ?>
             </div>
-            <div class="col-auto">
+            <div class="col-auto vspace-10">
                 <label for="use_abbr_name"><?= I18N::translate('Abbreviated place names'); ?></label>
                 <?= view('components/select', ['name' => 'vars[use_abbr_place]', 'id' => 'use_abbr_place', 'selected' => I18N::digits($vars['use_abbr_place']), 'options' => MainPage::updateTranslations($settings["use_abbr_places"])]) ?>
+            </div>
+            <div class="col-auto vspace-10">
+                <input type="checkbox" name="vars[use_abbr_month]" id="use_abbr_month" value="true" <?= $vars["use_abbr_month"] ? 'checked' : '' ?>>
+                <label for="use_abbr_month"><?= I18N::translate('Abbreviated month names'); ?></label>
             </div>
         </div>
     </div>

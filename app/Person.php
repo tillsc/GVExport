@@ -132,9 +132,9 @@ class Person
             $is_dead = $i->isDead();
             $link = $i->url();
 
-            // --- Birth data ---
+            // --- Birth date ---
             if ($this->dot->settings["show_birthdate"]) {
-                $birthdate = Dot::formatDate($i->getBirthDate(), $this->dot->settings["birthdate_year_only"]);
+                $birthdate = Dot::formatDate($i->getBirthDate(), $this->dot->settings["birthdate_year_only"],  $this->dot->settings["use_abbr_month"]);
             } else {
                 $birthdate = "";
             }
@@ -146,9 +146,9 @@ class Person
                 $birthplace = "";
             }
 
-            // --- Death data ---
+            // --- Death date ---
             if ($this->dot->settings["show_death_date"]) {
-                $death_date = Dot::formatDate($i->getDeathDate(), $this->dot->settings["death_date_year_only"]);
+                $death_date = Dot::formatDate($i->getDeathDate(), $this->dot->settings["death_date_year_only"],  $this->dot->settings["use_abbr_month"]);
             } else {
                 $death_date = "";
             }

@@ -48,6 +48,7 @@ return array(
 	'show_xref_families' => false, // Whether to show the family XREF
 	'use_abbr_place' => 0, // Default abbreviation setting for place names
 	'use_abbr_name' => 0, // Default abbreviation settings for individual's names
+	'use_abbr_month' => 0, // Default abbreviation settings for month names
 	'enable_debug_mode' => false, // Debug mode (if set to true then the debug steps are run)
 	'show_debug_panel' => false, // If set to true, a debug panel is shown
 	'enable_graphviz' => true, // If Graphviz installed, we can still choose not to use it by setting this to false
