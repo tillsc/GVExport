@@ -504,7 +504,7 @@ class Dot {
      */
 	function printFamily(string $fid, string $nodeName, SharedNoteList $sharednotes): string
     {
-
+        $prefix = '';
         $out = $nodeName;
 		$out .= " [ ";
 
@@ -534,15 +534,14 @@ class Dot {
             $married = !(empty($f->getMarriage()) && Date::compare($f->getMarriageDate(), new Date('')) == 0);
             if ($married) {
                 $prefix = $this->settings["marriage_prefix"] . ' ';
-            } else {
-                $prefix = '';
             }
+
 			$fill_colour = $this->getFamilyColour();
 			$link = $f->url();
 
 			// Show marriage year
 			if ($this->settings["show_marriage_date"]) {
-                $marriagedate = $this->formatDate($f->getMarriageDate(), $this->settings["marr_date_year_only"]);
+                $marriagedate = $this->formatDate($f->getMarriageDate(), $this->settings["marr_date_year_only"],  $this->settings["use_abbr_month"]);
 			} else {
 				$marriagedate = "";
 			}
@@ -1317,14 +1316,19 @@ class Dot {
 
     /** Format a date for display in the diagram
      *
-     * @param object $date             The date
-     * @param bool $yearOnly    Whether to only show year and not day/month
+     * @param object $date The date
+     * @param bool $yearOnly Whether to only show year and not day/month
+     * @param bool $abbr_month If month name should be abbreviated
      * @return string
      */
-    public static function formatDate(object $date, bool $yearOnly = false): string
+    public static function formatDate(object $date, bool $yearOnly = false, bool $abbr_month = false): string
     {
         $date_format = I18N::dateFormat();
+        if ($abbr_month) {
+            $date_format = str_replace('%F', '%M', $date_format);
+        }
         $q1 = $date->qual1;
+
         $d1 = $date->minimumDate()->format($date_format, $date->qual1);
         $q2 = $date->qual2;
         if ($date->maximumDate() === null) {

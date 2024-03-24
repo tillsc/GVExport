@@ -156,6 +156,8 @@ class FormSubmission
             $settings['use_abbr_name'] = I18N::digits($vars['use_abbr_name']);
         }
 
+        $settings['use_abbr_month'] = isset($vars['use_abbr_month']);
+
         if (isset($vars['use_cart'])) {
             $settings['use_cart'] = ($vars['use_cart'] !== "ignorecart");
         }
