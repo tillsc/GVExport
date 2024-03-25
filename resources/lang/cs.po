@@ -964,11 +964,6 @@ msgstr "Zahrnuté typy vztahů"
 msgid "Tile contents"
 msgstr "Obsah políčka"
 
-#. New help text for new section "Tile contents". The help text is quite long, but much of it is previous help text from the settings that have been combined into this section. You may want to copy translations from previous terms, so I have left these for now. I will eventually delete the original terms.  https://s3.eu-west-1.amazonaws.com/po-pub/i/opPq1bb4NbrBXGFAiRsVxXi1.png  https://s3.eu-west-1.amazonaws.com/po-pub/i/W4qegkcMMWTFs3sXIihOQskA.png
-#: 
-msgid "This section allows for some changes to the content of tiles, including links, abbreviations, and the details included on individuals and families.</p><h4>Page links</h4><h5>Add URL to individuals and families</h5><p>For SVG (and PDF if Graphviz installed on server) output, links can be included. This way you can click on the person in the diagram to be taken to their webtrees page.</p><h4>Abbreviations</h4><h5>Abbreviated names</h5><p>There are several options to shorten the names of individuals displayed.</p><ul><li>Full name - the default option, this shows the primary name and any nickname. This option currently is the only one where the preferred name is underlined, and is the only one to show nicknames (in &quot;quotes&quot;).</li><li>Given and surnames - like the full name, but without nicknames.</li><li>Given names - just the given names are displayed.</li><li>First given names only - just the first word of the name in the given names field.</li><li>Surnames - just the surnames are displayed.</li><li>Initials only - this displays initials only, for example &quot;JFK&quot;.</li><li>Given name initials and surname - this shows initials for the first and second given name, as well as the full surname. For example: &quot;J.F. Kennedy&quot;</li><li>Don&apos;t show names - no names are shown. If birth and death details are also disabled then it is possible to show only photos or even just coloured boxes.</li></ul><h5>Abbreviated place names</h5><p>There are several options to shorten place names (for place of birth, place of marriage, place of death).</p><ul><li>Full place name - the place name is printed in full.</li><li>City and Country - the first and last section of the place name is used, using commas to split the sections. For example, &quot;London, England, United Kingdom&quot; would be shortened to &quot;London, United Kingdom&quot;</li><li>City and 2-Letter ISO Country Code - the first and last section of the place name is used, using commas to split the sections. The country is then converted to the ISO3166-1-Alpha-2 country code. <br>For example, &quot;Calgary, Alberta, Canada&quot; would be shortened to &quot;Calgary, CA&quot;</li><li>City and 3-Letter ISO Country Code - the first and last section of the place name is used, using commas to split the sections. The country is then converted to the ISO3166-1-Alpha-3 country code.<br>For example, &quot;Calgary, Alberta, Canada&quot; would be shortened to &quot;Calgary, CAN&quot;</li></ul><p>Note - The CLDR display name is used for matching. The data comes from <a href=\\\"https://www.datahub.io/core/country-codes\\\" class=\\\"help-link\\\">Datahub</a> but has been modified as for example the original CLDR name for the United Kingdom is &quot;UK&quot;, and the original CLDR name for the United States is &quot;US&quot;. Matching against these countries for the purposes of abbreviation is therefore pointless. So changes have been made to make this work better. Please <a href=\\\"https://github.com/Neriderc/GVExport/issues/new\\\" class=\\\"help-link\\\">open an issue</a> on GitHub if you find a country is not abbreviating correctly.</p><h4>Information on individuals</h4><h5>Show individual XREF</h5><p>Whether to include the XREF of individuals in the diagram.</p><h5>Show birthdate</h5><p>Check the box if you would like to include the birthdate of individuals in the output.</p><p>You can also choose whether to show the full date of birth or just the year.</p><h5>Show birthplace</h5><p>Whether to show the place of birth in the output. Also see option for abbreviating place names.</p><h5>Show death date</h5><p>Check the box if you would like to include the death date of individuals in the output.</p><p>You can also choose whether to show the full date of death or just the year.</p><h5>Show death place</h5><p>Whether to show the place of death in the output. Also see option for abbreviating place names.</p><h5>Show sex of individuals</h5><p>Whether to print the sex of the individual on the individual&apos;s tile, e.g. &quot;Male&quot;</p><h4>Information on families</h4><h5>Show family XREF</h5><p>Whether to include the XREF of families in the output.</p><h5>Show marriage date</h5><p>Check the box if you would like to include the date of marriage in the output.</p><p>You can also choose whether to show the full date of marriage or just the year.</p><h5>Show marriage place</h5><p>Whether to show the place of marriage in the output. Also see option for abbreviating place names."
-msgstr "Tato část umožňuje provádět změny obsahu políček, včetně odkazů, zkratek a podrobností o osobách a rodinách.</p><h4>Odkazy na stránky</h4><h5>K osobám a rodinám přidat URL</h5><p>Do výstupu ve formátu SVG (a PDF, pokud je na serveru nainstalován Graphviz) lze vkládat odkazy. Pak lze kliknout na osobu v diagramu a přejít přímo na její stránku ve webtree.</p><h4>Zkratky</h4><h5>Zkrácená jména</h5><p>There are several options to shorten the names of individuals displayed.</p><ul><li>Celé jméno - výchozí možnost, zobrazí se výchozí jméno a případná přezdívka. Tato možnost je v současné době jediná, u které je preferované jméno podtrženo, a jako jediná zobrazuje přezdívky (v uvozovkách).</li><li>Jména a příjmení - jako celé jméno, ale bez přezdívek.</li><li>Křestní jména - zobrazí se pouze křestní jména.</li><li>Jen první křestní jméno - zobrazí se první slovo z křestního jména.</li><li>Příjmení - zobrazí se pouze příjmení.</li><li>Pouze iniciály - zobrazí se pouze iniciály, např. \"JFK\".</li><li>Iniciály jmen a příjmení - zobrazí se iniciály dvou prvních křestních jmen a celé příjmení, např.: \"J.F. Kennedy\"</li><li>Nezobrazovat jména - nezobrazí se žádná jména. Pokud jsou vypnuty i údaje o narození a úmrtí, je možné zobrazit pouze fotografie nebo dokonce jen barevná pole.</li></ul><h5>Zkrácené názvy míst</h5><p>Existuje několik možností, jak zkrátit názvy míst (místo narození, místo sňatku, místo úmrtí).</p><ul><li>Úplný název místa - zobrazí se celý název místa.</li><li>Město a země - použije se první a poslední část názvu místa, přičemž se části oddělí čárkami. Např. \"London, England, United Kingdom\" se zkrátí na \"London, United Kingdom\".</li><li>Město a 2místný ISO kód země - použije se první a poslední část názvu místa, přičemž se části oddělí čárkami. Země se pak převede na kód země dle ISO3166-1-Alpha-2. <br>Např. \"Calgary, Alberta, Canada\" se zkrátí na \"Calgary, CA\".</li><li>Město a 3místný ISO kód země - použije se první a poslední část názvu místa, přičemž se části oddělí čárkami. Země se pak převede na kód země dle ISO3166-1-Alpha-3. <br>Např. \"Calgary, Alberta, Canada\" se zkrátí na \"Calgary, CAN\".</li></ul><p>Poznámka - Pro přiřazování se používá zobrazovaný název z databáze CLDR. Údaje pocházejí z <a href=\"https://www.datahub.io/core/country-codes\" class=\"help-link\">Datahub</a>, ale byly upraveny, protože např. původní název v CLDR pro Spojené království je \"UK\" a pro Spojené státy je \"US\". A jelikož přiřazování k těmto názvům by bylo zbytečné byly provedeny změny aby to fungovalo lépe. Pokud zjistíte, že se některá země nezkracuje správně, založte prosím <a href=\"https://github.com/Neriderc/GVExport/issues/new\" class=\"help-link\">problém</a> na GitHubu. Pro české názvy států nefunguje přiřazování zkratek.</p><h4>Informace v políčku osoby/h4><h5>Zobrazit XREF osoby</h5><p>Zda má být v diagramu uveden XREF osob.</p><h5>Zobrazit datum narození</h5><p>Zaškrtněte toto políčko, pokud chcete do výstupu zahrnout datum narození osob.</p><p>Můžete si také vybrat, zda chcete zobrazit celé datum narození, nebo jen rok.</p><h5>Zobrazit místo narození</h5><p>Zda se má ve výstupu zobrazit místo narození. Viz také možnost pro zkracování názvů míst.</p><h5>Zobrazit datum úmrtí</h5><p>Zaškrtněte toto políčko, pokud chcete do výstupu uvést datum úmrtí osob.</p><p>Můžete si také vybrat, zda chcete zobrazit celé datum úmrtí, nebo jen rok.</p><h5>Zobrazit místo úmrtí</h5><p>Zda se má ve výstupu zobrazit místo úmrtí. Viz také možnost pro zkracování názvů míst.</p><h5>Zobrazit pohlaví osoby</h5><p>Zda se má v políčku osoby vypsat jeho pohlaví, např. \"Muž\".</p><h4>Informace v políčku rodiny</h4><h5>Zobrazit XREF rodiny</h5><p>Zda má být ve výstupu uveden XREF rodin.</p><h5>Zobrazit datum sňatku</h5><p>Zaškrtněte toto políčko, pokud chcete do výstupu zahrnout datum sňatku.</p><p>Můžete si také vybrat, zda chcete zobrazit celé datum sňatku, nebo jen rok.</p><h5>Zobrazit místo sňatku</h5><p>Zda se má ve výstupu zobrazit místo sňatku. Viz také možnost pro zkrácení názvů míst."
-
 #. New section to combine some general diagram settings:  https://s3.eu-west-1.amazonaws.com/po-pub/i/fXJwOPFeNExfAPrBjyabVej9.png   https://s3.eu-west-1.amazonaws.com/po-pub/i/OVcGk9fXLCrNYmgGTI25lMpH.png
 #: 
 msgid "Diagram"
@@ -1531,12 +1526,12 @@ msgstr "Nastavení ovlivní jak blízko budou na výstupu políčka osob stejné
 #. Part of the help text for the Diagram appearance settings:  https://s3.eu-west-1.amazonaws.com/po-pub/i/Vbjoek76Ojvq1rcmEumPnmgJ.png
 #: 
 msgid "This section lets you change settings related to the layout of the diagram."
-msgstr ""
+msgstr "V této části můžete změnit nastavení týkající se rozvržení diagramu."
 
 #. Part of the help text for the Diagram appearance settings:  https://s3.eu-west-1.amazonaws.com/po-pub/i/Vbjoek76Ojvq1rcmEumPnmgJ.png
 #: 
 msgid "When you have selected the \"Combined\" layout option, this option lets you choose whether the partners should be shown size by side (default), or in Stacked mode, which places them on top of each other. Stacked mode reduces the width of the diagram, which can be helpful in some situations."
-msgstr ""
+msgstr "Pokud máte zvolené \"Kombinované\" rozložení diagramu, můžete si vybrat, zda se mají partneři zobrazovat \"vedle sebe\" (výchozí nastavení), nebo v režimu \"nad sebou\". Režim \"nad sebou\" zmenšuje šířku diagramu, což může být v některých situacích užitečné."
 
 #. Part of the help text for the Diagram appearance settings:  https://s3.eu-west-1.amazonaws.com/po-pub/i/Vbjoek76Ojvq1rcmEumPnmgJ.png
 #: 
@@ -1571,27 +1566,294 @@ msgstr "barva šipky, která se použije pro nepokrevně příbuzné děti"
 #. Name of settings group in appearance section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/nM6gmf4vpCnqLFguqMJgW87Z.png
 #: 
 msgid "Layout"
-msgstr ""
+msgstr "Rozmístění"
 
 #. Name of setting in appearance section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/nM6gmf4vpCnqLFguqMJgW87Z.png
 #: 
 msgid "Partner position"
-msgstr ""
+msgstr "Rozmístění partnerů"
 
 #. Specifies this setting only works for the Combined diagram type:  https://s3.eu-west-1.amazonaws.com/po-pub/i/nM6gmf4vpCnqLFguqMJgW87Z.png
 #: 
 msgid "Combined diagram type only"
-msgstr ""
+msgstr "dostupné pouze u kombinovaného diagramu"
 
 #. One of the options for "Partner position" layout option. Indicates that husband and wife are side by side (default)  https://s3.eu-west-1.amazonaws.com/po-pub/i/nM6gmf4vpCnqLFguqMJgW87Z.png 
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/tqlYF2RCUpH3CtrsFC4pFdHI.png
 #: 
 msgid "Side by side"
-msgstr ""
+msgstr "Vedle sebe"
 
 #. One of the options for "Partner position" layout option. Indicates that husband and wife are on top of each other  https://s3.eu-west-1.amazonaws.com/po-pub/i/nM6gmf4vpCnqLFguqMJgW87Z.png 
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/5INseuMeLcdcqQiImjA3CAkS.png
 #: 
 msgid "Stacked"
-msgstr ""
+msgstr "Nad sebou"
+
+#. New option that allows user to set a background colour (and eventually other styles) based on the existence of a shared note - effectively a way of tagging and identifying.
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/bExD5UTsqFfyvdXMbWYkkens.png
+#: 
+msgid "Style individuals based on shared note"
+msgstr "Styl osob dle sdílené poznámky"
+
+#. Sets the default background colour when adding a new shared note for styling.
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/bExD5UTsqFfyvdXMbWYkkens.png
+#: 
+msgid "Default background colour for new items"
+msgstr "Výchozí barva pozadí pro novou položku"
+
+#. Label for the option to add a new shared note to the list: https://s3.eu-west-1.amazonaws.com/po-pub/i/bExD5UTsqFfyvdXMbWYkkens.png
+#: 
+msgid "Add shared note style"
+msgstr "Přidat styl sdílené poznámky"
+
+#. Option to open modal that shows list of shared notes and lets the user edit the settings or reorder them:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/bExD5UTsqFfyvdXMbWYkkens.png  https://s3.eu-west-1.amazonaws.com/po-pub/i/3d1NliVq7MD5ZlllAht2A5XW.png
+#: 
+msgid "Edit shared notes"
+msgstr "Úprava sdílených poznámek"
+
+#. Indicates the number of shared notes added to the settings: https://s3.eu-west-1.amazonaws.com/po-pub/i/bExD5UTsqFfyvdXMbWYkkens.png
+#: 
+msgid "%s shared note styles saved."
+msgstr "%s uložené styly sdílených poznámek."
+
+#. Text for when there are no shared note styles added to the list:  https://s3.eu-west-1.amazonaws.com/po-pub/i/yW3YdeiCwkyxAFyfMY4sdB2p.png
+#: 
+msgid "No styles set based on shared notes."
+msgstr "Nejsou nastaveny žádné styly sdílených poznámek."
+
+#. Label for the colour picker that lets the user choose the background colour for the shared note style: https://s3.eu-west-1.amazonaws.com/po-pub/i/3d1NliVq7MD5ZlllAht2A5XW.png
+#: 
+msgid "Shared note colour"
+msgstr "Barva sdílené poznámky"
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "This option lets you set styles for the tiles of individuals based on the shared notes linked to those individuals. Currently only the background colour can be set."
+msgstr "Tato možnost umožňuje nastavit styly pro políčka osob na základě sdílených poznámek spojených s těmito osobami. V současné době lze nastavit pouze barvu pozadí."
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "The options in this section are:"
+msgstr "V této části můžete nastavit:"
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "Enable option to use this functionality. If this is disabled, the settings are not used."
+msgstr "Povolte možnost pro použití této funkce. Pokud je tato funkce zakázána, nastavení se nepoužívá."
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "When adding a new item, this is the default colour used."
+msgstr "Při přidání nové položky se použije tato výchozí barva."
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "Choose a shared note from this list and it will be added to the list of shared notes."
+msgstr "Výběrem sdílené poznámky z tohoto seznamu ji přidáte do seznamu sdílených poznámek."
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "Click this to view the list of shared notes, where you can remove them, rearrange the order, or change the style associated with them."
+msgstr "Kliknutím na tuto položku zobrazíte seznam sdílených poznámek, ze kterého je můžete odebrat, změnit jejich pořadí nebo styl, který je k nim přiřazen."
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "This option is shown on the list item in the edit screen, where you can choose the background colour for individuals linked to this shared note."
+msgstr "Tato možnost se zobrazuje v okně úprav u jednotlivých položek seznamu, kde můžete zvolit barvu pozadí pro osoby spojené s touto sdílenou poznámkou."
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "To use this option, first select a shared note. A new screen will appear allowing you to set the style to use for that shared note. You may add multiple items, and you can drag the items in the list to rearrange them."
+msgstr "Chcete-li tuto možnost použít, nejprve vyberte sdílenou poznámku. Zobrazí se nová obrazovka umožňující nastavit styl, který se má pro danou sdílenou poznámku použít. Můžete přidat více položek a přetažením položek v seznamu můžete změnit jejich uspořádání."
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "If the same style is set by multiple settings, the following order is used:"
+msgstr "Pokud je stejný styl zadán ve více nastaveních, použije se následující pořadí:"
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "If the option to show the background of starting individuals in a different colour is selected, then this option takes priority over all others."
+msgstr "Pokud je vybrána možnost zobrazit pozadí výchozích osob jinou barvou, má tato možnost přednost před všemi ostatními."
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "The style set based on shared notes is then used, if relevant. If an individual is linked to multiple shared notes in the list, the style from the highest note in the list is used."
+msgstr "V případě potřeby se pak použije sada stylů založená na sdílených poznámkách. Pokud je jednotlivec spojen s více sdílenými poznámkami v seznamu, použije se styl z nejvýše umístěné poznámky v seznamu."
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "If the above options do not apply, then the Individual Background Colour is used."
+msgstr "Pokud výše uvedené možnosti neplatí, použije se nastavení z \"Barva pozadí osoby\"."
+
+#. Similar to birth and death date prefixes, the marriage date prefix is shown before the marriage date. https://s3.eu-west-1.amazonaws.com/po-pub/i/sJduRepchTD0hWHiI5o07QjL.png  https://s3.eu-west-1.amazonaws.com/po-pub/i/ef4C7sVuJ9WpQSxqWIJFvBwr.png
+#: 
+msgid "Marriage date prefix"
+msgstr "Předpona data sňatku"
+
+#. Option to abbreviate the months in dates using the webtrees month shortening. In English, this is "January"->"Jan", "February"->"Feb" (and similar in most languages).
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/F5T8grIN2Crn5G9tGzAVeCBL.png
+#: 
+msgid "Abbreviated month names"
+msgstr "Zkrácené názvy měsíců"
+
+#. Part of help page:  https://s3.eu-west-1.amazonaws.com/po-pub/i/08Z4pSSmjQhf0V1ym9AEETTC.png
+#: 
+msgid "This section allows for some changes to the content of tiles, including links, abbreviations, and the details included on individuals and families."
+msgstr "Tato část nastavení umožňuje provést změny v obsahu políček, včetně odkazů, zkratek a podrobností o osobách a rodinách."
+
+#. Part of help page:  https://s3.eu-west-1.amazonaws.com/po-pub/i/08Z4pSSmjQhf0V1ym9AEETTC.png
+#: 
+msgid "For SVG (and PDF if Graphviz installed on server) output, links can be included. This way you can click on the person in the diagram to be taken to their webtrees page."
+msgstr "Volba umožní přidat odkazy do SVG výstupu (a PDF výstupu, pokud je  na serveru nainstalován Graphviz). To pak umožní kliknout na osobu v diagramu a přejít na její osobní stránku v rodokmenu."
+
+#. Part of help page for abbreviation options: https://s3.eu-west-1.amazonaws.com/po-pub/i/rqnKktGCJbxelFo3RGr6SMVe.png
+#: 
+msgid "There are several options to shorten the names of individuals displayed."
+msgstr "Existuje několik možností, jak zkrátit jména zobrazených osob."
+
+#. Part of help page for abbreviation options: https://s3.eu-west-1.amazonaws.com/po-pub/i/rqnKktGCJbxelFo3RGr6SMVe.png
+#: 
+msgid "the default option, this shows the primary name and any nickname. This option currently is the only one where the preferred name is underlined, and is the only one to show nicknames (in &quot;quotes&quot;)."
+msgstr "výchozí možnost, zobrazí se výchozí jméno a případná přezdívka. Tato možnost je v současné době jediná, u které je preferované jméno podtrženo, a jako jediná zobrazuje přezdívky (v &quot;uvozovkách&quot;)."
+
+#. Part of help page for abbreviation options: https://s3.eu-west-1.amazonaws.com/po-pub/i/rqnKktGCJbxelFo3RGr6SMVe.png
+#: 
+msgid "like the full name, but without nicknames."
+msgstr "jako celé jméno, ale bez přezdívek."
+
+#. Part of help page for abbreviation options: https://s3.eu-west-1.amazonaws.com/po-pub/i/rqnKktGCJbxelFo3RGr6SMVe.png
+#: 
+msgid "just the given names are displayed."
+msgstr "zobrazí se pouze křestní jména."
+
+#. Part of help page for abbreviation options: https://s3.eu-west-1.amazonaws.com/po-pub/i/rqnKktGCJbxelFo3RGr6SMVe.png
+#: 
+msgid "just the first word of the name in the given names field."
+msgstr "zobrazí se pouze první slovo z křestního jména."
+
+#. Part of help page for abbreviation options: https://s3.eu-west-1.amazonaws.com/po-pub/i/rqnKktGCJbxelFo3RGr6SMVe.png
+#: 
+msgid "just the surnames are displayed."
+msgstr "zobrazí se pouze příjmení."
+
+#. Part of help page for abbreviation options: https://s3.eu-west-1.amazonaws.com/po-pub/i/rqnKktGCJbxelFo3RGr6SMVe.png
+#: 
+msgid "this displays initials only, for example &quot;JFK&quot;."
+msgstr "zobrazí se pouze iniciály, např. &quot;JFK&quot;."
+
+#. Part of help page for abbreviation options: https://s3.eu-west-1.amazonaws.com/po-pub/i/rqnKktGCJbxelFo3RGr6SMVe.png
+#: 
+msgid "this shows initials for the first and second given name, as well as the full surname. For example: &quot;J.F. Kennedy&quot;"
+msgstr "zobrazí se iniciály dvou prvních křestních jmen a celé příjmení, např. &quot;J.F. Kennedy&quot;."
+
+#. Part of help page for abbreviation options: https://s3.eu-west-1.amazonaws.com/po-pub/i/rqnKktGCJbxelFo3RGr6SMVe.png
+#: 
+msgid "no names are shown. If birth and death details are also disabled then it is possible to show only photos or even just coloured boxes."
+msgstr "nezobrazí se žádná jména. Pokud jsou vypnuty i údaje o narození a úmrtí, je možné si zobrazit pouze fotografie nebo dokonce jen barevná pole."
+
+#. Part of the help page for name abbreviations:  https://s3.eu-west-1.amazonaws.com/po-pub/i/wc6fNIyVirRJx9txr24YUfnP.png
+#: 
+msgid "There are several options to shorten place names (for place of birth, place of marriage, place of death)."
+msgstr "Existuje několik možností, jak zkrátit názvy míst (místo narození, místo sňatku, místo úmrtí)."
+
+#. Part of the help page for place abbreviations:  https://s3.eu-west-1.amazonaws.com/po-pub/i/wc6fNIyVirRJx9txr24YUfnP.png
+#: 
+msgid "the place name is printed in full."
+msgstr "zobrazí se celý název místa."
+
+#. Part of the help page for place abbreviations:  https://s3.eu-west-1.amazonaws.com/po-pub/i/wc6fNIyVirRJx9txr24YUfnP.png
+#: 
+msgid "the first and last section of the place name is used, using commas to split the sections. For example, &quot;London, England, United Kingdom&quot; would be shortened to &quot;London, United Kingdom&quot;"
+msgstr "použije se první a poslední část názvu místa, přičemž se části oddělí čárkami, např. &quot;London, England, United Kingdom&quot; se zkrátí na &quot;London, United Kingdom&quot;."
+
+#. Part of the help page for place abbreviations:  https://s3.eu-west-1.amazonaws.com/po-pub/i/wc6fNIyVirRJx9txr24YUfnP.png
+#: 
+msgid "the first and last section of the place name is used, using commas to split the sections. The country is then converted to the ISO3166-1-Alpha-2 country code. <br>For example, &quot;Calgary, Alberta, Canada&quot; would be shortened to &quot;Calgary, CA&quot;"
+msgstr "použije se první a poslední část názvu místa, přičemž se části oddělí čárkami. Země se pak převede na kód země dle ISO3166-1-Alpha-2. <br>Např. &quot;Calgary, Alberta, Canada&quot; se zkrátí na &quot;Calgary, CA&quot;."
+
+#. Part of the help page for place abbreviations:  https://s3.eu-west-1.amazonaws.com/po-pub/i/wc6fNIyVirRJx9txr24YUfnP.png
+#: 
+msgid "the first and last section of the place name is used, using commas to split the sections. The country is then converted to the ISO3166-1-Alpha-3 country code.<br>For example, &quot;Calgary, Alberta, Canada&quot; would be shortened to &quot;Calgary, CAN&quot;"
+msgstr "Město a 3místný ISO kód země - použije se první a poslední část názvu místa, přičemž se části oddělí čárkami. Země se pak převede na kód země dle ISO3166-1-Alpha-3. <br>Např. &quot;Calgary, Alberta, Canada&quot; se zkrátí na &quot;Calgary, CAN&quot;."
+
+#. Part of the help page for place abbreviations:  https://s3.eu-west-1.amazonaws.com/po-pub/i/wc6fNIyVirRJx9txr24YUfnP.png
+#: 
+msgid "Note - The CLDR display name is used for matching. The data comes from <a href=\"https://www.datahub.io/core/country-codes\" class=\"help-link\">Datahub</a> but has been modified as for example the original CLDR name for the United Kingdom is &quot;UK&quot;, and the original CLDR name for the United States is &quot;US&quot;. Matching against these countries for the purposes of abbreviation is therefore pointless. So changes have been made to make this work better. Please <a href=\"https://github.com/Neriderc/GVExport/issues/new\" class=\"help-link\">open an issue</a> on GitHub if you find a country is not abbreviating correctly."
+msgstr "Poznámka - Pro přiřazování se používá zobrazovaný název z databáze CLDR. Údaje pocházejí z <a href=\"https://www.datahub.io/core/country-codes\" class=\"help-link\">Datahub</a>, ale byly upraveny, protože např. původní název v CLDR pro Spojené království je \"UK\" a pro Spojené státy je \"US\". A jelikož přiřazování k těmto názvům by bylo zbytečné, byly provedeny změny, aby to fungovalo lépe. Pokud zjistíte, že se některá země nezkracuje správně, založte prosím <a href=\"https://github.com/Neriderc/GVExport/issues/new\" class=\"help-link\">problém</a> na GitHubu. Pro české názvy států nefunguje přiřazování zkratek."
+
+#. Part of help page for abbreviations:  https://s3.eu-west-1.amazonaws.com/po-pub/i/yVRNezroLkh7Cky5dWr4YYyp.png
+#: 
+msgid "Selecting this box will shorten the month names. This uses the webtrees built in date shortening; in most cases, the month name will be shortened to three characters, e.g. \\\"Jan\\\" for January"
+msgstr "Zaškrtnutím tohoto políčka se zkrátí názvy měsíců. \n"
+"Používá se vestavěné zkracování dat ve webtree; ve většině případů se název měsíce zkrátí na tři znaky, např. \"Jan\" pro January."
+
+#. Part of help page for choosing what goes on individual's tiles:  https://s3.eu-west-1.amazonaws.com/po-pub/i/u1x88hjQ3UFSTpqwJGuCdDSz.png
+#: 
+msgid "Whether to include the XREF of individuals in the diagram."
+msgstr "Zda má být v diagramu uveden XREF osob."
+
+#. Part of help page for choosing what goes on individual's tiles:  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/u1x88hjQ3UFSTpqwJGuCdDSz.png
+#: 
+msgid "Check the box if you would like to include the birthdate of individuals in the output."
+msgstr "Zaškrtněte toto políčko, pokud chcete ve výstupu uvést datum narození osob."
+
+#. Part of help page for choosing what goes on individual's tiles:  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/u1x88hjQ3UFSTpqwJGuCdDSz.png
+#: 
+msgid "You can also choose whether to show the full date of birth or just the year."
+msgstr "Můžete si také vybrat, zda chcete zobrazit celé datum narození, nebo jen rok."
+
+#. Part of help page for choosing what goes on individual's tiles:  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/u1x88hjQ3UFSTpqwJGuCdDSz.png
+#: 
+msgid "Whether to show the place of birth in the output. Also see option for abbreviating place names."
+msgstr "Zda se má ve výstupu zobrazit místo narození. Viz také nastavení zkracování názvů míst."
+
+#. Part of help page for choosing what goes on individual's tiles:  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/u1x88hjQ3UFSTpqwJGuCdDSz.png
+#: 
+msgid "Check the box if you would like to include the death date of individuals in the output."
+msgstr "Zaškrtněte toto políčko, pokud chcete do výstupu zahrnout datum úmrtí osob."
+
+#. Part of help page for choosing what goes on individual's tiles:  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/u1x88hjQ3UFSTpqwJGuCdDSz.png
+#: 
+msgid "You can also choose whether to show the full date of death or just the year."
+msgstr "Můžete si také vybrat, zda chcete zobrazit celé datum úmrtí, nebo jen rok."
+
+#. Part of help page for choosing what goes on individual's tiles:  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/u1x88hjQ3UFSTpqwJGuCdDSz.png
+#: 
+msgid "Whether to show the place of death in the output. Also see option for abbreviating place names."
+msgstr "Zda se má ve výstupu zobrazit místo úmrtí. Viz také nastavení zkracování názvů míst."
+
+#. Part of help page for choosing what goes on individual's tiles:  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/u1x88hjQ3UFSTpqwJGuCdDSz.png
+#: 
+msgid "Whether to print the sex of the individual on the individual&apos;s tile, e.g. &quot;Male&quot;"
+msgstr "Zda se má na políčko osoby vypsat jeho pohlaví, např. &quot;Muž&quot;"
+
+#. Part of help page for deciding what information goes in the family section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/igNqWCHKyhKOofsUxjaGrDeM.png
+#: 
+msgid "Whether to include the XREF of families in the output."
+msgstr "Zda má být ve výstupu uveden XREF rodin."
+
+#. Part of help page for deciding what information goes in the family section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/igNqWCHKyhKOofsUxjaGrDeM.png
+#: 
+msgid "Check the box if you would like to include the date of marriage in the output."
+msgstr "Zaškrtněte toto políčko, pokud chcete do výstupu zahrnout datum sňatku."
+
+#. Part of help page for deciding what information goes in the family section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/igNqWCHKyhKOofsUxjaGrDeM.png
+#: 
+msgid "You can also choose whether to show the full date of marriage or just the year."
+msgstr "Můžete si také vybrat, zda chcete zobrazit celé datum sňatku, nebo jen rok."
+
+#. Part of help page for deciding what information goes in the family section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/igNqWCHKyhKOofsUxjaGrDeM.png
+#: 
+msgid "Whether to show the place of marriage in the output. Also see option for abbreviating place names."
+msgstr "Zda se má ve výstupu zobrazit místo sňatku. Viz také nastavení zkracování názvů míst."
 
