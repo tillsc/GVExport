@@ -985,11 +985,6 @@ msgstr "Типы отношений для включения"
 msgid "Tile contents"
 msgstr "Содержимое плитки"
 
-#. New help text for new section "Tile contents". The help text is quite long, but much of it is previous help text from the settings that have been combined into this section. You may want to copy translations from previous terms, so I have left these for now. I will eventually delete the original terms.  https://s3.eu-west-1.amazonaws.com/po-pub/i/opPq1bb4NbrBXGFAiRsVxXi1.png  https://s3.eu-west-1.amazonaws.com/po-pub/i/W4qegkcMMWTFs3sXIihOQskA.png
-#: 
-msgid "This section allows for some changes to the content of tiles, including links, abbreviations, and the details included on individuals and families.</p><h4>Page links</h4><h5>Add URL to individuals and families</h5><p>For SVG (and PDF if Graphviz installed on server) output, links can be included. This way you can click on the person in the diagram to be taken to their webtrees page.</p><h4>Abbreviations</h4><h5>Abbreviated names</h5><p>There are several options to shorten the names of individuals displayed.</p><ul><li>Full name - the default option, this shows the primary name and any nickname. This option currently is the only one where the preferred name is underlined, and is the only one to show nicknames (in &quot;quotes&quot;).</li><li>Given and surnames - like the full name, but without nicknames.</li><li>Given names - just the given names are displayed.</li><li>First given names only - just the first word of the name in the given names field.</li><li>Surnames - just the surnames are displayed.</li><li>Initials only - this displays initials only, for example &quot;JFK&quot;.</li><li>Given name initials and surname - this shows initials for the first and second given name, as well as the full surname. For example: &quot;J.F. Kennedy&quot;</li><li>Don&apos;t show names - no names are shown. If birth and death details are also disabled then it is possible to show only photos or even just coloured boxes.</li></ul><h5>Abbreviated place names</h5><p>There are several options to shorten place names (for place of birth, place of marriage, place of death).</p><ul><li>Full place name - the place name is printed in full.</li><li>City and Country - the first and last section of the place name is used, using commas to split the sections. For example, &quot;London, England, United Kingdom&quot; would be shortened to &quot;London, United Kingdom&quot;</li><li>City and 2-Letter ISO Country Code - the first and last section of the place name is used, using commas to split the sections. The country is then converted to the ISO3166-1-Alpha-2 country code. <br>For example, &quot;Calgary, Alberta, Canada&quot; would be shortened to &quot;Calgary, CA&quot;</li><li>City and 3-Letter ISO Country Code - the first and last section of the place name is used, using commas to split the sections. The country is then converted to the ISO3166-1-Alpha-3 country code.<br>For example, &quot;Calgary, Alberta, Canada&quot; would be shortened to &quot;Calgary, CAN&quot;</li></ul><p>Note - The CLDR display name is used for matching. The data comes from <a href=\\\"https://www.datahub.io/core/country-codes\\\" class=\\\"help-link\\\">Datahub</a> but has been modified as for example the original CLDR name for the United Kingdom is &quot;UK&quot;, and the original CLDR name for the United States is &quot;US&quot;. Matching against these countries for the purposes of abbreviation is therefore pointless. So changes have been made to make this work better. Please <a href=\\\"https://github.com/Neriderc/GVExport/issues/new\\\" class=\\\"help-link\\\">open an issue</a> on GitHub if you find a country is not abbreviating correctly.</p><h4>Information on individuals</h4><h5>Show individual XREF</h5><p>Whether to include the XREF of individuals in the diagram.</p><h5>Show birthdate</h5><p>Check the box if you would like to include the birthdate of individuals in the output.</p><p>You can also choose whether to show the full date of birth or just the year.</p><h5>Show birthplace</h5><p>Whether to show the place of birth in the output. Also see option for abbreviating place names.</p><h5>Show death date</h5><p>Check the box if you would like to include the death date of individuals in the output.</p><p>You can also choose whether to show the full date of death or just the year.</p><h5>Show death place</h5><p>Whether to show the place of death in the output. Also see option for abbreviating place names.</p><h5>Show sex of individuals</h5><p>Whether to print the sex of the individual on the individual&apos;s tile, e.g. &quot;Male&quot;</p><h4>Information on families</h4><h5>Show family XREF</h5><p>Whether to include the XREF of families in the output.</p><h5>Show marriage date</h5><p>Check the box if you would like to include the date of marriage in the output.</p><p>You can also choose whether to show the full date of marriage or just the year.</p><h5>Show marriage place</h5><p>Whether to show the place of marriage in the output. Also see option for abbreviating place names."
-msgstr "Этот раздел позволяет вносить некоторые изменения в содержимое плиток, включая ссылки, сокращения и сведения об отдельных лицах и семьях.</p><h4>Ссылки на страницы</h4><h5>Добавить URL для отдельных лиц и семей</h5><p>Для вывода SVG (и PDF, если Graphviz установлен на сервере) можно включить ссылки. Таким образом, вы можете щелкнуть человека на диаграмме, чтобы перейти на страницу его веб-дерева.</p><h4>Сокращения</h4><h5>Сокращенные имена</h5><p>Есть несколько вариантов сокращения имени. отображаются имена отдельных лиц.</p><ul><li>Полное имя – параметр по умолчанию, при этом отображается основное имя и любой псевдоним. В настоящее время эта опция является единственной, где предпочтительное имя подчеркнуто, и только она показывает псевдонимы (в кавычках).</li><li>Имена и фамилии - как полное имя, но без псевдонимов.</li><li>Имена — отображаются только имена.</li><li>Только первые имена — только первое слово имени в поле имен.</li><li>Фамилии - отображаются только фамилии.</li><li>Только инициалы – отображаются только инициалы, например &quot;JFK&quot;.</li><li>Инициалы имени и фамилия – отображаются инициалы первого и второго имя, а также полную фамилию. Например: &quot;Дж.Ф. Кеннеди&quot;</li><li>Не показывать имена — имена не отображаются. Если сведения о рождении и смерти также отключены, можно показывать только фотографии или даже цветные рамки.</li></ul><h5>Сокращенные названия мест</h5><p>Есть несколько вариантов сокращения мест имена (по месту рождения, месту брака, месту смерти).</p><ul><li>Полное название места - название места печатается полностью.</li><li>Город и страна - используются первая и последняя части названия места, разделяемые запятыми. Например, &quot;Лондон, Англия, Соединенное Королевство&quot; будет сокращен до «Лондон, Великобритания»</li><li>Город и двухбуквенный код страны ISO — используются первая и последняя части названия места, разделяемые запятыми. Затем страна преобразуется в код страны ISO3166-1-Alpha-2. <br>Например, &quot;Калгари, Альберта, Канада&quot; будет сокращено до «Калгари, Калифорния»</li><li>Город и трехбуквенный код страны ISO — используются первая и последняя части названия места, разделяемые запятыми. Затем страна преобразуется в код страны ISO3166-1-Alpha-3.<br>Например, &quot;Калгари, Альберта, Канада&quot; будет сокращено до \"Calgary, CAN\"</li></ul><p>Примечание. Для сопоставления используется отображаемое имя CLDR. Данные поступают из <a href=\"https://www.datahub.io/core/country-codes\" class=\"help-link\">Datahub</a>, но были изменены, например, как исходное имя CLDR для Соединенное Королевство - \"Великобритания\", а первоначальное название CLDR для Соединенных Штатов - \"США\". Поэтому сопоставление с этими странами для целей сокращения бессмысленно. Поэтому были внесены изменения, чтобы сделать эту работу лучше. Пожалуйста, <a href=\"https://github.com/Neriderc/GVExport/issues/new\" class=\"help-link\">откройте вопрос</a> на GitHub, если вы обнаружите, что аббревиатура страны указана неправильно.</p><h4>Информация о физических лицах</h4><h5>Показать внешние ссылки</h5><p>Включить ли внешние ссылки отдельных лиц на диаграмму.</p><h5>Показать дату рождения</h5> <p>Установите флажок, если хотите включить в выходные данные дату рождения отдельных лиц.</p><p>Вы также можете выбрать, показывать ли полную дату рождения или только год.</p><h5 >Показать место рождения</h5><p>Показывать ли место рождения в выводе. Также см. вариант сокращения названий мест.</p><h5>Показать дату смерти</h5><p>Отметьте флажок, если хотите включить в выходные данные дату смерти отдельных лиц.</p><p> Вы также можете выбрать, показывать ли полную дату смерти или только год.</p><h5>Показывать место смерти</h5><p>Показывать ли место смерти в выводе. Также см. параметр для сокращения названий мест.</p><h5>Показать пол людей</h5><p>Печать ли пола человека на плитке человека, например. &quot;Мужской&quot;</p><h4>Информация о семьях</h4><h5>Показать внешнюю ссылку на семью</h5><p>Включить ли внешнюю ссылку на семью в выходные данные.</p><h5>Показать дата вступления в брак</h5><p>Отметьте поле, если вы хотите включить в выходные данные дату вступления в брак.</p><p>Вы также можете выбрать, показывать ли полную дату вступления в брак или только год.</p><h5>Показать место брака</h5><p>Показывать ли место брака в выводе. Также см. вариант сокращения названий мест."
-
 #. New section to combine some general diagram settings:  https://s3.eu-west-1.amazonaws.com/po-pub/i/fXJwOPFeNExfAPrBjyabVej9.png   https://s3.eu-west-1.amazonaws.com/po-pub/i/OVcGk9fXLCrNYmgGTI25lMpH.png
 #: 
 msgid "Diagram"
@@ -1616,4 +1611,270 @@ msgstr "Бок о бок"
 #: 
 msgid "Stacked"
 msgstr "Сложенный"
+
+#. New option that allows user to set a background colour (and eventually other styles) based on the existence of a shared note - effectively a way of tagging and identifying.
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/bExD5UTsqFfyvdXMbWYkkens.png
+#: 
+msgid "Style individuals based on shared note"
+msgstr "Создавайте стили для людей на основе общей заметки"
+
+#. Sets the default background colour when adding a new shared note for styling.
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/bExD5UTsqFfyvdXMbWYkkens.png
+#: 
+msgid "Default background colour for new items"
+msgstr "Цвет фона по умолчанию для новых элементов"
+
+#. Label for the option to add a new shared note to the list: https://s3.eu-west-1.amazonaws.com/po-pub/i/bExD5UTsqFfyvdXMbWYkkens.png
+#: 
+msgid "Add shared note style"
+msgstr "Добавить общий стиль заметки"
+
+#. Option to open modal that shows list of shared notes and lets the user edit the settings or reorder them:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/bExD5UTsqFfyvdXMbWYkkens.png  https://s3.eu-west-1.amazonaws.com/po-pub/i/3d1NliVq7MD5ZlllAht2A5XW.png
+#: 
+msgid "Edit shared notes"
+msgstr "Редактировать общие заметки"
+
+#. Indicates the number of shared notes added to the settings: https://s3.eu-west-1.amazonaws.com/po-pub/i/bExD5UTsqFfyvdXMbWYkkens.png
+#: 
+msgid "%s shared note styles saved."
+msgstr "Сохранено %s общих стилей заметок."
+
+#. Text for when there are no shared note styles added to the list:  https://s3.eu-west-1.amazonaws.com/po-pub/i/yW3YdeiCwkyxAFyfMY4sdB2p.png
+#: 
+msgid "No styles set based on shared notes."
+msgstr "Никакие стили не установлены на основе общих заметок."
+
+#. Label for the colour picker that lets the user choose the background colour for the shared note style: https://s3.eu-west-1.amazonaws.com/po-pub/i/3d1NliVq7MD5ZlllAht2A5XW.png
+#: 
+msgid "Shared note colour"
+msgstr "Общий цвет заметки"
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "This option lets you set styles for the tiles of individuals based on the shared notes linked to those individuals. Currently only the background colour can be set."
+msgstr "Эта опция позволяет вам устанавливать стили для плиток отдельных лиц на основе общих заметок, связанных с этими людьми. В настоящее время можно установить только цвет фона."
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "The options in this section are:"
+msgstr "В этом разделе доступны следующие варианты:"
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "Enable option to use this functionality. If this is disabled, the settings are not used."
+msgstr "Включите опцию, чтобы использовать эту функцию. Если этот параметр отключен, настройки не используются."
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "When adding a new item, this is the default colour used."
+msgstr "При добавлении нового элемента этот цвет используется по умолчанию."
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "Choose a shared note from this list and it will be added to the list of shared notes."
+msgstr "Выберите общую заметку из этого списка, и она будет добавлена в список общих заметок."
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "Click this to view the list of shared notes, where you can remove them, rearrange the order, or change the style associated with them."
+msgstr "Нажмите здесь, чтобы просмотреть список общих заметок, из которого вы можете удалить их, изменить порядок или изменить связанный с ними стиль."
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "This option is shown on the list item in the edit screen, where you can choose the background colour for individuals linked to this shared note."
+msgstr "Эта опция отображается в элементе списка на экране редактирования, где вы можете выбрать цвет фона для лиц, связанных с этой общей заметкой."
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "To use this option, first select a shared note. A new screen will appear allowing you to set the style to use for that shared note. You may add multiple items, and you can drag the items in the list to rearrange them."
+msgstr "Чтобы использовать эту опцию, сначала выберите общую заметку. Появится новый экран, позволяющий вам установить стиль, который будет использоваться для этой общей заметки. Вы можете добавить несколько элементов, а также перетаскивать элементы в списке, чтобы изменить их порядок."
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "If the same style is set by multiple settings, the following order is used:"
+msgstr "Если один и тот же стиль задан несколькими настройками, используется следующий порядок:"
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "If the option to show the background of starting individuals in a different colour is selected, then this option takes priority over all others."
+msgstr "Если выбрана опция отображения фона стартовых особей другим цветом, то эта опция имеет приоритет над всеми остальными."
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "The style set based on shared notes is then used, if relevant. If an individual is linked to multiple shared notes in the list, the style from the highest note in the list is used."
+msgstr "Затем, если это необходимо, используется набор стилей, основанный на общих заметках. Если человек связан с несколькими общими заметками в списке, используется стиль самой высокой заметки в списке."
+
+#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
+#: 
+msgid "If the above options do not apply, then the Individual Background Colour is used."
+msgstr "Если вышеуказанные параметры неприменимы, используется индивидуальный цвет фона."
+
+#. Similar to birth and death date prefixes, the marriage date prefix is shown before the marriage date. https://s3.eu-west-1.amazonaws.com/po-pub/i/sJduRepchTD0hWHiI5o07QjL.png  https://s3.eu-west-1.amazonaws.com/po-pub/i/ef4C7sVuJ9WpQSxqWIJFvBwr.png
+#: 
+msgid "Marriage date prefix"
+msgstr ""
+
+#. Option to abbreviate the months in dates using the webtrees month shortening. In English, this is "January"->"Jan", "February"->"Feb" (and similar in most languages).
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/F5T8grIN2Crn5G9tGzAVeCBL.png
+#: 
+msgid "Abbreviated month names"
+msgstr ""
+
+#. Part of help page:  https://s3.eu-west-1.amazonaws.com/po-pub/i/08Z4pSSmjQhf0V1ym9AEETTC.png
+#: 
+msgid "This section allows for some changes to the content of tiles, including links, abbreviations, and the details included on individuals and families."
+msgstr "Этот раздел позволяет вносить некоторые изменения в содержимое плиток, включая ссылки, сокращения и сведения об отдельных лицах и семьях."
+
+#. Part of help page:  https://s3.eu-west-1.amazonaws.com/po-pub/i/08Z4pSSmjQhf0V1ym9AEETTC.png
+#: 
+msgid "For SVG (and PDF if Graphviz installed on server) output, links can be included. This way you can click on the person in the diagram to be taken to their webtrees page."
+msgstr "Добавить URL для отдельных лиц и семей</h5><p>Для вывода SVG (и PDF, если Graphviz установлен на сервере) можно включить ссылки. Таким образом, вы можете щелкнуть человека на диаграмме, чтобы перейти на страницу его веб-дерева."
+
+#. Part of help page for abbreviation options: https://s3.eu-west-1.amazonaws.com/po-pub/i/rqnKktGCJbxelFo3RGr6SMVe.png
+#: 
+msgid "There are several options to shorten the names of individuals displayed."
+msgstr "Есть несколько вариантов сокращения имени. отображаются имена отдельных лиц."
+
+#. Part of help page for abbreviation options: https://s3.eu-west-1.amazonaws.com/po-pub/i/rqnKktGCJbxelFo3RGr6SMVe.png
+#: 
+msgid "the default option, this shows the primary name and any nickname. This option currently is the only one where the preferred name is underlined, and is the only one to show nicknames (in &quot;quotes&quot;)."
+msgstr "параметр по умолчанию, при этом отображается основное имя и любой псевдоним. В настоящее время эта опция является единственной, где предпочтительное имя подчеркнуто, и только она показывает псевдонимы (в кавычках)."
+
+#. Part of help page for abbreviation options: https://s3.eu-west-1.amazonaws.com/po-pub/i/rqnKktGCJbxelFo3RGr6SMVe.png
+#: 
+msgid "like the full name, but without nicknames."
+msgstr "Имена и фамилии - как полное имя, но без псевдонимов."
+
+#. Part of help page for abbreviation options: https://s3.eu-west-1.amazonaws.com/po-pub/i/rqnKktGCJbxelFo3RGr6SMVe.png
+#: 
+msgid "just the given names are displayed."
+msgstr "отображаются только имена."
+
+#. Part of help page for abbreviation options: https://s3.eu-west-1.amazonaws.com/po-pub/i/rqnKktGCJbxelFo3RGr6SMVe.png
+#: 
+msgid "just the first word of the name in the given names field."
+msgstr "только первое слово имени в поле имен."
+
+#. Part of help page for abbreviation options: https://s3.eu-west-1.amazonaws.com/po-pub/i/rqnKktGCJbxelFo3RGr6SMVe.png
+#: 
+msgid "just the surnames are displayed."
+msgstr "отображаются только фамилии."
+
+#. Part of help page for abbreviation options: https://s3.eu-west-1.amazonaws.com/po-pub/i/rqnKktGCJbxelFo3RGr6SMVe.png
+#: 
+msgid "this displays initials only, for example &quot;JFK&quot;."
+msgstr "отображаются только инициалы, например &quot;JFK&quot;."
+
+#. Part of help page for abbreviation options: https://s3.eu-west-1.amazonaws.com/po-pub/i/rqnKktGCJbxelFo3RGr6SMVe.png
+#: 
+msgid "this shows initials for the first and second given name, as well as the full surname. For example: &quot;J.F. Kennedy&quot;"
+msgstr "отображаются инициалы первого и второго имя, а также полную фамилию. Например: &quot;Дж.Ф. Кеннеди&quot;"
+
+#. Part of help page for abbreviation options: https://s3.eu-west-1.amazonaws.com/po-pub/i/rqnKktGCJbxelFo3RGr6SMVe.png
+#: 
+msgid "no names are shown. If birth and death details are also disabled then it is possible to show only photos or even just coloured boxes."
+msgstr "имена не отображаются. Если сведения о рождении и смерти также отключены, можно показывать только фотографии или даже цветные рамки."
+
+#. Part of the help page for name abbreviations:  https://s3.eu-west-1.amazonaws.com/po-pub/i/wc6fNIyVirRJx9txr24YUfnP.png
+#: 
+msgid "There are several options to shorten place names (for place of birth, place of marriage, place of death)."
+msgstr "Есть несколько вариантов сокращения мест имена (по месту рождения, месту брака, месту смерти)."
+
+#. Part of the help page for place abbreviations:  https://s3.eu-west-1.amazonaws.com/po-pub/i/wc6fNIyVirRJx9txr24YUfnP.png
+#: 
+msgid "the place name is printed in full."
+msgstr "название места печатается полностью."
+
+#. Part of the help page for place abbreviations:  https://s3.eu-west-1.amazonaws.com/po-pub/i/wc6fNIyVirRJx9txr24YUfnP.png
+#: 
+msgid "the first and last section of the place name is used, using commas to split the sections. For example, &quot;London, England, United Kingdom&quot; would be shortened to &quot;London, United Kingdom&quot;"
+msgstr "используются первая и последняя части названия места, разделяемые запятыми. Например, &quot;Лондон, Англия, Соединенное Королевство&quot; будет сокращен до «Лондон, Великобритания»"
+
+#. Part of the help page for place abbreviations:  https://s3.eu-west-1.amazonaws.com/po-pub/i/wc6fNIyVirRJx9txr24YUfnP.png
+#: 
+msgid "the first and last section of the place name is used, using commas to split the sections. The country is then converted to the ISO3166-1-Alpha-2 country code. <br>For example, &quot;Calgary, Alberta, Canada&quot; would be shortened to &quot;Calgary, CA&quot;"
+msgstr "используются первая и последняя части названия места, разделяемые запятыми. Затем страна преобразуется в код страны ISO3166-1-Alpha-2. <br>Например, &quot;Калгари, Альберта, Канада&quot; будет сокращено до «Калгари, Калифорния»"
+
+#. Part of the help page for place abbreviations:  https://s3.eu-west-1.amazonaws.com/po-pub/i/wc6fNIyVirRJx9txr24YUfnP.png
+#: 
+msgid "the first and last section of the place name is used, using commas to split the sections. The country is then converted to the ISO3166-1-Alpha-3 country code.<br>For example, &quot;Calgary, Alberta, Canada&quot; would be shortened to &quot;Calgary, CAN&quot;"
+msgstr "используются первая и последняя части названия места, разделяемые запятыми. Затем страна преобразуется в код страны ISO3166-1-Alpha-3.<br>Например, &quot;Калгари, Альберта, Канада&quot; будет сокращено до \\\"Calgary, CAN\\\""
+
+#. Part of the help page for place abbreviations:  https://s3.eu-west-1.amazonaws.com/po-pub/i/wc6fNIyVirRJx9txr24YUfnP.png
+#: 
+msgid "Note - The CLDR display name is used for matching. The data comes from <a href=\"https://www.datahub.io/core/country-codes\" class=\"help-link\">Datahub</a> but has been modified as for example the original CLDR name for the United Kingdom is &quot;UK&quot;, and the original CLDR name for the United States is &quot;US&quot;. Matching against these countries for the purposes of abbreviation is therefore pointless. So changes have been made to make this work better. Please <a href=\"https://github.com/Neriderc/GVExport/issues/new\" class=\"help-link\">open an issue</a> on GitHub if you find a country is not abbreviating correctly."
+msgstr "Примечание. Для сопоставления используется отображаемое имя CLDR. Данные поступают из <a href=\\\"https://www.datahub.io/core/country-codes\\\" class=\\\"help-link\\\">Datahub</a>, но были изменены, например, как исходное имя CLDR для Соединенное Королевство - \\\"Великобритания\\\", а первоначальное название CLDR для Соединенных Штатов - \\\"США\\\". Поэтому сопоставление с этими странами для целей сокращения бессмысленно. Поэтому были внесены изменения, чтобы сделать эту работу лучше. Пожалуйста, <a href=\\\"https://github.com/Neriderc/GVExport/issues/new\\\" class=\\\"help-link\\\">откройте вопрос</a> на GitHub, если вы обнаружите, что аббревиатура страны указана неправильно."
+
+#. Part of help page for abbreviations:  https://s3.eu-west-1.amazonaws.com/po-pub/i/yVRNezroLkh7Cky5dWr4YYyp.png
+#: 
+msgid "Selecting this box will shorten the month names. This uses the webtrees built in date shortening; in most cases, the month name will be shortened to three characters, e.g. \\\"Jan\\\" for January"
+msgstr ""
+
+#. Part of help page for choosing what goes on individual's tiles:  https://s3.eu-west-1.amazonaws.com/po-pub/i/u1x88hjQ3UFSTpqwJGuCdDSz.png
+#: 
+msgid "Whether to include the XREF of individuals in the diagram."
+msgstr "Включить ли внешние ссылки отдельных лиц на диаграмму."
+
+#. Part of help page for choosing what goes on individual's tiles:  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/u1x88hjQ3UFSTpqwJGuCdDSz.png
+#: 
+msgid "Check the box if you would like to include the birthdate of individuals in the output."
+msgstr "Установите флажок, если хотите включить в выходные данные дату рождения отдельных лиц."
+
+#. Part of help page for choosing what goes on individual's tiles:  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/u1x88hjQ3UFSTpqwJGuCdDSz.png
+#: 
+msgid "You can also choose whether to show the full date of birth or just the year."
+msgstr "Вы также можете выбрать, показывать ли полную дату рождения или только год."
+
+#. Part of help page for choosing what goes on individual's tiles:  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/u1x88hjQ3UFSTpqwJGuCdDSz.png
+#: 
+msgid "Whether to show the place of birth in the output. Also see option for abbreviating place names."
+msgstr "Показывать ли место рождения в выводе. Также см. вариант сокращения названий мест."
+
+#. Part of help page for choosing what goes on individual's tiles:  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/u1x88hjQ3UFSTpqwJGuCdDSz.png
+#: 
+msgid "Check the box if you would like to include the death date of individuals in the output."
+msgstr "Отметьте флажок, если хотите включить в выходные данные дату смерти отдельных лиц."
+
+#. Part of help page for choosing what goes on individual's tiles:  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/u1x88hjQ3UFSTpqwJGuCdDSz.png
+#: 
+msgid "You can also choose whether to show the full date of death or just the year."
+msgstr "Вы также можете выбрать, показывать ли полную дату смерти или только год."
+
+#. Part of help page for choosing what goes on individual's tiles:  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/u1x88hjQ3UFSTpqwJGuCdDSz.png
+#: 
+msgid "Whether to show the place of death in the output. Also see option for abbreviating place names."
+msgstr "Показывать ли место смерти в выводе. Также см. параметр для сокращения названий мест."
+
+#. Part of help page for choosing what goes on individual's tiles:  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/u1x88hjQ3UFSTpqwJGuCdDSz.png
+#: 
+msgid "Whether to print the sex of the individual on the individual&apos;s tile, e.g. &quot;Male&quot;"
+msgstr "Печать ли пола человека на плитке человека, например. &quot;Мужской&quot;"
+
+#. Part of help page for deciding what information goes in the family section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/igNqWCHKyhKOofsUxjaGrDeM.png
+#: 
+msgid "Whether to include the XREF of families in the output."
+msgstr "Включить ли внешнюю ссылку на семью в выходные данные."
+
+#. Part of help page for deciding what information goes in the family section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/igNqWCHKyhKOofsUxjaGrDeM.png
+#: 
+msgid "Check the box if you would like to include the date of marriage in the output."
+msgstr "Отметьте поле, если вы хотите включить в выходные данные дату вступления в брак."
+
+#. Part of help page for deciding what information goes in the family section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/igNqWCHKyhKOofsUxjaGrDeM.png
+#: 
+msgid "You can also choose whether to show the full date of marriage or just the year."
+msgstr "Вы также можете выбрать, показывать ли полную дату вступления в брак или только год."
+
+#. Part of help page for deciding what information goes in the family section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/igNqWCHKyhKOofsUxjaGrDeM.png
+#: 
+msgid "Whether to show the place of marriage in the output. Also see option for abbreviating place names."
+msgstr "Показывать ли место брака в выводе. Также см. вариант сокращения названий мест."
 

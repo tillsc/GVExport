@@ -965,11 +965,6 @@ msgstr "Einzubeziehende Verbindungsarten"
 msgid "Tile contents"
 msgstr "Inhalt der Kästchen"
 
-#. New help text for new section "Tile contents". The help text is quite long, but much of it is previous help text from the settings that have been combined into this section. You may want to copy translations from previous terms, so I have left these for now. I will eventually delete the original terms.  https://s3.eu-west-1.amazonaws.com/po-pub/i/opPq1bb4NbrBXGFAiRsVxXi1.png  https://s3.eu-west-1.amazonaws.com/po-pub/i/W4qegkcMMWTFs3sXIihOQskA.png
-#: 
-msgid "This section allows for some changes to the content of tiles, including links, abbreviations, and the details included on individuals and families.</p><h4>Page links</h4><h5>Add URL to individuals and families</h5><p>For SVG (and PDF if Graphviz installed on server) output, links can be included. This way you can click on the person in the diagram to be taken to their webtrees page.</p><h4>Abbreviations</h4><h5>Abbreviated names</h5><p>There are several options to shorten the names of individuals displayed.</p><ul><li>Full name - the default option, this shows the primary name and any nickname. This option currently is the only one where the preferred name is underlined, and is the only one to show nicknames (in &quot;quotes&quot;).</li><li>Given and surnames - like the full name, but without nicknames.</li><li>Given names - just the given names are displayed.</li><li>First given names only - just the first word of the name in the given names field.</li><li>Surnames - just the surnames are displayed.</li><li>Initials only - this displays initials only, for example &quot;JFK&quot;.</li><li>Given name initials and surname - this shows initials for the first and second given name, as well as the full surname. For example: &quot;J.F. Kennedy&quot;</li><li>Don&apos;t show names - no names are shown. If birth and death details are also disabled then it is possible to show only photos or even just coloured boxes.</li></ul><h5>Abbreviated place names</h5><p>There are several options to shorten place names (for place of birth, place of marriage, place of death).</p><ul><li>Full place name - the place name is printed in full.</li><li>City and Country - the first and last section of the place name is used, using commas to split the sections. For example, &quot;London, England, United Kingdom&quot; would be shortened to &quot;London, United Kingdom&quot;</li><li>City and 2-Letter ISO Country Code - the first and last section of the place name is used, using commas to split the sections. The country is then converted to the ISO3166-1-Alpha-2 country code. <br>For example, &quot;Calgary, Alberta, Canada&quot; would be shortened to &quot;Calgary, CA&quot;</li><li>City and 3-Letter ISO Country Code - the first and last section of the place name is used, using commas to split the sections. The country is then converted to the ISO3166-1-Alpha-3 country code.<br>For example, &quot;Calgary, Alberta, Canada&quot; would be shortened to &quot;Calgary, CAN&quot;</li></ul><p>Note - The CLDR display name is used for matching. The data comes from <a href=\\\"https://www.datahub.io/core/country-codes\\\" class=\\\"help-link\\\">Datahub</a> but has been modified as for example the original CLDR name for the United Kingdom is &quot;UK&quot;, and the original CLDR name for the United States is &quot;US&quot;. Matching against these countries for the purposes of abbreviation is therefore pointless. So changes have been made to make this work better. Please <a href=\\\"https://github.com/Neriderc/GVExport/issues/new\\\" class=\\\"help-link\\\">open an issue</a> on GitHub if you find a country is not abbreviating correctly.</p><h4>Information on individuals</h4><h5>Show individual XREF</h5><p>Whether to include the XREF of individuals in the diagram.</p><h5>Show birthdate</h5><p>Check the box if you would like to include the birthdate of individuals in the output.</p><p>You can also choose whether to show the full date of birth or just the year.</p><h5>Show birthplace</h5><p>Whether to show the place of birth in the output. Also see option for abbreviating place names.</p><h5>Show death date</h5><p>Check the box if you would like to include the death date of individuals in the output.</p><p>You can also choose whether to show the full date of death or just the year.</p><h5>Show death place</h5><p>Whether to show the place of death in the output. Also see option for abbreviating place names.</p><h5>Show sex of individuals</h5><p>Whether to print the sex of the individual on the individual&apos;s tile, e.g. &quot;Male&quot;</p><h4>Information on families</h4><h5>Show family XREF</h5><p>Whether to include the XREF of families in the output.</p><h5>Show marriage date</h5><p>Check the box if you would like to include the date of marriage in the output.</p><p>You can also choose whether to show the full date of marriage or just the year.</p><h5>Show marriage place</h5><p>Whether to show the place of marriage in the output. Also see option for abbreviating place names."
-msgstr "Dieser Abschnitt ermöglicht einige Änderungen am Inhalt von Kästchen, einschließlich Verweise, Abkürzungen und der enthaltenen Details zu Einzelpersonen und Familien.</p><h4>Verweise</h4><h5>URL zu Personen und Familien hinzufügen</h5><p>Für die Ausgabe von SVG (und PDF, wenn Graphviz auf dem Server installiert ist) können Links in das Diagramm eingefügt werden. Auf diese Weise können Sie auf die Person im Diagramm klicken, um so zur entsprechenden webtrees-Seite weitergeleitet zu werden.</p><h4>Abkürzungen</h4><h5>Abgekürzte Namen</h5><p>Es gibt mehrere Möglichkeiten, den angezeigten Namen von Einzelpersonen zu verkürzen.</p><ul><li>Vollständiger Name - die Standardoption, diese zeigt den primären Namen und Spitznamen. Diese Option ist derzeit die einzige, bei der der bevorzugte Name (Rufname) unterstrichen ist und Spitznamen (in &quot;Anführungszeichen&quot;) angezeigt werden.</li><li>Vor- und Nachnamen - wie der vollständige Name, aber ohne Spitznamen und Rufnamen.</li><li>Vornamen - nur die Vornamen werden angezeigt.</li><li>Nur erste Vornamen - nur der jeweils erste Vorname kommt zur Anzeige.</li><li>Nachnamen - nur die Nachnamen werden angezeigt.</li><li>Nur Initialen - hier werden nur Initialen angezeigt, zum Beispiel &quot;JFK&quot;.</li><li>Initialen des Vornamens und Nachnamen - hier werden für den ersten und zweiten Vornamen Initialen und die vollständigen Nachnamen angezeigt. Zum Beispiel: &quot;J.F. Kennedy&quot;</li><li>Keine Namen anzeigen - es werden keine Namen angezeigt. Wenn die Geburts- und Todesdaten ebenfalls deaktiviert sind, können nur Fotos oder sogar nur farbige Kästchen angezeigt werden.</li></ul><h5>Abgekürzte Ortsnamen</h5><p>Es gibt mehrere Möglichkeiten, Ortsnamen abzukürzen (für Geburtsort, Ort der Eheschließung, Ort des Todes).</p><ul><li>Vollständiger Ortsname - der Ortsname wird vollständig ausgegeben.</li><li>Stadt und Land - der erste und der letzte Abschnitt des Ortsnamens wird verwendet, wobei Kommas verwendet werden, um die Abschnitte zu trennen. Beispiel: &quot;London, England, Vereinigtes Königreich&quot; würde zu &quot;London, Vereinigtes Königreich&quot; abgekürzt.</li><li>Stadt und 2-Buchstaben-ISO-Ländercode - der erste und der letzte Abschnitt des Ortsnamens werden verwendet, wobei Kommas verwendet werden, um die Abschnitte zu trennen. Das Land wird dann in den Ländercode ISO3166-1-Alpha-2 umgewandelt.<br>Beispiel: &quot;Calgary, Alberta, Kanada&quot; würde zu &quot;Calgary, CA&quot; abgekürzt.</li><li>Stadt und 3-Buchstaben-ISO-Ländercode - der erste und der letzte Abschnitt des Ortsnamens werden verwendet, wobei Kommas verwendet werden, um die Abschnitte zu trennen. Das Land wird dann in den ISO3166-1-Alpha-3-Ländercode umgewandelt.<br>Beispiel: &quot;Calgary, Alberta, Kanada&quot; würde zu &quot;Calgary, CAN&quot; abgekürzt.</li></ul><p>Hinweis: Der CLDR-Anzeigename wird für den Abgleich verwendet. Die Daten stammen von <a href=\"https://www.datahub.io/core/country-codes\" class=\"help-link\">Datahub</a>, wurden aber teilweise modifiziert; zum Beispiel ist der ursprüngliche CLDR-Name für das Vereinigte Königreich &quot;UK&quot;, und der ursprüngliche CLDR-Name für die Vereinigten Staaten ist &quot;US&quot;. Ein Abgleich mit diesen Ländern zum Zweck der Abkürzung ist daher sinnlos. Daher wurden Änderungen vorgenommen, um diese Arbeit besser zu machen. Bitte <a href=\"https://github.com/Neriderc/GVExport/issues/new\" class=\"help-link\">öffnen Sie ein Problem</a> auf GitHub, wenn Sie feststellen, dass ein Land nicht korrekt abgekürzt wird.</p><h4>Informationen zu Personen</h4><h5>XREF einer Person zeigen</h5><p>Ob die XREF von Personen in das Diagramm aufgenommen werden soll.</p><h5>Geburtsdatum zeigen</h5><p>Aktivieren Sie das Kontrollkästchen, wenn Sie das Geburtsdatum von Personen in die Ausgabe aufnehmen möchten.</p><p>Sie können auch wählen, ob Sie das vollständige Geburtsdatum oder nur das Jahr anzeigen möchten.</p><h5 >Geburtsort zeigen</h5><p>Ob der Geburtsort in der Ausgabe angezeigt werden soll. Siehe auch Option zum Abkürzen von Ortsnamen.</p><h5>Sterbedatum zeigen</h5><p>Aktivieren Sie das Kontrollkästchen, wenn Sie das Sterbedatum von Personen in die Ausgabe aufnehmen möchten.</p><p> Sie können auch wählen, ob das vollständige Sterbedatum oder nur das Jahr angezeigt werden soll.</p><h5>Sterbeort zeigen</h5><p>Ob der Sterbeort in der Ausgabe angezeigt werden soll. Siehe auch Option zum Abkürzen von Ortsnamen.</p><h5>Geschlecht der Person zeigen</h5><p>Ob das Geschlecht der Person im Kästchen der Person ausgegeben werden soll, z.B. &quot;Männlich&quot;.</p><h4>Informationen zu Familien</h4><h5>XREF einer Familie zeigen</h5><p>Ob die XREF von Familien in die Ausgabe aufgenommen werden soll.</p><h5>Heiratsdatum zeigen</h5><p>Aktivieren Sie das Kästchen, wenn Sie das Heiratsdatum in die Ausgabe aufnehmen möchten.</p><p>Sie können auch wählen, ob das vollständige Heiratsdatum oder nur das Jahr angezeigt werden soll.</p><h5>Heiratsort zeigen</h5><p>Ob der Ort der Eheschließung im Diagramm angezeigt werden soll. Siehe auch Option zum Abkürzen von Ortsnamen."
-
 #. New section to combine some general diagram settings:  https://s3.eu-west-1.amazonaws.com/po-pub/i/fXJwOPFeNExfAPrBjyabVej9.png   https://s3.eu-west-1.amazonaws.com/po-pub/i/OVcGk9fXLCrNYmgGTI25lMpH.png
 #: 
 msgid "Diagram"
@@ -1693,4 +1688,172 @@ msgstr "Gegebenenfalls wird dann der auf gemeinsamen Notizen basierende Stil ver
 #: 
 msgid "If the above options do not apply, then the Individual Background Colour is used."
 msgstr "Wenn die oben genannten Optionen nicht zutreffen, wird die ansonsten festgelegte Hintergrundfarbe des Personenkästchens verwendet."
+
+#. Similar to birth and death date prefixes, the marriage date prefix is shown before the marriage date. https://s3.eu-west-1.amazonaws.com/po-pub/i/sJduRepchTD0hWHiI5o07QjL.png  https://s3.eu-west-1.amazonaws.com/po-pub/i/ef4C7sVuJ9WpQSxqWIJFvBwr.png
+#: 
+msgid "Marriage date prefix"
+msgstr "Symbol für Heirat"
+
+#. Option to abbreviate the months in dates using the webtrees month shortening. In English, this is "January"->"Jan", "February"->"Feb" (and similar in most languages).
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/F5T8grIN2Crn5G9tGzAVeCBL.png
+#: 
+msgid "Abbreviated month names"
+msgstr ""
+
+#. Part of help page:  https://s3.eu-west-1.amazonaws.com/po-pub/i/08Z4pSSmjQhf0V1ym9AEETTC.png
+#: 
+msgid "This section allows for some changes to the content of tiles, including links, abbreviations, and the details included on individuals and families."
+msgstr "Dieser Abschnitt ermöglicht einige Änderungen am Inhalt von Kästchen, einschließlich Verweise, Abkürzungen und der enthaltenen Details zu Einzelpersonen und Familien."
+
+#. Part of help page:  https://s3.eu-west-1.amazonaws.com/po-pub/i/08Z4pSSmjQhf0V1ym9AEETTC.png
+#: 
+msgid "For SVG (and PDF if Graphviz installed on server) output, links can be included. This way you can click on the person in the diagram to be taken to their webtrees page."
+msgstr "Für die Ausgabe von SVG (und PDF, wenn Graphviz auf dem Server installiert ist) können Links in das Diagramm eingefügt werden. Auf diese Weise können Sie auf die Person im Diagramm klicken, um so zur entsprechenden webtrees-Seite weitergeleitet zu werden."
+
+#. Part of help page for abbreviation options: https://s3.eu-west-1.amazonaws.com/po-pub/i/rqnKktGCJbxelFo3RGr6SMVe.png
+#: 
+msgid "There are several options to shorten the names of individuals displayed."
+msgstr "Es gibt mehrere Möglichkeiten, den angezeigten Namen von Einzelpersonen zu verkürzen."
+
+#. Part of help page for abbreviation options: https://s3.eu-west-1.amazonaws.com/po-pub/i/rqnKktGCJbxelFo3RGr6SMVe.png
+#: 
+msgid "the default option, this shows the primary name and any nickname. This option currently is the only one where the preferred name is underlined, and is the only one to show nicknames (in &quot;quotes&quot;)."
+msgstr "die Standardoption, diese zeigt den primären Namen und Spitznamen. Diese Option ist derzeit die einzige, bei der der bevorzugte Name (Rufname) unterstrichen ist und Spitznamen (in &quot;Anführungszeichen&quot;) angezeigt werden."
+
+#. Part of help page for abbreviation options: https://s3.eu-west-1.amazonaws.com/po-pub/i/rqnKktGCJbxelFo3RGr6SMVe.png
+#: 
+msgid "like the full name, but without nicknames."
+msgstr "wie der vollständige Name, aber ohne Spitznamen und Rufnamen."
+
+#. Part of help page for abbreviation options: https://s3.eu-west-1.amazonaws.com/po-pub/i/rqnKktGCJbxelFo3RGr6SMVe.png
+#: 
+msgid "just the given names are displayed."
+msgstr "nur die Vornamen werden angezeigt."
+
+#. Part of help page for abbreviation options: https://s3.eu-west-1.amazonaws.com/po-pub/i/rqnKktGCJbxelFo3RGr6SMVe.png
+#: 
+msgid "just the first word of the name in the given names field."
+msgstr "nur der jeweils erste Vorname kommt zur Anzeige."
+
+#. Part of help page for abbreviation options: https://s3.eu-west-1.amazonaws.com/po-pub/i/rqnKktGCJbxelFo3RGr6SMVe.png
+#: 
+msgid "just the surnames are displayed."
+msgstr "nur die Nachnamen werden angezeigt."
+
+#. Part of help page for abbreviation options: https://s3.eu-west-1.amazonaws.com/po-pub/i/rqnKktGCJbxelFo3RGr6SMVe.png
+#: 
+msgid "this displays initials only, for example &quot;JFK&quot;."
+msgstr "hier werden nur Initialen angezeigt, zum Beispiel &quot;JFK&quot;."
+
+#. Part of help page for abbreviation options: https://s3.eu-west-1.amazonaws.com/po-pub/i/rqnKktGCJbxelFo3RGr6SMVe.png
+#: 
+msgid "this shows initials for the first and second given name, as well as the full surname. For example: &quot;J.F. Kennedy&quot;"
+msgstr "hier werden für den ersten und zweiten Vornamen Initialen und die vollständigen Nachnamen angezeigt. Zum Beispiel: &quot;J.F. Kennedy&quot;"
+
+#. Part of help page for abbreviation options: https://s3.eu-west-1.amazonaws.com/po-pub/i/rqnKktGCJbxelFo3RGr6SMVe.png
+#: 
+msgid "no names are shown. If birth and death details are also disabled then it is possible to show only photos or even just coloured boxes."
+msgstr "es werden keine Namen angezeigt. Wenn die Geburts- und Todesdaten ebenfalls deaktiviert sind, können nur Fotos oder sogar nur farbige Kästchen angezeigt werden."
+
+#. Part of the help page for name abbreviations:  https://s3.eu-west-1.amazonaws.com/po-pub/i/wc6fNIyVirRJx9txr24YUfnP.png
+#: 
+msgid "There are several options to shorten place names (for place of birth, place of marriage, place of death)."
+msgstr "Es gibt mehrere Möglichkeiten, Ortsnamen abzukürzen (für Geburtsort, Ort der Eheschließung, Ort des Todes)."
+
+#. Part of the help page for place abbreviations:  https://s3.eu-west-1.amazonaws.com/po-pub/i/wc6fNIyVirRJx9txr24YUfnP.png
+#: 
+msgid "the place name is printed in full."
+msgstr "der Ortsname wird vollständig ausgegeben."
+
+#. Part of the help page for place abbreviations:  https://s3.eu-west-1.amazonaws.com/po-pub/i/wc6fNIyVirRJx9txr24YUfnP.png
+#: 
+msgid "the first and last section of the place name is used, using commas to split the sections. For example, &quot;London, England, United Kingdom&quot; would be shortened to &quot;London, United Kingdom&quot;"
+msgstr "der erste und der letzte Abschnitt des Ortsnamens wird verwendet, wobei Kommas verwendet werden, um die Abschnitte zu trennen. Beispiel: &quot;London, England, Vereinigtes Königreich&quot; würde zu &quot;London, Vereinigtes Königreich&quot; abgekürzt."
+
+#. Part of the help page for place abbreviations:  https://s3.eu-west-1.amazonaws.com/po-pub/i/wc6fNIyVirRJx9txr24YUfnP.png
+#: 
+msgid "the first and last section of the place name is used, using commas to split the sections. The country is then converted to the ISO3166-1-Alpha-2 country code. <br>For example, &quot;Calgary, Alberta, Canada&quot; would be shortened to &quot;Calgary, CA&quot;"
+msgstr "der erste und der letzte Abschnitt des Ortsnamens werden verwendet, wobei Kommas verwendet werden, um die Abschnitte zu trennen. Das Land wird dann in den Ländercode ISO3166-1-Alpha-2 umgewandelt.<br>Beispiel: &quot;Calgary, Alberta, Kanada&quot; würde zu &quot;Calgary, CA&quot; abgekürzt."
+
+#. Part of the help page for place abbreviations:  https://s3.eu-west-1.amazonaws.com/po-pub/i/wc6fNIyVirRJx9txr24YUfnP.png
+#: 
+msgid "the first and last section of the place name is used, using commas to split the sections. The country is then converted to the ISO3166-1-Alpha-3 country code.<br>For example, &quot;Calgary, Alberta, Canada&quot; would be shortened to &quot;Calgary, CAN&quot;"
+msgstr "der erste und der letzte Abschnitt des Ortsnamens werden verwendet, wobei Kommas verwendet werden, um die Abschnitte zu trennen. Das Land wird dann in den ISO3166-1-Alpha-3-Ländercode umgewandelt.<br>Beispiel: &quot;Calgary, Alberta, Kanada&quot; würde zu &quot;Calgary, CAN&quot; abgekürzt."
+
+#. Part of the help page for place abbreviations:  https://s3.eu-west-1.amazonaws.com/po-pub/i/wc6fNIyVirRJx9txr24YUfnP.png
+#: 
+msgid "Note - The CLDR display name is used for matching. The data comes from <a href=\"https://www.datahub.io/core/country-codes\" class=\"help-link\">Datahub</a> but has been modified as for example the original CLDR name for the United Kingdom is &quot;UK&quot;, and the original CLDR name for the United States is &quot;US&quot;. Matching against these countries for the purposes of abbreviation is therefore pointless. So changes have been made to make this work better. Please <a href=\"https://github.com/Neriderc/GVExport/issues/new\" class=\"help-link\">open an issue</a> on GitHub if you find a country is not abbreviating correctly."
+msgstr "Hinweis: Der CLDR-Anzeigename wird für den Abgleich verwendet. Die Daten stammen von <a href=\\\"https://www.datahub.io/core/country-codes\\\" class=\\\"help-link\\\">Datahub</a>, wurden aber teilweise modifiziert; zum Beispiel ist der ursprüngliche CLDR-Name für das Vereinigte Königreich &quot;UK&quot;, und der ursprüngliche CLDR-Name für die Vereinigten Staaten ist &quot;US&quot;. Ein Abgleich mit diesen Ländern zum Zweck der Abkürzung ist daher sinnlos. Daher wurden Änderungen vorgenommen, um diese Arbeit besser zu machen. Bitte <a href=\\\"https://github.com/Neriderc/GVExport/issues/new\\\" class=\\\"help-link\\\">öffnen Sie ein Problem</a> auf GitHub, wenn Sie feststellen, dass ein Land nicht korrekt abgekürzt wird."
+
+#. Part of help page for abbreviations:  https://s3.eu-west-1.amazonaws.com/po-pub/i/yVRNezroLkh7Cky5dWr4YYyp.png
+#: 
+msgid "Selecting this box will shorten the month names. This uses the webtrees built in date shortening; in most cases, the month name will be shortened to three characters, e.g. \\\"Jan\\\" for January"
+msgstr ""
+
+#. Part of help page for choosing what goes on individual's tiles:  https://s3.eu-west-1.amazonaws.com/po-pub/i/u1x88hjQ3UFSTpqwJGuCdDSz.png
+#: 
+msgid "Whether to include the XREF of individuals in the diagram."
+msgstr "Ob die XREF von Personen in das Diagramm aufgenommen werden soll."
+
+#. Part of help page for choosing what goes on individual's tiles:  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/u1x88hjQ3UFSTpqwJGuCdDSz.png
+#: 
+msgid "Check the box if you would like to include the birthdate of individuals in the output."
+msgstr "Aktivieren Sie das Kontrollkästchen, wenn Sie das Geburtsdatum von Personen in die Ausgabe aufnehmen möchten."
+
+#. Part of help page for choosing what goes on individual's tiles:  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/u1x88hjQ3UFSTpqwJGuCdDSz.png
+#: 
+msgid "You can also choose whether to show the full date of birth or just the year."
+msgstr "Sie können auch wählen, ob Sie das vollständige Geburtsdatum oder nur das Jahr anzeigen möchten."
+
+#. Part of help page for choosing what goes on individual's tiles:  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/u1x88hjQ3UFSTpqwJGuCdDSz.png
+#: 
+msgid "Whether to show the place of birth in the output. Also see option for abbreviating place names."
+msgstr "Ob der Geburtsort in der Ausgabe angezeigt werden soll. Siehe auch Option zum Abkürzen von Ortsnamen."
+
+#. Part of help page for choosing what goes on individual's tiles:  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/u1x88hjQ3UFSTpqwJGuCdDSz.png
+#: 
+msgid "Check the box if you would like to include the death date of individuals in the output."
+msgstr "Aktivieren Sie das Kontrollkästchen, wenn Sie das Sterbedatum von Personen in die Ausgabe aufnehmen möchten."
+
+#. Part of help page for choosing what goes on individual's tiles:  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/u1x88hjQ3UFSTpqwJGuCdDSz.png
+#: 
+msgid "You can also choose whether to show the full date of death or just the year."
+msgstr "Sie können auch wählen, ob das vollständige Sterbedatum oder nur das Jahr angezeigt werden soll."
+
+#. Part of help page for choosing what goes on individual's tiles:  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/u1x88hjQ3UFSTpqwJGuCdDSz.png
+#: 
+msgid "Whether to show the place of death in the output. Also see option for abbreviating place names."
+msgstr "Ob der Sterbeort in der Ausgabe angezeigt werden soll. Siehe auch Option zum Abkürzen von Ortsnamen."
+
+#. Part of help page for choosing what goes on individual's tiles:  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/u1x88hjQ3UFSTpqwJGuCdDSz.png
+#: 
+msgid "Whether to print the sex of the individual on the individual&apos;s tile, e.g. &quot;Male&quot;"
+msgstr "Ob das Geschlecht der Person im Kästchen der Person ausgegeben werden soll, z.B. &quot;Männlich&quot;."
+
+#. Part of help page for deciding what information goes in the family section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/igNqWCHKyhKOofsUxjaGrDeM.png
+#: 
+msgid "Whether to include the XREF of families in the output."
+msgstr "Ob die XREF von Familien in die Ausgabe aufgenommen werden soll."
+
+#. Part of help page for deciding what information goes in the family section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/igNqWCHKyhKOofsUxjaGrDeM.png
+#: 
+msgid "Check the box if you would like to include the date of marriage in the output."
+msgstr "Aktivieren Sie das Kästchen, wenn Sie das Heiratsdatum in die Ausgabe aufnehmen möchten."
+
+#. Part of help page for deciding what information goes in the family section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/igNqWCHKyhKOofsUxjaGrDeM.png
+#: 
+msgid "You can also choose whether to show the full date of marriage or just the year."
+msgstr "Sie können auch wählen, ob das vollständige Heiratsdatum oder nur das Jahr angezeigt werden soll."
+
+#. Part of help page for deciding what information goes in the family section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/igNqWCHKyhKOofsUxjaGrDeM.png
+#: 
+msgid "Whether to show the place of marriage in the output. Also see option for abbreviating place names."
+msgstr "Ob der Ort der Eheschließung im Diagramm angezeigt werden soll. Siehe auch Option zum Abkürzen von Ortsnamen."
 

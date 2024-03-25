@@ -2,6 +2,14 @@
 	Change Log
 	GVExport module for Webtrees
 =====================================================================
+Version 2.1.20 (2024-03-25)
+  - New       : Added marriage date prefix
+  - New       : Added option to abbreviate month names
+  - Change    : Updated Graphviz browser renderer Viz.js to latest version
+  - Fixed     : Fixed issue selecting individuals with Webtrees 2.1.19 (WARNING: No longer supports Webtrees 2.1.18 and below)
+  - Fixed     : PDF exports were very large if Graphviz was not installed on the server. PDFs are now compressed.
+
+
 Version 2.1.19 (2024-01-10)
   - New       : Allow renaming of saved settings
   - New       : Added diagram layout option for "Stacked" partners, placing partners one over the other in combined mode
