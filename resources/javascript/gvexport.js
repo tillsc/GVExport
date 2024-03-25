@@ -457,7 +457,7 @@ function showGraphvizUnsupportedMessage() {
 
 // This function is run when the page is loaded
 function pageLoaded(Url) {
-    TOMSELECT_URL = document.getElementById('pid').getAttribute("data-url") + "&query=";
+    TOMSELECT_URL = document.getElementById('pid').getAttribute("data-wt-url") + "&query=";
     loadURLXref(Url);
     loadUrlToken(Url);
     loadXrefList(TOMSELECT_URL, 'xref_list', 'indi_list');
