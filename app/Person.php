@@ -365,6 +365,16 @@ class Person
                 return explode(" ", $nameArray["givn"])[0];
             case 40: /* Surname(s) */
                 return $nameArray["surn"];
+            case 80: /* Preferred given name and surname */
+                $pattern = '/<span class="starredname">(.*?)<\/span>/';
+                preg_match_all($pattern, $nameArray['full'], $matches);
+                $preferredName = $matches[1];
+                if (empty($preferredName)) {
+                    $preferredName = explode(" ", $nameArray["givn"])[0];
+                } else {
+                    $preferredName = implode(' ', $preferredName);
+                }
+                return $preferredName . ' ' . $nameArray['surname'];
             case 50: /* Initials only */
                 // Split by space or hyphen to get different names
                 $givenParts = preg_split('/[\s-]/', $nameArray["givn"]);
