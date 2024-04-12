@@ -174,6 +174,8 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
     public function getChartAction(ServerRequestInterface $request): ResponseInterface
     {
         $tree = $request->getAttribute('tree');
+        Auth::checkComponentAccess($this, ModuleChartInterface::class, $tree, Auth::user());
+
         assert($tree instanceof Tree);
         if (isset($request->getQueryParams()['xref'])) {
             $xref = $request->getQueryParams()['xref'];
