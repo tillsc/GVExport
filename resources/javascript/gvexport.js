@@ -994,7 +994,6 @@ function getIdLocal() {
         let next_id;
         let settings_list = localStorage.getItem(SETTINGS_ID_LIST_NAME + "_" + treeName);
         if (settings_list) {
-            settings_list = localStorage.getItem(SETTINGS_ID_LIST_NAME + "_" + treeName);
             let ids = settings_list.split(',');
             let last_id = ids[ids.length - 1];
             next_id = (parseInt(last_id, 36) + 1).toString(36);
