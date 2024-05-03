@@ -226,12 +226,6 @@ $usegraphviz = $vars['graphviz_bin'] != "";
             });
         }
 
-        // Update settings in browser storage if logged out
-        isUserLoggedIn().then((loggedIn) => {
-            if (!loggedIn) {
-                Data.storeSettings.saveSettingsClient('_MAIN_');``
-            }
-        });
         // Set browser value to true so we can return other info with DOT file
         // that can't be included with downloaded file
         document.getElementById("browser").value = "true";
