@@ -395,7 +395,7 @@ class ApiHandler
     }
 
     /**
-     * Retrieve the help information from appropriate view file
+     * Retrieve the shared note form
      *
      * @return void
      */
