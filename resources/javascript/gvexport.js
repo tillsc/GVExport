@@ -844,59 +844,6 @@ function loadSettingsDetails() {
     );
 }
 
-function saveSettingsAdvanced(userPrompted = false) {
-    let settingsList = document.getElementsByClassName('settings_list_item');
-    let settingsName = document.getElementById('save_settings_name').value;
-    if (settingsName === '') settingsName = "Settings";
-    let id = null;
-    for (let i=0; i<settingsList.length; i++) {
-        if (settingsList[i].getAttribute('data-name') === settingsName) {
-            id = settingsList[i].getAttribute('data-id');
-        }
-    }
-    if (id !== null) {
-        if (userPrompted) {
-            document.getElementById('modal').remove();
-        } else {
-            let message = TRANSLATE["Overwrite settings '%s'?"].replace('%s', settingsName);
-            let buttons = '<div class="modal-button-container"><button class="btn btn-secondary modal-button" onclick="document.getElementById(' + "'modal'" + ').remove()">' + TRANSLATE['Cancel'] + '</button><button class="btn btn-primary modal-button" onclick="saveSettingsAdvanced(true)">' + TRANSLATE['Overwrite'] + '</button></div>';
-            showModal('<div class="modal-container">' + message + '<br>' + buttons + '</div>');
-            return false;
-        }
-    }
-
-    isUserLoggedIn().then((loggedIn) => {
-        if (loggedIn) {
-            return saveSettingsServer(false, id).then((response)=>{
-                try {
-                    let json = JSON.parse(response);
-                    if (json.success) {
-                        return response;
-                    } else {
-                        return Promise.reject(ERROR_CHAR + json.errorMessage);
-                    }
-                } catch (e) {
-                    return Promise.reject("Failed to load response: " + e);
-                }
-            });
-        } else {
-            if (id === null) {
-                return getIdLocal().then((newId) => {
-                    return saveSettingsClient(newId);
-                });
-            } else {
-                return saveSettingsClient(id);
-            }
-        }
-    }).then(() => {
-        loadSettingsDetails();
-        document.getElementById('save_settings_name').value = "";
-    }).catch(
-        error => UI.showToast(error)
-    );
-
-}
-
 function loadUrlToken(Url) {
     const token = Url.getURLParameter("t");
     if (token !== '') {

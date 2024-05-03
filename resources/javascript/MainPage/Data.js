@@ -361,4 +361,76 @@ const Data = {
         },
 
     },
+
+    /**
+     * Handles storing data to browser storage
+     */
+    storeSettings: {
+        /**
+         * Save settings to the browser storage
+         *
+         * @param id
+         */
+        saveSettingsBrowser(id) {
+            isUserLoggedIn().then((loggedIn) => {
+                if (loggedIn) {
+                    return saveSettingsServer(false, id).then((response)=>{
+                        try {
+                            let json = JSON.parse(response);
+                            if (json.success) {
+                                return response;
+                            } else {
+                                return Promise.reject(ERROR_CHAR + json.errorMessage);
+                            }
+                        } catch (e) {
+                            return Promise.reject("Failed to load response: " + e);
+                        }
+                    });
+                } else {
+                    if (id === null) {
+                        return getIdLocal().then((newId) => {
+                            return saveSettingsClient(newId);
+                        });
+                    } else {
+                        return saveSettingsClient(id);
+                    }
+                }
+            }).then(() => {
+                loadSettingsDetails();
+                document.getElementById('save_settings_name').value = "";
+            }).catch(
+                error => UI.showToast(error)
+            );
+        },
+
+        /**
+         * Triggered when user clicks save settings button in advanced section
+         * @param userPrompted
+         * @returns {boolean}
+         */
+        saveSettingsAdvanced(userPrompted = false) {
+            let settingsList = document.getElementsByClassName('settings_list_item');
+            let settingsName = document.getElementById('save_settings_name').value;
+            if (settingsName === '') settingsName = "Settings";
+            let id = null;
+            for (let i=0; i<settingsList.length; i++) {
+                if (settingsList[i].getAttribute('data-name') === settingsName) {
+                    id = settingsList[i].getAttribute('data-id');
+                }
+            }
+            if (id !== null) {
+                if (userPrompted) {
+                    document.getElementById('modal').remove();
+                } else {
+                    let message = TRANSLATE["Overwrite settings '%s'?"].replace('%s', settingsName);
+                    let buttons = '<div class="modal-button-container"><button class="btn btn-secondary modal-button" onclick="document.getElementById(' + "'modal'" + ').remove()">' + TRANSLATE['Cancel'] + '</button><button class="btn btn-primary modal-button" onclick="Data.storeSettings.saveSettingsAdvanced(true)">' + TRANSLATE['Overwrite'] + '</button></div>';
+                    showModal('<div class="modal-container">' + message + '<br>' + buttons + '</div>');
+                    return false;
+                }
+            } else {
+                Data.storeSettings.saveSettingsBrowser(id);
+            }
+
+        }
+    }
 }
