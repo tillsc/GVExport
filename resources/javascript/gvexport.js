@@ -457,6 +457,16 @@ function showGraphvizUnsupportedMessage() {
 
 // This function is run when the page is loaded
 function pageLoaded(Url) {
+
+    // Load settings for logged out user
+    isUserLoggedIn().then((loggedIn) => {
+        if (!loggedIn) {
+            Data.storeSettings.getSettingsClient(ID_MAIN_SETTINGS).then((obj) => {
+                loadSettings(JSON.stringify(obj));
+            })
+        }
+    });
+
     TOMSELECT_URL = document.getElementById('pid').getAttribute("data-wt-url") + "&query=";
     loadURLXref(Url);
     loadUrlToken(Url);
@@ -665,9 +675,12 @@ function loadSettings(data, isNamedSetting = false) {
     Form.showHide(document.getElementById('startcol_option'),document.getElementById('highlight_start_indis').checked)
 
     if (autoUpdatePrior) {
-        firstRender = false;
+        if (firstRender) {
+            firstRender = false;
+        } else {
+            updateRender();
+        }
         autoUpdate = true;
-        updateRender();
     }
     refreshIndisFromXREFS(false);
 }
@@ -711,55 +724,12 @@ function getSettingsServer(id = ID_ALL_SETTINGS) {
     });
 }
 
-
-function getSettingsClient(id = ID_ALL_SETTINGS) {
-    return getTreeName().then(async (treeName) => {
-        try {
-            if (id === ID_ALL_SETTINGS) {
-                if (localStorage.getItem(SETTINGS_ID_LIST_NAME + "_" + treeName)) {
-                    let settings_list = localStorage.getItem(SETTINGS_ID_LIST_NAME + "_" + treeName);
-                    let ids = settings_list.split(',');
-                    let promises = ids.map(id_value => getSettingsClient(id_value))
-                    let results = await Promise.all(promises);
-                    let settings = {};
-                    for (let i = 0; i < ids.length; i++) {
-                        let id_value = ids[i];
-                        let userSettings = results[i];
-                        if (userSettings === null) {
-                            return Promise.reject('User settings null');
-                        } else {
-                        settings[id_value] = {};
-                        settings[id_value]['name'] = userSettings['save_settings_name'];
-                        settings[id_value]['id'] = id_value;
-                        settings[id_value]['settings'] = JSON.stringify(userSettings);}
-                    }
-                    return settings;
-                } else {
-                    return {};
-                }
-            } else {
-                let settings_id = id === ID_MAIN_SETTINGS ? "" : id;
-                try {
-                    return JSON.parse(localStorage.getItem("GVE_Settings_" + treeName + "_" + settings_id));
-                } catch(e) {
-                    return Promise.reject(e);
-                }
-            }
-
-        } catch(e) {
-            return Promise.reject(e);
-        }
-    }).catch((e) => {
-        UI.showToast(ERROR_CHAR + e);
-    });
-}
-
 function getSettings(id = ID_ALL_SETTINGS) {
     return isUserLoggedIn().then((loggedIn) => {
         if (loggedIn || id === ID_MAIN_SETTINGS) {
             return getSettingsServer(id);
         } else {
-            return getSettingsClient(id).then((obj) => {
+            return Data.storeSettings.getSettingsClient(id).then((obj) => {
                 return JSON.stringify(obj);
             });
         }

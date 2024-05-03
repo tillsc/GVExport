@@ -30,7 +30,6 @@ $usegraphviz = $vars['graphviz_bin'] != "";
     let autoUpdate = <?= $vars["auto_update"] ? 'true' : 'false' ?>;
     let debug_string = "";
     let TOMSELECT_URL = "";
-    let settings_json = "";
     let download_file_name = "<?= e($settings['filename']); ?>";
     let url_xref_treatment = "<?= e($vars['url_xref_treatment']); ?>";
     let shared_note_default = "<?= $vars['sharednote_col_default']; ?>";
@@ -221,7 +220,7 @@ $usegraphviz = $vars['graphviz_bin'] != "";
             // Update settings in browser storage if logged out
             isUserLoggedIn().then((loggedIn) => {
                 if (!loggedIn) {
-                    Data.storeSettings.saveSettingsClient('_MAIN_');
+                    Data.storeSettings.saveSettingsClient(ID_MAIN_SETTINGS);
                 }
             });
         }
@@ -301,9 +300,6 @@ $usegraphviz = $vars['graphviz_bin'] != "";
             if (lastDotStr.indexOf("digraph WT_Graph {") !== -1) {
                 messages = jsonResponse.messages;
                 debug_string = jsonResponse.enable_debug_mode;
-                if (firstRender) {
-                    loadSettings(jsonResponse.settings);
-                }
             }
             const images = [...lastDotStr.matchAll(/<IMG[^>]+SRC="([^"]*)/gmi)].map(function (matches) {
                 return {

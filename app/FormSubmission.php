@@ -160,6 +160,8 @@ class FormSubmission
 
         if (isset($vars['use_cart'])) {
             $settings['use_cart'] = ($vars['use_cart'] !== "ignorecart");
+        } else {
+            $settings['use_cart'] = false;
         }
 
         if (isset($vars['show_adv_people'])) {
@@ -268,6 +270,8 @@ class FormSubmission
         }
         if (isset($vars['sharednote_col_data']) && $this->isValidJSON($vars["sharednote_col_data"])) {
             $settings['sharednote_col_data'] = $vars["sharednote_col_data"];
+        } else {
+            $settings['sharednote_col_data'] = '[]';
         }
         if (isset($vars["indi_background_col"]) && $this->isValidColourHex($vars["indi_background_col"])) {
             $settings['indi_background_col'] = $vars["indi_background_col"];
