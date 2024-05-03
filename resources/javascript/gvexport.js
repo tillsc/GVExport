@@ -920,22 +920,6 @@ function getTreeName() {
     }
 }
 
-function saveSettingsClient(id) {
-    return Promise.all([saveSettingsServer(true), getTreeName()])
-        .then(([, treeNameLocal]) => {
-            return getSettings(ID_MAIN_SETTINGS).then((settings_json_string) => [settings_json_string,treeNameLocal]);
-        })
-        .then(([settings_json_string, treeNameLocal]) => {
-            try {
-                JSON.parse(settings_json_string);
-            } catch (e) {
-                return Promise.reject("Invalid JSON 2");
-            }
-            localStorage.setItem("GVE_Settings_" + treeNameLocal + "_" + id, settings_json_string);
-            return Promise.resolve();
-        });
-}
-
 function getIdLocal() {
     return getTreeName().then((treeName) => {
         let next_id;

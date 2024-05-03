@@ -284,7 +284,7 @@ const Data = {
                     let settings_field = document.getElementById('save_settings_name');
                     let settings_text = settings_field.value;
                     settings_field.value = name;
-                    saveSettingsClient(id).then(() => {
+                    Data.storeSettings.saveSettingsClient(id).then(() => {
                         settings_field.value = settings_text;
                         loadSettingsDetails();
                     }).catch(error => UI.showToast(error));
@@ -367,11 +367,11 @@ const Data = {
      */
     storeSettings: {
         /**
-         * Save settings to the browser storage
+         * Save settings for user
          *
          * @param id
          */
-        saveSettingsBrowser(id) {
+        saveSettings(id) {
             isUserLoggedIn().then((loggedIn) => {
                 if (loggedIn) {
                     return saveSettingsServer(false, id).then((response)=>{
@@ -389,10 +389,10 @@ const Data = {
                 } else {
                     if (id === null) {
                         return getIdLocal().then((newId) => {
-                            return saveSettingsClient(newId);
+                            return Data.storeSettings.saveSettingsClient(newId);
                         });
                     } else {
-                        return saveSettingsClient(id);
+                        return Data.storeSettings.saveSettingsClient(id);
                     }
                 }
             }).then(() => {
@@ -401,6 +401,28 @@ const Data = {
             }).catch(
                 error => UI.showToast(error)
             );
+        },
+
+        /**
+         * Save settings to browser storage
+         *
+         * @param id
+         * @returns {Promise<void>}
+         */
+        saveSettingsClient(id) {
+            return Promise.all([saveSettingsServer(true), getTreeName()])
+                .then(([, treeNameLocal]) => {
+                    return getSettings(ID_MAIN_SETTINGS).then((settings_json_string) => [settings_json_string,treeNameLocal]);
+                })
+                .then(([settings_json_string, treeNameLocal]) => {
+                    try {
+                        JSON.parse(settings_json_string);
+                    } catch (e) {
+                        return Promise.reject("Invalid JSON 2");
+                    }
+                    localStorage.setItem("GVE_Settings_" + treeNameLocal + "_" + id, settings_json_string);
+                    return Promise.resolve();
+                });
         },
 
         /**
@@ -428,7 +450,7 @@ const Data = {
                     return false;
                 }
             } else {
-                Data.storeSettings.saveSettingsBrowser(id);
+                Data.storeSettings.saveSettings(id);
             }
 
         }
