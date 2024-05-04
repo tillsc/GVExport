@@ -153,7 +153,7 @@ function addIndiToStopList(xref) {
     const regex = new RegExp(`(?<=,|^)(${xref})(?=,|$)`);
     if (!regex.test(list.value.replaceAll(" ','"))) {
         appendXrefToList(xref, 'stop_xref_list');
-        loadIndividualDetails(TOMSELECT_URL, xref, 'stop_indi_list');
+        loadIndividualDetails(TOMSELECT_URL, xref, 'stop_indi_list').then(r => {});
     }
     Form.clearSelect('stop_pid');
 }
@@ -299,7 +299,7 @@ function toggleFullscreen() {
         document.msFullscreenElement
     ) {
         if (document.exitFullscreen) {
-            document.exitFullscreen();
+            document.exitFullscreen().then(r => {});
         } else if (document.mozCancelFullScreen) {
             document.mozCancelFullScreen();
         } else if (document.webkitExitFullscreen) {
@@ -310,7 +310,7 @@ function toggleFullscreen() {
     } else { // Not full screen, so go fullscreen
         const element = document.getElementById('render-container');
         if (element.requestFullscreen) {
-            element.requestFullscreen();
+            element.requestFullscreen().then(r => {});
         } else if (element.mozRequestFullScreen) {
             element.mozRequestFullScreen();
         } else if (element.webkitRequestFullscreen) {
@@ -459,13 +459,19 @@ function showGraphvizUnsupportedMessage() {
 function pageLoaded(Url) {
 
     // Load settings for logged out user
-    isUserLoggedIn().then((loggedIn) => {
-        if (!loggedIn) {
-            Data.storeSettings.getSettingsClient(ID_MAIN_SETTINGS).then((obj) => {
-                loadSettings(JSON.stringify(obj));
-            })
-        }
-    });
+    if (firstRender) {
+        isUserLoggedIn().then((loggedIn) => {
+            if (!loggedIn) {
+                Data.storeSettings.getSettingsClient(ID_MAIN_SETTINGS).then((obj) => {
+                    if (obj !== null) {
+                        loadSettings(JSON.stringify(obj));
+                    } else {
+                        firstRender = false;
+                    }
+                })
+            }
+        });
+    }
 
     TOMSELECT_URL = document.getElementById('pid').getAttribute("data-wt-url") + "&query=";
     loadURLXref(Url);
@@ -673,7 +679,7 @@ function loadSettings(data, isNamedSetting = false) {
     setSavedDiagramsPanel();
     Form.showHide(document.getElementById('arrow_group'),document.getElementById('colour_arrow_related').checked)
     Form.showHide(document.getElementById('startcol_option'),document.getElementById('highlight_start_indis').checked)
-
+    toggleUpdateButton();
     if (autoUpdatePrior) {
         if (firstRender) {
             firstRender = false;
@@ -930,7 +936,7 @@ function setSavedDiagramsPanel() {
 function copyToClipboard(textToCopy) {
     // navigator clipboard api needs a secure context (https)
     if (navigator.clipboard && window.isSecureContext) {
-        // navigator clipboard api method'
+        // navigator clipboard api method
         return navigator.clipboard.writeText(textToCopy);
     } else {
         // text area method

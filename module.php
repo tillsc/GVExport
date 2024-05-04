@@ -185,10 +185,12 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
         $individual = $this->getIndividual($tree, $tree->significantIndividual(Auth::user(), $xref)->xref());
 		$userDefaultVars = (new Settings())->getAdminSettings($this);
         $settings = new Settings();
+        $userDefaultVars['first_render'] = true;
         if (isset($_REQUEST['reset'])){
             if (!$userDefaultVars['enable_graphviz'] && $userDefaultVars['graphviz_bin'] != "") {
                 $userDefaultVars['graphviz_bin'] = "";
             }
+            $userDefaultVars['first_render'] = false; // Allow settings to be overwritten by defaults
         } else if (isset($_REQUEST['t'])) {
             try {
                 if (ctype_alnum($_REQUEST['t'])) {
@@ -208,6 +210,10 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
             $userDefaultVars = $settings->loadUserSettings($this, $tree);
         }
         $otypes = $this->getOTypes($userDefaultVars);
+
+        if (!isset($userDefaultVars['first_render'])) {
+            $userDefaultVars['first_render'] = true;
+        }
 
         return $this->viewResponse($this->name() . '::page', [
             'tree'          => $tree,
