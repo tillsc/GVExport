@@ -284,7 +284,7 @@ const Data = {
                     let settings_field = document.getElementById('save_settings_name');
                     let settings_text = settings_field.value;
                     settings_field.value = name;
-                    saveSettingsClient(id).then(() => {
+                    Data.storeSettings.saveSettingsClient(id).then(() => {
                         settings_field.value = settings_text;
                         loadSettingsDetails();
                     }).catch(error => UI.showToast(error));
@@ -361,4 +361,145 @@ const Data = {
         },
 
     },
+
+    /**
+     * Handles storing data to browser storage
+     */
+    storeSettings: {
+        /**
+         * Save settings for user
+         *
+         * @param id
+         */
+        saveSettings(id) {
+            isUserLoggedIn().then((loggedIn) => {
+                if (loggedIn) {
+                    return saveSettingsServer(false, id).then((response)=>{
+                        try {
+                            let json = JSON.parse(response);
+                            if (json.success) {
+                                return response;
+                            } else {
+                                return Promise.reject(ERROR_CHAR + json.errorMessage);
+                            }
+                        } catch (e) {
+                            return Promise.reject("Failed to load response: " + e);
+                        }
+                    });
+                } else {
+                    if (id === null) {
+                        return getIdLocal().then((newId) => {
+                            return Data.storeSettings.saveSettingsClient(newId);
+                        });
+                    } else {
+                        return Data.storeSettings.saveSettingsClient(id);
+                    }
+                }
+            }).then(() => {
+                loadSettingsDetails();
+                document.getElementById('save_settings_name').value = "";
+            }).catch(
+                error => UI.showToast(error)
+            );
+        },
+
+        /**
+         * Save settings to browser storage
+         *
+         * @param id
+         * @returns {Promise<void>}
+         */
+        saveSettingsClient(id) {
+            return Promise.all([saveSettingsServer(true), getTreeName()])
+                .then(([, treeNameLocal]) => {
+                    return getSettings(ID_MAIN_SETTINGS).then((settings_json_string) => [settings_json_string,treeNameLocal]);
+                })
+                .then(([settings_json_string, treeNameLocal]) => {
+                    try {
+                        JSON.parse(settings_json_string);
+                    } catch (e) {
+                        return Promise.reject("Invalid JSON 2");
+                    }
+                    localStorage.setItem("GVE_Settings_" + treeNameLocal + "_" + id, settings_json_string);
+                    return Promise.resolve();
+                });
+        },
+
+        /**
+         * Triggered when user clicks save settings button in advanced section
+         * @param userPrompted
+         * @returns {boolean}
+         */
+        saveSettingsAdvanced(userPrompted = false) {
+            let settingsList = document.getElementsByClassName('settings_list_item');
+            let settingsName = document.getElementById('save_settings_name').value;
+            if (settingsName === '') settingsName = "Settings";
+            let id = null;
+            for (let i=0; i<settingsList.length; i++) {
+                if (settingsList[i].getAttribute('data-name') === settingsName) {
+                    id = settingsList[i].getAttribute('data-id');
+                }
+            }
+            if (id !== null) {
+                if (userPrompted) {
+                    document.getElementById('modal').remove();
+                } else {
+                    let message = TRANSLATE["Overwrite settings '%s'?"].replace('%s', settingsName);
+                    let buttons = '<div class="modal-button-container"><button class="btn btn-secondary modal-button" onclick="document.getElementById(' + "'modal'" + ').remove()">' + TRANSLATE['Cancel'] + '</button><button class="btn btn-primary modal-button" onclick="Data.storeSettings.saveSettingsAdvanced(true)">' + TRANSLATE['Overwrite'] + '</button></div>';
+                    showModal('<div class="modal-container">' + message + '<br>' + buttons + '</div>');
+                    return false;
+                }
+            } else {
+                Data.storeSettings.saveSettings(id);
+            }
+
+        },
+
+        /**
+         * Retrieve settings from browser storage
+         *
+         * @param id
+         * @returns {Promise<{} | {} | any | undefined | void>}
+         */
+        getSettingsClient(id = ID_ALL_SETTINGS) {
+            return getTreeName().then(async (treeName) => {
+                try {
+                    if (id === ID_ALL_SETTINGS) {
+                        if (localStorage.getItem(SETTINGS_ID_LIST_NAME + "_" + treeName)) {
+                            let settings_list = localStorage.getItem(SETTINGS_ID_LIST_NAME + "_" + treeName);
+                            let ids = settings_list.split(',');
+                            let promises = ids.map(id_value => Data.storeSettings.getSettingsClient(id_value))
+                            let results = await Promise.all(promises);
+                            let settings = {};
+                            for (let i = 0; i < ids.length; i++) {
+                                let id_value = ids[i];
+                                let userSettings = results[i];
+                                if (userSettings === null) {
+                                    return Promise.reject('User settings null');
+                                } else {
+                                    settings[id_value] = {};
+                                    settings[id_value]['name'] = userSettings['save_settings_name'];
+                                    settings[id_value]['id'] = id_value;
+                                    settings[id_value]['settings'] = JSON.stringify(userSettings);}
+                            }
+                            return settings;
+                        } else {
+                            return {};
+                        }
+                    } else {
+                        try {
+                            return JSON.parse(localStorage.getItem("GVE_Settings_" + treeName + "_" + id));
+                        } catch(e) {
+                            return Promise.reject(e);
+                        }
+                    }
+
+                } catch(e) {
+                    return Promise.reject(e);
+                }
+            }).catch((e) => {
+                UI.showToast(ERROR_CHAR + e);
+            });
+        }
+    }
 }

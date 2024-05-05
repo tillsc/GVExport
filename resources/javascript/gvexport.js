@@ -153,7 +153,7 @@ function addIndiToStopList(xref) {
     const regex = new RegExp(`(?<=,|^)(${xref})(?=,|$)`);
     if (!regex.test(list.value.replaceAll(" ','"))) {
         appendXrefToList(xref, 'stop_xref_list');
-        loadIndividualDetails(TOMSELECT_URL, xref, 'stop_indi_list');
+        loadIndividualDetails(TOMSELECT_URL, xref, 'stop_indi_list').then(r => {});
     }
     Form.clearSelect('stop_pid');
 }
@@ -210,18 +210,18 @@ function removeSearchOptions() {
     document.getElementById('stop_xref_list').value.split(',').forEach(function (xref) {
         removeSearchOptionFromList(xref, 'stop_pid')
     });
-    isUserLoggedIn().then((loggedIn) => {
-        if (loggedIn) {
-            // Remove option for shared note if already in list
-            let notes = document.getElementById('sharednote_col_data').value;
-            if (notes !== '') {
-                let json = JSON.parse(notes);
-                json.forEach(item => {
-                    removeSearchOptionFromList('@' + item.xref + '@', 'sharednote_col_add');
-                });
-            }
+    // Remove option for shared note if already in list
+    let notes = document.getElementById('sharednote_col_data').value;
+    if (notes !== '') {
+        try {
+            let json = JSON.parse(notes);
+            json.forEach(item => {
+                removeSearchOptionFromList('@' + item.xref + '@', 'sharednote_col_add');
+            });
+        } catch (e) {
+            document.getElementById('sharednote_col_data').value = '';
         }
-    });
+    }
 
     // Remove option when searching diagram if indi not in diagram
     let dropdown = document.getElementById('diagram_search_box');
@@ -299,7 +299,7 @@ function toggleFullscreen() {
         document.msFullscreenElement
     ) {
         if (document.exitFullscreen) {
-            document.exitFullscreen();
+            document.exitFullscreen().then(r => {});
         } else if (document.mozCancelFullScreen) {
             document.mozCancelFullScreen();
         } else if (document.webkitExitFullscreen) {
@@ -310,7 +310,7 @@ function toggleFullscreen() {
     } else { // Not full screen, so go fullscreen
         const element = document.getElementById('render-container');
         if (element.requestFullscreen) {
-            element.requestFullscreen();
+            element.requestFullscreen().then(r => {});
         } else if (element.mozRequestFullScreen) {
             element.mozRequestFullScreen();
         } else if (element.webkitRequestFullscreen) {
@@ -457,6 +457,22 @@ function showGraphvizUnsupportedMessage() {
 
 // This function is run when the page is loaded
 function pageLoaded(Url) {
+
+    // Load settings for logged out user
+    if (firstRender) {
+        isUserLoggedIn().then((loggedIn) => {
+            if (!loggedIn) {
+                Data.storeSettings.getSettingsClient(ID_MAIN_SETTINGS).then((obj) => {
+                    if (obj !== null) {
+                        loadSettings(JSON.stringify(obj));
+                    } else {
+                        firstRender = false;
+                    }
+                })
+            }
+        });
+    }
+
     TOMSELECT_URL = document.getElementById('pid').getAttribute("data-wt-url") + "&query=";
     loadURLXref(Url);
     loadUrlToken(Url);
@@ -483,11 +499,7 @@ function pageLoaded(Url) {
     document.querySelector(".sidebar_toggle a").addEventListener("click", UI.showSidebar);
     UI.helpPanel.init();
     UI.fixTheme();
-    isUserLoggedIn().then((loggedIn) => {
-        if (loggedIn) {
-            Form.sharedNotePanel.init();
-        }
-    });
+    Form.sharedNotePanel.init();
 
     // Form change events
     const form = document.getElementById('gvexport');
@@ -585,6 +597,8 @@ function toBool(value) {
     }
 }
 function loadSettings(data, isNamedSetting = false) {
+    let autoUpdatePrior = autoUpdate;
+    autoUpdate = false;
     let settings;
     try {
         settings = JSON.parse(data);
@@ -665,9 +679,14 @@ function loadSettings(data, isNamedSetting = false) {
     setSavedDiagramsPanel();
     Form.showHide(document.getElementById('arrow_group'),document.getElementById('colour_arrow_related').checked)
     Form.showHide(document.getElementById('startcol_option'),document.getElementById('highlight_start_indis').checked)
-
-    if (autoUpdate) {
-        updateRender();
+    toggleUpdateButton();
+    if (autoUpdatePrior) {
+        if (firstRender) {
+            firstRender = false;
+        } else {
+            updateRender();
+        }
+        autoUpdate = true;
     }
     refreshIndisFromXREFS(false);
 }
@@ -711,55 +730,12 @@ function getSettingsServer(id = ID_ALL_SETTINGS) {
     });
 }
 
-
-function getSettingsClient(id = ID_ALL_SETTINGS) {
-    return getTreeName().then(async (treeName) => {
-        try {
-            if (id === ID_ALL_SETTINGS) {
-                if (localStorage.getItem(SETTINGS_ID_LIST_NAME + "_" + treeName)) {
-                    let settings_list = localStorage.getItem(SETTINGS_ID_LIST_NAME + "_" + treeName);
-                    let ids = settings_list.split(',');
-                    let promises = ids.map(id_value => getSettingsClient(id_value))
-                    let results = await Promise.all(promises);
-                    let settings = {};
-                    for (let i = 0; i < ids.length; i++) {
-                        let id_value = ids[i];
-                        let userSettings = results[i];
-                        if (userSettings === null) {
-                            return Promise.reject('User settings null');
-                        } else {
-                        settings[id_value] = {};
-                        settings[id_value]['name'] = userSettings['save_settings_name'];
-                        settings[id_value]['id'] = id_value;
-                        settings[id_value]['settings'] = JSON.stringify(userSettings);}
-                    }
-                    return settings;
-                } else {
-                    return {};
-                }
-            } else {
-                let settings_id = id === ID_MAIN_SETTINGS ? "" : id;
-                try {
-                    return JSON.parse(localStorage.getItem("GVE_Settings_" + treeName + "_" + settings_id));
-                } catch(e) {
-                    return Promise.reject(e);
-                }
-            }
-
-        } catch(e) {
-            return Promise.reject(e);
-        }
-    }).catch((e) => {
-        UI.showToast(ERROR_CHAR + e);
-    });
-}
-
 function getSettings(id = ID_ALL_SETTINGS) {
     return isUserLoggedIn().then((loggedIn) => {
         if (loggedIn || id === ID_MAIN_SETTINGS) {
             return getSettingsServer(id);
         } else {
-            return getSettingsClient(id).then((obj) => {
+            return Data.storeSettings.getSettingsClient(id).then((obj) => {
                 return JSON.stringify(obj);
             });
         }
@@ -844,59 +820,6 @@ function loadSettingsDetails() {
     );
 }
 
-function saveSettingsAdvanced(userPrompted = false) {
-    let settingsList = document.getElementsByClassName('settings_list_item');
-    let settingsName = document.getElementById('save_settings_name').value;
-    if (settingsName === '') settingsName = "Settings";
-    let id = null;
-    for (let i=0; i<settingsList.length; i++) {
-        if (settingsList[i].getAttribute('data-name') === settingsName) {
-            id = settingsList[i].getAttribute('data-id');
-        }
-    }
-    if (id !== null) {
-        if (userPrompted) {
-            document.getElementById('modal').remove();
-        } else {
-            let message = TRANSLATE["Overwrite settings '%s'?"].replace('%s', settingsName);
-            let buttons = '<div class="modal-button-container"><button class="btn btn-secondary modal-button" onclick="document.getElementById(' + "'modal'" + ').remove()">' + TRANSLATE['Cancel'] + '</button><button class="btn btn-primary modal-button" onclick="saveSettingsAdvanced(true)">' + TRANSLATE['Overwrite'] + '</button></div>';
-            showModal('<div class="modal-container">' + message + '<br>' + buttons + '</div>');
-            return false;
-        }
-    }
-
-    isUserLoggedIn().then((loggedIn) => {
-        if (loggedIn) {
-            return saveSettingsServer(false, id).then((response)=>{
-                try {
-                    let json = JSON.parse(response);
-                    if (json.success) {
-                        return response;
-                    } else {
-                        return Promise.reject(ERROR_CHAR + json.errorMessage);
-                    }
-                } catch (e) {
-                    return Promise.reject("Failed to load response: " + e);
-                }
-            });
-        } else {
-            if (id === null) {
-                return getIdLocal().then((newId) => {
-                    return saveSettingsClient(newId);
-                });
-            } else {
-                return saveSettingsClient(id);
-            }
-        }
-    }).then(() => {
-        loadSettingsDetails();
-        document.getElementById('save_settings_name').value = "";
-    }).catch(
-        error => UI.showToast(error)
-    );
-
-}
-
 function loadUrlToken(Url) {
     const token = Url.getURLParameter("t");
     if (token !== '') {
@@ -973,28 +896,11 @@ function getTreeName() {
     }
 }
 
-function saveSettingsClient(id) {
-    return Promise.all([saveSettingsServer(true), getTreeName()])
-        .then(([, treeNameLocal]) => {
-            return getSettings(ID_MAIN_SETTINGS).then((settings_json_string) => [settings_json_string,treeNameLocal]);
-        })
-        .then(([settings_json_string, treeNameLocal]) => {
-            try {
-                JSON.parse(settings_json_string);
-            } catch (e) {
-                return Promise.reject("Invalid JSON 2");
-            }
-            localStorage.setItem("GVE_Settings_" + treeNameLocal + "_" + id, settings_json_string);
-            return Promise.resolve();
-        });
-}
-
 function getIdLocal() {
     return getTreeName().then((treeName) => {
         let next_id;
         let settings_list = localStorage.getItem(SETTINGS_ID_LIST_NAME + "_" + treeName);
         if (settings_list) {
-            settings_list = localStorage.getItem(SETTINGS_ID_LIST_NAME + "_" + treeName);
             let ids = settings_list.split(',');
             let last_id = ids[ids.length - 1];
             next_id = (parseInt(last_id, 36) + 1).toString(36);
@@ -1030,7 +936,7 @@ function setSavedDiagramsPanel() {
 function copyToClipboard(textToCopy) {
     // navigator clipboard api needs a secure context (https)
     if (navigator.clipboard && window.isSecureContext) {
-        // navigator clipboard api method'
+        // navigator clipboard api method
         return navigator.clipboard.writeText(textToCopy);
     } else {
         // text area method

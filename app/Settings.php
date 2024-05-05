@@ -20,6 +20,7 @@ class Settings
     private const CONTEXT_USER = 0;
     private const CONTEXT_ADMIN = 1;
     private const CONTEXT_NAMED_SETTING = 10;
+    public const CONTEXT_COOKIE = 20;
     public const PREFERENCE_PREFIX = "GVE";
     public const SETTINGS_LIST_PREFERENCE_NAME = "_id_list";
     public const SAVED_SETTINGS_LIST_PREFERENCE_NAME = "_shared_settings_list";
@@ -69,6 +70,7 @@ class Settings
             $this->defaultSettings['graphviz_bin'] = "";
         }
         $this->defaultSettings['graphviz_config'] = $this->getGraphvizSettings($this->defaultSettings);
+        $this->defaultSettings['sharednote_col_data'] = '[]';
     }
 
     /**
@@ -435,8 +437,31 @@ class Settings
                 return $context == self::CONTEXT_ADMIN;
             case 'show_diagram_panel':
                 return $context != self::CONTEXT_NAMED_SETTING;
-            default:
+                // Include these in everything (especially including cookie)
+            case 'include_ancestors':
+            case 'include_descendants':
+            case 'ancestor_levels':
+            case 'descendant_levels':
+            case 'include_siblings':
+            case 'include_all_relatives':
+            case 'include_spouses':
+            case 'include_all':
+            case 'xref_list':
+            case 'stop_xref_list':
+            case 'mark_not_related':
+            case 'faster_relation_check':
+            case 'url_xref_treatment':
+            case 'graph_dir':
+            case 'diagtype_decorated':
+            case 'diagtype_combined':
+            case 'output_type':
+            case 'show_adv_people':
+            case 'show_adv_appear':
+            case 'show_adv_files':
                 return true;
+                // Include everything else in most contexts but not in cookie
+            default:
+                return $context !== self::CONTEXT_COOKIE;
         }
     }
 
@@ -464,21 +489,27 @@ class Settings
      */
     public function getSettingsJson(GVExport $module, Tree $tree, string $id)
     {
-        try {
-            $userSettings = $this->loadUserSettings($module, $tree, $id);
-            $settings = [];
+        $userSettings = $this->loadUserSettings($module, $tree, $id);
+        return self::getJsonFromSettings($userSettings);
+    }
 
+    /**
+     * Turn a settings array into JSON
+     */
+    public function getJsonFromSettings($settings)
+    {
+        try {
+            $new_settings = [];
             foreach ($this->defaultSettings as $preference => $value) {
                 if (self::shouldLoadSetting($preference)) {
-                    $settings[$preference] = $userSettings[$preference];
+                    $new_settings[$preference] = $settings[$preference];
                 }
             }
         } catch (Exception $e) {
             throw new Exception($e);
         }
-        return json_encode($settings);
+        return json_encode($new_settings);
     }
-
     /**
      * Retrieve all settings for the user as JSON
      *

@@ -180,11 +180,20 @@ class ApiHandler
     {
         if (isset($this->json['settings_id']) && (ctype_alnum((string) $this->json['settings_id']) || in_array($this->json['settings_id'], [Settings::ID_ALL_SETTINGS, Settings::ID_MAIN_SETTINGS]))) {
             $settings = new Settings();
-            try {
-                $this->response_data['settings'] = ($this->json['settings_id'] == Settings::ID_ALL_SETTINGS ? $settings->getAllSettingsJson($this->module, $this->tree) : $settings->getSettingsJson($this->module, $this->tree, $this->json['settings_id']));
+            // Treat loggged out users special if requesting ID_MAIN_SETTINGS
+            if ($this->json['settings_id'] == Settings::ID_MAIN_SETTINGS && Auth::user()->id() == Settings::GUEST_USER_ID) {
+                $vars = Validator::parsedBody($this->request)->array('vars');
+                $form = new FormSubmission();
+                $settings_response = $form->load($vars, $this->module);
+                $this->response_data['settings'] = $settings->getJsonFromSettings($settings_response);
                 $this->response_data['success'] = true;
-            } catch (Exception $e) {
-                $this->setFailResponse('Invalid JSON', 'E9');
+            } else {
+                try {
+                    $this->response_data['settings'] = ($this->json['settings_id'] == Settings::ID_ALL_SETTINGS ? $settings->getAllSettingsJson($this->module, $this->tree) : $settings->getSettingsJson($this->module, $this->tree, $this->json['settings_id']));
+                    $this->response_data['success'] = true;
+                } catch (Exception $e) {
+                    $this->setFailResponse('Invalid JSON', 'E9');
+                }
             }
         } else {
             $this->setFailResponse('Invalid settings ID', 'E6');
@@ -395,7 +404,7 @@ class ApiHandler
     }
 
     /**
-     * Retrieve the help information from appropriate view file
+     * Retrieve the shared note form
      *
      * @return void
      */

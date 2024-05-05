@@ -49,7 +49,7 @@ class Cookie
     public function set($vars) {
         $cookieArray = [];
         foreach ($vars as $preference => $value) {
-            if (Settings::shouldSaveSetting($preference)) {
+            if (Settings::shouldSaveSetting($preference, Settings::CONTEXT_COOKIE)) {
                 $cookieArray[$preference] = $value;
             }
         }
