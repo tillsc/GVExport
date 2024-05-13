@@ -427,7 +427,7 @@ const Data = {
 
         /**
          * Triggered when user clicks save settings button in advanced section
-         * @param userPrompted
+         * @param userPrompted whether the user has been asked to overwrite settings
          * @returns {boolean}
          */
         saveSettingsAdvanced(userPrompted = false) {

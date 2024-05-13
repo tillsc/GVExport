@@ -656,6 +656,8 @@ function loadSettings(data, isNamedSetting = false) {
                 case 'enable_graphviz':
                 // Token is not loaded as an option
                 case 'token':
+                // Date of settings is not a setting so don't load it
+                case 'updated_date':
                     break;
                 default:
                     UI.showToast(ERROR_CHAR + TRANSLATE['Unable to load setting'] + " " + key);

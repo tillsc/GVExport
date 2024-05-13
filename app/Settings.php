@@ -240,7 +240,7 @@ class Settings
                     }
                 }
             }
-
+            $s['updated_date'] = date("Y-m-d H:i:s");
             $this->addUserSettings($module, $tree, $id, $s);
             return true;
         }
@@ -427,6 +427,7 @@ class Settings
             case 'bg_col_type_options':
             case 'stripe_col_type_options':
             case 'border_col_type_options':
+            case 'updated_date':
                 return false;
             case 'show_debug_panel':
             case 'filename':
