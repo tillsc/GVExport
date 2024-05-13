@@ -125,7 +125,7 @@ return array(
 	'death_prefix' => '†', // Text shown on chart before the death date
 	'marriage_prefix' => '∞', // Text shown on chart before the marriage date
     'save_settings_name' => '', // Default value for text field where name of settings can be entered
-    'settings_sort_order' => 0, // Default value sorting the settings
+    'settings_sort_order' => 10, // Default value sorting the settings - default of 10 means the oldest items are first, new items go on the bottom of the list.
     'show_diagram_panel' => false, // If set to true, a "Saved diagrams" section is shown at the top, that lists settings saved using the feature to save multiple versions of settings
     'auto_update' => true, // If auto-updating browser render on change is enabled or not
     'url_xref_treatment' => 'default' // What to do with XREF provided by webtrees when loading page ('default', 'add', 'nothing', or 'overwrite'   )
