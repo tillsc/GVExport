@@ -465,18 +465,19 @@ const Data = {
             return getTreeName().then(async (treeName) => {
                 try {
                     if (id === ID_ALL_SETTINGS) {
-                        if (localStorage.getItem(SETTINGS_ID_LIST_NAME + "_" + treeName)) {
-                            let settings_list = localStorage.getItem(SETTINGS_ID_LIST_NAME + "_" + treeName);
+                        let settings_list = localStorage.getItem(SETTINGS_ID_LIST_NAME + "_" + treeName);
+                        if (settings_list) {
                             let ids = settings_list.split(',');
                             let promises = ids.map(id_value => Data.storeSettings.getSettingsClient(id_value))
                             let results = await Promise.all(promises);
+                            console.log(ids)
+                            console.log(promises)
+                            console.log(results)
                             let settings = {};
                             for (let i = 0; i < ids.length; i++) {
                                 let id_value = ids[i];
                                 let userSettings = results[i];
-                                if (userSettings === null) {
-                                    return Promise.reject('User settings null');
-                                } else {
+                                if (userSettings !== null) {
                                     settings[id_value] = {};
                                     settings[id_value]['name'] = userSettings['save_settings_name'];
                                     settings[id_value]['id'] = id_value;
