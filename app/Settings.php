@@ -428,6 +428,7 @@ class Settings
             case 'bg_col_type_options':
             case 'stripe_col_type_options':
             case 'border_col_type_options':
+            case 'settings_sort_order_options':
             case 'updated_date':
                 return false;
             case 'show_debug_panel':
