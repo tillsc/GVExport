@@ -688,6 +688,7 @@ class Settings
         $json = json_encode($s);
         $settings[$id]['settings'] = $json;
         $settings[$id]['name'] = $s['save_settings_name'];
+        $settings[$id]['updated_date'] = $s['updated_date'];
         $settings[$id]['id'] = $id;
         $settings[$id]['token'] = empty($s['token']) ? '':$s['token'];
         $new_json = json_encode($settings);
