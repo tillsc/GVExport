@@ -4,7 +4,8 @@ use vendor\WebtreesModules\gvexport\MainPage;
 use Fisharebest\Webtrees\I18N;
 
 /**
- * @var array       $vars                   array of saved settings
+ * @var array       $vars           array of saved settings
+ * @var array       $settings       wider array of settings and options
  * @var bool        $admin          whether this is for the admin page (remove functions that aren't settings)
  */
 ?>
@@ -22,7 +23,9 @@ use Fisharebest\Webtrees\I18N;
         </div>
     </div>
     <?php } ?>
-    <div class="col-auto">
+    <label for="settings_sort_order" class="margin-top"><?= I18N::translate('Settings list sort order') ?></label>
+    <?= view('components/select', ['name' => 'vars[settings_sort_order]', 'id' => 'settings_sort_order', 'selected' => e($vars['settings_sort_order']), 'options' => MainPage::updateTranslations($settings["settings_sort_order_options"])]) ?>
+    <div class="col-auto margin-top ">
         <input type="checkbox" <?php if (!$admin) echo 'onclick="setSavedDiagramsPanel()"'; ?> name="vars[show_diagram_panel]" id="show_diagram_panel" value="show_diagram_panel" <?= $vars["show_diagram_panel"] ? 'checked' : '' ?>>
         <label for="show_diagram_panel"><?= I18N::translate('Show saved diagrams panel') ?></label>
     </div>

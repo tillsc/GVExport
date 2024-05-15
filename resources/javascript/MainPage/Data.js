@@ -360,6 +360,73 @@ const Data = {
             });
         },
 
+        /**
+         * Get the selected sort order from the UI
+         *
+         * @returns {*}
+         */
+        getSortOrder() {
+            const selectElement = document.getElementById("settings_sort_order");
+            return selectElement.value;
+        },
+
+        /**
+         * Take settings object and return sorted array - based on sort order set in UI
+         *
+         * @param settings The settings object that holds all saved settings entries
+         * @returns {{}|unknown[]}
+         */
+        sortSettings(settings) {
+            switch (Data.savedSettings.getSortOrder()) {
+                case '0':
+                default:
+                    return Data.savedSettings.sortSettingsByUpdatedDate(settings, false);
+                case '10':
+                    return Data.savedSettings.sortSettingsByUpdatedDate(settings, true);
+                case '20':
+                    return Data.savedSettings.sortSettingsByName(settings, false);
+                case '30':
+                    return Data.savedSettings.sortSettingsByName(settings, true);
+            }
+        },
+
+        /**
+         * Sorts saved settings list alphabetically
+         *
+         * @param settings Saved settings JSON object
+         * @param reverse If true, settings will be sorted Z-A instead of A-Z
+         * @returns {[]} Sorted saved settings *array* (as JSON objects don't guarantee order)
+         */
+        sortSettingsByName(settings, reverse = false) {
+            return Object.values(settings).sort((a, b) => {
+                if (reverse) {
+                    return b.name.localeCompare(a.name);
+                } else {
+                    return a.name.localeCompare(b.name);
+                }
+            });
+        },
+
+        /**
+         * Sorts saved settings list by date last updated
+         *
+         * @param settings Saved settings JSON object
+         * @param reverse If true, settings will be newest to oldest instead of oldest to newest
+         * @returns {[]} Sorted saved settings *array* (as JSON objects don't guarantee order)
+         */
+        sortSettingsByUpdatedDate(settings, reverse = false) {
+            return Object.values(settings).sort((a, b) => {
+                // Settings saved before this was added won't have a date, so give them a default value
+                const dateA = a.updated_date || '';
+                const dateB = b.updated_date || '';
+
+                if (reverse) {
+                    return dateB.localeCompare(dateA);
+                } else {
+                    return dateA.localeCompare(dateB);
+                }
+            });
+        },
     },
 
     /**
@@ -427,7 +494,7 @@ const Data = {
 
         /**
          * Triggered when user clicks save settings button in advanced section
-         * @param userPrompted
+         * @param userPrompted whether the user has been asked to overwrite settings
          * @returns {boolean}
          */
         saveSettingsAdvanced(userPrompted = false) {
@@ -465,8 +532,8 @@ const Data = {
             return getTreeName().then(async (treeName) => {
                 try {
                     if (id === ID_ALL_SETTINGS) {
-                        if (localStorage.getItem(SETTINGS_ID_LIST_NAME + "_" + treeName)) {
-                            let settings_list = localStorage.getItem(SETTINGS_ID_LIST_NAME + "_" + treeName);
+                        let settings_list = localStorage.getItem(SETTINGS_ID_LIST_NAME + "_" + treeName);
+                        if (settings_list) {
                             let ids = settings_list.split(',');
                             let promises = ids.map(id_value => Data.storeSettings.getSettingsClient(id_value))
                             let results = await Promise.all(promises);
@@ -474,13 +541,13 @@ const Data = {
                             for (let i = 0; i < ids.length; i++) {
                                 let id_value = ids[i];
                                 let userSettings = results[i];
-                                if (userSettings === null) {
-                                    return Promise.reject('User settings null');
-                                } else {
+                                if (userSettings !== null) {
                                     settings[id_value] = {};
                                     settings[id_value]['name'] = userSettings['save_settings_name'];
+                                    settings[id_value]['updated_date'] = userSettings['updated_date'];
                                     settings[id_value]['id'] = id_value;
-                                    settings[id_value]['settings'] = JSON.stringify(userSettings);}
+                                    settings[id_value]['settings'] = JSON.stringify(userSettings);
+                                }
                             }
                             return settings;
                         } else {

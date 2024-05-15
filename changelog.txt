@@ -2,6 +2,10 @@
 	Change Log
 	GVExport module for Webtrees
 =====================================================================
+Version 2.1.22 (2024-)
+  - New       : Logged out users can now colour tiles based on a shared note
+  - Changed   : Refactored settings for logged out users to reduce number of settings saved in cookie
+
 Version 2.1.21 (2024-04-12)
   - New       : Added Preferred name abbreviation option
   - Fixed     : Fixed issue where a user could access the GVExport page (but not individual's details) if they had the URL, even if their access was disabled in the control panel.

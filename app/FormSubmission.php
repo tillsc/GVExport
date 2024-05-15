@@ -370,7 +370,11 @@ class FormSubmission
         } else {
             $settings['save_settings_name'] = I18N::translate('Settings');
         }
+        if (isset($vars['settings_sort_order'])) {
+            $settings['settings_sort_order'] = I18N::digits($vars['settings_sort_order']);
+        }
         $settings['show_diagram_panel'] = isset($vars['show_diagram_panel']);
+        $settings['updated_date'] = date("Y-m-d H:i:s");
         return $settings;
     }
 

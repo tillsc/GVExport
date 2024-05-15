@@ -21,6 +21,7 @@ class Settings
     private const CONTEXT_ADMIN = 1;
     private const CONTEXT_NAMED_SETTING = 10;
     public const CONTEXT_COOKIE = 20;
+    public const CONTEXT_MAIN_SETTINGS = 30;
     public const PREFERENCE_PREFIX = "GVE";
     public const SETTINGS_LIST_PREFERENCE_NAME = "_id_list";
     public const SAVED_SETTINGS_LIST_PREFERENCE_NAME = "_shared_settings_list";
@@ -65,12 +66,14 @@ class Settings
         $this->defaultSettings['bg_col_type_options'] = [self::OPTION_BACKGROUND_CUSTOM_COLOUR => 'Custom', self::OPTION_BACKGROUND_SEX_COLOUR => 'Based on individual&apos;s sex', self::OPTION_BACKGROUND_VITAL_COLOUR => 'Based on vital status', self::OPTION_BACKGROUND_AGE_COLOUR => 'Based on age'];
         $this->defaultSettings['stripe_col_type_options'] = [self::OPTION_STRIPE_NONE => 'No stripe', self::OPTION_STRIPE_SEX_COLOUR => 'Based on individual&apos;s sex', self::OPTION_STRIPE_VITAL_COLOUR => 'Based on vital status', self::OPTION_STRIPE_AGE_COLOUR => 'Based on age'];
         $this->defaultSettings['border_col_type_options'] = [self::OPTION_BORDER_CUSTOM_COLOUR => 'Custom', self::OPTION_BORDER_SEX_COLOUR => 'Based on individual&apos;s sex', self::OPTION_BORDER_FAMILY => 'Same as family border', self::OPTION_BORDER_VITAL_COLOUR => 'Based on vital status', self::OPTION_BORDER_AGE_COLOUR => 'Based on age'];
+        $this->defaultSettings['settings_sort_order_options'] = [0 => 'Oldest first', 10 => 'Newest first', 20 => 'Alphabetical order', 30 => 'Reverse alphabetical order'];
         $this->defaultSettings['countries'] = $this->getCountryAbbreviations();
         if (!$this->isGraphvizAvailable($this->defaultSettings['graphviz_bin'])) {
             $this->defaultSettings['graphviz_bin'] = "";
         }
         $this->defaultSettings['graphviz_config'] = $this->getGraphvizSettings($this->defaultSettings);
         $this->defaultSettings['sharednote_col_data'] = '[]';
+        $this->defaultSettings['updated_date'] = '';
     }
 
     /**
@@ -240,7 +243,6 @@ class Settings
                     }
                 }
             }
-
             $this->addUserSettings($module, $tree, $id, $s);
             return true;
         }
@@ -427,6 +429,7 @@ class Settings
             case 'bg_col_type_options':
             case 'stripe_col_type_options':
             case 'border_col_type_options':
+            case 'settings_sort_order_options':
                 return false;
             case 'show_debug_panel':
             case 'filename':
@@ -474,6 +477,9 @@ class Settings
      */
     public static function shouldLoadSetting($setting, int $context = self::CONTEXT_USER): bool
     {
+        if ($setting == 'updated_date' && $context !== self::CONTEXT_MAIN_SETTINGS) {
+            return false;
+        }
         return self::shouldSaveSetting($setting, $context);
     }
 
@@ -496,12 +502,12 @@ class Settings
     /**
      * Turn a settings array into JSON
      */
-    public function getJsonFromSettings($settings)
+    public function getJsonFromSettings($settings, $context = Settings::CONTEXT_USER)
     {
         try {
             $new_settings = [];
             foreach ($this->defaultSettings as $preference => $value) {
-                if (self::shouldLoadSetting($preference)) {
+                if (self::shouldLoadSetting($preference, $context)) {
                     $new_settings[$preference] = $settings[$preference];
                 }
             }
@@ -682,6 +688,7 @@ class Settings
         $json = json_encode($s);
         $settings[$id]['settings'] = $json;
         $settings[$id]['name'] = $s['save_settings_name'];
+        $settings[$id]['updated_date'] = $s['updated_date'];
         $settings[$id]['id'] = $id;
         $settings[$id]['token'] = empty($s['token']) ? '':$s['token'];
         $new_json = json_encode($settings);
