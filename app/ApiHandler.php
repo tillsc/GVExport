@@ -185,7 +185,7 @@ class ApiHandler
                 $vars = Validator::parsedBody($this->request)->array('vars');
                 $form = new FormSubmission();
                 $settings_response = $form->load($vars, $this->module);
-                $this->response_data['settings'] = $settings->getJsonFromSettings($settings_response);
+                $this->response_data['settings'] = $settings->getJsonFromSettings($settings_response, Settings::CONTEXT_MAIN_SETTINGS);
                 $this->response_data['success'] = true;
             } else {
                 try {

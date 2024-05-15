@@ -503,7 +503,7 @@ function pageLoaded(Url) {
 
     // Form change events
     const form = document.getElementById('gvexport');
-    let changeElems = form.querySelectorAll("input:not([type='file']):not(#save_settings_name):not(#stop_pid):not(.highlight_check):not(#sharednote_col_add), select:not(#simple_settings_list):not(#pid):not(#sharednote_col_add)");
+    let changeElems = form.querySelectorAll("input:not([type='file']):not(#save_settings_name):not(#stop_pid):not(.highlight_check):not(#sharednote_col_add), select:not(#simple_settings_list):not(#pid):not(#sharednote_col_add):not(#settings_sort_order)");
     for (let i = 0; i < changeElems.length; i++) {
         changeElems[i].addEventListener("change", handleFormChange);
     }
@@ -511,6 +511,8 @@ function pageLoaded(Url) {
     indiSelectEl.addEventListener('change', indiSelectChanged);
     let stopIndiSelectEl = form.querySelector("#stop_pid");
     stopIndiSelectEl.addEventListener('change', stopIndiSelectChanged);
+    let settingsSortOrder = form.querySelector("#settings_sort_order");
+    settingsSortOrder.addEventListener('change', loadSettingsDetails);
     let simpleSettingsEl = form.querySelector("#simple_settings_list");
     simpleSettingsEl.addEventListener('change', function(e) {
         let element = document.querySelector('.settings_list_item[data-id="' + e.target.value + '"]');
@@ -790,6 +792,9 @@ function loadSettingsDetails() {
         } catch (e) {
             return TRANSLATE['Invalid JSON'] + e;
         }
+
+        settingsList = Data.savedSettings.sortSettings(settingsList);
+
         const listElement = document.getElementById('settings_list');
         const simpleSettingsListEl = document.getElementById('simple_settings_list');
         if (simpleSettingsListEl !== null) {
