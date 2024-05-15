@@ -546,8 +546,9 @@ const Data = {
                                     settings[id_value]['name'] = userSettings['save_settings_name'];
                                     settings[id_value]['updated_date'] = userSettings['updated_date'];
                                     settings[id_value]['id'] = id_value;
-                                    settings[id_value]['settings'] = JSON.stringify(userSettings);}
-
+                                    settings[id_value]['settings'] = JSON.stringify(userSettings);
+                                }
+                            }
                             return settings;
                         } else {
                             return {};
