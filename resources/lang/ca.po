@@ -1720,7 +1720,7 @@ msgstr "Prefix de data de matrimoni"
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/F5T8grIN2Crn5G9tGzAVeCBL.png
 #: 
 msgid "Abbreviated month names"
-msgstr ""
+msgstr "Noms de mes abreujats"
 
 #. Part of help page:  https://s3.eu-west-1.amazonaws.com/po-pub/i/08Z4pSSmjQhf0V1ym9AEETTC.png
 #: 
@@ -1821,61 +1821,126 @@ msgstr "Si s'ha d'incloure l'XREF dels individus en el diagrama."
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/u1x88hjQ3UFSTpqwJGuCdDSz.png
 #: 
 msgid "Check the box if you would like to include the birthdate of individuals in the output."
-msgstr ""
+msgstr "Marqueu la casella si voleu incloure la data de naixement de les persones a la sortida."
 
 #. Part of help page for choosing what goes on individual's tiles:  
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/u1x88hjQ3UFSTpqwJGuCdDSz.png
 #: 
 msgid "You can also choose whether to show the full date of birth or just the year."
-msgstr ""
+msgstr "També podeu triar si voleu mostrar la data completa de naixement o només l'any."
 
 #. Part of help page for choosing what goes on individual's tiles:  
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/u1x88hjQ3UFSTpqwJGuCdDSz.png
 #: 
 msgid "Whether to show the place of birth in the output. Also see option for abbreviating place names."
-msgstr ""
+msgstr "Si s'ha de mostrar el lloc de naixement a la sortida. Vegeu també l'opció d'abreujar topònims."
 
 #. Part of help page for choosing what goes on individual's tiles:  
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/u1x88hjQ3UFSTpqwJGuCdDSz.png
 #: 
 msgid "Check the box if you would like to include the death date of individuals in the output."
-msgstr ""
+msgstr "Marqueu la casella si voleu incloure la data de defunció de les persones a la sortida."
 
 #. Part of help page for choosing what goes on individual's tiles:  
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/u1x88hjQ3UFSTpqwJGuCdDSz.png
 #: 
 msgid "You can also choose whether to show the full date of death or just the year."
-msgstr ""
+msgstr "També pots triar si vols mostrar la data completa de la defunció o només l'any."
 
 #. Part of help page for choosing what goes on individual's tiles:  
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/u1x88hjQ3UFSTpqwJGuCdDSz.png
 #: 
 msgid "Whether to show the place of death in the output. Also see option for abbreviating place names."
-msgstr ""
+msgstr "Si s'ha de mostrar el lloc de la mort a la sortida. Vegeu també l'opció d'abreujar topònims."
 
 #. Part of help page for choosing what goes on individual's tiles:  
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/u1x88hjQ3UFSTpqwJGuCdDSz.png
 #: 
 msgid "Whether to print the sex of the individual on the individual&apos;s tile, e.g. &quot;Male&quot;"
-msgstr ""
+msgstr "Si s'ha d'imprimir el sexe de l'individu als taulells, per exemple \" Masculí\""
 
 #. Part of help page for deciding what information goes in the family section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/igNqWCHKyhKOofsUxjaGrDeM.png
 #: 
 msgid "Whether to include the XREF of families in the output."
-msgstr ""
+msgstr "Si s'ha d'incloure la XREF de famílies a la sortida."
 
 #. Part of help page for deciding what information goes in the family section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/igNqWCHKyhKOofsUxjaGrDeM.png
 #: 
 msgid "Check the box if you would like to include the date of marriage in the output."
-msgstr ""
+msgstr "Marqueu la casella si voleu incloure la data de matrimoni a la sortida."
 
 #. Part of help page for deciding what information goes in the family section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/igNqWCHKyhKOofsUxjaGrDeM.png
 #: 
 msgid "You can also choose whether to show the full date of marriage or just the year."
-msgstr ""
+msgstr "També podeu triar si voleu mostrar la data completa del matrimoni o només l'any."
 
 #. Part of help page for deciding what information goes in the family section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/igNqWCHKyhKOofsUxjaGrDeM.png
 #: 
 msgid "Whether to show the place of marriage in the output. Also see option for abbreviating place names."
+msgstr "Si s'ha de mostrar el lloc del matrimoni a la sortida. Vegeu també l'opció d'abreujar topònims."
+
+#. An option in new setting to sort the saved settings list: 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/fSaYMVDGQqSSVdo1qxXE1pqY.png
+#: 
+msgid "Oldest first"
+msgstr "Els més antics primer"
+
+#. An option in new setting to sort the saved settings list: 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/fSaYMVDGQqSSVdo1qxXE1pqY.png
+#: 
+msgid "Newest first"
+msgstr "El més nou primer"
+
+#. An option in new setting to sort the saved settings list: 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/fSaYMVDGQqSSVdo1qxXE1pqY.png
+#: 
+msgid "Alphabetical order"
+msgstr "Ordre alfabètic"
+
+#. An option in new setting to sort the saved settings list: 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/fSaYMVDGQqSSVdo1qxXE1pqY.png
+#: 
+msgid "Reverse alphabetical order"
+msgstr "Ordre alfabètic invers"
+
+#. New setting to sort the saved settings list: 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/fSaYMVDGQqSSVdo1qxXE1pqY.png
+#: 
+msgid "Settings list sort order"
+msgstr "Configuració de l'ordre d'ordenació de la llista"
+
+#. Part of the help text for the Settings list sort order option:  https://s3.eu-west-1.amazonaws.com/po-pub/i/yZYMz48ukCKc7zl43L5QhV0a.png
+#: 
+msgid "The default option. New settings are added to the bottom of the list."
+msgstr "L'opció per defecte. S'afegeixen nous paràmetres a la part inferior de la llista."
+
+#. Part of the help text for the Settings list sort order option:  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/yZYMz48ukCKc7zl43L5QhV0a.png
+#: 
+msgid "New settings are added to the top of the list."
+msgstr "S'afegeixen nous paràmetres a la part superior de la llista."
+
+#. Part of the help text for the Settings list sort order option:  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/yZYMz48ukCKc7zl43L5QhV0a.png
+#: 
+msgid "Settings are sorted based on their name."
+msgstr "La configuració s'ordena en funció del seu nom."
+
+#. Part of the help text for the Settings list sort order option:  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/yZYMz48ukCKc7zl43L5QhV0a.png
+#: 
+msgid "Settings are sorted based on their name, but in reverse."
+msgstr ""
+
+#. Part of the help text for the Settings list sort order option:  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/yZYMz48ukCKc7zl43L5QhV0a.png
+#: 
+msgid "Note that if you update a saved setting, this will affect how it is sorted under the 'Oldest first' or 'Newest first' options."
+msgstr ""
+
+#. Part of the help text for the Settings list sort order option:  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/yZYMz48ukCKc7zl43L5QhV0a.png
+#: 
+msgid "This option lets you choose the order of saved settings. The options are"
 msgstr ""
 
