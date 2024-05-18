@@ -67,6 +67,7 @@ class Settings
         $this->defaultSettings['stripe_col_type_options'] = [self::OPTION_STRIPE_NONE => 'No stripe', self::OPTION_STRIPE_SEX_COLOUR => 'Based on individual&apos;s sex', self::OPTION_STRIPE_VITAL_COLOUR => 'Based on vital status', self::OPTION_STRIPE_AGE_COLOUR => 'Based on age'];
         $this->defaultSettings['border_col_type_options'] = [self::OPTION_BORDER_CUSTOM_COLOUR => 'Custom', self::OPTION_BORDER_SEX_COLOUR => 'Based on individual&apos;s sex', self::OPTION_BORDER_FAMILY => 'Same as family border', self::OPTION_BORDER_VITAL_COLOUR => 'Based on vital status', self::OPTION_BORDER_AGE_COLOUR => 'Based on age'];
         $this->defaultSettings['settings_sort_order_options'] = [0 => 'Oldest first', 10 => 'Newest first', 20 => 'Alphabetical order', 30 => 'Reverse alphabetical order'];
+        $this->defaultSettings['click_action_indi_options'] = [0 => 'Open individual\'s page', 10 => 'Show menu', 20 => 'Add individual to list of starting individuals', 30 => 'Replace starting individuals with this individual', 40 => 'Add this individual to the list of stopping individuals', 50 => 'Replace stopping individuals with this individual', 60 => 'Do nothing'];
         $this->defaultSettings['countries'] = $this->getCountryAbbreviations();
         if (!$this->isGraphvizAvailable($this->defaultSettings['graphviz_bin'])) {
             $this->defaultSettings['graphviz_bin'] = "";
@@ -430,6 +431,7 @@ class Settings
             case 'stripe_col_type_options':
             case 'border_col_type_options':
             case 'settings_sort_order_options':
+            case 'click_action_indi_options':
                 return false;
             case 'show_debug_panel':
             case 'filename':

@@ -17,7 +17,7 @@ use vendor\WebtreesModules\gvexport\GVExport;
     <?= view($module->name() . '::MainPage/GeneralSettings/OutputFile', ['vars' => $vars, 'settings' => $settings, 'usegraphviz' => $usegraphviz, 'otypes' => $otypes, 'admin' => $admin]); ?>
 </div>
 <div class="row no-right-margin form-group">
-    <?= view($module->name() . '::MainPage/GeneralSettings/BrowserRender', ['vars' => $vars, 'admin' => $admin]); ?>
+    <?= view($module->name() . '::MainPage/GeneralSettings/BrowserRender', ['vars' => $vars, 'settings' => $settings, 'admin' => $admin]); ?>
 </div>
 <div class="row no-right-margin form-group">
     <?= view($module->name() . '::MainPage/GeneralSettings/SaveSettings', ['vars' => $vars, 'settings' => $settings, 'admin' => $admin]); ?>
