@@ -423,6 +423,7 @@ function getDistance(x1, y1, x2, y2){
 
 function handleTileClick() {
     const MIN_DRAG = 100;
+    const DEFAULT_ACTION = '0';
     let startx;
     let starty;
 
@@ -433,10 +434,31 @@ function handleTileClick() {
             starty = e.clientY;
         });
         // Only trigger links if not dragging
-        linkElements[i].addEventListener("click", function(e) {
+        linkElements[i].addEventListener('click', function(e) {
+            let clickActionEl = document.getElementById('click_action_indi');
+            let clickAction = clickActionEl ? clickActionEl.value : DEFAULT_ACTION;
+
+            // Do nothing if user is dragging
             if (getDistance(startx, starty, e.clientX, e.clientY) >= MIN_DRAG) {
                 e.preventDefault();
+            } else if (clickAction !== '0') {
+                e.preventDefault();
+                switch (clickAction) {
+                    case '10': // Show a menu for user to choose
+                    case '20': // Add to list of starting individuals
+                    case '30': // Remove list of starting individuals and have just this person
+                    case '40':// Add to list of stopping individuals
+                    case '50':// Remove list of stopping individuals and have just this person
+
+                    break;
+                    // Do nothing - default click action is fine
+                    case '0': // Allow link to trigger user page opening
+                    case '60': // Do nothing option
+                    default: // Unknown, so do nothing
+                        break;
+                }
             }
+
         });
     }
 }
