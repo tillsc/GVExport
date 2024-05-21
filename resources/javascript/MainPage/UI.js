@@ -145,14 +145,14 @@ const UI = {
                         case '10': // Show a menu for user to choose
                         case '20': // Add to list of starting individuals
                             if (xref) {
-                                addIndiToList(xref);
+                                Form.indiList.addIndiToList(xref);
                                 handleFormChange();
                             }
                             break;
                         case '30': // Remove list of starting individuals and have just this person
                             if (xref) {
-                                clearIndiList(false);
-                                addIndiToList(xref);
+                                Form.indiList.clearIndiList(false);
+                                Form.indiList.addIndiToList(xref);
                                 mainPage.Url.changeURLXref(xref);
                                 handleFormChange();
                             }
@@ -166,7 +166,7 @@ const UI = {
                         case '50':// Remove list of stopping individuals and have just this person
                             if (xref) {
                                 clearStopIndiList(false);
-                                addIndiToList(xref);
+                                Form.indiList.addIndiToList(xref);
                                 mainPage.Url.changeURLXref(xref);
                                 handleFormChange();
                             }

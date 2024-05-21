@@ -33,7 +33,7 @@ function loadURLXref(Url) {
             }
             if (url_xref_treatment !== 'nothing') {
                 let startValue = el.value;
-                addIndiToList(xref);
+                Form.indiList.addIndiToList(xref);
                 if (url_xref_treatment === 'default' && xrefs.length === 1 ) {
                     setTimeout(function () {UI.showToast(TRANSLATE['Source individual has replaced existing individual'].replace('%s', xrefs.length.toString()))}, 100);
                 } else if (startValue !== el.value && (url_xref_treatment === 'default' || url_xref_treatment === 'add')) {
@@ -44,16 +44,6 @@ function loadURLXref(Url) {
     }
 }
 
-function indiSelectChanged() {
-    let xref = document.getElementById('pid').value.trim();
-    if (xref !== "") {
-        addIndiToList(xref);
-        mainPage.Url.changeURLXref(xref);
-        if (autoUpdate) {
-            updateRender();
-        }
-    }
-}
 function stopIndiSelectChanged() {
     let stopXref = document.getElementById('stop_pid').value.trim();
     if (stopXref !== "") {
@@ -73,7 +63,7 @@ function loadXrefList(url, xrefListId, indiListId) {
     let xrefs = xref_list.split(',');
     for (let i=0; i<xrefs.length; i++) {
         if (xrefs[i].trim() !== "") {
-            promises.push(loadIndividualDetails(url, xrefs[i], indiListId));
+            promises.push(Form.indiList.loadIndividualDetails(url, xrefs[i], indiListId));
         }
     }
     Promise.all(promises).then(function () {
@@ -85,75 +75,12 @@ function loadXrefList(url, xrefListId, indiListId) {
     });
 }
 
-function loadIndividualDetails(url, xref, list) {
-    return fetch(url + xref.trim()).then(async (response) => {
-            const data = await response.json();
-            let contents;
-            let otherXrefId;
-            if (list === "indi_list") {
-                otherXrefId = "xref_list";
-            } else {
-                otherXrefId = "stop_xref_list";
-            }
-            if (data["data"].length !== 0) {
-                for (let i=0; i< data['data'].length; i++) {
-                    if (xref.toUpperCase() === data['data'][i].value.toUpperCase()) {
-                        contents = data["data"][i]["text"];
-                        // Fix case if mismatched
-                        if (xref !== data['data'][i].value) {
-                            let listEl = document.getElementById(otherXrefId);
-                            let indiList = listEl.value.split(',');
-                            for (let j = indiList.length-1; j>=0; j--) {
-                                if (indiList[j].trim() === xref.trim()) {
-                                    indiList[j] = data["data"][i].value;
-                                    break;
-                                }
-                            }
-                            listEl.value = indiList.join(',');
-                            setTimeout(()=>{refreshIndisFromXREFS(false)}, 100);
-                            handleFormChange();
-                        }
-                    }
-                }
-            } else {
-                contents = xref;
-            }
-            const listElement = document.getElementById(list);
-            const newListItem = document.createElement("div");
-            newListItem.className = "indi_list_item";
-            newListItem.setAttribute("data-xref", xref);
-            newListItem.setAttribute("onclick", "UI.scrollToRecord('"+xref+"')");
-            newListItem.innerHTML = contents + "<div class=\"saved-settings-ellipsis\" onclick=\"removeItem(event, this.parentElement, '" + otherXrefId + "')\"><a class='pointer'>×</a></div>";
-            // Multiple promises can be for the same xref - don't add if a duplicate
-            let item = listElement.querySelector(`[data-xref="${xref}"]`);
-            if (item == null) {
-                listElement.appendChild(newListItem);
-            } else {
-                newListItem.remove();
-            }
-        updateClearAll();
-    })
-}
-
-function addIndiToList(xref) {
-    let list = document.getElementById('xref_list');
-    const regex = new RegExp(`(?<=,|^)(${xref})(?=,|$)`);
-    if (!regex.test(list.value.replaceAll(" ','"))) {
-        appendXrefToList(xref, 'xref_list');
-        loadIndividualDetails(TOMSELECT_URL, xref, 'indi_list').then(() => {
-            toggleHighlightStartPersons(document.getElementById('highlight_start_indis').checked);
-        })
-
-    }
-    Form.clearSelect('pid');
-}
-
 function addIndiToStopList(xref) {
     let list = document.getElementById('stop_xref_list');
     const regex = new RegExp(`(?<=,|^)(${xref})(?=,|$)`);
     if (!regex.test(list.value.replaceAll(" ','"))) {
         appendXrefToList(xref, 'stop_xref_list');
-        loadIndividualDetails(TOMSELECT_URL, xref, 'stop_indi_list').then(r => {});
+        Form.indiList.loadIndividualDetails(TOMSELECT_URL, xref, 'stop_indi_list').then(r => {});
     }
     Form.clearSelect('stop_pid');
 }
@@ -244,13 +171,6 @@ function removeSearchOptionFromList(xref, listId) {
     }
 }
 
-// Clear the list of starting individuals
-function clearIndiList(update = true) {
-    document.getElementById('xref_list').value = "";
-    document.getElementById('indi_list').innerHTML = "";
-    updateClearAll();
-    if (autoUpdate && update) updateRender();
-}
 // Clear the list of starting individuals
 function clearStopIndiList(update = true) {
     document.getElementById('stop_xref_list').value = "";
@@ -419,7 +339,7 @@ function pageLoaded(Url) {
         changeElems[i].addEventListener("change", handleFormChange);
     }
     let indiSelectEl = form.querySelector("#pid");
-    indiSelectEl.addEventListener('change', indiSelectChanged);
+    indiSelectEl.addEventListener('change', Form.indiList.indiSelectChanged);
     let stopIndiSelectEl = form.querySelector("#stop_pid");
     stopIndiSelectEl.addEventListener('change', stopIndiSelectChanged);
     let settingsSortOrder = form.querySelector("#settings_sort_order");

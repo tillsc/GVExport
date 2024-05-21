@@ -401,5 +401,111 @@ const Form = {
         defaultChanged() {
             shared_note_default = this.value;
         }
+    },
+
+    /**
+     * List of individuals for building diagram
+     */
+    indiList: {
+        /**
+         * Clear the list of starting individuals
+         *
+         * @param update Whether to update diagram (only if auto-update enables)
+         */
+        clearIndiList(update = true) {
+            document.getElementById('xref_list').value = "";
+            document.getElementById('indi_list').innerHTML = "";
+            updateClearAll();
+            if (autoUpdate && update) updateRender();
+        },
+
+        /**
+         * Add an individual to the list of starting individuals
+         *
+         * @param xref ID of the individual to add
+         */
+        addIndiToList(xref) {
+            let list = document.getElementById('xref_list');
+            const regex = new RegExp(`(?<=,|^)(${xref})(?=,|$)`);
+            if (!regex.test(list.value.replaceAll(" ','"))) {
+                appendXrefToList(xref, 'xref_list');
+                Form.indiList.loadIndividualDetails(TOMSELECT_URL, xref, 'indi_list').then(() => {
+                    toggleHighlightStartPersons(document.getElementById('highlight_start_indis').checked);
+                })
+            }
+            Form.clearSelect('pid');
+        },
+
+        /**
+         *
+         */
+        indiSelectChanged() {
+            let xref = document.getElementById('pid').value.trim();
+            if (xref !== "") {
+                Form.indiList.addIndiToList(xref);
+                mainPage.Url.changeURLXref(xref);
+                if (autoUpdate) {
+                    updateRender();
+                }
+            }
+        },
+
+        /**
+         * Updates the list of starting individuals to add the details of the individual
+         *
+         * @param url The webtrees URL that runs the Tom-select search that we use to pull the details
+         * @param xref The webtrees ID of the individual
+         * @param list 'indi_list' if it's the starting individual list, otherwise it updates the stopping individual's list
+         * @returns {Promise<void>}
+         */
+        loadIndividualDetails(url, xref, list) {
+            return fetch(url + xref.trim()).then(async (response) => {
+                const data = await response.json();
+                let contents;
+                let otherXrefId;
+                if (list === "indi_list") {
+                    otherXrefId = "xref_list";
+                } else {
+                    otherXrefId = "stop_xref_list";
+                }
+                if (data["data"].length !== 0) {
+                    for (let i=0; i< data['data'].length; i++) {
+                        if (xref.toUpperCase() === data['data'][i].value.toUpperCase()) {
+                            contents = data["data"][i]["text"];
+                            // Fix case if mismatched
+                            if (xref !== data['data'][i].value) {
+                                let listEl = document.getElementById(otherXrefId);
+                                let indiList = listEl.value.split(',');
+                                for (let j = indiList.length-1; j>=0; j--) {
+                                    if (indiList[j].trim() === xref.trim()) {
+                                        indiList[j] = data["data"][i].value;
+                                        break;
+                                    }
+                                }
+                                listEl.value = indiList.join(',');
+                                setTimeout(()=>{refreshIndisFromXREFS(false)}, 100);
+                                handleFormChange();
+                            }
+                        }
+                    }
+                } else {
+                    contents = xref;
+                }
+                const listElement = document.getElementById(list);
+                const newListItem = document.createElement("div");
+                newListItem.className = "indi_list_item";
+                newListItem.setAttribute("data-xref", xref);
+                newListItem.setAttribute("onclick", "UI.scrollToRecord('"+xref+"')");
+                newListItem.innerHTML = contents + "<div class=\"saved-settings-ellipsis\" onclick=\"removeItem(event, this.parentElement, '" + otherXrefId + "')\"><a class='pointer'>×</a></div>";
+                // Multiple promises can be for the same xref - don't add if a duplicate
+                let item = listElement.querySelector(`[data-xref="${xref}"]`);
+                if (item == null) {
+                    listElement.appendChild(newListItem);
+                } else {
+                    newListItem.remove();
+                }
+                updateClearAll();
+            })
+        }
     }
 }
