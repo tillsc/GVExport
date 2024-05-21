@@ -437,7 +437,7 @@ const Form = {
         },
 
         /**
-         *
+         * Triggered when the selection box for selecting a starting individual is changed
          */
         indiSelectChanged() {
             let xref = document.getElementById('pid').value.trim();
