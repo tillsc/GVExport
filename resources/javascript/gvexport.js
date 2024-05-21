@@ -122,7 +122,7 @@ function loadIndividualDetails(url, xref, list) {
             const newListItem = document.createElement("div");
             newListItem.className = "indi_list_item";
             newListItem.setAttribute("data-xref", xref);
-            newListItem.setAttribute("onclick", "scrollToRecord('"+xref+"')");
+            newListItem.setAttribute("onclick", "UI.scrollToRecord('"+xref+"')");
             newListItem.innerHTML = contents + "<div class=\"saved-settings-ellipsis\" onclick=\"removeItem(event, this.parentElement, '" + otherXrefId + "')\"><a class='pointer'>×</a></div>";
             // Multiple promises can be for the same xref - don't add if a duplicate
             let item = listElement.querySelector(`[data-xref="${xref}"]`);
@@ -245,18 +245,18 @@ function removeSearchOptionFromList(xref, listId) {
 }
 
 // Clear the list of starting individuals
-function clearIndiList() {
+function clearIndiList(update = true) {
     document.getElementById('xref_list').value = "";
     document.getElementById('indi_list').innerHTML = "";
     updateClearAll();
-    if (autoUpdate) updateRender();
+    if (autoUpdate && update) updateRender();
 }
 // Clear the list of starting individuals
-function clearStopIndiList() {
+function clearStopIndiList(update = true) {
     document.getElementById('stop_xref_list').value = "";
     document.getElementById('stop_indi_list').innerHTML = "";
     updateClearAll();
-    if (autoUpdate) updateRender();
+    if (autoUpdate && update) updateRender();
 }
 
 // Refresh the list of starting and stopping individuals
@@ -351,117 +351,6 @@ function getComputedProperty(element, property) {
     return (parseFloat(style.getPropertyValue(property)));
 }
 
-
-// If the browser render is available, scroll to the xref provided (if it exists)
-function scrollToRecord(xref) {
-    const rendering = document.getElementById('rendering');
-    const svg = rendering.getElementsByTagName('svg')[0].cloneNode(true);
-    let titles = svg.getElementsByTagName('title');
-    for (let i=0; i<titles.length; i++) {
-        let xrefs = titles[i].innerHTML.split("_");
-        for (let j=0; j<xrefs.length; j++) {
-            if (xrefs[j] === xref) {
-                let minX = null;
-                let minY = null;
-                let maxX = null;
-                let maxY = null;
-                let x = null;
-                let y = null;
-                const group = titles[i].parentElement;
-                // We need to locate the element within the SVG. We use "polygon" here because it is the
-                // only element that will always exist and that also has position information
-                // (other elements like text, image, etc. can be disabled by the user)
-                const polygonList = group.getElementsByTagName('polygon');
-                let points;
-                if (polygonList.length !== 0) {
-                    points = polygonList[0].getAttribute('points').split(" ");
-                    // Find largest and smallest X and Y value out of all the points of the polygon
-                    for (let k = 0; k < points.length; k++) {
-                        // If path instructions, ignore
-                        if (points[k].replace(/[a-z]/gi, '') !== points[k]) break;
-                        const x = parseFloat(points[k].split(',')[0]);
-                        const y = parseFloat(points[k].split(',')[1]);
-                        if (minX === null || x < minX) {
-                            minX = x;
-                        }
-                        if (minY === null || y < minY) {
-                            minY = y;
-                        }
-                        if (maxX === null || x > maxX) {
-                            maxX = x;
-                        }
-                        if (maxY === null || y > maxY) {
-                            maxY = y;
-                        }
-                    }
-
-                    // Get the average of the largest and smallest, so we can position the element in the middle
-                    x = (minX + maxX) / 2;
-                    y = (minY + maxY) / 2;
-                } else {
-                    x = group.getElementsByTagName('text')[0].getAttribute('x');
-                    y = group.getElementsByTagName('text')[0].getAttribute('y')
-                }
-
-                // Why do we multiply the scale by 1 and 1/3?
-                let zoombase = panzoomInst.getTransform().scale * (1 + 1 / 3);
-                let zoom = zoombase * parseFloat(document.getElementById("dpi").value)/72;
-                panzoomInst.smoothMoveTo((rendering.offsetWidth / 2) - x * zoom, (rendering.offsetHeight / 2) - parseFloat(svg.getAttribute('height')) * zoombase - y * zoom);
-                return true;
-            }
-        }
-    }
-    return false;
-}
-
-// Return distance between two points
-function getDistance(x1, y1, x2, y2){
-    let x = x2 - x1;
-    let y = y2 - y1;
-    return Math.sqrt(x * x + y * y);
-}
-
-function handleTileClick() {
-    const MIN_DRAG = 100;
-    const DEFAULT_ACTION = '0';
-    let startx;
-    let starty;
-
-    let linkElements = document.querySelectorAll("svg a");
-    for (let i = 0; i < linkElements.length; i++) {
-        linkElements[i].addEventListener("mousedown", function(e) {
-            startx = e.clientX;
-            starty = e.clientY;
-        });
-        // Only trigger links if not dragging
-        linkElements[i].addEventListener('click', function(e) {
-            let clickActionEl = document.getElementById('click_action_indi');
-            let clickAction = clickActionEl ? clickActionEl.value : DEFAULT_ACTION;
-
-            // Do nothing if user is dragging
-            if (getDistance(startx, starty, e.clientX, e.clientY) >= MIN_DRAG) {
-                e.preventDefault();
-            } else if (clickAction !== '0') {
-                e.preventDefault();
-                switch (clickAction) {
-                    case '10': // Show a menu for user to choose
-                    case '20': // Add to list of starting individuals
-                    case '30': // Remove list of starting individuals and have just this person
-                    case '40':// Add to list of stopping individuals
-                    case '50':// Remove list of stopping individuals and have just this person
-
-                    break;
-                    // Do nothing - default click action is fine
-                    case '0': // Allow link to trigger user page opening
-                    case '60': // Do nothing option
-                    default: // Unknown, so do nothing
-                        break;
-                }
-            }
-
-        });
-    }
-}
 
 function handleFormChange() {
     if (autoUpdate) updateRender();
@@ -1104,7 +993,7 @@ function diagramSearchBoxChange(e) {
     let xref = document.getElementById('diagram_search_box').value.trim();
     // Skip the first trigger, only fire for the follow-up trigger when the XREF is set
     if (xref !== ""){
-        if (!scrollToRecord(xref)) {
+        if (!UI.scrollToRecord(xref)) {
             UI.showToast(TRANSLATE['Individual not found']);
         }
         Form.clearSelect('diagram_search_box');

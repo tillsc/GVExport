@@ -110,6 +110,13 @@ const Data = {
         return false;
     },
 
+    // Return distance between two points
+        getDistance(x1, y1, x2, y2){
+        let x = x2 - x1;
+        let y = y2 - y1;
+        return Math.sqrt(x * x + y * y);
+    },
+
     /**
      * Responsible for generating downloads and related activities
      */

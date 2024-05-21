@@ -401,5 +401,5 @@ const Form = {
         defaultChanged() {
             shared_note_default = this.value;
         }
-    },
+    }
 }
