@@ -121,6 +121,25 @@ const Data = {
      * Responsible for generating downloads and related activities
      */
     download: {
+        /**
+         * Remove the <a> tags from the SVG string
+         *
+         * @param svgString
+         * @returns {string}
+         */
+        removeHrefLinksFromSVG(svgString) {
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = svgString;
+            const aTags = tempDiv.querySelectorAll('a');
+            for (let i = 0; i < aTags.length; i++) {
+                const parent = aTags[i].parentNode;
+                while (aTags[i].firstChild) {
+                    parent.insertBefore(aTags[i].firstChild, aTags[i]);
+                }
+                parent.removeChild(aTags[i]);
+            }
+            return tempDiv.innerHTML;
+        },
 
         /**
          * Request download of SVG file
@@ -129,7 +148,12 @@ const Data = {
             const svg = document.getElementById('rendering').getElementsByTagName('svg')[0].cloneNode(true);
             svg.removeAttribute("style");
             let svgData = svg.outerHTML.replace(/&nbsp;/g, '');
-            // Replace image URLs with embedded data  for SVG also triggers download
+            // Remove links if link option not enabled
+            const el = document.getElementById('add_links');
+            if (el && !el.checked) {
+                svgData = Data.download.removeHrefLinksFromSVG(svgData);
+            }
+            // Replace image URLs with embedded data for SVG - also triggers download
             Data.replaceImageURLs(svgData, "svg", null);
         },
 
