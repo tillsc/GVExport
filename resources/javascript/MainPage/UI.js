@@ -115,6 +115,32 @@ const UI = {
         return false;
     },
 
+    /**
+     * Check if the SVG node has <A> tags with a URL with '/individual/' in it.
+     * @param node
+     * @returns {boolean}
+     */
+    checkIfNodeIsIndividual(node) {
+        for (var i = 0; i < node.childNodes.length; i++) {
+            var child = node.childNodes[i];
+            if (child.tagName && child.tagName.toLowerCase() === 'a') {
+                if (child.getAttribute('xlink:href') && child.getAttribute('xlink:href').indexOf('/individual/') !== -1) {
+                    return true;
+                }
+            }
+            // Recursively check child nodes
+            if (child.childNodes.length > 0) {
+                if (UI.checkIfNodeIsIndividual(child)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    },
+
+    /**
+     * Add event listeners to handle clicks on the individuals and family nodes in the diagram
+     */
     handleTileClick() {
         const MIN_DRAG = 100;
         const DEFAULT_ACTION = '0';
@@ -137,7 +163,7 @@ const UI = {
                     xref = idElement.textContent;
                 }
                 // Do nothing if user is dragging
-                if (Data.getDistance(startx, starty, e.clientX, e.clientY) >= MIN_DRAG) {
+                if (Data.getDistance(startx, starty, e.clientX, e.clientY) >= MIN_DRAG || !UI.checkIfNodeIsIndividual(linkElements[i])) {
                     e.preventDefault();
                 } else if (clickAction !== '0') {
                     e.preventDefault();
