@@ -139,6 +139,17 @@ const UI = {
     },
 
     /**
+     * Takes a webtrees individual's URL as input, and returns their XREF
+     *
+     * @param url
+     * @returns {*}
+     */
+    getXrefFromUrl(url) {
+        const regex = /\/tree\/[^/]+\/individual\/(.+)\//;
+        return url.match(regex)[1];
+    },
+
+    /**
      * Add event listeners to handle clicks on the individuals and family nodes in the diagram
      */
     handleTileClick() {
@@ -147,7 +158,11 @@ const UI = {
         let startx;
         let starty;
 
-        let linkElements = document.querySelectorAll("svg .node");
+        let linkElements = document.querySelectorAll("svg a");
+        linkElements = Array.from(linkElements).filter(function(aTag) {
+            return aTag.hasAttribute('xlink:href');
+        });
+
         for (let i = 0; i < linkElements.length; i++) {
             linkElements[i].addEventListener("mousedown", function(e) {
                 startx = e.clientX;
@@ -157,11 +172,8 @@ const UI = {
             linkElements[i].addEventListener('click', function(e) {
                 let clickActionEl = document.getElementById('click_action_indi');
                 let clickAction = clickActionEl ? clickActionEl.value : DEFAULT_ACTION;
-                let idElement = linkElements[i].querySelector('title');
-                let xref;
-                if (idElement) {
-                    xref = idElement.textContent;
-                }
+                let url = linkElements[i].getAttribute('xlink:href');
+                let xref = UI.getXrefFromUrl(url);
                 // Do nothing if user is dragging
                 if (Data.getDistance(startx, starty, e.clientX, e.clientY) >= MIN_DRAG || !UI.checkIfNodeIsIndividual(linkElements[i])) {
                     e.preventDefault();
