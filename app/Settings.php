@@ -323,13 +323,17 @@ class Settings
             }
             $stdout_output = null;
             $return_var = null;
-            if ($this->is_exec_available()) {
-                exec($binPath . " -V" . " 2>&1", $stdout_output, $return_var);
-            }
-            if (!$this->is_exec_available() || $return_var !== 0) {
-                $outcome = false;
-            } else {
-                $outcome = true;
+            try {
+                if ($this->is_exec_available()) {
+                    exec($binPath . " -V" . " 2>&1", $stdout_output, $return_var);
+                }
+                if (!$this->is_exec_available() || $return_var !== 0) {
+                    $outcome = false;
+                } else {
+                    $outcome = true;
+                }
+            } catch (Exception $error) {
+                return false;
             }
         }
         return $outcome;
