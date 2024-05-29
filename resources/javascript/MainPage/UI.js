@@ -115,112 +115,157 @@ const UI = {
         return false;
     },
 
-    /**
-     * Check if the SVG node has <A> tags with a URL with '/individual/' in it.
-     * @param node
-     * @returns {boolean}
-     */
-    checkIfNodeIsIndividual(node) {
-        for (var i = 0; i < node.childNodes.length; i++) {
-            var child = node.childNodes[i];
-            if (child.tagName && child.tagName.toLowerCase() === 'a') {
-                if (child.getAttribute('xlink:href') && child.getAttribute('xlink:href').indexOf('/individual/') !== -1) {
-                    return true;
-                }
+    tile: {
+        /**
+         * Check if the SVG node has <A> tags with a URL with '/individual/' in it.
+         * @param node
+         * @returns {boolean}
+         */
+        isNodeAnIndividual(node) {
+            if (node.getAttribute('xlink:href') && node.getAttribute('xlink:href').indexOf('/individual/') !== -1) {
+                return true;
             }
-            // Recursively check child nodes
-            if (child.childNodes.length > 0) {
-                if (UI.checkIfNodeIsIndividual(child)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    },
-
-    /**
-     * Takes a webtrees individual's URL as input, and returns their XREF
-     *
-     * @param url
-     * @returns {*}
-     */
-    getXrefFromUrl(url) {
-        const regex = /\/tree\/[^/]+\/individual\/(.+)\//;
-        return url.match(regex)[1];
-    },
-
-    /**
-     * Add event listeners to handle clicks on the individuals and family nodes in the diagram
-     */
-    handleTileClick() {
-        const MIN_DRAG = 100;
-        const DEFAULT_ACTION = '0';
-        let startx;
-        let starty;
-
-        let linkElements = document.querySelectorAll("svg a");
-        linkElements = Array.from(linkElements).filter(function(aTag) {
-            return aTag.hasAttribute('xlink:href');
-        });
-
-        for (let i = 0; i < linkElements.length; i++) {
-            linkElements[i].addEventListener("mousedown", function(e) {
-                startx = e.clientX;
-                starty = e.clientY;
-            });
-            // Only trigger links if not dragging
-            linkElements[i].addEventListener('click', function(e) {
-                let clickActionEl = document.getElementById('click_action_indi');
-                let clickAction = clickActionEl ? clickActionEl.value : DEFAULT_ACTION;
-                let url = linkElements[i].getAttribute('xlink:href');
-                let xref = UI.getXrefFromUrl(url);
-                // Do nothing if user is dragging
-                if (Data.getDistance(startx, starty, e.clientX, e.clientY) >= MIN_DRAG || !UI.checkIfNodeIsIndividual(linkElements[i])) {
-                    e.preventDefault();
-                } else if (clickAction !== '0') {
-                    e.preventDefault();
-                    switch (clickAction) {
-                        case '10': // Show a menu for user to choose
-                        case '20': // Add to list of starting individuals
-                            if (xref) {
-                                Form.indiList.addIndiToList(xref);
-                                handleFormChange();
-                            }
-                            break;
-                        case '30': // Remove list of starting individuals and have just this person
-                            if (xref) {
-                                Form.indiList.clearIndiList(false);
-                                Form.indiList.addIndiToList(xref);
-                                mainPage.Url.changeURLXref(xref);
-                                handleFormChange();
-                            }
-                            break;
-                        case '40':// Add to list of stopping individuals
-                            if (xref) {
-                                addIndiToStopList(xref);
-                                handleFormChange();
-                            }
-                            break;
-                        case '50':// Remove list of stopping individuals and have just this person
-                            if (xref) {
-                                clearStopIndiList(false);
-                                Form.indiList.addIndiToList(xref);
-                                mainPage.Url.changeURLXref(xref);
-                                handleFormChange();
-                            }
-                            break;
-                        // Do nothing - default click action is fine
-                        case '0': // Allow link to trigger user page opening
-                        case '60': // Do nothing option
-                        default: // Unknown, so do nothing
-                            break;
+            // Also check children
+            for (let i = 0; i < node.childNodes.length; i++) {
+                const child = node.childNodes[i];
+                if (child.tagName && child.tagName.toLowerCase() === 'a') {
+                    if (child.getAttribute('xlink:href') && child.getAttribute('xlink:href').indexOf('/individual/') !== -1) {
+                        return true;
                     }
                 }
+                // Recursively check child nodes
+                if (child.childNodes.length > 0) {
+                    if (UI.tile.isNodeAnIndividual(child)) {
+                        return true;
+                    }
+                }
+            }
 
+            return false;
+        },
+
+        /**
+         * Takes a webtrees individual's URL as input, and returns their XREF
+         *
+         * @param url
+         * @returns {*}
+         */
+        getXrefFromUrl(url) {
+            const regex = /\/tree\/[^/]+\/individual\/(.+)\//;
+            return url.match(regex)[1];
+        },
+
+        /**
+         * Add event listeners to handle clicks on the individuals and family nodes in the diagram
+         */
+        handleTileClick() {
+            const MIN_DRAG = 100;
+            const DEFAULT_ACTION = '0';
+            let startx;
+            let starty;
+
+            let linkElements = document.querySelectorAll("svg a");
+            linkElements = Array.from(linkElements).filter(function (aTag) {
+                return aTag.hasAttribute('xlink:href');
             });
-        }
-    },
 
+            for (let i = 0; i < linkElements.length; i++) {
+                linkElements[i].addEventListener("mousedown", function (e) {
+                    startx = e.clientX;
+                    starty = e.clientY;
+                });
+                // Only trigger links if not dragging
+                linkElements[i].addEventListener('click', function (e) {
+                    let clickActionEl = document.getElementById('click_action_indi');
+                    let clickAction = clickActionEl ? clickActionEl.value : DEFAULT_ACTION;
+                    let url = linkElements[i].getAttribute('xlink:href');
+
+                    // Do nothing if user is dragging
+                    if (Data.getDistance(startx, starty, e.clientX, e.clientY) >= MIN_DRAG) {
+                        e.preventDefault();
+                    // Leave family links alone
+                    } else if (clickAction !== '0' && UI.tile.isNodeAnIndividual(linkElements[i])) {
+                        e.preventDefault();
+                        let xref = UI.tile.getXrefFromUrl(url);
+                        switch (clickAction) {
+                            case '10': // Show a menu for user to choose
+                                UI.tile.showNodeContextMenu(e, url, xref);
+                                break;
+                            case '20': // Add to list of starting individuals
+                                UI.tile.addIndividualToStartingIndividualsList(xref);
+                                break;
+                            case '30': // Remove list of starting individuals and have just this person
+                                if (xref) {
+                                    Form.indiList.clearIndiList(false);
+                                    Form.indiList.addIndiToList(xref);
+                                    mainPage.Url.changeURLXref(xref);
+                                    handleFormChange();
+                                }
+                                break;
+                            case '40':// Add to list of stopping individuals
+                                if (xref) {
+                                    addIndiToStopList(xref);
+                                    handleFormChange();
+                                }
+                                break;
+                            case '50':// Remove list of stopping individuals and have just this person
+                                if (xref) {
+                                    clearStopIndiList(false);
+                                    Form.indiList.addIndiToList(xref);
+                                    mainPage.Url.changeURLXref(xref);
+                                    handleFormChange();
+                                }
+                                break;
+                            // Do nothing - default click action is fine
+                            case '0': // Allow link to trigger user page opening
+                            case '60': // Do nothing option
+                            default: // Unknown, so do nothing
+                                break;
+                        }
+                    }
+
+                });
+            }
+        },
+
+        /**
+         * Shows a context menu on a node in the diagram, e.g. show menu when individual clicked if this option enabled
+         *
+         * @param e The click event
+         * @param url The URL of the individual or family webtrees page
+         * @param xref The xref of the individual or family
+         */
+        showNodeContextMenu(e, url, xref) {
+            const div = document.getElementById('context_menu');
+            div.setAttribute("data-xref",  xref);
+            div.setAttribute("data-url",  url);
+            UI.contextMenu.enableContextMenu(window.innerWidth - e.pageX, e.pageY);
+            UI.contextMenu.addContextMenuOption('➕', 'Add individual to list of starting individuals', UI.tile.addIndividualToStartingIndividualsContextMenu);
+        },
+
+        /**
+         * Function for context menu item
+         *
+         * @param e Click event
+         */
+        addIndividualToStartingIndividualsContextMenu(e) {
+            UI.tile.addIndividualToStartingIndividualsList(e.currentTarget.parentElement.getAttribute('data-xref'));
+        },
+
+        /**
+         * Adds the individual to the starting individual list
+         *
+         * @param xref
+         */
+        addIndividualToStartingIndividualsList(xref) {
+            if (xref) {
+                Form.indiList.addIndiToList(xref);
+                handleFormChange();
+                UI.contextMenu.clearContextMenu();
+            }
+        }
+
+    },
     /**
      * Additional side panel that shows help information
      */
@@ -358,6 +403,69 @@ const UI = {
                     elements[i].style.color = replaceTextColour;
                 }
             }
+        }
+    },
+
+    /**
+     * Represents the context menu that is shown when an individual is selected and the option to show a menu is enabled
+     */
+    contextMenu: {
+        /**
+         * Adds the context menu element - must only be run once (say, on page load)
+         */
+        init() {
+            let div = document.createElement('div');
+
+            div.setAttribute('id', 'context_menu');
+            div.style.display = 'block';
+            document.getElementById('render-container').appendChild(div);
+
+        },
+
+        /**
+         * Enables the context menu at the provided page location
+         *
+         * @param x
+         * @param y
+         */
+        enableContextMenu(x, y) {
+            UI.contextMenu.clearContextMenu();
+            const div = document.getElementById('context_menu');
+            // Adjustment so pointy bit of menu is on mouse click position
+            x -= 8;
+            y += 5;
+            // Set position
+            div.style.position = 'fixed';
+            div.style.right = x + 'px';
+            div.style.top = y + 'px';
+            div.style.display = '';
+        },
+
+        /**
+         * Removes items from context menu and hides it
+         */
+        clearContextMenu() {
+            const div = document.getElementById('context_menu');
+            div.innerHTML = '';
+            div.style.display = 'none';
+        },
+
+        /**
+         * Adds an option to the context menu list
+         *
+         * @param emoji Emoji to show at the start of line before text
+         * @param text The text of the option to show
+         * @param callback The function to call when option is selected
+         */
+        addContextMenuOption(emoji, text, callback) {
+            const div = document.getElementById('context_menu');
+            let el = document.createElement('a');
+            el.setAttribute('class', 'settings_ellipsis_menu_item');
+            el.innerHTML = '<span class="settings_ellipsis_menu_icon">' + emoji + '</span><span>' + TRANSLATE[text] + '</span>';
+            div.appendChild(el);
+            el.addEventListener("click", (e) => {
+                callback(e);
+            });
         }
     },
 

@@ -329,6 +329,7 @@ function pageLoaded(Url) {
     document.querySelector(".hide-form").addEventListener("click", UI.hideSidebar);
     document.querySelector(".sidebar_toggle a").addEventListener("click", UI.showSidebar);
     UI.helpPanel.init();
+    UI.contextMenu.init();
     UI.fixTheme();
     Form.sharedNotePanel.init();
 
@@ -361,6 +362,10 @@ function pageLoaded(Url) {
     });
     document.addEventListener("click", function(event) {
         removeSettingsEllipsisMenu(event.target);
+        // Hide diagram context menu if clicked off a tile
+        if (event.target.closest('.node') == null && !event.currentTarget.classList.contains('settings_ellipsis_menu_item')) {
+            UI.contextMenu.clearContextMenu();
+        }
         if (!document.getElementById('searchButton').contains(event.target) && !document.getElementById('diagram_search_box_container').contains(event.target)) {
             Form.showHideSearchBox(event, false);
         }

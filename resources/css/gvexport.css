@@ -381,7 +381,8 @@ span.NAME {
     text-decoration: underline;
 }
 
-.settings_ellipsis_menu {
+
+#context_menu, .settings_ellipsis_menu {
     position: absolute;
     padding: 5px;
     z-index: 100;
@@ -396,7 +397,7 @@ span.NAME {
     top: 28px;
 }
 
-.settings_ellipsis_menu::after {
+#context_menu::after, .settings_ellipsis_menu::after {
     content: "";
     position: absolute;
     top: -1px; /* move up 20px */
@@ -408,7 +409,7 @@ span.NAME {
     border-width: 1px;
 }
 
-.settings_ellipsis_menu::before {
+#context_menu::before, .settings_ellipsis_menu::before {
     content: "";
     position: absolute;
     top: -5px;
