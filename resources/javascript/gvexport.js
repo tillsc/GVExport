@@ -363,7 +363,15 @@ function pageLoaded(Url) {
     document.addEventListener("click", function(event) {
         removeSettingsEllipsisMenu(event.target);
         // Hide diagram context menu if clicked off a tile
-        if (event.target.closest('.node') == null && !event.currentTarget.classList.contains('settings_ellipsis_menu_item')) {
+        let menuItem = false;
+        let classList = event.currentTarget.classList;
+        if (classList) {
+            if (classList.contains('settings_ellipsis_menu_item')) {
+                // This is a button in our context menu - let the button handle it
+                menuItem = true;
+            }
+        }
+        if (event.target.closest('.node') == null && !menuItem) {
             UI.contextMenu.clearContextMenu();
         }
         if (!document.getElementById('searchButton').contains(event.target) && !document.getElementById('diagram_search_box_container').contains(event.target)) {
