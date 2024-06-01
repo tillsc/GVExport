@@ -323,6 +323,8 @@ function pageLoaded(Url) {
     }
     let indiSelectEl = form.querySelector("#pid");
     indiSelectEl.addEventListener('change', Form.indiList.indiSelectChanged);
+    let clickActionSelectEl = form.querySelector("#click_action_indi");
+    clickActionSelectEl.addEventListener('change', UI.tile.clickOptionChanged);
     let stopIndiSelectEl = form.querySelector("#stop_pid");
     stopIndiSelectEl.addEventListener('change', stopIndiSelectChanged);
     let settingsSortOrder = form.querySelector("#settings_sort_order");

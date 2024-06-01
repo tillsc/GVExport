@@ -240,11 +240,11 @@ const UI = {
             div.setAttribute("data-xref",  xref);
             div.setAttribute("data-url",  url);
             UI.contextMenu.enableContextMenu(window.innerWidth - e.pageX, e.pageY);
-            UI.contextMenu.addContextMenuOption('➕', 'Open individual\'s page', UI.tile.openIndividualsPageContextMenu);
+            UI.contextMenu.addContextMenuOption('👤', 'Open individual\'s page', UI.tile.openIndividualsPageContextMenu);
             UI.contextMenu.addContextMenuOption('➕', 'Add individual to list of starting individuals', UI.tile.addIndividualToStartingIndividualsContextMenu);
-            UI.contextMenu.addContextMenuOption('➕', 'Replace starting individuals with this individual', UI.tile.replaceStartingIndividualsContextMenu);
-            UI.contextMenu.addContextMenuOption('➕', 'Add this individual to the list of stopping individuals', UI.tile.addIndividualToStoppingIndividualsContextMenu);
-            UI.contextMenu.addContextMenuOption('➕', 'Replace stopping individuals with this individual', UI.tile.replaceStoppingIndividualsContextMenu);
+            UI.contextMenu.addContextMenuOption('🔄', 'Replace starting individuals with this individual', UI.tile.replaceStartingIndividualsContextMenu);
+            UI.contextMenu.addContextMenuOption('🛑', 'Add this individual to the list of stopping individuals', UI.tile.addIndividualToStoppingIndividualsContextMenu);
+            UI.contextMenu.addContextMenuOption('🚫', 'Replace stopping individuals with this individual', UI.tile.replaceStoppingIndividualsContextMenu);
         },
 
         /**
@@ -360,6 +360,19 @@ const UI = {
             }
         },
 
+        /**
+         * Run when setting is changed for what to do when individual is clicked in diagram
+         */
+        clickOptionChanged() {
+            // Trigger background settings saving.
+            isUserLoggedIn().then((loggedIn) => {
+                if (loggedIn) {
+                    saveSettingsServer().then();
+                } else {
+                    Data.storeSettings.saveSettingsClient(ID_MAIN_SETTINGS).then();
+                }
+            });
+        }
 
     },
     /**
