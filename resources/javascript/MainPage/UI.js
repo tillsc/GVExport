@@ -527,8 +527,7 @@ const UI = {
 
             div.setAttribute('id', 'context_menu');
             div.style.display = 'block';
-            document.getElementById('render-container').appendChild(div);
-
+            document.body.appendChild(div);
         },
 
         /**
@@ -544,7 +543,7 @@ const UI = {
             x -= 8;
             y += 5;
             // Set position
-            div.style.position = 'fixed';
+            div.style.position = 'absolute';
             div.style.right = x + 'px';
             div.style.top = y + 'px';
             div.style.display = '';
