@@ -47,7 +47,7 @@ function loadURLXref(Url) {
 function stopIndiSelectChanged() {
     let stopXref = document.getElementById('stop_pid').value.trim();
     if (stopXref !== "") {
-        addIndiToStopList(stopXref);
+        Form.stoppingIndiList.addIndiToStopList(stopXref);
     }
     if (autoUpdate) {
         updateRender();
@@ -73,16 +73,6 @@ function loadXrefList(url, xrefListId, indiListId) {
         UI.showToast("Error");
         console.log(error);
     });
-}
-
-function addIndiToStopList(xref) {
-    let list = document.getElementById('stop_xref_list');
-    const regex = new RegExp(`(?<=,|^)(${xref})(?=,|$)`);
-    if (!regex.test(list.value.replaceAll(" ','"))) {
-        appendXrefToList(xref, 'stop_xref_list');
-        Form.indiList.loadIndividualDetails(TOMSELECT_URL, xref, 'stop_indi_list').then(r => {});
-    }
-    Form.clearSelect('stop_pid');
 }
 
 function appendXrefToList(xref, elementId) {
@@ -169,14 +159,6 @@ function removeSearchOptionFromList(xref, listId) {
             dropdown.tomselect.removeOption(xref);
         }
     }
-}
-
-// Clear the list of starting individuals
-function clearStopIndiList(update = true) {
-    document.getElementById('stop_xref_list').value = "";
-    document.getElementById('stop_indi_list').innerHTML = "";
-    updateClearAll();
-    if (autoUpdate && update) updateRender();
 }
 
 // Refresh the list of starting and stopping individuals
@@ -360,7 +342,7 @@ function pageLoaded(Url) {
             UI.helpPanel.hideHelpSidebar(e);
         }
     });
-    
+
     document.addEventListener("mousedown", function(event) {
         // Hide diagram context menu if clicked off a tile
         if (event.target.closest('.settings_ellipsis_menu_item') == null) {

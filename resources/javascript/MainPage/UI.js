@@ -188,13 +188,10 @@ const UI = {
                         e.preventDefault();
                         let xref = UI.tile.getXrefFromUrl(url);
                         switch (clickAction) {
-                            case '10': // Show a menu for user to choose
-                                UI.tile.showNodeContextMenu(e, url, xref);
-                                break;
-                            case '20': // Add to list of starting individuals
+                            case '10': // Add to list of starting individuals
                                 UI.tile.addIndividualToStartingIndividualsList(xref);
                                 break;
-                            case '30': // Remove list of starting individuals and have just this person
+                            case '20': // Remove list of starting individuals and have just this person
                                 if (xref) {
                                     Form.indiList.clearIndiList(false);
                                     Form.indiList.addIndiToList(xref);
@@ -202,19 +199,22 @@ const UI = {
                                     handleFormChange();
                                 }
                                 break;
-                            case '40':// Add to list of stopping individuals
+                            case '30':// Add to list of stopping individuals
                                 if (xref) {
-                                    addIndiToStopList(xref);
+                                    Form.stoppingIndiList.addIndiToStopList(xref);
                                     handleFormChange();
                                 }
                                 break;
-                            case '50':// Remove list of stopping individuals and have just this person
+                            case '40':// Remove list of stopping individuals and have just this person
                                 if (xref) {
-                                    clearStopIndiList(false);
+                                    Form.stoppingIndiList.clearStopIndiList(false);
                                     Form.indiList.addIndiToList(xref);
                                     mainPage.Url.changeURLXref(xref);
                                     handleFormChange();
                                 }
+                                break;
+                            case '50': // Show a menu for user to choose
+                                UI.tile.showNodeContextMenu(e, url, xref);
                                 break;
                             // Do nothing - default click action is fine
                             case '0': // Allow link to trigger user page opening
@@ -243,8 +243,8 @@ const UI = {
             UI.contextMenu.addContextMenuOption('➕', 'Open individual\'s page', UI.tile.openIndividualsPageContextMenu);
             UI.contextMenu.addContextMenuOption('➕', 'Add individual to list of starting individuals', UI.tile.addIndividualToStartingIndividualsContextMenu);
             UI.contextMenu.addContextMenuOption('➕', 'Replace starting individuals with this individual', UI.tile.replaceStartingIndividualsContextMenu);
-            UI.contextMenu.addContextMenuOption('➕', 'Add this individual to the list of stopping individuals', UI.tile.addIndividualToStartingIndividualsContextMenu);
-            UI.contextMenu.addContextMenuOption('➕', 'Replace stopping individuals with this individual', UI.tile.addIndividualToStartingIndividualsContextMenu);
+            UI.contextMenu.addContextMenuOption('➕', 'Add this individual to the list of stopping individuals', UI.tile.addIndividualToStoppingIndividualsContextMenu);
+            UI.contextMenu.addContextMenuOption('➕', 'Replace stopping individuals with this individual', UI.tile.replaceStoppingIndividualsContextMenu);
         },
 
         /**
@@ -272,6 +272,37 @@ const UI = {
          */
         replaceStartingIndividualsContextMenu(e) {
             UI.tile.replaceStartingIndividuals(e.currentTarget.parentElement.getAttribute('data-xref'));
+        },
+
+        /**
+         * Function for context menu item
+         *
+         * @param e Click event
+         */
+        addIndividualToStoppingIndividualsContextMenu(e) {
+            UI.tile.addIndividualToStoppingIndividualsList(e.currentTarget.parentElement.getAttribute('data-xref'));
+        },
+
+        /**
+         * Function for context menu item
+         *
+         * @param e Click event
+         */
+        replaceStoppingIndividualsContextMenu(e) {
+            UI.tile.replaceStoppingIndividuals(e.currentTarget.parentElement.getAttribute('data-xref'));
+        },
+
+
+        /**
+         * Adds the individual to the starting individual list
+         *
+         * @param xref
+         */
+        openIndividualsPage(url) {
+            if (url) {
+                window.open(url,'_blank');
+                UI.contextMenu.clearContextMenu();
+            }
         },
 
         /**
@@ -303,16 +334,32 @@ const UI = {
         },
 
         /**
-         * Adds the individual to the starting individual list
+         * Adds the individual to the stopping individual list
          *
          * @param xref
          */
-        openIndividualsPage(url) {
-            if (url) {
-                window.open(url,'_blank');
+        addIndividualToStoppingIndividualsList(xref) {
+            if (xref) {
+                Form.stoppingIndiList.addIndiToStopList(xref);
+                handleFormChange();
                 UI.contextMenu.clearContextMenu();
             }
-        }
+        },
+
+        /**
+         * Replaces stopping individual list with this individual
+         *
+         * @param xref
+         */
+        replaceStoppingIndividuals(xref) {
+            if (xref) {
+                Form.stoppingIndiList.clearStopIndiList(false);
+                Form.stoppingIndiList.addIndiToStopList(xref);
+                handleFormChange();
+                UI.contextMenu.clearContextMenu();
+            }
+        },
+
 
     },
     /**

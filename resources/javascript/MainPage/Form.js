@@ -507,5 +507,38 @@ const Form = {
                 updateClearAll();
             })
         }
+    },
+
+    /**
+     * List of stopping individuals for pruning diagram
+     */
+    stoppingIndiList: {
+
+        /**
+         * Adds the individual to the list of stopping individuals
+         *
+         * @param xref The xref of the individual
+         */
+        addIndiToStopList(xref) {
+            let list = document.getElementById('stop_xref_list');
+            const regex = new RegExp(`(?<=,|^)(${xref})(?=,|$)`);
+            if (!regex.test(list.value.replaceAll(" ','"))) {
+                appendXrefToList(xref, 'stop_xref_list');
+                Form.indiList.loadIndividualDetails(TOMSELECT_URL, xref, 'stop_indi_list').then(r => {});
+            }
+            Form.clearSelect('stop_pid');
+        },
+
+        /**
+         * Clears the list of stopping individuals.
+         *
+         * @param update Whether it's ok to update the diagram afterward. Even if true, the diagram will only be updated if autoUpdate is enabled.
+         */
+        clearStopIndiList(update = true) {
+            document.getElementById('stop_xref_list').value = "";
+            document.getElementById('stop_indi_list').innerHTML = "";
+            updateClearAll();
+            if (autoUpdate && update) updateRender();
+        }
     }
 }
