@@ -4,7 +4,11 @@
 =====================================================================
 Version 2.1.22 (2024-)
   - New       : Logged out users can now colour tiles based on a shared note
+  - New       : Added option to change how saved settings are sorted
+  - New       : Added option to allow user to choose what happens when individual is clicked in diagram
   - Changed   : Refactored settings for logged out users to reduce number of settings saved in cookie
+  - Fixed     : Fixed error when exec function was enabled on server but didn't have permission to actually run.
+  - Fixed     : Fixed issue where tooltip showed "<TABLE>" instead of XREF
 
 Version 2.1.21 (2024-04-12)
   - New       : Added Preferred name abbreviation option
