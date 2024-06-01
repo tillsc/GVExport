@@ -1921,3 +1921,104 @@ msgstr "Note that if you update a saved setting, this will affect how it is sort
 msgid "This option lets you choose the order of saved settings. The options are"
 msgstr "This option lets you choose the order of saved settings. The options are"
 
+#. One option in the list of things that can happen when you click an individual in the diagram.  https://s3.eu-west-1.amazonaws.com/po-pub/i/KpMTncLFJrS21Y0UPolZeCDD.png
+#: 
+msgid "Add individual to list of starting individuals"
+msgstr "Add individual to list of starting individuals"
+
+#. One option in the list of things that can happen when you click an individual in the diagram.  https://s3.eu-west-1.amazonaws.com/po-pub/i/KpMTncLFJrS21Y0UPolZeCDD.png
+#: 
+msgid "Open individual's page"
+msgstr "Open individual's page"
+
+#. One option in the list of things that can happen when you click an individual in the diagram.  https://s3.eu-west-1.amazonaws.com/po-pub/i/KpMTncLFJrS21Y0UPolZeCDD.png
+#: 
+msgid "Replace starting individuals with this individual"
+msgstr "Replace starting individuals with this individual"
+
+#. One option in the list of things that can happen when you click an individual in the diagram.  https://s3.eu-west-1.amazonaws.com/po-pub/i/KpMTncLFJrS21Y0UPolZeCDD.png
+#: 
+msgid "Add this individual to the list of stopping individuals"
+msgstr "Add this individual to the list of stopping individuals"
+
+#. One option in the list of things that can happen when you click an individual in the diagram.  https://s3.eu-west-1.amazonaws.com/po-pub/i/KpMTncLFJrS21Y0UPolZeCDD.png
+#: 
+msgid "Replace stopping individuals with this individual"
+msgstr "Replace stopping individuals with this individual"
+
+#. New option to set what happens when you click an individual in the diagram.  https://s3.eu-west-1.amazonaws.com/po-pub/i/KpMTncLFJrS21Y0UPolZeCDD.png
+#: 
+msgid "Action when individual clicked"
+msgstr "Action when individual clicked"
+
+#. One option in the list of things that can happen when you click an individual in the diagram.  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/KpMTncLFJrS21Y0UPolZeCDD.png
+#: 
+msgid "Show menu"
+msgstr "Show menu"
+
+#. One option in the list of things that can happen when you click an individual in the diagram.  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/KpMTncLFJrS21Y0UPolZeCDD.png
+#: 
+msgid "Do nothing"
+msgstr "Do nothing"
+
+#. Part of the help text for the option "Action when individual clicked".
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
+#: 
+msgid "This option lets you choose what happens when you click on an individual in the diagram."
+msgstr "This option lets you choose what happens when you click on an individual in the diagram."
+
+#. Part of the help text for the option "Action when individual clicked".
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
+#: 
+msgid "This is the default option. When you click on an individual, the webtrees page for that individual will open in a new tab or window."
+msgstr "This is the default option. When you click on an individual, the webtrees page for that individual will open in a new tab or window."
+
+#. Part of the help text for the option "Action when individual clicked".
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
+#: 
+msgid "If this option is selected, clicking on an individual in the diagram will add them to the list of starting individuals."
+msgstr "If this option is selected, clicking on an individual in the diagram will add them to the list of starting individuals."
+
+#. Part of the help text for the option "Action when individual clicked".
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
+#: 
+msgid "If this option is selected, clicking on an individual in the diagram will add them to the list of starting individuals and remove all others from the list."
+msgstr "If this option is selected, clicking on an individual in the diagram will add them to the list of starting individuals and remove all others from the list."
+
+#. Part of the help text for the option "Action when individual clicked".
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
+#: 
+msgid "If this option is selected, clicking on an individual in the diagram will add them to the list of stopping individuals."
+msgstr "If this option is selected, clicking on an individual in the diagram will add them to the list of stopping individuals."
+
+#. Part of the help text for the option "Action when individual clicked".
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
+#: 
+msgid "If this option is selected, clicking on an individual in the diagram will add them to the list of stopping individuals and remove all others from the list."
+msgstr "If this option is selected, clicking on an individual in the diagram will add them to the list of stopping individuals and remove all others from the list."
+
+#. Part of the help text for the option "Action when individual clicked".
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
+#: 
+msgid "If this option is chosen, when an individual is clicked on in the diagram, a menu will be shown with the above items to choose from."
+msgstr "If this option is chosen, when an individual is clicked on in the diagram, a menu will be shown with the above items to choose from."
+
+#. Part of the help text for the option "Action when individual clicked".
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
+#: 
+msgid "When an individual is clicked on in the diagram, nothing will happen."
+msgstr "When an individual is clicked on in the diagram, nothing will happen."
+
+#. Part of the help text for the option "Action when individual clicked".
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
+#: 
+msgid "Note that there is currently no option for what to do when a family record is clicked on in the diagram. However, the option to add URLs to individuals and families will also affect families in the browser diagram. That is, if you click a family then if this option is enabled, the family page will open in webtrees."
+msgstr "Note that there is currently no option for what to do when a family record is clicked on in the diagram. However, the option to add URLs to individuals and families will also affect families in the browser diagram. That is, if you click a family then if this option is enabled, the family page will open in webtrees."
+
+#. An extra paragraph for the section on URL links in the help page:  https://s3.eu-west-1.amazonaws.com/po-pub/i/4Vxx95kI54pojXyfcC4CvyYc.png
+#: 
+msgid "This also affects families in the diagram. If this option is enabled, you can click on family records to open the family webtrees page. Also see \\'Action when individual clicked\\' in the Browser render settings."
+msgstr "This also affects families in the diagram. If this option is enabled, you can click on family records to open the family webtrees page. Also see \\'Action when individual clicked\\' in the Browser render settings."
+

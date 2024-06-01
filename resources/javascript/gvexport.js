@@ -33,7 +33,7 @@ function loadURLXref(Url) {
             }
             if (url_xref_treatment !== 'nothing') {
                 let startValue = el.value;
-                addIndiToList(xref);
+                Form.indiList.addIndiToList(xref);
                 if (url_xref_treatment === 'default' && xrefs.length === 1 ) {
                     setTimeout(function () {UI.showToast(TRANSLATE['Source individual has replaced existing individual'].replace('%s', xrefs.length.toString()))}, 100);
                 } else if (startValue !== el.value && (url_xref_treatment === 'default' || url_xref_treatment === 'add')) {
@@ -44,20 +44,10 @@ function loadURLXref(Url) {
     }
 }
 
-function indiSelectChanged() {
-    let xref = document.getElementById('pid').value.trim();
-    if (xref !== "") {
-        addIndiToList(xref);
-        mainPage.Url.changeURLXref(xref);
-        if (autoUpdate) {
-            updateRender();
-        }
-    }
-}
 function stopIndiSelectChanged() {
     let stopXref = document.getElementById('stop_pid').value.trim();
     if (stopXref !== "") {
-        addIndiToStopList(stopXref);
+        Form.stoppingIndiList.addIndiToStopList(stopXref);
     }
     if (autoUpdate) {
         updateRender();
@@ -73,7 +63,7 @@ function loadXrefList(url, xrefListId, indiListId) {
     let xrefs = xref_list.split(',');
     for (let i=0; i<xrefs.length; i++) {
         if (xrefs[i].trim() !== "") {
-            promises.push(loadIndividualDetails(url, xrefs[i], indiListId));
+            promises.push(Form.indiList.loadIndividualDetails(url, xrefs[i], indiListId));
         }
     }
     Promise.all(promises).then(function () {
@@ -83,79 +73,6 @@ function loadXrefList(url, xrefListId, indiListId) {
         UI.showToast("Error");
         console.log(error);
     });
-}
-
-function loadIndividualDetails(url, xref, list) {
-    return fetch(url + xref.trim()).then(async (response) => {
-            const data = await response.json();
-            let contents;
-            let otherXrefId;
-            if (list === "indi_list") {
-                otherXrefId = "xref_list";
-            } else {
-                otherXrefId = "stop_xref_list";
-            }
-            if (data["data"].length !== 0) {
-                for (let i=0; i< data['data'].length; i++) {
-                    if (xref.toUpperCase() === data['data'][i].value.toUpperCase()) {
-                        contents = data["data"][i]["text"];
-                        // Fix case if mismatched
-                        if (xref !== data['data'][i].value) {
-                            let listEl = document.getElementById(otherXrefId);
-                            let indiList = listEl.value.split(',');
-                            for (let j = indiList.length-1; j>=0; j--) {
-                                if (indiList[j].trim() === xref.trim()) {
-                                    indiList[j] = data["data"][i].value;
-                                    break;
-                                }
-                            }
-                            listEl.value = indiList.join(',');
-                            setTimeout(()=>{refreshIndisFromXREFS(false)}, 100);
-                            handleFormChange();
-                        }
-                    }
-                }
-            } else {
-                contents = xref;
-            }
-            const listElement = document.getElementById(list);
-            const newListItem = document.createElement("div");
-            newListItem.className = "indi_list_item";
-            newListItem.setAttribute("data-xref", xref);
-            newListItem.setAttribute("onclick", "scrollToRecord('"+xref+"')");
-            newListItem.innerHTML = contents + "<div class=\"saved-settings-ellipsis\" onclick=\"removeItem(event, this.parentElement, '" + otherXrefId + "')\"><a class='pointer'>×</a></div>";
-            // Multiple promises can be for the same xref - don't add if a duplicate
-            let item = listElement.querySelector(`[data-xref="${xref}"]`);
-            if (item == null) {
-                listElement.appendChild(newListItem);
-            } else {
-                newListItem.remove();
-            }
-        updateClearAll();
-    })
-}
-
-function addIndiToList(xref) {
-    let list = document.getElementById('xref_list');
-    const regex = new RegExp(`(?<=,|^)(${xref})(?=,|$)`);
-    if (!regex.test(list.value.replaceAll(" ','"))) {
-        appendXrefToList(xref, 'xref_list');
-        loadIndividualDetails(TOMSELECT_URL, xref, 'indi_list').then(() => {
-            toggleHighlightStartPersons(document.getElementById('highlight_start_indis').checked);
-        })
-
-    }
-    Form.clearSelect('pid');
-}
-
-function addIndiToStopList(xref) {
-    let list = document.getElementById('stop_xref_list');
-    const regex = new RegExp(`(?<=,|^)(${xref})(?=,|$)`);
-    if (!regex.test(list.value.replaceAll(" ','"))) {
-        appendXrefToList(xref, 'stop_xref_list');
-        loadIndividualDetails(TOMSELECT_URL, xref, 'stop_indi_list').then(r => {});
-    }
-    Form.clearSelect('stop_pid');
 }
 
 function appendXrefToList(xref, elementId) {
@@ -242,21 +159,6 @@ function removeSearchOptionFromList(xref, listId) {
             dropdown.tomselect.removeOption(xref);
         }
     }
-}
-
-// Clear the list of starting individuals
-function clearIndiList() {
-    document.getElementById('xref_list').value = "";
-    document.getElementById('indi_list').innerHTML = "";
-    updateClearAll();
-    if (autoUpdate) updateRender();
-}
-// Clear the list of starting individuals
-function clearStopIndiList() {
-    document.getElementById('stop_xref_list').value = "";
-    document.getElementById('stop_indi_list').innerHTML = "";
-    updateClearAll();
-    if (autoUpdate) updateRender();
 }
 
 // Refresh the list of starting and stopping individuals
@@ -352,95 +254,6 @@ function getComputedProperty(element, property) {
 }
 
 
-// If the browser render is available, scroll to the xref provided (if it exists)
-function scrollToRecord(xref) {
-    const rendering = document.getElementById('rendering');
-    const svg = rendering.getElementsByTagName('svg')[0].cloneNode(true);
-    let titles = svg.getElementsByTagName('title');
-    for (let i=0; i<titles.length; i++) {
-        let xrefs = titles[i].innerHTML.split("_");
-        for (let j=0; j<xrefs.length; j++) {
-            if (xrefs[j] === xref) {
-                let minX = null;
-                let minY = null;
-                let maxX = null;
-                let maxY = null;
-                let x = null;
-                let y = null;
-                const group = titles[i].parentElement;
-                // We need to locate the element within the SVG. We use "polygon" here because it is the
-                // only element that will always exist and that also has position information
-                // (other elements like text, image, etc. can be disabled by the user)
-                const polygonList = group.getElementsByTagName('polygon');
-                let points;
-                if (polygonList.length !== 0) {
-                    points = polygonList[0].getAttribute('points').split(" ");
-                    // Find largest and smallest X and Y value out of all the points of the polygon
-                    for (let k = 0; k < points.length; k++) {
-                        // If path instructions, ignore
-                        if (points[k].replace(/[a-z]/gi, '') !== points[k]) break;
-                        const x = parseFloat(points[k].split(',')[0]);
-                        const y = parseFloat(points[k].split(',')[1]);
-                        if (minX === null || x < minX) {
-                            minX = x;
-                        }
-                        if (minY === null || y < minY) {
-                            minY = y;
-                        }
-                        if (maxX === null || x > maxX) {
-                            maxX = x;
-                        }
-                        if (maxY === null || y > maxY) {
-                            maxY = y;
-                        }
-                    }
-
-                    // Get the average of the largest and smallest, so we can position the element in the middle
-                    x = (minX + maxX) / 2;
-                    y = (minY + maxY) / 2;
-                } else {
-                    x = group.getElementsByTagName('text')[0].getAttribute('x');
-                    y = group.getElementsByTagName('text')[0].getAttribute('y')
-                }
-
-                // Why do we multiply the scale by 1 and 1/3?
-                let zoombase = panzoomInst.getTransform().scale * (1 + 1 / 3);
-                let zoom = zoombase * parseFloat(document.getElementById("dpi").value)/72;
-                panzoomInst.smoothMoveTo((rendering.offsetWidth / 2) - x * zoom, (rendering.offsetHeight / 2) - parseFloat(svg.getAttribute('height')) * zoombase - y * zoom);
-                return true;
-            }
-        }
-    }
-    return false;
-}
-
-// Return distance between two points
-function getDistance(x1, y1, x2, y2){
-    let x = x2 - x1;
-    let y = y2 - y1;
-    return Math.sqrt(x * x + y * y);
-}
-
-function handleTileClick() {
-    const MIN_DRAG = 100;
-    let startx;
-    let starty;
-
-    let linkElements = document.querySelectorAll("svg a");
-    for (let i = 0; i < linkElements.length; i++) {
-        linkElements[i].addEventListener("mousedown", function(e) {
-            startx = e.clientX;
-            starty = e.clientY;
-        });
-        // Only trigger links if not dragging
-        linkElements[i].addEventListener("click", function(e) {
-            if (getDistance(startx, starty, e.clientX, e.clientY) >= MIN_DRAG) {
-                e.preventDefault();
-            }
-        });
-    }
-}
-
 function handleFormChange() {
     if (autoUpdate) updateRender();
 }
@@ -498,17 +311,20 @@ function pageLoaded(Url) {
     document.querySelector(".hide-form").addEventListener("click", UI.hideSidebar);
     document.querySelector(".sidebar_toggle a").addEventListener("click", UI.showSidebar);
     UI.helpPanel.init();
+    UI.contextMenu.init();
     UI.fixTheme();
     Form.sharedNotePanel.init();
 
     // Form change events
     const form = document.getElementById('gvexport');
-    let changeElems = form.querySelectorAll("input:not([type='file']):not(#save_settings_name):not(#stop_pid):not(.highlight_check):not(#sharednote_col_add), select:not(#simple_settings_list):not(#pid):not(#sharednote_col_add):not(#settings_sort_order)");
+    let changeElems = form.querySelectorAll("input:not([type='file']):not(#save_settings_name):not(#stop_pid):not(.highlight_check):not(#sharednote_col_add), select:not(#simple_settings_list):not(#pid):not(#sharednote_col_add):not(#settings_sort_order):not(#click_action_indi)");
     for (let i = 0; i < changeElems.length; i++) {
         changeElems[i].addEventListener("change", handleFormChange);
     }
     let indiSelectEl = form.querySelector("#pid");
-    indiSelectEl.addEventListener('change', indiSelectChanged);
+    indiSelectEl.addEventListener('change', Form.indiList.indiSelectChanged);
+    let clickActionSelectEl = form.querySelector("#click_action_indi");
+    clickActionSelectEl.addEventListener('change', UI.tile.clickOptionChanged);
     let stopIndiSelectEl = form.querySelector("#stop_pid");
     stopIndiSelectEl.addEventListener('change', stopIndiSelectChanged);
     let settingsSortOrder = form.querySelector("#settings_sort_order");
@@ -528,8 +344,17 @@ function pageLoaded(Url) {
             UI.helpPanel.hideHelpSidebar(e);
         }
     });
+
+    document.addEventListener("mousedown", function(event) {
+        // Hide diagram context menu if clicked off a tile
+        if (event.target.closest('.settings_ellipsis_menu_item') == null) {
+            UI.contextMenu.clearContextMenu();
+        }
+    });
+
     document.addEventListener("click", function(event) {
         removeSettingsEllipsisMenu(event.target);
+
         if (!document.getElementById('searchButton').contains(event.target) && !document.getElementById('diagram_search_box_container').contains(event.target)) {
             Form.showHideSearchBox(event, false);
         }
@@ -1070,6 +895,13 @@ function cleanSVG(element) {
             break;
     }
 
+    // remove title tags, so we don't get weird data on hover,
+    // instead this defaults to the XREF of the record
+    const a = element.getElementsByTagName("a");
+    for (let i = 0; i < a.length; i++) {
+        a[i].removeAttribute("xlink:title");
+    }
+    
     //half of bug fix for photos not showing in browser - we change & to %26 in functions_dot.php
     element.innerHTML = element.innerHTML.replaceAll("%26", "&amp;");
     // Don't show anything when hovering on blank space
@@ -1082,7 +914,7 @@ function diagramSearchBoxChange(e) {
     let xref = document.getElementById('diagram_search_box').value.trim();
     // Skip the first trigger, only fire for the follow-up trigger when the XREF is set
     if (xref !== ""){
-        if (!scrollToRecord(xref)) {
+        if (!UI.scrollToRecord(xref)) {
             UI.showToast(TRANSLATE['Individual not found']);
         }
         Form.clearSelect('diagram_search_box');

@@ -67,6 +67,7 @@ class Settings
         $this->defaultSettings['stripe_col_type_options'] = [self::OPTION_STRIPE_NONE => 'No stripe', self::OPTION_STRIPE_SEX_COLOUR => 'Based on individual&apos;s sex', self::OPTION_STRIPE_VITAL_COLOUR => 'Based on vital status', self::OPTION_STRIPE_AGE_COLOUR => 'Based on age'];
         $this->defaultSettings['border_col_type_options'] = [self::OPTION_BORDER_CUSTOM_COLOUR => 'Custom', self::OPTION_BORDER_SEX_COLOUR => 'Based on individual&apos;s sex', self::OPTION_BORDER_FAMILY => 'Same as family border', self::OPTION_BORDER_VITAL_COLOUR => 'Based on vital status', self::OPTION_BORDER_AGE_COLOUR => 'Based on age'];
         $this->defaultSettings['settings_sort_order_options'] = [0 => 'Oldest first', 10 => 'Newest first', 20 => 'Alphabetical order', 30 => 'Reverse alphabetical order'];
+        $this->defaultSettings['click_action_indi_options'] = [0 => 'Open individual\'s page', 10 => 'Add individual to list of starting individuals', 20 => 'Replace starting individuals with this individual', 30 => 'Add this individual to the list of stopping individuals', 40 => 'Replace stopping individuals with this individual', 50 => 'Show menu', 60 => 'Do nothing'];
         $this->defaultSettings['countries'] = $this->getCountryAbbreviations();
         if (!$this->isGraphvizAvailable($this->defaultSettings['graphviz_bin'])) {
             $this->defaultSettings['graphviz_bin'] = "";
@@ -322,13 +323,17 @@ class Settings
             }
             $stdout_output = null;
             $return_var = null;
-            if ($this->is_exec_available()) {
-                exec($binPath . " -V" . " 2>&1", $stdout_output, $return_var);
-            }
-            if (!$this->is_exec_available() || $return_var !== 0) {
-                $outcome = false;
-            } else {
-                $outcome = true;
+            try {
+                if ($this->is_exec_available()) {
+                    exec($binPath . " -V" . " 2>&1", $stdout_output, $return_var);
+                }
+                if (!$this->is_exec_available() || $return_var !== 0) {
+                    $outcome = false;
+                } else {
+                    $outcome = true;
+                }
+            } catch (Exception $error) {
+                return false;
             }
         }
         return $outcome;
@@ -430,6 +435,7 @@ class Settings
             case 'stripe_col_type_options':
             case 'border_col_type_options':
             case 'settings_sort_order_options':
+            case 'click_action_indi_options':
                 return false;
             case 'show_debug_panel':
             case 'filename':

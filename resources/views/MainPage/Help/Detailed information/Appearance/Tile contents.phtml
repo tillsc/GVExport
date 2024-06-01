@@ -11,6 +11,7 @@ use vendor\WebtreesModules\gvexport\GVExport;
 use vendor\WebtreesModules\gvexport\Help;
 
 $page_name = Help::TILE_CONTENTS;
+$help = new Help();
 ?>
 
 <?= view($module->name() . '::MainPage/Help/HelpHeader', ['name' => $page_name]); ?>
@@ -22,6 +23,9 @@ $page_name = Help::TILE_CONTENTS;
 <h5><?= I18N::translate('Add URL to individuals and families'); ?></h5>
 <p>
     <?= I18N::translate('For SVG (and PDF if Graphviz installed on server) output, links can be included. This way you can click on the person in the diagram to be taken to their webtrees page.'); ?>
+</p>
+<p>
+    <?= I18N::translate('This also affects families in the diagram. If this option is enabled, you can click on family records to open the family webtrees page. Also see \'Action when individual clicked\' in the Browser render settings.'); ?>
 </p>
 <h4><?= I18N::translate('Abbreviations'); ?></h4>
 <h5><?= I18N::translate('Abbreviated names'); ?></h5>
@@ -108,3 +112,9 @@ $page_name = Help::TILE_CONTENTS;
 <p>
     <?= I18N::translate('Whether to show the place of marriage in the output. Also see option for abbreviating place names.'); ?>
 </p>
+<p>
+    <?= I18N::translate('Related links'); ?>:
+</p>
+<ul>
+    <li><?= $help->getHelpLinkHtml(HELP::BROWSER_RENDER);?></li>
+</ul>

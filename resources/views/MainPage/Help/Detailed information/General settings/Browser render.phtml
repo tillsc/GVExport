@@ -11,10 +11,37 @@ use vendor\WebtreesModules\gvexport\GVExport;
 use vendor\WebtreesModules\gvexport\Help;
 
 $page_name = Help::BROWSER_RENDER;
+$help = new Help();
 ?>
 
 <?= view($module->name() . '::MainPage/Help/HelpHeader',['name' => $page_name]); ?>
 
+<h4><?= I18N::translate('Auto-update'); ?></h4>
 <p>
     <?= I18N::translate('If the option &quot;Auto-update&quot; is selected, the browser rendered diagram will automatically update when any option is changed. This will also hide the &quot;Update&quot; button.'); ?>
 </p>
+
+<h4><?= I18N::translate('Action when individual clicked'); ?></h4>
+<p>
+    <?= I18N::translate('This option lets you choose what happens when you click on an individual in the diagram.'); ?>
+</p>
+<ul>
+    <li><?= I18N::translate('Open individual\'s page'); ?> - <?= I18N::translate('This is the default option. When you click on an individual, the webtrees page for that individual will open in a new tab or window.'); ?></li>
+    <li><?= I18N::translate('Add individual to list of starting individuals'); ?> - <?= I18N::translate('If this option is selected, clicking on an individual in the diagram will add them to the list of starting individuals.'); ?></li>
+    <li><?= I18N::translate('Replace starting individuals with this individual'); ?> - <?= I18N::translate('If this option is selected, clicking on an individual in the diagram will add them to the list of starting individuals and remove all others from the list.'); ?></li>
+    <li><?= I18N::translate('Add this individual to the list of stopping individuals'); ?> - <?= I18N::translate('If this option is selected, clicking on an individual in the diagram will add them to the list of stopping individuals.'); ?></li>
+    <li><?= I18N::translate('Replace stopping individuals with this individual'); ?> - <?= I18N::translate('If this option is selected, clicking on an individual in the diagram will add them to the list of stopping individuals and remove all others from the list.'); ?></li>
+    <li><?= I18N::translate('Show menu'); ?> - <?= I18N::translate('If this option is chosen, when an individual is clicked on in the diagram, a menu will be shown with the above items to choose from.'); ?></li>
+    <li><?= I18N::translate('Do nothing'); ?> - <?= I18N::translate('When an individual is clicked on in the diagram, nothing will happen.'); ?></li>
+</ul>
+<p>
+    <?= I18N::translate('Note that there is currently no option for what to do when a family record is clicked on in the diagram. However, the option to add URLs to individuals and families will also affect families in the browser diagram. That is, if you click a family then if this option is enabled, the family page will open in webtrees.'); ?>
+</p>
+<p>
+    <?= I18N::translate('Related links'); ?>:
+</p>
+<ul>
+    <li><?= $help->getHelpLinkHtml(HELP::XREFs_OF_INDIVIDUALS);?></li>
+    <li><?= $help->getHelpLinkHtml(HELP::STOP_PROCESSING_ON);?></li>
+    <li><?= $help->getHelpLinkHtml(HELP::TILE_CONTENTS);?></li>
+</ul>

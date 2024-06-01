@@ -4,7 +4,8 @@ use vendor\WebtreesModules\gvexport\MainPage;
 use Fisharebest\Webtrees\I18N;
 
 /**
- * @var array       $vars                   array of saved settings
+ * @var array       $vars           array of saved settings
+ * @var array       $settings       wider array of settings and options
  * @var bool        $admin          whether this is for the admin page (remove functions that aren't settings)
  */
 ?>
@@ -13,4 +14,8 @@ use Fisharebest\Webtrees\I18N;
 <div class="col-sm-8 wt-page-options-value">
     <input type="checkbox" <?php if (!$admin) echo 'onclick="toggleUpdateButton()"'; ?> name="vars[auto_update]" id="auto_update" value="auto_update" <?= $vars["auto_update"] ? 'checked' : '' ?>>
     <label for="auto_update"><?= I18N::translate('Auto-update') ?></label>
+    <div class="col-auto vspace-10">
+        <label for="click_action_indi"><?= I18N::translate('Action when individual clicked'); ?></label>
+        <?= view('components/select', ['name' => 'vars[click_action_indi]', 'id' => 'click_action_indi', 'selected' => I18N::digits($vars['click_action_indi']), 'options' => MainPage::updateTranslations($settings["click_action_indi_options"])]) ?>
+    </div>
 </div>

@@ -340,12 +340,12 @@ $usegraphviz = $vars['graphviz_bin'] != "";
             let indiList = document.getElementById('xref_list').value.split(",");
             for (let i = indiList.length-1; i>=0; i--) {
                 if (indiList[i].trim() !== "") {
-                    scrollToRecord(indiList[i].trim());
+                    UI.scrollToRecord(indiList[i].trim());
                     break;
                 }
             }
 
-            handleTileClick();
+            UI.tile.handleTileClick();
             createXrefListFromSvg();
             return element;
         }).catch(function (error) {

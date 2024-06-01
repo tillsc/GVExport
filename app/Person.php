@@ -180,7 +180,12 @@ class Person
         if ($is_dead) {
             $death_place = Dot::convertToHTMLSC($death_place);
         }
-        $href = $this->dot->settings["add_links"] ? "TARGET=\"_blank\" HREF=\"" . Dot::convertToHTMLSC($link) . "\"" : "";
+        if ($this->dot->settings["add_links"] || !isset($_REQUEST["download"])) {
+            $href = "TARGET=\"_blank\" HREF=\"" . Dot::convertToHTMLSC($link) . "\"";
+        } else {
+            $href = "";
+        }
+
         // Get background colour
         if ($this->isStartingIndividual($pid) && $this->dot->settings['highlight_start_indis'] == "true" && !$this->isValueInList($this->dot->settings['no_highlight_xref_list'], $pid)) {
             $indi_bg_colour = $this->dot->settings["highlight_col"];

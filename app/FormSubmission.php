@@ -174,6 +174,9 @@ class FormSubmission
             $settings['show_adv_files'] = ($vars['show_adv_files'] == "show");
         }
         $settings['auto_update'] = isset($vars['auto_update']);
+        if (isset($vars['click_action_indi'])) {
+            $settings['click_action_indi'] = I18N::digits($vars["click_action_indi"]);
+        }
         $settings['enable_debug_mode'] = isset($vars['enable_debug_mode']);
         $settings['show_debug_panel'] = isset($vars['show_debug_panel']);
         if (isset($vars['admin_page'])) {
