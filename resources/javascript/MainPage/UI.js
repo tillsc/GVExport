@@ -240,7 +240,20 @@ const UI = {
             div.setAttribute("data-xref",  xref);
             div.setAttribute("data-url",  url);
             UI.contextMenu.enableContextMenu(window.innerWidth - e.pageX, e.pageY);
+            UI.contextMenu.addContextMenuOption('➕', 'Open individual\'s page', UI.tile.openIndividualsPageContextMenu);
             UI.contextMenu.addContextMenuOption('➕', 'Add individual to list of starting individuals', UI.tile.addIndividualToStartingIndividualsContextMenu);
+            UI.contextMenu.addContextMenuOption('➕', 'Replace starting individuals with this individual', UI.tile.replaceStartingIndividualsContextMenu);
+            UI.contextMenu.addContextMenuOption('➕', 'Add this individual to the list of stopping individuals', UI.tile.addIndividualToStartingIndividualsContextMenu);
+            UI.contextMenu.addContextMenuOption('➕', 'Replace stopping individuals with this individual', UI.tile.addIndividualToStartingIndividualsContextMenu);
+        },
+
+        /**
+         * Function for context menu item
+         *
+         * @param e Click event
+         */
+        openIndividualsPageContextMenu(e) {
+            UI.tile.openIndividualsPage(e.currentTarget.parentElement.getAttribute('data-url'));
         },
 
         /**
@@ -253,6 +266,15 @@ const UI = {
         },
 
         /**
+         * Function for context menu item
+         *
+         * @param e Click event
+         */
+        replaceStartingIndividualsContextMenu(e) {
+            UI.tile.replaceStartingIndividuals(e.currentTarget.parentElement.getAttribute('data-xref'));
+        },
+
+        /**
          * Adds the individual to the starting individual list
          *
          * @param xref
@@ -261,6 +283,33 @@ const UI = {
             if (xref) {
                 Form.indiList.addIndiToList(xref);
                 handleFormChange();
+                UI.contextMenu.clearContextMenu();
+            }
+        },
+
+        /**
+         * Replaces starting individual list with this individual
+         *
+         * @param xref
+         */
+        replaceStartingIndividuals(xref) {
+            if (xref) {
+                Form.indiList.clearIndiList(false);
+                Form.indiList.addIndiToList(xref);
+                mainPage.Url.changeURLXref(xref);
+                handleFormChange();
+                UI.contextMenu.clearContextMenu();
+            }
+        },
+
+        /**
+         * Adds the individual to the starting individual list
+         *
+         * @param xref
+         */
+        openIndividualsPage(url) {
+            if (url) {
+                window.open(url,'_blank');
                 UI.contextMenu.clearContextMenu();
             }
         }

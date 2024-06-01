@@ -360,20 +360,17 @@ function pageLoaded(Url) {
             UI.helpPanel.hideHelpSidebar(e);
         }
     });
-    document.addEventListener("click", function(event) {
-        removeSettingsEllipsisMenu(event.target);
+    
+    document.addEventListener("mousedown", function(event) {
         // Hide diagram context menu if clicked off a tile
-        let menuItem = false;
-        let classList = event.currentTarget.classList;
-        if (classList) {
-            if (classList.contains('settings_ellipsis_menu_item')) {
-                // This is a button in our context menu - let the button handle it
-                menuItem = true;
-            }
-        }
-        if (event.target.closest('.node') == null && !menuItem) {
+        if (event.target.closest('.settings_ellipsis_menu_item') == null) {
             UI.contextMenu.clearContextMenu();
         }
+    });
+
+    document.addEventListener("click", function(event) {
+        removeSettingsEllipsisMenu(event.target);
+
         if (!document.getElementById('searchButton').contains(event.target) && !document.getElementById('diagram_search_box_container').contains(event.target)) {
             Form.showHideSearchBox(event, false);
         }
