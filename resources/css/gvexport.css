@@ -2,7 +2,7 @@
     height: calc(100% - 200px);
     max-width: calc(min(98vw, 500px));
     position: fixed;
-    z-index: 1050;
+    z-index: 100;
     top: 200px;
     left: 0;
     border-top: 1px solid black;
@@ -48,7 +48,7 @@
     width: 500px;
     max-width: calc(min(98vw, 500px));
     position: fixed;
-    z-index: 1050;
+    z-index: 100;
     top: 200px;
     right: 0;
     border-top: 1px solid black;
@@ -63,13 +63,13 @@
     position: absolute;
     right: 5px;
     top: 5px;
-    z-index: 1100;
+    z-index: 200;
 }
 .btn-help-home {
     position: absolute;
     right: 45px;
     top: 5px;
-    z-index: 1100;
+    z-index: 200;
 }
 
 .help-home {
@@ -81,7 +81,7 @@
     position: absolute;
     right: 85px;
     top: 5px;
-    z-index: 1100;
+    z-index: 200;
 }
 
 .help-search {
@@ -301,7 +301,7 @@ span.NAME {
 .modal {
     display: block;
     position: fixed;
-    z-index: 1150;
+    z-index: 400;
     left: 0;
     top: 0;
     width: 100%;
@@ -385,7 +385,7 @@ span.NAME {
 #context_menu, .settings_ellipsis_menu {
     position: absolute;
     padding: 5px;
-    z-index: 100;
+    z-index: 300;
     background-color: white;
     border-color: #333333;
     border-width: 1px;
