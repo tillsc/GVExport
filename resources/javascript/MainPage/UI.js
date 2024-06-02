@@ -116,6 +116,12 @@ const UI = {
     },
 
     tile: {
+        /**
+         * Fixes URL so regular expression doesn't get confused
+         *
+         * @param url
+         * @returns {string}
+         */
         cleanUrl(url){
             if (url) {
                 return url.replaceAll('%2F', '/');
