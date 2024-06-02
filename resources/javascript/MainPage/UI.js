@@ -159,6 +159,7 @@ const UI = {
          * @returns {*}
          */
         getXrefFromUrl(url) {
+            url = this.cleanUrl(url);
             const regex = /\/tree\/[^/]+\/individual\/(.+)\//;
             return url.match(regex)[1];
         },
