@@ -315,7 +315,7 @@ function pageLoaded(Url) {
     UI.fixTheme();
     Form.sharedNotePanel.init();
 
-    // Form change events
+    // Change events
     const form = document.getElementById('gvexport');
     let changeElems = form.querySelectorAll("input:not([type='file']):not(#save_settings_name):not(#stop_pid):not(.highlight_check):not(#sharednote_col_add), select:not(#simple_settings_list):not(#pid):not(#sharednote_col_add):not(#settings_sort_order):not(#click_action_indi)");
     for (let i = 0; i < changeElems.length; i++) {
@@ -343,6 +343,11 @@ function pageLoaded(Url) {
             document.querySelector(".sidebar").hidden ? UI.showSidebar(e) : UI.hideSidebar(e);
             UI.helpPanel.hideHelpSidebar(e);
         }
+    });
+
+    window.addEventListener("scroll", (event) => {
+        // Hide diagram context menu on scroll
+        UI.contextMenu.clearContextMenu();
     });
 
     document.addEventListener("mousedown", function(event) {

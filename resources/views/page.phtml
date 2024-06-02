@@ -321,6 +321,14 @@ $usegraphviz = $vars['graphviz_bin'] != "";
             // Clear current rendering then append new element to the page
             rendering.innerHTML = "";
             rendering.appendChild(element);
+
+            // Add SVG change observer in case of zooming
+            let svg = rendering.querySelector('svg');
+            const observer = new MutationObserver(() => {
+                UI.contextMenu.clearContextMenu();
+            });
+            observer.observe(svg, { attributes: true });
+
             const fullZoom = Math.min(4, rendering.getBoundingClientRect().width / element.getBBox().width);
             panzoomInst = panzoom(element, {
                 maxZoom: 4,
