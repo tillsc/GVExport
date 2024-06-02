@@ -116,26 +116,34 @@ const UI = {
     },
 
     tile: {
+        cleanUrl(url){
+            if (url) {
+                return url.replace('%2f', '/');
+            } else {
+                return '';
+            }
+        },
+
         /**
          * Check if the SVG node has <A> tags with a URL with '/individual/' in it.
          * @param node
          * @returns {boolean}
          */
         isNodeAnIndividual(node) {
-            if (node.getAttribute('xlink:href') && node.getAttribute('xlink:href').indexOf('/individual/') !== -1) {
+            if (this.cleanUrl(node.getAttribute('xlink:href')).indexOf('/individual/') !== -1) {
                 return true;
             }
             // Also check children
             for (let i = 0; i < node.childNodes.length; i++) {
                 const child = node.childNodes[i];
                 if (child.tagName && child.tagName.toLowerCase() === 'a') {
-                    if (child.getAttribute('xlink:href') && child.getAttribute('xlink:href').indexOf('/individual/') !== -1) {
+                    if (this.cleanUrl(node.getAttribute('xlink:href')).indexOf('/individual/') !== -1) {
                         return true;
                     }
                 }
                 // Recursively check child nodes
                 if (child.childNodes.length > 0) {
-                    if (UI.tile.isNodeAnIndividual(child)) {
+                    if (this.isNodeAnIndividual(child)) {
                         return true;
                     }
                 }
@@ -151,6 +159,7 @@ const UI = {
          * @returns {*}
          */
         getXrefFromUrl(url) {
+            url = this.cleanUrl(url);
             const regex = /\/tree\/[^/]+\/individual\/(.+)\//;
             return url.match(regex)[1];
         },
@@ -527,8 +536,7 @@ const UI = {
 
             div.setAttribute('id', 'context_menu');
             div.style.display = 'block';
-            document.getElementById('render-container').appendChild(div);
-
+            document.body.appendChild(div);
         },
 
         /**
@@ -544,7 +552,7 @@ const UI = {
             x -= 8;
             y += 5;
             // Set position
-            div.style.position = 'fixed';
+            div.style.position = 'absolute';
             div.style.right = x + 'px';
             div.style.top = y + 'px';
             div.style.display = '';
