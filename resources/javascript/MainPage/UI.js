@@ -254,7 +254,7 @@ const UI = {
             const div = document.getElementById('context_menu');
             div.setAttribute("data-xref",  xref);
             div.setAttribute("data-url",  url);
-            UI.contextMenu.enableContextMenu(window.innerWidth - e.pageX, e.pageY);
+            UI.contextMenu.enableContextMenu(window.innerWidth - e.clientX, e.clientY);
             UI.contextMenu.addContextMenuOption('👤', 'Open individual\'s page', UI.tile.openIndividualsPageContextMenu);
             UI.contextMenu.addContextMenuOption('➕', 'Add individual to list of starting individuals', UI.tile.addIndividualToStartingIndividualsContextMenu);
             UI.contextMenu.addContextMenuOption('🔄', 'Replace starting individuals with this individual', UI.tile.replaceStartingIndividualsContextMenu);
@@ -542,7 +542,7 @@ const UI = {
 
             div.setAttribute('id', 'context_menu');
             div.style.display = 'block';
-            document.body.appendChild(div);
+            document.getElementById('render-container').appendChild(div);
         },
 
         /**
@@ -558,7 +558,7 @@ const UI = {
             x -= 8;
             y += 5;
             // Set position
-            div.style.position = 'absolute';
+            div.style.position = 'fixed';
             div.style.right = x + 'px';
             div.style.top = y + 'px';
             div.style.display = '';
