@@ -118,7 +118,7 @@ const UI = {
     tile: {
         cleanUrl(url){
             if (url) {
-                return url.replace('%2f', '/');
+                return url.replaceAll('%2F', '/');
             } else {
                 return '';
             }
