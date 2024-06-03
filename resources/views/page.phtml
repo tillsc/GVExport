@@ -167,7 +167,12 @@ $usegraphviz = $vars['graphviz_bin'] != "";
     const form = document.getElementById('gvexport');
     const rendering = document.getElementById('rendering');
 
-
+    // Trigger action when button pressed to refresh diagram after changing custom highlight list
+    document.querySelector('#refresh_highlight_custom').addEventListener('click', function(e) {
+        if (!autoUpdate) {
+            updateRender();
+        }
+    });
     // Trigger action when "Update" button clicked
     document.querySelector('.update-browser-rendering').addEventListener('click', function(e) {
         if (Form.isIndiBlank() === false) {
