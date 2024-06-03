@@ -187,7 +187,9 @@ class Person
         }
 
         // Get background colour
-        if ($this->isStartingIndividual($pid) && $this->dot->settings['highlight_start_indis'] == "true" && !$this->isValueInList($this->dot->settings['no_highlight_xref_list'], $pid)) {
+        if ($this->isValueInList($this->dot->settings['highlight_custom'], $pid)) {
+            $indi_bg_colour = $this->dot->settings["highlight_custom_col"];
+        } else if ($this->isStartingIndividual($pid) && $this->dot->settings['highlight_start_indis'] == "true" && !$this->isValueInList($this->dot->settings['no_highlight_xref_list'], $pid)) {
             $indi_bg_colour = $this->dot->settings["highlight_col"];
         } else if ($this->dot->settings["sharednote_col_enable"] && $sharednotes->indiHasSharedNote($pid)) {
             $indi_bg_colour = $sharednotes->getSharedNoteColour($pid);
