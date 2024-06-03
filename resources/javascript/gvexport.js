@@ -513,6 +513,7 @@ function loadSettings(data, isNamedSetting = false) {
     setSavedDiagramsPanel();
     Form.showHide(document.getElementById('arrow_group'),document.getElementById('colour_arrow_related').checked)
     Form.showHide(document.getElementById('startcol_option'),document.getElementById('highlight_start_indis').checked)
+    Form.showHide(document.getElementById('highlight_custom_option'),document.getElementById('highlight_custom_indis').checked)
     toggleUpdateButton();
     if (autoUpdatePrior) {
         if (firstRender) {
