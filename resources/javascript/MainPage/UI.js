@@ -231,6 +231,9 @@ const UI = {
                             case '50': // Show a menu for user to choose
                                 UI.tile.showNodeContextMenu(e, url, xref);
                                 break;
+                            case '70': // Add XREF to list of custom highlighted individuals
+                                UI.tile.highlightIndividual(xref);
+                                break;
                             // Do nothing - default click action is fine
                             case '0': // Allow link to trigger user page opening
                             case '60': // Do nothing option
@@ -260,6 +263,7 @@ const UI = {
             UI.contextMenu.addContextMenuOption('🔄', 'Replace starting individuals with this individual', UI.tile.replaceStartingIndividualsContextMenu);
             UI.contextMenu.addContextMenuOption('🛑', 'Add this individual to the list of stopping individuals', UI.tile.addIndividualToStoppingIndividualsContextMenu);
             UI.contextMenu.addContextMenuOption('🚫', 'Replace stopping individuals with this individual', UI.tile.replaceStoppingIndividualsContextMenu);
+            UI.contextMenu.addContextMenuOption('🖍️', 'Add to list of individuals to highlight', UI.tile.highlightIndividualContextMenu);
         },
 
         /**
@@ -305,6 +309,15 @@ const UI = {
          */
         replaceStoppingIndividualsContextMenu(e) {
             UI.tile.replaceStoppingIndividuals(e.currentTarget.parentElement.getAttribute('data-xref'));
+        },
+
+        /**
+         * Function for context menu item
+         *
+         * @param e Click event
+         */
+        highlightIndividualContextMenu(e) {
+            UI.tile.highlightIndividual(e.currentTarget.parentElement.getAttribute('data-xref'));
         },
 
 
@@ -372,6 +385,32 @@ const UI = {
                 Form.stoppingIndiList.addIndiToStopList(xref);
                 handleFormChange();
                 UI.contextMenu.clearContextMenu();
+            }
+        },
+
+        /**
+         * Adds XREF to custom highlight list
+         *
+         * @param xref
+         */
+        highlightIndividual(xref) {
+            if (xref) {
+                this.addIndiToCustomHighlightList(xref);
+                handleFormChange();
+                UI.contextMenu.clearContextMenu();
+            }
+        },
+
+        /**
+         *  Adds the XREF to the list of indiviudals to highlight
+         *
+         * @param xref
+         */
+        addIndiToCustomHighlightList(xref) {
+            let list = document.getElementById('highlight_custom');
+            const regex = new RegExp(`(?<=,|^)(${xref})(?=,|$)`);
+            if (!regex.test(list.value.replaceAll(" ','"))) {
+                appendXrefToList(xref, 'highlight_custom');
             }
         },
 
