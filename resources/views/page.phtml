@@ -219,7 +219,7 @@ $usegraphviz = $vars['graphviz_bin'] != "";
         }
     });
 
-    function updateRender() {
+    function updateRender(scrollXref = null) {
         // Don't overwrite browser settings with default settings
         if (!firstRender) {
             // Update settings in browser storage if logged out
@@ -349,12 +349,17 @@ $usegraphviz = $vars['graphviz_bin'] != "";
                     UI.showToast(messages[i]);
                 }
             }
-            // Scroll render to last starting individual
-            let indiList = document.getElementById('xref_list').value.split(",");
-            for (let i = indiList.length-1; i>=0; i--) {
-                if (indiList[i].trim() !== "") {
-                    UI.scrollToRecord(indiList[i].trim());
-                    break;
+            // Scroll render to scrollXref if it exists, otherwise to the last starting individual
+            if (scrollXref) {
+                // Jump don't scroll
+                UI.scrollToRecord(scrollXref, false);
+            } else {
+                let indiList = document.getElementById('xref_list').value.split(",");
+                for (let i = indiList.length - 1; i >= 0; i--) {
+                    if (indiList[i].trim() !== "") {
+                        UI.scrollToRecord(indiList[i].trim());
+                        break;
+                    }
                 }
             }
 

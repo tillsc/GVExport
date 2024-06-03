@@ -254,8 +254,8 @@ function getComputedProperty(element, property) {
 }
 
 
-function handleFormChange() {
-    if (autoUpdate) updateRender();
+function handleFormChange(scrollXref = null) {
+    if (autoUpdate) updateRender(scrollXref);
 }
 
 function removeSettingsEllipsisMenu(menuElement) {

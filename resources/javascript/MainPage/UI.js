@@ -54,7 +54,7 @@ const UI = {
     },
 
     // If the browser render is available, scroll to the xref provided (if it exists)
-    scrollToRecord(xref) {
+    scrollToRecord(xref, smooth = true) {
         const rendering = document.getElementById('rendering');
         const svg = rendering.getElementsByTagName('svg')[0].cloneNode(true);
         let titles = svg.getElementsByTagName('title');
@@ -107,7 +107,11 @@ const UI = {
                     // Why do we multiply the scale by 1 and 1/3?
                     let zoombase = panzoomInst.getTransform().scale * (1 + 1 / 3);
                     let zoom = zoombase * parseFloat(document.getElementById("dpi").value)/72;
-                    panzoomInst.smoothMoveTo((rendering.offsetWidth / 2) - x * zoom, (rendering.offsetHeight / 2) - parseFloat(svg.getAttribute('height')) * zoombase - y * zoom);
+                    if (smooth) {
+                        panzoomInst.smoothMoveTo((rendering.offsetWidth / 2) - x * zoom, (rendering.offsetHeight / 2) - parseFloat(svg.getAttribute('height')) * zoombase - y * zoom);
+                    } else {
+                        panzoomInst.moveTo((rendering.offsetWidth / 2) - x * zoom, (rendering.offsetHeight / 2) - parseFloat(svg.getAttribute('height')) * zoombase - y * zoom);
+                    }
                     return true;
                 }
             }
@@ -341,7 +345,7 @@ const UI = {
         addIndividualToStartingIndividualsList(xref) {
             if (xref) {
                 Form.indiList.addIndiToList(xref);
-                handleFormChange();
+                handleFormChange(xref);
                 UI.contextMenu.clearContextMenu();
             }
         },
@@ -356,7 +360,7 @@ const UI = {
                 Form.indiList.clearIndiList(false);
                 Form.indiList.addIndiToList(xref);
                 mainPage.Url.changeURLXref(xref);
-                handleFormChange();
+                handleFormChange(xref);
                 UI.contextMenu.clearContextMenu();
             }
         },
@@ -369,7 +373,7 @@ const UI = {
         addIndividualToStoppingIndividualsList(xref) {
             if (xref) {
                 Form.stoppingIndiList.addIndiToStopList(xref);
-                handleFormChange();
+                handleFormChange(xref);
                 UI.contextMenu.clearContextMenu();
             }
         },
@@ -383,7 +387,7 @@ const UI = {
             if (xref) {
                 Form.stoppingIndiList.clearStopIndiList(false);
                 Form.stoppingIndiList.addIndiToStopList(xref);
-                handleFormChange();
+                handleFormChange(xref);
                 UI.contextMenu.clearContextMenu();
             }
         },
@@ -396,7 +400,7 @@ const UI = {
         highlightIndividual(xref) {
             if (xref) {
                 this.addIndiToCustomHighlightList(xref);
-                handleFormChange();
+                handleFormChange(xref);
                 UI.contextMenu.clearContextMenu();
             }
         },
