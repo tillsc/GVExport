@@ -154,7 +154,7 @@ const UI = {
 
             let linkElements = document.querySelectorAll("svg a");
             linkElements = Array.from(linkElements).filter(function (aTag) {
-                return aTag.hasAttribute('xlink:href');
+                return aTag.hasAttribute('xlink:href') && aTag.hasAttribute('xmlns:xlink');
             });
 
             for (let i = 0; i < linkElements.length; i++) {
