@@ -219,7 +219,7 @@ $usegraphviz = $vars['graphviz_bin'] != "";
         }
     });
 
-    function updateRender(scrollXref = null) {
+    function updateRender(scrollX = null, scrollY = null, zoom = null, xref = null) {
         // Don't overwrite browser settings with default settings
         if (!firstRender) {
             // Update settings in browser storage if logged out
@@ -250,9 +250,12 @@ $usegraphviz = $vars['graphviz_bin'] != "";
         }
         Form.showHideMatchCheckbox('mark_not_related', 'mark_related_subgroup');
         document.getElementById("browser").value = "false";
-        let lastDotStr, indiNum, famNum, messages;
+        let lastDotStr, messages;
 
-        rendering.innerHTML = '<div class="d-flex justify-content-center h-100"><div class="spinner-border align-self-center" role="status"><span class="sr-only">Loading...</span></div></div>';
+        // Show loading message unless we are doing some nice dynamic tree growing stuff
+        if (!scrollX || !scrollY) {
+            rendering.innerHTML = '<div class="d-flex justify-content-center h-100"><div class="spinner-border align-self-center" role="status"><span class="sr-only">Loading...</span></div></div>';
+        }
         rendering.hidden = false;
 
         const MARGIN = 50;
@@ -349,11 +352,11 @@ $usegraphviz = $vars['graphviz_bin'] != "";
                     UI.showToast(messages[i]);
                 }
             }
-            // Scroll render to scrollXref if it exists, otherwise to the last starting individual
-            if (scrollXref) {
-                // Jump don't scroll
-                UI.scrollToRecord(scrollXref, false);
+            // scroll to the nominated individual
+            if (xref) {
+                UI.scrollToRecord(xref, scrollX, scrollY, zoom);
             } else {
+            // Otherwise scroll to last individual on starting individuals list
                 let indiList = document.getElementById('xref_list').value.split(",");
                 for (let i = indiList.length - 1; i >= 0; i--) {
                     if (indiList[i].trim() !== "") {
