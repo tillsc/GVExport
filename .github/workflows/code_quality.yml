@@ -20,7 +20,10 @@ jobs:
           fetch-depth: 0  # a full history is required for pull request analysis
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
+        with:
+          php-version: 7.4
       - name: 'Qodana Scan'
         uses: JetBrains/qodana-action@v2024.1
         env:
           QODANA_TOKEN: ${{ secrets.QODANA_TOKEN }}
+        
