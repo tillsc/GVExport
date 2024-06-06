@@ -230,13 +230,13 @@ const UI = {
             const div = document.getElementById('context_menu');
             div.setAttribute("data-xref",  xref);
             div.setAttribute("data-url",  url);
-            UI.contextMenu.enableContextMenu(window.innerWidth - e.clientX, e.clientY);
             UI.contextMenu.addContextMenuOption('👤', 'Open individual\'s page', UI.tile.openIndividualsPageContextMenu);
             UI.contextMenu.addContextMenuOption('➕', 'Add individual to list of starting individuals', UI.tile.addIndividualToStartingIndividualsContextMenu);
             UI.contextMenu.addContextMenuOption('🔄', 'Replace starting individuals with this individual', UI.tile.replaceStartingIndividualsContextMenu);
             UI.contextMenu.addContextMenuOption('🛑', 'Add this individual to the list of stopping individuals', UI.tile.addIndividualToStoppingIndividualsContextMenu);
             UI.contextMenu.addContextMenuOption('🚫', 'Replace stopping individuals with this individual', UI.tile.replaceStoppingIndividualsContextMenu);
             UI.contextMenu.addContextMenuOption('🖍️', 'Add to list of individuals to highlight', UI.tile.highlightIndividualContextMenu);
+            UI.contextMenu.enableContextMenu(window.innerWidth - e.clientX, e.clientY);
         },
 
         /**
@@ -627,16 +627,29 @@ const UI = {
          * @param y
          */
         enableContextMenu(x, y) {
-            UI.contextMenu.clearContextMenu();
             const div = document.getElementById('context_menu');
+            // Show first, so our width calculations work
+            div.style.display = '';
+
             // Adjustment so pointy bit of menu is on mouse click position
             x -= 8;
             y += 5;
+
+            // Make sure it's not off the page
+            let width = div.offsetWidth;
+            let height = div.offsetHeight;
+
+            if (x + width >= window.innerWidth) {
+                x = window.innerWidth - width;
+            }
+            if (y + height >= window.innerHeight) {
+                y = window.innerHeight - height;
+            }
+
             // Set position
             div.style.position = 'fixed';
             div.style.right = x + 'px';
             div.style.top = y + 'px';
-            div.style.display = '';
         },
 
         /**
