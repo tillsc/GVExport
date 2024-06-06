@@ -22,15 +22,8 @@ jobs:
         uses: JetBrains/qodana-action@v2024.1
         env:
           QODANA_TOKEN: ${{ secrets.QODANA_TOKEN }}
-      - name: Run Qodana Docker Container
-        run: |
-          docker run \
-          -p 8080:8080 \
-          -v ${{ github.workspace }}:/data/project \
-          -v ${{ github.workspace }}/res:/data/results/ \
-          jetbrains/qodana-php:latest \
-          --show-report \
-          --baseline=/data/project/qodana.sarif.json
+        with:
+          args: --baseline,qodana.sarif.json
       
       
               
