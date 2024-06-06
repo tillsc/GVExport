@@ -253,11 +253,6 @@ function getComputedProperty(element, property) {
     return (parseFloat(style.getPropertyValue(property)));
 }
 
-
-function handleFormChange() {
-    if (autoUpdate) updateRender();
-}
-
 function removeSettingsEllipsisMenu(menuElement) {
     document.querySelectorAll('.settings_ellipsis_menu').forEach(e => {
         if (e !== menuElement) e.remove();
@@ -319,7 +314,7 @@ function pageLoaded(Url) {
     const form = document.getElementById('gvexport');
     let changeElems = form.querySelectorAll("input:not([type='file']):not(#save_settings_name):not(#stop_pid):not(.highlight_check):not(#sharednote_col_add), select:not(#simple_settings_list):not(#pid):not(#sharednote_col_add):not(#settings_sort_order):not(#click_action_indi)");
     for (let i = 0; i < changeElems.length; i++) {
-        changeElems[i].addEventListener("change", handleFormChange);
+        changeElems[i].addEventListener("change", Form.handleFormChange);
     }
     let indiSelectEl = form.querySelector("#pid");
     indiSelectEl.addEventListener('change', Form.indiList.indiSelectChanged);
@@ -513,6 +508,7 @@ function loadSettings(data, isNamedSetting = false) {
     setSavedDiagramsPanel();
     Form.showHide(document.getElementById('arrow_group'),document.getElementById('colour_arrow_related').checked)
     Form.showHide(document.getElementById('startcol_option'),document.getElementById('highlight_start_indis').checked)
+    Form.showHide(document.getElementById('highlight_custom_option'),document.getElementById('highlight_custom_indis').checked)
     toggleUpdateButton();
     if (autoUpdatePrior) {
         if (firstRender) {
@@ -801,7 +797,7 @@ function toggleHighlightCheckbox(e) {
     } else {
         addToXrefList(xref, 'no_highlight_xref_list');
     }
-    handleFormChange();
+    Form.handleFormChange();
 }
 
 function addToXrefList(value, listElName) {

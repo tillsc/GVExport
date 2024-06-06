@@ -4,6 +4,36 @@
  * @type {{}}
  */
 const Form = {
+
+    /**
+     * Triggers on form change, to update diagram if autoUpdate enabled
+     *
+     * @param xref xref of tile we want to keep in the same position
+     */
+    handleFormChange(xref = null) {
+    if (autoUpdate) {
+            // If xref has been nominated, calculate the position on screen, so we can keep it in the same place
+            if (xref) {
+                let [found, x, y] = UI.tile.getElementPositionFromXref(xref);
+                if (found) {
+                    let scale = panzoomInst.getTransform().scale;
+                    // Why is this 1 1/3 number needed?
+                    let zoomBase = scale * (1 + 1/3);
+                    let zoom_value = zoomBase * parseFloat(document.getElementById("dpi").value) / 72;
+                    const rendering = document.getElementById('rendering');
+                    const svg = rendering.getElementsByTagName('svg')[0];
+                    let transform = panzoomInst.getTransform();
+                    updateRender(x*zoom_value + transform.x, parseFloat(svg.getAttribute('height'))*zoomBase + y*zoom_value + transform.y, transform.scale, xref);
+                } else {
+                    updateRender();
+                }
+            // Nothing fany happening, just update
+            } else {
+                updateRender();
+            }
+        }
+    },
+
     /**
      * Add or remove the % sign from the text input
      *
@@ -484,7 +514,7 @@ const Form = {
                                 }
                                 listEl.value = indiList.join(',');
                                 setTimeout(()=>{refreshIndisFromXREFS(false)}, 100);
-                                handleFormChange();
+                                Form.handleFormChange();
                             }
                         }
                     }

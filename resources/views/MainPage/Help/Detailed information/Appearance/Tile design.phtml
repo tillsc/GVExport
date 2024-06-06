@@ -11,6 +11,7 @@ use vendor\WebtreesModules\gvexport\GVExport;
 use vendor\WebtreesModules\gvexport\Help;
 
 $page_name = Help::TILE_DESIGN;
+$help = new Help();
 ?>
 
 <?= view($module->name() . '::MainPage/Help/HelpHeader',['name' => $page_name]); ?>
@@ -33,6 +34,7 @@ $page_name = Help::TILE_DESIGN;
 <p><?= Help::translateClean('This option lets you change the size of photos as they are displayed, which is done as a percentage of the default size. 100&percnt; is the default size, 50&percnt; is half sized and 200&percnt; is double sized.'); ?></p>
 <h5><?= Help::translateClean('Photo resolution'); ?></h5>
 <p><?= Help::translateClean('This option lets you change the resolution of photos, which is done by adjusting the width as a percentage of the default width. 100&percnt; is the default resolution, 50&percnt; is half the pixels wide and 200&percnt; is double the pixels wide. Because the aspect ratio is maintained, doubling the resolution will increase the size of the file to around 4 times larger (depending on the exact shape of the photo).'); ?></p>
+
 <h4><?= Help::translateClean('Colours'); ?></h4>
 <h5><?= Help::translateClean('Individual background colour'); ?></h5>
 <ul>
@@ -88,10 +90,13 @@ $page_name = Help::TILE_DESIGN;
 <p><?= Help::translateClean('There are four options here for non-blood related individuals, if the &quot;Mark not blood-related people with different colour&quot; option is enabled in the &quot;People to be included&quot; section.'); ?></p>
 <h5><?= Help::translateClean('Show starting individuals in different colour'); ?></h5>
 <p><?= Help::translateClean('Whether starting individuals should be highlighted on the diagram. If enabled, you can choose a background colour to highlight the individual with, and can choose to enable this only for some starting individuals.'); ?></p>
+<h5><?= Help::translateClean('Show additional individuals in different colour'); ?></h5>
+<p><?= Help::translateClean('Similar to the above option for starting individuals, but this option lets you choose a background colour to highlight a custom selection if individuals based on a list of XREFs. Also see option in Browser Render settings to choose what happens when an individual is clicked, as this may be an easier way to add individuals to this list.'); ?></p>
 <h5><?= Help::translateClean('Family background'); ?></h5>
 <p><?= Help::translateClean('The background colour of family records.'); ?></p>
 <h5><?= Help::translateClean('Family border colour'); ?></h5>
 <p><?= Help::translateClean('The border colour of family records.'); ?></p>
+
 <h4><?= Help::translateClean('Font'); ?></h4>
 <h5><?= Help::translateClean('Typeface'); ?></h5>
 <p><?= Help::translateClean('This list lets you pick from a number of known web-safe font typefaces. They must be installed on the system or a fallback typeface will be used. These options are known to be installed on almost all desktop systems and that is why they have been chosen. Mobile browsers will likely use a fallback font.'); ?></p>
@@ -103,3 +108,10 @@ $page_name = Help::TILE_DESIGN;
 <p><?= Help::translateClean('This changes the colour of the font for names. Note that the colour picker is provided by your browser, and is handled differently depending on which browser you are using.'); ?></p>
 <h5><?= Help::translateClean('Font colour for details'); ?></h5>
 <p><?= Help::translateClean('This changes the colour of the font of all text except for names, for example, the date and place of marriage, and the date and place of birth and death. Note that the colour picker is provided by your browser, and is handled differently depending on which browser you are using.'); ?></p>
+
+<p>
+<?= I18N::translate('Related links'); ?>:
+</p>
+<ul>
+    <li><?= $help->getHelpLinkHtml(HELP::BROWSER_RENDER);?></li>
+</ul>

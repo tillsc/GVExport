@@ -161,7 +161,7 @@ use Fisharebest\Webtrees\Auth;
             </div>
             <div class="col-auto padding-left-10">
                 <input type="checkbox" name="vars[highlight_start_indis]" onclick="toggleHighlightStartPersons(this.checked, <?= !$admin ? 'false' : 'true'; ?>)" id="highlight_start_indis" value="true" <?= $vars["highlight_start_indis"] ? 'checked' : '' ?>><label for="highlight_start_indis" class="check-list width-90pc"><?= I18N::translate('Show starting individuals in different colour') ?></label>
-                <div class="setting_subgroup col-auto wt-page-options-value" id="startcol_option"  <?= !$admin && $vars["highlight_start_indis"] != "true" ? 'style="display:none;"' : '' ?>>
+                <div class="setting_subgroup col-auto wt-page-options-value" id="startcol_option"  <?= !$admin && $vars["highlight_start_indis"] ? 'style="display:none;"' : '' ?>>
                     <input type="color" class="picker" name="vars[highlight_col]" id="highlight_col" value="<?= e($vars["highlight_col"]); ?>" /><label for="highlight_col" class="picker-label"><?= I18N::translate('Starting individuals background colour') ?></label>
                     <?php if (!$admin) { ?>
                         <label for="no_highlight_xref_list"><?= I18N::translate('Colour these individuals:'); ?></label><br>
@@ -170,6 +170,17 @@ use Fisharebest\Webtrees\Auth;
                         </div>
                         <input type="hidden" class="form-control" name="vars[no_highlight_xref_list]" id="no_highlight_xref_list" value="<?= e($vars['no_highlight_xref_list']); ?>">
                     <?php } ?>
+                </div>
+            </div>
+            <div class="col-auto padding-left-10">
+                <input type="checkbox" name="vars[highlight_custom_indis]" onclick="Form.showHideMatchCheckbox('highlight_custom_indis', 'highlight_custom_option');" id="highlight_custom_indis" value="true" <?= $vars["highlight_custom_indis"] ? 'checked' : '' ?>><label for="highlight_custom_indis" class="check-list width-90pc"><?= I18N::translate('Show additional individuals in different colour') ?></label>
+                <div class="setting_subgroup col-auto wt-page-options-value" id="highlight_custom_option"  data-test="<?= $vars["highlight_custom_indis"]; ?>" <?= !$admin && !$vars["highlight_custom_indis"] ? 'style="display:none;"' : '' ?>>
+                    <input type="color" class="picker" name="vars[highlight_custom_col]" id="highlight_custom_col" value="<?= e($vars["highlight_custom_col"]); ?>" /><label for="highlight_custom_col" class="picker-label"><?= I18N::translate('Highlighted individuals background colour') ?></label>
+                    <div class="input-group-append">
+                        <label for="highlight_custom" class="picker-label"><?= I18N::translate('Highlighted individuals XREFs') ?></label>
+                        <input type="text" name="vars[highlight_custom]" id="highlight_custom" value="<?= e($vars['highlight_custom']) ?>" >
+                        <button id="refresh_highlight_custom" type="button" class="btn btn-outline-secondary" >⟳</button>
+                    </div>
                 </div>
             </div>
             <div class="col-auto">

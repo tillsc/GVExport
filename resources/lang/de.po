@@ -418,12 +418,12 @@ msgstr "Nicht-blutsverwandte Personen mit unbekanntem Geschlecht"
 #. Option allowing user to change the background colour of individual tiles (decorated and combined modes)
 #: 
 msgid "Individual background colour"
-msgstr "Hintergrundfarbe einer Personenbox"
+msgstr "Hintergrundfarbe eines Personenkästchens"
 
 #. Option where user can change the background colour of the family record (ovals in simple/decorated mode, attached rectangle in combined mode). Default is a light yellow.
 #: 
 msgid "Family background"
-msgstr "Hintergrundfarbe einer Familienbox"
+msgstr "Hintergrundfarbe eines Familienkästchens"
 
 #. Option where user can change the colour of the borders of the tiles and family records.
 #: 
@@ -505,7 +505,7 @@ msgstr "Suchen Sie nach einer Person im Auswahlfeld, um die herum das Diagramm e
 #: 
 #, fuzzy
 msgid "This section includes options that let you decide how to build the tree from your starting individual(s).</p><b>Include ancestors</b><p>Tick this option to include ancestors of your starting individual(s) and anyone in the tree.</p><b>Max levels</b><p>The number of generations of ancestors to include. For example, if you chose yourself as your starting person, you may want the diagram to include relatives back to your great-grandparents. In this case, you would type &quot;3&quot; in the Max levels box under Include ancestors, to include your parents&apos; generation, your grandparents&apos; generation, and your great-grandparents&apos; generation.</p><b>Include descendants</b><p>Whether to include children, grandchildren, etc. of people listed in the tree.</p><b>Max levels</b><p>Similar to the same option for &quot;Include ancestors&quot;, this option indicates how many descendant generations should be included.<h4>Relation types to include</h4><p>The type of relatives to include when generating the diagram.</p><b>Siblings</b><p>Include brothers and sisters of anyone in the tree.</p><b>All relations</b><p>Include cousins, nieces, nephews, and their descendants when generating the tree. Requires &quot;Siblings&quot; to be selected.</p><b>Partners</b><p>Include the husbands, wives, and partners of those in the tree even if they aren&apos;t blood-relatives. There is another option &quot;Mark not blood-related people with different color&quot; that allows these people to be marked in a different colour.</p><b>Anyone</b><p>Follow all links regardless of whether the person is related. In practice, this generally means that the family of non-relatives (i.e. spouses) are included in the tree.</p><p>Use this option to include all records of the selected generations. Note that only records with a link are included, so you may need to include more ancestor or descendant generations (or more starting individuals) to get all your records to show."
-msgstr "In diesem Abschnitt können Sie entscheiden, welche Personen ausgehend von den Startpersonen bei der Erstellung des Diagramms berücksichtigt werden sollen.</p><b>Vorfahren einbeziehen</b><p>Wählen Sie hier aus, ob die Vorfahren der Startpersonen und aller anderen Personen im angezeigten Stammbaum einbezogen werden sollen.</p><b>Nachkommen einbeziehen</b><p>Ob die Kinder, Enkel, etc. der Personen im angezeigten Baum einbezogen werden sollen.</p><b>Maximale Generationen</b><p>Hier wählen Sie die Anzahl der Vorfahren- und Nachkommengenerationen aus. Wenn Sie beispielsweise sich selbst als Startperson ausgewählt haben und möchten, dass das Diagramm Vorfahren bis zu ihren Urgroßeltern enthält, wählen Sie die &quot;3&quot; im Feld für die maximalen Generationen für die Vorfahren. Somit werden ihre Eltern, die Generation ihrer Großeltern und die Generation ihrer Urgroßeltern einbezogen. Entsprechendes gilt für die maximalen Generationen der Nachkommen.</p><h5>Einzubeziehende Verbindungsarten</h5><p>Hier wählen Sie die Art von Verwandten aus, die bei der Erzeugung des Diagramms einbezogen werden sollen.</p><b>Geschwister</b><p>Brüder und Schwestern aller Personen im Baum werden einbezogen.</p><b>Alle Verwandten </b><p>Dies bezieht Cousins, Cousinen, Nichten, Neffen und ggf. deren Nachkommen in die Erstellung des Baums ein. Diese Option erfordert auch die Auswahl der  &quot;Geschwister&quot;.</p><b>Partner</b><p>Schließen Sie die Ehemänner, Ehefrauen und Partner der Personen im Baum ein, auch wenn diese keine Blutsverwandten sind. Es gibt eine weitere Option &quot;Nicht blutsverwandte Personen in einer anderen Farbe markieren&quot;, mit der diese Personen in einer anderen Farbe dargestellt werden können.</p><b>Jeder</b><p>Diese Option folgt allen Verbindungen, unabhängig davon, ob die Person verwandt ist. Dies bedeutet im Allgemeinen, dass auch die Familien von über die Partner verschwägerten Personen in den Baum aufgenommen werden.</p><p>Verwenden Sie diese Option, um alle Datensätze der ausgewählten Generationen einzuschließen. Beachten Sie, dass nur Personen mit einer Verbindung zum Personenkreis im Diagramm enthalten sind, sodass Sie möglicherweise mehr Vorfahrengenerationen (oder mehr Startpersonen) hinzufügen müssen, wenn Sie alle ihre Datensätze anzeigen wollen."
+msgstr "In diesem Abschnitt können Sie entscheiden, welche Personen ausgehend von den Startpersonen bei der Erstellung des Diagramms berücksichtigt werden sollen.</p><b>Vorfahren einbeziehen</b><p>Wählen Sie hier aus, ob die Vorfahren der Startpersonen und aller anderen Personen im angezeigten Stammbaum einbezogen werden sollen.</p><b>Maximale Generationen</b><p>Hier wählen Sie die Anzahl der Vorfahrengenerationen aus. Wenn Sie beispielsweise sich selbst als Startperson ausgewählt haben und möchten, dass das Diagramm Vorfahren bis zu ihren Urgroßeltern enthält, wählen Sie die &quot;3&quot; im Feld für die maximalen Generationen für die Vorfahren. Somit werden ihre Eltern, die Generation ihrer Großeltern und die Generation ihrer Urgroßeltern einbezogen.</p><b>Nachkommen einbeziehen</b><p>Ob die Kinder, Enkel, etc. der Personen im angezeigten Baum einbezogen werden sollen.</p><b>Maximale Generationen</b><p>Ähnlich wie bei der gleichen Option für &quot;Vorfahren einbeziehen&quot; gibt diese Option an, wie viele Nachkommengenerationen einbezogen werden sollen.</p><h4>Einzubeziehende Verbindungsarten</h4><p>Hier wählen Sie die Art von Verwandten aus, die bei der Erzeugung des Diagramms einbezogen werden sollen.</p><b>Geschwister</b><p>Brüder und Schwestern aller Personen im Baum werden einbezogen.</p><b>Alle Verwandten</b><p>Dies bezieht Cousins, Cousinen, Nichten, Neffen und ggf. deren Nachkommen in die Erstellung des Baums ein. Diese Option erfordert auch die Auswahl der  &quot;Geschwister&quot;.</p><b>Partner</b><p>Schließen Sie die Ehemänner, Ehefrauen und Partner der Personen im Baum ein, auch wenn diese keine Blutsverwandten sind. Es gibt eine weitere Option &quot;Nicht blutsverwandte Personen in einer anderen Farbe markieren&quot;, mit der diese Personen in einer anderen Farbe dargestellt werden können.</p><b>Jeder</b><p>Diese Option folgt allen Verbindungen, unabhängig davon, ob die Person verwandt ist. Dies bedeutet im Allgemeinen, dass auch die Familien von über die Partner verschwägerten Personen in den Baum aufgenommen werden.</p><p>Verwenden Sie diese Option, um alle Datensätze der ausgewählten Generationen einzuschließen. Beachten Sie, dass nur Personen mit einer Verbindung zum Personenkreis im Diagramm enthalten sind, sodass Sie möglicherweise mehr Vorfahrengenerationen (oder mehr Startpersonen) hinzufügen müssen, wenn Sie alle ihre Datensätze anzeigen wollen."
 
 #. This help message is displayed when the user clicks the help icon next to "Graph direction". https://s3.eu-west-1.amazonaws.com/po-pub/i/MpbVhXyRxeLgMO8FZVXHZhHG.png
 #: 
@@ -988,17 +988,17 @@ msgstr "Ausgewählte Hintergrundfarbe"
 #. New option for setting the colour of the stripe on individual tiles:  https://s3.eu-west-1.amazonaws.com/po-pub/i/foB5NxsPsztrvQxIxo0R7HvG.png
 #: 
 msgid "Individual stripe colour"
-msgstr "Balkenfarbe einer Personenbox"
+msgstr "Balkenfarbe eines Personenkästchens"
 
 #. Option to set the border colour of individuals:  https://s3.eu-west-1.amazonaws.com/po-pub/i/U91BOGzE90DmKPN8uGvur5k9.png
 #: 
 msgid "Individual border colour"
-msgstr "Randfarbe einer Personenbox"
+msgstr "Randfarbe eines Personenkästchens"
 
 #. New name for existing option to set the border colour of tiles:  https://s3.eu-west-1.amazonaws.com/po-pub/i/JBcfI43E8P0ZCxLo51Bhpa8U.png
 #: 
 msgid "Family border colour"
-msgstr "Randfarbe der Familienbox"
+msgstr "Randfarbe der Familienkästchen"
 
 #. Option in dropdown box for stripe, border, and background colour option: https://s3.eu-west-1.amazonaws.com/po-pub/i/foB5NxsPsztrvQxIxo0R7HvG.png
 #: 
@@ -1013,7 +1013,7 @@ msgstr "Kein Balken"
 #. Option to set individuals border colour to the same as families (this is the default): https://s3.eu-west-1.amazonaws.com/po-pub/i/U91BOGzE90DmKPN8uGvur5k9.png
 #: 
 msgid "Same as family border"
-msgstr "Genau wie die Randfarbe einer Familienbox"
+msgstr "Genau wie die Randfarbe der Familienkästchen"
 
 #. New grouping of settings within new Tile contents section:   https://s3.eu-west-1.amazonaws.com/po-pub/i/vjxGtnJth5ODT2NSpQ8tm7WB.png
 #: 
@@ -1698,7 +1698,7 @@ msgstr "Symbol für Heirat"
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/F5T8grIN2Crn5G9tGzAVeCBL.png
 #: 
 msgid "Abbreviated month names"
-msgstr ""
+msgstr "Abgekürzte Monatsnamen"
 
 #. Part of help page:  https://s3.eu-west-1.amazonaws.com/po-pub/i/08Z4pSSmjQhf0V1ym9AEETTC.png
 #: 
@@ -1788,7 +1788,7 @@ msgstr "Hinweis: Der CLDR-Anzeigename wird für den Abgleich verwendet. Die Date
 #. Part of help page for abbreviations:  https://s3.eu-west-1.amazonaws.com/po-pub/i/yVRNezroLkh7Cky5dWr4YYyp.png
 #: 
 msgid "Selecting this box will shorten the month names. This uses the webtrees built in date shortening; in most cases, the month name will be shortened to three characters, e.g. \\\"Jan\\\" for January"
-msgstr ""
+msgstr "Wenn Sie dieses Kästchen auswählen, werden die Monatsnamen abgekürzt. Dies nutzt die in webtrees eingebaute Datumsverkürzung; In den meisten Fällen wird der Monatsname auf drei Zeichen gekürzt, z. B. \\\"Jan\\“ für Januar"
 
 #. Part of help page for choosing what goes on individual's tiles:  https://s3.eu-west-1.amazonaws.com/po-pub/i/u1x88hjQ3UFSTpqwJGuCdDSz.png
 #: 
@@ -1856,4 +1856,205 @@ msgstr "Sie können auch wählen, ob das vollständige Heiratsdatum oder nur das
 #: 
 msgid "Whether to show the place of marriage in the output. Also see option for abbreviating place names."
 msgstr "Ob der Ort der Eheschließung im Diagramm angezeigt werden soll. Siehe auch Option zum Abkürzen von Ortsnamen."
+
+#. An option in new setting to sort the saved settings list: 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/fSaYMVDGQqSSVdo1qxXE1pqY.png
+#: 
+msgid "Oldest first"
+msgstr "Älteste zuerst"
+
+#. An option in new setting to sort the saved settings list: 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/fSaYMVDGQqSSVdo1qxXE1pqY.png
+#: 
+msgid "Newest first"
+msgstr "Neueste zuerst"
+
+#. An option in new setting to sort the saved settings list: 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/fSaYMVDGQqSSVdo1qxXE1pqY.png
+#: 
+msgid "Alphabetical order"
+msgstr "Alphabetische Reihenfolge"
+
+#. An option in new setting to sort the saved settings list: 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/fSaYMVDGQqSSVdo1qxXE1pqY.png
+#: 
+msgid "Reverse alphabetical order"
+msgstr "Umgekehrte alphabetische Reihenfolge"
+
+#. New setting to sort the saved settings list: 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/fSaYMVDGQqSSVdo1qxXE1pqY.png
+#: 
+msgid "Settings list sort order"
+msgstr "Sortierung der Liste der Einstellungen"
+
+#. Part of the help text for the Settings list sort order option:  https://s3.eu-west-1.amazonaws.com/po-pub/i/yZYMz48ukCKc7zl43L5QhV0a.png
+#: 
+msgid "The default option. New settings are added to the bottom of the list."
+msgstr "Standardauswahl. Neue Einstellungen werden am Ende der Liste eingefügt."
+
+#. Part of the help text for the Settings list sort order option:  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/yZYMz48ukCKc7zl43L5QhV0a.png
+#: 
+msgid "New settings are added to the top of the list."
+msgstr "Neue Einstellungen werden zu Beginn der Liste eingefügt."
+
+#. Part of the help text for the Settings list sort order option:  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/yZYMz48ukCKc7zl43L5QhV0a.png
+#: 
+msgid "Settings are sorted based on their name."
+msgstr "Einstellungen werden nach ihrem Namen sortiert."
+
+#. Part of the help text for the Settings list sort order option:  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/yZYMz48ukCKc7zl43L5QhV0a.png
+#: 
+msgid "Settings are sorted based on their name, but in reverse."
+msgstr "Einstellungen werden nach ihrem Namen sortiert, aber in umgekehrter Reihenfolge."
+
+#. Part of the help text for the Settings list sort order option:  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/yZYMz48ukCKc7zl43L5QhV0a.png
+#: 
+msgid "Note that if you update a saved setting, this will affect how it is sorted under the 'Oldest first' or 'Newest first' options."
+msgstr "Beachten Sie beim Aktualisieren einer gespeicherten Einstellung, dass dies einen Einfluss darauf hat, wie es unter Beachtung der Option 'Älteste zuerst' bzw. 'Neueste zuerst' sortiert wird."
+
+#. Part of the help text for the Settings list sort order option:  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/yZYMz48ukCKc7zl43L5QhV0a.png
+#: 
+msgid "This option lets you choose the order of saved settings. The options are"
+msgstr "Diese Option erlaubt es die Reihenfolge der gespeicherten Einstellungen auszuwählen. Die Möglichkeiten sind"
+
+#. One option in the list of things that can happen when you click an individual in the diagram.  https://s3.eu-west-1.amazonaws.com/po-pub/i/KpMTncLFJrS21Y0UPolZeCDD.png
+#: 
+msgid "Add individual to list of starting individuals"
+msgstr "Person zur Liste der Startpersonen hinzufügen"
+
+#. One option in the list of things that can happen when you click an individual in the diagram.  https://s3.eu-west-1.amazonaws.com/po-pub/i/KpMTncLFJrS21Y0UPolZeCDD.png
+#: 
+msgid "Open individual's page"
+msgstr "Seite der Person öffnen"
+
+#. One option in the list of things that can happen when you click an individual in the diagram.  https://s3.eu-west-1.amazonaws.com/po-pub/i/KpMTncLFJrS21Y0UPolZeCDD.png
+#: 
+msgid "Replace starting individuals with this individual"
+msgstr "Startpersonen durch diese Person ersetzen"
+
+#. One option in the list of things that can happen when you click an individual in the diagram.  https://s3.eu-west-1.amazonaws.com/po-pub/i/KpMTncLFJrS21Y0UPolZeCDD.png
+#: 
+msgid "Add this individual to the list of stopping individuals"
+msgstr "Person zur Liste der Stopp-Personen hinzufügen"
+
+#. One option in the list of things that can happen when you click an individual in the diagram.  https://s3.eu-west-1.amazonaws.com/po-pub/i/KpMTncLFJrS21Y0UPolZeCDD.png
+#: 
+msgid "Replace stopping individuals with this individual"
+msgstr "Liste der Stopp-Personen durch diese Person ersetzen"
+
+#. New option to set what happens when you click an individual in the diagram.  https://s3.eu-west-1.amazonaws.com/po-pub/i/KpMTncLFJrS21Y0UPolZeCDD.png
+#: 
+msgid "Action when individual clicked"
+msgstr "Aktion beim Anklicken eines Personenkästchens"
+
+#. One option in the list of things that can happen when you click an individual in the diagram.  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/KpMTncLFJrS21Y0UPolZeCDD.png
+#: 
+msgid "Show menu"
+msgstr "Menü anzeigen"
+
+#. One option in the list of things that can happen when you click an individual in the diagram.  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/KpMTncLFJrS21Y0UPolZeCDD.png
+#: 
+msgid "Do nothing"
+msgstr "Nichts tun"
+
+#. Part of the help text for the option "Action when individual clicked".
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
+#: 
+msgid "This option lets you choose what happens when you click on an individual in the diagram."
+msgstr "Mit dieser Option können Sie auswählen, was passiert, wenn Sie auf ein Personenkästchen im Diagramm klicken."
+
+#. Part of the help text for the option "Action when individual clicked".
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
+#: 
+msgid "This is the default option. When you click on an individual, the webtrees page for that individual will open in a new tab or window."
+msgstr "Dies ist die Standardoption. Wenn Sie auf ein Personenkästchen klicken, wird die webtrees-Seite für diese Person in einem neuen Tab oder Fenster geöffnet."
+
+#. Part of the help text for the option "Action when individual clicked".
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
+#: 
+msgid "If this option is selected, clicking on an individual in the diagram will add them to the list of starting individuals."
+msgstr "Wenn diese Option ausgewählt ist, wird durch Klicken auf eine Person im Diagramm diese zur Liste der Startpersonen hinzugefügt."
+
+#. Part of the help text for the option "Action when individual clicked".
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
+#: 
+msgid "If this option is selected, clicking on an individual in the diagram will add them to the list of starting individuals and remove all others from the list."
+msgstr "Wenn diese Option ausgewählt ist, wird durch Klicken auf eine Personenbox im Diagramm diese Person zur Liste der Startpersonen hinzugefügt und alle anderen aus der Liste entfernt."
+
+#. Part of the help text for the option "Action when individual clicked".
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
+#: 
+msgid "If this option is selected, clicking on an individual in the diagram will add them to the list of stopping individuals."
+msgstr "Wenn diese Option ausgewählt ist, wird durch Klicken auf eine Personenbox im Diagramm diese zur Liste der Stopp-Personen hinzugefügt."
+
+#. Part of the help text for the option "Action when individual clicked".
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
+#: 
+msgid "If this option is selected, clicking on an individual in the diagram will add them to the list of stopping individuals and remove all others from the list."
+msgstr "Wenn diese Option ausgewählt ist, wird durch Klicken auf eine Personenbox im Diagramm diese zur Liste der Stopp-Personen hinzugefügt und alle anderen aus der Liste entfernt."
+
+#. Part of the help text for the option "Action when individual clicked".
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
+#: 
+msgid "If this option is chosen, when an individual is clicked on in the diagram, a menu will be shown with the above items to choose from."
+msgstr "Wenn diese Option ausgewählt ist und auf ein Personenkästchen im Diagramm geklickt wird, wird ein Menü mit den oben genannten Elementen zur Auswahl angezeigt."
+
+#. Part of the help text for the option "Action when individual clicked".
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
+#: 
+msgid "When an individual is clicked on in the diagram, nothing will happen."
+msgstr "Wenn im Diagramm auf ein Personenkästchen geklickt wird, passiert nichts."
+
+#. Part of the help text for the option "Action when individual clicked".
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
+#: 
+msgid "Note that there is currently no option for what to do when a family record is clicked on in the diagram. However, the option to add URLs to individuals and families will also affect families in the browser diagram. That is, if you click a family then if this option is enabled, the family page will open in webtrees."
+msgstr "Beachten Sie, dass es derzeit keine Option gibt, die festlegt was geschehen soll, wenn im Diagramm auf ein Familienelement geklickt wird. Die Option zum Hinzufügen von URLs zu Einzelpersonen und Familien wirkt sich jedoch auch auf Familien im Browserdiagramm aus. Das heißt, wenn Sie auf eine Familie klicken und diese Option aktiviert ist, wird die Familienseite in webtrees geöffnet."
+
+#. An extra paragraph for the section on URL links in the help page:  https://s3.eu-west-1.amazonaws.com/po-pub/i/4Vxx95kI54pojXyfcC4CvyYc.png
+#: 
+msgid "This also affects families in the diagram. If this option is enabled, you can click on family records to open the family webtrees page. Also see \\'Action when individual clicked\\' in the Browser render settings."
+msgstr "Dies betrifft auch Familien im Diagramm. Wenn diese Option aktiviert ist, können Sie auf Familienelemente klicken, um die webtrees-Seite mit der Familie zu öffnen. Siehe auch \\'Aktion beim Anklicken eines Personenkästchens\\' in den Browser-Einstellungen."
+
+#. Option for what to do when individual clicked on in diagram
+#: 
+msgid "Add to list of individuals to highlight"
+msgstr ""
+
+#. Part of new option to highlight a custom list of individuals
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/iMke2fkhJ5QFsxPD8JHlabfu.png
+#: 
+msgid "Show additional individuals in different colour"
+msgstr ""
+
+#. Part of new option to highlight a custom list of individuals
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/iMke2fkhJ5QFsxPD8JHlabfu.png
+#: 
+msgid "Highlighted individuals background colour"
+msgstr ""
+
+#. Part of new option to highlight a custom list of individuals
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/iMke2fkhJ5QFsxPD8JHlabfu.png
+#: 
+msgid "Highlighted individuals XREFs"
+msgstr ""
+
+#. Update to help text to add this new option
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/hepcgMX8Ou17qX7kH5upaW16.png
+#: 
+msgid "If this option is selected, clicking on an individual in the diagram will add them to the list of individuals with a coloured background for identification in the diagram. See the option \"Show additional individuals in different colour\", in the Colours section of the Tile design options."
+msgstr ""
+
+#. Update to help text to add this new option:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/taeaB9TOXPYyAr6SzuyMVLDJ.png
+#: 
+msgid "Similar to the above option for starting individuals, but this option lets you choose a background colour to highlight a custom selection if individuals based on a list of XREFs. Also see option in Browser Render settings to choose what happens when an individual is clicked, as this may be an easier way to add individuals to this list."
+msgstr ""
 

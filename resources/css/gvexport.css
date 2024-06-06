@@ -464,6 +464,10 @@ span.NAME {
     margin-left: 10px;
 }
 
+#highlight_custom {
+    width: calc(100% - 48px);
+}
+
 .align-middle-container {
     display:flex;
     align-items:center;

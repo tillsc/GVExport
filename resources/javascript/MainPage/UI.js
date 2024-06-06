@@ -53,66 +53,39 @@ const UI = {
         }
     },
 
-    // If the browser render is available, scroll to the xref provided (if it exists)
-    scrollToRecord(xref) {
-        const rendering = document.getElementById('rendering');
-        const svg = rendering.getElementsByTagName('svg')[0].cloneNode(true);
-        let titles = svg.getElementsByTagName('title');
-        for (let i=0; i<titles.length; i++) {
-            let xrefs = titles[i].innerHTML.split("_");
-            for (let j=0; j<xrefs.length; j++) {
-                if (xrefs[j] === xref) {
-                    let minX = null;
-                    let minY = null;
-                    let maxX = null;
-                    let maxY = null;
-                    let x = null;
-                    let y = null;
-                    const group = titles[i].parentElement;
-                    // We need to locate the element within the SVG. We use "polygon" here because it is the
-                    // only element that will always exist and that also has position information
-                    // (other elements like text, image, etc. can be disabled by the user)
-                    const polygonList = group.getElementsByTagName('polygon');
-                    let points;
-                    if (polygonList.length !== 0) {
-                        points = polygonList[0].getAttribute('points').split(" ");
-                        // Find largest and smallest X and Y value out of all the points of the polygon
-                        for (let k = 0; k < points.length; k++) {
-                            // If path instructions, ignore
-                            if (points[k].replace(/[a-z]/gi, '') !== points[k]) break;
-                            const x = parseFloat(points[k].split(',')[0]);
-                            const y = parseFloat(points[k].split(',')[1]);
-                            if (minX === null || x < minX) {
-                                minX = x;
-                            }
-                            if (minY === null || y < minY) {
-                                minY = y;
-                            }
-                            if (maxX === null || x > maxX) {
-                                maxX = x;
-                            }
-                            if (maxY === null || y > maxY) {
-                                maxY = y;
-                            }
-                        }
-
-                        // Get the average of the largest and smallest, so we can position the element in the middle
-                        x = (minX + maxX) / 2;
-                        y = (minY + maxY) / 2;
-                    } else {
-                        x = group.getElementsByTagName('text')[0].getAttribute('x');
-                        y = group.getElementsByTagName('text')[0].getAttribute('y')
-                    }
-
-                    // Why do we multiply the scale by 1 and 1/3?
-                    let zoombase = panzoomInst.getTransform().scale * (1 + 1 / 3);
-                    let zoom = zoombase * parseFloat(document.getElementById("dpi").value)/72;
-                    panzoomInst.smoothMoveTo((rendering.offsetWidth / 2) - x * zoom, (rendering.offsetHeight / 2) - parseFloat(svg.getAttribute('height')) * zoombase - y * zoom);
-                    return true;
-                }
+    /**
+     * Scroll the diagram to put the provided XREF at the given position on the screen
+     * Placed in middle of screen if no position specified
+     *
+     * @param xref xref of individual whose tile we are positioning
+     * @param scrollX Position middle of tile this far from left edge of view
+     * @param scrollY Position middle of tile this far from top of view
+     * @param zoom Set zoom level to this number
+     * @returns {boolean}
+     */
+    scrollToRecord(xref, scrollX = null, scrollY = null, zoom = null) {
+        // Why do we multiply the scale by 1 and 1/3?
+        let zoomBase = (zoom ? zoom : panzoomInst.getTransform().scale) * (1 + 1 / 3);
+        let zoom_value = zoomBase * parseFloat(document.getElementById("dpi").value) / 72;
+        let [found, x, y] = UI.tile.getElementPositionFromXref(xref);
+        if (!found) {
+            // The xref isn't in the diagram
+            return false;
+        } else {
+            const rendering = document.getElementById('rendering');
+            const svg = rendering.getElementsByTagName('svg')[0];
+            if (zoom) {
+                panzoomInst.zoomTo(0, 0, zoom);
             }
+            if (scrollX && scrollY) {
+                // Jump xref tile to position. Note this does not scroll
+                panzoomInst.moveTo(scrollX - x * zoom_value, scrollY - parseFloat(svg.getAttribute('height')) * zoomBase - y * zoom_value);
+            } else {
+                // Put in middle of screen if no position specified
+                panzoomInst.smoothMoveTo((rendering.offsetWidth / 2) - x * zoom_value, (rendering.offsetHeight / 2) - parseFloat(svg.getAttribute('height')) * zoomBase - y * zoom_value);
+            }
+            return true;
         }
-        return false;
     },
 
     tile: {
@@ -181,7 +154,7 @@ const UI = {
 
             let linkElements = document.querySelectorAll("svg a");
             linkElements = Array.from(linkElements).filter(function (aTag) {
-                return aTag.hasAttribute('xlink:href');
+                return aTag.hasAttribute('xlink:href') && aTag.hasAttribute('xmlns:xlink');
             });
 
             for (let i = 0; i < linkElements.length; i++) {
@@ -211,13 +184,13 @@ const UI = {
                                     Form.indiList.clearIndiList(false);
                                     Form.indiList.addIndiToList(xref);
                                     mainPage.Url.changeURLXref(xref);
-                                    handleFormChange();
+                                    Form.handleFormChange();
                                 }
                                 break;
                             case '30':// Add to list of stopping individuals
                                 if (xref) {
                                     Form.stoppingIndiList.addIndiToStopList(xref);
-                                    handleFormChange();
+                                    Form.handleFormChange();
                                 }
                                 break;
                             case '40':// Remove list of stopping individuals and have just this person
@@ -225,11 +198,14 @@ const UI = {
                                     Form.stoppingIndiList.clearStopIndiList(false);
                                     Form.indiList.addIndiToList(xref);
                                     mainPage.Url.changeURLXref(xref);
-                                    handleFormChange();
+                                    Form.handleFormChange();
                                 }
                                 break;
                             case '50': // Show a menu for user to choose
                                 UI.tile.showNodeContextMenu(e, url, xref);
+                                break;
+                            case '70': // Add XREF to list of custom highlighted individuals
+                                UI.tile.highlightIndividual(xref);
                                 break;
                             // Do nothing - default click action is fine
                             case '0': // Allow link to trigger user page opening
@@ -260,6 +236,7 @@ const UI = {
             UI.contextMenu.addContextMenuOption('🔄', 'Replace starting individuals with this individual', UI.tile.replaceStartingIndividualsContextMenu);
             UI.contextMenu.addContextMenuOption('🛑', 'Add this individual to the list of stopping individuals', UI.tile.addIndividualToStoppingIndividualsContextMenu);
             UI.contextMenu.addContextMenuOption('🚫', 'Replace stopping individuals with this individual', UI.tile.replaceStoppingIndividualsContextMenu);
+            UI.contextMenu.addContextMenuOption('🖍️', 'Add to list of individuals to highlight', UI.tile.highlightIndividualContextMenu);
         },
 
         /**
@@ -307,6 +284,15 @@ const UI = {
             UI.tile.replaceStoppingIndividuals(e.currentTarget.parentElement.getAttribute('data-xref'));
         },
 
+        /**
+         * Function for context menu item
+         *
+         * @param e Click event
+         */
+        highlightIndividualContextMenu(e) {
+            UI.tile.highlightIndividual(e.currentTarget.parentElement.getAttribute('data-xref'));
+        },
+
 
         /**
          * Adds the individual to the starting individual list
@@ -328,7 +314,7 @@ const UI = {
         addIndividualToStartingIndividualsList(xref) {
             if (xref) {
                 Form.indiList.addIndiToList(xref);
-                handleFormChange();
+                Form.handleFormChange(xref);
                 UI.contextMenu.clearContextMenu();
             }
         },
@@ -343,7 +329,7 @@ const UI = {
                 Form.indiList.clearIndiList(false);
                 Form.indiList.addIndiToList(xref);
                 mainPage.Url.changeURLXref(xref);
-                handleFormChange();
+                Form.handleFormChange(xref);
                 UI.contextMenu.clearContextMenu();
             }
         },
@@ -356,7 +342,7 @@ const UI = {
         addIndividualToStoppingIndividualsList(xref) {
             if (xref) {
                 Form.stoppingIndiList.addIndiToStopList(xref);
-                handleFormChange();
+                Form.handleFormChange(xref);
                 UI.contextMenu.clearContextMenu();
             }
         },
@@ -370,8 +356,34 @@ const UI = {
             if (xref) {
                 Form.stoppingIndiList.clearStopIndiList(false);
                 Form.stoppingIndiList.addIndiToStopList(xref);
-                handleFormChange();
+                Form.handleFormChange(xref);
                 UI.contextMenu.clearContextMenu();
+            }
+        },
+
+        /**
+         * Adds XREF to custom highlight list
+         *
+         * @param xref
+         */
+        highlightIndividual(xref) {
+            if (xref) {
+                this.addIndiToCustomHighlightList(xref);
+                Form.handleFormChange(xref);
+                UI.contextMenu.clearContextMenu();
+            }
+        },
+
+        /**
+         *  Adds the XREF to the list of indiviudals to highlight
+         *
+         * @param xref
+         */
+        addIndiToCustomHighlightList(xref) {
+            let list = document.getElementById('highlight_custom');
+            const regex = new RegExp(`(?<=,|^)(${xref})(?=,|$)`);
+            if (!regex.test(list.value.replaceAll(" ','"))) {
+                appendXrefToList(xref, 'highlight_custom');
             }
         },
 
@@ -387,7 +399,70 @@ const UI = {
                     Data.storeSettings.saveSettingsClient(ID_MAIN_SETTINGS).then();
                 }
             });
-        }
+        },
+
+        /**
+         * Finds the individual's tile from the provided XREF, and returns position information
+         *
+         * @param xref The XREF of the individual we are looking for
+         * @returns {boolean[]|(boolean|string|number)[]} An array [true if found, x position, y position]
+         */
+        getElementPositionFromXref(xref) {
+            const rendering = document.getElementById('rendering');
+            const svg = rendering.getElementsByTagName('svg')[0].cloneNode(true);
+            let titles = svg.getElementsByTagName('title');
+            for (let i=0; i<titles.length; i++) {
+                let xrefs = titles[i].innerHTML.split("_");
+                for (let j=0; j<xrefs.length; j++) {
+                    if (xrefs[j] === xref) {
+                        let minX = null;
+                        let minY = null;
+                        let maxX = null;
+                        let maxY = null;
+                        let x = null;
+                        let y = null;
+                        const group = titles[i].parentElement;
+                        // We need to locate the element within the SVG. We use "polygon" here because it is the
+                        // only element that will always exist and that also has position information
+                        // (other elements like text, image, etc. can be disabled by the user)
+                        const polygonList = group.getElementsByTagName('polygon');
+                        let points;
+                        if (polygonList.length !== 0) {
+                            points = polygonList[0].getAttribute('points').split(" ");
+                            // Find largest and smallest X and Y value out of all the points of the polygon
+                            for (let k = 0; k < points.length; k++) {
+                                // If path instructions, ignore
+                                if (points[k].replace(/[a-z]/gi, '') !== points[k]) break;
+                                const x = parseFloat(points[k].split(',')[0]);
+                                const y = parseFloat(points[k].split(',')[1]);
+                                if (minX === null || x < minX) {
+                                    minX = x;
+                                }
+                                if (minY === null || y < minY) {
+                                    minY = y;
+                                }
+                                if (maxX === null || x > maxX) {
+                                    maxX = x;
+                                }
+                                if (maxY === null || y > maxY) {
+                                    maxY = y;
+                                }
+                            }
+
+                            // Get the average of the largest and smallest, so we can position the element in the middle
+                            x = (minX + maxX) / 2;
+                            y = (minY + maxY) / 2;
+
+                        } else {
+                            x = group.getElementsByTagName('text')[0].getAttribute('x');
+                            y = group.getElementsByTagName('text')[0].getAttribute('y')
+                        }
+                        return [true, x, y];
+                    }
+                }
+            }
+            return [false, null, null];
+        },
 
     },
     /**

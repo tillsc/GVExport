@@ -2022,3 +2022,38 @@ msgstr "Note that there is currently no option for what to do when a family reco
 msgid "This also affects families in the diagram. If this option is enabled, you can click on family records to open the family webtrees page. Also see \\'Action when individual clicked\\' in the Browser render settings."
 msgstr "This also affects families in the diagram. If this option is enabled, you can click on family records to open the family webtrees page. Also see \\'Action when individual clicked\\' in the Browser render settings."
 
+#. Option for what to do when individual clicked on in diagram
+#: 
+msgid "Add to list of individuals to highlight"
+msgstr "Add to list of individuals to highlight"
+
+#. Part of new option to highlight a custom list of individuals
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/iMke2fkhJ5QFsxPD8JHlabfu.png
+#: 
+msgid "Show additional individuals in different colour"
+msgstr "Show additional individuals in different colour"
+
+#. Part of new option to highlight a custom list of individuals
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/iMke2fkhJ5QFsxPD8JHlabfu.png
+#: 
+msgid "Highlighted individuals background colour"
+msgstr "Highlighted individuals background colour"
+
+#. Part of new option to highlight a custom list of individuals
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/iMke2fkhJ5QFsxPD8JHlabfu.png
+#: 
+msgid "Highlighted individuals XREFs"
+msgstr "Highlighted individuals XREFs"
+
+#. Update to help text to add this new option
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/hepcgMX8Ou17qX7kH5upaW16.png
+#: 
+msgid "If this option is selected, clicking on an individual in the diagram will add them to the list of individuals with a coloured background for identification in the diagram. See the option \"Show additional individuals in different colour\", in the Colours section of the Tile design options."
+msgstr "If this option is selected, clicking on an individual in the diagram will add them to the list of individuals with a coloured background for identification in the diagram. See the option \"Show additional individuals in different colour\", in the Colours section of the Tile design options."
+
+#. Update to help text to add this new option:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/taeaB9TOXPYyAr6SzuyMVLDJ.png
+#: 
+msgid "Similar to the above option for starting individuals, but this option lets you choose a background colour to highlight a custom selection if individuals based on a list of XREFs. Also see option in Browser Render settings to choose what happens when an individual is clicked, as this may be an easier way to add individuals to this list."
+msgstr "Similar to the above option for starting individuals, but this option lets you choose a background colour to highlight a custom selection if individuals based on a list of XREFs. Also see option in Browser Render settings to choose what happens when an individual is clicked, as this may be an easier way to add individuals to this list."
+

@@ -1930,17 +1930,154 @@ msgstr "La configuració s'ordena en funció del seu nom."
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/yZYMz48ukCKc7zl43L5QhV0a.png
 #: 
 msgid "Settings are sorted based on their name, but in reverse."
-msgstr ""
+msgstr "Els paràmetres s'ordenen en funció del seu nom, però al revés."
 
 #. Part of the help text for the Settings list sort order option:  
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/yZYMz48ukCKc7zl43L5QhV0a.png
 #: 
 msgid "Note that if you update a saved setting, this will affect how it is sorted under the 'Oldest first' or 'Newest first' options."
-msgstr ""
+msgstr "Tingueu en compte que si actualitzeu una opció de configuració desada, això afectarà la manera com s'ordena a les opcions \"Els més antics primer\" o \"Els més nous primer\"."
 
 #. Part of the help text for the Settings list sort order option:  
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/yZYMz48ukCKc7zl43L5QhV0a.png
 #: 
 msgid "This option lets you choose the order of saved settings. The options are"
+msgstr "Aquesta opció us permet triar l'ordre de la configuració desada. Les opcions són:"
+
+#. One option in the list of things that can happen when you click an individual in the diagram.  https://s3.eu-west-1.amazonaws.com/po-pub/i/KpMTncLFJrS21Y0UPolZeCDD.png
+#: 
+msgid "Add individual to list of starting individuals"
+msgstr "Afegir individu a la llista d'individus inicials"
+
+#. One option in the list of things that can happen when you click an individual in the diagram.  https://s3.eu-west-1.amazonaws.com/po-pub/i/KpMTncLFJrS21Y0UPolZeCDD.png
+#: 
+msgid "Open individual's page"
+msgstr "Obrir pàgina individual"
+
+#. One option in the list of things that can happen when you click an individual in the diagram.  https://s3.eu-west-1.amazonaws.com/po-pub/i/KpMTncLFJrS21Y0UPolZeCDD.png
+#: 
+msgid "Replace starting individuals with this individual"
+msgstr "Substituïu els individus inicials per aquest individu"
+
+#. One option in the list of things that can happen when you click an individual in the diagram.  https://s3.eu-west-1.amazonaws.com/po-pub/i/KpMTncLFJrS21Y0UPolZeCDD.png
+#: 
+msgid "Add this individual to the list of stopping individuals"
+msgstr "Afegiu aquest individu a la llista d'individus aturats"
+
+#. One option in the list of things that can happen when you click an individual in the diagram.  https://s3.eu-west-1.amazonaws.com/po-pub/i/KpMTncLFJrS21Y0UPolZeCDD.png
+#: 
+msgid "Replace stopping individuals with this individual"
+msgstr "Substituïu l'aturada d'individus per aquest individu"
+
+#. New option to set what happens when you click an individual in the diagram.  https://s3.eu-west-1.amazonaws.com/po-pub/i/KpMTncLFJrS21Y0UPolZeCDD.png
+#: 
+msgid "Action when individual clicked"
+msgstr "Acció en què l'individu ha fet clic"
+
+#. One option in the list of things that can happen when you click an individual in the diagram.  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/KpMTncLFJrS21Y0UPolZeCDD.png
+#: 
+msgid "Show menu"
+msgstr "Mostrar menú"
+
+#. One option in the list of things that can happen when you click an individual in the diagram.  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/KpMTncLFJrS21Y0UPolZeCDD.png
+#: 
+msgid "Do nothing"
+msgstr "No fer res"
+
+#. Part of the help text for the option "Action when individual clicked".
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
+#: 
+msgid "This option lets you choose what happens when you click on an individual in the diagram."
+msgstr "Aquesta opció us permet triar què passa quan feu clic a una persona del diagrama."
+
+#. Part of the help text for the option "Action when individual clicked".
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
+#: 
+msgid "This is the default option. When you click on an individual, the webtrees page for that individual will open in a new tab or window."
+msgstr "Aquesta és l'opció per defecte. Quan feu clic a una persona, la pàgina d'arbres web d'aquesta persona s'obrirà en una pestanya o finestra nova."
+
+#. Part of the help text for the option "Action when individual clicked".
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
+#: 
+msgid "If this option is selected, clicking on an individual in the diagram will add them to the list of starting individuals."
+msgstr "Si se selecciona aquesta opció, fent clic a un individu del diagrama s'afegirà a la llista d'individus inicials."
+
+#. Part of the help text for the option "Action when individual clicked".
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
+#: 
+msgid "If this option is selected, clicking on an individual in the diagram will add them to the list of starting individuals and remove all others from the list."
+msgstr "Si se selecciona aquesta opció, fent clic a un individu del diagrama s'afegirà a la llista d'individus inicials i s'eliminaran tots els altres de la llista."
+
+#. Part of the help text for the option "Action when individual clicked".
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
+#: 
+msgid "If this option is selected, clicking on an individual in the diagram will add them to the list of stopping individuals."
+msgstr "Si se selecciona aquesta opció, fent clic a un individu del diagrama s'afegirà a la llista d'individus aturats."
+
+#. Part of the help text for the option "Action when individual clicked".
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
+#: 
+msgid "If this option is selected, clicking on an individual in the diagram will add them to the list of stopping individuals and remove all others from the list."
+msgstr "Si se selecciona aquesta opció, fent clic a un individu del diagrama s'afegirà a la llista d'individus aturats i s'eliminaran tots els altres de la llista."
+
+#. Part of the help text for the option "Action when individual clicked".
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
+#: 
+msgid "If this option is chosen, when an individual is clicked on in the diagram, a menu will be shown with the above items to choose from."
+msgstr "Si es tria aquesta opció, quan es faci clic a una persona en el diagrama, es mostrarà un menú amb els elements anteriors per triar."
+
+#. Part of the help text for the option "Action when individual clicked".
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
+#: 
+msgid "When an individual is clicked on in the diagram, nothing will happen."
+msgstr "Quan es fa clic a un individu al diagrama, no passarà res."
+
+#. Part of the help text for the option "Action when individual clicked".
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
+#: 
+msgid "Note that there is currently no option for what to do when a family record is clicked on in the diagram. However, the option to add URLs to individuals and families will also affect families in the browser diagram. That is, if you click a family then if this option is enabled, the family page will open in webtrees."
+msgstr "Tingueu en compte que actualment no hi ha cap opció sobre què fer quan es fa clic en un registre familiar al diagrama. No obstant això, l'opció d'afegir URL a individus i famílies també afectarà les famílies en el diagrama del navegador. És a dir, si feu clic a una família, si aquesta opció està habilitada, la pàgina de la família s'obrirà als arbres web.\n"
+""
+
+#. An extra paragraph for the section on URL links in the help page:  https://s3.eu-west-1.amazonaws.com/po-pub/i/4Vxx95kI54pojXyfcC4CvyYc.png
+#: 
+msgid "This also affects families in the diagram. If this option is enabled, you can click on family records to open the family webtrees page. Also see \\'Action when individual clicked\\' in the Browser render settings."
+msgstr "Això també afecta les famílies del diagrama. Si aquesta opció està habilitada, podeu fer clic a registres familiars per obrir la pàgina d'arbres web de la família. Vegeu també \\'Action when individual clicked\\' a la configuració de renderització del navegador."
+
+#. Option for what to do when individual clicked on in diagram
+#: 
+msgid "Add to list of individuals to highlight"
+msgstr ""
+
+#. Part of new option to highlight a custom list of individuals
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/iMke2fkhJ5QFsxPD8JHlabfu.png
+#: 
+msgid "Show additional individuals in different colour"
+msgstr ""
+
+#. Part of new option to highlight a custom list of individuals
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/iMke2fkhJ5QFsxPD8JHlabfu.png
+#: 
+msgid "Highlighted individuals background colour"
+msgstr ""
+
+#. Part of new option to highlight a custom list of individuals
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/iMke2fkhJ5QFsxPD8JHlabfu.png
+#: 
+msgid "Highlighted individuals XREFs"
+msgstr ""
+
+#. Update to help text to add this new option
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/hepcgMX8Ou17qX7kH5upaW16.png
+#: 
+msgid "If this option is selected, clicking on an individual in the diagram will add them to the list of individuals with a coloured background for identification in the diagram. See the option \"Show additional individuals in different colour\", in the Colours section of the Tile design options."
+msgstr ""
+
+#. Update to help text to add this new option:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/taeaB9TOXPYyAr6SzuyMVLDJ.png
+#: 
+msgid "Similar to the above option for starting individuals, but this option lets you choose a background colour to highlight a custom selection if individuals based on a list of XREFs. Also see option in Browser Render settings to choose what happens when an individual is clicked, as this may be an easier way to add individuals to this list."
 msgstr ""
 
