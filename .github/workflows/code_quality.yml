@@ -18,12 +18,19 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}  # to check out the actual pull request commit, not the merge commit
           fetch-depth: 0  # a full history is required for pull request analysis
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: 7.4
       - name: 'Qodana Scan'
         uses: JetBrains/qodana-action@v2024.1
         env:
           QODANA_TOKEN: ${{ secrets.QODANA_TOKEN }}
+      - name: Run Qodana Docker Container
+  run: |
+    docker run \
+    -p 8080:8080 \
+    -v ${{ github.workspace }}:/data/project \
+    -v ${{ github.workspace }}/res:/data/results/ \
+    jetbrains/qodana-php:latest \
+    --show-report \
+    --baseline=/data/project/qodana.sarif.json
+
+
         
