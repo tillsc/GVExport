@@ -2030,8 +2030,8 @@ msgstr "Add to list of individuals to highlight"
 #. Part of new option to highlight a custom list of individuals
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/iMke2fkhJ5QFsxPD8JHlabfu.png
 #: 
-msgid "Show additional individuals in different colour"
-msgstr "Show additional individuals in different color"
+msgid "Show selected individuals in different colour"
+msgstr "Show selected individuals in different color"
 
 #. Part of new option to highlight a custom list of individuals
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/iMke2fkhJ5QFsxPD8JHlabfu.png
