@@ -627,29 +627,41 @@ const UI = {
          * @param y
          */
         enableContextMenu(x, y) {
-            const div = document.getElementById('context_menu');
-            // Show first, so our width calculations work
-            div.style.display = '';
+            const contextMenu = document.getElementById('context_menu');
+            // Un-hide first, so our width calculations work
+            contextMenu.style.display = '';
 
             // Adjustment so pointy bit of menu is on mouse click position
             x -= 8;
             y += 5;
 
             // Make sure it's not off the page
-            let width = div.offsetWidth;
-            let height = div.offsetHeight;
+            let width = contextMenu.offsetWidth;
+            let height = contextMenu.offsetHeight;
 
             if (x + width >= window.innerWidth) {
+                let diff = x + width - window.innerWidth;
+                contextMenu.style.setProperty('--gve-context-right', diff + 'px');
                 x = window.innerWidth - width;
+            } else {
+                contextMenu.style.setProperty('--gve-context-right', '1px');
             }
             if (y + height >= window.innerHeight) {
-                y = window.innerHeight - height;
+                let diff = y + height - window.innerHeight;
+                contextMenu.style.setProperty('--gve-context-top', (height-7) + 'px');
+                contextMenu.style.setProperty('--gve-context-up', 'transparent');
+                contextMenu.style.setProperty('--gve-context-down', 'var(--gve-context-border)');
+                y -= height+10;
+            } else {
+                contextMenu.style.setProperty('--gve-context-top', '-5px');
+                contextMenu.style.setProperty('--gve-context-up', 'var(--gve-context-border)');
+                contextMenu.style.setProperty('--gve-context-down', 'transparent');
             }
 
             // Set position
-            div.style.position = 'fixed';
-            div.style.right = x + 'px';
-            div.style.top = y + 'px';
+            contextMenu.style.position = 'fixed';
+            contextMenu.style.right = x + 'px';
+            contextMenu.style.top = y + 'px';
         },
 
         /**
