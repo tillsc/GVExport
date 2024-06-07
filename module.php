@@ -40,6 +40,7 @@ spl_autoload_register(function ($class) {
     }
 });
 
+use Exception;
 use Fisharebest\Webtrees\Auth;
 use Fisharebest\Webtrees\Contracts\UserInterface;
 use Fisharebest\Webtrees\Registry;
@@ -60,6 +61,7 @@ use Fisharebest\Webtrees\Validator;
 use Fisharebest\Webtrees\View;
 use Fisharebest\Webtrees\Tree;
 use Fisharebest\Webtrees\Webtrees;
+use JsonException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
@@ -169,7 +171,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function getChartAction(ServerRequestInterface $request): ResponseInterface
     {
@@ -200,9 +202,9 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
                         $userDefaultVars[$key] = $value;
                     }
                 } else {
-                    throw new \Exception("Invalid token");
+                    throw new Exception("Invalid token");
                 }
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $userDefaultVars = $settings->loadUserSettings($this, $tree);
             }
         } else {
@@ -231,7 +233,7 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
      *
      * @return ResponseInterface
      *
-     * @throws \JsonException
+         * @throws JsonException
      */
     public function getJSAction() : ResponseInterface
     {
@@ -327,6 +329,9 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
         return $temp_dir;
     }
 
+    /**
+     * @throws Exception
+     */
     function createGraphVizDump($tree, $vars_data, $temp_dir): string
     {
         $out = "";
@@ -350,7 +355,11 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
             $response['messages'] = $dot->messages;
             $response['enable_debug_mode'] = $dot->debug_string;
             $response['dot'] = $out;
-            $response['settings'] = $settings->getSettingsJson($this, $tree, Settings::ID_MAIN_SETTINGS);
+            try {
+                $response['settings'] = $settings->getSettingsJson($this, $tree, Settings::ID_MAIN_SETTINGS);
+            } catch (Exception $e) {
+                $dot->messages[] = 'Failed to retrieve settings JSON';
+            }
             $r = json_encode($response);
         } else {
             $r = $out;
