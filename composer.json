@@ -1,0 +1,10 @@
+{
+  "name": "neriderc/gvexport",
+  "description": "Family tree diagram module for webtrees",
+  "minimum-stability": "stable",
+  "license": "GPL-2.0-only",
+  "require": {
+    "fisharebest/webtrees": "^2.1",
+    "ext-json": "*"
+  }
+}

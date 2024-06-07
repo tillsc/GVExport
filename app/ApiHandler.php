@@ -185,8 +185,12 @@ class ApiHandler
                 $vars = Validator::parsedBody($this->request)->array('vars');
                 $form = new FormSubmission();
                 $settings_response = $form->load($vars, $this->module);
-                $this->response_data['settings'] = $settings->getJsonFromSettings($settings_response, Settings::CONTEXT_MAIN_SETTINGS);
-                $this->response_data['success'] = true;
+                try {
+                    $this->response_data['settings'] = $settings->getJsonFromSettings($settings_response, Settings::CONTEXT_MAIN_SETTINGS);
+                    $this->response_data['success'] = true;
+                } catch (Exception $e) {
+                    $this->setFailResponse('Failed to receive settings JSON', 'E18');
+                }
             } else {
                 try {
                     $this->response_data['settings'] = ($this->json['settings_id'] == Settings::ID_ALL_SETTINGS ? $settings->getAllSettingsJson($this->module, $this->tree) : $settings->getSettingsJson($this->module, $this->tree, $this->json['settings_id']));

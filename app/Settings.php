@@ -510,15 +510,11 @@ class Settings
      */
     public function getJsonFromSettings($settings, $context = Settings::CONTEXT_USER)
     {
-        try {
-            $new_settings = [];
-            foreach ($this->defaultSettings as $preference => $value) {
-                if (self::shouldLoadSetting($preference, $context)) {
-                    $new_settings[$preference] = $settings[$preference];
-                }
+        $new_settings = [];
+        foreach ($this->defaultSettings as $preference => $value) {
+            if (self::shouldLoadSetting($preference, $context)) {
+                $new_settings[$preference] = $settings[$preference];
             }
-        } catch (Exception $e) {
-            throw new Exception($e);
         }
         return json_encode($new_settings);
     }

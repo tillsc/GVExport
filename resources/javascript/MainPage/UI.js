@@ -230,13 +230,13 @@ const UI = {
             const div = document.getElementById('context_menu');
             div.setAttribute("data-xref",  xref);
             div.setAttribute("data-url",  url);
-            UI.contextMenu.enableContextMenu(window.innerWidth - e.clientX, e.clientY);
             UI.contextMenu.addContextMenuOption('👤', 'Open individual\'s page', UI.tile.openIndividualsPageContextMenu);
             UI.contextMenu.addContextMenuOption('➕', 'Add individual to list of starting individuals', UI.tile.addIndividualToStartingIndividualsContextMenu);
             UI.contextMenu.addContextMenuOption('🔄', 'Replace starting individuals with this individual', UI.tile.replaceStartingIndividualsContextMenu);
             UI.contextMenu.addContextMenuOption('🛑', 'Add this individual to the list of stopping individuals', UI.tile.addIndividualToStoppingIndividualsContextMenu);
             UI.contextMenu.addContextMenuOption('🚫', 'Replace stopping individuals with this individual', UI.tile.replaceStoppingIndividualsContextMenu);
             UI.contextMenu.addContextMenuOption('🖍️', 'Add to list of individuals to highlight', UI.tile.highlightIndividualContextMenu);
+            UI.contextMenu.enableContextMenu(window.innerWidth - e.clientX, e.clientY);
         },
 
         /**
@@ -627,16 +627,41 @@ const UI = {
          * @param y
          */
         enableContextMenu(x, y) {
-            UI.contextMenu.clearContextMenu();
-            const div = document.getElementById('context_menu');
+            const contextMenu = document.getElementById('context_menu');
+            // Un-hide first, so our width calculations work
+            contextMenu.style.display = '';
+
             // Adjustment so pointy bit of menu is on mouse click position
             x -= 8;
             y += 5;
+
+            // Make sure it's not off the page
+            let width = contextMenu.offsetWidth;
+            let height = contextMenu.offsetHeight;
+
+            if (x + width >= window.innerWidth) {
+                let diff = x + width - window.innerWidth;
+                contextMenu.style.setProperty('--gve-context-right', diff + 'px');
+                x = window.innerWidth - width;
+            } else {
+                contextMenu.style.setProperty('--gve-context-right', '1px');
+            }
+            if (y + height >= window.innerHeight) {
+                let diff = y + height - window.innerHeight;
+                contextMenu.style.setProperty('--gve-context-top', (height-7) + 'px');
+                contextMenu.style.setProperty('--gve-context-up', 'transparent');
+                contextMenu.style.setProperty('--gve-context-down', 'var(--gve-context-border)');
+                y -= height+10;
+            } else {
+                contextMenu.style.setProperty('--gve-context-top', '-5px');
+                contextMenu.style.setProperty('--gve-context-up', 'var(--gve-context-border)');
+                contextMenu.style.setProperty('--gve-context-down', 'transparent');
+            }
+
             // Set position
-            div.style.position = 'fixed';
-            div.style.right = x + 'px';
-            div.style.top = y + 'px';
-            div.style.display = '';
+            contextMenu.style.position = 'fixed';
+            contextMenu.style.right = x + 'px';
+            contextMenu.style.top = y + 'px';
         },
 
         /**

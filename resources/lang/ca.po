@@ -2049,35 +2049,36 @@ msgstr "Això també afecta les famílies del diagrama. Si aquesta opció està 
 #. Option for what to do when individual clicked on in diagram
 #: 
 msgid "Add to list of individuals to highlight"
-msgstr ""
+msgstr "Afegeix a la llista d'individus per destacar"
 
 #. Part of new option to highlight a custom list of individuals
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/iMke2fkhJ5QFsxPD8JHlabfu.png
 #: 
-msgid "Show additional individuals in different colour"
-msgstr ""
+#, fuzzy
+msgid "Show selected individuals in different colour"
+msgstr "Mostrar individus addicionals de color diferent"
 
 #. Part of new option to highlight a custom list of individuals
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/iMke2fkhJ5QFsxPD8JHlabfu.png
 #: 
 msgid "Highlighted individuals background colour"
-msgstr ""
+msgstr "ndividus destacats: color de fons"
 
 #. Part of new option to highlight a custom list of individuals
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/iMke2fkhJ5QFsxPD8JHlabfu.png
 #: 
 msgid "Highlighted individuals XREFs"
-msgstr ""
+msgstr "Persones destacades XREFs"
 
 #. Update to help text to add this new option
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/hepcgMX8Ou17qX7kH5upaW16.png
 #: 
 msgid "If this option is selected, clicking on an individual in the diagram will add them to the list of individuals with a coloured background for identification in the diagram. See the option \"Show additional individuals in different colour\", in the Colours section of the Tile design options."
-msgstr ""
+msgstr "Si se selecciona aquesta opció, fent clic sobre un individu del diagrama s'afegirà a la llista d'individus amb fons de color per identificar-los en el diagrama. Consulta l'opció “Mostrar altres individus en un color diferent”, a la secció Colors de les opcions de disseny de les rajoles."
 
 #. Update to help text to add this new option:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/taeaB9TOXPYyAr6SzuyMVLDJ.png
 #: 
 msgid "Similar to the above option for starting individuals, but this option lets you choose a background colour to highlight a custom selection if individuals based on a list of XREFs. Also see option in Browser Render settings to choose what happens when an individual is clicked, as this may be an easier way to add individuals to this list."
-msgstr ""
+msgstr "Similar a l'opció anterior per a individus principiants, però aquesta opció us permet triar un color de fons per ressaltar una selecció personalitzada si els individus es basen en una llista de XREF. Vegeu també l'opció a Configuració de renderització del navegador per triar què passa quan es fa clic a una persona, ja que pot ser una manera més senzilla d'afegir persones a aquesta llista."
 
