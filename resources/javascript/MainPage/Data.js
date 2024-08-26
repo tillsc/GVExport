@@ -541,6 +541,7 @@ const Data = {
             if (id !== null) {
                 if (userPrompted) {
                     document.getElementById('modal').remove();
+                    Data.storeSettings.saveSettings(id);
                 } else {
                     let message = TRANSLATE["Overwrite settings '%s'?"].replace('%s', settingsName);
                     let buttons = '<div class="modal-button-container"><button class="btn btn-secondary modal-button" onclick="document.getElementById(' + "'modal'" + ').remove()">' + TRANSLATE['Cancel'] + '</button><button class="btn btn-primary modal-button" onclick="Data.storeSettings.saveSettingsAdvanced(true)">' + TRANSLATE['Overwrite'] + '</button></div>';
