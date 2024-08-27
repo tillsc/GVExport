@@ -392,8 +392,8 @@ function showHelp(item) {
            helpText = '<div class="settings_list_item">' + msg[0].toLocaleString() + ": " + msg[1] + '</div>' + helpText; // most recent first
         });
         helpText = '<h3>' + TRANSLATE['Message history']+ '</h3>' + helpText;
-    } else {
-        helpText = getHelpText(item);
+    } else if (item === 'enable_debug_mode') {
+        helpText = '<textarea cols=50 rows=20 onclick=\"this.select()\">' + debug_string + '</textarea>';
     }
     let content = "<p>" + helpText + "</p>";
     showModal(content);
