@@ -585,15 +585,20 @@ class Dot {
 			     if ($this->settings["combined_layout_type"] == 'OU' && !empty($husb_id)) {
 			       $out .= "</TR>";
    			       $out .= "<TR>";
-                             }
-                   	     $person = new Person([], $this);
-                   	     $out = $person->addPersonLabel($wife_id, $out, $sharednotes);
+                 }
+                 $person = new Person([], $this);
+                 $out = $person->addPersonLabel($wife_id, $out, $sharednotes);
 			  }
+
+              if (empty($husb_id) && empty($wife_id)) {
+                  $person = new Person([], $this);
+                  $out = $person->addPersonLabel('I_N', $out, $sharednotes);
+              }
 			}
 
 			$out .= "</TR>";
             // --- Print marriage ---
-			if (substr($fid, 0, 2) !== "F_" && !(empty($marriagedate) && empty($marriageplace) && empty($family) && empty($prefix)) && ($this->settings["show_marriage_date"] || $this->settings["show_marriage_place"] || $this->settings["show_xref_families"])) {
+			if (substr($fid, 0, 2) !== "F_" && (!(empty($marriagedate) && empty($marriageplace) && empty($family) && empty($prefix)) || (empty($husb_id) && empty($wife_id))) && ($this->settings["show_marriage_date"] || $this->settings["show_marriage_place"] || $this->settings["show_xref_families"])) {
 				$out .= "<TR>";
 				if ($this->settings["add_links"]) {
 					$out .= "<TD COLSPAN=\"2\" CELLPADDING=\"0\" CELLBORDER=\"1\" PORT=\"marr\" TARGET=\"_BLANK\" HREF=\"" . $this->convertToHTMLSC($link) . "\" BGCOLOR=\"" . $fill_colour . "\">"; #ESL!!! 20090213 without convertToHTMLSC the dot file has invalid data
@@ -626,7 +631,7 @@ class Dot {
             }
         }
 
-		$out .= "];\n";
+		$out .= ", style=\"dashed\"];\n";
 
 		return $out;
 	}
