@@ -67,13 +67,13 @@ class Person
         }
         switch ($this->dot->settings['border_col_type']) {
             case Settings::OPTION_BORDER_SEX_COLOUR:
-                $border_colour = $this->dot->getGenderColour($i->sex(), $related);
+                $border_colour = $this->dot->getGenderColour($i ? $i->sex() : 'U', $related);
                 break;
             case Settings::OPTION_BORDER_CUSTOM_COLOUR:
                 $border_colour = $this->dot->settings["indi_border_col"];
                 break;
             case Settings::OPTION_BORDER_VITAL_COLOUR:
-                $border_colour = $this->getVitalColour($i->isDead(), Settings::OPTION_BORDER_VITAL_COLOUR);
+                $border_colour = $this->getVitalColour($i ? $i->isDead() : false, Settings::OPTION_BORDER_VITAL_COLOUR);
                 break;
             case Settings::OPTION_BORDER_AGE_COLOUR:
                 $border_colour = $this->getAgeColour($i, Settings::OPTION_BORDER_AGE_COLOUR);
@@ -104,7 +104,7 @@ class Person
         $death_place = "";
         $i = $this->dot->getUpdatedPerson($pid);
         // Get the personal data
-        if ($this->dot->settings["diagram_type"] == "combined" && (substr($pid, 0, 3) == "I_H" || substr($pid, 0, 3) == "I_W")) {
+        if ($this->dot->settings["diagram_type"] == "combined" && (substr($pid, 0, 3) == "I_H" || substr($pid, 0, 3) == "I_W") || substr($pid, 0, 3) == "I_N") {
             // In case of dummy individual
             $sex_colour = $this->dot->getGenderColour('U', false);
             $is_dead = false;
@@ -114,22 +114,22 @@ class Person
             $link = "";
             $name = " ";
         } else {
-            $sex_colour = $this->dot->getGenderColour($i->sex(), $related);
+            $sex_colour = $this->dot->getGenderColour($i ? $i->sex() : 'U', $related);
             switch ($this->dot->settings['border_col_type']) {
                 case Settings::OPTION_BORDER_SEX_COLOUR:
-                    $border_colour = $this->dot->getGenderColour($i->sex(), $related);
+                    $border_colour = $this->dot->getGenderColour($i ? $i->sex() : 'U', $related);
                     break;
                 case Settings::OPTION_BORDER_CUSTOM_COLOUR:
                     $border_colour = $this->dot->settings["indi_border_col"];
                     break;
                 case Settings::OPTION_BORDER_VITAL_COLOUR:
-                    $border_colour = $this->getVitalColour($i->isDead(), Settings::OPTION_BORDER_VITAL_COLOUR);
+                    $border_colour = $this->getVitalColour($i ? $i->isDead() : false, Settings::OPTION_BORDER_VITAL_COLOUR);
                     break;
                 case Settings::OPTION_BORDER_AGE_COLOUR:
                     $border_colour = $this->getAgeColour($i, Settings::OPTION_BORDER_AGE_COLOUR);
                     break;
             }
-            $is_dead = $i->isDead();
+            $is_dead = $i ? $i->isDead() : false;
             $link = $i->url();
 
             // --- Birth date ---
@@ -200,10 +200,10 @@ class Person
                     $indi_bg_colour = $this->dot->settings["indi_background_col"];
                     break;
                 case Settings::OPTION_BACKGROUND_SEX_COLOUR:
-                    $indi_bg_colour = $this->dot->getGenderColour($i->sex(), $related);
+                    $indi_bg_colour = $this->dot->getGenderColour($i ? $i->sex() : 'U', $related);
                     break;
                 case Settings::OPTION_BACKGROUND_VITAL_COLOUR:
-                    $indi_bg_colour = $this->getVitalColour($i->isDead(), Settings::OPTION_BACKGROUND_VITAL_COLOUR);
+                    $indi_bg_colour = $this->getVitalColour($i ? $i->isDead() : false, Settings::OPTION_BACKGROUND_VITAL_COLOUR);
                     break;
                 case Settings::OPTION_BACKGROUND_AGE_COLOUR:
                     $indi_bg_colour = $this->getAgeColour($i, Settings::OPTION_BACKGROUND_AGE_COLOUR);
@@ -235,7 +235,7 @@ class Person
                 $stripe_colour = $sex_colour;
                 break;
             case Settings::OPTION_STRIPE_VITAL_COLOUR:
-                $stripe_colour = $this->getVitalColour($i->isDead(),Settings::OPTION_STRIPE_VITAL_COLOUR);
+                $stripe_colour = $this->getVitalColour($i ? $i->isDead() : false,Settings::OPTION_STRIPE_VITAL_COLOUR);
                 break;
             case Settings::OPTION_STRIPE_AGE_COLOUR:
                 $stripe_colour = $this->getAgeColour($i,Settings::OPTION_STRIPE_AGE_COLOUR);
@@ -519,7 +519,7 @@ class Person
                     default: return false;
                 }
             case Person::TILE_SHAPE_VITAL:
-                if ($i->isDead()) {
+                if ($i ? $i->isDead() : false) {
                     return $this->dot->settings['shape_vital_dead'];
                 } else {
                     return $this->dot->settings['shape_vital_living'];
@@ -567,11 +567,14 @@ class Person
      */
     private function getAgeColour($individual, $context): string
     {
-        if ($individual->isDead()) {
-            $age = (string) new Age($individual->getBirthDate(), $individual->getDeathDate());
-        } else {
-            $today = new Date(strtoupper(date('d M Y')));
-            $age   = (string) new Age($individual->getBirthDate(), $today);
+        $age = '';
+        if ($individual) {
+            if ($individual->isDead()) {
+                $age = (string)new Age($individual->getBirthDate(), $individual->getDeathDate());
+            } else {
+                $today = new Date(strtoupper(date('d M Y')));
+                $age = (string)new Age($individual->getBirthDate(), $today);
+            }
         }
         if ($age === '') {
             switch ($context) {
