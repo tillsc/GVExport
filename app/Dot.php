@@ -631,7 +631,7 @@ class Dot {
             }
         }
 
-		$out .= ", style=\"dashed\"];\n";
+		$out .= "];\n";
 
 		return $out;
 	}
