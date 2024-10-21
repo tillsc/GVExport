@@ -9,7 +9,7 @@ use Fisharebest\Webtrees\I18N;
 ?>
 
 <?= MainPage::addLabel('', 'Settings file', !$admin); ?>
-<div class="col-sm-8 wt-page-options-value">
+<div class="col-sm-8 options-panel-background">
     <label for="load_settings"><?= I18N::translate('Load settings from file') ?></label><br>
     <input id="load_settings" type="file" onchange="uploadSettingsFile(this)">
 </div>

@@ -10,6 +10,6 @@ use vendor\WebtreesModules\gvexport\MainPage;
 ?>
 
 <?= MainPage::addLabel('graph_dir', 'Graph direction', !$admin); ?>
-<div class="col-sm-8 wt-page-options-value">
+<div class="col-sm-8 options-panel-background">
     <?= view('components/select', ['name' => 'vars[graph_dir]', 'id' => 'graph_dir', 'selected' => e($vars['graph_dir']), 'options' => MainPage::updateTranslations($settings["directions"])]) ?>
 </div>
