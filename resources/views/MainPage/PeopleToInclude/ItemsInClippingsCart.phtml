@@ -10,12 +10,12 @@ use vendor\WebtreesModules\gvexport\MainPage;
 
 ?>
 <?= MainPage::addLabel('', 'Clippings cart', !$admin); ?>
-<div class="col-sm-8 wt-page-options-value">
+<div class="col-sm-8 options-panel-background">
     <?php
         if (!$admin) {
             I18N::translate('You have items in the clippings cart, which can be used for the diagram instead of the below options.');
         } ?>
-    <div class="col-sm-8 wt-page-options-value">
+    <div class="col-sm-8 options-panel-background">
         <div class="row">
             <div class="col-auto mx-3">
                 <input type="radio" onclick="Form.toggleCart(true)" name="vars[use_cart]" id="usecart_yes" value="use_cart" <?= $vars["use_cart"] ? 'checked' : '' ?>>

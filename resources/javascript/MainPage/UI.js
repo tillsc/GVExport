@@ -578,30 +578,36 @@ const UI = {
      *
      */
     fixTheme() {
-        let elements = document.querySelectorAll('.advanced-settings-btn');
-        let baseColour = getComputedStyle(document.querySelector('.wt-page-options-value')).backgroundColor;
-        let replaceColour = getComputedStyle(document.querySelector('.btn-primary')).backgroundColor;
-        let primaryButton = document.querySelector('.btn-primary');
-        let replaceTextColour;
-        if (primaryButton !== null) {
-            replaceTextColour = getComputedStyle(primaryButton).color;
-        }
-        for (let i=0; i<elements.length; i++) {
-            if (getComputedStyle(elements[i]).backgroundColor === baseColour) {
-                // If no background-color because background is used instead, then use this.
-                // Resolves issue where background-color is transparent because background gradient being used
-                if (replaceColour === 'rgba(0, 0, 0, 0)') {
-                    let searchButton = document.querySelector('.wt-header-search-button');
-                    if (searchButton !== null) {
-                        elements[i].style.background = getComputedStyle(searchButton).background;
-                    }
-                } else {
-                    elements[i].style.backgroundColor = replaceColour;
-                }
-                if (primaryButton !== null) {
-                    elements[i].style.color = replaceTextColour;
+        try {
+            // first, what theme?
+            let theme = '';
+            let dropdownMenu = document.querySelector('.menu-theme');
+            if (dropdownMenu) {
+                let activeItem = dropdownMenu.querySelector('.dropdown-item.active');
+                if (activeItem) {
+                    theme = activeItem.textContent.trim();
                 }
             }
+
+            if (theme === 'webtrees') {
+                // Set the webtrees blue colours that are for some reason not stored in a css variable
+                // We do this here rather than hard coding the colour we want so we don't break other themes.
+                let elements = document.querySelectorAll('.sidebar-labels');
+                for (let i = 0; i < elements.length; i++) {
+                    elements[i].classList.add('theme-webtrees-labels');
+                }
+
+                elements = document.querySelectorAll('.options-panel-background');
+                for (let i = 0; i < elements.length; i++) {
+                    elements[i].classList.add('theme-webtrees-options');
+                }
+
+                // Make colour behind headings white instead of theme colour leaking through
+                let form = document.getElementById('gvexport');
+                form.style.background = '#ffffff';
+            }
+        } catch (e) {
+            // ignore if theme doesn't like us messing with it
         }
     },
 

@@ -10,7 +10,7 @@ use Fisharebest\Webtrees\I18N;
 ?>
 
 <?= MainPage::addLabel('', 'Diagram type', !$admin); ?>
-<div class="col-sm-8 wt-page-options-value">
+<div class="col-sm-8 options-panel-background">
     <div class="row">
         <?php // Simple diagram type no longer exists, but we need to handle it if we find the setting in loaded settings
         MainPage::handleSimpleSettings($vars['diagram_type']); ?>

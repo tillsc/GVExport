@@ -44,7 +44,7 @@ class MainPage
      */
     public static function addLabel(string $for, string $text, bool $help = TRUE): string
     {
-        return '<label class="col-sm-4 col-form-label wt-page-options-label label-group" for="' . $for .'"><span class="label-text">' . I18N::translate($text) . "</span>" . ($help ? MainPage::addInfoButton($text) : "") . '</label>';
+        return '<label class="col-sm-4 col-form-label sidebar-labels label-group" for="' . $for .'"><span class="label-text">' . I18N::translate($text) . "</span>" . ($help ? MainPage::addInfoButton($text) : "") . '</label>';
     }
 
     /**

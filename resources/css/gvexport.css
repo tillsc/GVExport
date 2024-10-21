@@ -8,10 +8,31 @@
     border-top: 1px solid black;
     border-right: 1px solid black;
     padding-top: 0.5rem;
-    background-color: #fff;
+    background-color: var(--bs-tertiary-bg);
     display: flex;
     flex-direction: column;
 }
+
+.sidebar-labels {
+    background-color: var(--bs-secondary-bg);
+    color: var(--fgColor-default, --bs-secondary-text-emphasis, white);
+    margin-left: 2px;
+    margin-right: -2px;
+}
+
+.theme-webtrees-labels {
+    background-color: #81a9cb !important;
+    color: white;
+}
+
+.theme-webtrees-options {
+    background-color: #edf7f9 !important;
+}
+
+.theme-primer-listitem {
+    background-color: white;
+}
+
 
 .no-right-margin {
     margin-right: 0px !important;
@@ -54,7 +75,7 @@
     border-top: 1px solid black;
     border-left: 1px solid black;
     padding: 0.5rem;
-    background-color: #fff;
+    background-color: var(--bs-tertiary-bg);
     display: flex;
     flex-direction: column;
 }
@@ -220,10 +241,16 @@
 .indi_list_item, .settings_list_item {
     position: relative;
     border: 1px solid;
-    background-color: white;
+    border-color: var(--bs-border-color);
+    background-color: var(--data-gray-color-muted, var(--bs-body-bg, white));
     border-radius: 5px;
     margin: 3px;
     width: 100%;
+}
+
+.options-panel-background {
+    background-color: var(--bs-tertiary-bg);
+    padding: .25rem .75rem;
 }
 
 span.NAME {
@@ -391,7 +418,7 @@ span.NAME {
     position: absolute;
     padding: 5px;
     z-index: 300;
-    background-color: white;
+    background-color: var(--bs-tertiary-bg);
     border-color: #333333;
     border-width: 1px;
     border-style: solid;
@@ -402,18 +429,19 @@ span.NAME {
     top: 28px;
 }
 
+
 #context_menu::after, .settings_ellipsis_menu::after {
     content: "";
     position: absolute;
-    top: -1px; /* move up 20px */
-    right: -1px; /* move right 20px */
-    width: 10px; /* width of the corner */
-    height: 10px; /* height of the corner */
+    top: -1px;
+    right: -1px;
+    width: 10px;
+    height: 10px;
     border-color: transparent #333333 transparent transparent;
     border-style: solid;
     border-width: 1px;
 }
-
+/* pointy arrow bit of menu */
 #context_menu::before, .settings_ellipsis_menu::before {
     content: "";
     position: absolute;
@@ -421,7 +449,7 @@ span.NAME {
     right: var(--gve-context-right);
     width: 10px;
     height: 10px;
-    background-color: white;
+    background-color: var(--bs-tertiary-bg);
     border: 1px solid var(--gve-context-up);
     border-bottom-color: var(--gve-context-down);
     border-left-color: var(--gve-context-down);

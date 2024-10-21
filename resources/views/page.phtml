@@ -43,7 +43,7 @@ $usegraphviz = $vars['graphviz_bin'] != "";
     <?= $title ?>
 </h2>
 
-<form action="<?= $module->chartUrl($individual) ?>" method="post" class="wt-page-options sidebar d-print-none" id="gvexport">
+<form action="<?= $module->chartUrl($individual) ?>" method="post" class="sidebar d-print-none" id="gvexport">
     <div class="pull-right btn-hover">
         <a class="hide-form btn btn-secondary pointer"><i class="fa-solid fa-xmark"></i></a>
     </div>
@@ -59,7 +59,7 @@ $usegraphviz = $vars['graphviz_bin'] != "";
 
             <div class="row no-right-margin form-group">
                 <?= MainPage::addLabel('simple_settings_list', 'List of diagrams'); ?>
-                <div class="col-sm-8 wt-page-options-value">
+                <div class="col-sm-8 options-panel-background">
                     <select id="simple_settings_list" class="form-select">
                         <option value="-">-</option>
                     </select>

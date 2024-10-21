@@ -11,13 +11,13 @@ use vendor\WebtreesModules\gvexport\Settings;
 
 <div class="row no-right-margin form-group">
     <?= MainPage::addLabel('enable_debug_mode', 'Debug mode', FALSE); ?>
-    <div class="col-sm-8 wt-page-options-value">
+    <div class="col-sm-8 options-panel-background">
         <label for="enable_debug_mode"><?= I18N::translate('Enable debug mode') ?></label>
         <input type="checkbox" name="vars[enable_debug_mode]" id="enable_debug_mode" value="enable_debug_mode" <?= $vars["enable_debug_mode"] ? 'checked' : '' ?>><br>
         <button class="btn btn-outline-secondary" type="button" name="debug_view" onclick="return showHelp('enable_debug_mode');"><?= I18N::translate('View debug log') ?></button>
     </div>
     <?= MainPage::addLabel('enable_graphviz', 'Graphviz', FALSE); ?>
-    <div class="col-sm-8 wt-page-options-value">
+    <div class="col-sm-8 options-panel-background">
         <label for="enable_graphviz"><?= I18N::translate('Use Graphviz on server') ?></label>
         <input type="checkbox" name="vars[enable_graphviz]" id="enable_graphviz" value="enable_graphviz" onclick="setGraphvizAvailable(this.value==='enable_graphviz');" <?= $vars["enable_graphviz"] && (new Settings())->getDefaultSettings()['graphviz_bin'] != "" ? 'checked' : '' ?> <?= (new Settings())->getDefaultSettings()['graphviz_bin'] == "" ? "disabled" : ""; ?>><br></div>
 </div>
