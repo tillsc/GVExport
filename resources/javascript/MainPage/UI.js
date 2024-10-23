@@ -35,7 +35,7 @@ const UI = {
             toast.setAttribute("id", "toast");
             toast.setAttribute("class", "pointer");
             if (message.substring(0, ERROR_CHAR.length) === ERROR_CHAR) {
-                toast.className += "error";
+                toast.className += " error";
                 message = message.substring(ERROR_CHAR.length);
             }
             toast.innerText = message;
@@ -375,16 +375,24 @@ const UI = {
         },
 
         /**
-         *  Adds the XREF to the list of indiviudals to highlight
+         *  Adds the XREF to the list of individuals to highlight
          *
          * @param xref
          */
         addIndiToCustomHighlightList(xref) {
-            let list = document.getElementById('highlight_custom');
+            let listEl = document.getElementById('highlight_custom_json');
+            list = listEl.value.trim();
             const regex = new RegExp(`(?<=,|^)(${xref})(?=,|$)`);
-            if (!regex.test(list.value.replaceAll(" ','"))) {
-                appendXrefToList(xref, 'highlight_custom');
+            if (list === '') list = '{}';
+            let data = JSON.parse(list);
+            if (!data[xref]) {
+                let el = document.getElementById('highlight_custom_col');
+                if (el) {
+                    data[xref] = el.value;
+                }
             }
+            listEl.value = JSON.stringify(data);
+            Form.indiList.refreshIndisFromJson('highlight_custom_json', 'highlight_list');
         },
 
         /**
@@ -465,6 +473,7 @@ const UI = {
         },
 
     },
+
     /**
      * Additional side panel that shows help information
      */

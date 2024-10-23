@@ -54,7 +54,7 @@ function stopIndiSelectChanged() {
     }
 }
 
-function loadXrefList(url, xrefListId, indiListId) {
+function loadXrefList(url, xrefListId, indiListId, skinny) {
     let xrefListEl = document.getElementById(xrefListId);
     let xref_list = xrefListEl.value.trim();
     xrefListEl.value = xref_list;
@@ -63,7 +63,7 @@ function loadXrefList(url, xrefListId, indiListId) {
     let xrefs = xref_list.split(',');
     for (let i=0; i<xrefs.length; i++) {
         if (xrefs[i].trim() !== "") {
-            promises.push(Form.indiList.loadIndividualDetails(url, xrefs[i], indiListId));
+            promises.push(Form.indiList.loadIndividualDetails(url, xrefs[i], indiListId, skinny));
         }
     }
     Promise.all(promises).then(function () {
@@ -169,6 +169,7 @@ function refreshIndisFromXREFS(onchange) {
         loadXrefList(TOMSELECT_URL, 'xref_list', 'indi_list');
         document.getElementById('stop_indi_list').innerHTML = "";
         loadXrefList(TOMSELECT_URL, 'stop_xref_list', 'stop_indi_list');
+        Form.indiList.refreshIndisFromJson('highlight_custom_json', 'highlight_list');
     }
 }
 
@@ -284,8 +285,7 @@ function pageLoaded(Url) {
     TOMSELECT_URL = document.getElementById('pid').getAttribute("data-wt-url") + "&query=";
     loadURLXref(Url);
     loadUrlToken(Url);
-    loadXrefList(TOMSELECT_URL, 'xref_list', 'indi_list');
-    loadXrefList(TOMSELECT_URL, 'stop_xref_list', 'stop_indi_list');
+    refreshIndisFromXREFS(false);
     loadSettingsDetails();
     // Remove reset parameter from URL when page loaded, to prevent
     // further resets when page reloaded
@@ -826,7 +826,7 @@ function removeFromXrefList(value, listElName) {
 
 function toggleHighlightStartPersons(enable, adminPage) {
     if (enable && !adminPage) {
-        let list = document.getElementById('highlight_list');
+        let list = document.getElementById('highlight_list2');
         let xrefList = document.getElementById('xref_list');
         let xrefExcludeArray = document.getElementById('no_highlight_xref_list').value.split(',');
         list.innerHTML = '';

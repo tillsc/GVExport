@@ -290,8 +290,8 @@ class FormSubmission
         if (isset($vars["highlight_custom_col"]) && $this->isValidColourHex($vars["highlight_custom_col"])) {
             $settings['highlight_custom_col'] = $vars["highlight_custom_col"];
         }
-        if (isset($vars["highlight_custom"]) && $this->isXrefListValid($vars["highlight_custom"])) {
-            $settings['highlight_custom'] = $vars["highlight_custom"];
+        if (isset($vars["highlight_custom_json"]) && $this->isValidJSON($vars["highlight_custom_json"])) {
+            $settings['highlight_custom_json'] = $vars["highlight_custom_json"];
         }
         if (isset($vars["border_col"]) && $this->isValidColourHex($vars["border_col"])) {
             $settings['border_col'] = $vars["border_col"];

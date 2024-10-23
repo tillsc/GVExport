@@ -187,7 +187,7 @@ class Person
         }
 
         // Get background colour
-        if ($this->dot->settings['highlight_custom_indis'] && $this->isValueInList($this->dot->settings['highlight_custom'], $pid)) {
+        if ($this->dot->settings['highlight_custom_indis'] && $this->isValueInList($this->dot->settings['highlight_custom_json'], $pid)) {
             $indi_bg_colour = $this->dot->settings["highlight_custom_col"];
         } else if ($this->isStartingIndividual($pid) && $this->dot->settings['highlight_start_indis'] == "true" && !$this->isValueInList($this->dot->settings['no_highlight_xref_list'], $pid)) {
             $indi_bg_colour = $this->dot->settings["highlight_col"];

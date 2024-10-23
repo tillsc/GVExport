@@ -371,7 +371,7 @@ $usegraphviz = $vars['graphviz_bin'] != "";
             return element;
         }).catch(function (error) {
             console.log(error);
-            if (error.message.includes("TOTAL_MEMORY")) {
+            if (error.message && error.message.includes("TOTAL_MEMORY")) {
                 if (graphvizAvailable) {
                     UI.showToast(ERROR_CHAR + "<?= I18N::translate('Memory limit reached. Please reduce number of records or use download option.'); ?>");
                 } else {

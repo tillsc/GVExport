@@ -486,34 +486,39 @@ const Form = {
          * @param url The webtrees URL that runs the Tom-select search that we use to pull the details
          * @param xref The webtrees ID of the individual
          * @param list 'indi_list' if it's the starting individual list, otherwise it updates the stopping individual's list
+         * @param skinny Whether this is a skinny version, used when the item is indented in the layout, i.e. full version doesn't fit
          * @returns {Promise<void>}
          */
-        loadIndividualDetails(url, xref, list) {
+        loadIndividualDetails(url, xref, list, skinny = false) {
             return fetch(url + xref.trim()).then(async (response) => {
                 const data = await response.json();
                 let contents;
                 let otherXrefId;
                 if (list === "indi_list") {
                     otherXrefId = "xref_list";
-                } else {
+                } else if (list === "stop_indi_list") {
                     otherXrefId = "stop_xref_list";
+                } else {
+                    otherXrefId = "highlight_custom_json";
                 }
                 if (data["data"].length !== 0) {
-                    for (let i=0; i< data['data'].length; i++) {
+                    for (let i = 0; i < data['data'].length; i++) {
                         if (xref.toUpperCase() === data['data'][i].value.toUpperCase()) {
                             contents = data["data"][i]["text"];
                             // Fix case if mismatched
                             if (xref !== data['data'][i].value) {
                                 let listEl = document.getElementById(otherXrefId);
                                 let indiList = listEl.value.split(',');
-                                for (let j = indiList.length-1; j>=0; j--) {
+                                for (let j = indiList.length - 1; j >= 0; j--) {
                                     if (indiList[j].trim() === xref.trim()) {
                                         indiList[j] = data["data"][i].value;
                                         break;
                                     }
                                 }
                                 listEl.value = indiList.join(',');
-                                setTimeout(()=>{refreshIndisFromXREFS(false)}, 100);
+                                setTimeout(() => {
+                                    refreshIndisFromXREFS(false)
+                                }, 100);
                                 Form.handleFormChange();
                             }
                         }
@@ -525,8 +530,11 @@ const Form = {
                 const newListItem = document.createElement("div");
                 newListItem.className = "indi_list_item";
                 newListItem.setAttribute("data-xref", xref);
-                newListItem.setAttribute("onclick", "UI.scrollToRecord('"+xref+"')");
-                newListItem.innerHTML = contents + "<div class=\"saved-settings-ellipsis\" onclick=\"removeItem(event, this.parentElement, '" + otherXrefId + "')\"><a class='pointer'>×</a></div>";
+                newListItem.setAttribute("onclick", "UI.scrollToRecord('" + xref + "')");
+                newListItem.innerHTML = contents + "<div class=\"saved-settings-ellipsis\" onclick=\"removeItem(event, this.parentElement" + (skinny ? '.parentElement' : '') + ", '" + otherXrefId + "')\"><a class='pointer'>×</a></div>";
+                if (skinny) {
+                    newListItem.innerHTML = '<span class="list_item_skinny">' + newListItem.innerHTML + '</span>';
+                }
                 // Multiple promises can be for the same xref - don't add if a duplicate
                 let item = listElement.querySelector(`[data-xref="${xref}"]`);
                 if (item == null) {
@@ -536,9 +544,29 @@ const Form = {
                 }
                 updateClearAll();
             })
-        }
-    },
+        },
 
+        /**
+         * Load a list of indis into element indiListId using JSON data
+         *
+         * @param {string} jsonId
+         * @param {string} indiListId
+         */
+        refreshIndisFromJson(jsonId, indiListId) {
+            let jsonEl = document.getElementById(jsonId);
+            let listEl = document.getElementById(indiListId);
+            document.getElementById(indiListId).innerHTML = "";
+            if (jsonEl.value === '') jsonEl.value = '{}';
+            try {
+                let data = JSON.parse(jsonEl.value);
+                for (let key in data) {
+                    Form.indiList.loadIndividualDetails(TOMSELECT_URL, key, indiListId, true)
+                }
+            } catch (error) {
+                UI.showToast(ERROR_CHAR + error);
+            }
+        },
+    },
     /**
      * List of stopping individuals for pruning diagram
      */
