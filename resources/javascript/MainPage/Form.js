@@ -533,8 +533,9 @@ const Form = {
                 newListItem.setAttribute("onclick", "UI.scrollToRecord('" + xref + "')");
                 newListItem.innerHTML = contents + "<div class=\"saved-settings-ellipsis\" onclick=\"Form.indiList.removeItem(event, this.parentElement" + (colour === '' ? '' :  '.parentElement') + ", '" + otherXrefId + "')\"><a class='pointer'>×</a></div>";
                 if (colour !== '') {
-                    let picker = '<input type="color" class="highlight_picker" name="" id="" value="' + colour + '">';
+                    let picker = `<input type="color" class="highlight_picker" data-xref="${xref}" value="${colour}">`;
                     newListItem.innerHTML = '<span class="list_item_skinny">' + newListItem.innerHTML + '</span>' + picker;
+                    newListItem.querySelector('.highlight_picker')?.addEventListener('change', Form.indiList.updateHighlightColour);
                 }
                 // Multiple promises can be for the same xref - don't add if a duplicate
                 let item = listElement.querySelector(`[data-xref="${xref}"]`);
@@ -566,11 +567,26 @@ const Form = {
             if (xrefListId === 'highlight_custom_json') {
                 let list = document.getElementById(xrefListId);
                 let data = JSON.parse(list.value);
-                console.log(data);
                 delete data[xref];
-                console.log(data);
                 list.value = JSON.stringify(data);
             }
+            if (autoUpdate) {
+                updateRender();
+            }
+        },
+
+        /** Triggered by change of highlight colour picker, updates the JSON that stores the colour
+         * 
+         * @param {Event} e
+         */
+        updateHighlightColour(e) {
+            let xref = e.target.getAttribute('data-xref');
+            let newColour = e.target.value;
+            let list = document.getElementById('highlight_custom_json');
+            let data = JSON.parse(list.value);
+            data[xref] = newColour;
+            list.value = JSON.stringify(data);
+
             if (autoUpdate) {
                 updateRender();
             }
