@@ -94,28 +94,6 @@ function toggleUpdateButton() {
     if (autoUpdate) updateRender();
 }
 
-function removeItem(e, element, xrefListId) {
-    e.stopPropagation();
-    let xref = element.getAttribute("data-xref").trim();
-    let list = document.getElementById(xrefListId);
-    const regex = new RegExp(`(?<=,|^)(${xref})(?=,|$)`);
-    list.value = list.value.replaceAll(" ','").replace(regex, "");
-    list.value = list.value.replace(",,", ',');
-    if (list.value.substring(0,1) === ',') {
-        list.value = list.value.substring(1);
-    }
-    if (list.value.substring(list.value.length-1) === ',') {
-        list.value = list.value.substring(0, list.value.length-1);
-    }
-    element.remove();
-    mainPage.Url.changeURLXref(list.value.split(',')[0].trim());
-    updateClearAll();
-    removeFromXrefList(xref, 'no_highlight_xref_list');
-    toggleHighlightStartPersons(document.getElementById('highlight_start_indis').checked);
-    if (autoUpdate) {
-        updateRender();
-    }
-}
 
 // clear options from the dropdown if they are already in our list
 function removeSearchOptions() {

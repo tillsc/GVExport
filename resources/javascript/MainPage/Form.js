@@ -531,7 +531,7 @@ const Form = {
                 newListItem.className = "indi_list_item";
                 newListItem.setAttribute("data-xref", xref);
                 newListItem.setAttribute("onclick", "UI.scrollToRecord('" + xref + "')");
-                newListItem.innerHTML = contents + "<div class=\"saved-settings-ellipsis\" onclick=\"removeItem(event, this.parentElement" + (colour === '' ? '' :  '.parentElement') + ", '" + otherXrefId + "')\"><a class='pointer'>×</a></div>";
+                newListItem.innerHTML = contents + "<div class=\"saved-settings-ellipsis\" onclick=\"Form.indiList.removeItem(event, this.parentElement" + (colour === '' ? '' :  '.parentElement') + ", '" + otherXrefId + "')\"><a class='pointer'>×</a></div>";
                 if (colour !== '') {
                     let picker = '<input type="color" class="highlight_picker" name="" id="" value="' + colour + '">';
                     newListItem.innerHTML = '<span class="list_item_skinny">' + newListItem.innerHTML + '</span>' + picker;
@@ -545,6 +545,35 @@ const Form = {
                 }
                 updateClearAll();
             })
+        },
+
+        /**
+         * Removes an item from a list of individuals - triggered by clicking X
+         *
+         * @param {Event} e
+         * @param {HTMLElement} element
+         * @param {string} xrefListId
+         */
+        removeItem(e, element, xrefListId) {
+            e.stopPropagation();
+            let xref = element.getAttribute("data-xref").trim();
+            removeFromXrefList(xref, xrefListId);
+            element.remove();
+            if (xrefListId === 'xref_list') {
+                mainPage.Url.changeURLXref(list.value.split(',')[0].trim());
+            }
+            updateClearAll();
+            if (xrefListId === 'highlight_custom_json') {
+                let list = document.getElementById(xrefListId);
+                let data = JSON.parse(list.value);
+                console.log(data);
+                delete data[xref];
+                console.log(data);
+                list.value = JSON.stringify(data);
+            }
+            if (autoUpdate) {
+                updateRender();
+            }
         },
 
         /**
