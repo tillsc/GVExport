@@ -486,10 +486,10 @@ const Form = {
          * @param url The webtrees URL that runs the Tom-select search that we use to pull the details
          * @param xref The webtrees ID of the individual
          * @param list 'indi_list' if it's the starting individual list, otherwise it updates the stopping individual's list
-         * @param skinny Whether this is a skinny version, used when the item is indented in the layout, i.e. full version doesn't fit
+         * @param colour For some, we want to have a colour select box included. This is the colour for the box.
          * @returns {Promise<void>}
          */
-        loadIndividualDetails(url, xref, list, skinny = false) {
+        loadIndividualDetails(url, xref, list, colour = '') {
             return fetch(url + xref.trim()).then(async (response) => {
                 const data = await response.json();
                 let contents;
@@ -531,9 +531,10 @@ const Form = {
                 newListItem.className = "indi_list_item";
                 newListItem.setAttribute("data-xref", xref);
                 newListItem.setAttribute("onclick", "UI.scrollToRecord('" + xref + "')");
-                newListItem.innerHTML = contents + "<div class=\"saved-settings-ellipsis\" onclick=\"removeItem(event, this.parentElement" + (skinny ? '.parentElement' : '') + ", '" + otherXrefId + "')\"><a class='pointer'>×</a></div>";
-                if (skinny) {
-                    newListItem.innerHTML = '<span class="list_item_skinny">' + newListItem.innerHTML + '</span>';
+                newListItem.innerHTML = contents + "<div class=\"saved-settings-ellipsis\" onclick=\"removeItem(event, this.parentElement" + (colour === '' ? '' :  '.parentElement') + ", '" + otherXrefId + "')\"><a class='pointer'>×</a></div>";
+                if (colour !== '') {
+                    let picker = '<input type="color" class="highlight_picker" name="" id="" value="' + colour + '">';
+                    newListItem.innerHTML = '<span class="list_item_skinny">' + newListItem.innerHTML + '</span>' + picker;
                 }
                 // Multiple promises can be for the same xref - don't add if a duplicate
                 let item = listElement.querySelector(`[data-xref="${xref}"]`);
@@ -560,7 +561,7 @@ const Form = {
             try {
                 let data = JSON.parse(jsonEl.value);
                 for (let key in data) {
-                    Form.indiList.loadIndividualDetails(TOMSELECT_URL, key, indiListId, true)
+                    Form.indiList.loadIndividualDetails(TOMSELECT_URL, key, indiListId, data[key]);
                 }
             } catch (error) {
                 UI.showToast(ERROR_CHAR + error);

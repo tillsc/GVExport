@@ -54,7 +54,7 @@ function stopIndiSelectChanged() {
     }
 }
 
-function loadXrefList(url, xrefListId, indiListId, skinny) {
+function loadXrefList(url, xrefListId, indiListId) {
     let xrefListEl = document.getElementById(xrefListId);
     let xref_list = xrefListEl.value.trim();
     xrefListEl.value = xref_list;
@@ -63,7 +63,7 @@ function loadXrefList(url, xrefListId, indiListId, skinny) {
     let xrefs = xref_list.split(',');
     for (let i=0; i<xrefs.length; i++) {
         if (xrefs[i].trim() !== "") {
-            promises.push(Form.indiList.loadIndividualDetails(url, xrefs[i], indiListId, skinny));
+            promises.push(Form.indiList.loadIndividualDetails(url, xrefs[i], indiListId));
         }
     }
     Promise.all(promises).then(function () {

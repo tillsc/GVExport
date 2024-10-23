@@ -228,6 +228,11 @@
     float: right;
 }
 
+.highlight_picker {
+    width: 32px;
+    margin-top: 4px !important;
+}
+
 .setting_subgroup .picker {
     margin-right: 2px !important;
 }
@@ -246,6 +251,9 @@
     border-radius: 5px;
     margin: 3px;
     width: 100%;
+    display: flex;
+    min-height: 42px;
+    line-height: 36px;
 }
 
 .list_item_skinny {
@@ -278,6 +286,7 @@ span.NAME {
     position: absolute;
     top: -2px;
     right: 5px;
+    line-height: initial;
 }
 
 #clear_list, #clear_stop_list {
