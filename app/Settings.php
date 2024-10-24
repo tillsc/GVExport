@@ -150,6 +150,8 @@ class Settings
                 } else {
                     if (isset($all_settings[$id]) && json_last_error() === JSON_ERROR_NONE) {
                         $loaded_settings = json_decode($all_settings[$id]['settings'], true);
+                        $loaded_settings = $this->migrate($loaded_settings);
+
                         if (json_last_error() === JSON_ERROR_NONE) {
                             foreach ($settings as $preference => $value) {
                                 if (($preference == 'enable_graphviz' || $preference == 'enable_debug_mode') && !$settings['show_debug_panel']) {
@@ -184,6 +186,25 @@ class Settings
             $settings['graphviz_bin'] = "";
         }
         return $settings;
+    }
+
+    /** Given an array of settings, migrate old settings into the new settings structure
+     *
+     * @param $settings
+     * @return array
+     */
+    private function migrate($settings) {
+        $migrated = $settings;
+        if (isset($migrated['highlight_custom_col']) && isset($migrated['highlight_custom'])) {
+            $xrefs = explode(',', $migrated['highlight_custom']);
+            $highlight = [];
+            foreach ($xrefs as $xref) {
+                $highlight[$xref] = $migrated['highlight_custom_col'];
+            }
+            $migrated['highlight_custom_json'] = json_encode($highlight);
+        }
+
+        return $migrated;
     }
 
     /**
