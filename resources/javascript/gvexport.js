@@ -68,7 +68,6 @@ function loadXrefList(url, xrefListId, indiListId) {
     }
     Promise.all(promises).then(function () {
         updateClearAll();
-        toggleHighlightStartPersons(document.getElementById('highlight_start_indis').checked);
     }).catch(function(error) {
         UI.showToast("Error");
         console.log(error);
@@ -517,7 +516,7 @@ function loadSettingsDetails() {
             newListItem.setAttribute("data-id", settingsList[key]['id']);
             newListItem.setAttribute("data-token", settingsList[key]['token'] || "");
             newListItem.setAttribute("data-name", settingsList[key]['name']);
-            newListItem.setAttribute("onclick", "Form.settings.loadSettings(this.getAttribute('data-settings'), true)");
+            newListItem.setAttribute("onclick", "Form.settings.load(this.getAttribute('data-settings'), true)");
             newListItem.innerHTML = "<a class='pointer'>" + settingsList[key]['name'] + "<div class=\"saved-settings-ellipsis pointer\" onclick='UI.savedSettings.showSavedSettingsItemMenu(event)'><a class='pointer'>…</a></div></a>";
             newLinkWrapper.appendChild(newListItem);
             listElement.appendChild(newLinkWrapper);
@@ -703,46 +702,6 @@ function removeFromXrefList(value, listElName) {
         xrefExcludeEl.value = xrefExcludeArray.join(',');
     }
 }
-
-
-function toggleHighlightStartPersons(enable, adminPage) {
-    if (enable && !adminPage) {
-        let list = document.getElementById('highlight_list2');
-        let xrefList = document.getElementById('xref_list');
-        let xrefExcludeArray = document.getElementById('no_highlight_xref_list').value.split(',');
-        list.innerHTML = '';
-        let xrefs = xrefList.value.split(',');
-        for (let i=0; i<xrefs.length; i++) {
-            if (xrefs[i].trim() !== "") {
-                const xrefItem = document.createElement('div');
-                const checkboxEl = document.createElement('input');
-                checkboxEl.setAttribute('id', 'highlight_check' + i);
-                checkboxEl.setAttribute('class', 'highlight_check');
-                checkboxEl.setAttribute('type', 'checkbox');
-                checkboxEl.setAttribute('data-xref', xrefs[i]);
-                if (!xrefExcludeArray.includes(xrefs[i])) {
-                    checkboxEl.checked = true;
-                }
-                checkboxEl.addEventListener("click", toggleHighlightCheckbox);
-                xrefItem.appendChild(checkboxEl);
-                const indiItem = document.getElementById('indi_list')
-                    .querySelector('.indi_list_item[data-xref="' + xrefs[i] + '"]');
-                let indiName = "";
-                if (indiItem != null) {
-                    indiName = indiItem.getElementsByClassName("NAME")[0].innerText;
-                }
-                const labelEl = document.createElement('label');
-                labelEl.setAttribute('class', 'highlight_check_label');
-                labelEl.setAttribute('for', 'highlight_check' + i);
-                labelEl.innerHTML = indiName + " (" + xrefs[i] + ")";
-                xrefItem.appendChild(labelEl);
-                list.appendChild(xrefItem);
-            }
-        }
-    }
-    Form.showHide(document.getElementById('startcol_option'),enable);
-}
-
 function setSvgImageClipPath(element, clipPath) {
     // Circle photo
     const imageElements = element.getElementsByTagName("image");

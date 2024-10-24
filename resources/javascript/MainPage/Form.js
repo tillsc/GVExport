@@ -460,7 +460,6 @@ const Form = {
             if (!regex.test(list.value.replaceAll(" ','"))) {
                 appendXrefToList(xref, 'xref_list');
                 Form.indiList.loadIndividualDetails(TOMSELECT_URL, xref, 'indi_list').then(() => {
-                    toggleHighlightStartPersons(document.getElementById('highlight_start_indis').checked);
                 })
             }
             Form.clearSelect('pid');
@@ -704,9 +703,19 @@ const Form = {
                         case 'highlight_custom':
                             let xrefs = settings[key].split(',');
                             for (let xref of xrefs) {
-                                UI.tile.addIndiToCustomHighlightList(xref);
+                                if (xref !== '') {
+                                    alert(xref)
+                                    UI.tile.addIndiToCustomHighlightList(xref);
+                                }
                             }
                             break;
+                        // Handle transforming highlighted start indis into new custom highlight system
+                        case 'highlight_start_indis':
+                            Form.settings.migrateHighlightStartIndis(settings);
+                            break;
+                        // Ignore these as handled by highlight_start_indis
+                        case 'highlight_col':
+                        case 'no_highlight_xref_list':
                         // If option to use cart is not showing, don't load, but also don't show error
                         case 'use_cart':
                         // These options only exist if debug panel active - don't show error if not found
@@ -738,7 +747,6 @@ const Form = {
             Form.showHideMatchCheckbox('show_death_date', 'death_date_subgroup');
             setSavedDiagramsPanel();
             Form.showHide(document.getElementById('arrow_group'),document.getElementById('colour_arrow_related').checked)
-            Form.showHide(document.getElementById('startcol_option'),document.getElementById('highlight_start_indis').checked)
             Form.showHide(document.getElementById('highlight_custom_option'),document.getElementById('highlight_custom_indis').checked)
             toggleUpdateButton();
             if (autoUpdatePrior) {
@@ -751,5 +759,22 @@ const Form = {
             }
             refreshIndisFromXREFS(false);
         },
+
+        /**
+         * Migrate old setting to highlight start individuals into the new custom highlight function
+         * @param settings
+         */
+        migrateHighlightStartIndis(settings){
+            if (settings['highlight_start_indis'] && settings['highlight_col']) {
+                let xrefs = settings['xref_list'].split(',');
+                let nohighlight = settings['no_highlight_xref_list'].split(',');
+                for (let xref of xrefs) {
+                    if (xref.trim() !== '' && !nohighlight.includes(xref)) {
+                        UI.tile.addIndiToCustomHighlightList(xref, settings['highlight_col']);
+                        settings['highlight_custom_indis'] = true;
+                    }
+                }
+            }
+        }
     },
 }

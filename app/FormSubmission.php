@@ -279,13 +279,6 @@ class FormSubmission
         if (isset($vars["indi_background_col"]) && $this->isValidColourHex($vars["indi_background_col"])) {
             $settings['indi_background_col'] = $vars["indi_background_col"];
         }
-        $settings['highlight_start_indis'] = isset($vars["highlight_start_indis"]);
-        if (isset($vars["highlight_col"]) && $this->isValidColourHex($vars["highlight_col"])) {
-            $settings['highlight_col'] = $vars["highlight_col"];
-        }
-        if (isset($vars["no_highlight_xref_list"]) && $this->isXrefListValid($vars["no_highlight_xref_list"])) {
-            $settings['no_highlight_xref_list'] = $vars["no_highlight_xref_list"];
-        }
         $settings['highlight_custom_indis'] = isset($vars["highlight_custom_indis"]);
         if (isset($vars["highlight_custom_col"]) && $this->isValidColourHex($vars["highlight_custom_col"])) {
             $settings['highlight_custom_col'] = $vars["highlight_custom_col"];

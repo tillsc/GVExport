@@ -377,18 +377,22 @@ const UI = {
         /**
          *  Adds the XREF to the list of individuals to highlight
          *
-         * @param xref
+         * @param xref xref of individual to add
+         * @param colour colour to use for this individual (if not default)
          */
-        addIndiToCustomHighlightList(xref) {
+        addIndiToCustomHighlightList(xref, colour = null) {
             let listEl = document.getElementById('highlight_custom_json');
-            list = listEl.value.trim();
-            const regex = new RegExp(`(?<=,|^)(${xref})(?=,|$)`);
+            let list = listEl.value.trim();
             if (list === '') list = '{}';
             let data = JSON.parse(list);
-            if (!data[xref]) {
-                let el = document.getElementById('highlight_custom_col');
-                if (el) {
-                    data[xref] = el.value;
+            if (xref !== '' && !data[xref]) {
+                if (colour) {
+                    data[xref] = colour;
+                } else {
+                    let el = document.getElementById('highlight_custom_col');
+                    if (el) {
+                        data[xref] = el.value;
+                    }
                 }
             }
             listEl.value = JSON.stringify(data);

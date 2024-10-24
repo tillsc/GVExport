@@ -193,16 +193,41 @@ class Settings
      * @param $settings
      * @return array
      */
-    private function migrate($settings) {
+    private function migrate($settings): array
+    {
         $migrated = $settings;
+        if (isset($migrated['highlight_custom_json'])) {
+            $highlight = json_decode($migrated['highlight_custom_json'], true);
+        } else {
+            $highlight = [];
+        }
+        // Migrate custom highlight settings to new JSON format
         if (isset($migrated['highlight_custom_col']) && isset($migrated['highlight_custom'])) {
             $xrefs = explode(',', $migrated['highlight_custom']);
+            foreach ($xrefs as $xref) {
+                if (trim($xref) != "") {
+                    if (!isset($highlight[$xref])) {
+                        $highlight[$xref] = $migrated['highlight_custom_col'];
+                        $migrated['highlight_custom_indis'] = true;
+                    }
+                }
+            }
+        }
+
+        // Migrate highlighted starting indis to new custom highlight function
+        if (isset($migrated['highlight_start_indis']) && $migrated['highlight_start_indis'] && isset($migrated['highlight_col']) && isset($migrated['xref_list']) && isset($migrated['no_highlight_xref_list'])) {
+            $xrefs = explode(',', $migrated['xref_list']);
+            $no_highlight = explode(',', $migrated['no_highlight_xref_list']);
             $highlight = [];
             foreach ($xrefs as $xref) {
-                $highlight[$xref] = $migrated['highlight_custom_col'];
+                if (trim($xref) != "" && !isset($highlight[$xref]) && !in_array($xref, $no_highlight)) {
+                    $highlight[$xref] = $migrated['highlight_custom_col'];
+                    $migrated['highlight_custom_indis'] = true;
+                }
             }
-            $migrated['highlight_custom_json'] = json_encode($highlight);
         }
+
+        $migrated['highlight_custom_json'] = json_encode($highlight);
 
         return $migrated;
     }
