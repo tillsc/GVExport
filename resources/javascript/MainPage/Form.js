@@ -644,5 +644,105 @@ const Form = {
             updateClearAll();
             if (autoUpdate && update) updateRender();
         }
-    }
+    },
+
+    settings: {
+        load(data, isNamedSetting = false) {
+            let autoUpdatePrior = autoUpdate;
+            autoUpdate = false;
+            let settings;
+            try {
+                settings = JSON.parse(data);
+            } catch (e) {
+                UI.showToast("Failed to load settings: " + e);
+                return false;
+            }
+            if (!settings.hasOwnProperty("sharednote_col_data")) {
+                settings["sharednote_col_data"] = "[]";
+            }
+            Object.keys(settings).forEach(function(key){
+                let el = document.getElementById(key);
+                if (el == null) {
+                    switch (key) {
+                        case 'diagram_type':
+                            if (settings[key] === 'simple') {
+                                setTimeout(() => {
+                                    handleSimpleDiagram();
+                                    if (autoUpdate) updateRender();
+                                },1);
+                            } else {
+                                setCheckStatus(document.getElementById('diagtype_decorated'), settings[key] === 'decorated');
+                                setCheckStatus(document.getElementById('diagtype_combined'), settings[key] === 'combined');
+                            }
+                            break;
+                        case 'combined_layout_type':
+                            setCheckStatus(document.getElementById('cl_type_ss'), settings[key] === 'SS');
+                            setCheckStatus(document.getElementById('cl_type_ou'), settings[key] === 'OU');
+                            break;
+                        case 'birthdate_year_only':
+                            setCheckStatus(document.getElementById('bd_type_y'), toBool(settings[key]));
+                            setCheckStatus(document.getElementById('bd_type_gedcom'), !toBool(settings[key]));
+                            break;
+                        case 'death_date_year_only':
+                            setCheckStatus(document.getElementById('dd_type_y'), toBool(settings[key]));
+                            setCheckStatus(document.getElementById('dd_type_gedcom'), !toBool(settings[key]));
+                            break;
+                        case 'marr_date_year_only':
+                            setCheckStatus(document.getElementById('md_type_y'), toBool(settings[key]));
+                            setCheckStatus(document.getElementById('md_type_gedcom'), !toBool(settings[key]));
+                            break;
+                        case 'show_adv_people':
+                            Form.toggleAdvanced(document.getElementById('people-advanced-button'), 'people-advanced', toBool(settings[key]));
+                            break;
+                        case 'show_adv_appear':
+                            Form.toggleAdvanced(document.getElementById('appearance-advanced-button'), 'appearance-advanced', toBool(settings[key]));
+                            break;
+                        case 'show_adv_files':
+                            Form.toggleAdvanced(document.getElementById('files-advanced-button'), 'files-advanced', toBool(settings[key]));
+                            break;
+                        // If option to use cart is not showing, don't load, but also don't show error
+                        case 'use_cart':
+                        // These options only exist if debug panel active - don't show error if not found
+                        case 'enable_debug_mode':
+                        case 'enable_graphviz':
+                        // Token is not loaded as an option
+                        case 'token':
+                        // Date of settings is not a setting so don't load it
+                        case 'updated_date':
+                            break;
+                        default:
+                            UI.showToast(ERROR_CHAR + TRANSLATE['Unable to load setting'] + " " + key);
+                    }
+                } else {
+                    if (el.type === 'checkbox' || el.type === 'radio') {
+                        if (!isNamedSetting || key !== 'show_diagram_panel') {
+                            setCheckStatus(el, toBool(settings[key]));
+                        }
+                    } else {
+                        el.value = settings[key];
+                    }
+                }
+
+                // Update show/hide of JPG quality option
+                Form.showHideMatchDropdown('output_type', 'server_pdf_subgroup', 'pdf|svg|jpg')
+            });
+            Form.showHideMatchCheckbox('mark_not_related', 'mark_related_subgroup');
+            Form.showHideMatchCheckbox('show_birthdate', 'birth_date_subgroup');
+            Form.showHideMatchCheckbox('show_death_date', 'death_date_subgroup');
+            setSavedDiagramsPanel();
+            Form.showHide(document.getElementById('arrow_group'),document.getElementById('colour_arrow_related').checked)
+            Form.showHide(document.getElementById('startcol_option'),document.getElementById('highlight_start_indis').checked)
+            Form.showHide(document.getElementById('highlight_custom_option'),document.getElementById('highlight_custom_indis').checked)
+            toggleUpdateButton();
+            if (autoUpdatePrior) {
+                if (firstRender) {
+                    firstRender = false;
+                } else {
+                    updateRender();
+                }
+                autoUpdate = true;
+            }
+            refreshIndisFromXREFS(false);
+        },
+    },
 }

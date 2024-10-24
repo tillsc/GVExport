@@ -251,7 +251,7 @@ function pageLoaded(Url) {
             if (!loggedIn) {
                 Data.storeSettings.getSettingsClient(ID_MAIN_SETTINGS).then((obj) => {
                     if (obj !== null) {
-                        loadSettings(JSON.stringify(obj));
+                        Form.settings.load(JSON.stringify(obj));
                     } else {
                         firstRender = false;
                     }
@@ -306,7 +306,7 @@ function pageLoaded(Url) {
     simpleSettingsEl.addEventListener('change', function(e) {
         let element = document.querySelector('.settings_list_item[data-id="' + e.target.value + '"]');
         if (element !== null) {
-            loadSettings(element.getAttribute('data-settings'), true);
+            Form.settings.load(element.getAttribute('data-settings'), true);
         } else if (e.target.value !== '-') {
             UI.showToast(ERROR_CHAR + 'Settings not found')
         }
@@ -388,7 +388,7 @@ function uploadSettingsFile(input) {
     const file = input.files[0];
     let reader = new FileReader();
     reader.onload = (e) => {
-        loadSettings(e.target.result);
+        Form.settings.load(e.target.result);
     };
     reader.onerror = (e) => UI.showToast(e.target.error.name);
     reader.readAsText(file);
@@ -400,103 +400,6 @@ function toBool(value) {
     } else {
         return value;
     }
-}
-function loadSettings(data, isNamedSetting = false) {
-    let autoUpdatePrior = autoUpdate;
-    autoUpdate = false;
-    let settings;
-    try {
-        settings = JSON.parse(data);
-    } catch (e) {
-        UI.showToast("Failed to load settings: " + e);
-        return false;
-    }
-    if (!settings.hasOwnProperty("sharednote_col_data")) {
-        settings["sharednote_col_data"] = "[]";
-    }
-    Object.keys(settings).forEach(function(key){
-        let el = document.getElementById(key);
-        if (el == null) {
-            switch (key) {
-                case 'diagram_type':
-                    if (settings[key] === 'simple') {
-                        setTimeout(() => {
-                            handleSimpleDiagram();
-                            if (autoUpdate) updateRender();
-                            },1);
-                    } else {
-                        setCheckStatus(document.getElementById('diagtype_decorated'), settings[key] === 'decorated');
-                        setCheckStatus(document.getElementById('diagtype_combined'), settings[key] === 'combined');
-                    }
-                    break;
-                case 'combined_layout_type':
-                    setCheckStatus(document.getElementById('cl_type_ss'), settings[key] === 'SS');
-                    setCheckStatus(document.getElementById('cl_type_ou'), settings[key] === 'OU');
-                    break;
-                case 'birthdate_year_only':
-                    setCheckStatus(document.getElementById('bd_type_y'), toBool(settings[key]));
-                    setCheckStatus(document.getElementById('bd_type_gedcom'), !toBool(settings[key]));
-                    break;
-                case 'death_date_year_only':
-                    setCheckStatus(document.getElementById('dd_type_y'), toBool(settings[key]));
-                    setCheckStatus(document.getElementById('dd_type_gedcom'), !toBool(settings[key]));
-                    break;
-                case 'marr_date_year_only':
-                    setCheckStatus(document.getElementById('md_type_y'), toBool(settings[key]));
-                    setCheckStatus(document.getElementById('md_type_gedcom'), !toBool(settings[key]));
-                    break;
-                case 'show_adv_people':
-                    Form.toggleAdvanced(document.getElementById('people-advanced-button'), 'people-advanced', toBool(settings[key]));
-                    break;
-                case 'show_adv_appear':
-                    Form.toggleAdvanced(document.getElementById('appearance-advanced-button'), 'appearance-advanced', toBool(settings[key]));
-                    break;
-                case 'show_adv_files':
-                    Form.toggleAdvanced(document.getElementById('files-advanced-button'), 'files-advanced', toBool(settings[key]));
-                    break;
-                // If option to use cart is not showing, don't load, but also don't show error
-                case 'use_cart':
-                // These options only exist if debug panel active - don't show error if not found
-                case 'enable_debug_mode':
-                case 'enable_graphviz':
-                // Token is not loaded as an option
-                case 'token':
-                // Date of settings is not a setting so don't load it
-                case 'updated_date':
-                    break;
-                default:
-                    UI.showToast(ERROR_CHAR + TRANSLATE['Unable to load setting'] + " " + key);
-            }
-        } else {
-            if (el.type === 'checkbox' || el.type === 'radio') {
-                if (!isNamedSetting || key !== 'show_diagram_panel') {
-                    setCheckStatus(el, toBool(settings[key]));
-                }
-            } else {
-                el.value = settings[key];
-            }
-        }
-
-        // Update show/hide of JPG quality option
-        Form.showHideMatchDropdown('output_type', 'server_pdf_subgroup', 'pdf|svg|jpg')
-    });
-    Form.showHideMatchCheckbox('mark_not_related', 'mark_related_subgroup');
-    Form.showHideMatchCheckbox('show_birthdate', 'birth_date_subgroup');
-    Form.showHideMatchCheckbox('show_death_date', 'death_date_subgroup');
-    setSavedDiagramsPanel();
-    Form.showHide(document.getElementById('arrow_group'),document.getElementById('colour_arrow_related').checked)
-    Form.showHide(document.getElementById('startcol_option'),document.getElementById('highlight_start_indis').checked)
-    Form.showHide(document.getElementById('highlight_custom_option'),document.getElementById('highlight_custom_indis').checked)
-    toggleUpdateButton();
-    if (autoUpdatePrior) {
-        if (firstRender) {
-            firstRender = false;
-        } else {
-            updateRender();
-        }
-        autoUpdate = true;
-    }
-    refreshIndisFromXREFS(false);
 }
 
 function setCheckStatus(el, checked) {
@@ -614,7 +517,7 @@ function loadSettingsDetails() {
             newListItem.setAttribute("data-id", settingsList[key]['id']);
             newListItem.setAttribute("data-token", settingsList[key]['token'] || "");
             newListItem.setAttribute("data-name", settingsList[key]['name']);
-            newListItem.setAttribute("onclick", "loadSettings(this.getAttribute('data-settings'), true)");
+            newListItem.setAttribute("onclick", "Form.settings.loadSettings(this.getAttribute('data-settings'), true)");
             newListItem.innerHTML = "<a class='pointer'>" + settingsList[key]['name'] + "<div class=\"saved-settings-ellipsis pointer\" onclick='UI.savedSettings.showSavedSettingsItemMenu(event)'><a class='pointer'>…</a></div></a>";
             newLinkWrapper.appendChild(newListItem);
             listElement.appendChild(newLinkWrapper);
@@ -644,7 +547,7 @@ function loadUrlToken(Url) {
                 let json = JSON.parse(response);
                 if (json.success) {
                     let settingsString = JSON.stringify(json.settings);
-                    loadSettings(settingsString);
+                    Form.settings.load(settingsString);
                     if(json.settings['auto_update']) {
                         UI.hideSidebar();
                     }
