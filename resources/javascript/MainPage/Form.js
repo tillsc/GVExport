@@ -700,6 +700,13 @@ const Form = {
                         case 'show_adv_files':
                             Form.toggleAdvanced(document.getElementById('files-advanced-button'), 'files-advanced', toBool(settings[key]));
                             break;
+                        // Handle transforming old highlight_custom xrefs into the new custom highlight system
+                        case 'highlight_custom':
+                            let xrefs = settings[key].split(',');
+                            for (let xref of xrefs) {
+                                UI.tile.addIndiToCustomHighlightList(xref);
+                            }
+                            break;
                         // If option to use cart is not showing, don't load, but also don't show error
                         case 'use_cart':
                         // These options only exist if debug panel active - don't show error if not found
