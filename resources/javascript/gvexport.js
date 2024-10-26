@@ -289,7 +289,7 @@ function pageLoaded(Url) {
 
     // Change events
     const form = document.getElementById('gvexport');
-    let changeElems = form.querySelectorAll("input:not([type='file']):not(#save_settings_name):not(#stop_pid):not(.highlight_check):not(#sharednote_col_add), select:not(#simple_settings_list):not(#pid):not(#sharednote_col_add):not(#settings_sort_order):not(#click_action_indi)");
+    let changeElems = form.querySelectorAll(":scope > input:not([type='file']):not(#save_settings_name):not(#stop_pid):not(#highlight_pid):not(#highlight_custom_json):not(#sharednote_col_add), :scope > select:not(#simple_settings_list):not(#pid):not(#sharednote_col_add):not(#settings_sort_order):not(#click_action_indi)");
     for (let i = 0; i < changeElems.length; i++) {
         changeElems[i].addEventListener("change", Form.handleFormChange);
     }
@@ -299,6 +299,8 @@ function pageLoaded(Url) {
     clickActionSelectEl.addEventListener('change', UI.tile.clickOptionChanged);
     let stopIndiSelectEl = form.querySelector("#stop_pid");
     stopIndiSelectEl.addEventListener('change', stopIndiSelectChanged);
+    let highlightIndiSelectEl = form.querySelector("#highlight_pid");
+    highlightIndiSelectEl.addEventListener('change', Form.indiList.highlightIndiSelectChanged);
     let settingsSortOrder = form.querySelector("#settings_sort_order");
     settingsSortOrder.addEventListener('change', loadSettingsDetails);
     let simpleSettingsEl = form.querySelector("#simple_settings_list");

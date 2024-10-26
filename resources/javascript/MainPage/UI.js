@@ -383,7 +383,7 @@ const UI = {
         addIndiToCustomHighlightList(xref, colour = null) {
             let listEl = document.getElementById('highlight_custom_json');
             let list = listEl.value.trim();
-            if (list === '') list = '{}';
+            if (list.trim() === '') list = '{}';
             let data = JSON.parse(list);
             if (xref !== '' && !data[xref]) {
                 if (colour) {

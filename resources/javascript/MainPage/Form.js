@@ -611,7 +611,23 @@ const Form = {
                 UI.showToast(ERROR_CHAR + error);
             }
         },
+
+        /**
+         * Triggered by person select being changed for highlight indis
+         */
+        highlightIndiSelectChanged() {
+            let xref = document.getElementById('highlight_pid').value.trim();
+            if (xref !== "") {
+                let colour = document.getElementById('highlight_custom_col').value;
+                UI.tile.addIndiToCustomHighlightList(xref, colour);
+                Form.clearSelect('highlight_pid');
+            }
+            if (autoUpdate) {
+                updateRender();
+            }
+        },
     },
+
     /**
      * List of stopping individuals for pruning diagram
      */
