@@ -75,6 +75,8 @@ class Settings
         $this->defaultSettings['graphviz_config'] = $this->getGraphvizSettings($this->defaultSettings);
         $this->defaultSettings['sharednote_col_data'] = '[]';
         $this->defaultSettings['updated_date'] = '';
+        $this->defaultSettings['highlight_custom_json'] = '{}';
+
     }
 
     /**

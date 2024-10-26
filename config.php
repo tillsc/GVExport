@@ -116,9 +116,8 @@ return array(
     'indi_background_age_unknown_col' => "#FFFFFF", // For background colour option for age, this is the colour for high-aged individuals
     'indi_background_age_low' => 0, // For background colour option for age, this is the age for the low colour - this age and anything younger gets the low colour
     'indi_background_age_high' => 100, // For background colour option for age, this is the age for the high colour - this age and anything older gets this colour
-    'highlight_custom_indis' => '', // Whether to highlight a customer list of XREFs in addition to the about starting individuals
-    'highlight_custom_col' => '#FFFDC3', // The colour to highlight the custom highlighted individuals
-    'highlight_custom_json' => '', // List of XREFs of other individuals to highlight
+    'highlight_custom_indis' => '', // Whether to highlight a custom list of individuals
+    'highlight_custom_col' => '#FFFDC3', // The default colour to highlight the custom highlighted individuals
 	'border_col' => '#606060', // Border colour (in UI this is Family border colour, but by default the individual border is the same as family)
 	'indi_border_col' => '#606060', // Border colour of individuals
 	'birth_prefix' => '*', // Text shown on chart before the birthdate
