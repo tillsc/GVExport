@@ -233,6 +233,10 @@
     margin-top: 4px !important;
 }
 
+#highlight_list {
+    margin-top: 10px;
+}
+
 .setting_subgroup .picker {
     margin-right: 2px !important;
 }
@@ -508,14 +512,6 @@ span.NAME {
 
 .modal-button {
     margin: 5px !important;
-}
-
-.highlight_check_label {
-    margin-left: 10px;
-}
-
-#highlight_custom_json {
-    width: calc(100% - 48px);
 }
 
 .align-middle-container {
