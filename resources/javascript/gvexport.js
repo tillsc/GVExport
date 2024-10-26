@@ -289,7 +289,7 @@ function pageLoaded(Url) {
 
     // Change events
     const form = document.getElementById('gvexport');
-    let changeElems = form.querySelectorAll(":scope > input:not([type='file']):not(#save_settings_name):not(#stop_pid):not(#highlight_pid):not(#highlight_custom_json):not(#sharednote_col_add), :scope > select:not(#simple_settings_list):not(#pid):not(#sharednote_col_add):not(#settings_sort_order):not(#click_action_indi)");
+    let changeElems = form.querySelectorAll("input:not([type='file']):not(#save_settings_name):not(#stop_pid):not(#highlight_pid):not(#highlight_custom_json):not(#sharednote_col_add), select:not(#simple_settings_list):not(#pid):not(#highlight_pid):not(#stop_pid):not(#sharednote_col_add):not(#settings_sort_order):not(#click_action_indi)");
     for (let i = 0; i < changeElems.length; i++) {
         changeElems[i].addEventListener("change", Form.handleFormChange);
     }
