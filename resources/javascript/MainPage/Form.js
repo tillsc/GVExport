@@ -704,7 +704,6 @@ const Form = {
                             let xrefs = settings[key].split(',');
                             for (let xref of xrefs) {
                                 if (xref !== '') {
-                                    alert(xref)
                                     UI.tile.addIndiToCustomHighlightList(xref);
                                 }
                             }

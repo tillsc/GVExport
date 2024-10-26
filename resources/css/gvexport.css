@@ -252,6 +252,9 @@
     margin: 3px;
     width: 100%;
     display: flex;
+}
+
+.indi_list_item {
     min-height: 42px;
     line-height: 36px;
 }
