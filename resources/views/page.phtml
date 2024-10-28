@@ -153,6 +153,11 @@ $usegraphviz = $vars['graphviz_bin'] != "";
             <div id="diagram_search_box_container" style="display: none"><?= view('components/select-individual', ['name' => 'diagram_search_box', 'id' => 'diagram_search_box', 'tree' => $tree, 'individual' => "", 'required'=>false]); ?></div>
         </div>
     </div>
+    <div id="context_menu">
+        <span id="menu-info">
+            <?= MainPage::addInfoButton('Context menu when individual clicked'); ?>
+        </span>
+    </div>
 </div>
 <script src="<?= $module->assetUrl('javascript/viz-standalone.js'); ?>"></script>
 <script src="<?= $module->assetUrl('javascript/panzoom.min.js'); ?>"></script>

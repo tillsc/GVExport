@@ -31,6 +31,7 @@ class Help
     public const DIAGRAM_APPEARANCE = 'Diagram';
     public const OUTPUT_FILE = 'Output file';
     public const BROWSER_RENDER = 'Browser render';
+    public const CONTEXT_MENU_HELP = 'Context menu when individual clicked';
     public const SAVE_SETTINGS = 'Save settings';
     public const SETTINGS_FILE = 'Settings file';
     public const MESSAGE_HISTORY = 'Message history';
@@ -64,6 +65,7 @@ class Help
             self::GENERAL_SETTINGS => 'Detailed information/',
             self::OUTPUT_FILE => 'Detailed information/General settings/',
             self::BROWSER_RENDER => 'Detailed information/General settings/',
+            self::CONTEXT_MENU_HELP => 'Detailed information/General settings/Browser render/',
             self::SAVE_SETTINGS => 'Detailed information/General settings/',
             self::SETTINGS_FILE => 'Detailed information/General settings/',
             self::MESSAGE_HISTORY => 'Detailed information/General settings/',

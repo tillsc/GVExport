@@ -227,7 +227,8 @@ const UI = {
          * @param xref The xref of the individual or family
          */
         showNodeContextMenu(e, url, xref) {
-            const div = document.getElementById('context_menu');
+            UI.contextMenu.clearContextMenu();
+            const div = document.getElementById('context_list');
             div.setAttribute("data-xref",  xref);
             div.setAttribute("data-url",  url);
             UI.contextMenu.addContextMenuOption('👤', 'Open individual\'s page', UI.tile.openIndividualsPageContextMenu);
@@ -633,10 +634,9 @@ const UI = {
          */
         init() {
             let div = document.createElement('div');
-
-            div.setAttribute('id', 'context_menu');
+            div.setAttribute('id', 'context_list');
             div.style.display = 'block';
-            document.getElementById('render-container').appendChild(div);
+            document.getElementById('context_menu').appendChild(div);
         },
 
         /**
@@ -687,9 +687,12 @@ const UI = {
          * Removes items from context menu and hides it
          */
         clearContextMenu() {
-            const div = document.getElementById('context_menu');
-            div.innerHTML = '';
-            div.style.display = 'none';
+            const list = document.getElementById('context_list');
+            const menu = document.getElementById('context_menu');
+            if (menu.style.display !== 'none') {
+                list.innerHTML = '';
+                menu.style.display = 'none';
+            }
         },
 
         /**
@@ -700,7 +703,7 @@ const UI = {
          * @param callback The function to call when option is selected
          */
         addContextMenuOption(emoji, text, callback) {
-            const div = document.getElementById('context_menu');
+            const div = document.getElementById('context_list');
             let el = document.createElement('a');
             el.setAttribute('class', 'settings_ellipsis_menu_item');
             el.innerHTML = '<span class="settings_ellipsis_menu_icon">' + emoji + '</span><span>' + TRANSLATE[text] + '</span>';
