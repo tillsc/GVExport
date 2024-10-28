@@ -222,7 +222,7 @@ class Settings
             $no_highlight = explode(',', $migrated['no_highlight_xref_list']);
             $highlight = [];
             foreach ($xrefs as $xref) {
-                if (trim($xref) != "" && !isset($highlight[$xref]) && !in_array($xref, $no_highlight)) {
+                if (trim($xref) != "" && !isset($highlight[$xref]) && isset($migrated['highlight_custom_col']) && !in_array($xref, $no_highlight)) {
                     $highlight[$xref] = $migrated['highlight_custom_col'];
                     $migrated['highlight_custom_indis'] = true;
                 }
