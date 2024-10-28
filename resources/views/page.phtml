@@ -153,6 +153,11 @@ $usegraphviz = $vars['graphviz_bin'] != "";
             <div id="diagram_search_box_container" style="display: none"><?= view('components/select-individual', ['name' => 'diagram_search_box', 'id' => 'diagram_search_box', 'tree' => $tree, 'individual' => "", 'required'=>false]); ?></div>
         </div>
     </div>
+    <div id="context_menu">
+        <span id="menu-info">
+            <?= MainPage::addInfoButton('Context menu when individual clicked'); ?>
+        </span>
+    </div>
 </div>
 <script src="<?= $module->assetUrl('javascript/viz-standalone.js'); ?>"></script>
 <script src="<?= $module->assetUrl('javascript/panzoom.min.js'); ?>"></script>
@@ -167,12 +172,6 @@ $usegraphviz = $vars['graphviz_bin'] != "";
     const form = document.getElementById('gvexport');
     const rendering = document.getElementById('rendering');
 
-    // Trigger action when button pressed to refresh diagram after changing custom highlight list
-    document.querySelector('#refresh_highlight_custom').addEventListener('click', function(e) {
-        if (!autoUpdate) {
-            updateRender();
-        }
-    });
     // Trigger action when "Update" button clicked
     document.querySelector('.update-browser-rendering').addEventListener('click', function(e) {
         if (Form.isIndiBlank() === false) {
@@ -371,7 +370,7 @@ $usegraphviz = $vars['graphviz_bin'] != "";
             return element;
         }).catch(function (error) {
             console.log(error);
-            if (error.message.includes("TOTAL_MEMORY")) {
+            if (error.message && error.message.includes("TOTAL_MEMORY")) {
                 if (graphvizAvailable) {
                     UI.showToast(ERROR_CHAR + "<?= I18N::translate('Memory limit reached. Please reduce number of records or use download option.'); ?>");
                 } else {

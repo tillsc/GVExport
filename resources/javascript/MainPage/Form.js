@@ -460,7 +460,6 @@ const Form = {
             if (!regex.test(list.value.replaceAll(" ','"))) {
                 appendXrefToList(xref, 'xref_list');
                 Form.indiList.loadIndividualDetails(TOMSELECT_URL, xref, 'indi_list').then(() => {
-                    toggleHighlightStartPersons(document.getElementById('highlight_start_indis').checked);
                 })
             }
             Form.clearSelect('pid');
@@ -486,34 +485,39 @@ const Form = {
          * @param url The webtrees URL that runs the Tom-select search that we use to pull the details
          * @param xref The webtrees ID of the individual
          * @param list 'indi_list' if it's the starting individual list, otherwise it updates the stopping individual's list
+         * @param colour For some, we want to have a colour select box included. This is the colour for the box.
          * @returns {Promise<void>}
          */
-        loadIndividualDetails(url, xref, list) {
+        loadIndividualDetails(url, xref, list, colour = '') {
             return fetch(url + xref.trim()).then(async (response) => {
                 const data = await response.json();
                 let contents;
                 let otherXrefId;
                 if (list === "indi_list") {
                     otherXrefId = "xref_list";
-                } else {
+                } else if (list === "stop_indi_list") {
                     otherXrefId = "stop_xref_list";
+                } else {
+                    otherXrefId = "highlight_custom_json";
                 }
                 if (data["data"].length !== 0) {
-                    for (let i=0; i< data['data'].length; i++) {
+                    for (let i = 0; i < data['data'].length; i++) {
                         if (xref.toUpperCase() === data['data'][i].value.toUpperCase()) {
                             contents = data["data"][i]["text"];
                             // Fix case if mismatched
                             if (xref !== data['data'][i].value) {
                                 let listEl = document.getElementById(otherXrefId);
                                 let indiList = listEl.value.split(',');
-                                for (let j = indiList.length-1; j>=0; j--) {
+                                for (let j = indiList.length - 1; j >= 0; j--) {
                                     if (indiList[j].trim() === xref.trim()) {
                                         indiList[j] = data["data"][i].value;
                                         break;
                                     }
                                 }
                                 listEl.value = indiList.join(',');
-                                setTimeout(()=>{refreshIndisFromXREFS(false)}, 100);
+                                setTimeout(() => {
+                                    refreshIndisFromXREFS(false)
+                                }, 100);
                                 Form.handleFormChange();
                             }
                         }
@@ -525,8 +529,13 @@ const Form = {
                 const newListItem = document.createElement("div");
                 newListItem.className = "indi_list_item";
                 newListItem.setAttribute("data-xref", xref);
-                newListItem.setAttribute("onclick", "UI.scrollToRecord('"+xref+"')");
-                newListItem.innerHTML = contents + "<div class=\"saved-settings-ellipsis\" onclick=\"removeItem(event, this.parentElement, '" + otherXrefId + "')\"><a class='pointer'>×</a></div>";
+                newListItem.setAttribute("onclick", "UI.scrollToRecord('" + xref + "')");
+                newListItem.innerHTML = contents + "<div class=\"saved-settings-ellipsis\" onclick=\"Form.indiList.removeItem(event, this.parentElement" + (colour === '' ? '' :  '.parentElement') + ", '" + otherXrefId + "')\"><a class='pointer'>×</a></div>";
+                if (colour !== '') {
+                    let picker = `<input type="color" class="highlight_picker" data-xref="${xref}" value="${colour}">`;
+                    newListItem.innerHTML = '<span class="list_item_skinny">' + newListItem.innerHTML + '</span>' + picker;
+                    newListItem.querySelector('.highlight_picker')?.addEventListener('change', Form.indiList.updateHighlightColour);
+                }
                 // Multiple promises can be for the same xref - don't add if a duplicate
                 let item = listElement.querySelector(`[data-xref="${xref}"]`);
                 if (item == null) {
@@ -536,7 +545,87 @@ const Form = {
                 }
                 updateClearAll();
             })
-        }
+        },
+
+        /**
+         * Removes an item from a list of individuals - triggered by clicking X
+         *
+         * @param {Event} e
+         * @param {HTMLElement} element
+         * @param {string} xrefListId
+         */
+        removeItem(e, element, xrefListId) {
+            e.stopPropagation();
+            let xref = element.getAttribute("data-xref").trim();
+            removeFromXrefList(xref, xrefListId);
+            element.remove();
+            if (xrefListId === 'xref_list') {
+                mainPage.Url.changeURLXref(list.value.split(',')[0].trim());
+            }
+            updateClearAll();
+            if (xrefListId === 'highlight_custom_json') {
+                let list = document.getElementById(xrefListId);
+                let data = JSON.parse(list.value);
+                delete data[xref];
+                list.value = JSON.stringify(data);
+            }
+            if (autoUpdate) {
+                updateRender();
+            }
+        },
+
+        /** Triggered by change of highlight colour picker, updates the JSON that stores the colour
+         * 
+         * @param {Event} e
+         */
+        updateHighlightColour(e) {
+            let xref = e.target.getAttribute('data-xref');
+            let newColour = e.target.value;
+            let list = document.getElementById('highlight_custom_json');
+            let data = JSON.parse(list.value);
+            data[xref] = newColour;
+            list.value = JSON.stringify(data);
+
+            if (autoUpdate) {
+                updateRender();
+            }
+        },
+
+        /**
+         * Load a list of indis into element indiListId using JSON data
+         *
+         * @param {string} jsonId
+         * @param {string} indiListId
+         */
+        refreshIndisFromJson(jsonId, indiListId) {
+            let jsonEl = document.getElementById(jsonId);
+            let listEl = document.getElementById(indiListId);
+            document.getElementById(indiListId).innerHTML = "";
+            if (jsonEl.value === '') jsonEl.value = '{}';
+            try {
+                let data = JSON.parse(jsonEl.value);
+                for (let key in data) {
+                    Form.indiList.loadIndividualDetails(TOMSELECT_URL, key, indiListId, data[key]);
+                }
+            } catch (error) {
+                UI.showToast(ERROR_CHAR + error);
+            }
+        },
+
+        /**
+         * Triggered by person select being changed for highlight indis
+         */
+        highlightIndiSelectChanged() {
+            let xref = document.getElementById('highlight_pid').value.trim();
+            if (xref !== "") {
+                let colour = document.getElementById('highlight_custom_col').value;
+                UI.tile.addIndiToCustomHighlightList(xref, colour);
+                Form.clearSelect('highlight_pid');
+            }
+            if (autoUpdate) {
+                updateRender();
+            }
+        },
     },
 
     /**
@@ -570,5 +659,141 @@ const Form = {
             updateClearAll();
             if (autoUpdate && update) updateRender();
         }
-    }
+    },
+
+    settings: {
+        load(data, isNamedSetting = false) {
+            let autoUpdatePrior = autoUpdate;
+            autoUpdate = false;
+            let settings;
+            try {
+                settings = JSON.parse(data);
+            } catch (e) {
+                UI.showToast("Failed to load settings: " + e);
+                return false;
+            }
+            if (!settings.hasOwnProperty("sharednote_col_data")) {
+                settings["sharednote_col_data"] = "[]";
+            }
+            Object.keys(settings).forEach(function(key){
+                let el = document.getElementById(key);
+                if (el == null) {
+                    switch (key) {
+                        case 'diagram_type':
+                            if (settings[key] === 'simple') {
+                                setTimeout(() => {
+                                    handleSimpleDiagram();
+                                    if (autoUpdate) updateRender();
+                                },1);
+                            } else {
+                                setCheckStatus(document.getElementById('diagtype_decorated'), settings[key] === 'decorated');
+                                setCheckStatus(document.getElementById('diagtype_combined'), settings[key] === 'combined');
+                            }
+                            break;
+                        case 'combined_layout_type':
+                            setCheckStatus(document.getElementById('cl_type_ss'), settings[key] === 'SS');
+                            setCheckStatus(document.getElementById('cl_type_ou'), settings[key] === 'OU');
+                            break;
+                        case 'birthdate_year_only':
+                            setCheckStatus(document.getElementById('bd_type_y'), toBool(settings[key]));
+                            setCheckStatus(document.getElementById('bd_type_gedcom'), !toBool(settings[key]));
+                            break;
+                        case 'death_date_year_only':
+                            setCheckStatus(document.getElementById('dd_type_y'), toBool(settings[key]));
+                            setCheckStatus(document.getElementById('dd_type_gedcom'), !toBool(settings[key]));
+                            break;
+                        case 'marr_date_year_only':
+                            setCheckStatus(document.getElementById('md_type_y'), toBool(settings[key]));
+                            setCheckStatus(document.getElementById('md_type_gedcom'), !toBool(settings[key]));
+                            break;
+                        case 'show_adv_people':
+                            Form.toggleAdvanced(document.getElementById('people-advanced-button'), 'people-advanced', toBool(settings[key]));
+                            break;
+                        case 'show_adv_appear':
+                            Form.toggleAdvanced(document.getElementById('appearance-advanced-button'), 'appearance-advanced', toBool(settings[key]));
+                            break;
+                        case 'show_adv_files':
+                            Form.toggleAdvanced(document.getElementById('files-advanced-button'), 'files-advanced', toBool(settings[key]));
+                            break;
+                        // Handle transforming old highlight_custom xrefs into the new custom highlight system
+                        case 'highlight_custom':
+                            let xrefs = settings[key].split(',');
+                            for (let xref of xrefs) {
+                                if (xref !== '') {
+                                    UI.tile.addIndiToCustomHighlightList(xref);
+                                }
+                            }
+                            break;
+                        // Handle transforming highlighted start indis into new custom highlight system
+                        case 'highlight_start_indis':
+                            Form.settings.migrateHighlightStartIndis(settings);
+                            break;
+                        // Ignore these as handled by highlight_start_indis
+                        case 'highlight_col':
+                        case 'no_highlight_xref_list':
+                        // If option to use cart is not showing, don't load, but also don't show error
+                        case 'use_cart':
+                        // These options only exist if debug panel active - don't show error if not found
+                        case 'enable_debug_mode':
+                        case 'enable_graphviz':
+                        // Token is not loaded as an option
+                        case 'token':
+                        // Date of settings is not a setting so don't load it
+                        case 'updated_date':
+                            break;
+                        default:
+                            UI.showToast(ERROR_CHAR + TRANSLATE['Unable to load setting'] + " " + key);
+                    }
+                } else {
+                    if (el.type === 'checkbox' || el.type === 'radio') {
+                        if (!isNamedSetting || key !== 'show_diagram_panel') {
+                            setCheckStatus(el, toBool(settings[key]));
+                        }
+                    } else {
+                        el.value = settings[key];
+                    }
+                }
+
+                // Update show/hide of JPG quality option
+                Form.showHideMatchDropdown('output_type', 'server_pdf_subgroup', 'pdf|svg|jpg')
+            });
+            Form.showHideMatchCheckbox('mark_not_related', 'mark_related_subgroup');
+            Form.showHideMatchCheckbox('show_birthdate', 'birth_date_subgroup');
+            Form.showHideMatchCheckbox('show_death_date', 'death_date_subgroup');
+            setSavedDiagramsPanel();
+            Form.showHide(document.getElementById('arrow_group'),document.getElementById('colour_arrow_related').checked)
+            Form.showHide(document.getElementById('highlight_custom_option'),document.getElementById('highlight_custom_indis').checked)
+            toggleUpdateButton();
+            if (autoUpdatePrior) {
+                if (firstRender) {
+                    firstRender = false;
+                } else {
+                    updateRender();
+                }
+                autoUpdate = true;
+            }
+            refreshIndisFromXREFS(false);
+        },
+
+        /**
+         * Migrate old setting to highlight start individuals into the new custom highlight function
+         * @param settings
+         */
+        migrateHighlightStartIndis(settings){
+            if (settings['highlight_start_indis'] && settings['highlight_col']) {
+                let xrefs = settings['xref_list'].split(',');
+                let nohighlight = settings['no_highlight_xref_list'].split(',');
+                for (let xref of xrefs) {
+                    if (xref.trim() !== '' && !nohighlight.includes(xref)) {
+                        UI.tile.addIndiToCustomHighlightList(xref, settings['highlight_col']);
+                        settings['highlight_custom_indis'] = true;
+                    }
+                }
+            }
+        }
+    },
+}
+
+if (typeof Cypress !== 'undefined') {
+    window.Form = Form;
 }

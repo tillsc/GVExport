@@ -160,27 +160,22 @@ use Fisharebest\Webtrees\Auth;
                 <input type="color" class="picker" name="vars[unkn_gender_unrel_col]" id="unkn_gender_unrel_col" value="<?= e($vars["unkn_gender_unrel_col"]); ?>" /><label for="unkn_gender_unrel_col" class="picker-label"><?= I18N::translate('Not blood-related unknown gender individuals') ?></label>
             </div>
             <div class="col-auto padding-left-10">
-                <input type="checkbox" name="vars[highlight_start_indis]" onclick="toggleHighlightStartPersons(this.checked, <?= !$admin ? 'false' : 'true'; ?>)" id="highlight_start_indis" value="true" <?= $vars["highlight_start_indis"] ? 'checked' : '' ?>><label for="highlight_start_indis" class="check-list width-90pc"><?= I18N::translate('Show starting individuals in different colour') ?></label>
-                <div class="setting_subgroup col-auto options-panel-background" id="startcol_option"  <?= !$admin && $vars["highlight_start_indis"] ? 'style="display:none;"' : '' ?>>
-                    <input type="color" class="picker" name="vars[highlight_col]" id="highlight_col" value="<?= e($vars["highlight_col"]); ?>" /><label for="highlight_col" class="picker-label"><?= I18N::translate('Starting individuals background colour') ?></label>
-                    <?php if (!$admin) { ?>
-                        <label for="no_highlight_xref_list"><?= I18N::translate('Colour these individuals:'); ?></label><br>
-                        <div id="highlight_list">
-
-                        </div>
-                        <input type="hidden" class="form-control" name="vars[no_highlight_xref_list]" id="no_highlight_xref_list" value="<?= e($vars['no_highlight_xref_list']); ?>">
-                    <?php } ?>
-                </div>
-            </div>
-            <div class="col-auto padding-left-10">
                 <input type="checkbox" name="vars[highlight_custom_indis]" onclick="Form.showHideMatchCheckbox('highlight_custom_indis', 'highlight_custom_option');" id="highlight_custom_indis" value="true" <?= $vars["highlight_custom_indis"] ? 'checked' : '' ?>><label for="highlight_custom_indis" class="check-list width-90pc"><?= I18N::translate('Show selected individuals in different colour') ?></label>
                 <div class="setting_subgroup col-auto options-panel-background" id="highlight_custom_option"  data-test="<?= $vars["highlight_custom_indis"]; ?>" <?= !$admin && !$vars["highlight_custom_indis"] ? 'style="display:none;"' : '' ?>>
-                    <input type="color" class="picker" name="vars[highlight_custom_col]" id="highlight_custom_col" value="<?= e($vars["highlight_custom_col"]); ?>" /><label for="highlight_custom_col" class="picker-label"><?= I18N::translate('Highlighted individuals background colour') ?></label>
-                    <div class="input-group-append">
-                        <label for="highlight_custom" class="picker-label"><?= I18N::translate('Highlighted individuals XREFs') ?></label>
-                        <input type="text" name="vars[highlight_custom]" id="highlight_custom" value="<?= e($vars['highlight_custom']) ?>" >
-                        <button id="refresh_highlight_custom" type="button" class="btn btn-outline-secondary" >⟳</button>
+                    <input type="color" class="picker" name="vars[highlight_custom_col]" id="highlight_custom_col" value="<?= e($vars["highlight_custom_col"]); ?>" /><label for="highlight_custom_col" class="picker-label"><?= I18N::translate('Default highlight colour') ?></label>
+                    <?php if (!$admin) { ?>
+                    <div id="highlight_list">
+
                     </div>
+                    <div>
+                        <?php
+                        echo view('components/select-individual', ['name' => 'vars[highlight_pid]', 'tree' => $tree, 'id' => 'highlight_pid', 'xref' => '']);
+                        ?>
+                    </div>
+                    <div class="input-group-append">
+                        <input type="text" name="vars[highlight_custom_json]" id="highlight_custom_json" value="<?= e($vars['highlight_custom_json']) ?>" hidden="true">
+                    </div>
+                    <?php } ?>
                 </div>
             </div>
             <div class="col-auto">

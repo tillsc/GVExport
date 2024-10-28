@@ -35,7 +35,7 @@ const UI = {
             toast.setAttribute("id", "toast");
             toast.setAttribute("class", "pointer");
             if (message.substring(0, ERROR_CHAR.length) === ERROR_CHAR) {
-                toast.className += "error";
+                toast.className += " error";
                 message = message.substring(ERROR_CHAR.length);
             }
             toast.innerText = message;
@@ -227,7 +227,8 @@ const UI = {
          * @param xref The xref of the individual or family
          */
         showNodeContextMenu(e, url, xref) {
-            const div = document.getElementById('context_menu');
+            UI.contextMenu.clearContextMenu();
+            const div = document.getElementById('context_list');
             div.setAttribute("data-xref",  xref);
             div.setAttribute("data-url",  url);
             UI.contextMenu.addContextMenuOption('👤', 'Open individual\'s page', UI.tile.openIndividualsPageContextMenu);
@@ -375,16 +376,28 @@ const UI = {
         },
 
         /**
-         *  Adds the XREF to the list of indiviudals to highlight
+         *  Adds the XREF to the list of individuals to highlight
          *
-         * @param xref
+         * @param xref xref of individual to add
+         * @param colour colour to use for this individual (if not default)
          */
-        addIndiToCustomHighlightList(xref) {
-            let list = document.getElementById('highlight_custom');
-            const regex = new RegExp(`(?<=,|^)(${xref})(?=,|$)`);
-            if (!regex.test(list.value.replaceAll(" ','"))) {
-                appendXrefToList(xref, 'highlight_custom');
+        addIndiToCustomHighlightList(xref, colour = null) {
+            let listEl = document.getElementById('highlight_custom_json');
+            let list = listEl.value.trim();
+            if (list.trim() === '') list = '{}';
+            let data = JSON.parse(list);
+            if (xref !== '' && !data[xref]) {
+                if (colour) {
+                    data[xref] = colour;
+                } else {
+                    let el = document.getElementById('highlight_custom_col');
+                    if (el) {
+                        data[xref] = el.value;
+                    }
+                }
             }
+            listEl.value = JSON.stringify(data);
+            Form.indiList.refreshIndisFromJson('highlight_custom_json', 'highlight_list');
         },
 
         /**
@@ -465,6 +478,7 @@ const UI = {
         },
 
     },
+
     /**
      * Additional side panel that shows help information
      */
@@ -620,10 +634,9 @@ const UI = {
          */
         init() {
             let div = document.createElement('div');
-
-            div.setAttribute('id', 'context_menu');
+            div.setAttribute('id', 'context_list');
             div.style.display = 'block';
-            document.getElementById('render-container').appendChild(div);
+            document.getElementById('context_menu').appendChild(div);
         },
 
         /**
@@ -674,9 +687,12 @@ const UI = {
          * Removes items from context menu and hides it
          */
         clearContextMenu() {
-            const div = document.getElementById('context_menu');
-            div.innerHTML = '';
-            div.style.display = 'none';
+            const list = document.getElementById('context_list');
+            const menu = document.getElementById('context_menu');
+            if (menu.style.display !== 'none') {
+                list.innerHTML = '';
+                menu.style.display = 'none';
+            }
         },
 
         /**
@@ -687,7 +703,7 @@ const UI = {
          * @param callback The function to call when option is selected
          */
         addContextMenuOption(emoji, text, callback) {
-            const div = document.getElementById('context_menu');
+            const div = document.getElementById('context_list');
             let el = document.createElement('a');
             el.setAttribute('class', 'settings_ellipsis_menu_item');
             el.innerHTML = '<span class="settings_ellipsis_menu_icon">' + emoji + '</span><span>' + TRANSLATE[text] + '</span>';

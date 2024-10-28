@@ -458,22 +458,6 @@ msgstr "De waarden hier worden gebruikt als standaardwaarden voor nieuwe gebruik
 msgid "reset to defaults"
 msgstr "Standaardwaarden herstellen"
 
-#. Checkbox option to enable a different background colour for starting individuals, to help find them easier on the diagram:
-#. https://s3.eu-west-1.amazonaws.com/po-pub/i/afEtoto6Qnv1HlJn0zqAiMtP.png 
-#. 
-#. https://s3.eu-west-1.amazonaws.com/po-pub/i/eo7ytnyRCth5W2Sq76da71Ph.png
-#: 
-msgid "Show starting individuals in different colour"
-msgstr "Toon startpersonen in andere kleur"
-
-#. Option to change the background colour for starting individuals, to help find them easier on the diagram:
-#. https://s3.eu-west-1.amazonaws.com/po-pub/i/afEtoto6Qnv1HlJn0zqAiMtP.png 
-#. 
-#. https://s3.eu-west-1.amazonaws.com/po-pub/i/eo7ytnyRCth5W2Sq76da71Ph.png
-#: 
-msgid "Starting individuals background colour"
-msgstr "Achtergrondkleur startpersonen"
-
 #. Option to change font size. This affects (at the time of writing) all diagram text except for names which have their own setting:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/IdWIcmNdrOj4l1yTgxv6MpVW.png
 #: 
@@ -1341,11 +1325,6 @@ msgstr "Stel de kleur in voor Personen van onbekend geslacht, die in bovenstaand
 msgid "There are four options here for non-blood related individuals, if the &quot;Mark not blood-related people with different colour&quot; option is enabled in the &quot;People to be included&quot; section."
 msgstr "Er zijn hier vier opties voor niet-bloedverwante personen, als de optie &quot;Markeer niet-bloedverwante personen met andere kleur&quot; is ingeschakeld in de sectie &quot;Op te nemen personen&quot;."
 
-#. Help information for the "Show starting individuals in different colour" option:  https://s3.eu-west-1.amazonaws.com/po-pub/i/doM4pEnT2JzxQBks7KkZWAkT.png
-#: 
-msgid "Whether starting individuals should be highlighted on the diagram. If enabled, you can choose a background colour to highlight the individual with, and can choose to enable this only for some starting individuals."
-msgstr "Of startpersonen gemarkeerd moeten worden in het diagram. Indien ingeschakeld, kunt u een achtergrondkleur kiezen om de persoon mee te markeren, en kunt u ervoor kiezen dit alleen voor sommige startpersonen in te schakelen."
-
 #. Part of the help text for family tile colours:  https://s3.eu-west-1.amazonaws.com/po-pub/i/YJInMp5brj9vY9iKPUQTX3rF.png
 #: 
 msgid "The background colour of family records."
@@ -1675,11 +1654,6 @@ msgstr "Als dezelfde stijl wordt ingesteld door meerdere instellingen, wordt de 
 
 #. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
 #: 
-msgid "If the option to show the background of starting individuals in a different colour is selected, then this option takes priority over all others."
-msgstr "Als de optie om de achtergrond van startpersonen in een andere kleur weer te geven is geselecteerd, dan heeft deze optie voorrang op alle andere."
-
-#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
-#: 
 msgid "The style set based on shared notes is then used, if relevant. If an individual is linked to multiple shared notes in the list, the style from the highest note in the list is used."
 msgstr "De stijlset gebaseerd op gedeelde notities wordt dan gebruikt, indien relevant. Als een persoon gekoppeld is aan meerdere gedeelde notities in de lijst, dan wordt de stijl van de hoogste notitie in de lijst gebruikt."
 
@@ -1972,8 +1946,8 @@ msgstr "Met deze optie kunt u kiezen wat er gebeurt als u op een persoon in het 
 #. Part of the help text for the option "Action when individual clicked".
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
 #: 
-msgid "This is the default option. When you click on an individual, the webtrees page for that individual will open in a new tab or window."
-msgstr "Dit is de standaardoptie. Als u op een persoon klikt, wordt de webtreespagina voor die persoon geopend in een nieuw tabblad of venster."
+msgid "When you click on an individual, the webtrees page for that individual will open in a new tab or window."
+msgstr "Als u op een persoon klikt, wordt de webtreespagina voor die persoon geopend in een nieuw tabblad of venster."
 
 #. Part of the help text for the option "Action when individual clicked".
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
@@ -2030,31 +2004,40 @@ msgstr "Toevoegen aan lijst van te markeren personen"
 #. Part of new option to highlight a custom list of individuals
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/iMke2fkhJ5QFsxPD8JHlabfu.png
 #: 
-#, fuzzy
 msgid "Show selected individuals in different colour"
-msgstr "Toon extra personen in een andere kleur"
-
-#. Part of new option to highlight a custom list of individuals
-#. https://s3.eu-west-1.amazonaws.com/po-pub/i/iMke2fkhJ5QFsxPD8JHlabfu.png
-#: 
-msgid "Highlighted individuals background colour"
-msgstr "Achtergrondkleur van gemarkeerde personen"
-
-#. Part of new option to highlight a custom list of individuals
-#. https://s3.eu-west-1.amazonaws.com/po-pub/i/iMke2fkhJ5QFsxPD8JHlabfu.png
-#: 
-msgid "Highlighted individuals XREFs"
-msgstr "XREF's van gemarkeerde personen"
+msgstr "Toon geselecteerde personen in een andere kleur"
 
 #. Update to help text to add this new option
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/hepcgMX8Ou17qX7kH5upaW16.png
 #: 
-msgid "If this option is selected, clicking on an individual in the diagram will add them to the list of individuals with a coloured background for identification in the diagram. See the option \"Show additional individuals in different colour\", in the Colours section of the Tile design options."
-msgstr "Als deze optie geselecteerd is, zal klikken op een persoon in het diagram deze toevoegen aan de lijst van personen met een gekleurde achtergrond voor identificatie in het diagram. Zie de optie \"Toon extra personen in andere kleur\", in de Kleurensectie van de Tegelontwerp-opties."
+msgid "If this option is selected, clicking on an individual in the diagram will add them to the list of individuals with a coloured background for identification in the diagram. See the option \"Show selected individuals in different colour\", in the Colours section of the Tile design options."
+msgstr "Als deze optie geselecteerd is, zal klikken op een persoon in het diagram deze toevoegen aan de lijst van personen met een gekleurde achtergrond voor identificatie in het diagram. Zie de optie \"Toon geselecteerde personen in een andere kleur\", in de Kleurensectie van de Tegelontwerp-opties."
 
-#. Update to help text to add this new option:
-#. https://s3.eu-west-1.amazonaws.com/po-pub/i/taeaB9TOXPYyAr6SzuyMVLDJ.png
+#. Default colour for custom highlights: 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/avfciefqaWjNB7aRddD2bx22.png
 #: 
-msgid "Similar to the above option for starting individuals, but this option lets you choose a background colour to highlight a custom selection if individuals based on a list of XREFs. Also see option in Browser Render settings to choose what happens when an individual is clicked, as this may be an easier way to add individuals to this list."
-msgstr "Vergelijkbaar met de bovenstaande optie voor startpersonen, maar met deze optie kunt u een achtergrondkleur kiezen om een aangepaste selectie van personen te markeren op basis van een lijst met XREFs. Zie ook de optie in de Browserweergave-instellingen om te kiezen wat er gebeurt als er op een persoon wordt geklikt, omdat dit een makkelijker manier kan zijn om personen aan deze lijst toe te voegen."
+msgid "Default highlight colour"
+msgstr "Standaard markeringskleur"
+
+#. Part of the help text around background colour priority:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/5OK33EJBueLG9k0GXR19qRpk.png
+#: 
+msgid "If the option is enabled to show selected individuals in a different colour, then this option takes priority over all others."
+msgstr "Als de optie is ingeschakeld om geselecteerde personen in een andere kleur weer te geven, dan heeft deze optie voorrang op alle andere."
+
+#. Part of the help for Show selected individuals in a different colour:  https://s3.eu-west-1.amazonaws.com/po-pub/i/P1bJ86EmElATeVIKW50p7nfv.png
+#: 
+msgid "This option lets you set a custom background for selected individuals. The default highlight colour is used by default, but the colour can be customised for each individual. Also see option in Browser Render settings to choose what happens when an individual is clicked, as this may be an easier way to add individuals to this list."
+msgstr "Met deze optie kunt u een aangepaste achtergrond instellen voor geselecteerde personen. Standaard wordt de standaard markeringskleur gebruikt, maar de kleur kan voor elke persoon aangepast worden. Zie ook de optie in Browserweergave-instellingen om te kiezen wat er gebeurt als er op een persoon wordt geklikt, omdat dit een gemakkelijkere manier kan zijn om personen aan deze lijst toe te voegen."
+
+#. Part of the help text for the option "Action when individual clicked".
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
+#: 
+msgid "This is the default option."
+msgstr "Dit is de standaardoptie."
+
+#. Part of the help text explaining the context menu when you click on an individual (if enabled): https://s3.eu-west-1.amazonaws.com/po-pub/i/JbiHUCluK5zzUvYxjbtvg3LS.png
+#: 
+msgid "In the General Settings section, there is an option in the Browser options that lets you choose what happens when you click on an individual in the diagram. One of the options is to show a menu, and the menu has the following options:"
+msgstr ""
 

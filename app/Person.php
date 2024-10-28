@@ -187,10 +187,9 @@ class Person
         }
 
         // Get background colour
-        if ($this->dot->settings['highlight_custom_indis'] && $this->isValueInList($this->dot->settings['highlight_custom'], $pid)) {
-            $indi_bg_colour = $this->dot->settings["highlight_custom_col"];
-        } else if ($this->isStartingIndividual($pid) && $this->dot->settings['highlight_start_indis'] == "true" && !$this->isValueInList($this->dot->settings['no_highlight_xref_list'], $pid)) {
-            $indi_bg_colour = $this->dot->settings["highlight_col"];
+        if ($this->dot->settings['highlight_custom_indis'] && $this->isKeyInJson($this->dot->settings['highlight_custom_json'], $pid)) {
+            $data = json_decode($this->dot->settings['highlight_custom_json'], true);
+            $indi_bg_colour = $data[$pid];
         } else if ($this->dot->settings["sharednote_col_enable"] && $sharednotes->indiHasSharedNote($pid)) {
             $indi_bg_colour = $sharednotes->getSharedNoteColour($pid);
         } else {
@@ -446,6 +445,23 @@ class Person
     {
         $list = explode(',', $list);
         return in_array($value, $list);
+    }
+
+    /**
+     * Check if key is found in json
+     *
+     * @param string $json the json as a string
+     * @param string $key the key to look for
+     * @return bool
+     */
+    private function isKeyInJson(string $json, string $key): bool
+    {
+        try {
+            $data = json_decode($json, true);
+        } catch (\Exception $e) {
+            return false;
+        }
+        return isset($data[$key]);
     }
 
     /**

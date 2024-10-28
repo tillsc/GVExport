@@ -228,6 +228,15 @@
     float: right;
 }
 
+.highlight_picker {
+    width: 32px;
+    margin-top: 4px !important;
+}
+
+#highlight_list {
+    margin-top: 10px;
+}
+
 .setting_subgroup .picker {
     margin-right: 2px !important;
 }
@@ -246,6 +255,20 @@
     border-radius: 5px;
     margin: 3px;
     width: 100%;
+    display: flex;
+}
+
+.indi_list_item {
+    min-height: 42px;
+    line-height: 36px;
+}
+
+.list_item_skinny {
+    width: 80%;
+    display: block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .options-panel-background {
@@ -270,6 +293,7 @@ span.NAME {
     position: absolute;
     top: -2px;
     right: 5px;
+    line-height: initial;
 }
 
 #clear_list, #clear_stop_list {
@@ -457,6 +481,12 @@ span.NAME {
     transform-origin: 50% 50%;
 }
 
+#menu-info {
+    position: absolute;
+    top: 0;
+    right: 5px;
+}
+
 .settings_ellipsis_menu_item {
     display: block;
 }
@@ -488,14 +518,6 @@ span.NAME {
 
 .modal-button {
     margin: 5px !important;
-}
-
-.highlight_check_label {
-    margin-left: 10px;
-}
-
-#highlight_custom {
-    width: calc(100% - 48px);
 }
 
 .align-middle-container {

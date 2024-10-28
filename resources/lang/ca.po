@@ -460,24 +460,6 @@ msgstr "Els valors aquí s'utilitzen com a valors predeterminats per als nous us
 msgid "reset to defaults"
 msgstr "Restablir als valors predeterminats"
 
-#. Checkbox option to enable a different background colour for starting individuals, to help find them easier on the diagram:
-#. https://s3.eu-west-1.amazonaws.com/po-pub/i/afEtoto6Qnv1HlJn0zqAiMtP.png 
-#. 
-#. https://s3.eu-west-1.amazonaws.com/po-pub/i/eo7ytnyRCth5W2Sq76da71Ph.png
-#: 
-#, fuzzy
-msgid "Show starting individuals in different colour"
-msgstr "Mostrar els individus inicials amb diferent color"
-
-#. Option to change the background colour for starting individuals, to help find them easier on the diagram:
-#. https://s3.eu-west-1.amazonaws.com/po-pub/i/afEtoto6Qnv1HlJn0zqAiMtP.png 
-#. 
-#. https://s3.eu-west-1.amazonaws.com/po-pub/i/eo7ytnyRCth5W2Sq76da71Ph.png
-#: 
-#, fuzzy
-msgid "Starting individuals background colour"
-msgstr "Color del fons per als individus inicials"
-
 #. Option to change font size. This affects (at the time of writing) all diagram text except for names which have their own setting:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/IdWIcmNdrOj4l1yTgxv6MpVW.png
 #: 
@@ -1364,11 +1346,6 @@ msgstr "Configureu el color per a individus de gènere desconegut, que s'utilitz
 msgid "There are four options here for non-blood related individuals, if the &quot;Mark not blood-related people with different colour&quot; option is enabled in the &quot;People to be included&quot; section."
 msgstr "Hi ha quatre opcions aquí per a persones no relacionades amb la sang, si la \" Marca persones no relacionades amb la sang amb diferent color”; l'opció està habilitada al \" Persones a incloure”;. Secció"
 
-#. Help information for the "Show starting individuals in different colour" option:  https://s3.eu-west-1.amazonaws.com/po-pub/i/doM4pEnT2JzxQBks7KkZWAkT.png
-#: 
-msgid "Whether starting individuals should be highlighted on the diagram. If enabled, you can choose a background colour to highlight the individual with, and can choose to enable this only for some starting individuals."
-msgstr "Per què s'han de ressaltar altres individus inicials al diagrama. Si està activat, podeu triar un color de fons per ressaltar l'individu amb, i podeu optar per habilitar-lo només per a alguns individus inicials."
-
 #. Part of the help text for family tile colours:  https://s3.eu-west-1.amazonaws.com/po-pub/i/YJInMp5brj9vY9iKPUQTX3rF.png
 #: 
 msgid "The background colour of family records."
@@ -1698,11 +1675,6 @@ msgstr "Si el mateix estil s'estableix amb diversos paràmetres, s'utilitza l'or
 
 #. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
 #: 
-msgid "If the option to show the background of starting individuals in a different colour is selected, then this option takes priority over all others."
-msgstr "Si se selecciona l'opció de mostrar el fons dels individus inicials d'un color diferent, aquesta opció té prioritat sobre totes les altres."
-
-#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
-#: 
 msgid "The style set based on shared notes is then used, if relevant. If an individual is linked to multiple shared notes in the list, the style from the highest note in the list is used."
 msgstr "A continuació, s'utilitza el conjunt d'estils basat en notes compartides, si escau. Si una persona està vinculada a diverses notes compartides de la llista, s'utilitzarà l'estil de la nota més alta de la llista."
 
@@ -1995,8 +1967,9 @@ msgstr "Aquesta opció us permet triar què passa quan feu clic a una persona de
 #. Part of the help text for the option "Action when individual clicked".
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
 #: 
-msgid "This is the default option. When you click on an individual, the webtrees page for that individual will open in a new tab or window."
-msgstr "Aquesta és l'opció per defecte. Quan feu clic a una persona, la pàgina d'arbres web d'aquesta persona s'obrirà en una pestanya o finestra nova."
+#, fuzzy
+msgid "When you click on an individual, the webtrees page for that individual will open in a new tab or window."
+msgstr "Quan feu clic a una persona, la pàgina d'arbres web d'aquesta persona s'obrirà en una pestanya o finestra nova."
 
 #. Part of the help text for the option "Action when individual clicked".
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
@@ -2058,27 +2031,38 @@ msgstr "Afegeix a la llista d'individus per destacar"
 msgid "Show selected individuals in different colour"
 msgstr "Mostrar individus addicionals de color diferent"
 
-#. Part of new option to highlight a custom list of individuals
-#. https://s3.eu-west-1.amazonaws.com/po-pub/i/iMke2fkhJ5QFsxPD8JHlabfu.png
-#: 
-msgid "Highlighted individuals background colour"
-msgstr "ndividus destacats: color de fons"
-
-#. Part of new option to highlight a custom list of individuals
-#. https://s3.eu-west-1.amazonaws.com/po-pub/i/iMke2fkhJ5QFsxPD8JHlabfu.png
-#: 
-msgid "Highlighted individuals XREFs"
-msgstr "Persones destacades XREFs"
-
 #. Update to help text to add this new option
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/hepcgMX8Ou17qX7kH5upaW16.png
 #: 
-msgid "If this option is selected, clicking on an individual in the diagram will add them to the list of individuals with a coloured background for identification in the diagram. See the option \"Show additional individuals in different colour\", in the Colours section of the Tile design options."
+#, fuzzy
+msgid "If this option is selected, clicking on an individual in the diagram will add them to the list of individuals with a coloured background for identification in the diagram. See the option \"Show selected individuals in different colour\", in the Colours section of the Tile design options."
 msgstr "Si se selecciona aquesta opció, fent clic sobre un individu del diagrama s'afegirà a la llista d'individus amb fons de color per identificar-los en el diagrama. Consulta l'opció “Mostrar altres individus en un color diferent”, a la secció Colors de les opcions de disseny de les rajoles."
 
-#. Update to help text to add this new option:
-#. https://s3.eu-west-1.amazonaws.com/po-pub/i/taeaB9TOXPYyAr6SzuyMVLDJ.png
+#. Default colour for custom highlights: 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/avfciefqaWjNB7aRddD2bx22.png
 #: 
-msgid "Similar to the above option for starting individuals, but this option lets you choose a background colour to highlight a custom selection if individuals based on a list of XREFs. Also see option in Browser Render settings to choose what happens when an individual is clicked, as this may be an easier way to add individuals to this list."
-msgstr "Similar a l'opció anterior per a individus principiants, però aquesta opció us permet triar un color de fons per ressaltar una selecció personalitzada si els individus es basen en una llista de XREF. Vegeu també l'opció a Configuració de renderització del navegador per triar què passa quan es fa clic a una persona, ja que pot ser una manera més senzilla d'afegir persones a aquesta llista."
+msgid "Default highlight colour"
+msgstr "Color de ressaltat per predeterminat"
+
+#. Part of the help text around background colour priority:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/5OK33EJBueLG9k0GXR19qRpk.png
+#: 
+msgid "If the option is enabled to show selected individuals in a different colour, then this option takes priority over all others."
+msgstr ""
+
+#. Part of the help for Show selected individuals in a different colour:  https://s3.eu-west-1.amazonaws.com/po-pub/i/P1bJ86EmElATeVIKW50p7nfv.png
+#: 
+msgid "This option lets you set a custom background for selected individuals. The default highlight colour is used by default, but the colour can be customised for each individual. Also see option in Browser Render settings to choose what happens when an individual is clicked, as this may be an easier way to add individuals to this list."
+msgstr ""
+
+#. Part of the help text for the option "Action when individual clicked".
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
+#: 
+msgid "This is the default option."
+msgstr "Aquesta és l'opció per defecte."
+
+#. Part of the help text explaining the context menu when you click on an individual (if enabled): https://s3.eu-west-1.amazonaws.com/po-pub/i/JbiHUCluK5zzUvYxjbtvg3LS.png
+#: 
+msgid "In the General Settings section, there is an option in the Browser options that lets you choose what happens when you click on an individual in the diagram. One of the options is to show a menu, and the menu has the following options:"
+msgstr ""
 

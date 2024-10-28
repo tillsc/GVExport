@@ -75,6 +75,8 @@ class Settings
         $this->defaultSettings['graphviz_config'] = $this->getGraphvizSettings($this->defaultSettings);
         $this->defaultSettings['sharednote_col_data'] = '[]';
         $this->defaultSettings['updated_date'] = '';
+        $this->defaultSettings['highlight_custom_json'] = '{}';
+
     }
 
     /**
@@ -150,6 +152,8 @@ class Settings
                 } else {
                     if (isset($all_settings[$id]) && json_last_error() === JSON_ERROR_NONE) {
                         $loaded_settings = json_decode($all_settings[$id]['settings'], true);
+                        $loaded_settings = $this->migrate($loaded_settings);
+
                         if (json_last_error() === JSON_ERROR_NONE) {
                             foreach ($settings as $preference => $value) {
                                 if (($preference == 'enable_graphviz' || $preference == 'enable_debug_mode') && !$settings['show_debug_panel']) {
@@ -184,6 +188,50 @@ class Settings
             $settings['graphviz_bin'] = "";
         }
         return $settings;
+    }
+
+    /** Given an array of settings, migrate old settings into the new settings structure
+     *
+     * @param $settings
+     * @return array
+     */
+    private function migrate($settings): array
+    {
+        $migrated = $settings;
+        if (isset($migrated['highlight_custom_json'])) {
+            $highlight = json_decode($migrated['highlight_custom_json'], true);
+        } else {
+            $highlight = [];
+        }
+        // Migrate custom highlight settings to new JSON format
+        if (isset($migrated['highlight_custom_col']) && isset($migrated['highlight_custom'])) {
+            $xrefs = explode(',', $migrated['highlight_custom']);
+            foreach ($xrefs as $xref) {
+                if (trim($xref) != "") {
+                    if (!isset($highlight[$xref])) {
+                        $highlight[$xref] = $migrated['highlight_custom_col'];
+                        $migrated['highlight_custom_indis'] = true;
+                    }
+                }
+            }
+        }
+
+        // Migrate highlighted starting indis to new custom highlight function
+        if (isset($migrated['highlight_start_indis']) && $migrated['highlight_start_indis'] && isset($migrated['highlight_col']) && isset($migrated['xref_list']) && isset($migrated['no_highlight_xref_list'])) {
+            $xrefs = explode(',', $migrated['xref_list']);
+            $no_highlight = explode(',', $migrated['no_highlight_xref_list']);
+            $highlight = [];
+            foreach ($xrefs as $xref) {
+                if (trim($xref) != "" && !isset($highlight[$xref]) && !in_array($xref, $no_highlight)) {
+                    $highlight[$xref] = $migrated['highlight_custom_col'];
+                    $migrated['highlight_custom_indis'] = true;
+                }
+            }
+        }
+
+        $migrated['highlight_custom_json'] = json_encode($highlight);
+
+        return $migrated;
     }
 
     /**

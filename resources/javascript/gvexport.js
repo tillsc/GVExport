@@ -68,7 +68,6 @@ function loadXrefList(url, xrefListId, indiListId) {
     }
     Promise.all(promises).then(function () {
         updateClearAll();
-        toggleHighlightStartPersons(document.getElementById('highlight_start_indis').checked);
     }).catch(function(error) {
         UI.showToast("Error");
         console.log(error);
@@ -94,28 +93,6 @@ function toggleUpdateButton() {
     if (autoUpdate) updateRender();
 }
 
-function removeItem(e, element, xrefListId) {
-    e.stopPropagation();
-    let xref = element.getAttribute("data-xref").trim();
-    let list = document.getElementById(xrefListId);
-    const regex = new RegExp(`(?<=,|^)(${xref})(?=,|$)`);
-    list.value = list.value.replaceAll(" ','").replace(regex, "");
-    list.value = list.value.replace(",,", ',');
-    if (list.value.substring(0,1) === ',') {
-        list.value = list.value.substring(1);
-    }
-    if (list.value.substring(list.value.length-1) === ',') {
-        list.value = list.value.substring(0, list.value.length-1);
-    }
-    element.remove();
-    mainPage.Url.changeURLXref(list.value.split(',')[0].trim());
-    updateClearAll();
-    removeFromXrefList(xref, 'no_highlight_xref_list');
-    toggleHighlightStartPersons(document.getElementById('highlight_start_indis').checked);
-    if (autoUpdate) {
-        updateRender();
-    }
-}
 
 // clear options from the dropdown if they are already in our list
 function removeSearchOptions() {
@@ -169,6 +146,7 @@ function refreshIndisFromXREFS(onchange) {
         loadXrefList(TOMSELECT_URL, 'xref_list', 'indi_list');
         document.getElementById('stop_indi_list').innerHTML = "";
         loadXrefList(TOMSELECT_URL, 'stop_xref_list', 'stop_indi_list');
+        Form.indiList.refreshIndisFromJson('highlight_custom_json', 'highlight_list');
     }
 }
 
@@ -272,7 +250,7 @@ function pageLoaded(Url) {
             if (!loggedIn) {
                 Data.storeSettings.getSettingsClient(ID_MAIN_SETTINGS).then((obj) => {
                     if (obj !== null) {
-                        loadSettings(JSON.stringify(obj));
+                        Form.settings.load(JSON.stringify(obj));
                     } else {
                         firstRender = false;
                     }
@@ -284,8 +262,7 @@ function pageLoaded(Url) {
     TOMSELECT_URL = document.getElementById('pid').getAttribute("data-wt-url") + "&query=";
     loadURLXref(Url);
     loadUrlToken(Url);
-    loadXrefList(TOMSELECT_URL, 'xref_list', 'indi_list');
-    loadXrefList(TOMSELECT_URL, 'stop_xref_list', 'stop_indi_list');
+    refreshIndisFromXREFS(false);
     loadSettingsDetails();
     // Remove reset parameter from URL when page loaded, to prevent
     // further resets when page reloaded
@@ -312,7 +289,7 @@ function pageLoaded(Url) {
 
     // Change events
     const form = document.getElementById('gvexport');
-    let changeElems = form.querySelectorAll("input:not([type='file']):not(#save_settings_name):not(#stop_pid):not(.highlight_check):not(#sharednote_col_add), select:not(#simple_settings_list):not(#pid):not(#sharednote_col_add):not(#settings_sort_order):not(#click_action_indi)");
+    let changeElems = form.querySelectorAll("input:not([type='file']):not(#save_settings_name):not(#stop_pid):not(#highlight_pid):not(#highlight_custom_json):not(#sharednote_col_add), select:not(#simple_settings_list):not(#pid):not(#highlight_pid):not(#stop_pid):not(#sharednote_col_add):not(#settings_sort_order):not(#click_action_indi)");
     for (let i = 0; i < changeElems.length; i++) {
         changeElems[i].addEventListener("change", Form.handleFormChange);
     }
@@ -322,13 +299,15 @@ function pageLoaded(Url) {
     clickActionSelectEl.addEventListener('change', UI.tile.clickOptionChanged);
     let stopIndiSelectEl = form.querySelector("#stop_pid");
     stopIndiSelectEl.addEventListener('change', stopIndiSelectChanged);
+    let highlightIndiSelectEl = form.querySelector("#highlight_pid");
+    highlightIndiSelectEl.addEventListener('change', Form.indiList.highlightIndiSelectChanged);
     let settingsSortOrder = form.querySelector("#settings_sort_order");
     settingsSortOrder.addEventListener('change', loadSettingsDetails);
     let simpleSettingsEl = form.querySelector("#simple_settings_list");
     simpleSettingsEl.addEventListener('change', function(e) {
         let element = document.querySelector('.settings_list_item[data-id="' + e.target.value + '"]');
         if (element !== null) {
-            loadSettings(element.getAttribute('data-settings'), true);
+            Form.settings.load(element.getAttribute('data-settings'), true);
         } else if (e.target.value !== '-') {
             UI.showToast(ERROR_CHAR + 'Settings not found')
         }
@@ -346,8 +325,9 @@ function pageLoaded(Url) {
     });
 
     document.addEventListener("mousedown", function(event) {
+
         // Hide diagram context menu if clicked off a tile
-        if (event.target.closest('.settings_ellipsis_menu_item') == null) {
+        if (event.target.closest('.settings_ellipsis_menu_item') == null && event.target.parent.id !== 'menu-info') {
             UI.contextMenu.clearContextMenu();
         }
     });
@@ -410,7 +390,7 @@ function uploadSettingsFile(input) {
     const file = input.files[0];
     let reader = new FileReader();
     reader.onload = (e) => {
-        loadSettings(e.target.result);
+        Form.settings.load(e.target.result);
     };
     reader.onerror = (e) => UI.showToast(e.target.error.name);
     reader.readAsText(file);
@@ -422,103 +402,6 @@ function toBool(value) {
     } else {
         return value;
     }
-}
-function loadSettings(data, isNamedSetting = false) {
-    let autoUpdatePrior = autoUpdate;
-    autoUpdate = false;
-    let settings;
-    try {
-        settings = JSON.parse(data);
-    } catch (e) {
-        UI.showToast("Failed to load settings: " + e);
-        return false;
-    }
-    if (!settings.hasOwnProperty("sharednote_col_data")) {
-        settings["sharednote_col_data"] = "[]";
-    }
-    Object.keys(settings).forEach(function(key){
-        let el = document.getElementById(key);
-        if (el == null) {
-            switch (key) {
-                case 'diagram_type':
-                    if (settings[key] === 'simple') {
-                        setTimeout(() => {
-                            handleSimpleDiagram();
-                            if (autoUpdate) updateRender();
-                            },1);
-                    } else {
-                        setCheckStatus(document.getElementById('diagtype_decorated'), settings[key] === 'decorated');
-                        setCheckStatus(document.getElementById('diagtype_combined'), settings[key] === 'combined');
-                    }
-                    break;
-                case 'combined_layout_type':
-                    setCheckStatus(document.getElementById('cl_type_ss'), settings[key] === 'SS');
-                    setCheckStatus(document.getElementById('cl_type_ou'), settings[key] === 'OU');
-                    break;
-                case 'birthdate_year_only':
-                    setCheckStatus(document.getElementById('bd_type_y'), toBool(settings[key]));
-                    setCheckStatus(document.getElementById('bd_type_gedcom'), !toBool(settings[key]));
-                    break;
-                case 'death_date_year_only':
-                    setCheckStatus(document.getElementById('dd_type_y'), toBool(settings[key]));
-                    setCheckStatus(document.getElementById('dd_type_gedcom'), !toBool(settings[key]));
-                    break;
-                case 'marr_date_year_only':
-                    setCheckStatus(document.getElementById('md_type_y'), toBool(settings[key]));
-                    setCheckStatus(document.getElementById('md_type_gedcom'), !toBool(settings[key]));
-                    break;
-                case 'show_adv_people':
-                    Form.toggleAdvanced(document.getElementById('people-advanced-button'), 'people-advanced', toBool(settings[key]));
-                    break;
-                case 'show_adv_appear':
-                    Form.toggleAdvanced(document.getElementById('appearance-advanced-button'), 'appearance-advanced', toBool(settings[key]));
-                    break;
-                case 'show_adv_files':
-                    Form.toggleAdvanced(document.getElementById('files-advanced-button'), 'files-advanced', toBool(settings[key]));
-                    break;
-                // If option to use cart is not showing, don't load, but also don't show error
-                case 'use_cart':
-                // These options only exist if debug panel active - don't show error if not found
-                case 'enable_debug_mode':
-                case 'enable_graphviz':
-                // Token is not loaded as an option
-                case 'token':
-                // Date of settings is not a setting so don't load it
-                case 'updated_date':
-                    break;
-                default:
-                    UI.showToast(ERROR_CHAR + TRANSLATE['Unable to load setting'] + " " + key);
-            }
-        } else {
-            if (el.type === 'checkbox' || el.type === 'radio') {
-                if (!isNamedSetting || key !== 'show_diagram_panel') {
-                    setCheckStatus(el, toBool(settings[key]));
-                }
-            } else {
-                el.value = settings[key];
-            }
-        }
-
-        // Update show/hide of JPG quality option
-        Form.showHideMatchDropdown('output_type', 'server_pdf_subgroup', 'pdf|svg|jpg')
-    });
-    Form.showHideMatchCheckbox('mark_not_related', 'mark_related_subgroup');
-    Form.showHideMatchCheckbox('show_birthdate', 'birth_date_subgroup');
-    Form.showHideMatchCheckbox('show_death_date', 'death_date_subgroup');
-    setSavedDiagramsPanel();
-    Form.showHide(document.getElementById('arrow_group'),document.getElementById('colour_arrow_related').checked)
-    Form.showHide(document.getElementById('startcol_option'),document.getElementById('highlight_start_indis').checked)
-    Form.showHide(document.getElementById('highlight_custom_option'),document.getElementById('highlight_custom_indis').checked)
-    toggleUpdateButton();
-    if (autoUpdatePrior) {
-        if (firstRender) {
-            firstRender = false;
-        } else {
-            updateRender();
-        }
-        autoUpdate = true;
-    }
-    refreshIndisFromXREFS(false);
 }
 
 function setCheckStatus(el, checked) {
@@ -636,7 +519,7 @@ function loadSettingsDetails() {
             newListItem.setAttribute("data-id", settingsList[key]['id']);
             newListItem.setAttribute("data-token", settingsList[key]['token'] || "");
             newListItem.setAttribute("data-name", settingsList[key]['name']);
-            newListItem.setAttribute("onclick", "loadSettings(this.getAttribute('data-settings'), true)");
+            newListItem.setAttribute("onclick", "Form.settings.load(this.getAttribute('data-settings'), true)");
             newListItem.innerHTML = "<a class='pointer'>" + settingsList[key]['name'] + "<div class=\"saved-settings-ellipsis pointer\" onclick='UI.savedSettings.showSavedSettingsItemMenu(event)'><a class='pointer'>…</a></div></a>";
             newLinkWrapper.appendChild(newListItem);
             listElement.appendChild(newLinkWrapper);
@@ -666,7 +549,7 @@ function loadUrlToken(Url) {
                 let json = JSON.parse(response);
                 if (json.success) {
                     let settingsString = JSON.stringify(json.settings);
-                    loadSettings(settingsString);
+                    Form.settings.load(settingsString);
                     if(json.settings['auto_update']) {
                         UI.hideSidebar();
                     }
@@ -822,46 +705,6 @@ function removeFromXrefList(value, listElName) {
         xrefExcludeEl.value = xrefExcludeArray.join(',');
     }
 }
-
-
-function toggleHighlightStartPersons(enable, adminPage) {
-    if (enable && !adminPage) {
-        let list = document.getElementById('highlight_list');
-        let xrefList = document.getElementById('xref_list');
-        let xrefExcludeArray = document.getElementById('no_highlight_xref_list').value.split(',');
-        list.innerHTML = '';
-        let xrefs = xrefList.value.split(',');
-        for (let i=0; i<xrefs.length; i++) {
-            if (xrefs[i].trim() !== "") {
-                const xrefItem = document.createElement('div');
-                const checkboxEl = document.createElement('input');
-                checkboxEl.setAttribute('id', 'highlight_check' + i);
-                checkboxEl.setAttribute('class', 'highlight_check');
-                checkboxEl.setAttribute('type', 'checkbox');
-                checkboxEl.setAttribute('data-xref', xrefs[i]);
-                if (!xrefExcludeArray.includes(xrefs[i])) {
-                    checkboxEl.checked = true;
-                }
-                checkboxEl.addEventListener("click", toggleHighlightCheckbox);
-                xrefItem.appendChild(checkboxEl);
-                const indiItem = document.getElementById('indi_list')
-                    .querySelector('.indi_list_item[data-xref="' + xrefs[i] + '"]');
-                let indiName = "";
-                if (indiItem != null) {
-                    indiName = indiItem.getElementsByClassName("NAME")[0].innerText;
-                }
-                const labelEl = document.createElement('label');
-                labelEl.setAttribute('class', 'highlight_check_label');
-                labelEl.setAttribute('for', 'highlight_check' + i);
-                labelEl.innerHTML = indiName + " (" + xrefs[i] + ")";
-                xrefItem.appendChild(labelEl);
-                list.appendChild(xrefItem);
-            }
-        }
-    }
-    Form.showHide(document.getElementById('startcol_option'),enable);
-}
-
 function setSvgImageClipPath(element, clipPath) {
     // Circle photo
     const imageElements = element.getElementsByTagName("image");
