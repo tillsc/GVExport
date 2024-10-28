@@ -601,7 +601,7 @@ const Form = {
             let jsonEl = document.getElementById(jsonId);
             let listEl = document.getElementById(indiListId);
             document.getElementById(indiListId).innerHTML = "";
-            if (jsonEl.value === '') jsonEl.value = '{}';
+            if (jsonEl.value === '' || jsonEl.value === '[]') jsonEl.value = '{}';
             try {
                 let data = JSON.parse(jsonEl.value);
                 for (let key in data) {
