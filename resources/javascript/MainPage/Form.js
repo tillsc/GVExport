@@ -530,11 +530,16 @@ const Form = {
                 newListItem.className = "indi_list_item";
                 newListItem.setAttribute("data-xref", xref);
                 newListItem.setAttribute("onclick", "UI.scrollToRecord('" + xref + "')");
-                newListItem.innerHTML = contents + "<div class=\"saved-settings-ellipsis\" onclick=\"Form.indiList.removeItem(event, this.parentElement" + (colour === '' ? '' :  '.parentElement') + ", '" + otherXrefId + "')\"><a class='pointer'>×</a></div>";
+                const listItemIndi = document.createElement("span");
+                listItemIndi.innerHTML = contents + "<div class=\"saved-settings-ellipsis\" onclick=\"Form.indiList.removeItem(event, this.parentElement" + (colour === '' ? '' :  '.parentElement') + ", '" + otherXrefId + "')\"><a class='pointer'>×</a></div>";
+                newListItem.appendChild(listItemIndi);
                 if (colour !== '') {
+                    listItemIndi.setAttribute('class', 'list_item_skinny');
                     let picker = `<input type="color" class="highlight_picker" data-xref="${xref}" value="${colour}">`;
-                    newListItem.innerHTML = '<span class="list_item_skinny">' + newListItem.innerHTML + '</span>' + picker;
+                    newListItem.innerHTML = newListItem.innerHTML + picker;
                     newListItem.querySelector('.highlight_picker')?.addEventListener('change', Form.indiList.updateHighlightColour);
+                } else {
+                    listItemIndi.setAttribute('class', 'list_item_content');
                 }
                 // Multiple promises can be for the same xref - don't add if a duplicate
                 let item = listElement.querySelector(`[data-xref="${xref}"]`);

@@ -256,6 +256,9 @@
     margin: 3px;
     width: 100%;
     display: flex;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .indi_list_item {
@@ -266,9 +269,14 @@
 .list_item_skinny {
     width: 80%;
     display: block;
-    text-overflow: ellipsis;
+}
+
+.list_item_content {
+    width: 95%;
+    display: block;
     white-space: nowrap;
     overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .options-panel-background {
