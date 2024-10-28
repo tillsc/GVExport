@@ -73,7 +73,7 @@ $help = new Help();
 <p><?= Help::translateClean('To use this option, first select a shared note. A new screen will appear allowing you to set the style to use for that shared note. You may add multiple items, and you can drag the items in the list to rearrange them.'); ?></p>
 <p><?= Help::translateClean('If the same style is set by multiple settings, the following order is used:'); ?></p>
 <ul>
-    <li><?= Help::translateClean('If the option to show the background of starting individuals in a different colour is selected, then this option takes priority over all others.'); ?></li>
+    <li><?= Help::translateClean('If the option is enabled to show selected individuals in a different colour, then this option takes priority over all others.'); ?></li>
     <li><?= Help::translateClean('The style set based on shared notes is then used, if relevant. If an individual is linked to multiple shared notes in the list, the style from the highest note in the list is used.'); ?></li>
     <li><?= Help::translateClean('If the above options do not apply, then the Individual Background Colour is used.'); ?></li>
 </ul>
@@ -88,10 +88,8 @@ $help = new Help();
 <p><?= Help::translateClean('Set the colour for Unknown gender individuals, used in above settings for background, stripe, border if selected.'); ?></p>
 <h5><?= Help::translateClean('Non-blood related individuals'); ?></h5>
 <p><?= Help::translateClean('There are four options here for non-blood related individuals, if the &quot;Mark not blood-related people with different colour&quot; option is enabled in the &quot;People to be included&quot; section.'); ?></p>
-<h5><?= Help::translateClean('Show starting individuals in different colour'); ?></h5>
-<p><?= Help::translateClean('Whether starting individuals should be highlighted on the diagram. If enabled, you can choose a background colour to highlight the individual with, and can choose to enable this only for some starting individuals.'); ?></p>
 <h5><?= Help::translateClean('Show selected individuals in different colour'); ?></h5>
-<p><?= Help::translateClean('Similar to the above option for starting individuals, but this option lets you choose a background colour to highlight a custom selection if individuals based on a list of XREFs. Also see option in Browser Render settings to choose what happens when an individual is clicked, as this may be an easier way to add individuals to this list.'); ?></p>
+<p><?= Help::translateClean('This option lets you set a custom background for selected individuals. The default highlight colour is used by default, but the colour can be customised for each individual. Also see option in Browser Render settings to choose what happens when an individual is clicked, as this may be an easier way to add individuals to this list.'); ?></p>
 <h5><?= Help::translateClean('Family background'); ?></h5>
 <p><?= Help::translateClean('The background colour of family records.'); ?></p>
 <h5><?= Help::translateClean('Family border colour'); ?></h5>
