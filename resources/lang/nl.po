@@ -1946,8 +1946,8 @@ msgstr "Met deze optie kunt u kiezen wat er gebeurt als u op een persoon in het 
 #. Part of the help text for the option "Action when individual clicked".
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
 #: 
-msgid "This is the default option. When you click on an individual, the webtrees page for that individual will open in a new tab or window."
-msgstr "Dit is de standaardoptie. Als u op een persoon klikt, wordt de webtreespagina voor die persoon geopend in een nieuw tabblad of venster."
+msgid "When you click on an individual, the webtrees page for that individual will open in a new tab or window."
+msgstr "Als u op een persoon klikt, wordt de webtreespagina voor die persoon geopend in een nieuw tabblad of venster."
 
 #. Part of the help text for the option "Action when individual clicked".
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
@@ -2029,4 +2029,15 @@ msgstr "Als de optie is ingeschakeld om geselecteerde personen in een andere kle
 #: 
 msgid "This option lets you set a custom background for selected individuals. The default highlight colour is used by default, but the colour can be customised for each individual. Also see option in Browser Render settings to choose what happens when an individual is clicked, as this may be an easier way to add individuals to this list."
 msgstr "Met deze optie kunt u een aangepaste achtergrond instellen voor geselecteerde personen. Standaard wordt de standaard markeringskleur gebruikt, maar de kleur kan voor elke persoon aangepast worden. Zie ook de optie in Browserweergave-instellingen om te kiezen wat er gebeurt als er op een persoon wordt geklikt, omdat dit een gemakkelijkere manier kan zijn om personen aan deze lijst toe te voegen."
+
+#. Part of the help text for the option "Action when individual clicked".
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
+#: 
+msgid "This is the default option."
+msgstr "Dit is de standaardoptie."
+
+#. Part of the help text explaining the context menu when you click on an individual (if enabled): https://s3.eu-west-1.amazonaws.com/po-pub/i/JbiHUCluK5zzUvYxjbtvg3LS.png
+#: 
+msgid "In the General Settings section, there is an option in the Browser options that lets you choose what happens when you click on an individual in the diagram. One of the options is to show a menu, and the menu has the following options:"
+msgstr ""
 

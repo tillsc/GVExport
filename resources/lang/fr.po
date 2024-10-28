@@ -458,22 +458,6 @@ msgstr "Les valeurs sont ici utilisées comme valeurs par défaut pour les nouve
 msgid "reset to defaults"
 msgstr "Réinitialiser les valeurs"
 
-#. Checkbox option to enable a different background colour for starting individuals, to help find them easier on the diagram:
-#. https://s3.eu-west-1.amazonaws.com/po-pub/i/afEtoto6Qnv1HlJn0zqAiMtP.png 
-#. 
-#. https://s3.eu-west-1.amazonaws.com/po-pub/i/eo7ytnyRCth5W2Sq76da71Ph.png
-#: 
-msgid "Show starting individuals in different colour"
-msgstr "Montrer les individus de base dans une couleur différente"
-
-#. Option to change the background colour for starting individuals, to help find them easier on the diagram:
-#. https://s3.eu-west-1.amazonaws.com/po-pub/i/afEtoto6Qnv1HlJn0zqAiMtP.png 
-#. 
-#. https://s3.eu-west-1.amazonaws.com/po-pub/i/eo7ytnyRCth5W2Sq76da71Ph.png
-#: 
-msgid "Starting individuals background colour"
-msgstr "Couleur de fond pour les individus de base"
-
 #. Option to change font size. This affects (at the time of writing) all diagram text except for names which have their own setting:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/IdWIcmNdrOj4l1yTgxv6MpVW.png
 #: 
@@ -1341,11 +1325,6 @@ msgstr "Réglez la couleur pour Sexe inconnu, utilisée dans les paramètres ci-
 msgid "There are four options here for non-blood related individuals, if the &quot;Mark not blood-related people with different colour&quot; option is enabled in the &quot;People to be included&quot; section."
 msgstr "Il y a quatre options ici pour les individus non liés par le sang, si l'option &quot;Marquer les individus non liées par le sang avec une couleur différente&quot ; est activée dans la section &quot;Individus à inclure&quot;"
 
-#. Help information for the "Show starting individuals in different colour" option:  https://s3.eu-west-1.amazonaws.com/po-pub/i/doM4pEnT2JzxQBks7KkZWAkT.png
-#: 
-msgid "Whether starting individuals should be highlighted on the diagram. If enabled, you can choose a background colour to highlight the individual with, and can choose to enable this only for some starting individuals."
-msgstr "Les individus de départ doivent-ils être mis en évidence sur le diagramme ? Si cette option est activée, vous pouvez choisir une couleur d'arrière-plan pour mettre l'individu en évidence, et vous pouvez choisir d'activer cette option uniquement pour certains individus de départ."
-
 #. Part of the help text for family tile colours:  https://s3.eu-west-1.amazonaws.com/po-pub/i/YJInMp5brj9vY9iKPUQTX3rF.png
 #: 
 msgid "The background colour of family records."
@@ -1536,7 +1515,7 @@ msgstr "Lorsque vous avez sélectionné l'option de mise en page \"Combiné\", c
 #. Part of the help text for the Diagram appearance settings:  https://s3.eu-west-1.amazonaws.com/po-pub/i/Vbjoek76Ojvq1rcmEumPnmgJ.png
 #: 
 msgid "This section allows you to change colours associated with the diagram that are not directly related to the individual or family tiles. Click the coloured box to change the colour. This uses your browser&apos;s colour picker, so will look different depending on what browser you are using."
-msgstr "Cette section vous permet de modifier les couleurs associées au diagramme qui ne sont pas directement liées aux tuiles des individus ou des familles. Cliquez sur la case colorée pour modifier la couleur. Cette fonction utilise le sélecteur de couleurs de votre navigateur et sera donc différente selon le navigateur que vous utilisez."
+msgstr "Cette section vous permet de modifier les couleurs associées au diagramme qui ne sont pas directement liées aux vignettes des individus ou des familles. Cliquez sur la case colorée pour modifier la couleur. Cette fonction utilise le sélecteur de couleurs de votre navigateur et sera donc différente selon le navigateur que vous utilisez."
 
 #. Part of the help text for the Diagram appearance settings:  https://s3.eu-west-1.amazonaws.com/po-pub/i/Vbjoek76Ojvq1rcmEumPnmgJ.png
 #: 
@@ -1632,7 +1611,7 @@ msgstr "Couleur des notes partagées"
 #. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
 #: 
 msgid "This option lets you set styles for the tiles of individuals based on the shared notes linked to those individuals. Currently only the background colour can be set."
-msgstr "Cette option vous permet de définir des styles pour les tuiles des personnes en fonction des notes partagées liées à ces personnes. Actuellement, seule la couleur d'arrière-plan peut être définie."
+msgstr "Cette option vous permet de définir des styles pour les vignettes des personnes en fonction des notes partagées liées à ces personnes. Actuellement, seule la couleur d'arrière-plan peut être définie."
 
 #. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
 #: 
@@ -1676,11 +1655,6 @@ msgstr "Si le même style est défini par plusieurs paramètres, l'ordre suivant
 
 #. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
 #: 
-msgid "If the option to show the background of starting individuals in a different colour is selected, then this option takes priority over all others."
-msgstr "Si l'option permettant d'afficher l'arrière-plan des personnes racines dans une couleur différente est sélectionnée, elle est prioritaire sur toutes les autres."
-
-#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
-#: 
 msgid "The style set based on shared notes is then used, if relevant. If an individual is linked to multiple shared notes in the list, the style from the highest note in the list is used."
 msgstr "Le style défini en fonction des notes partagées est ensuite utilisé, le cas échéant. Si une personne est liée à plusieurs notes partagées dans la liste, le style de la note la plus élevée de la liste est utilisé."
 
@@ -1703,7 +1677,7 @@ msgstr "Noms abrégés des mois"
 #. Part of help page:  https://s3.eu-west-1.amazonaws.com/po-pub/i/08Z4pSSmjQhf0V1ym9AEETTC.png
 #: 
 msgid "This section allows for some changes to the content of tiles, including links, abbreviations, and the details included on individuals and families."
-msgstr "Cette section permet de modifier le contenu des tuiles, y compris les liens, les abréviations et les détails concernant les personnes et les familles."
+msgstr "Cette section permet de modifier le contenu des vignettes, y compris les liens, les abréviations et les détails concernant les personnes et les familles."
 
 #. Part of help page:  https://s3.eu-west-1.amazonaws.com/po-pub/i/08Z4pSSmjQhf0V1ym9AEETTC.png
 #: 
@@ -1836,7 +1810,7 @@ msgstr "Indique si le lieu du décès doit être affiché dans le résultat. Voi
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/u1x88hjQ3UFSTpqwJGuCdDSz.png
 #: 
 msgid "Whether to print the sex of the individual on the individual&apos;s tile, e.g. &quot;Male&quot;"
-msgstr "Indique si le sexe de l'individu doit être imprimé sur la tuile de l'individu, par exemple \"Homme\""
+msgstr "Indique si le sexe de l'individu doit être imprimé sur la vignette de l'individu, par exemple \"Homme\""
 
 #. Part of help page for deciding what information goes in the family section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/igNqWCHKyhKOofsUxjaGrDeM.png
 #: 
@@ -1974,7 +1948,7 @@ msgstr ""
 #. Part of the help text for the option "Action when individual clicked".
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
 #: 
-msgid "This is the default option. When you click on an individual, the webtrees page for that individual will open in a new tab or window."
+msgid "When you click on an individual, the webtrees page for that individual will open in a new tab or window."
 msgstr ""
 
 #. Part of the help text for the option "Action when individual clicked".
@@ -2035,27 +2009,38 @@ msgstr ""
 msgid "Show selected individuals in different colour"
 msgstr ""
 
-#. Part of new option to highlight a custom list of individuals
-#. https://s3.eu-west-1.amazonaws.com/po-pub/i/iMke2fkhJ5QFsxPD8JHlabfu.png
-#: 
-msgid "Highlighted individuals background colour"
-msgstr ""
-
-#. Part of new option to highlight a custom list of individuals
-#. https://s3.eu-west-1.amazonaws.com/po-pub/i/iMke2fkhJ5QFsxPD8JHlabfu.png
-#: 
-msgid "Highlighted individuals XREFs"
-msgstr ""
-
 #. Update to help text to add this new option
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/hepcgMX8Ou17qX7kH5upaW16.png
 #: 
-msgid "If this option is selected, clicking on an individual in the diagram will add them to the list of individuals with a coloured background for identification in the diagram. See the option \"Show additional individuals in different colour\", in the Colours section of the Tile design options."
+msgid "If this option is selected, clicking on an individual in the diagram will add them to the list of individuals with a coloured background for identification in the diagram. See the option \"Show selected individuals in different colour\", in the Colours section of the Tile design options."
+msgstr "Si cette option est sélectionnée, cliquer sur un individu du diagramme l'ajoutera à la liste des individus avec un arrière-plan coloré pour l'identifier dans le diagramme. Voir l'option \"Montrer les individus sélectionnés avec une couleur différente\", dans la section Couleurs des options de dessin des Vignettes.\n"
+""
+
+#. Default colour for custom highlights: 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/avfciefqaWjNB7aRddD2bx22.png
+#: 
+msgid "Default highlight colour"
 msgstr ""
 
-#. Update to help text to add this new option:
-#. https://s3.eu-west-1.amazonaws.com/po-pub/i/taeaB9TOXPYyAr6SzuyMVLDJ.png
+#. Part of the help text around background colour priority:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/5OK33EJBueLG9k0GXR19qRpk.png
 #: 
-msgid "Similar to the above option for starting individuals, but this option lets you choose a background colour to highlight a custom selection if individuals based on a list of XREFs. Also see option in Browser Render settings to choose what happens when an individual is clicked, as this may be an easier way to add individuals to this list."
+msgid "If the option is enabled to show selected individuals in a different colour, then this option takes priority over all others."
+msgstr ""
+
+#. Part of the help for Show selected individuals in a different colour:  https://s3.eu-west-1.amazonaws.com/po-pub/i/P1bJ86EmElATeVIKW50p7nfv.png
+#: 
+msgid "This option lets you set a custom background for selected individuals. The default highlight colour is used by default, but the colour can be customised for each individual. Also see option in Browser Render settings to choose what happens when an individual is clicked, as this may be an easier way to add individuals to this list."
+msgstr ""
+
+#. Part of the help text for the option "Action when individual clicked".
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
+#: 
+msgid "This is the default option."
+msgstr ""
+
+#. Part of the help text explaining the context menu when you click on an individual (if enabled): https://s3.eu-west-1.amazonaws.com/po-pub/i/JbiHUCluK5zzUvYxjbtvg3LS.png
+#: 
+msgid "In the General Settings section, there is an option in the Browser options that lets you choose what happens when you click on an individual in the diagram. One of the options is to show a menu, and the menu has the following options:"
 msgstr ""
 

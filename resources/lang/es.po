@@ -484,22 +484,6 @@ msgstr ""
 msgid "reset to defaults"
 msgstr ""
 
-#. Checkbox option to enable a different background colour for starting individuals, to help find them easier on the diagram:
-#. https://s3.eu-west-1.amazonaws.com/po-pub/i/afEtoto6Qnv1HlJn0zqAiMtP.png 
-#. 
-#. https://s3.eu-west-1.amazonaws.com/po-pub/i/eo7ytnyRCth5W2Sq76da71Ph.png
-#: 
-msgid "Show starting individuals in different colour"
-msgstr ""
-
-#. Option to change the background colour for starting individuals, to help find them easier on the diagram:
-#. https://s3.eu-west-1.amazonaws.com/po-pub/i/afEtoto6Qnv1HlJn0zqAiMtP.png 
-#. 
-#. https://s3.eu-west-1.amazonaws.com/po-pub/i/eo7ytnyRCth5W2Sq76da71Ph.png
-#: 
-msgid "Starting individuals background colour"
-msgstr ""
-
 #. Option to change font size. This affects (at the time of writing) all diagram text except for names which have their own setting:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/IdWIcmNdrOj4l1yTgxv6MpVW.png
 #: 
@@ -1367,11 +1351,6 @@ msgstr ""
 msgid "There are four options here for non-blood related individuals, if the &quot;Mark not blood-related people with different colour&quot; option is enabled in the &quot;People to be included&quot; section."
 msgstr ""
 
-#. Help information for the "Show starting individuals in different colour" option:  https://s3.eu-west-1.amazonaws.com/po-pub/i/doM4pEnT2JzxQBks7KkZWAkT.png
-#: 
-msgid "Whether starting individuals should be highlighted on the diagram. If enabled, you can choose a background colour to highlight the individual with, and can choose to enable this only for some starting individuals."
-msgstr ""
-
 #. Part of the help text for family tile colours:  https://s3.eu-west-1.amazonaws.com/po-pub/i/YJInMp5brj9vY9iKPUQTX3rF.png
 #: 
 msgid "The background colour of family records."
@@ -1701,11 +1680,6 @@ msgstr ""
 
 #. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
 #: 
-msgid "If the option to show the background of starting individuals in a different colour is selected, then this option takes priority over all others."
-msgstr ""
-
-#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
-#: 
 msgid "The style set based on shared notes is then used, if relevant. If an individual is linked to multiple shared notes in the list, the style from the highest note in the list is used."
 msgstr ""
 
@@ -1880,5 +1854,216 @@ msgstr ""
 #. Part of help page for deciding what information goes in the family section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/igNqWCHKyhKOofsUxjaGrDeM.png
 #: 
 msgid "Whether to show the place of marriage in the output. Also see option for abbreviating place names."
+msgstr ""
+
+#. An option in new setting to sort the saved settings list: 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/fSaYMVDGQqSSVdo1qxXE1pqY.png
+#: 
+msgid "Oldest first"
+msgstr ""
+
+#. An option in new setting to sort the saved settings list: 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/fSaYMVDGQqSSVdo1qxXE1pqY.png
+#: 
+msgid "Newest first"
+msgstr ""
+
+#. An option in new setting to sort the saved settings list: 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/fSaYMVDGQqSSVdo1qxXE1pqY.png
+#: 
+msgid "Alphabetical order"
+msgstr ""
+
+#. An option in new setting to sort the saved settings list: 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/fSaYMVDGQqSSVdo1qxXE1pqY.png
+#: 
+msgid "Reverse alphabetical order"
+msgstr ""
+
+#. New setting to sort the saved settings list: 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/fSaYMVDGQqSSVdo1qxXE1pqY.png
+#: 
+msgid "Settings list sort order"
+msgstr ""
+
+#. Part of the help text for the Settings list sort order option:  https://s3.eu-west-1.amazonaws.com/po-pub/i/yZYMz48ukCKc7zl43L5QhV0a.png
+#: 
+msgid "The default option. New settings are added to the bottom of the list."
+msgstr ""
+
+#. Part of the help text for the Settings list sort order option:  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/yZYMz48ukCKc7zl43L5QhV0a.png
+#: 
+msgid "New settings are added to the top of the list."
+msgstr ""
+
+#. Part of the help text for the Settings list sort order option:  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/yZYMz48ukCKc7zl43L5QhV0a.png
+#: 
+msgid "Settings are sorted based on their name."
+msgstr ""
+
+#. Part of the help text for the Settings list sort order option:  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/yZYMz48ukCKc7zl43L5QhV0a.png
+#: 
+msgid "Settings are sorted based on their name, but in reverse."
+msgstr ""
+
+#. Part of the help text for the Settings list sort order option:  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/yZYMz48ukCKc7zl43L5QhV0a.png
+#: 
+msgid "Note that if you update a saved setting, this will affect how it is sorted under the 'Oldest first' or 'Newest first' options."
+msgstr ""
+
+#. Part of the help text for the Settings list sort order option:  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/yZYMz48ukCKc7zl43L5QhV0a.png
+#: 
+msgid "This option lets you choose the order of saved settings. The options are"
+msgstr ""
+
+#. One option in the list of things that can happen when you click an individual in the diagram.  https://s3.eu-west-1.amazonaws.com/po-pub/i/KpMTncLFJrS21Y0UPolZeCDD.png
+#: 
+msgid "Add individual to list of starting individuals"
+msgstr ""
+
+#. One option in the list of things that can happen when you click an individual in the diagram.  https://s3.eu-west-1.amazonaws.com/po-pub/i/KpMTncLFJrS21Y0UPolZeCDD.png
+#: 
+msgid "Open individual's page"
+msgstr ""
+
+#. One option in the list of things that can happen when you click an individual in the diagram.  https://s3.eu-west-1.amazonaws.com/po-pub/i/KpMTncLFJrS21Y0UPolZeCDD.png
+#: 
+msgid "Replace starting individuals with this individual"
+msgstr ""
+
+#. One option in the list of things that can happen when you click an individual in the diagram.  https://s3.eu-west-1.amazonaws.com/po-pub/i/KpMTncLFJrS21Y0UPolZeCDD.png
+#: 
+msgid "Add this individual to the list of stopping individuals"
+msgstr ""
+
+#. One option in the list of things that can happen when you click an individual in the diagram.  https://s3.eu-west-1.amazonaws.com/po-pub/i/KpMTncLFJrS21Y0UPolZeCDD.png
+#: 
+msgid "Replace stopping individuals with this individual"
+msgstr ""
+
+#. New option to set what happens when you click an individual in the diagram.  https://s3.eu-west-1.amazonaws.com/po-pub/i/KpMTncLFJrS21Y0UPolZeCDD.png
+#: 
+msgid "Action when individual clicked"
+msgstr ""
+
+#. One option in the list of things that can happen when you click an individual in the diagram.  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/KpMTncLFJrS21Y0UPolZeCDD.png
+#: 
+msgid "Show menu"
+msgstr ""
+
+#. One option in the list of things that can happen when you click an individual in the diagram.  
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/KpMTncLFJrS21Y0UPolZeCDD.png
+#: 
+msgid "Do nothing"
+msgstr ""
+
+#. Part of the help text for the option "Action when individual clicked".
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
+#: 
+msgid "This option lets you choose what happens when you click on an individual in the diagram."
+msgstr ""
+
+#. Part of the help text for the option "Action when individual clicked".
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
+#: 
+msgid "When you click on an individual, the webtrees page for that individual will open in a new tab or window."
+msgstr ""
+
+#. Part of the help text for the option "Action when individual clicked".
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
+#: 
+msgid "If this option is selected, clicking on an individual in the diagram will add them to the list of starting individuals."
+msgstr ""
+
+#. Part of the help text for the option "Action when individual clicked".
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
+#: 
+msgid "If this option is selected, clicking on an individual in the diagram will add them to the list of starting individuals and remove all others from the list."
+msgstr ""
+
+#. Part of the help text for the option "Action when individual clicked".
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
+#: 
+msgid "If this option is selected, clicking on an individual in the diagram will add them to the list of stopping individuals."
+msgstr ""
+
+#. Part of the help text for the option "Action when individual clicked".
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
+#: 
+msgid "If this option is selected, clicking on an individual in the diagram will add them to the list of stopping individuals and remove all others from the list."
+msgstr ""
+
+#. Part of the help text for the option "Action when individual clicked".
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
+#: 
+msgid "If this option is chosen, when an individual is clicked on in the diagram, a menu will be shown with the above items to choose from."
+msgstr ""
+
+#. Part of the help text for the option "Action when individual clicked".
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
+#: 
+msgid "When an individual is clicked on in the diagram, nothing will happen."
+msgstr ""
+
+#. Part of the help text for the option "Action when individual clicked".
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
+#: 
+msgid "Note that there is currently no option for what to do when a family record is clicked on in the diagram. However, the option to add URLs to individuals and families will also affect families in the browser diagram. That is, if you click a family then if this option is enabled, the family page will open in webtrees."
+msgstr ""
+
+#. An extra paragraph for the section on URL links in the help page:  https://s3.eu-west-1.amazonaws.com/po-pub/i/4Vxx95kI54pojXyfcC4CvyYc.png
+#: 
+msgid "This also affects families in the diagram. If this option is enabled, you can click on family records to open the family webtrees page. Also see \\'Action when individual clicked\\' in the Browser render settings."
+msgstr ""
+
+#. Option for what to do when individual clicked on in diagram
+#: 
+msgid "Add to list of individuals to highlight"
+msgstr ""
+
+#. Part of new option to highlight a custom list of individuals
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/iMke2fkhJ5QFsxPD8JHlabfu.png
+#: 
+msgid "Show selected individuals in different colour"
+msgstr ""
+
+#. Update to help text to add this new option
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/hepcgMX8Ou17qX7kH5upaW16.png
+#: 
+msgid "If this option is selected, clicking on an individual in the diagram will add them to the list of individuals with a coloured background for identification in the diagram. See the option \"Show selected individuals in different colour\", in the Colours section of the Tile design options."
+msgstr ""
+
+#. Default colour for custom highlights: 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/avfciefqaWjNB7aRddD2bx22.png
+#: 
+msgid "Default highlight colour"
+msgstr ""
+
+#. Part of the help text around background colour priority:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/5OK33EJBueLG9k0GXR19qRpk.png
+#: 
+msgid "If the option is enabled to show selected individuals in a different colour, then this option takes priority over all others."
+msgstr ""
+
+#. Part of the help for Show selected individuals in a different colour:  https://s3.eu-west-1.amazonaws.com/po-pub/i/P1bJ86EmElATeVIKW50p7nfv.png
+#: 
+msgid "This option lets you set a custom background for selected individuals. The default highlight colour is used by default, but the colour can be customised for each individual. Also see option in Browser Render settings to choose what happens when an individual is clicked, as this may be an easier way to add individuals to this list."
+msgstr ""
+
+#. Part of the help text for the option "Action when individual clicked".
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
+#: 
+msgid "This is the default option."
+msgstr ""
+
+#. Part of the help text explaining the context menu when you click on an individual (if enabled): https://s3.eu-west-1.amazonaws.com/po-pub/i/JbiHUCluK5zzUvYxjbtvg3LS.png
+#: 
+msgid "In the General Settings section, there is an option in the Browser options that lets you choose what happens when you click on an individual in the diagram. One of the options is to show a menu, and the menu has the following options:"
 msgstr ""
 

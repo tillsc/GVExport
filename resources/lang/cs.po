@@ -458,22 +458,6 @@ msgstr "Zde uvedené hodnoty se použijí jako výchozí hodnoty pro nové uživ
 msgid "reset to defaults"
 msgstr "resetovat na výchozí nastavení"
 
-#. Checkbox option to enable a different background colour for starting individuals, to help find them easier on the diagram:
-#. https://s3.eu-west-1.amazonaws.com/po-pub/i/afEtoto6Qnv1HlJn0zqAiMtP.png 
-#. 
-#. https://s3.eu-west-1.amazonaws.com/po-pub/i/eo7ytnyRCth5W2Sq76da71Ph.png
-#: 
-msgid "Show starting individuals in different colour"
-msgstr "Výchozí osoby zobrazit jinou barvou"
-
-#. Option to change the background colour for starting individuals, to help find them easier on the diagram:
-#. https://s3.eu-west-1.amazonaws.com/po-pub/i/afEtoto6Qnv1HlJn0zqAiMtP.png 
-#. 
-#. https://s3.eu-west-1.amazonaws.com/po-pub/i/eo7ytnyRCth5W2Sq76da71Ph.png
-#: 
-msgid "Starting individuals background colour"
-msgstr "Barva pozadí výchozích osob"
-
 #. Option to change font size. This affects (at the time of writing) all diagram text except for names which have their own setting:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/IdWIcmNdrOj4l1yTgxv6MpVW.png
 #: 
@@ -1341,11 +1325,6 @@ msgstr "Nastaví barvu pro osoby neznámého pohlaví, která se použije ve vý
 msgid "There are four options here for non-blood related individuals, if the &quot;Mark not blood-related people with different colour&quot; option is enabled in the &quot;People to be included&quot; section."
 msgstr "Můžete zde nastavit čtyři různé barvy pro osoby, které nejsou pokrevně příbuzné, pokud je v části \"Osoby, které mají být zahrnuty\" povolena možnost \"Označit osoby, které nejsou pokrevně spřízněné, jinou barvou\"."
 
-#. Help information for the "Show starting individuals in different colour" option:  https://s3.eu-west-1.amazonaws.com/po-pub/i/doM4pEnT2JzxQBks7KkZWAkT.png
-#: 
-msgid "Whether starting individuals should be highlighted on the diagram. If enabled, you can choose a background colour to highlight the individual with, and can choose to enable this only for some starting individuals."
-msgstr "Nastavení zdali by měly být v diagramu zvýrazněny výchozí osoby. Pokud je tato volba povolena, můžete zvolit barvu pozadí, kterou budou výchozí osoby zvýrazněny, případně lze také nastavit zvýraznění pouze u některých výchozích osob."
-
 #. Part of the help text for family tile colours:  https://s3.eu-west-1.amazonaws.com/po-pub/i/YJInMp5brj9vY9iKPUQTX3rF.png
 #: 
 msgid "The background colour of family records."
@@ -1675,11 +1654,6 @@ msgstr "Pokud je stejný styl zadán ve více nastaveních, použije se následu
 
 #. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
 #: 
-msgid "If the option to show the background of starting individuals in a different colour is selected, then this option takes priority over all others."
-msgstr "Pokud je vybrána možnost zobrazit pozadí výchozích osob jinou barvou, má tato možnost přednost před všemi ostatními."
-
-#. Part of the help text for option to set styles based on which shared notes are linked to an individual:  https://s3.eu-west-1.amazonaws.com/po-pub/i/NIUymmhOAhoOrnOrEw4LHHwy.png
-#: 
 msgid "The style set based on shared notes is then used, if relevant. If an individual is linked to multiple shared notes in the list, the style from the highest note in the list is used."
 msgstr "V případě potřeby se pak použije sada stylů založená na sdílených poznámkách. Pokud je jednotlivec spojen s více sdílenými poznámkami v seznamu, použije se styl z nejvýše umístěné poznámky v seznamu."
 
@@ -1973,8 +1947,8 @@ msgstr "Tato možnost vám umožňuje zvolit, co se stane, když kliknete na oso
 #. Part of the help text for the option "Action when individual clicked".
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
 #: 
-msgid "This is the default option. When you click on an individual, the webtrees page for that individual will open in a new tab or window."
-msgstr "Toto je výchozí možnost. Když kliknete na osobu, stránka webtrees pro tuto osobu se otevře v nové záložce nebo okně."
+msgid "When you click on an individual, the webtrees page for that individual will open in a new tab or window."
+msgstr "Když kliknete na osobu, stránka webtrees pro tuto osobu se otevře v nové záložce nebo okně."
 
 #. Part of the help text for the option "Action when individual clicked".
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
@@ -2026,35 +2000,45 @@ msgstr "To také ovlivňuje rodiny v diagramu. Pokud je tato možnost povolena, 
 #. Option for what to do when individual clicked on in diagram
 #: 
 msgid "Add to list of individuals to highlight"
-msgstr ""
+msgstr "Přidat do seznamu zvýrazněných osob"
 
 #. Part of new option to highlight a custom list of individuals
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/iMke2fkhJ5QFsxPD8JHlabfu.png
 #: 
 msgid "Show selected individuals in different colour"
-msgstr ""
-
-#. Part of new option to highlight a custom list of individuals
-#. https://s3.eu-west-1.amazonaws.com/po-pub/i/iMke2fkhJ5QFsxPD8JHlabfu.png
-#: 
-msgid "Highlighted individuals background colour"
-msgstr ""
-
-#. Part of new option to highlight a custom list of individuals
-#. https://s3.eu-west-1.amazonaws.com/po-pub/i/iMke2fkhJ5QFsxPD8JHlabfu.png
-#: 
-msgid "Highlighted individuals XREFs"
-msgstr ""
+msgstr "Zobrazit vybrané osoby jinou barvou"
 
 #. Update to help text to add this new option
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/hepcgMX8Ou17qX7kH5upaW16.png
 #: 
-msgid "If this option is selected, clicking on an individual in the diagram will add them to the list of individuals with a coloured background for identification in the diagram. See the option \"Show additional individuals in different colour\", in the Colours section of the Tile design options."
+msgid "If this option is selected, clicking on an individual in the diagram will add them to the list of individuals with a coloured background for identification in the diagram. See the option \"Show selected individuals in different colour\", in the Colours section of the Tile design options."
+msgstr "Pokud je tato možnost vybrána, kliknutím na osobu v diagramu ji přidáte do seznamu osob s barevným pozadím pro identifikaci v diagramu. Podívejte se na možnost \"Zobrazit vybrané osoby jinou barvou\" v sekci Barvy v nastavení políčka."
+
+#. Default colour for custom highlights: 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/avfciefqaWjNB7aRddD2bx22.png
+#: 
+msgid "Default highlight colour"
 msgstr ""
 
-#. Update to help text to add this new option:
-#. https://s3.eu-west-1.amazonaws.com/po-pub/i/taeaB9TOXPYyAr6SzuyMVLDJ.png
+#. Part of the help text around background colour priority:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/5OK33EJBueLG9k0GXR19qRpk.png
 #: 
-msgid "Similar to the above option for starting individuals, but this option lets you choose a background colour to highlight a custom selection if individuals based on a list of XREFs. Also see option in Browser Render settings to choose what happens when an individual is clicked, as this may be an easier way to add individuals to this list."
+msgid "If the option is enabled to show selected individuals in a different colour, then this option takes priority over all others."
+msgstr ""
+
+#. Part of the help for Show selected individuals in a different colour:  https://s3.eu-west-1.amazonaws.com/po-pub/i/P1bJ86EmElATeVIKW50p7nfv.png
+#: 
+msgid "This option lets you set a custom background for selected individuals. The default highlight colour is used by default, but the colour can be customised for each individual. Also see option in Browser Render settings to choose what happens when an individual is clicked, as this may be an easier way to add individuals to this list."
+msgstr ""
+
+#. Part of the help text for the option "Action when individual clicked".
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
+#: 
+msgid "This is the default option."
+msgstr "Toto je výchozí možnost."
+
+#. Part of the help text explaining the context menu when you click on an individual (if enabled): https://s3.eu-west-1.amazonaws.com/po-pub/i/JbiHUCluK5zzUvYxjbtvg3LS.png
+#: 
+msgid "In the General Settings section, there is an option in the Browser options that lets you choose what happens when you click on an individual in the diagram. One of the options is to show a menu, and the menu has the following options:"
 msgstr ""
 
