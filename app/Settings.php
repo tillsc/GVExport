@@ -487,6 +487,7 @@ class Settings
             case 'border_col_type_options':
             case 'settings_sort_order_options':
             case 'click_action_indi_options':
+            case 'limit_levels':
                 return false;
             case 'show_debug_panel':
             case 'filename':
