@@ -267,8 +267,7 @@
 }
 
 .list_item_skinny {
-    width: 80%;
-    display: block;
+    width: 80% !important;
 }
 
 .list_item_content {
