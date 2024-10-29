@@ -256,14 +256,14 @@
     margin: 3px;
     width: 100%;
     display: flex;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 .indi_list_item {
     min-height: 42px;
     line-height: 36px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .list_item_skinny {
