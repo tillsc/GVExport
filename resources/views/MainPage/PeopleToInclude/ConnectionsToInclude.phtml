@@ -18,7 +18,7 @@ use vendor\WebtreesModules\gvexport\MainPage;
             </div>
             <div class="align-middle-container">
                 <label for="ancestor_levels" class="col-sm-6"><?= I18N::translate('Max levels') ?></label>
-                <input type="number" min="0" max="99" class="cart_toggle form-control max-level-box" size="3" name="vars[ancestor_levels]" id="ancestor_levels" value="<?= I18N::digits($vars["ancestor_levels"]); ?>">
+                <input type="number" min="0" max="<?= $vars['limit_levels'] ?>" class="cart_toggle form-control max-level-box" size="3" name="vars[ancestor_levels]" id="ancestor_levels" value="<?= I18N::digits($vars["ancestor_levels"]); ?>">
             </div>
         </div>
         <div class="col-sm-6">
@@ -28,7 +28,7 @@ use vendor\WebtreesModules\gvexport\MainPage;
             </div>
             <div class="align-middle-container">
                 <label for="descendant_levels" class="col-sm-6"><?= I18N::translate('Max levels') ?></label>
-                <input type="number" min="0" max="99" class="cart_toggle form-control max-level-box" size="3" name="vars[descendant_levels]" id="descendant_levels"
+                <input type="number" min="0" max="<?= $vars['limit_levels'] ?>" class="cart_toggle form-control max-level-box" size="3" name="vars[descendant_levels]" id="descendant_levels"
                        value="<?= I18N::digits($vars["descendant_levels"]); ?>">
             </div>
         </div>

@@ -51,6 +51,20 @@ $usegraphviz = $vars['graphviz_bin'] != "";
                 <label for="marriage_prefix"><?= I18N::translate('Marriage date prefix') ?>:</label>
                 <input class="form-control col-sm-6" type="text" name="vars[marriage_prefix]" id="marriage_prefix" pattern="^[A-Za-z0-9_ .*+()^%$#@!†∞-]*$" title="<?= I18N::translate('Letters, numbers, spaces, or the following symbols: ') . "_.*+()^%$#@!†∞-"; ?>" value="<?= e($vars["marriage_prefix"]); ?>">
             </div>
+            <hr>
+            <label class="col-sm-4 col-form-label"><?= I18N::translate('Limit ancestor and descendant levels') ?></label>
+            <div class="col-sm-8 options-panel-background">
+                <?php
+                    foreach (Settings::USER_ROLES as $role) {
+                ?>
+                <div>
+                    <label for="limit_levels_<?= strtolower($role); ?>"><?= I18N::translate($role) ?>:</label>
+                    <input type="number" min="0" max="99" class="form-control max-level-box" size="3" name="vars[limit_levels_<?= strtolower($role); ?>]" id="limit_levels_<?= strtolower($role); ?>" value="<?= I18N::digits($vars["limit_levels_" . strtolower($role)]); ?>">
+                </div>
+                <?php
+                    }
+                ?>
+            </div>
         </div>
 
         <h2><?= I18N::translate('Default values for GVExport'); ?></h2>
