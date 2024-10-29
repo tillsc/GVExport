@@ -124,6 +124,11 @@ return array(
 	'birth_prefix' => '*', // Text shown on chart before the birthdate
 	'death_prefix' => '†', // Text shown on chart before the death date
 	'marriage_prefix' => '∞', // Text shown on chart before the marriage date
+	'limit_levels_visitor' => '5', // How many ancestor or descendant levels a user with this privilege can select up to
+	'limit_levels_member' => '10', // How many ancestor or descendant levels a user with this privilege can select up to
+	'limit_levels_editor' => '15', // How many ancestor or descendant levels a user with this privilege can select up to
+	'limit_levels_moderator' => '20', // How many ancestor or descendant levels a user with this privilege can select up to
+	'limit_levels_manager' => '25', // How many ancestor or descendant levels a user with this privilege can select up to
     'save_settings_name' => '', // Default value for text field where name of settings can be entered
     'settings_sort_order' => 0, // Default value sorting the settings - default of 0 means the oldest items are first, new items go on the bottom of the list.
     'show_diagram_panel' => false, // If set to true, a "Saved diagrams" section is shown at the top, that lists settings saved using the feature to save multiple versions of settings

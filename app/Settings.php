@@ -38,6 +38,7 @@ class Settings
     public const OPTION_BORDER_FAMILY = 320;
     public const OPTION_BORDER_VITAL_COLOUR = 330;
     public const OPTION_BORDER_AGE_COLOUR = 340;
+    public const USER_ROLES = ['Visitor', 'Member', 'Editor', 'Moderator', 'Manager'];
     const TREE_PREFIX = "_t";
     const USER_PREFIX = "_u";
     private array $settings_json_cache = [];
@@ -76,6 +77,7 @@ class Settings
         $this->defaultSettings['sharednote_col_data'] = '[]';
         $this->defaultSettings['updated_date'] = '';
         $this->defaultSettings['highlight_custom_json'] = '{}';
+        $this->defaultSettings['limit_levels'] = '0';
 
     }
 
@@ -187,6 +189,7 @@ class Settings
         if (!$settings['enable_graphviz'] && $settings['graphviz_bin'] != "") {
             $settings['graphviz_bin'] = "";
         }
+        $settings['limit_levels'] = $this->getLevelLimit($tree, $settings);
         return $settings;
     }
 
@@ -484,6 +487,7 @@ class Settings
             case 'border_col_type_options':
             case 'settings_sort_order_options':
             case 'click_action_indi_options':
+            case 'limit_levels':
                 return false;
             case 'show_debug_panel':
             case 'filename':
@@ -491,6 +495,11 @@ class Settings
             case 'birth_prefix':
             case 'death_prefix':
             case 'marriage_prefix':
+            case 'limit_levels_visitor':
+            case 'limit_levels_member':
+            case 'limit_levels_editor':
+            case 'limit_levels_moderator':
+            case 'limit_levels_manager':
                 return $context == self::CONTEXT_ADMIN;
             case 'show_diagram_panel':
                 return $context != self::CONTEXT_NAMED_SETTING;
@@ -815,5 +824,29 @@ class Settings
     {
         $userSettings = $this->loadUserSettings($module, $tree, $settings_id);
         return $userSettings['save_settings_name'];
+    }
+
+    /**
+     * Find the maximum number of ancestor or descendant levels this user is allowed
+     *
+     * @param $tree
+     * @param $settings
+     * @return string
+     */
+    private function getLevelLimit($tree, $settings)
+    {
+        if (Auth::isAdmin()) {
+            return '99';
+        } else if (Auth::isManager($tree)) {
+            return $settings['limit_levels_manager'];
+        } else if (Auth::isModerator($tree)) {
+            return $settings['limit_levels_moderator'];
+        } else if (Auth::isEditor($tree)) {
+            return $settings['limit_levels_editor'];
+        } else if (Auth::isMember($tree)) {
+            return $settings['limit_levels_member'];
+        } else {
+            return $settings['limit_levels_visitor'];
+        }
     }
 }

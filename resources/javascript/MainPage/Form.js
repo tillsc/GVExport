@@ -531,10 +531,10 @@ const Form = {
                 newListItem.setAttribute("data-xref", xref);
                 newListItem.setAttribute("onclick", "UI.scrollToRecord('" + xref + "')");
                 const listItemIndi = document.createElement("span");
-                listItemIndi.innerHTML = contents + "<div class=\"saved-settings-ellipsis\" onclick=\"Form.indiList.removeItem(event, this.parentElement" + (colour === '' ? '' :  '.parentElement') + ", '" + otherXrefId + "')\"><a class='pointer'>×</a></div>";
+                listItemIndi.innerHTML = contents + "<div class=\"saved-settings-ellipsis\" onclick=\"Form.indiList.removeItem(event, this.parentElement.parentElement" + ", '" + otherXrefId + "')\"><a class='pointer'>×</a></div>";
                 newListItem.appendChild(listItemIndi);
                 if (colour !== '') {
-                    listItemIndi.setAttribute('class', 'list_item_skinny');
+                    listItemIndi.setAttribute('class', 'list_item_skinny list_item_content');
                     let picker = `<input type="color" class="highlight_picker" data-xref="${xref}" value="${colour}">`;
                     newListItem.innerHTML = newListItem.innerHTML + picker;
                     newListItem.querySelector('.highlight_picker')?.addEventListener('change', Form.indiList.updateHighlightColour);
@@ -562,6 +562,7 @@ const Form = {
         removeItem(e, element, xrefListId) {
             e.stopPropagation();
             let xref = element.getAttribute("data-xref").trim();
+            let list = document.getElementById(xrefListId);
             removeFromXrefList(xref, xrefListId);
             element.remove();
             if (xrefListId === 'xref_list') {
@@ -569,7 +570,6 @@ const Form = {
             }
             updateClearAll();
             if (xrefListId === 'highlight_custom_json') {
-                let list = document.getElementById(xrefListId);
                 let data = JSON.parse(list.value);
                 delete data[xref];
                 list.value = JSON.stringify(data);

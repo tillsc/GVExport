@@ -256,7 +256,8 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
             try {
                 $temp_dir = $this->saveDOTFile($tree, $vars_data);
             } catch (Exception $e) {
-                return Registry::responseFactory()->response('Failed to generate file', StatusCodeInterface::STATUS_NOT_ACCEPTABLE);
+                // Remove comments around $e below to get a proper error message. Ensure full error is not showing for prod.
+                return Registry::responseFactory()->response('Failed to generate file' /* . $e */, StatusCodeInterface::STATUS_NOT_ACCEPTABLE);
             }
             // If browser mode, output dot instead of selected file
             $file_type = isset($_POST["browser"]) && $_POST["browser"] == "true" ? "dot" : $vars_data["output_type"];
@@ -349,7 +350,8 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
             $vars['temp_dir'] = $temp_dir;
         }
         $dot->setSettings($vars);
-
+        $dot->settings['ancestor_levels'] = min($vars['ancestor_levels'], $dot->settings['limit_levels']);
+        $dot->settings['descendant_levels'] = min($vars['descendant_levels'], $dot->settings['limit_levels']);
         $settings = new Settings();
         $settings->saveUserSettings($this, $tree,$dot->settings);
         // Get out DOT file

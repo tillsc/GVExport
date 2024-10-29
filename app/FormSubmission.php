@@ -73,6 +73,12 @@ class FormSubmission
             $settings['marriage_prefix'] = $vars["marriage_prefix"];
         }
 
+        foreach (Settings::USER_ROLES as $role) {
+            if (isset($vars['limit_levels_' . strtolower($role)])) {
+                $settings['limit_levels_' . strtolower($role)] = I18N::digits($vars['limit_levels_' . strtolower($role)]);
+            }
+        }
+
         $settings['mark_not_related'] = isset($vars['mark_not_related']);
         $settings['faster_relation_check'] = isset($vars['faster_relation_check']);
 
