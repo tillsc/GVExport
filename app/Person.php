@@ -102,6 +102,7 @@ class Person
         $out = '';
         $border_colour = $this->dot->settings["border_col"];    // Border colour of the INDI's box
         $death_place = "";
+        $birthplace = "";
         $i = $this->dot->getUpdatedPerson($pid);
         // Get the personal data
         if ($this->dot->settings["diagram_type"] == "combined" && (substr($pid, 0, 3) == "I_H" || substr($pid, 0, 3) == "I_W") || substr($pid, 0, 3) == "I_N") {
@@ -134,27 +135,60 @@ class Person
 
             // --- Birth date ---
             if ($this->dot->settings["show_birthdate"]) {
-                $birthdate = Dot::formatDate($i->getBirthDate(), $this->dot->settings["birthdate_year_only"],  $this->dot->settings["use_abbr_month"]);
-            } else {
+                if ($this->dot->settings["use_alt_events"]) {
+                      $date = $i->getBirthDate();
+                    } else {
+                        $dates = $i->getAllEventDates(['BIRT']);
+                        if ($dates !== []) {
+                            $date = $dates[0];
+                        } else {
+                            $date = new Date('');
+                        }
+                    }
+                    $birthdate = Dot::formatDate($date, $this->dot->settings["birthdate_year_only"],  $this->dot->settings["use_abbr_month"]);
+
+                } else {
                 $birthdate = "";
             }
 
             if ($this->dot->settings["show_birthplace"]) {
                 // Show birthplace
-                $birthplace = Dot::getAbbreviatedPlace($i->getBirthPlace()->gedcomName(), $this->dot->settings);
-            } else {
-                $birthplace = "";
+                if ($this->dot->settings["use_alt_events"]) {
+                    $birthplace = Dot::getAbbreviatedPlace($i->getBirthPlace()->gedcomName(), $this->dot->settings);
+                } else {
+                    $places = $i->getAllEventPlaces(['BIRT']);
+                    if ($places !== []) {
+                        $birthplace = $places[0]->gedcomName();
+                    }
+                }
             }
 
             // --- Death date ---
             if ($this->dot->settings["show_death_date"]) {
-                $death_date = Dot::formatDate($i->getDeathDate(), $this->dot->settings["death_date_year_only"],  $this->dot->settings["use_abbr_month"]);
+                if ($this->dot->settings["use_alt_events"]) {
+                    $date = $i->getDeathDate();
+                } else {
+                    $dates = $i->getAllEventDates(['DEAT']);
+                    if ($dates !== []) {
+                        $date = $dates[0];
+                    } else {
+                        $date = new Date('');
+                    }
+                }
+                $death_date = Dot::formatDate($date, $this->dot->settings["death_date_year_only"], $this->dot->settings["use_abbr_month"]);
             } else {
                 $death_date = "";
             }
             if ($this->dot->settings["show_death_place"]) {
                 // Show death place
-                $death_place = Dot::getAbbreviatedPlace($i->getDeathPlace()->gedcomName(), $this->dot->settings);
+                if ($this->dot->settings["use_alt_events"]) {
+                    $death_place = Dot::getAbbreviatedPlace($i->getDeathPlace()->gedcomName(), $this->dot->settings);
+                } else {
+                    $places = $i->getAllEventPlaces(['DEAT']);
+                    if ($places !== []) {
+                        $death_place = $places[0]->gedcomName();
+                    }
+                }
             }
             // --- Name ---
             $names = $i->getAllNames();

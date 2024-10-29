@@ -29,6 +29,7 @@ return array(
 	'show_death_date' => true, // Whether to show death date  for individuals
 	'death_date_year_only' => false, // Whether to show just the year or the full GEDCOM date pf death
 	'show_death_place' => true, // Whether to show death date for individuals
+	'use_alt_events' => true, // Whether to use similar events if the birth or death place is not available (e.g. Christening or Burial)
 	'show_marriage_date' => true, // Whether to show marriage date on the family record
 	'marr_date_year_only' => false, // Whether to show just the year or the full GEDCOM date of marriage
 	'show_marriage_place' => true, // Whether to show the place of marriage on the family record
