@@ -258,24 +258,16 @@
     display: flex;
 }
 
-.indi_list_item {
-    min-height: 42px;
-    line-height: 36px;
+.list-item-highlight {
+    width: 80%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-}
-
-.list_item_skinny {
-    width: 80% !important;
+    min-height: 40px;
 }
 
 .list_item_content {
     width: 95%;
-    display: block;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 .options-panel-background {
