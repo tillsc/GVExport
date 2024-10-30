@@ -534,7 +534,7 @@ const Form = {
                 listItemIndi.innerHTML = contents + "<div class=\"saved-settings-ellipsis\" onclick=\"Form.indiList.removeItem(event, this.parentElement.parentElement" + ", '" + otherXrefId + "')\"><a class='pointer'>×</a></div>";
                 newListItem.appendChild(listItemIndi);
                 if (colour !== '') {
-                    listItemIndi.setAttribute('class', 'list_item_skinny list_item_content');
+                    listItemIndi.setAttribute('class', 'list-item-highlight');
                     let picker = `<input type="color" class="highlight_picker" data-xref="${xref}" value="${colour}">`;
                     newListItem.innerHTML = newListItem.innerHTML + picker;
                     newListItem.querySelector('.highlight_picker')?.addEventListener('change', Form.indiList.updateHighlightColour);
