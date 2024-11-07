@@ -2039,5 +2039,45 @@ msgstr "Dit is de standaardoptie."
 #. Part of the help text explaining the context menu when you click on an individual (if enabled): https://s3.eu-west-1.amazonaws.com/po-pub/i/JbiHUCluK5zzUvYxjbtvg3LS.png
 #: 
 msgid "In the General Settings section, there is an option in the Browser options that lets you choose what happens when you click on an individual in the diagram. One of the options is to show a menu, and the menu has the following options:"
-msgstr ""
+msgstr "In de sectie Algemene instellingen is er een optie in de Browseropties waarmee u kunt kiezen wat er gebeurt als u op een persoon in het diagram klikt. Een van de opties is om een menu weer te geven, en het menu heeft de volgende opties:"
+
+#. New option to "Use similar events if information not available". Current state is this is always on, but this new option allows you to force webtrees to only use the "birth" and "death" events to get the date or place. When enabled, this option allows webtrees to look for christening, baptism, burial, and cremation dates.
+#. 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/Ar3cUICuO182fidUcnwLD1o7.png
+#: 
+msgid "Use similar events if information not available"
+msgstr "Gebruik vergelijkbare gebeurtenissen als er geen informatie beschikbaar is"
+
+#. Part of help text for new option to Use similar events if information not available:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/VofL6d6Hi0v11hbzqG3N02wF.png
+#: 
+msgid "When showing information about a birth or death, if the information is not available then webtrees will look for similar events and use the information from those events instead."
+msgstr "Bij het tonen van informatie over een geboorte of overlijden, als de informatie niet beschikbaar is, zal webtrees zoeken naar vergelijkbare gebeurtenissen en in plaats daarvan de informatie van die gebeurtenissen gebruiken."
+
+#. Part of help text for new option to Use similar events if information not available: https://s3.eu-west-1.amazonaws.com/po-pub/i/VofL6d6Hi0v11hbzqG3N02wF.png
+#: 
+msgid "If a birth date or place is not recorded, webtrees will attempt to use the date or place of the christening or baptism if it exists."
+msgstr "Als een geboortedatum of -plaats niet is vastgelegd, probeert webtrees de datum of plaats van de doop te gebruiken als die bestaat."
+
+#. Part of help text for new option to Use similar events if information not available: https://s3.eu-west-1.amazonaws.com/po-pub/i/VofL6d6Hi0v11hbzqG3N02wF.png
+#: 
+msgid "If a death date or place is not recorded, webtrees will attempt to use the date or place of the burial or cremation if it exists."
+msgstr "Als een overlijdensdatum of -plaats niet is vastgelegd, probeert webtrees de datum of plaats van de begrafenis of crematie te gebruiken als die bestaat."
+
+#. Part of help text for new option to Use similar events if information not available: https://s3.eu-west-1.amazonaws.com/po-pub/i/VofL6d6Hi0v11hbzqG3N02wF.png
+#: 
+msgid "If you disable this option, GVExport will only use information from birth and death events, and not try to find missing information in similar events."
+msgstr "Als u deze optie uitschakelt, zal GVExport alleen informatie van geboorte- en overlijdensgebeurtenissen gebruiken en niet proberen ontbrekende informatie te vinden in vergelijkbare gebeurtenissen."
+
+#. New option that lets you set a limit on how many levels of ancestors or descendants can be used, to reduce server load:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/QFLhfPYHliw57Nxcq7TjSt2c.png
+#: 
+msgid "Limit ancestor and descendant levels"
+msgstr "Beperk voorouder- en afstammelingenniveaus"
+
+#. One of the options for name abbreviations:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/8TnookhkbklzifVBjlRHlH6j.png
+#: 
+msgid "Preferred given name and surname"
+msgstr "Voorkeursvoornaam en achternaam"
 

@@ -1948,7 +1948,7 @@ msgstr "Tato možnost vám umožňuje zvolit, co se stane, když kliknete na oso
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
 #: 
 msgid "When you click on an individual, the webtrees page for that individual will open in a new tab or window."
-msgstr "Když kliknete na osobu, stránka webtrees pro tuto osobu se otevře v nové záložce nebo okně."
+msgstr "Když kliknete na osobu, otevře se stránka webtrees pro tuto osobu v nové kartě nebo v novém okně."
 
 #. Part of the help text for the option "Action when individual clicked".
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
@@ -2018,18 +2018,18 @@ msgstr "Pokud je tato možnost vybrána, kliknutím na osobu v diagramu ji přid
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/avfciefqaWjNB7aRddD2bx22.png
 #: 
 msgid "Default highlight colour"
-msgstr ""
+msgstr "Výchozí barva zvýraznění"
 
 #. Part of the help text around background colour priority:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/5OK33EJBueLG9k0GXR19qRpk.png
 #: 
 msgid "If the option is enabled to show selected individuals in a different colour, then this option takes priority over all others."
-msgstr ""
+msgstr "Pokud je povolena možnost zobrazit vybrané osoby v jiné barvě, pak tato možnost má přednost před všemi ostatními."
 
 #. Part of the help for Show selected individuals in a different colour:  https://s3.eu-west-1.amazonaws.com/po-pub/i/P1bJ86EmElATeVIKW50p7nfv.png
 #: 
 msgid "This option lets you set a custom background for selected individuals. The default highlight colour is used by default, but the colour can be customised for each individual. Also see option in Browser Render settings to choose what happens when an individual is clicked, as this may be an easier way to add individuals to this list."
-msgstr ""
+msgstr "Tato možnost vám umožňuje nastavit vlastní pozadí pro vybrané osoby. Ve výchozím nastavení se použije výchozí barva zvýraznění, ale barvu lze pro každou osobu upravit. Podívejte se také na možnost v nastavení vykreslování prohlížeče, kde můžete zvolit, co se stane při kliknutí na osobu, protože to může být jednodušší způsob, jak přidat osoby do tohoto seznamu."
 
 #. Part of the help text for the option "Action when individual clicked".
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
@@ -2040,5 +2040,45 @@ msgstr "Toto je výchozí možnost."
 #. Part of the help text explaining the context menu when you click on an individual (if enabled): https://s3.eu-west-1.amazonaws.com/po-pub/i/JbiHUCluK5zzUvYxjbtvg3LS.png
 #: 
 msgid "In the General Settings section, there is an option in the Browser options that lets you choose what happens when you click on an individual in the diagram. One of the options is to show a menu, and the menu has the following options:"
-msgstr ""
+msgstr "V sekci Obecná nastavení je v možnostech prohlížeče volba, která vám umožní zvolit, co se stane při kliknutí na osobu v diagramu. Jednou z možností je zobrazit nabídku, která obsahuje následující volby:"
+
+#. New option to "Use similar events if information not available". Current state is this is always on, but this new option allows you to force webtrees to only use the "birth" and "death" events to get the date or place. When enabled, this option allows webtrees to look for christening, baptism, burial, and cremation dates.
+#. 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/Ar3cUICuO182fidUcnwLD1o7.png
+#: 
+msgid "Use similar events if information not available"
+msgstr "Použít podobné události, pokud informace nejsou k dispozici"
+
+#. Part of help text for new option to Use similar events if information not available:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/VofL6d6Hi0v11hbzqG3N02wF.png
+#: 
+msgid "When showing information about a birth or death, if the information is not available then webtrees will look for similar events and use the information from those events instead."
+msgstr "Pokud nejsou pro zobrazení k dispozici informace o narození nebo úmrtí, webtrees vyhledá podobné události a použije jejich údaje."
+
+#. Part of help text for new option to Use similar events if information not available: https://s3.eu-west-1.amazonaws.com/po-pub/i/VofL6d6Hi0v11hbzqG3N02wF.png
+#: 
+msgid "If a birth date or place is not recorded, webtrees will attempt to use the date or place of the christening or baptism if it exists."
+msgstr "Pokud není zaznamenáno datum nebo místo narození, webtrees se pokusí použít datum nebo místo křtu, pokud je dostupné."
+
+#. Part of help text for new option to Use similar events if information not available: https://s3.eu-west-1.amazonaws.com/po-pub/i/VofL6d6Hi0v11hbzqG3N02wF.png
+#: 
+msgid "If a death date or place is not recorded, webtrees will attempt to use the date or place of the burial or cremation if it exists."
+msgstr "Pokud není zaznamenáno datum nebo místo úmrtí, webtrees se pokusí použít datum nebo místo pohřbu či kremace, pokud je dostupné."
+
+#. Part of help text for new option to Use similar events if information not available: https://s3.eu-west-1.amazonaws.com/po-pub/i/VofL6d6Hi0v11hbzqG3N02wF.png
+#: 
+msgid "If you disable this option, GVExport will only use information from birth and death events, and not try to find missing information in similar events."
+msgstr "Pokud tuto možnost zakážete, GVExport bude používat pouze informace z událostí narození a úmrtí a nebude se snažit doplnit chybějící údaje z podobných událostí."
+
+#. New option that lets you set a limit on how many levels of ancestors or descendants can be used, to reduce server load:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/QFLhfPYHliw57Nxcq7TjSt2c.png
+#: 
+msgid "Limit ancestor and descendant levels"
+msgstr "Omezení úrovní předků a potomků"
+
+#. One of the options for name abbreviations:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/8TnookhkbklzifVBjlRHlH6j.png
+#: 
+msgid "Preferred given name and surname"
+msgstr "Preferované jméno a příjmení"
 

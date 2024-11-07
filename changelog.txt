@@ -2,13 +2,20 @@
 	Change Log
 	GVExport module for Webtrees
 =====================================================================
-Version 2.1.22 (2024-)
-  - New       : Logged out users can now colour tiles based on a shared note
-  - New       : Added option to change how saved settings are sorted
-  - New       : Added option to allow user to choose what happens when individual is clicked in diagram
-  - Changed   : Refactored settings for logged out users to reduce number of settings saved in cookie
+Version 2.1.22 (2024-11-08)
+  - New       : Logged-out users can now colour tiles based on a shared note (in addition to existing ability for logged-in users).
+  - New       : Added option to change how saved settings are sorted.
+  - New       : Added option to allow user to choose what happens when individual is clicked in diagram.
+  - New       : Added option to stop webtrees using similar events instead of birth or death place or date.
+  - New       : Added control panel options to limit the maximum generation levels a user can use based on their role.
+  - Changed   : Refactored settings for logged-out users to reduce number of settings saved in cookie.
+  - Changed   : Replaced option to highlight starting individuals with a list of individuals to highlight.
   - Fixed     : Fixed error when exec function was enabled on server but didn't have permission to actually run.
-  - Fixed     : Fixed issue where tooltip showed "<TABLE>" instead of XREF
+  - Fixed     : Fixed issue where tooltip showed "<TABLE>" instead of the XREF.
+  - Fixed     : Fixed issue with overwriting settings.
+  - Fixed     : Fixed issue where diagram would fail to load in Combined mode load if a family record had no parents.
+  - Fixed     : Fixed some issues in themes other than the default webtrees theme, especially Primer.
+
 
 Version 2.1.21 (2024-04-12)
   - New       : Added Preferred name abbreviation option

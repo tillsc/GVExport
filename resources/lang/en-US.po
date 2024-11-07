@@ -2041,3 +2041,43 @@ msgstr "This is the default option."
 msgid "In the General Settings section, there is an option in the Browser options that lets you choose what happens when you click on an individual in the diagram. One of the options is to show a menu, and the menu has the following options:"
 msgstr "In the General Settings section, there is an option in the Browser options that lets you choose what happens when you click on an individual in the diagram. One of the options is to show a menu, and the menu has the following options:"
 
+#. New option to "Use similar events if information not available". Current state is this is always on, but this new option allows you to force webtrees to only use the "birth" and "death" events to get the date or place. When enabled, this option allows webtrees to look for christening, baptism, burial, and cremation dates.
+#. 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/Ar3cUICuO182fidUcnwLD1o7.png
+#: 
+msgid "Use similar events if information not available"
+msgstr "Use similar events if information not available"
+
+#. Part of help text for new option to Use similar events if information not available:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/VofL6d6Hi0v11hbzqG3N02wF.png
+#: 
+msgid "When showing information about a birth or death, if the information is not available then webtrees will look for similar events and use the information from those events instead."
+msgstr "When showing information about a birth or death, if the information is not available then webtrees will look for similar events and use the information from those events instead."
+
+#. Part of help text for new option to Use similar events if information not available: https://s3.eu-west-1.amazonaws.com/po-pub/i/VofL6d6Hi0v11hbzqG3N02wF.png
+#: 
+msgid "If a birth date or place is not recorded, webtrees will attempt to use the date or place of the christening or baptism if it exists."
+msgstr "If a birth date or place is not recorded, webtrees will attempt to use the date or place of the christening or baptism if it exists."
+
+#. Part of help text for new option to Use similar events if information not available: https://s3.eu-west-1.amazonaws.com/po-pub/i/VofL6d6Hi0v11hbzqG3N02wF.png
+#: 
+msgid "If a death date or place is not recorded, webtrees will attempt to use the date or place of the burial or cremation if it exists."
+msgstr "If a death date or place is not recorded, webtrees will attempt to use the date or place of the burial or cremation if it exists."
+
+#. Part of help text for new option to Use similar events if information not available: https://s3.eu-west-1.amazonaws.com/po-pub/i/VofL6d6Hi0v11hbzqG3N02wF.png
+#: 
+msgid "If you disable this option, GVExport will only use information from birth and death events, and not try to find missing information in similar events."
+msgstr "If you disable this option, GVExport will only use information from birth and death events, and not try to find missing information in similar events."
+
+#. New option that lets you set a limit on how many levels of ancestors or descendants can be used, to reduce server load:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/QFLhfPYHliw57Nxcq7TjSt2c.png
+#: 
+msgid "Limit ancestor and descendant levels"
+msgstr "Limit ancestor and descendant levels"
+
+#. One of the options for name abbreviations:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/8TnookhkbklzifVBjlRHlH6j.png
+#: 
+msgid "Preferred given name and surname"
+msgstr "Preferred given name and surname"
+
