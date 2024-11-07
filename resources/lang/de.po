@@ -487,7 +487,6 @@ msgstr "Suchen Sie nach einer Person im Auswahlfeld, um die herum das Diagramm e
 
 #. This help message is displayed when the user clicks the help icon next to "Include".  https://s3.eu-west-1.amazonaws.com/po-pub/i/G2LwgKcPjaAwzcCXllEaXa13.png
 #: 
-#, fuzzy
 msgid "This section includes options that let you decide how to build the tree from your starting individual(s).</p><b>Include ancestors</b><p>Tick this option to include ancestors of your starting individual(s) and anyone in the tree.</p><b>Max levels</b><p>The number of generations of ancestors to include. For example, if you chose yourself as your starting person, you may want the diagram to include relatives back to your great-grandparents. In this case, you would type &quot;3&quot; in the Max levels box under Include ancestors, to include your parents&apos; generation, your grandparents&apos; generation, and your great-grandparents&apos; generation.</p><b>Include descendants</b><p>Whether to include children, grandchildren, etc. of people listed in the tree.</p><b>Max levels</b><p>Similar to the same option for &quot;Include ancestors&quot;, this option indicates how many descendant generations should be included.<h4>Relation types to include</h4><p>The type of relatives to include when generating the diagram.</p><b>Siblings</b><p>Include brothers and sisters of anyone in the tree.</p><b>All relations</b><p>Include cousins, nieces, nephews, and their descendants when generating the tree. Requires &quot;Siblings&quot; to be selected.</p><b>Partners</b><p>Include the husbands, wives, and partners of those in the tree even if they aren&apos;t blood-relatives. There is another option &quot;Mark not blood-related people with different color&quot; that allows these people to be marked in a different colour.</p><b>Anyone</b><p>Follow all links regardless of whether the person is related. In practice, this generally means that the family of non-relatives (i.e. spouses) are included in the tree.</p><p>Use this option to include all records of the selected generations. Note that only records with a link are included, so you may need to include more ancestor or descendant generations (or more starting individuals) to get all your records to show."
 msgstr "In diesem Abschnitt können Sie entscheiden, welche Personen ausgehend von den Startpersonen bei der Erstellung des Diagramms berücksichtigt werden sollen.</p><b>Vorfahren einbeziehen</b><p>Wählen Sie hier aus, ob die Vorfahren der Startpersonen und aller anderen Personen im angezeigten Stammbaum einbezogen werden sollen.</p><b>Maximale Generationen</b><p>Hier wählen Sie die Anzahl der Vorfahrengenerationen aus. Wenn Sie beispielsweise sich selbst als Startperson ausgewählt haben und möchten, dass das Diagramm Vorfahren bis zu ihren Urgroßeltern enthält, wählen Sie die &quot;3&quot; im Feld für die maximalen Generationen für die Vorfahren. Somit werden ihre Eltern, die Generation ihrer Großeltern und die Generation ihrer Urgroßeltern einbezogen.</p><b>Nachkommen einbeziehen</b><p>Ob die Kinder, Enkel, etc. der Personen im angezeigten Baum einbezogen werden sollen.</p><b>Maximale Generationen</b><p>Ähnlich wie bei der gleichen Option für &quot;Vorfahren einbeziehen&quot; gibt diese Option an, wie viele Nachkommengenerationen einbezogen werden sollen.</p><h4>Einzubeziehende Verbindungsarten</h4><p>Hier wählen Sie die Art von Verwandten aus, die bei der Erzeugung des Diagramms einbezogen werden sollen.</p><b>Geschwister</b><p>Brüder und Schwestern aller Personen im Baum werden einbezogen.</p><b>Alle Verwandten</b><p>Dies bezieht Cousins, Cousinen, Nichten, Neffen und ggf. deren Nachkommen in die Erstellung des Baums ein. Diese Option erfordert auch die Auswahl der  &quot;Geschwister&quot;.</p><b>Partner</b><p>Schließen Sie die Ehemänner, Ehefrauen und Partner der Personen im Baum ein, auch wenn diese keine Blutsverwandten sind. Es gibt eine weitere Option &quot;Nicht blutsverwandte Personen in einer anderen Farbe markieren&quot;, mit der diese Personen in einer anderen Farbe dargestellt werden können.</p><b>Jeder</b><p>Diese Option folgt allen Verbindungen, unabhängig davon, ob die Person verwandt ist. Dies bedeutet im Allgemeinen, dass auch die Familien von über die Partner verschwägerten Personen in den Baum aufgenommen werden.</p><p>Verwenden Sie diese Option, um alle Datensätze der ausgewählten Generationen einzuschließen. Beachten Sie, dass nur Personen mit einer Verbindung zum Personenkreis im Diagramm enthalten sind, sodass Sie möglicherweise mehr Vorfahrengenerationen (oder mehr Startpersonen) hinzufügen müssen, wenn Sie alle ihre Datensätze anzeigen wollen."
 
@@ -2018,18 +2017,18 @@ msgstr "Wenn diese Option ausgewählt ist, wird durch Klicken auf eine Person im
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/avfciefqaWjNB7aRddD2bx22.png
 #: 
 msgid "Default highlight colour"
-msgstr ""
+msgstr "Voreinstellung für Hervorhebungsfarbe"
 
 #. Part of the help text around background colour priority:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/5OK33EJBueLG9k0GXR19qRpk.png
 #: 
 msgid "If the option is enabled to show selected individuals in a different colour, then this option takes priority over all others."
-msgstr ""
+msgstr "Falls die Option zur Darstellung ausgewählte Personen in einer anderen Farbe aktiv ist, hat diese Option Vorrang vor allen anderen."
 
 #. Part of the help for Show selected individuals in a different colour:  https://s3.eu-west-1.amazonaws.com/po-pub/i/P1bJ86EmElATeVIKW50p7nfv.png
 #: 
 msgid "This option lets you set a custom background for selected individuals. The default highlight colour is used by default, but the colour can be customised for each individual. Also see option in Browser Render settings to choose what happens when an individual is clicked, as this may be an easier way to add individuals to this list."
-msgstr ""
+msgstr "Mit dieser Option können Sie eine Hintergrundfarbe für ausgewählte Personen festlegen. Dabei wird die Standard-Hervorhebungsfarbe verwendet; die Farbe kann jedoch auch für jede Person individuell angepasst werden. Beachten Sie sich auch die Option in den Browser-Rendering-Einstellungen, um auszuwählen, was passiert, wenn auf eine Person geklickt wird, da dies möglicherweise eine einfachere Möglichkeit ist, um Personen zu dieser Liste hinzuzufügen."
 
 #. Part of the help text for the option "Action when individual clicked".
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
@@ -2040,5 +2039,45 @@ msgstr "Dies ist die Standardoption."
 #. Part of the help text explaining the context menu when you click on an individual (if enabled): https://s3.eu-west-1.amazonaws.com/po-pub/i/JbiHUCluK5zzUvYxjbtvg3LS.png
 #: 
 msgid "In the General Settings section, there is an option in the Browser options that lets you choose what happens when you click on an individual in the diagram. One of the options is to show a menu, and the menu has the following options:"
-msgstr ""
+msgstr "Im Abschnitt \"Allgemeine Einstellungen\" gibt es bei den Browser-Optionen eine Einstellung, mit der man auswählen kann, was passiert, wenn man auf eine Person im Diagramm klickt. Eine Auswahlmöglichkeit besteht darin, ein Menü anzuzeigen, das dann die folgenden Punkte anbietet:"
+
+#. New option to "Use similar events if information not available". Current state is this is always on, but this new option allows you to force webtrees to only use the "birth" and "death" events to get the date or place. When enabled, this option allows webtrees to look for christening, baptism, burial, and cremation dates.
+#. 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/Ar3cUICuO182fidUcnwLD1o7.png
+#: 
+msgid "Use similar events if information not available"
+msgstr "Ähnliche Ereignisse nutzen, falls keine Angaben verfügbar sind"
+
+#. Part of help text for new option to Use similar events if information not available:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/VofL6d6Hi0v11hbzqG3N02wF.png
+#: 
+msgid "When showing information about a birth or death, if the information is not available then webtrees will look for similar events and use the information from those events instead."
+msgstr "Wenn bei der Anzeige von Informationen zu einer Geburt oder einem Todesfall keine Angaben verfügbar sind, sucht webtrees nach ähnlichen Ereignissen und verwendet stattdessen die Angaben aus diesen Ereignissen."
+
+#. Part of help text for new option to Use similar events if information not available: https://s3.eu-west-1.amazonaws.com/po-pub/i/VofL6d6Hi0v11hbzqG3N02wF.png
+#: 
+msgid "If a birth date or place is not recorded, webtrees will attempt to use the date or place of the christening or baptism if it exists."
+msgstr "Wenn kein Geburtsdatum oder -ort erfasst ist, versucht webtrees das Datum oder den Ort zu verwenden, der eventuell bei der Taufe angegeben ist."
+
+#. Part of help text for new option to Use similar events if information not available: https://s3.eu-west-1.amazonaws.com/po-pub/i/VofL6d6Hi0v11hbzqG3N02wF.png
+#: 
+msgid "If a death date or place is not recorded, webtrees will attempt to use the date or place of the burial or cremation if it exists."
+msgstr "Wenn kein Sterbedatum oder -ort erfasst ist, versucht webtrees das Datum oder den Ort zu verwenden, der eventuell bei Beerdigung oder Einäscherung angegeben ist."
+
+#. Part of help text for new option to Use similar events if information not available: https://s3.eu-west-1.amazonaws.com/po-pub/i/VofL6d6Hi0v11hbzqG3N02wF.png
+#: 
+msgid "If you disable this option, GVExport will only use information from birth and death events, and not try to find missing information in similar events."
+msgstr "Wenn Sie diese Option deaktivieren, verwendet GVExport nur Informationen aus Geburts- und Sterbeereignissen und versucht nicht, fehlende Informationen in ähnlichen Ereignissen zu finden."
+
+#. New option that lets you set a limit on how many levels of ancestors or descendants can be used, to reduce server load:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/QFLhfPYHliw57Nxcq7TjSt2c.png
+#: 
+msgid "Limit ancestor and descendant levels"
+msgstr "Begrenzung für die Vorfahren- und Nachkommenebenen"
+
+#. One of the options for name abbreviations:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/8TnookhkbklzifVBjlRHlH6j.png
+#: 
+msgid "Preferred given name and surname"
+msgstr "Bevorzugter Vor- und Nachname"
 
