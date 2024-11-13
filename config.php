@@ -36,7 +36,7 @@ return array(
 	'burial_date_year_only' => false, // Whether to show just the year or the full GEDCOM date pf burial
 	'show_burial_place' => false, // Whether to show burial date for individuals
 	'show_burial_first_image' => false, // Whether to show burial first image of individuals
-	'show_only_first_marriage' => false, // Whether to show only the first marriage of the family record
+	'show_only_first_marriage' => true, // Whether to show only the first marriage of the family record
 	'show_marriage_date' => true, // Whether to show marriage date on the family record
 	'show_marriage_first_image' => false, // Whether to show marriage first image of individuals
 	'marr_date_year_only' => false, // Whether to show just the year or the full GEDCOM date of marriage
