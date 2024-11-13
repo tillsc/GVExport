@@ -673,41 +673,33 @@ class Dot {
                     $this->settings["show_xref_families"] ||
                     $this->settings["show_marriage_type"]
                 );
+
 				// --- Print marriage ---
 				if (!$isDummy && ($hasContent || $noPartners) && $enabled) {
-					if ($i == 0) {
-						$out .= "<TR>";
-						if ($this->settings["add_links"]) {
-							$out .= "<TD COLSPAN=\"2\" CELLPADDING=\"0\" CELLBORDER=\"1\" PORT=\"marr\" TARGET=\"_BLANK\" HREF=\"" . $this->convertToHTMLSC($link) . "\" BGCOLOR=\"" . $fill_colour . "\">"; #ESL!!! 20090213 without convertToHTMLSC the dot file has invalid data
-						} else {
-							$out .= "<TD COLSPAN=\"2\" CELLPADDING=\"0\" CELLBORDER=\"1\" PORT=\"marr\" BGCOLOR=\"" . $fill_colour . "\">";
-						}
-	
-						$out .= "<TABLE CELLPADDING=\"0\" CELLSPACING=\"0\"  BORDER=\"0\" >";
-					} else {
-						$out .= "<TR><TD><FONT COLOR=\"". $this->settings["font_colour_details"] ."\" POINT-SIZE=\"" . ($this->settings["font_size"]) ."\">-</FONT></TD></TR>";
-					}
-					$out .= "<TR><TD>";
-					$out .= "<FONT COLOR=\"". $this->settings["font_colour_details"] ."\" POINT-SIZE=\"" . ($this->settings["font_size"]) ."\">" . ($prefix_array[$i] ?? '') . (empty($marriageType_array[$i])?"":$marriageType_array[$i]) . "<BR />" . (empty($marriagedate_array[$i])?"":$marriagedate_array[$i]) . "<BR />" . (empty($marriageplace_array[$i])?"":"(".$marriageplace_array[$i].")") . $family . "</FONT>";
-					$out .= "</TD>";
+                    if ($i==0) {
+                        $out .= "<TR>";
+
+                        if ($this->settings["add_links"]) {
+                            $out .= "<TD COLSPAN=\"2\" CELLPADDING=\"0\" CELLBORDER=\"1\" PORT=\"marr\" TARGET=\"_BLANK\" HREF=\"" . $this->convertToHTMLSC($link) . "\" BGCOLOR=\"" . $fill_colour . "\">"; #ESL!!! 20090213 without convertToHTMLSC the dot file has invalid data
+                        } else {
+                            $out .= "<TD COLSPAN=\"2\" CELLPADDING=\"0\" CELLBORDER=\"1\" PORT=\"marr\" BGCOLOR=\"" . $fill_colour . "\">";
+                        }
+                    }
+					$out .= "<FONT COLOR=\"". $this->settings["font_colour_details"] ."\" POINT-SIZE=\"" . ($this->settings["font_size"]) ."\">" . ($prefix_array[$i] ?? '') . (empty($marriageType_array[$i])?"":$marriageType_array[$i]) . " " . (empty($marriagedate_array[$i])?"":$marriagedate_array[$i]) . " " . (empty($marriageplace_array[$i])?"":"(".$marriageplace_array[$i].")") . $family . "</FONT><BR />";
+
 					if ($this->isPhotoRequired()) {
 						if ($this->settings["show_marriage_first_image"] && !empty($pic_marriage_first_array[$i])) {
 							$out .= $this->getFamFactImage($fid, true /*$detailsExist*/, $pic_marriage_first_array[$i], $pic_marriage_first_link_array[$i], $pic_marriage_first_title_array[$i]);
-						} else {
-							$out .= "<TD>&nbsp;";
-							$out .= "</TD>";
 						}
 					}
-					$out .= "</TR>";
-					if ($i == $printCount) {
-						$out .= "</TABLE></TD>";
-						$out .= "</TR>";
-					}
+                    if ($i == $printCount) {
+                        $out .= "</TD>";
+                        $out .= "</TR>";
+                    }
 				}
 	
 				if ($i == $printCount) {
 					$out .= "</TABLE>";
-	
 					$out .= ">";
 				}
 			} else {
@@ -725,8 +717,6 @@ class Dot {
 					if ($i == 0) {
 						$out .= "color=\"" . $this->settings["border_col"] . "\",fillcolor=\"" . $fill_colour . "\", $href shape=oval, style=\"filled\", margin=0.01";
 						$out .= ", label=" . "<<TABLE border=\"0\" CELLPADDING=\"5\" CELLSPACING=\"0\">";
-					} else {
-						$out .= "<TR><TD><FONT COLOR=\"". $this->settings["font_colour_details"] ."\" POINT-SIZE=\"" . ($this->settings["font_size"]) ."\">-</FONT></TD></TR>";
 					}
 
 					$out .= "<TR><TD><FONT COLOR=\"". $this->settings["font_colour_details"] ."\" POINT-SIZE=\"" . ($this->settings["font_size"]) ."\">" . (empty($prefix_array[$i])?"":$prefix_array[$i]) . (empty($marriageType_array[$i])?"":$marriageType_array[$i]) . "<BR />" . (empty($marriagedate_array[$i])?"":$marriagedate_array[$i]) . "<BR />" . (empty($marriageplace_array[$i])?"":"(".$marriageplace_array[$i].")") . $family . "</FONT>";
@@ -742,7 +732,7 @@ class Dot {
 					$out .= "</TR>";
 
 					if ($i == $printCount) {
-						$out .= "</TABLE>>";
+						$out .= "dog</TABLE>>";
 					}
 				}
 			}
