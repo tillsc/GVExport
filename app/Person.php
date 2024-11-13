@@ -2,10 +2,12 @@
 
 namespace vendor\WebtreesModules\gvexport;
 
+use Exception;
 use Fisharebest\Webtrees\Age;
 use Fisharebest\Webtrees\Date;
 use Fisharebest\Webtrees\I18N;
 use Fisharebest\Webtrees\Individual;
+use Fisharebest\Webtrees\Place;
 
 /**
  * Represents an individual in the diagram or DOT file
@@ -114,7 +116,6 @@ class Person
             $death_date = "";
             $burial_date = "";
             $birthdate = "";
-            $birthplace = "";
             $link = "";
             $name = " ";
         } else {
@@ -133,7 +134,7 @@ class Person
                     $border_colour = $this->getAgeColour($i, Settings::OPTION_BORDER_AGE_COLOUR);
                     break;
             }
-            $is_dead = $i ? $i->isDead() : false;
+            $is_dead = $i && $i->isDead();
             $link = $i->url();
 
             // --- Birth date ---
@@ -166,13 +167,6 @@ class Person
                 }
             }
 
-            if ($this->dot->settings["show_birth_first_image"]) {
-                // Show birth_first_image
-                $birth_first_image = "BIRTH FIRST IMAGE";
-            } else {
-                $birth_first_image = "";
-            }
-
             // --- Death date ---
             if ($this->dot->settings["show_death_date"]) {
                 if ($this->dot->settings["use_alt_events"]) {
@@ -201,13 +195,6 @@ class Person
                 }
             }
 
-            if ($this->dot->settings["show_death_first_image"]) {
-                // Show death_first_image
-                $death_first_image = "DEATH FIRST IMAGE";
-            } else {
-                $death_first_image = "";
-            }
-
             // --- Burial date ---
             if ($this->dot->settings["show_burial_date"]) {
 
@@ -233,13 +220,13 @@ class Person
             }
             if ($this->dot->settings["show_burial_place"]) {
                 // Show burial place
-                $burial_place = "";
+                $break = false;
                 $buriEvents = ['BURI', 'CREM'];
                 foreach ($buriEvents as $event) {
                     $buriPlaces = $i->getAllEventPlaces([$event]);
                     $burial_place = "";
                     foreach ($buriPlaces as $place) {
-                        if ($place instanceof \Fisharebest\Webtrees\Place) {
+                        if ($place instanceof Place) {
                             $burial_place = $place;
                             $break=true;
                             break;
@@ -249,11 +236,9 @@ class Person
                         break;
                     }
                 }
-                if (($burial_place != "") && ($burial_place instanceof \Fisharebest\Webtrees\Place)) {
+                if (($burial_place != "") && ($burial_place instanceof Place)) {
                     $burial_place = Dot::getAbbreviatedPlace($burial_place->gedcomName(), $this->dot->settings);
                 }
-            } else {
-                $burial_place = "";
             }
 
             // --- Name ---
@@ -418,7 +403,7 @@ class Person
                     }
                 } else {
                     // Blank cell zero width to keep the height right
-                    $out .= "<TD ROWSPAN=\"2\" CELLPADDING=\"1\" PORT=\"pic\" WIDTH=\"" . ($detailsExist ? "0" : ($this->dot->settings["font_size"] * 3.5)) . "\" HEIGHT=\"" . ($this->dot->settings["font_size"] * 4) . "\" FIXEDSIZE=\"true\"></TD>";
+                    $out .= "<TD ROWSPAN=\"2\" CELLPADDING=\"1\" PORT=\"pic\" WIDTH=\"0\" HEIGHT=\"" . ($this->dot->settings["font_size"] * 4) . "\" FIXEDSIZE=\"true\"></TD>";
                 }
             }
             return $out;
@@ -543,36 +528,6 @@ class Person
     }
 
     /**
-     *  Check if XREF in list of starting individuals
-     *
-     * @param string $pid Xref to check
-     * @return bool
-     */
-    private function isStartingIndividual(string $pid): bool
-    {
-        $indis = explode(",", $this->dot->settings['xref_list']);
-        for ($i = 0; $i < count($indis); $i++) {
-            if (trim($indis[$i]) == $pid) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Check if string is found in full in comma separated list
-     *
-     * @param $list
-     * @param string $value
-     * @return bool
-     */
-    private function isValueInList($list, string $value): bool
-    {
-        $list = explode(',', $list);
-        return in_array($value, $list);
-    }
-
-    /**
      * Check if key is found in json
      *
      * @param string $json the json as a string
@@ -583,7 +538,7 @@ class Person
     {
         try {
             $data = json_decode($json, true);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return false;
         }
         return isset($data[$key]);
@@ -660,7 +615,7 @@ class Person
                     default: return false;
                 }
             case Person::TILE_SHAPE_VITAL:
-                if ($i ? $i->isDead() : false) {
+                if ($i->isDead()) {
                     return $this->dot->settings['shape_vital_dead'];
                 } else {
                     return $this->dot->settings['shape_vital_living'];
