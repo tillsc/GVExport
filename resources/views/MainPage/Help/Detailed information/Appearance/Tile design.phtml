@@ -26,8 +26,17 @@ $help = new Help();
     <li><?= Help::translateClean('Based on individual&apos;s sex'); ?> - <?= Help::translateClean('This lets you assign a shape based on the sex of individuals. For example, you can set male individuals to have rectangle tiles and female individuals to have rounded rectangle tiles.'); ?></li>
 </ul>
 <h4><?= Help::translateClean('Photos'); ?></h4>
-<h5><?= Help::translateClean('Show photos'); ?></h5>
-<p><?= Help::translateClean('This option lets you enable or disable showing photos on the tiles of individuals. If enabled, there are further options as follows:'); ?></p>
+<h5><?= Help::translateClean('Show photos of individuals'); ?></h5>
+<p><?= Help::translateClean('This option lets you enable or disable showing photos on the tiles of individuals.'); ?></p>
+<h5><?= Help::translateClean('Show first birth image'); ?></h5>
+<p><?= Help::translateClean('When enabled, if the birth event for the individual has photos attached, then the first will be shown. This is in addition to other photos.'); ?></p>
+<h5><?= Help::translateClean('Show first marriage image'); ?></h5>
+<p><?= Help::translateClean('When enabled, if the marriage event for the individual has photos attached, then the first will be shown. This is in addition to other photos.'); ?></p>
+<h5><?= Help::translateClean('Show first death image'); ?></h5>
+<p><?= Help::translateClean('When enabled, if the death event for the individual has photos attached, then the first will be shown. This is in addition to other photos.'); ?></p>
+<h5><?= Help::translateClean('Show first burial image'); ?></h5>
+<p><?= Help::translateClean('When enabled, if the burial event for the individual has photos attached, then the first will be shown. This is in addition to other photos.'); ?></p>
+
 <h5><?= Help::translateClean('Photo shape'); ?></h5>
 <p><?= Help::translateClean('This option lets you choose the shape of photos. Note that if you have Graphviz installed on the server, using these options will disable generating the diagram on the server, which may prevent large diagrams from being created.'); ?></p>
 <h5><?= Help::translateClean('Photo size'); ?></h5>
