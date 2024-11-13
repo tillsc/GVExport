@@ -106,11 +106,11 @@ use Fisharebest\Webtrees\I18N;
                 <div id="burial_date_subgroup" class="setting_subgroup col-auto options-panel-background" <?= !$vars["show_burial_date"] ? 'style="display:none;"' : '' ?>>
                     <div class="col-auto mx-3">
                         <input type="radio" name="vars[burial_date_year_only]" id="bud_type_y" value="true" <?= $vars["burial_date_year_only"] ? 'checked' : '' ?>>
-                        <label for="dd_type_y"><?= I18N::translate('Year') ?></label>
+                        <label for="bud_type_y"><?= I18N::translate('Year') ?></label>
                     </div>
                     <div class="col-auto mx-3">
                         <input type="radio" name="vars[burial_date_year_only]" id="bud_type_gedcom" value="false" <?= !$vars["burial_date_year_only"] ? 'checked' : '' ?>>
-                        <label for="dd_type_gedcom"><?= I18N::translate('Full date') ?></label>
+                        <label for="bud_type_gedcom"><?= I18N::translate('Full date') ?></label>
                     </div>
                 </div>
             </div>
