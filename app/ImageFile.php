@@ -73,6 +73,7 @@ class ImageFile
                 $image = @imageCreateFromGif($filepath);
                 break;
             case IMAGETYPE_JPEG:
+ini_set('memory_limit', '8192M');
                 $image = @imageCreateFromJpeg($filepath);
                 break;
             case IMAGETYPE_PNG:
@@ -116,7 +117,7 @@ class ImageFile
         }
 
         if (!is_dir($dir)) {
-            mkdir($dir);
+            mkdir($dir, 0700, true);
         }
         if ($convert) {
             $this->type = IMAGETYPE_JPEG;

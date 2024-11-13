@@ -135,6 +135,28 @@ const Form = {
         }
     },
     /**
+     * Ensures that the option to show marriage type "not specified" is only set if showing marriage types is enabled
+     *
+     * @param principalCheckboxId
+     * @param subordinatedCheckboxArray
+     * @param elementId
+     * @param isSubordinatedCheckbox
+     */
+    updateCheckDependentCheckbox(principalCheckboxId, subordinatedCheckboxArray, elementId, isSubordinatedCheckbox) {
+        if (isSubordinatedCheckbox) {
+            if (document.getElementById(elementId).checked) {
+                document.getElementById(principalCheckboxId).checked = true;
+            }
+        } else {
+            if (!document.getElementById(elementId).checked) {
+                subordinatedCheckboxArray.forEach( function(dependentId, index, array) {
+                    document.getElementById(dependentId).checked = false;
+                });
+            }
+        }
+        //}
+    },
+    /**
      * Gets position of element relative to another
      * From https://stackoverflow.com/questions/1769584/get-position-of-element-by-javascript
      *

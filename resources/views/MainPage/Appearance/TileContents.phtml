@@ -81,6 +81,10 @@ use Fisharebest\Webtrees\I18N;
                 <input type="checkbox" name="vars[show_birthplace]" id="show_birthplace" value="show_birthplace" <?= $vars["show_birthplace"] ? 'checked' : '' ?>>
                 <label class="check-list" for='show_birthplace'><?= I18N::translate('Show birthplace'); ?></label>
             </div>
+            <div class="col-sm-8">
+                <input type="checkbox" name="vars[show_birth_first_image]" id="show_birth_first_image" value="show_birth_first_image" <?= $vars["show_birth_first_image"] ? 'checked' : '' ?>>
+                <label for='show_birth_first_image'><?= I18N::translate('Show any birth first image'); ?></label>
+            </div>
 
             <div class="col-sm-8">
                 <input type="checkbox" onclick="Form.showHideMatchCheckbox('show_death_date', 'death_date_subgroup');" name="vars[show_death_date]" id="show_death_date" value="show_death_date" <?= $vars["show_death_date"] ? 'checked' : '' ?>>
@@ -96,7 +100,6 @@ use Fisharebest\Webtrees\I18N;
                     </div>
                 </div>
             </div>
-
             <div class="col-sm-8">
                 <input type="checkbox" name="vars[show_death_place]" id="show_death_place" value="show_death_place" <?= $vars["show_death_place"] ? 'checked' : '' ?>>
                 <label class="check-list" for='show_death_place'><?= I18N::translate('Show death place'); ?></label>
@@ -106,6 +109,34 @@ use Fisharebest\Webtrees\I18N;
                 <input type="checkbox" name="vars[use_alt_events]" id="use_alt_events" value="use_alt_events" <?= $vars["use_alt_events"] ? 'checked' : '' ?>>
                 <label class="check-list width-90pc" for='use_alt_events'><?= I18N::translate('Use similar events if information not available'); ?></label>
             </div>
+            <div class="col-sm-8">
+                <input type="checkbox" name="vars[show_death_first_image]" id="show_death_first_image" value="show_death_first_image" <?= $vars["show_death_first_image"] ? 'checked' : '' ?>>
+                <label for='show_death_first_image'><?= I18N::translate('Show any death first image'); ?></label>
+            </div>
+
+            <div class="col-sm-8">
+                <input type="checkbox" onclick="Form.showHideMatchCheckbox('show_burial_date', 'burial_date_subgroup');" name="vars[show_burial_date]" id="show_burial_date" value="show_burial_date" <?= $vars["show_burial_date"] ? 'checked' : '' ?>>
+                <label for='show_burial_date'><?= I18N::translate('Show burial date'); ?></label>
+                <div id="burial_date_subgroup" class="setting_subgroup col-auto options-panel-background" <?= !$vars["show_burial_date"] ? 'style="display:none;"' : '' ?>>
+                    <div class="col-auto mx-3">
+                        <input type="radio" name="vars[burial_date_year_only]" id="bud_type_y" value="true" <?= $vars["burial_date_year_only"] ? 'checked' : '' ?>>
+                        <label for="dd_type_y"><?= I18N::translate('Year') ?></label>
+                    </div>
+                    <div class="col-auto mx-3">
+                        <input type="radio" name="vars[burial_date_year_only]" id="bud_type_gedcom" value="false" <?= !$vars["burial_date_year_only"] ? 'checked' : '' ?>>
+                        <label for="dd_type_gedcom"><?= I18N::translate('Full date') ?></label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <input type="checkbox" name="vars[show_burial_place]" id="show_burial_place" value="show_burial_place" <?= $vars["show_burial_place"] ? 'checked' : '' ?>>
+                <label for='show_burial_place'><?= I18N::translate('Show burial place'); ?></label>
+            </div>
+            <div class="col-sm-8">
+                <input type="checkbox" name="vars[show_burial_first_image]" id="show_burial_first_image" value="show_burial_first_image" <?= $vars["show_burial_first_image"] ? 'checked' : '' ?>>
+                <label for='show_burial_first_image'><?= I18N::translate('Show any burial first image'); ?></label>
+            </div>
+
             <div class="col-sm-8">
                 <input type="checkbox" name="vars[show_indi_sex]" id="show_indi_sex" value="show_indi_sex" <?= $vars["show_indi_sex"] ? 'checked' : '' ?>>
                 <label class="check-list" for='show_indi_sex'><?= I18N::translate('Show sex of individuals'); ?></label>
@@ -118,6 +149,10 @@ use Fisharebest\Webtrees\I18N;
             <div class="col-sm-8">
                 <input type="checkbox" name="vars[show_xref_families]" id="show_xref_families" value="show_xref_families" <?= $vars["show_xref_families"] ? 'checked' : '' ?>>
                 <label for='show_xref_families'><?= I18N::translate('Show family XREF'); ?></label>
+            </div>
+            <div class="col-sm-8">
+                <input type="checkbox" name="vars[show_only_first_marriage]" id="show_only_first_marriage" value="show_only_first_marriage" <?= $vars["show_only_first_marriage"] ? 'checked' : '' ?>>
+                <label for='show_only_first_marriage'><?= I18N::translate('Show only first marriage'); ?></label>
             </div>
             <div class="col-sm-8">
                 <input type="checkbox" onclick="Form.showHideMatchCheckbox('show_marriage_date', 'marriage_date_subgroup');" name="vars[show_marriage_date]" id="show_marriage_date" value="show_marriage_date" <?= $vars["show_marriage_date"] ? 'checked' : '' ?>>
@@ -136,6 +171,18 @@ use Fisharebest\Webtrees\I18N;
             <div class="col-sm-8">
                 <input type="checkbox" name="vars[show_marriage_place]" id="show_marriage_place" value="show_marriage_place" <?= $vars["show_marriage_place"] ? 'checked' : '' ?>>
                 <label for='show_marriage_place'><?= I18N::translate('Show marriage place'); ?></label>
+            </div>
+            <div class="col-sm-8">
+                <input type="checkbox" name="vars[show_marriage_first_image]" id="show_marriage_first_image" value="show_marriage_first_image" <?= $vars["show_marriage_first_image"] ? 'checked' : '' ?>>
+                <label for='show_marriage_first_image'><?= I18N::translate('Show marriage first image'); ?></label>
+            </div>
+            <div class="col-sm-8">
+                <input type="checkbox" onclick="Form.updateCheckDependentCheckbox('show_marriage_type', ['show_marriage_type_not_specified'], this.id, /*isSubordinatedCheckbox*/ false)" name="vars[show_marriage_type]" id="show_marriage_type" value="show_marriage_type" <?= $vars["show_marriage_type"] ? 'checked' : '' ?>>
+                <label for='show_marriage_type'><?= I18N::translate('Show marriage type'); ?></label>
+            </div>
+            <div class="col-sm-8">
+                <input type="checkbox" onclick="Form.updateCheckDependentCheckbox('show_marriage_type', ['show_marriage_type_not_specified'], this.id, /*isSubordinatedCheckbox*/ true)" name="vars[show_marriage_type_not_specified]" id="show_marriage_type_not_specified" value="show_marriage_type_not_specified" <?= $vars["show_marriage_type_not_specified"] ? 'checked' : '' ?>>
+                <label for='show_marriage_type_not_specified' class="width-80pc check-list"><?= I18N::translate('Show when type is not specified'); ?></label>
             </div>
         </div>
     </div>

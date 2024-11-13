@@ -494,6 +494,7 @@ class Settings
             case 'mclimit':
             case 'birth_prefix':
             case 'death_prefix':
+            case 'burial_prefix':
             case 'marriage_prefix':
             case 'limit_levels_visitor':
             case 'limit_levels_member':
@@ -524,6 +525,15 @@ class Settings
             case 'show_adv_people':
             case 'show_adv_appear':
             case 'show_adv_files':
+            case 'show_birth_first_image':
+            case 'show_death_first_image':
+            case 'show_burial_date':
+            case 'burial_date_year_only':
+            case 'show_burial_place':
+            case 'show_burial_first_image':
+            case 'show_marriage_first_image':
+            case 'show_marriage_type':
+            case 'show_marriage_type_not_specified':
                 return true;
                 // Include everything else in most contexts but not in cookie
             default:

@@ -103,6 +103,8 @@ class Person
         $border_colour = $this->dot->settings["border_col"];    // Border colour of the INDI's box
         $death_place = "";
         $birthplace = "";
+        $burial_place = "";
+
         $i = $this->dot->getUpdatedPerson($pid);
         // Get the personal data
         if ($this->dot->settings["diagram_type"] == "combined" && (substr($pid, 0, 3) == "I_H" || substr($pid, 0, 3) == "I_W") || substr($pid, 0, 3) == "I_N") {
@@ -110,6 +112,7 @@ class Person
             $sex_colour = $this->dot->getGenderColour('U', false);
             $is_dead = false;
             $death_date = "";
+            $burial_date = "";
             $birthdate = "";
             $birthplace = "";
             $link = "";
@@ -163,6 +166,13 @@ class Person
                 }
             }
 
+            if ($this->dot->settings["show_birth_first_image"]) {
+                // Show birth_first_image
+                $birth_first_image = "BIRTH FIRST IMAGE";
+            } else {
+                $birth_first_image = "";
+            }
+
             // --- Death date ---
             if ($this->dot->settings["show_death_date"]) {
                 if ($this->dot->settings["use_alt_events"]) {
@@ -190,6 +200,62 @@ class Person
                     }
                 }
             }
+
+            if ($this->dot->settings["show_death_first_image"]) {
+                // Show death_first_image
+                $death_first_image = "DEATH FIRST IMAGE";
+            } else {
+                $death_first_image = "";
+            }
+
+            // --- Burial date ---
+            if ($this->dot->settings["show_burial_date"]) {
+
+                $buriEvents = ['BURI', 'CREM'];
+                foreach ($buriEvents as $event) {
+                    $buriDates = $i->getAllEventDates([$event]);
+                    $burial_date = "";
+                    $break = false;
+                    foreach ($buriDates as $date) {
+                        if ($date->isOK()) {
+                            $burial_date = Dot::formatDate($buriDates[0], $this->dot->settings["burial_date_year_only"],  $this->dot->settings["use_abbr_month"]);
+                            $break=true;
+                            break;
+                        }
+                    }
+                    if ($break) {
+                        break;
+                    }
+                }
+
+            } else {
+                $burial_date = "";
+            }
+            if ($this->dot->settings["show_burial_place"]) {
+                // Show burial place
+                $burial_place = "";
+                $buriEvents = ['BURI', 'CREM'];
+                foreach ($buriEvents as $event) {
+                    $buriPlaces = $i->getAllEventPlaces([$event]);
+                    $burial_place = "";
+                    foreach ($buriPlaces as $place) {
+                        if ($place instanceof \Fisharebest\Webtrees\Place) {
+                            $burial_place = $place;
+                            $break=true;
+                            break;
+                        }
+                    }
+                    if ($break) {
+                        break;
+                    }
+                }
+                if (($burial_place != "") && ($burial_place instanceof \Fisharebest\Webtrees\Place)) {
+                    $burial_place = Dot::getAbbreviatedPlace($burial_place->gedcomName(), $this->dot->settings);
+                }
+            } else {
+                $burial_place = "";
+            }
+
             // --- Name ---
             $names = $i->getAllNames();
             $nameArray = $names[$i->getPrimaryName()];
@@ -213,6 +279,7 @@ class Person
         $birthplace = Dot::convertToHTMLSC($birthplace);
         if ($is_dead) {
             $death_place = Dot::convertToHTMLSC($death_place);
+            $burial_place = Dot::convertToHTMLSC($burial_place);
         }
         if ($this->dot->settings["add_links"] || !isset($_REQUEST["download"])) {
             $href = "TARGET=\"_blank\" HREF=\"" . Dot::convertToHTMLSC($link) . "\"";
@@ -253,10 +320,11 @@ class Person
         }
         $birthData = " $birthdate " . (empty($birthplace) ? "" : "($birthplace)");
         $deathData = " $death_date " . (empty($death_place) ? "" : "($death_place)");
+        $burialData = " $burial_date " . (empty($burial_place) ? "" : "($burial_place)");
 
-        $detailsExist = trim($name . $birthData . $deathData . $sex) != "";
+        $detailsExist = trim($name . $birthData . $deathData . $burialData . $sex) != "";
 
-        if (!$detailsExist && !$this->dot->settings["show_photos"]) {
+        if (!$detailsExist && !$this->dot->isPhotoRequired()) {
             // No information in our tiles so make coloured boxes
             $size = "WIDTH=\"" . ($this->dot->settings["font_size"] * 3) . "\" HEIGHT=\"" . ($this->dot->settings["font_size"] * 3) . "\"";
         } else {
@@ -277,47 +345,46 @@ class Person
                 $stripe_colour = '';
         }
         if ($stripe_colour !== '') {
-            $out .= "<TR><TD COLSPAN=\"3\" CELLPADDING=\"2\" BGCOLOR=\"$stripe_colour\" PORT=\"nam\" $size></TD></TR>";
+            $out .= "<TR><TD COLSPAN=\"6\" CELLPADDING=\"2\" BGCOLOR=\"$stripe_colour\" PORT=\"nam\" $size></TD></TR>";
         }
-        // Second row (photo, name, birth & death data)
-        if ($detailsExist || $this->dot->settings["show_photos"]) {
+        // Second row (photo, name, birth, death & burial data)
+        if ($detailsExist || $this->dot->isPhotoRequired()) {
             $out .= "<TR>";
             // Show photo
-            if ($this->dot->settings["show_photos"]) {
-                if (isset($this->dot->individuals[$pid]["pic"]) && !empty($this->dot->individuals[$pid]["pic"])) {
-                    $photo_size = floatval($this->dot->settings["photo_size"]) / 100;
-                    $padding = $this->getPhotoPaddingSize();
-                    $out .= "<TD ROWSPAN=\"2\" CELLPADDING=\"$padding\" PORT=\"pic\" WIDTH=\"" . ($this->dot->settings["font_size"] * 4 * $photo_size)  . "\" HEIGHT=\"" . ($this->dot->settings["font_size"] * 4 * $photo_size) . "\" FIXEDSIZE=\"true\" ALIGN=\"CENTER\"><IMG SCALE=\"true\" SRC=\"" . $this->dot->individuals[$pid]["pic"] . "\" /></TD>";
-                } else {
-                    // Blank cell zero width to keep the height right
-                    $out .= "<TD ROWSPAN=\"2\" CELLPADDING=\"1\" PORT=\"pic\" WIDTH=\"" . ($detailsExist ? "0" : ($this->dot->settings["font_size"] * 3.5)) . "\" HEIGHT=\"" . ($this->dot->settings["font_size"] * 4) . "\" FIXEDSIZE=\"true\"></TD>";
-                }
-            }
+            $out .= $this->getFactImage($pid, $detailsExist, "pic");
             if ($detailsExist) {
                 $out .= "<TD ALIGN=\"LEFT\" BALIGN=\"LEFT\"  TARGET=\"_BLANK\" CELLPADDING=\"4\" PORT=\"dat\">";
             }
             // Show name
             if (trim($name) != "") {
                 $out .= "<FONT COLOR=\"" . $this->dot->settings["font_colour_name"] . "\" POINT-SIZE=\"" . ($this->dot->settings["font_size_name"]) . "\">" . $name . "</FONT>";
-                if (trim($birthData . $deathData . $sex) != "") {
+                if (trim($birthData . $deathData . $burialData . $sex) != "") {
                     $out .= "<BR />";
                 }
             }
             // Show sex
             if (trim($sex) != "") {
                 $out .= "<FONT COLOR=\"" . $this->dot->settings["font_colour_details"] . "\" POINT-SIZE=\"" . ($this->dot->settings["font_size"]) . "\">" . $sex . "</FONT>";
-                if (trim($birthData . $deathData) != "") {
+                if (trim($birthData . $deathData . $burialData) != "") {
                     $out .= "<BR />";
                 }
             }
             if (trim($birthData) != "") {
                 $out .= "<FONT COLOR=\"" . $this->dot->settings["font_colour_details"] . "\" POINT-SIZE=\"" . ($this->dot->settings["font_size"]) . "\">" . $this->dot->settings["birth_prefix"] . $birthData . "</FONT>";
-                if (trim($deathData) != "") {
+                if (trim($deathData . $burialData) != "") {
                     $out .= "<BR />";
                 }
             }
             if ($is_dead && trim($deathData) !== "") {
                 $out .= "<FONT COLOR=\"" . $this->dot->settings["font_colour_details"] . "\" POINT-SIZE=\"" . ($this->dot->settings["font_size"]) . "\">" . $this->dot->settings["death_prefix"] . $deathData . "</FONT>";
+                if (trim($burialData) != "") {
+                    $out .= "<BR />";
+                }
+            } else {
+                $out .= " ";
+            }
+            if ($is_dead && trim($burialData) !== "") {
+                $out .= "<FONT COLOR=\"" . $this->dot->settings["font_colour_details"] . "\" POINT-SIZE=\"" . ($this->dot->settings["font_size"]) . "\">" . $this->dot->settings["burial_prefix"] . $burialData . "</FONT>";
             } else {
                 $out .= " ";
             }
@@ -325,12 +392,36 @@ class Person
             if ($detailsExist) {
                 $out .= "</TD>";
             }
+            $out .= $this->getFactImage($pid, $detailsExist, "pic_birth_first");
+            $out .= $this->getFactImage($pid, $detailsExist, "pic_death_first");
+            $out .= $this->getFactImage($pid, $detailsExist, "pic_burial_first");
             $out .= "<TD CELLPADDING=\"10\"></TD></TR>";
         }
         // Close table
         $out .= "</TABLE>";
 
         return $out;
+    }
+
+
+    public function getFactImage(string $pid, bool $detailsExist, string $id) : string {
+            $out = "";
+            // Show photo
+            if (($detailsExist) && ($this->dot->isPhotoRequired())) {
+                if (isset($this->dot->individuals[$pid][$id]) && !empty($this->dot->individuals[$pid][$id])) {
+                    $photo_size = floatval($this->dot->settings["photo_size"]) / 100;
+                    $padding = $this->getPhotoPaddingSize();
+                    if ($this->dot->settings["add_links"]) {
+                        $out .= "<TD ROWSPAN=\"2\" CELLPADDING=\"$padding\" PORT=\"pic\" WIDTH=\"" . ($this->dot->settings["font_size"] * 4 * $photo_size)  . "\" HEIGHT=\"" . ($this->dot->settings["font_size"] * 4 * $photo_size) . "\" FIXEDSIZE=\"true\" ALIGN=\"CENTER\" VALIGN=\"MIDDLE\" HREF=\"".$this->dot->convertToHTMLSC( $this->dot->individuals[$pid][$id . "_link"])."\"><IMG SCALE=\"true\" SRC=\"" . $this->dot->individuals[$pid][$id] . "\" ALT=\"" . $this->dot->individuals[$pid][$id . "_title"] . "\"  /></TD>";
+                    } else {
+                        $out .= "<TD ROWSPAN=\"2\" CELLPADDING=\"$padding\" PORT=\"pic\" WIDTH=\"" . ($this->dot->settings["font_size"] * 4 * $photo_size)  . "\" HEIGHT=\"" . ($this->dot->settings["font_size"] * 4 * $photo_size) . "\" FIXEDSIZE=\"true\" ALIGN=\"CENTER\" VALIGN=\"MIDDLE\"><IMG SCALE=\"true\" SRC=\"" . $this->dot->individuals[$pid][$id] . "\" ALT=\"" . $this->dot->individuals[$pid][$id . "_title"] . "\" /></TD>";
+                    }
+                } else {
+                    // Blank cell zero width to keep the height right
+                    $out .= "<TD ROWSPAN=\"2\" CELLPADDING=\"1\" PORT=\"pic\" WIDTH=\"" . ($detailsExist ? "0" : ($this->dot->settings["font_size"] * 3.5)) . "\" HEIGHT=\"" . ($this->dot->settings["font_size"] * 4) . "\" FIXEDSIZE=\"true\"></TD>";
+                }
+            }
+            return $out;
     }
 
     /**

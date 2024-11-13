@@ -69,6 +69,11 @@ class FormSubmission
         if (isset($vars["death_prefix"]) && $this->isPrefixStringValid($vars["death_prefix"])) {
             $settings['death_prefix'] = $vars["death_prefix"];
         }
+
+        if (isset($vars["burial_prefix"]) && $this->isPrefixStringValid($vars["burial_prefix"])) {
+            $settings['burial_prefix'] = $vars["burial_prefix"];
+        }
+
         if (isset($vars["marriage_prefix"]) && $this->isPrefixStringValid($vars["marriage_prefix"])) {
             $settings['marriage_prefix'] = $vars["marriage_prefix"];
         }
@@ -135,6 +140,7 @@ class FormSubmission
         }
 
         $settings['show_birthplace'] = isset($vars['show_birthplace']);
+        $settings['show_birth_first_image'] = isset($vars['show_birth_first_image']);
         $settings['show_death_date'] = isset($vars['show_death_date']);
 
         if (isset($vars['death_date_year_only'])) {
@@ -142,6 +148,16 @@ class FormSubmission
         }
 
         $settings['show_death_place'] = isset($vars['show_death_place']);
+        $settings['show_death_first_image'] = isset($vars['show_death_first_image']);
+        $settings['show_burial_date'] = isset($vars['show_burial_date']);
+
+        if (isset($vars['burial_date_year_only'])) {
+            $settings['burial_date_year_only'] = ($vars['burial_date_year_only'] == 'true');
+        }
+
+        $settings['show_burial_place'] = isset($vars['show_burial_place']);
+        $settings['show_burial_first_image'] = isset($vars['show_burial_first_image']);
+        $settings['show_only_first_marriage'] = isset($vars['show_only_first_marriage']);
         $settings['show_marriage_date'] = isset($vars['show_marriage_date']);
 
         if (isset($vars['marr_date_year_only'])) {
@@ -150,6 +166,10 @@ class FormSubmission
 
         $settings['show_marriage_place'] = isset($vars['show_marriage_place']);
         $settings['use_alt_events'] = isset($vars['use_alt_events']);
+        $settings['show_marriage_first_image'] = isset($vars['show_marriage_first_image']);
+        $settings['show_marriage_type'] = isset($vars['show_marriage_type']) || isset($vars['show_marriage_type_not_specified']);
+        $settings['show_marriage_type_not_specified'] = isset($vars['show_marriage_type_not_specified']);
+
         $settings['show_indi_sex'] = isset($vars['show_indi_sex']);
         $settings['show_xref_individuals'] = isset($vars['show_xref_individuals']);
         $settings['show_xref_families'] = isset($vars['show_xref_families']);
@@ -441,7 +461,7 @@ class FormSubmission
      */
     private function isPrefixStringValid($name): bool
     {
-        return preg_match('/^[A-Za-z0-9_ .*+()^∞%$#@!†-]*$/',$name);
+        return preg_match('/^[A-Za-z0-9_ .*+()^∞%$#@!†-↑↓]*$/',$name);
     }
 
     /**
