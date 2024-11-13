@@ -318,6 +318,10 @@ function pageLoaded(Url) {
             UI.helpPanel.hideHelpSidebar(e);
         }
     });
+    let marriagetypeEl = form.querySelector("#show_marriage_type");
+    marriagetypeEl.addEventListener('change', function(e) {
+        Form.showHideMatchCheckbox('show_marriage_type', 'marriage_type_subgroup');
+    });
 
     window.addEventListener("scroll", (event) => {
         // Hide diagram context menu on scroll

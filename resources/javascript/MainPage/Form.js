@@ -134,28 +134,7 @@ const Form = {
             }
         }
     },
-    /**
-     * Ensures that the option to show marriage type "not specified" is only set if showing marriage types is enabled
-     *
-     * @param principalCheckboxId
-     * @param subordinatedCheckboxArray
-     * @param elementId
-     * @param isSubordinatedCheckbox
-     */
-    updateCheckDependentCheckbox(principalCheckboxId, subordinatedCheckboxArray, elementId, isSubordinatedCheckbox) {
-        if (isSubordinatedCheckbox) {
-            if (document.getElementById(elementId).checked) {
-                document.getElementById(principalCheckboxId).checked = true;
-            }
-        } else {
-            if (!document.getElementById(elementId).checked) {
-                subordinatedCheckboxArray.forEach( function(dependentId, index, array) {
-                    document.getElementById(dependentId).checked = false;
-                });
-            }
-        }
-        //}
-    },
+
     /**
      * Gets position of element relative to another
      * From https://stackoverflow.com/questions/1769584/get-position-of-element-by-javascript
@@ -784,16 +763,18 @@ const Form = {
                         el.value = settings[key];
                     }
                 }
-
-                // Update show/hide of JPG quality option
-                Form.showHideMatchDropdown('output_type', 'server_pdf_subgroup', 'pdf|svg|jpg')
             });
+            // Make sure show/hide groups are set right now that we changed the settings
+            Form.showHideMatchDropdown('output_type', 'server_pdf_subgroup', 'pdf|svg|jpg')
             Form.showHideMatchCheckbox('mark_not_related', 'mark_related_subgroup');
             Form.showHideMatchCheckbox('show_birthdate', 'birth_date_subgroup');
             Form.showHideMatchCheckbox('show_death_date', 'death_date_subgroup');
+            Form.showHideMatchCheckbox('show_marriage_date', 'marriage_date_subgroup');
+            Form.showHideMatchCheckbox('show_burial_date', 'burial_date_subgroup');
+            Form.showHideMatchCheckbox('highlight_custom_indis', 'highlight_custom_option');
+            Form.showHideMatchCheckbox('show_marriage_type', 'marriage_type_subgroup');
             setSavedDiagramsPanel();
             Form.showHide(document.getElementById('arrow_group'),document.getElementById('colour_arrow_related').checked)
-            Form.showHide(document.getElementById('highlight_custom_option'),document.getElementById('highlight_custom_indis').checked)
             toggleUpdateButton();
             if (autoUpdatePrior) {
                 if (firstRender) {

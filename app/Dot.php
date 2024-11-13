@@ -577,7 +577,7 @@ class Dot {
 							$element = Registry::elementFactory()->make('FAM:MARR:TYPE');
 							$marriageType_array[$printCount] = $element->value($marriageAttributeType, $this->tree);
 						} else {
-							if ($this->settings["show_marriage_type_not_specified"]) {
+							if ($this->settings["show_marriage_type"] && $this->settings["show_marriage_type_not_specified"]) {
 								$marriageType_array[$printCount] = I18N::translate('Unknown type of marriage') ;
 							}
 						}

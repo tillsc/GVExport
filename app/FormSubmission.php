@@ -167,7 +167,7 @@ class FormSubmission
         $settings['show_marriage_place'] = isset($vars['show_marriage_place']);
         $settings['use_alt_events'] = isset($vars['use_alt_events']);
         $settings['show_marriage_first_image'] = isset($vars['show_marriage_first_image']);
-        $settings['show_marriage_type'] = isset($vars['show_marriage_type']) || isset($vars['show_marriage_type_not_specified']);
+        $settings['show_marriage_type'] = isset($vars['show_marriage_type']);
         $settings['show_marriage_type_not_specified'] = isset($vars['show_marriage_type_not_specified']);
 
         $settings['show_indi_sex'] = isset($vars['show_indi_sex']);
