@@ -2,6 +2,14 @@
 	Change Log
 	GVExport module for Webtrees
 =====================================================================
+
+Version 2.1.23 ()
+  - New       : Add option to show a birth image (thanks @elysch)
+  - New       : Add option to show death image (thanks @elysch)
+  - New       : Add option to show marriage image and type of marriage (thanks @elysch)
+  - New       : Add option to show burial date, place, image (thanks @elysch)
+
+
 Version 2.1.22 (2024-11-08)
   - New       : Logged-out users can now colour tiles based on a shared note (in addition to existing ability for logged-in users).
   - New       : Added option to change how saved settings are sorted.
