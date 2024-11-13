@@ -16,6 +16,8 @@ use Fisharebest\Webtrees\Tree;
 $settingsObj = new Settings();
 $settings = $settingsObj->getDefaultSettings();
 $usegraphviz = $vars['graphviz_bin'] != "";
+$regex_symbols = '_.*+()^∞%$#@!†-↑↓';
+$prefix_regex = '^[A-Za-z0-9 ' . $regex_symbols . ']*$';
 ?>
 
 <?= view('components/breadcrumbs', ['links' => [route(ControlPanel::class) => I18N::translate('Control panel'), $title]]) ?>
@@ -45,11 +47,13 @@ $usegraphviz = $vars['graphviz_bin'] != "";
                 <label for="mclimit"><?= I18N::translate('Graphviz MCLIMIT setting') ?>:</label>
                 <input class="form-control col-sm-6" type="text" name="vars[mclimit]" id="mclimit" value="<?= I18N::digits($vars["mclimit"]); ?>">
                 <label for="birth_prefix"><?= I18N::translate('Birthdate prefix') ?>:</label>
-                <input class="form-control col-sm-6" type="text" name="vars[birth_prefix]" id="birth_prefix" pattern="^[A-Za-z0-9_ .*+()^%$#@!†∞-]*$" title="<?= I18N::translate('Letters, numbers, spaces, or the following symbols: ') . "_.*+()^%$#@!†∞-"; ?>" value="<?= e($vars["birth_prefix"]); ?>">
+                <input class="form-control col-sm-6" type="text" name="vars[birth_prefix]" id="birth_prefix" pattern="<?= $prefix_regex; ?>" title="<?= I18N::translate('Letters, numbers, spaces, or the following symbols: ') . $regex_symbols; ?>" value="<?= e($vars["birth_prefix"]); ?>">
                 <label for="death_prefix"><?= I18N::translate('Death date prefix') ?>:</label>
-                <input class="form-control col-sm-6" type="text" name="vars[death_prefix]" id="death_prefix" pattern="^[A-Za-z0-9_ .*+()^%$#@!†∞-]*$" title="<?= I18N::translate('Letters, numbers, spaces, or the following symbols: ') . "_.*+()^%$#@!†∞-"; ?>" value="<?= e($vars["death_prefix"]); ?>">
+                <input class="form-control col-sm-6" type="text" name="vars[death_prefix]" id="death_prefix" pattern="<?= $prefix_regex; ?>" title="<?= I18N::translate('Letters, numbers, spaces, or the following symbols: ') . $regex_symbols; ?>" value="<?= e($vars["death_prefix"]); ?>">
                 <label for="marriage_prefix"><?= I18N::translate('Marriage date prefix') ?>:</label>
-                <input class="form-control col-sm-6" type="text" name="vars[marriage_prefix]" id="marriage_prefix" pattern="^[A-Za-z0-9_ .*+()^%$#@!†∞-]*$" title="<?= I18N::translate('Letters, numbers, spaces, or the following symbols: ') . "_.*+()^%$#@!†∞-"; ?>" value="<?= e($vars["marriage_prefix"]); ?>">
+                <input class="form-control col-sm-6" type="text" name="vars[marriage_prefix]" id="marriage_prefix" pattern="<?= $prefix_regex; ?>" title="<?= I18N::translate('Letters, numbers, spaces, or the following symbols: ') . $regex_symbols; ?>" value="<?= e($vars["marriage_prefix"]); ?>">
+                <label for="burial_prefix"><?= I18N::translate('Burial date prefix') ?>:</label>
+                <input class="form-control col-sm-6" type="text" name="vars[burial_prefix]" id="burial_prefix" pattern="<?= $prefix_regex; ?>" title="<?= I18N::translate('Letters, numbers, spaces, or the following symbols: ') . $regex_symbols; ?>" value="<?= e($vars["burial_prefix"]); ?>">
             </div>
             <hr>
             <label class="col-sm-4 col-form-label"><?= I18N::translate('Limit ancestor and descendant levels') ?></label>
