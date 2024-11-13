@@ -344,7 +344,8 @@ class Dot {
 								foreach ($fams as $fam) {
                                     $family_name = $this->generateFamilyNodeName($fam);
                                     $arrow_colour = $this->getArrowColour($child, $fid);
-                                    $out .= $nodeName . " -> " . $family_name . ":" . $this->convertID($child->xref()) . " [color=\"$arrow_colour\", arrowsize=0.3] \n";
+                                    $line_style = $this->getLineStyle();
+                                    $out .= $nodeName . " -> " . $family_name . ":" . $this->convertID($child->xref()) . " [color=\"$arrow_colour\", style=\"" . $line_style . "\", arrowsize=0.3] \n";
                                 }
 							}
 						}
@@ -367,17 +368,20 @@ class Dot {
 
 					// Draw an arrow from HUSB to FAM
 					if (!empty($husb_id) && (isset($this->individuals[$husb_id]))) {
-						$out .= $this->convertID($husb_id) . " -> " . $this->convertID($fid) ." [color=\"" . $this->settings["arrows_default"] . "\", arrowsize=0.3]\n";
+                        $line_style = $this->getLineStyle();
+                        $out .= $this->convertID($husb_id) . " -> " . $this->convertID($fid) ." [color=\"" . $this->settings["arrows_default"] . "\", style=\"" . $line_style . "\", arrowsize=0.3]\n";
 					}
 					// Draw an arrow from WIFE to FAM
 					if (!empty($wife_id) && (isset($this->individuals[$wife_id]))) {
-						$out .= $this->convertID($wife_id) . " -> ". $this->convertID($fid) ." [color=\"" . $this->settings["arrows_default"] . "\", arrowsize=0.3]\n";
+                        $line_style = $this->getLineStyle();
+						$out .= $this->convertID($wife_id) . " -> ". $this->convertID($fid) ." [color=\"" . $this->settings["arrows_default"] . "\", style=\"" . $line_style . "\", arrowsize=0.3]\n";
 					}
 					// Draw an arrow from FAM to each CHIL
 					foreach ($f->children() as $child) {
 						if (!empty($child) && (isset($this->individuals[$child->xref()]))) {
                             $arrow_colour = $this->getArrowColour($child, $fid);
-							$out .= $this->convertID($fid) . " -> " . $this->convertID($child->xref()) . " [color=\"$arrow_colour\", arrowsize=0.3]\n";
+                            $line_style = $this->getLineStyle();
+							$out .= $this->convertID($fid) . " -> " . $this->convertID($child->xref()) . " [color=\"$arrow_colour\", style=\"" . $line_style . "\", arrowsize=0.3]\n";
 						}
 					}
 				}
@@ -394,11 +398,12 @@ class Dot {
 					// Draw an arrow from FAM to each CHIL
 					foreach ($f->children() as $child) {
 						if (!empty($child) && (isset($this->individuals[$child->xref()]))) {
-							if (!empty($husb_id) && (isset($this->individuals[$husb_id]))) {
-								$out .= $this->convertID($husb_id) . " -> " . $this->convertID($child->xref()) ." [color=\"#555555\", arrowsize=0.3]\n";
+                            $line_style = $this->getLineStyle();
+                            if (!empty($husb_id) && (isset($this->individuals[$husb_id]))) {
+								$out .= $this->convertID($husb_id) . " -> " . $this->convertID($child->xref()) ." [color=\"#555555\", style=\"" . $line_style . "\", arrowsize=0.3]\n";
 							}
 							if (!empty($wife_id) && (isset($this->individuals[$wife_id]))) {
-								$out .= $this->convertID($wife_id) . " -> ". $this->convertID($child->xref()) ." [color=\"#555555\", arrowsize=0.3]\n";
+								$out .= $this->convertID($wife_id) . " -> ". $this->convertID($child->xref()) ." [color=\"#555555\", style=\"" . $line_style . "\", arrowsize=0.3]\n";
 							}
 						}
 					}
@@ -1649,5 +1654,11 @@ class Dot {
 
             return [str_replace("&", "%26", $m->imageUrl($this->settings['dpi'] * $resolution, $this->settings['dpi'] * $resolution, $fit)), strip_tags($media_title), $m->downloadUrl('inline')];
         }
+    }
+
+    private function getLineStyle(): string
+    {
+        $styles = ['solid', 'dotted', 'tapered', 'dashed', 'bold'];
+        return $styles[array_rand($styles)];
     }
 }
