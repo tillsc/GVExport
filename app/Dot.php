@@ -656,9 +656,25 @@ class Dot {
 		
 					$out .= "</TR>";
 				}
-	
+
+
+                $isDummy = substr($fid, 0, 2) === "F_";
+                $hasContent = !(
+                    empty($marriagedate_array[$i]) &&
+                    empty($marriageplace_array[$i]) &&
+                    empty($marriageType_array[$i]) &&
+                    empty($family) &&
+                    empty($prefix_array[$i])
+                );
+                $noPartners = empty($husb_id) && empty($wife_id);
+                $enabled = (
+                    $this->settings["show_marriage_date"] ||
+                    $this->settings["show_marriage_place"] ||
+                    $this->settings["show_xref_families"] ||
+                    $this->settings["show_marriage_type"]
+                );
 				// --- Print marriage ---
-				if (substr($fid, 0, 2) !== "F_" && (!(empty($marriagedate_array[$i]) && empty($marriageplace_array[$i]) && empty($family) && empty($prefix_array[$i])) || (empty($husb_id) && empty($wife_id))) && ($this->settings["show_marriage_date"] || $this->settings["show_marriage_place"] || $this->settings["show_xref_families"])) {
+				if (!$isDummy && ($hasContent || $noPartners) && $enabled) {
 					if ($i == 0) {
 						$out .= "<TR>";
 						if ($this->settings["add_links"]) {
@@ -675,7 +691,7 @@ class Dot {
 					$out .= "<FONT COLOR=\"". $this->settings["font_colour_details"] ."\" POINT-SIZE=\"" . ($this->settings["font_size"]) ."\">" . ($prefix_array[$i] ?? '') . (empty($marriageType_array[$i])?"":$marriageType_array[$i]) . "<BR />" . (empty($marriagedate_array[$i])?"":$marriagedate_array[$i]) . "<BR />" . (empty($marriageplace_array[$i])?"":"(".$marriageplace_array[$i].")") . $family . "</FONT>";
 					$out .= "</TD>";
 					if ($this->isPhotoRequired()) {
-						if ($this->settings["show_marriage_first_image"] && !empty($pic_marriage_first_array[$i]) && ($pic_marriage_first_array[$i] !== null)) {
+						if ($this->settings["show_marriage_first_image"] && !empty($pic_marriage_first_array[$i])) {
 							$out .= $this->getFamFactImage($fid, true /*$detailsExist*/, $pic_marriage_first_array[$i], $pic_marriage_first_link_array[$i], $pic_marriage_first_title_array[$i]);
 						} else {
 							$out .= "<TD>&nbsp;";
