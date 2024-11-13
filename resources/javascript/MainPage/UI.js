@@ -172,10 +172,13 @@ const UI = {
                     if (Data.getDistance(startx, starty, e.clientX, e.clientY) >= MIN_DRAG) {
                         e.preventDefault();
                     // Leave family links alone
-                    } else if (clickAction !== '0' && UI.tile.isNodeAnIndividual(linkElements[i])) {
+                    } else if (UI.tile.isNodeAnIndividual(linkElements[i])) {
                         e.preventDefault();
                         let xref = UI.tile.getXrefFromUrl(url);
                         switch (clickAction) {
+                            case '0':
+                                window.open(url,'_blank');
+                                break;
                             case '10': // Add to list of starting individuals
                                 UI.tile.addIndividualToStartingIndividualsList(xref);
                                 break;
@@ -207,8 +210,6 @@ const UI = {
                             case '70': // Add XREF to list of custom highlighted individuals
                                 UI.tile.highlightIndividual(xref);
                                 break;
-                            // Do nothing - default click action is fine
-                            case '0': // Allow link to trigger user page opening
                             case '60': // Do nothing option
                             default: // Unknown, so do nothing
                                 break;
