@@ -692,7 +692,7 @@ class Dot {
                         $out .= "</TD>";
                         if ($this->isPhotoRequired()) {
                             if ($this->settings["show_marriage_first_image"] && !empty($pic_marriage_first_array[$i])) {
-                                $out .= $this->getFamFactImage($fid, true /*$detailsExist*/, $pic_marriage_first_array[$i], $pic_marriage_first_link_array[$i], $pic_marriage_first_title_array[$i]);
+                                $out .= $this->getFamFactImage(true /*$detailsExist*/, $pic_marriage_first_array[$i], $pic_marriage_first_link_array[$i], $pic_marriage_first_title_array[$i]);
                             }
                         }
                         $out .= "</TR>";
@@ -727,7 +727,7 @@ class Dot {
                         $out .= "</TD>";
                         if ($this->isPhotoRequired()) {
                             if ($this->settings["show_marriage_first_image"] && !empty($pic_marriage_first_array[$i])) {
-                                $out .= $this->getFamFactImage($fid, true /*$detailsExist*/, $pic_marriage_first_array[$i], $pic_marriage_first_link_array[$i], $pic_marriage_first_title_array[$i]);
+                                $out .= $this->getFamFactImage(true /*$detailsExist*/, $pic_marriage_first_array[$i], $pic_marriage_first_link_array[$i], $pic_marriage_first_title_array[$i]);
                             }
                         }
                         $out .= "</TR>";
@@ -762,7 +762,7 @@ class Dot {
 		return 1;
 	}
 
-	public function getFamFactImage(string $fid, bool $detailsExist, string $img, string $link, string $title) : string {
+	public function getFamFactImage(bool $detailsExist, string $img, string $link, string $title) : string {
 		$out = "";
 		// Show photo
 		if (($detailsExist) && ($this->isPhotoRequired())) {
@@ -1314,32 +1314,17 @@ class Dot {
  	 *
 	 * @param string $pid Individual's GEDCOM id (Ixxx)
 	 */
-	function addPhotoToIndi(string $pid) {
+	function addPhotoToIndi(string $pid): array
+    {
 		$i = Registry::individualFactory()->make($pid, $this->tree);
 		$m = $i->findHighlightedMediaFile();
 		$resolution = floatval($this->settings["photo_resolution"]) / 100;
 		if (empty($m)) {
 			return [null, "", null];
 		} else if (!$m->isExternal() && $m->fileExists()) {
-			// If we are rendering in the browser, provide the URL, otherwise provide the server side file location
 			$media_title  = strip_tags($i->fullName());
-			if (isset($_REQUEST["download"])) {
-				$image = new ImageFile($m, $this->tree, $this->settings['dpi']*$resolution);
-				return [$image->getImageLocation($this->settings["photo_quality"], $this->settings["convert_photos_jpeg"]), strip_tags($media_title), $m->downloadUrl('inline')];
-			} else {
-				switch ($this->settings['photo_shape']) {
-					case 0:
-					case 10:
-					case 40:
-						$fit = 'contain';
-						break;
-					default:
-						$fit = 'crop';
-				}
-
-				return [str_replace("&","%26",$m->imageUrl($this->settings['dpi']*$resolution,$this->settings['dpi']*$resolution, $fit)), strip_tags($media_title), $m->downloadUrl('inline')];
-			}
-		} else {
+            return $this->getImageLocation($m, $resolution, $media_title);
+        } else {
 			return [null, "", null];
 		}
 	}
@@ -1349,7 +1334,7 @@ class Dot {
 	 * It should be analized if it would be better to just consider the first fact of a specified kind and take it's photo, if present. That way the written information is consistent with it
  	 *
 	 * @param string $pid Individual's GEDCOM id (Ixxx)
-	 * @param array of GEDCOM fact names to be searched
+	 * @param array $fnames of GEDCOM fact names to be searched
 	 */
 	function addFirstPhotoFromFactsToIndi(string $pid, array $fnames): array
     {
@@ -1388,22 +1373,7 @@ class Dot {
 			return [null, "", $emptyimg];
 		} else if (!$m->isExternal() && $m->fileExists()) {
 			// If we are rendering in the browser, provide the URL, otherwise provide the server side file location
-			if (isset($_REQUEST["download"])) {
-				$image = new ImageFile($m, $this->tree, $this->settings['dpi']*$resolution);
-				return [$image->getImageLocation($this->settings["photo_quality"], $this->settings["convert_photos_jpeg"]), strip_tags($media_title), $m->downloadUrl('inline')];
-			} else {
-				switch ($this->settings['photo_shape']) {
-					case 0:
-					case 10:
-					case 40:
-						$fit = 'contain';
-					break;
-					default:
-						$fit = 'crop';
-				}
-
-				return [str_replace("&","%26",$m->imageUrl($this->settings['dpi']*$resolution,$this->settings['dpi']*$resolution, $fit)), strip_tags($media_title), $m->downloadUrl('inline')];
-			}
+            return $this->getImageLocation($m, $resolution, $media_title);
 		} else {
 			return [null, "", $emptyimg];
 		}
@@ -1414,7 +1384,8 @@ class Dot {
  	 *
 	 * @param Fact $fact The fact to search on
 	 */
-	function addFirstPhotoFromSpecificFactToFam(Fact $fact) {
+	function addFirstPhotoFromSpecificFactToFam(Fact $fact): array
+    {
 		$emptyimg='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
         $resolution = 1;
         $media_title = "";
@@ -1437,22 +1408,7 @@ class Dot {
 			return [null, "", $emptyimg];
 		} else if (!$m->isExternal() && $m->fileExists()) {
 			// If we are rendering in the browser, provide the URL, otherwise provide the server side file location
-			if (isset($_REQUEST["download"])) {
-				$image = new ImageFile($m, $this->tree, $this->settings['dpi']*$resolution);
-				return [$image->getImageLocation($this->settings["photo_quality"], $this->settings["convert_photos_jpeg"]), strip_tags($media_title), $m->downloadUrl('inline')];
-			} else {
-				switch ($this->settings['photo_shape']) {
-					case 0:
-					case 10:
-					case 40:
-						$fit = 'contain';
-					break;
-					default:
-						$fit = 'crop';
-				}
-
-				return [str_replace("&","%26",$m->imageUrl($this->settings['dpi']*$resolution,$this->settings['dpi']*$resolution, $fit)), strip_tags($media_title), $m->downloadUrl('inline')];
-			}
+            return $this->getImageLocation($m, $resolution, $media_title);
 		} else {
 			return [null, "", $emptyimg];
 		}
@@ -1665,5 +1621,33 @@ class Dot {
             $tmp = trim("$q1 $dy");
         }
         return $tmp;
+    }
+
+    /**
+     * Returns the location of the image. For browser this is the URL but downloads are given the hard drive location
+     *
+     * @param $m
+     * @param $resolution
+     * @param string $media_title
+     * @return array
+     */
+    public function getImageLocation($m, $resolution, string $media_title): array
+    {
+        if (isset($_REQUEST["download"])) {
+            $image = new ImageFile($m, $this->tree, $this->settings['dpi'] * $resolution);
+            return [$image->getImageLocation($this->settings["photo_quality"], $this->settings["convert_photos_jpeg"]), strip_tags($media_title), $m->downloadUrl('inline')];
+        } else {
+            switch ($this->settings['photo_shape']) {
+                case 0:
+                case 10:
+                case 40:
+                    $fit = 'contain';
+                    break;
+                default:
+                    $fit = 'crop';
+            }
+
+            return [str_replace("&", "%26", $m->imageUrl($this->settings['dpi'] * $resolution, $this->settings['dpi'] * $resolution, $fit)), strip_tags($media_title), $m->downloadUrl('inline')];
+        }
     }
 }
