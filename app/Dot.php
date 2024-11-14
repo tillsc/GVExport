@@ -31,6 +31,7 @@
 namespace vendor\WebtreesModules\gvexport;
 
 use Fisharebest\Webtrees\Date;
+use Fisharebest\Webtrees\Fact;
 use Fisharebest\Webtrees\Family;
 use Fisharebest\Webtrees\I18n;
 use Fisharebest\Webtrees\Individual;
@@ -571,7 +572,7 @@ class Dot {
 	
 				if ($this->settings["show_marriage_type"]) {
 					$marriageType_array[$printCount] = '';
-					if (($marriageFact instanceof \Fisharebest\Webtrees\Fact)) {
+					if (($marriageFact instanceof Fact)) {
 						$marriageAttributeType = $marriageFact->attribute('TYPE');
 						if ($marriageAttributeType !== '') {
 							$element = Registry::elementFactory()->make('FAM:MARR:TYPE');
@@ -601,7 +602,7 @@ class Dot {
 				if ($this->settings["show_marriage_first_image"] && $this->isPhotoRequired()) {
 					[$pic_marriage_first_array[$printCount], 
 					 $pic_marriage_first_title_array[$printCount], 
-					 $pic_marriage_first_link_array[$printCount]] = $this->addFirstPhotoFromSpecificFactToFam($fid, $marriageFact);
+					 $pic_marriage_first_link_array[$printCount]] = $this->addFirstPhotoFromSpecificFactToFam($marriageFact);
 				}
 	
 				// Get the husband's and wife's id from PGV
@@ -725,7 +726,7 @@ class Dot {
 					if ($i == $printCount) {
                         $out .= "</TD>";
                         if ($this->isPhotoRequired()) {
-                            if ($this->settings["show_marriage_first_image"] && !empty($pic_marriage_first_array[$i]) && ($pic_marriage_first_array[$i] !== null)) {
+                            if ($this->settings["show_marriage_first_image"] && !empty($pic_marriage_first_array[$i])) {
                                 $out .= $this->getFamFactImage($fid, true /*$detailsExist*/, $pic_marriage_first_array[$i], $pic_marriage_first_link_array[$i], $pic_marriage_first_title_array[$i]);
                             }
                         }
@@ -765,7 +766,7 @@ class Dot {
 		$out = "";
 		// Show photo
 		if (($detailsExist) && ($this->isPhotoRequired())) {
-			if (($img !== null) && isset($img)) {
+			if (!empty($img)) {
 				$photo_size = floatval($this->settings["photo_size"]) / 100;
 				$padding = $this->getFamPhotoPaddingSize();
 				if ($this->settings["add_links"]) {
@@ -775,7 +776,7 @@ class Dot {
 				}
 			} else {
 				// Blank cell zero width to keep the height right
-				$out .= "<TD CELLPADDING=\"1\" PORT=\"pic\" WIDTH=\"" . ($detailsExist ? "0" : ($this->settings["font_size"] * 3.5)) . "\" HEIGHT=\"" . ($this->settings["font_size"] * 4) . "\" FIXEDSIZE=\"true\"></TD>";
+				$out .= "<TD CELLPADDING=\"1\" PORT=\"pic\" WIDTH=\"0\" HEIGHT=\"" . ($this->settings["font_size"] * 4) . "\" FIXEDSIZE=\"true\"></TD>";
 			}
 		} else {
 			$out .= "<TD>&nbsp;";
@@ -1343,29 +1344,6 @@ class Dot {
 		}
 	}
 
-	function debugMsgToFile(string $str, string $log_file_name = "../webtrees_LOGGGGGGG.log") {
-
-		#$log_file_name="../webtrees_LOGGGGGGG.log";
-		error_log("getcwd: " . getcwd() . "\r\n");
-		error_log("DIR: " . __DIR__ . "\r\n");
-		error_log("log_file_name: " . $log_file_name . "\r\n");
-		if(!@copy($log_file_name, $log_file_name . ".bak"))
-		{
-			$errors= error_get_last();
-			error_log( "COPY ERROR: ". is_null($errors) ? "NO INFORMATION ABOUT THE ERROR WHEN TRYING TO BACKUP THE LOG" : $errors['type'] . "\r\n" . $errors['message'] );
-		} else {
-			error_log( "Log backup successfull" );
-		}
-
-		#file_put_contents("../../../../webtrees_LOGGGGGGG.log.html", $html_report_content, FILE_APPEND);
-		if ( file_put_contents($log_file_name, $str) === false ) {
-			error_log("NOT ABLE TO SAVE FILE 1" . "\r\n");
-		}
-		if ( file_put_contents($log_file_name, "\n\n" . print_r($matches,true), FILE_APPEND) === false ) {
-			error_log("NOT ABLE TO SAVE FILE 2" . "\r\n");
-		}
-	}
-
 	/**
 	 * Searches in all specified facts of a given individual (even if repeated) for the first photo and adds it's path
 	 * It should be analized if it would be better to just consider the first fact of a specified kind and take it's photo, if present. That way the written information is consistent with it
@@ -1383,12 +1361,11 @@ class Dot {
 		$break=false;
 		foreach ($fnames as $fname) {
 			foreach ($i->facts([$fname]) as $fact) {
-				if ($fact instanceof \Fisharebest\Webtrees\Fact) {
+				if ($fact instanceof Fact) {
 					if ($fact->canShow()) {
 						if (preg_match_all('/\n2 OBJE\b\s@*([^@]*)@*/', $fact->gedcom(), $matches, PREG_SET_ORDER) > 0) {
-							### debugMsgToFile(print_r($i->gedcom(),true));
 							$mediaGed = $matches[0][1];
-							if (($mediaGed !== null) && (!empty($mediaGed))) {
+							if (!empty($mediaGed)) {
 								$mediaobject = Registry::mediaFactory()->make($mediaGed, $this->tree);
 								if ($mediaobject !== null) {
 									$m  = $mediaobject->firstImageFile();
@@ -1431,88 +1408,16 @@ class Dot {
 			return [null, "", $emptyimg];
 		}
 	}
-
-
-	/**
-	 * Searches in all specified facts of a given family (even if repeated) for the first photo and adds it's path
-	 * It should be analized if it would be better to just consider the first fact of a specified kind and take it's photo, if present. That way the written information is consistent with it
- 	 *
-	 * @param string $fid Family's GEDCOM id (Ixxx)
-	 * @param array of GEDCOM fact names to be searched
-	 */
-	function addFirstPhotoFromFactsToFam(string $fid, array $fnames) {
-		$emptyimg='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
-
-		$f = $this->getUpdatedFamily($fid);
-		#$i = Registry::individualFactory()->make($pid, $this->tree);
-		#$i = $this->getUpdatedPerson($pid);
-
-		$m = null;
-		$media_title = null;
-		$break=false;
-		foreach ($fnames as $fname) {
-			foreach ($f->facts([$fname]) as $fact) {
-				if ($fact instanceof \Fisharebest\Webtrees\Fact) {
-					if ($fact->canShow()) {
-						if (preg_match_all('/\n2 OBJE\b\s@*([^@]*)@*/', $fact->gedcom(), $matches, PREG_SET_ORDER) > 0) {
-							### debugMsgToFile(print_r($i->gedcom(),true));
-							$mediaGed = $matches[0][1];
-							if (($mediaGed !== null) && (!empty($mediaGed))) {
-								$mediaobject = Registry::mediaFactory()->make($mediaGed, $this->tree);
-								if ($mediaobject !== null) {
-
-									$m  = $mediaobject->firstImageFile();
-									$media_title  = $mediaobject->fullName();
-									$break=true;
-									break;
-								}
-							}
-						}
-					}
-				}
-			}
-			if ($break) {
-				break;
-			}
-		}
-
-		$resolution = floatval($this->settings["photo_resolution"]) / 100;
-		if (empty($m)) {
-			return [null, "", $emptyimg];
-		} else if (!$m->isExternal() && $m->fileExists()) {
-			// If we are rendering in the browser, provide the URL, otherwise provide the server side file location
-			if (isset($_REQUEST["download"])) {
-				$image = new ImageFile($m, $this->tree, $this->settings['dpi']*$resolution);
-				return [$image->getImageLocation($this->settings["photo_quality"], $this->settings["convert_photos_jpeg"]), strip_tags($media_title), $m->downloadUrl('inline')];
-			} else {
-				switch ($this->settings['photo_shape']) {
-					case 0:
-					case 10:
-					case 40:
-						$fit = 'contain';
-					break;
-					default:
-						$fit = 'crop';
-				}
-
-				#return str_replace("&","%26",$m->imageUrl($this->settings['dpi']*$resolution,$this->settings['dpi']*$resolution, $fit));
-				return [str_replace("&","%26",$m->imageUrl($this->settings['dpi']*$resolution,$this->settings['dpi']*$resolution, $fit)), strip_tags($media_title), $m->downloadUrl('inline')];
-			}
-		} else {
-			return [null, "", $emptyimg];
-		}
-	}
-
 
 	/**
 	 * Searches for the first photo of a given fact and adds it's path
  	 *
-	 * @param string $fid Family's GEDCOM id (Ixxx)
-	 * @param fact $fact The fact to search on
+	 * @param Fact $fact The fact to search on
 	 */
-	function addFirstPhotoFromSpecificFactToFam(string $fid, \Fisharebest\Webtrees\Fact $fact) {
+	function addFirstPhotoFromSpecificFactToFam(Fact $fact) {
 		$emptyimg='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
-
+        $resolution = 1;
+        $media_title = "";
 		if ($fact->canShow()) {
 			$imageGed = '';
 			$imageVal = $fact->attribute('OBJE'); # Obtains the first one
