@@ -16,15 +16,15 @@ use Fisharebest\Webtrees\I18N;
 
 <?= MainPage::addLabel('', 'Tile contents', !$admin); ?>
 <div class="col-sm-8 options-panel-background">
+    <?php if ($usegraphviz) { ?>
     <div class="col-auto">
         <div onclick="Form.showHideSubgroup('url_subgroup', this)" class="pointer subgroup">→ <?= I18N::translate('Page links'); ?></div>
         <div id="url_subgroup" class="setting_subgroup col-auto options-panel-background" style="display: none">
             <input type="checkbox" name="vars[add_links]" id="add_links" value="add_links" <?= $vars["add_links"] ? 'checked' : '' ?>>
-            <label for="add_links"><?= I18N::translate('Add URL to individuals and families') ?></label>
-            <br>
-            <span class="text-muted">(<?= $usegraphviz ? I18N::translate('browser, SVG, and PDF only') : I18N::translate('browser and SVG only'); ?>)</span>
+            <label class="check-list width-90pc" for="add_links"><?= I18N::translate('Add link to individuals and families in PDF output') ?></label>
         </div>
     </div>
+    <?php } ?>
     <div class="col-auto">
         <div onclick="Form.showHideSubgroup('abbreviations_subgroup', this)" class="pointer subgroup">→ <?= I18N::translate('Abbreviations'); ?></div>
         <div id="abbreviations_subgroup" class="setting_subgroup col-auto options-panel-background" style="display: none">
