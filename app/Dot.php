@@ -687,13 +687,13 @@ class Dot {
                     }
 					$out .= "<FONT COLOR=\"". $this->settings["font_colour_details"] ."\" POINT-SIZE=\"" . ($this->settings["font_size"]) ."\">" . ($prefix_array[$i] ?? '') . (empty($marriageType_array[$i])?"":$marriageType_array[$i]) . " " . (empty($marriagedate_array[$i])?"":$marriagedate_array[$i]) . " " . (empty($marriageplace_array[$i])?"":"(".$marriageplace_array[$i].")") . $family . "</FONT><BR />";
 
-					if ($this->isPhotoRequired()) {
-						if ($this->settings["show_marriage_first_image"] && !empty($pic_marriage_first_array[$i])) {
-							$out .= $this->getFamFactImage($fid, true /*$detailsExist*/, $pic_marriage_first_array[$i], $pic_marriage_first_link_array[$i], $pic_marriage_first_title_array[$i]);
-						}
-					}
                     if ($i == $printCount) {
                         $out .= "</TD>";
+                        if ($this->isPhotoRequired()) {
+                            if ($this->settings["show_marriage_first_image"] && !empty($pic_marriage_first_array[$i])) {
+                                $out .= $this->getFamFactImage($fid, true /*$detailsExist*/, $pic_marriage_first_array[$i], $pic_marriage_first_link_array[$i], $pic_marriage_first_title_array[$i]);
+                            }
+                        }
                         $out .= "</TR>";
                     }
 				}
@@ -720,14 +720,16 @@ class Dot {
 					}
 
 					$out .= "<FONT COLOR=\"". $this->settings["font_colour_details"] ."\" POINT-SIZE=\"" . ($this->settings["font_size"]) ."\">" . (empty($prefix_array[$i])?"":$prefix_array[$i]) . (empty($marriageType_array[$i])?"":$marriageType_array[$i]) . " " . (empty($marriagedate_array[$i])?"":$marriagedate_array[$i]) . "<BR />" . (empty($marriageplace_array[$i])?"":"(".$marriageplace_array[$i].")") . $family . "</FONT>";
-					if ($this->isPhotoRequired()) {
-						if ($this->settings["show_marriage_first_image"] && !empty($pic_marriage_first_array[$i]) && ($pic_marriage_first_array[$i] !== null)) {
-							$out .= $this->getFamFactImage($fid, true /*$detailsExist*/, $pic_marriage_first_array[$i], $pic_marriage_first_link_array[$i], $pic_marriage_first_title_array[$i]);
-						}
-					}
+
 
 					if ($i == $printCount) {
-                        $out .= "</TD></TR>";
+                        $out .= "</TD>";
+                        if ($this->isPhotoRequired()) {
+                            if ($this->settings["show_marriage_first_image"] && !empty($pic_marriage_first_array[$i]) && ($pic_marriage_first_array[$i] !== null)) {
+                                $out .= $this->getFamFactImage($fid, true /*$detailsExist*/, $pic_marriage_first_array[$i], $pic_marriage_first_link_array[$i], $pic_marriage_first_title_array[$i]);
+                            }
+                        }
+                        $out .= "</TR>";
 						$out .= "</TABLE>>";
 					}
 				}
