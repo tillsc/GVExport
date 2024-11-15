@@ -5,6 +5,7 @@ use Fisharebest\Webtrees\I18N;
 
 /**
  * @var array       $vars           array of saved settings
+ * @var array       $settings       full settings data including dropdown options
  * @var bool        $admin          whether this is for the admin page (remove functions that aren't settings)
  */
 
@@ -57,9 +58,13 @@ use Fisharebest\Webtrees\I18N;
         </div>
     </div>
 
-    <div onclick="Form.showHideSubgroup('diagram_colours_subgroup', this)" class="pointer subgroup">→ <?= I18N::translate('Diagram colours'); ?></div>
+    <div onclick="Form.showHideSubgroup('diagram_colours_subgroup', this)" class="pointer subgroup">→ <?= I18N::translate('Diagram style'); ?></div>
     <div id="diagram_colours_subgroup" class="setting_subgroup col-auto options-panel-background" style="display: none">
         <div class="row">
+            <div class="col-sm-12 col-auto">
+                <label for="click_action_indi"><?= I18N::translate('Arrow style'); ?></label>
+                <?= view('components/select', ['name' => 'vars[arrow_style]', 'id' => 'arrow_style', 'selected' => I18N::digits($vars['arrow_style']), 'options' => MainPage::updateTranslations($settings["arrow_style_options"])]) ?>
+            </div>
             <div class="col-sm-12 col-auto">
                 <input type="color" class="picker" name="vars[background_col]" id="background_col" value="<?= e($vars["background_col"]); ?>" /><label for="background_col" class="picker-label"><?= I18N::translate('Diagram background colour') ?></label>
             </div>

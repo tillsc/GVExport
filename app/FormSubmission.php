@@ -125,6 +125,10 @@ class FormSubmission
 
         $settings['colour_arrow_related'] = isset($vars['colour_arrow_related']);
 
+        if (isset($vars['arrow_style'])) {
+            $settings['arrow_style'] = I18N::digits($vars['arrow_style']);
+        }
+
         if (isset($vars['graph_dir']) && ctype_alpha($vars['graph_dir'])) {
             $settings['graph_dir'] = $vars['graph_dir'];
         }

@@ -1658,7 +1658,31 @@ class Dot {
 
     private function getLineStyle(): string
     {
-        $styles = ['solid', 'dotted', 'tapered', 'dashed', 'bold'];
-        return $styles[array_rand($styles)];
+        switch ($this->settings['arrow_style']) {
+            case 0:
+            default:
+                $style = 'solid';
+                break;
+            case 10:
+                $style = 'dotted';
+                break;
+            case 20:
+                $style = 'dashed';
+                break;
+            case 30:
+                $style = 'bold';
+                break;
+            case 40:
+                $style = 'tapered';
+                break;
+            case 50:
+                $styles = ['solid', 'dotted', 'tapered', 'dashed', 'bold'];
+                $style = $styles[array_rand($styles)];
+                break;
+            case 60:
+                $style = 'invis';
+                break;
+        }
+        return $style;
     }
 }
