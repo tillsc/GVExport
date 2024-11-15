@@ -75,6 +75,16 @@ const Form = {
     },
 
     /**
+     * Decide if we should use client side generation of diagram or server side, depending on various factors
+     *
+     * @returns {boolean}
+     */
+    mustUseClientGeneration() {
+        let optionsUnsupported = (document.getElementById('photo_shape')?.value !== '0' ||
+            (document.getElementById('output_type')?.value === 'svg' && document.getElementById('add_links')?.checked));
+        return !graphvizAvailable || optionsUnsupported;
+    },
+    /**
      * Checks if a starting individual is selected or the list is blank
      *
      * @returns {boolean}
