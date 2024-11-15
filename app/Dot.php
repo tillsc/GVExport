@@ -31,12 +31,14 @@
 namespace vendor\WebtreesModules\gvexport;
 
 use Fisharebest\Webtrees\Date;
+use Fisharebest\Webtrees\Fact;
 use Fisharebest\Webtrees\Family;
 use Fisharebest\Webtrees\I18n;
 use Fisharebest\Webtrees\Individual;
 use Fisharebest\Webtrees\Registry;
 use Fisharebest\Webtrees\Tree;
 use Psr\Http\Message\StreamFactoryInterface;
+use Fisharebest\Webtrees\Gedcom;
 
 /**
  * Main class for managing the DOT file
@@ -90,7 +92,7 @@ class Dot {
 	 *
 	 * @return bool
 	 */
-	private function isPhotoRequired(): bool
+	public function isPhotoRequired(): bool
 	{
 		return ($this->isTreePreferenceShowingThumbnails($this->tree) &&
 			($this->settings["show_photos"]));
@@ -229,26 +231,26 @@ class Dot {
 	}
 
 	function createDOTDump(): string
-    {
+	{
 		// If no individuals in the clippings cart (or option chosen to override), use standard method
 		if (!functionsClippingsCart::isIndividualInCart($this->tree) || !$this->settings["use_cart"] ) {
 			// Create our tree
 			$this->createIndiList($this->individuals, $this->families, false);
 			if ($this->settings["diagram_type"] == "combined") {
-                if ($this->indi_search_method["spou"] != "") {
-                    $this->removeGhosts($this->individuals, $this->families);
-                }
+				if ($this->indi_search_method["spou"] != "") {
+					$this->removeGhosts($this->individuals, $this->families);
+				}
 			} else {
-                // Remove families with only one link
-                foreach ($this->families as $f) {
-                    $xref = $f["fid"];
-                    // If not dummy family, the family has no children, and one of the spouse records are missing
-                    if (substr($xref, 0, 2) != "F_" && (!isset($this->families[$xref]["has_children"]) || !$this->families[$xref]["has_children"]) && (!isset($this->families[$xref]["husb_id"]) || !isset($this->families[$xref]["wife_id"]))) {
-                        // Remove this family from the family list
-                        unset($this->families[$xref]);
-                    }
-                }
-            }
+				// Remove families with only one link
+				foreach ($this->families as $f) {
+					$xref = $f["fid"];
+					// If not dummy family, the family has no children, and one of the spouse records are missing
+					if (substr($xref, 0, 2) != "F_" && (!isset($this->families[$xref]["has_children"]) || !$this->families[$xref]["has_children"]) && (!isset($this->families[$xref]["husb_id"]) || !isset($this->families[$xref]["wife_id"]))) {
+						// Remove this family from the family list
+						unset($this->families[$xref]);
+					}
+				}
+			}
 
 			// If option to display related in another colour is selected,
 			// check if any non-related persons in tree
@@ -289,15 +291,15 @@ class Dot {
 			$this->families = $functionsCC->getFamilies();
 		}
 
-        // Create shared notes data
-        $sharednotes = new SharedNoteList($this->settings['sharednote_col_data'], $this->tree, $this->settings['sharednote_col_default']);
+		// Create shared notes data
+		$sharednotes = new SharedNoteList($this->settings['sharednote_col_data'], $this->tree, $this->settings['sharednote_col_default']);
 
-        $out = $this->printDOTHeader();
+		$out = $this->printDOTHeader();
 
 		// ### Print the individuals list ###
 		if ($this->settings["diagram_type"] != "combined") {
 			foreach ($this->individuals as $person_attributes) {
-                $person = new Person($person_attributes, $this);
+				$person = new Person($person_attributes, $this);
 				$out .= $person->printPerson($sharednotes);
 			}
 		}
@@ -308,15 +310,15 @@ class Dot {
 		// If no_fams option is not checked then we print the families
 		if (!$this->settings["no_fams"]) {
 			foreach ($this->families as $fid=>$fam_data) {
-                if ($this->settings["diagram_type"] == "combined") {
-                    $nodeName = $this->generateFamilyNodeName($fid);
-                    // We do not show those families which has no parents and children in case of "combined" view;
-                    if ((isset($this->families[$fid]["has_children"]) && $this->families[$fid]["has_children"])
-                        || (isset($this->families[$fid]["has_parents"]) && $this->families[$fid]["has_parents"])
-                        || ((isset($this->families[$fid]["husb_id"]) && $this->families[$fid]["husb_id"]) && (isset($this->families[$fid]["wife_id"]) && $this->families[$fid]["wife_id"]))
-                    ) {
-                        $out .= $this->printFamily($fid, $nodeName, $sharednotes);
-                    }
+				if ($this->settings["diagram_type"] == "combined") {
+					$nodeName = $this->generateFamilyNodeName($fid);
+					// We do not show those families which has no parents and children in case of "combined" view;
+					if ((isset($this->families[$fid]["has_children"]) && $this->families[$fid]["has_children"])
+						|| (isset($this->families[$fid]["has_parents"]) && $this->families[$fid]["has_parents"])
+						|| ((isset($this->families[$fid]["husb_id"]) && $this->families[$fid]["husb_id"]) && (isset($this->families[$fid]["wife_id"]) && $this->families[$fid]["wife_id"]))
+					) {
+						$out .= $this->printFamily($fid, $nodeName, $sharednotes);
+					}
 				} elseif ($this->settings["diagram_type"] != "combined") {
 					$out .= $this->printFamily($fid, $fid, $sharednotes);
 				}
@@ -479,8 +481,10 @@ class Dot {
 		$out .= "rankdir=\"" . $this->settings["graph_dir"] . "\"\n";
 		$out .= "pagedir=\"LT\"\n";
 		$out .= "bgcolor=\"" . $this->settings['background_col'] . "\"\n";
+		#splines https://gitlab.com/graphviz/graphviz/-/blob/main/lib/common/utils.c
+		$out .= "splines=\"spline\"\n";   #<- default
 		$out .= "edge [ style=solid, arrowhead=normal, arrowtail=none];\n";
-        $out .= "node [ shape=plaintext font_size=\"" . $this->settings['font_size'] ."\" fontname=\"" . $this->settings["typefaces"][$this->settings["typeface"]] . "\"];\n";
+		$out .= "node [ shape=plaintext font_size=\"" . $this->settings['font_size'] ."\" fontname=\"" . $this->settings["typefaces"][$this->settings["typeface"]] . "\"];\n";
 		return $out;
 	}
 
@@ -503,9 +507,18 @@ class Dot {
      * @return string
      */
 	function printFamily(string $fid, string $nodeName, SharedNoteList $sharednotes): string
-    {
-        $prefix = '';
-        $out = $nodeName;
+	{
+		$out = $nodeName;
+		$prefix_array = Array();
+		$marriageType_array = Array();
+		$marriagedate_array = Array();
+		$marriageplace_array = Array();
+		$pic_marriage_first_array = Array();
+		$pic_marriage_first_title_array = Array();
+		$pic_marriage_first_link_array = Array();
+
+		$printCount = -1;
+
 		$out .= " [ ";
 
 		// Showing the ID of the family, if set
@@ -518,8 +531,10 @@ class Dot {
 		// --- Data collection ---
 		// If a "dummy" family is set (begins with "F_"), then there is no marriage & family data, so no need for querying webtrees...
 		if (substr($fid, 0, 2) == "F_") {
+			$printCount += 1;
+
 			$fill_colour = $this->getFamilyColour();
-			$marriageplace = "";
+			$marriageplace_array[0] = "";
 			$husb_id = $this->families[$fid]["husb_id"];
 			$wife_id = $this->families[$fid]["wife_id"];
 			if (!empty($this->families[$fid]["unkn_id"])) {
@@ -530,109 +545,243 @@ class Dot {
 		} else {
 			$f = $this->getUpdatedFamily($fid);
 
-            // Set marriage prefix only if marriage exists
-            $married = !(empty($f->getMarriage()) && Date::compare($f->getMarriageDate(), new Date('')) == 0);
-            if ($married) {
-                $prefix = $this->settings["marriage_prefix"] . ' ';
-            }
+			$marriages = $f->facts(['MARR']);
 
+			// Get the husband's and wife's id from PGV
+			$husb_id = $this->families[$fid]["husb_id"] ?? "";
+			$wife_id = $this->families[$fid]["wife_id"] ?? "";
+	
 			$fill_colour = $this->getFamilyColour();
 			$link = $f->url();
 
-			// Show marriage year
-			if ($this->settings["show_marriage_date"]) {
-                $marriagedate = $this->formatDate($f->getMarriageDate(), $this->settings["marr_date_year_only"],  $this->settings["use_abbr_month"]);
-			} else {
-				$marriagedate = "";
+			if (count($marriages) == 0) {
+				# No marriage events
+				#Increment the printCount in order to print a family without marriage
+				$printCount += 1;
 			}
 
-			// Show marriage place
-			if ($this->settings["show_marriage_place"] && !empty($f->getMarriage()) && !empty($f->getMarriagePlace())) {
-				$marriageplace = $this->getAbbreviatedPlace($f->getMarriagePlace()->gedcomName(), $this->settings);
-			} else {
-				$marriageplace = "";
-			}
+			# At least one marriage event
+			foreach ($marriages as $marriageFact) {
+				$printCount += 1;
 
-			// Get the husband's and wife's id from PGV
-            $husb_id = $this->families[$fid]["husb_id"] ?? "";
-            $wife_id = $this->families[$fid]["wife_id"] ?? "";
+				// Set marriage prefix only if marriage exists
+				$married = !(empty($marriageFact) && Date::compare($marriageFact->date(), new Date('')) == 0);
+				if ($married) {
+					$prefix_array[$printCount] = $this->settings["marriage_prefix"] . ' ';
+				}
+	
+				if ($this->settings["show_marriage_type"]) {
+					$marriageType_array[$printCount] = '';
+					if (($marriageFact instanceof Fact)) {
+						$marriageAttributeType = $marriageFact->attribute('TYPE');
+						if ($marriageAttributeType !== '') {
+							$element = Registry::elementFactory()->make('FAM:MARR:TYPE');
+							$marriageType_array[$printCount] = $element->value($marriageAttributeType, $this->tree);
+						} else {
+							if ($this->settings["show_marriage_type"] && $this->settings["show_marriage_type_not_specified"]) {
+								$marriageType_array[$printCount] = I18N::translate('Unknown type of marriage') ;
+							}
+						}
+					}
+				}
+	
+				// Show marriage year
+				if ($this->settings["show_marriage_date"]) {
+					$marriagedate_array[$printCount] = $this->formatDate($marriageFact->date(), $this->settings["marr_date_year_only"],  $this->settings["use_abbr_month"]);
+				} else {
+					$marriagedate_array[$printCount] = "";
+				}
+	
+				// Show marriage place
+				if ($this->settings["show_marriage_place"] && !empty($marriageFact) && !empty($marriageFact->place())) {
+					$marriageplace_array[$printCount] = $this->getAbbreviatedPlace($marriageFact->place()->gedcomName(), $this->settings);
+				} else {
+					$marriageplace_array[$printCount] = "";
+				}
+		
+				if ($this->settings["show_marriage_first_image"] && $this->isPhotoRequired()) {
+					[$pic_marriage_first_array[$printCount], 
+					 $pic_marriage_first_title_array[$printCount], 
+					 $pic_marriage_first_link_array[$printCount]] = $this->addFirstPhotoFromSpecificFactToFam($marriageFact);
+				}
+	
+				// Get the husband's and wife's id from PGV
+				$husb_id = $this->families[$fid]["husb_id"] ?? "";
+				$wife_id = $this->families[$fid]["wife_id"] ?? "";
+
+				if ($this->settings["show_only_first_marriage"]) {
+					break;
+				}
+			}
 		}
 
-		// --- Printing ---
-		// "Combined" type
-		if ($this->settings["diagram_type"] == "combined") {
-			$out .= "label=<";
+		for ($i = 0; $i <= $printCount; $i++) {
+			// --- Printing ---
+			// "Combined" type
+			if ($this->settings["diagram_type"] == "combined") {
+				if ($i==0) {
+					$out .= "label=<";
+		
+					// --- Print table ---
+					$out .= "<TABLE COLOR=\"" . $this->settings["border_col"] . "\" BORDER=\"0\" CELLBORDER=\"1\" CELLPADDING=\"2\" CELLSPACING=\"0\">";
+		
+					// --- Print couple ---
+					$out .= "<TR>";
+		
+					if (!empty($unkn_id)) {
+						// Print unknown gender INDI
+						$person = new Person([], $this);
+						$out = $person->addPersonLabel($unkn_id, $out, $sharednotes);
+					} else {
+						// Print husband
+						if (!empty($husb_id)) {
+							$person = new Person([], $this);
+							$out = $person->addPersonLabel($husb_id, $out, $sharednotes);
+						}
+		
+						// Print wife
+						if (!empty($wife_id)) {
+							if ($this->settings["combined_layout_type"] == 'OU' && !empty($husb_id)) {
+								$out .= "</TR>";
+								$out .= "<TR>";
+							}
+							$person = new Person([], $this);
+							$out = $person->addPersonLabel($wife_id, $out, $sharednotes);
+						}
 
-			// --- Print table ---
-			$out .= "<TABLE COLOR=\"" . $this->settings["border_col"] . "\" BORDER=\"0\" CELLBORDER=\"1\" CELLPADDING=\"2\" CELLSPACING=\"0\">";
-
-			// --- Print couple ---
-			$out .= "<TR>";
-
-			if (!empty($unkn_id)) {
-                // Print unknown gender INDI
-                $person = new Person([], $this);
-                $out = $person->addPersonLabel($unkn_id, $out, $sharednotes);
-            } else {
-			  // Print husband
-			  if (!empty($husb_id)) {
-                  $person = new Person([], $this);
-                  $out = $person->addPersonLabel($husb_id, $out, $sharednotes);
-			  }
-
-			  // Print wife
-			  if (!empty($wife_id)) {
-			     if ($this->settings["combined_layout_type"] == 'OU' && !empty($husb_id)) {
-			       $out .= "</TR>";
-   			       $out .= "<TR>";
-                 }
-                 $person = new Person([], $this);
-                 $out = $person->addPersonLabel($wife_id, $out, $sharednotes);
-			  }
-
-              if (empty($husb_id) && empty($wife_id)) {
-                  $person = new Person([], $this);
-                  $out = $person->addPersonLabel('I_N', $out, $sharednotes);
-              }
-			}
-
-			$out .= "</TR>";
-            // --- Print marriage ---
-			if (substr($fid, 0, 2) !== "F_" && (!(empty($marriagedate) && empty($marriageplace) && empty($family) && empty($prefix)) || (empty($husb_id) && empty($wife_id))) && ($this->settings["show_marriage_date"] || $this->settings["show_marriage_place"] || $this->settings["show_xref_families"])) {
-				$out .= "<TR>";
-				if ($this->settings["add_links"]) {
-					$out .= "<TD COLSPAN=\"2\" CELLPADDING=\"0\" CELLBORDER=\"1\" PORT=\"marr\" TARGET=\"_BLANK\" HREF=\"" . $this->convertToHTMLSC($link) . "\" BGCOLOR=\"" . $fill_colour . "\">"; #ESL!!! 20090213 without convertToHTMLSC the dot file has invalid data
-				} else {
-					$out .= "<TD COLSPAN=\"2\" CELLPADDING=\"0\" CELLBORDER=\"1\" PORT=\"marr\" BGCOLOR=\"" . $fill_colour . "\">";
+						if (empty($husb_id) && empty($wife_id)) {
+							$person = new Person([], $this);
+							$out = $person->addPersonLabel('I_N', $out, $sharednotes);
+						}
+					}
+		
+					$out .= "</TR>";
 				}
 
-				$out .= "<FONT COLOR=\"". $this->settings["font_colour_details"] ."\" POINT-SIZE=\"" . ($this->settings["font_size"]) ."\">" . $prefix . (empty($marriagedate)?"":$marriagedate) . "<BR />" . (empty($marriageplace)?"":"(".$marriageplace.")") . $family . "</FONT>";
-				$out .= "</TD>";
-				$out .= "</TR>";
+
+                $isDummy = substr($fid, 0, 2) === "F_";
+                $hasContent = !(
+                    empty($marriagedate_array[$i]) &&
+                    empty($marriageplace_array[$i]) &&
+                    empty($marriageType_array[$i]) &&
+                    empty($family) &&
+                    empty($prefix_array[$i])
+                );
+                $noPartners = empty($husb_id) && empty($wife_id);
+                $enabled = (
+                    $this->settings["show_marriage_date"] ||
+                    $this->settings["show_marriage_place"] ||
+                    $this->settings["show_xref_families"] ||
+                    $this->settings["show_marriage_type"]
+                );
+
+				// --- Print marriage ---
+				if (!$isDummy && ($hasContent || $noPartners) && $enabled) {
+                    if ($i==0) {
+                        $out .= "<TR>";
+
+                        if ($this->settings["add_links"]) {
+                            $out .= "<TD COLSPAN=\"2\" CELLPADDING=\"0\" CELLBORDER=\"1\" PORT=\"marr\" TARGET=\"_BLANK\" HREF=\"" . $this->convertToHTMLSC($link) . "\" BGCOLOR=\"" . $fill_colour . "\">"; #ESL!!! 20090213 without convertToHTMLSC the dot file has invalid data
+                        } else {
+                            $out .= "<TD COLSPAN=\"2\" CELLPADDING=\"0\" CELLBORDER=\"1\" PORT=\"marr\" BGCOLOR=\"" . $fill_colour . "\">";
+                        }
+                    }
+					$out .= "<FONT COLOR=\"". $this->settings["font_colour_details"] ."\" POINT-SIZE=\"" . ($this->settings["font_size"]) ."\">" . ($prefix_array[$i] ?? '') . (empty($marriageType_array[$i])?"":$marriageType_array[$i]) . " " . (empty($marriagedate_array[$i])?"":$marriagedate_array[$i]) . " " . (empty($marriageplace_array[$i])?"":"(".$marriageplace_array[$i].")") . $family . "</FONT><BR />";
+
+                    if ($i == $printCount) {
+                        $out .= "</TD>";
+                        if ($this->isPhotoRequired()) {
+                            if ($this->settings["show_marriage_first_image"] && !empty($pic_marriage_first_array[$i])) {
+                                $out .= $this->getFamFactImage(true /*$detailsExist*/, $pic_marriage_first_array[$i], $pic_marriage_first_link_array[$i], $pic_marriage_first_title_array[$i]);
+                            }
+                        }
+                        $out .= "</TR>";
+                    }
+				}
+	
+				if ($i == $printCount) {
+					$out .= "</TABLE>";
+					$out .= ">";
+				}
+			} else {
+			// Non-combined type
+				if ($this->settings["add_links"]) {
+					$href = "target=\"_blank\" href=\"" . $this->convertToHTMLSC($link) . "\", target=\"_blank\", ";
+				} else {
+					$href = "";
+				}
+				// If names, birth details, and death details are all disabled - show a smaller marriage circle to match the small tiles for individuals.
+				if (!$this->settings["show_marriage_date"] && !$this->settings["show_marriage_place"] && !$this->settings["show_xref_families"]) {
+					$out .= "color=\"" . $this->settings["border_col"] . "\",fillcolor=\"" . $fill_colour . "\", $href shape=point, height=0.2, style=filled";
+					$out .= ", label=" . "< >";
+				} else {
+					if ($i == 0) {
+						$out .= "color=\"" . $this->settings["border_col"] . "\",fillcolor=\"" . $fill_colour . "\", $href shape=oval, style=\"filled\", margin=0.01";
+						$out .= ", label=" . "<<TABLE border=\"0\" CELLPADDING=\"5\" CELLSPACING=\"0\"><TR><TD>";
+					}
+
+					$out .= "<FONT COLOR=\"". $this->settings["font_colour_details"] ."\" POINT-SIZE=\"" . ($this->settings["font_size"]) ."\">" . (empty($prefix_array[$i])?"":$prefix_array[$i]) . (empty($marriageType_array[$i])?"":$marriageType_array[$i]) . " " . (empty($marriagedate_array[$i])?"":$marriagedate_array[$i]) . "<BR />" . (empty($marriageplace_array[$i])?"":"(".$marriageplace_array[$i].")") . $family . "</FONT>";
+
+
+					if ($i == $printCount) {
+                        $out .= "</TD>";
+                        if ($this->isPhotoRequired()) {
+                            if ($this->settings["show_marriage_first_image"] && !empty($pic_marriage_first_array[$i])) {
+                                $out .= $this->getFamFactImage(true /*$detailsExist*/, $pic_marriage_first_array[$i], $pic_marriage_first_link_array[$i], $pic_marriage_first_title_array[$i]);
+                            }
+                        }
+                        $out .= "</TR>";
+						$out .= "</TABLE>>";
+					}
+				}
 			}
-
-			$out .= "</TABLE>";
-
-			$out .= "> tooltip=\" \"";
-		} else {
-		// Non-combined type
-			if ($this->settings["add_links"]) {
-                $href = "target=\"_blank\" href=\"" . $this->convertToHTMLSC($link) . "\", target=\"_blank\", ";
-            } else {
-                $href = "";
-            }
-            // If names, birth details, and death details are all disabled - show a smaller marriage circle to match the small tiles for individuals.
-            if (!$this->settings["show_marriage_date"] && !$this->settings["show_marriage_place"] && !$this->settings["show_xref_families"]) {
-                $out .= "color=\"" . $this->settings["border_col"] . "\",fillcolor=\"" . $fill_colour . "\", $href shape=point, height=0.2, style=filled";
-                $out .= ", label=" . "< >";
-            } else {
-                $out .= "color=\"" . $this->settings["border_col"] . "\",fillcolor=\"" . $fill_colour . "\", $href shape=oval, style=\"filled\", margin=0.01";
-                $out .= ", label=" . "<<TABLE border=\"0\" CELLPADDING=\"5\" CELLSPACING=\"0\"><TR><TD><FONT COLOR=\"". $this->settings["font_colour_details"] ."\" POINT-SIZE=\"" . ($this->settings["font_size"]) ."\">" . $prefix . (empty($marriagedate)?"":$marriagedate) . "<BR />" . (empty($marriageplace)?"":"(".$marriageplace.")") . $family . "</FONT></TD></TR></TABLE>>";
-            }
-        }
+		}
 
 		$out .= "];\n";
 
+		return $out;
+	}
+
+	/**
+	 * Returns the cell margin needed for the different photo shapes, so
+	 * they don't overlap rounded rectangle borders
+	 *
+	 * @return int
+	 */
+	private function getFamPhotoPaddingSize(): int
+	{
+		if ($this->settings['indi_tile_shape'] == Person::TILE_SHAPE_ROUNDED) {
+			switch ($this->settings['photo_shape']) {
+				case Person::SHAPE_NONE:
+					return 4;
+				case Person::SHAPE_SQUARE:
+					return 2;
+				default:
+			}
+		}
+		return 1;
+	}
+
+	public function getFamFactImage(bool $detailsExist, string $img, string $link, string $title) : string {
+		$out = "";
+		// Show photo
+		if (($detailsExist) && ($this->isPhotoRequired())) {
+			if (!empty($img)) {
+				$photo_size = floatval($this->settings["photo_size"]) / 100;
+				$padding = $this->getFamPhotoPaddingSize();
+				if ($this->settings["add_links"]) {
+					$out .= "<TD CELLPADDING=\"$padding\" PORT=\"pic\" WIDTH=\"" . ($this->settings["font_size"] * 4 * $photo_size)  . "\" HEIGHT=\"" . ($this->settings["font_size"] * 4 * $photo_size) . "\" FIXEDSIZE=\"true\" ALIGN=\"CENTER\" VALIGN=\"MIDDLE\" HREF=\"".$this->convertToHTMLSC($link)."\" TOOLTIP=\"" . $title . "\"><IMG SCALE=\"true\" SRC=\"" . $img . "\" /></TD>";
+				} else {
+					$out .= "<TD CELLPADDING=\"$padding\" PORT=\"pic\" WIDTH=\"" . ($this->settings["font_size"] * 4 * $photo_size)  . "\" HEIGHT=\"" . ($this->settings["font_size"] * 4 * $photo_size) . "\" FIXEDSIZE=\"true\" ALIGN=\"CENTER\" VALIGN=\"MIDDLE\" TOOLTIP=\"" . $title . "\"><IMG SCALE=\"true\" SRC=\"" . $img . "\" /></TD>";
+				}
+			} else {
+				// Blank cell zero width to keep the height right
+				$out .= "<TD CELLPADDING=\"1\" PORT=\"pic\" WIDTH=\"0\" HEIGHT=\"" . ($this->settings["font_size"] * 4) . "\" FIXEDSIZE=\"true\"></TD>";
+			}
+		} else {
+			$out .= "<TD>&nbsp;";
+			$out .= "</TD>";
+		}
 		return $out;
 	}
 
@@ -661,9 +810,9 @@ class Dot {
 		// Set ancestor/descendant levels in case these options disabled
 		$ance_level = $this->indi_search_method["ance"] ? $this->settings["ancestor_levels"] : 0;
 		$desc_level = $this->indi_search_method["desc"] ? $this->settings["descendant_levels"] : 0;
-        if ($this->settings["descendant_levels"] == 0) {
-            $desc = false;
-        }
+		if ($this->settings["descendant_levels"] == 0) {
+			$desc = false;
+		}
 		// Get updated INDI data
 		$i = $this->getUpdatedPerson($pid);
 
@@ -677,8 +826,8 @@ class Dot {
 		$individuals[$pid]['pid'] = $pid;
 		// Overwrite the 'related' status if it was not set before, or it's 'false' (for those people who are added as both related and non-related)
 
-        if (!isset($individuals[$pid]['rel']) || (!$individuals[$pid]['rel'] && $rel)) {
-				$individuals[$pid]['rel'] = $rel;
+		if (!isset($individuals[$pid]['rel']) || (!$individuals[$pid]['rel'] && $rel)) {
+			$individuals[$pid]['rel'] = $rel;
 		} else {
 			// We've already added this person
 			return false;
@@ -696,8 +845,20 @@ class Dot {
 		}
 		// -------------
 		// Add photo
-		if ($this->settings["show_photos"] && $this->isPhotoRequired()) {
-			$individuals[$pid]["pic"] = $this->addPhotoToIndi($pid);
+		if ($this->isPhotoRequired()) {
+			[$individuals[$pid]["pic"], $individuals[$pid]["pic" . "_title"], $individuals[$pid]["pic" . "_link"]] = $this->addPhotoToIndi($pid);
+
+			if ($this->settings["show_birth_first_image"] && $this->isPhotoRequired()) {
+				[$individuals[$pid]["pic_birth_first"], $individuals[$pid]["pic_birth_first"."_title"], $individuals[$pid]["pic_birth_first"."_link"]] = $this->addFirstPhotoFromFactsToIndi($pid, Gedcom::BIRTH_EVENTS);
+			}
+	
+			if ($this->settings["show_death_first_image"] && $this->isPhotoRequired()) {
+				[$individuals[$pid]["pic_death_first"], $individuals[$pid]["pic_death_first"."_title"], $individuals[$pid]["pic_death_first"."_link"]] = $this->addFirstPhotoFromFactsToIndi($pid, ["DEAT"]);
+			}
+	
+			if ($this->settings["show_burial_first_image"] && $this->isPhotoRequired()) {
+				[$individuals[$pid]["pic_burial_first"], $individuals[$pid]["pic_burial_first"."_title"], $individuals[$pid]["pic_burial_first"."_link"]] = $this->addFirstPhotoFromFactsToIndi($pid, ['BURI', 'CREM']);
+			}
 		}
 
 		// Add the family nr which he/she belongs to as spouse (needed when "combined" mode is used)
@@ -1139,10 +1300,12 @@ class Dot {
 	 *
 	 */
 	function addFamToList($fid, &$families) {
-        if($fid instanceof Family)
-            $fid = $fid->xref();
-        if(!isset($families[$fid]))
+		if($fid instanceof Family) {
+			$fid = $fid->xref();
+		}
+		if(!isset($families[$fid])) {
 			$families[$fid] = array();
+		}
 		$families[$fid]["fid"] = $fid;
 	}
 
@@ -1151,42 +1314,114 @@ class Dot {
  	 *
 	 * @param string $pid Individual's GEDCOM id (Ixxx)
 	 */
-	function addPhotoToIndi(string $pid) {
+	function addPhotoToIndi(string $pid): array
+    {
 		$i = Registry::individualFactory()->make($pid, $this->tree);
 		$m = $i->findHighlightedMediaFile();
-        $resolution = floatval($this->settings["photo_resolution"]) / 100;
+		$resolution = floatval($this->settings["photo_resolution"]) / 100;
 		if (empty($m)) {
-			return null;
+			return [null, "", null];
 		} else if (!$m->isExternal() && $m->fileExists()) {
-			// If we are rendering in the browser, provide the URL, otherwise provide the server side file location
-			if (isset($_REQUEST["download"])) {
-                $image = new ImageFile($m, $this->tree, $this->settings['dpi']*$resolution);
-				return $image->getImageLocation($this->settings["photo_quality"], $this->settings["convert_photos_jpeg"]);
-			} else {
-                switch ($this->settings['photo_shape']) {
-                    case 0:
-                    case 10:
-                    case 40:
-                        $fit = 'contain';
-                        break;
-                    default:
-                        $fit = 'crop';
-                }
-
-				return str_replace("&","%26",$m->imageUrl($this->settings['dpi']*$resolution,$this->settings['dpi']*$resolution, $fit));
-			}
-		} else {
-			return null;
+			$media_title  = strip_tags($i->fullName());
+            return $this->getImageLocation($m, $resolution, $media_title);
+        } else {
+			return [null, "", null];
 		}
 	}
 
-	function getUpdatedFamily($fid): ?Family
+	/**
+	 * Searches in all specified facts of a given individual (even if repeated) for the first photo and adds it's path
+	 * It should be analized if it would be better to just consider the first fact of a specified kind and take it's photo, if present. That way the written information is consistent with it
+ 	 *
+	 * @param string $pid Individual's GEDCOM id (Ixxx)
+	 * @param array $fnames of GEDCOM fact names to be searched
+	 */
+	function addFirstPhotoFromFactsToIndi(string $pid, array $fnames): array
     {
+		$emptyimg='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
+		$i = $this->getUpdatedPerson($pid);
+
+		$m = null;
+		$media_title = null;
+		$break=false;
+		foreach ($fnames as $fname) {
+			foreach ($i->facts([$fname]) as $fact) {
+				if ($fact instanceof Fact) {
+					if ($fact->canShow()) {
+						if (preg_match_all('/\n2 OBJE\b\s@*([^@]*)@*/', $fact->gedcom(), $matches, PREG_SET_ORDER) > 0) {
+							$mediaGed = $matches[0][1];
+							if (!empty($mediaGed)) {
+								$mediaobject = Registry::mediaFactory()->make($mediaGed, $this->tree);
+								if ($mediaobject !== null) {
+									$m  = $mediaobject->firstImageFile();
+									$media_title  = $mediaobject->fullName();
+									$break=true;
+									break;
+								}
+							}
+						}
+					}
+				}
+			}
+			if ($break) {
+				break;
+			}
+		}
+
+		$resolution = floatval($this->settings["photo_resolution"]) / 100;
+		if (empty($m)) {
+			return [null, "", $emptyimg];
+		} else if (!$m->isExternal() && $m->fileExists()) {
+			// If we are rendering in the browser, provide the URL, otherwise provide the server side file location
+            return $this->getImageLocation($m, $resolution, $media_title);
+		} else {
+			return [null, "", $emptyimg];
+		}
+	}
+
+	/**
+	 * Searches for the first photo of a given fact and adds it's path
+ 	 *
+	 * @param Fact $fact The fact to search on
+	 */
+	function addFirstPhotoFromSpecificFactToFam(Fact $fact): array
+    {
+		$emptyimg='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
+        $resolution = 1;
+        $media_title = "";
+		if ($fact->canShow()) {
+			$imageGed = '';
+			$imageVal = $fact->attribute('OBJE'); # Obtains the first one
+			if (!empty($imageVal)) {
+				$imageGed = explode("@", $imageVal)[1]; # Removes @ from the Gedcom media id
+			}
+			if (!empty($imageGed)) {
+				$mediaobject = Registry::mediaFactory()->make($imageGed, $this->tree);
+				if ($mediaobject !== null) {
+					$m  = $mediaobject->firstImageFile();
+					$media_title  = $mediaobject->fullName();
+				}
+			}
+			$resolution = floatval($this->settings["photo_resolution"]) / 100;
+		}
+		if (empty($m)) {
+			return [null, "", $emptyimg];
+		} else if (!$m->isExternal() && $m->fileExists()) {
+			// If we are rendering in the browser, provide the URL, otherwise provide the server side file location
+            return $this->getImageLocation($m, $resolution, $media_title);
+		} else {
+			return [null, "", $emptyimg];
+		}
+	}
+
+
+	function getUpdatedFamily($fid): ?Family
+	{
 		return Registry::familyFactory()->make($fid, $this->tree);
 	}
 
 	function getUpdatedPerson($pid): ?Individual
-    {
+	{
 		return Registry::individualFactory()->make($pid, $this->tree);
 	}
 
@@ -1386,5 +1621,33 @@ class Dot {
             $tmp = trim("$q1 $dy");
         }
         return $tmp;
+    }
+
+    /**
+     * Returns the location of the image. For browser this is the URL but downloads are given the hard drive location
+     *
+     * @param $m
+     * @param $resolution
+     * @param string $media_title
+     * @return array
+     */
+    public function getImageLocation($m, $resolution, string $media_title): array
+    {
+        if (isset($_REQUEST["download"])) {
+            $image = new ImageFile($m, $this->tree, $this->settings['dpi'] * $resolution);
+            return [$image->getImageLocation($this->settings["photo_quality"], $this->settings["convert_photos_jpeg"]), strip_tags($media_title), $m->downloadUrl('inline')];
+        } else {
+            switch ($this->settings['photo_shape']) {
+                case 0:
+                case 10:
+                case 40:
+                    $fit = 'contain';
+                    break;
+                default:
+                    $fit = 'crop';
+            }
+
+            return [str_replace("&", "%26", $m->imageUrl($this->settings['dpi'] * $resolution, $this->settings['dpi'] * $resolution, $fit)), strip_tags($media_title), $m->downloadUrl('inline')];
+        }
     }
 }

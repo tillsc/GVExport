@@ -193,15 +193,16 @@ $usegraphviz = $vars['graphviz_bin'] != "";
             addError("indi-error","<?= I18N::translate('Individual required') ?>");
             e.preventDefault();
         }
-        // Also check if Graphviz installed. If so then let it handle it (unless unsupported setting used),
-        // but if not, trigger client side actions
-        if (!graphvizAvailable || document.getElementById('photo_shape')?.value !== '0') {
+
+        // If not client side, submit will be triggered and server side used
+        if (Form.mustUseClientGeneration()) {
             const output = document.getElementById('output_type').value;
             switch(output) {
                 case "png":
                     Data.download.downloadSVGAsPNG();
                     break;
                 case "svg":
+                    if (graphvizAvailable) UI.showToast(TRANSLATE['Diagram rendered in browser due to settings selected'])
                     Data.download.downloadSVGAsText();
                     break;
                 case "jpg":

@@ -27,6 +27,9 @@ $help = new Help();
 <p>
     <?= I18N::translate('This also affects families in the diagram. If this option is enabled, you can click on family records to open the family webtrees page. Also see \'Action when individual clicked\' in the Browser render settings.'); ?>
 </p>
+<p>
+    <?= I18N::translate('Note that SVG output will always be rendered by the browser (and not the server) if you choose to include page links.'); ?>
+</p>
 <h4><?= I18N::translate('Abbreviations'); ?></h4>
 <h5><?= I18N::translate('Abbreviated names'); ?></h5>
 <p>
@@ -92,6 +95,21 @@ $help = new Help();
 <p>
     <?= I18N::translate('Whether to show the place of death in the output. Also see option for abbreviating place names.'); ?>
 </p>
+<h5><?= I18N::translate('Show burial date'); ?></h5>
+<p>
+    <?= I18N::translate('Check the box if you would like to include the burial date of individuals in the output.'); ?>
+</p>
+<p>
+    <?= I18N::translate('You can also choose whether to show the full date of burial or just the year.'); ?>
+</p>
+<h5><?= I18N::translate('Show burial place'); ?></h5>
+<p>
+    <?= I18N::translate('Whether to show the place of burial in the output. Also see option for abbreviating place names.'); ?>
+</p>
+<h5><?= I18N::translate('Show sex of individuals'); ?></h5>
+<p>
+    <?= I18N::translate('Whether to print the sex of the individual on the individual&apos;s tile, e.g. &quot;Male&quot;'); ?>
+</p>
 <h5><?= I18N::translate('Use similar events if information not available'); ?></h5>
 <p>
     <?= I18N::translate('When showing information about a birth or death, if the information is not available then webtrees will look for similar events and use the information from those events instead.'); ?>
@@ -103,15 +121,20 @@ $help = new Help();
 <p>
     <?= I18N::translate('If you disable this option, GVExport will only use information from birth and death events, and not try to find missing information in similar events.'); ?>
 </p>
-<h5><?= I18N::translate('Show sex of individuals'); ?></h5>
 <p>
-    <?= I18N::translate('Whether to print the sex of the individual on the individual&apos;s tile, e.g. &quot;Male&quot;'); ?>
+    <?= I18N::translate('The options to show burial dates and places will use the burial or cremation events and is not affected by this setting.'); ?>
 </p>
 <h4><?= I18N::translate('Information on families'); ?></h4>
 <h5><?= I18N::translate('Show family XREF'); ?></h5>
 <p>
     <?= I18N::translate('Whether to include the XREF of families in the output.'); ?>
 </p>
+
+<h5><?= I18N::translate('Show only first marriage'); ?></h5>
+<p>
+    <?= I18N::translate('If a couple have been married more than once (a family record in webtrees has multiple marriage events), if this option is selected then only the first is shown (this is the default). If you unselect this option, all marriage events will be shown in the same family record in the diagram.'); ?>
+</p>
+
 <h5><?= I18N::translate('Show marriage date'); ?></h5>
 <p>
     <?= I18N::translate('Check the box if you would like to include the date of marriage in the output.'); ?>
@@ -122,6 +145,14 @@ $help = new Help();
 <h5><?= I18N::translate('Show marriage place'); ?></h5>
 <p>
     <?= I18N::translate('Whether to show the place of marriage in the output. Also see option for abbreviating place names.'); ?>
+</p>
+<h5><?= I18N::translate('Show marriage type'); ?></h5>
+<p>
+    <?= I18N::translate('If selected, the type of marriage (civil, religious, registered partnership) will be shown on the family record.'); ?>
+</p>
+<h5><?= I18N::translate('Show when type not specified'); ?></h5>
+<p>
+    <?= I18N::translate('If selected, where the marriage type is not known then it will show a message stating this. If unselected, unknown marriage types will not be displayed.'); ?>
 </p>
 <p>
     <?= I18N::translate('Related links'); ?>:

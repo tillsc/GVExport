@@ -494,6 +494,7 @@ class Settings
             case 'mclimit':
             case 'birth_prefix':
             case 'death_prefix':
+            case 'burial_prefix':
             case 'marriage_prefix':
             case 'limit_levels_visitor':
             case 'limit_levels_member':
