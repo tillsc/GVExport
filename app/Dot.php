@@ -751,7 +751,7 @@ class Dot {
 	private function getFamPhotoPaddingSize(): int
 	{
 		if ($this->settings['indi_tile_shape'] == Person::TILE_SHAPE_ROUNDED) {
-			switch ($this->dot->settings['photo_shape']) {
+			switch ($this->settings['photo_shape']) {
 				case Person::SHAPE_NONE:
 					return 4;
 				case Person::SHAPE_SQUARE:
