@@ -56,9 +56,12 @@ msgstr "Max. niveaus"
 msgid "Mark not blood-related people with different colour"
 msgstr "Markeer niet-bloedverwante personen met andere kleur"
 
+#. SVG links no longer work (and seem to have been broken for 3+ years), and it's not trivial to fix. Instead, I have updated this to clarify that it works only with PDF, and it will be hidden if Graphviz is not installed on the server.
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/SEzk1B1h5LwyvxiJ9liuAwLX.png
 #: 
-msgid "Add URL to individuals and families"
-msgstr "URL toevoegen naar personen en gezinnen"
+#, fuzzy
+msgid "Add link to individuals and families in PDF output"
+msgstr "Koppeling naar personen en gezinnen toevoegen in PDF-uitvoerURL toevoegen naar personen en gezinnen"
 
 #: 
 msgid "Show birthdate"
@@ -475,11 +478,6 @@ msgstr "Lettergrootte voor namen"
 msgid "browser and SVG only"
 msgstr "alleen browser en SVG"
 
-#. Note limitation for adding URLs:  https://s3.eu-west-1.amazonaws.com/po-pub/i/8gzkcNUo2oj43PpU7Dou5ZEr.png
-#: 
-msgid "browser, SVG, and PDF only"
-msgstr "alleen browser, SVG en PDF"
-
 #. This help message is displayed when the user clicks the help icon next to "Include anyone related to". https://s3.eu-west-1.amazonaws.com/po-pub/i/4sXDKFJMwoE5PBYZqEPOIV7W.png
 #: 
 msgid "This is our starting point. Choose a person to base the diagram around. You might choose yourself.</p><p>You can choose as many starting individuals as you wish. A tree will be created for each starting individual based on the settings, then the trees are merged to create one tree for the diagram.</p><p>Click the X to remove a record from the list. If two or more records are listed, a &quot;Clear all&quot; option will appear to allow you to remove all records.</p><p>You can also click on an individual in this list to have the diagram in the browser scroll to that person.</p><p>When you next come to the page, the default individual or the last individual you were looking at in webtrees will be loaded. If there was just one saved individual then it will be replaced with the individual provided by webtrees on coming to the page. If there were multiple in the list, then the individual provided by webtrees will be added to the list (if not already in it). So be sure to double-check you are only including individuals you are looking for when first loading the page. This default behaviour can be changed with the option &quot;Treatment of source individuals&quot; in the advanced section."
@@ -503,7 +501,7 @@ msgstr "De opties hier zijn:<ul><li>Gescheiden - Personen hebben elk hun eigen t
 #. This help message is displayed when the user clicks the help icon next to "Output file type". https://s3.eu-west-1.amazonaws.com/po-pub/i/apq6Tgv91ZGJTGcUfFH3V1VE.png
 #: 
 msgid "This section lets you choose the output file type when downloading the diagram. Some additional settings are available under some circumstances.<h4>Output file type</h4>The output file type you want. This is ignored when rendering in the browser, it is only used when you download a file. File types SVG, PNG, JPG, and PDF can be downloaded, in addition to the Graphviz DOT format.</p><p>There are some minor differences if you have Graphviz installed on the server:<ul><li>There are two more file types, GIF and PostScript (PS). Most people would not need these.</li><li>PDF and SVG files may be smaller and can include URLs</li><li>You may be able to include more records</li></ul><p>In addition, if you have Graphviz installed on the server there are additional quality settings that are available. The following settings are only available when Graphviz is installed on the server, and the output type is set to SVG or PDF:</p><h4>Quality of JPG photos</h4><p>This setting lets you change the quality of embedded JPG photos. This uses the quality setting that is part of the JPG standard. Reducing this can reduce the file size of the output, while increasing it may increase the quality. Also see the DPI setting to change the resolution of the diagram including photos.</p><h4>Convert photos to JPG where possible</h4><p>If enabled, GVExport will attempt to convert PNG, BMP, and GIF files to JPG and will apply the above quality setting."
-msgstr "Hier kunt u het type uitvoerbestand kiezen bij het downloaden van het diagram. Sommige extra instellingen zijn onder bepaalde omstandigheden beschikbaar.<h4>Type uitvoerbestand </h4>Het gewenste type uitvoerbestand. Dit wordt genegeerd bij het renderen in de browser, het wordt alleen gebruikt bij het downloaden van een bestand. Bestandstypen SVG, PNG, JPG en PDF kunnen worden gedownload, naast het Graphviz DOT-formaat.</p><p>Er zijn enkele kleine verschillen als Graphviz op de server is geïnstalleerd:<ul><li>Er zijn nog twee bestandstypen, GIF en PostScript (PS). De meeste mensen hebben deze niet nodig.</li><li>PDF- en SVG-bestanden kunnen kleiner zijn en URL's bevatten</li><li>Mogelijk kunnen er meer records worden opgenomen</li></ul><p>Als Graphviz op de server is geïnstalleerd, zijn er bovendien extra kwaliteitsinstellingen beschikbaar. De volgende instellingen zijn alleen beschikbaar als Graphviz op de server is geïnstalleerd en het uitvoertype is ingesteld op SVG of PDF:</p><h4>Kwaliteit van JPG-foto's</h4><p>Met deze instelling kunt u de kwaliteit van ingesloten JPG-foto's wijzigen. Hierbij wordt de kwaliteitsinstelling gebruikt die deel uitmaakt van de JPG-standaard. Verlagen kan de bestandsgrootte van de uitvoer verminderen, terwijl verhogen de kwaliteit kan verhogen. Zie ook de DPI-instelling om de resolutie van het diagram inclusief foto's te wijzigen.</p><h4>Foto's waar mogelijk omzetten naar JPG</h4><p>Indien ingeschakeld, zal GVExport proberen PNG-, BMP- en GIF-bestanden te converteren naar JPG en de bovenstaande kwaliteitsinstelling toepassen."
+msgstr "Hier kunt u het type uitvoerbestand kiezen bij het downloaden van het diagram. Sommige extra instellingen zijn onder bepaalde omstandigheden beschikbaar.<h4>Type uitvoerbestand </h4>Het gewenste type uitvoerbestand. Dit wordt genegeerd bij het weergeven in de browser, het wordt alleen gebruikt bij het downloaden van een bestand. Bestandstypen SVG, PNG, JPG en PDF kunnen worden gedownload, naast het Graphviz DOT-formaat.</p><p>Er zijn enkele kleine verschillen als Graphviz op de server is geïnstalleerd:<ul><li>Er zijn nog twee bestandstypen, GIF en PostScript (PS). De meeste mensen hebben deze niet nodig.</li><li>PDF- en SVG-bestanden kunnen kleiner zijn en URL's bevatten</li><li>Mogelijk kunnen er meer records worden opgenomen</li></ul><p>Als Graphviz op de server is geïnstalleerd, zijn er bovendien extra kwaliteitsinstellingen beschikbaar. De volgende instellingen zijn alleen beschikbaar als Graphviz op de server is geïnstalleerd en het uitvoertype is ingesteld op SVG of PDF:</p><h4>Kwaliteit van JPG-foto's</h4><p>Met deze instelling kunt u de kwaliteit van ingesloten JPG-foto's wijzigen. Hierbij wordt de kwaliteitsinstelling gebruikt die deel uitmaakt van de JPG-standaard. Verlagen kan de bestandsgrootte van de uitvoer verminderen, terwijl verhogen de kwaliteit kan verhogen. Zie ook de DPI-instelling om de resolutie van het diagram inclusief foto's te wijzigen.</p><h4>Foto's waar mogelijk omzetten naar JPG</h4><p>Indien ingeschakeld, zal GVExport proberen PNG-, BMP- en GIF-bestanden te converteren naar JPG en de bovenstaande kwaliteitsinstelling toepassen."
 
 #. This help message is displayed when the user clicks the help icon next to "Browser render". https://s3.eu-west-1.amazonaws.com/po-pub/i/obqZqWV3JxLlYqmWek7FPMfW.png
 #: 
@@ -1202,8 +1200,9 @@ msgstr "Hiermee kunt u een vorm toewijzen op basis van het geslacht van personen
 
 #. Part of the Photos help text:  https://s3.eu-west-1.amazonaws.com/po-pub/i/LnybW6GMtDH0UDez4Z0flfpW.png
 #: 
-msgid "This option lets you enable or disable showing photos on the tiles of individuals. If enabled, there are further options as follows:"
-msgstr "Met deze optie kunt u het tonen van foto's op de tegels van personen in- of uitschakelen. Indien ingeschakeld, zijn er verdere opties."
+#, fuzzy
+msgid "This option lets you enable or disable showing photos on the tiles of individuals."
+msgstr "Met deze optie kunt u het tonen van foto's op de tegels van personen in- of uitschakelen."
 
 #. Part of the Photos help text:  https://s3.eu-west-1.amazonaws.com/po-pub/i/LnybW6GMtDH0UDez4Z0flfpW.png
 #: 
@@ -1678,11 +1677,6 @@ msgstr "Verkorte maandnamen"
 msgid "This section allows for some changes to the content of tiles, including links, abbreviations, and the details included on individuals and families."
 msgstr "In dit onderdeel kunnen enkele wijzigingen worden aangebracht aan de inhoud van tegels, zoals koppelingen, afkortingen en details over personen en gezinnen."
 
-#. Part of help page:  https://s3.eu-west-1.amazonaws.com/po-pub/i/08Z4pSSmjQhf0V1ym9AEETTC.png
-#: 
-msgid "For SVG (and PDF if Graphviz installed on server) output, links can be included. This way you can click on the person in the diagram to be taken to their webtrees page."
-msgstr "Voor SVG-uitvoer (en PDF als Graphviz op de server is geïnstalleerd) kunnen koppelingen worden opgenomen. Op deze manier kunt u op de persoon in het diagram klikken om naar de webtreespagina te gaan."
-
 #. Part of help page for abbreviation options: https://s3.eu-west-1.amazonaws.com/po-pub/i/rqnKktGCJbxelFo3RGr6SMVe.png
 #: 
 msgid "There are several options to shorten the names of individuals displayed."
@@ -1993,8 +1987,9 @@ msgstr "Merk op dat er momenteel geen optie is voor wat er moet gebeuren als er 
 
 #. An extra paragraph for the section on URL links in the help page:  https://s3.eu-west-1.amazonaws.com/po-pub/i/4Vxx95kI54pojXyfcC4CvyYc.png
 #: 
-msgid "This also affects families in the diagram. If this option is enabled, you can click on family records to open the family webtrees page. Also see \\'Action when individual clicked\\' in the Browser render settings."
-msgstr "Dit heeft ook invloed op gezinnen in het diagram. Als deze optie is ingeschakeld, kunt u op gezinsrecords klikken om de webtreespagina van het gezin te openen. Zie ook 'Actie bij klikken op persoon' in de  Browserweergave-instellingen ."
+#, fuzzy
+msgid "Also see \\'Action when individual clicked\\' in the Browser render settings."
+msgstr "Zie ook \\'Actie bij klikken op persoon\\' in de  Browserweergave-instellingen."
 
 #. Option for what to do when individual clicked on in diagram
 #: 
@@ -2080,4 +2075,214 @@ msgstr "Beperk voorouder- en afstammelingenniveaus"
 #: 
 msgid "Preferred given name and surname"
 msgstr "Voorkeursvoornaam en achternaam"
+
+#. New option to show the first image attached to the birth event, if any:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/RVKTpBYdxWG9wyE9GAqScxDc.png
+#: 
+msgid "Show first birth image"
+msgstr "Toon eerste geboorteafbeelding"
+
+#. New option to show the first image attached to the death event, if any:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/RVKTpBYdxWG9wyE9GAqScxDc.png
+#: 
+msgid "Show first death image"
+msgstr "Toon eerste overlijdensafbeelding"
+
+#. New option to show burial (or cremation) date:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/WlSbROWFgzNEDqRS0q8pZgAb.png
+#: 
+msgid "Show burial date"
+msgstr "Toon begrafenisdatum"
+
+#. New option to show burial (or cremation) place:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/WlSbROWFgzNEDqRS0q8pZgAb.png
+#: 
+msgid "Show burial place"
+msgstr "Toon begrafenisplaats"
+
+#. New option to show the first image attached to the burial or cremation event, if any:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/RVKTpBYdxWG9wyE9GAqScxDc.png
+#: 
+msgid "Show first burial image"
+msgstr "Toon eerste begrafenisafbeelding"
+
+#. GVExport can now show all marriage events if the same couple have multiple. This option will only show the first, if enabled:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/HqluftIIHdUwOT5EBUDDdIzS.png
+#: 
+msgid "Show only first marriage"
+msgstr "Toon alleen eerste huwelijk"
+
+#. New option to show the first image attached to the marriage event, if any:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/RVKTpBYdxWG9wyE9GAqScxDc.png
+#: 
+msgid "Show first marriage image"
+msgstr "Toon eerste huwelijksafbeelding"
+
+#. Show the type of marriage (civil, religious, etc)
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/HqluftIIHdUwOT5EBUDDdIzS.png
+#: 
+msgid "Show marriage type"
+msgstr "Toon type huwelijk"
+
+#. If this option is enabled, if the marriage type is not known then a message will be shown to indicate this: https://s3.eu-west-1.amazonaws.com/po-pub/i/HqluftIIHdUwOT5EBUDDdIzS.png
+#: 
+msgid "Show when type is not specified"
+msgstr "Toon als type niet is opgegeven"
+
+#. New wording for option to show photos on individuals as there are now many options for which photos to show.
+#: 
+msgid "Show photos of individuals"
+msgstr "Toon foto's van personen"
+
+#. New control panel option for admin to set a prefix for burial records:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/hVEI9oO3KxRBrDdqseXZ5Lf0.png
+#: 
+msgid "Burial date prefix"
+msgstr "Voorvoegsel begrafenisdatum"
+
+#. Additional help text to clarify that the setting to use alternate events does not apply to burial events:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/KIQiyqfzLqLyWbWyJDAuNrkv.png
+#: 
+msgid "The options to show burial dates and places will use the burial or cremation events and is not affected by this setting."
+msgstr "De opties om begrafenisdatum en -plaatsen te tonen zullen de begrafenis- of crematiegebeurtenissen gebruiken en worden niet beïnvloed door deze instelling."
+
+#. Part of help for burial dates:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/L8XnRFljy2puyETrxWRkboGd.png
+#: 
+msgid "Check the box if you would like to include the burial date of individuals in the output."
+msgstr "Vink het vakje aan als u de begrafenisdatum van personen wilt opnemen in de uitvoer."
+
+#. Part of help for burial dates:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/L8XnRFljy2puyETrxWRkboGd.png
+#: 
+msgid "You can also choose whether to show the full date of burial or just the year."
+msgstr "U kunt ook kiezen of u de volledige begrafenisdatum of alleen het jaar wilt weergeven."
+
+#. Part of help for burial place:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/L8XnRFljy2puyETrxWRkboGd.png
+#: 
+msgid "Whether to show the place of burial in the output. Also see option for abbreviating place names."
+msgstr "Of de plaats van begraven moet worden getoond in de uitvoer. Zie ook de optie voor het afkorten van plaatsnamen."
+
+#. Part of help text for photos:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/rpmt8ugrEArj5PBFFS8bRR5f.png
+#: 
+msgid "When enabled, if the birth event for the individual has photos attached, then the first will be shown. This is in addition to other photos."
+msgstr "Als deze optie is ingeschakeld en er bij de geboortegebeurtenis van de persoon foto's zijn bijgevoegd, dan wordt de eerste foto getoond. Dit is in aanvulling op andere foto's."
+
+#. Part of help text for photos:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/rpmt8ugrEArj5PBFFS8bRR5f.png
+#: 
+msgid "When enabled, if the marriage event for the individual has photos attached, then the first will be shown. This is in addition to other photos."
+msgstr "Als deze optie is ingeschakeld en er bij de huwelijksgebeurtenis van de persoon foto's zijn bijgevoegd, dan wordt de eerste foto getoond. Dit is in aanvulling op andere foto's."
+
+#. Part of help text for photos:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/rpmt8ugrEArj5PBFFS8bRR5f.png
+#: 
+msgid "When enabled, if the death event for the individual has photos attached, then the first will be shown. This is in addition to other photos."
+msgstr "Als deze optie is ingeschakeld en er bij de overlijdensgebeurtenis van de persoon foto's zijn bijgevoegd, dan wordt de eerste foto getoond. Dit is in aanvulling op andere foto's."
+
+#. Part of help text for photos:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/rpmt8ugrEArj5PBFFS8bRR5f.png
+#: 
+msgid "When enabled, if the burial event for the individual has photos attached, then the first will be shown. This is in addition to other photos."
+msgstr "Als deze optie is ingeschakeld en er bij de begrafenisgebeurtenis van de persoon foto's zijn bijgevoegd, dan wordt de eerste foto getoond. Dit is in aanvulling op andere foto's."
+
+#. Part of help text relating to content on family records:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/YgNsKPAarw3CvZkSzbtJvRe1.png
+#: 
+msgid "If a couple have been married more than once (a family record in webtrees has multiple marriage events), if this option is selected then only the first is shown (this is the default). If you unselect this option, all marriage events will be shown in the same family record in the diagram."
+msgstr "Als een koppel meer dan eens getrouwd is geweest (een gezinsrecord in webtrees heeft meerdere huwelijksgebeurtenissen), wordt als deze optie geselecteerd is alleen de eerste getoond (dit is de standaard). Als u deze optie niet selecteert, worden alle huwelijksgebeurtenissen in hetzelfde gezinsrecord in het diagram getoond."
+
+#. Part of help text relating to content on family records:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/YgNsKPAarw3CvZkSzbtJvRe1.png
+#: 
+msgid "If selected, the type of marriage (civil, religious, registered partnership) will be shown on the family record."
+msgstr "Als deze optie is geselecteerd, wordt het type huwelijk (burgerlijk, religieus, geregistreerd partnerschap) getoond op het gezinsrecord."
+
+#. Part of help text relating to content on family records:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/YgNsKPAarw3CvZkSzbtJvRe1.png
+#: 
+msgid "If selected, where the marriage type is not known then it will show a message stating this. If unselected, unknown marriage types will not be displayed."
+msgstr "Als deze optie is geselecteerd en het huwelijkstype niet bekend is, dan wordt er een bericht weergegeven waarin dit wordt vermeld. Als deze optie niet is geselecteerd, worden onbekende huwelijkstypes niet weergegeven."
+
+#. Restoring as was incorrectly removed
+#: 
+msgid "browser, SVG, and PDF only"
+msgstr "alleen browser, SVG en PDF"
+
+#. I have readded this as I was wrong about page links, the can be supported in SVG but only when generated in the browser (not server), so I have restored this.
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/PFTXgi5zjRwyuP02uQEGbizv.png
+#: 
+msgid "For SVG (and PDF if Graphviz installed on server) output, links can be included. This way you can click on the person in the diagram to be taken to their webtrees page."
+msgstr "Voor SVG-uitvoer (en PDF als Graphviz op de server is geïnstalleerd) kunnen koppelingen worden opgenomen. Op deze manier kunt u op de persoon in het diagram klikken om naar de webtreespagina te gaan."
+
+#. Extra part to help text to inform user that if they choose to include links in SVG format, the browser will render the diagram even if they have Graphviz on their server:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/wfrHxNXw49ofOCG1CBpFzGcW.png
+#: 
+msgid "Note that SVG output will always be rendered by the browser (and not the server) if you choose to include page links."
+msgstr "Merk op dat SVG-uitvoer altijd wordt verzorgd door de browser (en niet door de server) als u ervoor kiest om paginalinks op te nemen."
+
+#. "Diagram colours" is now "Diagram style": https://s3.eu-west-1.amazonaws.com/po-pub/i/4AMAMqb2XvyddBnzaeXB174Y.png
+#: 
+msgid "Diagram style"
+msgstr "Diagramstijl"
+
+#. New option to set the style of arrow:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/TYPN390pgUuKhdXd6P4NYUpN.png
+#: 
+msgid "Arrow style"
+msgstr "Pijlstijl"
+
+#. One of the arrow style options for new arrow style setting:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/4AMAMqb2XvyddBnzaeXB174Y.png
+#: 
+msgid "Solid"
+msgstr "Ononderbroken"
+
+#. One of the arrow style options for new arrow style setting:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/4AMAMqb2XvyddBnzaeXB174Y.png
+#: 
+msgid "Dotted"
+msgstr "Gestippeld"
+
+#. One of the arrow style options for new arrow style setting:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/4AMAMqb2XvyddBnzaeXB174Y.png
+#: 
+msgid "Dashed"
+msgstr "Gestreept"
+
+#. One of the arrow style options for new arrow style setting:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/4AMAMqb2XvyddBnzaeXB174Y.png
+#: 
+msgid "Bold"
+msgstr "Vet"
+
+#. One of the arrow style options for new arrow style setting:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/4AMAMqb2XvyddBnzaeXB174Y.png
+#: 
+msgid "Tapered"
+msgstr "Taps"
+
+#. One of the arrow style options for new arrow style setting:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/4AMAMqb2XvyddBnzaeXB174Y.png
+#: 
+msgid "Random"
+msgstr "Willekeurig"
+
+#. Updated help text to cater for new arrow style option:  https://s3.eu-west-1.amazonaws.com/po-pub/i/fn6MBj0cyzMUvsgzAVFvUeoS.png
+#: 
+msgid "You are also able to set the arrow style here."
+msgstr "U kunt hier ook de pijlstijl instellen."
+
+#. Updated help text to cater for new arrow style option:  https://s3.eu-west-1.amazonaws.com/po-pub/i/fn6MBj0cyzMUvsgzAVFvUeoS.png
+#: 
+msgid "This allows you to select the arrow style from the various available styles. The \\'Random\\' option will randomly select a style for each arrow, making it easier to follow overlapping arrows on complex diagrams."
+msgstr "Hiermee kunt u de pijlstijl selecteren uit de verschillende beschikbare stijlen. De optie 'Willekeurig' selecteert willekeurig een stijl voor elke pijl, waardoor het gemakkelijker wordt om overlappende pijlen te volgen in complexe diagrammen."
+
+#. Restoring this translation as it was needed after all. 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/xIpoeu5Uos6YjpRvDXybeRqg.png
+#: 
+msgid "Add URL to individuals and families"
+msgstr "URL toevoegen naar personen en gezinnen"
 
