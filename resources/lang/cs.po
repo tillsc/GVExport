@@ -56,9 +56,11 @@ msgstr "Do úrovně"
 msgid "Mark not blood-related people with different colour"
 msgstr "Nepokrevní příbuzné označit jinou barvou"
 
+#. SVG links no longer work (and seem to have been broken for 3+ years), and it's not trivial to fix. Instead, I have updated this to clarify that it works only with PDF, and it will be hidden if Graphviz is not installed on the server.
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/SEzk1B1h5LwyvxiJ9liuAwLX.png
 #: 
-msgid "Add URL to individuals and families"
-msgstr "K osobám a rodinám přidat URL"
+msgid "Add link to individuals and families in PDF output"
+msgstr "Přidat osobám a rodinám odkazy v PDF výstupu"
 
 #: 
 msgid "Show birthdate"
@@ -474,11 +476,6 @@ msgstr "Velikost fontu pro jména"
 #: 
 msgid "browser and SVG only"
 msgstr "jen prohlížeč a SVG"
-
-#. Note limitation for adding URLs:  https://s3.eu-west-1.amazonaws.com/po-pub/i/8gzkcNUo2oj43PpU7Dou5ZEr.png
-#: 
-msgid "browser, SVG, and PDF only"
-msgstr "jen prohlížeč, SVG a PDF"
 
 #. This help message is displayed when the user clicks the help icon next to "Include anyone related to". https://s3.eu-west-1.amazonaws.com/po-pub/i/4sXDKFJMwoE5PBYZqEPOIV7W.png
 #: 
@@ -1202,8 +1199,8 @@ msgstr "Tato možnost umožňuje přiřadit tvar políčku na základě pohlaví
 
 #. Part of the Photos help text:  https://s3.eu-west-1.amazonaws.com/po-pub/i/LnybW6GMtDH0UDez4Z0flfpW.png
 #: 
-msgid "This option lets you enable or disable showing photos on the tiles of individuals. If enabled, there are further options as follows:"
-msgstr "Tato možnost umožňuje povolit nebo zakázat zobrazování fotek v políčku osoby. Pokud je tato možnost povolena, jsou k dispozici následující možnosti:"
+msgid "This option lets you enable or disable showing photos on the tiles of individuals."
+msgstr "Tato možnost umožňuje povolit nebo zakázat zobrazování fotek v políčku osoby."
 
 #. Part of the Photos help text:  https://s3.eu-west-1.amazonaws.com/po-pub/i/LnybW6GMtDH0UDez4Z0flfpW.png
 #: 
@@ -1678,11 +1675,6 @@ msgstr "Zkrácené názvy měsíců"
 msgid "This section allows for some changes to the content of tiles, including links, abbreviations, and the details included on individuals and families."
 msgstr "Tato část nastavení umožňuje provést změny v obsahu políček, včetně odkazů, zkratek a podrobností o osobách a rodinách."
 
-#. Part of help page:  https://s3.eu-west-1.amazonaws.com/po-pub/i/08Z4pSSmjQhf0V1ym9AEETTC.png
-#: 
-msgid "For SVG (and PDF if Graphviz installed on server) output, links can be included. This way you can click on the person in the diagram to be taken to their webtrees page."
-msgstr "Volba umožní přidat odkazy do SVG výstupu (a PDF výstupu, pokud je  na serveru nainstalován Graphviz). To pak umožní kliknout na osobu v diagramu a přejít na její osobní stránku v rodokmenu."
-
 #. Part of help page for abbreviation options: https://s3.eu-west-1.amazonaws.com/po-pub/i/rqnKktGCJbxelFo3RGr6SMVe.png
 #: 
 msgid "There are several options to shorten the names of individuals displayed."
@@ -1779,31 +1771,31 @@ msgstr "Zaškrtněte toto políčko, pokud chcete ve výstupu uvést datum naroz
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/u1x88hjQ3UFSTpqwJGuCdDSz.png
 #: 
 msgid "You can also choose whether to show the full date of birth or just the year."
-msgstr "Můžete si také vybrat, zda chcete zobrazit celé datum narození, nebo jen rok."
+msgstr "Můžete si také zvolit, zda chcete zobrazit celé datum narození, nebo jen rok."
 
 #. Part of help page for choosing what goes on individual's tiles:  
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/u1x88hjQ3UFSTpqwJGuCdDSz.png
 #: 
 msgid "Whether to show the place of birth in the output. Also see option for abbreviating place names."
-msgstr "Zda se má ve výstupu zobrazit místo narození. Viz také nastavení zkracování názvů míst."
+msgstr "Zda se má ve výstupu zobrazit místo narození. Podívejte se také na nastavení zkracování názvů míst."
 
 #. Part of help page for choosing what goes on individual's tiles:  
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/u1x88hjQ3UFSTpqwJGuCdDSz.png
 #: 
 msgid "Check the box if you would like to include the death date of individuals in the output."
-msgstr "Zaškrtněte toto políčko, pokud chcete do výstupu zahrnout datum úmrtí osob."
+msgstr "Zaškrtněte toto políčko, pokud chcete ve výstupu uvést datum úmrtí osob."
 
 #. Part of help page for choosing what goes on individual's tiles:  
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/u1x88hjQ3UFSTpqwJGuCdDSz.png
 #: 
 msgid "You can also choose whether to show the full date of death or just the year."
-msgstr "Můžete si také vybrat, zda chcete zobrazit celé datum úmrtí, nebo jen rok."
+msgstr "Můžete si také zvolit, zda chcete zobrazit celé datum úmrtí, nebo jen rok."
 
 #. Part of help page for choosing what goes on individual's tiles:  
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/u1x88hjQ3UFSTpqwJGuCdDSz.png
 #: 
 msgid "Whether to show the place of death in the output. Also see option for abbreviating place names."
-msgstr "Zda se má ve výstupu zobrazit místo úmrtí. Viz také nastavení zkracování názvů míst."
+msgstr "Zda se má ve výstupu zobrazit místo úmrtí. Podívejte se také na nastavení zkracování názvů míst."
 
 #. Part of help page for choosing what goes on individual's tiles:  
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/u1x88hjQ3UFSTpqwJGuCdDSz.png
@@ -1819,17 +1811,17 @@ msgstr "Zda má být ve výstupu uveden XREF rodin."
 #. Part of help page for deciding what information goes in the family section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/igNqWCHKyhKOofsUxjaGrDeM.png
 #: 
 msgid "Check the box if you would like to include the date of marriage in the output."
-msgstr "Zaškrtněte toto políčko, pokud chcete do výstupu zahrnout datum sňatku."
+msgstr "Zaškrtněte toto políčko, pokud chcete ve výstupu uvést datum sňatku."
 
 #. Part of help page for deciding what information goes in the family section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/igNqWCHKyhKOofsUxjaGrDeM.png
 #: 
 msgid "You can also choose whether to show the full date of marriage or just the year."
-msgstr "Můžete si také vybrat, zda chcete zobrazit celé datum sňatku, nebo jen rok."
+msgstr "Můžete si také zvolit, zda chcete zobrazit celé datum sňatku, nebo jen rok."
 
 #. Part of help page for deciding what information goes in the family section:  https://s3.eu-west-1.amazonaws.com/po-pub/i/igNqWCHKyhKOofsUxjaGrDeM.png
 #: 
 msgid "Whether to show the place of marriage in the output. Also see option for abbreviating place names."
-msgstr "Zda se má ve výstupu zobrazit místo sňatku. Viz také nastavení zkracování názvů míst."
+msgstr "Zda se má ve výstupu zobrazit místo sňatku. Podívejte se také na nastavení zkracování názvů míst."
 
 #. An option in new setting to sort the saved settings list: 
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/fSaYMVDGQqSSVdo1qxXE1pqY.png
@@ -1994,8 +1986,8 @@ msgstr "Všimněte si, že momentálně neexistuje žádná možnost nastavit, c
 
 #. An extra paragraph for the section on URL links in the help page:  https://s3.eu-west-1.amazonaws.com/po-pub/i/4Vxx95kI54pojXyfcC4CvyYc.png
 #: 
-msgid "This also affects families in the diagram. If this option is enabled, you can click on family records to open the family webtrees page. Also see \\'Action when individual clicked\\' in the Browser render settings."
-msgstr "To také ovlivňuje rodiny v diagramu. Pokud je tato možnost povolena, můžete kliknout na rodinné záznamy a otevřít stránku rodiny ve webtrees. Podívejte se také na \\'Akce po kliknutí na osobu\\' v nastavení vykreslování prohlížeče."
+msgid "Also see \\'Action when individual clicked\\' in the Browser render settings."
+msgstr "Podívejte se také na \\'Akce po kliknutí na osobu\\' v nastavení vykreslování prohlížeče."
 
 #. Option for what to do when individual clicked on in diagram
 #: 
@@ -2081,4 +2073,214 @@ msgstr "Omezení úrovní předků a potomků"
 #: 
 msgid "Preferred given name and surname"
 msgstr "Preferované jméno a příjmení"
+
+#. New option to show the first image attached to the birth event, if any:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/RVKTpBYdxWG9wyE9GAqScxDc.png
+#: 
+msgid "Show first birth image"
+msgstr "Zobrazit první obrázek narození"
+
+#. New option to show the first image attached to the death event, if any:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/RVKTpBYdxWG9wyE9GAqScxDc.png
+#: 
+msgid "Show first death image"
+msgstr "Zobrazit první obrázek úmrtí"
+
+#. New option to show burial (or cremation) date:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/WlSbROWFgzNEDqRS0q8pZgAb.png
+#: 
+msgid "Show burial date"
+msgstr "Zobrazit datum pohřbu."
+
+#. New option to show burial (or cremation) place:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/WlSbROWFgzNEDqRS0q8pZgAb.png
+#: 
+msgid "Show burial place"
+msgstr "Zobrazit místo pohřbu"
+
+#. New option to show the first image attached to the burial or cremation event, if any:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/RVKTpBYdxWG9wyE9GAqScxDc.png
+#: 
+msgid "Show first burial image"
+msgstr "Zobrazit první obrázek pohřbu"
+
+#. GVExport can now show all marriage events if the same couple have multiple. This option will only show the first, if enabled:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/HqluftIIHdUwOT5EBUDDdIzS.png
+#: 
+msgid "Show only first marriage"
+msgstr "Zobrazit pouze první manželství"
+
+#. New option to show the first image attached to the marriage event, if any:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/RVKTpBYdxWG9wyE9GAqScxDc.png
+#: 
+msgid "Show first marriage image"
+msgstr "Zobrazit první obrázek manželství"
+
+#. Show the type of marriage (civil, religious, etc)
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/HqluftIIHdUwOT5EBUDDdIzS.png
+#: 
+msgid "Show marriage type"
+msgstr "Zobrazit typ manželství"
+
+#. If this option is enabled, if the marriage type is not known then a message will be shown to indicate this: https://s3.eu-west-1.amazonaws.com/po-pub/i/HqluftIIHdUwOT5EBUDDdIzS.png
+#: 
+msgid "Show when type is not specified"
+msgstr "Zobrazit že typ není uveden"
+
+#. New wording for option to show photos on individuals as there are now many options for which photos to show.
+#: 
+msgid "Show photos of individuals"
+msgstr "Zobrazit fotografie osob"
+
+#. New control panel option for admin to set a prefix for burial records:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/hVEI9oO3KxRBrDdqseXZ5Lf0.png
+#: 
+msgid "Burial date prefix"
+msgstr "Předpona data pohřbu"
+
+#. Additional help text to clarify that the setting to use alternate events does not apply to burial events:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/KIQiyqfzLqLyWbWyJDAuNrkv.png
+#: 
+msgid "The options to show burial dates and places will use the burial or cremation events and is not affected by this setting."
+msgstr "Nastavení zobrazení informací o pohřbu vychází jen z událostí pohřbu nebo kremace a toto nastavení na ně nemá vliv."
+
+#. Part of help for burial dates:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/L8XnRFljy2puyETrxWRkboGd.png
+#: 
+msgid "Check the box if you would like to include the burial date of individuals in the output."
+msgstr "Zaškrtněte toto políčko, pokud chcete ve výstupu uvést datum pohřbu osob."
+
+#. Part of help for burial dates:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/L8XnRFljy2puyETrxWRkboGd.png
+#: 
+msgid "You can also choose whether to show the full date of burial or just the year."
+msgstr "Můžete si také zvolit, zda chcete zobrazit celé datum úmrtí, nebo jen rok."
+
+#. Part of help for burial place:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/L8XnRFljy2puyETrxWRkboGd.png
+#: 
+msgid "Whether to show the place of burial in the output. Also see option for abbreviating place names."
+msgstr "Zda se má ve výstupu zobrazit místo úmrtí. Podívejte se také na nastavení zkracování názvů míst."
+
+#. Part of help text for photos:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/rpmt8ugrEArj5PBFFS8bRR5f.png
+#: 
+msgid "When enabled, if the birth event for the individual has photos attached, then the first will be shown. This is in addition to other photos."
+msgstr "Pokud je tato možnost povolena a k události pohřbu osoby jsou připojeny fotografie, přidá se první z nich mezi ostatními fotografie."
+
+#. Part of help text for photos:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/rpmt8ugrEArj5PBFFS8bRR5f.png
+#: 
+msgid "When enabled, if the marriage event for the individual has photos attached, then the first will be shown. This is in addition to other photos."
+msgstr "Pokud je tato možnost povolena a k události manželství osoby jsou připojeny fotografie, první z nich se přidá mezi ostatní fotografie."
+
+#. Part of help text for photos:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/rpmt8ugrEArj5PBFFS8bRR5f.png
+#: 
+msgid "When enabled, if the death event for the individual has photos attached, then the first will be shown. This is in addition to other photos."
+msgstr "Pokud je tato možnost povolena a k události úmrtí osoby jsou připojeny fotografie, první z nich se přidá mezi ostatní fotografie."
+
+#. Part of help text for photos:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/rpmt8ugrEArj5PBFFS8bRR5f.png
+#: 
+msgid "When enabled, if the burial event for the individual has photos attached, then the first will be shown. This is in addition to other photos."
+msgstr "Pokud je tato možnost povolena a k události pohřbu osoby jsou připojeny fotografie, první z nich se přidá mezi ostatní fotografie."
+
+#. Part of help text relating to content on family records:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/YgNsKPAarw3CvZkSzbtJvRe1.png
+#: 
+msgid "If a couple have been married more than once (a family record in webtrees has multiple marriage events), if this option is selected then only the first is shown (this is the default). If you unselect this option, all marriage events will be shown in the same family record in the diagram."
+msgstr "Pokud byl pár oddán vícekrát (rodinný záznam ve webtrees obsahuje více událostí manželství), zobrazí se při výběru této možnosti pouze první manželství (výchozí nastavení). Pokud tuto možnost nezvolíte, budou v diagramu zobrazeny všechny události manželství ve stejném rodinném záznamu."
+
+#. Part of help text relating to content on family records:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/YgNsKPAarw3CvZkSzbtJvRe1.png
+#: 
+msgid "If selected, the type of marriage (civil, religious, registered partnership) will be shown on the family record."
+msgstr "Pokud je vybráno, typ manželství (civilní, církevní, registrované partnerství) bude zobrazen v rodinném záznamu."
+
+#. Part of help text relating to content on family records:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/YgNsKPAarw3CvZkSzbtJvRe1.png
+#: 
+msgid "If selected, where the marriage type is not known then it will show a message stating this. If unselected, unknown marriage types will not be displayed."
+msgstr "Pokud je vybráno, bude v případě neznámého typu manželství zobrazena zpráva o této skutečnosti. Pokud není vybráno, neznámé typy manželství se nebudou zobrazovat."
+
+#. Restoring as was incorrectly removed
+#: 
+msgid "browser, SVG, and PDF only"
+msgstr "jen prohlížeč, SVG a PDF"
+
+#. I have readded this as I was wrong about page links, the can be supported in SVG but only when generated in the browser (not server), so I have restored this.
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/PFTXgi5zjRwyuP02uQEGbizv.png
+#: 
+msgid "For SVG (and PDF if Graphviz installed on server) output, links can be included. This way you can click on the person in the diagram to be taken to their webtrees page."
+msgstr "Volba umožní přidat odkazy do SVG výstupu (a PDF výstupu, pokud je  na serveru nainstalován Graphviz). To pak umožní kliknout na osobu v diagramu a přejít na její osobní stránku v rodokmenu."
+
+#. Extra part to help text to inform user that if they choose to include links in SVG format, the browser will render the diagram even if they have Graphviz on their server:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/wfrHxNXw49ofOCG1CBpFzGcW.png
+#: 
+msgid "Note that SVG output will always be rendered by the browser (and not the server) if you choose to include page links."
+msgstr "Výstup ve formátu SVG bude vždy vykreslován prohlížečem (nikoli serverem), pokud zvolíte zahrnutí odkazů na stránky."
+
+#. "Diagram colours" is now "Diagram style": https://s3.eu-west-1.amazonaws.com/po-pub/i/4AMAMqb2XvyddBnzaeXB174Y.png
+#: 
+msgid "Diagram style"
+msgstr "Styl diagramu"
+
+#. New option to set the style of arrow:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/TYPN390pgUuKhdXd6P4NYUpN.png
+#: 
+msgid "Arrow style"
+msgstr "Styl šipek"
+
+#. One of the arrow style options for new arrow style setting:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/4AMAMqb2XvyddBnzaeXB174Y.png
+#: 
+msgid "Solid"
+msgstr "Plný"
+
+#. One of the arrow style options for new arrow style setting:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/4AMAMqb2XvyddBnzaeXB174Y.png
+#: 
+msgid "Dotted"
+msgstr "Tečkovaný"
+
+#. One of the arrow style options for new arrow style setting:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/4AMAMqb2XvyddBnzaeXB174Y.png
+#: 
+msgid "Dashed"
+msgstr "Čárkovaný"
+
+#. One of the arrow style options for new arrow style setting:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/4AMAMqb2XvyddBnzaeXB174Y.png
+#: 
+msgid "Bold"
+msgstr "Tlustý"
+
+#. One of the arrow style options for new arrow style setting:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/4AMAMqb2XvyddBnzaeXB174Y.png
+#: 
+msgid "Tapered"
+msgstr "Tenký"
+
+#. One of the arrow style options for new arrow style setting:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/4AMAMqb2XvyddBnzaeXB174Y.png
+#: 
+msgid "Random"
+msgstr "Náhodný"
+
+#. Updated help text to cater for new arrow style option:  https://s3.eu-west-1.amazonaws.com/po-pub/i/fn6MBj0cyzMUvsgzAVFvUeoS.png
+#: 
+msgid "You are also able to set the arrow style here."
+msgstr "Můžete zda nastavit také styl šipek."
+
+#. Updated help text to cater for new arrow style option:  https://s3.eu-west-1.amazonaws.com/po-pub/i/fn6MBj0cyzMUvsgzAVFvUeoS.png
+#: 
+msgid "This allows you to select the arrow style from the various available styles. The \\'Random\\' option will randomly select a style for each arrow, making it easier to follow overlapping arrows on complex diagrams."
+msgstr "Tato možnost vám umožňuje vybrat styl šipek z dostupných stylů. Možnost „Náhodný“ náhodně vybere styl pro každou šipku, což usnadní sledování překrývajících se šipek v komplexních diagramech."
+
+#. Restoring this translation as it was needed after all. 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/xIpoeu5Uos6YjpRvDXybeRqg.png
+#: 
+msgid "Add URL to individuals and families"
+msgstr "K osobám a rodinám přidat URL"
 

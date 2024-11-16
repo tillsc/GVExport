@@ -60,8 +60,11 @@ msgstr "Maksymalne poziomy"
 msgid "Mark not blood-related people with different colour"
 msgstr "Nie oznaczaj osób spokrewnionych o innym kolorze skóry"
 
+#. SVG links no longer work (and seem to have been broken for 3+ years), and it's not trivial to fix. Instead, I have updated this to clarify that it works only with PDF, and it will be hidden if Graphviz is not installed on the server.
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/SEzk1B1h5LwyvxiJ9liuAwLX.png
 #: 
-msgid "Add URL to individuals and families"
+#, fuzzy
+msgid "Add link to individuals and families in PDF output"
 msgstr "Dodawanie adresów URL do osób i rodzin"
 
 #: 
@@ -498,11 +501,6 @@ msgstr "Rozmiar czcionki dla nazwisk"
 #: 
 msgid "browser and SVG only"
 msgstr "tylko przeglądarka i SVG"
-
-#. Note limitation for adding URLs:  https://s3.eu-west-1.amazonaws.com/po-pub/i/8gzkcNUo2oj43PpU7Dou5ZEr.png
-#: 
-msgid "browser, SVG, and PDF only"
-msgstr "tylko przeglądarka, SVG i PDF"
 
 #. This help message is displayed when the user clicks the help icon next to "Include anyone related to". https://s3.eu-west-1.amazonaws.com/po-pub/i/4sXDKFJMwoE5PBYZqEPOIV7W.png
 #: 
@@ -1238,8 +1236,9 @@ msgstr "Umożliwia to przypisanie kształtu na podstawie płci osób. Na przykł
 
 #. Part of the Photos help text:  https://s3.eu-west-1.amazonaws.com/po-pub/i/LnybW6GMtDH0UDez4Z0flfpW.png
 #: 
-msgid "This option lets you enable or disable showing photos on the tiles of individuals. If enabled, there are further options as follows:"
-msgstr "Ta opcja umożliwia włączenie lub wyłączenie wyświetlania zdjęć na kafelkach poszczególnych osób. Jeśli opcja ta jest włączona, dostępne są następujące opcje:"
+#, fuzzy
+msgid "This option lets you enable or disable showing photos on the tiles of individuals."
+msgstr "Ta opcja umożliwia włączenie lub wyłączenie wyświetlania zdjęć na kafelkach poszczególnych osób."
 
 #. Part of the Photos help text:  https://s3.eu-west-1.amazonaws.com/po-pub/i/LnybW6GMtDH0UDez4Z0flfpW.png
 #: 
@@ -1714,11 +1713,6 @@ msgstr ""
 msgid "This section allows for some changes to the content of tiles, including links, abbreviations, and the details included on individuals and families."
 msgstr ""
 
-#. Part of help page:  https://s3.eu-west-1.amazonaws.com/po-pub/i/08Z4pSSmjQhf0V1ym9AEETTC.png
-#: 
-msgid "For SVG (and PDF if Graphviz installed on server) output, links can be included. This way you can click on the person in the diagram to be taken to their webtrees page."
-msgstr ""
-
 #. Part of help page for abbreviation options: https://s3.eu-west-1.amazonaws.com/po-pub/i/rqnKktGCJbxelFo3RGr6SMVe.png
 #: 
 msgid "There are several options to shorten the names of individuals displayed."
@@ -2029,7 +2023,7 @@ msgstr ""
 
 #. An extra paragraph for the section on URL links in the help page:  https://s3.eu-west-1.amazonaws.com/po-pub/i/4Vxx95kI54pojXyfcC4CvyYc.png
 #: 
-msgid "This also affects families in the diagram. If this option is enabled, you can click on family records to open the family webtrees page. Also see \\'Action when individual clicked\\' in the Browser render settings."
+msgid "Also see \\'Action when individual clicked\\' in the Browser render settings."
 msgstr ""
 
 #. Option for what to do when individual clicked on in diagram
@@ -2076,4 +2070,254 @@ msgstr ""
 #: 
 msgid "In the General Settings section, there is an option in the Browser options that lets you choose what happens when you click on an individual in the diagram. One of the options is to show a menu, and the menu has the following options:"
 msgstr ""
+
+#. New option to "Use similar events if information not available". Current state is this is always on, but this new option allows you to force webtrees to only use the "birth" and "death" events to get the date or place. When enabled, this option allows webtrees to look for christening, baptism, burial, and cremation dates.
+#. 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/Ar3cUICuO182fidUcnwLD1o7.png
+#: 
+msgid "Use similar events if information not available"
+msgstr ""
+
+#. Part of help text for new option to Use similar events if information not available:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/VofL6d6Hi0v11hbzqG3N02wF.png
+#: 
+msgid "When showing information about a birth or death, if the information is not available then webtrees will look for similar events and use the information from those events instead."
+msgstr ""
+
+#. Part of help text for new option to Use similar events if information not available: https://s3.eu-west-1.amazonaws.com/po-pub/i/VofL6d6Hi0v11hbzqG3N02wF.png
+#: 
+msgid "If a birth date or place is not recorded, webtrees will attempt to use the date or place of the christening or baptism if it exists."
+msgstr ""
+
+#. Part of help text for new option to Use similar events if information not available: https://s3.eu-west-1.amazonaws.com/po-pub/i/VofL6d6Hi0v11hbzqG3N02wF.png
+#: 
+msgid "If a death date or place is not recorded, webtrees will attempt to use the date or place of the burial or cremation if it exists."
+msgstr ""
+
+#. Part of help text for new option to Use similar events if information not available: https://s3.eu-west-1.amazonaws.com/po-pub/i/VofL6d6Hi0v11hbzqG3N02wF.png
+#: 
+msgid "If you disable this option, GVExport will only use information from birth and death events, and not try to find missing information in similar events."
+msgstr ""
+
+#. New option that lets you set a limit on how many levels of ancestors or descendants can be used, to reduce server load:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/QFLhfPYHliw57Nxcq7TjSt2c.png
+#: 
+msgid "Limit ancestor and descendant levels"
+msgstr ""
+
+#. One of the options for name abbreviations:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/8TnookhkbklzifVBjlRHlH6j.png
+#: 
+msgid "Preferred given name and surname"
+msgstr ""
+
+#. New option to show the first image attached to the birth event, if any:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/RVKTpBYdxWG9wyE9GAqScxDc.png
+#: 
+msgid "Show first birth image"
+msgstr ""
+
+#. New option to show the first image attached to the death event, if any:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/RVKTpBYdxWG9wyE9GAqScxDc.png
+#: 
+msgid "Show first death image"
+msgstr ""
+
+#. New option to show burial (or cremation) date:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/WlSbROWFgzNEDqRS0q8pZgAb.png
+#: 
+msgid "Show burial date"
+msgstr ""
+
+#. New option to show burial (or cremation) place:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/WlSbROWFgzNEDqRS0q8pZgAb.png
+#: 
+msgid "Show burial place"
+msgstr ""
+
+#. New option to show the first image attached to the burial or cremation event, if any:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/RVKTpBYdxWG9wyE9GAqScxDc.png
+#: 
+msgid "Show first burial image"
+msgstr ""
+
+#. GVExport can now show all marriage events if the same couple have multiple. This option will only show the first, if enabled:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/HqluftIIHdUwOT5EBUDDdIzS.png
+#: 
+msgid "Show only first marriage"
+msgstr ""
+
+#. New option to show the first image attached to the marriage event, if any:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/RVKTpBYdxWG9wyE9GAqScxDc.png
+#: 
+msgid "Show first marriage image"
+msgstr ""
+
+#. Show the type of marriage (civil, religious, etc)
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/HqluftIIHdUwOT5EBUDDdIzS.png
+#: 
+msgid "Show marriage type"
+msgstr ""
+
+#. If this option is enabled, if the marriage type is not known then a message will be shown to indicate this: https://s3.eu-west-1.amazonaws.com/po-pub/i/HqluftIIHdUwOT5EBUDDdIzS.png
+#: 
+msgid "Show when type is not specified"
+msgstr ""
+
+#. New wording for option to show photos on individuals as there are now many options for which photos to show.
+#: 
+msgid "Show photos of individuals"
+msgstr ""
+
+#. New control panel option for admin to set a prefix for burial records:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/hVEI9oO3KxRBrDdqseXZ5Lf0.png
+#: 
+msgid "Burial date prefix"
+msgstr ""
+
+#. Additional help text to clarify that the setting to use alternate events does not apply to burial events:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/KIQiyqfzLqLyWbWyJDAuNrkv.png
+#: 
+msgid "The options to show burial dates and places will use the burial or cremation events and is not affected by this setting."
+msgstr ""
+
+#. Part of help for burial dates:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/L8XnRFljy2puyETrxWRkboGd.png
+#: 
+msgid "Check the box if you would like to include the burial date of individuals in the output."
+msgstr ""
+
+#. Part of help for burial dates:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/L8XnRFljy2puyETrxWRkboGd.png
+#: 
+msgid "You can also choose whether to show the full date of burial or just the year."
+msgstr ""
+
+#. Part of help for burial place:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/L8XnRFljy2puyETrxWRkboGd.png
+#: 
+msgid "Whether to show the place of burial in the output. Also see option for abbreviating place names."
+msgstr ""
+
+#. Part of help text for photos:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/rpmt8ugrEArj5PBFFS8bRR5f.png
+#: 
+msgid "When enabled, if the birth event for the individual has photos attached, then the first will be shown. This is in addition to other photos."
+msgstr ""
+
+#. Part of help text for photos:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/rpmt8ugrEArj5PBFFS8bRR5f.png
+#: 
+msgid "When enabled, if the marriage event for the individual has photos attached, then the first will be shown. This is in addition to other photos."
+msgstr ""
+
+#. Part of help text for photos:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/rpmt8ugrEArj5PBFFS8bRR5f.png
+#: 
+msgid "When enabled, if the death event for the individual has photos attached, then the first will be shown. This is in addition to other photos."
+msgstr ""
+
+#. Part of help text for photos:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/rpmt8ugrEArj5PBFFS8bRR5f.png
+#: 
+msgid "When enabled, if the burial event for the individual has photos attached, then the first will be shown. This is in addition to other photos."
+msgstr ""
+
+#. Part of help text relating to content on family records:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/YgNsKPAarw3CvZkSzbtJvRe1.png
+#: 
+msgid "If a couple have been married more than once (a family record in webtrees has multiple marriage events), if this option is selected then only the first is shown (this is the default). If you unselect this option, all marriage events will be shown in the same family record in the diagram."
+msgstr ""
+
+#. Part of help text relating to content on family records:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/YgNsKPAarw3CvZkSzbtJvRe1.png
+#: 
+msgid "If selected, the type of marriage (civil, religious, registered partnership) will be shown on the family record."
+msgstr ""
+
+#. Part of help text relating to content on family records:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/YgNsKPAarw3CvZkSzbtJvRe1.png
+#: 
+msgid "If selected, where the marriage type is not known then it will show a message stating this. If unselected, unknown marriage types will not be displayed."
+msgstr ""
+
+#. Restoring as was incorrectly removed
+#: 
+msgid "browser, SVG, and PDF only"
+msgstr ""
+
+#. I have readded this as I was wrong about page links, the can be supported in SVG but only when generated in the browser (not server), so I have restored this.
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/PFTXgi5zjRwyuP02uQEGbizv.png
+#: 
+msgid "For SVG (and PDF if Graphviz installed on server) output, links can be included. This way you can click on the person in the diagram to be taken to their webtrees page."
+msgstr ""
+
+#. Extra part to help text to inform user that if they choose to include links in SVG format, the browser will render the diagram even if they have Graphviz on their server:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/wfrHxNXw49ofOCG1CBpFzGcW.png
+#: 
+msgid "Note that SVG output will always be rendered by the browser (and not the server) if you choose to include page links."
+msgstr ""
+
+#. "Diagram colours" is now "Diagram style": https://s3.eu-west-1.amazonaws.com/po-pub/i/4AMAMqb2XvyddBnzaeXB174Y.png
+#: 
+msgid "Diagram style"
+msgstr ""
+
+#. New option to set the style of arrow:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/TYPN390pgUuKhdXd6P4NYUpN.png
+#: 
+msgid "Arrow style"
+msgstr ""
+
+#. One of the arrow style options for new arrow style setting:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/4AMAMqb2XvyddBnzaeXB174Y.png
+#: 
+msgid "Solid"
+msgstr ""
+
+#. One of the arrow style options for new arrow style setting:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/4AMAMqb2XvyddBnzaeXB174Y.png
+#: 
+msgid "Dotted"
+msgstr ""
+
+#. One of the arrow style options for new arrow style setting:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/4AMAMqb2XvyddBnzaeXB174Y.png
+#: 
+msgid "Dashed"
+msgstr ""
+
+#. One of the arrow style options for new arrow style setting:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/4AMAMqb2XvyddBnzaeXB174Y.png
+#: 
+msgid "Bold"
+msgstr ""
+
+#. One of the arrow style options for new arrow style setting:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/4AMAMqb2XvyddBnzaeXB174Y.png
+#: 
+msgid "Tapered"
+msgstr ""
+
+#. One of the arrow style options for new arrow style setting:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/4AMAMqb2XvyddBnzaeXB174Y.png
+#: 
+msgid "Random"
+msgstr ""
+
+#. Updated help text to cater for new arrow style option:  https://s3.eu-west-1.amazonaws.com/po-pub/i/fn6MBj0cyzMUvsgzAVFvUeoS.png
+#: 
+msgid "You are also able to set the arrow style here."
+msgstr ""
+
+#. Updated help text to cater for new arrow style option:  https://s3.eu-west-1.amazonaws.com/po-pub/i/fn6MBj0cyzMUvsgzAVFvUeoS.png
+#: 
+msgid "This allows you to select the arrow style from the various available styles. The \\'Random\\' option will randomly select a style for each arrow, making it easier to follow overlapping arrows on complex diagrams."
+msgstr ""
+
+#. Restoring this translation as it was needed after all. 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/xIpoeu5Uos6YjpRvDXybeRqg.png
+#: 
+msgid "Add URL to individuals and families"
+msgstr "Dodawanie adresów URL do osób i rodzin"
 
