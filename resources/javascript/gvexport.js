@@ -329,16 +329,14 @@ function pageLoaded(Url) {
     });
 
     document.addEventListener("mousedown", function(event) {
-
         // Hide diagram context menu if clicked off a tile
-        if (event.target.closest('.settings_ellipsis_menu_item') == null && event.target.parent && event.target.parent.id !== 'menu-info') {
+        if (event.target.closest('.settings_ellipsis_menu_item') == null && event.target.parent?.id !== 'menu-info') {
             UI.contextMenu.clearContextMenu();
         }
     });
 
     document.addEventListener("click", function(event) {
         removeSettingsEllipsisMenu(event.target);
-
         if (!document.getElementById('searchButton').contains(event.target) && !document.getElementById('diagram_search_box_container').contains(event.target)) {
             Form.showHideSearchBox(event, false);
         }
