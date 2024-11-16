@@ -184,8 +184,8 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
             $xref = $tree->getUserPreference(Auth::user(), UserInterface::PREF_TREE_ACCOUNT_XREF);
         }
         $individual = $this->getIndividual($tree, $tree->significantIndividual(Auth::user(), $xref)->xref());
-		$userDefaultVars = (new Settings())->getAdminSettings($this);
-        $settings = new Settings();
+		$userDefaultVars = (new Settings($tree))->getAdminSettings($this);
+        $settings = new Settings($tree);
         $userDefaultVars['first_render'] = true;
         if (isset($_REQUEST['reset'])){
             if (!$userDefaultVars['enable_graphviz'] && $userDefaultVars['graphviz_bin'] != "") {

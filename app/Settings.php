@@ -47,7 +47,7 @@ class Settings
     /**
      * Settings instance always starts with default settings
      */
-    public function __construct(){
+    public function __construct($tree = null){
         // Load settings from config file
         $this->defaultSettings = include dirname(__FILE__) . "/../config.php";
         // Add options lists
@@ -78,8 +78,7 @@ class Settings
         $this->defaultSettings['sharednote_col_data'] = '[]';
         $this->defaultSettings['updated_date'] = '';
         $this->defaultSettings['highlight_custom_json'] = '{}';
-        $this->defaultSettings['limit_levels'] = '0';
-
+        $this->defaultSettings['limit_levels'] = ($tree ? $this->getLevelLimit($tree, $this->defaultSettings) : '0');
     }
 
     /**
@@ -836,7 +835,7 @@ class Settings
      * @param $settings
      * @return string
      */
-    private function getLevelLimit($tree, $settings)
+    private function getLevelLimit($tree, $settings): string
     {
         if (Auth::isAdmin()) {
             return '99';
