@@ -1529,7 +1529,7 @@ class Dot {
             default:
                 return $place_long;
         }
-        
+
         /* It's possible the place name string was blank, meaning our return variable is
                still blank. We don't want to add a comma if that's the case. */
         if (!empty($place) && !empty($place_chunks[$chunk_count - 1]) && ($chunk_count > 1)) {
