@@ -66,6 +66,19 @@ const Data = {
         return Data.callAPI(request);
     },
 
+    /**
+     * Sends API request to retrieve record count
+     *
+     * @returns {Promise<unknown>}
+     */
+    getResourceCount(token) {
+        let request = {
+            "type": REQUEST_TYPE_GET_RECORD_COUNT,
+            "token": token,
+        };
+        return Data.callAPI(request);
+    },
+
     decodeHTML(html) {
         const textarea = document.createElement('textarea');
         textarea.innerHTML = html;

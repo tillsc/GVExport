@@ -7,6 +7,8 @@ use Fisharebest\Webtrees\Auth;
 use Fisharebest\Webtrees\Http\Exceptions\HttpBadRequestException;
 use Fisharebest\Webtrees\I18N;
 use Fisharebest\Webtrees\Tree;
+use Fisharebest\Webtrees\GuestUser;
+
 
 /**
  * Represents the diagram settings, regardless of context (user, admin, default)
@@ -25,6 +27,7 @@ class Settings
     public const PREFERENCE_PREFIX = "GVE";
     public const SETTINGS_LIST_PREFERENCE_NAME = "_id_list";
     public const SAVED_SETTINGS_LIST_PREFERENCE_NAME = "_shared_settings_list";
+    const RECORD_COUNT_PREFERENCE_NAME = 'RECORD_COUNT';
     public const OPTION_STRIPE_NONE = 100;
     public const OPTION_STRIPE_SEX_COLOUR = 110;
     public const OPTION_STRIPE_VITAL_COLOUR = 120;
@@ -489,6 +492,7 @@ class Settings
             case 'click_action_indi_options':
             case 'arrow_style_options':
             case 'limit_levels':
+            case 'time_token':
                 return false;
             case 'show_debug_panel':
             case 'filename':
@@ -850,5 +854,48 @@ class Settings
         } else {
             return $settings['limit_levels_visitor'];
         }
+    }
+
+    /**
+     * Saves record count of diagram to session storage
+     *
+     * @param string $token Token used by front end to check record has been updated
+     * @param int $indis
+     * @param int $fams
+     * @return void
+     */
+    public function updateRecordCount(string $token, int $indis, int $fams)
+    {
+        $data = json_encode([
+            'time_token' => $token,
+            'indis' => $indis,
+            'fams' => $fams
+        ]);
+        $_SESSION[Settings::PREFERENCE_PREFIX . '_' . Settings::RECORD_COUNT_PREFERENCE_NAME] = $data;
+    }
+
+    /**
+     * Loads record count of diagram from session storage
+     *
+     * @param $token
+     * @return string
+     */
+    static public function loadRecordCount($token): string
+    {
+        $defaults = [
+            'time_token' => '',
+            'indis' => -1,
+            'fams' => -1
+        ];
+
+        $records = $_SESSION[Settings::PREFERENCE_PREFIX . '_' . Settings::RECORD_COUNT_PREFERENCE_NAME] ?? null;
+
+        $decoded = $records ? json_decode($records, true) : null;
+
+        if ($decoded && isset($decoded['time_token']) && $decoded['time_token'] === $token) {
+            return $records;
+        }
+
+        return json_encode($defaults);
     }
 }
