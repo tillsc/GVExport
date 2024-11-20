@@ -395,20 +395,38 @@ class Settings
 
     /**
      * Load country data for abbreviating place names
-     * Data comes from https://www.datahub.io/core/country-codes
-     * This material is licensed by its maintainers under the Public Domain Dedication and License, however,
-     * they note that the data is ultimately sourced from ISO who have an unclear licence regarding use,
-     * particularly around commercial use. Though all data sources providing ISO data have this problem.
+     * Data comes from https://github.com/stefangabos/world_countries
+     *
      * @return array
      */
     private function getCountryAbbreviations(): array
     {
-        $string = file_get_contents(dirname(__FILE__) . "/../resources/data/country-codes_json.json");
+        $countries['iso2'] = $this->loadCountryDataFile('iso2');
+        $countries['iso3'] = $this->loadCountryDataFile('iso3');
+        return $countries;
+    }
+
+    /**
+     * Loads country data from JSON file
+     *
+     * @param $type
+     * @return array|false
+     */
+    private function loadCountryDataFile($type) {
+        switch ($type) {
+            case 'iso2':
+                $string = file_get_contents(dirname(__FILE__) . "/../resources/data/CountryRegionCodes2Char.json");
+                break;
+            case 'iso3':
+                $string = file_get_contents(dirname(__FILE__) . "/../resources/data/CountryRegionCodes3Char.json");
+                break;
+            default:
+                return false;
+        }
         $json = json_decode($string, true);
         $countries = [];
-        foreach ($json as $row) {
-            $countries['iso2'][strtolower($row['Name'])] = $row['ISO3166-1-Alpha-2'];
-            $countries['iso3'][strtolower($row['Name'])] = $row['ISO3166-1-Alpha-3'];
+        foreach ($json as $row => $value) {
+            $countries[strtolower($row)] = strtoupper($value);
         }
         return $countries;
     }
