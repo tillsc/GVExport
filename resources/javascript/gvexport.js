@@ -15,6 +15,7 @@ const REQUEST_TYPE_ADD_MY_FAVORITE = "add_my_favorite";
 const REQUEST_TYPE_ADD_TREE_FAVORITE = "add_tree_favorite";
 const REQUEST_TYPE_GET_HELP = "get_help";
 const REQUEST_TYPE_GET_SHARED_NOTE_FORM = "get_shared_note_form";
+const REQUEST_TYPE_GET_RECORD_COUNT = "get_record_count";
 let treeName = null;
 let loggedIn = null;
 let xrefList = [];
@@ -35,7 +36,7 @@ function loadURLXref(Url) {
                 let startValue = el.value;
                 Form.indiList.addIndiToList(xref);
                 if (url_xref_treatment === 'default' && xrefs.length === 1 ) {
-                    setTimeout(function () {UI.showToast(TRANSLATE['Source individual has replaced existing individual'].replace('%s', xrefs.length.toString()))}, 100);
+                    setTimeout(function () {UI.showToast(TRANSLATE['Source individual has replaced existing individual'])}, 100);
                 } else if (startValue !== el.value && (url_xref_treatment === 'default' || url_xref_treatment === 'add')) {
                     setTimeout(function () {UI.showToast(TRANSLATE['One new source individual added to %s existing individuals'].replace('%s', xrefs.length.toString()))}, 100);
                 }

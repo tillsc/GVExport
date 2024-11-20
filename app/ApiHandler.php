@@ -98,6 +98,9 @@ class ApiHandler
                 case "get_shared_note_form":
                     $this->getSharedNoteForm();
                     break;
+                case "get_record_count":
+                    $this->getRecordCount();
+                    break;
                 default:
                     $this->response_data['success'] = false;
                     $this->response_data['json'] = $this->json_data;
@@ -180,7 +183,7 @@ class ApiHandler
     {
         if (isset($this->json['settings_id']) && (ctype_alnum((string) $this->json['settings_id']) || in_array($this->json['settings_id'], [Settings::ID_ALL_SETTINGS, Settings::ID_MAIN_SETTINGS]))) {
             $settings = new Settings();
-            // Treat loggged out users special if requesting ID_MAIN_SETTINGS
+            // Treat logged-out users special if requesting ID_MAIN_SETTINGS
             if ($this->json['settings_id'] == Settings::ID_MAIN_SETTINGS && Auth::user()->id() == Settings::GUEST_USER_ID) {
                 $vars = Validator::parsedBody($this->request)->array('vars');
                 $form = new FormSubmission();
@@ -417,5 +420,11 @@ class ApiHandler
         $vars = Validator::parsedBody($this->request)->array('vars');
         $this->response_data['success'] = true;
         $this->response_data['response'] = view($this->module->name() . '::MainPage/Appearance/TileDesign/SharedNote', ['vars' => $vars, 'tree' => $this->tree, 'module' => $this->module]);
+    }
+
+    private function getRecordCount()
+    {
+        $this->response_data['success'] = true;
+        $this->response_data['response'] = Settings::loadRecordCount($this->json['token']);
     }
 }

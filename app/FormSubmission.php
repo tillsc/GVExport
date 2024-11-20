@@ -20,6 +20,12 @@ class FormSubmission
     public function load($vars, $module): array
     {
         $settings = [];
+
+        if (isset($vars["time_token"]) && $this->isNameStringValid($vars["time_token"])) {
+            $settings['time_token'] = $vars["time_token"];
+        } else {
+            $settings['time_token'] = '';
+        }
         // INDI id
         if (!empty($vars["xref_list"]) && $this->isXrefListValid($vars["xref_list"])) {
             $settings['xref_list'] = $vars["xref_list"];

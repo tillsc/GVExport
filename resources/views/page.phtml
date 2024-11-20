@@ -52,6 +52,7 @@ $usegraphviz = $vars['graphviz_bin'] != "";
 
         <?= csrf_field() ?>
 
+        <input type="hidden" id="time_token" name="vars[time_token]" value="">
         <div id="saved_diagrams_panel" <?php if (!$vars["show_diagram_panel"]) echo 'style="display: none"'; ?>>
             <div class="d-flex">
                 <h3><?= I18N::translate('Saved diagrams') ?></h3>
@@ -153,7 +154,7 @@ $usegraphviz = $vars['graphviz_bin'] != "";
             <div id="diagram_search_box_container" style="display: none"><?= view('components/select-individual', ['name' => 'diagram_search_box', 'id' => 'diagram_search_box', 'tree' => $tree, 'individual' => "", 'required'=>false]); ?></div>
         </div>
     </div>
-    <div id="context_menu">
+    <div id="context_menu" style="display: none">
         <span id="menu-info">
             <?= MainPage::addInfoButton('Context menu when individual clicked'); ?>
         </span>
@@ -217,7 +218,56 @@ $usegraphviz = $vars['graphviz_bin'] != "";
                 e.preventDefault();
             }
         }
+        let timeToken = crypto?.randomUUID?.() || (Date.now()).toString(16);
+
+        document.getElementById('time_token').value = timeToken;
+        setTimeout(() => { getResourceCountWithMyToken(timeToken)}, 500);
     });
+
+    /**
+     * Send request to server to get the number of individuals and families from the generated diagram
+     *
+     * @param myToken A time based token used to check that the information on record counts is from the same request we sent to the server
+     * @param callCount Keeps track of retries. If the server never gets updated to our token (maybe multiple requests messed this up), then we eventually give up.
+     */
+    function getResourceCountWithMyToken(myToken, callCount = 0) {
+
+        const MAX_RETRIES = 50;
+        const RETRY_DELAY = 500;
+        if (callCount >= MAX_RETRIES) {
+            console.log('Max retries reached for time token');
+            return;
+        }
+
+        if (myToken === '') {
+            retry(myToken, callCount);
+        }
+
+        Data.getResourceCount(myToken).then((response) => {
+            let obj;
+            try {
+                obj = JSON.parse(response);
+                if (obj['time_token'] === myToken) {
+                    let indis = obj['indis'];
+                    let fams = obj['fams'];
+                    if ('indis' in obj && 'fams' in obj) {
+                        UI.showToast(TRANSLATE['Downloaded diagram with %s individuals and %s families.'].replace('%s', indis).replace('%s', fams))
+                    }
+                } else {
+                    retry(myToken, callCount);
+                }
+            } catch (e) {
+                console.log('Failed to fetch resource counts: ' + e);
+                retry(myToken, callCount);
+            }
+        });
+
+        function retry(myToken, callCount) {
+            setTimeout(() => {
+                getResourceCountWithMyToken(myToken, callCount);
+            }, RETRY_DELAY);
+        }
+    }
 
     function updateRender(scrollX = null, scrollY = null, zoom = null, xref = null) {
         // Don't overwrite browser settings with default settings
