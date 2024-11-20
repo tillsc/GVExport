@@ -1491,53 +1491,62 @@ class Dot {
         // If chose no abbreviating, then return string untouched
         if ($settings["use_abbr_place"] == 0 /* Full place name */) {
             return $place_long;
-        } else {
-            // Cut the place name up into pieces using the commas
-            $place_chunks = explode(",", $place_long);
-            $place = "";
-            $chunk_count = count($place_chunks);
-            // Add city to out return string as we always keep this
-            if (!empty($place_chunks[0])) {
-                $place .= trim($place_chunks[0]);
+        }
+
+        // Cut the place name up into pieces using the commas
+        $place_chunks = explode(",", $place_long);
+        $place = "";
+        $chunk_count = count($place_chunks);
+
+        // Add city to our return string as we always keep this
+        if (!empty($place_chunks[0])) {
+            $place .= trim($place_chunks[0]);
+
+            if ($settings["use_abbr_place"] == 5 /* City only */) {
+                return $place;
             }
-            // Chose to keep just the first and last sections
-            if ($settings["use_abbr_place"] == 10 /* City and Country */) {
-                if (!empty($place_chunks[$chunk_count - 1]) && ($chunk_count > 1)) {
-                    if (!empty($place)) {
-                        $place .= ", ";
-                    }
-                    $place .= trim($place_chunks[$chunk_count - 1]);
-                }
-            } else {
-                /* Otherwise, we have chosen one of the ISO code options */
-                switch ($settings["use_abbr_place"]) {
-                    case 20: //City and 2-Letter ISO Country Code
-                        $code = "iso2";
-                        break;
-                    case 30: //City and 3-Letter ISO Country Code
-                        $code = "iso3";
-                        break;
-                    default:
-                        return $place_long;
-                }
-                /* It's possible the place name string was blank, meaning our return variable is
-                       still blank. We don't want to add a comma if that's the case. */
-                if (!empty($place) && !empty($place_chunks[$chunk_count - 1]) && ($chunk_count > 1)) {
+        }
+
+        // Chose to keep just the first and last sections
+        if ($settings["use_abbr_place"] == 10 /* City and Country */) {
+            if (!empty($place_chunks[$chunk_count - 1]) && ($chunk_count > 1)) {
+                if (!empty($place)) {
                     $place .= ", ";
                 }
-                /* Look up our country in the array of country names.
-                   It must be an exact match, or it won't be abbreviated to the country code. */
-                if (isset($settings["countries"][$code][strtolower(trim($place_chunks[$chunk_count - 1]))])) {
-                    $place .= $settings["countries"][$code][strtolower(trim($place_chunks[$chunk_count - 1]))];
-                } else {
-                    // We didn't find out country in the abbreviation list, so just add the full country name
-                    if (!empty($place_chunks[$chunk_count - 1]) && ($chunk_count > 1)) {
-                        $place .= trim($place_chunks[$chunk_count - 1]);
-                    }
-                }
+                $place .= trim($place_chunks[$chunk_count - 1]);
+                return $place;
             }
-            return $place;
         }
+
+        /* Otherwise, we have chosen one of the ISO code options */
+        switch ($settings["use_abbr_place"]) {
+            case 20: //City and 2-Letter ISO Country Code
+                $code = "iso2";
+                break;
+            case 30: //City and 3-Letter ISO Country Code
+                $code = "iso3";
+                break;
+            default:
+                return $place_long;
+        }
+        
+        /* It's possible the place name string was blank, meaning our return variable is
+               still blank. We don't want to add a comma if that's the case. */
+        if (!empty($place) && !empty($place_chunks[$chunk_count - 1]) && ($chunk_count > 1)) {
+            $place .= ", ";
+        }
+
+        /* Look up our country in the array of country names.
+           It must be an exact match, or it won't be abbreviated to the country code. */
+        if (isset($settings["countries"][$code][strtolower(trim($place_chunks[$chunk_count - 1]))])) {
+            $place .= $settings["countries"][$code][strtolower(trim($place_chunks[$chunk_count - 1]))];
+        } else {
+            // We didn't find country in the abbreviation list, so just add the full country name
+            if (!empty($place_chunks[$chunk_count - 1]) && ($chunk_count > 1)) {
+                $place .= trim($place_chunks[$chunk_count - 1]);
+            }
+        }
+        return $place;
     }
 
     /**
