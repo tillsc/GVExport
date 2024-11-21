@@ -44,6 +44,11 @@ class Settings
     public const USER_ROLES = ['Visitor', 'Member', 'Editor', 'Moderator', 'Manager'];
     const TREE_PREFIX = "_t";
     const USER_PREFIX = "_u";
+    const OPTION_FULL_PLACE_NAME = 0;
+    const OPTION_CITY_ONLY = 5;
+    const OPTION_CITY_AND_COUNTRY = 10;
+    const OPTION_2_LETTER_ISO = 20;
+    const OPTION_3_LETTER_ISO = 30;
     private array $settings_json_cache = [];
     private array $defaultSettings;
 
@@ -61,7 +66,7 @@ class Settings
         $this->defaultSettings['url_xref_treatment_options']['add'] = "Add to list";
         $this->defaultSettings['url_xref_treatment_options']['nothing'] = "Don't add to list";
         $this->defaultSettings['url_xref_treatment_options']['overwrite'] = "Overwrite";
-        $this->defaultSettings['use_abbr_places'] = [0 => "Full place name", 5 => "City only" ,  10 => "City and country" ,  20 => "City and 2 letter ISO country code", 30 => "City and 3 letter ISO country code"];
+        $this->defaultSettings['use_abbr_places'] = [self::OPTION_FULL_PLACE_NAME => "Full place name", self::OPTION_CITY_ONLY => "City only" ,  self::OPTION_CITY_AND_COUNTRY => "City and country" ,  self::OPTION_2_LETTER_ISO => "City and 2 letter ISO country code", self::OPTION_3_LETTER_ISO => "City and 3 letter ISO country code"];
         $this->defaultSettings['use_abbr_names'] = [0 => "Full name", 10 => "Given and surnames", 20 => "Given names" , 30 => "First given name only", 80 => "Preferred given name and surname", 40 => "Surnames", 50 => "Initials only", 60 => "Given name initials and surname", 70 => "Don't show names"];
         $this->defaultSettings['photo_shape_options'] = [Person::SHAPE_NONE => "No change", Person::SHAPE_OVAL => "Oval", Person::SHAPE_CIRCLE => "Circle" , Person::SHAPE_SQUARE => "Square", Person::SHAPE_ROUNDED_RECT => "Rounded rectangle", Person::SHAPE_ROUNDED_SQUARE => "Rounded square"];
         $this->defaultSettings['photo_quality_options'] = [0 => "Lowest", 20 => "Low", 50 => "Medium" , 75 => "High", 100 => "Highest"];
