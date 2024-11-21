@@ -44,6 +44,11 @@ class Settings
     public const USER_ROLES = ['Visitor', 'Member', 'Editor', 'Moderator', 'Manager'];
     const TREE_PREFIX = "_t";
     const USER_PREFIX = "_u";
+    const OPTION_FULL_PLACE_NAME = 0;
+    const OPTION_CITY_ONLY = 5;
+    const OPTION_CITY_AND_COUNTRY = 10;
+    const OPTION_2_LETTER_ISO = 20;
+    const OPTION_3_LETTER_ISO = 30;
     private array $settings_json_cache = [];
     private array $defaultSettings;
 
@@ -61,7 +66,7 @@ class Settings
         $this->defaultSettings['url_xref_treatment_options']['add'] = "Add to list";
         $this->defaultSettings['url_xref_treatment_options']['nothing'] = "Don't add to list";
         $this->defaultSettings['url_xref_treatment_options']['overwrite'] = "Overwrite";
-        $this->defaultSettings['use_abbr_places'] = [0 => "Full place name", 5 => "City only" ,  10 => "City and country" ,  20 => "City and 2 letter ISO country code", 30 => "City and 3 letter ISO country code"];
+        $this->defaultSettings['use_abbr_places'] = [self::OPTION_FULL_PLACE_NAME => "Full place name", self::OPTION_CITY_ONLY => "City only" ,  self::OPTION_CITY_AND_COUNTRY => "City and country" ,  self::OPTION_2_LETTER_ISO => "City and 2 letter ISO country code", self::OPTION_3_LETTER_ISO => "City and 3 letter ISO country code"];
         $this->defaultSettings['use_abbr_names'] = [0 => "Full name", 10 => "Given and surnames", 20 => "Given names" , 30 => "First given name only", 80 => "Preferred given name and surname", 40 => "Surnames", 50 => "Initials only", 60 => "Given name initials and surname", 70 => "Don't show names"];
         $this->defaultSettings['photo_shape_options'] = [Person::SHAPE_NONE => "No change", Person::SHAPE_OVAL => "Oval", Person::SHAPE_CIRCLE => "Circle" , Person::SHAPE_SQUARE => "Square", Person::SHAPE_ROUNDED_RECT => "Rounded rectangle", Person::SHAPE_ROUNDED_SQUARE => "Rounded square"];
         $this->defaultSettings['photo_quality_options'] = [0 => "Lowest", 20 => "Low", 50 => "Medium" , 75 => "High", 100 => "Highest"];
@@ -395,20 +400,38 @@ class Settings
 
     /**
      * Load country data for abbreviating place names
-     * Data comes from https://www.datahub.io/core/country-codes
-     * This material is licensed by its maintainers under the Public Domain Dedication and License, however,
-     * they note that the data is ultimately sourced from ISO who have an unclear licence regarding use,
-     * particularly around commercial use. Though all data sources providing ISO data have this problem.
+     * Data comes from https://github.com/stefangabos/world_countries
+     *
      * @return array
      */
     private function getCountryAbbreviations(): array
     {
-        $string = file_get_contents(dirname(__FILE__) . "/../resources/data/country-codes_json.json");
+        $countries['iso2'] = $this->loadCountryDataFile('iso2');
+        $countries['iso3'] = $this->loadCountryDataFile('iso3');
+        return $countries;
+    }
+
+    /**
+     * Loads country data from JSON file
+     *
+     * @param $type
+     * @return array|false
+     */
+    private function loadCountryDataFile($type) {
+        switch ($type) {
+            case 'iso2':
+                $string = file_get_contents(dirname(__FILE__) . "/../resources/data/CountryRegionCodes2Char.json");
+                break;
+            case 'iso3':
+                $string = file_get_contents(dirname(__FILE__) . "/../resources/data/CountryRegionCodes3Char.json");
+                break;
+            default:
+                return false;
+        }
         $json = json_decode($string, true);
         $countries = [];
-        foreach ($json as $row) {
-            $countries['iso2'][strtolower($row['Name'])] = $row['ISO3166-1-Alpha-2'];
-            $countries['iso3'][strtolower($row['Name'])] = $row['ISO3166-1-Alpha-3'];
+        foreach ($json as $row => $value) {
+            $countries[strtolower($row)] = strtoupper($value);
         }
         return $countries;
     }

@@ -1489,7 +1489,7 @@ class Dot {
     public static function getAbbreviatedPlace(string $place_long, array $settings): string
     {
         // If chose no abbreviating, then return string untouched
-        if ($settings["use_abbr_place"] == 0 /* Full place name */) {
+        if ($settings["use_abbr_place"] == Settings::OPTION_FULL_PLACE_NAME) {
             return $place_long;
         }
 
@@ -1497,18 +1497,19 @@ class Dot {
         $place_chunks = explode(",", $place_long);
         $place = "";
         $chunk_count = count($place_chunks);
+        $abbreviating_country = !($chunk_count == 1 && ($settings["use_abbr_place"] == Settings::OPTION_2_LETTER_ISO || $settings["use_abbr_place"] == Settings::OPTION_3_LETTER_ISO));
 
-        // Add city to our return string as we always keep this
-        if (!empty($place_chunks[0])) {
+        // Add city to our return string
+        if (!empty($place_chunks[0]) && $abbreviating_country) {
             $place .= trim($place_chunks[0]);
 
-            if ($settings["use_abbr_place"] == 5 /* City only */) {
+            if ($settings["use_abbr_place"] == Settings::OPTION_CITY_ONLY) {
                 return $place;
             }
         }
 
         // Chose to keep just the first and last sections
-        if ($settings["use_abbr_place"] == 10 /* City and Country */) {
+        if ($settings["use_abbr_place"] == Settings::OPTION_CITY_AND_COUNTRY) {
             if (!empty($place_chunks[$chunk_count - 1]) && ($chunk_count > 1)) {
                 if (!empty($place)) {
                     $place .= ", ";
@@ -1520,10 +1521,10 @@ class Dot {
 
         /* Otherwise, we have chosen one of the ISO code options */
         switch ($settings["use_abbr_place"]) {
-            case 20: //City and 2-Letter ISO Country Code
+            case Settings::OPTION_2_LETTER_ISO:
                 $code = "iso2";
                 break;
-            case 30: //City and 3-Letter ISO Country Code
+            case Settings::OPTION_3_LETTER_ISO:
                 $code = "iso3";
                 break;
             default:
@@ -1542,7 +1543,7 @@ class Dot {
             $place .= $settings["countries"][$code][strtolower(trim($place_chunks[$chunk_count - 1]))];
         } else {
             // We didn't find country in the abbreviation list, so just add the full country name
-            if (!empty($place_chunks[$chunk_count - 1]) && ($chunk_count > 1)) {
+            if (!empty($place_chunks[$chunk_count - 1])) {
                 $place .= trim($place_chunks[$chunk_count - 1]);
             }
         }
