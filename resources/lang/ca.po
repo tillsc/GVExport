@@ -2247,68 +2247,92 @@ msgstr "Per a la sortida SVG (i PDF si Graphviz està instal·lat al servidor), 
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/wfrHxNXw49ofOCG1CBpFzGcW.png
 #: 
 msgid "Note that SVG output will always be rendered by the browser (and not the server) if you choose to include page links."
-msgstr ""
+msgstr "Tingueu en compte que la sortida SVG sempre serà renderitzada pel navegador (i no pel servidor) si decidiu incloure enllaços de pàgina."
 
 #. "Diagram colours" is now "Diagram style": https://s3.eu-west-1.amazonaws.com/po-pub/i/4AMAMqb2XvyddBnzaeXB174Y.png
 #: 
 msgid "Diagram style"
-msgstr ""
+msgstr "Estil de diagrama"
 
 #. New option to set the style of arrow:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/TYPN390pgUuKhdXd6P4NYUpN.png
 #: 
 msgid "Arrow style"
-msgstr ""
+msgstr "Estil de fletxa"
 
 #. One of the arrow style options for new arrow style setting:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/4AMAMqb2XvyddBnzaeXB174Y.png
 #: 
 msgid "Solid"
-msgstr ""
+msgstr "Sòlid"
 
 #. One of the arrow style options for new arrow style setting:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/4AMAMqb2XvyddBnzaeXB174Y.png
 #: 
 msgid "Dotted"
-msgstr ""
+msgstr "Punts"
 
 #. One of the arrow style options for new arrow style setting:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/4AMAMqb2XvyddBnzaeXB174Y.png
 #: 
 msgid "Dashed"
-msgstr ""
+msgstr "Guions"
 
 #. One of the arrow style options for new arrow style setting:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/4AMAMqb2XvyddBnzaeXB174Y.png
 #: 
 msgid "Bold"
-msgstr ""
+msgstr "Atrevit"
 
 #. One of the arrow style options for new arrow style setting:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/4AMAMqb2XvyddBnzaeXB174Y.png
 #: 
 msgid "Tapered"
-msgstr ""
+msgstr "Obelisc"
 
 #. One of the arrow style options for new arrow style setting:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/4AMAMqb2XvyddBnzaeXB174Y.png
 #: 
 msgid "Random"
-msgstr ""
+msgstr "Aleatori"
 
 #. Updated help text to cater for new arrow style option:  https://s3.eu-west-1.amazonaws.com/po-pub/i/fn6MBj0cyzMUvsgzAVFvUeoS.png
 #: 
 msgid "You are also able to set the arrow style here."
-msgstr ""
+msgstr "També podeu establir l'estil de fletxa aquí."
 
 #. Updated help text to cater for new arrow style option:  https://s3.eu-west-1.amazonaws.com/po-pub/i/fn6MBj0cyzMUvsgzAVFvUeoS.png
 #: 
 msgid "This allows you to select the arrow style from the various available styles. The \\'Random\\' option will randomly select a style for each arrow, making it easier to follow overlapping arrows on complex diagrams."
-msgstr ""
+msgstr "Això us permet seleccionar l'estil de fletxa entre els diferents estils disponibles. L'opció \\'Aleatori\\' seleccionarà aleatòriament un estil per a cada fletxa, fent més fàcil seguir les fletxes superposades en diagrames complexos."
 
 #. Restoring this translation as it was needed after all. 
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/xIpoeu5Uos6YjpRvDXybeRqg.png
 #: 
 msgid "Add URL to individuals and families"
 msgstr "Agregar URL a individus i famílies"
+
+#. A new message that pops up when diagram is downloaded:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/XxcKvjkqSJtgUHUpr5e8vBOL.png
+#: 
+msgid "Downloaded diagram with %s individuals and %s families."
+msgstr "S'ha descarregat el diagrama amb %s individus i %s famílies."
+
+#. Message that shows if Graphviz installed but diagram can't be rendered on server due to options chosen:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/UBXubBpivJyzaSPmBiQoKicp.png
+#: 
+msgid "Diagram rendered in browser due to settings selected"
+msgstr "Diagrama representat al navegador segons la configuració seleccionada"
+
+#. New place name abbreviation option, to only show the section up to the first comma, normally the city.
+#. 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/n46qXm3knZc5Xtx7hTiGNgZv.png
+#: 
+msgid "City only"
+msgstr "Només ciutat"
+
+#. Updated help to account for new option to only show the city.  https://s3.eu-west-1.amazonaws.com/po-pub/i/zrK8142tvoMbrXaHQL9bHZD4.png
+#: 
+msgid "only the first section of the place name is used, up to the first comma. For example, &quot;London, England, United Kingdom&quot; would be shortened to &quot;London&quot;"
+msgstr "només s'utilitza la primera secció del topònim, fins a la primera coma. Per exemple, \" Londres, Anglaterra, Regne Unit\" s'escurçaria a \" Londres\""
 

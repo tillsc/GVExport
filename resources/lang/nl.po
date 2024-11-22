@@ -59,9 +59,8 @@ msgstr "Markeer niet-bloedverwante personen met andere kleur"
 #. SVG links no longer work (and seem to have been broken for 3+ years), and it's not trivial to fix. Instead, I have updated this to clarify that it works only with PDF, and it will be hidden if Graphviz is not installed on the server.
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/SEzk1B1h5LwyvxiJ9liuAwLX.png
 #: 
-#, fuzzy
 msgid "Add link to individuals and families in PDF output"
-msgstr "Koppeling naar personen en gezinnen toevoegen in PDF-uitvoerURL toevoegen naar personen en gezinnen"
+msgstr "Koppeling naar personen en gezinnen toevoegen in PDF-uitvoer"
 
 #: 
 msgid "Show birthdate"
@@ -1200,7 +1199,6 @@ msgstr "Hiermee kunt u een vorm toewijzen op basis van het geslacht van personen
 
 #. Part of the Photos help text:  https://s3.eu-west-1.amazonaws.com/po-pub/i/LnybW6GMtDH0UDez4Z0flfpW.png
 #: 
-#, fuzzy
 msgid "This option lets you enable or disable showing photos on the tiles of individuals."
 msgstr "Met deze optie kunt u het tonen van foto's op de tegels van personen in- of uitschakelen."
 
@@ -1987,7 +1985,6 @@ msgstr "Merk op dat er momenteel geen optie is voor wat er moet gebeuren als er 
 
 #. An extra paragraph for the section on URL links in the help page:  https://s3.eu-west-1.amazonaws.com/po-pub/i/4Vxx95kI54pojXyfcC4CvyYc.png
 #: 
-#, fuzzy
 msgid "Also see \\'Action when individual clicked\\' in the Browser render settings."
 msgstr "Zie ook \\'Actie bij klikken op persoon\\' in de  Browserweergave-instellingen."
 
@@ -2285,4 +2282,28 @@ msgstr "Hiermee kunt u de pijlstijl selecteren uit de verschillende beschikbare 
 #: 
 msgid "Add URL to individuals and families"
 msgstr "URL toevoegen naar personen en gezinnen"
+
+#. A new message that pops up when diagram is downloaded:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/XxcKvjkqSJtgUHUpr5e8vBOL.png
+#: 
+msgid "Downloaded diagram with %s individuals and %s families."
+msgstr "Diagram met %s personen en %s gezinnen gedownload."
+
+#. Message that shows if Graphviz installed but diagram can't be rendered on server due to options chosen:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/UBXubBpivJyzaSPmBiQoKicp.png
+#: 
+msgid "Diagram rendered in browser due to settings selected"
+msgstr "Diagram weergegeven in browser op basis van geselecteerde instellingen"
+
+#. New place name abbreviation option, to only show the section up to the first comma, normally the city.
+#. 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/n46qXm3knZc5Xtx7hTiGNgZv.png
+#: 
+msgid "City only"
+msgstr "Alleen plaats"
+
+#. Updated help to account for new option to only show the city.  https://s3.eu-west-1.amazonaws.com/po-pub/i/zrK8142tvoMbrXaHQL9bHZD4.png
+#: 
+msgid "only the first section of the place name is used, up to the first comma. For example, &quot;London, England, United Kingdom&quot; would be shortened to &quot;London&quot;"
+msgstr "alleen het eerste deel van de plaatsnaam wordt gebruikt, tot aan de eerste komma. Bijvoorbeeld, &quot;Londen, Engeland, Verenigd Koninkrijk&quot; wordt afgekort tot &quot;Londen&quot;"
 
