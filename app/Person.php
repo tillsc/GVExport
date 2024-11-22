@@ -83,7 +83,7 @@ class Person
             default:
                 $border_colour = $this->dot->settings["border_col"];
         }
-        $out .= "<TD COLOR=\"" . $border_colour . "\"  BORDER=\"1\" CELLPADDING=\"0\" PORT=\"" . $pid . "\">";
+        $out .= "<TD COLOR=\"" . $border_colour . "\"  BORDER=\"1\" " . ($pid == "I_N" ? "COLSPAN=\"2\" WIDTH=\"50\"" : "") . " CELLPADDING=\"0\" PORT=\"" . $pid . "\">";
         $out .= $this->printPersonLabel($pid, $sharednotes, $related);
         $out .= "</TD>";
         return $out;
@@ -300,8 +300,10 @@ class Person
         // Draw table
         if ($this->dot->settings["diagram_type"] == "combined") {
             $out .= "<TABLE BORDER=\"0\" CELLBORDER=\"0\" CELLPADDING=\"2\" CELLSPACING=\"0\" BGCOLOR=\"" . $indi_bg_colour . "\" $href>";
+            $rounded = false;
         } else {
-            $style = ($this->shouldBeRounded($i, $this->dot->settings['indi_tile_shape']) ? 'STYLE="ROUNDED" ' : '');
+            $rounded = $this->shouldBeRounded($i, $this->dot->settings['indi_tile_shape']);
+            $style = ($rounded ? 'STYLE="ROUNDED" ' : '');
             $out .= "<TABLE " . $style . "COLOR=\"" . $border_colour . "\" BORDER=\"1\" CELLBORDER=\"0\" CELLPADDING=\"2\" CELLSPACING=\"0\" BGCOLOR=\"" . $indi_bg_colour . "\" $href>";
         }
         $birthData = " $birthdate " . (empty($birthplace) ? "" : "($birthplace)");
@@ -331,11 +333,19 @@ class Person
                 $stripe_colour = '';
         }
         if ($stripe_colour !== '') {
-            $out .= "<TR><TD COLSPAN=\"6\" CELLPADDING=\"2\" BGCOLOR=\"$stripe_colour\" PORT=\"nam\" $size></TD></TR>";
+            if ($rounded) {
+                $out .= "<TR><TD WIDTH=\"7\"></TD><TD COLSPAN=\"6\" CELLPADDING=\"2\" BGCOLOR=\"$stripe_colour\" PORT=\"nam\" $size></TD><TD WIDTH=\"7\"></TD></TR>";
+            } else {
+                $out .= "<TR><TD COLSPAN=\"6\" CELLPADDING=\"2\" BGCOLOR=\"$stripe_colour\" PORT=\"nam\" $size></TD></TR>";
+            }
         }
         // Second row (photo, name, birth, death & burial data)
         if ($detailsExist || $this->dot->isPhotoRequired()) {
             $out .= "<TR>";
+            if ($rounded || $pid == "I_N") {
+                $out .= "<TD></TD>";
+            }
+
             // Show photo
             $out .= $this->getFactImage($pid, $detailsExist, "pic");
             if ($detailsExist) {
@@ -381,7 +391,10 @@ class Person
             $out .= $this->getFactImage($pid, $detailsExist, "pic_birth_first");
             $out .= $this->getFactImage($pid, $detailsExist, "pic_death_first");
             $out .= $this->getFactImage($pid, $detailsExist, "pic_burial_first");
-            $out .= "<TD CELLPADDING=\"10\"></TD></TR>";
+            if ($rounded) {
+                $out .= "<TD WIDTH=\"7\"></TD>";
+            }
+            $out .= "</TR>";
         }
         // Close table
         $out .= "</TABLE>";
@@ -393,12 +406,12 @@ class Person
     public function getFactImage(string $pid, bool $detailsExist, string $id) : string {
             $out = "";
             // Show photo
-            if (($detailsExist) && ($this->dot->isPhotoRequired())) {
+            if (($detailsExist || $pid == "I_N") && ($this->dot->isPhotoRequired())) {
                 if (isset($this->dot->individuals[$pid][$id]) && !empty($this->dot->individuals[$pid][$id])) {
                     $photo_size = floatval($this->dot->settings["photo_size"]) / 100;
                     $padding = $this->getPhotoPaddingSize();
                     if ($this->dot->settings["add_links"]) {
-                        $out .= "<TD ROWSPAN=\"2\" CELLPADDING=\"$padding\" PORT=\"pic\" WIDTH=\"" . ($this->dot->settings["font_size"] * 4 * $photo_size)  . "\" HEIGHT=\"" . ($this->dot->settings["font_size"] * 4 * $photo_size) . "\" FIXEDSIZE=\"true\" ALIGN=\"CENTER\" VALIGN=\"MIDDLE\"" . ($id != 'pic' ? " HREF=\"".$this->dot->convertToHTMLSC( $this->dot->individuals[$pid][$id . "_link"])."\"" : '') . "><IMG SCALE=\"true\" SRC=\"" . $this->dot->individuals[$pid][$id] . "\" ALT=\"" . $this->dot->individuals[$pid][$id . "_title"] . "\"  /></TD>";
+                        $out .= "<TD ROWSPAN=\"2\" COLSPAN=\"2\" CELLPADDING=\"$padding\" PORT=\"pic\" WIDTH=\"" . ($this->dot->settings["font_size"] * 4 * $photo_size)  . "\" HEIGHT=\"" . ($this->dot->settings["font_size"] * 4 * $photo_size) . "\" FIXEDSIZE=\"true\" ALIGN=\"CENTER\" VALIGN=\"MIDDLE\"" . ($id != 'pic' ? " HREF=\"".$this->dot->convertToHTMLSC( $this->dot->individuals[$pid][$id . "_link"])."\"" : '') . "><IMG SCALE=\"true\" SRC=\"" . $this->dot->individuals[$pid][$id] . "\" ALT=\"" . $this->dot->individuals[$pid][$id . "_title"] . "\"  /></TD>";
                     } else {
                         $out .= "<TD ROWSPAN=\"2\" CELLPADDING=\"$padding\" PORT=\"pic\" WIDTH=\"" . ($this->dot->settings["font_size"] * 4 * $photo_size)  . "\" HEIGHT=\"" . ($this->dot->settings["font_size"] * 4 * $photo_size) . "\" FIXEDSIZE=\"true\" ALIGN=\"CENTER\" VALIGN=\"MIDDLE\"><IMG SCALE=\"true\" SRC=\"" . $this->dot->individuals[$pid][$id] . "\" ALT=\"" . $this->dot->individuals[$pid][$id . "_title"] . "\" /></TD>";
                     }
@@ -601,7 +614,7 @@ class Person
             case 0:
             default;
                 return false;
-            case 10:
+            case Person::TILE_SHAPE_ROUNDED:
                 return true;
             case Person::TILE_SHAPE_SEX:
                 switch ($i->sex()) {
