@@ -628,7 +628,7 @@ class Dot {
 					$out .= "label=<";
 		
 					// --- Print table ---
-					$out .= "<TABLE COLOR=\"" . $this->settings["border_col"] . "\" BORDER=\"0\" CELLBORDER=\"1\" CELLPADDING=\"2\" CELLSPACING=\"0\">";
+					$out .= "<TABLE COLOR=\"" . $this->settings["border_col"] . "\" BORDER=\"0\" CELLBORDER=\"0\" CELLPADDING=\"2\" CELLSPACING=\"0\">";
 		
 					// --- Print couple ---
 					$out .= "<TR>";
@@ -682,26 +682,28 @@ class Dot {
 
 				// --- Print marriage ---
 				if (!$isDummy && ($hasContent || $noPartners) && $enabled) {
-                    if ($i==0) {
-                        $out .= "<TR>";
-
-                        if ($this->settings["add_links"]) {
-                            $out .= "<TD COLSPAN=\"2\" CELLPADDING=\"0\" CELLBORDER=\"1\" PORT=\"marr\" TARGET=\"_BLANK\" HREF=\"" . $this->convertToHTMLSC($link) . "\" BGCOLOR=\"" . $fill_colour . "\">"; #ESL!!! 20090213 without convertToHTMLSC the dot file has invalid data
-                        } else {
-                            $out .= "<TD COLSPAN=\"2\" CELLPADDING=\"0\" CELLBORDER=\"1\" PORT=\"marr\" BGCOLOR=\"" . $fill_colour . "\">";
-                        }
+                    $out .= "<TR>";
+                    if ($this->settings["add_links"]) {
+                        $out .= "<TD COLSPAN=\"2\" CELLPADDING=\"0\" PORT=\"marr\" TARGET=\"_BLANK\" HREF=\"" . $this->convertToHTMLSC($link) . "\" BGCOLOR=\"" . $fill_colour . "\">"; #ESL!!! 20090213 without convertToHTMLSC the dot file has invalid data
+                    } else {
+                        $out .= "<TD COLSPAN=\"2\" CELLPADDING=\"0\" PORT=\"marr\" BGCOLOR=\"" . $fill_colour . "\">";
                     }
+                    $out .= "<TABLE  CELLBORDER=\"0\">";
+                    $out .= "<TR>";
+                    $out .= "<TD>";
 					$out .= "<FONT COLOR=\"". $this->settings["font_colour_details"] ."\" POINT-SIZE=\"" . ($this->settings["font_size"]) ."\">" . ($prefix_array[$i] ?? '') . (empty($marriageType_array[$i])?"":$marriageType_array[$i]) . " " . (empty($marriagedate_array[$i])?"":$marriagedate_array[$i]) . " " . (empty($marriageplace_array[$i])?"":"(".$marriageplace_array[$i].")") . $family . "</FONT><BR />";
+                    $out .= "</TD>";
 
-                    if ($i == $printCount) {
-                        $out .= "</TD>";
-                        if ($this->isPhotoRequired()) {
-                            if ($this->settings["show_marriage_first_image"] && !empty($pic_marriage_first_array[$i])) {
-                                $out .= $this->getFamFactImage(true /*$detailsExist*/, $pic_marriage_first_array[$i], $pic_marriage_first_link_array[$i], $pic_marriage_first_title_array[$i]);
-                            }
+                    if ($this->isPhotoRequired()) {
+                        if ($this->settings["show_marriage_first_image"] && !empty($pic_marriage_first_array[$i])) {
+                            $out .= $this->getFamFactImage(true /*$detailsExist*/, $pic_marriage_first_array[$i], $pic_marriage_first_link_array[$i], $pic_marriage_first_title_array[$i]);
                         }
-                        $out .= "</TR>";
                     }
+
+                    $out .= "</TR>";
+                    $out .= "</TABLE>";
+                    $out .= "</TD>";
+                    $out .= "</TR>";
 				}
 	
 				if ($i == $printCount) {
@@ -727,17 +729,22 @@ class Dot {
 
 					$out .= "<FONT COLOR=\"". $this->settings["font_colour_details"] ."\" POINT-SIZE=\"" . ($this->settings["font_size"]) ."\">" . (empty($prefix_array[$i])?"":$prefix_array[$i]) . (empty($marriageType_array[$i])?"":$marriageType_array[$i]) . " " . (empty($marriagedate_array[$i])?"":$marriagedate_array[$i]) . "<BR />" . (empty($marriageplace_array[$i])?"":"(".$marriageplace_array[$i].")") . $family . "</FONT>";
 
+                    if ($this->isPhotoRequired()) {
+                        if ($this->settings["show_marriage_first_image"] && !empty($pic_marriage_first_array[$i])) {
+                            $out .= "</TD>";
+                            $out .= $this->getFamFactImage(true /*$detailsExist*/, $pic_marriage_first_array[$i], $pic_marriage_first_link_array[$i], $pic_marriage_first_title_array[$i]);
+                            $out .= "</TR><TR><TD>";
+                        }
+                    }
 
 					if ($i == $printCount) {
                         $out .= "</TD>";
-                        if ($this->isPhotoRequired()) {
-                            if ($this->settings["show_marriage_first_image"] && !empty($pic_marriage_first_array[$i])) {
-                                $out .= $this->getFamFactImage(true /*$detailsExist*/, $pic_marriage_first_array[$i], $pic_marriage_first_link_array[$i], $pic_marriage_first_title_array[$i]);
-                            }
-                        }
+
                         $out .= "</TR>";
 						$out .= "</TABLE>>";
-					}
+					} else {
+                        $out .= "<BR /><BR />";
+                    }
 				}
 			}
 		}

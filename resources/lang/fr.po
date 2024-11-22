@@ -59,9 +59,8 @@ msgstr "Marquer les individus non liés par le sang avec des couleurs différent
 #. SVG links no longer work (and seem to have been broken for 3+ years), and it's not trivial to fix. Instead, I have updated this to clarify that it works only with PDF, and it will be hidden if Graphviz is not installed on the server.
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/SEzk1B1h5LwyvxiJ9liuAwLX.png
 #: 
-#, fuzzy
 msgid "Add link to individuals and families in PDF output"
-msgstr "Ajouter une URL vers les individus et familles"
+msgstr "Ajouter un lien aux individus et familles dans la sortie PDF"
 
 #: 
 msgid "Show birthdate"
@@ -1200,7 +1199,6 @@ msgstr "Selon le sexe de l'individu - Cette option vous permet d'attribuer une f
 
 #. Part of the Photos help text:  https://s3.eu-west-1.amazonaws.com/po-pub/i/LnybW6GMtDH0UDez4Z0flfpW.png
 #: 
-#, fuzzy
 msgid "This option lets you enable or disable showing photos on the tiles of individuals."
 msgstr "Cette option vous permet d'activer ou de désactiver l'affichage des photos sur les vignettes des individus."
 
@@ -1894,114 +1892,114 @@ msgstr "Cette option permet de choisir l'ordre de la liste des réglages sauvega
 #. One option in the list of things that can happen when you click an individual in the diagram.  https://s3.eu-west-1.amazonaws.com/po-pub/i/KpMTncLFJrS21Y0UPolZeCDD.png
 #: 
 msgid "Add individual to list of starting individuals"
-msgstr ""
+msgstr "Ajouter une personne à la liste des individus de départ"
 
 #. One option in the list of things that can happen when you click an individual in the diagram.  https://s3.eu-west-1.amazonaws.com/po-pub/i/KpMTncLFJrS21Y0UPolZeCDD.png
 #: 
 msgid "Open individual's page"
-msgstr ""
+msgstr "Ouvrir la page d'un individu"
 
 #. One option in the list of things that can happen when you click an individual in the diagram.  https://s3.eu-west-1.amazonaws.com/po-pub/i/KpMTncLFJrS21Y0UPolZeCDD.png
 #: 
 msgid "Replace starting individuals with this individual"
-msgstr ""
+msgstr "Remplacer l'individu de départ avec cette personne"
 
 #. One option in the list of things that can happen when you click an individual in the diagram.  https://s3.eu-west-1.amazonaws.com/po-pub/i/KpMTncLFJrS21Y0UPolZeCDD.png
 #: 
 msgid "Add this individual to the list of stopping individuals"
-msgstr ""
+msgstr "Ajouter cette personne à la liste des individus d'arrêt"
 
 #. One option in the list of things that can happen when you click an individual in the diagram.  https://s3.eu-west-1.amazonaws.com/po-pub/i/KpMTncLFJrS21Y0UPolZeCDD.png
 #: 
 msgid "Replace stopping individuals with this individual"
-msgstr ""
+msgstr "Remplacer les individus d'arrêt avec cette personne"
 
 #. New option to set what happens when you click an individual in the diagram.  https://s3.eu-west-1.amazonaws.com/po-pub/i/KpMTncLFJrS21Y0UPolZeCDD.png
 #: 
 msgid "Action when individual clicked"
-msgstr ""
+msgstr "Action lorsque que l'individu est cliqué"
 
 #. One option in the list of things that can happen when you click an individual in the diagram.  
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/KpMTncLFJrS21Y0UPolZeCDD.png
 #: 
 msgid "Show menu"
-msgstr ""
+msgstr "Montrer le menu"
 
 #. One option in the list of things that can happen when you click an individual in the diagram.  
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/KpMTncLFJrS21Y0UPolZeCDD.png
 #: 
 msgid "Do nothing"
-msgstr ""
+msgstr "Ne rien faire"
 
 #. Part of the help text for the option "Action when individual clicked".
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
 #: 
 msgid "This option lets you choose what happens when you click on an individual in the diagram."
-msgstr ""
+msgstr "Cette option vous permet de choisir ce qui se passe lorsque vous cliquez sur une personne du diagramme"
 
 #. Part of the help text for the option "Action when individual clicked".
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
 #: 
 msgid "When you click on an individual, the webtrees page for that individual will open in a new tab or window."
-msgstr ""
+msgstr "Quand vous cliquez sur un individu, la page Webtrees de cet individu s'ouvrira dans une nouvelle page ou un nouvel onglet."
 
 #. Part of the help text for the option "Action when individual clicked".
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
 #: 
 msgid "If this option is selected, clicking on an individual in the diagram will add them to the list of starting individuals."
-msgstr ""
+msgstr "Si cette option est sélectionnée, cliquer sur un individu dans le diagramme ajoutera cet individu à la liste des individus de départ."
 
 #. Part of the help text for the option "Action when individual clicked".
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
 #: 
 msgid "If this option is selected, clicking on an individual in the diagram will add them to the list of starting individuals and remove all others from the list."
-msgstr ""
+msgstr "Si cette option est sélectionnée, cliquer sur un individu dans le diagramme ajoutera cet individu à la liste des individus de départ après avoir effacé la liste en entier. "
 
 #. Part of the help text for the option "Action when individual clicked".
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
 #: 
 msgid "If this option is selected, clicking on an individual in the diagram will add them to the list of stopping individuals."
-msgstr ""
+msgstr "Si cette option est sélectionnée, cliquer sur un individu dans le diagramme ajoutera cet individu à la liste des individus d'arrêt."
 
 #. Part of the help text for the option "Action when individual clicked".
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
 #: 
 msgid "If this option is selected, clicking on an individual in the diagram will add them to the list of stopping individuals and remove all others from the list."
-msgstr ""
+msgstr "Si cette option est sélectionnée, cliquer sur un individu dans le diagramme ajoutera cet individu à la liste des individus d'arrêt après avoir effacé la liste en entier. "
 
 #. Part of the help text for the option "Action when individual clicked".
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
 #: 
 msgid "If this option is chosen, when an individual is clicked on in the diagram, a menu will be shown with the above items to choose from."
-msgstr ""
+msgstr "Si cette option est choisie, cliquer sur un individu du diagramme affichera un menu avec les options ci-dessus."
 
 #. Part of the help text for the option "Action when individual clicked".
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
 #: 
 msgid "When an individual is clicked on in the diagram, nothing will happen."
-msgstr ""
+msgstr "Quand on clique sur un individu du diagramme, rien ne se passe."
 
 #. Part of the help text for the option "Action when individual clicked".
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
 #: 
 msgid "Note that there is currently no option for what to do when a family record is clicked on in the diagram. However, the option to add URLs to individuals and families will also affect families in the browser diagram. That is, if you click a family then if this option is enabled, the family page will open in webtrees."
-msgstr ""
+msgstr "A noter qu'il n'y a pour l'instant aucune option associée au clic sur une famille dans le diagramme.Cependant, l'option d'ajout d'une URL à un individu ou une famille affectera également les familles dans le diagramme. Ainsi, si vous cliquez sur une famille alors que cette option est active, la page de la famille s'ouvrira dans Webtrees."
 
 #. An extra paragraph for the section on URL links in the help page:  https://s3.eu-west-1.amazonaws.com/po-pub/i/4Vxx95kI54pojXyfcC4CvyYc.png
 #: 
 msgid "Also see \\'Action when individual clicked\\' in the Browser render settings."
-msgstr ""
+msgstr "Voir également \\'Action quand un individu est cliqué\\' dans les options de rendu du navigateur."
 
 #. Option for what to do when individual clicked on in diagram
 #: 
 msgid "Add to list of individuals to highlight"
-msgstr ""
+msgstr "Ajouter à la liste des individus à mettre en évidence"
 
 #. Part of new option to highlight a custom list of individuals
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/iMke2fkhJ5QFsxPD8JHlabfu.png
 #: 
 msgid "Show selected individuals in different colour"
-msgstr ""
+msgstr "Montrer les individus sélectionnés avec une couleur différente."
 
 #. Update to help text to add this new option
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/hepcgMX8Ou17qX7kH5upaW16.png
@@ -2014,199 +2012,199 @@ msgstr "Si cette option est sélectionnée, cliquer sur un individu du diagramme
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/avfciefqaWjNB7aRddD2bx22.png
 #: 
 msgid "Default highlight colour"
-msgstr ""
+msgstr "Couleur de surbrillance par défaut"
 
 #. Part of the help text around background colour priority:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/5OK33EJBueLG9k0GXR19qRpk.png
 #: 
 msgid "If the option is enabled to show selected individuals in a different colour, then this option takes priority over all others."
-msgstr ""
+msgstr "Si l'option de mettre une couleur différente pour les individus sélectionnés est active, alors cette option prend le pas sur toutes les autres."
 
 #. Part of the help for Show selected individuals in a different colour:  https://s3.eu-west-1.amazonaws.com/po-pub/i/P1bJ86EmElATeVIKW50p7nfv.png
 #: 
 msgid "This option lets you set a custom background for selected individuals. The default highlight colour is used by default, but the colour can be customised for each individual. Also see option in Browser Render settings to choose what happens when an individual is clicked, as this may be an easier way to add individuals to this list."
-msgstr ""
+msgstr "Cette option permet de mettre un arrière-plan personnalisé pour les individus sélectionnés. La couleur de surbrillance est utilisée par défaut, mais la couleur peut être personnalisée pour chaque individu. Voir également les options de rendu du navigateur pour choisir ce qui doit se passer lorsqu’un individu est cliqué, puisque ce peut être un moyen plus facile pour ajouter des individus à cette liste."
 
 #. Part of the help text for the option "Action when individual clicked".
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/oh4Yjz8fjz3l2aFFkAV608mv.png
 #: 
 msgid "This is the default option."
-msgstr ""
+msgstr "C'est l'option par défaut."
 
 #. Part of the help text explaining the context menu when you click on an individual (if enabled): https://s3.eu-west-1.amazonaws.com/po-pub/i/JbiHUCluK5zzUvYxjbtvg3LS.png
 #: 
 msgid "In the General Settings section, there is an option in the Browser options that lets you choose what happens when you click on an individual in the diagram. One of the options is to show a menu, and the menu has the following options:"
-msgstr ""
+msgstr "Dans le chapitre des options générales, il y a une option dans les options du navigateur qui permet de choisir ce qui arrive quand on clique sur un individu du diagramme. Une des options est d'afficher un menu, et le menu présente les choix suivants:"
 
 #. New option to "Use similar events if information not available". Current state is this is always on, but this new option allows you to force webtrees to only use the "birth" and "death" events to get the date or place. When enabled, this option allows webtrees to look for christening, baptism, burial, and cremation dates.
 #. 
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/Ar3cUICuO182fidUcnwLD1o7.png
 #: 
 msgid "Use similar events if information not available"
-msgstr ""
+msgstr "Utiliser des événement similaires si l'information n'est pas disponible."
 
 #. Part of help text for new option to Use similar events if information not available:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/VofL6d6Hi0v11hbzqG3N02wF.png
 #: 
 msgid "When showing information about a birth or death, if the information is not available then webtrees will look for similar events and use the information from those events instead."
-msgstr ""
+msgstr "A l'affichage des informations de naissance ou de décès, si celles-ci ne sont pas disponibles, alors Webtrees recherchera une information similaire pour les remplacer."
 
 #. Part of help text for new option to Use similar events if information not available: https://s3.eu-west-1.amazonaws.com/po-pub/i/VofL6d6Hi0v11hbzqG3N02wF.png
 #: 
 msgid "If a birth date or place is not recorded, webtrees will attempt to use the date or place of the christening or baptism if it exists."
-msgstr ""
+msgstr "Si une date ou un lieu de naissance ne sont pas disponibles, Webtrees tentera d'utiliser à la place les informations de baptême si elles existent."
 
 #. Part of help text for new option to Use similar events if information not available: https://s3.eu-west-1.amazonaws.com/po-pub/i/VofL6d6Hi0v11hbzqG3N02wF.png
 #: 
 msgid "If a death date or place is not recorded, webtrees will attempt to use the date or place of the burial or cremation if it exists."
-msgstr ""
+msgstr "Si une date ou un lieu de décès ne sont pas disponibles, Webtrees tentera d'utiliser à la place les informations de crémation ou d'enterrement si elles existent."
 
 #. Part of help text for new option to Use similar events if information not available: https://s3.eu-west-1.amazonaws.com/po-pub/i/VofL6d6Hi0v11hbzqG3N02wF.png
 #: 
 msgid "If you disable this option, GVExport will only use information from birth and death events, and not try to find missing information in similar events."
-msgstr ""
+msgstr "Si vous désactivez cette option, GVExport utilisera uniquement les informations de naissance et de décès n'essayera pas de trouver des événements similaires en cas d'absence."
 
 #. New option that lets you set a limit on how many levels of ancestors or descendants can be used, to reduce server load:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/QFLhfPYHliw57Nxcq7TjSt2c.png
 #: 
 msgid "Limit ancestor and descendant levels"
-msgstr ""
+msgstr "Limite le nombre de niveaux pour les descendants et les ancêtres."
 
 #. One of the options for name abbreviations:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/8TnookhkbklzifVBjlRHlH6j.png
 #: 
 msgid "Preferred given name and surname"
-msgstr ""
+msgstr "Prénom et nom préférés"
 
 #. New option to show the first image attached to the birth event, if any:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/RVKTpBYdxWG9wyE9GAqScxDc.png
 #: 
 msgid "Show first birth image"
-msgstr ""
+msgstr "Affiche la première image de naissance"
 
 #. New option to show the first image attached to the death event, if any:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/RVKTpBYdxWG9wyE9GAqScxDc.png
 #: 
 msgid "Show first death image"
-msgstr ""
+msgstr "Affiche la première image de décès"
 
 #. New option to show burial (or cremation) date:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/WlSbROWFgzNEDqRS0q8pZgAb.png
 #: 
 msgid "Show burial date"
-msgstr ""
+msgstr "Affiche la date d'enterrement"
 
 #. New option to show burial (or cremation) place:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/WlSbROWFgzNEDqRS0q8pZgAb.png
 #: 
 msgid "Show burial place"
-msgstr ""
+msgstr "Affiche le lieu de sépulture"
 
 #. New option to show the first image attached to the burial or cremation event, if any:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/RVKTpBYdxWG9wyE9GAqScxDc.png
 #: 
 msgid "Show first burial image"
-msgstr ""
+msgstr "Montre la première image de sépulture"
 
 #. GVExport can now show all marriage events if the same couple have multiple. This option will only show the first, if enabled:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/HqluftIIHdUwOT5EBUDDdIzS.png
 #: 
 msgid "Show only first marriage"
-msgstr ""
+msgstr "Affiche seulement le premier mariage"
 
 #. New option to show the first image attached to the marriage event, if any:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/RVKTpBYdxWG9wyE9GAqScxDc.png
 #: 
 msgid "Show first marriage image"
-msgstr ""
+msgstr "Affiche la première image de mariage"
 
 #. Show the type of marriage (civil, religious, etc)
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/HqluftIIHdUwOT5EBUDDdIzS.png
 #: 
 msgid "Show marriage type"
-msgstr ""
+msgstr "Affiche le type de mariage"
 
 #. If this option is enabled, if the marriage type is not known then a message will be shown to indicate this: https://s3.eu-west-1.amazonaws.com/po-pub/i/HqluftIIHdUwOT5EBUDDdIzS.png
 #: 
 msgid "Show when type is not specified"
-msgstr ""
+msgstr "Afficher quand le type n'est pas spécifié"
 
 #. New wording for option to show photos on individuals as there are now many options for which photos to show.
 #: 
 msgid "Show photos of individuals"
-msgstr ""
+msgstr "Afficher les photos des individus"
 
 #. New control panel option for admin to set a prefix for burial records:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/hVEI9oO3KxRBrDdqseXZ5Lf0.png
 #: 
 msgid "Burial date prefix"
-msgstr ""
+msgstr "Préfixe de la date d'inhumation"
 
 #. Additional help text to clarify that the setting to use alternate events does not apply to burial events:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/KIQiyqfzLqLyWbWyJDAuNrkv.png
 #: 
 msgid "The options to show burial dates and places will use the burial or cremation events and is not affected by this setting."
-msgstr ""
+msgstr "Les options pour afficher des dates et des lieux d'inhumation utiliseront les événements d'inhumation ou de crémation et ne seront pas affectés par ce choix."
 
 #. Part of help for burial dates:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/L8XnRFljy2puyETrxWRkboGd.png
 #: 
 msgid "Check the box if you would like to include the burial date of individuals in the output."
-msgstr ""
+msgstr "Cochez la case pour inclure la date d'inhumation des individus dans le résultat."
 
 #. Part of help for burial dates:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/L8XnRFljy2puyETrxWRkboGd.png
 #: 
 msgid "You can also choose whether to show the full date of burial or just the year."
-msgstr ""
+msgstr "Vous pouvez aussi choisir d'afficher la date complète de l'inhumation ou seulement l'année."
 
 #. Part of help for burial place:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/L8XnRFljy2puyETrxWRkboGd.png
 #: 
 msgid "Whether to show the place of burial in the output. Also see option for abbreviating place names."
-msgstr ""
+msgstr "Indique si le lieu d'inhumation doit être affiché dans le résultat. Voir également l'option d'abréviation des noms de lieux."
 
 #. Part of help text for photos:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/rpmt8ugrEArj5PBFFS8bRR5f.png
 #: 
 msgid "When enabled, if the birth event for the individual has photos attached, then the first will be shown. This is in addition to other photos."
-msgstr ""
+msgstr "Lorsque cette option est activée, si l'événement de naissance de la personne a des photos jointes, la première sera affichée. Cela s'ajoute aux autres photos."
 
 #. Part of help text for photos:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/rpmt8ugrEArj5PBFFS8bRR5f.png
 #: 
 msgid "When enabled, if the marriage event for the individual has photos attached, then the first will be shown. This is in addition to other photos."
-msgstr ""
+msgstr "Lorsque cette option est activée, si l'événement de mariage de la personne a des photos jointes, la première sera affichée. Cela s'ajoute aux autres photos."
 
 #. Part of help text for photos:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/rpmt8ugrEArj5PBFFS8bRR5f.png
 #: 
 msgid "When enabled, if the death event for the individual has photos attached, then the first will be shown. This is in addition to other photos."
-msgstr ""
+msgstr "Lorsque cette option est activée, si l'événement de décès de la personne a des photos jointes, la première sera affichée. Cela s'ajoute aux autres photos."
 
 #. Part of help text for photos:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/rpmt8ugrEArj5PBFFS8bRR5f.png
 #: 
 msgid "When enabled, if the burial event for the individual has photos attached, then the first will be shown. This is in addition to other photos."
-msgstr ""
+msgstr "Lorsque cette option est activée, si l'événement d'obsèques de la personne a des photos jointes, la première sera affichée. Cela s'ajoute aux autres photos."
 
 #. Part of help text relating to content on family records:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/YgNsKPAarw3CvZkSzbtJvRe1.png
 #: 
 msgid "If a couple have been married more than once (a family record in webtrees has multiple marriage events), if this option is selected then only the first is shown (this is the default). If you unselect this option, all marriage events will be shown in the same family record in the diagram."
-msgstr ""
+msgstr "Si un couple s'est marié plus d'une fois (une fiche familiale dans Webtrees a plusieurs mariages), si cette option est sélectionnée, seul le premier est affiché (par défaut). Si vous désélectionnez cette option, tous les événements de mariage seront affichés dans la même fiche familiale dans le diagramme."
 
 #. Part of help text relating to content on family records:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/YgNsKPAarw3CvZkSzbtJvRe1.png
 #: 
 msgid "If selected, the type of marriage (civil, religious, registered partnership) will be shown on the family record."
-msgstr ""
+msgstr "Si cette option est sélectionnée, le type de mariage (civil, religieux, partenariat enregistré) sera indiqué sur la fiche familiale."
 
 #. Part of help text relating to content on family records:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/YgNsKPAarw3CvZkSzbtJvRe1.png
 #: 
 msgid "If selected, where the marriage type is not known then it will show a message stating this. If unselected, unknown marriage types will not be displayed."
-msgstr ""
+msgstr "Si cette option est sélectionnée et que le type de mariage n'est pas connu, un message l'indique. S'il n'est pas sélectionné, les types de mariage inconnus ne seront pas affichés."
 
 #. Restoring as was incorrectly removed
 #: 
@@ -2223,68 +2221,92 @@ msgstr "Pour la sortie SVG (et PDF si Graphviz est installé sur le serveur), de
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/wfrHxNXw49ofOCG1CBpFzGcW.png
 #: 
 msgid "Note that SVG output will always be rendered by the browser (and not the server) if you choose to include page links."
-msgstr ""
+msgstr "Notez que la sortie SVG sera toujours rendue par le navigateur (et non par le serveur) si vous choisissez d'inclure des liens de page."
 
 #. "Diagram colours" is now "Diagram style": https://s3.eu-west-1.amazonaws.com/po-pub/i/4AMAMqb2XvyddBnzaeXB174Y.png
 #: 
 msgid "Diagram style"
-msgstr ""
+msgstr "Stle de diagramme"
 
 #. New option to set the style of arrow:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/TYPN390pgUuKhdXd6P4NYUpN.png
 #: 
 msgid "Arrow style"
-msgstr ""
+msgstr "Style de flèche"
 
 #. One of the arrow style options for new arrow style setting:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/4AMAMqb2XvyddBnzaeXB174Y.png
 #: 
 msgid "Solid"
-msgstr ""
+msgstr "Solide"
 
 #. One of the arrow style options for new arrow style setting:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/4AMAMqb2XvyddBnzaeXB174Y.png
 #: 
 msgid "Dotted"
-msgstr ""
+msgstr "Pointillé"
 
 #. One of the arrow style options for new arrow style setting:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/4AMAMqb2XvyddBnzaeXB174Y.png
 #: 
 msgid "Dashed"
-msgstr ""
+msgstr "Tirets"
 
 #. One of the arrow style options for new arrow style setting:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/4AMAMqb2XvyddBnzaeXB174Y.png
 #: 
 msgid "Bold"
-msgstr ""
+msgstr "Epais"
 
 #. One of the arrow style options for new arrow style setting:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/4AMAMqb2XvyddBnzaeXB174Y.png
 #: 
 msgid "Tapered"
-msgstr ""
+msgstr "Effilé"
 
 #. One of the arrow style options for new arrow style setting:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/4AMAMqb2XvyddBnzaeXB174Y.png
 #: 
 msgid "Random"
-msgstr ""
+msgstr "Aléatoire"
 
 #. Updated help text to cater for new arrow style option:  https://s3.eu-west-1.amazonaws.com/po-pub/i/fn6MBj0cyzMUvsgzAVFvUeoS.png
 #: 
 msgid "You are also able to set the arrow style here."
-msgstr ""
+msgstr "Vous pouvez également définir le style de la flèche ici."
 
 #. Updated help text to cater for new arrow style option:  https://s3.eu-west-1.amazonaws.com/po-pub/i/fn6MBj0cyzMUvsgzAVFvUeoS.png
 #: 
 msgid "This allows you to select the arrow style from the various available styles. The \\'Random\\' option will randomly select a style for each arrow, making it easier to follow overlapping arrows on complex diagrams."
-msgstr ""
+msgstr "Cela vous permet de sélectionner le style de flèche parmi les différents styles disponibles. L'option \\'Aléatoire\\' sélectionne de manière aléatoire un style pour chaque flèche, ce qui facilite le suivi des flèches qui se chevauchent dans les diagrammes complexes."
 
 #. Restoring this translation as it was needed after all. 
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/xIpoeu5Uos6YjpRvDXybeRqg.png
 #: 
 msgid "Add URL to individuals and families"
 msgstr "Ajouter une URL vers les individus et familles"
+
+#. A new message that pops up when diagram is downloaded:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/XxcKvjkqSJtgUHUpr5e8vBOL.png
+#: 
+msgid "Downloaded diagram with %s individuals and %s families."
+msgstr ""
+
+#. Message that shows if Graphviz installed but diagram can't be rendered on server due to options chosen:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/UBXubBpivJyzaSPmBiQoKicp.png
+#: 
+msgid "Diagram rendered in browser due to settings selected"
+msgstr ""
+
+#. New place name abbreviation option, to only show the section up to the first comma, normally the city.
+#. 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/n46qXm3knZc5Xtx7hTiGNgZv.png
+#: 
+msgid "City only"
+msgstr ""
+
+#. Updated help to account for new option to only show the city.  https://s3.eu-west-1.amazonaws.com/po-pub/i/zrK8142tvoMbrXaHQL9bHZD4.png
+#: 
+msgid "only the first section of the place name is used, up to the first comma. For example, &quot;London, England, United Kingdom&quot; would be shortened to &quot;London&quot;"
+msgstr ""
 
