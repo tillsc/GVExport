@@ -737,7 +737,9 @@ class Dot {
                         }
                         $out .= "</TR>";
 						$out .= "</TABLE>>";
-					}
+					} else {
+                        $out .= "<BR /><BR />";
+                    }
 				}
 			}
 		}
