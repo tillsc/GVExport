@@ -3,13 +3,22 @@
 	GVExport module for Webtrees
 =====================================================================
 
-Version 2.1.23 ()
+Version 2.1.23 (2024-11-26)
   - New       : Add option to show a birth image (thanks @elysch)
   - New       : Add option to show death image (thanks @elysch)
   - New       : Add option to show marriage image and type of marriage (thanks @elysch)
   - New       : Add option to show burial date, place, image (thanks @elysch)
+  - New       : Added "City only" abbreviation option for place names
+  - New       : Abbreviating country name to an ISO code now works in many more languages
+  - New       : Message is now shown with number of individuals and families when downloading the diagram
+  - New       : Added option for setting line style, including the options for random or none.
   - Change    : Browser is now always used for SVG when links are enabled, even if Graphviz is installed on the server
   - Change    : Added ↑ and ↓ as allowed symbols for birth, death, marriage, burial prefixes.
+  - Fix       : Fixed issue with stripe overflowing rounded corners
+  - Fix       : Fixed issue where the ISO abbreviation didn't work properly if the place name only had the country
+  - Fix       : Fixed issue where a context menu on an individual was not closed when clicking off the individual
+  - Fix       : Fixed issue where maximum generational levels allowed was set to zero when resetting user settings
+  - Fix       : Fixed issue where settings with show/hide options were not correctly displayed if loaded from saved settings list
 
 Version 2.1.22 (2024-11-08)
   - New       : Logged-out users can now colour tiles based on a shared note (in addition to existing ability for logged-in users).
