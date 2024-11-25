@@ -59,9 +59,8 @@ msgstr "Nicht blutsverwandte Personen in einer anderen Farbe markieren"
 #. SVG links no longer work (and seem to have been broken for 3+ years), and it's not trivial to fix. Instead, I have updated this to clarify that it works only with PDF, and it will be hidden if Graphviz is not installed on the server.
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/SEzk1B1h5LwyvxiJ9liuAwLX.png
 #: 
-#, fuzzy
 msgid "Add link to individuals and families in PDF output"
-msgstr "URL zu Personen und Familien hinzuf&uuml;gen"
+msgstr "URL zu Personen und Familien bei der pdf-Ausgabe hinzufügen"
 
 #: 
 msgid "Show birthdate"
@@ -1200,7 +1199,6 @@ msgstr "Dies erlaubt es, die Form des Kästchens abhängig vom Geschlecht der Pe
 
 #. Part of the Photos help text:  https://s3.eu-west-1.amazonaws.com/po-pub/i/LnybW6GMtDH0UDez4Z0flfpW.png
 #: 
-#, fuzzy
 msgid "This option lets you enable or disable showing photos on the tiles of individuals."
 msgstr "Mit dieser Option können Sie die Anzeige von Fotos in den Personenkästchen aktivieren oder deaktivieren."
 
@@ -1987,9 +1985,8 @@ msgstr "Beachten Sie, dass es derzeit keine Option gibt, die festlegt was gesche
 
 #. An extra paragraph for the section on URL links in the help page:  https://s3.eu-west-1.amazonaws.com/po-pub/i/4Vxx95kI54pojXyfcC4CvyYc.png
 #: 
-#, fuzzy
 msgid "Also see \\'Action when individual clicked\\' in the Browser render settings."
-msgstr "Dies betrifft auch Familien im Diagramm. Wenn diese Option aktiviert ist, können Sie auf Familienelemente klicken, um die webtrees-Seite mit der Familie zu öffnen. Siehe auch \\'Aktion beim Anklicken eines Personenkästchens\\' in den Browser-Einstellungen."
+msgstr "Siehe auch \\'Aktion beim Anklicken eines Personenkästchens\\' in den Browser-Einstellungen."
 
 #. Option for what to do when individual clicked on in diagram
 #: 
@@ -2057,7 +2054,7 @@ msgstr "Wenn kein Geburtsdatum oder -ort erfasst ist, versucht webtrees das Datu
 #. Part of help text for new option to Use similar events if information not available: https://s3.eu-west-1.amazonaws.com/po-pub/i/VofL6d6Hi0v11hbzqG3N02wF.png
 #: 
 msgid "If a death date or place is not recorded, webtrees will attempt to use the date or place of the burial or cremation if it exists."
-msgstr "Wenn kein Sterbedatum oder -ort erfasst ist, versucht webtrees das Datum oder den Ort zu verwenden, der eventuell bei Beerdigung oder Einäscherung angegeben ist."
+msgstr "Wenn kein Sterbedatum oder -ort erfasst ist, versucht webtrees das Datum oder den Ort zu verwenden, der eventuell bei Bestattung oder Einäscherung angegeben ist."
 
 #. Part of help text for new option to Use similar events if information not available: https://s3.eu-west-1.amazonaws.com/po-pub/i/VofL6d6Hi0v11hbzqG3N02wF.png
 #: 
@@ -2080,131 +2077,131 @@ msgstr "Bevorzugter Vor- und Nachname"
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/RVKTpBYdxWG9wyE9GAqScxDc.png
 #: 
 msgid "Show first birth image"
-msgstr ""
+msgstr "Erste Abbildung zur Geburt anzeigen"
 
 #. New option to show the first image attached to the death event, if any:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/RVKTpBYdxWG9wyE9GAqScxDc.png
 #: 
 msgid "Show first death image"
-msgstr ""
+msgstr "Erste Abbildung zum Tod anzeigen"
 
 #. New option to show burial (or cremation) date:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/WlSbROWFgzNEDqRS0q8pZgAb.png
 #: 
 msgid "Show burial date"
-msgstr ""
+msgstr "Beerdigungsdatum anzeigen"
 
 #. New option to show burial (or cremation) place:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/WlSbROWFgzNEDqRS0q8pZgAb.png
 #: 
 msgid "Show burial place"
-msgstr ""
+msgstr "Beerdigungsort anzeigen"
 
 #. New option to show the first image attached to the burial or cremation event, if any:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/RVKTpBYdxWG9wyE9GAqScxDc.png
 #: 
 msgid "Show first burial image"
-msgstr ""
+msgstr "Erste Abbildung zur Beerdigung anzeigen"
 
 #. GVExport can now show all marriage events if the same couple have multiple. This option will only show the first, if enabled:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/HqluftIIHdUwOT5EBUDDdIzS.png
 #: 
 msgid "Show only first marriage"
-msgstr ""
+msgstr "Nur die erste Hochzeit anzeigen"
 
 #. New option to show the first image attached to the marriage event, if any:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/RVKTpBYdxWG9wyE9GAqScxDc.png
 #: 
 msgid "Show first marriage image"
-msgstr ""
+msgstr "Erste Abbildung zur Hochzeit anzeigen"
 
 #. Show the type of marriage (civil, religious, etc)
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/HqluftIIHdUwOT5EBUDDdIzS.png
 #: 
 msgid "Show marriage type"
-msgstr ""
+msgstr "Art der Hochzeit anzeigen"
 
 #. If this option is enabled, if the marriage type is not known then a message will be shown to indicate this: https://s3.eu-west-1.amazonaws.com/po-pub/i/HqluftIIHdUwOT5EBUDDdIzS.png
 #: 
 msgid "Show when type is not specified"
-msgstr ""
+msgstr "Nicht angegebene Art kennzeichnen"
 
 #. New wording for option to show photos on individuals as there are now many options for which photos to show.
 #: 
 msgid "Show photos of individuals"
-msgstr ""
+msgstr "Fotos von Personen anzeigen"
 
 #. New control panel option for admin to set a prefix for burial records:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/hVEI9oO3KxRBrDdqseXZ5Lf0.png
 #: 
 msgid "Burial date prefix"
-msgstr ""
+msgstr "Zeichen für Bestattung"
 
 #. Additional help text to clarify that the setting to use alternate events does not apply to burial events:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/KIQiyqfzLqLyWbWyJDAuNrkv.png
 #: 
 msgid "The options to show burial dates and places will use the burial or cremation events and is not affected by this setting."
-msgstr ""
+msgstr "Die Optionen zur Anzeige von Bestattungsdatum und -ort basieren auf Bestattungs- oder Einäscherungsereignissen und sind von dieser Einstellung nicht betroffen."
 
 #. Part of help for burial dates:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/L8XnRFljy2puyETrxWRkboGd.png
 #: 
 msgid "Check the box if you would like to include the burial date of individuals in the output."
-msgstr ""
+msgstr "Aktivieren Sie das Kontrollkästchen um das Bestattungsdatum von Personen in die Ausgabe einzubeziehen."
 
 #. Part of help for burial dates:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/L8XnRFljy2puyETrxWRkboGd.png
 #: 
 msgid "You can also choose whether to show the full date of burial or just the year."
-msgstr ""
+msgstr "Sie können auch wählen, ob das vollständige Datum der Bestattung oder nur das Jahr angezeigt werden soll."
 
 #. Part of help for burial place:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/L8XnRFljy2puyETrxWRkboGd.png
 #: 
 msgid "Whether to show the place of burial in the output. Also see option for abbreviating place names."
-msgstr ""
+msgstr "Soll der Bestattungsort in der Ausgabe angezeigt werden? Siehe auch Option zur Abkürzung von Ortsnamen."
 
 #. Part of help text for photos:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/rpmt8ugrEArj5PBFFS8bRR5f.png
 #: 
 msgid "When enabled, if the birth event for the individual has photos attached, then the first will be shown. This is in addition to other photos."
-msgstr ""
+msgstr "Wenn diese Option aktiviert ist und dem Geburtsereignis der Person Fotos beigefügt sind, wird das erste davon angezeigt. Dies ist eine Ergänzung zu anderen Fotos."
 
 #. Part of help text for photos:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/rpmt8ugrEArj5PBFFS8bRR5f.png
 #: 
 msgid "When enabled, if the marriage event for the individual has photos attached, then the first will be shown. This is in addition to other photos."
-msgstr ""
+msgstr "Wenn diese Option aktiviert ist und dem Hochzeitsereignis für die Familie Fotos beigefügt sind, wird das erste davon angezeigt. Dies ist eine Ergänzung zu anderen Fotos."
 
 #. Part of help text for photos:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/rpmt8ugrEArj5PBFFS8bRR5f.png
 #: 
 msgid "When enabled, if the death event for the individual has photos attached, then the first will be shown. This is in addition to other photos."
-msgstr ""
+msgstr "Wenn diese Option aktiviert ist und dem Sterbeereignis für die Person Fotos beigefügt sind, wird das erste davon angezeigt. Dies ist eine Ergänzung zu anderen Fotos."
 
 #. Part of help text for photos:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/rpmt8ugrEArj5PBFFS8bRR5f.png
 #: 
 msgid "When enabled, if the burial event for the individual has photos attached, then the first will be shown. This is in addition to other photos."
-msgstr ""
+msgstr "Wenn diese Option aktiviert ist und dem Bestattungsereignis für die Person Fotos beigefügt sind, wird das erste davon angezeigt. Dies ist eine Ergänzung zu anderen Fotos."
 
 #. Part of help text relating to content on family records:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/YgNsKPAarw3CvZkSzbtJvRe1.png
 #: 
 msgid "If a couple have been married more than once (a family record in webtrees has multiple marriage events), if this option is selected then only the first is shown (this is the default). If you unselect this option, all marriage events will be shown in the same family record in the diagram."
-msgstr ""
+msgstr "Wenn ein Paar mehrmals geheiratet hat (ein Familiendatensatz in webtrees enthält mehrere Hochzeitsereignisse), wird bei Auswahl dieser Option nur das erste Ereignis angezeigt (dies ist die Standardeinstellung). Wenn Sie diese Option deaktivieren, werden alle Hochzeitsereignisse im selben Familiendatensatz im Diagramm angezeigt."
 
 #. Part of help text relating to content on family records:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/YgNsKPAarw3CvZkSzbtJvRe1.png
 #: 
 msgid "If selected, the type of marriage (civil, religious, registered partnership) will be shown on the family record."
-msgstr ""
+msgstr "Wenn ausgewählt, wird die Art der Heirat (standesamtliche, religiöse, eingetragene Partnerschaft) aus dem Familiendatensatz angezeigt."
 
 #. Part of help text relating to content on family records:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/YgNsKPAarw3CvZkSzbtJvRe1.png
 #: 
 msgid "If selected, where the marriage type is not known then it will show a message stating this. If unselected, unknown marriage types will not be displayed."
-msgstr ""
+msgstr "Wenn diese Option ausgewählt ist und der Typ der Heirat nicht bekannt ist, wird eine entsprechende Meldung angezeigt. Wenn diese Option deaktiviert ist, werden unbekannte Heiratstypen nicht angezeigt."
 
 #. Restoring as was incorrectly removed
 #: 
@@ -2221,68 +2218,92 @@ msgstr "Für die Ausgabe von SVG (und PDF, wenn Graphviz auf dem Server installi
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/wfrHxNXw49ofOCG1CBpFzGcW.png
 #: 
 msgid "Note that SVG output will always be rendered by the browser (and not the server) if you choose to include page links."
-msgstr ""
+msgstr "Beachten Sie, dass die SVG-Ausgabe immer vom Browser (und nicht vom Server) gerendert wird, wenn Sie sich für die Einbindung von Seitenverweisen entscheiden."
 
 #. "Diagram colours" is now "Diagram style": https://s3.eu-west-1.amazonaws.com/po-pub/i/4AMAMqb2XvyddBnzaeXB174Y.png
 #: 
 msgid "Diagram style"
-msgstr ""
+msgstr "Stil des Diagramms"
 
 #. New option to set the style of arrow:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/TYPN390pgUuKhdXd6P4NYUpN.png
 #: 
 msgid "Arrow style"
-msgstr ""
+msgstr "Stil der Pfeile"
 
 #. One of the arrow style options for new arrow style setting:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/4AMAMqb2XvyddBnzaeXB174Y.png
 #: 
 msgid "Solid"
-msgstr ""
+msgstr "Durchgezogen"
 
 #. One of the arrow style options for new arrow style setting:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/4AMAMqb2XvyddBnzaeXB174Y.png
 #: 
 msgid "Dotted"
-msgstr ""
+msgstr "Gepunktet"
 
 #. One of the arrow style options for new arrow style setting:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/4AMAMqb2XvyddBnzaeXB174Y.png
 #: 
 msgid "Dashed"
-msgstr ""
+msgstr "Gestrichelt"
 
 #. One of the arrow style options for new arrow style setting:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/4AMAMqb2XvyddBnzaeXB174Y.png
 #: 
 msgid "Bold"
-msgstr ""
+msgstr "Fett"
 
 #. One of the arrow style options for new arrow style setting:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/4AMAMqb2XvyddBnzaeXB174Y.png
 #: 
 msgid "Tapered"
-msgstr ""
+msgstr "Konisch"
 
 #. One of the arrow style options for new arrow style setting:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/4AMAMqb2XvyddBnzaeXB174Y.png
 #: 
 msgid "Random"
-msgstr ""
+msgstr "Zufällig"
 
 #. Updated help text to cater for new arrow style option:  https://s3.eu-west-1.amazonaws.com/po-pub/i/fn6MBj0cyzMUvsgzAVFvUeoS.png
 #: 
 msgid "You are also able to set the arrow style here."
-msgstr ""
+msgstr "Hier können Sie auch den Stil der Pfeile festlegen."
 
 #. Updated help text to cater for new arrow style option:  https://s3.eu-west-1.amazonaws.com/po-pub/i/fn6MBj0cyzMUvsgzAVFvUeoS.png
 #: 
 msgid "This allows you to select the arrow style from the various available styles. The \\'Random\\' option will randomly select a style for each arrow, making it easier to follow overlapping arrows on complex diagrams."
-msgstr ""
+msgstr "Sie können den Pfeilstil aus den verschiedenen verfügbaren Stilen auswählen. Die Option \\'Zufällig\\' wählt zufällig einen Stil für jeden einzelnen Pfeil aus, wodurch es einfacher wird, überlappenden Pfeilen in komplexen Diagrammen zu folgen."
 
 #. Restoring this translation as it was needed after all. 
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/xIpoeu5Uos6YjpRvDXybeRqg.png
 #: 
 msgid "Add URL to individuals and families"
 msgstr "URL zu Personen und Familien hinzuf&uuml;gen"
+
+#. A new message that pops up when diagram is downloaded:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/XxcKvjkqSJtgUHUpr5e8vBOL.png
+#: 
+msgid "Downloaded diagram with %s individuals and %s families."
+msgstr "Heruntergeladenes Diagramm mit %s Personen und %s Familien"
+
+#. Message that shows if Graphviz installed but diagram can't be rendered on server due to options chosen:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/UBXubBpivJyzaSPmBiQoKicp.png
+#: 
+msgid "Diagram rendered in browser due to settings selected"
+msgstr "Aufgrund der ausgewählten Einstellungen wird das Diagramm im Browser erzeugt"
+
+#. New place name abbreviation option, to only show the section up to the first comma, normally the city.
+#. 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/n46qXm3knZc5Xtx7hTiGNgZv.png
+#: 
+msgid "City only"
+msgstr "nur Ort"
+
+#. Updated help to account for new option to only show the city.  https://s3.eu-west-1.amazonaws.com/po-pub/i/zrK8142tvoMbrXaHQL9bHZD4.png
+#: 
+msgid "only the first section of the place name is used, up to the first comma. For example, &quot;London, England, United Kingdom&quot; would be shortened to &quot;London&quot;"
+msgstr "Nur der erste Teil des Ortsnamens bis zum ersten Komma wird verwendet. Beispielsweise würde &quot;London, England, Vereinigtes Königreich&quot; zu &quot;London&quot; abgekürzt"
 

@@ -2311,3 +2311,27 @@ msgstr ""
 msgid "Add URL to individuals and families"
 msgstr "Legg til URL til enkeltpersoner og familier"
 
+#. A new message that pops up when diagram is downloaded:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/XxcKvjkqSJtgUHUpr5e8vBOL.png
+#: 
+msgid "Downloaded diagram with %s individuals and %s families."
+msgstr ""
+
+#. Message that shows if Graphviz installed but diagram can't be rendered on server due to options chosen:
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/UBXubBpivJyzaSPmBiQoKicp.png
+#: 
+msgid "Diagram rendered in browser due to settings selected"
+msgstr ""
+
+#. New place name abbreviation option, to only show the section up to the first comma, normally the city.
+#. 
+#. https://s3.eu-west-1.amazonaws.com/po-pub/i/n46qXm3knZc5Xtx7hTiGNgZv.png
+#: 
+msgid "City only"
+msgstr ""
+
+#. Updated help to account for new option to only show the city.  https://s3.eu-west-1.amazonaws.com/po-pub/i/zrK8142tvoMbrXaHQL9bHZD4.png
+#: 
+msgid "only the first section of the place name is used, up to the first comma. For example, &quot;London, England, United Kingdom&quot; would be shortened to &quot;London&quot;"
+msgstr ""
+
