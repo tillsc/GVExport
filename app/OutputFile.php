@@ -7,6 +7,7 @@ namespace vendor\WebtreesModules\gvexport;
 
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
+use Fisharebest\Webtrees\Registry;
 
 
 /**
@@ -35,7 +36,7 @@ class OutputFile
     function downloadFile()
     {
         $stream = $this->getFileStream();
-        $response_factory = app(ResponseFactoryInterface::class);
+        $response_factory = Registry::container()->get(ResponseFactoryInterface::class);
         return $response_factory->createResponse()
             ->withBody($stream)
             ->withHeader('Content-Type', $this->settings['graphviz_config']['output'][$this->fileType]['cont_type'])
@@ -58,7 +59,7 @@ class OutputFile
             }
         }
 
-        return app(StreamFactoryInterface::class)->createStreamFromFile($filename);
+        return Registry::container()->get(StreamFactoryInterface::class)->createStreamFromFile($filename);
     }
 
 }

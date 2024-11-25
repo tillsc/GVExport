@@ -9,6 +9,7 @@ use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Fisharebest\Webtrees\Tree;
+use Fisharebest\Webtrees\Registry;
 
 
 /**
@@ -43,8 +44,8 @@ class ApiHandler
      * @return mixed
      */
     public function getResponse() {
-        $stream = app(StreamFactoryInterface::class)->createStream(json_encode($this->response_data));
-        $response_factory = app(ResponseFactoryInterface::class);
+        $stream = Registry::container()->get(StreamFactoryInterface::class)->createStream(json_encode($this->response_data));
+        $response_factory = Registry::container()->get(ResponseFactoryInterface::class);
         return $response_factory->createResponse()
             ->withBody($stream)
             ->withHeader('Content-Type', "application/json");
