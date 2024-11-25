@@ -2290,7 +2290,7 @@ msgstr "Ajouter une URL vers les individus et familles"
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/XxcKvjkqSJtgUHUpr5e8vBOL.png
 #: 
 msgid "Downloaded diagram with %s individuals and %s families."
-msgstr ""
+msgstr "Diagramme téléchargé avec %s individus et %s familles."
 
 #. Message that shows if Graphviz installed but diagram can't be rendered on server due to options chosen:
 #. https://s3.eu-west-1.amazonaws.com/po-pub/i/UBXubBpivJyzaSPmBiQoKicp.png
