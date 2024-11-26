@@ -3,6 +3,10 @@
 	GVExport module for Webtrees
 =====================================================================
 
+Version 2.2.0 (2024-11-26)
+  - Fix       : GVExport now supports webtrees 2.2.0
+  - Change    : Versions of webtrees below 2.2.0 are no longer supported due to breaking changes in webtrees
+
 Version 2.1.23 (2024-11-26)
   - New       : Add option to show a birth image (thanks @elysch)
   - New       : Add option to show death image (thanks @elysch)
