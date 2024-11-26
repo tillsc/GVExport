@@ -6,6 +6,8 @@ use Fisharebest\Webtrees\Auth;
 use Fisharebest\Webtrees\Module\FamilyTreeFavoritesModule;
 use Fisharebest\Webtrees\Module\UserFavoritesModule;
 use Fisharebest\Webtrees\Tree;
+use Fisharebest\Webtrees\Registry;
+
 
 /**
  * GVExport representation of a webtrees Favourite
@@ -57,9 +59,9 @@ class Favourite
         $note = "";
         $user = Auth::user();
         $favorite = function ($tree, $user, $url, $title, $note) {
-            return app(UserFavoritesModule::class)->addUrlFavorite($tree, $user, $url, $title, $note);
+            return Registry::container()->get(UserFavoritesModule::class)->addUrlFavorite($tree, $user, $url, $title, $note);
         };
-        $favorite->call(app(UserFavoritesModule::class), $tree, $user, $url, $title, $note);
+        $favorite->call(Registry::container()->get(UserFavoritesModule::class), $tree, $user, $url, $title, $note);
         return true;
     }
 
@@ -75,9 +77,9 @@ class Favourite
     {
         $note = "";
         $favorite = function ($tree, $url, $title, $note) {
-            return app(FamilyTreeFavoritesModule::class)->addUrlFavorite($tree, $url, $title, $note);
+            return Registry::container()->get(FamilyTreeFavoritesModule::class)->addUrlFavorite($tree, $url, $title, $note);
         };
-        $favorite->call(app(FamilyTreeFavoritesModule::class), $tree, $url, $title, $note);
+        $favorite->call(Registry::container()->get(FamilyTreeFavoritesModule::class), $tree, $url, $title, $note);
         return true;
     }
 }
