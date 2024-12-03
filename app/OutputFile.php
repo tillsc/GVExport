@@ -36,7 +36,7 @@ class OutputFile
     function downloadFile()
     {
         $stream = $this->getFileStream();
-        $response_factory = Registry::container()->get(ResponseFactoryInterface::class);
+        $response_factory = GVExport::getClass(ResponseFactoryInterface::class);
         return $response_factory->createResponse()
             ->withBody($stream)
             ->withHeader('Content-Type', $this->settings['graphviz_config']['output'][$this->fileType]['cont_type'])
@@ -59,7 +59,7 @@ class OutputFile
             }
         }
 
-        return Registry::container()->get(StreamFactoryInterface::class)->createStreamFromFile($filename);
+        return GVExport::getClass(StreamFactoryInterface::class)->createStreamFromFile($filename);
     }
 
 }

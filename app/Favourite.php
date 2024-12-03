@@ -59,9 +59,9 @@ class Favourite
         $note = "";
         $user = Auth::user();
         $favorite = function ($tree, $user, $url, $title, $note) {
-            return Registry::container()->get(UserFavoritesModule::class)->addUrlFavorite($tree, $user, $url, $title, $note);
+            return GVExport::getClass(UserFavoritesModule::class)->addUrlFavorite($tree, $user, $url, $title, $note);
         };
-        $favorite->call(Registry::container()->get(UserFavoritesModule::class), $tree, $user, $url, $title, $note);
+        $favorite->call(GVExport::getClass(UserFavoritesModule::class), $tree, $user, $url, $title, $note);
         return true;
     }
 
@@ -77,9 +77,9 @@ class Favourite
     {
         $note = "";
         $favorite = function ($tree, $url, $title, $note) {
-            return Registry::container()->get(FamilyTreeFavoritesModule::class)->addUrlFavorite($tree, $url, $title, $note);
+            return GVExport::getClass(FamilyTreeFavoritesModule::class)->addUrlFavorite($tree, $url, $title, $note);
         };
-        $favorite->call(Registry::container()->get(FamilyTreeFavoritesModule::class), $tree, $url, $title, $note);
+        $favorite->call(GVExport::getClass(FamilyTreeFavoritesModule::class), $tree, $url, $title, $note);
         return true;
     }
 }
