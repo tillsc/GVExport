@@ -3,7 +3,10 @@
 	GVExport module for Webtrees
 =====================================================================
 
-Version 2.2.0 (2024-11-26)
+Version 2.2.2 (2024-11-26)
+  - Change    : Versions of webtrees below 2.2.0 are now supported again
+
+Version 2.2.1 (2024-11-26)
   - Fix       : GVExport now supports webtrees 2.2.0
   - Change    : Versions of webtrees below 2.2.0 are no longer supported due to breaking changes in webtrees
 
