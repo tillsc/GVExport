@@ -44,8 +44,8 @@ class ApiHandler
      * @return mixed
      */
     public function getResponse() {
-        $stream = Registry::container()->get(StreamFactoryInterface::class)->createStream(json_encode($this->response_data));
-        $response_factory = Registry::container()->get(ResponseFactoryInterface::class);
+        $stream = GVExport::getClass(StreamFactoryInterface::class)->createStream(json_encode($this->response_data));
+        $response_factory = GVExport::getClass(ResponseFactoryInterface::class);
         return $response_factory->createResponse()
             ->withBody($stream)
             ->withHeader('Content-Type', "application/json");

@@ -431,7 +431,22 @@ class GVExport extends AbstractModule implements ModuleCustomInterface, ModuleCh
         }
         return $url;
     }
+
+    /**
+     * A breaking change in webtrees 2.2.0 changes how the classes are retrieved.
+     * This function allows support for both 2.1.X and 2.2.X versions
+     * @param $class
+     * @return mixed
+     */
+    static function getClass($class)
+    {
+        if (version_compare(Webtrees::VERSION, '2.2.0', '>=')) {
+            return Registry::container()->get($class);
+        } else {
+            return app($class);
+        }
+    }
 }
 
-$moduleService = Registry::container()->get(ModuleService::class);
+$moduleService = GVExport::getClass(ModuleService::class);
 return new GVExport($moduleService);    
