@@ -257,13 +257,14 @@ function pageLoaded(Url) {
                     }
                 })
             }
+
+            loadURLXref(Url);
+            refreshIndisFromXREFS(false);
         });
     }
 
     TOMSELECT_URL = document.getElementById('pid').getAttribute("data-wt-url") + "&query=";
-    loadURLXref(Url);
     loadUrlToken(Url);
-    refreshIndisFromXREFS(false);
     loadSettingsDetails();
     // Remove reset parameter from URL when page loaded, to prevent
     // further resets when page reloaded
