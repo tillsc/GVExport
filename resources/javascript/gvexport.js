@@ -56,6 +56,8 @@ function stopIndiSelectChanged() {
 }
 
 function loadXrefList(url, xrefListId, indiListId) {
+    if (url === '') return false;
+
     let xrefListEl = document.getElementById(xrefListId);
     let xref_list = xrefListEl.value.trim();
     xrefListEl.value = xref_list;
