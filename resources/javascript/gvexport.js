@@ -243,29 +243,24 @@ function showGraphvizUnsupportedMessage() {
 }
 
 // This function is run when the page is loaded
-function pageLoaded(Url) {
-
-    // Load settings for logged out user
+async function pageLoaded(Url) {
     if (firstRender) {
-        isUserLoggedIn().then((loggedIn) => {
-            if (!loggedIn) {
-                Data.storeSettings.getSettingsClient(ID_MAIN_SETTINGS).then((obj) => {
-                    if (obj !== null) {
-                        Form.settings.load(JSON.stringify(obj));
-                    } else {
-                        firstRender = false;
-                    }
-                })
+        const loggedIn = await isUserLoggedIn();
+        if (!loggedIn) {
+            const settings = await Data.storeSettings.getSettingsClient(ID_MAIN_SETTINGS);
+            if (settings !== null) {
+                Form.settings.load(JSON.stringify(settings));
+            } else {
+                firstRender = false;
             }
-
-            loadURLXref(Url);
-            refreshIndisFromXREFS(false);
-        });
+        }
     }
 
     TOMSELECT_URL = document.getElementById('pid').getAttribute("data-wt-url") + "&query=";
     loadUrlToken(Url);
     loadSettingsDetails();
+    loadURLXref(Url);
+    refreshIndisFromXREFS(false);
     // Remove reset parameter from URL when page loaded, to prevent
     // further resets when page reloaded
     Url.removeURLParameter("reset");
